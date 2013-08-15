@@ -1,8 +1,10 @@
 Data Source : 
 
-[ftp://anonymous@ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy](ftp://anonymous@ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy)
+[ftp://anonymous@ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura Grundy](ftp://anonymous@ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura Grundy)
 
 [First GitHub Issue](https://github.com/openworm/OpenWorm/issues/82)
+
+[ftp details](MRC_HDFS/ftp_structure.md)
 
 ## Worm File Structure ##
 
