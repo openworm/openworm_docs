@@ -7,10 +7,10 @@ Contains experimental annotation.
 
 ````
 - wt2: Short for Worm Tracker 2
-    - tracker: [1x5] char
-    - hardware: [1x3] char
-    - analysis: [1x3] char
-    - annotations: []
+    - tracker: '2.0.4'
+    - hardware: '2.0'
+    - analysis: '2.0'
+    - annotations: [ ]
 - video:
     - length:
         - frames: 26979
@@ -30,10 +30,10 @@ Contains experimental annotation.
             - id: 1 - this # matches with the # above in frames
             - function: 'segWorm:Success'
             - message : 'The worm was successfully segmented.'
-		- reference(2) =>
-			- id: 2
-			- function: 'segWorm:DroppedFrame
-			- message: 'The video frame was dropped'
+	- reference(2) =>
+	    - id: 2
+	    - function: 'segWorm:DroppedFrame
+	    - message: 'The video frame was dropped'
 - experiment:
     - worm:
 	    -   genotype: 'acc-4(ok2371)III'
