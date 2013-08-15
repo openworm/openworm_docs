@@ -4,7 +4,7 @@ Data Source :
 
 [First GitHub Issue](https://github.com/openworm/OpenWorm/issues/82)
 
-[ftp details](MRC_HDFS/ftp_structure.md)
+[ftp details](MRC_HDF5/ftp_structure.md)
 
 ## Worm File Structure ##
 
