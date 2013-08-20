@@ -29,8 +29,8 @@ Skeleton : Set of midpoints between each pairing of outside pixels.
 - posture:
     - bends: (degrees, inside angle is + dorsal, - ventral)
         - head:
-            - mean: 
-            - stdDev: 
+            - mean: [1 x nFrames]
+            - stdDev: [1 x nFrames]
         - neck:
             - mean:
             - stdDev:
