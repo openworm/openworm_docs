@@ -10,6 +10,7 @@ A better list is available in the Nature Methods paper.
 A brief list (not yet exhaustive):
 - egg laying
 - omega bends
+- pirouettes
 - coiled shapes
 - defecation
 - morphology
