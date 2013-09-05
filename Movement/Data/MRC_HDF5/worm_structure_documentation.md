@@ -33,7 +33,7 @@ Skeleton : Set of midpoints between each pairing of outside pixels.
     worm.morphology.area
 ````
 
-- a size indication that is not a terminal property indicates that a structure array, For example:
+- a size indication [n x m] that is attached to a name which has child properties indicates that the entry is a structure array, For example:
 
 ````
 - locomotion:
