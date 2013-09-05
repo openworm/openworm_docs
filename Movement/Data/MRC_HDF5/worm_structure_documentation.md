@@ -24,6 +24,7 @@ Skeleton : Set of midpoints between each pairing of outside pixels.
 
 - These fields are all in the "worm" structure
 - Field depth is indicated by indentation level of the leading hyphen. For example:
+
 ````
     worm.morphology.length
     worm.morphology.width.head
@@ -31,7 +32,9 @@ Skeleton : Set of midpoints between each pairing of outside pixels.
     worm.morphology.width.tail
     worm.morphology.area
 ````
+
 - a size indication that is not a terminal property indicates that a structure array, For example:
+
 ````
 - locomotion:
     - motion:
@@ -45,7 +48,11 @@ Skeleton : Set of midpoints between each pairing of outside pixels.
 Note from above this means:
 worm.locomotion.motion.forward.frames
 The values shown in this case are an example, such as from frames(1)
+
+frames(1).start = 10422
+frames(1).end   = 10470
 ````
+
 - The structure array entries typically refer to events (epochs) which do not occur for every frame, but rather occur occasionally throughout the recording (or not at all)
 
 
