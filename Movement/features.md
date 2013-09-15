@@ -4,6 +4,8 @@ One source for features is listed at:
 
 http://www.nature.com/nmeth/journal/v10/n9/extref/nmeth.2560-S3.xlsx
 
+A csv copy is availabe [here](features/nmeth.2560-S3.csv)
+
 NOTE: We are currently going through the information from Yemini et al and compiling the lists seen below.
 
 ## TODOS ##
