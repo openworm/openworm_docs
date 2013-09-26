@@ -1,0 +1,704 @@
+Feature Number,,Feature Name, Feature Subdivision 1,Feature Subdivision 2,,Units
+,,,,,,
+1,,Length,,,,Microns
+2,,Length,Forward,,,Microns
+3,,Length,Paused,,,Microns
+4,,Length,Backward,,,Microns
+5,,Head Width,,,,Microns
+6,,Head Width,Forward,,,Microns
+7,,Head Width,Paused,,,Microns
+8,,Head Width,Backward,,,Microns
+9,,Midbody Width,,,,Microns
+10,,Midbody Width,Forward,,,Microns
+11,,Midbody Width,Paused,,,Microns
+12,,Midbody Width,Backward,,,Microns
+13,,Tail Width,,,,Microns
+14,,Tail Width,Forward,,,Microns
+15,,Tail Width,Paused,,,Microns
+16,,Tail Width,Backward,,,Microns
+17,,Area,,,,Micronsý
+18,,Area,Forward,,,Micronsý
+19,,Area,Paused,,,Micronsý
+20,,Area,Backward,,,Micronsý
+21,,Area/Length,,,,Microns
+22,,Area/Length,Forward,,,Microns
+23,,Area/Length,Paused,,,Microns
+24,,Area/Length,Backward,,,Microns
+25,,Width/Length,,,,No Units
+26,,Width/Length,Forward,,,No Units
+27,,Width/Length,Paused,,,No Units
+28,,Width/Length,Backward,,,No Units
+29,,Head Bend Mean (+/- = D/V Inside),,,,Degrees
+30,,Head Bend Mean (+/- = D/V Inside),,Absolute,,Degrees
+31,,Head Bend Mean (+/- = D/V Inside),,Positive,,Degrees
+32,,Head Bend Mean (+/- = D/V Inside),,Negative,,Degrees
+33,,Head Bend Mean (+/- = D/V Inside),Forward,,,Degrees
+34,,Head Bend Mean (+/- = D/V Inside),Forward,Absolute,,Degrees
+35,,Head Bend Mean (+/- = D/V Inside),Forward,Positive,,Degrees
+36,,Head Bend Mean (+/- = D/V Inside),Forward,Negative,,Degrees
+37,,Head Bend Mean (+/- = D/V Inside),Paused,,,Degrees
+38,,Head Bend Mean (+/- = D/V Inside),Paused,Absolute,,Degrees
+39,,Head Bend Mean (+/- = D/V Inside),Paused,Positive,,Degrees
+40,,Head Bend Mean (+/- = D/V Inside),Paused,Negative,,Degrees
+41,,Head Bend Mean (+/- = D/V Inside),Backward,,,Degrees
+42,,Head Bend Mean (+/- = D/V Inside),Backward,Absolute,,Degrees
+43,,Head Bend Mean (+/- = D/V Inside),Backward,Positive,,Degrees
+44,,Head Bend Mean (+/- = D/V Inside),Backward,Negative,,Degrees
+45,,Neck Bend Mean (+/- = D/V Inside),,,,Degrees
+46,,Neck Bend Mean (+/- = D/V Inside),,Absolute,,Degrees
+47,,Neck Bend Mean (+/- = D/V Inside),,Positive,,Degrees
+48,,Neck Bend Mean (+/- = D/V Inside),,Negative,,Degrees
+49,,Neck Bend Mean (+/- = D/V Inside),Forward,,,Degrees
+50,,Neck Bend Mean (+/- = D/V Inside),Forward,Absolute,,Degrees
+51,,Neck Bend Mean (+/- = D/V Inside),Forward,Positive,,Degrees
+52,,Neck Bend Mean (+/- = D/V Inside),Forward,Negative,,Degrees
+53,,Neck Bend Mean (+/- = D/V Inside),Paused,,,Degrees
+54,,Neck Bend Mean (+/- = D/V Inside),Paused,Absolute,,Degrees
+55,,Neck Bend Mean (+/- = D/V Inside),Paused,Positive,,Degrees
+56,,Neck Bend Mean (+/- = D/V Inside),Paused,Negative,,Degrees
+57,,Neck Bend Mean (+/- = D/V Inside),Backward,,,Degrees
+58,,Neck Bend Mean (+/- = D/V Inside),Backward,Absolute,,Degrees
+59,,Neck Bend Mean (+/- = D/V Inside),Backward,Positive,,Degrees
+60,,Neck Bend Mean (+/- = D/V Inside),Backward,Negative,,Degrees
+61,,Midbody Bend Mean (+/- = D/V Inside),,,,Degrees
+62,,Midbody Bend Mean (+/- = D/V Inside),,Absolute,,Degrees
+63,,Midbody Bend Mean (+/- = D/V Inside),,Positive,,Degrees
+64,,Midbody Bend Mean (+/- = D/V Inside),,Negative,,Degrees
+65,,Midbody Bend Mean (+/- = D/V Inside),Forward,,,Degrees
+66,,Midbody Bend Mean (+/- = D/V Inside),Forward,Absolute,,Degrees
+67,,Midbody Bend Mean (+/- = D/V Inside),Forward,Positive,,Degrees
+68,,Midbody Bend Mean (+/- = D/V Inside),Forward,Negative,,Degrees
+69,,Midbody Bend Mean (+/- = D/V Inside),Paused,,,Degrees
+70,,Midbody Bend Mean (+/- = D/V Inside),Paused,Absolute,,Degrees
+71,,Midbody Bend Mean (+/- = D/V Inside),Paused,Positive,,Degrees
+72,,Midbody Bend Mean (+/- = D/V Inside),Paused,Negative,,Degrees
+73,,Midbody Bend Mean (+/- = D/V Inside),Backward,,,Degrees
+74,,Midbody Bend Mean (+/- = D/V Inside),Backward,Absolute,,Degrees
+75,,Midbody Bend Mean (+/- = D/V Inside),Backward,Positive,,Degrees
+76,,Midbody Bend Mean (+/- = D/V Inside),Backward,Negative,,Degrees
+77,,Hips Bend Mean (+/- = D/V Inside),,,,Degrees
+78,,Hips Bend Mean (+/- = D/V Inside),,Absolute,,Degrees
+79,,Hips Bend Mean (+/- = D/V Inside),,Positive,,Degrees
+80,,Hips Bend Mean (+/- = D/V Inside),,Negative,,Degrees
+81,,Hips Bend Mean (+/- = D/V Inside),Forward,,,Degrees
+82,,Hips Bend Mean (+/- = D/V Inside),Forward,Absolute,,Degrees
+83,,Hips Bend Mean (+/- = D/V Inside),Forward,Positive,,Degrees
+84,,Hips Bend Mean (+/- = D/V Inside),Forward,Negative,,Degrees
+85,,Hips Bend Mean (+/- = D/V Inside),Paused,,,Degrees
+86,,Hips Bend Mean (+/- = D/V Inside),Paused,Absolute,,Degrees
+87,,Hips Bend Mean (+/- = D/V Inside),Paused,Positive,,Degrees
+88,,Hips Bend Mean (+/- = D/V Inside),Paused,Negative,,Degrees
+89,,Hips Bend Mean (+/- = D/V Inside),Backward,,,Degrees
+90,,Hips Bend Mean (+/- = D/V Inside),Backward,Absolute,,Degrees
+91,,Hips Bend Mean (+/- = D/V Inside),Backward,Positive,,Degrees
+92,,Hips Bend Mean (+/- = D/V Inside),Backward,Negative,,Degrees
+93,,Tail Bend Mean (+/- = D/V Inside),,,,Degrees
+94,,Tail Bend Mean (+/- = D/V Inside),,Absolute,,Degrees
+95,,Tail Bend Mean (+/- = D/V Inside),,Positive,,Degrees
+96,,Tail Bend Mean (+/- = D/V Inside),,Negative,,Degrees
+97,,Tail Bend Mean (+/- = D/V Inside),Forward,,,Degrees
+98,,Tail Bend Mean (+/- = D/V Inside),Forward,Absolute,,Degrees
+99,,Tail Bend Mean (+/- = D/V Inside),Forward,Positive,,Degrees
+100,,Tail Bend Mean (+/- = D/V Inside),Forward,Negative,,Degrees
+101,,Tail Bend Mean (+/- = D/V Inside),Paused,,,Degrees
+102,,Tail Bend Mean (+/- = D/V Inside),Paused,Absolute,,Degrees
+103,,Tail Bend Mean (+/- = D/V Inside),Paused,Positive,,Degrees
+104,,Tail Bend Mean (+/- = D/V Inside),Paused,Negative,,Degrees
+105,,Tail Bend Mean (+/- = D/V Inside),Backward,,,Degrees
+106,,Tail Bend Mean (+/- = D/V Inside),Backward,Absolute,,Degrees
+107,,Tail Bend Mean (+/- = D/V Inside),Backward,Positive,,Degrees
+108,,Tail Bend Mean (+/- = D/V Inside),Backward,Negative,,Degrees
+109,,Head Bend S.D. (+/- = D/V Inside),,,,Degrees
+110,,Head Bend S.D. (+/- = D/V Inside),,Absolute,,Degrees
+111,,Head Bend S.D. (+/- = D/V Inside),,Positive,,Degrees
+112,,Head Bend S.D. (+/- = D/V Inside),,Negative,,Degrees
+113,,Head Bend S.D. (+/- = D/V Inside),Forward,,,Degrees
+114,,Head Bend S.D. (+/- = D/V Inside),Forward,Absolute,,Degrees
+115,,Head Bend S.D. (+/- = D/V Inside),Forward,Positive,,Degrees
+116,,Head Bend S.D. (+/- = D/V Inside),Forward,Negative,,Degrees
+117,,Head Bend S.D. (+/- = D/V Inside),Paused,,,Degrees
+118,,Head Bend S.D. (+/- = D/V Inside),Paused,Absolute,,Degrees
+119,,Head Bend S.D. (+/- = D/V Inside),Paused,Positive,,Degrees
+120,,Head Bend S.D. (+/- = D/V Inside),Paused,Negative,,Degrees
+121,,Head Bend S.D. (+/- = D/V Inside),Backward,,,Degrees
+122,,Head Bend S.D. (+/- = D/V Inside),Backward,Absolute,,Degrees
+123,,Head Bend S.D. (+/- = D/V Inside),Backward,Positive,,Degrees
+124,,Head Bend S.D. (+/- = D/V Inside),Backward,Negative,,Degrees
+125,,Neck Bend S.D. (+/- = D/V Inside),,,,Degrees
+126,,Neck Bend S.D. (+/- = D/V Inside),,Absolute,,Degrees
+127,,Neck Bend S.D. (+/- = D/V Inside),,Positive,,Degrees
+128,,Neck Bend S.D. (+/- = D/V Inside),,Negative,,Degrees
+129,,Neck Bend S.D. (+/- = D/V Inside),Forward,,,Degrees
+130,,Neck Bend S.D. (+/- = D/V Inside),Forward,Absolute,,Degrees
+131,,Neck Bend S.D. (+/- = D/V Inside),Forward,Positive,,Degrees
+132,,Neck Bend S.D. (+/- = D/V Inside),Forward,Negative,,Degrees
+133,,Neck Bend S.D. (+/- = D/V Inside),Paused,,,Degrees
+134,,Neck Bend S.D. (+/- = D/V Inside),Paused,Absolute,,Degrees
+135,,Neck Bend S.D. (+/- = D/V Inside),Paused,Positive,,Degrees
+136,,Neck Bend S.D. (+/- = D/V Inside),Paused,Negative,,Degrees
+137,,Neck Bend S.D. (+/- = D/V Inside),Backward,,,Degrees
+138,,Neck Bend S.D. (+/- = D/V Inside),Backward,Absolute,,Degrees
+139,,Neck Bend S.D. (+/- = D/V Inside),Backward,Positive,,Degrees
+140,,Neck Bend S.D. (+/- = D/V Inside),Backward,Negative,,Degrees
+141,,Midbody Bend S.D. (+/- = D/V Inside),,,,Degrees
+142,,Midbody Bend S.D. (+/- = D/V Inside),,Absolute,,Degrees
+143,,Midbody Bend S.D. (+/- = D/V Inside),,Positive,,Degrees
+144,,Midbody Bend S.D. (+/- = D/V Inside),,Negative,,Degrees
+145,,Midbody Bend S.D. (+/- = D/V Inside),Forward,,,Degrees
+146,,Midbody Bend S.D. (+/- = D/V Inside),Forward,Absolute,,Degrees
+147,,Midbody Bend S.D. (+/- = D/V Inside),Forward,Positive,,Degrees
+148,,Midbody Bend S.D. (+/- = D/V Inside),Forward,Negative,,Degrees
+149,,Midbody Bend S.D. (+/- = D/V Inside),Paused,,,Degrees
+150,,Midbody Bend S.D. (+/- = D/V Inside),Paused,Absolute,,Degrees
+151,,Midbody Bend S.D. (+/- = D/V Inside),Paused,Positive,,Degrees
+152,,Midbody Bend S.D. (+/- = D/V Inside),Paused,Negative,,Degrees
+153,,Midbody Bend S.D. (+/- = D/V Inside),Backward,,,Degrees
+154,,Midbody Bend S.D. (+/- = D/V Inside),Backward,Absolute,,Degrees
+155,,Midbody Bend S.D. (+/- = D/V Inside),Backward,Positive,,Degrees
+156,,Midbody Bend S.D. (+/- = D/V Inside),Backward,Negative,,Degrees
+157,,Hips Bend S.D. (+/- = D/V Inside),,,,Degrees
+158,,Hips Bend S.D. (+/- = D/V Inside),,Absolute,,Degrees
+159,,Hips Bend S.D. (+/- = D/V Inside),,Positive,,Degrees
+160,,Hips Bend S.D. (+/- = D/V Inside),,Negative,,Degrees
+161,,Hips Bend S.D. (+/- = D/V Inside),Forward,,,Degrees
+162,,Hips Bend S.D. (+/- = D/V Inside),Forward,Absolute,,Degrees
+163,,Hips Bend S.D. (+/- = D/V Inside),Forward,Positive,,Degrees
+164,,Hips Bend S.D. (+/- = D/V Inside),Forward,Negative,,Degrees
+165,,Hips Bend S.D. (+/- = D/V Inside),Paused,,,Degrees
+166,,Hips Bend S.D. (+/- = D/V Inside),Paused,Absolute,,Degrees
+167,,Hips Bend S.D. (+/- = D/V Inside),Paused,Positive,,Degrees
+168,,Hips Bend S.D. (+/- = D/V Inside),Paused,Negative,,Degrees
+169,,Hips Bend S.D. (+/- = D/V Inside),Backward,,,Degrees
+170,,Hips Bend S.D. (+/- = D/V Inside),Backward,Absolute,,Degrees
+171,,Hips Bend S.D. (+/- = D/V Inside),Backward,Positive,,Degrees
+172,,Hips Bend S.D. (+/- = D/V Inside),Backward,Negative,,Degrees
+173,,Tail Bend S.D. (+/- = D/V Inside),,,,Degrees
+174,,Tail Bend S.D. (+/- = D/V Inside),,Absolute,,Degrees
+175,,Tail Bend S.D. (+/- = D/V Inside),,Positive,,Degrees
+176,,Tail Bend S.D. (+/- = D/V Inside),,Negative,,Degrees
+177,,Tail Bend S.D. (+/- = D/V Inside),Forward,,,Degrees
+178,,Tail Bend S.D. (+/- = D/V Inside),Forward,Absolute,,Degrees
+179,,Tail Bend S.D. (+/- = D/V Inside),Forward,Positive,,Degrees
+180,,Tail Bend S.D. (+/- = D/V Inside),Forward,Negative,,Degrees
+181,,Tail Bend S.D. (+/- = D/V Inside),Paused,,,Degrees
+182,,Tail Bend S.D. (+/- = D/V Inside),Paused,Absolute,,Degrees
+183,,Tail Bend S.D. (+/- = D/V Inside),Paused,Positive,,Degrees
+184,,Tail Bend S.D. (+/- = D/V Inside),Paused,Negative,,Degrees
+185,,Tail Bend S.D. (+/- = D/V Inside),Backward,,,Degrees
+186,,Tail Bend S.D. (+/- = D/V Inside),Backward,Absolute,,Degrees
+187,,Tail Bend S.D. (+/- = D/V Inside),Backward,Positive,,Degrees
+188,,Tail Bend S.D. (+/- = D/V Inside),Backward,Negative,,Degrees
+189,,Max Amplitude,,,,Microns
+190,,Max Amplitude,Forward,,,Microns
+191,,Max Amplitude,Paused,,,Microns
+192,,Max Amplitude,Backward,,,Microns
+193,,Amplitude Ratio,,,,No Units
+194,,Amplitude Ratio,Forward,,,No Units
+195,,Amplitude Ratio,Paused,,,No Units
+196,,Amplitude Ratio,Backward,,,No Units
+197,,Primary Wavelength,,,,Microns
+198,,Primary Wavelength,Forward,,,Microns
+199,,Primary Wavelength,Paused,,,Microns
+200,,Primary Wavelength,Backward,,,Microns
+201,,Secondary Wavelength,,,,Microns
+202,,Secondary Wavelength,Forward,,,Microns
+203,,Secondary Wavelength,Paused,,,Microns
+204,,Secondary Wavelength,Backward,,,Microns
+205,,Track Length,,,,Microns
+206,,Track Length,Forward,,,Microns
+207,,Track Length,Paused,,,Microns
+208,,Track Length,Backward,,,Microns
+209,,Eccentricity,,,,No Units
+210,,Eccentricity,Forward,,,No Units
+211,,Eccentricity,Paused,,,No Units
+212,,Eccentricity,Backward,,,No Units
+213,,Bend Count,,,,Counts
+214,,Bend Count,Forward,,,Counts
+215,,Bend Count,Paused,,,Counts
+216,,Bend Count,Backward,,,Counts
+217,,Coiling Events,Frequency,,,Hz
+218,,Coiling Events,Time Ratio,,,No Units
+219,,Coiling Events,Time,,,Seconds
+220,,Coiling Events,Inter Time,,,Seconds
+221,,Coiling Events,Inter Distance,,,Microns
+222,,Tail-To-Head Orientation,,,,Degrees
+223,,Tail-To-Head Orientation,,Absolute,,Degrees
+224,,Tail-To-Head Orientation,,Positive,,Degrees
+225,,Tail-To-Head Orientation,,Negative,,Degrees
+226,,Tail-To-Head Orientation,Forward,,,Degrees
+227,,Tail-To-Head Orientation,Forward,Absolute,,Degrees
+228,,Tail-To-Head Orientation,Forward,Positive,,Degrees
+229,,Tail-To-Head Orientation,Forward,Negative,,Degrees
+230,,Tail-To-Head Orientation,Paused,,,Degrees
+231,,Tail-To-Head Orientation,Paused,Absolute,,Degrees
+232,,Tail-To-Head Orientation,Paused,Positive,,Degrees
+233,,Tail-To-Head Orientation,Paused,Negative,,Degrees
+234,,Tail-To-Head Orientation,Backward,,,Degrees
+235,,Tail-To-Head Orientation,Backward,Absolute,,Degrees
+236,,Tail-To-Head Orientation,Backward,Positive,,Degrees
+237,,Tail-To-Head Orientation,Backward,Negative,,Degrees
+238,,Head Orientation,,,,Degrees
+239,,Head Orientation,,Absolute,,Degrees
+240,,Head Orientation,,Positive,,Degrees
+241,,Head Orientation,,Negative,,Degrees
+242,,Head Orientation,Forward,,,Degrees
+243,,Head Orientation,Forward,Absolute,,Degrees
+244,,Head Orientation,Forward,Positive,,Degrees
+245,,Head Orientation,Forward,Negative,,Degrees
+246,,Head Orientation,Paused,,,Degrees
+247,,Head Orientation,Paused,Absolute,,Degrees
+248,,Head Orientation,Paused,Positive,,Degrees
+249,,Head Orientation,Paused,Negative,,Degrees
+250,,Head Orientation,Backward,,,Degrees
+251,,Head Orientation,Backward,Absolute,,Degrees
+252,,Head Orientation,Backward,Positive,,Degrees
+253,,Head Orientation,Backward,Negative,,Degrees
+254,,Tail Orientation,,,,Degrees
+255,,Tail Orientation,,Absolute,,Degrees
+256,,Tail Orientation,,Positive,,Degrees
+257,,Tail Orientation,,Negative,,Degrees
+258,,Tail Orientation,Forward,,,Degrees
+259,,Tail Orientation,Forward,Absolute,,Degrees
+260,,Tail Orientation,Forward,Positive,,Degrees
+261,,Tail Orientation,Forward,Negative,,Degrees
+262,,Tail Orientation,Paused,,,Degrees
+263,,Tail Orientation,Paused,Absolute,,Degrees
+264,,Tail Orientation,Paused,Positive,,Degrees
+265,,Tail Orientation,Paused,Negative,,Degrees
+266,,Tail Orientation,Backward,,,Degrees
+267,,Tail Orientation,Backward,Absolute,,Degrees
+268,,Tail Orientation,Backward,Positive,,Degrees
+269,,Tail Orientation,Backward,Negative,,Degrees
+270,,Eigen Projection 1,,,,No Units
+271,,Eigen Projection 1,,Absolute,,No Units
+272,,Eigen Projection 1,,Positive,,No Units
+273,,Eigen Projection 1,,Negative,,No Units
+274,,Eigen Projection 1,Forward,,,No Units
+275,,Eigen Projection 1,Forward,Absolute,,No Units
+276,,Eigen Projection 1,Forward,Positive,,No Units
+277,,Eigen Projection 1,Forward,Negative,,No Units
+278,,Eigen Projection 1,Paused,,,No Units
+279,,Eigen Projection 1,Paused,Absolute,,No Units
+280,,Eigen Projection 1,Paused,Positive,,No Units
+281,,Eigen Projection 1,Paused,Negative,,No Units
+282,,Eigen Projection 1,Backward,,,No Units
+283,,Eigen Projection 1,Backward,Absolute,,No Units
+284,,Eigen Projection 1,Backward,Positive,,No Units
+285,,Eigen Projection 1,Backward,Negative,,No Units
+286,,Eigen Projection 2,,,,No Units
+287,,Eigen Projection 2,,Absolute,,No Units
+288,,Eigen Projection 2,,Positive,,No Units
+289,,Eigen Projection 2,,Negative,,No Units
+290,,Eigen Projection 2,Forward,,,No Units
+291,,Eigen Projection 2,Forward,Absolute,,No Units
+292,,Eigen Projection 2,Forward,Positive,,No Units
+293,,Eigen Projection 2,Forward,Negative,,No Units
+294,,Eigen Projection 2,Paused,,,No Units
+295,,Eigen Projection 2,Paused,Absolute,,No Units
+296,,Eigen Projection 2,Paused,Positive,,No Units
+297,,Eigen Projection 2,Paused,Negative,,No Units
+298,,Eigen Projection 2,Backward,,,No Units
+299,,Eigen Projection 2,Backward,Absolute,,No Units
+300,,Eigen Projection 2,Backward,Positive,,No Units
+301,,Eigen Projection 2,Backward,Negative,,No Units
+302,,Eigen Projection 3,,,,No Units
+303,,Eigen Projection 3,,Absolute,,No Units
+304,,Eigen Projection 3,,Positive,,No Units
+305,,Eigen Projection 3,,Negative,,No Units
+306,,Eigen Projection 3,Forward,,,No Units
+307,,Eigen Projection 3,Forward,Absolute,,No Units
+308,,Eigen Projection 3,Forward,Positive,,No Units
+309,,Eigen Projection 3,Forward,Negative,,No Units
+310,,Eigen Projection 3,Paused,,,No Units
+311,,Eigen Projection 3,Paused,Absolute,,No Units
+312,,Eigen Projection 3,Paused,Positive,,No Units
+313,,Eigen Projection 3,Paused,Negative,,No Units
+314,,Eigen Projection 3,Backward,,,No Units
+315,,Eigen Projection 3,Backward,Absolute,,No Units
+316,,Eigen Projection 3,Backward,Positive,,No Units
+317,,Eigen Projection 3,Backward,Negative,,No Units
+318,,Eigen Projection 4,,,,No Units
+319,,Eigen Projection 4,,Absolute,,No Units
+320,,Eigen Projection 4,,Positive,,No Units
+321,,Eigen Projection 4,,Negative,,No Units
+322,,Eigen Projection 4,Forward,,,No Units
+323,,Eigen Projection 4,Forward,Absolute,,No Units
+324,,Eigen Projection 4,Forward,Positive,,No Units
+325,,Eigen Projection 4,Forward,Negative,,No Units
+326,,Eigen Projection 4,Paused,,,No Units
+327,,Eigen Projection 4,Paused,Absolute,,No Units
+328,,Eigen Projection 4,Paused,Positive,,No Units
+329,,Eigen Projection 4,Paused,Negative,,No Units
+330,,Eigen Projection 4,Backward,,,No Units
+331,,Eigen Projection 4,Backward,Absolute,,No Units
+332,,Eigen Projection 4,Backward,Positive,,No Units
+333,,Eigen Projection 4,Backward,Negative,,No Units
+334,,Eigen Projection 5,,,,No Units
+335,,Eigen Projection 5,,Absolute,,No Units
+336,,Eigen Projection 5,,Positive,,No Units
+337,,Eigen Projection 5,,Negative,,No Units
+338,,Eigen Projection 5,Forward,,,No Units
+339,,Eigen Projection 5,Forward,Absolute,,No Units
+340,,Eigen Projection 5,Forward,Positive,,No Units
+341,,Eigen Projection 5,Forward,Negative,,No Units
+342,,Eigen Projection 5,Paused,,,No Units
+343,,Eigen Projection 5,Paused,Absolute,,No Units
+344,,Eigen Projection 5,Paused,Positive,,No Units
+345,,Eigen Projection 5,Paused,Negative,,No Units
+346,,Eigen Projection 5,Backward,,,No Units
+347,,Eigen Projection 5,Backward,Absolute,,No Units
+348,,Eigen Projection 5,Backward,Positive,,No Units
+349,,Eigen Projection 5,Backward,Negative,,No Units
+350,,Eigen Projection 6,,,,No Units
+351,,Eigen Projection 6,,Absolute,,No Units
+352,,Eigen Projection 6,,Positive,,No Units
+353,,Eigen Projection 6,,Negative,,No Units
+354,,Eigen Projection 6,Forward,,,No Units
+355,,Eigen Projection 6,Forward,Absolute,,No Units
+356,,Eigen Projection 6,Forward,Positive,,No Units
+357,,Eigen Projection 6,Forward,Negative,,No Units
+358,,Eigen Projection 6,Paused,,,No Units
+359,,Eigen Projection 6,Paused,Absolute,,No Units
+360,,Eigen Projection 6,Paused,Positive,,No Units
+361,,Eigen Projection 6,Paused,Negative,,No Units
+362,,Eigen Projection 6,Backward,,,No Units
+363,,Eigen Projection 6,Backward,Absolute,,No Units
+364,,Eigen Projection 6,Backward,Positive,,No Units
+365,,Eigen Projection 6,Backward,Negative,,No Units
+366,,Forward Motion,Frequency,,,Hz
+367,,Forward Motion,Time Ratio,,,No Units
+368,,Forward Motion,Distance Ratio,,,No Units
+369,,Forward Motion,Time,,,Seconds
+370,,Forward Motion,Distance,,,Microns
+371,,Forward Motion,Inter Time,,,Seconds
+372,,Forward Motion,Inter Distance,,,Microns
+373,,Paused Motion,Frequency,,,Hz
+374,,Paused Motion,Time Ratio,,,No Units
+375,,Paused Motion,Distance Ratio,,,No Units
+376,,Paused Motion,Time,,,Seconds
+377,,Paused Motion,Distance,,,Microns
+378,,Paused Motion,Inter Time,,,Seconds
+379,,Paused Motion,Inter Distance,,,Microns
+380,,Backward Motion,Frequency,,,Hz
+381,,Backward Motion,Time Ratio,,,No Units
+382,,Backward Motion,Distance Ratio,,,No Units
+383,,Backward Motion,Time,,,Seconds
+384,,Backward Motion,Distance,,,Microns
+385,,Backward Motion,Inter Time,,,Seconds
+386,,Backward Motion,Inter Distance,,,Microns
+387,,Head Tip Speed (+/- = Forward/Backward),,,,Microns/Seconds
+388,,Head Tip Speed (+/- = Forward/Backward),,Absolute,,Microns/Seconds
+389,,Head Tip Speed (+/- = Forward/Backward),,Positive,,Microns/Seconds
+390,,Head Tip Speed (+/- = Forward/Backward),,Negative,,Microns/Seconds
+391,,Head Tip Speed (+/- = Forward/Backward),Forward,,,Microns/Seconds
+392,,Head Tip Speed (+/- = Forward/Backward),Forward,Absolute,,Microns/Seconds
+393,,Head Tip Speed (+/- = Forward/Backward),Forward,Positive,,Microns/Seconds
+394,,Head Tip Speed (+/- = Forward/Backward),Forward,Negative,,Microns/Seconds
+395,,Head Tip Speed (+/- = Forward/Backward),Paused,,,Microns/Seconds
+396,,Head Tip Speed (+/- = Forward/Backward),Paused,Absolute,,Microns/Seconds
+397,,Head Tip Speed (+/- = Forward/Backward),Paused,Positive,,Microns/Seconds
+398,,Head Tip Speed (+/- = Forward/Backward),Paused,Negative,,Microns/Seconds
+399,,Head Tip Speed (+/- = Forward/Backward),Backward,,,Microns/Seconds
+400,,Head Tip Speed (+/- = Forward/Backward),Backward,Absolute,,Microns/Seconds
+401,,Head Tip Speed (+/- = Forward/Backward),Backward,Positive,,Microns/Seconds
+402,,Head Tip Speed (+/- = Forward/Backward),Backward,Negative,,Microns/Seconds
+403,,Head Speed (+/- = Forward/Backward),,,,Microns/Seconds
+404,,Head Speed (+/- = Forward/Backward),,Absolute,,Microns/Seconds
+405,,Head Speed (+/- = Forward/Backward),,Positive,,Microns/Seconds
+406,,Head Speed (+/- = Forward/Backward),,Negative,,Microns/Seconds
+407,,Head Speed (+/- = Forward/Backward),Forward,,,Microns/Seconds
+408,,Head Speed (+/- = Forward/Backward),Forward,Absolute,,Microns/Seconds
+409,,Head Speed (+/- = Forward/Backward),Forward,Positive,,Microns/Seconds
+410,,Head Speed (+/- = Forward/Backward),Forward,Negative,,Microns/Seconds
+411,,Head Speed (+/- = Forward/Backward),Paused,,,Microns/Seconds
+412,,Head Speed (+/- = Forward/Backward),Paused,Absolute,,Microns/Seconds
+413,,Head Speed (+/- = Forward/Backward),Paused,Positive,,Microns/Seconds
+414,,Head Speed (+/- = Forward/Backward),Paused,Negative,,Microns/Seconds
+415,,Head Speed (+/- = Forward/Backward),Backward,,,Microns/Seconds
+416,,Head Speed (+/- = Forward/Backward),Backward,Absolute,,Microns/Seconds
+417,,Head Speed (+/- = Forward/Backward),Backward,Positive,,Microns/Seconds
+418,,Head Speed (+/- = Forward/Backward),Backward,Negative,,Microns/Seconds
+419,,Midbody Speed (+/- = Forward/Backward),,,,Microns/Seconds
+420,,Midbody Speed (+/- = Forward/Backward),,Absolute,,Microns/Seconds
+421,,Midbody Speed (+/- = Forward/Backward),,Positive,,Microns/Seconds
+422,,Midbody Speed (+/- = Forward/Backward),,Negative,,Microns/Seconds
+423,,Midbody Speed (+/- = Forward/Backward),Forward,,,Microns/Seconds
+424,,Midbody Speed (+/- = Forward/Backward),Forward,Absolute,,Microns/Seconds
+425,,Midbody Speed (+/- = Forward/Backward),Forward,Positive,,Microns/Seconds
+426,,Midbody Speed (+/- = Forward/Backward),Forward,Negative,,Microns/Seconds
+427,,Midbody Speed (+/- = Forward/Backward),Paused,,,Microns/Seconds
+428,,Midbody Speed (+/- = Forward/Backward),Paused,Absolute,,Microns/Seconds
+429,,Midbody Speed (+/- = Forward/Backward),Paused,Positive,,Microns/Seconds
+430,,Midbody Speed (+/- = Forward/Backward),Paused,Negative,,Microns/Seconds
+431,,Midbody Speed (+/- = Forward/Backward),Backward,,,Microns/Seconds
+432,,Midbody Speed (+/- = Forward/Backward),Backward,Absolute,,Microns/Seconds
+433,,Midbody Speed (+/- = Forward/Backward),Backward,Positive,,Microns/Seconds
+434,,Midbody Speed (+/- = Forward/Backward),Backward,Negative,,Microns/Seconds
+435,,Tail Speed (+/- = Forward/Backward),,,,Microns/Seconds
+436,,Tail Speed (+/- = Forward/Backward),,Absolute,,Microns/Seconds
+437,,Tail Speed (+/- = Forward/Backward),,Positive,,Microns/Seconds
+438,,Tail Speed (+/- = Forward/Backward),,Negative,,Microns/Seconds
+439,,Tail Speed (+/- = Forward/Backward),Forward,,,Microns/Seconds
+440,,Tail Speed (+/- = Forward/Backward),Forward,Absolute,,Microns/Seconds
+441,,Tail Speed (+/- = Forward/Backward),Forward,Positive,,Microns/Seconds
+442,,Tail Speed (+/- = Forward/Backward),Forward,Negative,,Microns/Seconds
+443,,Tail Speed (+/- = Forward/Backward),Paused,,,Microns/Seconds
+444,,Tail Speed (+/- = Forward/Backward),Paused,Absolute,,Microns/Seconds
+445,,Tail Speed (+/- = Forward/Backward),Paused,Positive,,Microns/Seconds
+446,,Tail Speed (+/- = Forward/Backward),Paused,Negative,,Microns/Seconds
+447,,Tail Speed (+/- = Forward/Backward),Backward,,,Microns/Seconds
+448,,Tail Speed (+/- = Forward/Backward),Backward,Absolute,,Microns/Seconds
+449,,Tail Speed (+/- = Forward/Backward),Backward,Positive,,Microns/Seconds
+450,,Tail Speed (+/- = Forward/Backward),Backward,Negative,,Microns/Seconds
+451,,Tail Tip Speed (+/- = Forward/Backward),,,,Microns/Seconds
+452,,Tail Tip Speed (+/- = Forward/Backward),,Absolute,,Microns/Seconds
+453,,Tail Tip Speed (+/- = Forward/Backward),,Positive,,Microns/Seconds
+454,,Tail Tip Speed (+/- = Forward/Backward),,Negative,,Microns/Seconds
+455,,Tail Tip Speed (+/- = Forward/Backward),Forward,,,Microns/Seconds
+456,,Tail Tip Speed (+/- = Forward/Backward),Forward,Absolute,,Microns/Seconds
+457,,Tail Tip Speed (+/- = Forward/Backward),Forward,Positive,,Microns/Seconds
+458,,Tail Tip Speed (+/- = Forward/Backward),Forward,Negative,,Microns/Seconds
+459,,Tail Tip Speed (+/- = Forward/Backward),Paused,,,Microns/Seconds
+460,,Tail Tip Speed (+/- = Forward/Backward),Paused,Absolute,,Microns/Seconds
+461,,Tail Tip Speed (+/- = Forward/Backward),Paused,Positive,,Microns/Seconds
+462,,Tail Tip Speed (+/- = Forward/Backward),Paused,Negative,,Microns/Seconds
+463,,Tail Tip Speed (+/- = Forward/Backward),Backward,,,Microns/Seconds
+464,,Tail Tip Speed (+/- = Forward/Backward),Backward,Absolute,,Microns/Seconds
+465,,Tail Tip Speed (+/- = Forward/Backward),Backward,Positive,,Microns/Seconds
+466,,Tail Tip Speed (+/- = Forward/Backward),Backward,Negative,,Microns/Seconds
+467,,Head Tip Motion Direction (+/- = Toward D/V),,,,Degrees/Seconds
+468,,Head Tip Motion Direction (+/- = Toward D/V),,Absolute,,Degrees/Seconds
+469,,Head Tip Motion Direction (+/- = Toward D/V),,Positive,,Degrees/Seconds
+470,,Head Tip Motion Direction (+/- = Toward D/V),,Negative,,Degrees/Seconds
+471,,Head Tip Motion Direction (+/- = Toward D/V),Forward,,,Degrees/Seconds
+472,,Head Tip Motion Direction (+/- = Toward D/V),Forward,Absolute,,Degrees/Seconds
+473,,Head Tip Motion Direction (+/- = Toward D/V),Forward,Positive,,Degrees/Seconds
+474,,Head Tip Motion Direction (+/- = Toward D/V),Forward,Negative,,Degrees/Seconds
+475,,Head Tip Motion Direction (+/- = Toward D/V),Paused,,,Degrees/Seconds
+476,,Head Tip Motion Direction (+/- = Toward D/V),Paused,Absolute,,Degrees/Seconds
+477,,Head Tip Motion Direction (+/- = Toward D/V),Paused,Positive,,Degrees/Seconds
+478,,Head Tip Motion Direction (+/- = Toward D/V),Paused,Negative,,Degrees/Seconds
+479,,Head Tip Motion Direction (+/- = Toward D/V),Backward,,,Degrees/Seconds
+480,,Head Tip Motion Direction (+/- = Toward D/V),Backward,Absolute,,Degrees/Seconds
+481,,Head Tip Motion Direction (+/- = Toward D/V),Backward,Positive,,Degrees/Seconds
+482,,Head Tip Motion Direction (+/- = Toward D/V),Backward,Negative,,Degrees/Seconds
+483,,Head Motion Direction (+/- = Toward D/V),,,,Degrees/Seconds
+484,,Head Motion Direction (+/- = Toward D/V),,Absolute,,Degrees/Seconds
+485,,Head Motion Direction (+/- = Toward D/V),,Positive,,Degrees/Seconds
+486,,Head Motion Direction (+/- = Toward D/V),,Negative,,Degrees/Seconds
+487,,Head Motion Direction (+/- = Toward D/V),Forward,,,Degrees/Seconds
+488,,Head Motion Direction (+/- = Toward D/V),Forward,Absolute,,Degrees/Seconds
+489,,Head Motion Direction (+/- = Toward D/V),Forward,Positive,,Degrees/Seconds
+490,,Head Motion Direction (+/- = Toward D/V),Forward,Negative,,Degrees/Seconds
+491,,Head Motion Direction (+/- = Toward D/V),Paused,,,Degrees/Seconds
+492,,Head Motion Direction (+/- = Toward D/V),Paused,Absolute,,Degrees/Seconds
+493,,Head Motion Direction (+/- = Toward D/V),Paused,Positive,,Degrees/Seconds
+494,,Head Motion Direction (+/- = Toward D/V),Paused,Negative,,Degrees/Seconds
+495,,Head Motion Direction (+/- = Toward D/V),Backward,,,Degrees/Seconds
+496,,Head Motion Direction (+/- = Toward D/V),Backward,Absolute,,Degrees/Seconds
+497,,Head Motion Direction (+/- = Toward D/V),Backward,Positive,,Degrees/Seconds
+498,,Head Motion Direction (+/- = Toward D/V),Backward,Negative,,Degrees/Seconds
+499,,Midbody Motion Direction (+/- = Toward D/V),,,,Degrees/Seconds
+500,,Midbody Motion Direction (+/- = Toward D/V),,Absolute,,Degrees/Seconds
+501,,Midbody Motion Direction (+/- = Toward D/V),,Positive,,Degrees/Seconds
+502,,Midbody Motion Direction (+/- = Toward D/V),,Negative,,Degrees/Seconds
+503,,Midbody Motion Direction (+/- = Toward D/V),Forward,,,Degrees/Seconds
+504,,Midbody Motion Direction (+/- = Toward D/V),Forward,Absolute,,Degrees/Seconds
+505,,Midbody Motion Direction (+/- = Toward D/V),Forward,Positive,,Degrees/Seconds
+506,,Midbody Motion Direction (+/- = Toward D/V),Forward,Negative,,Degrees/Seconds
+507,,Midbody Motion Direction (+/- = Toward D/V),Paused,,,Degrees/Seconds
+508,,Midbody Motion Direction (+/- = Toward D/V),Paused,Absolute,,Degrees/Seconds
+509,,Midbody Motion Direction (+/- = Toward D/V),Paused,Positive,,Degrees/Seconds
+510,,Midbody Motion Direction (+/- = Toward D/V),Paused,Negative,,Degrees/Seconds
+511,,Midbody Motion Direction (+/- = Toward D/V),Backward,,,Degrees/Seconds
+512,,Midbody Motion Direction (+/- = Toward D/V),Backward,Absolute,,Degrees/Seconds
+513,,Midbody Motion Direction (+/- = Toward D/V),Backward,Positive,,Degrees/Seconds
+514,,Midbody Motion Direction (+/- = Toward D/V),Backward,Negative,,Degrees/Seconds
+515,,Tail Motion Direction (+/- = Toward D/V),,,,Degrees/Seconds
+516,,Tail Motion Direction (+/- = Toward D/V),,Absolute,,Degrees/Seconds
+517,,Tail Motion Direction (+/- = Toward D/V),,Positive,,Degrees/Seconds
+518,,Tail Motion Direction (+/- = Toward D/V),,Negative,,Degrees/Seconds
+519,,Tail Motion Direction (+/- = Toward D/V),Forward,,,Degrees/Seconds
+520,,Tail Motion Direction (+/- = Toward D/V),Forward,Absolute,,Degrees/Seconds
+521,,Tail Motion Direction (+/- = Toward D/V),Forward,Positive,,Degrees/Seconds
+522,,Tail Motion Direction (+/- = Toward D/V),Forward,Negative,,Degrees/Seconds
+523,,Tail Motion Direction (+/- = Toward D/V),Paused,,,Degrees/Seconds
+524,,Tail Motion Direction (+/- = Toward D/V),Paused,Absolute,,Degrees/Seconds
+525,,Tail Motion Direction (+/- = Toward D/V),Paused,Positive,,Degrees/Seconds
+526,,Tail Motion Direction (+/- = Toward D/V),Paused,Negative,,Degrees/Seconds
+527,,Tail Motion Direction (+/- = Toward D/V),Backward,,,Degrees/Seconds
+528,,Tail Motion Direction (+/- = Toward D/V),Backward,Absolute,,Degrees/Seconds
+529,,Tail Motion Direction (+/- = Toward D/V),Backward,Positive,,Degrees/Seconds
+530,,Tail Motion Direction (+/- = Toward D/V),Backward,Negative,,Degrees/Seconds
+531,,Tail Tip Motion Direction (+/- = Toward D/V),,,,Degrees/Seconds
+532,,Tail Tip Motion Direction (+/- = Toward D/V),,Absolute,,Degrees/Seconds
+533,,Tail Tip Motion Direction (+/- = Toward D/V),,Positive,,Degrees/Seconds
+534,,Tail Tip Motion Direction (+/- = Toward D/V),,Negative,,Degrees/Seconds
+535,,Tail Tip Motion Direction (+/- = Toward D/V),Forward,,,Degrees/Seconds
+536,,Tail Tip Motion Direction (+/- = Toward D/V),Forward,Absolute,,Degrees/Seconds
+537,,Tail Tip Motion Direction (+/- = Toward D/V),Forward,Positive,,Degrees/Seconds
+538,,Tail Tip Motion Direction (+/- = Toward D/V),Forward,Negative,,Degrees/Seconds
+539,,Tail Tip Motion Direction (+/- = Toward D/V),Paused,,,Degrees/Seconds
+540,,Tail Tip Motion Direction (+/- = Toward D/V),Paused,Absolute,,Degrees/Seconds
+541,,Tail Tip Motion Direction (+/- = Toward D/V),Paused,Positive,,Degrees/Seconds
+542,,Tail Tip Motion Direction (+/- = Toward D/V),Paused,Negative,,Degrees/Seconds
+543,,Tail Tip Motion Direction (+/- = Toward D/V),Backward,,,Degrees/Seconds
+544,,Tail Tip Motion Direction (+/- = Toward D/V),Backward,Absolute,,Degrees/Seconds
+545,,Tail Tip Motion Direction (+/- = Toward D/V),Backward,Positive,,Degrees/Seconds
+546,,Tail Tip Motion Direction (+/- = Toward D/V),Backward,Negative,,Degrees/Seconds
+547,,Foraging Amplitude (+/- = Toward D/V),,,,Microns
+548,,Foraging Amplitude (+/- = Toward D/V),,Absolute,,Microns
+549,,Foraging Amplitude (+/- = Toward D/V),,Positive,,Microns
+550,,Foraging Amplitude (+/- = Toward D/V),,Negative,,Microns
+551,,Foraging Amplitude (+/- = Toward D/V),Forward,,,Microns
+552,,Foraging Amplitude (+/- = Toward D/V),Forward,Absolute,,Microns
+553,,Foraging Amplitude (+/- = Toward D/V),Forward,Positive,,Microns
+554,,Foraging Amplitude (+/- = Toward D/V),Forward,Negative,,Microns
+555,,Foraging Amplitude (+/- = Toward D/V),Paused,,,Microns
+556,,Foraging Amplitude (+/- = Toward D/V),Paused,Absolute,,Microns
+557,,Foraging Amplitude (+/- = Toward D/V),Paused,Positive,,Microns
+558,,Foraging Amplitude (+/- = Toward D/V),Paused,Negative,,Microns
+559,,Foraging Amplitude (+/- = Toward D/V),Backward,,,Microns
+560,,Foraging Amplitude (+/- = Toward D/V),Backward,Absolute,,Microns
+561,,Foraging Amplitude (+/- = Toward D/V),Backward,Positive,,Microns
+562,,Foraging Amplitude (+/- = Toward D/V),Backward,Negative,,Microns
+563,,Head Crawling Amplitude (+/- = D/V Inside),,,,Degrees
+564,,Head Crawling Amplitude (+/- = D/V Inside),,Absolute,,Degrees
+565,,Head Crawling Amplitude (+/- = D/V Inside),,Positive,,Degrees
+566,,Head Crawling Amplitude (+/- = D/V Inside),,Negative,,Degrees
+567,,Head Crawling Amplitude (+/- = D/V Inside),Forward,,,Degrees
+568,,Head Crawling Amplitude (+/- = D/V Inside),Forward,Absolute,,Degrees
+569,,Head Crawling Amplitude (+/- = D/V Inside),Forward,Positive,,Degrees
+570,,Head Crawling Amplitude (+/- = D/V Inside),Forward,Negative,,Degrees
+571,,Head Crawling Amplitude (+/- = D/V Inside),Backward,,,Degrees
+572,,Head Crawling Amplitude (+/- = D/V Inside),Backward,Absolute,,Degrees
+573,,Head Crawling Amplitude (+/- = D/V Inside),Backward,Positive,,Degrees
+574,,Head Crawling Amplitude (+/- = D/V Inside),Backward,Negative,,Degrees
+575,,Midbody Crawling Amplitude (+/- = D/V Inside),,,,Degrees
+576,,Midbody Crawling Amplitude (+/- = D/V Inside),,Absolute,,Degrees
+577,,Midbody Crawling Amplitude (+/- = D/V Inside),,Positive,,Degrees
+578,,Midbody Crawling Amplitude (+/- = D/V Inside),,Negative,,Degrees
+579,,Midbody Crawling Amplitude (+/- = D/V Inside),Forward,,,Degrees
+580,,Midbody Crawling Amplitude (+/- = D/V Inside),Forward,Absolute,,Degrees
+581,,Midbody Crawling Amplitude (+/- = D/V Inside),Forward,Positive,,Degrees
+582,,Midbody Crawling Amplitude (+/- = D/V Inside),Forward,Negative,,Degrees
+583,,Midbody Crawling Amplitude (+/- = D/V Inside),Backward,,,Degrees
+584,,Midbody Crawling Amplitude (+/- = D/V Inside),Backward,Absolute,,Degrees
+585,,Midbody Crawling Amplitude (+/- = D/V Inside),Backward,Positive,,Degrees
+586,,Midbody Crawling Amplitude (+/- = D/V Inside),Backward,Negative,,Degrees
+587,,Tail Crawling Amplitude (+/- = D/V Inside),,,,Degrees
+588,,Tail Crawling Amplitude (+/- = D/V Inside),,Absolute,,Degrees
+589,,Tail Crawling Amplitude (+/- = D/V Inside),,Positive,,Degrees
+590,,Tail Crawling Amplitude (+/- = D/V Inside),,Negative,,Degrees
+591,,Tail Crawling Amplitude (+/- = D/V Inside),Forward,,,Degrees
+592,,Tail Crawling Amplitude (+/- = D/V Inside),Forward,Absolute,,Degrees
+593,,Tail Crawling Amplitude (+/- = D/V Inside),Forward,Positive,,Degrees
+594,,Tail Crawling Amplitude (+/- = D/V Inside),Forward,Negative,,Degrees
+595,,Tail Crawling Amplitude (+/- = D/V Inside),Backward,,,Degrees
+596,,Tail Crawling Amplitude (+/- = D/V Inside),Backward,Absolute,,Degrees
+597,,Tail Crawling Amplitude (+/- = D/V Inside),Backward,Positive,,Degrees
+598,,Tail Crawling Amplitude (+/- = D/V Inside),Backward,Negative,,Degrees
+599,,Foraging Speed,,,,Degrees/Seconds
+600,,Foraging Speed,,Absolute,,Degrees/Seconds
+601,,Foraging Speed,,Positive,,Degrees/Seconds
+602,,Foraging Speed,,Negative,,Degrees/Seconds
+603,,Foraging Speed,Forward,,,Degrees/Seconds
+604,,Foraging Speed,Forward,Absolute,,Degrees/Seconds
+605,,Foraging Speed,Forward,Positive,,Degrees/Seconds
+606,,Foraging Speed,Forward,Negative,,Degrees/Seconds
+607,,Foraging Speed,Paused,,,Degrees/Seconds
+608,,Foraging Speed,Paused,Absolute,,Degrees/Seconds
+609,,Foraging Speed,Paused,Positive,,Degrees/Seconds
+610,,Foraging Speed,Paused,Negative,,Degrees/Seconds
+611,,Foraging Speed,Backward,,,Degrees/Seconds
+612,,Foraging Speed,Backward,Absolute,,Degrees/Seconds
+613,,Foraging Speed,Backward,Positive,,Degrees/Seconds
+614,,Foraging Speed,Backward,Negative,,Degrees/Seconds
+615,,Head Crawling Frequency (+/- = D/V Inside),,,,Hz
+616,,Head Crawling Frequency (+/- = D/V Inside),,Absolute,,Hz
+617,,Head Crawling Frequency (+/- = D/V Inside),,Positive,,Hz
+618,,Head Crawling Frequency (+/- = D/V Inside),,Negative,,Hz
+619,,Head Crawling Frequency (+/- = D/V Inside),Forward,,,Hz
+620,,Head Crawling Frequency (+/- = D/V Inside),Forward,Absolute,,Hz
+621,,Head Crawling Frequency (+/- = D/V Inside),Forward,Positive,,Hz
+622,,Head Crawling Frequency (+/- = D/V Inside),Forward,Negative,,Hz
+623,,Head Crawling Frequency (+/- = D/V Inside),Backward,,,Hz
+624,,Head Crawling Frequency (+/- = D/V Inside),Backward,Absolute,,Hz
+625,,Head Crawling Frequency (+/- = D/V Inside),Backward,Positive,,Hz
+626,,Head Crawling Frequency (+/- = D/V Inside),Backward,Negative,,Hz
+627,,Midbody Crawling Frequency (+/- = D/V Inside),,,,Hz
+628,,Midbody Crawling Frequency (+/- = D/V Inside),,Absolute,,Hz
+629,,Midbody Crawling Frequency (+/- = D/V Inside),,Positive,,Hz
+630,,Midbody Crawling Frequency (+/- = D/V Inside),,Negative,,Hz
+631,,Midbody Crawling Frequency (+/- = D/V Inside),Forward,,,Hz
+632,,Midbody Crawling Frequency (+/- = D/V Inside),Forward,Absolute,,Hz
+633,,Midbody Crawling Frequency (+/- = D/V Inside),Forward,Positive,,Hz
+634,,Midbody Crawling Frequency (+/- = D/V Inside),Forward,Negative,,Hz
+635,,Midbody Crawling Frequency (+/- = D/V Inside),Backward,,,Hz
+636,,Midbody Crawling Frequency (+/- = D/V Inside),Backward,Absolute,,Hz
+637,,Midbody Crawling Frequency (+/- = D/V Inside),Backward,Positive,,Hz
+638,,Midbody Crawling Frequency (+/- = D/V Inside),Backward,Negative,,Hz
+639,,Tail Crawling Frequency (+/- = D/V Inside),,,,Hz
+640,,Tail Crawling Frequency (+/- = D/V Inside),,Absolute,,Hz
+641,,Tail Crawling Frequency (+/- = D/V Inside),,Positive,,Hz
+642,,Tail Crawling Frequency (+/- = D/V Inside),,Negative,,Hz
+643,,Tail Crawling Frequency (+/- = D/V Inside),Forward,,,Hz
+644,,Tail Crawling Frequency (+/- = D/V Inside),Forward,Absolute,,Hz
+645,,Tail Crawling Frequency (+/- = D/V Inside),Forward,Positive,,Hz
+646,,Tail Crawling Frequency (+/- = D/V Inside),Forward,Negative,,Hz
+647,,Tail Crawling Frequency (+/- = D/V Inside),Backward,,,Hz
+648,,Tail Crawling Frequency (+/- = D/V Inside),Backward,Absolute,,Hz
+649,,Tail Crawling Frequency (+/- = D/V Inside),Backward,Positive,,Hz
+650,,Tail Crawling Frequency (+/- = D/V Inside),Backward,Negative,,Hz
+651,,Omega Turn Events,Frequency,,,Hz
+652,,Omega Turn Events,Time Ratio,,,No Units
+653,,Omega Turn Events,Time,,,Seconds
+654,,Omega Turn Events,Time,Absolute,,Seconds
+655,,Omega Turn Events,Time,Positive,,Seconds
+656,,Omega Turn Events,Time,Negative,,Seconds
+657,,Omega Turn Events,Inter Time,,,Seconds
+658,,Omega Turn Events,Inter Time,Absolute,,Seconds
+659,,Omega Turn Events,Inter Time,Positive,,Seconds
+660,,Omega Turn Events,Inter Time,Negative,,Seconds
+661,,Omega Turn Events,Inter Distance,,,Microns
+662,,Omega Turn Events,Inter Distance,Absolute,,Microns
+663,,Omega Turn Events,Inter Distance,Positive,,Microns
+664,,Omega Turn Events,Inter Distance,Negative,,Microns
+665,,Upsilon Turn Events,Frequency,,,Hz
+666,,Upsilon Turn Events,Time Ratio,,,No Units
+667,,Upsilon Turn Events,Time,,,Seconds
+668,,Upsilon Turn Events,Time,Absolute,,Seconds
+669,,Upsilon Turn Events,Time,Positive,,Seconds
+670,,Upsilon Turn Events,Time,Negative,,Seconds
+671,,Upsilon Turn Events,Inter Time,,,Seconds
+672,,Upsilon Turn Events,Inter Time,Absolute,,Seconds
+673,,Upsilon Turn Events,Inter Time,Positive,,Seconds
+674,,Upsilon Turn Events,Inter Time,Negative,,Seconds
+675,,Upsilon Turn Events,Inter Distance,,,Microns
+676,,Upsilon Turn Events,Inter Distance,Absolute,,Microns
+677,,Upsilon Turn Events,Inter Distance,Positive,,Microns
+678,,Upsilon Turn Events,Inter Distance,Negative,,Microns
+679,,Path Range,,,,Microns
+680,,Path Range,Forward,,,Microns
+681,,Path Range,Paused,,,Microns
+682,,Path Range,Backward,,,Microns
+683,,Worm Dwelling,,,,Seconds
+684,,Head Dwelling,,,,Seconds
+685,,Midbody Dwelling,,,,Seconds
+686,,Tail Dwelling,,,,Seconds
+687,,Path Curvature (+/- = D/V Inside),,,,Radians/Microns
+688,,Path Curvature (+/- = D/V Inside),,Absolute,,Radians/Microns
+689,,Path Curvature (+/- = D/V Inside),,Positive,,Radians/Microns
+690,,Path Curvature (+/- = D/V Inside),,Negative,,Radians/Microns
+691,,Path Curvature (+/- = D/V Inside),Forward,,,Radians/Microns
+692,,Path Curvature (+/- = D/V Inside),Forward,Absolute,,Radians/Microns
+693,,Path Curvature (+/- = D/V Inside),Forward,Positive,,Radians/Microns
+694,,Path Curvature (+/- = D/V Inside),Forward,Negative,,Radians/Microns
+695,,Path Curvature (+/- = D/V Inside),Paused,,,Radians/Microns
+696,,Path Curvature (+/- = D/V Inside),Paused,Absolute,,Radians/Microns
+697,,Path Curvature (+/- = D/V Inside),Paused,Positive,,Radians/Microns
+698,,Path Curvature (+/- = D/V Inside),Paused,Negative,,Radians/Microns
+699,,Path Curvature (+/- = D/V Inside),Backward,,,Radians/Microns
+700,,Path Curvature (+/- = D/V Inside),Backward,Absolute,,Radians/Microns
+701,,Path Curvature (+/- = D/V Inside),Backward,Positive,,Radians/Microns
+702,,Path Curvature (+/- = D/V Inside),Backward,Negative,,Radians/Microns
