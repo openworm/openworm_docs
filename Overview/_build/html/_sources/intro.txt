@@ -1,0 +1,87 @@
+*****
+Introduction to OpenWorm
+*****
+
+* Project areas
+* Overview of the roadmap
+* \'You are here'\ in the roadmap
+* GitHub Issues
+* Description of all the repositories and how they map to the project areas
+* Explanations of the current code that has been produced, how to run it, how to use it
+* Breakdowns of current issues based on potential volunteers' incoming skills
+
+Project Areas
+=============
+http://www.openworm.org/about.html
+https://github.com/openworm/OpenWorm/wiki/Project-overview
+https://github.com/openworm/OpenWorm/issues/milestones
+
+**NeuroML Connectome**
+We have converted all 302 neurons described in the WormBase Virtual Worm Blender files into multi-compartmental neuronal models described in NeuroML format. We are currently building descriptions of the synaptic junctions and the ion channels for each cell. You can explore the github repository.
+
+**Geppetto Simulation Engine**
+We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser. You can read about architectural concepts and learn more about the different plug-in bundles we are working on.
+
+**OpenWorm Browser**
+The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.
+
+**Fluid Mechanics Simulator**
+We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initiall worked out in C++ (with OpenGL visualization), then ported to Java as a bundle for Geppetto, our simulation engine.
+
+**Optimization Engine**
+The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the github repository.
+
+
+Overview of the Roadmap
+=============
+https://github.com/openworm/OpenWorm/issues/milestones
+https://github.com/openworm/OpenWorm/wiki/Past-Releases
+
+
+ \'You are here'\ in the roadmap
+=============
+
+
+
+GitHub Issues
+=============
+To access the repositories for OpenWorm on GitHub, you will first need to create an account if you do not already have one.  Accounts are free and can be set by visiting: https://github.com/
+DO THEY HAVE TO BE MEMBERS OF THE OPENWORM GITHUB TO CONTRIBUTE???
+
+Once completed, you can log back into GitHub and select OpenWorm from the organization drop down menu to get started. 
+https://github.com/organizations/openworm
+
+
+
+Repositories
+=============
+Description of all the repositories and how they map to the project areas
+https://github.com/openworm (full list)
+
+* https://github.com/openworm/org.geppetto.frontend
+* https://github.com/openworm/org.geppetto.simulation
+* https://github.com/openworm/org.geppetto.core
+* https://github.com/openworm/org.geppetto.testbackend
+* https://github.com/openworm/org.geppetto.solver.sph
+* https://github.com/openworm/org.geppetto.simulator.sph
+* https://github.com/openworm/org.openworm.website
+* https://github.com/openworm/org.geppetto.simulator.jlems
+* https://github.com/openworm/org.geppetto.model.sph
+* https://github.com/openworm/org.geppetto.model.neuroml
+* https://github.com/openworm/data-viz
+* https://github.com/openworm/OpenWorm
+* https://github.com/openworm/org.geppetto.templatebundle
+
+
+
+Using the Code
+=============
+Explanations of the current code that has been produced, how to run it, how to use it
+https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
+https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
+
+
+
+Current Issues
+=============
+Do we have a current list of contributors mapped to current issues?
