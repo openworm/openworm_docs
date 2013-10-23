@@ -71,6 +71,8 @@ https://github.com/openworm (full list)
 * https://github.com/openworm/data-viz
 * https://github.com/openworm/OpenWorm
 * https://github.com/openworm/org.geppetto.templatebundle
+* https://github.com/openworm/OpenWorm/wiki/Geppetto---Repositories
+* https://github.com/openworm/OpenWorm/wiki/Sibernetic-Overview
 
 
 
@@ -85,3 +87,5 @@ https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmM
 Current Issues
 =============
 Do we have a current list of contributors mapped to current issues?
+Breakdowns of current issues based on potential volunteers' incoming skills
+Using tags for categorizing tasks and issues
