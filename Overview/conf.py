@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'MyTestDocumentation'
-copyright = u'2013, Vanessa'
+project = u'OpenWorm'
+copyright = u'2013, OpenWorm'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -167,7 +167,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'MyTestDocumentationdoc'
+htmlhelp_basename = 'OpenWormdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -186,8 +186,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'MyTestDocumentation.tex', u'MyTestDocumentation Documentation',
-   u'Vanessa', 'manual'),
+  ('index', 'OpenWorm.tex', u'OpenWorm Documentation',
+   u'OpenWorm', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -216,8 +216,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'mytestdocumentation', u'MyTestDocumentation Documentation',
-     [u'Vanessa'], 1)
+    ('index', 'openworm', u'OpenWorm Documentation',
+     [u'OpenWorm'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -230,9 +230,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'MyTestDocumentation', u'MyTestDocumentation Documentation',
-   u'Vanessa', 'MyTestDocumentation', 'One line description of project.',
-   'Miscellaneous'),
+  ('index', 'OpenWorm', u'OpenWorm Documentation',
+   u'OpenWorm', 'OpenWorm', 'One line description of project.',
+   'OpenWorm'),
 ]
 
 # Documents to append as an appendix to all manuals.
