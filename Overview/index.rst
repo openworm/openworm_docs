@@ -12,7 +12,10 @@ Contents:
    :maxdepth: 2
 
    intro
-   tutorial
+   data
+   repositories
+   knowledgebase
+   project
 
 
 Indices and tables
