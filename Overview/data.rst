@@ -4,8 +4,8 @@ Interacting with OpenWorm Data
 
 * Google Drive
 * Forking GitHub repositories
-* GitHub issues
-* Mailing list
+* GitHub Issues
+* Mailing Lists
 * Posting content online
   - YouTube
   - Guest blog post
@@ -78,20 +78,33 @@ https://groups.google.com/forum/?hl=en#!forum/openworm-discuss
 
 Posting Content Online
 ======================
-* YouTube
+YouTube
+-------
 http://www.youtube.com/user/OpenWorm
 
-* Guest blog post
-* Create google docs
+Guest blog post
+---------------
+We love hearing about what members are of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
+
+Create google docs
+------------------
 https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
 
-* Creating personal repos that OpenWorm forks
+Creating personal repos that OpenWorm forks
+-------------------------------------------
 https://help.github.com/articles/fork-a-repo
 
-* Posting Gists (gist.github.com)
-gists
-https://github.com/blog/1276-welcome-to-a-new-gist
-https://gist.github.com/
+Posting Gists (gist.github.com)
+-------------------------------
+Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
+
+How to:
+.. _Create Gists: https://help.github.com/articles/creating-gists
+.. _Embed, Download and Copy Gists: https://help.github.com/articles/embedding-downloading-and-copying-gists 
+
+For the latest news and updates on Gists at GitHub:
+https://github.com/blog/search?page=1&q=gist
+
 
 * Replying to github issues
 

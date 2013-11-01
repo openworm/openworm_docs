@@ -220,9 +220,9 @@ Contributing and Resolving Issues
 =================================
 A complete list of issues on GitHub can be found at: https://github.com/organizations/openworm/dashboard/issues
 
-To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around. 
+To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
-
+SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
 
 Do we have a current list of contributors mapped to current issues?
 Breakdowns of current issues based on potential volunteers' incoming skills
