@@ -5,9 +5,9 @@ Introduction to OpenWorm
 * Project areas
 * Overview of the roadmap
 * \'You are here'\ in the roadmap
-* GitHub Issues
-* Description of all the repositories and how they map to the project areas
-* Explanations of the current code that has been produced, how to run it, how to use it
+* Accessing GitHub Issues
+* Repositories
+* Using the Code
 * Breakdowns of current issues based on potential volunteers' incoming skills
 
 Project Areas
@@ -89,8 +89,8 @@ The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requ
 
 
 
-GitHub Issues
-=============
+Accessing GitHub Issues
+=======================
 To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: https://github.com/
 
 Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get started. You will now have access to be assigned issues, add issues and edit them.  
@@ -223,6 +223,7 @@ A complete list of issues on GitHub can be found at: https://github.com/organiza
 To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
 SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
+(link to Data.rst sections on opening, replying to and closing issues)
 
 Do we have a current list of contributors mapped to current issues?
 Breakdowns of current issues based on potential volunteers' incoming skills

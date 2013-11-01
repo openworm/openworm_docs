@@ -63,6 +63,15 @@ This will open the interface to create a new issue. You will need to add the fol
 
 Finally, click on Submit New Issue.
 
+Replying to an Issue on GitHub
+-----------------------------
+[Add content]
+
+
+Closing an Issue
+----------------
+[Add content]
+
 
 
 Mailing Lists
@@ -94,6 +103,7 @@ Creating personal repos that OpenWorm forks
 -------------------------------------------
 https://help.github.com/articles/fork-a-repo
 
+
 Posting Gists (gist.github.com)
 -------------------------------
 Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
@@ -106,5 +116,4 @@ For the latest news and updates on Gists at GitHub:
 https://github.com/blog/search?page=1&q=gist
 
 
-* Replying to github issues
 
