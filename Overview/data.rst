@@ -12,7 +12,6 @@ Interacting with OpenWorm Data
   - Create google docs
   - Creating personal repos that OpenWorm forks
   - Posting Gists (gist.github.com)
-  - Replying to github issues
 
 
 
@@ -40,11 +39,9 @@ https://help.github.com/articles/fork-a-repo
 
 
 
-
-
 GitHub Issues
 =============
-Opening a new issue on GitHub
+Opening a New Issue
 -----------------------------
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 .. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
@@ -63,8 +60,8 @@ This will open the interface to create a new issue. You will need to add the fol
 
 Finally, click on Submit New Issue.
 
-Replying to an Issue on GitHub
------------------------------
+Replying to an Issue
+--------------------
 [Add content]
 
 
