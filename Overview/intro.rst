@@ -106,106 +106,105 @@ View the full list with active links:
 
 Gepetto
 -------
-org.geppetto.solver.sph
+**org.geppetto.solver.sph**
 PCI SPH Solver bundle for Geppetto
 Python
 
-org.geppetto.simulator.jlems
+**org.geppetto.simulator.jlems**
 jLEMS based simulator for Geppetto
 Java
 
-org.geppetto.model.neuroml
+**org.geppetto.model.neuroml**
 NeuroML Model Bundle for Geppettoo
 Java
 
-org.geppetto.core
+**org.geppetto.core**
 Geppetto core bundle
 JavaScript
 
-org.geppetto.frontend
+**org.geppetto.frontend**
 Geppetto frontend bundle (Web Application)
 Java
 
-org.geppetto.testbackend
+**org.geppetto.testbackend**
 Java 
 
-org.geppetto.simulator.sph
+**org.geppetto.simulator.sph**
 SPH Simulator bundle for Geppetto
 Java
 
-org.geppetto.simulation
+**org.geppetto.simulation**
 Generic simulation bundle for Geppetto
 Python
 
-org.geppetto
+**org.geppetto**
 Geppetto Main Bundle / packaging
 Java
 
-org.geppetto.model.sph
+**org.geppetto.model.sph**
 PCI SPH Model Bundle for Geppetto
 CSS
 
-org.geppetto.samples
+**org.geppetto.samples**
 Python
 
-org.geppetto.templatebundle
+**org.geppetto.templatebundle**
 JavaScript
+
 
 Models
 ------
-Smoothed-Particle-Hydrodynamics
+**Smoothed-Particle-Hydrodynamics**
 This is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
 Java
 
-muscle_model
+**muscle_model**
 model of c.elegans muscle in NEURON
 XSLT
 
-CElegansNeuroML
+**CElegansNeuroML**
 NeuroML based C elegans model, contained in a neuroConstruct project
 Java
 
-Blender2NeuroML
+**Blender2NeuroML**
 Conversion script to bring neuron models drawn in Blender into NeuroML format
 Python
 
 
-
 OpenWorm
 --------
-org.openworm.website
+**org.openworm.website
 OpenWorm Website
 Python
 
-OpenWorm
+**OpenWorm**
 Matlab
 
-openworm_docs
-
+**openworm_docs**
 
 
 Uncategorized
 -------------
-movement_validation
+**movement_validation**
 
-ConfigurationGenerator
+**ConfigurationGenerator**
 JavaScript
 
-data-viz
+**data-viz**
 Python
 
-SegWorm
+**SegWorm**
 Java
 
-wormbrowser
+**wormbrowser**
 Objective-C
 
-openwormbrowser-ios
+**openwormbrowser-ios**
 C++
 
-HeuristicWorm
+**HeuristicWorm**
 
-CyberElegans
+**CyberElegans**
 
 
 
@@ -217,8 +216,14 @@ https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmM
 
 
 
-Current Issues
-==============
+Contributing and Resolving Issues
+=================================
+A complete list of issues on GitHub can be found at: https://github.com/organizations/openworm/dashboard/issues
+
+To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around. 
+
+
+
 Do we have a current list of contributors mapped to current issues?
 Breakdowns of current issues based on potential volunteers' incoming skills
 Using tags for categorizing tasks and issues
