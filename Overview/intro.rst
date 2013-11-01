@@ -1,6 +1,6 @@
-*****
+************************
 Introduction to OpenWorm
-*****
+************************
 
 * Project areas
 * Overview of the roadmap
@@ -33,14 +33,11 @@ The Optimization Engine uses optimization techniques like genetic algorithms to 
 
 
 Overview of the Roadmap
-=============
+=======================
 https://github.com/openworm/OpenWorm/issues/milestones
 
 .. _STORY: Muscle Cell model output closely matches that of real data: https://github.com/openworm/OpenWorm/issues?milestone=13&state=open
 We will show that we have built a model of C. elegans muscle cell that matches data recorded from the nematode muscle cell. In part, we will use techniques of model optimization to fill in gaps in the model parameter space (deduce unmeasured parameters). The main technical challenge is tuning muscle cell passive properties and building a larger data set (more cell recordings).
-
-Updated NeuroML connectome model ..https://github.com/openworm/OpenWorm/issues?milestone=15&state=open
-The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
 
 .. _STORY: Build a test suite for the simulation from WormBehavior database: https://github.com/openworm/OpenWorm/issues?milestone=19&state=open
 As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how close the model is to real data.
@@ -83,9 +80,12 @@ This epic is to have a simulation that can demonstrate it can predict (and there
 This epic focuses on an output of simulation performance rather than the means of implementation, so any way to achieve this epic is welcome.
 
 
+.. _Updated NeuroML connectome model ..https://github.com/openworm/OpenWorm/issues?milestone=15&state=open
+The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
+
 
  \'You are here'\ in the roadmap
-=============
+================================
 
 
 
@@ -93,11 +93,28 @@ GitHub Issues
 =============
 To access the repositories for OpenWorm on GitHub, you will first need to create an account if you do not already have one.  Accounts are free and can be set by visiting: https://github.com/
 DO THEY HAVE TO BE MEMBERS OF THE OPENWORM GITHUB TO CONTRIBUTE???
+They have to be added to the organization to be assigned to issues, add and edit them but not to comment on them.
 
 Once completed, you can log back into GitHub and select OpenWorm from the organization drop down menu to get started. 
 https://github.com/organizations/openworm
 
+Opening a new issue on GitHub. 
+After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
+.. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
 
+Next, click on the New Image button in the upper right corner of the screen.
+.. GitHubIssue1b:: http://i.imgur.com/fvEQOJQ.png 
+
+This will open the interface to create a new issue. You will need to add the following information:
+* Name or short description of the issue
+* Full description of the issue, including images if available
+* Assign team members to the issue if appropriate
+* Add a milestone if appropriate
+* Add labels to categorize the issue
+
+.. GitHubIssue1c:: http://i.imgur.com/ozkZFsh.png 
+
+Finally, click on Submit New Issue.
 
 Repositories
 =============
@@ -153,7 +170,7 @@ org.geppetto.templatebundle
 JavaScript
 
 Models
--------------
+------
 Smoothed-Particle-Hydrodynamics
 This is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
 Java
@@ -173,7 +190,7 @@ Python
 
 
 OpenWorm
--------------
+--------
 org.openworm.website
 OpenWorm Website
 Python
@@ -211,7 +228,7 @@ CyberElegans
 
 
 Using the Code
-=============
+==============
 Explanations of the current code that has been produced, how to run it, how to use it
 https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
 https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
@@ -219,7 +236,7 @@ https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmM
 
 
 Current Issues
-=============
+==============
 Do we have a current list of contributors mapped to current issues?
 Breakdowns of current issues based on potential volunteers' incoming skills
 Using tags for categorizing tasks and issues
