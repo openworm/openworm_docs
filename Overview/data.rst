@@ -1,6 +1,6 @@
-*****
+******************************
 Interacting with OpenWorm Data
-*****
+******************************
 
 * Google Drive
 * Forking GitHub repositories
@@ -17,7 +17,7 @@ Interacting with OpenWorm Data
 
 
 Google Drive
-=============
+============
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on the link below.
 https://drive.google.com/a/openworm.org/?tab=go#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
 (CONFIRM THIS IS THE CORRECT LINK - GOES TO OPENWORM PUBLIC folder
@@ -30,7 +30,7 @@ Folder structure w/ descriptors
 
 
 Forking GitHub Repositories
-=============
+===========================
 On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
 
 To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
@@ -64,7 +64,7 @@ https://groups.google.com/forum/?hl=en#!forum/openworm-discuss
 
 
 Posting Content Online
-=============
+======================
 * YouTube
 http://www.youtube.com/user/OpenWorm
 
