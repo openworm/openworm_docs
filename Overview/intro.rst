@@ -91,39 +91,21 @@ The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requ
 
 GitHub Issues
 =============
-To access the repositories for OpenWorm on GitHub, you will first need to create an account if you do not already have one.  Accounts are free and can be set by visiting: https://github.com/
-DO THEY HAVE TO BE MEMBERS OF THE OPENWORM GITHUB TO CONTRIBUTE???
-They have to be added to the organization to be assigned to issues, add and edit them but not to comment on them.
+To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: https://github.com/
 
-Once completed, you can log back into GitHub and select OpenWorm from the organization drop down menu to get started. 
+Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get started. You will now have access to be assigned issues, add issues and edit them.  
 https://github.com/organizations/openworm
 
-Opening a new issue on GitHub. 
-After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
-.. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
 
-Next, click on the New Image button in the upper right corner of the screen.
-.. GitHubIssue1b:: http://i.imgur.com/fvEQOJQ.png 
-
-This will open the interface to create a new issue. You will need to add the following information:
-* Name or short description of the issue
-* Full description of the issue, including images if available
-* Assign team members to the issue if appropriate
-* Add a milestone if appropriate
-* Add labels to categorize the issue
-
-.. GitHubIssue1c:: http://i.imgur.com/ozkZFsh.png 
-
-Finally, click on Submit New Issue.
 
 Repositories
-=============
+============
 Description of all the repositories and how they map to the project areas
 View the full list with active links:
 .. https://github.com/openworm 
 
 Gepetto
--------------
+-------
 org.geppetto.solver.sph
 PCI SPH Solver bundle for Geppetto
 Python

@@ -44,11 +44,24 @@ https://help.github.com/articles/fork-a-repo
 
 GitHub Issues
 =============
-Opening a new issue on GitHub. 
-https://docs.google.com/a/metacell.us/document/d/17xjdNEy-0V6FHvkQhK9TWiZxPOjGbB1yiwr1CDQnfAo/edit
+Opening a new issue on GitHub
+-----------------------------
+After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
+.. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
 
-OpenWorm Milestones:
-https://github.com/openworm/OpenWorm/issues/milestones
+Next, click on the New Image button in the upper right corner of the screen.
+.. GitHubIssue1b:: http://i.imgur.com/fvEQOJQ.png 
+
+This will open the interface to create a new issue. You will need to add the following information:
+* Name or short description of the issue
+* Full description of the issue, including images if available
+* Assign team members to the issue if appropriate
+* Add a milestone if appropriate
+* Add labels to categorize the issue
+
+.. GitHubIssue1c:: http://i.imgur.com/ozkZFsh.png 
+
+Finally, click on Submit New Issue.
 
 
 
