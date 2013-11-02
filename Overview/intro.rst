@@ -34,8 +34,6 @@ The Optimization Engine uses optimization techniques like genetic algorithms to 
 
 Overview of the Roadmap
 =======================
-https://github.com/openworm/OpenWorm/issues/milestones
-
 .. _STORY: Muscle Cell model output closely matches that of real data: https://github.com/openworm/OpenWorm/issues?milestone=13&state=open
 We will show that we have built a model of C. elegans muscle cell that matches data recorded from the nematode muscle cell. In part, we will use techniques of model optimization to fill in gaps in the model parameter space (deduce unmeasured parameters). The main technical challenge is tuning muscle cell passive properties and building a larger data set (more cell recordings).
 
@@ -83,6 +81,8 @@ This epic focuses on an output of simulation performance rather than the means o
 .. _Updated NeuroML connectome model ..https://github.com/openworm/OpenWorm/issues?milestone=15&state=open
 The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
 
+For the latest status on the milestones, visit: https://github.com/openworm/OpenWorm/issues/milestones
+
 
  \'You are here'\ in the roadmap
 ================================
@@ -91,10 +91,10 @@ The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requ
 
 Accessing GitHub Issues
 =======================
-To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: https://github.com/
+To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: .. https://github.com/
 
 Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get started. You will now have access to be assigned issues, add issues and edit them.  
-https://github.com/organizations/openworm
+.. https://github.com/organizations/openworm
 
 
 
