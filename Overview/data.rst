@@ -20,9 +20,11 @@ Google Drive
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on the link below.
 https://drive.google.com/a/openworm.org/?tab=go#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
 (CONFIRM THIS IS THE CORRECT LINK - GOES TO OPENWORM PUBLIC folder
+
+All docuemnts located in the OpenWorm folder is viewable to the public.  Comments can be added to both text documents and spreadsheets.  In order to edit existing documents or to add a new document, you will need to be added to the folder.  You can request access by email your Google ID to info@openworm.org. 
 All content in this folder is viewable to the public
-Text documents and spreadsheets - anyone can comment
-To Edit or add new, you have to be added (google ID) - request access by emailing info@openworm
+
+
 Spreadsheets, slide presentation, dynamic documents - should be on google drive (policy of what goes in)
 Folder structure w/ descriptors
 
