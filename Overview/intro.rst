@@ -16,7 +16,7 @@ http://www.openworm.org/about.html
 https://github.com/openworm/OpenWorm/wiki/Project-overview
 https://github.com/openworm/OpenWorm/issues/milestones
 http://www.openworm.org/projects.html
-(NEED TO HARMAONIZE INFORMATION ACROSS THESE PAGES)
+(NEED TO HARMONIZE INFORMATION ACROSS THESE PAGES)
 
 **NeuroML Connectome**
 We have converted all 302 neurons described in the WormBase Virtual Worm Blender files into multi-compartmental neuronal models described in NeuroML format. We are currently building descriptions of the synaptic junctions and the ion channels for each cell. You can explore the github repository.
