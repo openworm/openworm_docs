@@ -15,6 +15,8 @@ Project Areas
 http://www.openworm.org/about.html
 https://github.com/openworm/OpenWorm/wiki/Project-overview
 https://github.com/openworm/OpenWorm/issues/milestones
+http://www.openworm.org/projects.html
+(NEED TO HARMAONIZE INFORMATION ACROSS THESE PAGES)
 
 **NeuroML Connectome**
 We have converted all 302 neurons described in the WormBase Virtual Worm Blender files into multi-compartmental neuronal models described in NeuroML format. We are currently building descriptions of the synaptic junctions and the ion channels for each cell. You can explore the github repository.
@@ -30,6 +32,10 @@ We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to
 
 **Optimization Engine**
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the github repository.
+
+
+
+
 
 
 Overview of the Roadmap
