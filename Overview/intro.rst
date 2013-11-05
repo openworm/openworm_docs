@@ -133,6 +133,7 @@ Geppetto frontend bundle (Web Application)
 Java
 
 **org.geppetto.testbackend**
+NO DESCRIPTION AVAILABLE
 Java 
 
 **org.geppetto.simulator.sph**
@@ -152,16 +153,18 @@ PCI SPH Model Bundle for Geppetto
 CSS
 
 **org.geppetto.samples**
+Sample simulations for Geppetto
 Python
 
 **org.geppetto.templatebundle**
+NO DESCRIPTION AVAILABLE
 JavaScript
 
 
 Models
 ------
 **Smoothed-Particle-Hydrodynamics**
-This is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
+Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
 Java
 
 **muscle_model**
@@ -176,41 +179,58 @@ Java
 Conversion script to bring neuron models drawn in Blender into NeuroML format
 Python
 
+**NEURONSimData**
+Graphing voltage data from NEURON sims of C. elegans conectome
+
 
 OpenWorm
 --------
 **org.openworm.website
-OpenWorm Website
+OpenWorm Website 
+http://openworm.org
 Python
 
 **OpenWorm**
+Project Home repo for OpenWorm Wiki and Project-wide issues 
+http://openworm.org
 Matlab
 
 **openworm_docs**
+Documentation for OpenWorm
 
 
 Uncategorized
 -------------
 **movement_validation**
+A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data.
 
 **ConfigurationGenerator**
+Generation start scene configuration for PCI SPH solver
 JavaScript
 
 **data-viz**
+Repository for scripts and other code items to create web-based visualizations of data in the project
 Python
 
 **SegWorm**
+SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)
 Java
 
 **wormbrowser**
+The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans 
+http://openworm.org
 Objective-C
 
 **openwormbrowser-ios**
+OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser
+http://openworm.org
 C++
 
 **HeuristicWorm**
+NO DESCRIPTION AVAILABLE
 
 **CyberElegans**
+Neuromechanical model of C. Elegans
 
 
 
