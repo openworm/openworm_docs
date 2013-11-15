@@ -21,7 +21,7 @@ Interacting with OpenWorm Data
 
 Mailing Lists
 =============
-There are two Google Groups in connection with OpenWorm. We suggest joining both lists to stay current, introduce yourself to the project, and participate in ongoing discussions.  Simply click on "Join Group" for each list.
+There are two Google Groups in connection with OpenWorm. We suggest joining both lists to stay current, introduce yourself to the project, and participate in ongoing discussions.  Simply login with you Gmail username and click on "Join Group" for each list.
 
 This list is for general updates and announcements related to the project.
 https://groups.google.com/forum/?hl=en#!forum/openworm
@@ -40,6 +40,10 @@ All docuemnts located in the OpenWorm folder is viewable to the public.  Comment
 Spreadsheets, slide presentation, dynamic documents - should be on google drive (policy of what goes in)
 Folder structure w/ descriptors
 
+Create google docs
+------------------
+https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
+
 
 Google Plus
 ===========
@@ -47,35 +51,23 @@ Google Plus
 
 
 
-Posting Content Online
-======================
+Social Media
+============
 YouTube
 -------
 http://www.youtube.com/user/OpenWorm
 
+
+Twitter
+-------
+http://www.youtube.com/user/OpenWorm
+@openworm
+
+
+Other Ways to Share
+===================
+
 Guest blog post
 ---------------
 We love hearing about what members are of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
-
-Create google docs
-------------------
-https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
-
-Creating personal repos that OpenWorm forks
--------------------------------------------
-https://help.github.com/articles/fork-a-repo
-
-
-Posting Gists (gist.github.com)
--------------------------------
-Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
-
-How to:
-.. _Create Gists: https://help.github.com/articles/creating-gists
-.. _Embed, Download and Copy Gists: https://help.github.com/articles/embedding-downloading-and-copying-gists 
-
-For the latest news and updates on Gists at GitHub:
-https://github.com/blog/search?page=1&q=gist
-
-
 
