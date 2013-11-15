@@ -13,6 +13,7 @@ Contents:
 
    intro
    data
+   github
    repositories
    knowledgebase
    project

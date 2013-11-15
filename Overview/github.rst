@@ -1,29 +1,202 @@
-******************************
-Interacting with OpenWorm Data
-******************************
+************************************************
+Interacting with OpenWorm Repositories on GitHub
+************************************************
 
-* Forking GitHub repositories
+* Accessing GitHub
 * GitHub Issues
-* Google Drive
-* Mailing Lists
-* Posting content online
-  - YouTube
-  - Guest blog post
-  - Create google docs
-  - Creating personal repos that OpenWorm forks
-  - Posting Gists (gist.github.com)
+* Forking GitHub repositories
+* Accessing GitHub Issues
+* Repositories
+* Using the Code
+
+
+Accessing GitHub Issues
+=======================
+To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: .. https://github.com/
+
+Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get started. You will now have access to be assigned issues, add issues and edit them.  
+.. https://github.com/organizations/openworm
 
 
 
-Google Drive
+Repositories
 ============
-To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on the link below.
-.. _OpenWorm Google Drive: https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing
+Description of all the repositories and how they map to the project areas
+View the full list with active links:
+.. https://github.com/openworm 
 
-All docuemnts located in the OpenWorm folder is viewable to the public.  Comments can be added to both text documents and spreadsheets.  In order to edit existing documents or to add a new document, you will need to be added to the folder.  You can request access by email your Google ID to info@openworm.org. 
+Gepetto
+-------
+**org.geppetto**
+Geppetto Main Bundle / packaging
+Java
+https://github.com/openworm/org.geppetto
 
-Spreadsheets, slide presentation, dynamic documents - should be on google drive (policy of what goes in)
-Folder structure w/ descriptors
+**org.geppetto.solver.sph**
+PCI SPH Solver bundle for Geppetto
+Python
+https://github.com/openworm/org.geppetto.solver.sph
+
+**org.geppetto.simulator.jlems**
+jLEMS based simulator for Geppetto
+Java
+https://github.com/openworm/org.geppetto.simulator.jlems
+
+**org.geppetto.model.neuroml**
+NeuroML Model Bundle for Geppettoo
+Java
+https://github.com/openworm/org.geppetto.model.neuroml
+
+**org.geppetto.core**
+Geppetto core bundle
+JavaScript
+https://github.com/openworm/org.geppetto.core
+
+**org.geppetto.frontend**
+Geppetto frontend bundle (Web Application)
+Java
+https://github.com/openworm/org.geppetto.frontend
+
+**org.geppetto.testbackend**
+NO DESCRIPTION AVAILABLE
+Java 
+https://github.com/openworm/org.geppetto.testbackend
+
+**org.geppetto.simulator.sph**
+SPH Simulator bundle for Geppetto
+Java
+https://github.com/openworm/org.geppetto.simulator.sph
+
+**org.geppetto.simulation**
+Generic simulation bundle for Geppetto
+Python
+https://github.com/openworm/org.geppetto.simulation
+
+**org.geppetto.model.sph**
+PCI SPH Model Bundle for Geppetto
+CSS
+https://github.com/openworm/org.geppetto.model.sph
+
+**org.geppetto.samples**
+Sample simulations for Geppetto
+Python
+https://github.com/openworm/org.geppetto.samples
+
+**org.geppetto.templatebundle**
+NO DESCRIPTION AVAILABLE
+JavaScript
+https://github.com/openworm/org.geppetto.templatebundle
+
+
+Models
+------
+**Smoothed-Particle-Hydrodynamics**
+Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
+Java
+https://github.com/openworm/Smoothed-Particle-Hydrodynamics
+
+**muscle_model**
+model of c.elegans muscle in NEURON
+XSLT
+https://github.com/openworm/muscle_model
+
+**CElegansNeuroML**
+NeuroML based C elegans model, contained in a neuroConstruct project
+Java
+https://github.com/openworm/CElegansNeuroML
+
+**Blender2NeuroML**
+Conversion script to bring neuron models drawn in Blender into NeuroML format
+Python
+https://github.com/openworm/Blender2NeuroML
+
+**NEURONSimData**
+Graphing voltage data from NEURON sims of C. elegans conectome
+https://github.com/openworm/NEURONSimData
+
+
+OpenWorm
+--------
+**org.openworm.website**
+OpenWorm Website 
+http://openworm.org
+Python
+https://github.com/openworm/org.openworm.website
+
+**OpenWorm**
+Project Home repo for OpenWorm Wiki and Project-wide issues 
+http://openworm.org
+Matlab
+https://github.com/openworm/OpenWorm
+
+**openworm_docs**
+Documentation for OpenWorm
+https://github.com/openworm/openworm_docs
+
+Uncategorized
+-------------
+**movement_validation**
+A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data.
+https://github.com/openworm/movement_validation
+
+**ConfigurationGenerator**
+Generation start scene configuration for PCI SPH solver
+JavaScript
+https://github.com/openworm/ConfigurationGenerator
+
+**data-viz**
+Repository for scripts and other code items to create web-based visualizations of data in the project
+Python
+https://github.com/openworm/data-viz
+
+**SegWorm**
+SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)
+Java
+https://github.com/openworm/SegWorm
+
+**wormbrowser**
+The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans 
+http://openworm.org
+Objective-C
+https://github.com/openworm/wormbrowser
+
+**openwormbrowser-ios**
+OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser
+http://openworm.org
+C++
+https://github.com/openworm/openwormbrowser-ios
+
+**HeuristicWorm**
+NO DESCRIPTION AVAILABLE
+https://github.com/openworm/HeuristicWorm
+
+**CyberElegans**
+Neuromechanical model of C. Elegans
+https://github.com/openworm/CyberElegans
+
+
+
+Using the Code
+==============
+Explanations of the current code that has been produced, how to run it, how to use it
+https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
+https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
+
+
+
+Contributing and Resolving Issues
+=================================
+A complete list of issues on GitHub can be found at: https://github.com/organizations/openworm/dashboard/issues
+
+To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
+
+SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
+(link to Data.rst sections on opening, replying to and closing issues)
+
+Do we have a current list of contributors mapped to current issues?
+Breakdowns of current issues based on potential volunteers' incoming skills
+Using tags for categorizing tasks and issues
+
 
 
 

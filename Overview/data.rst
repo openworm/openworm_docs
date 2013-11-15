@@ -2,9 +2,9 @@
 Interacting with OpenWorm Data
 ******************************
 
-* Google Drive
 * Forking GitHub repositories
 * GitHub Issues
+* Google Drive
 * Mailing Lists
 * Posting content online
   - YouTube
