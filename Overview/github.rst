@@ -1,13 +1,14 @@
-************************************************
-Interacting with OpenWorm Repositories on GitHub
-************************************************
+*************************************
+Using OpenWorm Repositories on GitHub
+*************************************
 
 * Accessing GitHub
 * GitHub Issues
 * Forking GitHub repositories
-* Accessing GitHub Issues
 * Repositories
 * Using the Code
+* Creating personal repos that OpenWorm forks
+* Posting Gists (gist.github.com)
 
 
 Accessing GitHub Issues
@@ -214,7 +215,7 @@ https://help.github.com/articles/fork-a-repo
 GitHub Issues
 =============
 Opening a New Issue
------------------------------
+-------------------
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 .. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
 
@@ -232,8 +233,8 @@ This will open the interface to create a new issue. You will need to add the fol
 
 Finally, click on Submit New Issue.
 
-Replying to an Issue
---------------------
+Commenting on an Issue
+----------------------
 [Add content]
 
 
