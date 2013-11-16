@@ -42,15 +42,27 @@ This will open the interface to create a new issue. You will need to add the fol
 
 Finally, click on Submit New Issue.
 
-Commenting on an Issue
-----------------------
-[Add content]
+Best Practices for OpenWorm
+[Need to fill this in]
+
+
+
+Interacting with Issues
+-----------------------
+Generic information from GitHub
+https://github.com/blog/831-issues-2-0-the-next-generation
+
+Best Practices for OpenWorm
+[Need to fill this in]
 
 
 Closing an Issue
 ----------------
 [Add content]
 
+
+Best Practices for OpenWorm
+[Need to fill this in]
 
 
 Contributing and Resolving Issues
