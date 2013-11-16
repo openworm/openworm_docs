@@ -14,7 +14,7 @@ Introduction to OpenWorm
 
 How to Participate
 ==================
-
+For the latest status on the milestones, visit: https://github.com/openworm/OpenWorm/issues/milestones
 
 
 Project Areas
@@ -177,37 +177,66 @@ Java
 
 Data Collection and Representation
 ----------------------------------
+**OpenWorm Browser**
+The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.
+
+*Associated Milestones*
+None
+
+*Associated Repositories*
+.. _wormbrowser: https://github.com/openworm/wormbrowser
+The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans 
+http://openworm.org
+Objective-C
+
+.. _openwormbrowser-ios: https://github.com/openworm/openwormbrowser-ios
+OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser
+http://openworm.org
+C++
+
+
 **NeuroML Connectome**
 Our computational strategy to accomplish this involves first reusing the c. elegans connectome and the 3D anatomical map of the c. elegans nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
-Cell and neuron list
-
-Neuropeptide and ion channel database
-
-Worm movies repository
-
-Synapse position database
-
-Data visualization
-
-
-
+*Associated Milestones*
 .. _Updated NeuroML connectome model ..https://github.com/openworm/OpenWorm/issues?milestone=15&state=open
 The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
 
-For the latest status on the milestones, visit: https://github.com/openworm/OpenWorm/issues/milestones
+*Associated Repositories*
 
 
-**data-viz**
+**NEEDS A NAME**
+Cell and neuron list
+[NEED DESCRIPTION]
+
+Neuropeptide and ion channel database
+[NEED DESCRIPTION]
+
+Worm movies repository
+[NEED DESCRIPTION]
+
+Synapse position database
+[NEED DESCRIPTION]
+
+Data visualization
+[NEED DESCRIPTION]
+
+*Associated Milestones*
+None
+
+*Associated Repositories*
+.. _data-viz: https://github.com/openworm/data-viz
 Repository for scripts and other code items to create web-based visualizations of data in the project
 Python
-https://github.com/openworm/data-viz
+
 
 
 Community Outreach
 ------------------
 [NEED DESCRIPTION]
 
+*Associated Milestones*
+None
 
 *Associated Repositories*
 .. _org.openworm.website: https://github.com/openworm/org.openworm.website
