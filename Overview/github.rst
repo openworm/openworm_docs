@@ -12,7 +12,6 @@ Using OpenWorm Repositories on GitHub
 
 
 
-
 Accessing GitHub
 ================
 To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: .. https://github.com/
