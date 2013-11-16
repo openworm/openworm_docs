@@ -198,7 +198,10 @@ The NeuroML connectome model at https://github.com/openworm/CElegansNeuroML requ
 For the latest status on the milestones, visit: https://github.com/openworm/OpenWorm/issues/milestones
 
 
-
+**data-viz**
+Repository for scripts and other code items to create web-based visualizations of data in the project
+Python
+https://github.com/openworm/data-viz
 
 
 Community Outreach
@@ -207,3 +210,16 @@ Community Outreach
 
 
 *Associated Repositories*
+.. _org.openworm.website: https://github.com/openworm/org.openworm.website
+OpenWorm Website 
+http://openworm.org
+Python
+
+.. _OpenWorm: https://github.com/openworm/OpenWorm
+Project Home repo for OpenWorm Wiki and Project-wide issues 
+http://openworm.org
+Matlab
+
+.. _openworm_docs: https://github.com/openworm/openworm_docs
+Documentation for OpenWorm
+
