@@ -47,7 +47,11 @@ Create google docs
 
 Google Plus
 ===========
-.. _OpenWorm Google Plus: https://plus.google.com/+OpenwormOrg/posts
+.. _OpenWorm Google+: https://plus.google.com/+OpenwormOrg/posts
+
+Click on the "Follow" button to be a part of the OpenWorm community on Google+. 
+
+If you need more help with Google+, check out the handy .. _help guide: https://support.google.com/plus/?hl=en#topic=3049662 put out by Google.
 
 
 
