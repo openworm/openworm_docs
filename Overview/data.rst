@@ -62,16 +62,17 @@ YouTube
 .. http://www.youtube.com/user/OpenWorm
 
 Playlists
-* Status Updates - Biweekly updates from the OpenWorm team
-* Journal Clubs - 
+* Status Updates - Biweekly updates from the OpenWorm team. 
+* Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science.  Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube.
 * Data Team meetings
 * Building Blocks
 
 
 Twitter
 -------
-.. http://www.youtube.com/user/OpenWorm
-@openworm
+.. _@OpenWorm: http://www.youtube.com/user/OpenWorm
+
+Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
 
 
