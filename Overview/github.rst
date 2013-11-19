@@ -59,6 +59,8 @@ Closing an Issue
 ----------------
 [Add content]
 
+.. _Via pull requests: https://github.com/blog/1506-closing-issues-via-pull-requests
+.. _Via commit messages: https://github.com/blog/1386-closing-issues-via-commit-messages
 
 Best Practices for OpenWorm
 [Need to fill this in]
@@ -114,9 +116,8 @@ https://github.com/blog/search?page=1&q=gist
 
 Repositories
 ============
-Description of all the repositories and how they map to the project areas
-View the full list with active links:
-.. https://github.com/openworm 
+View the full current list of repositories on GitHub:
+.. _Repositories: https://github.com/openworm 
 
 Gepetto
 -------
