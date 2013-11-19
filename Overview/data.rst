@@ -44,6 +44,8 @@ Create google docs
 ------------------
 .. _OpenWorm Docs: https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
 
+Best Practices
+
 
 Google Plus
 ===========
@@ -79,10 +81,10 @@ Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 Other Ways to Share
 ===================
 
-Guest blog post
+Guest Blog Post
 ---------------
 We love hearing about what members are of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
 
 
-Journal Club
-------------
+Journal Clubs
+-------------
