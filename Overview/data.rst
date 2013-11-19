@@ -88,3 +88,8 @@ We love hearing about what members are of the OpenWorm community are doing.  If 
 
 Journal Clubs
 -------------
+Every few months an academic journal article comes along we can't resist talking about. We host a journal club where we invite scientists to present on the paper and to host a discussion about it, hopefully with some of the article authors.
+
+You can see past journal clubs we have conducted online.
+
+The next journal club is not yet scheduled, but if you have suggestions, please reach out and let us know on our various social media channels.
