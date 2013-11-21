@@ -59,6 +59,8 @@ If you need more help with Google+, check out the handy .. _help guide: https://
 
 Social Media
 ============
+https://github.com/openworm/OpenWorm/wiki/Social-media
+
 YouTube
 -------
 .. http://www.youtube.com/user/OpenWorm
