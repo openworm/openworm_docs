@@ -5,6 +5,7 @@ Project Background
 * Mission/Vision
 * Goals
 * Why do this?
+* On models
 * Why c. elegans?
 * History
 
@@ -36,6 +37,15 @@ Scientists can make models of sending a rocket to land on the surface of Mars, b
 Complex neuronal activity is the result of countless interactions between molecules happening inside, between, and around neurons. Because of all the interactions that make up complex neuronal activity, you need to gather up a lot of information to make models of it. Also because of all those interactions, you need sophisticated software platforms to manage all that information properly.
 
 We are building a simulation platform to prove it is possible to make good models of complex neuronal activity, starting with a digital worm. We are making the simulation platform open source because we believe anyone should be able to use it to understand how neurons and cells work.
+
+
+On models
+=========
+Models are the cornerstone of science. Tools like algebra and calculus and newtonian mechanics and computer spreadsheets were advances because we could plug numbers into equations and get answers out that told us something about the world.
+
+Unfortunately, neuroscience has few predictive models for how nervous systems work.
+
+We are starting by building a full simulation of a small biological system with a reasonable number of parts. We are focused on capturing as much of the rich detail of that biological system as possible.
 
 
 Why c. elegans?
