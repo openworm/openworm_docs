@@ -3,16 +3,28 @@ Introduction to OpenWorm
 ************************
 
 * Welcome
+* Contributing to OpenWorm
 * Navigating OpenWorm
 * Concepts
 
 Welcome
 =======
+OpenWorm is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a *C. elegans* nematode, via bottom-up "systems biology" computational modeling. It is an association of highly motivated scientists and engineers who believe in Open Science and Open Access.
+[pulled from Mission/Vision - let's adapt to be more welcoming]
 
+
+Contributing to OpenWorm
+========================
+
+
+While the heart of OpenWorm is computational modeling, we are always looking for people with talents beyond programming to contribute.  Are you a graphic designer, writer, PR specialist or simply someone with a love of science and expertise to share? Please reach out to us at info@openworm.org to discuss how you can support OpenWorm.
 
 
 Navigating OpenWorm
 ===================
+To help you find your way around OpenWorm we suggest using this page 
+
+
 
 
 
