@@ -15,7 +15,6 @@ OpenWorm is an open source project and open science community dedicated to creat
 
 Contributing to OpenWorm
 ========================
-
 Anyone is free to sign up to help. To get to know a little about you, please fill out this form and we'll get back to you within a few days.
 .. _Community Volunteer Form: https://docs.google.com/a/openworm.org/spreadsheet/viewform?formkey=dC1CUDQtTV82MEJJcjY0NjdCcHpYdmc6MQ#gid=0
 
