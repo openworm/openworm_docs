@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to OpenWorm &mdash; OpenWorm 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="OpenWorm 0.1 documentation" href="index.html" />
+    <link rel="next" title="Interacting with OpenWorm Data" href="data.html" />
+    <link rel="prev" title="Welcome to OpenWorm’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="data.html" title="Interacting with OpenWorm Data"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to OpenWorm’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction-to-openworm">
+<h1>Introduction to OpenWorm<a class="headerlink" href="#introduction-to-openworm" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Project areas</li>
+<li>Overview of the roadmap</li>
+<li>&#8216;You are here&#8217;in the roadmap</li>
+<li>GitHub Issues</li>
+<li>Description of all the repositories and how they map to the project areas</li>
+<li>Explanations of the current code that has been produced, how to run it, how to use it</li>
+<li>Breakdowns of current issues based on potential volunteers&#8217; incoming skills</li>
+</ul>
+<div class="section" id="project-areas">
+<h2>Project Areas<a class="headerlink" href="#project-areas" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.openworm.org/about.html">http://www.openworm.org/about.html</a>
+<a class="reference external" href="https://github.com/openworm/OpenWorm/wiki/Project-overview">https://github.com/openworm/OpenWorm/wiki/Project-overview</a>
+<a class="reference external" href="https://github.com/openworm/OpenWorm/issues/milestones">https://github.com/openworm/OpenWorm/issues/milestones</a></p>
+<p><strong>NeuroML Connectome</strong>
+We have converted all 302 neurons described in the WormBase Virtual Worm Blender files into multi-compartmental neuronal models described in NeuroML format. We are currently building descriptions of the synaptic junctions and the ion channels for each cell. You can explore the github repository.</p>
+<p><strong>Geppetto Simulation Engine</strong>
+We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser. You can read about architectural concepts and learn more about the different plug-in bundles we are working on.</p>
+<p><strong>OpenWorm Browser</strong>
+The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.</p>
+<p><strong>Fluid Mechanics Simulator</strong>
+We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initiall worked out in C++ (with OpenGL visualization), then ported to Java as a bundle for Geppetto, our simulation engine.</p>
+<p><strong>Optimization Engine</strong>
+The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the github repository.</p>
+</div>
+<div class="section" id="overview-of-the-roadmap">
+<h2>Overview of the Roadmap<a class="headerlink" href="#overview-of-the-roadmap" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/openworm/OpenWorm/issues/milestones">https://github.com/openworm/OpenWorm/issues/milestones</a></p>
+<p>We will show that we have built a model of C. elegans muscle cell that matches data recorded from the nematode muscle cell. In part, we will use techniques of model optimization to fill in gaps in the model parameter space (deduce unmeasured parameters). The main technical challenge is tuning muscle cell passive properties and building a larger data set (more cell recordings).</p>
+<p>Updated NeuroML connectome model ..https://github.com/openworm/OpenWorm/issues?milestone=15&amp;state=open
+The NeuroML connectome model at <a class="reference external" href="https://github.com/openworm/CElegansNeuroML">https://github.com/openworm/CElegansNeuroML</a> requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.</p>
+<p>As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how close the model is to real data.</p>
+<p>In order for a model to demonstrate scientific value, it has to make falsifiable predictions. The target data to be able to predict will be drawn from the WormBehavior database. This milestone will involve working with these data, creating a code base that can compare movement output from the simulation with ground truth from the database and produce an accuracy score.</p>
+<p>This story breaks down the epic to predict behavior from the WormBehavior database</p>
+<p>As a scientist or developer, I want to be able to run a program and see a wiggling worm in 3D in front of me.</p>
+<p>This refers to having a running simulation with the following components:</p>
+<p>Four rows of &#8216;elastic matter muscles&#8217; fixed in a &#8216;elastic matter shell&#8217;
+&#8216;Elastic matter shell&#8217; is filled with liquid that puts outward pressure on shell
+&#8216;Elastic matter muscles&#8217; put force on &#8216;elastic matter shell&#8217;
+Simple sinusoidal input (no neurons) can be applied to &#8216;elastic matter muscles&#8217; to produce simple &#8216;wiggling&#8217;.
+To get rapidly to the end goal, this implementation will be done with some combination of Sibernetic + Configuration Generator + Python scripts. A Geppetto implementation will come later.</p>
+<p>This story breaks down the epic to predict behavior from the WormBehavior database</p>
+<p>As a user, I want to see the proof of concept sibernetic worm in my web browser so that anyone around the world can play with it.</p>
+<p>Practically, this means porting the proof of concept scene into Geppetto.</p>
+<p>As a user, I want to be able to see a visualization of the proof of concept worm wiggling in my web browser and be able to perturb it in a manner that causes the wiggling to change in a realistic manner.</p>
+<p>This milestone suggests interactivity via Geppetto. The kind of perturbation is not defined yet&#8211; ideally we should aim for the simplest kind we can think of that gives the user an interface to make modifications.</p>
+<p>We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells and the worm body. &#64;vellamike, &#64;a-palyanov and &#64;skhayrulin are taking the lead on this,</p>
+<p>The proposal is to do this after the Sibernetic proof of concept worm wiggling is complete.</p>
+<p>This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data collected about the N2 worm in the WormBehavior database. This means building a training set and a test set that are kept separate from each other, using the training set to tune up the model, then generating predictions, and comparing them against the test set, and doing some cross-validation).</p>
+<p>This epic focuses on an output of simulation performance rather than the means of implementation, so any way to achieve this epic is welcome.</p>
+<blockquote>
+<div>&#8216;You are here&#8217;in the roadmap</div></blockquote>
+</div>
+<hr class="docutils" />
+<div class="section" id="github-issues">
+<h2>GitHub Issues<a class="headerlink" href="#github-issues" title="Permalink to this headline">¶</a></h2>
+<p>To access the repositories for OpenWorm on GitHub, you will first need to create an account if you do not already have one.  Accounts are free and can be set by visiting: <a class="reference external" href="https://github.com/">https://github.com/</a>
+DO THEY HAVE TO BE MEMBERS OF THE OPENWORM GITHUB TO CONTRIBUTE???</p>
+<p>Once completed, you can log back into GitHub and select OpenWorm from the organization drop down menu to get started.
+<a class="reference external" href="https://github.com/organizations/openworm">https://github.com/organizations/openworm</a></p>
+</div>
+<div class="section" id="repositories">
+<h2>Repositories<a class="headerlink" href="#repositories" title="Permalink to this headline">¶</a></h2>
+<p>Description of all the repositories and how they map to the project areas
+View the full list with active links:
+.. <a class="reference external" href="https://github.com/openworm">https://github.com/openworm</a></p>
+<div class="section" id="gepetto">
+<h3>Gepetto<a class="headerlink" href="#gepetto" title="Permalink to this headline">¶</a></h3>
+<p>org.geppetto.solver.sph
+PCI SPH Solver bundle for Geppetto
+Python</p>
+<p>org.geppetto.simulator.jlems
+jLEMS based simulator for Geppetto
+Java</p>
+<p>org.geppetto.model.neuroml
+NeuroML Model Bundle for Geppettoo
+Java</p>
+<p>org.geppetto.core
+Geppetto core bundle
+JavaScript</p>
+<p>org.geppetto.frontend
+Geppetto frontend bundle (Web Application)
+Java</p>
+<p>org.geppetto.testbackend
+Java</p>
+<p>org.geppetto.simulator.sph
+SPH Simulator bundle for Geppetto
+Java</p>
+<p>org.geppetto.simulation
+Generic simulation bundle for Geppetto
+Python</p>
+<p>org.geppetto
+Geppetto Main Bundle / packaging
+Java</p>
+<p>org.geppetto.model.sph
+PCI SPH Model Bundle for Geppetto
+CSS</p>
+<p>org.geppetto.samples
+Python</p>
+<p>org.geppetto.templatebundle
+JavaScript</p>
+</div>
+<div class="section" id="models">
+<h3>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h3>
+<p>Smoothed-Particle-Hydrodynamics
+This is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
+Java</p>
+<p>muscle_model
+model of c.elegans muscle in NEURON
+XSLT</p>
+<p>CElegansNeuroML
+NeuroML based C elegans model, contained in a neuroConstruct project
+Java</p>
+<p>Blender2NeuroML
+Conversion script to bring neuron models drawn in Blender into NeuroML format
+Python</p>
+</div>
+<div class="section" id="openworm">
+<h3>OpenWorm<a class="headerlink" href="#openworm" title="Permalink to this headline">¶</a></h3>
+<p>org.openworm.website
+OpenWorm Website
+Python</p>
+<p>OpenWorm
+Matlab</p>
+<p>openworm_docs</p>
+</div>
+<div class="section" id="uncategorized">
+<h3>Uncategorized<a class="headerlink" href="#uncategorized" title="Permalink to this headline">¶</a></h3>
+<p>movement_validation</p>
+<p>ConfigurationGenerator
+JavaScript</p>
+<p>data-viz
+Python</p>
+<p>SegWorm
+Java</p>
+<p>wormbrowser
+Objective-C</p>
+<p>openwormbrowser-ios
+C++</p>
+<p>HeuristicWorm</p>
+<p>CyberElegans</p>
+</div>
+</div>
+<div class="section" id="using-the-code">
+<h2>Using the Code<a class="headerlink" href="#using-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Explanations of the current code that has been produced, how to run it, how to use it
+<a class="reference external" href="https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35">https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35</a>
+<a class="reference external" href="https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl">https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl</a></p>
+</div>
+<div class="section" id="current-issues">
+<h2>Current Issues<a class="headerlink" href="#current-issues" title="Permalink to this headline">¶</a></h2>
+<p>Do we have a current list of contributors mapped to current issues?
+Breakdowns of current issues based on potential volunteers&#8217; incoming skills
+Using tags for categorizing tasks and issues</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction to OpenWorm</a><ul>
+<li><a class="reference internal" href="#project-areas">Project Areas</a></li>
+<li><a class="reference internal" href="#overview-of-the-roadmap">Overview of the Roadmap</a></li>
+<li><a class="reference internal" href="#github-issues">GitHub Issues</a></li>
+<li><a class="reference internal" href="#repositories">Repositories</a><ul>
+<li><a class="reference internal" href="#gepetto">Gepetto</a></li>
+<li><a class="reference internal" href="#models">Models</a></li>
+<li><a class="reference internal" href="#openworm">OpenWorm</a></li>
+<li><a class="reference internal" href="#uncategorized">Uncategorized</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-the-code">Using the Code</a></li>
+<li><a class="reference internal" href="#current-issues">Current Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to OpenWorm&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data.html"
+                        title="next chapter">Interacting with OpenWorm Data</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="data.html" title="Interacting with OpenWorm Data"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to OpenWorm’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, OpenWorm.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
