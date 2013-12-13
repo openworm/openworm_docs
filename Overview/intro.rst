@@ -84,7 +84,7 @@ Once equations have been determined, computers are great at calculating them onc
 handling a bunch of equations.
 
 The challenge is that there are a lot of equations that are necessary to fully specify how cellular activity works.  
-A `recent whole cell model <https://simtk.org/home/wholecell>` of a relatively simple cell came up with 32 algorithms 
+A `recent whole cell model <https://simtk.org/home/wholecell>`_ of a relatively simple cell came up with 32 algorithms 
 composed of many more equations and a ton of data.
 
 The consequence of this from an engineering perspective is, in order to simulate complex living systems, 
@@ -95,7 +95,7 @@ Model optimization
 ------------------
 
 There are a lot of aspects of the _c. elegans_ that we will not be able to measure directly for a while based 
-on experimental limitations.  These are `"free parameters" <http://en.wikipedia.org/wiki/Free_parameter>`.  
+on experimental limitations.  These are `"free parameters" <http://en.wikipedia.org/wiki/Free_parameter>`_.  
 The conventional wisdom on modeling is to minimize the number of free parameters as much as possible.  
 Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.
 
@@ -111,10 +111,10 @@ that a computer can address using brute force calculations.
 NeuroML
 -------
 
-`NeuroML is <http://en.wikipedia.org/wiki/NeuroML>` an XML (Extensible Markup Language) based model description 
+`NeuroML is <http://en.wikipedia.org/wiki/NeuroML>`_ an XML (Extensible Markup Language) based model description 
 language that aims to provide a common data format for defining and exchanging models in computational neuroscience. 
 The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. 
-(`Wikipedia <http://en.wikipedia.org/wiki/NeuroML>`_.
+(`Wikipedia <http://en.wikipedia.org/wiki/NeuroML>`_).
 
 NeuroML is known as an open standard, because its means of describing a model is publicly available for 
 others to improve upon.  
