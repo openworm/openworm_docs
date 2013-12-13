@@ -2,10 +2,12 @@
 OpenWorm Roadmap
 ****************
 
-
 Project Areas
 =============
-**NeuroMechanical Modeling**
+
+NeuroMechanical Modeling
+------------------------
+
 While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
 of its body, its nervous system, and its environment.
 
@@ -14,13 +16,17 @@ see a simulated 3D c. elegans being activated in an environment. Its muscles are
 of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
-**Geppetto Simulation Engine**
+Geppetto Simulation Engine
+--------------------------
+
 We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm 
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
 out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
 concepts and learn more about the different plug-in bundles we are working on.
 
-**Optimization Engine & Model Validation**
+Optimization Engine & Model Validation
+---------------------------------------
+
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the 
 github repository.
@@ -35,7 +41,9 @@ Detailed Roadmap
 NeuroMechanical Modeling
 ------------------------
 
-**Fluid Mechanics Simulator**
+Fluid Mechanics Simulator
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the 
 worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization), 
 then ported to Java as a bundle for Geppetto, our simulation engine.
