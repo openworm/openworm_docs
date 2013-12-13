@@ -16,13 +16,8 @@ Contents:
    github
    project
    roadmap
-   Movement/features
-   Movement/Data/MRC_HDF5
-   Movement/Data/MRC_HDF5/definitions
-   Movement/Data/MRC_HDF5/ftp_structure
-   Movement/Data/MRC_HDF5/info_structure_documentation
-   Movement/Data/MRC_HDF5/worm_structure_documentation
-   
+   Movement/worm_movement
+
 ..   repositories
 ..   knowledgebase
 
