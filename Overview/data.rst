@@ -42,14 +42,14 @@ Folder structure w/ descriptors
 
 Create google docs
 ------------------
-.. __hyperlink-OpenWorm Docs: link-https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
+`OpenWorm Docs <https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E>`_
 
 Best Practices
 
 
 Google Plus
 ===========
-.. __hyperlink-OpenWorm Google+: link-https://plus.google.com/+OpenwormOrg/posts
+`OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
 
 Click on the "Follow" button to be a part of the OpenWorm community on Google+. 
 
