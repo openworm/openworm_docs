@@ -17,6 +17,7 @@ Contents:
    github
    roadmap
    Movement/worm_movement
+   faq
 
 ..   repositories
 ..   knowledgebase
