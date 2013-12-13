@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>General Idea &mdash; OpenWorm 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="OpenWorm 0.1 documentation" href="../../../index.html" />
+    <link rel="next" title="info" href="info_structure_documentation.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="definitions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="info_structure_documentation.html" title="info"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="definitions.html" title="&lt;no title&gt;"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="general-idea">
+<h1>General Idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h1>
+<p>The following describes the way that data files are stored on the FTP
+server.</p>
+<p>NOTE: As of late August 2013 we are discussing possible mirroring of the
+data to improve access. In other words, this interface may to change.</p>
+</div>
+<div class="section" id="specifics">
+<h1>Specifics<a class="headerlink" href="#specifics" title="Permalink to this headline">¶</a></h1>
+<p>When present, the first subdirectory is the gene name (e.g., &#8220;unc-8&#8221;);
+otherwise, for wild isolates and N2 the subdirectory is &#8220;gene_NA&#8221;.</p>
+<p>When present, the next subdirectory is the allele (e.g., &#8220;n491n1192&#8221;);
+otherwise, for wild isolates and N2 the subdirectory is &#8220;allele_NA&#8221;.</p>
+<p>The subdirectory thereafter is the strain name (e.g., &#8220;AQ2947&#8221; is the
+Schafer lab copy of the CGC&#8217;s N2). The strain name is always present.</p>
+<p>Beyond this point the subdirectories describe whether the worm is on
+food (&#8220;on_food&#8221; or &#8220;off_food&#8221; &#8211; only a small subset of N2s and MECs
+were done off food). The sex (&#8220;XX&#8221; or &#8220;XO&#8221; &#8211; the only males are N2).
+Whether a habituation period was observed (&#8220;30m_wait&#8221; or &#8220;no_wait&#8221; &#8211;
+25 N2 experiments were done with no habituation and recorded for 2 hours
+straight; otherwise, we always observed a 30 minute habituation period).</p>
+<p>At the end the subdirectories become far less meaningful to you. They
+indicate the ventral side (&#8220;L&#8221; = anti-clockwise or &#8220;R&#8221; = clockwise &#8211;
+this can be confusing due to the orientation of the video vs. the
+experimenter&#8217;s annotation). The tracker we used (1 through 8). The date
+(YYYY-MM-DD___HH_MM_SS). And, finally, the experiment&#8217;s filename.
+The actual feature files contain further annotations (e.g., the room we
+used, the frame rate, ...).</p>
+<p>Here are 2 examples:</p>
+<p>unc-8(n491n1192)
+<a class="reference external" href="ftp://anonymous&#64;ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy/unc-8/n491n1192/MT2611/on_food/XX/30m_wait/L/tracker_2/2010-03-19_">ftp://anonymous&#64;ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy/unc-8/n491n1192/MT2611/on_food/XX/30m_wait/L/tracker_2/2010-03-19_</a><strong>09_14_57/unc-8%20(rev)%20on%20food%20R_2010_03_19</strong>09_14_57_<strong>2</strong><em>2</em>features.mat</p>
+<p>CB4856 - the famous Hawaiian wild isolate
+<a class="reference external" href="ftp://anonymous&#64;ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy/gene_NA/allele_NA/CB4856/on_food/XX/30m_wait/L/tracker_1/2010-11-25_">ftp://anonymous&#64;ftp.mrc-lmb.cam.ac.uk/pub/tjucikas/wormdatabase/results-12-06-08/Laura%20Grundy/gene_NA/allele_NA/CB4856/on_food/XX/30m_wait/L/tracker_1/2010-11-25_</a><strong>11_33_52/399%20CB4856%20on%20food%20R_2010_11_25</strong>11_33_52_<strong>1</strong><em>1</em>features.mat</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">General Idea</a></li>
+<li><a class="reference internal" href="#specifics">Specifics</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="definitions.html"
+                        title="previous chapter">&lt;no title&gt;</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="info_structure_documentation.html"
+                        title="next chapter">info</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/Movement/Data/MRC_HDF5/ftp_structure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="info_structure_documentation.html" title="info"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="definitions.html" title="&lt;no title&gt;"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, OpenWorm.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

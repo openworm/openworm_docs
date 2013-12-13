@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; OpenWorm 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="OpenWorm 0.1 documentation" href="../../../index.html" />
+    <link rel="next" title="General Idea" href="ftp_structure.html" />
+    <link rel="prev" title="Related Papers" href="../MRC_HDF5.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ftp_structure.html" title="General Idea"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../MRC_HDF5.html" title="Related Papers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>This is just a raw list. At some point it will need to be expanded and
+perhaps linked to other places which discuss the specifics in better
+detail.</p>
+<ul class="simple">
+<li>1 muscle</li>
+<li>1/48 of contour</li>
+<li>1/24 of skeleton</li>
+<li>23-24 muscles per worm</li>
+<li>Head &amp; tail</li>
+<li>each occupies 1/6 of the total body</li>
+<li>Length</li>
+<li>computed from the skeleton by converting chain-code pixel length
+(Freeman chain code, TODO: insert description) to microns</li>
+<li>Width</li>
+<li>?? computed from skeleton?? or contour?</li>
+<li>Angles</li>
+<li>supplementary angles used relative to those formed by angle between
+muscle segments</li>
+<li>thus when the worm is straight, the angle is 0</li>
+<li>on contour:<ul>
+<li>inner sections are negative</li>
+<li>outer sections are positive</li>
+</ul>
+</li>
+<li>on skeleton:<ul>
+<li><ul class="first">
+<li>dorsal</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>ventral</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>High frequency bends</li>
+<li>angle formed between two muscle segments at each point along contour
+and skeleton</li>
+<li>Low frequency bends</li>
+<li>angle formed by points two muscle segments away from vertex muscle
+point</li>
+<li>half the spatial sampling rate of high-frequency bends</li>
+<li>Chunks</li>
+<li>small segment of video wherein all worm shapes are aligned to share
+the same head-to-tail orientation</li>
+</ul>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../MRC_HDF5.html"
+                        title="previous chapter">Related Papers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ftp_structure.html"
+                        title="next chapter">General Idea</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/Movement/Data/MRC_HDF5/definitions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ftp_structure.html" title="General Idea"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../MRC_HDF5.html" title="Related Papers"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, OpenWorm.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Worm Behavior Database &mdash; OpenWorm 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="OpenWorm 0.1 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="worm-behavior-database">
+<h1>Worm Behavior Database<a class="headerlink" href="#worm-behavior-database" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Date: 2013-09-04</li>
+<li>Author: Jim Hokanson</li>
+</ul>
+<p>The following describes current progress regarding the worm behavior
+database.</p>
+<div class="section" id="brief-summary">
+<h2>Brief Summary<a class="headerlink" href="#brief-summary" title="Permalink to this headline">¶</a></h2>
+<p>Data has provided to us by Dr William Schafer&#8217;s lab at the MRC
+Laboratory of Molecular Biology. It is currently unclear what if any
+update mechanisms will be in place when more experiments are added to
+the current collection.</p>
+<p>A few gists have been provided which demonstrate how to work with the
+data.</p>
+</div>
+<div class="section" id="data-source">
+<h2>Data Source<a class="headerlink" href="#data-source" title="Permalink to this headline">¶</a></h2>
+<p>I&#8217;ve tried to start documenting this data source at:
+<a class="reference external" href="https://github.com/JimHokanson/openworm_docs/blob/master/Movement/Data/MRC_HDF5.md">https://github.com/JimHokanson/openworm_docs/blob/master/Movement/Data/MRC_HDF5.md</a></p>
+<p>If we ever get data from other groups the idea would be to document
+these in the same folder. The documentation location might change once a
+more official documentation strategy is in place.</p>
+</div>
+<div class="section" id="data-contents">
+<h2>Data Contents<a class="headerlink" href="#data-contents" title="Permalink to this headline">¶</a></h2>
+<p>The data contents are described in links on the data source page:
+<a class="reference external" href="https://github.com/JimHokanson/openworm_docs/blob/master/Movement/Data/MRC_HDF5.md#worm-file-structure">https://github.com/JimHokanson/openworm_docs/blob/master/Movement/Data/MRC_HDF5.md#worm-file-structure</a></p>
+<p>The documentation has been started but the descriptions are currently
+incomplete.</p>
+</div>
+<div class="section" id="data-analysis">
+<h2>Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Significant data analysis has yet to begin. Look for more issues to be
+started on this topic.</p>
+</div>
+<div class="section" id="current-coding-efforts">
+<h2>Current Coding Efforts<a class="headerlink" href="#current-coding-efforts" title="Permalink to this headline">¶</a></h2>
+<p>This code traverses the structure, plots each field, and saves the plot
+to disk. <a class="reference external" href="https://gist.github.com/PeterMcCluskey/6418155">https://gist.github.com/PeterMcCluskey/6418155</a></p>
+<p>Plot of movement <a class="reference external" href="https://gist.github.com/JimHokanson/6425605">https://gist.github.com/JimHokanson/6425605</a></p>
+<p>A little bit of code on understanding a Matlab structure array as seen
+by h5py: <a class="reference external" href="https://gist.github.com/JimHokanson/6420348">https://gist.github.com/JimHokanson/6420348</a></p>
+</div>
+<div class="section" id="reference-code">
+<h2>Reference Code<a class="headerlink" href="#reference-code" title="Permalink to this headline">¶</a></h2>
+<p>Dr. Schafer&#8217;s lab has also shared their analysis code (in Matlab) which
+takes a video and creates the information that is stored in the data
+files. Given the documentation available on the file format, it might
+not be needed. Nevertheless this is available at:
+<a class="reference external" href="https://github.com/openworm/SegWorm">https://github.com/openworm/SegWorm</a></p>
+<p>As is the code itself can not be run due to missing dependencies.</p>
+<p>There is also a branch which is attempting to make the code a bit more
+readable and to convert most of the code into using objects:
+<a class="reference external" href="https://github.com/JimHokanson/SegWorm/tree/classes">https://github.com/JimHokanson/SegWorm/tree/classes</a></p>
+<p>Currently this branch requires code which can be found at:
+<a class="reference external" href="https://github.com/JimHokanson/matlab_standard_library">https://github.com/JimHokanson/matlab_standard_library</a></p>
+<p>Both versions also require the Image Toolbox and possibly the Statistics
+Toolbox.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Worm Behavior Database</a><ul>
+<li><a class="reference internal" href="#brief-summary">Brief Summary</a></li>
+<li><a class="reference internal" href="#data-source">Data Source</a></li>
+<li><a class="reference internal" href="#data-contents">Data Contents</a></li>
+<li><a class="reference internal" href="#data-analysis">Data Analysis</a></li>
+<li><a class="reference internal" href="#current-coding-efforts">Current Coding Efforts</a></li>
+<li><a class="reference internal" href="#reference-code">Reference Code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/Projects/MovementValidation/ProgressReport_2013_09_04.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">OpenWorm 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, OpenWorm.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
