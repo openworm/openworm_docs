@@ -33,7 +33,7 @@ This list is for high-volume type technical discussions, day-to-day communicatio
 Google Drive
 ============
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on the link below.
-.. _OpenWorm Google Drive: https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing
+.. __hyperlink-OpenWorm Google Drive: link-https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing
 
 All docuemnts located in the OpenWorm folder is viewable to the public.  Comments can be added to both text documents and spreadsheets.  In order to edit existing documents or to add a new document, you will need to be added to the folder.  You can request access by email your Google ID to info@openworm.org. 
 
@@ -42,18 +42,18 @@ Folder structure w/ descriptors
 
 Create google docs
 ------------------
-.. _OpenWorm Docs: https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E
+`OpenWorm Docs <https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E>`_
 
 Best Practices
 
 
 Google Plus
 ===========
-.. _OpenWorm Google+: https://plus.google.com/+OpenwormOrg/posts
+`OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
 
 Click on the "Follow" button to be a part of the OpenWorm community on Google+. 
 
-If you need more help with Google+, check out the handy .. _help guide: https://support.google.com/plus/?hl=en#topic=3049662 put out by Google.
+If you need more help with Google+, check out the handy .. __hyperlink-help guide: link-https://support.google.com/plus/?hl=en#topic=3049662 put out by Google.
 
 
 
@@ -74,7 +74,7 @@ Playlists
 
 Twitter
 -------
-.. _@OpenWorm: http://www.youtube.com/user/OpenWorm
+.. __hyperlink-@OpenWorm: link-://www.youtube.com/user/OpenWorm
 
 Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
