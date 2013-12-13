@@ -2,11 +2,6 @@
 Introduction to OpenWorm
 ************************
 
-* Welcome
-* Contributing to OpenWorm
-* Navigating OpenWorm
-* Concepts
-
 Welcome
 =======
 OpenWorm is an open source project and open science community dedicated to creating the world's first whole organism 
