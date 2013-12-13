@@ -23,9 +23,5 @@ worms.
    :maxdepth: 2
    
    features
-   Data/MRC_HDF5
-   Data/MRC_HDF5/definitions
-   Data/MRC_HDF5/ftp_structure
-   Data/MRC_HDF5/info_structure_documentation
-   Data/MRC_HDF5/worm_structure_documentation
+   Data/worm_movement_data
 
