@@ -55,8 +55,8 @@ Closing an Issue
 ----------------
 .. [Add content]
 
-  * `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
-  * `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
+* `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
+* `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
 
 .. Best Practices for OpenWorm
 .. [Need to fill this in]
@@ -76,11 +76,11 @@ To find issues that are relevant to your skillset and interest, first browse the
 ..Using tags for categorizing tasks and issues
 
 
-Using the Code
-==============
-Explanations of the current code that has been produced, how to run it, how to use it
-https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
-https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
+..Using the Code
+..==============
+..Explanations of the current code that has been produced, how to run it, how to use it
+..https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
+..https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
 
 
 
@@ -94,17 +94,15 @@ For directions on doing this, check out the help page from GitHub.
 https://help.github.com/articles/fork-a-repo
 
 
-
 Posting Gists (gist.github.com)
 ===============================
 Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
 
 How to:
-.. _Create Gists: https://help.github.com/articles/creating-gists
-.. _Embed, Download and Copy Gists: https://help.github.com/articles/embedding-downloading-and-copying-gists 
+* `Create Gists <https://help.github.com/articles/creating-gists>`_
+* Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
-For the latest news and updates on Gists at GitHub:
-https://github.com/blog/search?page=1&q=gist
+For the latest news and updates on Gists at GitHub: https://github.com/blog/search?page=1&q=gist
 
 
 
@@ -113,7 +111,7 @@ Repositories
 View the full current list of repositories on GitHub:
 .. _Repositories: https://github.com/openworm 
 
-Gepetto
+Geppetto
 -------
 **org.geppetto**
 Geppetto Main Bundle / packaging
