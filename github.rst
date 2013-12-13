@@ -41,7 +41,6 @@ Finally, click on Submit New Issue.
 .. [Need to fill this in]
 
 
-
 Interacting with Issues
 -----------------------
 `Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
@@ -53,11 +52,11 @@ Interacting with Issues
 
 Closing an Issue
 ----------------
-.. [Add content]
 
 * `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
 * `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
 
+.. [Add content]
 .. Best Practices for OpenWorm
 .. [Need to fill this in]
 
@@ -108,8 +107,7 @@ For the latest news and updates on Gists at GitHub: https://github.com/blog/sear
 
 Repositories
 ============
-View the full current list of repositories on GitHub:
-.. _Repositories: https://github.com/openworm 
+View the `full current list <https://github.com/openworm>`_ of repositories on GitHub.
 
 Geppetto
 -------
