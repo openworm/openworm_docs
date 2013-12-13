@@ -2,21 +2,14 @@
 Using OpenWorm Repositories on GitHub
 *************************************
 
-* Accessing GitHub
-* GitHub Issues
-* Using the Code
-* Forking GitHub repositories
-* Creating personal repos that OpenWorm forks
-* Posting Gists (gist.github.com)
-* Repositories
-
-
-
 Accessing GitHub
 ================
 To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: .. https://github.com/
 
-Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get started. You will now have access to be assigned issues, add issues and edit them.  
+Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  
+Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
+started. You will now have access to be assigned issues, add issues and edit them.  
+
 .. https://github.com/organizations/openworm
 
 
@@ -24,11 +17,14 @@ GitHub Issues
 =============
 Opening a New Issue
 -------------------
-After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
-.. GitHubIssue1a:: http://i.imgur.com/Rh1uvmn.png
+After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is 
+located/relevant to. Click on the Issues tab on the menu to the right.
+
+.. image:: http://i.imgur.com/Rh1uvmn.png
 
 Next, click on the New Image button in the upper right corner of the screen.
-.. GitHubIssue1b:: http://i.imgur.com/fvEQOJQ.png 
+
+.. image:: http://i.imgur.com/fvEQOJQ.png 
 
 This will open the interface to create a new issue. You will need to add the following information:
 * Name or short description of the issue
@@ -37,33 +33,33 @@ This will open the interface to create a new issue. You will need to add the fol
 * Add a milestone if appropriate
 * Add labels to categorize the issue
 
-.. GitHubIssue1c:: http://i.imgur.com/ozkZFsh.png 
+.. image:: http://i.imgur.com/ozkZFsh.png 
 
 Finally, click on Submit New Issue.
 
-Best Practices for OpenWorm
-[Need to fill this in]
+.. Best Practices for OpenWorm
+.. [Need to fill this in]
 
 
 
 Interacting with Issues
 -----------------------
-Generic information from GitHub
-https://github.com/blog/831-issues-2-0-the-next-generation
+`Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
 
-Best Practices for OpenWorm
-[Need to fill this in]
+
+.. Best Practices for OpenWorm
+.. [Need to fill this in]
 
 
 Closing an Issue
 ----------------
-[Add content]
+.. [Add content]
 
-.. _Via pull requests: https://github.com/blog/1506-closing-issues-via-pull-requests
-.. _Via commit messages: https://github.com/blog/1386-closing-issues-via-commit-messages
+  * `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
+  * `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
 
-Best Practices for OpenWorm
-[Need to fill this in]
+.. Best Practices for OpenWorm
+.. [Need to fill this in]
 
 
 Contributing and Resolving Issues
@@ -72,14 +68,12 @@ A complete list of issues on GitHub can be found at: https://github.com/organiza
 
 To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
-SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
-(link to Data.rst sections on opening, replying to and closing issues)
+.. SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
+.. (link to Data.rst sections on opening, replying to and closing issues)
 
-Do we have a current list of contributors mapped to current issues?
-Breakdowns of current issues based on potential volunteers' incoming skills
-Using tags for categorizing tasks and issues
-
-
+..Do we have a current list of contributors mapped to current issues?
+..Breakdowns of current issues based on potential volunteers' incoming skills
+..Using tags for categorizing tasks and issues
 
 
 Using the Code
