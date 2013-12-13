@@ -12,9 +12,9 @@ Contents:
    :maxdepth: 2
 
    intro
+   project
    data
    github
-   project
    roadmap
    Movement/worm_movement
 
