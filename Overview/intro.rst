@@ -47,7 +47,7 @@ Bottom-up simulation
 --------------------
 
 Biology teaches us that when it comes to understanding how animals work, understanding the 
-`behavior of cells is critical <http://en.wikipedia.org/wiki/Cell_biology>_'.  
+`behavior of cells is critical <http://en.wikipedia.org/wiki/Cell_biology>`_.  
 Our bodies are made up of between 40 and 100 trillion cells, and it is these cells working 
 together that make up everything we are and do.  Of particular interest are the cells in the 
 brain and larger nervous system, that are responsible for our thoughts, creativity and feelings.  
