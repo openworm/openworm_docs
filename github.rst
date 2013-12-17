@@ -10,7 +10,7 @@ Once you have joined GitHub, submit your username to info@openworm.org to be add
 Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
 started. You will now have access to be assigned issues, add issues and edit them.  
 
-.. https://github.com/organizations/openworm
+You can also directly access the `OpenWorm Organization on Github <https://github.com/organizations/openworm/>`_.
 
 
 GitHub Issues
@@ -89,8 +89,9 @@ On GitHub, click the Fork button on a project to create a "copy" that you can th
 
 To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
 
-For directions on doing this, check out the help page from GitHub.
-https://help.github.com/articles/fork-a-repo
+For directions on doing this, check out the
+`help page from Github<https://help.github.com/articles/fork-a-repo>`_.
+
 
 
 Posting Gists (gist.github.com)
