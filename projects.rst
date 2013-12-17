@@ -1,8 +1,8 @@
 ****************
-OpenWorm Roadmap
+OpenWorm Projects
 ****************
 
-Project Areas
+Areas
 =============
 
 NeuroMechanical Modeling
