@@ -1,35 +1,39 @@
 ****************
-OpenWorm Roadmap
+OpenWorm Projects
 ****************
 
-* Project Areas
-* Detailed Roadmap
-  - Neuromechanical Modeling
-  - Geppetto Simulation Engine
-  - Optimization Engine & Model Validation
-  - Data Collection and Representation
-  - Community Outreach
-
-
-Project Areas
+Areas
 =============
-**NeuroMechanical Modeling**
-While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model of its body, its nervous system, and its environment.
 
-To get a quick idea of what this looks like, check out the CyberElegans prototype. In this movie you can see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. In turn, the activity of the muscles are being driven by the activity of neurons within the body.
+NeuroMechanical Modeling
+------------------------
 
-**Geppetto Simulation Engine**
-We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser. You can read about architectural concepts and learn more about the different plug-in bundles we are working on.
+While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
+of its body, its nervous system, and its environment.
 
-**Optimization Engine & Model Validation**
-The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the github repository.
+To get a quick idea of what this looks like, check out the CyberElegans prototype. In this movie you can 
+see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside 
+of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
+In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
-**Data Collection and Representation**
+Geppetto Simulation Engine
+--------------------------
 
-**Community Outreach**
+We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm 
+interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
+out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
+concepts and learn more about the different plug-in bundles we are working on.
 
+Optimization Engine & Model Validation
+---------------------------------------
 
+The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
+knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the 
+github repository.
 
+.. **Data Collection and Representation**
+
+.. **Community Outreach**
 
 
 Detailed Roadmap
@@ -37,8 +41,12 @@ Detailed Roadmap
 NeuroMechanical Modeling
 ------------------------
 
-**Fluid Mechanics Simulator**
-We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization), then ported to Java as a bundle for Geppetto, our simulation engine.
+Fluid Mechanics Simulator
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the 
+worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization), 
+then ported to Java as a bundle for Geppetto, our simulation engine.
 
 *Associated Milestones*
 .. _STORY: Proof of concept worm wiggling in Sibernetic: https://github.com/openworm/OpenWorm/issues?milestone=20&state=open
@@ -232,13 +240,13 @@ Neuropeptide and ion channel database
 [NEED DESCRIPTION]
 
 Worm movies repository
-[NEED DESCRIPTION]
+..[NEED DESCRIPTION]
 
-Synapse position database
-[NEED DESCRIPTION]
+..Synapse position database
+..[NEED DESCRIPTION]
 
-Data visualization
-[NEED DESCRIPTION]
+..Data visualization
+..[NEED DESCRIPTION]
 
 *Associated Milestones*
 None
@@ -252,7 +260,7 @@ Python
 
 Community Outreach
 ------------------
-[NEED DESCRIPTION]
+.. [NEED DESCRIPTION]
 
 *Associated Milestones*
 None

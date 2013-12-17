@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to OpenWorm's documentation!
-===============================================
+====================================
 
 Contents:
 
@@ -12,10 +12,15 @@ Contents:
    :maxdepth: 2
 
    intro
-   data
-   repositories
-   knowledgebase
    project
+   data
+   github
+   projects
+   Movement/worm_movement
+   faq
+
+..   repositories
+..   knowledgebase
 
 
 Indices and tables
