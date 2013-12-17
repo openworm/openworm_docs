@@ -225,7 +225,7 @@ These two algorithms, Hodgkin-Huxley and SPH, require parameters to be set in or
 To deal with the space of free parameters, two strategies are employed. First, by using parameters that are based on actual physical processes, many different means can be used to provide sensible estimates. For example, we can estimate the volume and mass of a muscle cell based on figures that have been created in the scientific literature that show its basic dimensions, and some educated guesses about the weight of muscle tissue. Secondly, to go beyond educated estimates into more detailed measurements, we can employ model optimization techniques. Briefly stated, these computational techniques enable a rational way to generate multiple models with differing parameters and choose those sets of parameters that best pass a series of tests. For example, the conductances of motor neurons can be set by what keeps the activity those neurons within the boundaries of an appropriate dynamic range, given calcium trace recordings data of those neurons as constraints.
 
 Electrophysiology / Mechanics Integration
-..[NEEDS A DESCRIPTION]
+.. [NEEDS A DESCRIPTION]
 
 
 
@@ -236,14 +236,14 @@ Electrophysiology / Mechanics Integration
 .. Neuropeptide and ion channel database
 .. [NEED DESCRIPTION]
 
-..Worm movies repository
-..[NEED DESCRIPTION]
+.. Worm movies repository
+.. [NEED DESCRIPTION]
 
-..Synapse position database
-..[NEED DESCRIPTION]
+.. Synapse position database
+.. [NEED DESCRIPTION]
 
-..Data visualization
-..[NEED DESCRIPTION]
+.. Data visualization
+.. [NEED DESCRIPTION]
 
 *Associated Milestones*
 None
@@ -257,7 +257,7 @@ Python
 
 Community Outreach
 ------------------
-..[NEED DESCRIPTION]
+.. [NEED DESCRIPTION]
 
 *Associated Milestones*
 None
