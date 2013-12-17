@@ -34,11 +34,13 @@ Details
     * reference: [1x15] <- I think the 15 is an exhaustive list of all ids, a few examples of this are shown below  
 
       * reference(1) =>             
+
         * id: 1 - this # matches with the # above in frames 
         * function: 'segWorm:Success'   
         * message : 'The worm was successfully segmented.'   
 
       * reference(2) =>         
+
         * id: 2         
         * function: 'segWorm:DroppedFrame  
         * message: 'The video frame was dropped' 
