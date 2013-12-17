@@ -229,12 +229,12 @@ Electrophysiology / Mechanics Integration
 
 
 
-..**NEEDS A TOP LEVEL NAME TO DESCRIBE ELEMENTS BELOW**
-..Cell and neuron list
-..[NEED DESCRIPTION]
+.. **NEEDS A TOP LEVEL NAME TO DESCRIBE ELEMENTS BELOW**
+.. Cell and neuron list
+.. [NEED DESCRIPTION]
 
-..Neuropeptide and ion channel database
-..[NEED DESCRIPTION]
+.. Neuropeptide and ion channel database
+.. [NEED DESCRIPTION]
 
 ..Worm movies repository
 ..[NEED DESCRIPTION]
