@@ -45,6 +45,7 @@ Details
 * experiment:     
 
   * worm:         
+
     * genotype: 'acc-4(ok2371)III'  
     * gene: 'acc-4'         
     * allele: 'ok2371'         
@@ -58,6 +59,7 @@ Details
     * annotations: [] -> similar to annotations example above   
 
   * environment:  
+
     * timestamp: '2011-08-11 11:58:57.0'   
     * food: 'OP50'  
     * illumination: '627nm' -> peak wavelength  
