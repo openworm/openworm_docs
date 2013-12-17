@@ -28,17 +28,24 @@ Next, click on the New Image button in the upper right corner of the screen.
 
 This will open the interface to create a new issue. You will need to add the following information:
 * Name or short description of the issue
-* Full description of the issue, including images if available
+* Full description of the issue, including images if available.  (See below for more details on formatting the description.)
 * Assign team members to the issue if appropriate
 * Add a milestone if appropriate
-* Add labels to categorize the issue
+* Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
 .. image:: http://i.imgur.com/ozkZFsh.png 
 
 Finally, click on Submit New Issue.
 
-.. Best Practices for OpenWorm
-.. [Need to fill this in]
+**Best Practices for OpenWorm**
+When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest the following format:
+*Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
+*Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
+*Steps: Create a list of specific steps that need to be completed to resolve the issue.
+
+Links to relevant code, databases, documentation and related issues are strongly recommended.  
+
+Check out `this example <https://github.com/openworm/OpenWorm/issues/140>`_ of a clearly written issue that follows best practices.
 
 
 Interacting with Issues
