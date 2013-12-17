@@ -132,7 +132,7 @@ Geppetto
 | `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle               | Javascript |   
 +---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
 | `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle           | Java       | 
-|                                                                                                                     | (Web Application)   			   |            |    
+|                                                                                                                     | Web Application      			   |            |    
 +---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
 | `org.geppetto.testbackend <https://github.com/openworm/org.geppetto.testbackend>`_                                  | Geppetto test backend              | Java       | 
 |                                                                                                                     | for Geppetto					   |            |    
