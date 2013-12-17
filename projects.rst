@@ -1,9 +1,9 @@
-****************
+*****************
 OpenWorm Projects
-****************
+*****************
 
 Areas
-=============
+=====
 
 NeuroMechanical Modeling
 ------------------------
@@ -25,11 +25,11 @@ out-of-the-box visualization of simulated models right in the browser. You can r
 concepts and learn more about the different plug-in bundles we are working on.
 
 Optimization Engine & Model Validation
----------------------------------------
+--------------------------------------
 
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
-knowledge of the electrophysiology of C. elegans muscle cells and neurons. Check out the code on the 
-github repository.
+knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
+GitHub repository.
 
 .. **Data Collection and Representation**
 
