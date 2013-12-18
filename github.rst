@@ -10,7 +10,7 @@ Once you have joined GitHub, submit your username to info@openworm.org to be add
 Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
 started. You will now have access to be assigned issues, add issues and edit them.  
 
-.. https://github.com/organizations/openworm
+You can also directly access the `OpenWorm Organization on Github <https://github.com/organizations/openworm/>`_.
 
 
 GitHub Issues
@@ -28,17 +28,24 @@ Next, click on the New Image button in the upper right corner of the screen.
 
 This will open the interface to create a new issue. You will need to add the following information:
 * Name or short description of the issue
-* Full description of the issue, including images if available
+* Full description of the issue, including images if available.  (See below for more details on formatting the description.)
 * Assign team members to the issue if appropriate
 * Add a milestone if appropriate
-* Add labels to categorize the issue
+* Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
 .. image:: http://i.imgur.com/ozkZFsh.png 
 
 Finally, click on Submit New Issue.
 
-.. Best Practices for OpenWorm
-.. [Need to fill this in]
+**Best Practices for OpenWorm**
+When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest the following format:
+*Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
+*Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
+*Steps: Create a list of specific steps that need to be completed to resolve the issue.
+
+Links to relevant code, databases, documentation and related issues are strongly recommended.  
+
+Check out `this example <https://github.com/openworm/OpenWorm/issues/140>`_ of a clearly written issue that follows best practices.
 
 
 Interacting with Issues
@@ -89,8 +96,9 @@ On GitHub, click the Fork button on a project to create a "copy" that you can th
 
 To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
 
-For directions on doing this, check out the help page from GitHub.
-https://help.github.com/articles/fork-a-repo
+For directions on doing this, check out the
+`help page from Github<https://help.github.com/articles/fork-a-repo>`_.
+
 
 
 Posting Gists (gist.github.com)
@@ -109,67 +117,49 @@ Repositories
 ============
 View the `full current list <https://github.com/openworm>`_ of repositories on GitHub.
 
+
 Geppetto
--------
-**org.geppetto**
-Geppetto Main Bundle / packaging
-Java
-https://github.com/openworm/org.geppetto
+--------
 
-**org.geppetto.solver.sph**
-PCI SPH Solver bundle for Geppetto
-Python
-https://github.com/openworm/org.geppetto.solver.sph
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| Repository                                                                                                          | Description                        | Language   |
++=====================================================================================================================+====================================+============+
+| `org.gepetto <https://github.com/openworm/org.geppetto>`_                                                           | Geppetto Main Bundle               | Java       |
+|                                                                                                                     | and packaging                      |            |
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle              | Python     |
+|                                                                                                                     | for Geppetto                       |            |   
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.simulator.jlems <https://github.com/openworm/org.geppetto.simulator.jlems>`_                          | jLEMS based simulator              | Java       | 
+|                                                                                                                     | for Geppetto					   |            |  
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.model.neuroml <https://github.com/openworm/org.geppetto.model.neuroml>`_                              | NeuroML Model Bundle               | Java       | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle               | Javascript |   
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle           | Java       | 
+|                                                                                                                     | Web Application      			   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.testbackend <https://github.com/openworm/org.geppetto.testbackend>`_                                  | Geppetto test backend              | Java       | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.simulator.sph <https://github.com/openworm/org.geppetto.simulator.sph>`_                              | SPH Simulator bundle               | Java       | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.simulation <https://github.com/openworm/org.geppetto.simulation>`_                                    | Generic simulation bundle          | Python     | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.model.sph <https://github.com/openworm/org.geppetto.model.sph>`_                                      | PCI SPH Model Bundle               | CSS        | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.samples <https://github.com/openworm/org.geppetto.samples>`_                                          | Sample simulations                 | Python     | 
+|                                                                                                                     | for Geppetto					   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.templatebundle <https://github.com/openworm/org.geppetto.templatebundle>`_                            | Template bundle                    | Javascript |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
 
-**org.geppetto.simulator.jlems**
-jLEMS based simulator for Geppetto
-Java
-https://github.com/openworm/org.geppetto.simulator.jlems
-
-**org.geppetto.model.neuroml**
-NeuroML Model Bundle for Geppettoo
-Java
-https://github.com/openworm/org.geppetto.model.neuroml
-
-**org.geppetto.core**
-Geppetto core bundle
-JavaScript
-https://github.com/openworm/org.geppetto.core
-
-**org.geppetto.frontend**
-Geppetto frontend bundle (Web Application)
-Java
-https://github.com/openworm/org.geppetto.frontend
-
-**org.geppetto.testbackend**
-NO DESCRIPTION AVAILABLE
-Java 
-https://github.com/openworm/org.geppetto.testbackend
-
-**org.geppetto.simulator.sph**
-SPH Simulator bundle for Geppetto
-Java
-https://github.com/openworm/org.geppetto.simulator.sph
-
-**org.geppetto.simulation**
-Generic simulation bundle for Geppetto
-Python
-https://github.com/openworm/org.geppetto.simulation
-
-**org.geppetto.model.sph**
-PCI SPH Model Bundle for Geppetto
-CSS
-https://github.com/openworm/org.geppetto.model.sph
-
-**org.geppetto.samples**
-Sample simulations for Geppetto
-Python
-https://github.com/openworm/org.geppetto.samples
-
-**org.geppetto.templatebundle**
-NO DESCRIPTION AVAILABLE
-JavaScript
-https://github.com/openworm/org.geppetto.templatebundle
+`Link text <http://example.com/>`_
 
 
 Models

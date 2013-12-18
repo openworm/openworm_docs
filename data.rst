@@ -46,7 +46,6 @@ put out by Google.
 
 Social Media
 ============
-https://github.com/openworm/OpenWorm/wiki/Social-media
 
 YouTube
 -------
