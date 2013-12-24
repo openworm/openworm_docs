@@ -33,8 +33,3 @@
 | `org.geppetto.model.neuroml <https://github.com/openworm/org.geppetto.model.neuroml>`_                              | NeuroML Model Bundle               | Java       | 
 |                                                                                                                     | for Geppetto					   |            |    
 +---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
-| `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle               | Javascript |   
-+---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
-| `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle           | Java       | 
-|                                                                                                                     | Web Application      			   |            |    
-+---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
