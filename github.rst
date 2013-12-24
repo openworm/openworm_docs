@@ -4,7 +4,7 @@ Using OpenWorm Repositories on GitHub
 
 Accessing GitHub
 ================
-To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be established by visiting: .. https://github.com/
+To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be`created on the Github website <https://github.com/>`_.
 
 Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  
 Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
@@ -70,7 +70,7 @@ Closing an Issue
 
 Contributing and Resolving Issues
 =================================
-A complete list of issues on GitHub can be found at: https://github.com/organizations/openworm/dashboard/issues
+`View the complete list of issues on GitHub<https://github.com/organizations/openworm/dashboard/issues>`_
 
 To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
