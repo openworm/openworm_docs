@@ -31,7 +31,9 @@
 | `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle              | Python     |
 |                                                                                                                     | for Geppetto                       |            |   
 +---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
- 
+| `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle           | Java       | 
+|                                                                                                                     | Web Application      			   |            |    
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+ 
 
 
 
