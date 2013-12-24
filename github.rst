@@ -89,7 +89,6 @@ To find issues that are relevant to your skillset and interest, first browse the
 .. https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
 
 
-
 Forking GitHub Repositories
 ===========================
 On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
@@ -100,17 +99,15 @@ For directions on doing this, check out the
 `help page from Github<https://help.github.com/articles/fork-a-repo>`_.
 
 
-
 Posting Gists (gist.github.com)
 ===============================
 Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
 
 How to:
 * `Create Gists <https://help.github.com/articles/creating-gists>`_
-* Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
+* `Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
-For the latest news and updates on Gists at GitHub: https://github.com/blog/search?page=1&q=gist
-
+Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_on Gists at GitHub.
 
 
 Repositories
