@@ -149,34 +149,23 @@ Geppetto
 | `org.geppetto.templatebundle <https://github.com/openworm/org.geppetto.templatebundle>`_                            | Template bundle                            | Javascript |    
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 
-`Link text <http://example.com/>`_
-
 
 Models
 ------
-**Smoothed-Particle-Hydrodynamics**
-Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
-Java
-https://github.com/openworm/Smoothed-Particle-Hydrodynamics
 
-**muscle_model**
-model of c.elegans muscle in NEURON
-XSLT
-https://github.com/openworm/muscle_model
-
-**CElegansNeuroML**
-NeuroML based C elegans model, contained in a neuroConstruct project
-Java
-https://github.com/openworm/CElegansNeuroML
-
-**Blender2NeuroML**
-Conversion script to bring neuron models drawn in Blender into NeuroML format
-Python
-https://github.com/openworm/Blender2NeuroML
-
-**NEURONSimData**
-Graphing voltage data from NEURON sims of C. elegans conectome
-https://github.com/openworm/NEURONSimData
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| Repository                                                                                                          | Description                                                                                                                      | Language   |
++=====================================================================================================================+==================================================================================================================================+============+
+| `Smoothed-Particle-Hydrodynamics <https://github.com/openworm/Smoothed-Particle-Hydrodynamics>`_                    | Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.     | Java       |
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `muscle_model <https://github.com/openworm/muscle_model>`_                                                          | model of c.elegans muscle in NEURON                                                                                              | XSLT       |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `CElegansNeuroML <https://github.com/openworm/CElegansNeuroML>`_                                                    | NeuroML based C elegans model, contained in a neuroConstruct project                                                             | Java       |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `Blender2NeuroML <https://github.com/openworm/Blender2NeuroML>`_                                                    | Conversion script to bring neuron models drawn in Blender into NeuroML format                                                    | Python     |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `NEURONSimData <https://github.com/openworm/NEURONSimData>`_                                                        | Graphing voltage data from NEURON sims of C. elegans conectome                                                                   |            |   
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 
 
 OpenWorm
