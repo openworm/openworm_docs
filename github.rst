@@ -77,16 +77,16 @@ To find issues that are relevant to your skillset and interest, first browse the
 .. SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
 .. (link to Data.rst sections on opening, replying to and closing issues)
 
-..Do we have a current list of contributors mapped to current issues?
-..Breakdowns of current issues based on potential volunteers' incoming skills
-..Using tags for categorizing tasks and issues
+.. Do we have a current list of contributors mapped to current issues?
+.. Breakdowns of current issues based on potential volunteers' incoming skills
+.. Using tags for categorizing tasks and issues
 
 
-..Using the Code
-..==============
-..Explanations of the current code that has been produced, how to run it, how to use it
-..https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
-..https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
+.. Using the Code
+.. ==============
+.. Explanations of the current code that has been produced, how to run it, how to use it
+.. https://docs.google.com/a/openworm.org/presentation/d/1x0CPE74XNnISt9BVkyX3jYitvIq9j5QbamRWYrvp5fs/edit#slide=id.i35
+.. https://drive.google.com/a/openworm.org/?tab=oo#folders/0B-GW0T4RUrQ6MTU0N2NmZmMtODAxOC00NDRlLWE3MmMtZDhjMGU4NjNhOTdl
 
 
 
