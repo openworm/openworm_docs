@@ -30,3 +30,6 @@
 | `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle              | Python     |
 |                                                                                                                     | for Geppetto                       |            |   
 +---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
+| `org.geppetto.simulator.jlems <https://github.com/openworm/org.geppetto.simulator.jlems>`_                          | jLEMS based simulator              | Java       | 
+|                                                                                                                     | for Geppetto					   |            |  
++---------------------------------------------------------------------------------------------------------------------+------------------------------------+------------+
