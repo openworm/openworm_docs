@@ -170,60 +170,39 @@ Models
 
 OpenWorm
 --------
-**org.openworm.website**
-OpenWorm Website 
-http://openworm.org
-Python
-https://github.com/openworm/org.openworm.website
 
-**OpenWorm**
-Project Home repo for OpenWorm Wiki and Project-wide issues 
-http://openworm.org
-Matlab
-https://github.com/openworm/OpenWorm
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| Repository                                                                                                          | Description                                                                                                                      | Language   |
++=====================================================================================================================+==================================================================================================================================+============+
+| `org.openworm.website <https://github.com/openworm/org.openworm.website>`_                                          | OpenWorm Website                                                                                                                 | Python     |
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `OpenWorm <https://github.com/openworm/OpenWorm>`_                                                                  | Project Home repo for OpenWorm Wiki and Project-wide issues                                                                      | Matlab     |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `openworm_docs <https://github.com/openworm/openworm_docs>`_                                                        | Documentation for OpenWorm                                                                                                       |            |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 
-**openworm_docs**
-Documentation for OpenWorm
-https://github.com/openworm/openworm_docs
 
 Uncategorized
 -------------
-**movement_validation**
-A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data.
-https://github.com/openworm/movement_validation
 
-**ConfigurationGenerator**
-Generation start scene configuration for PCI SPH solver
-JavaScript
-https://github.com/openworm/ConfigurationGenerator
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| Repository                                                                                                          | Description                                                                                                                                                  | Language    |
++=====================================================================================================================+==============================================================================================================================================================+=============+
+| `movement_validation <https://github.com/openworm/movement_validation>`_                                            | A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data. | Java        |
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `ConfigurationGenerator <https://github.com/openworm/ConfigurationGenerator>`_                                      | Generation start scene configuration for PCI SPH solver                                                                                                      | JavaScript  |  
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `data-viz <https://github.com/openworm/data-viz>`_                                                                  | Repository for scripts and other code items to create web-based visualizations of data in the project                                                        | Python      |  
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `SegWorm* <https://github.com/openworm/SegWorm>`_                                                                   | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Java        |  
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `wormbrowser <https://github.com/openworm/wormbrowser>`_                                                            | The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans                                                                                   | Objective-C |   
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `openwormbrowser-ios <https://github.com/openworm/openwormbrowser-ios>`_                                            | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser                                                                | C++         |   
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `HeuristicWorm <https://github.com/openworm/HeuristicWorm>`_                                                        |                                                                                                                                                              |             |   
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `CyberElegans* <https://github.com/openworm/CyberElegans>`_                                                         | Neuromechanical model of C. Elegans                                                                                                                          |             |   
++---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 
-**data-viz**
-Repository for scripts and other code items to create web-based visualizations of data in the project
-Python
-https://github.com/openworm/data-viz
-
-**SegWorm**
-SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)
-Java
-https://github.com/openworm/SegWorm
-
-**wormbrowser**
-The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans 
-http://openworm.org
-Objective-C
-https://github.com/openworm/wormbrowser
-
-**openwormbrowser-ios**
-OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser
-http://openworm.org
-C++
-https://github.com/openworm/openwormbrowser-ios
-
-**HeuristicWorm**
-NO DESCRIPTION AVAILABLE
-https://github.com/openworm/HeuristicWorm
-
-**CyberElegans**
-Neuromechanical model of C. Elegans
-https://github.com/openworm/CyberElegans
 
