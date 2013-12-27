@@ -30,7 +30,6 @@ to share? Please reach out to us at info@openworm.org to discuss opportuntities 
 Concepts
 ========
 
-
 Top-down simulation
 -------------------
 
