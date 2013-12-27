@@ -80,7 +80,7 @@ Closing an Issue
 Contributing and Resolving Issues
 =================================
 
-`View the complete list of issues on GitHub<https://github.com/organizations/openworm/dashboard/issues>`_
+`View the complete list of issues on GitHub <https://github.com/organizations/openworm/dashboard/issues>`_
 
 To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
@@ -118,7 +118,7 @@ How to:
 
 * `Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
-Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_on Gists at GitHub.
+Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_ on Gists at GitHub.
 
 
 Repositories
