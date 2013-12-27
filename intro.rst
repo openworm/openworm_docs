@@ -37,7 +37,7 @@ the
 `Geppetto codebase <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_, 
 `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
 and 
-`help with documentation <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=documentation&page=1&sort=comments&state=open>`.
+`help with documentation <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=documentation&page=1&sort=comments&state=open>`_.
 
 If you have questions about specific things you find, please post them to 
 `the list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
@@ -59,7 +59,7 @@ to share? Please reach out to us at info@openworm.org to discuss opportuntities 
 ..  On Google Drive
 ..  
 
-
+.. move the following to its own page.
 Concepts
 ========
 
