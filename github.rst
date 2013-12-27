@@ -45,11 +45,11 @@ Finally, click on Submit New Issue.
 **Best Practices for OpenWorm**
 When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest the following format:
 
-*Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
+* Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
 
-*Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
+* Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
 
-*Steps: Create a list of specific steps that need to be completed to resolve the issue.
+* Steps: Create a list of specific steps that need to be completed to resolve the issue.
 
 Links to relevant code, databases, documentation and related issues are strongly recommended.  
 
@@ -105,12 +105,12 @@ On GitHub, click the Fork button on a project to create a "copy" that you can th
 
 To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
 
-For directions on doing this, check out the `help page from Github<https://help.github.com/articles/fork-a-repo>`_.
+For directions on doing this, check out the `help page from Github <https://help.github.com/articles/fork-a-repo>`_.
 
 
 Posting Gists (gist.github.com)
 ===============================
-Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
+Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a `new gist here <https://gist.github.com/>`_.
 
 How to:
 
