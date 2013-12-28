@@ -3,6 +3,8 @@
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
+.. contents::
+
 While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
 of its body, its nervous system, and its environment.  
 `Sibernetic <http://sibernetic.org>`_ is the home of the C++ code base that implements the core of the model.  
