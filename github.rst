@@ -10,7 +10,8 @@ Once you have joined GitHub, submit your username to info@openworm.org to be add
 Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
 started. You will now have access to be assigned issues, add issues and edit them.  
 
-You can also directly access the `OpenWorm Organization on Github <https://github.com/organizations/openworm/>`_.
+You can also directly access the 
+`OpenWorm organization on Github <https://github.com/organizations/openworm/>`_.
 
 
 GitHub Issues
@@ -27,6 +28,7 @@ Next, click on the New Image button in the upper right corner of the screen.
 .. image:: http://i.imgur.com/fvEQOJQ.png 
 
 This will open the interface to create a new issue. You will need to add the following information:
+
 * Name or short description of the issue
 * Full description of the issue, including images if available.  (See below for more details on formatting the description.)
 * Assign team members to the issue if appropriate
@@ -38,7 +40,9 @@ This will open the interface to create a new issue. You will need to add the fol
 Finally, click on Submit New Issue.
 
 **Best Practices for OpenWorm**
-When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest the following format:
+When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest 
+the following format:
+
 *Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
 *Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
 *Steps: Create a list of specific steps that need to be completed to resolve the issue.
