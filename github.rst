@@ -43,9 +43,9 @@ Finally, click on Submit New Issue.
 When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest 
 the following format:
 
-*Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
-*Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
-*Steps: Create a list of specific steps that need to be completed to resolve the issue.
+* Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
+* Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
+* Steps: Create a list of specific steps that need to be completed to resolve the issue.
 
 Links to relevant code, databases, documentation and related issues are strongly recommended.  
 
@@ -116,94 +116,4 @@ Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`
 
 Repositories
 ============
-View the `full current list <https://github.com/openworm>`_ of repositories on GitHub.
-
-
-Geppetto
---------
-
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| Repository                                                                                                          | Description                                | Language   |
-+=====================================================================================================================+============================================+============+
-| `org.gepetto <https://github.com/openworm/org.geppetto>`_                                                           | Geppetto Main Bundle and packaging         | Java       |
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle for Geppetto         | Python     |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.simulator.jlems <https://github.com/openworm/org.geppetto.simulator.jlems>`_                          | jLEMS based simulator for Geppetto         | Java       |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.model.neuroml <https://github.com/openworm/org.geppetto.model.neuroml>`_                              | NeuroML Model Bundle for Geppetto          | Java       |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle                       | Javascript |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle - Web application | Java       |    
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.testbackend <https://github.com/openworm/org.geppetto.testbackend>`_                                  | Geppetto test backend for Geppetto         | Java       |    
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.simulator.sph <https://github.com/openworm/org.geppetto.simulator.sph>`_                              | SPH Simulator bundle for Geppetto          | Java       | 
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.simulation <https://github.com/openworm/org.geppetto.simulation>`_                                    | Generic simulation bundle for Geppetto     | Python     |    
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.model.sph <https://github.com/openworm/org.geppetto.model.sph>`_                                      | PCI SPH Model Bundle for Geppetto          | CSS        |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.samples <https://github.com/openworm/org.geppetto.samples>`_                                          | Sample simulations for Geppetto            | Python     |    
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.templatebundle <https://github.com/openworm/org.geppetto.templatebundle>`_                            | Template bundle                            | Javascript |    
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-
-
-Models
-------
-
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| Repository                                                                                                          | Description                                                                                                                      | Language   |
-+=====================================================================================================================+==================================================================================================================================+============+
-| `Smoothed-Particle-Hydrodynamics <https://github.com/openworm/Smoothed-Particle-Hydrodynamics>`_                    | Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.     | Java       |
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `muscle_model <https://github.com/openworm/muscle_model>`_                                                          | model of c.elegans muscle in NEURON                                                                                              | XSLT       |  
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `CElegansNeuroML <https://github.com/openworm/CElegansNeuroML>`_                                                    | NeuroML based C elegans model, contained in a neuroConstruct project                                                             | Java       |  
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `Blender2NeuroML <https://github.com/openworm/Blender2NeuroML>`_                                                    | Conversion script to bring neuron models drawn in Blender into NeuroML format                                                    | Python     |  
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `NEURONSimData <https://github.com/openworm/NEURONSimData>`_                                                        | Graphing voltage data from NEURON sims of C. elegans conectome                                                                   |            |   
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-
-
-OpenWorm
---------
-
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| Repository                                                                                                          | Description                                                                                                                      | Language   |
-+=====================================================================================================================+==================================================================================================================================+============+
-| `org.openworm.website <https://github.com/openworm/org.openworm.website>`_                                          | OpenWorm Website                                                                                                                 | Python     |
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `OpenWorm <https://github.com/openworm/OpenWorm>`_                                                                  | Project Home repo for OpenWorm Wiki and Project-wide issues                                                                      | Matlab     |  
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `openworm_docs <https://github.com/openworm/openworm_docs>`_                                                        | Documentation for OpenWorm                                                                                                       |            |  
-+---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-
-
-Uncategorized
--------------
-
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| Repository                                                                                                          | Description                                                                                                                                                  | Language    |
-+=====================================================================================================================+==============================================================================================================================================================+=============+
-| `movement_validation <https://github.com/openworm/movement_validation>`_                                            | A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data. | Java        |
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `ConfigurationGenerator <https://github.com/openworm/ConfigurationGenerator>`_                                      | Generation start scene configuration for PCI SPH solver                                                                                                      | JavaScript  |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `data-viz <https://github.com/openworm/data-viz>`_                                                                  | Repository for scripts and other code items to create web-based visualizations of data in the project                                                        | Python      |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `SegWorm* <https://github.com/openworm/SegWorm>`_                                                                   | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Java        |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `wormbrowser <https://github.com/openworm/wormbrowser>`_                                                            | The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans                                                                                   | Objective-C |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `openwormbrowser-ios <https://github.com/openworm/openwormbrowser-ios>`_                                            | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser                                                                | C++         |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `HeuristicWorm <https://github.com/openworm/HeuristicWorm>`_                                                        |                                                                                                                                                              |             |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `CyberElegans* <https://github.com/openworm/CyberElegans>`_                                                         | Neuromechanical model of C. Elegans                                                                                                                          |             |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-
-
+View the :ref:`full current list <repositories>` of repositories on GitHub.
