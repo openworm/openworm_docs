@@ -9,6 +9,9 @@ The Optimization Engine uses optimization techniques like genetic algorithms to 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
 GitHub repository.
 
+For more details on movement validation, check out the 
+:ref:`movement validation project page <movement-validation>`.
+
 Previous accomplishments
 ------------------------
 
@@ -39,10 +42,10 @@ Associated Repositories
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | Repository                                                                                                          | Description                                                                                                                                                  | Language    |
 +=====================================================================================================================+==============================================================================================================================================================+=============+
-| `movement_validation <https://github.com/openworm/movement_validation>`_                                            | A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data. | Java        |
+| `movement_validation <https://github.com/openworm/movement_validation>`_                                            | A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data. | Python      |
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `SegWorm <https://github.com/openworm/SegWorm>`_                                                                    | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Java        |  
+| `SegWorm <https://github.com/openworm/SegWorm>`_                                                                    | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Matlab      |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `HeuristicWorm <https://github.com/openworm/HeuristicWorm>`_                                                        |                                                                                                                                                              |             |   
+| `HeuristicWorm <https://github.com/openworm/HeuristicWorm>`_                                                        |                                                                                                                                                              |  C++        |   
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 

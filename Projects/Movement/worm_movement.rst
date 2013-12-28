@@ -1,3 +1,5 @@
+.. _worm-movement:
+
 Worm Movement
 =============
 
@@ -5,7 +7,7 @@ Worm Movement
 This section documents aspects of the project
 which are related to **worm movement**.
 
-**`data sources <Data/MRC_HDF5>`__** - A description of movement data
+**`data sources <Data-MRC_HDF5>`__** - A description of movement data
 that we have access to
 
 **`features <features>`__** - A description of features, such as time

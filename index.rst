@@ -16,7 +16,6 @@ Contents:
    data
    github
    projects
-   Movement/worm_movement
    faq
 
 ..   repositories
