@@ -5,6 +5,10 @@ Data Collection and Representation
 
 .. contents::
 
+A lot of data about *c. elegans* is integrated into the model. 
+
+In this project, we work on what forms we should these data in to best leverage them for building the model.
+
 * Building the OpenWorm database
 * Building the C Elegans NeuroML file
 
