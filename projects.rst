@@ -3,6 +3,10 @@ OpenWorm Projects
 *****************
 
 .. contents:: Table of Contents
+.. toctree::
+   :hidden:
+   
+   Projects/sibernetic
 
 NeuroMechanical Modeling - Sibernetic
 =====================================
@@ -20,7 +24,7 @@ see a simulated 3D c. elegans being activated in an environment.  Its muscles ar
 of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
-More detailed information is available on the :ref:`Sibenetic project page <sibernetic-project>`.
+More detailed information is available on the :ref:`Sibernetic project page <sibernetic-project>`.
 
 
 Geppetto Simulation Engine
