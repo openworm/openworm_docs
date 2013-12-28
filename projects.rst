@@ -2,6 +2,8 @@
 OpenWorm Projects
 *****************
 
+.. contents:: Table of Contents
+
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
