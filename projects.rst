@@ -56,11 +56,11 @@ Associated Repositories
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
 +=====================================================================================================================+==================================================================================================================================+============+
-| `Smoothed-Particle-Hydrodynamics <https://github.com/openworm/Smoothed-Particle-Hydrodynamics>`_                    | Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.     | Java       |
+| `Smoothed-Particle-Hydrodynamics <https://github.com/openworm/Smoothed-Particle-Hydrodynamics>`_                    | Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.     | C++        |
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | `ConfigurationGenerator <https://github.com/openworm/ConfigurationGenerator>`_                                      | Generation start scene configuration for PCI SPH solver                                                                          | JavaScript |  
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `CyberElegans* <https://github.com/openworm/CyberElegans>`_                                                         | Neuromechanical model of C. Elegans                                                                                              | C++        |   
+| `CyberElegans <https://github.com/openworm/CyberElegans>`_                                                          | Neuromechanical model of C. Elegans                                                                                              | C++        |   
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 
 
@@ -76,7 +76,7 @@ concepts and learn more about the different plug-in bundles we are working on.
 Geppetto, is written in Java and leverages technologies like 
 `OSGi <http://www.osgi.org/>`_, 
 `Spring Framework <http://www.springsource.org/spring-framework>`_, 
-`OpenCL <http://www.khronos.org/opencl/" target="_blank"></a> and 
+`OpenCL <http://www.khronos.org/opencl/>`_ and 
 `Maven <http://maven.apache.org/>`_.
 
 Geppetto's frontend is written using 
@@ -181,7 +181,7 @@ Associated Repositories
 +=====================================================================================================================+==============================================================================================================================================================+=============+
 | `movement_validation <https://github.com/openworm/movement_validation>`_                                            | A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data. | Java        |
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `SegWorm* <https://github.com/openworm/SegWorm>`_                                                                   | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Java        |  
+| `SegWorm <https://github.com/openworm/SegWorm>`_                                                                    | SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (http://wormbehavior.mrc-lmb.cam.ac.uk/)                           | Java        |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | `HeuristicWorm <https://github.com/openworm/HeuristicWorm>`_                                                        |                                                                                                                                                              |             |   
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
