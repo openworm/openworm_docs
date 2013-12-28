@@ -12,7 +12,7 @@ OpenWorm Projects
    Projects/community
 
 NeuroMechanical Modeling - Sibernetic
-=====================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
 of its body, its nervous system, and its environment.  
@@ -31,7 +31,7 @@ More detailed information is available on the :ref:`Sibernetic project page <sib
 
 
 Geppetto Simulation Engine
-==========================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
@@ -41,12 +41,12 @@ concepts and learn more about the different plug-in bundles we are working on.
 More detailed information is available on the :ref:`Geppetto project page <geppetto-project>`.
 
 Data Collection and Representation
-==================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 More detailed information is available on the :ref:`Data representation project page <data-rep>`.
 
 Model Validation & Optimization engine
-======================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
@@ -55,7 +55,7 @@ GitHub repository.
 More detailed information is available on the :ref:`Model validation project page <model-validation>`.
 
 Community Outreach
-==================
+^^^^^^^^^^^^^^^^^^
 
 The effort to build the OpenWorm open science community is always ongoing.  
 
