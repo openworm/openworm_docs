@@ -57,6 +57,7 @@ Check out `this example <https://github.com/openworm/OpenWorm/issues/140>`_ of a
 
 Interacting with Issues
 -----------------------
+
 `Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
 
 
@@ -80,7 +81,10 @@ Contributing and Resolving Issues
 
 `View the complete list of issues on GitHub <https://github.com/organizations/openworm/dashboard/issues>`_
 
-To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
+To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related 
+to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by 
+tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore 
+and dig around.  
 
 .. SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
 .. (link to Data.rst sections on opening, replying to and closing issues)
@@ -101,7 +105,11 @@ Forking GitHub Repositories
 ===========================
 On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
 
-To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
+To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will 
+copy the repository to your account. This will copy the repo to your personal repository.  You can then 
+make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo 
+page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge 
+the changes into the original repository.
 
 For directions on doing this, check out the
 `help page from Github <https://help.github.com/articles/fork-a-repo>`_.
@@ -109,14 +117,15 @@ For directions on doing this, check out the
 
 Posting Gists (gist.github.com)
 ===============================
-Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
+Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are 
+automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
 
 How to:
 
 * `Create Gists <https://help.github.com/articles/creating-gists>`_
 * `Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
-Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_on Gists at GitHub.
+Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_ on Gists at GitHub.
 
 
 Repositories
