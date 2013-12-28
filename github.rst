@@ -4,7 +4,10 @@ Using OpenWorm Repositories on GitHub
 
 Accessing GitHub
 ================
-To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be`created on the Github website <https://github.com/>`_.
+To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an 
+account if you do not already have one. Note, you can comment on issues without a GitHub account, however, 
+we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be 
+`created on the Github website <https://github.com/>`_.
 
 Once you have joined GitHub, submit your username to info@openworm.org to be added to the OpenWorm organization.  
 Once you have been accepted, log back into GitHub and select OpenWorm from the organization drop down menu to get 
@@ -74,7 +77,8 @@ Closing an Issue
 
 Contributing and Resolving Issues
 =================================
-`View the complete list of issues on GitHub<https://github.com/organizations/openworm/dashboard/issues>`_
+
+`View the complete list of issues on GitHub <https://github.com/organizations/openworm/dashboard/issues>`_
 
 To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language.  Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details.  Feel free to explore and dig around.  
 
@@ -100,7 +104,7 @@ On GitHub, click the Fork button on a project to create a "copy" that you can th
 To fork an OpenWorm repository, go to https://github.com/openworm and hit the "Fork" button. GitHub will copy the repository to your account. This will copy the repo to your personal repository.  You can then make changes to the repository. Once you are done with the changes, hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository.
 
 For directions on doing this, check out the
-`help page from Github<https://help.github.com/articles/fork-a-repo>`_.
+`help page from Github <https://help.github.com/articles/fork-a-repo>`_.
 
 
 Posting Gists (gist.github.com)
@@ -108,6 +112,7 @@ Posting Gists (gist.github.com)
 Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
 
 How to:
+
 * `Create Gists <https://help.github.com/articles/creating-gists>`_
 * `Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
