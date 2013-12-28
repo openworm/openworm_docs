@@ -2,11 +2,8 @@
 OpenWorm Projects
 *****************
 
-Areas
-=====
-
 NeuroMechanical Modeling - Sibernetic
-------------------------
+=====================================
 
 While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
 of its body, its nervous system, and its environment.  
@@ -22,13 +19,13 @@ of its body, and as they turn red, they are exerting forces on the body that cau
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
 Previous accomplishments
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 * Physics tests
 * Initial worm crawling
 
 Current roadmap
-~~~~~~~~~~~~~~~
+---------------
 
 +--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | Associated Milestones                                                                                                          | Description                                                                                                           | 
@@ -54,22 +51,22 @@ Current roadmap
 +--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
 +=====================================================================================================================+==================================================================================================================================+============+
 | `Smoothed-Particle-Hydrodynamics <https://github.com/openworm/Smoothed-Particle-Hydrodynamics>`_                    | Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.     | Java       |
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
-| `ConfigurationGenerator <https://github.com/openworm/ConfigurationGenerator>`_                                      | Generation start scene configuration for PCI SPH solver                                                                                                      | JavaScript  |  
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
-| `CyberElegans* <https://github.com/openworm/CyberElegans>`_                                                         | Neuromechanical model of C. Elegans                                                                                                                          |             |   
-+---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
+| `ConfigurationGenerator <https://github.com/openworm/ConfigurationGenerator>`_                                      | Generation start scene configuration for PCI SPH solver                                                                          | JavaScript |  
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
+| `CyberElegans* <https://github.com/openworm/CyberElegans>`_                                                         | Neuromechanical model of C. Elegans                                                                                              | C++        |   
++---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 
 
 
 Geppetto Simulation Engine
---------------------------
+==========================
 
 In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
@@ -95,12 +92,12 @@ The engine runs on on Eclipse Virgo WebServer deployed on an Amazon
 Sound familiar? Like to help? <a href="./contacts.html">Contact us</a>!
 
 Previous accomplishments
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 * Past releases of Geppetto
 
 Current roadmap
-~~~~~~~~~~~~~~~~
+--------------
 
 `STORY: Worm wiggling in the browser <https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
 As a user, I want to see the proof of concept sibernetic worm in my web browser so that anyone around the world can play with it.
@@ -113,7 +110,7 @@ As a user, I want to be able to see a visualization of the proof of concept worm
 This milestone suggests interactivity via Geppetto. The kind of perturbation is not defined yet-- ideally we should aim for the simplest kind we can think of that gives the user an interface to make modifications.
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | Repository                                                                                                          | Description                                | Language   |
@@ -146,19 +143,20 @@ Associated Repositories
 
 
 Model Validation & Optimization engine
---------------------------------------
+======================================
 
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
 GitHub repository.
 
 Previous accomplishments
-~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 * Genetic algorithms applied to tuning muscle cell models
 
+Associated Milestones
+----------------------
 
-*Associated Milestones*
 `STORY: Muscle Cell model output closely matches that of real data <https://github.com/openworm/OpenWorm/issues?milestone=13&state=open>`_
 We will show that we have built a model of C. elegans muscle cell that matches data recorded from the nematode muscle cell. In part, we will use techniques of model optimization to fill in gaps in the model parameter space (deduce unmeasured parameters). The main technical challenge is tuning muscle cell passive properties and building a larger data set (more cell recordings).
 
@@ -176,7 +174,7 @@ This epic focuses on an output of simulation performance rather than the means o
 
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | Repository                                                                                                          | Description                                                                                                                                                  | Language    |
@@ -190,28 +188,25 @@ Associated Repositories
 
 
 Data Collection and Representation
-----------------------------------
+==================================
 
 * Building the OpenWorm database
 * Building the C Elegans NeuroML file
 
 Previous accomplishments
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 * OpenWorm browser
 * OpenWorm browser iOS
 * Hive Plots visualizations of connectome
 
-**OpenWorm Browser**
-The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.
-
 Current roadmap
-~~~~~~~~~~~~~~~
+---------------
 
 None
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | Repository                                                                                                          | Description                                                                                                                                                  | Language    |
@@ -227,13 +222,13 @@ Associated Repositories
 Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
 Current roadmap
-~~~~~~~~~~~~~~~
+---------------
 
 `Updated NeuroML connectome model <https://github.com/openworm/OpenWorm/issues?milestone=15&state=open>`_
 The `NeuroML connectome model <https://github.com/openworm/CElegansNeuroML>`_ requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
@@ -277,14 +272,10 @@ Data visualization
 [NEED DESCRIPTION]
 
 Current roadmap
-~~~~~~~~~~~~~~~
+---------------
 
 None
 
-*Associated Repositories*
-`data-viz <https://github.com/openworm/data-viz>`_
-Repository for scripts and other code items to create web-based visualizations of data in the project
-Python
 
 
 Community Outreach
@@ -310,7 +301,7 @@ Current roadmap
 None
 
 Associated Repositories
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
