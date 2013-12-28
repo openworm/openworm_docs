@@ -12,98 +12,17 @@ While our ultimate goal is to simulate every cell in the c. Elegans, we are star
 of its body, its nervous system, and its environment.  
 `Sibernetic <http://sibernetic.org>`_ is the home of the C++ code base that implements the core of the model.
 
-To get a quick idea of what this looks like, check out the `latest movie <>`_. In this movie you can 
+To get a quick idea of what this looks like, check out the 
+`latest movie <https://www.youtube.com/watch?v=SaovWiZJUWY>`_. In this movie you can 
 see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 
 of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
-.. Previous accomplishments
-.. ~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. * Physics tests
-.. * Initial worm crawling
-
-Geppetto Simulation Engine
---------------------------
-
-In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
-interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
-out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
-concepts and learn more about the different plug-in bundles we are working on.
-
-Geppetto, is written in Java and leverages technologies like 
-`OSGi <http://www.osgi.org/>`_, 
-`Spring Framework <http://www.springsource.org/spring-framework>`_, 
-`OpenCL <http://www.khronos.org/opencl/" target="_blank"></a> and 
-`Maven <http://maven.apache.org/>`_.
-
-Geppetto's frontend is written using 
-`THREE.js <http://mrdoob.github.com/three.js/>`_ and 
-`WebGL <http://www.khronos.org/webgl/>`_.
-Back-end / front-end communication happens via 
-`JSON <http://www.json.org/>`_ messages through 
-`WebSocket <http://www.websocket.org/>`_.
-
-The engine runs on on Eclipse Virgo WebServer deployed on an Amazon 
-`Elastic Compute Cloud <http://aws.amazon.com/ec2/>`_ Linux instance.
-
-Sound familiar? Like to help? <a href="./contacts.html">Contact us</a>!
-
-.. Previous accomplishments
-.. ~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. * Past releases of Geppetto
-
-Model Validation & Optimization engine
---------------------------------------
-
-The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
-knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
-GitHub repository.
-
-.. Previous accomplishments
-.. ~~~~~~~~~~~~~~~~~~~~~~~
-
-.. * Genetic algorithms applied to tuning muscle cell models
-
-.. Data Collection and Representation
-.. ----------------------------------
-
-.. * Building the OpenWorm database
-.. * Building the C Elegans NeuroML file
-
-.. Previous accomplishments
-.. ~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. * OpenWorm browser
-.. * OpenWorm browser iOS
-.. * Hive Plots visualizations of connectome
-
-.. Community Outreach
-.. ------------------
-
-.. The effort to build the OpenWorm open science community is always ongoing.  
-
-.. * Outreach via Social Media
-.. * Documenting our progress
-.. * Journal clubs
-
 Previous accomplishments
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Past Journal clubs
-* Media attention
-* Attracting contributors
-* Attracting supporters
-
-
-Detailed Roadmap
-================
-NeuroMechanical Modeling
-------------------------
-
-Fluid Mechanics Simulator
-~~~~~~~~~~~~~~~~~~~~~~~~~
+* Physics tests
+* Initial worm crawling
 
 We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the 
 worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization), 
@@ -141,6 +60,37 @@ Neuromechanical model of C. Elegans
 Known as Sibernetic, this is a C++ implementation of the Smoothed Particle Hydrodynamics algorithm for the OpenWorm project.
 Java
 
+
+Geppetto Simulation Engine
+--------------------------
+
+In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
+interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
+out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
+concepts and learn more about the different plug-in bundles we are working on.
+
+Geppetto, is written in Java and leverages technologies like 
+`OSGi <http://www.osgi.org/>`_, 
+`Spring Framework <http://www.springsource.org/spring-framework>`_, 
+`OpenCL <http://www.khronos.org/opencl/" target="_blank"></a> and 
+`Maven <http://maven.apache.org/>`_.
+
+Geppetto's frontend is written using 
+`THREE.js <http://mrdoob.github.com/three.js/>`_ and 
+`WebGL <http://www.khronos.org/webgl/>`_.
+Back-end / front-end communication happens via 
+`JSON <http://www.json.org/>`_ messages through 
+`WebSocket <http://www.websocket.org/>`_.
+
+The engine runs on on Eclipse Virgo WebServer deployed on an Amazon 
+`Elastic Compute Cloud <http://aws.amazon.com/ec2/>`_ Linux instance.
+
+Sound familiar? Like to help? <a href="./contacts.html">Contact us</a>!
+
+.. Previous accomplishments
+.. ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. * Past releases of Geppetto
 
 Geppetto Simulation Engine
 --------------------------
@@ -205,9 +155,18 @@ Python
 JavaScript
 
 
-Optimization Engine & Model Validation
+Model Validation & Optimization engine
 --------------------------------------
-.. [NEED DESCRIPTION]
+
+The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
+knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
+GitHub repository.
+
+Previous accomplishments
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Genetic algorithms applied to tuning muscle cell models
+
 
 *Associated Milestones*
 `STORY: Muscle Cell model output closely matches that of real data <https://github.com/openworm/OpenWorm/issues?milestone=13&state=open>`_
@@ -235,9 +194,19 @@ A test pipeline that allows us to run a behavioural phenotyping of our virtual w
 SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the `WormBehavior database <http://wormbehavior.mrc-lmb.cam.ac.uk/>`_.
 Java
 
-
 Data Collection and Representation
 ----------------------------------
+
+* Building the OpenWorm database
+* Building the C Elegans NeuroML file
+
+Previous accomplishments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* OpenWorm browser
+* OpenWorm browser iOS
+* Hive Plots visualizations of connectome
+
 **OpenWorm Browser**
 The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.
 
@@ -287,25 +256,24 @@ To deal with the space of free parameters, two strategies are employed. First, b
 
 Electrophysiology / Mechanics Integration
 
-.. [NEEDS A DESCRIPTION]
+[NEEDS A DESCRIPTION]
 
 
+**NEEDS A TOP LEVEL NAME TO DESCRIBE ELEMENTS BELOW**
+Cell and neuron list
+[NEED DESCRIPTION]
 
-.. **NEEDS A TOP LEVEL NAME TO DESCRIBE ELEMENTS BELOW**
-.. Cell and neuron list
-.. [NEED DESCRIPTION]
+Neuropeptide and ion channel database
+[NEED DESCRIPTION]
 
-.. Neuropeptide and ion channel database
-.. [NEED DESCRIPTION]
+Worm movies repository
+[NEED DESCRIPTION]
 
-.. Worm movies repository
-.. [NEED DESCRIPTION]
+Synapse position database
+[NEED DESCRIPTION]
 
-.. Synapse position database
-.. [NEED DESCRIPTION]
-
-.. Data visualization
-.. [NEED DESCRIPTION]
+Data visualization
+[NEED DESCRIPTION]
 
 *Associated Milestones*
 None
@@ -316,10 +284,22 @@ Repository for scripts and other code items to create web-based visualizations o
 Python
 
 
-
 Community Outreach
 ------------------
-.. [NEED DESCRIPTION]
+
+The effort to build the OpenWorm open science community is always ongoing.  
+
+* Outreach via Social Media
+* Documenting our progress
+* Journal clubs
+
+Previous accomplishments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Past Journal clubs
+* Media attention
+* Attracting contributors
+* Attracting supporters
 
 *Associated Milestones*
 None
@@ -335,4 +315,7 @@ Matlab
 
 `openworm_docs <https://github.com/openworm/openworm_docs>`_
 Documentation for OpenWorm
+
+
+
 
