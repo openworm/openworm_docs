@@ -279,7 +279,7 @@ None
 
 
 Community Outreach
-------------------
+==================
 
 The effort to build the OpenWorm open science community is always ongoing.  
 
