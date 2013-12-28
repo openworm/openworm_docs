@@ -1,3 +1,5 @@
+.. _sibernetic-project:
+
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
