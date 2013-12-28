@@ -5,35 +5,96 @@ OpenWorm Projects
 Areas
 =====
 
-NeuroMechanical Modeling
+NeuroMechanical Modeling - Sibernetic
 ------------------------
 
 While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
-of its body, its nervous system, and its environment.
+of its body, its nervous system, and its environment.  
+`Sibernetic <http://sibernetic.org>`_ is the home of the C++ code base that implements the core of the model.
 
-To get a quick idea of what this looks like, check out the CyberElegans prototype. In this movie you can 
-see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside 
+To get a quick idea of what this looks like, check out the `latest movie <>`_. In this movie you can 
+see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 
 of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
+
+.. Previous accomplishments
+.. ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. * Physics tests
+.. * Initial worm crawling
 
 Geppetto Simulation Engine
 --------------------------
 
-We are engineering Geppetto, a Java OSGi open-source modular platform to enable multi-scale and multi-algorithm 
+In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
 out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
 concepts and learn more about the different plug-in bundles we are working on.
 
-Optimization Engine & Model Validation
+Geppetto, is written in Java and leverages technologies like 
+`OSGi <http://www.osgi.org/>`_, 
+`Spring Framework <http://www.springsource.org/spring-framework>`_, 
+`OpenCL <http://www.khronos.org/opencl/" target="_blank"></a> and 
+`Maven <http://maven.apache.org/>`_.
+
+Geppetto's frontend is written using 
+`THREE.js <http://mrdoob.github.com/three.js/>`_ and 
+`WebGL <http://www.khronos.org/webgl/>`_.
+Back-end / front-end communication happens via 
+`JSON <http://www.json.org/>`_ messages through 
+`WebSocket <http://www.websocket.org/>`_.
+
+The engine runs on on Eclipse Virgo WebServer deployed on an Amazon 
+`Elastic Compute Cloud <http://aws.amazon.com/ec2/>`_ Linux instance.
+
+Sound familiar? Like to help? <a href="./contacts.html">Contact us</a>!
+
+.. Previous accomplishments
+.. ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. * Past releases of Geppetto
+
+Model Validation & Optimization engine
 --------------------------------------
 
 The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
 GitHub repository.
 
-.. **Data Collection and Representation**
+.. Previous accomplishments
+.. ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. **Community Outreach**
+.. * Genetic algorithms applied to tuning muscle cell models
+
+.. Data Collection and Representation
+.. ----------------------------------
+
+.. * Building the OpenWorm database
+.. * Building the C Elegans NeuroML file
+
+.. Previous accomplishments
+.. ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. * OpenWorm browser
+.. * OpenWorm browser iOS
+.. * Hive Plots visualizations of connectome
+
+.. Community Outreach
+.. ------------------
+
+.. The effort to build the OpenWorm open science community is always ongoing.  
+
+.. * Outreach via Social Media
+.. * Documenting our progress
+.. * Journal clubs
+
+Previous accomplishments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Past Journal clubs
+* Media attention
+* Attracting contributors
+* Attracting supporters
 
 
 Detailed Roadmap
