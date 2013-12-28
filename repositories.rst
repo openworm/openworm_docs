@@ -1,9 +1,9 @@
+.. _repositories:
+
 *******************
-Repository Workflow
+Repositories
 *******************
 
-Repositories
-============
 View the `full current list <https://github.com/openworm>`_ of repositories on GitHub.
 
 
