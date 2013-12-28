@@ -2,6 +2,15 @@
 OpenWorm Projects
 *****************
 
+.. toctree::
+   :hidden:
+   
+   Projects/sibernetic
+   Projects/geppetto
+   Projects/modelval
+   Projects/datarep
+   Projects/community
+
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
