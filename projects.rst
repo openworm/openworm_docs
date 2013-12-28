@@ -27,6 +27,8 @@ Previous accomplishments
 * Physics tests
 * Initial worm crawling
 
+Current roadmap
+~~~~~~~~~~~~~~~
 
 +--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 | Associated Milestones                                                                                                          | Description                                                                                                           | 
@@ -51,8 +53,8 @@ Previous accomplishments
 |                                                                                                                                |                                                                                                                       |
 +--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
-
-*Associated Repositories*
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
@@ -97,7 +99,9 @@ Previous accomplishments
 
 * Past releases of Geppetto
 
-*Associated Milestones*
+Current roadmap
+~~~~~~~~~~~~~~~~
+
 `STORY: Worm wiggling in the browser <https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
 As a user, I want to see the proof of concept sibernetic worm in my web browser so that anyone around the world can play with it.
 
@@ -108,6 +112,8 @@ As a user, I want to be able to see a visualization of the proof of concept worm
 
 This milestone suggests interactivity via Geppetto. The kind of perturbation is not defined yet-- ideally we should aim for the simplest kind we can think of that gives the user an interface to make modifications.
 
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | Repository                                                                                                          | Description                                | Language   |
@@ -169,6 +175,9 @@ This epic is to have a simulation that can demonstrate it can predict (and there
 This epic focuses on an output of simulation performance rather than the means of implementation, so any way to achieve this epic is welcome.
 
 
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
+
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | Repository                                                                                                          | Description                                                                                                                                                  | Language    |
 +=====================================================================================================================+==============================================================================================================================================================+=============+
@@ -196,9 +205,13 @@ Previous accomplishments
 **OpenWorm Browser**
 The OpenWorm Browser enables ready access to a cell-by-cell 3D representation of the nematode C. elegans in a WebGL enabled browser. Checkout the source code and find out more on the github repository. We also ported this project to an iOS app to support the project.
 
-*Associated Milestones*
+Current roadmap
+~~~~~~~~~~~~~~~
+
 None
 
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+
 | Repository                                                                                                          | Description                                                                                                                                                  | Language    |
@@ -213,10 +226,14 @@ None
 **NeuroML Connectome**
 Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
-*Associated Milestones*
+Current roadmap
+~~~~~~~~~~~~~~~
+
 `Updated NeuroML connectome model <https://github.com/openworm/OpenWorm/issues?milestone=15&state=open>`_
 The `NeuroML connectome model <https://github.com/openworm/CElegansNeuroML>`_ requires a number of updates before it can be used for multicompartmental simulations. Padraig Gleeson will take the lead on this.
 
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
@@ -259,7 +276,9 @@ Synapse position database
 Data visualization
 [NEED DESCRIPTION]
 
-*Associated Milestones*
+Current roadmap
+~~~~~~~~~~~~~~~
+
 None
 
 *Associated Repositories*
@@ -285,8 +304,13 @@ Previous accomplishments
 * Attracting contributors
 * Attracting supporters
 
-*Associated Milestones*
+Current roadmap
+~~~~~~~~~~~~~~~
+
 None
+
+Associated Repositories
+~~~~~~~~~~~~~~~~~~~~~~~
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
