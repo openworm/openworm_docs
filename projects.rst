@@ -2,15 +2,6 @@
 OpenWorm Projects
 *****************
 
-.. toctree::
-   :hidden:
-   
-   Projects/sibernetic
-   Projects/geppetto
-   Projects/modelval
-   Projects/datarep
-   Projects/community
-
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
@@ -37,22 +28,6 @@ In order to allow the world to play with the model easily, we are engineering `G
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
 out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
 concepts and learn more about the different plug-in bundles we are working on.
-
-Geppetto, is written in Java and leverages technologies like 
-`OSGi <http://www.osgi.org/>`_, 
-`Spring Framework <http://www.springsource.org/spring-framework>`_, 
-`OpenCL <http://www.khronos.org/opencl/>`_ and 
-`Maven <http://maven.apache.org/>`_.
-
-Geppetto's frontend is written using 
-`THREE.js <http://mrdoob.github.com/three.js/>`_ and 
-`WebGL <http://www.khronos.org/webgl/>`_.
-Back-end / front-end communication happens via 
-`JSON <http://www.json.org/>`_ messages through 
-`WebSocket <http://www.websocket.org/>`_.
-
-The engine runs on on Eclipse Virgo WebServer deployed on an Amazon 
-`Elastic Compute Cloud <http://aws.amazon.com/ec2/>`_ Linux instance.
 
 More detailed information is available on the :ref:`Geppetto project page <geppetto-project>`.
 
