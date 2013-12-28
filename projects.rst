@@ -40,8 +40,9 @@ More detailed information is available on the :ref:`Geppetto project page <geppe
 
 **Data Collection and Representation**
 
-A lot of data about *c. elegans* is integrated into the model.  In this project, we work on what forms we should
-these data in to best leverage them for building the mode.
+A lot of data about *c. elegans* is integrated into the model.  In this project, we work 
+on what forms we should put these data in to best leverage them for building the model.
+
 
 More detailed information is available on the :ref:`Data representation project page <data-rep>`.
 

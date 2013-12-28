@@ -10,7 +10,7 @@ knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Che
 GitHub repository.
 
 For more details on movement validation, check out the 
-:ref:`movement validation project page <movement-validation>`.
+:ref:`movement validation project page <worm-movement>`.
 
 Previous accomplishments
 ------------------------
