@@ -288,7 +288,7 @@ The effort to build the OpenWorm open science community is always ongoing.
 * Journal clubs
 
 Previous accomplishments
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 * Past Journal clubs
 * Media attention
@@ -296,7 +296,7 @@ Previous accomplishments
 * Attracting supporters
 
 Current roadmap
-~~~~~~~~~~~~~~~
+---------------
 
 None
 
