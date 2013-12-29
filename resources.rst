@@ -13,6 +13,14 @@ Geppetto
 
 More information on running Geppetto is `available online <http://geppetto.org>`_.
 
+OpenWorm Database
+----------------
+
+An web version of the OpenWorm database can `be browsed online <http://www.interintelligence.org/openworm/Entities.aspx>`_.
+
+More information about working with the data within it and other data entities 
+can be found :ref:`one the data representation project page <data-rep>`.
+
 CyberElegans
 ------------
 
