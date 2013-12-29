@@ -135,3 +135,9 @@ Blog
 ----
 
 `Our blog <http://blog.openworm.org>`_ is hosted in Tumblr.
+
+Membership
+==========
+
+More information about the membership policy is 
+:ref:`available on a separate page <membership>`.

@@ -70,7 +70,7 @@ C. elegans NeuroML model in neuroConstruct
 
 The NeuroML conversion of the [[Virtual Worm Blender files]] has been
 imported into a `neuroConstruct <http://www.neuroConstruct.org>`__
-project. [[This page\|Running the C. elegans model in neuroConstruct]]
+project. :ref:`This page <running-nc>`
 provides instructions for obtaining the latest version of
 neuroConstruct, getting the latest CElegans project and
 generating/visualizing the cells and connections.
