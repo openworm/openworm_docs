@@ -46,6 +46,13 @@ comparing them against the test set, and doing some cross-validation).
 This epic focuses on an output of simulation performance rather than the means of implementation, so any way to 
 achieve this epic is welcome.
 
+Issues list
+-----------
+
+All issues related to 
+`movement validation <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=movement+validation&page=1&sort=comments&state=open>`_ 
+can be found on GitHub
+
 
 Associated Repositories
 -----------------------
