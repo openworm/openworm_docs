@@ -68,7 +68,7 @@ the `Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_
 C. elegans NeuroML model in neuroConstruct
 ------------------------------------------
 
-The NeuroML conversion of the [[Virtual Worm Blender files]] has been
+The NeuroML conversion of the `Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_has been
 imported into a `neuroConstruct <http://www.neuroConstruct.org>`__
 project. :ref:`This page <running-nc>`
 provides instructions for obtaining the latest version of
