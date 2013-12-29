@@ -13,9 +13,9 @@ Contents:
 
    intro
    project
+   projects
    data
    github
-   projects
    faq
 
 ..   repositories
