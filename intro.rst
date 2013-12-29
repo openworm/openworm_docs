@@ -39,9 +39,14 @@ Navigating OpenWorm
 ===================
 
 We've created this documentation to help orient you to the different locations on the web
-where OpenWorm material is found and where contributions can be made.  The 
+where OpenWorm material is found and where contributions can be made.  
+
+The :ref:`modeling approach page <modeling>` explains how we have broken down this problem and what steps
+we are currently taking.
+
+The 
 :ref:`resources page <resources>`
-has a gallery of content that has been produced by the project, including simulation engines
+has a gallery of content that has been produced by the project, including simulation engines,
 visualization environments, and data sets.
 
 There are a lot of additional questions you may have about the project.  We have assembled
@@ -71,8 +76,8 @@ If you are interested in a specific programming language, check out links to iss
 If you have questions about specific things you find, please post them to 
 `the list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
 
-More information about the process of making a contribution from here is 
-:ref:`available on another page <community>`
+More information about the process of making a contribution is 
+:ref:`available on our community page <community>`
 
 While the heart of OpenWorm is computational modeling, we are always looking for people with talents beyond programming 
 to contribute.  Are you a graphic designer, writer, PR specialist or simply someone with a love of science and expertise 

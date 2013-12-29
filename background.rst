@@ -4,7 +4,7 @@ Project Background
 
 History
 =======
-Established in January 2011 and in just 2 years of activity, OpenWorm has built a community of 28 highly-motivated 
+Established in January 2011 and in just 2 years of activity, OpenWorm has built a community of highly-motivated 
 and highly-skilled individuals and coordinated their work. The community has produced regular scientific publications 
 making extensive use of scientific research published through open access,  proving the validity of the open science 
 approach taken.
