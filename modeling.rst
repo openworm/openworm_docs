@@ -39,7 +39,7 @@ construct an acceptable neuromechanical model.  There have been
 past and there are some groups currently working on the problem using
 different approaches (e.g. `Cohen <http://www.comp.leeds.ac.uk/celegans/>`_, 
 `Lockery <http://lockerylab.uoregon.edu/groups/main/wiki/a99e9/Research.html>`_, 
-`Si Elegans <http://www.si-elegans.eu/>`).
+`Si Elegans <http://www.si-elegans.eu/>`_).
 
 Our approach involves building a 3D mechanical model of the worm body and nervous system, 
 tuning the model using model optimization techniques, validating the model using real data,
@@ -50,17 +50,16 @@ simulation engine.
 Closing the loop with neuromechanical modeling
 ----------------------------------------------
 
-While our ultimate goal is to simulate every cell in the c. Elegans, we
-are starting out by building a model of its body, its nervous system,
-and its environment.
+While our ultimate goal is to simulate every cell in the *c. elegans*, we
+are starting out by building a model of its body and environment, its nervous system,
+and its muscle cells.
 
 To get a quick idea of what this looks like, check out the `CyberElegans
 prototype <http://www.youtube.com/embed/3uV3yTmUlgo>`__. In this movie
 you can see a simulated 3D c. elegans being activated in an environment.
-Its muscles are located around the outside of its body, and as they turn
-red, they are exerting forces on the body that cause the bending to
-happen. In turn, the activity of the muscles are being driven by the
-activity of neurons within the body.
+Similar to the CyberElegans model, its muscles are located around the outside of its body, 
+and as they turn red, they are exerting forces on the body that cause the bending to
+happen.  
 
 These steps are outlined in blue text of the figure below:
 

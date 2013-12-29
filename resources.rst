@@ -51,6 +51,8 @@ connectome, we have simplified it into a project called the 'connectome engine' 
 integrated its dynamics into a Lego Mindstorms EV3 robot.  You can `see a movie of
 this in action <https://www.youtube.com/watch?v=D8ogHHwqrkI>`_.  
 
+.. image:: http://i.imgur.com/OG7sOAD.jpg
+
 This is currently in the process of being written up.
 
 CyberElegans
