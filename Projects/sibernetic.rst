@@ -26,36 +26,22 @@ Previous accomplishments
 * Initial worm crawling
 
 Current roadmap
-=========================
+=========================                                  
 
-+--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| Associated Milestones                                                                                                          | Description                                                                                                           | 
-+================================================================================================================================+=======================================================================================================================+
-| `STORY: Proof of concept worm wiggling in Sibernetic <https://github.com/openworm/OpenWorm/issues?milestone=20&state=open>`_   | As a scientist or developer, I want to be able to run a program and see a wiggling worm in 3D in front of me.         |
-|                                                                                                                                |                                                                                                                       |
-|                                                                                                                                |This refers to having a running simulation with the following components:                                              |
-|                                                                                                                                |                                                                                                                       |
-|                                                                                                                                |Four rows of 'elastic matter muscles' fixed in a 'elastic matter shell'                                                |
-|                                                                                                                                |'Elastic matter shell' is filled with liquid that puts outward pressure on shell                                       |
-|                                                                                                                                |'Elastic matter muscles' put force on 'elastic matter shell'                                                           |
-|                                                                                                                                | Simple sinusoidal input (no neurons) can be applied to 'elastic matter muscles' to produce simple 'wiggling'.         |
-|                                                                                                                                | To get rapidly to the end goal, this implementation will be done with some combination of Sibernetic + Configuration  |
-|                                                                                                                                |  Generator + Python scripts. A Geppetto implementation will come later.                                               |
-|                                                                                                                                |                                                                                                                       |
-|                                                                                                                                | This story breaks down the epic to predict behavior from the WormBehavior database                                    |
-+--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
-| `Electrofluid Paper <https://github.com/openworm/OpenWorm/issues?milestone=17&state=open>`_                                    | We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells |
-|                                                                                                                                | and the worm body. @vellamike, @a-palyanov and @skhayrulin are taking the lead on this,                               |
-|                                                                                                                                |                                                                                                                       |
-|                                                                                                                                | The proposal is to do this after the Sibernetic proof of concept worm wiggling is complete.                           |
-|                                                                                                                                |                                                                                                                       |
-+--------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+`Electrofluid Paper <https://github.com/openworm/OpenWorm/issues?milestone=17&state=open>`_ 
+-------------------------------------------------------------------------------------------
+
+We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells 
+and the worm body. @vellamike, @a-palyanov and @skhayrulin are taking the lead on this,
+
+The proposal is to do this after the Sibernetic proof of concept worm wiggling is complete. 
 
 Issues list
 ===========
 
 All issues related to the 
-`Sibernetic code base <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=sibernetic&page=1&sort=comments&state=open>`_ can be found on GitHub.
+`Sibernetic code base <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=sibernetic&page=1&sort=comments&state=open>`_ 
+can be found on GitHub.
 
 Associated Repositories
 =========================

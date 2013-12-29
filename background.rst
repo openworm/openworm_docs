@@ -123,7 +123,7 @@ We call this "multi-algorithm integration".
 Model optimization
 ------------------
 
-There are a lot of aspects of the _c. elegans_ that we will not be able to measure directly for a while based 
+There are a lot of aspects of the *c. elegans* that we will not be able to measure directly for a while based 
 on experimental limitations.  These are `"free parameters" <http://en.wikipedia.org/wiki/Free_parameter>`_.  
 The conventional wisdom on modeling is to minimize the number of free parameters as much as possible.  
 Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.

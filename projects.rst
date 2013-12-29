@@ -13,6 +13,28 @@ OpenWorm Projects
    Projects/optimization
    Projects/datarep
    Projects/community-proj
+   
+The project is currently laid out into five major areas shown below:
+
+-  Data collection and representation
+-  Community outreach
+-  Muscle cell integration
+-  Geppetto Simulation Engine
+-  Mechanics / Physical
+
+|Project overview|
+
+The work with the muscle cell integration brings many of the pieces
+together that we have been focusing on in this tour. To support that
+work, data collection and representation is the area where we gather
+information about the biology of the worm and turn it into digital forms
+that can be used in the simulation. In community outreach we work on all
+of the social aspects of the project that keep volunteers interested.
+The Geppetto simulation engine is the open source platform that we are
+engineering to support not only neuromechanical simulation, but even
+more sophisticated simulations. The mechanics / physical area involves a
+lot of hard core scientific programming to get the physics just right so
+that the body of the worm is as close to a real worm body as we can get.
 
 **NeuroMechanical Modeling - Sibernetic**
 
@@ -73,4 +95,4 @@ The effort to build the OpenWorm open science community is always ongoing.
 
 More detailed information is available on the :ref:`Community project page <community-proj>`.
 
-
+.. |Project overview| image:: https://docs.google.com/drawings/d/12QMz1LNvKfS1iiYOPCSCkXTU7JQHKJQkjLwN3WLSXYc/pub?w=755&h=493

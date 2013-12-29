@@ -13,19 +13,15 @@ Contents:
 
    intro
    background
+   modeling-approach
    projects
    community
    resources
    faq
 
-..   repositories
-..   knowledgebase
 
+.. Indices and tables
+.. ==================
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
 
