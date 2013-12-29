@@ -6,6 +6,11 @@ Data Collection and Representation
 
 .. contents::
 
+
+A lot of data about *c. elegans* is integrated into the model.  
+In this project, we work on what forms we should put these data in to best leverage them
+for building the model.  
+
 Four sub-projects are contained within the data collection and representation project.
 
 * OpenWorm Database
@@ -16,10 +21,8 @@ Four sub-projects are contained within the data collection and representation pr
 OpenWorm Database
 ==================
 
-A lot of data about *c. elegans* is integrated into the model. 
-
-In this project, we work on what forms we should put these data in to best leverage them
-for building the model.
+We have consolidated a lot of data about the worm 
+`into a database <https://github.com/openworm/OpenWorm/tree/master/OpenWorm%20database>`_.
 
 * Database Name:	 mysql_31129_celegans
 * Database Server:	my01.winhost.com
