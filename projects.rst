@@ -1,3 +1,5 @@
+.. _projects:
+
 *****************
 OpenWorm Projects
 *****************
