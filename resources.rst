@@ -1,25 +1,25 @@
+.. _resources:
+
 ************************
 Using OpenWorm Resources
 ************************
+
+This page describes content that has been created by the project for use by the public.  
+Currently we make simulation engines, visualization environments, and data sets available.
+
+Simulation engines
+==================
 
 Sibernetic
 ----------
 
 More information on running Sibernetic is `available online <http://sibernetic.org>`_.
 
-
 Geppetto
 --------
 
 More information on running Geppetto is `available online <http://geppetto.org>`_.
 
-OpenWorm Database
-----------------
-
-An web version of the OpenWorm database can `be browsed online <http://www.interintelligence.org/openworm/Entities.aspx>`_.
-
-More information about working with the data within it and other data entities 
-can be found :ref:`on the data representation project page <data-rep>`.
 
 CyberElegans
 ------------
@@ -50,6 +50,9 @@ operating on more scalable.
 You can `download the binary for the CyberElegans <http://g.ua/MKja>`__
 (Windows only)
 
+Visualization Environments
+==========================
+
 Connectome Browser
 ------------------
 
@@ -72,6 +75,17 @@ experience of browsing the C. elegans worm anatomy. This is built from
 the `Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_
 
 |WormBrowser|
+
+Data sets
+=========
+
+OpenWorm Database
+----------------
+
+An web version of the OpenWorm database can `be browsed online <http://www.interintelligence.org/openworm/Entities.aspx>`_.
+
+More information about working with the data within it and other data entities 
+can be found :ref:`on the data representation project page <data-rep>`.
 
 C. elegans NeuroML model in neuroConstruct
 ------------------------------------------

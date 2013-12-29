@@ -1,4 +1,4 @@
-.. _community:
+.. _community-proj:
 
 Community Outreach
 ==================

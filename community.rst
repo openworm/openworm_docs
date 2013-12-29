@@ -4,13 +4,41 @@
 OpenWorm Community
 *******************
 
+This page contains information intended to help individuals understand what steps to take 
+to make contributions to OpenWorm, how to join OpenWorm meetings, how to 
+interact with the community online, and how to become
+an OpenWorm core member.
+
 Contribution Best Practices
 ===========================
+
+Once you have identified an issue you want to work on from :ref:`a particular project <projects>`, 
+please announce your intention to helping out on the 
+`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_. and 
+by :ref:`commenting on the 
+specific GitHub issue <github-issues>`.  Making
+a contribution of code to the project will first involve 
+:ref:`forking one of our repositories <github-fork>`,
+making changes, committing them, creating a pull request back to the original repo, and
+then updating the appropriate part of documentation.  
+
+An alternate way to contribute is to 
+create a new GitHub repo yourself and begin tackling some issue directly there.  We can
+then fork your repo back into the OpenWorm organization at a later point in order to 
+bring other contributors along to help you.
+
+Another
+great way to contribute is by 
+:ref:`organizing ideas or documentation or proposals via a Google
+doc <google-drive>`, and then sharing the link on our 
+`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
 
 Using OpenWorm repos on GitHub
 ------------------------------
 
 More details on best practices using OpenWorm repos on GitHub are available :ref:`on a separate page <github>`.
+
+.. _google-drive:
 
 Creating organizing documents
 -----------------------------
@@ -59,43 +87,37 @@ it should be announced on `the mailing list <https://groups.google.com/forum/?fr
 An example of an effective proposal is 
 `available online <https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375>`_
 
-Proposals
+Contributing to the OpenWorm documentation
+------------------------------------------
 
-Meetings
---------
+The `OpenWorm documentation <http://openworm.rtfd.org>`_ is a searchable repository
+of knowledge we have assembled to help new users get oriented to the different areas 
+of the project.  When new contributions are made, it is important that they are incorporated
+into the appropriate part of the documentation.
 
-Team meetings
-^^^^^^^^^^^^^
+When they are ready to consume by the general public, simulation engines, 
+visualization environments, and data sets should be added to the :ref:`resources page <resources>`.
 
-We have `a regular meeting <https://www.youtube.com/watch?v=-IyHokN8FkA&list=PL8ACJC0fGE7C7zlCBqkx1LMN1DHGKVp22>`_ 
-of the team that is building applications every two weeks.  
-We also currently
-schedule an ad-hoc `data team meeting <https://www.youtube.com/watch?v=seKjRnw7CB8&list=PL8ACJC0fGE7CGtyJWV2dPOfNxAruk2VcM>`_ 
-about every 3-4 weeks.  The events
-are on `our community calendar <https://www.google.com/calendar/embed?src=bqvlrm642m3irjehbethokkcdg%40group.calendar.google.com>`_.  
-The events are streamed live when they occur and an archive of the meeting videos
-and `the minutes <https://drive.google.com/#folders/0B8QUskXehbJtNWM2MjUyM2EtOTMxMC00MWY3LWEyNWMtNDUwMjRiNjM0Mjcx>`_
-are kept online.
+Information about the goals, progress, and roadmap of current or proposed projects should 
+be added to the :ref:`projects page <projects>`. 
 
-Working meetings
-^^^^^^^^^^^^^^^^
+The docs use `rst format <http://sphinx-doc.org/rest.html>`_.  This kind of 
+`markup <https://en.wikipedia.org/wiki/Markup_language>` is a bit verbose and unforgiving
+in its syntax compared to other languages, but it is convenient for publishing documentation
+to the `ReadTheDocs service <https://readthedocs.org/>` directly from the GitHub repo, so we use it.
 
-Contributors are encouraged to meet with each other on a regular basis to advance areas of 
-the project they need interaction on.  
+The 'master outline' for the top level is in 
+`index.rst <https://raw.github.com/openworm/openworm_docs/master/index.rst>`_.  The 
+`'toctree' directive <http://sphinx-doc.org/markup/toctree.html>`_ in this 
+file sets up what is on the sidebar.  This assumes that files with the names under the 
+toctree are present in the same directory as index.rst.  Under this, the next level of 
+hierarchy is determined by `section headers <http://sphinx-doc.org/rest.html#sections>`_.  
+In the `projects page <https://raw.github.com/openworm/openworm_docs/master/projects.rst>`_
+ we've used a
+non-standard practice by using a hidden toctree into the file, which is creating the 
+next level of hierarchy in the sidebar.  In that toctree, you can see an example of referencing 
+the underlying directory structure (e.g. 'Projects/worm-movement').
 
-IRC meetings
-^^^^^^^^^^^^
-
-We had been running meetings on IRC for some time but have currently discontinued the 
-practice.  If there is interest in reviving this, please post on 
-`the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
-
-Scheduling meetings
-^^^^^^^^^^^^^^^^^^^
-
-We like using the `Doodle service <doodle.com>`_ for scheduling meetings.  This makes it easy to find
-times to meet across various time zones.  Once a meeting is scheduled, we will often create
-a Google+ event to track it and remind everyone it is occurring.
 
 Guest Blog Post
 ---------------
@@ -116,9 +138,46 @@ You can see
 If you have an idea for a good journal club, please post the suggestion 
 `on our mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
 
+
+Meetings
+========
+
+Team meetings
+--------------
+
+We have `a regular meeting <https://www.youtube.com/watch?v=-IyHokN8FkA&list=PL8ACJC0fGE7C7zlCBqkx1LMN1DHGKVp22>`_ 
+of the team that is building applications every two weeks.  
+We also currently
+schedule an ad-hoc `data team meeting <https://www.youtube.com/watch?v=seKjRnw7CB8&list=PL8ACJC0fGE7CGtyJWV2dPOfNxAruk2VcM>`_ 
+about every 3-4 weeks.  The events
+are on `our community calendar <https://www.google.com/calendar/embed?src=bqvlrm642m3irjehbethokkcdg%40group.calendar.google.com>`_.  
+The events are streamed live when they occur and an archive of the meeting videos
+and `the minutes <https://drive.google.com/#folders/0B8QUskXehbJtNWM2MjUyM2EtOTMxMC00MWY3LWEyNWMtNDUwMjRiNjM0Mjcx>`_
+are kept online.
+
+Working meetings
+----------------
+
+Contributors are encouraged to meet with each other on a regular basis to advance areas of 
+the project they need interaction on.  
+
+IRC meetings
+-----------
+
+We had been running meetings on IRC for some time but have currently discontinued the 
+practice.  If there is interest in reviving this, please post on 
+`the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
+
+Scheduling meetings
+-------------------
+
+We like using the `Doodle service <doodle.com>`_ for scheduling meetings.  This makes it easy to find
+times to meet across various time zones.  Once a meeting is scheduled, we will often create
+a Google+ event to track it and remind everyone it is occurring.
+
+
 Interactions
 ============
-
 
 Mailing Lists
 ---------------

@@ -17,6 +17,8 @@ account if you do not already have one. Note, you can comment on issues without 
 we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be 
 `created on the Github website <https://github.com/>`_.
 
+.. _github-issues:
+
 Contributing and Resolving Issues
 =================================
 
@@ -35,6 +37,28 @@ and dig around.
 .. Using tags for categorizing tasks and issues
 
 
+Interacting with Issues
+-----------------------
+
+`Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
+
+
+.. Best Practices for OpenWorm
+.. [Need to fill this in]
+
+
+Closing an Issue
+----------------
+
+* `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
+* `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
+
+.. [Add content]
+.. Best Practices for OpenWorm
+.. [Need to fill this in]
+
+.. _github-fork:
+
 Forking GitHub Repositories
 ===========================
 On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
@@ -49,11 +73,8 @@ For directions on doing this, check out the
 `help page from Github <https://help.github.com/articles/fork-a-repo>`_.
 
 
-
-GitHub Issues
-=============
 Opening a New Issue
--------------------
+===================
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is 
 located/relevant to. Click on the Issues tab on the menu to the right.
 
@@ -92,27 +113,6 @@ When writing up the description for a given issue, provide as much context and d
 Links to relevant code, databases, documentation and related issues are strongly recommended.  
 
 Check out `this example <https://github.com/openworm/OpenWorm/issues/140>`_ of a clearly written issue that follows best practices.
-
-
-Interacting with Issues
------------------------
-
-`Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
-
-
-.. Best Practices for OpenWorm
-.. [Need to fill this in]
-
-
-Closing an Issue
-----------------
-
-* `Via pull requests <https://github.com/blog/1506-closing-issues-via-pull-requests>`_
-* `Via commit messages <https://github.com/blog/1386-closing-issues-via-commit-messages>`_
-
-.. [Add content]
-.. Best Practices for OpenWorm
-.. [Need to fill this in]
 
 
 Posting Gists (gist.github.com)

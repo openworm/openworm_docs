@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    intro
-   project
+   background
    projects
    community
    resources

@@ -12,7 +12,7 @@ OpenWorm Projects
    Projects/worm-movement
    Projects/optimization
    Projects/datarep
-   Projects/community
+   Projects/community-proj
 
 **NeuroMechanical Modeling - Sibernetic**
 
@@ -71,6 +71,6 @@ More detailed information is available on the :ref:`Data representation project 
 
 The effort to build the OpenWorm open science community is always ongoing.  
 
-More detailed information is available on the :ref:`community project page <community>`.
+More detailed information is available on the :ref:`Community project page <community-proj>`.
 
 
