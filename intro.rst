@@ -45,23 +45,12 @@ We recommend as well that you sign up to
 to get a sense of what is going on.  
 
 Then, please check out a `recent orientation overview <https://www.youtube.com/watch?v=C12d11z8OIo>`_, 
-browse 
-`our wiki <https://github.com/openworm/OpenWorm/wiki/Introduction>`_, 
-and also our `project milestones <https://github.com/openworm/OpenWorm/issues/milestones>`_ 
-and 
-`open issues list <https://github.com/openworm/OpenWorm/issues?labels=&milestone=&page=1&state=open>`_ to see 
-if there is some area you might be interested in.
+and browse 
+:ref:`our project list <projects>` to understand what is happening in the project.
 
 If you are interested in a specific programming language, check out links to issues specifically for 
 `python <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open>`_ or 
 `c++ <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open>`_.  
-Also check out links specifically for the 
-`Sibernetic code base <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=sibernetic&page=1&sort=comments&state=open>`_, 
-the 
-`Geppetto codebase <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_, 
-`working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
-and 
-`help with documentation <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=documentation&page=1&sort=comments&state=open>`_.
 
 If you have questions about specific things you find, please post them to 
 `the list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
