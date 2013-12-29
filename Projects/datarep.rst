@@ -103,6 +103,18 @@ The `NeuroML connectome model <https://github.com/openworm/CElegansNeuroML>`_
 requires a number of updates before it can be used for multicompartmental simulations. 
 Padraig Gleeson will take the lead on this.
 
+
+* `Create sample NeuroML connectome output <https://github.com/openworm/OpenWorm/issues/114>`_
+* `Remove Glutamate_GJ etc in neuroConstruct project <https://github.com/openworm/OpenWorm/issues/50>`_
+* `Create or reuse a NeuroML description of c. elegans motor neuron synapses <https://github.com/openworm/OpenWorm/issues/124>`_
+
+Issues list
+------------
+
+All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
+and `doing research <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open>`_ can be found on GitHub.
+
+
 Associated Repositories
 -----------------------
 
@@ -127,12 +139,13 @@ Previous accomplishments
 
 * Creation of the muscle model repo
 
-Current roadmap
---------------
 
-* `Create sample NeuroML connectome output <https://github.com/openworm/OpenWorm/issues/114>`_
-* `Remove Glutamate_GJ etc in neuroConstruct project <https://github.com/openworm/OpenWorm/issues/50>`_
-* `Create or reuse a NeuroML description of c. elegans motor neuron synapses <https://github.com/openworm/OpenWorm/issues/124>`_
+Current roadmap
+---------------
+
+* `Sync channel descriptions with Muscle model standalone <https://github.com/openworm/OpenWorm/issues/51>`_
+* `Find neuroreceptors and synaptic information for MDL08 muscle cell <https://github.com/openworm/OpenWorm/issues/53>`_
+* `Secondary mechanical/electrophysiological muscle cell integration <https://github.com/openworm/OpenWorm/issues/9>`_
 
 Issues list
 ------------
@@ -149,12 +162,6 @@ Associated Repositories
 | `muscle_model <https://github.com/openworm/muscle_model>`_                                                          | model of c.elegans muscle in NEURON / Python                                                                                     | Python      |  
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+-------------+
 
-Current roadmap
----------------
-
-* `Sync channel descriptions with Muscle model standalone <https://github.com/openworm/OpenWorm/issues/51>`_
-* `Find neuroreceptors and synaptic information for MDL08 muscle cell <https://github.com/openworm/OpenWorm/issues/53>`_
-* `Secondary mechanical/electrophysiological muscle cell integration <https://github.com/openworm/OpenWorm/issues/9>`_
 
 Data Visualization
 =======================
