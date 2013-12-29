@@ -14,8 +14,8 @@ Contents:
    intro
    project
    projects
-   data
-   github
+   community
+   resources
    faq
 
 ..   repositories
