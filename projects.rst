@@ -9,7 +9,8 @@ OpenWorm Projects
    
    Projects/sibernetic
    Projects/geppetto
-   Projects/modelval
+   Projects/worm-movement
+   Projects/optimization
    Projects/datarep
    Projects/community
 
@@ -57,7 +58,7 @@ More detailed information is available on the :ref:`Movement validation project 
 The Optimization engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. 
 
-More detailed information is available on the :ref:`Model validation project page <model-validation>`.
+More detailed information is available on the :ref:`Optimization project page <optimization>`.
 
 **Data Collection and Representation**
 
