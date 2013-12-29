@@ -170,7 +170,7 @@ practice.  If there is interest in reviving this, please post on
 Scheduling meetings
 -------------------
 
-We like using the `Doodle service <doodle.com>`_ for scheduling meetings.  This makes it easy to find
+We like using the `Doodle service <http://doodle.com>`_ for scheduling meetings.  This makes it easy to find
 times to meet across various time zones.  Once a meeting is scheduled, we will often create
 a Google+ event to track it and remind everyone it is occurring.
 

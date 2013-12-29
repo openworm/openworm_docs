@@ -12,7 +12,6 @@ of its body, its nervous system, and its environment.
 We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the 
 worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
 
-
 To get a quick idea of what this looks like, check out the 
 `latest movie <https://www.youtube.com/watch?v=SaovWiZJUWY>`_. In this movie you can 
 see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 

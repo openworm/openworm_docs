@@ -13,7 +13,7 @@ Contents:
 
    intro
    background
-   modeling-approach
+   modeling
    projects
    community
    resources

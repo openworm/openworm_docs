@@ -13,7 +13,7 @@ Simulation engines
 Sibernetic
 ----------
 
-is the code base that currently implements the crawling model.  
+Sibernetic is the code base that currently implements the crawling model.  
 Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella that has been 
 created expressly for the purpose of doing research and building the model quickly.
 
@@ -21,7 +21,7 @@ created expressly for the purpose of doing research and building the model quick
 
 More information on running Sibernetic is `available online <http://sibernetic.org>`_.
 
-The :ref:`project page for Sibernetic <sibernetic>` has information about getting involved
+The :ref:`project page for Sibernetic <sibernetic-project>` has information about getting involved
 with its development.
 
 Geppetto
@@ -38,7 +38,7 @@ to play and interact with the model in 3D.
 
 More information on running Geppetto is `available online <http://geppetto.org>`_.
 
-The :ref:`project page for Geppetto <geppetto>` has information about getting involved in its development with
+The :ref:`project page for Geppetto <geppetto-project>` has information about getting involved in its development with
 OpenWorm.
 
 CyberElegans
