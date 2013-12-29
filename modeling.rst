@@ -123,6 +123,9 @@ the body.
 
 More detailed information is available on the :ref:`Sibernetic project page <sibernetic-project>`.
 
+Having a virtual body now allows us to try out many different ways to control it using
+signals that could arise from neurons.  Separately, we have been doing work to create
+a realistic model of the worm's neurons.
 
 Neurons
 ^^^^^^^
@@ -132,7 +135,7 @@ Neurons
 This is a much more faithful representation of the neurons and their
 positions within the worm's body. 
 
-Our computational strategy to accomplish this involves first reusing the
+Our computational strategy to model the nervous system involves first reusing the
 `c. elegans
 connectome <http://dx.plos.org/10.1371/journal.pcbi.1001066>`__ and the
 `3D anatomical map of the c. elegans nervous system and body
@@ -154,33 +157,36 @@ integrated its dynamics into a Lego Mindstorms EV3 robot.  You can `see a movie 
 this in action <https://www.youtube.com/watch?v=D8ogHHwqrkI>`_.
 
 More information about working with the data within it and other data entities 
-can be found :ref:`on the data representation project page <data-rep>`.
+can be found :ref:`on the data representation project page <data-rep-neuroml>`.
 
+These neurons must eventually send signals to muscle cells.
 
 Muscle cells
 ^^^^^^^^^^^^^
 
-In addition, the muscle cells are
-represented more realistically:
-
 |Muscle cells in c. elegans|
 
-We have chosen a specific muscle cell to
+We have started our process of modeling muscle cells by choosing a specific muscle cell to
 target:
 
 |Muscle cell highlighted|
 
+More information about working with the data within it and other data entities 
+can be found :ref:`on the data representation project page <data-rep-muscle>`.
+
+Once the body, neurons, and muscles are represented, we still have a lot of free parameters
+that we don't know.  That's what leads us to the need to tune the model.
 
 Tuning
 ------
 
-Another component of making the model more biophysically realistic is to
-use more sophisticated mathematics to drive the simulation that keep it
+The way we make the model biophysically realistic is to
+use sophisticated mathematics to drive the simulation that keep it
 more closely tied to real biology. This is important because we want the
 model to be able to inform real biological experiments and more
 coarse-grained, simplified mathematics falls short in many cases.
 
-Specifically for this loop, we have found that two sets of equations
+Specifically for this loop, we have found that two systems of equations
 will cover both aspects of the loop, broadly speaking:
 
 |Simple loop overlaid with solvers|
