@@ -16,7 +16,7 @@ Contribution Best Practices
 
 Once you have identified an issue you want to work on from :ref:`a particular project <projects>`, 
 please announce your intention to helping out on the 
-`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_. and 
+`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_ and 
 by :ref:`commenting on the 
 specific GitHub issue <github-issues>`.  Making
 a contribution of code to the project will first involve 
@@ -104,9 +104,9 @@ Information about the goals, progress, and roadmap of current or proposed projec
 be added to the :ref:`projects page <projects>`. 
 
 The docs use `rst format <http://sphinx-doc.org/rest.html>`_.  This kind of 
-`markup <https://en.wikipedia.org/wiki/Markup_language>` is a bit verbose and unforgiving
+`markup <https://en.wikipedia.org/wiki/Markup_language>`_ is a bit verbose and unforgiving
 in its syntax compared to other languages, but it is convenient for publishing documentation
-to the `ReadTheDocs service <https://readthedocs.org/>` directly from the GitHub repo, so we use it.
+to the `ReadTheDocs service <https://readthedocs.org/>`_ directly from the GitHub repo, so we use it.
 
 The 'master outline' for the top level is in 
 `index.rst <https://raw.github.com/openworm/openworm_docs/master/index.rst>`_.  The 
@@ -211,10 +211,11 @@ Playlists
 ^^^^^^^^^
 
 * Status Updates - Biweekly updates from the OpenWorm team. 
-* Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, 
-tools and resources related to neuroscience, *C. elegans*, computational biology and open source science.  
-Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube.
+* Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs 
+  use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science.  
+  Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube.
 * Data Team meetings
+* Real c. elegans
 * Building Blocks
 
 

@@ -149,7 +149,7 @@ can be found :ref:`on the data representation project page <data-rep>`.
 OpenWorm Spreadsheet data
 --------------------------
 
-We keep a `publicly accessible archive of data sets <https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U>` 
+We keep a `publicly accessible archive of data sets <https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U>`_ 
 that we have come across and adapted on Google Drive.  We are currently in the process of
 consolidating these data into the OpenWorm database.  More information about working with 
 the data within it and other data entities 

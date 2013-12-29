@@ -30,6 +30,8 @@ Current roadmap
 
 `STORY: Build a test suite for the simulation from WormBehavior database 
 <https://github.com/openworm/OpenWorm/issues?milestone=19&state=open>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how 
 close the model is to real data.
 
@@ -42,6 +44,8 @@ This story breaks down the epic to predict behavior from the WormBehavior databa
 
 `EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database 
 <https://github.com/openworm/OpenWorm/issues?milestone=22&state=open>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data 
 collected about the N2 worm in the WormBehavior database. This means building a training set and a test set that 
 are kept separate from each other, using the training set to tune up the model, then generating predictions, and 

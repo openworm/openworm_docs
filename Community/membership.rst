@@ -3,6 +3,12 @@
 Membership
 ==========
 
+Our website has a `list of the contributors <http://www.openworm.org/people.html>`_ to 
+the OpenWorm project.  Contributors
+who make regular contributions to the project are considered core members.  This page
+explains the process by which a person becomes a contributor and how a contributor
+becomes a core member.
+
 Privileges of core members
 --------------------------
 

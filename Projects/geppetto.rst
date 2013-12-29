@@ -35,15 +35,26 @@ Previous accomplishments
 Current roadmap
 --------------
 
-`STORY: Worm wiggling in the browser <https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
-As a user, I want to see the proof of concept sibernetic worm in my web browser so that anyone around the world can play with it.
+`STORY: Worm wiggling in the browser 
+<https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As a user, I want to see the proof of concept sibernetic worm in my web browser so 
+that anyone around the world can play with it.
 
 Practically, this means porting the proof of concept scene into Geppetto.
 
-`STORY: Interactive worm wiggling in browser <https://github.com/openworm/OpenWorm/issues?milestone=23&state=open>`_
-As a user, I want to be able to see a visualization of the proof of concept worm wiggling in my web browser and be able to perturb it in a manner that causes the wiggling to change in a realistic manner.
+`STORY: Interactive worm wiggling in browser 
+<https://github.com/openworm/OpenWorm/issues?milestone=23&state=open>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This milestone suggests interactivity via Geppetto. The kind of perturbation is not defined yet-- ideally we should aim for the simplest kind we can think of that gives the user an interface to make modifications.
+As a user, I want to be able to see a visualization of the proof of concept 
+worm wiggling in my web browser and be able to perturb it in a manner that 
+causes the wiggling to change in a realistic manner.
+
+This milestone suggests interactivity via Geppetto. The kind of perturbation is 
+not defined yet-- ideally we should aim for the simplest kind we can think of that 
+gives the user an interface to make modifications.
 
 Issues list
 -----------

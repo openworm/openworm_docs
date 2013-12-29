@@ -13,10 +13,11 @@ Previous accomplishments
 
 * Genetic algorithms applied to tuning muscle cell models
 
-Associated Milestones
+Current roadmap
 ----------------------
 
-`STORY: Muscle Cell model output closely matches that of real data <https://github.com/openworm/OpenWorm/issues?milestone=13&state=open>`_
+`STORY: Muscle Cell model output closely matches that of real data 
+<https://github.com/openworm/OpenWorm/issues?milestone=13&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We will show that we have built a model of C. elegans muscle cell that matches data 
