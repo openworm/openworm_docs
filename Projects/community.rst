@@ -24,6 +24,13 @@ Current roadmap
 
 None
 
+Issues list
+-----------
+
+All issues related to 
+`help with documentation <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=documentation&page=1&sort=comments&state=open>`_.
+can be found on GitHub.
+
 Associated Repositories
 -----------------------
 
