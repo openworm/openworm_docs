@@ -22,8 +22,8 @@ All documents located in the OpenWorm folder is viewable to the public.  Comment
 documents and spreadsheets.  In order to edit existing documents or to add a new document, you will need to be 
 added to the folder.  You can request access by email your Google ID to info@openworm.org. 
 
-..Spreadsheets, slide presentation, dynamic documents - should be on google drive (policy of what goes in)
-..Folder structure w/ descriptors
+.. Spreadsheets, slide presentation, dynamic documents - should be on google drive (policy of what goes in)
+.. Folder structure w/ descriptors
 
 `OpenWorm Docs <https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E>`_
 
