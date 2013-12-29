@@ -11,6 +11,7 @@ View the :ref:`full current list <repositories>` of repositories on GitHub.
 
 Accessing GitHub
 ================
+
 To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an 
 account if you do not already have one. Note, you can comment on issues without a GitHub account, however, 
 we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be 
@@ -65,9 +66,13 @@ Next, click on the New Image button in the upper right corner of the screen.
 This will open the interface to create a new issue. You will need to add the following information:
 
 * Name or short description of the issue
+
 * Full description of the issue, including images if available.  (See below for more details on formatting the description.)
+
 * Assign team members to the issue if appropriate
+
 * Add a milestone if appropriate
+
 * Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
 .. image:: http://i.imgur.com/ozkZFsh.png 
@@ -75,11 +80,13 @@ This will open the interface to create a new issue. You will need to add the fol
 Finally, click on Submit New Issue.
 
 **Best Practices for OpenWorm**
-When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest 
-the following format:
+
+When writing up the description for a given issue, provide as much context and detail as possible.  For clarity, we suggest the following format:
 
 * Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.
+
 * Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.
+
 * Steps: Create a list of specific steps that need to be completed to resolve the issue.
 
 Links to relevant code, databases, documentation and related issues are strongly recommended.  
@@ -110,13 +117,16 @@ Closing an Issue
 
 Posting Gists (gist.github.com)
 ===============================
-Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are 
-automatically versioned, forkable and usable from Git.  You can create a new gist here: https://gist.github.com/
+Gist is a simple way to share snippets and pastes with others. All gists are Git 
+repositories, so they are automatically versioned, forkable and usable from Git.  
+You can create a `new gist here <https://gist.github.com/>`_.
 
 How to:
 
 * `Create Gists <https://help.github.com/articles/creating-gists>`_
+
 * `Embed, Download and Copy Gists <https://help.github.com/articles/embedding-downloading-and-copying-gists>`_
 
 Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_ on Gists at GitHub.
+
 
