@@ -7,6 +7,8 @@ Using OpenWorm Resources
 This page describes content that has been created by the project for use by the public.  
 Currently we make simulation engines, visualization environments, and data sets available.
 
+.. contents::
+
 Simulation engines
 ==================
 

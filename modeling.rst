@@ -11,6 +11,8 @@ living cells to power
 the next generation of advanced systems biology analysis, synthetic biology, 
 computational drug discovery and dynamic disease modeling.
 
+.. contents::
+
 In order to achieve these goals, we first began with an informal cartoon representation of 
 a breakdown of cell types and 
 various biological processes that the worm has.  Here is a representation of a small subset of those processes,

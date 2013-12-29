@@ -3,6 +3,8 @@
 Frequently Asked Questions
 ===========================
 
+.. contents::
+
 OpenWorm general
 -----------------
 

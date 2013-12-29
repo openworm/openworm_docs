@@ -9,6 +9,8 @@ to make contributions to OpenWorm, how to join OpenWorm meetings, how to
 interact with the community online, and how to become
 an OpenWorm core member.
 
+.. contents::
+
 Contribution Best Practices
 ===========================
 
