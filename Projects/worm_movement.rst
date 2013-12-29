@@ -21,7 +21,7 @@ Previous accomplishments
   * This is in addition to the `SegWorm repo <https://github.com/openworm/SegWorm>`_, although we will be merging them.
   * It has code to generate features from measurements.
 
-* A `movement validation GitHub repository <https://github.com/MichaelCurrie/movement_validation>` was started specifically with the goal of developing
+* A `movement validation GitHub repository <https://github.com/MichaelCurrie/movement_validation>`_ was started specifically with the goal of developing
  the infrastructure to validate model worm movements against real worms. 
 
    
@@ -51,7 +51,7 @@ This epic focuses on an output of simulation performance rather than the means o
 achieve this epic is welcome.
 
 More information on next steps is available in a 
-`recent progress report <https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit>`.
+`recent progress report <https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit>`_.
 
 Issues list
 -----------
