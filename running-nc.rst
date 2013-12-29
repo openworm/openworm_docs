@@ -68,7 +68,7 @@ dropdown and press **Generate cell positions and connections**.
 
 The image below shows the generated full network.
 
-|CElegans\_nC|
+|CElegansnC|
 
 Executing the network in NEURON simulation environment.
 =======================================================
@@ -204,4 +204,4 @@ Fork yourself a personal copy of the project repository. Go to
 https://github.com/openworm/CElegansNeuroML for more details.
 
 .. |ADAL| image:: https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/ADAL_nC.png
-.. |CElegans\_nC| image:: https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png
+.. |CElegansnC| image:: https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png
