@@ -24,6 +24,12 @@ Current roadmap
 
 None
 
+Issues list
+-----------
+
+All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
+can be found on GitHub.
+
 Associated Repositories
 -----------------------
 
