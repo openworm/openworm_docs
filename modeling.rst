@@ -149,6 +149,11 @@ the “spatial connectome” into the NEURON simulator (`Hines & Carnevale
 1997 <http://www.ncbi.nlm.nih.gov/pubmed/9248061>`__) to perform *in
 silico* experiments.
 
+To start getting some practical experience playing with dynamics that come from the 
+connectome, we have simplified it into a project called the 'connectome engine' and
+integrated its dynamics into a Lego Mindstorms EV3 robot.  You can `see a movie of
+this in action <https://www.youtube.com/watch?v=D8ogHHwqrkI>`_.
+
 More information about working with the data within it and other data entities 
 can be found :ref:`on the data representation project page <data-rep>`.
 

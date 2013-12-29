@@ -43,6 +43,16 @@ More information on running Geppetto is `available online <http://geppetto.org>`
 The :ref:`project page for Geppetto <geppetto-project>` has information about getting involved in its development with
 OpenWorm.
 
+Connectome Engine and Lego Mindstorms robot
+-------------------------------------------
+
+To start getting some practical experience playing with dynamics that come from the 
+connectome, we have simplified it into a project called the 'connectome engine' and
+integrated its dynamics into a Lego Mindstorms EV3 robot.  You can `see a movie of
+this in action <https://www.youtube.com/watch?v=D8ogHHwqrkI>`_.  
+
+This is currently in the process of being written up.
+
 CyberElegans
 ------------
 
@@ -142,6 +152,7 @@ that we have come across and adapted on Google Drive.  We are currently in the p
 consolidating these data into the OpenWorm database.  More information about working with 
 the data within it and other data entities 
 can be found :ref:`on the data representation project page <data-rep>`.
+
 
 .. |CyberElegans with muscle cells| image:: https://docs.google.com/drawings/d/142NbGecjnWuq6RxWgqREhKOXJ8oDo55wVvBuKQPyKCg/pub?w=430&h=297
 .. |Inside the CyberElegans model| image:: https://docs.google.com/drawings/d/1fO_gQI_febpu4iHd1_UDrMNQ_eqvHgJynMqho7UC6gw/pub?w=460&h=327
