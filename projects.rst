@@ -40,12 +40,19 @@ concepts and learn more about the different plug-in bundles we are working on.
 
 More detailed information is available on the :ref:`Geppetto project page <geppetto-project>`.
 
-
-**Model Validation & Optimization engine**
+**Movement validation**
 
 In order to know that we are making meaningful scientific progress, we need to validate the model using information 
 from real worms.  The movement validation project is working with an existing database of worm movement to make
-the critical comparisons.
+the critical comparisons. 
+
+The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm 
+project can run a behavioural phenotyping of its virtual worm, using the same statistical 
+tests the Schafer lab used on their real worm data. 
+
+More detailed information is available on the :ref:`Movement validation project page <worm-movement>`.
+
+**Optimization engine**
 
 The Optimization engine uses optimization techniques like genetic algorithms to help fill gaps in our 
 knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. 
