@@ -27,6 +27,39 @@ added to the folder.  You can request access by email your Google ID to info@ope
 
 `OpenWorm Docs <https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E>`_
 
+Taking notes as Google docs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is very useful to create notes and progress reports as the result of meetings as Google docs. Docs should
+be shared publicly with view and comment access.
+
+An effective progress report should contain the following information:
+
+* Meeting title
+* Attendees
+* Date
+* Goal being worked on (link back to doc page describing project)
+* Previous accomplishments
+* Recent progress towards goal
+* Next Steps 
+* Future Steps
+
+An example of an effective progress report is 
+`available online <https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit>`_.
+
+Once the document is shared, it should be announced on `the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
+
+Creating proposals as Google docs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To gather public comment on a direction for the project, it is often effective to create a 
+proposal as a world-editable Google Doc.  Once your document is created and shared, 
+it should be announced on `the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
+
+An example of an effective proposal is 
+`available online <https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375>`_
+
+Proposals
 
 Meetings
 --------
