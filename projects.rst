@@ -38,21 +38,24 @@ concepts and learn more about the different plug-in bundles we are working on.
 
 More detailed information is available on the :ref:`Geppetto project page <geppetto-project>`.
 
+
+**Model Validation & Optimization engine**
+
+In order to know that we are making meaningful scientific progress, we need to validate the model using information 
+from real worms.  The movement validation project is working with an existing database of worm movement to make
+the critical comparisons.
+
+The Optimization engine uses optimization techniques like genetic algorithms to help fill gaps in our 
+knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. 
+
+More detailed information is available on the :ref:`Model validation project page <model-validation>`.
+
 **Data Collection and Representation**
 
 A lot of data about *c. elegans* is integrated into the model.  In this project, we work 
 on what forms we should put these data in to best leverage them for building the model.
 
-
 More detailed information is available on the :ref:`Data representation project page <data-rep>`.
-
-**Model Validation & Optimization engine**
-
-The Optimization Engine uses optimization techniques like genetic algorithms to help fill gaps in our 
-knowledge of the electrophysiology of *C. elegans* muscle cells and neurons. Check out the code on the 
-GitHub repository.
-
-More detailed information is available on the :ref:`Model validation project page <model-validation>`.
 
 **Community Outreach**
 
