@@ -60,13 +60,13 @@ to contribute.  Are you a graphic designer, writer, PR specialist or simply some
 to share? Please reach out to us at info@openworm.org to discuss opportuntities with OpenWorm.
 
 
-..Navigating OpenWorm
-..===================
+.. Navigating OpenWorm
+.. ===================
 
-..To help you find your way around OpenWorm we suggest using this page 
+.. To help you find your way around OpenWorm we suggest using this page 
 
-..Overview of projects 
-..How to contribute
+.. Overview of projects 
+.. How to contribute
 ..  On GitHub
 ..  On Google Drive
 ..  
