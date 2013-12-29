@@ -45,6 +45,12 @@ As a user, I want to be able to see a visualization of the proof of concept worm
 
 This milestone suggests interactivity via Geppetto. The kind of perturbation is not defined yet-- ideally we should aim for the simplest kind we can think of that gives the user an interface to make modifications.
 
+Issues list
+-----------
+
+All issues related to the 
+`Geppetto codebase <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_, can be found on GitHub
+
 Associated Repositories
 ----------------------
 
