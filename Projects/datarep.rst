@@ -18,21 +18,28 @@ OpenWorm Database
 
 A lot of data about *c. elegans* is integrated into the model. 
 
-In this project, we work on what forms we should put these data in to best leverage them for building the model.
+In this project, we work on what forms we should put these data in to best leverage them
+for building the model.
 
+* Database Name:	 mysql_31129_celegans
+* Database Server:	my01.winhost.com
+* Database User:	openworm
+* Database Password:	openworm
 
-**NEEDS A TOP LEVEL NAME TO DESCRIBE ELEMENTS BELOW**
-Cell and neuron list
-[NEED DESCRIPTION]
+`This thread <https://groups.google.com/d/topic/openworm-discuss/2V5kF5na5fw/discussion>`_ 
+describes more about the database.
 
-Neuropeptide and ion channel database
-[NEED DESCRIPTION]
+.. Cell and neuron list
+.. [NEED DESCRIPTION]
 
-Worm movies repository
-[NEED DESCRIPTION]
+.. Neuropeptide and ion channel database
+.. [NEED DESCRIPTION]
 
-Synapse position database
-[NEED DESCRIPTION]
+.. Worm movies repository
+.. [NEED DESCRIPTION]
+
+.. Synapse position database
+.. [NEED DESCRIPTION]
 
 
 Previous accomplishments
@@ -43,13 +50,15 @@ Previous accomplishments
 Current roadmap
 --------------
 
-None
+* `Document Neuron Ion Channels: Types <https://github.com/openworm/OpenWorm/issues/31>`_
+* `Document Ion channels: Research Claims <https://github.com/openworm/OpenWorm/issues/32>`_
+
 
 Issues list
 ------------
 
 All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
-can be found on GitHub.
+and `doing research <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open>`_ can be found on GitHub.
 
 Associated Repositories
 -----------------------
@@ -87,8 +96,7 @@ Previous accomplishments
 Current roadmap
 ---------------
 
-`Updated NeuroML connectome model 
-<https://github.com/openworm/OpenWorm/issues?milestone=15&state=open>`_
+`Updated NeuroML connectome model <https://github.com/openworm/OpenWorm/issues?milestone=15&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `NeuroML connectome model <https://github.com/openworm/CElegansNeuroML>`_ 
@@ -96,7 +104,7 @@ requires a number of updates before it can be used for multicompartmental simula
 Padraig Gleeson will take the lead on this.
 
 Associated Repositories
-^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 +---------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+------------+
 | Repository                                                                                                          | Description                                                                                                                      | Language   |
@@ -111,19 +119,26 @@ Associated Repositories
 Muscle Cell Integration
 =======================
 
+Because the muscle cell is driven both by an electrical model and a mechanical model, it
+is a focus of integration between different algorithms.
+
 Previous accomplishments
 ------------------------
+
+* Creation of the muscle model repo
 
 Current roadmap
 --------------
 
-None
+* `Create sample NeuroML connectome output <https://github.com/openworm/OpenWorm/issues/114>`_
+* `Remove Glutamate_GJ etc in neuroConstruct project <https://github.com/openworm/OpenWorm/issues/50>`_
+* `Create or reuse a NeuroML description of c. elegans motor neuron synapses <https://github.com/openworm/OpenWorm/issues/124>`_
 
 Issues list
 ------------
 
 All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
-can be found on GitHub.
+and `doing research <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open>`_ can be found on GitHub.
 
 Associated Repositories
 -----------------------
@@ -137,12 +152,14 @@ Associated Repositories
 Current roadmap
 ---------------
 
-None
-
+* `Sync channel descriptions with Muscle model standalone <https://github.com/openworm/OpenWorm/issues/51>`_
+* `Find neuroreceptors and synaptic information for MDL08 muscle cell <https://github.com/openworm/OpenWorm/issues/53>`_
+* `Secondary mechanical/electrophysiological muscle cell integration <https://github.com/openworm/OpenWorm/issues/9>`_
 
 Data Visualization
 =======================
 
+Visualizations can provide important insights into the complexity of biological models.
 
 Previous accomplishments
 ------------------------
@@ -154,13 +171,13 @@ Previous accomplishments
 Current roadmap
 --------------
 
-None
+* `Create a D3 implementation of the C. elegans connectome HivePlot <https://github.com/openworm/OpenWorm/issues/89>`_
 
 Issues list
 ------------
 
 All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
-can be found on GitHub.
+and `doing research <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open>`_ can be found on GitHub.
 
 Associated Repositories
 -----------------------
