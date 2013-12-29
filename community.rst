@@ -113,8 +113,7 @@ file sets up what is on the sidebar.  This assumes that files with the names und
 toctree are present in the same directory as index.rst.  Under this, the next level of 
 hierarchy is determined by `section headers <http://sphinx-doc.org/rest.html#sections>`_.  
 In the `projects page <https://raw.github.com/openworm/openworm_docs/master/projects.rst>`_
- we've used a
-non-standard practice by using a hidden toctree into the file, which is creating the 
+we've used a hidden toctree in the file, which is creating the 
 next level of hierarchy in the sidebar.  In that toctree, you can see an example of referencing 
 the underlying directory structure (e.g. 'Projects/worm-movement').
 

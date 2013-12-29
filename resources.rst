@@ -13,13 +13,33 @@ Simulation engines
 Sibernetic
 ----------
 
+is the code base that currently implements the crawling model.  
+Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella that has been 
+created expressly for the purpose of doing research and building the model quickly.
+
+.. image:: http://i.imgur.com/KSWjCaW.jpg
+
 More information on running Sibernetic is `available online <http://sibernetic.org>`_.
+
+The :ref:`project page for Sibernetic <sibernetic>` has information about getting involved
+with its development.
 
 Geppetto
 --------
 
+Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by 
+Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with 
+simulations via their web browser, dramatically reducing the barrier to entry.  We are 
+currently working to port the functionality in Sibernetic into Geppetto, which would 
+transform the experience of seeing the model from looking at a YouTube video to being able 
+to play and interact with the model in 3D.
+
+.. image:: http://www.geppetto.org/images/cn2.png
+
 More information on running Geppetto is `available online <http://geppetto.org>`_.
 
+The :ref:`project page for Geppetto <geppetto>` has information about getting involved in its development with
+OpenWorm.
 
 CyberElegans
 ------------
@@ -50,6 +70,8 @@ operating on more scalable.
 You can `download the binary for the CyberElegans <http://g.ua/MKja>`__
 (Windows only)
 
+This code base is not currently in active development.
+
 Visualization Environments
 ==========================
 
@@ -66,7 +88,7 @@ files <http://caltech.wormbase.org/virtualworm/>`_
 
 |Connectome browser|
 
-WormBrowser
+WormBrowser (HTML5 and iOS)
 -----------
 
 Explore the c. elegans in 3D! The
@@ -75,6 +97,13 @@ experience of browsing the C. elegans worm anatomy. This is built from
 the `Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_
 
 |WormBrowser|
+
+Source code for `the web version <https://github.com/openworm/wormbrowser>`_ and `an iOS version 
+<https://github.com/openworm/openwormbrowser-ios>`_ are available online.  We don't
+currently have active development happening with either, but if you are interested 
+in helping with the iOS code base, `here's a walkthrough <https://www.youtube.com/watch?v=b5X5fz7pZME>`_ 
+of how to get started
+with the codebase.
 
 Data sets
 =========
@@ -90,7 +119,8 @@ can be found :ref:`on the data representation project page <data-rep>`.
 C. elegans NeuroML model in neuroConstruct
 ------------------------------------------
 
-The NeuroML conversion of the `Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_has been
+The NeuroML conversion of the 
+`Virtual Worm Blender files <http://caltech.wormbase.org/virtualworm/>`_ has been
 imported into a `neuroConstruct <http://www.neuroConstruct.org>`__
 project. :ref:`This page <running-nc>`
 provides instructions for obtaining the latest version of
@@ -98,6 +128,18 @@ neuroConstruct, getting the latest CElegans project and
 generating/visualizing the cells and connections.
 
 |CElegansnC|
+
+More information about working with the data within it and other data entities 
+can be found :ref:`on the data representation project page <data-rep>`.
+
+OpenWorm Spreadsheet data
+--------------------------
+
+We keep a `publicly accessible archive of data sets <https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U>` 
+that we have come across and adapted on Google Drive.  We are currently in the process of
+consolidating these data into the OpenWorm database.  More information about working with 
+the data within it and other data entities 
+can be found :ref:`on the data representation project page <data-rep>`.
 
 .. |CyberElegans with muscle cells| image:: https://docs.google.com/drawings/d/142NbGecjnWuq6RxWgqREhKOXJ8oDo55wVvBuKQPyKCg/pub?w=430&h=297
 .. |Inside the CyberElegans model| image:: https://docs.google.com/drawings/d/1fO_gQI_febpu4iHd1_UDrMNQ_eqvHgJynMqho7UC6gw/pub?w=460&h=327
