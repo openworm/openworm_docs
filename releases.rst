@@ -126,15 +126,15 @@ We have set a completed a successful release 1 in September. It included the fol
 
 * Neuron database
 
-* Use the Virtual Worm Blender files to create a NeuroML compartmental description of the 302 neurons
+* Use the `Virtual Worm <http://caltech.wormbase.org/virtualworm/>`_ Blender files to create a NeuroML compartmental description of the 302 neurons
 
-* Combine knowledge about the synaptic structure of the neuronal network with the compartmental description
+* Combine knowledge about the `synaptic structure of the neuronal network <http://www.wormatlas.org/neuronalwiring.html>`_  with the compartmental description
 
 * Combine knowledge about the ion channel structure of the neuronal network with the compartmental description
 
 * Worm browser
 
-*Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the Google Body Browser
+* Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the `Google Body Browser <http://www.zygotebody.com/>`_
 
 Simulation Engine (source)
 --------------------------
@@ -145,7 +145,7 @@ Simulation Engine (source)
 
 * As a developer, I want a first draft of a simulation engine design
 
-* As a product manager, I want to see a working prototype of the SPH algorithm working with the existing CyberElegans code
+* As a product manager, I want to see a working prototype of the SPH algorithm working with the existing `CyberElegans <http://www.youtube.com/watch?v=Ek49JSAiKjY>`_ code
 
 * As a product manager, I want a initial test implementation example of the SPH algorithm implemented as a solver
 

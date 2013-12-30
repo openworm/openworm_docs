@@ -103,7 +103,7 @@ files <http://caltech.wormbase.org/virtualworm/>`_
 |Connectome browser|
 
 WormBrowser (HTML5 and iOS)
------------
+---------------------------
 
 Explore the c. elegans in 3D! The
 `WormBrowser <http://browser.openworm.org>`__ is an interactive virtual
