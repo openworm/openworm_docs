@@ -18,7 +18,12 @@ Once you have identified an issue you want to work on from :ref:`a particular pr
 please announce your intention to helping out on the 
 `mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_ and 
 by :ref:`commenting on the 
-specific GitHub issue <github-issues>`.  Making
+specific GitHub issue <github-issues>`.  
+
+Using OpenWorm repos on GitHub
+------------------------------
+
+Making
 a contribution of code to the project will first involve 
 :ref:`forking one of our repositories <github-fork>`,
 making changes, committing them, creating a pull request back to the original repo, and
@@ -29,21 +34,18 @@ create a new GitHub repo yourself and begin tackling some issue directly there. 
 then fork your repo back into the OpenWorm organization at a later point in order to 
 bring other contributors along to help you.
 
-Another
-great way to contribute is by 
-:ref:`organizing ideas or documentation or proposals via a Google
-doc <google-drive>`, and then sharing the link on our 
-`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
-
-Using OpenWorm repos on GitHub
-------------------------------
-
 More details on best practices using OpenWorm repos on GitHub are available :ref:`on a separate page <github>`.
 
 .. _google-drive:
 
 Creating organizing documents
 -----------------------------
+
+Another
+great way to contribute is by 
+:ref:`organizing ideas or documentation or proposals via a Google
+doc <google-drive>`, and then sharing the link on our 
+`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
 
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on 
 `this link <https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing>`_.
