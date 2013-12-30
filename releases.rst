@@ -136,8 +136,8 @@ We have set a completed a successful release 1 in September. It included the fol
 
 * Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the `Google Body Browser <http://www.zygotebody.com/>`_
 
-Simulation Engine (source)
---------------------------
+Simulation Engine
+-----------------
 
 * As a developer, I would like a simulation engine prototype that provides a design proof of concept
 
@@ -153,16 +153,26 @@ Simulation Engine (source)
 
 * As a developer, I would like to have a prototype of a solver service, using the HH OpenCL alpha kernel.
 
-Neuron Database (source)
-------------------------
-As a developer, I want the Virtual Worm Blender files to include details about synapses so simulatable NeuroML can be produced
-As a developer, I want to be able to convert the Virtual Worm meshes for neurons into complete simulation ready NeuroML descriptions of the neurons
-Worm Browser (demo source)
+Neuron Database
+---------------
 
-As a user I want to visualize 3D models of the worm in the browser
-As a user, I want to have GUI controls to zoom in and out of the worm
-As a user, I want to drag the worm using "cylindrical mouse orbit" like google body browser
-As a product manager, I want an example of a Unity3D web player that can visualize the Virtual Worm blender files to mitigate risk
-As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser
-As a user, I want to use a slider to smoothly make systems in the worm transparent
-A more complete document describing our plans for release 2 is available.
+* As a developer, I want the Virtual Worm Blender files to include details about synapses so simulatable NeuroML can be produced
+
+* As a developer, I want to be able to convert the Virtual Worm meshes for neurons into complete simulation ready NeuroML descriptions of the neurons
+
+Worm Browser
+------------
+
+* As a user I want to visualize 3D models of the worm in the browser
+
+* As a user, I want to have GUI controls to zoom in and out of the worm
+
+* As a user, I want to drag the worm using "cylindrical mouse orbit" like google body browser
+
+* As a product manager, I want an example of a Unity3D web player that can visualize the Virtual Worm blender files to mitigate risk
+
+* As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser
+
+* As a user, I want to use a slider to smoothly make systems in the worm transparent
+
+* A more complete document describing our plans for release 2 is available.
