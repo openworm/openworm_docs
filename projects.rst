@@ -75,7 +75,7 @@ More detailed information is available on the :ref:`Optimization project page <o
 
 **Data Collection and Representation**
 
-A lot of data about *c. elegans* is integrated into the model.  In this project, we work 
+A lot of data about *C. elegans* is integrated into the model.  In this project, we work 
 on what forms we should put these data in to best leverage them for building the model.
 
 More detailed information is available on the :ref:`Data representation project page <data-rep>`.
