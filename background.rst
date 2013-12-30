@@ -9,7 +9,7 @@ and highly-skilled individuals and coordinated their work. The community has pro
 making extensive use of scientific research published through open access, proving the validity of the open science 
 approach taken.
 
-`Release History <http://openworm.readthedocs.org/en/latest/releases.html>`_
+:ref:`Release History <releases>`
 
 Why do this?
 ============
