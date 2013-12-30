@@ -28,8 +28,7 @@ Previous accomplishments
 Current roadmap
 ----------------------
 
-`STORY: Build a test suite for the simulation from WormBehavior database 
-<https://github.com/openworm/OpenWorm/issues?milestone=19&state=open>`_
+`STORY: Build a test suite for the simulation from WormBehavior database <https://github.com/openworm/OpenWorm/issues?milestone=19&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how 
@@ -42,8 +41,7 @@ an accuracy score.
 
 This story breaks down the epic to predict behavior from the WormBehavior database
 
-`EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database 
-<https://github.com/openworm/OpenWorm/issues?milestone=22&state=open>`_
+`EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database <https://github.com/openworm/OpenWorm/issues?milestone=22&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data 

@@ -5,7 +5,8 @@ Geppetto Simulation Engine
 
 .. contents::
 
-In order to allow the world to play with the model easily, we are engineering `Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
+In order to allow the world to play with the model easily, we are engineering 
+`Geppetto <http://geppetto.org>`_, an open-source modular platform to enable multi-scale and multi-algorithm 
 interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers 
 out-of-the-box visualization of simulated models right in the browser. You can read about architectural 
 concepts and learn more about the different plug-in bundles we are working on.
@@ -35,8 +36,7 @@ Previous accomplishments
 Current roadmap
 --------------
 
-`STORY: Worm wiggling in the browser 
-<https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
+`STORY: Worm wiggling in the browser <https://github.com/openworm/OpenWorm/issues?milestone=21&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As a user, I want to see the proof of concept sibernetic worm in my web browser so 
@@ -44,8 +44,7 @@ that anyone around the world can play with it.
 
 Practically, this means porting the proof of concept scene into Geppetto.
 
-`STORY: Interactive worm wiggling in browser 
-<https://github.com/openworm/OpenWorm/issues?milestone=23&state=open>`_
+`STORY: Interactive worm wiggling in browser <https://github.com/openworm/OpenWorm/issues?milestone=23&state=open>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As a user, I want to be able to see a visualization of the proof of concept 
