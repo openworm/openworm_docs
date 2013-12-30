@@ -6,6 +6,7 @@ perhaps linked to other places which discuss the specifics in better
 detail.
 
 1 muscle
+
    *  1/48 of contour
    *  1/24 of skeleton
    *  23-24 muscles per worm
@@ -26,9 +27,11 @@ Angles
    
    thus when the worm is straight, the angle is 0
    on contour:
+   
      * inner sections are negative
      * outer sections are positive
    on skeleton:
+   
      * +dorsal
      * -ventral
 

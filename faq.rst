@@ -1,5 +1,9 @@
+.. _faq:
+
 Frequently Asked Questions
 ===========================
+
+.. contents::
 
 OpenWorm general
 -----------------

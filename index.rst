@@ -12,21 +12,16 @@ Contents:
    :maxdepth: 2
 
    intro
-   project
-   data
-   github
+   background
+   modeling
    projects
-   Movement/worm_movement
+   community
+   resources
    faq
 
-..   repositories
-..   knowledgebase
 
+.. Indices and tables
+.. ==================
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
 
