@@ -4,6 +4,78 @@
 Past Releases
 *************
 
+Release 4 January-July 2013
+===========================
+
+* OpenWorm website update - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=10&state=closed>`_
+
+  * completely renewed version of the website using bootstrap
+  
+* Tuning neurons based on real worm recordings - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=16&state=closed>`_
+
+  * plotted some calcium traces from Leifer's lab
+  
+* Ion Channel and Neuropeptide database - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=16&state=closed>`_
+
+  * Defined known neuropeptides for each neuron
+  
+Data visualization experiments - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=8&state=closed>`_
+
+  * hive plots of connectome - poster at Neuroinformatics 2013
+  
+  * D3JS experiments
+
+* Submit a perspectives paper on OpenWorm - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=9&state=closed>`_
+
+  * drafted and submitted to frontiers - review process ongoing
+
+* Synapse position crowdsourcing - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=11&state=closed>`_
+
+* C++ Fluid mechanics engine improvements - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=2&state=closed>`_
+
+  * independent bundles of contracting elastic matter
+  * impermeable surfaces
+  * bug fixes on liquid and elastic matter
+  * renamed C++ implementation to Sibernetic
+
+* Integration of membrane electrophysiology and muscle cell mechanics - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=1&state=closed>`_
+
+  * poster at CNS 2013
+  
+* Geppetto platform: 1st release - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=4&state=closed>`_ / `release <https://github.com/openworm/org.geppetto/releases/tag/v0.0.2-alpha>`_
+
+  * basic simulation file XML specification
+  
+  * simulation lifecycle and basic interaction
+  
+    * load / start / stop / reset
+	
+  * WebGL frontend visualization
+  
+    * particle systems
+	
+    * ball-stick morphologies
+	
+    * camera controls: rotation / zoom / panning
+	
+  * Multi-user support
+  
+    * multiple-users can observe the same simulation
+	
+  * Tooling and scripts to facilitate deployment / install etc.
+  
+* Geppetto plugin: single-compartment neuronal simulator - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=3&state=closed>`_
+
+* Geppetto plugin: fluid mechanics solver - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=14&state=closed>`_
+
+  * ported C++ version to Java for liquid and elastic matter support
+  
+  * porting validation - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=18&state=open>`_
+
+    * unit testing infrastructure to validate codebase
+
+
+
 Release 3 (completed) May 2012 - November 2012
 ==============================================
 

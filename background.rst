@@ -9,6 +9,8 @@ and highly-skilled individuals and coordinated their work. The community has pro
 making extensive use of scientific research published through open access, proving the validity of the open science 
 approach taken.
 
+:ref:Release History <releases>
+
 Why do this?
 ============
 There has never been a scientific result in biology or neuroscience that is inconsistent with the idea that 
