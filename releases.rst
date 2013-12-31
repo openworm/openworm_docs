@@ -4,8 +4,8 @@
 Past Releases
 *************
 
-Release 4 January-July 2013
-===========================
+Release 4 (1st Half of 2013) January-July 2013
+==============================================
 
 * **OpenWorm website update** - `milestone <https://github.com/openworm/OpenWorm/issues?milestone=10&state=closed>`_
 
