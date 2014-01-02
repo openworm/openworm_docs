@@ -1,11 +1,4 @@
-## Introduction ##
 
-This repository is meant to be a place where we can place or link to documentation. If you have any suggestions or would like to contribute, feel free to fork the repository (TODO: Provide link to Git Policies).
+This is the repsitory for the [OpenWorm documentation](http://docs.openworm.org).
 
-[Link to Wiki](https://github.com/openworm/OpenWorm/wiki)
-
-**Topics**
-- [Movement](Movement/ReadMe.md) - things related to worm movement
-- [Sub Project List](SubProjects.md) - summary of sub-projects
-- Git Policies 
-- [Git & GitHub](GitAndGitHub.md)
+More information on how to make changes to the documentation is contained [within the documentation itself](http://docs.openworm.org/en/0.5/community.html#contributing-to-the-openworm-documentation).  All updates to process on how to update the documentation should be made there.
