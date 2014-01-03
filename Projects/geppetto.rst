@@ -59,9 +59,13 @@ Issues list
 -----------
 
 The issues related to Geppetto are distributed across different repositories. 
+
 Issues related to general functionalities that need to be added to support the OpenWorm simulation are found `here <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_.
+
 Issues related to the platform in general are found `here <https://github.com/openworm/org.geppetto/issues?state=open>`_.
-Ultimately every module of Geppetto have issues of its own, see the list of repositories below.
+
+Ultimately every module of Geppetto has issues of its own, see the list of repositories below.
+
 The issues are so splitted to allow capturing different granularities, having both issues that reflect what macro functionalities need to be added in the OpenWorm and Geppetto repository and having detailed close-to-the-code bugs in the individual repositories.  
 
 Associated Repositories
