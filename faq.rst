@@ -155,7 +155,8 @@ different perspectives on tasks to the table.
 Do you all ever meet up somewhere physically?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Subsets of us meet but we haven't ever all converged in the same place.
+Subsets of us meet frequently, and there has been one meeting of the core OpenWorm team in `Paris in July 2014 
+<http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris>`__.
 We use Google+ hangout to meet face to face virtually every two weeks.
 
 OpenWorm simulation and modeling
