@@ -39,8 +39,8 @@ worm and its environment using GPUs. This algorithm has been initially worked ou
 To get a quick idea of what this looks like, check out the 
 `latest movie <https://www.youtube.com/watch?v=SaovWiZJUWY>`_. In this movie you can 
 see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 
-of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen. 
-In turn, the activity of the muscles are being driven by the activity of neurons within the body.
+of its body, and as they contract, they exert forces on the surrounding fluid, propelling the body forward via undulutory thrust.
+In this model, the neural system is not considered and patterns of muscle contraction are explicitly defined.
 
 More detailed information is available on the :ref:`Sibernetic project page <sibernetic-project>`.
 
