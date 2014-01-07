@@ -8,7 +8,7 @@ Using OpenWorm Repositories on GitHub
 
 Making
 a contribution of code to the project will first involve 
-:ref:`forking one of our repositories <github-fork>`,
+:ref:`forking one of our repositories <github-fork>` ,
 making changes, committing them, creating a pull request back to the original repo, and
 then updating the appropriate part of documentation.  
 
@@ -24,7 +24,9 @@ creating Gists.
 
 Repositories
 ============
+
 View the :ref:`full current list <repositories>` of repositories on GitHub.
+
 
 Accessing GitHub
 ================
@@ -33,6 +35,25 @@ To access the OpenWorm organization on GitHub and fully participate on issues, y
 account if you do not already have one. Note, you can comment on issues without a GitHub account, however, 
 we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be 
 `created on the Github website <https://github.com/>`_.
+
+
+.. _github-fork:
+
+Forking GitHub Repositories
+===========================
+On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
+
+To fork an OpenWorm repository, go to the repository's page and hit the "Fork" button. GitHub will 
+copy the repository to your personal repository.  You can then 
+make changes to the repository.  Once you are done with the changes, commit them back to your personal account.  
+Then hit the 'Pull Request' button on the repo 
+page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge 
+the changes into the original repository.  This follows the so-called 
+`'fork and pull' model <https://help.github.com/articles/using-pull-requests#fork--pull>`_.
+
+For further details on doing this, check out the
+`help page from Github <https://help.github.com/articles/fork-a-repo>`_.
+
 
 .. _github-issues:
 
@@ -73,23 +94,6 @@ Closing an Issue
 .. [Add content]
 .. Best Practices for OpenWorm
 .. [Need to fill this in]
-
-.. _github-fork:
-
-Forking GitHub Repositories
-===========================
-On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently. 
-
-To fork an OpenWorm repository, go to the repository's page and hit the "Fork" button. GitHub will 
-copy the repository to your personal repository.  You can then 
-make changes to the repository.  Once you are done with the changes, commit them back to your personal account.  
-Then hit the 'Pull Request' button on the repo 
-page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge 
-the changes into the original repository.  This follows the so-called 
-`'fork and pull' model <https://help.github.com/articles/using-pull-requests#fork--pull>`_.
-
-For further details on doing this, check out the
-`help page from Github <https://help.github.com/articles/fork-a-repo>`_.
 
 
 Opening a New Issue
