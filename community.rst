@@ -194,7 +194,7 @@ discussions, day-to-day communications, and questions related to the OpenWorm pr
 
 Google Plus
 ------------
-`OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
+`Follow us on OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
 
 Click on the "Follow" button to be a part of the OpenWorm community on Google+. 
 
