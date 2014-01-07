@@ -58,8 +58,15 @@ gives the user an interface to make modifications.
 Issues list
 -----------
 
-All issues related to the 
-`Geppetto codebase <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_, can be found on GitHub
+The issues related to Geppetto are distributed across different repositories. 
+
+Issues related to general functionalities that need to be added to support the OpenWorm simulation are found `here <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=geppetto&page=1&sort=comments&state=open>`_.
+
+Issues related to the platform in general are found `here <https://github.com/openworm/org.geppetto/issues?state=open>`_.
+
+Ultimately every module of Geppetto has issues of its own, see the list of repositories below.
+
+The issues are so splitted to allow capturing different granularities, having both issues that reflect what macro functionalities need to be added in the OpenWorm and Geppetto repository and having detailed close-to-the-code bugs in the individual repositories.  
 
 Associated Repositories
 ----------------------
@@ -69,13 +76,13 @@ Associated Repositories
 +=====================================================================================================================+============================================+============+
 | `org.gepetto <https://github.com/openworm/org.geppetto>`_                                                           | Geppetto Main Bundle and packaging         | Java       |
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle for Geppetto         | Python     |  
+| `org.geppetto.solver.sph <https://github.com/openworm/org.geppetto.solver.sph>`_                                    | PCI SPH Solver bundle for Geppetto         | Java       |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | `org.geppetto.simulator.jlems <https://github.com/openworm/org.geppetto.simulator.jlems>`_                          | jLEMS based simulator for Geppetto         | Java       |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | `org.geppetto.model.neuroml <https://github.com/openworm/org.geppetto.model.neuroml>`_                              | NeuroML Model Bundle for Geppetto          | Java       |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle                       | Javascript |   
+| `org.geppetto.core <https://github.com/openworm/org.geppetto.core>`_                                                | Geppetto core bundle                       | Java       |   
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | `org.geppetto.frontend <https://github.com/openworm/org.geppetto.frontend>`_                                        | Geppetto frontend bundle - Web application | Java       |    
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
@@ -83,12 +90,12 @@ Associated Repositories
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 | `org.geppetto.simulator.sph <https://github.com/openworm/org.geppetto.simulator.sph>`_                              | SPH Simulator bundle for Geppetto          | Java       | 
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.simulation <https://github.com/openworm/org.geppetto.simulation>`_                                    | Generic simulation bundle for Geppetto     | Python     |    
+| `org.geppetto.simulation <https://github.com/openworm/org.geppetto.simulation>`_                                    | Generic simulation bundle for Geppetto     | Java       |    
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.model.sph <https://github.com/openworm/org.geppetto.model.sph>`_                                      | PCI SPH Model Bundle for Geppetto          | CSS        |  
+| `org.geppetto.model.sph <https://github.com/openworm/org.geppetto.model.sph>`_                                      | PCI SPH Model Bundle for Geppetto          | Java       |  
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.samples <https://github.com/openworm/org.geppetto.samples>`_                                          | Sample simulations for Geppetto            | Python     |    
+| `org.geppetto.samples <https://github.com/openworm/org.geppetto.samples>`_                                          | Sample simulations for Geppetto            | Descriptive|    
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
-| `org.geppetto.templatebundle <https://github.com/openworm/org.geppetto.templatebundle>`_                            | Template bundle                            | Javascript |    
+| `org.geppetto.templatebundle <https://github.com/openworm/org.geppetto.templatebundle>`_                            | Template bundle                            | Java       |    
 +---------------------------------------------------------------------------------------------------------------------+--------------------------------------------+------------+
 

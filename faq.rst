@@ -155,7 +155,8 @@ different perspectives on tasks to the table.
 Do you all ever meet up somewhere physically?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Subsets of us meet but we haven't ever all converged in the same place.
+Subsets of us meet frequently, and there has been one meeting of the core OpenWorm team in `Paris in July 2014 
+<http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris>`__.
 We use Google+ hangout to meet face to face virtually every two weeks.
 
 OpenWorm simulation and modeling
@@ -354,13 +355,15 @@ OpenWorm code reuse
 What are LEMS and jLEMS?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-LEMS (Low Entropy Model Specification) is a compact model specification
-that allows defining mathematical models in a transparent machine
-readable way. NeuroML 2.0 is built on top of LEMS and defines component
-types useful for describing neural systems.
-`jLEMS <https://github.com/robertcannon/jLEMS>`__ is the Java library
-that reads, validates, and provides basic solving for LEMS and NeuroML
-2.0.
+`LEMS (Low Entropy Model Specification) <http://lems.github.io/jLEMS/>`__ is a compact model specification
+that allows definition of mathematical models in a transparent machine
+readable way. `NeuroML 2.0 <http://www.neuroml.org/neuroml2.php>`__ is built on top of LEMS and defines component
+types useful for describing neural systems (e.g. ion channels, synapses).
+`jLEMS <https://github.com/LEMS/jLEMS>`__ is the Java library
+that reads, validates, and provides basic solving for LEMS. A utility, `jNeuroML 
+<https://github.com/NeuroML/jNeuroML>`__, has been created which bundles jLEMS, and allows any LEMS or NeuroML 2 model
+to be executed, can validate NeuroML 2 files, and convert LEMS/NeuroML 2 models to multiple simulator languages (e.g. NEURON, 
+Brian) and to other formats.
 
 What is OSGi and how is it being used?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
