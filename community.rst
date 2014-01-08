@@ -121,6 +121,38 @@ we've used a hidden toctree in the file, which is creating the
 next level of hierarchy in the sidebar.  In that toctree, you can see an example of referencing 
 the underlying directory structure (e.g. 'Projects/worm-movement').
 
+Changes that appear in GitHub will automatically trigger a hook that will cause the documentation on 
+ReadTheDocs to become rebuilt and pushed onto the site.  There are different versions of the documentation
+that are explained below.
+
+OpenWorm Documentation Versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Multiple versions of the documentation are enabled via GitHub branches.  
+The content that appears as `'latest' online <http://docs.openworm.org/en/latest/>`_ corresponds to what is 
+in the master branch in the repo.  This content should be dynamic and a space for adding stuff boldly.
+
+The content that appears as a numbered version, like `0.5 <http://docs.openworm.org/en/0.5/>_` corresponds to 
+what is in the branch named `0.5 in the repo <https://github.com/openworm/openworm_docs/tree/0.5>`_.  This content
+should be considered stable and not updated lightly.
+
+Keeping a division between latest and the versioned documentation is important for several reasons:
+
+* *Latest* acts as a staging area - ReStructuredText is often touchy in terms of formatting -- it is easy to 
+write something before ensuring that it formats properly.  We don't want those warts exposed to the public
+so having an extra layer of review by checking the page on *latest* first is valuable.
+* URL Stability - content in *latest* is easy to update.  Pages can be moved or deleted easily, breaking URLs
+  that we have given out.  If we make sure not to move pages around on the versioned docs, we can sustain URLs
+* Versions should correspond to major releases of the project as a whole, which happen approximately every six months.
+As the project naturally evolves, the versioned docs provide a motivation for the entire documentation to be re-evaluated
+as a whole.
+
+The recommended best practice when updating the documentation is that if your changes fix bugs with the documentation that
+don't involve moving pages, renaming pages, or deleting pages, then check them in first to latest.  Then on a regular
+basis the changes can be evaluated to be back applied to the most recent version.  If your changes add new projects
+or new content, or update a documentation page with the results of new events, keep this in latest and it will
+get rolled into the next version.
+
 
 Guest Blog Post
 ---------------
