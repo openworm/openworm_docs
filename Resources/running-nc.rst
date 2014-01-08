@@ -16,7 +16,7 @@ Install neuroConstruct and the CElegans project
 ===============================================
 
 There is a `quick-start zip
-file <https://www.dropbox.com/s/wzem2isez33966m/CElegansNeuroConstructBundle-snapshot-20131102.zip>`__
+file <https://www.dropbox.com/s/xdu1bh5sq2x1nx6/CElegansNeuroConstructBundle-snapshot-20140107.zip>`__
 containing neuroConstruct and the C. elegans connectome project.
 Installation instructions are in the file
 `README.txt <https://github.com/rayner/CElegansNeuroConstructBundle/blob/master/README.txt>`__
