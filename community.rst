@@ -230,7 +230,7 @@ Blog
 
 `Our blog <http://blog.openworm.org>`_ is hosted in Tumblr.
 
-Interesting in being a guest on our blog? We love hearing about what members are of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
+Interesting in being a guest on our blog? We love hearing about what members of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
 
 
 Membership
