@@ -68,11 +68,6 @@ tags related to the type of issue and coding language. Click on the issue name t
 and dig around.  
 
 .. SHOULD ADD MORE INFORMATION ON MAKING COMMENTS, ACTUALLY MAKING CODE UPDATES, WHEN TO CLOSE OUT ISSUES (PROCESS)
-.. (link to Data.rst sections on opening, replying to and closing issues)
-
-.. Do we have a current list of contributors mapped to current issues?
-.. Breakdowns of current issues based on potential volunteers' incoming skills
-.. Using tags for categorizing tasks and issues
 
 
 Interacting with Issues
