@@ -80,7 +80,7 @@ located/relevant to. Click on the Issues tab on the menu to the right.
 
 .. image:: http://i.imgur.com/Rh1uvmn.png
 
-Next, click on the New Image button in the upper right corner of the screen.
+Next, click on the New Issue button in the upper right corner of the screen.
 
 .. image:: http://i.imgur.com/fvEQOJQ.png 
 
