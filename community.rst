@@ -159,6 +159,7 @@ Guest Blog Post
 We love hearing about what members are of the OpenWorm community are doing.  
 If you have something to share, contact us at info@openworm.org to discuss.
 
+.. _journalclub:
 
 Journal Clubs
 -------------
@@ -176,6 +177,8 @@ If you have an idea for a good journal club, please post the suggestion
 
 Meetings
 ========
+
+.. _team-meetings:
 
 Team meetings
 --------------
@@ -229,7 +232,7 @@ discussions, day-to-day communications, and questions related to the OpenWorm pr
 
 Google Plus
 ------------
-`OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
+`Follow us on OpenWorm Google+ <https://plus.google.com/+OpenwormOrg/posts>`_
 
 Click on the "Follow" button to be a part of the OpenWorm community on Google+. 
 
@@ -239,23 +242,24 @@ put out by Google.
 
 YouTube
 -------
-`Our YouTube channel <http://www.youtube.com/user/OpenWorm>`_
+`View our YouTube channel <http://www.youtube.com/user/OpenWorm>`_
+
+Want to get notified when new content goes live? `Subscribe to the channel <http://www.youtube.com/user/OpenWorm>`_ by clicking on the "subscribe" button while logged in to your Google account.
 
 Playlists
 ^^^^^^^^^
 
 * Status Updates - Biweekly updates from the OpenWorm team. 
-* Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs 
-  use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science.  
-  Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube.
-* Data Team meetings
-* Real c. elegans
+* Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science.  
+  Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube.  :ref:`Learn more about our journal clubs. <journalclub>`
+* Data Team meetings - :ref:`Learn more about our team meetings. <team-meetings>`
+* Real *C. elegans*
 * Building Blocks
 
 
 Twitter
 -------
-`Our Twitter feed <http://twitter.com/openworm>`_
+`Follow our Twitter feed <http://twitter.com/openworm>`_
 
 Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
@@ -263,6 +267,9 @@ Blog
 ----
 
 `Our blog <http://blog.openworm.org>`_ is hosted in Tumblr.
+
+Interesting in being a guest on our blog? We love hearing about what members of the OpenWorm community are doing.  If you have something to share, contact us at info@openworm.org to discuss.
+
 
 Membership
 ==========
