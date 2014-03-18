@@ -70,7 +70,9 @@ believe that this is the most meaningful place to begin because it
 enables us to study the relationship between a nervous system, the body
 it is controlling, and the environment that body has to navigate. We
 also believe this is a novel development because there are no existing
-computational models of any nervous systems that complete this loop.
+computational models of any nervous systems that complete this loop.  For
+an excellent review of the current state of research on this topic, check out 
+`Cohen & Sanders, 2014 <https://www.dropbox.com/s/6a76de0jpjm0ze0/Nematode%20locomotion%20dissecting%20the%20neuronal%E2%80%93environmental%20loop%20-%20Cohen%2C%20Sanders%20-%202014.pdf>`__
 
 When we first started, our team in Novosibirsk had produced an awesome
 prototype. We recently published `an
