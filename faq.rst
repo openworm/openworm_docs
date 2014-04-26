@@ -41,7 +41,7 @@ Does it need to know how to be a worm to act like a worm?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The "logic" part comes from the dynamics of the neurons interacting with
-each other. it is a little unintuitive but that's why makes up how it
+each other. it is a little unintuitive but that's what makes up how it
 "thinks". So we are simulating those dynamics as well as we can rather
 than instructing it what to do when. Of course that will require a good
 mechanical model of how CE muscles respond to stimulation.
