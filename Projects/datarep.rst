@@ -29,7 +29,7 @@ We have consolidated a lot of data about the worm
 * Database User:	openworm
 * Database Password:	openworm
 
-`This thread <https://groups.google.com/d/topic/openworm-discuss/2V5kF5na5fw/discussion>`_ 
+`This thread <https://groups.google.com/d/msg/openworm-discuss/2V5kF5na5fw/GnxZMgWYF7wJ>`_ 
 describes more about the database.
 
 .. Cell and neuron list
