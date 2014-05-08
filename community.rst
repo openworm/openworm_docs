@@ -174,6 +174,9 @@ You can see
 If you have an idea for a good journal club, please post the suggestion 
 `on our mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
 
+Coding Standards
+--------------
+It is recommended to follow the `PEP8 Guidelines <http://legacy.python.org/dev/peps/pep-0008/>`_. For contributions of Python code to OpenWorm repositories. Compliance can be checked with the `pep8 tool <https://pypi.python.org/pypi/pep8>`_ and `autopep8 <http://pypi.python.org/pypi/autopep8>`_
 
 Meetings
 ========
