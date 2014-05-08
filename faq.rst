@@ -8,6 +8,19 @@ Frequently Asked Questions
 OpenWorm general
 -----------------
 
+Why C. elegans?
+~~~~~~~~~~~~~~~
+
+The tiny worm C. elegans is by far the most understood and studied animal with a brain in all of biology. 
+It was the first multi-cellular organism to have its genome mapped. It has only ~1000 cells and exactly 302 neurons, 
+which have also been mapped as well as its “wiring diagram” making it also the first organism to have a complete 
+connectome produced. This part gets particularly exciting for folks interested in artificial intelligence or 
+computational neuroscience. 
+
+Three different Nobel prizes have been awarded for work on this worm, and it is increasingly being used as a model for 
+better understanding disease and health relevant to all organisms, including humans. When making a complex computer model, 
+it is important to start where the data are the most complete.
+
 What does the worm do?
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -88,11 +101,11 @@ complete space of possibilities.
 Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nematodes have been studied far more than simpler organisms, and
+Nematodes have been studied far more than simpler multi-cellular organisms, and
 therefore more data exist that we can use to build our model. We would
 need to get, for example, another connectome and another anatomical 3D
-map whereas in C. elegans they already exist. There are also more
-biologists studying nematodes than there are studying simpler organisms,
+map whereas in C. elegans they already exist. The community of scientists using c. elegans
+as their model organism is much larger than communities that studying simpler multi-cellular organisms,
 so the effect of the community size also weighed in on the decision.
 
 When do you think the simulation will be "complete", and which behaviors would that include?
@@ -131,7 +144,9 @@ website <http://www.openworm.org/get_involved.html>`__.
 Where I could read about your "to do's?"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-https://github.com/openworm/OpenWorm/issues/milestones
+We have a set of [high level milestones](https://github.com/openworm/OpenWorm/issues/milestones) 
+for the modeling direction we are taking up on GitHub.  We also have [a master board of all issues](https://waffle.io/openworm/openworm)
+across all our GitHub repositories that show a bunch of programming tasks we are working on.
 
 How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
