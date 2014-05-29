@@ -132,7 +132,7 @@ Multiple versions of the documentation are enabled via GitHub branches.
 The content that appears as `'latest' online <http://docs.openworm.org/en/latest/>`_ corresponds to what is 
 in the master branch in the repo.  This content should be dynamic and a space for adding stuff boldly.
 
-The content that appears as a numbered version, like `0.5 <http://docs.openworm.org/en/0.5/>_` corresponds to 
+The content that appears as a numbered version, like `0.5 <http://docs.openworm.org/en/0.5/>`_ corresponds to 
 what is in the branch named `0.5 in the repo <https://github.com/openworm/openworm_docs/tree/0.5>`_.  This content
 should be considered stable and not updated lightly.
 
