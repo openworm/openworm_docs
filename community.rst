@@ -138,14 +138,9 @@ should be considered stable and not updated lightly.
 
 Keeping a division between latest and the versioned documentation is important for several reasons:
 
-* *Latest* acts as a staging area - ReStructuredText is often touchy in terms of formatting -- it is easy to 
-write something before ensuring that it formats properly.  We don't want those warts exposed to the public
-so having an extra layer of review by checking the page on *latest* first is valuable.
-* URL Stability - content in *latest* is easy to update.  Pages can be moved or deleted easily, breaking URLs that we 
-have given out.  If we make sure not to move pages around on the versioned docs, we can sustain URLs
-* Versions should correspond to major releases of the project as a whole, which happen approximately every six months.
-As the project naturally evolves, the versioned docs provide a motivation for the entire documentation to be re-evaluated
-as a whole.
+* *Latest* acts as a staging area - ReStructuredText is often touchy in terms of formatting -- it is easy towrite something before ensuring that it formats properly.  We don't want those warts exposed to the public so having an extra layer of review by checking the page on *latest* first is valuable.
+* URL Stability - content in *latest* is easy to update.  Pages can be moved or deleted easily, breaking URLs that we have given out.  If we make sure not to move pages around on the versioned docs, we can sustain URLs
+* Versions should correspond to major releases of the project as a whole, which happen approximately every six months. As the project naturally evolves, the versioned docs provide a motivation for the entire documentation to be re-evaluated as a whole.
 
 The recommended best practice when updating the documentation is that if your changes fix bugs with the documentation that
 don't involve moving pages, renaming pages, or deleting pages, then check them in first to latest.  Then on a regular
