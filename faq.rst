@@ -246,7 +246,7 @@ which makes them different from human neurons.  However, the same mathematics th
 (known as the `Hodgkin-Huxley model <http://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model>`__) also describe
 the dynamics of neurons that do not exhibit action potentials.  The biophysics of the neurons from either species
 are still similar in that they both have `chemical synapses <http://en.wikipedia.org/wiki/Chemical_synapse>`__, 
-both have `excitable cell membranes <http://en.wikipedia.org/wiki/Cell_membrane`>__, 
+both have `excitable cell membranes <http://en.wikipedia.org/wiki/Cell_membrane>`__, 
 and both use `voltage sensitive ion channels <http://en.wikipedia.org/wiki/Voltage-gated_ion_channel>`__ to modify 
 the `electrical potential across their cell membranes <http://en.wikipedia.org/wiki/Membrane_potential>`__.
 
