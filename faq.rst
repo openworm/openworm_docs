@@ -21,7 +21,7 @@ Three different Nobel prizes have been awarded for work on this worm, and it is 
 better understanding disease and health relevant to all organisms, including humans. When making a complex computer model, 
 it is important to start where the data are the most complete.
 
-What does the worm do?
+What does the real worm do?
 ~~~~~~~~~~~~~~~~~~~~~~
 
 It has all sorts of behaviors! Some include:
@@ -41,7 +41,7 @@ crawling <https://github.com/openworm/OpenWorm/wiki/Project-overview>`__.
 The main point is that we want the worm's overall behavior to emerge
 from the behavior of each of its cells put together.
 
-So say it lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
+So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Right now we aren't addressing the egg laying or development capacity,
@@ -191,6 +191,20 @@ are governed by an algorithm known as "smoothed particle hydrodynamics."
 So our initial complexity estimates are based on asking how much CPU
 horsepower do we need for these algorithms.
 
+What's the data source for your computer simulation of the living worm?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is not a single data source for our simulation; in fact one of our unique challenges is
+coming up with new ways to work out how to integrate multiple data sets together.  Here is a list
+of some of the data sets that we have used so far:
+
+- `The Virtual Worm (3D atlas of C. elegans anatomy) <http://caltech.wormbase.org/virtualworm/>`__
+- `The c. elegans connectome (wiring diagram of neurons) <http://www.wormatlas.org/neuronalwiring.html>`__
+- `Cell list of c. elegans <https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html>`__
+- `Ion channels used by c. elegans <https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html>`__
+- `Database of Worm behavioral phenotypes <http://www.ncbi.nlm.nih.gov/pubmed/23852451>`__
+
+
 Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -223,6 +237,19 @@ described in detail in space (multi-compartmental models), while others
 ignore ion channels and treat neurons as points connected directly to
 other neurons. In OpenWorm, we focus on multi-compartmental neuron
 models with ion channels.
+
+What is the connection between the basic proporties of C. elegans neurons and human neurons?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+C.elegans neurons do not spike (i.e. have `action potentials <http://en.wikipedia.org/wiki/Action_potential>`__), 
+which makes them different from human neurons.  However, the same mathematics that describe the action potential 
+(known as the `Hodgkin-Huxley model <http://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model>`__) also describe
+the dynamics of neurons that do not exhibit action potentials.  The biophysics of the neurons from either species
+are still similar in that they both have `chemical synapses <http://en.wikipedia.org/wiki/Chemical_synapse>`__, 
+both have `excitable cell membranes <http://en.wikipedia.org/wiki/Cell_membrane`>__, 
+and both use `voltage sensitive ion channels <http://en.wikipedia.org/wiki/Voltage-gated_ion_channel>`__ to modify 
+the `electrical potential across their cell membranes <http://en.wikipedia.org/wiki/Membrane_potential>`__.
+
 
 What is the level of detail of the wiring diagram for the non-neuron elements?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
