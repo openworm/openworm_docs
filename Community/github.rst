@@ -159,8 +159,8 @@ Licenses on repositories
 
 In historical practice, OpenWorm members have chosen to use the `MIT open source license <http://opensource.org/licenses/MIT>`_
 for their repositories.  The ultimate choice of license is up to the the authors of a given repository, but we would 
-ask that all OpenWorm repository authors `choose some open source license for your repository 
-<http://choosealicense.com/>`_and display a LICENSE file in the root of the repository to make it clear to 
+ask that all OpenWorm repository authors `choose some open source license for your repository <http://choosealicense.com/>`_ 
+and display a LICENSE file in the root of the repository to make it clear to 
 the how to use it.
 
 An example of using the MIT license for OpenWorm code follows:
