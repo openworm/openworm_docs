@@ -147,4 +147,43 @@ How to:
 
 Read the `latest news and updates <https://github.com/blog/search?page=1&q=gis>`_ on Gists at GitHub.
 
+Creating or Adding New Repositories
+===================================
+
+Already existing repositories can be transferred into the OpenWorm GitHub organization via the `"transfer" 
+mechanism provided by GitHub <https://help.github.com/articles/how-to-transfer-a-repository>`_.  New repositories
+`can be created <https://help.github.com/articles/create-a-repo>`_ under the OpenWorm GitHub organization by request.
+
+Licenses on repositories
+========================
+
+In historical practice, OpenWorm members have chosen to use the `MIT open source license <http://opensource.org/licenses/MIT>`_
+for their repositories.  The ultimate choice of license is up to the the authors of a given repository, but we would 
+ask that all OpenWorm repository authors `choose some open source license for your repository 
+<http://choosealicense.com/>`_and display a LICENSE file in the root of the repository to make it clear to 
+the how to use it.
+
+An example of using the MIT license for OpenWorm code follows:
+
+The MIT License (MIT)
+
+Copyright (c) 2014 OpenWorm
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
