@@ -89,7 +89,7 @@ surface of its environment.
 |Inside the CyberElegans model|
 
 Inside the worm, motor neurons are responsible for activating the
-muscles, which them makes the worms move. The blue portions of the loop
+muscles, which then makes the worms move. The blue portions of the loop
 diagram above are those aspects that are covered by the initial
 prototype. We are now in the process of both adding in the missing
 portions of the loop, as well as making the existing portions more
