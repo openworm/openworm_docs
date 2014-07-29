@@ -197,12 +197,10 @@ Working meetings
 Contributors are encouraged to meet with each other on a regular basis to advance areas of 
 the project they need interaction on.  
 
-IRC meetings
------------
+IRC channel for OpenWorm
+------------------------
 
-We had been running meetings on IRC for some time but have currently discontinued the 
-practice.  If there is interest in reviving this, please post on 
-`the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_.
+We're trying to reboot `an IRC channel for OpenWorm <https://kiwiirc.com/client/irc.snoonet.org/OpenWorm>`_.  Check it out!
 
 Scheduling meetings
 -------------------
