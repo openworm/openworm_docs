@@ -11,8 +11,16 @@ an OpenWorm core member.
 
 .. contents::
 
+An Opening Note
+===============
+
+Feeling lost?  Not uncommon in open source projects.  In fact, there are `whole papers <http://www.igor.pro.br/publica/papers/OSS2014.pdf>`_ 
+describing the kinds of problems you may be having and some proposed solutions.  
+Help us make helping you easier by reaching out to us to ask for help!
+
 Contribution Best Practices
 ===========================
+
 
 Once you have identified an issue you want to work on from :ref:`a particular project <projects>`, 
 please announce your intention to helping out on the 
