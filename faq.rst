@@ -131,7 +131,7 @@ website <http://www.openworm.org/get_involved.html>`__.
 Where I could read about your "to do's?"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-https://github.com/openworm/OpenWorm/issues/milestones
+https://github.com/openworm/OpenWorm/milestones
 
 How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
