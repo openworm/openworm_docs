@@ -197,26 +197,27 @@ Muscle Cell Integration
 =======================
 
 Because the muscle cell is driven both by an electrical model and a mechanical model, it
-is a focus of integration between different algorithms.
-
-Previous accomplishments
-------------------------
-
-* Creation of the muscle model repo
-
+is a focus of integration between different algorithms.  Previously we have created a 
+separate `repository for the muscle model <https://github.com/openworm/muscle_model>`_ that is an adaptation
+of the work by `Boyle & Cohen, 2008 <http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/extended.pdf>`.
+We have an `approximately working version <http://www.opensourcebrain.org/projects/muscle_model/wiki>`_ implemented
+in NEURON and are porting this to be fully NeuroML2 compliant.
 
 Current roadmap
 ---------------
 
+* `Update NeuroML2 version of muscle model to match Neuron version <https://github.com/openworm/OpenWorm/issues/169>`_
+* `Create or reuse a NeuroML description of C. elegans motor neuron synapses <https://github.com/openworm/OpenWorm/issues/124>`_
 * `Sync channel descriptions with Muscle model standalone <https://github.com/openworm/OpenWorm/issues/51>`_
 * `Find neuroreceptors and synaptic information for MDL08 muscle cell <https://github.com/openworm/OpenWorm/issues/53>`_
 * `Secondary mechanical/electrophysiological muscle cell integration <https://github.com/openworm/OpenWorm/issues/9>`_
 
+
 Issues list
 ------------
 
-All issues related to `working with data <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open>`_, 
-and `doing research <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open>`_ can be found on GitHub.
+All issues related to `working with the muscle model <https://github.com/openworm/OpenWorm/labels/muscle%20model>`_, 
+can be found on GitHub.
 
 Associated Repositories
 -----------------------
