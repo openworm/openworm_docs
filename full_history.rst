@@ -36,20 +36,15 @@ which may fill in a remaining data gap.
 OpenWorm
 --------
 
-~2007: Co-founders Giovanni Idili and Matteo Cantarelli have
+~2007: Co-founders Giovanni Idili and Matteo Cantarelli (software engineers) have
 conversations about simulating the worm, but nothing comes of it at the
-time.
+time as they lack computational biology / neuroscience background.
 
-3 August 2010: In a `five-minute
-speech <https://www.youtube.com/watch?v=Sb1V_OKqRfc>`__, Stephen Larson
-pitches the idea for simulating *C. elegans* at `Ignite San
-Diego <http://ignitesandiego.org/>`__.
-
-1 Jan 2011: In `the tweet heard 'round the
+1 Jan 2010: In `the tweet heard 'round the
 world <http://www.sciencetogrok.com/2013/03/a-great-role-model-for-collaborative.html>`__,
 co-founder `Giovanni Idili <http://twitter.com/john_idol>`__ **proposes
 what would later be called the OpenWorm project** to co-founder Stephen
-Larson at the `Whole Brain Catalog <http://twitter.com/BrainCatalog>`__:
+Larson (PhD student at UCSD) at the `Whole Brain Catalog <http://twitter.com/BrainCatalog>`__:
 
 .. raw:: html
 
@@ -63,9 +58,18 @@ Larson at the `Whole Brain Catalog <http://twitter.com/BrainCatalog>`__:
 
    <blockquote class="twitter-tweet" lang="en"><p>Nice! RT <a href="https://twitter.com/John_Idol">@John_Idol</a>: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole C.Elegans brain (302 neurons)!</p>&mdash; Whole Brain Catalog (@BrainCatalog) <a href="https://twitter.com/BrainCatalog/status/7279523701">January 1, 2010</a></blockquote>
 
+3 August 2010: In a `five-minute
+speech <https://www.youtube.com/watch?v=Sb1V_OKqRfc>`__, Stephen Larson
+pitches the idea for simulating *C. elegans* at `Ignite San
+Diego <http://ignitesandiego.org/>`__.
+
+Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. 
+Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation <b>Stephen proposes the name "OpenWorm" and the name sticks</b>.
+Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
+
 24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
-of *C. elegans* developed by future OpenWorm team members **Andrey
-Palyanov** and **Sergey Khayrulin**:
+of *C. elegans* developed by **Andrey
+Palyanov** and **Sergey Khayrulin** who are contacted and immediately are invited and agree to join forces with the OpenWorm team:
 
 .. raw:: html
 
