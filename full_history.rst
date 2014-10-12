@@ -157,8 +157,7 @@ weights. Papers:
 -  `A model of motor control of C. elegans with neuronal
    circuits <http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf>`__
 
-September 2011 - October 2013 **`Project Nemaload <http://nemaload.davidad.org/>`__ (`David
-Dalrymple <http://syntheticneurobiology.org/people/display/144/26>`__)**.
+September 2011 - October 2013 **`Project Nemaload <http://nemaload.davidad.org/>`__ (`David Dalrymple <http://syntheticneurobiology.org/people/display/144/26>`__)**.
 The aim was to use optogenetics to record the firing dynamics of the
 **C. elegans** neurons and then replicate it in a simulation. `He
 delivered a lecture on the project in November
