@@ -9,7 +9,7 @@ and highly-skilled individuals and coordinated their work. This community has pr
 making use of scientific research published through open access, helping to show the validity of the open science 
 approach we have taken.
 
-:ref:`Please visit here <full_history.md>` for a more extensive history of the project.
+:ref:`Please visit here <full_history>` for a more extensive history of the project.
 
 More information is available on :ref:`the past history of OpenWorm releases <releases>`.
 
