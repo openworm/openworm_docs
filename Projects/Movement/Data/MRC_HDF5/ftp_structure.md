@@ -1,5 +1,13 @@
 ## General Idea ##
 
+The FTP server to use is: 
+
+[ftp://anonymous@ftp.mrc-lmb.cam.ac.uk](ftp://anonymous@ftp.mrc-lmb.cam.ac.uk) 
+
+anonymous login 
+
+/pub/tjucikas/wormdatabase/results-12-06-08/Laura Grundy/
+
 The following describes the way that data files are stored on the FTP server. 
 
 NOTE: As of late August 2013 we are discussing possible mirroring of the data to improve access. In other words, this interface may to change.

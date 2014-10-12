@@ -4,12 +4,16 @@ Project Background
 
 History
 =======
-Established in January 2011 and in just 2 years of activity, OpenWorm has built a community of highly-motivated 
-and highly-skilled individuals and coordinated their work. The community has produced regular scientific publications 
-making extensive use of scientific research published through open access, proving the validity of the open science 
-approach taken.
+Established in January 2011, OpenWorm has since that time built a community of highly-motivated 
+and highly-skilled individuals and coordinated their work. This community has produced scientific publications 
+making use of scientific research published through open access, helping to show the validity of the open science 
+approach we have taken.
 
-More information is available on :ref:`the past history of releases the project has done <releases>`
+:ref:`Please visit here <full_history.md>` for a more extensive history of the project.
+
+More information is available on :ref:`the past history of OpenWorm releases <releases>`.
+
+
 
 Why do this?
 ============
@@ -31,12 +35,12 @@ We are building a simulation platform to prove it is possible to make good model
 starting with a digital worm. We are making the simulation platform open source because we believe anyone should be 
 able to use it to understand how neurons and cells work.
 
-Why c. elegans?
-===============
-In the field of neuroscience, one of the simplest organisms that are studied is the c. elegans. It only has 302 
-neurons, has a very consistent lifecycle, and is well studied. Its whole body has only 1000 cells total. 
-With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using 
-a nervous system driving muscles on a body in a complex world.
+Why *C. elegans*?
+=================
+In the field of neuroscience, one of the simplest organisms that are studied is *Caenorhabditis elegans*, or 
+*C. elegans* for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole 
+body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator 
+and toxin avoidance using a nervous system driving muscles on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building 
 a simple system to capture it, we are starting with making models of the individual cells and their interactions. 
@@ -52,7 +56,7 @@ complex organisms down the road.
 
 On models
 =========
-Models are the cornerstone of science. Tools like algebra and calculus and newtonian mechanics and computer 
+Models are the cornerstone of science. Tools like algebra and calculus and Newtonian mechanics and computer 
 spreadsheets were advances because we could plug numbers into equations and get answers out that told us something 
 about the world.
 
@@ -125,7 +129,7 @@ We call this "multi-algorithm integration".
 Model optimization
 ------------------
 
-There are a lot of aspects of the *c. elegans* that we will not be able to measure directly for a while based 
+There are a lot of aspects of *C. elegans* that we will not be able to measure directly for a while based 
 on experimental limitations.  These are `"free parameters" <http://en.wikipedia.org/wiki/Free_parameter>`_.  
 The conventional wisdom on modeling is to minimize the number of free parameters as much as possible.  
 Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.

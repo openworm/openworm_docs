@@ -68,8 +68,8 @@ To put the projects in context, you will find it useful to read more about the
 :ref:`big picture idea of the modeling approach <modeling>` we are taking.
 
 If you are interested in a specific programming language, check out links to issues specifically for 
-`python <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open>`_ or 
-`c++ <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open>`_. 
+`Python <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open>`_ or 
+`C++ <https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open>`_. 
 We also have a lot of Java and Javascript/HTML/CSS development going on as part of Geppetto. 
 See the `list of issues here <https://waffle.io/openworm/org.geppetto>`_.
 
