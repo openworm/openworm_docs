@@ -64,12 +64,12 @@ pitches the idea for simulating *C. elegans* at `Ignite San
 Diego <http://ignitesandiego.org/>`__.
 
 Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. 
-Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation <b>Stephen proposes the name "OpenWorm" and the name sticks</b>.
+Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**.
 Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
 24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
 of *C. elegans* developed by **Andrey
-Palyanov** and **Sergey Khayrulin** who are contacted and immediately are invited and agree to join forces with the OpenWorm team:
+Palyanov** and **Sergey Khayrulin** (from AP Ershov Institute of Informatics, Russia) who are contacted and immediately agree to join forces with the OpenWorm team:
 
 .. raw:: html
 
