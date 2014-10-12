@@ -7,8 +7,8 @@ Project, as well as of several similar projects.
 Historical Milestones
 ---------------------
 
-1900: **C. elegans** was `first described in
-1900 <http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans>`__
+1900: ***C. elegans*** was `first
+described <http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans>`__
 by Émile Maupas, who isolated it from soil in Algeria.
 
 1963: **Sydney Brenner**, at MRC Laboratory in Cambridge, `**proposed

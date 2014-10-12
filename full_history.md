@@ -5,7 +5,7 @@ What follows is a history of *C. elegans* research, of the OpenWorm Project, as 
 
 ##Historical Milestones##
 
-1900: **C. elegans** was [first described in 1900](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by Émile Maupas, who isolated it from soil in Algeria.
+1900: ***C. elegans*** was [first described](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by Émile Maupas, who isolated it from soil in Algeria.
 
 1963: **Sydney Brenner**, at MRC Laboratory in Cambridge, [**proposed using *C. elegans* as a model organism**](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) for scientific study.  He won a Nobel prize for this work in 2002.
 
