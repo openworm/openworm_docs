@@ -25,8 +25,8 @@ connectome** <http://www.wormatlas.org/ver1/MoW_built0.92/toc.html>`__.
 by Paul Sternberg of CalTech and Richard Durbin, among others. It
 aggregates information known about *C. elegans* into one place.
 
-| 2009 **Jordan Boyle, Netta Cohen at University of Leeds, UK**
-| `C. elegans locomotion: an integrated
+2009 **Jordan Boyle, Netta Cohen at University of Leeds, UK**
+`C. elegans locomotion: an integrated
 approach <http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/J_Boyle_PhD.pdf>`__
 
 2010 **Mailler at Tulsa, USA** `A Biologically Accurate 3D Model of the
@@ -68,17 +68,17 @@ Larson at the `Whole Brain Catalog <http://twitter.com/BrainCatalog>`__:
 
    <blockquote class="twitter-tweet" lang="en"><p>Nice! RT <a href="https://twitter.com/John_Idol">@John_Idol</a>: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole C.Elegans brain (302 neurons)!</p>&mdash; Whole Brain Catalog (@BrainCatalog) <a href="https://twitter.com/BrainCatalog/status/7279523701">January 1, 2010</a></blockquote>
 
+24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
+of *C. elegans* developed by future OpenWorm team members **Andrey
+Palyanov** and **Sergey Khayrulin**:
+
+.. raw:: html
+
+   <blockquote class="twitter-tweet" lang="en"><p>WOW, this C.Elegans simulation looks pretty impressive --&gt; http://goo.gl/SS96B cc: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a>, <a href="https://twitter.com/tarelli">@tarelli</a></p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/29603680760111104">January 24, 2011</a></blockquote>
+
 .. raw:: html
 
    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-| 24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
-of *C. elegans* developed by future OpenWorm team members **Andrey
-Palyanov** and **Sergey Khayrulin**:
-| WOW, this C.Elegans simulation looks pretty impressive -->
-http://goo.gl/SS96B cc: @BrainCatalog, @tarelli— Giovanni Idili
-(@John\_Idol) January 24, 2011
-| 
 
 4 September 2011:
 `Article <http://www.openworm.org/publications.html>`__: Managing
@@ -141,11 +141,11 @@ including body, every neuron, every synapse, and complete set of sensory
 modalities. No paper was ever published. `Webpage
 link <http://www.csi.uoregon.edu/projects/celegans/>`__
 
-| ~1998 **Perfect C. elegans Project in Tokyo**
-| They released an initial report, but no more.
+~1998 **Perfect C. elegans Project in Tokyo**
+They released an initial report, but no more.
 
-| ~2004 **Virtual C. Elegans project at Hiroshima University, Japan**
-| The aim was to build a worm emulation, simulate poking it on the head,
+~2004 **Virtual C. Elegans project at Hiroshima University, Japan**
+The aim was to build a worm emulation, simulate poking it on the head,
 and have it back away from the poke. This was achieved, but not in a
 biologically realistic way. They simulated the nematode neurons, but the
 connection weights were unknown. Instead of getting this information
@@ -157,10 +157,9 @@ weights. Papers:
 -  `A model of motor control of C. elegans with neuronal
    circuits <http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf>`__
 
-| September 2011 - October 2013 **`Project
-Nemaload <http://nemaload.davidad.org/>`__ (`David
+September 2011 - October 2013 **`Project Nemaload <http://nemaload.davidad.org/>`__ (`David
 Dalrymple <http://syntheticneurobiology.org/people/display/144/26>`__)**.
-| The aim was to use optogenetics to record the firing dynamics of the
+The aim was to use optogenetics to record the firing dynamics of the
 **C. elegans** neurons and then replicate it in a simulation. `He
 delivered a lecture on the project in November
 2011 <http://www.youtube.com/watch?v=xW77lANeJas>`__. `As of June 2014
