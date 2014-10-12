@@ -20,7 +20,7 @@ for scientific study. He won a Nobel prize for this work in 2002.
 Laboratory in Cambridge, `publishes the full *C. elegans*
 connectome <http://www.wormatlas.org/ver1/MoW_built0.92/toc.html>`__.
 
-1999: *C. elegans* becomes the first animal `to have its genome completely sequenced <http://www.sanger.ac.uk/research/projects/caenorhabditisgenomics>`.
+1999: *C. elegans* becomes the first animal `to have its genome completely sequenced <http://www.sanger.ac.uk/research/projects/caenorhabditisgenomics>`__.
 Humans follow in 2002.
 
 2000: `**WormBase** <http://www.wormbase.org/about#0--10>`__ is
