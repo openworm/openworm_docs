@@ -24,19 +24,19 @@ Qualify as core team
 * Qualify as contributor
 * Attend at least 4 hangouts over a period of 3 months
 * Hangouts can be the general or any other regular hangout conducting OpenWorm work
-* Have a github account
+* Have a GitHub account
 * Has been providing regular contributions for at least 3 months
 
 Stay on core team
 -----------------
 
-* Core member can be removed if there is silence for two months
+* Core members can be removed if there is silence for two months
 
 Qualify as a contributor
 ------------------------
 
 * Add at least one meaningful contribution of code or data that fits into an OpenWorm goal 
-into one of the OpenWorm repositories (GitHub, Google Drive, DropBox, etc) 
+into one of the OpenWorm repositories (GitHub, Google Drive, DropBox, etc.) 
 
 OR
 
