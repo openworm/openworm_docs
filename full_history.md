@@ -11,12 +11,9 @@ What follows is a history of *C. elegans* research, of the OpenWorm Project, as 
 
 1986: After thirteen years of work, **John White**, also at MRC Laboratory in Cambridge, [publishes **the full *C. elegans* connectome**](http://www.wormatlas.org/ver1/MoW_built0.92/toc.html).
 
+1999: *C. elegans* becomes the first animal [to have its genome completely sequenced](http://www.sanger.ac.uk/research/projects/caenorhabditisgenomics/).  Humans follow in 2002.
+
 2000: [**WormBase**](http://www.wormbase.org/about#0--10) is [founded](http://nar.oxfordjournals.org/content/38/suppl_1/D463.abstract) by Paul Sternberg of CalTech and Richard Durbin, among others.  It aggregates information known about *C. elegans* into one place.
-
-2009 **Jordan Boyle, Netta Cohen at University of Leeds, UK**
-[C. elegans locomotion: an integrated approach](http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/J_Boyle_PhD.pdf)
-
-2010 **Mailler at Tulsa, USA** [A Biologically Accurate 3D Model of the Locomotion of Caenorhabditis Elegans](http://www.personal.utulsa.edu/~roger-mailler/publications/BIOSYSCOM2010.pdf).
 
 18 May 2014: [A team from MIT develops a technique to **view all C. elegans neurons at once**](http://www.nature.com/nmeth/journal/v11/n7/full/nmeth.2964.html), which may fill in a remaining data gap.
 
@@ -41,9 +38,9 @@ What follows is a history of *C. elegans* research, of the OpenWorm Project, as 
 
 4 September 2011: [Article](http://www.openworm.org/publications.html): Managing Complexity in Multi-Algorithm, Multi-Scale Biological Simulations: An Integrated Software Engineering and Neuroinformatics Approach.
 
-December 2011: [OpenWorm's Blog is initiated](http://blog.openworm.org/post/14895262028/in-order-to-build-a-whole-organism-first-you-must)
-
 September 2011: [OpenWorm Release 1](http://docs.openworm.org/en/latest/releases.html#releases) 
+
+December 2011: [OpenWorm's Blog is initiated](http://blog.openworm.org/post/14895262028/in-order-to-build-a-whole-organism-first-you-must)
 
 April 2012: [OpenWorm Release 2](http://docs.openworm.org/en/latest/releases.html#releases)
 
@@ -74,16 +71,27 @@ January 2014: [OpenWorm Release 5](http://docs.openworm.org/en/latest/releases.h
 
 ##Projects similar to OpenWorm##
 
-~1997: **NemaSys at University of Oregon**  A full model was planned, including body, every neuron, every synapse, and complete set of sensory modalities. No paper was ever published. [Webpage link](http://www.csi.uoregon.edu/projects/celegans/)
+[Detailed spreadsheet of these models and their attributes](https://docs.google.com/spreadsheets/d/1NclOVMRIqY_hn-aL8MdLlJrfuhDgNJyk_ChsZMjugmE/edit#gid=0)
+
+1991: **Neibur and Erdos** develop the first standard CBM (Cuticle with internal fluid Pressure, body-wall muscle) model, in a series of two papers.  It was a mathematical model only:
+
+- [Theory of the locomotion of nematodes: dynamics of undulatoy progression on a surface](http://scholar.google.ca/citations?view_op=view_citation&hl=en&user=ipKi9CIAAAAJ&citation_for_view=ipKi9CIAAAAJ:Se3iqnhoufwC)
+
+1997: **NemaSys at University of Oregon**  A full model was planned, including body, every neuron, every synapse, and complete set of sensory modalities.  Four papers were released in 1997-1998 on pieces of the model, but its ultimate ambition was not finished. [Webpage link](http://www.csi.uoregon.edu/projects/celegans/)
 
 ~1998 **Perfect C. elegans Project in Tokyo**
-They released an initial report, but no more.
+They released [an initial report](http://www.mitpressjournals.org/doi/abs/10.1162/106454698568495#.VDrtDfldV8E), but no more.
 
 ~2004 **Virtual C. Elegans project at Hiroshima University, Japan**
 The aim was to build a worm emulation, simulate poking it on the head, and have it back away from the poke. This was achieved, but not in a biologically realistic way. They simulated the nematode neurons, but the connection weights were unknown. Instead of getting this information experimentally, a machine learning algorithm was used to generate weights. Papers:
 
 - [A Dynamic Body Model of C. elegans with Neural Oscillators](http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_152.pdf)
-- [A model of motor control of C. elegans with neuronal circuits](http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf)
+- [A Model of Motor Control of C. elegans with Neuronal Circuits](http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf)
+
+2009 **Jordan Boyle, Netta Cohen at University of Leeds, UK**
+[C. elegans locomotion: an integrated approach](http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/J_Boyle_PhD.pdf)
+
+2010 **Mailler at Tulsa, USA** [A Biologically Accurate 3D Model of the Locomotion of Caenorhabditis Elegans](http://www.personal.utulsa.edu/~roger-mailler/publications/BIOSYSCOM2010.pdf).
 
 September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/) ([David Dalrymple](http://syntheticneurobiology.org/people/display/144/26))**.
 The aim was to use optogenetics to record the firing dynamics of the **C. elegans** neurons and then replicate it in a simulation.  [He delivered a lecture on the project in November 2011](http://www.youtube.com/watch?v=xW77lANeJas).  [As of June 2014 he works for Twitter](https://www.linkedin.com/profile/view?id=66199655) so it seems the project is defunct.

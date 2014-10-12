@@ -29,7 +29,7 @@ The project is currently laid out into six major areas shown below:
 
 **NeuroMechanical Modeling - Sibernetic**
 
-While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model 
+While our ultimate goal is to simulate every cell in *C. elegans*, we are starting out by building a model 
 of its body, its nervous system, and its environment.  
 `Sibernetic <http://sibernetic.org>`_ is the home of the C++ code base that implements the core of the model.  
 We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the 
@@ -38,7 +38,7 @@ worm and its environment using GPUs. This algorithm has been initially worked ou
 
 To get a quick idea of what this looks like, check out the 
 `latest movie <https://www.youtube.com/watch?v=SaovWiZJUWY>`_. In this movie you can 
-see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 
+see a simulated 3D *C. elegans* being activated in an environment.  Its muscles are located around the outside 
 of its body, and as they contract, they exert forces on the surrounding fluid, propelling the body forward via undulutory thrust.
 In this model, the neural system is not considered and patterns of muscle contraction are explicitly defined.
 
