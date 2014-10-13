@@ -11,7 +11,7 @@ approach we have taken.
 
 Please :ref:`visit here <full_history>` for a more extensive history of the project.
 
-More information is available on :ref:`the past history of OpenWorm releases <releases>`.
+More information is available on :ref:`the past history of OpenWorm releases <full_history>`.
 
 
 
