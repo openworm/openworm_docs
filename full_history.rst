@@ -65,7 +65,7 @@ Diego <http://ignitesandiego.org/>`__.
 
 Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. 
 Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**.
-Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
+Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers and co-founded OpenWorm), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
 24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
 of *C. elegans* developed by **Andrey
