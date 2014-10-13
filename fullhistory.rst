@@ -1,3 +1,5 @@
+.. _fullhistory:
+
 A History and Pre-History of OpenWorm
 =====================================
 
@@ -63,7 +65,7 @@ speech <https://www.youtube.com/watch?v=Sb1V_OKqRfc>`__, Stephen Larson
 pitches the idea for simulating *C. elegans* at `Ignite San
 Diego <http://ignitesandiego.org/>`__.
 
-Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. 
+Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform.
 Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**.
 Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
@@ -137,8 +139,8 @@ Projects similar to OpenWorm
 
 `Detailed spreadsheet of these models and their attributes <https://docs.google.com/spreadsheets/d/1NclOVMRIqY_hn-aL8MdLlJrfuhDgNJyk_ChsZMjugmE/edit?usp=sharing>`
 
-~1997: **NemaSys at University of Oregon**  A full model was planned, including body, every neuron, 
-every synapse, and complete set of sensory modalities.  Four papers were released in 1997-1998 on 
+~1997: **NemaSys at University of Oregon**  A full model was planned, including body, every neuron,
+every synapse, and complete set of sensory modalities.  Four papers were released in 1997-1998 on
 pieces of the model, but its ultimate ambition was not finished. `Webpage link <http://www.csi.uoregon.edu/projects/celegans/>`__
 
 ~1998 **Perfect C. elegans Project in Tokyo**
@@ -164,7 +166,7 @@ approach <http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/J_Boyle_PhD.pdf>`
 2010 **Mailler at Tulsa, USA** `A Biologically Accurate 3D Model of the
 Locomotion of Caenorhabditis
 Elegans <http://www.personal.utulsa.edu/~roger-mailler/publications/BIOSYSCOM2010.pdf>`__.
-   
+
 September 2011 - October 2013 **`Project Nemaload <http://nemaload.davidad.org/>`__ (`David Dalrymple <http://syntheticneurobiology.org/people/display/144/26>`__)**.
 The aim was to use optogenetics to record the firing dynamics of the
 **C. elegans** neurons and then replicate it in a simulation. `He
