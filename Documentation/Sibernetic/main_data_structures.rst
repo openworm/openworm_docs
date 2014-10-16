@@ -14,13 +14,13 @@ Each particle in simulation could be described with a bunch of physical qualitie
 For describing 3D vector 4 cells in array is usually using first 3 is for coordinates and 4th is a auxiliary cell also 4 component vector is needed for better vectorization of array. For taking e.g. position vector of particle with some id: 
     .. math::
     
-         x_id = position[4 * id + 0]
+         x_{id} = position[4 * id + 0]
     
-         y_id = position[4 * id + 1]
+         y_{id} = position[4 * id + 1]
     
-         z_id = position[4 * id + 2]
+         z_{id} = position[4 * id + 2]
 
-         p_id = position[4 * id + 3]
+         p_{id} = position[4 * id + 3]
 
 **NOTATIONS**
 
