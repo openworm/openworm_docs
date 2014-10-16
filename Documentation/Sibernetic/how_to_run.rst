@@ -55,7 +55,7 @@ General options
 ------------------
     -no_g run Sibernetic without graphics
 
-    device= indicates on what device is more priority for run simulation. Value could be equal to CPU or GPU.
+    device= indicates what device is more priority for run simulation. Value could be equal to CPU or GPU.
 
 Main modes
 ------------------
