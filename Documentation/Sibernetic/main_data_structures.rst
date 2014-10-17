@@ -28,7 +28,7 @@ For describing 3D vector 4 cells in array is usually using first 3 is for coordi
 
 numOfElasticP - number of elastic particles
 
-H - smoothing radius (support radius) "The support radius h is typically chosen so that the average number of neighbors of a particle is around 30-40." [ref on Solenailer dissertation]
+H - smoothing radius (support radius) "The support radius h is typically chosen so that the average number of neighbors of a particle is around 30-40." [2]_
 
 **MAX_NEIGHBOR_COUNT** - maximal numbers of neighbors it's equal to 32. 
 
@@ -122,7 +122,10 @@ each cell can contain -1 in case when no or no more membranes are associated wit
 
 Reference
 ==========================
-[1] - http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics
-[2] - http://www.zora.uzh.ch/29724/1/Barbara.pdf
-[3] - PCISPH_algorithm.rst
-[4] - http://www.artcompsci.org/vol_1/v1_web/node34.html
+.. [1] http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics
+
+.. [2] http://www.zora.uzh.ch/29724/1/Barbara.pdf
+
+.. [3] `PCISPH_algorithm.html <./PCISPH_algorithm.html>`_
+
+.. [4] http://www.artcompsci.org/vol_1/v1_web/node34.html
