@@ -10,7 +10,7 @@ This document contains information about PCI SPH algorithm represent in the work
 
 Sсheme
 ==========================
-For simulating incompressible liquid PCI SPH method was realized represent in [1]_,[2]_. Main feature of PCI SPH algorithm includes in using Predicted-Corrector schema
+For simulating incompressible liquid PCI SPH method was realized represent in [1]_, [2]_. Main feature of PCI SPH algorithm includes in using Predicted-Corrector schema
 "To avoid the time step restriction of WCSPH we propose to use a prediction-
 correction scheme based on the SPH algorithm (PCISPH). In our method, the
 velocities and positions are temporarily forwarded in time and the new particle
