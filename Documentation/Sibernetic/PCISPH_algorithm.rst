@@ -29,6 +29,9 @@ for linear systems, this process is iterated until it converges, i.e. until all 
             compute forces F viscosity, gravity, surface tension (i,t)
             initialize pressure p(t)=0
             initialize pressure force F pressure = 0.0
+        for particle i from particles:
+			if i is elastic particle:
+				compute forces F elasticity
         while rho_error(t+1) >= 3% or iter <= minIteration
             for particle i from particles
                 predict velocity v_i(t+1)    # predicted velocity from predicted
