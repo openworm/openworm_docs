@@ -11,15 +11,16 @@ and information how they evolving through the simulation.
 Each simulation based on SPH methods [1]_ is representing with a number of particles which interact with each other through equation of motion.
 Each particle in simulation could be described with a bunch of physical qualities every quality is needed for obtaining displacement of particular particle at the step (t+1) from values for step (t).
 
-For describing 3D vector 4 cells in array is usually using first 3 is for coordinates and 4th is a auxiliary cell also 4 component vector is needed for better vectorization of array. For taking e.g. position vector of particle with some *id*:
+For describing 3D vector 4 cells in array is usually using first 3 is for coordinates and 4th is a auxiliary cell also 4 component vector is needed for better vectorization of array. For taking e.g. position vector of particle with some id: 
     .. math::
-         x_id = position[4 * id + 0]
     
-         y_id = position[4 * id + 1]
+         x_{id} = position[4 * id + 0]
     
-         z_id = position[4 * id + 2]
+         y_{id} = position[4 * id + 1]
+    
+         z_{id} = position[4 * id + 2]
 
-         p_id = position[4 * id + 3]
+         p_{id} = position[4 * id + 3]
 
 **NOTATIONS**
 
@@ -27,7 +28,7 @@ For describing 3D vector 4 cells in array is usually using first 3 is for coordi
 
 numOfElasticP - number of elastic particles
 
-H - smoothing radius (support radius) "The support radius h is typically chosen so that the average number of neighbors of a particle is around 30-40." [2]_
+H - smoothing radius (support radius) "The support radius h is typically chosen so that the average number of neighbors of a particle is around 30-40." [ref on Solenailer dissertation]
 
 **MAX_NEIGHBOR_COUNT** - maximal numbers of neighbors it's equal to 32. 
 
@@ -51,9 +52,9 @@ acceleration
 ---------------------------
 Containing information about current accelerations for all particles. 
     .. math::
-            a_i m_i = F^viscosity_i + F^surfaceTension_i + F^gravity_i + F^elasticInteraction_i + F^muscleForce_i + F^pressure_i
-:math:`F^elasticInteraction_i, F^muscleForce_i` could be zero for sure it's calculating only for muscle fibers and elastic connections between elastic particles.
-Acceleration buffer is represent as a 1d array with size = 4 * **PARTICLE_COUNT** * 3 firs block  from 0 to 4 * **PARTICLE_COUNT** - 1 stores information about impact of ViscosityForces, SurfaceTension, GravityForces, ElasticForces  and MuscleForce forces to acceleration of particle second block from 4 * **PARTICLE_COUNT** to 4 * PARTICLE_COUNT * 2 - 1 storing information about impact of PressureForces force during work of predictive-corrective cycle [3]_ and last one block storing information about acceleration taking on previous time step it needed for explicit integration methods like LeapFrog [4]_. 
+            a_i m_i = F^{viscosity}_{i} + F^{surfaceTension}_{i} + F^{gravity}_{i} + F^{elasticInteraction}_{i} + F^{muscleForce}_{i} + F^{pressure}_{i}
+:math:`F^{elasticInteraction}_{i}, F^{muscleForce}_{i}` could be zero for sure it's calculating only for muscle fibers and elastic connections between elastic particles.
+Acceleration buffer is represent as a 1d array with size = 4 * **PARTICLE_COUNT** * 3 firs block  from 0 to 4 * **PARTICLE_COUNT** - 1 stores information about impact of ViscosityForces, SurfaceTension, GravityForces, ElasticForces  and MuscleForce forces to acceleration of particle second block from 4 * **PARTICLE_COUNT** to 4 * PARTICLE_COUNT * 2 - 1 storing information about impact of PressureForces force during work of predictive-corrective cycle [3]_ and last one block storing information about acceleration taking on previous time step it needed for explicit integration methods like LeapFrog [4]_.
 
 rho
 ---------------------------
