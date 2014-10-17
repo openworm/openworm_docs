@@ -10,14 +10,14 @@ This document contains information about PCI SPH algorithm represent in the work
 
 Sсheme
 ==========================
-For simulating incompressible liquid PCI SPH method was realized represent in [1,2]. Main feature of PCI SPH algorithm includes in using Predicted-Corrector schema
+For simulating incompressible liquid PCI SPH method was realized represent in [1]_,[2]_. Main feature of PCI SPH algorithm includes in using Predicted-Corrector schema
 "To avoid the time step restriction of WCSPH we propose to use a prediction-
 correction scheme based on the SPH algorithm (PCISPH). In our method, the
 velocities and positions are temporarily forwarded in time and the new particle
 densities are estimated. Then, for each particle, the predicted variation from the
 reference density is computed and used to update the pressure values, which in
 turn enter the recomputation of the pressure forces. Similar to a Jacobi iteration
-for linear systems, this process is iterated until it converges, i.e. until all particle density fluctuations are smaller than a user-defined threshold η (for example 1%). Note that this is a nonlinear problem since we include collision handling and updated kernel values in our iteration process. As a final step, the velocities and positions of the next physics update step are computed."[2]. 
+for linear systems, this process is iterated until it converges, i.e. until all particle density fluctuations are smaller than a user-defined threshold η (for example 1%). Note that this is a nonlinear problem since we include collision handling and updated kernel values in our iteration process. As a final step, the velocities and positions of the next physics update step are computed."[2]_. 
 Also we include calculation of elastic forces for elastic particle - this force calculates by the next way for every elastic particle it takes a set of elastic connections after that 
 The PCISPH method is illustrated in scheme below:
 
