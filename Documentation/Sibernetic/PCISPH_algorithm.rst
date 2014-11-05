@@ -1,4 +1,4 @@
-.. _sibernetic-documentation:
+.. _sibernetic-algorithm:
 
 *************************************
 Sibernetic - PCI SPH algorithm
