@@ -1,4 +1,4 @@
-.. _sibernetic-documentation:
+.. _sibernetic-how-to-run:
 
 *************************************
 Sibernetic - documentation how to run instruction
