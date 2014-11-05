@@ -1,4 +1,4 @@
-.. _sibernetic-documentation:
+.. _sibernetic-main-data-structures:
 
 *************************************
 Sibernetic - main data structures
