@@ -20,9 +20,9 @@ of its body, and as they turn red, they are exerting forces on the body that cau
 Available Documentation
 =========================
 
-* :ref:`How to run <Sibernetic/how_to_run>`
-* :ref:`PCI-SPH algorithm <Sibernetic/PCISPH_algorithm>`
-* :ref:`Main data structures <Sibernetic/main_data_structures>`
+* :ref:`How to run <sibernetic-how-to-run>`
+* :ref:`PCI-SPH algorithm <sibernetic-algorithm>`
+* :ref:`Main data structures <sibernetic-data-structures>`
 
 Current roadmap
 =========================                                  
