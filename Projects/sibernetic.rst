@@ -22,7 +22,7 @@ Available Documentation
 
 * :ref:`How to run <sibernetic-how-to-run>`
 * :ref:`PCI-SPH algorithm <sibernetic-algorithm>`
-* :ref:`Main data structures <sibernetic-data-structures>`
+* :ref:`Main data structures <sibernetic-main-data-structures>`
 
 Current roadmap
 =========================                                  
