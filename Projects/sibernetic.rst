@@ -17,11 +17,12 @@ To get a quick idea of what this looks like, check out the
 see a simulated 3D c. elegans being activated in an environment.  Its muscles are located around the outside 
 of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
-Previous accomplishments
+Available Documentation
 =========================
 
-* Physics tests
-* Initial worm crawling
+* :ref:`How to run <how_to_run>`
+* :ref:`PCI-SPH algorithm <main_data_structures>`
+* :ref:`Main data structures <PCISPH_algorithm>`
 
 Current roadmap
 =========================                                  
