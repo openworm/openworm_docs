@@ -22,6 +22,14 @@ What follows is a history of *C. elegans* research, of the OpenWorm Project, as 
 
 ~2007: Co-founders Giovanni Idili and Matteo Cantarelli have conversations about simulating the worm, but nothing comes of it at the time.
 
+Fall of 2007: Andrey Palyanov starts the CyberElegans project.  
+
+June 2008: First CyberElegans publication: Palyanov A.Yu., Dibert A.A., Computer simulation of C. Elegans muscular system and neural network // In: Proc. 6-th Int. Conf. Bioinformatics of Genome Regulation and Structure (BGRS), June 22-28, 2008, p. 61.
+
+~2009: Andrey posts the first CyberElegans video to youtube: https://www.youtube.com/watch?v=Ek49JSAiKjY
+
+Jan 2010: Sergey Khayrulin joins Andrey and the CyberElegans project.
+
 3 August 2010: In a [five-minute speech](https://www.youtube.com/watch?v=Sb1V_OKqRfc), Stephen Larson pitches the idea for simulating *C. elegans* at [Ignite San Diego](http://ignitesandiego.org/).
 
 1 Jan 2011: In [the tweet heard 'round the world](http://www.sciencetogrok.com/2013/03/a-great-role-model-for-collaborative.html), co-founder [Giovanni Idili](http://twitter.com/john_idol) **proposes what would later be called the OpenWorm project** to co-founder Stephen Larson at the [Whole Brain Catalog](http://twitter.com/BrainCatalog):
@@ -32,7 +40,7 @@ What follows is a history of *C. elegans* research, of the OpenWorm Project, as 
 <blockquote class="twitter-tweet" lang="en"><p>Nice! RT <a href="https://twitter.com/John_Idol">@John_Idol</a>: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole C.Elegans brain (302 neurons)!</p>&mdash; Whole Brain Catalog (@BrainCatalog) <a href="https://twitter.com/BrainCatalog/status/7279523701">January 1, 2010</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-24 Jan 2011: Giovanni discovers **CyberElegans**, a physics simulation of *C. elegans* developed by future OpenWorm team members **Andrey Palyanov** and **Sergey Khayrulin**:
+24 Jan 2011: Giovanni discovers **CyberElegans**, a physics simulation of *C. elegans* developed by soon to be OpenWormers **Andrey Palyanov** and **Sergey Khayrulin**:
 <blockquote class="twitter-tweet" lang="en"><p>WOW, this C.Elegans simulation looks pretty impressive --&gt; http://goo.gl/SS96B cc: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a>, <a href="https://twitter.com/tarelli">@tarelli</a></p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/29603680760111104">January 24, 2011</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
