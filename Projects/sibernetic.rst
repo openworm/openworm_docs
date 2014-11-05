@@ -21,7 +21,7 @@ Available Documentation
 =========================
 
 * :ref:`How to run <how_to_run>`
-* :ref:`PCI-SPH algorithm <main_data_structures>`
+* :ref:`PCI-SPH algorithm <PCISPH_algorithm>`
 * :ref:`Main data structures <PCISPH_algorithm>`
 
 Current roadmap
