@@ -38,9 +38,17 @@ which may fill in a remaining data gap.
 OpenWorm
 --------
 
+Fall of 2007: Andrey Palyanov starts the CyberElegans project.
+
 ~2007: Co-founders Giovanni Idili and Matteo Cantarelli (software engineers) have
 conversations about simulating the worm, but nothing comes of it at the
 time as they lack computational biology / neuroscience background.
+
+June 2008: First CyberElegans publication: Palyanov A.Yu., Dibert A.A., Computer simulation of C. Elegans muscular system and neural network // In: Proc. 6-th Int. Conf. Bioinformatics of Genome Regulation and Structure (BGRS), June 22-28, 2008, p. 61.
+
+~2009: Andrey posts the first CyberElegans video to youtube: https://www.youtube.com/watch?v=Ek49JSAiKjY
+
+Jan 2010: Sergey Khayrulin joins Andrey and the CyberElegans project.
 
 1 Jan 2010: In `the tweet heard 'round the
 world <http://www.sciencetogrok.com/2013/03/a-great-role-model-for-collaborative.html>`__,
@@ -69,8 +77,7 @@ Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brai
 Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**.
 Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
-24 Jan 2011: Giovanni discovers **Sibernetic**, a physics simulation
-of *C. elegans* developed by **Andrey
+24 Jan 2011: Giovanni discovers **CyberElegans**, developed by **Andrey
 Palyanov** and **Sergey Khayrulin** (from AP Ershov Institute of Informatics, Russia) who are contacted and immediately agree to join forces with the OpenWorm team:
 
 .. raw:: html
