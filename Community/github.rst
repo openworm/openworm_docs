@@ -40,7 +40,7 @@ and dig around.
 Interacting with Issues
 -----------------------
 
-`Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`_
+`Generic information from GitHub <https://github.com/blog/831-issues-2-0-the-next-generation>`
 
 
 .. Best Practices for OpenWorm
