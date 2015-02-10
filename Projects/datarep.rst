@@ -203,20 +203,26 @@ of the work by `Boyle & Cohen, 2008 <http://www.comp.leeds.ac.uk/jboyle/JordanBo
 We have an `approximately working version <http://www.opensourcebrain.org/projects/muscle_model/wiki>`_ implemented
 in NEURON and are porting this to be fully NeuroML2 compliant.
 
+The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team.
+
+To catch up with recent developments of this team, please see the following resources:
+
+* Meeting #1 (`YouTube Video <https://www.youtube.com/watch?v=6AhKE2Vg_Uw>`_) (`Agenda <https://docs.google.com/document/d/1BByFfABx91Ao-qKFYXAP0wQONlhdDy7MtSu8G0QxUes/edit>`_)
+* Meeting #2 (`YouTube Video <https://www.youtube.com/watch?v=HfGAJYwNt3c>`_) (`Agenda <https://docs.google.com/document/d/1gUBwNjK4OEYd22Pdjt5vcm0-L6cbIHEU6k51AnOcL24/edit?usp=drive_web>`_)
+* Synapse journal club (`YouTube Video <https://www.youtube.com/watch?v=697Irn0J_54>`_) (`Slides <https://docs.google.com/presentation/d/1uMtXJNEXzzoPw45HG6sztqiiPDUn2jcUpHj7oiHxu38/edit?usp=sharing>`_)
+* Meeting #3 (`YouTube Video <https://www.youtube.com/watch?v=3KApBmFa6WY>`_) (`Agenda <https://docs.google.com/document/d/1JAH4Hs_J0tYbcEuxOMQ0fl2NPf6H6Z7kbe72lAi7SdA/edit>`_)
+
 Current roadmap
 ---------------
 
-* `Update NeuroML2 version of muscle model to match Neuron version <https://github.com/openworm/OpenWorm/issues/169>`_
-* `Create or reuse a NeuroML description of C. elegans motor neuron synapses <https://github.com/openworm/OpenWorm/issues/124>`_
-* `Sync channel descriptions with Muscle model standalone <https://github.com/openworm/OpenWorm/issues/51>`_
-* `Find neuroreceptors and synaptic information for MDL08 muscle cell <https://github.com/openworm/OpenWorm/issues/53>`_
-* `Secondary mechanical/electrophysiological muscle cell integration <https://github.com/openworm/OpenWorm/issues/9>`_
-
+* `Create unit test on the full muscle model that reproduces Figure 1A from Liu, Hollopeter, & Jorgensen 2009 <https://github.com/openworm/muscle_model/issues/31>`_
+* `Create unit test that verifies correct I/V curve for ca_boyle NML2 channel <https://github.com/openworm/muscle_model/issues/30>`_
+* `Update optimization.py to run with neurotune instead of optimalneuron <https://github.com/openworm/muscle_model/issues/18>`_
 
 Issues list
 ------------
 
-All issues related to `working with the muscle model <https://github.com/openworm/OpenWorm/labels/muscle%20model>`_, 
+All issues related to `working with the muscle model <https://github.com/openworm/muscle_model/issues>`_, 
 can be found on GitHub.
 
 Associated Repositories
