@@ -199,7 +199,7 @@ Muscle Cell Integration
 Because the muscle cell is driven both by an electrical model and a mechanical model, it
 is a focus of integration between different algorithms.  Previously we have created a 
 separate `repository for the muscle model <https://github.com/openworm/muscle_model>`_ that is an adaptation
-of the work by `Boyle & Cohen, 2008 <http://www.comp.leeds.ac.uk/jboyle/JordanBoyle_files/extended.pdf>`.
+of the work by `Boyle & Cohen, 2008 <http://www.comp.leeds.ac.uk/netta/CV/papers/BC08b.pdf>`_.
 We have an `approximately working version <http://www.opensourcebrain.org/projects/muscle_model/wiki>`_ implemented
 in NEURON and are porting this to be fully NeuroML2 compliant.
 
