@@ -16,17 +16,19 @@ An Opening Note
 
 Feeling lost?  Not uncommon in open source projects.  In fact, there are `whole papers <http://www.igor.pro.br/publica/papers/OSS2014.pdf>`_ 
 describing the kinds of problems you may be having and some proposed solutions.  
-Help us make helping you easier by reaching out to us to ask for help!
+Help us make helping you easier by reaching out to us to ask for help either `on the mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_ or on `our chatroom <https://gitter.im/openworm/OpenWorm>`_!
 
 Contribution Best Practices
 ===========================
 
+What do I work on?  We outline the work we are doing in the project using `GitHub issues <https://guides.github.com/features/issues/>`_.  Therefore, in order to figure out
+what to help out on, you need to be able to check them out for yourself.  One way is to use this documentation to 
+find :ref:`a project <projects>` you want to contrubte to.
+
+Another way is you can `browse the board of issues <https://waffle.io/openworm/openworm>`_ directly.
 
 Once you have identified an issue you want to work on from :ref:`a particular project <projects>`, 
-please announce your intention to helping out on the 
-`mailing list <https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss>`_ and 
-by :ref:`commenting on the 
-specific GitHub issue <github-issues>`.  
+please announce your intention to help out by :ref:`commenting on the specific GitHub issue <github-issues>`.  
 
 Using OpenWorm repos on GitHub
 ------------------------------
