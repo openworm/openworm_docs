@@ -192,9 +192,11 @@ Team meetings
 --------------
 
 We have `a regular meeting <https://www.youtube.com/watch?v=-IyHokN8FkA&list=PL8ACJC0fGE7C7zlCBqkx1LMN1DHGKVp22>`_ 
-of the team that is building applications every two weeks.  
-We also currently
-schedule an ad-hoc `data team meeting <https://www.youtube.com/watch?v=seKjRnw7CB8&list=PL8ACJC0fGE7CGtyJWV2dPOfNxAruk2VcM>`_ 
+of the team that is building applications every month.  
+
+We also have a regular Movement Validation team meeting once a month.
+
+We also currently schedule an ad-hoc Muscle / Neuron team meeting 
 about every 3-4 weeks.  The events
 are on `our community calendar <https://www.google.com/calendar/embed?src=bqvlrm642m3irjehbethokkcdg%40group.calendar.google.com>`_.  
 The events are streamed live when they occur and an archive of the meeting videos
@@ -207,10 +209,10 @@ Working meetings
 Contributors are encouraged to meet with each other on a regular basis to advance areas of 
 the project they need interaction on.  
 
-IRC channel for OpenWorm
+Chatroom for OpenWorm
 ------------------------
 
-We're trying to reboot `an IRC channel for OpenWorm <https://kiwiirc.com/client/irc.snoonet.org/OpenWorm>`_.  Check it out!
+We have `a new chatroom on Gitter <https://gitter.im/openworm/OpenWorm>`_.  Check it out!
 
 Scheduling meetings
 -------------------
