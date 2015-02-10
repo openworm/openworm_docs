@@ -203,7 +203,7 @@ of the work by `Boyle & Cohen, 2008 <http://www.comp.leeds.ac.uk/netta/CV/papers
 We have an `approximately working version <http://www.opensourcebrain.org/projects/muscle_model/wiki>`_ implemented
 in NEURON and are porting this to be fully NeuroML2 compliant.
 
-The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team.
+The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team.  You can connect with the team `on real time chat <https://gitter.im/openworm/muscle_model>`_.
 
 To catch up with recent developments of this team, please see the following resources:
 
