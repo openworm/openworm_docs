@@ -212,6 +212,13 @@ To catch up with recent developments of this team, please see the following reso
 * Synapse journal club (`YouTube Video <https://www.youtube.com/watch?v=697Irn0J_54>`_) (`Slides <https://docs.google.com/presentation/d/1uMtXJNEXzzoPw45HG6sztqiiPDUn2jcUpHj7oiHxu38/edit?usp=sharing>`_)
 * Meeting #3 (`YouTube Video <https://www.youtube.com/watch?v=3KApBmFa6WY>`_) (`Agenda <https://docs.google.com/document/d/1JAH4Hs_J0tYbcEuxOMQ0fl2NPf6H6Z7kbe72lAi7SdA/edit>`_)
 
+Some additional background materials that will help explain neuroscience concepts relevant to to this in two minutes each are below:
+
+* `The neuron <https://www.youtube.com/watch?v=6qS83wD29PY>`_
+* `Membrane potential <https://www.youtube.com/watch?v=tIzF2tWy6KI>`_
+* `Synaptic transmission <https://www.youtube.com/watch?v=WhowH0kb7n0>`_
+* `Receptors and ligands <https://www.youtube.com/watch?v=NXOXZ-kaSVI>`_
+
 Current roadmap
 ---------------
 
