@@ -26,7 +26,6 @@ into ion channel *models*. This pipeline involves:
 ..
   4. Fitting of models (to what? Is this part of the pipeline or validation process?)
 
-
 ..
   Previous accomplishments
   ------------------------
@@ -36,7 +35,13 @@ into ion channel *models*. This pipeline involves:
 Current roadmap
 ---------------
 
+We are tracking milestones for this project over `here. <https://github.com/VahidGh/ChannelWorm/milestones/>`_
 
+The tasks ahead include:
+
+1. Run `Rayner's scripts <https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/>`_ on an example cell, and get output.
+2. Establish common format between outputs of Rayner's script (above) and `digitized plots <https://plot.ly/~VahidGh/56/>`_ from scientific articles.
+3. Write test to compare digitized plots and plots generated from ion channel model.
 
 Issues list
 -----------
@@ -50,59 +55,103 @@ Associated Repositories
 
 .. _neurotune:
 
-NeuroTune
-=========
+..
+  Optimization (NeuroTune)
+  ========================
 
-Previous accomplishments
-------------------------
+  Previous accomplishments
+  ------------------------
 
-Current roadmap
----------------
+  Current roadmap
+  ---------------
 
-Issues list
------------
+  Issues list
+  -----------
 
-Associated Repositories
------------------------
+  Associated Repositories
+  -----------------------
 
 .. _pyopenworm:
 
 PyOpenWorm
 ==========
 
+`PyOpenWorm <https://github.com/openworm/PyOpenWorm/tree/master />`_ is a unified data access layer for OpenWorm. It's used to store and
+retrieve data associated with *C. elegans*, associating evidence for this data
+when it is stored.
+
 Previous accomplishments
 ------------------------
+
+* Create API to access data
+* Create API to insert data
+* Employ backend database to capture data
 
 Current roadmap
 ---------------
 
+PyOpenWorm will be used in the information storage aspect of various other
+subprojects. For instance, ChannelWorm will use `its own fork of PyOpenWorm <https://github.com/openworm/PyOpenWorm/tree/channelworm />`_
+to store Ion Channel data and models that it retrieves from scientific papers.
+Next steps involve:
+
+1. Adapting PyOpenWorm's existing infrastructure to serve ChannelWorm
+2. Filling the database with information, being sure to tag each fact with sources along the way.
+
 Issues list
 -----------
 
+Issues for PyOpenWorm are tracked `on Github <https://github.com/openworm/PyOpenWorm/issues />`_.
+
 Associated Repositories
 -----------------------
+
+`PyOpenWorm <https://github.com/openworm/PyOpenWorm/ />`_
 
 .. _musclemodel:
 
 Muscle_Model
 ============
 
+The `muscle model subproject <https://github.com/openworm/muscle_model />`_ is concerned with modelling and simulation at the
+*cellular* level, specifically attempting to simulate the electrical dynamics of
+ a *C. elegans* body wall muscle cell.
+
+This depends on what happens in the :ref:`channelworm` repo, since ion channel
+dynamics are integral to our simulation of membrane dynamics.
+
 Previous accomplishments
 ------------------------
+
+* Implementation of Boyle & Cohen muscle model `in python <https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008 />`_
+* `Conversion of model into NEURON <https://github.com/openworm/muscle_model/tree/master/neuron_implementation />`_
+* `Simulation <https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels />`_ of NeuroML2 ion channels in LEMS
 
 Current roadmap
 ---------------
 
+Some of the next steps for the muscle model subproject include:
+
+1. Write validation tests for the muscle model (Ex: using SciUnit).
+
 Issues list
 -----------
 
+Issues for the muscle model are tracked `on Github. <https://github.com/openworm/muscle_model/issues />`_
+
 Associated Repositories
 -----------------------
+
+`Muscle_model <<https://github.com/openworm/muscle_model />`_
 
 .. _c302:
 
 c302
 ====
+
+The `c302 subproject <https://github.com/openworm/CElegansNeuroML/tree/master/CElegans/pythonScripts/c302 />`_
+ is an effort to simulate the connectome of *C. elegans*, which includes its 302
+ neurons.
 
 Previous accomplishments
 ------------------------
