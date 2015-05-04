@@ -6,6 +6,25 @@ Muscle-Neuron Team
 
 .. image:: http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869
 
+.. _overview:
+
+High-level Overview
+===================
+
+Broadly speaking, the team will develop a workflow and tools to simulate
+*C. elegans* cell dynamics using simulated ion channel (*intracellular*)
+dynamics.
+
+Data mined from the relevant literature will be used to create ion channel
+models. These ion channel models will be "embedded" in the virtual membranes
+of simulated muscle cells and neurons, and give rise to electrophysical
+dynamics for the cell as a whole.
+
+All of these processes must have validation tests to ensure that each step is
+doing exactly what we want it to do. This maintains the validity of the model as
+ a whole, and provides breakpoints to examine if something in the workflow is
+amiss.
+
 
 .. contents:: Table of Contents
 
@@ -110,7 +129,7 @@ Associated Repositories
 
 .. _musclemodel:
 
-Muscle_Model
+Muscle Model
 ============
 
 The `muscle model subproject <https://github.com/openworm/muscle_model />`_ is concerned with modelling and simulation at the
@@ -151,7 +170,7 @@ c302
 ====
 
 The `c302 subproject <https://github.com/openworm/CElegansNeuroML/tree/master/CElegans/pythonScripts/c302 />`_
- is an effort to simulate the connectome of *C. elegans*, which includes its 302
+is an effort to simulate the connectome of *C. elegans*, which includes its 302
  neurons. The neural dynamics will start out with biologically-unrealistic
  integrate and fire cells, and be replaced with incrementally more realistic
  dynamics, as tests pass. Like the :ref:`musclemodel`, dynamics of neurons
