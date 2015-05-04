@@ -4,6 +4,8 @@
 Muscle-Neuron Team
 ******************
 
+.. contents:: Table of Contents
+
 .. image:: http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869
 
 .. _overview:
@@ -25,9 +27,33 @@ doing exactly what we want it to do. This maintains the validity of the model as
  a whole, and provides breakpoints to examine if something in the workflow is
 amiss.
 
+It is especially important to validate the ion channel models we generate and
+simulate, since it is at the deepest level of our model, and affects all other
+layers on top of it.
 
-.. contents:: Table of Contents
+This part of the workflow is described directly below.
 
+.. _modelling-validation:
+
+Modelling / Validation
+======================
+
+.. image:: https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370
+
+This figure shows, in a general way, how ion channel models are simulated and
+incrementally fit to their observed counterparts.
+
+Depending on the type of data being used (e.g. patch-clamp data or homology
+modelling), the implementation will differ, but our approach will follow this
+pattern.
+
+Let's take an example channel model being compared to patch-clamp data from the
+literature:
+
+1. We have a given channel model (ex: `ca_boyle <https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml />`_)
+2. Run it through simulating scripts (ex: `Rayner's scripts <https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py />`_)
+3. These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature (`example digitized curve <https://plot.ly/~VahidGh/56/ />`_)
+4. Depending on the result of `a test <https://github.com/openworm/muscle_model/issues/30 />`_ comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
 
 .. _channelworm:
 
