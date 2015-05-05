@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 site_name: OpenWorm
 theme: readthedocs
 pages:
@@ -10,3 +11,6 @@ pages:
   - [releases.md, Releases]
   - [modeling.md, Modelling]
   - [Projects/, Projects]
+=======
+site_name: My Docs
+>>>>>>> 5d2f2af7344e798ba4a0ded55235adf437570bba
