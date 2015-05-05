@@ -100,21 +100,21 @@ Associated Repositories
 
 .. _neurotune:
 
-..
-  Optimization (NeuroTune)
-  ========================
+Optimization (NeuroTune)
+========================
 
-  Previous accomplishments
-  ------------------------
+The `Neurotune <https://github.com/vellamike/neurotune />`_  package provides neurotune a package for optimizing electical models of excitable cells.
 
-  Current roadmap
-  ---------------
+Neurotune provides a solution for optimizing the parameters of a model to match
+a specific output. In this case, the parameters are modelled ion channel
+parameters, and the desired output is patch-clamp data comparable to that
+observed in real life.
 
-  Issues list
-  -----------
+Associated Repositories
+-----------------------
 
-  Associated Repositories
-  -----------------------
+`Neurotune <https://github.com/vellamike/neurotune />`_
+`NeuroTune docs <http://optimal-neuron.readthedocs.org/en/latest/architecture.html />`_
 
 .. _pyopenworm:
 
