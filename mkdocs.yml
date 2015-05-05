@@ -1,0 +1,12 @@
+site_name: OpenWorm
+theme: readthedocs
+pages:
+  - [index.md, Home]
+  - [intro.md, Introduction]
+  - [background.md, Background]
+  - [community.md, Community]
+  - [faq.md, FAQ]
+  - [fullhistory.md, History]
+  - [releases.md, Releases]
+  - [modeling.md, Modelling]
+  - [Projects/, Projects]
