@@ -6,9 +6,9 @@ History
 
 Established in January 2011, OpenWorm has since that time built a community of highly-motivated and highly-skilled individuals and coordinated their work. This community has produced scientific publications making use of scientific research published through open access, helping to show the validity of the open science approach we have taken.
 
-Please visit here \<fullhistory\> for a more extensive history of the project.
+Please [visit here](/fullhistory/) for a more extensive history of the project.
 
-More information is available on the past history of OpenWorm releases \<releases\>.
+More information is available on the past history of [OpenWorm releases](/releases/).
 
 Why do this?
 ------------
@@ -78,4 +78,4 @@ In this case, we have to make do with what we have and make some good educated g
 
 ### NeuroML
 
-[NeuroML is](http://en.wikipedia.org/wiki/NeuroML) an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. ([Wikipedia](http://en.wikipedia.org/wiki/NeuroML)). NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
+[NeuroML is](http://en.wikipedia.org/wiki/NeuroML) an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
