@@ -10,7 +10,7 @@ The tiny worm C. elegans is by far the most understood and studied animal with a
 
 Three different Nobel prizes have been awarded for work on this worm, and it is increasingly being used as a model for better understanding disease and health relevant to all organisms, including humans. When making a complex computer model, it is important to start where the data are the most complete.
 
-What does the real worm do? ~~~~~~~~~~~~~~~~~~~~~~
+### What does the real worm do?
 
 It has all sorts of behaviors! Some include:
 
@@ -23,7 +23,7 @@ It has all sorts of behaviors! Some include:
 
 We've started from a cellular approach so we are building behavior of individual cells and we are trying to get the cells to perform those behaviors. We are [starting with simple crawling](https://github.com/openworm/OpenWorm/wiki/Project-overview). The main point is that we want the worm's overall behavior to emerge from the behavior of each of its cells put together.
 
-So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal? ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
 Right now we aren't addressing the egg laying or development capacity, however, the worm does have the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing) so it would be really interesting to work on a computational development model.
 
@@ -61,7 +61,7 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 ### Where I could read about your "to do's?"
 
-We have a set of [high level milestones](<https://github.com/openworm/OpenWorm/issues/milestones>) for the modeling direction we are taking up on GitHub. We also have [a master board of all issues](<https://waffle.io/openworm/openworm>) across all our GitHub repositories that show a bunch of programming tasks we are working on.
+We have a set of [high level milestones](https://github.com/openworm/OpenWorm/issues/milestones) for the modeling direction we are taking up on GitHub. We also have [a master board of all issues](https://waffle.io/openworm/openworm) across all our GitHub repositories that show a bunch of programming tasks we are working on.
 
 ### How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
 
@@ -203,7 +203,8 @@ Maven is a dependency management and automated build system for Java that is use
 
 It is important for OpenWorm because as Geppetto increasingly relies on other code libraries, we need easy ways to manage this.
 
-OpenWorm links and resources ---------------------------
+OpenWorm links and resources
+----------------------------
 
 ### Do you have a website?
 

@@ -27,18 +27,18 @@ Stay on core team
 Qualify as a contributor
 ------------------------
 
-\* Add at least one meaningful contribution of code or data that fits into an OpenWorm goal into one of the OpenWorm repositories (GitHub, Google Drive, DropBox, etc.)
+- Add at least one meaningful contribution of code or data that fits into an OpenWorm goal into one of the OpenWorm repositories (GitHub, Google Drive, DropBox, etc.)
 
 OR
 
--   Add organizational support to the goals of OpenWorm
+- Add organizational support to the goals of OpenWorm
 
 Stay on as contributor
 ----------------------
 
--   Once you are a contributor, you are a contributor forever
+- Once you are a contributor, you are a contributor forever
 
 Hangouts invite criteria
 ------------------------
 
-\* Everybody who is a contributor gains the privilege to join the hangouts so that they can gain core team membership if they want
+- Everybody who is a contributor gains the privilege to join the hangouts so that they can gain core team membership if they want

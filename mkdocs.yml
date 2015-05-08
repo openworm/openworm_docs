@@ -3,7 +3,6 @@ theme: readthedocs
 pages:
   - [intro.md, Introduction]
   - [background.md, Background]
-  - [faq.md, FAQ]
   - [fullhistory.md, History]
   - [releases.md, Releases]
   - [modeling.md, Modelling]
@@ -19,5 +18,6 @@ pages:
   - [Community/github.md, Community, Github]
   - [Community/repositories.md, Community, Repos]
   - [Community/membership.md, Community, Membership]
-  - [resources.md, Resources, Resources]
+  - [Resources/resources.md, Resources, Resources]
   - [Resources/running-nc.md, Resources, Running NeuroConstruct]
+  - [faq.md, FAQ]

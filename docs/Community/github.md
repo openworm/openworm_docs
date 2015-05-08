@@ -1,16 +1,16 @@
 Using OpenWorm Repositories on GitHub
 =====================================
 
-Making a contribution of code to the project will first involve forking one of our repositories \<github-fork\> , making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-This page contains a list of repositories maintained by the OpenWorm projet on GitHub, provides simple instructions for how to access GitHub, contribute and resolve issues, opening new issues, and creating Gists.
+This page contains a list of repositories maintained by the OpenWorm project on GitHub, provides simple instructions for how to access GitHub, contribute and resolve issues, opening new issues, and creating Gists.
 
 Repositories
 ------------
 
-View the full current list \<repositories\> of repositories on GitHub.
+View the full current list [repositories](repositories/) of repositories on GitHub.
 
 Accessing GitHub
 ----------------

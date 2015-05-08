@@ -14,7 +14,7 @@ Sibernetic is the code base that currently implements the crawling model. Sibern
 
 More information on running Sibernetic is [available online](http://sibernetic.org).
 
-The project page for Sibernetic \<sibernetic-project\> has information about getting involved with its development.
+[The project page for Sibernetic](/Projects/sibernetic/) has information about getting involved with its development.
 
 ### Geppetto
 
@@ -24,7 +24,7 @@ Geppetto is a generic multi-algorithm integration platform written in Java and H
 
 More information on running Geppetto is [available online](http://geppetto.org).
 
-The project page for Geppetto \<geppetto-project\> has information about getting involved in its development with OpenWorm.
+[The project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
 
 ### Connectome Engine and Lego Mindstorms robot
 
@@ -70,15 +70,16 @@ Source code for [the web version](https://github.com/openworm/wormbrowser) and [
 Data sets
 ---------
 
-OpenWorm Database ----------------
+OpenWorm Database
+-----------------
 
 An web version of the OpenWorm database can [be browsed online](http://www.interintelligence.org/openworm/Entities.aspx).
 
-More information about working with the data within it and other data entities can be found on the data representation project page \<data-rep\>.
+More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).
 
-### C. elegans NeuroML model in neuroConstruct
+### C. elegans NeuroML model in NeuroConstruct
 
-The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. This page \<running-nc\> provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
+The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. [This page](/Resources/running-nc/) provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
 
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
@@ -86,4 +87,4 @@ More information about working with the data within it and other data entities c
 
 ### OpenWorm Spreadsheet data
 
-We keep a [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive. We are currently in the process of consolidating these data into the OpenWorm database. More information about working with the data within it and other data entities can be found on the data representation project page \<data-rep\>.
+We keep a [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive. We are currently in the process of consolidating these data into the OpenWorm database. More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).

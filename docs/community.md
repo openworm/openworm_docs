@@ -11,24 +11,24 @@ Feeling lost? Not uncommon in open source projects. In fact, there are [whole pa
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find a project \<projects\> you want to contrubte to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/projects/) you want to contribute to.
 
 Another way is you can [browse the board of issues](https://waffle.io/openworm/openworm) directly.
 
-Once you have identified an issue you want to work on from a particular project \<projects\>, please announce your intention to help out by commenting on the specific GitHub issue \<github-issues\>.
+Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve forking one of our repositories \<github-fork\>, making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-More details on best practices using OpenWorm repos on GitHub are available on a separate page \<github\>.
+More details on best practices using OpenWorm repos on GitHub are available on [a separate page](github/).
 
 ### Creating organizing documents
 
 Another great way to contribute is by organizing ideas or documentation or proposals via a Google
-doc \<google-drive\>, and then sharing the link on our [mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
+doc, and then sharing the link on our [mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
 
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on [this link](https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing).
 
@@ -36,7 +36,7 @@ All documents located in the OpenWorm folder is viewable to the public. Comments
 
 [OpenWorm Docs](https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E)
 
-#### Taking notes as Google docs
+### Taking notes as Google docs
 
 It is very useful to create notes and progress reports as the result of meetings as Google docs. Docs should be shared publicly with view and comment access.
 
@@ -55,7 +55,7 @@ An example of an effective progress report is [available online](https://docs.go
 
 Once the document is shared, it should be announced on [the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
 
-#### Creating proposals as Google docs
+### Creating proposals as Google docs
 
 To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
 
@@ -65,9 +65,9 @@ An example of an effective proposal is [available online](https://docs.google.co
 
 The [OpenWorm documentation](http://openworm.rtfd.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to the resources page \<resources\>.
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/resources/).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to the projects page \<projects\>.
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/projects/).
 
 The docs use [rst format](http://sphinx-doc.org/rest.html). This kind of [markup](https://en.wikipedia.org/wiki/Markup_language) is a bit verbose and unforgiving in its syntax compared to other languages, but it is convenient for publishing documentation to the [ReadTheDocs service](https://readthedocs.org/) directly from the GitHub repo, so we use it.
 
@@ -101,7 +101,10 @@ You can see [past journal clubs we have conducted online](https://www.youtube.co
 
 If you have an idea for a good journal club, please post the suggestion [on our mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
 
-Coding Standards --------------It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8)
+Coding Standards
+----------------
+
+It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8)
 
 Meetings
 --------
@@ -154,8 +157,8 @@ Want to get notified when new content goes live? [Subscribe to the channel](http
 #### Playlists
 
 -   Status Updates - Biweekly updates from the OpenWorm team.
--   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our journal clubs. \<journalclub\>
--   Data Team meetings - Learn more about our team meetings. \<team-meetings\>
+-   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
+-   Data Team meetings - Learn more about our [team meetings](#team-meetings).
 -   Real *C. elegans*
 -   Building Blocks
 
@@ -174,4 +177,4 @@ Interesting in being a guest on our blog? We love hearing about what members of 
 Membership
 ----------
 
-More information about the membership policy is available on a separate page \<membership\>.
+More information about the membership policy is available on [a separate page](membership/).
