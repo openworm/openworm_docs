@@ -69,9 +69,11 @@ When they are ready to consume by the general public, simulation engines, visual
 
 Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/projects/).
 
-The docs use [rst format](http://sphinx-doc.org/rest.html). This kind of [markup](https://en.wikipedia.org/wiki/Markup_language) is a bit verbose and unforgiving in its syntax compared to other languages, but it is convenient for publishing documentation to the [ReadTheDocs service](https://readthedocs.org/) directly from the GitHub repo, so we use it.
+The docs use ["Github-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for Github (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than ReSTructured text, which was used previously. Converting to markdown is in hopes that writing will be easier for contributors.
 
-The 'master outline' for the top level is in [index.rst](https://raw.github.com/openworm/openworm_docs/master/index.rst). The ['toctree' directive](http://sphinx-doc.org/markup/toctree.html) in this file sets up what is on the sidebar. This assumes that files with the names under the toctree are present in the same directory as index.rst. Under this, the next level of hierarchy is determined by [section headers](http://sphinx-doc.org/rest.html#sections). In the [projects page](https://raw.github.com/openworm/openworm_docs/master/projects.rst) we've used a hidden toctree in the file, which is creating the next level of hierarchy in the sidebar. In that toctree, you can see an example of referencing the underlying directory structure (e.g. 'Projects/worm-movement').
+The documentation is published on the [ReadTheDocs service](https://readthedocs.org/), which helps it remain searchable and beautiful.
+
+The markdown documentation is rendered using the Python module [MkDocs](mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
 Changes that appear in GitHub will automatically trigger a hook that will cause the documentation on ReadTheDocs to become rebuilt and pushed onto the site. There are different versions of the documentation that are explained below.
 
@@ -83,8 +85,8 @@ The content that appears as a numbered version, like [0.5](http://docs.openworm.
 
 Keeping a division between latest and the versioned documentation is important for several reasons:
 
--   *Latest* acts as a staging area - ReStructuredText is often touchy in terms of formatting -- it is easy towrite something before ensuring that it formats properly. We don't want those warts exposed to the public so having an extra layer of review by checking the page on *latest* first is valuable.
--   URL Stability - content in *latest* is easy to update. Pages can be moved or deleted easily, breaking URLs that we have given out. If we make sure not to move pages around on the versioned docs, we can sustain URLs
+-   *Latest* acts as a staging area -  We don't want errors exposed to the public, so having an extra layer of review by checking the page on *latest* first is valuable.
+-   URL Stability - content in *latest* is easy to update. Pages can be moved or deleted easily, breaking URLs that we have given out. If we make sure not to move pages around on the versioned docs, we can sustain URLs.
 -   Versions should correspond to major releases of the project as a whole, which happen approximately every six months. As the project naturally evolves, the versioned docs provide a motivation for the entire documentation to be re-evaluated as a whole.
 
 The recommended best practice when updating the documentation is that if your changes fix bugs with the documentation that don't involve moving pages, renaming pages, or deleting pages, then check them in first to latest. Then on a regular basis the changes can be evaluated to be back applied to the most recent version. If your changes add new projects or new content, or update a documentation page with the results of new events, keep this in latest and it will get rolled into the next version.
