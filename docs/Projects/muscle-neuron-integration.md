@@ -16,7 +16,7 @@ It is especially important to validate the ion channel models we generate and si
 
 This part of the workflow is described directly below.
 
-Modelling / Validation
+Modeling / Validation
 ----------------------
 
 ![image](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370)
@@ -57,18 +57,19 @@ Issues for this part of the project are tracked and raised in [the Github repo.]
 
 ### Associated Repositories
 
-[ChannelWorm](https://github.com/VahidGh/ChannelWorm/%20/)
+- [ChannelWorm](https://github.com/VahidGh/ChannelWorm/%20/)
 
 Optimization (NeuroTune)
 ------------------------
 
-The [Neurotune](https://github.com/vellamike/neurotune%20/) package provides neurotune a package for optimizing electical models of excitable cells.
+The [Neurotune](https://github.com/vellamike/neurotune%20/) package provides neurotune a package for optimizing electrical models of excitable cells.
 
-Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In this case, the parameters are modelled ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.
+Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In this case, the parameters are modeled ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.
 
 ### Associated Repositories
 
-[Neurotune](https://github.com/vellamike/neurotune%20/) [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html%20/)
+- [Neurotune](https://github.com/vellamike/neurotune%20/)
+- [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html%20/)
 
 PyOpenWorm
 ----------
@@ -94,7 +95,7 @@ Issues for PyOpenWorm are tracked [on Github](https://github.com/openworm/PyOpen
 
 ### Associated Repositories
 
-[PyOpenWorm](https://github.com/openworm/PyOpenWorm/%20/)
+- [PyOpenWorm](https://github.com/openworm/PyOpenWorm/%20/)
 
 Muscle Model
 ------------
@@ -122,7 +123,7 @@ Issues for the muscle model are tracked [on Github.](https://github.com/openworm
 
 ### Associated Repositories
 
-[Muscle\_model](https://github.com/openworm/muscle_model%20/)
+- [Muscle\_model](https://github.com/openworm/muscle_model%20/)
 
 c302
 ----
@@ -145,4 +146,4 @@ Issues for c302 are tracked [in the CElegansNeuroML repo.](https://github.com/op
 
 ### Associated Repositories
 
-[CElegansNeuroML](https://github.com/openworm/CElegansNeuroML%20/)
+- [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML%20/)

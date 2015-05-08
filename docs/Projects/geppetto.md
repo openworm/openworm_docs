@@ -12,17 +12,18 @@ The engine runs on on Eclipse Virgo WebServer deployed on an Amazon [Elastic Com
 Previous accomplishments
 ------------------------
 
--   Past releases of Geppetto
+- Past releases of Geppetto
 
-Current roadmap --------------
+Current roadmap
+---------------
 
-[STORY: Worm wiggling in the browser](https://github.com/openworm/OpenWorm/issues?milestone=21&state=open) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+###[STORY: Worm wiggling in the browser](https://github.com/openworm/OpenWorm/issues?milestone=21&state=open)
 
 As a user, I want to see the proof of concept sibernetic worm in my web browser so that anyone around the world can play with it.
 
 Practically, this means porting the proof of concept scene into Geppetto.
 
-[STORY: Interactive worm wiggling in browser](https://github.com/openworm/OpenWorm/issues?milestone=23&state=open) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+###[STORY: Interactive worm wiggling in browser](https://github.com/openworm/OpenWorm/issues?milestone=23&state=open)
 
 As a user, I want to be able to see a visualization of the proof of concept worm wiggling in my web browser and be able to perturb it in a manner that causes the wiggling to change in a realistic manner.
 
@@ -41,7 +42,8 @@ Ultimately every module of Geppetto has issues of its own, see the list of repos
 
 The issues are so splitted to allow capturing different granularities, having both issues that reflect what macro functionalities need to be added in the OpenWorm and Geppetto repository and having detailed close-to-the-code bugs in the individual repositories.
 
-Associated Repositories ----------------------
+Associated Repositories
+-----------------------
 
 <table>
 <colgroup>

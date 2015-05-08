@@ -8,25 +8,24 @@ The main goal of the Movement Validation team is to finish a test pipeline so th
 Previous accomplishments
 ------------------------
 
--   All code necessary to reproduce Ev Yemini’s Nature Methods paper was obtained in October 2013. Jim has stored it in the [MRC\_wormtracker\_GUI repo](https://github.com/JimHokanson/mrc_wormtracker_gui).
-    -   This is in addition to the [SegWorm repo](https://github.com/openworm/SegWorm), although we will be merging them.
-    -   It has code to generate features from measurements.
+- All code necessary to reproduce Ev Yemini’s Nature Methods paper was obtained in October 2013. Jim has stored it in the [MRC\_wormtracker\_GUI repo](https://github.com/JimHokanson/mrc_wormtracker_gui).
+    - This is in addition to the [SegWorm repo](https://github.com/openworm/SegWorm), although we will be merging them.
+    - It has code to generate features from measurements.
 
-\* A [movement validation GitHub repository](https://github.com/MichaelCurrie/movement_validation) was started specifically with the goal of developing  
-the infrastructure to validate model worm movements against real worms.
+- A [movement validation GitHub repository](https://github.com/MichaelCurrie/movement_validation) was started specifically with the goal of developing  the infrastructure to validate model worm movements against real worms.
 
 Current roadmap
 ---------------
 
-[STORY: Build a test suite for the simulation from WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=19&state=open) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+###[STORY: Build a test suite for the simulation from WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=19&state=open)
 
 As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how close the model is to real data.
 
 In order for a model to demonstrate scientific value, it has to make falsifiable predictions. The target data to be able to predict will be drawn from the WormBehavior database. This milestone will involve working with these data, creating a code base that can compare movement output from the simulation with ground truth from the database and produce an accuracy score.
 
-This story breaks down the epic to predict behavior from the WormBehavior database
+This story breaks down the epic to predict behavior from the WormBehavior database.
 
-[EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=22&state=open) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+###[EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=22&state=open)
 
 This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data collected about the N2 worm in the WormBehavior database. This means building a training set and a test set that are kept separate from each other, using the training set to tune up the model, then generating predictions, and comparing them against the test set, and doing some cross-validation).
 

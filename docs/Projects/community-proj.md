@@ -7,7 +7,7 @@ The effort to build the OpenWorm open science community is always ongoing.
 -   Documenting our progress
 -   Journal clubs
 
-You can find out more about our OpenWorm community on another page \<community\>.
+You can find out more about our OpenWorm community on [another page](../Community/community/).
 
 Previous accomplishments
 ------------------------
