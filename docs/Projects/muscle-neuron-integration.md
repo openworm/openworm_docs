@@ -71,16 +71,14 @@ Neurotune provides a solution for optimizing the parameters of a model to match 
 - [Neurotune](https://github.com/vellamike/neurotune%20/)
 - [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html%20/)
 
-PyOpenWorm
-----------
+## PyOpenWorm Unified Data Access Layer
 
-[PyOpenWorm](https://github.com/openworm/PyOpenWorm/tree/master%20/) is a unified data access layer for OpenWorm. It's used to store and retrieve data associated with *C. elegans*, associating evidence for this data when it is stored.
+We have consolidated a lot of data about the worm into a python library that creates a unified data access layer [called PyOpenWorm](https://github.com/openworm/pyopenworm). [Documentation for PyOpenWorm is available online](http://pyopenworm.readthedocs.org/en/latest/intro.html).
 
 ### Previous accomplishments
 
--   Create API to access data
--   Create API to insert data
--   Employ backend database to capture data
+-   Building the original [OpenWorm database](https://groups.google.com/d/msg/openworm-discuss/2V5kF5na5fw/GnxZMgWYF7wJ)
+-   [Initial release of PyOpenWorm](https://github.com/openworm/PyOpenWorm/releases/tag/0.0.1-alpha)
 
 ### Current roadmap
 
@@ -88,21 +86,42 @@ PyOpenWorm will be used in the information storage aspect of various other subpr
 
 1.  Adapting PyOpenWorm's existing infrastructure to serve ChannelWorm
 2.  Filling the database with information, being sure to tag each fact with sources along the way.
+3.  Finalize [remaining issues for PyOpenWorm version alpha0.5](https://github.com/openworm/PyOpenWorm/labels/alpha0.5)
+4.  [Document Neuron Ion Channels: Types](https://github.com/openworm/OpenWorm/issues/31)
+5.  [Document Ion channels: Research Claims](https://github.com/openworm/OpenWorm/issues/32)
 
 ### Issues list
 
-Issues for PyOpenWorm are tracked [on Github](https://github.com/openworm/PyOpenWorm/issues%20/).
+Issues for PyOpenWorm are tracked [on Github](https://github.com/openworm/PyOpenWorm/issues/).
 
 ### Associated Repositories
 
-- [PyOpenWorm](https://github.com/openworm/PyOpenWorm/%20/)
+- [PyOpenWorm](https://github.com/openworm/PyOpenWorm/)
 
 Muscle Model
 ------------
 
 The [muscle model subproject](https://github.com/openworm/muscle_model%20/) is concerned with modelling and simulation at the *cellular* level, specifically attempting to simulate the electrical dynamics of a *C. elegans* body wall muscle cell.
 
-This depends on what happens in the channelworm repo, since ion channel dynamics are integral to our simulation of membrane dynamics.
+This depends on what happens in [ChannelWorm](#channelworm), since ion channel dynamics are integral to our simulation of membrane dynamics.
+
+Because the muscle cell is driven both by an electrical model and a mechanical model, it is a focus of integration between different algorithms. Previously we have created a separate [repository for the muscle model](https://github.com/openworm/muscle_model) that is an adaptation of the work by [Boyle & Cohen, 2008](http://www.comp.leeds.ac.uk/netta/CV/papers/BC08b.pdf). We have an [approximately working version](http://www.opensourcebrain.org/projects/muscle_model/wiki) implemented in NEURON and are porting this to be fully NeuroML2 compliant.
+
+The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team. You can connect with the team [on real time chat](https://gitter.im/openworm/muscle_model).
+
+To catch up with recent developments of this team, please see the following resources:
+
+-   Meeting \#1 ([YouTube Video](https://www.youtube.com/watch?v=6AhKE2Vg_Uw)) ([Agenda](https://docs.google.com/document/d/1BByFfABx91Ao-qKFYXAP0wQONlhdDy7MtSu8G0QxUes/edit))
+-   Meeting \#2 ([YouTube Video](https://www.youtube.com/watch?v=HfGAJYwNt3c)) ([Agenda](https://docs.google.com/document/d/1gUBwNjK4OEYd22Pdjt5vcm0-L6cbIHEU6k51AnOcL24/edit?usp=drive_web))
+-   Synapse journal club ([YouTube Video](https://www.youtube.com/watch?v=697Irn0J_54)) ([Slides](https://docs.google.com/presentation/d/1uMtXJNEXzzoPw45HG6sztqiiPDUn2jcUpHj7oiHxu38/edit?usp=sharing))
+-   Meeting \#3 ([YouTube Video](https://www.youtube.com/watch?v=3KApBmFa6WY)) ([Agenda](https://docs.google.com/document/d/1JAH4Hs_J0tYbcEuxOMQ0fl2NPf6H6Z7kbe72lAi7SdA/edit))
+
+Some additional background materials that will help explain neuroscience concepts relevant to to this in two minutes each are below:
+
+-   [The neuron](https://www.youtube.com/watch?v=6qS83wD29PY)
+-   [Membrane potential](https://www.youtube.com/watch?v=tIzF2tWy6KI)
+-   [Synaptic transmission](https://www.youtube.com/watch?v=WhowH0kb7n0)
+-   [Receptors and ligands](https://www.youtube.com/watch?v=NXOXZ-kaSVI)
 
 ### Previous accomplishments
 
@@ -114,8 +133,9 @@ This depends on what happens in the channelworm repo, since ion channel dynamics
 
 Some of the next steps for the muscle model subproject include:
 
-1.  Write validation tests for the muscle model (Ex: using [SciUnit](https://github.com/scidash/sciunit%20/)).
-2.  Run validation tests.
+1.   [Create unit test on the full muscle model that reproduces Figure 1A from Liu, Hollopeter, & Jorgensen 2009](https://github.com/openworm/muscle_model/issues/31)
+2.   [Create unit test that verifies correct I/V curve for ca\_boyle NML2 channel](https://github.com/openworm/muscle_model/issues/30)
+3.   [Update optimization.py to run with neurotune instead of optimalneuron](https://github.com/openworm/muscle_model/issues/18)
 
 ### Issues list
 
