@@ -52,11 +52,13 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 
 ### Associated Repositories
 
+
 Repository | Description | Language
 ------------ | ------------- | ------------
 <a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C elegans model, contained in a neuroConstruct project  | Java
 <a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
 <a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
+
 
 
 # Data Visualization
@@ -79,34 +81,8 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 
 ### Associated Repositories
 
-<table>
-<colgroup>
-<col width="44%" />
-<col width="49%" />
-<col width="5%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Repository</th>
-<th align="left">Description</th>
-<th align="left">Language</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/wormbrowser">wormbrowser</a></td>
-<td align="left">The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans</td>
-<td align="left">Javascript</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a></td>
-<td align="left">OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser</td>
-<td align="left">Objective-C</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/data-viz">data-viz</a></td>
-<td align="left">Repository for scripts and other code items to create web-based visualizations of data in the project</td>
-<td align="left">Python</td>
-</tr>
-</tbody>
-</table>
+Repository | Description | Language
+------------ | ------------- | ------------
+<a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans | Javascript
+<a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a> | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser | Objective-C
+<a href="https://github.com/openworm/data-viz">data-viz</a> | Repository for scripts and other code items to create web-based visualizations of data in the project | Python
