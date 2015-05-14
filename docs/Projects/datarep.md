@@ -52,37 +52,12 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 
 ### Associated Repositories
 
-<table>
-<colgroup>
-<col width="45%" />
-<col width="50%" />
-<col width="4%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Repository</th>
-<th align="left">Description</th>
-<th align="left">Language</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a></td>
-<td align="left">NeuroML based C elegans model, contained in a neuroConstruct project</td>
-<td align="left">Java</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a></td>
-<td align="left">Conversion script to bring neuron models drawn in Blender into NeuroML format</td>
-<td align="left">Python</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a></td>
-<td align="left">Graphing voltage data from NEURON sims of C. elegans conectome</td>
-<td align="left">Python</td>
-</tr>
-</tbody>
-</table>
+Repository | Description | Language
+------------ | ------------- | ------------
+<a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C elegans model, contained in a neuroConstruct project  | Java
+<a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
+<a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
+
 
 # Data Visualization
 
