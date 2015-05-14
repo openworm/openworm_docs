@@ -28,15 +28,15 @@ Below you can find information about each subproject, see the project’s curren
 
 A lot of data about *c. elegans* is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
 
-#NeuroML Connectome
+# NeuroML Connectome
 
 Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
-## Previous accomplishments
+### Previous accomplishments
 
 -   Building the C Elegans NeuroML file
 
-## Current roadmap
+### Current roadmap
 
 ###[Updated NeuroML connectome model](https://github.com/openworm/OpenWorm/issues?milestone=15&state=open)
 
@@ -46,11 +46,11 @@ The [NeuroML connectome model](https://github.com/openworm/CElegansNeuroML) prov
 -   [Remove Glutamate\_GJ etc in neuroConstruct project](https://github.com/openworm/OpenWorm/issues/50)
 -   [Create or reuse a NeuroML description of c. elegans motor neuron synapses](https://github.com/openworm/OpenWorm/issues/124)
 
-## Issues list
+### Issues list
 
 All issues related to [working with data](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open), and [doing research](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open) can be found on GitHub.
 
-## Associated Repositories
+### Associated Repositories
 
 <table>
 <colgroup>
@@ -84,26 +84,25 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 </tbody>
 </table>
 
-Data Visualization
-------------------
+# Data Visualization
 
 With the ever increasing capacity to collect data about biological system, the new challenge is to understand what these dataset tell us about the system. The computational neuroscience community is developing a range of methods to extract knowledge from these datasets. One approach the accomplish this task is to represent the data visually. Our team has already produced the [OpenWorm browser for web](http://browser.openworm.org) and [iOS](https://itunes.apple.com/us/app/openworm-browser/id595581306?mt=8), which makes it easy to visually study the anatomy of the the worm.
 
-## Previous accomplishments
+### Previous accomplishments
 
 -   OpenWorm browser
 -   OpenWorm browser iOS
 -   Hive Plots visualizations of connectome
 
-##Current roadmap
+### Current roadmap
 
 -   [Create a D3 implementation of the C. elegans connectome HivePlot](https://github.com/openworm/OpenWorm/issues/89)
 
-## Issues list
+### Issues list
 
 All issues related to [working with data](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=data+parsing&page=1&sort=comments&state=open), and [doing research](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=research&page=1&sort=comments&state=open) can be found on GitHub.
 
-## Associated Repositories
+### Associated Repositories
 
 <table>
 <colgroup>
