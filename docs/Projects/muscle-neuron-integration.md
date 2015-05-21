@@ -27,10 +27,10 @@ Depending on the type of data being used (e.g. patch-clamp data or homology mode
 
 Let's take an example channel model being compared to patch-clamp data from the literature:
 
-1.  We have a given channel model (ex: [ca\_boyle](https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml%20/))
-2.  Run it through simulating scripts (ex: [Rayner's scripts](https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py%20/))
+1.  We have a given channel model (ex: [ca\_boyle](https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml/))
+2.  Run it through simulating scripts (ex: [Rayner's scripts](https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/))
 3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/%20/))
-4.  Depending on the result of [a test](https://github.com/openworm/muscle_model/issues/30%20/) comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
+4.  Depending on the result of [a test](https://github.com/openworm/muscle_model/issues/30/) comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
 
 ChannelWorm
 -----------
@@ -57,12 +57,12 @@ Issues for this part of the project are tracked and raised in [the Github repo.]
 
 ### Associated Repositories
 
-- [ChannelWorm](https://github.com/VahidGh/ChannelWorm/%20/)
+- [ChannelWorm](https://github.com/VahidGh/ChannelWorm/)
 
 Optimization (NeuroTune)
 ------------------------
 
-The [Neurotune](https://github.com/vellamike/neurotune%20/) package provides neurotune a package for optimizing electrical models of excitable cells.
+The [Neurotune](https://github.com/vellamike/neurotune/) package provides neurotune a package for optimizing electrical models of excitable cells.
 
 Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In this case, the parameters are modeled ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.
 
@@ -101,7 +101,7 @@ Issues for PyOpenWorm are tracked [on Github](https://github.com/openworm/PyOpen
 Muscle Model
 ------------
 
-The [muscle model subproject](https://github.com/openworm/muscle_model%20/) is concerned with modelling and simulation at the *cellular* level, specifically attempting to simulate the electrical dynamics of a *C. elegans* body wall muscle cell.
+The [muscle model subproject](https://github.com/openworm/muscle_model/) is concerned with modelling and simulation at the *cellular* level, specifically attempting to simulate the electrical dynamics of a *C. elegans* body wall muscle cell.
 
 This depends on what happens in [ChannelWorm](#channelworm), since ion channel dynamics are integral to our simulation of membrane dynamics.
 
@@ -148,22 +148,22 @@ Issues for the muscle model are tracked [on Github.](https://github.com/openworm
 c302
 ----
 
-The [c302 subproject](https://github.com/openworm/CElegansNeuroML/tree/master/CElegans/pythonScripts/c302%20/) is an effort to simulate the connectome of *C. elegans*, which includes its 302 neurons. The neural dynamics will start out with biologically-unrealistic integrate and fire cells, and be replaced with incrementally more realistic dynamics, as tests pass. Like the musclemodel, dynamics of neurons depend on ion channel dynamics within the cells, and thus depend on the channelworm subproject.
+The [c302 subproject](https://github.com/openworm/CElegansNeuroML/tree/master/CElegans/pythonScripts/c302/) is an effort to simulate the connectome of *C. elegans*, which includes its 302 neurons. The neural dynamics will start out with biologically-unrealistic integrate and fire cells, and be replaced with incrementally more realistic dynamics, as tests pass. Like the musclemodel, dynamics of neurons depend on ion channel dynamics within the cells, and thus depend on the channelworm subproject.
 
 ### Previous accomplishments
 
--   Generate NeuroML2 using [libNeuroML](https://github.com/NeuralEnsemble/libNeuroML%20/) combined with connectivity data
--   Run simulations of the connectome in LEMS using [jNeuroML](https://github.com/NeuroML/jNeuroML%20/) or [pyNeuroML](https://github.com/NeuroML/pyNeuroML%20/)
+-   Generate NeuroML2 using [libNeuroML](https://github.com/NeuralEnsemble/libNeuroML/) combined with connectivity data
+-   Run simulations of the connectome in LEMS using [jNeuroML](https://github.com/NeuroML/jNeuroML/) or [pyNeuroML](https://github.com/NeuroML/pyNeuroML/)
 
 ### Current roadmap
 
-1.  Create validation tests using [SciUnit](https://github.com/scidash/sciunit%20/) or a similar framework.
+1.  Create validation tests using [SciUnit](https://github.com/scidash/sciunit/) or a similar framework.
 2.  Run validation tests.
 
 ### Issues list
 
-Issues for c302 are tracked [in the CElegansNeuroML repo.](https://github.com/openworm/CElegansNeuroML/issues%20/)
+Issues for c302 are tracked [in the CElegansNeuroML repo.](https://github.com/openworm/CElegansNeuroML/issues/)
 
 ### Associated Repositories
 
-- [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML%20/)
+- [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML/)
