@@ -41,7 +41,7 @@ Let's take an example channel model being compared to patch-clamp data from the 
 
 1.  We have a given channel model (ex: [ca\_boyle](https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml/))
 2.  Run it through simulating scripts (ex: [Rayner's scripts](https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/))
-3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/%20/))
+3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/))
 4.  Depending on the result of [a test](https://github.com/openworm/muscle_model/issues/30/) comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
 
 ChannelWorm
@@ -82,8 +82,8 @@ In other words, Neurotune provides a solution for optimizing the parameters of a
 
 ### Associated Repositories
 
-- [Neurotune](https://github.com/vellamike/neurotune%20/)
-- [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html%20/)
+- [Neurotune](https://github.com/vellamike/neurotune/)
+- [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html/)
 
 ## PyOpenWorm Unified Data Access Layer
 
@@ -96,7 +96,7 @@ We have consolidated a lot of data about the worm into a python library that cre
 
 ### Current roadmap
 
-PyOpenWorm will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use [its own fork of PyOpenWorm](https://github.com/openworm/PyOpenWorm/tree/channelworm%20/) to store Ion Channel data and models that it retrieves from scientific papers. Next steps involve:
+PyOpenWorm will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use [its own fork of PyOpenWorm](https://github.com/openworm/PyOpenWorm/tree/channelworm/) to store Ion Channel data and models that it retrieves from scientific papers. Next steps involve:
 
 1.  Adapting PyOpenWorm's existing infrastructure to serve ChannelWorm
 2.  Filling the database with information, being sure to tag each fact with sources along the way.
@@ -139,9 +139,9 @@ Some additional background materials that will help explain neuroscience concept
 
 ### Previous accomplishments
 
--   Implementation of Boyle & Cohen muscle model [in python](https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008%20/)
--   [Conversion of model into NEURON](https://github.com/openworm/muscle_model/tree/master/neuron_implementation%20/)
--   [Simulation](https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels%20/) of NeuroML2 ion channels in LEMS
+-   Implementation of Boyle & Cohen muscle model [in python](https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008/)
+-   [Conversion of model into NEURON](https://github.com/openworm/muscle_model/tree/master/neuron_implementation/)
+-   [Simulation](https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels/) of NeuroML2 ion channels in LEMS
 
 ### Current roadmap
 
@@ -153,11 +153,11 @@ Some of the next steps for the muscle model subproject include:
 
 ### Issues list
 
-Issues for the muscle model are tracked [on Github.](https://github.com/openworm/muscle_model/issues%20/)
+Issues for the muscle model are tracked [on Github.](https://github.com/openworm/muscle_model/issues/)
 
 ### Associated Repositories
 
-- [Muscle\_model](https://github.com/openworm/muscle_model%20/)
+- [Muscle\_model](https://github.com/openworm/muscle_model/)
 
 c302
 ----
