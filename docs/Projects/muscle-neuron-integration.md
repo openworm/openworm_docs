@@ -1,35 +1,47 @@
 Muscle-Neuron Team
 ==================
 
-![image](http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869)
+Abstract
+--------
+
+The fidelity of OpenWorm to its biological counterpart, C. elegans, depends on the realism of its constituent parts, such as computationally-modelled cells. The internal dynamics of these cells are largely controlled by ion channels, so a biophysically-informed ion channel model will, in-turn, support a realistic model of the entire organism.
+
+Broadly speaking, the team for this project will develop a workflow and tools to simulate *C. elegans* cell dynamics using simulated ion channel (*intracellular*) dynamics.
+
+[![image](http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869)](https://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/edit)
 
 High-level Overview
 -------------------
 
-Broadly speaking, the team will develop a workflow and tools to simulate *C. elegans* cell dynamics using simulated ion channel (*intracellular*) dynamics.
+The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.
 
-Data mined from the relevant literature will be used to create ion channel models. These ion channel models will be "embedded" in the virtual membranes of simulated muscle cells and neurons, and give rise to electrophysical dynamics for the cell as a whole.
+Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (PyOpenWorm) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.
 
-All of these processes must have validation tests to ensure that each step is doing exactly what we want it to do. This maintains the validity of the model as a whole, and provides breakpoints to examine if something in the workflow is amiss.
+Once the ion channel models are successfully validated and stored in the PyOpenWorm database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - PyOpenWorm database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
 
-It is especially important to validate the ion channel models we generate and simulate, since it is at the deepest level of our model, and affects all other layers on top of it.
+Tracking progress
+-----------------
 
-This part of the workflow is described directly below.
+Issues for this set of projects are organized on our [waffle board](https://waffle.io/VahidGh/ChannelWorm), and may give a clearer picture of what is going on in each of them.
 
-Modeling / Validation
-----------------------
+Below is a similarly organized chart keeping track of our higher-level *milestones* in each repository, which will be updated as this meta-project develops.
 
-![image](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370)
+[![](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/pub?w=1322&h=748)](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/edit)
 
-This figure shows, in a general way, how ion channel models are simulated and incrementally fit to their observed counterparts.
+Modeling / Validation / Optimization Loop
+-----------------------------------------
 
-Depending on the type of data being used (e.g. patch-clamp data or homology modelling), the implementation will differ, but our approach will follow this pattern.
+[![image](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370)](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/edit)
+
+This figure describes, in a general way, how ion channel models are simulated and incrementally fit to their observed counterparts, as will be done in [the ChannelWorm subproject](https://github.com/VahidGh/ChannelWorm/).
+
+Depending on the type of data being used (e.g. patch-clamp data or homology modelling), the implementation will differ, but our approach will still follow this pattern.
 
 Let's take an example channel model being compared to patch-clamp data from the literature:
 
 1.  We have a given channel model (ex: [ca\_boyle](https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml/))
 2.  Run it through simulating scripts (ex: [Rayner's scripts](https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/))
-3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/%20/))
+3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/))
 4.  Depending on the result of [a test](https://github.com/openworm/muscle_model/issues/30/) comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
 
 ChannelWorm
@@ -39,7 +51,9 @@ ChannelWorm
 
 1.  [Identification](https://github.com/VahidGh/ChannelWorm/issues/10/) of papers with ion channel data.
 2.  Extraction of data from these papers, including figures, active parameters and tabular data.
-3.  [Digitization](https://github.com/VahidGh/ChannelWorm/issues/17/) of figures, and more generally, converting this information into machine-readable form.
+3.  [Digitization](http://channelworm.readthedocs.org/en/latest/digitization/) of figures, and more generally, converting this information into machine-readable form.
+
+The output of the pipeline will either be [fed into an optimization engine](http://channelworm.readthedocs.org/en/latest/optimization/) or [stored in a database](http://channelworm.readthedocs.org/en/latest/information-management/#data-management), depending on the results of [validation tests](http://channelworm.readthedocs.org/en/latest/validation/).
 
 ### Current roadmap
 
@@ -53,23 +67,23 @@ The tasks ahead include:
 
 ### Issues list
 
-Issues for this part of the project are tracked and raised in [the Github repo.](https://github.com/VahidGh/ChannelWorm/issues?q=is%3Aopen+is%3Aissue/)
+Issues for this part of the project are tracked and raised in [the Github repo,](https://github.com/VahidGh/ChannelWorm/issues?q=is%3Aopen+is%3Aissue/) as well as the [ChannelWorm waffle board](https://waffle.io/VahidGh/ChannelWorm).
 
 ### Associated Repositories
 
 - [ChannelWorm](https://github.com/VahidGh/ChannelWorm/)
 
-Optimization (NeuroTune)
-------------------------
+Optimization
+------------
 
 The [Neurotune](https://github.com/vellamike/neurotune/) package provides neurotune a package for optimizing electrical models of excitable cells.
 
-Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In this case, the parameters are modeled ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.
+In other words, Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In the case of ChannelWorm, the parameters are electrical ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.
 
 ### Associated Repositories
 
-- [Neurotune](https://github.com/vellamike/neurotune%20/)
-- [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html%20/)
+- [Neurotune](https://github.com/vellamike/neurotune/)
+- [NeuroTune docs](http://optimal-neuron.readthedocs.org/en/latest/architecture.html/)
 
 ## PyOpenWorm Unified Data Access Layer
 
@@ -82,7 +96,7 @@ We have consolidated a lot of data about the worm into a python library that cre
 
 ### Current roadmap
 
-PyOpenWorm will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use [its own fork of PyOpenWorm](https://github.com/openworm/PyOpenWorm/tree/channelworm%20/) to store Ion Channel data and models that it retrieves from scientific papers. Next steps involve:
+PyOpenWorm will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use [its own fork of PyOpenWorm](https://github.com/openworm/PyOpenWorm/tree/channelworm/) to store Ion Channel data and models that it retrieves from scientific papers. Next steps involve:
 
 1.  Adapting PyOpenWorm's existing infrastructure to serve ChannelWorm
 2.  Filling the database with information, being sure to tag each fact with sources along the way.
@@ -125,9 +139,9 @@ Some additional background materials that will help explain neuroscience concept
 
 ### Previous accomplishments
 
--   Implementation of Boyle & Cohen muscle model [in python](https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008%20/)
--   [Conversion of model into NEURON](https://github.com/openworm/muscle_model/tree/master/neuron_implementation%20/)
--   [Simulation](https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels%20/) of NeuroML2 ion channels in LEMS
+-   Implementation of Boyle & Cohen muscle model [in python](https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008/)
+-   [Conversion of model into NEURON](https://github.com/openworm/muscle_model/tree/master/neuron_implementation/)
+-   [Simulation](https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels/) of NeuroML2 ion channels in LEMS
 
 ### Current roadmap
 
@@ -139,11 +153,11 @@ Some of the next steps for the muscle model subproject include:
 
 ### Issues list
 
-Issues for the muscle model are tracked [on Github.](https://github.com/openworm/muscle_model/issues%20/)
+Issues for the muscle model are tracked [on Github.](https://github.com/openworm/muscle_model/issues/)
 
 ### Associated Repositories
 
-- [Muscle\_model](https://github.com/openworm/muscle_model%20/)
+- [Muscle\_model](https://github.com/openworm/muscle_model/)
 
 c302
 ----
