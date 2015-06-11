@@ -13,6 +13,8 @@ The project is currently laid out into seven major areas shown below:
 
 ![Project overview](https://docs.google.com/drawings/d/12QMz1LNvKfS1iiYOPCSCkXTU7JQHKJQkjLwN3WLSXYc/pub?w=755&h=493)
 
+![Overview Flow Diagram](Projects/OpenWorm Integration - Neuromechanical simulation.png)
+
 **NeuroMechanical Modeling - Sibernetic**
 
 While our ultimate goal is to simulate every cell in *C. elegans*, we are starting out by building a model of its body, its nervous system, and its environment. [Sibernetic](http://sibernetic.org) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
