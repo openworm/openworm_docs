@@ -11,8 +11,6 @@ The project is currently laid out into seven major areas shown below:
 -   Community outreach
 -   Muscle-Neuron integration
 
-![Project overview](https://docs.google.com/drawings/d/12QMz1LNvKfS1iiYOPCSCkXTU7JQHKJQkjLwN3WLSXYc/pub?w=755&h=493)
-
 ![Overview Flow Diagram](https://camo.githubusercontent.com/88a8afd44de4740a089a5912a542adb09bc38bc5/68747470733a2f2f7777772e6c7563696463686172742e636f6d2f7075626c69635365676d656e74732f766965772f35346564663035632d373162382d343038362d396130632d3561303530613030343830352f696d6167652e706e67)
 
 **NeuroMechanical Modeling - Sibernetic**
