@@ -6,6 +6,16 @@ Welcome
 
 OpenWorm is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a *C. elegans* nematode, via bottom-up "systems biology" computational modeling. It is an association of highly motivated scientists, engineers, coders, and curious citizens from around the world who believe in open science and open access.
 
+Table Of Contents
+-----------------
+
+- [Projects](/Projects/projects/)
+- [Community](/Community/community/)
+- [Background](background/)
+- [Modeling Approach](modeling/)
+- [Resources](resources/)
+- [Frequently Asked Questions](faq/)
+
 Mission/Vision
 --------------
 
