@@ -16,6 +16,7 @@ Previous accomplishments
 -   [Media attention](http://www.openworm.org/media.html)
 -   [Attracting contributors](http://www.openworm.org/people.html)
 -   [Attracting supporters](http://www.openworm.org/supporters.html)
+-   [Successful crowdfunding](https://www.kickstarter.com/projects/openworm/openworm-a-digital-organism-in-your-browser)
 
 Current roadmap
 ---------------

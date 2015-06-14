@@ -14,7 +14,17 @@ Contribution Best Practices
 
 What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/) you want to contribute to.
 
-Another way is you can [browse the board of issues](https://waffle.io/openworm/openworm) directly.
+### Find tasks to work on
+
+Another way is you can [browse the top-level board of issues](https://waffle.io/openworm/openworm) directly.
+
+Other key boards:
+
+- [Geppetto](https://waffle.io/openworm/org.geppetto)
+- [Movement Validation](https://waffle.io/openworm/movement_validation)
+- [Muscle-Neuron-Channel integration](https://waffle.io/VahidGh/ChannelWorm)
+
+### Come chat with us!
 
 You can initiate a conversation with us on our chatrooms to get more specific about issues..  Currently these are:
 
