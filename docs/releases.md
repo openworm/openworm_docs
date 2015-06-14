@@ -1,6 +1,30 @@
 Past Releases
 =============
 
+Release 5,6,7 (2nd Half of 2013, 1st half of 2014, 2nd half of 2014)
+--------------------------------------------------------------------
+These releases have yet to be fully documented, as the project has transitioned
+from a small group-only run project into a much larger volunteer-based
+organization.
+
+Some key milestones that were reached:
+
+Release 7
+
+-  **First OpenWorm Paper published**
+-  **Donation of Brown Lab worm movement data**
+-  **Successful shipments of physical rewards to Kickstarter backers**
+
+Release 6
+
+-  **First version of PyOpenWorm released**
+-  **Successful Kickstarter campaign**
+
+Release 5
+
+-  **Movement validation team formed**
+-  **Donation of code to reproduce movement validation**
+
 Release 4 (1st Half of 2013) January - July 2013
 ------------------------------------------------
 
@@ -170,4 +194,3 @@ We have set a completed a successful release 1 in September. It included the fol
 -   As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser
 -   As a user, I want to use a slider to smoothly make systems in the worm transparent
 -   A more complete document describing our plans for release 2 is available.
-
