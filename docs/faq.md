@@ -71,7 +71,7 @@ In general, you won't step on any toes though -- multiple people doing the same 
 
 ### Do you all ever meet up somewhere physically?
 
-Subsets of us meet frequently, and there has been one meeting of the core OpenWorm team in [Paris in July 2014](http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris). We use Google+ hangout to meet face to face virtually every two weeks.
+Subsets of us meet frequently, and there have been two meetings of the core OpenWorm team, one in [Paris in July 2014](http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris), and a second in London in Fall of 2014.  We use Google+ hangout to meet face to face on a regular basis in general meetings and in standing meetings of the subprojects.
 
 OpenWorm simulation and modeling
 --------------------------------
