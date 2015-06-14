@@ -3,18 +3,13 @@ Using OpenWorm Resources
 
 This page describes content that has been created by the project for use by the public. Currently we make simulation engines, visualization environments, and data sets available.
 
+For Biologists
+--------------
+
+Our website [contains an additional list of resources](http://www.openworm.org/science.html) that are useful to biologists in particular.
+
 Simulation engines
 ------------------
-
-### Sibernetic
-
-Sibernetic is the code base that currently implements the crawling model. Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella that has been created expressly for the purpose of doing research and building the model quickly.
-
-![image](http://i.imgur.com/KSWjCaW.jpg)
-
-More information on running Sibernetic is [available online](http://sibernetic.org).
-
-[The project page for Sibernetic](/Projects/sibernetic/) has information about getting involved with its development.
 
 ### Geppetto
 
@@ -26,13 +21,23 @@ More information on running Geppetto is [available online](http://geppetto.org).
 
 [The project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
 
+### Sibernetic
+
+Sibernetic is the code base that currently implements the crawling model. Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella that has been created expressly for the purpose of doing research and building the model quickly.
+
+![image](http://i.imgur.com/KSWjCaW.jpg)
+
+More information on running Sibernetic is [available online](http://sibernetic.org).
+
+[The project page for Sibernetic](/Projects/sibernetic/) has information about getting involved with its development.
+
 ### Connectome Engine and Lego Mindstorms robot
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
 ![image](http://i.imgur.com/OG7sOAD.jpg)
 
-This is currently in the process of being written up.
+More information is available at [http://www.connectomeengine.org]
 
 ### CyberElegans
 
@@ -70,12 +75,11 @@ Source code for [the web version](https://github.com/openworm/wormbrowser) and [
 Data sets
 ---------
 
-OpenWorm Database
------------------
+### PyOpenWorm
 
-An web version of the OpenWorm database can [be browsed online](http://www.interintelligence.org/openworm/Entities.aspx).
-
-More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).
+A straightforward Python API for accessing information about *C. elegans* is available
+at [PyOpenWorm](http://github.com/openworm/PyOpenWorm).  This API consolidates
+information from our various [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive.
 
 ### C. elegans NeuroML model in NeuroConstruct
 
@@ -84,7 +88,3 @@ The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormba
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
 More information about working with the data within it and other data entities can be found on the data representation project page \<data-rep\>.
-
-### OpenWorm Spreadsheet data
-
-We keep a [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive. We are currently in the process of consolidating these data into the OpenWorm database. More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).
