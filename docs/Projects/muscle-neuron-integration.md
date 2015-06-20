@@ -43,7 +43,7 @@ Let's take an example channel model being compared to patch-clamp data from the 
 Model Completion Dashboard
 ==========================
 
-This is one possible interface that will display the results of the [unifying modeling activity](Projects/muscle-neuron-integration/).
+This is one possible interface that will display the results of the unifying modeling activity.
 
 This interface allows a user to drill down into our model, and view the states of completion of modeled components at each level. At the highest level, matrices display, using a color indicator, the level of completion of each cell in the model.
 
