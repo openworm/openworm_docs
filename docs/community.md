@@ -6,14 +6,33 @@ This page contains information intended to help individuals understand what step
 An Opening Note
 ---------------
 
-Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help either [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss) or on [our chatroom](https://gitter.im/openworm/OpenWorm)!
+Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).  See below for
+additional information on our repo specific chatrooms.
 
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/) you want to contribute to.
 
-Another way is you can [browse the board of issues](https://waffle.io/openworm/openworm) directly.
+### Find tasks to work on
+
+Another way is you can [browse the top-level board of issues](https://waffle.io/openworm/openworm) directly.
+
+Other key boards:
+
+- [Geppetto](https://waffle.io/openworm/org.geppetto)
+- [Movement Validation](https://waffle.io/openworm/movement_validation)
+- [Muscle-Neuron-Channel integration](https://waffle.io/VahidGh/ChannelWorm)
+
+### Come chat with us!
+
+You can initiate a conversation with us on our chatrooms to get more specific about issues..  Currently these are:
+
+- [Project-wide](https://gitter.im/openworm/OpenWorm)
+- [Geppetto](https://gitter.im/openworm/org.geppetto)
+- [Movement Validation](https://gitter.im/openworm/movement_validation)
+- [Muscle model](https://gitterm.im/openworm/muscle_model)
+- [ChannelWorm](https://gitter.im/VahidGh/ChannelWorm)
 
 Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
 
@@ -63,11 +82,11 @@ An example of an effective proposal is [available online](https://docs.google.co
 
 ### Contributing to the OpenWorm documentation
 
-The [OpenWorm documentation](http://openworm.rtfd.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.
+The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/resources/).
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/projects/).
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/).
 
 The docs use ["Github-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for Github (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than ReSTructured text, which was used previously. Converting to markdown is in hopes that writing will be easier for contributors.
 

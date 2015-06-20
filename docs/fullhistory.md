@@ -29,21 +29,23 @@ June 2008: First CyberElegans publication: Palyanov A.Yu., Dibert A.A., Computer
 
 ~2009: Andrey posts the first CyberElegans video to youtube: <https://www.youtube.com/watch?v=Ek49JSAiKjY>
 
-Jan 2010: Sergey Khayrulin joins Andrey and the CyberElegans project.
+Jan 2010: Sergey Khayrulin joins Andrey on the CyberElegans project.
 
 1 Jan 2010: In [the tweet heard 'round the world](http://www.sciencetogrok.com/2013/03/a-great-role-model-for-collaborative.html), co-founder [Giovanni Idili](http://twitter.com/john_idol) **proposes what would later be called the OpenWorm project** to co-founder Stephen Larson (PhD student at UCSD) at the [Whole Brain Catalog](http://twitter.com/BrainCatalog):
 
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole C.Elegans brain (302 neurons)!</p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/7279117575">January 1, 2010</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <blockquote class="twitter-tweet" lang="en"><p>Nice! RT <a href="https://twitter.com/John_Idol">@John_Idol</a>: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole C.Elegans brain (302 neurons)!</p>&mdash; Whole Brain Catalog (@BrainCatalog) <a href="https://twitter.com/BrainCatalog/status/7279523701">January 1, 2010</a></blockquote>
+
 3 August 2010: In a [five-minute speech](https://www.youtube.com/watch?v=Sb1V_OKqRfc), Stephen Larson pitches the idea for simulating *C. elegans* at [Ignite San Diego](http://ignitesandiego.org/).
 
-Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. Giovanni and Matteo reply to the call restating their goal of C. elegans simulation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**. Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
+Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. Giovanni replies to the call restating his goal of C. elegans simulation, and brings Matteo into the conversation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**. Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
 24 Jan 2011: Giovanni discovers **CyberElegans**, developed by **Andrey Palyanov** and **Sergey Khayrulin** (from AP Ershov Institute of Informatics, Russia) who are contacted and immediately agree to join forces with the OpenWorm team:
 
 <blockquote class="twitter-tweet" lang="en"><p>WOW, this C.Elegans simulation looks pretty impressive --&gt; http://goo.gl/SS96B cc: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a>, <a href="https://twitter.com/tarelli">@tarelli</a></p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/29603680760111104">January 24, 2011</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 4 September 2011: [Article](http://www.openworm.org/publications.html): Managing Complexity in Multi-Algorithm, Multi-Scale Biological Simulations: An Integrated Software Engineering and Neuroinformatics Approach.
 
 September 2011: [OpenWorm Release 1](http://docs.openworm.org/en/latest/releases.html#releases)
@@ -71,7 +73,13 @@ January 2014: [OpenWorm Release 5](http://docs.openworm.org/en/latest/releases.h
 
 24 May 2014: [OpenWorm article in The Economist](http://www.economist.com/news/science-and-technology/21602661-crowd-funded-project-aims-build-worlds-first-simulated-organism-computer)
 
+Summer 2014: Two OpenWorm volunteers are sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
+
 4-6 November 2014: **Second OpenWorm Conference**, in London, UK.
+
+April 2015: Amazon Web Services donates credits to the OpenWorm project.
+
+Summer 2015: One OpenWorm volunteer is sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
 
 Projects similar to OpenWorm
 ----------------------------

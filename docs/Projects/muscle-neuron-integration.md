@@ -1,8 +1,8 @@
-Muscle-Neuron Team
-==================
+Muscle-Neuron-Channel Integration
+=================================
 
-Abstract
---------
+High-level Overview
+-------------------
 
 The fidelity of OpenWorm to its biological counterpart, C. elegans, depends on the realism of its constituent parts, such as computationally-modelled cells. The internal dynamics of these cells are largely controlled by ion channels, so a biophysically-informed ion channel model will, in-turn, support a realistic model of the entire organism.
 
@@ -10,17 +10,13 @@ Broadly speaking, the team for this project will develop a workflow and tools to
 
 [![image](http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869)](https://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/edit)
 
-High-level Overview
--------------------
-
 The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.
 
 Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (PyOpenWorm) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.
 
 Once the ion channel models are successfully validated and stored in the PyOpenWorm database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - PyOpenWorm database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
 
-Tracking progress
------------------
+### Tracking progress
 
 Issues for this set of projects are organized on our [waffle board](https://waffle.io/VahidGh/ChannelWorm), and may give a clearer picture of what is going on in each of them.
 
@@ -28,8 +24,7 @@ Below is a similarly organized chart keeping track of our higher-level *mileston
 
 [![](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/pub?w=1322&h=748)](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/edit)
 
-Modeling / Validation / Optimization Loop
------------------------------------------
+### Modeling / Validation / Optimization Loop
 
 [![image](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370)](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/edit)
 
@@ -43,6 +38,25 @@ Let's take an example channel model being compared to patch-clamp data from the 
 2.  Run it through simulating scripts (ex: [Rayner's scripts](https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/))
 3.  These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature ([example digitized curve](https://plot.ly/~VahidGh/56/))
 4.  Depending on the result of [a test](https://github.com/openworm/muscle_model/issues/30/) comparing these two I/V curves, the model is either *kept* or *optimized further* using NeuroTune.
+
+Model Completion Dashboard
+==========================
+
+This is one possible interface that will display the results of the unifying modeling activity.
+
+This interface allows a user to drill down into our model, and view the states of completion of modeled components at each level. At the highest level, matrices display, using a color indicator, the level of completion of each cell in the model.
+
+By clicking one of these cells, the section below focuses on that cell. Ion channels that exist in that cell are displayed in a grid with completion coloring, and simulation/experimental data for the cell is compared in plots.
+
+Individual ion channels can be clicked on and selected from the grid, with parameters and simulation/experimental comparison plots available.
+
+Rolling over the data displayed at each level gives information about the references for that particular piece of data.
+
+---
+
+Clicking on the image below will let you view the raw drawing, and see more detailed annotations for each element.
+
+[![](https://docs.google.com/drawings/d/1PcAMyBLZR3Z98gb4BDTUKp9PMDWZJHo2fnlYAVpISmo/pub?w=1672&h=2918)](https://docs.google.com/drawings/d/1PcAMyBLZR3Z98gb4BDTUKp9PMDWZJHo2fnlYAVpISmo/edit)
 
 ChannelWorm
 -----------
