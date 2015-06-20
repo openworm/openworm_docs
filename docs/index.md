@@ -9,8 +9,8 @@ OpenWorm is an open source project and open science community dedicated to creat
 Table Of Contents
 -----------------
 
-- [Projects](/Projects/projects/)
-- [Community](/Community/community/)
+- [Projects](/projects/)
+- [Community](/community/)
 - [Background](background/)
 - [Modeling Approach](modeling/)
 - [Resources](resources/)
