@@ -1,5 +1,5 @@
 Muscle-Neuron-Channel Integration
-=================================
+---------------------------------
 
 ### Abstract
 
