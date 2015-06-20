@@ -1,15 +1,14 @@
 Muscle-Neuron-Channel Integration
----------------------------------
+=================================
 
-### Abstract
+High-level Overview
+-------------------
 
 The fidelity of OpenWorm to its biological counterpart, C. elegans, depends on the realism of its constituent parts, such as computationally-modelled cells. The internal dynamics of these cells are largely controlled by ion channels, so a biophysically-informed ion channel model will, in-turn, support a realistic model of the entire organism.
 
 Broadly speaking, the team for this project will develop a workflow and tools to simulate *C. elegans* cell dynamics using simulated ion channel (*intracellular*) dynamics.
 
 [![image](http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869)](https://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/edit)
-
-### High-level Overview
 
 The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.
 
