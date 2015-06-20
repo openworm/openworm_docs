@@ -1,8 +1,7 @@
-Muscle-Neuron Team
-==================
+Muscle-Neuron-Channel Integration
+=================================
 
-Abstract
---------
+# Abstract
 
 The fidelity of OpenWorm to its biological counterpart, C. elegans, depends on the realism of its constituent parts, such as computationally-modelled cells. The internal dynamics of these cells are largely controlled by ion channels, so a biophysically-informed ion channel model will, in-turn, support a realistic model of the entire organism.
 
@@ -10,8 +9,7 @@ Broadly speaking, the team for this project will develop a workflow and tools to
 
 [![image](http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869)](https://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/edit)
 
-High-level Overview
--------------------
+# High-level Overview
 
 The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.
 
@@ -19,8 +17,7 @@ Each ion channel model is simulated and, depending on its performance in a set o
 
 Once the ion channel models are successfully validated and stored in the PyOpenWorm database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - PyOpenWorm database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
 
-Tracking progress
------------------
+# Tracking progress
 
 Issues for this set of projects are organized on our [waffle board](https://waffle.io/VahidGh/ChannelWorm), and may give a clearer picture of what is going on in each of them.
 
@@ -28,8 +25,7 @@ Below is a similarly organized chart keeping track of our higher-level *mileston
 
 [![](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/pub?w=1322&h=748)](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/edit)
 
-Modeling / Validation / Optimization Loop
------------------------------------------
+# Modeling / Validation / Optimization Loop
 
 [![image](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&h=370)](https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/edit)
 
