@@ -2,7 +2,6 @@ site_name: OpenWorm
 theme: readthedocs
 pages:
   - [index.md, Index]
-  - [intro.md, Introduction]
   - [background.md, Background]
   - [fullhistory.md, History]
   - [releases.md, Releases]
