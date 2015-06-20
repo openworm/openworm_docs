@@ -1,5 +1,4 @@
-OpenWorm Projects
-=================
+**OpenWorm Projects**
 
 The project is currently laid out into seven major areas shown below:
 
