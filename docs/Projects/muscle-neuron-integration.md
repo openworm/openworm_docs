@@ -22,7 +22,7 @@ Issues for this set of projects are organized on our [waffle board](https://waff
 
 Below is a similarly organized board keeping track of our higher-level *milestones* in each repository (in the Muscle / Neuron / Channel list), which will be updated as this meta-project develops.
 
-[![](Screenshot\ 2015-06-20\ 15.19.10.png)](https://trello.com/b/mPaT7Ol0/openworm-release-10-milestone-roadmap-not-individual-tasks-issues)
+[![](Screenshot%202015-06-20%2015.19.10.png)](https://trello.com/b/mPaT7Ol0/openworm-release-10-milestone-roadmap-not-individual-tasks-issues)
 
 ### Modeling / Validation / Optimization Loop
 
