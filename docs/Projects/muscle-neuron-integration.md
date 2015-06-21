@@ -20,9 +20,9 @@ Once the ion channel models are successfully validated and stored in the PyOpenW
 
 Issues for this set of projects are organized on our [waffle board](https://waffle.io/VahidGh/ChannelWorm), and may give a clearer picture of what is going on in each of them.
 
-Below is a similarly organized chart keeping track of our higher-level *milestones* in each repository, which will be updated as this meta-project develops.
+Below is a similarly organized board keeping track of our higher-level *milestones* in each repository (in the Muscle / Neuron / Channel list), which will be updated as this meta-project develops.
 
-[![](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/pub?w=1322&h=748)](https://docs.google.com/drawings/d/1cS23c2FwPWHImEckgz3HJhNUK5uOOWcDAoJq0GpBabE/edit)
+[![](Screenshot 2015-06-20\ 15.19.10.png)](https://trello.com/b/mPaT7Ol0/openworm-release-10-milestone-roadmap-not-individual-tasks-issues)
 
 ### Modeling / Validation / Optimization Loop
 
