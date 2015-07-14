@@ -10,8 +10,6 @@ The project is currently laid out into seven major areas shown below:
 -   Community outreach
 -   Muscle-Neuron integration
 
-![Project overview](https://docs.google.com/drawings/d/12QMz1LNvKfS1iiYOPCSCkXTU7JQHKJQkjLwN3WLSXYc/pub?w=755&h=493)
-
 ![Overview Flow Diagram](/Projects/OpenWormIntegrationNeuromechanicalSimulation.png)
 
 **NeuroMechanical Modeling - Sibernetic**
