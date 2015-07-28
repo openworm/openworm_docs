@@ -14,7 +14,13 @@ Historical Milestones
 
 1999: *C. elegans* becomes the first animal [to have its genome completely sequenced](http://www.sanger.ac.uk/research/projects/caenorhabditisgenomics). Humans follow in 2002.
 
+1999: **Ferree and Lockery** publish a [neural network model of chemotaxis in *C.Elegans*](http://www.ncbi.nlm.nih.gov/pubmed/10406137)
+
 2000: [**WormBase**](http://www.wormbase.org/about#0--10) is [founded](http://nar.oxfordjournals.org/content/38/suppl_1/D463.abstract) by Paul Sternberg of CalTech and Richard Durbin, among others. It aggregates information known about *C. elegans* into one place.
+
+2002: **David Harel** proposes complete modeling of the *C. elegans* as a [grand challenge in computing](http://dx.doi.org/10.1007/978-3-540-24622-0_26).
+
+2009: **Boyle & Cohen** publish an [integrated 2D computer model of *C. elegans* locomotion](http://etheses.whiterose.ac.uk/1377/)
 
 18 May 2014: [A team from MIT develops a technique to **view all C. elegans neurons at once**](http://www.nature.com/nmeth/journal/v11/n7/full/nmeth.2964.html), which may fill in a remaining data gap.
 
