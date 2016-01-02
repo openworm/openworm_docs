@@ -45,7 +45,7 @@ Jan 2010: Sergey Khayrulin joins Andrey on the CyberElegans project.
 
 3 August 2010: In a [five-minute speech](https://www.youtube.com/watch?v=Sb1V_OKqRfc), Stephen Larson pitches the idea for simulating *C. elegans* at [Ignite San Diego](http://ignitesandiego.org/).
 
-Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. Giovanni replies to the call restating his goal of C. elegans simulation, and brings Matteo into the conversation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**. Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
+Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brain Catalog, originally oriented at finding contributors for the WBC platform. Giovanni replies to the call restating his goal of C. elegans simulation, and brings Matteo into the conversation. The 3 get together on a skype call and decide to start a project together, during this conversation **Stephen proposes the name "OpenWorm" and the name sticks**. Subsequent early days conversations include Timothy Busbice (who also replied to Stephen's call for volunteers and co-founded OpenWorm), Marius Buibas (UCSD at the time) and Jay Coggan (Salk Institute).
 
 24 Jan 2011: Giovanni discovers **CyberElegans**, developed by **Andrey Palyanov** and **Sergey Khayrulin** (from AP Ershov Institute of Informatics, Russia) who are contacted and immediately agree to join forces with the OpenWorm team:
 
