@@ -50,7 +50,7 @@ Contributing to OpenWorm
 
 To start off the process, please give us some information about yourself on [this form](https://docs.google.com/spreadsheet/viewform?usp=drive_web&formkey=dC1CUDQtTV82MEJJcjY0NjdCcHpYdmc6MQ#gid=0). We recommend as well that you sign up to [this mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss) and peruse the archives to get a sense of what is going on.
 
-Then, please check out a [recent orientation overview](https://www.youtube.com/watch?v=C12d11z8OIo), and browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling\) we are taking.
+Then, please browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling\) we are taking.
 
 If you are interested in a specific programming language, check out links to issues specifically for [Python](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open) or [C++](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open). We also have a lot of Java and Javascript/HTML/CSS development going on as part of Geppetto. See the [list of issues here](https://waffle.io/openworm/org.geppetto).
 
