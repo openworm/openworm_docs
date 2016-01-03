@@ -8,8 +8,9 @@ The main goal of the Movement Analysis team is to finish a test pipeline so the 
 
 Tools Built
 -----------
-[Open Worm Analysis Toolbox](https://github.com/openworm/open-worm-analysis-toolbox)
-[Tracker-Commons file format](https://github.com/openworm/tracker-commons/)
+
+- [Open Worm Analysis Toolbox](https://github.com/openworm/open-worm-analysis-toolbox)
+- [Tracker-Commons file format](https://github.com/openworm/tracker-commons/)
 
 For more information, please visit the above pages.
 
@@ -42,28 +43,28 @@ Associated Repositories
 
 **OpenWorm Port of Schafer Lab's Worm Analysis Toolbox 1.3.4**
 
-https://github.com/openworm/SegWorm  (original MATLAB code, static)
-https://github.com/JimHokanson/SegwormMatlabClasses  (Jim's MATLAB fork, now static)
-https://github.com/openworm/open-worm-analysis-toolbox  (active Python port; formerly movement_validation)
+- https://github.com/openworm/SegWorm  (original MATLAB code, static)
+- https://github.com/JimHokanson/SegwormMatlabClasses  (Jim's MATLAB fork, now static)
+- https://github.com/openworm/open-worm-analysis-toolbox  (active Python port; formerly movement_validation)
 
 **Cloud Computing**
 
-https://github.com/openworm/movement_validation_cloud, forked from
-https://github.com/joebowen/movement_validation_cloud
+- https://github.com/openworm/movement_validation_cloud, forked from
+- https://github.com/joebowen/movement_validation_cloud
 
 **Worm Tracker File Format Specification and Parser**
 
-https://github.com/openworm/tracker-commons
-https://github.com/openworm/biological_data   (placeholder repo to discuss worm video data)
+- https://github.com/openworm/tracker-commons
+- https://github.com/openworm/biological_data   (placeholder repo to discuss worm video data)
 
 **André Brown's "Eigenworms" Code**
 
-https://github.com/aexbrown/Motif_Analysis   (Deprecated in favour of Behavioural_Syntax below)
-https://github.com/aexbrown/Behavioural_Syntax   (in MATLAB)
-https://github.com/AidanRocke/behavioral_syntax  (Aidan Rocke's Python port)
+- https://github.com/aexbrown/Motif_Analysis   (Deprecated in favour of Behavioural_Syntax below)
+- https://github.com/aexbrown/Behavioural_Syntax   (in MATLAB)
+- https://github.com/AidanRocke/behavioral_syntax  (Aidan Rocke's Python port)
 
 **Brown Lab Multiworm Tracking Code**
 
-https://github.com/Behavioural-Genomics/tracking   (not sure what this is, looks stale?)
-https://github.com/ver228/Multiworm_Tracking    (Avelino's work)
-https://github.com/KezhiLi/Tracking_Hypo   (Kezhi's work; the computer vision code)
+- https://github.com/Behavioural-Genomics/tracking   (not sure what this is, looks stale?)
+- https://github.com/ver228/Multiworm_Tracking    (Avelino's work)
+- https://github.com/KezhiLi/Tracking_Hypo   (Kezhi's work; the computer vision code)
