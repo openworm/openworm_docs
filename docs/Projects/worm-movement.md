@@ -35,7 +35,7 @@ More information on next steps is available in a [recent progress report](https:
 Issues list
 -----------
 
-All issues related to [movement validation](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=movement+validation&page=1&sort=comments&state=open) can be found on GitHub
+Please visit the issues listed in the below repositories.
 
 Associated Repositories
 -----------------------
