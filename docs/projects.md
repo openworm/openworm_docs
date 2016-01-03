@@ -4,7 +4,7 @@ The project is currently laid out into seven major areas shown below:
 
 -   Neuromechanical modeling with Sibernetic
 -   Geppetto Simulation Engine
--   Movement validation
+-   Movement analysis
 -   Optimization engine
 -   Data collection and representation
 -   Community outreach
@@ -26,13 +26,13 @@ In order to allow the world to play with the model easily, we are engineering [G
 
 More detailed information is available on the [Geppetto project page](Projects/geppetto/).
 
-**Movement validation**
+**Movement analysis**
 
 In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement validation project is working with an existing database of worm movement to make the critical comparisons.
 
-The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
+The Movement Analysis Team maintains the test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm.
 
-More detailed information is available on the [Movement validation project page](/Projects/worm-movement/).
+More detailed information is available on the [Movement analysis project page](/Projects/worm-movement/).
 
 **Optimization engine**
 
