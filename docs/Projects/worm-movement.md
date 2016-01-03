@@ -1,18 +1,17 @@
-Movement Validation
+Movement Analysis
 ===================
 
-In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement validation project is working with an existing database of worm movement to make the critical comparisons.
+In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement analysis team is working with an existing database of worm movement to make the critical comparisons.
 
-The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
+The main goal of the Movement Analysis team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
 
-Previous accomplishments
-------------------------
 
-- All code necessary to reproduce Ev Yemini’s Nature Methods paper was obtained in October 2013. Jim has stored it in the [MRC\_wormtracker\_GUI repo](https://github.com/JimHokanson/mrc_wormtracker_gui).
-    - This is in addition to the [SegWorm repo](https://github.com/openworm/SegWorm), although we will be merging them.
-    - It has code to generate features from measurements.
+Tools Built
+-----------
+[Open Worm Analysis Toolbox](https://github.com/openworm/open-worm-analysis-toolbox)
+[Tracker-Commons file format](https://github.com/openworm/tracker-commons/)
 
-- A [movement validation GitHub repository](https://github.com/MichaelCurrie/movement_validation) was started specifically with the goal of developing  the infrastructure to validate model worm movements against real worms.
+For more information, please visit the above pages.
 
 Current roadmap
 ---------------
@@ -41,29 +40,25 @@ All issues related to [movement validation](https://github.com/openworm/OpenWorm
 Associated Repositories
 -----------------------
 
-<table>
-<colgroup>
-<col width="40%" />
-<col width="54%" />
-<col width="4%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Repository</th>
-<th align="left">Description</th>
-<th align="left">Language</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/movement_validation">movement_validation</a></td>
-<td align="left">A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data.</td>
-<td align="left">Python</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/SegWorm">SegWorm</a></td>
-<td align="left">SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (<a href="http://wormbehavior.mrc-lmb.cam.ac.uk/" class="uri">http://wormbehavior.mrc-lmb.cam.ac.uk/</a>)</td>
-<td align="left">Matlab</td>
-</tr>
-</tbody>
-</table>
+**OpenWorm Port of Schafer Lab's Worm Analysis Toolbox 1.3.4**
+https://github.com/openworm/SegWorm  (original MATLAB code, static)
+https://github.com/JimHokanson/SegwormMatlabClasses  (Jim's MATLAB fork, now static)
+https://github.com/openworm/open-worm-analysis-toolbox  (active Python port; formerly movement_validation)
+
+**Cloud Computing**
+https://github.com/openworm/movement_validation_cloud, forked from
+https://github.com/joebowen/movement_validation_cloud
+
+**Worm Tracker File Format Specification and Parser**
+https://github.com/openworm/tracker-commons
+https://github.com/openworm/biological_data   (placeholder repo to discuss worm video data)
+
+**André Brown's "Eigenworms" Code**
+https://github.com/aexbrown/Motif_Analysis   (Deprecated in favour of Behavioural_Syntax below)
+https://github.com/aexbrown/Behavioural_Syntax   (in MATLAB)
+https://github.com/AidanRocke/behavioral_syntax  (Aidan Rocke's Python port)
+
+**Brown Lab Multiworm Tracking Code**
+https://github.com/Behavioural-Genomics/tracking   (not sure what this is, looks stale?)
+https://github.com/ver228/Multiworm_Tracking    (Avelino's work)
+https://github.com/KezhiLi/Tracking_Hypo   (Kezhi's work; the computer vision code)
