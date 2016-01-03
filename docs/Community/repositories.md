@@ -127,35 +127,10 @@ Geppetto Simulation Engine
 </tbody>
 </table>
 
-Movement Validation
+Movement Analysis
 -------------------
 
-<table>
-<colgroup>
-<col width="40%" />
-<col width="54%" />
-<col width="4%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Repository</th>
-<th align="left">Description</th>
-<th align="left">Language</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/movement_validation">movement_validation</a></td>
-<td align="left">A test pipeline that allows us to run a behavioural phenotyping of our virtual worm running the same test statistics the Shafer lab used on their worm data.</td>
-<td align="left">Python</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/SegWorm">SegWorm</a></td>
-<td align="left">SegWorm is Matlab code from Dr. Eviatar Yemini built as part of the WormBehavior database (<a href="http://wormbehavior.mrc-lmb.cam.ac.uk/" class="uri">http://wormbehavior.mrc-lmb.cam.ac.uk/</a>)</td>
-<td align="left">Matlab</td>
-</tr>
-</tbody>
-</table>
+See the [movement analysis](../Projects/worm-movement.md) project page for the full repository list.
 
 Optimization Engine
 -------------------
