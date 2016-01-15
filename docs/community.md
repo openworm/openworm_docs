@@ -198,4 +198,26 @@ Interesting in being a guest on our blog? We love hearing about what members of 
 Membership
 ----------
 
-More information about the membership policy is available on [a separate page](membership/).
+More information about the membership policy is available on [a separate page](Community/membership.md).
+
+Use of OpenWorm logo
+--------------------
+
+The OpenWorm logo font is Kefa.
+
+This is the OpenWorm logo:
+
+![](Community/openworm_logo.png)
+
+[Click here for a vector version of the logo](https://drive.google.com/folderview?id=0B-GW0T4RUrQ6ZDRFWGQwVmpOSm8&usp=sharing).  All three layers are vector.
+
+It may be adapted for subteams.  Please follow these style rules when doing so:
+
+- Don't apply effects (e.g. shadows) to the text; use flat style
+- If any icon is added it should be flat looking and its colour should be #92bd1e
+- Do not use detailed/real looking graphics
+- Keep it simple
+- Do not alter the OpenWorm logo itself
+- Logo needs to be readable when rendered in grayscale
+
+Such logos are subject to review by the core team to retain consistency across the project.
