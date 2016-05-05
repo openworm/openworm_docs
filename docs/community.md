@@ -12,7 +12,7 @@ additional information on our repo specific chatrooms.
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/projects/) you want to contribute to.
 
 ### Find tasks to work on
 
@@ -34,15 +34,15 @@ You can initiate a conversation with us on our chatrooms to get more specific ab
 - [Muscle model](https://gitterm.im/openworm/muscle_model)
 - [ChannelWorm](https://gitter.im/VahidGh/ChannelWorm)
 
-Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+Once you have identified an issue you want to work on from a [particular project](/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](/Community/github/#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve [forking one of our repositories](github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](/Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-More details on best practices using OpenWorm repos on GitHub are available on [a separate page](github/).
+More details on best practices using OpenWorm repos on GitHub are available on [a separate page](/Community/github/).
 
 ### Creating organizing documents
 
