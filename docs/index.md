@@ -48,7 +48,9 @@ There are a lot of additional questions you may have about the project. We have 
 Contributing to OpenWorm
 ------------------------
 
-To start off the process, please give us some information about yourself on [this form](https://docs.google.com/spreadsheet/viewform?usp=drive_web&formkey=dC1CUDQtTV82MEJJcjY0NjdCcHpYdmc6MQ#gid=0). We recommend as well that you sign up to [this mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss) and peruse the archives to get a sense of what is going on.
+We primarily use Slack to communicate and coordinate our daily activities, you are welcome to join us! For an invitation, fill out our [volunteer application form](https://goo.gl/3ncZWn).
+
+We recommend as well that you sign up to [this mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss) and peruse the archives to get a sense of what is going on.
 
 Then, please browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling\) we are taking.
 
