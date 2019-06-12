@@ -1,23 +1,25 @@
 site_name: OpenWorm
 theme: readthedocs
-pages:
-  - [index.md, Introduction]
-  - [background.md, Background]
-  - [fullhistory.md, History]
-  - [releases.md, Releases]
-  - [modeling.md, Modelling]
-  - [projects.md, Projects Overview]
-  - [Projects/sibernetic.md, Projects, Sibernetic]
-  - [Projects/geppetto.md, Projects, Geppetto]
-  - [Projects/worm-movement.md, Projects, Movement]
-  - [Projects/DevoWorm.md, Projects, DevoWorm]
-  - [Projects/optimization.md, Projects, Optimization]
-  - [Projects/datarep.md, Projects, Representation]
-  - [Projects/community-proj.md, Projects, Community]
-  - [Projects/muscle-neuron-integration.md, Projects, Muscle / Neuron / Channel]
-  - [community.md, Community Overview]
-  - [Community/github.md, Community, Github]
-  - [Community/repositories.md, Community, Repos]
-  - [Community/membership.md, Community, Membership]
-  - [Resources/resources.md, Resources]
-  - [faq.md, FAQ]
+nav:
+  - Introduction : index.md
+  - Background : background.md
+  - History : fullhistory.md
+  - Releases : releases.md
+  - Modelling : modeling.md
+  - Projects Overview : projects.md
+  - Projects: 
+      - Sibernetic : Projects/sibernetic.md
+      - Geppetto : Projects/geppetto.md
+      - Movement : Projects/worm-movement.md
+      - DevoWorm : Projects/DevoWorm.md
+      - Optimization : Projects/optimization.md
+      - Representation : Projects/datarep.md
+      - Community : Projects/community-proj.md
+      - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
+  - Community Overview : community.md
+  - Community: 
+      - Github : Community/github.md
+      - Repos : Community/repositories.md
+      - Membership : Community/membership.md
+  - Resources : Resources/resources.md
+  - FAQ : faq.md

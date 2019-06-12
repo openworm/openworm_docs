@@ -59,6 +59,7 @@ Repository | Description | Language
 <a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C elegans model, contained in a neuroConstruct project  | Java
 <a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
 <a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
+<a href="https://github.com/openworm/PyOpenWorm">PyOpenWorm</a> | Metadata extraction, translation, storage, and sharing | Python
 
 
 

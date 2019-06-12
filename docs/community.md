@@ -88,11 +88,11 @@ When they are ready to consume by the general public, simulation engines, visual
 
 Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/).
 
-The docs use ["Github-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for Github (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than ReSTructured text, which was used previously. Converting to markdown is in hopes that writing will be easier for contributors.
+The docs use ["Github-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for Github (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
 
 The documentation is published on the [ReadTheDocs service](https://readthedocs.org/), which helps it remain searchable and beautiful.
 
-The markdown documentation is rendered using the Python module [MkDocs](mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
+The markdown documentation is rendered using the Python module [MkDocs](https://www.mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
 Changes that appear in GitHub will automatically trigger a hook that will cause the documentation on ReadTheDocs to become rebuilt and pushed onto the site. There are different versions of the documentation that are explained below.
 
