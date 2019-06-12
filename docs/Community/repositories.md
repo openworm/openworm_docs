@@ -187,43 +187,18 @@ Data Collection and Representation
 <td align="left">Objective-C</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://github.com/openworm/data-viz">data-viz</a></td>
-<td align="left">Repository for scripts and other code items to create web-based visualizations of data in the project</td>
-<td align="left">Python</td>
-</tr>
-<tr class="even">
 <td align="left"><a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a></td>
-<td align="left">NeuroML based C elegans model, contained in a neuroConstruct project</td>
+<td align="left">NeuroML based <i>C. elegans</i> model, contained in a neuroConstruct project</td>
 <td align="left">Java</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a></td>
 <td align="left">Conversion script to bring neuron models drawn in Blender into NeuroML format</td>
 <td align="left">Python</td>
 </tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a></td>
-<td align="left">Graphing voltage data from NEURON sims of C. elegans conectome</td>
-<td align="left">Python</td>
-</tr>
 <tr class="odd">
 <td align="left"><a href="https://github.com/openworm/muscle_model">muscle_model</a></td>
-<td align="left">model of c.elegans muscle in NEURON / Python</td>
-<td align="left">Python</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/wormbrowser">wormbrowser</a></td>
-<td align="left">The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans</td>
-<td align="left">Javascript</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a></td>
-<td align="left">OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser</td>
-<td align="left">Objective-C</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/data-viz">data-viz</a></td>
-<td align="left">Repository for scripts and other code items to create web-based visualizations of data in the project</td>
+<td align="left">model of <i>C.elegans</i> muscle in NEURON / Python</td>
 <td align="left">Python</td>
 </tr>
 </tbody>
