@@ -1,0 +1,46 @@
+version: 2.1
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/python:3.6
+commands:
+  install:
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
+            - dependency-cache-
+      - run: pip install -U mkdocs
+      - save_cache:
+          key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
+          paths:
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+jobs:
+  mkdocs:
+    <<: *defaults
+    steps:
+      - install
+      - run: mkdocs build
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: site
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - mkdocs
+  poll:
+    triggers:
+      - schedule:
+          # every hour
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - mkdocs
