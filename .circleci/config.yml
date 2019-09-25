@@ -25,8 +25,8 @@ jobs:
     steps:
       - install
       - run: mkdocs build
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: site
+      - store_artifacts:
+          path: site  # could directly deploy this directory instead?
 
 workflows:
   version: 2
