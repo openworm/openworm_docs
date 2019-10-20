@@ -23,7 +23,7 @@ def repo2content(repo):
         return {}
     reqs = [requests.get(i.url) for i in files]
     data = [
-        base64.decodestring(
+        base64.b64decode(
             requests.get(i.url).json()['content']
         ) for i in reqs
     ]
@@ -37,7 +37,7 @@ def repo2meta(repo):
     meta = {}
     for file, data in content.items():
         if file.endswith('.yml') or file.endswith('.yaml'):
-            meta.update(yaml.load(data))
+            meta.update(yaml.safe_load(data))
         elif file.endswith('.rst'):
             raise NotImplementedError
         elif file.endswith('.md'):

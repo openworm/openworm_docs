@@ -19,7 +19,6 @@ commands:
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-      - run: pip install -U mkdocs
       - run: pip install -U -r requirements.txt
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
