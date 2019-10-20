@@ -2,7 +2,7 @@
 from __future__ import print_function, division
 import os
 import sys
-import base64
+from base64 import b64decode
 
 import requests
 from tqdm import tqdm
@@ -22,11 +22,7 @@ def repo2content(repo):
     if not files:
         return {}
     reqs = [requests.get(i.url) for i in files]
-    data = [
-        base64.b64decode(
-            requests.get(i.url).json()['content']
-        ) for i in reqs
-    ]
+    data = [b64decode(i.json()['content']) for i in reqs]
     return dict(zip((i.path.lower() for i in files), data))
 
 
