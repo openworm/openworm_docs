@@ -13,7 +13,7 @@ commands:
           keys:
             - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
             - dependency-cache-
-      - run: pip install -U mkdocs
+      - run: pip install mkdocs
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
