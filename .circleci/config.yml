@@ -13,7 +13,13 @@ commands:
           keys:
             - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
             - dependency-cache-
-      - run: pip install mkdocs
+      - run:
+          # may fix build issues
+          name: Ensure pip
+          command: |
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py
+      - run: pip install -U mkdocs
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
