@@ -22,7 +22,10 @@ def repo2content(repo):
     if not files:
         return {}
     reqs = [requests.get(i.url) for i in files]
-    data = [b64decode(i.json()['content']) for i in reqs]
+    try:
+        data = [b64decode(i.json()['content']) for i in reqs]
+    except KeyError:
+        raise ValueError(reqs)  # likely 403
     return dict(zip((i.path.lower() for i in files), data))
 
 
