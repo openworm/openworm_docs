@@ -1,0 +1,5 @@
+mkdocs
+PyGithub
+requests
+tqdm
+pyyaml

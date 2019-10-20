@@ -20,6 +20,7 @@ commands:
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
       - run: pip install -U mkdocs
+      - run: pip install -U -r requirements.txt
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
@@ -30,6 +31,7 @@ jobs:
     <<: *defaults
     steps:
       - install
+      - run: python build.py
       - run: mkdocs build
       - store_artifacts:
           path: site  # could directly deploy this directory instead?
