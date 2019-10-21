@@ -53,7 +53,7 @@ def repo2meta(repo):
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     log = logging.getLogger(__name__)
 
     meta = {}
@@ -62,7 +62,7 @@ def main():
         files = repo2meta(repo)
         if files:
             meta[repo.name] = files
-    log.debug(meta)
+    log.info(meta)
 
     defaults = {
         # TODO: build graph based on the following, and use it to determine
@@ -108,12 +108,11 @@ def main():
         - lang(s): {languages}
         - keyword(s): {keywords}
         - current version: {latest_release} {latest_release_date}
+        - contact: <{coordinator}>
 
         {shortdescription}
 
-        <{coordinator}>
         <small>Last generated {latest_generated_date}</small>
-
         TODO: autoremove undefined vars
         """).format(**fmt))
 
