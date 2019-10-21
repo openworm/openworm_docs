@@ -61,7 +61,8 @@ def main():
     for repo in tqdm(repos, unit="repo"):
         files = repo2meta(repo)
         if files:
-            meta[repo] = files
+            files['repo_obj'] = repo
+            meta[repo.name] = files
     log.info(meta)
 
     defaults = {
@@ -89,11 +90,12 @@ def main():
         'latest_generated_date': '',
     }
 
-    for repo, fmt in meta.items():
+    for name, fmt in meta.items():
+        repo = fmt['repo_obj']
         if 'markdown' in fmt:
             print(fmt['markdown'])
             continue
-        fmt = merge(defaults, dict(name=repo.name), fmt)
+        fmt = merge(defaults, dict(name=name), fmt)
 
         # TODO: auto determine {latest_generated_date}
         # TODO: auto determine {shortdescription} from repo description
