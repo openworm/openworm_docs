@@ -33,7 +33,7 @@ This seems to us the only sensible starting point to creating a true biological 
 On models
 ---------
 
-Models are the cornerstone of science. Tools like algebra and calculus and Newtonian mechanics and computer spreadsheets were advances because we could plug numbers into equations and get answers out that told us something about the world.
+Models are the cornerstone of science. Tools like algebra, calculus, Newtonian mechanics and computer spreadsheets were advances because we could plug numbers into equations and get answers out that told us something about the world.
 
 Unfortunately, neuroscience has few predictive models for how nervous systems work.
 
