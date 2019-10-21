@@ -61,7 +61,7 @@ def main():
     for repo in tqdm(repos, unit="repo"):
         files = repo2meta(repo)
         if files:
-            meta[repo.name] = files
+            meta[repo] = files
     log.info(meta)
 
     defaults = {
@@ -93,12 +93,23 @@ def main():
         if 'markdown' in fmt:
             print(fmt['markdown'])
             continue
-        # TODO: auto determine {latest_release}
-        # TODO: auto determine {latest_release_date}
+        fmt = merge(defaults, dict(name=repo.name), fmt)
+
         # TODO: auto determine {latest_generated_date}
-        fmt = merge(defaults, dict(name=repo), fmt)
+        # TODO: auto determine {shortdescription} from repo description
+
+        # TODO: auto determine from repo
         fmt['keywords'] = ", ".join(fmt['keywords'])
+        # TODO: auto determine from repo
         fmt['languages'] = ", ".join(fmt['languages'])
+
+        try:
+            rel = repo.get_latest_release()
+        except:
+            pass
+        else:
+            fmt['latest_release_date'] = fmt['latest_release_date'] or "{rel.last_modified}".format(rel=rel)
+            fmt['latest_release'] = fmt['latest_release'] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
         print(dedent("""
         # {name}
@@ -107,7 +118,7 @@ def main():
 
         - lang(s): {languages}
         - keyword(s): {keywords}
-        - current version: {latest_release} {latest_release_date}
+        - current version: {latest_release_date} {latest_release}
         - contact: <{coordinator}>
 
         {shortdescription}
