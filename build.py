@@ -127,7 +127,17 @@ def main():
 
         <small>Last generated {latest_generated_date}</small>
         TODO: autoremove undefined vars
-        """).format(**fmt))
+        """)
+        .format(**fmt)
+        .replace(' | [docs]()', '')
+        .replace(' | [gitter]()', '')
+        .replace(' | [contributor guide]()', '')
+        .replace('- lang(s): \n', '')
+        .replace('- keyword(s): \n', '')
+        .replace('- current version:  \n', '')
+        .replace('- contact: <>\n', '')
+        .replace('\n\n\n', '\n')
+        )
 
 
 if __name__ == "__main__":
