@@ -5,6 +5,7 @@ import sys
 from base64 import b64decode
 import logging
 from textwrap import dedent
+from time import strptime, strftime
 
 import requests
 from tqdm import tqdm
@@ -18,7 +19,7 @@ repos = list(g.get_organization("OpenWorm").get_repos())
 
 def repo2content(repo):
     """
-    @return {"filename": "content"} where `filename` starts with `.openworm.`
+    @return {"filename": (File, "content")} where `filename` starts with `.openworm.`
     """
     tree = repo.get_git_tree("master", recursive=False).tree
     files = [i for i in tree if i.path.lower().startswith('.openworm.')]
@@ -29,7 +30,7 @@ def repo2content(repo):
         data = [b64decode(i.json()['content']) for i in reqs]
     except KeyError:
         raise ValueError(reqs)  # likely 403
-    return dict(zip((i.path.lower() for i in files), data))
+    return dict(zip((i.path.lower() for i in files), zip(files, data)))
 
 
 def repo2meta(repo):
@@ -37,18 +38,24 @@ def repo2meta(repo):
     if not content:
         return {}
     meta = {}
-    for file, data in content.items():
-        if file.endswith('.yml') or file.endswith('.yaml'):
+    for name, (file, data) in content.items():
+        if name.endswith('.yml') or name.endswith('.yaml'):
             meta.update({
                 k.lower().replace('-', '_'): v
                 for k, v in yaml.safe_load(data).items()
             })
-        elif file.endswith('.rst'):
+            meta['ymlObj'] = file
+        elif name.endswith('.rst'):
             raise NotImplementedError
-        elif file.endswith('.md'):
+        elif name.endswith('.md'):
             meta['markdown'] = data
+            meta['mdObj'] = file
         else:
-            raise KeyError("Unknown file extension: {}".format(file))
+            raise KeyError("Unknown file extension: {}".format(name))
+        lastMod = strptime(file.last_modified, "%a, %d %b %Y %H:%M:%S %Z")
+        meta.setdefault('latest_generated_date', lastMod)
+        meta['latest_generated_date'] = max(
+            meta['latest_generated_date'], lastMod)
     return meta
 
 
@@ -61,7 +68,7 @@ def main():
     for repo in tqdm(repos, unit="repo"):
         files = repo2meta(repo)
         if files:
-            files['repo_obj'] = repo
+            files['repoObj'] = repo
             meta[repo.name] = files
     log.info(meta)
 
@@ -91,13 +98,15 @@ def main():
     }
 
     for name, fmt in meta.items():
-        repo = fmt['repo_obj']
         if 'markdown' in fmt:
             print(fmt['markdown'])
             continue
+
+        repo = fmt['repoObj']
         fmt = merge(defaults, dict(name=name), fmt)
 
-        # TODO: auto determine {latest_generated_date}
+        fmt['latest_generated_date'] = strftime(
+            "%Y-%m-%d", fmt['latest_generated_date'])
         # TODO: auto determine {shortdescription} from repo description
 
         # TODO: auto determine from repo
@@ -126,7 +135,6 @@ def main():
         {shortdescription}
 
         <small>Last generated {latest_generated_date}</small>
-        TODO: autoremove undefined vars
         """)
         .format(**fmt)
         .replace(' | [docs]()', '')
