@@ -25,13 +25,16 @@ commands:
           paths:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
+  check:
+    steps:
+      - run: black -l 79 --check build.py
+      - run: flake8 --count --statistics --show-source build.py
 jobs:
-  lint:
+  check:
     <<: *defaults
     steps:
       - install
-      - run: black -l 79 --check build.py
-      - run: flake8 --count --statistics --show-source build.py
+      - check
   mkdocs:
     <<: *defaults
     steps:
@@ -45,7 +48,7 @@ workflows:
   version: 2
   test:
     jobs:
-      - lint
+      - check
       - mkdocs
   poll:
     triggers:

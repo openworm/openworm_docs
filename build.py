@@ -118,7 +118,7 @@ def main():
 
         try:
             rel = repo.get_latest_release()
-        except:
+        except:  # NOQA
             pass
         else:
             fmt["latest_release_date"] = fmt[
