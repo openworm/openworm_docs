@@ -41,7 +41,7 @@ jobs:
           condition: <<parameters.run-checks>>
           steps:
             - check
-      - run: make mkdocs
+      - run: make build
       - store_artifacts:
           path: site  # could directly deploy this directory instead?
 
