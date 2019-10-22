@@ -30,15 +30,18 @@ commands:
       - run: black -l 79 --check build.py
       - run: flake8 --count --statistics --show-source build.py
 jobs:
-  check:
-    <<: *defaults
-    steps:
-      - install
-      - check
   mkdocs:
     <<: *defaults
+    parameters:
+      run-checks:
+        type: boolean
+        default: true
     steps:
       - install
+      - when:
+          condition: <<parameters.run-checks>>
+          steps:
+            - check
       - run: python build.py
       - run: mkdocs build
       - store_artifacts:
@@ -48,10 +51,7 @@ workflows:
   version: 2
   test:
     jobs:
-      - check
-      - mkdocs:
-          requires:
-            - check
+      - mkdocs
   poll:
     triggers:
       - schedule:
@@ -62,4 +62,5 @@ workflows:
               only:
                 - master
     jobs:
-      - mkdocs
+      - mkdocs:
+          run-checks: false
