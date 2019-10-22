@@ -1,0 +1,12 @@
+# {name}
+
+[repo](https://github.com/{repo}) | [docs]({documentation}) | [gitter]({gitter}) | [contributor guide]({contributor_guide})
+
+- lang(s): {languages}
+- keyword(s): {keywords}
+- current version: {latest_release_date} {latest_release}
+- contact: <{coordinator}>
+
+{shortdescription}
+
+<small>Last generated {latest_generated_date:%Y-%m-%d}</small>

@@ -12,8 +12,9 @@ from github import Github
 import yaml
 from funcy import merge
 
-g = Github(os.getenv("GITHUB_API_TOKEN"))
-repos = list(g.get_organization("OpenWorm").get_repos())
+GH = Github(os.getenv("GITHUB_API_TOKEN"))
+REPOS = list(GH.get_organization("OpenWorm").get_repos())
+TEMPLATE = open("docs/gsod19/repos.md.template").read()
 
 
 def repo2content(repo):
@@ -68,7 +69,7 @@ def main():
     log = logging.getLogger(__name__)
 
     meta = {}
-    for repo in tqdm(repos, unit="repo"):
+    for repo in tqdm(REPOS, unit="repo"):
         fmt = repo2meta(repo)
         if fmt:
             fmt["repoObj"] = repo
@@ -129,24 +130,7 @@ def main():
             ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
         print(
-            dedent(
-                """
-        # {name}
-
-        [repo](https://github.com/{repo}) | [docs]({documentation}) \
-| [gitter]({gitter}) | [contributor guide]({contributor_guide})
-
-        - lang(s): {languages}
-        - keyword(s): {keywords}
-        - current version: {latest_release_date} {latest_release}
-        - contact: <{coordinator}>
-
-        {shortdescription}
-
-        <small>Last generated {latest_generated_date:%Y-%m-%d}</small>
-        """
-            )
-            .format(**fmt)
+            TEMPLATE.format(**fmt)
             .replace(" | [docs]()", "")
             .replace(" | [gitter]()", "")
             .replace(" | [contributor guide]()", "")
