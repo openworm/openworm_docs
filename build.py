@@ -4,7 +4,6 @@ import os
 import sys
 from base64 import b64decode
 import logging
-from textwrap import dedent
 
 import requests
 from tqdm import tqdm
