@@ -38,7 +38,10 @@ workflows:
   version: 2
   test:
     jobs:
-      - mkdocs
+      - mkdocs:
+          filters:
+            branches:
+              ignore: /^gh-pages/
   poll:
     triggers:
       - schedule:
