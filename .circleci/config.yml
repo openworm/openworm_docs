@@ -26,6 +26,11 @@ commands:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - install
+      - run: flake8
   mkdocs:
     <<: *defaults
     steps:
