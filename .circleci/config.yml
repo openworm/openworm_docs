@@ -19,7 +19,7 @@ commands:
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-      - run: pip install -U -r requirements.txt
+      - run: make install
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
@@ -27,8 +27,7 @@ commands:
             - "/usr/local/lib/python3.6/site-packages"
   check:
     steps:
-      - run: black -l 79 --check build.py
-      - run: flake8 --count --statistics --show-source build.py
+      - run: make check
 jobs:
   mkdocs:
     <<: *defaults
@@ -42,8 +41,7 @@ jobs:
           condition: <<parameters.run-checks>>
           steps:
             - check
-      - run: python build.py
-      - run: mkdocs build
+      - run: make mkdocs
       - store_artifacts:
           path: site  # could directly deploy this directory instead?
 
