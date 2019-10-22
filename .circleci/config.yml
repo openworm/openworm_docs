@@ -30,7 +30,8 @@ jobs:
     <<: *defaults
     steps:
       - install
-      - run: flake8
+      - run: black -l 79 --check build.py
+      - run: flake8 --count --statistics --show-source build.py
   mkdocs:
     <<: *defaults
     steps:
@@ -44,6 +45,7 @@ workflows:
   version: 2
   test:
     jobs:
+      - lint
       - mkdocs
   poll:
     triggers:
