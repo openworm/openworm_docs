@@ -38,21 +38,21 @@ def repo2meta(repo):
     if not content:
         return {}
     meta = {}
-    for name, (file, data) in content.items():
+    for name, (fname, data) in content.items():
         if name.endswith('.yml') or name.endswith('.yaml'):
             meta.update({
                 k.lower().replace('-', '_'): v
                 for k, v in yaml.safe_load(data).items()
             })
-            meta['ymlObj'] = file
+            meta['ymlObj'] = fname
         elif name.endswith('.rst'):
             raise NotImplementedError
         elif name.endswith('.md'):
             meta['markdown'] = data
-            meta['mdObj'] = file
+            meta['mdObj'] = fname
         else:
             raise KeyError("Unknown file extension: {}".format(name))
-        lastMod = strptime(file.last_modified, "%a, %d %b %Y %H:%M:%S %Z")
+        lastMod = strptime(fname.last_modified, "%a, %d %b %Y %H:%M:%S %Z")
         meta.setdefault('latest_generated_date', lastMod)
         meta['latest_generated_date'] = max(
             meta['latest_generated_date'], lastMod)
