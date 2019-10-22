@@ -67,6 +67,11 @@ def repo2meta(repo):
 def main():
     logging.basicConfig(level=logging.INFO)
     log = logging.getLogger(__name__)
+    outfile = open("docs/gsod19/repos.md", "w")
+
+    def tee(*a):
+        print(*a)
+        print(*a, file=outfile)
 
     meta = {}
     for repo in tqdm(REPOS, unit="repo"):
@@ -103,7 +108,7 @@ def main():
 
     for name, fmt in meta.items():
         if "markdown" in fmt:
-            print(fmt["markdown"])
+            tee(fmt["markdown"])
             continue
 
         repo = fmt["repoObj"]
@@ -129,7 +134,7 @@ def main():
                 "latest_release"
             ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
-        print(
+        tee(
             TEMPLATE.format(**fmt)
             .replace(" | [docs]()", "")
             .replace(" | [gitter]()", "")
@@ -140,6 +145,8 @@ def main():
             .replace("- contact: <>\n", "")
             .replace("\n\n\n", "\n")
         )
+
+    outfile.close()
 
 
 if __name__ == "__main__":
