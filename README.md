@@ -42,4 +42,5 @@ Requirements:
 (py)make install  # installs other dependencies
 (py)make check    # basic tests
 (py)make build    # creates static site/
+(py)make serve    # hosts website locally (<http://127.0.0.1:8000>)
 ```

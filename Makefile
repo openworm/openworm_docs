@@ -7,3 +7,5 @@ check:
 build:
 	$(PYTHON) build.py
 	$(PYTHON) -m mkdocs build
+serve: build
+	$(PYTHON) -m mkdocs serve
