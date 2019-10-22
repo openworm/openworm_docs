@@ -5,7 +5,6 @@ import sys
 from base64 import b64decode
 import logging
 from textwrap import dedent
-from time import strptime, strftime
 
 import requests
 from tqdm import tqdm
@@ -38,24 +37,23 @@ def repo2meta(repo):
     if not content:
         return {}
     meta = {}
-    for name, (fname, data) in content.items():
+    for name, (fObj, data) in content.items():
         if name.endswith('.yml') or name.endswith('.yaml'):
             meta.update({
                 k.lower().replace('-', '_'): v
                 for k, v in yaml.safe_load(data).items()
             })
-            meta['ymlObj'] = fname
+            meta['ymlObj'] = fObj
         elif name.endswith('.rst'):
             raise NotImplementedError
         elif name.endswith('.md'):
             meta['markdown'] = data
-            meta['mdObj'] = fname
+            meta['mdObj'] = fObj
         else:
             raise KeyError("Unknown file extension: {}".format(name))
-        lastMod = strptime(fname.last_modified, "%a, %d %b %Y %H:%M:%S %Z")
+        lastMod = fObj.last_modified_at
         meta.setdefault('latest_generated_date', lastMod)
-        meta['latest_generated_date'] = max(
-            meta['latest_generated_date'], lastMod)
+        meta['latest_generated_date'] = max(meta['latest_generated_date'], lastMod)
     return meta
 
 
@@ -64,12 +62,11 @@ def main():
     log = logging.getLogger(__name__)
 
     meta = {}
-
     for repo in tqdm(repos, unit="repo"):
-        files = repo2meta(repo)
-        if files:
-            files['repoObj'] = repo
-            meta[repo.name] = files
+        fmt = repo2meta(repo)
+        if fmt:
+            fmt['repoObj'] = repo
+            meta[repo.name] = fmt
     log.info(meta)
 
     defaults = {
@@ -105,9 +102,8 @@ def main():
         repo = fmt['repoObj']
         fmt = merge(defaults, dict(name=name), fmt)
 
-        fmt['latest_generated_date'] = strftime(
-            "%Y-%m-%d", fmt['latest_generated_date'])
-        # TODO: auto determine {shortdescription} from repo description
+        fmt.setdefault('shortdescription', repo.description)
+        # TODO: maybe use repo.updated_at or repo.pushed_at ?
 
         # TODO: auto determine from repo
         fmt['keywords'] = ", ".join(fmt['keywords'])
@@ -119,7 +115,7 @@ def main():
         except:
             pass
         else:
-            fmt['latest_release_date'] = fmt['latest_release_date'] or "{rel.last_modified}".format(rel=rel)
+            fmt['latest_release_date'] = fmt['latest_release_date'] or "{rel.published_at:%Y-%m-%d}".format(rel=rel)
             fmt['latest_release'] = fmt['latest_release'] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
         print(dedent("""
@@ -134,7 +130,7 @@ def main():
 
         {shortdescription}
 
-        <small>Last generated {latest_generated_date}</small>
+        <small>Last generated {latest_generated_date:%Y-%m-%d}</small>
         """)
         .format(**fmt)
         .replace(' | [docs]()', '')

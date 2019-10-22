@@ -1,5 +1,5 @@
 mkdocs
-PyGithub
+git+https://github.com/casperdcl/PyGithub.git@master#egg=PyGithub
 requests
 tqdm
 pyyaml
