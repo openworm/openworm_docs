@@ -7,6 +7,8 @@ commands:
   install:
     steps:
       - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:

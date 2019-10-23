@@ -4,5 +4,7 @@ requests
 tqdm
 pyyaml
 funcy
+six
+python-igraph
 black
 flake8

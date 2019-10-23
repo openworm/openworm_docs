@@ -10,10 +10,29 @@ from tqdm import tqdm
 from github import Github
 import yaml
 from funcy import merge
+from six import string_types
+import igraph
 
 GH = Github(os.getenv("GITHUB_API_TOKEN"))
 REPOS = list(GH.get_organization("OpenWorm").get_repos())
 TEMPLATE = open("docs/gsod19/repos.md.template").read()
+
+
+class RepoTree(igraph.Graph):
+    def __init__(self, directed=True, **k):
+        super(RepoTree, self).__init__(directed=directed, **k)
+
+    def add_edge(self, src, dst):
+        try:
+            for v in {src, dst}.difference(self.vs['name']):
+                self.add_vertex(v)
+        except KeyError:
+            self.add_vertex(src)
+            self.add_vertex(dst)
+        try:
+            self.get_eid(src, dst)
+        except igraph.InternalError:
+            super(RepoTree, self).add_edge(src, dst)
 
 
 def repo2content(repo):
@@ -85,7 +104,7 @@ def main():
         # 1. order of printing
         # 2. heading levels
         "children": [],
-        "parent": "",
+        "parent": [],
         "inputs": [],
         "outputs": [],
         # TODO: use the following
@@ -105,11 +124,9 @@ def main():
         "latest_generated_date": "",
     }
 
+    tee("![Repos](repos.png)")
+    graph = RepoTree()
     for name, fmt in meta.items():
-        if "markdown" in fmt:
-            tee(fmt["markdown"])
-            continue
-
         repo = fmt["repoObj"]
         fmt = merge(defaults, dict(name=name), fmt)
 
@@ -133,6 +150,19 @@ def main():
                 "latest_release"
             ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
+        if isinstance(fmt['parent'], string_types):
+            fmt['parent'] = [fmt['parent']]
+        #for i in filter(None, fmt['children']):
+        for i in fmt['children']:
+            graph.add_edge(fmt['repo'], i)
+        #for i in filter(None, fmt['parent']):
+        for i in fmt['parent']:
+            graph.add_edge(i, fmt['repo'])
+        continue
+
+        if "markdown" in fmt:
+            tee(fmt["markdown"])
+            continue
         tee(
             TEMPLATE.format(**fmt)
             .replace(" | [docs]()", "")
@@ -146,6 +176,18 @@ def main():
         )
 
     outfile.close()
+
+    igraph.plot(
+        graph,
+        "docs/gsod19/repos.png",
+        layout=graph.layout('large'),
+        bbox=(860, 860),
+        margin=80,
+        vertex_label=[
+            i[len('openworm/'):] if i.lower().startswith('openworm/') else i
+            for i in graph.vs['name']
+        ]
+    )
 
 
 if __name__ == "__main__":
