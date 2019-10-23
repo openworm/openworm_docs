@@ -16,6 +16,11 @@ commands:
             - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
             - dependency-cache-
       - run:
+          command: |
+            if [ -d ~/.cache/pip ]; then
+              sudo chown -R circleci:circleci ~/.cache/pip
+            fi
+      - run:
           # may fix build issues
           name: Ensure pip
           command: |
@@ -27,7 +32,7 @@ commands:
           paths:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
-            - "/home/circleci/.cache/pip"
+            - "~/.cache/pip"
   check:
     steps:
       - run: make check
