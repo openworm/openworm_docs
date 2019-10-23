@@ -1,6 +1,9 @@
 Repositories
 ============
 
+![](repository-graph.png)
+*Repository graph circa October 2019 from https://igraph.org/python/ courtesy Casper da Costa-Luis*
+
 View the [full current list](https://github.com/openworm) of repositories on GitHub.
 
 The repositories fall into the following six project areas shown below:
