@@ -1,10 +1,18 @@
+# doc build
 mkdocs
+
+# GitHub metadata parsing
 git+https://github.com/casperdcl/PyGithub.git@master#egg=PyGithub
 requests
 tqdm
 pyyaml
 funcy
 six
+
+## graphing
+pycairo
 git+https://github.com/casperdcl/python-igraph.git@patch-1#egg=python-igraph
+
+# testing
 black
 flake8

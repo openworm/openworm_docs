@@ -24,7 +24,7 @@ class RepoTree(igraph.Graph):
 
     def add_edge(self, src, dst):
         try:
-            for v in {src, dst}.difference(self.vs['name']):
+            for v in {src, dst}.difference(self.vs["name"]):
                 self.add_vertex(v)
         except KeyError:
             self.add_vertex(src)
@@ -76,9 +76,7 @@ def repo2meta(repo):
             raise KeyError("Unknown file extension: {}".format(name))
         lastMod = fObj.last_modified_at
         meta.setdefault("latest_generated_date", lastMod)
-        meta["latest_generated_date"] = max(
-            meta["latest_generated_date"], lastMod
-        )
+        meta["latest_generated_date"] = max(meta["latest_generated_date"], lastMod)
     return meta
 
 
@@ -150,14 +148,14 @@ def main():
                 "latest_release"
             ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
-        if isinstance(fmt['parent'], string_types):
-            fmt['parent'] = [fmt['parent']]
-        #for i in filter(None, fmt['children']):
-        for i in fmt['children']:
-            graph.add_edge(fmt['repo'], i)
-        #for i in filter(None, fmt['parent']):
-        for i in fmt['parent']:
-            graph.add_edge(i, fmt['repo'])
+        if isinstance(fmt["parent"], string_types):
+            fmt["parent"] = [fmt["parent"]]
+        # for i in filter(None, fmt['children']):
+        for i in fmt["children"]:
+            graph.add_edge(fmt["repo"], i)
+        # for i in filter(None, fmt['parent']):
+        for i in fmt["parent"]:
+            graph.add_edge(i, fmt["repo"])
         continue
 
         if "markdown" in fmt:
@@ -180,13 +178,13 @@ def main():
     igraph.plot(
         graph,
         "docs/gsod19/repos.png",
-        layout=graph.layout('large'),
+        layout=graph.layout("large"),
         bbox=(860, 860),
         margin=80,
         vertex_label=[
-            i[len('openworm/'):] if i.lower().startswith('openworm/') else i
-            for i in graph.vs['name']
-        ]
+            i[len("openworm/") :] if i.lower().startswith("openworm/") else i
+            for i in graph.vs["name"]
+        ],
     )
 
 
