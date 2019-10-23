@@ -7,7 +7,7 @@ nav:
   - Releases : releases.md
   - Modelling : modeling.md
   - Projects Overview : projects.md
-  - Projects: 
+  - Projects:
       - Sibernetic : Projects/sibernetic.md
       - Geppetto : Projects/geppetto.md
       - Movement : Projects/worm-movement.md
@@ -17,9 +17,12 @@ nav:
       - Community : Projects/community-proj.md
       - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
   - Community Overview : community.md
-  - Community: 
+  - Community:
       - Github : Community/github.md
       - Repos : Community/repositories.md
       - Membership : Community/membership.md
-  - Resources : Resources/resources.md
+  - Resources:
+      - Resources: Resources/resources.md
+      - Running NeuroML connectome: Resources/running-nc.md
+      - Live video streaming: Live-Video-Protocol.md
   - FAQ : faq.md
