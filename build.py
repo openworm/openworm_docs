@@ -156,7 +156,6 @@ def main():
         # for i in filter(None, fmt['parent']):
         for i in fmt["parent"]:
             graph.add_edge(i, fmt["repo"])
-        continue
 
         if "markdown" in fmt:
             tee(fmt["markdown"])
