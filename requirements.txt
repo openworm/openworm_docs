@@ -11,7 +11,7 @@ six
 
 ## graphing
 pycairo
-git+https://github.com/casperdcl/python-igraph.git@patch-1#egg=python-igraph
+git+https://github.com/igraph/python-igraph.git@master#egg=python-igraph
 
 # testing
 black
