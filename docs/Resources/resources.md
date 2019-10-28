@@ -2,10 +2,6 @@ Using OpenWorm Resources
 ========================
 
 This page describes content that has been created by the project for use by the public. Currently we make simulation engines, visualization environments, and data sets available.
-
-For Biologists
---------------
-
 Our website [contains an additional list of resources](http://www.openworm.org/science.html) that are useful to biologists in particular.
 
 Simulation engines
@@ -13,7 +9,7 @@ Simulation engines
 
 ### Geppetto
 
-Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry. We are currently working to port the functionality in Sibernetic into Geppetto, which would transform the experience of seeing the model from looking at a YouTube video to being able to play and interact with the model in 3D.
+Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry. We are currently working to port the functionality in Sibernetic (see below) into Geppetto, which would transform the experience of seeing the model from looking at a YouTube video to being able to play and interact with the model in 3D.
 
 ![image](http://www.geppetto.org/images/cn2.png)
 
@@ -37,7 +33,7 @@ To start getting some practical experience playing with dynamics that come from 
 
 ![image](http://i.imgur.com/OG7sOAD.jpg)
 
-More information is available at [http://www.connectomeengine.org]
+More information is available at [http://www.connectomeengine.com/]
 
 ### CyberElegans
 
