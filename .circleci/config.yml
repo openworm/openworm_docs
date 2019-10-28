@@ -22,7 +22,7 @@ commands:
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-      - run: pip install -U mkdocs
+      - run: pip install -U mkdocs ghp-import
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
@@ -45,8 +45,8 @@ jobs:
               if [[ "$(git log origin/gh-pages --oneline)" == *$SHA* ]]; then
                 echo "Skipping already deployed master@$SHA"
               else
-                git remote set-url origin https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
-                mkdocs gh-deploy -m "Deploy master@$SHA (MkDocs v{version}) [ci skip]" -v
+                ghp-import site
+                git push origin gh-pages
               fi
             fi
 workflows:
