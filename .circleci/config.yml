@@ -7,8 +7,11 @@ commands:
   install:
     steps:
       - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+      - run:
+          name: apt install
+          command: |
+            sudo apt-get update
+            sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
       - run:
           name: Fix permissions
           command: |
