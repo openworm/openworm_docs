@@ -29,7 +29,7 @@ commands:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 jobs:
-  mkdocs:
+  build:
     <<: *defaults
     steps:
       - install
@@ -40,25 +40,14 @@ jobs:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              readonly GIT_URL=https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
-              readonly SHA=$(git rev-parse --short HEAD)
-
-              rm -rf tmp-dir
-              git clone --depth=1 $GIT_URL -b gh-pages tmp-dir || (git init tmp-dir && cd tmp-dir && git remote add origin $GIT_URL && git checkout -b gh-pages)
-              rm -rf tmp-dir/*
-              cp -R site/. tmp-dir
-              cd tmp-dir
-              git config --global user.email openworm-bot@noreply.users.github.com
-              git config --global user.name OpenWorm-bot
-              git add --all
-              git commit -m "Deploy master@$SHA [ci skip]" || true
-              git push origin gh-pages
+              git remote set-url origin https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+              mkdocs gh-deploy -m "Deploy master@{sha} (MkDocs v{version}) [ci skip]" -v
             fi
 workflows:
   version: 2
   test:
     jobs:
-      - mkdocs
+      - build
   poll:
     triggers:
       - schedule:
@@ -68,4 +57,4 @@ workflows:
               only:
                 - master
     jobs:
-      - mkdocs
+      - build
