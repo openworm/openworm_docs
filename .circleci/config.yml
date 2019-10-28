@@ -40,7 +40,6 @@ jobs:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              # [ci skip] since no tests exist on deployed gh-pages branch
               mkdocs gh-deploy -m "Deploy master@{sha} (MkDocs v{version}) [ci skip]" -v
             fi
 
