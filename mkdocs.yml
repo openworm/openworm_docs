@@ -24,5 +24,4 @@ nav:
   - Resources:
       - Resources: Resources/resources.md
       - Running NeuroML connectome: Resources/running-nc.md
-      - Live video streaming: Live-Video-Protocol.md
   - FAQ : faq.md
