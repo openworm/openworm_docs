@@ -36,16 +36,11 @@ jobs:
       - run: mkdocs build
       - store_artifacts:
           path: site
-      - add_ssh_keys:
-          # tell CI to use openworm-bot@github's ssh key (for deploy permissions)
-          # https://circleci.com/docs/2.0/add-ssh-key/
-          fingerprints:
-            - "ad:f1:51:b7:68:cb:19:08:b2:7d:63:e3:eb:79:1a:63"
       - deploy:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              readonly GIT_URL=git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+              readonly GIT_URL=https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
               readonly SHA=$(git rev-parse --short HEAD)
 
               rm -rf tmp-dir
