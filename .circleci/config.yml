@@ -31,19 +31,31 @@ jobs:
     steps:
       - install
       - run: mkdocs build
+      - add_ssh_keys:
+          # tell CI to use openworm-bot@github's ssh key (for deploy permissions)
+          # https://circleci.com/docs/2.0/add-ssh-key/
+          fingerprints:
+            - "ad:f1:51:b7:68:cb:19:08:b2:7d:63:e3:eb:79:1a:63"
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              mkdocs gh-deploy
+            fi
       - store_artifacts:
-          path: site  # could directly deploy this directory instead?
+          path: site
 
 workflows:
   version: 2
   test:
     jobs:
-      - mkdocs
+      - mkdocs:
+          filters:
+            branches:
+              ignore: /^gh-pages/  # no tests exist on deployed pages branch
   poll:
     triggers:
       - schedule:
-          # every hour
-          cron: "0 * * * *"
+          cron: "0 * * * *"  # every hour
           filters:
             branches:
               only:
