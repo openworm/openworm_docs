@@ -7,7 +7,7 @@ Being an integrative model, OpenWorm utilizes different datasets, each with diff
 
 Consider the connectomics data. There are different useful ways to mine this data set. For example, a [NetworkX](https://networkx.github.io/) representation of the connectome as a complex graph enables questions to be asked about first and second nearest neighbors of a given neuron. In contrast, an [RDF](http://www.w3.org/RDF/) semantic graph representation is useful for reading and writing annotations about multiple aspects of a neuron, such as what papers have been written about it, multiple different properties it may have such as ion channels and neurotransmitter receptors and so on. A [NeuroML](http://www.neuroml.org/) representation is useful for answering questions about model morphology and simulation parameters. Lastly, a [Blender](http://www.blender.org/) representation is a full 3D shape definition that can be used for calculations in 3D space.
 
-Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see PyOpenWorm below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.
+Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see OWMeta below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.
 
 Here is a list of some of the data sets that we have used so far:
 
@@ -21,27 +21,27 @@ Currently our work on data collection and representation is divided among four s
 
 -   NeuroML Connectome
 -   Data Visualization
--   PyOpenWorm Unified Data Access Layer
+-   OWMeta Unified Data Access Layer
 -   Muscle cell integration
 
 Below you can find information about each subproject, see the project’s current roadmap and access the associated data repositories
 
-A lot of data about *c. elegans* is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
+A lot of data about *C. elegans* is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
 
 NeuroML Connectome
 ------------------
 
-Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
+Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the *C. elegans* nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the *C. elegans* connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
 ### Previous accomplishments
 
--   Building the C Elegans NeuroML file
+-   Building the *C. elegans* NeuroML file
 
 ### Current roadmap
 
 ###[Updated NeuroML connectome model](https://github.com/openworm/OpenWorm/issues?milestone=15&state=open)
 
-The [NeuroML connectome model](https://github.com/openworm/CElegansNeuroML) provides a framework for [multi-compartmental modeling](https://en.wikipedia.org/wiki/Multi-compartment_model) of the c. elegans nervous system. We are continuing to refine this to include more and more information that is known about the anatomy and dynamics of the nervous system in order to reach ever-improving biological realism.
+The [NeuroML connectome model](https://github.com/openworm/CElegansNeuroML) provides a framework for [multi-compartmental modeling](https://en.wikipedia.org/wiki/Multi-compartment_model) of the *C. elegans* nervous system. We are continuing to refine this to include more and more information that is known about the anatomy and dynamics of the nervous system in order to reach ever-improving biological realism.
 
 -   [Create sample NeuroML connectome output](https://github.com/openworm/OpenWorm/issues/114)
 -   [Remove Glutamate\_GJ etc in neuroConstruct project](https://github.com/openworm/OpenWorm/issues/50)
@@ -59,7 +59,7 @@ Repository | Description | Language
 <a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C elegans model, contained in a neuroConstruct project  | Java
 <a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
 <a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
-<a href="https://github.com/openworm/PyOpenWorm">PyOpenWorm</a> | Metadata extraction, translation, storage, and sharing | Python
+<a href="https://github.com/openworm/OWMeta">OWMeta</a> | Metadata extraction, translation, storage, and sharing | Python
 
 
 

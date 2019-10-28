@@ -61,7 +61,7 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 ### Where I could read about your "to do's?"
 
-We have a set of [high level milestones](https://github.com/openworm/OpenWorm/issues/milestones) for the modeling direction we are taking up on GitHub. We also have [a master board of all issues](https://waffle.io/openworm/openworm) across all our GitHub repositories that show a bunch of programming tasks we are working on.
+We have a set of [high level milestones](https://github.com/openworm/OpenWorm/issues/milestones) for the modeling direction we are taking up on GitHub. We also have [a master board of all issues](https://github.com/orgs/openworm/projects/9) across all our GitHub repositories that show a bunch of programming tasks we are working on.
 
 ### How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
 
