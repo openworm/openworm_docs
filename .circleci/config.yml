@@ -7,8 +7,11 @@ commands:
   install:
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - run:
+          name: Fix permissions
+          command: |
+            sudo chown -R circleci:circleci /usr/local/bin
+            sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
           keys:
             - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
@@ -34,6 +37,7 @@ jobs:
       - store_artifacts:
           path: site
       - deploy:
+          name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               mkdocs gh-deploy
