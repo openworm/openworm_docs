@@ -40,9 +40,18 @@ jobs:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              mkdocs gh-deploy -m "Deploy master@{sha} (MkDocs v{version}) [ci skip]" -v
-            fi
+              readonly GIT_URL=git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+              readonly SHA=$(git rev-parse --short HEAD)
 
+              rm -rf tmp-dir
+              git clone --depth=1 $GIT_URL -b gh-pages tmp-dir || (git init tmp-dir && cd tmp-dir && git remote add origin $GIT_URL && git checkout -b gh-pages)
+              rm -rf tmp-dir/*
+              cp -R site/. tmp-dir
+              cd tmp-dir
+              git add --all
+              git commit -m "Deploy master@$SHA [ci skip]" || true
+              git push origin gh-pages
+            fi
 workflows:
   version: 2
   test:
