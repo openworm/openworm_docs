@@ -48,6 +48,8 @@ jobs:
               rm -rf tmp-dir/*
               cp -R site/. tmp-dir
               cd tmp-dir
+              git config --global user.email openworm-bot@noreply.users.github.com
+              git config --global user.name OpenWorm-bot
               git add --all
               git commit -m "Deploy master@$SHA [ci skip]" || true
               git push origin gh-pages
