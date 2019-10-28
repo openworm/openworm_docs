@@ -40,7 +40,7 @@ jobs:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              mkdocs gh-deploy -v
+              mkdocs gh-deploy -m "Deploy master@{sha} (MkDocs v{version}) [ci skip]" -v
             fi
 
 workflows:
