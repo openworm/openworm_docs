@@ -44,7 +44,7 @@ jobs:
               git fetch origin gh-pages:gh-pages
               git config user.name OpenWorm-bot
               git config user.email openworm-bot@noreply.users.github.com
-              ghp-import site
+              ghp-import -n site
               git checkout gh-pages
               if [[ "$(git diff origin/gh-pages --numstat | grep -v sitemap.xml.gz)" == 1$'\t'1$'\t'index.html ]]; then
                 echo "Ignoring sitemap.xml.gz, only one line changed in index.html (assumed timestamp)"
