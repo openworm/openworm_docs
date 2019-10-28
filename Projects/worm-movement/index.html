@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Movement - OpenWorm</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Movement";
+    var mkdocs_page_input_path = "Projects/worm-movement.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenWorm</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../background/">Background</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../fullhistory/">History</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../releases/">Releases</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../modeling/">Modelling</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../projects/">Projects Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Projects</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../sibernetic/">Sibernetic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../geppetto/">Geppetto</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Movement</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#movement-analysis">Movement Analysis</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#tools-built">Tools Built</a></li>
+        
+            <li><a class="toctree-l4" href="#current-roadmap">Current roadmap</a></li>
+        
+            <li><a class="toctree-l4" href="#issues-list">Issues list</a></li>
+        
+            <li><a class="toctree-l4" href="#associated-repositories">Associated Repositories</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../DevoWorm/">DevoWorm</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../optimization/">Optimization</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../datarep/">Representation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../community-proj/">Community</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../community/">Community Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Community</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Community/github/">Github</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Community/repositories/">Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Community/membership/">Membership</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../Resources/resources/">Resources</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../faq/">FAQ</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenWorm</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Projects &raquo;</li>
+        
+      
+    
+    <li>Movement</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="movement-analysis">Movement Analysis</h1>
+<p>In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement analysis team is working with an existing database of worm movement to make the critical comparisons.</p>
+<p>The main goal of the Movement Analysis team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.</p>
+<h2 id="tools-built">Tools Built</h2>
+<ul>
+<li><a href="https://github.com/openworm/open-worm-analysis-toolbox">Open Worm Analysis Toolbox</a></li>
+<li><a href="https://github.com/openworm/tracker-commons/">Tracker-Commons file format</a></li>
+</ul>
+<p>For more information, please visit the above pages.</p>
+<h2 id="current-roadmap">Current roadmap</h2>
+<h3 id="story-build-a-test-suite-for-the-simulation-from-wormbehavior-database"><a href="https://github.com/openworm/OpenWorm/issues?milestone=19&amp;state=open">STORY: Build a test suite for the simulation from WormBehavior database</a></h3>
+<p>As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how close the model is to real data.</p>
+<p>In order for a model to demonstrate scientific value, it has to make falsifiable predictions. The target data to be able to predict will be drawn from the WormBehavior database. This milestone will involve working with these data, creating a code base that can compare movement output from the simulation with ground truth from the database and produce an accuracy score.</p>
+<p>This story breaks down the epic to predict behavior from the WormBehavior database.</p>
+<h3 id="epic-correctly-predict-80-of-wild-type-n2-behavior-in-wormbehavior-database"><a href="https://github.com/openworm/OpenWorm/issues?milestone=22&amp;state=open">EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database</a></h3>
+<p>This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data collected about the N2 worm in the WormBehavior database. This means building a training set and a test set that are kept separate from each other, using the training set to tune up the model, then generating predictions, and comparing them against the test set, and doing some cross-validation).</p>
+<p>This epic focuses on an output of simulation performance rather than the means of implementation, so any way to achieve this epic is welcome.</p>
+<p>More information on next steps is available in a <a href="https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit">recent progress report</a>.</p>
+<h2 id="issues-list">Issues list</h2>
+<p>Please visit the issues listed in the below repositories.</p>
+<h2 id="associated-repositories">Associated Repositories</h2>
+<p><strong>OpenWorm Port of Schafer Lab's Worm Analysis Toolbox 1.3.4</strong></p>
+<ul>
+<li>https://github.com/openworm/SegWorm  (original MATLAB code, static)</li>
+<li>https://github.com/JimHokanson/SegwormMatlabClasses  (Jim's MATLAB fork, now static)</li>
+<li>https://github.com/openworm/open-worm-analysis-toolbox  (active Python port; formerly movement_validation)</li>
+</ul>
+<p><strong>Cloud Computing</strong></p>
+<ul>
+<li>https://github.com/openworm/movement_validation_cloud, forked from</li>
+<li>https://github.com/joebowen/movement_validation_cloud</li>
+</ul>
+<p><strong>Worm Tracker File Format Specification and Parser</strong></p>
+<ul>
+<li>https://github.com/openworm/tracker-commons</li>
+<li>https://github.com/openworm/biological_data   (placeholder repo to discuss worm video data)</li>
+</ul>
+<p><strong>André Brown's "Eigenworms" Code</strong></p>
+<ul>
+<li>https://github.com/aexbrown/Motif_Analysis   (Deprecated in favour of Behavioural_Syntax below)</li>
+<li>https://github.com/aexbrown/Behavioural_Syntax   (in MATLAB)</li>
+<li>https://github.com/AidanRocke/behavioral_syntax  (Aidan Rocke's Python port)</li>
+</ul>
+<p><strong>Brown Lab Multiworm Tracking Code</strong></p>
+<ul>
+<li>https://github.com/Behavioural-Genomics/tracking   (not sure what this is, looks stale?)</li>
+<li>https://github.com/ver228/Multiworm_Tracking    (Avelino's work)</li>
+<li>https://github.com/KezhiLi/Tracking_Hypo   (Kezhi's work; the computer vision code)</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../DevoWorm/" class="btn btn-neutral float-right" title="DevoWorm">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../geppetto/" class="btn btn-neutral" title="Geppetto"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../geppetto/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../DevoWorm/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

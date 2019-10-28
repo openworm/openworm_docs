@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Muscle / Neuron /  Channel - OpenWorm</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Muscle / Neuron /  Channel";
+    var mkdocs_page_input_path = "Projects/muscle-neuron-integration.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenWorm</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../background/">Background</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../fullhistory/">History</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../releases/">Releases</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../modeling/">Modelling</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../projects/">Projects Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Projects</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../sibernetic/">Sibernetic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../geppetto/">Geppetto</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../worm-movement/">Movement</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../DevoWorm/">DevoWorm</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../optimization/">Optimization</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../datarep/">Representation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../community-proj/">Community</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Muscle / Neuron /  Channel</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#muscle-neuron-channel-integration">Muscle-Neuron-Channel Integration</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#high-level-overview">High-level Overview</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#model-completion-dashboard">Model Completion Dashboard</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#channelworm">ChannelWorm</a></li>
+        
+            <li><a class="toctree-l4" href="#optimization">Optimization</a></li>
+        
+            <li><a class="toctree-l4" href="#pyopenworm-unified-data-access-layer">PyOpenWorm Unified Data Access Layer</a></li>
+        
+            <li><a class="toctree-l4" href="#muscle-model">Muscle Model</a></li>
+        
+            <li><a class="toctree-l4" href="#c302">c302</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../community/">Community Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Community</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Community/github/">Github</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Community/repositories/">Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Community/membership/">Membership</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../Resources/resources/">Resources</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../faq/">FAQ</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenWorm</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Projects &raquo;</li>
+        
+      
+    
+    <li>Muscle / Neuron /  Channel</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="muscle-neuron-channel-integration">Muscle-Neuron-Channel Integration</h1>
+<h2 id="high-level-overview">High-level Overview</h2>
+<p>The fidelity of OpenWorm to its biological counterpart, C. elegans, depends on the realism of its constituent parts, such as computationally-modelled cells. The internal dynamics of these cells are largely controlled by ion channels, so a biophysically-informed ion channel model will, in-turn, support a realistic model of the entire organism.</p>
+<p>Broadly speaking, the team for this project will develop a workflow and tools to simulate <em>C. elegans</em> cell dynamics using simulated ion channel (<em>intracellular</em>) dynamics.</p>
+<p><a href="https://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/edit"><img alt="image" src="http://docs.google.com/drawings/d/1WzHYpgHZBDvbAxIb-KDDw0OatI8KWXQ8h_BeMVaQ2wM/pub?w=1238&amp;h=869" /></a></p>
+<p>The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.</p>
+<p>Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (PyOpenWorm) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.</p>
+<p>Once the ion channel models are successfully validated and stored in the PyOpenWorm database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - PyOpenWorm database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.</p>
+<h3 id="tracking-progress">Tracking progress</h3>
+<p>Issues for this set of projects are organized on our <a href="https://github.com/orgs/openworm/projects/5">project board</a>, and may give a clearer picture of what is going on in each of them.</p>
+<p>Below is a similarly organized board keeping track of our higher-level <em>milestones</em> in each repository (in the Muscle / Neuron / Channel list), which will be updated as this meta-project develops.</p>
+<p><a href="https://trello.com/b/mPaT7Ol0/openworm-release-10-milestone-roadmap-not-individual-tasks-issues"><img alt="" src="../trello.png" /></a></p>
+<h3 id="modeling-validation-optimization-loop">Modeling / Validation / Optimization Loop</h3>
+<p><a href="https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/edit"><img alt="image" src="https://docs.google.com/drawings/d/13JvpUktlTXN2GKH9fXzacXQWudm5MQUMXXY94cr6S50/pub?w=778&amp;h=370" /></a></p>
+<p>This figure describes, in a general way, how ion channel models are simulated and incrementally fit to their observed counterparts, as will be done in <a href="https://github.com/VahidGh/ChannelWorm/">the ChannelWorm subproject</a>.</p>
+<p>Depending on the type of data being used (e.g. patch-clamp data or homology modelling), the implementation will differ, but our approach will still follow this pattern.</p>
+<p>Let's take an example channel model being compared to patch-clamp data from the literature:</p>
+<ol>
+<li>We have a given channel model (ex: <a href="https://github.com/openworm/muscle_model/blob/master/NeuroML2/ca_boyle.channel.nml/">ca_boyle</a>)</li>
+<li>Run it through simulating scripts (ex: <a href="https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/">Rayner's scripts</a>)</li>
+<li>These scripts give us a simulate I/V curve, which can be compared to a digitized I/V curve from the literature (<a href="https://plot.ly/~VahidGh/56/">example digitized curve</a>)</li>
+<li>Depending on the result of <a href="https://github.com/openworm/muscle_model/issues/30/">a test</a> comparing these two I/V curves, the model is either <em>kept</em> or <em>optimized further</em> using NeuroTune.</li>
+</ol>
+<h1 id="model-completion-dashboard">Model Completion Dashboard</h1>
+<p>This is one possible interface that will display the results of the unifying modeling activity.</p>
+<p>This interface allows a user to drill down into our model, and view the states of completion of modeled components at each level. At the highest level, matrices display, using a color indicator, the level of completion of each cell in the model.</p>
+<p>By clicking one of these cells, the section below focuses on that cell. Ion channels that exist in that cell are displayed in a grid with completion coloring, and simulation/experimental data for the cell is compared in plots.</p>
+<p>Individual ion channels can be clicked on and selected from the grid, with parameters and simulation/experimental comparison plots available.</p>
+<p>Rolling over the data displayed at each level gives information about the references for that particular piece of data.</p>
+<hr />
+<p>Clicking on the image below will let you view the raw drawing, and see more detailed annotations for each element.</p>
+<p><a href="https://docs.google.com/drawings/d/1PcAMyBLZR3Z98gb4BDTUKp9PMDWZJHo2fnlYAVpISmo/edit"><img alt="" src="https://docs.google.com/drawings/d/1PcAMyBLZR3Z98gb4BDTUKp9PMDWZJHo2fnlYAVpISmo/pub?w=1672&amp;h=2918" /></a></p>
+<h2 id="channelworm">ChannelWorm</h2>
+<p><a href="https://github.com/VahidGh/ChannelWorm/">The ChannelWorm subproject</a> is, at a high level, a pipeline to convert ion channel <em>data</em> found in scientific papers into ion channel <em>models</em>. This pipeline involves:</p>
+<ol>
+<li><a href="https://github.com/VahidGh/ChannelWorm/issues/10/">Identification</a> of papers with ion channel data.</li>
+<li>Extraction of data from these papers, including figures, active parameters and tabular data.</li>
+<li><a href="http://channelworm.readthedocs.org/en/latest/digitization/">Digitization</a> of figures, and more generally, converting this information into machine-readable form.</li>
+</ol>
+<p>The output of the pipeline will either be <a href="http://channelworm.readthedocs.org/en/latest/optimization/">fed into an optimization engine</a> or <a href="http://channelworm.readthedocs.org/en/latest/information-management/#data-management">stored in a database</a>, depending on the results of <a href="http://channelworm.readthedocs.org/en/latest/validation/">validation tests</a>.</p>
+<h3 id="current-roadmap">Current roadmap</h3>
+<p>We are tracking milestones for this project over <a href="https://github.com/VahidGh/ChannelWorm/milestones/">here.</a></p>
+<p>The tasks ahead include:</p>
+<ol>
+<li>Run <a href="https://github.com/openworm/BlueBrainProjectShowcase/blob/master/Channelpedia/iv_analyse.py/">Rayner's scripts</a> on an example cell, and get output.</li>
+<li>Establish common format between outputs of Rayner's script (above) and <a href="https://plot.ly/~VahidGh/56/">digitized plots</a> from scientific articles.</li>
+<li>Write test to compare digitized plots and plots generated from ion channel model.</li>
+</ol>
+<h3 id="issues-list">Issues list</h3>
+<p>Issues for this part of the project are tracked and raised in <a href="https://github.com/VahidGh/ChannelWorm/issues?q=is%3Aopen+is%3Aissue/">the Github repo,</a> as well as the <a href="https://waffle.io/VahidGh/ChannelWorm">ChannelWorm waffle board</a>.</p>
+<h3 id="associated-repositories">Associated Repositories</h3>
+<ul>
+<li><a href="https://github.com/VahidGh/ChannelWorm/">ChannelWorm</a></li>
+</ul>
+<h2 id="optimization">Optimization</h2>
+<p>The <a href="https://github.com/vellamike/neurotune/">Neurotune</a> package provides neurotune a package for optimizing electrical models of excitable cells.</p>
+<p>In other words, Neurotune provides a solution for optimizing the parameters of a model to match a specific output. In the case of ChannelWorm, the parameters are electrical ion channel parameters, and the desired output is patch-clamp data comparable to that observed in real life.</p>
+<h3 id="associated-repositories_1">Associated Repositories</h3>
+<ul>
+<li><a href="https://github.com/vellamike/neurotune/">Neurotune</a></li>
+<li><a href="http://optimal-neuron.readthedocs.org/en/latest/architecture.html/">NeuroTune docs</a></li>
+</ul>
+<h2 id="pyopenworm-unified-data-access-layer">PyOpenWorm Unified Data Access Layer</h2>
+<p>We have consolidated a lot of data about the worm into a python library that creates a unified data access layer <a href="https://github.com/openworm/pyopenworm">called PyOpenWorm</a>. <a href="http://pyopenworm.readthedocs.org/en/latest/intro.html">Documentation for PyOpenWorm is available online</a>.</p>
+<h3 id="previous-accomplishments">Previous accomplishments</h3>
+<ul>
+<li>Building the original <a href="https://groups.google.com/d/msg/openworm-discuss/2V5kF5na5fw/GnxZMgWYF7wJ">OpenWorm database</a></li>
+<li><a href="https://github.com/openworm/PyOpenWorm/releases/tag/0.0.1-alpha">Initial release of PyOpenWorm</a></li>
+</ul>
+<h3 id="current-roadmap_1">Current roadmap</h3>
+<p>PyOpenWorm will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use <a href="https://github.com/openworm/PyOpenWorm/tree/channelworm/">its own fork of PyOpenWorm</a> to store Ion Channel data and models that it retrieves from scientific papers. Next steps involve:</p>
+<ol>
+<li>Adapting PyOpenWorm's existing infrastructure to serve ChannelWorm</li>
+<li>Filling the database with information, being sure to tag each fact with sources along the way.</li>
+<li>Finalize <a href="https://github.com/openworm/PyOpenWorm/labels/alpha0.5">remaining issues for PyOpenWorm version alpha0.5</a></li>
+<li><a href="https://github.com/openworm/OpenWorm/issues/31">Document Neuron Ion Channels: Types</a></li>
+<li><a href="https://github.com/openworm/OpenWorm/issues/32">Document Ion channels: Research Claims</a></li>
+</ol>
+<h3 id="issues-list_1">Issues list</h3>
+<p>Issues for PyOpenWorm are tracked <a href="https://github.com/openworm/PyOpenWorm/issues/">on Github</a>.</p>
+<h3 id="associated-repositories_2">Associated Repositories</h3>
+<ul>
+<li><a href="https://github.com/openworm/PyOpenWorm/">PyOpenWorm</a></li>
+</ul>
+<h2 id="muscle-model">Muscle Model</h2>
+<p>The <a href="https://github.com/openworm/muscle_model/">muscle model subproject</a> is concerned with modelling and simulation at the <em>cellular</em> level, specifically attempting to simulate the electrical dynamics of a <em>C. elegans</em> body wall muscle cell.</p>
+<p>This depends on what happens in <a href="#channelworm">ChannelWorm</a>, since ion channel dynamics are integral to our simulation of membrane dynamics.</p>
+<p>Because the muscle cell is driven both by an electrical model and a mechanical model, it is a focus of integration between different algorithms. Previously we have created a separate <a href="https://github.com/openworm/muscle_model">repository for the muscle model</a> that is an adaptation of the work by <a href="http://www.comp.leeds.ac.uk/netta/CV/papers/BC08b.pdf">Boyle &amp; Cohen, 2008</a>. We have an <a href="http://www.opensourcebrain.org/projects/muscle_model/wiki">approximately working version</a> implemented in NEURON and are porting this to be fully NeuroML2 compliant.</p>
+<p>The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team. You can connect with the team <a href="https://gitter.im/openworm/muscle_model">on real time chat</a>.</p>
+<p>To catch up with recent developments of this team, please see the following resources:</p>
+<ul>
+<li>Meeting #1 (<a href="https://www.youtube.com/watch?v=6AhKE2Vg_Uw">YouTube Video</a>) (<a href="https://docs.google.com/document/d/1BByFfABx91Ao-qKFYXAP0wQONlhdDy7MtSu8G0QxUes/edit">Agenda</a>)</li>
+<li>Meeting #2 (<a href="https://www.youtube.com/watch?v=HfGAJYwNt3c">YouTube Video</a>) (<a href="https://docs.google.com/document/d/1gUBwNjK4OEYd22Pdjt5vcm0-L6cbIHEU6k51AnOcL24/edit?usp=drive_web">Agenda</a>)</li>
+<li>Synapse journal club (<a href="https://www.youtube.com/watch?v=697Irn0J_54">YouTube Video</a>) (<a href="https://docs.google.com/presentation/d/1uMtXJNEXzzoPw45HG6sztqiiPDUn2jcUpHj7oiHxu38/edit?usp=sharing">Slides</a>)</li>
+<li>Meeting #3 (<a href="https://www.youtube.com/watch?v=3KApBmFa6WY">YouTube Video</a>) (<a href="https://docs.google.com/document/d/1JAH4Hs_J0tYbcEuxOMQ0fl2NPf6H6Z7kbe72lAi7SdA/edit">Agenda</a>)</li>
+</ul>
+<p>Some additional background materials that will help explain neuroscience concepts relevant to to this in two minutes each are below:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=6qS83wD29PY">The neuron</a></li>
+<li><a href="https://www.youtube.com/watch?v=tIzF2tWy6KI">Membrane potential</a></li>
+<li><a href="https://www.youtube.com/watch?v=WhowH0kb7n0">Synaptic transmission</a></li>
+<li><a href="https://www.youtube.com/watch?v=NXOXZ-kaSVI">Receptors and ligands</a></li>
+</ul>
+<h3 id="previous-accomplishments_1">Previous accomplishments</h3>
+<ul>
+<li>Implementation of Boyle &amp; Cohen muscle model <a href="https://github.com/openworm/muscle_model/tree/master/BoyleCohen2008/">in python</a></li>
+<li><a href="https://github.com/openworm/muscle_model/tree/master/neuron_implementation/">Conversion of model into NEURON</a></li>
+<li><a href="https://github.com/openworm/muscle_model#21-simulation-of-muscle-cell-ion-channels/">Simulation</a> of NeuroML2 ion channels in LEMS</li>
+</ul>
+<h3 id="current-roadmap_2">Current roadmap</h3>
+<p>Some of the next steps for the muscle model subproject include:</p>
+<ol>
+<li><a href="https://github.com/openworm/muscle_model/issues/31">Create unit test on the full muscle model that reproduces Figure 1A from Liu, Hollopeter, &amp; Jorgensen 2009</a></li>
+<li><a href="https://github.com/openworm/muscle_model/issues/30">Create unit test that verifies correct I/V curve for ca_boyle NML2 channel</a></li>
+<li><a href="https://github.com/openworm/muscle_model/issues/18">Update optimization.py to run with neurotune instead of optimalneuron</a></li>
+</ol>
+<h3 id="issues-list_2">Issues list</h3>
+<p>Issues for the muscle model are tracked <a href="https://github.com/openworm/muscle_model/issues/">on Github.</a></p>
+<h3 id="associated-repositories_3">Associated Repositories</h3>
+<ul>
+<li><a href="https://github.com/openworm/muscle_model/">Muscle_model</a></li>
+</ul>
+<h2 id="c302">c302</h2>
+<p>The <a href="https://github.com/openworm/CElegansNeuroML/tree/master/CElegans/pythonScripts/c302/">c302 subproject</a> is an effort to simulate the connectome of <em>C. elegans</em>, which includes its 302 neurons. The neural dynamics will start out with biologically-unrealistic integrate and fire cells, and be replaced with incrementally more realistic dynamics, as tests pass. Like the musclemodel, dynamics of neurons depend on ion channel dynamics within the cells, and thus depend on the channelworm subproject.</p>
+<h3 id="previous-accomplishments_2">Previous accomplishments</h3>
+<ul>
+<li>Generate NeuroML2 using <a href="https://github.com/NeuralEnsemble/libNeuroML/">libNeuroML</a> combined with connectivity data</li>
+<li>Run simulations of the connectome in LEMS using <a href="https://github.com/NeuroML/jNeuroML/">jNeuroML</a> or <a href="https://github.com/NeuroML/pyNeuroML/">pyNeuroML</a></li>
+</ul>
+<h3 id="current-roadmap_3">Current roadmap</h3>
+<ol>
+<li>Create validation tests using <a href="https://github.com/scidash/sciunit/">SciUnit</a> or a similar framework.</li>
+<li>Run validation tests.</li>
+</ol>
+<h3 id="issues-list_3">Issues list</h3>
+<p>Issues for c302 are tracked <a href="https://github.com/openworm/CElegansNeuroML/issues/">in the CElegansNeuroML repo.</a></p>
+<h3 id="associated-repositories_4">Associated Repositories</h3>
+<ul>
+<li><a href="https://github.com/openworm/CElegansNeuroML/">CElegansNeuroML</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../community/" class="btn btn-neutral float-right" title="Community Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../community-proj/" class="btn btn-neutral" title="Community"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../community-proj/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../community/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
