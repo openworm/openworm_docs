@@ -42,11 +42,15 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               SHA="$(git log -1 --pretty=format:%h)"
               git fetch origin gh-pages:gh-pages
-              if [[ "$(git log origin/gh-pages --oneline)" == *$SHA* ]]; then
+              ghp-import site
+              git checkout gh-pages
+              if [[ "$(git diff origin/gh-pages --numstat | grep -v sitemap.xml.gz)" == 1$'\t'1$'\t'index.html ]]; then
+                echo "Ignoring sitemap.xml.gz, only one line changed in index.html (assumed timestamp)"
                 echo "Skipping already deployed master@$SHA"
               else
-                ghp-import site
-                git push origin gh-pages
+                git commit --amend -m "Deploy master@$SHA [ci skip]" --author "OpenWorm-bot <openworm-bot@noreply.users.github.com>"
+                git remote set-url origin https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+                git push -f origin gh-pages
               fi
             fi
 workflows:
