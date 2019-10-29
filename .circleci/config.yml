@@ -27,7 +27,7 @@ commands:
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
-      - run: SKIP_HEADER_INSTALL=1 make install
+      - run: SKIP_HEADER_INSTALL=1 PIP_OPTS="--user -U" make install
       - save_cache:
           key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
