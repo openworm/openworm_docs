@@ -19,7 +19,7 @@ commands:
       - run:
           name: Create venv
           command: |
-            python3 -m venv venv
+            python3 -m virtualenv venv
             . venv/bin/activate
       - run: PIP_OPTS="-U" make install
       - save_cache:
