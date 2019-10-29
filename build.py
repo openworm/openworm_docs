@@ -53,6 +53,77 @@ class RepoTree(igraph.Graph):
             )
             return
 
+        assert outfile.lower().endswith('.html')
+        from plotly import graph_objects as go
+
+        edges = [e.tuple for e in graph.es]
+        Yn = [layout[i][1] for i in range(len(labels))]
+        Xn = [layout[i][0] for i in range(len(labels))]
+        Xe = [[layout[i[0]][0], layout[i[1]][0], None] for i in edges]
+        Ye = [[layout[i[0]][1], layout[i[1]][1], None] for i in edges]
+
+        traceLines = go.Scatter(
+            x=Xe,
+            y=Ye,
+            mode="lines",
+            line=dict(color="rgb(210,210,210)", width=1),
+            hoverinfo="none",
+        )
+        traceNodes = go.Scatter(
+            x=Xn,
+            y=Yn,
+            mode="markers",
+            name="ntw",
+            marker=dict(
+                symbol="circle-dot",
+                size=5,
+                color="#6959CD",
+                line=dict(color="rgb(50,50,50)", width=0.5),
+            ),
+            text=labels,
+            hoverinfo="text",
+        )
+        ax = dict(
+            showline=False,  # hide axis line, grid, ticklabels and  title
+            zeroline=False,
+            showgrid=False,
+            showticklabels=False,
+            title="",
+        )
+
+        layout_html = go.Layout(
+            title="OpenWorm Repositories",
+            font=dict(size=12),
+            showlegend=False,
+            autosize=False,
+            width=width,
+            height=height,
+            xaxis=go.layout.XAxis(ax),
+            yaxis=go.layout.YAxis(ax),
+            margin=go.layout.Margin(l=80, r=80, b=80, t=80),
+            hovermode="closest",
+            annotations=[
+                dict(
+                    showarrow=False,
+                    text="All OpenWorm repositories",
+                    xref="paper",
+                    yref="paper",
+                    x=0,
+                    y=-0.1,
+                    xanchor="left",
+                    yanchor="bottom",
+                    font=dict(size=14),
+                )
+            ],
+        )
+
+        fig = go.Figure(data=[
+            traceLines,
+            traceNodes,
+        ], layout=layout_html)
+        fig.write_html(outfile, auto_open=False)
+
+
 def repo2content(repo):
     """
     @return {"filename": (File, "content")}
@@ -192,7 +263,7 @@ def main():
 
     outfile.close()
 
-    graph.plot("docs/gsod19/repos.png")
+    graph.plot("docs/gsod19/repos.html")
 
 
 if __name__ == "__main__":

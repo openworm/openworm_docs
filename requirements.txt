@@ -12,6 +12,7 @@ six
 ## graphing
 pycairo
 git+https://github.com/igraph/python-igraph.git@master#egg=python-igraph
+plotly
 
 # testing
 black
