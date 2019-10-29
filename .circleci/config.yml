@@ -17,11 +17,13 @@ commands:
             - dependency-cache-{{ checksum "requirements.txt" }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
             - dependency-cache-{{ checksum "requirements.txt" }}-
       - run:
-          name: pip install
+          name: Create venv
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            PIP_OPTS="-U" make install
+            python -m pip install -U pip
+            echo "export MAKEFLAGS=\"PYTHON=$(which python) PIP_OPTS=-U\"" >> $BASH_ENV
+      - run: make install
       - save_cache:
           key: dependency-cache-{{ checksum "requirements.txt" }}-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
