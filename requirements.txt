@@ -2,7 +2,7 @@
 mkdocs
 
 # GitHub metadata parsing
-git+https://github.com/casperdcl/PyGithub.git@master#egg=PyGithub
+PyGithub
 requests
 tqdm
 pyyaml
@@ -11,7 +11,7 @@ six
 
 ## graphing
 pycairo
-git+https://github.com/igraph/python-igraph.git@master#egg=python-igraph
+python-igraph
 plotly
 
 # testing

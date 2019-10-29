@@ -12,27 +12,20 @@ commands:
           command: |
             sudo apt-get update
             sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
-      - run:
-          name: Fix permissions
-          command: |
-            sudo chown -R circleci:circleci /usr/local/bin
-            sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
           keys:
-            - dependency-cache-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
-            - dependency-cache-
+            - dependency-cache-{{ checksum "requirements.txt" }}-{{ .Environment.CIRCLE_PREVIOUS_BUILD_NUM }}
+            - dependency-cache-{{ checksum "requirements.txt" }}-
       - run:
-          # may fix build issues
-          name: Ensure pip
+          name: Create venv
           command: |
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python get-pip.py
-      - run: SKIP_HEADER_INSTALL=1 PIP_OPTS="--user -U" make install
+            python3 -m venv venv
+            . venv/bin/activate
+      - run: PIP_OPTS="-U" make install
       - save_cache:
-          key: dependency-cache-{{ .Environment.CIRCLE_BUILD_NUM }}
+          key: dependency-cache-{{ checksum "requirements.txt" }}-{{ .Environment.CIRCLE_BUILD_NUM }}
           paths:
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "venv"
   check:
     steps:
       - run: make check
