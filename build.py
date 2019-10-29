@@ -40,7 +40,7 @@ class RepoTree(igraph.Graph):
             for i in self.vs["name"]
         ]
         layout = self.layout(layout)
-        width, height = 860, 860
+        width, height = 680, 860
 
         if outfile.lower().endswith(".png"):
             igraph.plot(
@@ -48,7 +48,7 @@ class RepoTree(igraph.Graph):
                 outfile,
                 layout=layout,
                 bbox=(width, height),
-                margin=80,
+                margin=10,
                 vertex_label=labels,
             )
             return
@@ -172,7 +172,7 @@ def main():
     outfile = open("docs/gsod19/repos.md", "w")
 
     def tee(*a):
-        print(*a)
+        tqdm.write(' '.join(map(str, a)))
         print(*a, file=outfile)
 
     meta = {}
@@ -208,7 +208,7 @@ def main():
         "latest_generated_date": "",
     }
 
-    tee("![Repos](repos.png)")
+    tee("<iframe src="../repos-graph.html" width="100%" height=880></iframe>\n")
     graph = RepoTree()
     for name, fmt in tqdm(meta.items(), unit="repos"):
         repo = fmt["repoObj"]
@@ -260,7 +260,7 @@ def main():
 
     outfile.close()
 
-    graph.plot("docs/gsod19/repos.html")
+    graph.plot("docs/gsod19/repos-graph.html")
 
 
 if __name__ == "__main__":
