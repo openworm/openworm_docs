@@ -34,17 +34,17 @@ class RepoTree(igraph.Graph):
         except igraph.InternalError:
             super(RepoTree, self).add_edge(src, dst)
 
-    def plot(graph, outfile, layout="kk"):
+    def plot(self, outfile, layout="kk"):
         labels = [
             i[len("openworm/") :] if i.lower().startswith("openworm/") else i
-            for i in graph.vs["name"]
+            for i in self.vs["name"]
         ]
-        layout = graph.layout(layout)
+        layout = self.layout(layout)
         width, height = 860, 860
 
         if outfile.lower().endswith(".png"):
             igraph.plot(
-                graph,
+                self,
                 outfile,
                 layout=layout,
                 bbox=(width, height),
@@ -56,7 +56,7 @@ class RepoTree(igraph.Graph):
         assert outfile.lower().endswith(".html")
         from plotly import graph_objects as go
 
-        edges = [e.tuple for e in graph.es]
+        edges = [e.tuple for e in self.es]
         Xn = [layout[i][0] for i in range(len(labels))]
         Yn = [layout[i][1] for i in range(len(labels))]
         Xe = [[layout[i][0], layout[j][0], None] for (i, j) in edges]
@@ -210,7 +210,7 @@ def main():
 
     tee("![Repos](repos.png)")
     graph = RepoTree()
-    for name, fmt in meta.items():
+    for name, fmt in tqdm(meta.items(), unit="repos"):
         repo = fmt["repoObj"]
         fmt = merge(defaults, dict(name=name), fmt)
 
