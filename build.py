@@ -53,14 +53,14 @@ class RepoTree(igraph.Graph):
             )
             return
 
-        assert outfile.lower().endswith('.html')
+        assert outfile.lower().endswith(".html")
         from plotly import graph_objects as go
 
         edges = [e.tuple for e in graph.es]
-        Yn = [layout[i][1] for i in range(len(labels))]
         Xn = [layout[i][0] for i in range(len(labels))]
-        Xe = [[layout[i[0]][0], layout[i[1]][0], None] for i in edges]
-        Ye = [[layout[i[0]][1], layout[i[1]][1], None] for i in edges]
+        Yn = [layout[i][1] for i in range(len(labels))]
+        Xe = [[layout[i][0], layout[j][0], None] for (i, j) in edges]
+        Ye = [[layout[i][1], layout[j][1], None] for (i, j) in edges]
 
         traceLines = go.Scatter(
             x=Xe,
@@ -76,7 +76,7 @@ class RepoTree(igraph.Graph):
             name="ntw",
             marker=dict(
                 symbol="circle-dot",
-                size=5,
+                size=16,
                 color="#6959CD",
                 line=dict(color="rgb(50,50,50)", width=0.5),
             ),
@@ -117,10 +117,7 @@ class RepoTree(igraph.Graph):
             ],
         )
 
-        fig = go.Figure(data=[
-            traceLines,
-            traceNodes,
-        ], layout=layout_html)
+        fig = go.Figure(data=[traceLines, traceNodes], layout=layout_html)
         fig.write_html(outfile, auto_open=False)
 
 
