@@ -34,6 +34,24 @@ class RepoTree(igraph.Graph):
         except igraph.InternalError:
             super(RepoTree, self).add_edge(src, dst)
 
+    def plot(graph, outfile, layout="kk"):
+        labels = [
+            i[len("openworm/") :] if i.lower().startswith("openworm/") else i
+            for i in graph.vs["name"]
+        ]
+        layout = graph.layout(layout)
+        width, height = 860, 860
+
+        if outfile.lower().endswith(".png"):
+            igraph.plot(
+                graph,
+                outfile,
+                layout=layout,
+                bbox=(width, height),
+                margin=80,
+                vertex_label=labels,
+            )
+            return
 
 def repo2content(repo):
     """
@@ -174,17 +192,7 @@ def main():
 
     outfile.close()
 
-    igraph.plot(
-        graph,
-        "docs/gsod19/repos.png",
-        layout=graph.layout("large"),
-        bbox=(860, 860),
-        margin=80,
-        vertex_label=[
-            i[len("openworm/") :] if i.lower().startswith("openworm/") else i
-            for i in graph.vs["name"]
-        ],
-    )
+    graph.plot("docs/gsod19/repos.png")
 
 
 if __name__ == "__main__":
