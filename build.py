@@ -100,7 +100,7 @@ class RepoTree(igraph.Graph):
             height=height,
             xaxis=go.layout.XAxis(ax),
             yaxis=go.layout.YAxis(ax),
-            margin=go.layout.Margin(l=80, r=80, b=80, t=80),
+            margin=go.layout.Margin(l=80, r=80, b=80, t=80),  # NOQA: E741
             hovermode="closest",
             annotations=[
                 dict(
@@ -172,7 +172,7 @@ def main():
     outfile = open("docs/gsod19/repos.md", "w")
 
     def tee(*a):
-        tqdm.write(' '.join(map(str, a)))
+        tqdm.write(" ".join(map(str, a)))
         print(*a, file=outfile)
 
     meta = {}
@@ -208,7 +208,7 @@ def main():
         "latest_generated_date": "",
     }
 
-    tee("<iframe src="../repos-graph.html" width="100%" height=880></iframe>\n")
+    tee('<iframe src="../repos-graph.html" width="100%" height=880></iframe>\n')
     graph = RepoTree()
     for name, fmt in tqdm(meta.items(), unit="repos"):
         repo = fmt["repoObj"]
