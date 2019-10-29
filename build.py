@@ -59,8 +59,8 @@ class RepoTree(igraph.Graph):
         edges = [e.tuple for e in self.es]
         Xn = [layout[i][0] for i in range(len(labels))]
         Yn = [layout[i][1] for i in range(len(labels))]
-        Xe = [[layout[i][0], layout[j][0], None] for (i, j) in edges]
-        Ye = [[layout[i][1], layout[j][1], None] for (i, j) in edges]
+        Xe = sum([[layout[i][0], layout[j][0], None] for (i, j) in edges], [])
+        Ye = sum([[layout[i][1], layout[j][1], None] for (i, j) in edges], [])
 
         traceLines = go.Scatter(
             x=Xe,
