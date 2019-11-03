@@ -71,11 +71,12 @@ Source code for [the web version](https://github.com/openworm/wormbrowser) and [
 Data sets
 ---------
 
-### PyOpenWorm
+### OWMeta
 
-A straightforward Python API for accessing information about *C. elegans* is available
-at [PyOpenWorm](http://github.com/openworm/PyOpenWorm).  This API consolidates
-information from our various [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive.
+A Python API for accessing information about *C. elegans* is available
+at [OWMeta](http://github.com/openworm/OWMeta). This API consolidates
+information from our [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U)
+that we have come across and adapted on Google Drive.
 
 ### C. elegans NeuroML model in NeuroConstruct
 
