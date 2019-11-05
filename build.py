@@ -255,7 +255,7 @@ def main():
             .replace("- keyword(s): \n", "")
             .replace("- current version:  \n", "")
             .replace("- contact: <>\n", "")
-            .replace("\n\n\n", "\n")
+            .replace("\n\n\n", "\n\n")
         )
 
     outfile.close()
