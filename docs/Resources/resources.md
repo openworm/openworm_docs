@@ -2,9 +2,20 @@ Using OpenWorm Resources
 ========================
 
 This page describes content that has been created by the project for use by the public. Currently we make simulation engines, visualization environments, and data sets available.
+Our website [contains an additional list of resources](http://www.openworm.org/science.html) that are useful to biologists in particular.
 
 Simulation engines
 ------------------
+
+### Geppetto
+
+Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry. We are currently working to port the functionality in Sibernetic (see below) into Geppetto, which would transform the experience of seeing the model from looking at a YouTube video to being able to play and interact with the model in 3D.
+
+![image](http://www.geppetto.org/images/cn2.png)
+
+More information on running Geppetto is [available online](http://geppetto.org).
+
+[The project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
 
 ### Sibernetic
 
@@ -16,23 +27,13 @@ More information on running Sibernetic is [available online](http://sibernetic.o
 
 [The project page for Sibernetic](/Projects/sibernetic/) has information about getting involved with its development.
 
-### Geppetto
-
-Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry. We are currently working to port the functionality in Sibernetic into Geppetto, which would transform the experience of seeing the model from looking at a YouTube video to being able to play and interact with the model in 3D.
-
-![image](http://www.geppetto.org/images/cn2.png)
-
-More information on running Geppetto is [available online](http://geppetto.org).
-
-[The project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
-
 ### Connectome Engine and Lego Mindstorms robot
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
 ![image](http://i.imgur.com/OG7sOAD.jpg)
 
-This is currently in the process of being written up.
+More information is available at [http://www.connectomeengine.com/]
 
 ### CyberElegans
 
@@ -70,12 +71,12 @@ Source code for [the web version](https://github.com/openworm/wormbrowser) and [
 Data sets
 ---------
 
-OpenWorm Database
------------------
+### OWMeta
 
-An web version of the OpenWorm database can [be browsed online](http://www.interintelligence.org/openworm/Entities.aspx).
-
-More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).
+A Python API for accessing information about *C. elegans* is available
+at [OWMeta](http://github.com/openworm/OWMeta). This API consolidates
+information from our [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U)
+that we have come across and adapted on Google Drive.
 
 ### C. elegans NeuroML model in NeuroConstruct
 
@@ -84,7 +85,3 @@ The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormba
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
 More information about working with the data within it and other data entities can be found on the data representation project page \<data-rep\>.
-
-### OpenWorm Spreadsheet data
-
-We keep a [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U) that we have come across and adapted on Google Drive. We are currently in the process of consolidating these data into the OpenWorm database. More information about working with the data within it and other data entities can be found on [the data representation project page](/Projects/datarep/).

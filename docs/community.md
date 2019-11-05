@@ -16,13 +16,13 @@ What do I work on? We outline the work we are doing in the project using [GitHub
 
 ### Find tasks to work on
 
-Another way is you can [browse the top-level board of issues](https://waffle.io/openworm/openworm) directly.
+Another way is you can [browse the top-level board of issues](https://github.com/orgs/openworm/projects/9) directly.
 
 Other key boards:
 
-- [Geppetto](https://waffle.io/openworm/org.geppetto)
-- [Movement Validation](https://waffle.io/openworm/movement_validation)
-- [Muscle-Neuron-Channel integration](https://waffle.io/VahidGh/ChannelWorm)
+- [Geppetto](https://github.com/orgs/openworm/projects/13)
+- [Movement Validation](https://github.com/orgs/openworm/projects/6)
+- [Muscle-Neuron-Channel integration](https://github.com/orgs/openworm/projects/5)
 
 ### Come chat with us!
 

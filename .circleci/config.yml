@@ -51,8 +51,20 @@ jobs:
           name: if master; mkdocs gh-deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git remote set-url origin https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
-              mkdocs gh-deploy -m "Deploy master@{sha} (MkDocs v{version}) [ci skip]" -v
+              SHA="$(git log -1 --pretty=format:%h)"
+              git fetch origin gh-pages:gh-pages
+              git config user.name OpenWorm-bot
+              git config user.email openworm-bot@noreply.users.github.com
+              ghp-import -n site
+              git checkout gh-pages
+              if [[ "$(git diff origin/gh-pages --numstat | grep -v sitemap.xml.gz)" == 1$'\t'1$'\t'index.html ]]; then
+                echo "Ignoring sitemap.xml.gz, only one line changed in index.html (assumed timestamp)"
+                echo "Skipping already deployed master@$SHA"
+              else
+                git commit --amend -m "Deploy master@$SHA [ci skip]"
+                git remote set-url origin https://${GITHUB_API_TOKEN}@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git
+                git push -f origin gh-pages
+              fi
             fi
 workflows:
   version: 2
