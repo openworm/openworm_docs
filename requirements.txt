@@ -1,5 +1,7 @@
 # doc build
 mkdocs
+# GitHub pages upload
+ghp-import
 
 # GitHub metadata parsing
 git+https://github.com/casperdcl/PyGithub.git@master#egg=PyGithub
