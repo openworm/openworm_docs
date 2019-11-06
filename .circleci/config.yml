@@ -58,7 +58,7 @@ jobs:
               . venv/bin/activate
               ghp-import -n site
               git checkout gh-pages
-              if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev '^([-0-9]+\s[-0-9]+\ssitemap\.xml.*|1\s1\sindex.html)$')" ]]; then
+              if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
                 echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
                 echo "Skipping already deployed master@$SHA"
               else
