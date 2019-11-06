@@ -9,13 +9,14 @@ import requests
 from tqdm import tqdm
 from github import Github
 import yaml
+from jinja2 import Template
 from funcy import merge
 from six import string_types
 import igraph
 
 GH = Github(os.getenv("GITHUB_API_TOKEN"))
 REPOS = list(GH.get_organization("OpenWorm").get_repos())
-TEMPLATE = open("docs/gsod19/repos.md.template").read()
+TEMPLATE = Template(open("docs/gsod19/repos.md.template").read())
 
 
 class RepoTree(igraph.Graph):
@@ -163,6 +164,7 @@ def repo2meta(repo):
         lastMod = fObj.last_modified_at
         meta.setdefault("latest_generated_date", lastMod)
         meta["latest_generated_date"] = max(meta["latest_generated_date"], lastMod)
+    meta["latest_generated_date"] = "{:%Y-%m-%d}".format(meta["latest_generated_date"])
     return meta
 
 
@@ -246,17 +248,7 @@ def main():
         if "markdown" in fmt:
             tee(fmt["markdown"])
             continue
-        tee(
-            TEMPLATE.format(**fmt)
-            .replace(" | [docs]()", "")
-            .replace(" | [gitter]()", "")
-            .replace(" | [contributor guide]()", "")
-            .replace("- lang(s): \n", "")
-            .replace("- keyword(s): \n", "")
-            .replace("- current version:  \n", "")
-            .replace("- contact: <>\n", "")
-            .replace("\n\n\n", "\n\n")
-        )
+        tee(TEMPLATE.render(**fmt))
 
     outfile.close()
 

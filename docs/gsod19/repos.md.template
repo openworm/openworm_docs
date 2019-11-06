@@ -1,12 +1,13 @@
-# {name}
+# {{ name }}
 
-[repo](https://github.com/{repo}) | [docs]({documentation}) | [gitter]({gitter}) | [contributor guide]({contributor_guide})
+[repo](https://github.com/{{ repo }}){% if documenation %} | [docs]({{ documentation }}){% endif %}{% if gitter %} | [gitter]({{ gitter }}){% endif %}{% if contributor_guide %} | [contributor guide]({{ contributor_guide }}){% endif %}
 
-- lang(s): {languages}
-- keyword(s): {keywords}
-- current version: {latest_release_date} {latest_release}
-- contact: <{coordinator}>
+{% if languages %}
+- lang(s): {{ languages }}{% endif %}{% if keywords %}
+- keyword(s): {{ keywords }}{% endif %}{% if latest_release_date and latest_release %}
+- current version: {{ latest_release_date }} {{ latest_release }}{% endif %}{% if coordinator %}
+- contact: <{{ coordinator }}>{% endif %}
 
-{shortdescription}
+{{ shortdescription }}
 
-<small>Last generated {latest_generated_date:%Y-%m-%d}</small>
+<small>Last generated {{ latest_generated_date }}</small>
