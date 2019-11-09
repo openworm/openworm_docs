@@ -3,10 +3,17 @@
 [repo](https://github.com/{{ repo }}){% if documenation %} | [docs]({{ documentation }}){% endif %}{% if gitter %} | [gitter]({{ gitter }}){% endif %}{% if contributor_guide %} | [contributor guide]({{ contributor_guide }}){% endif %}
 
 {% if languages %}
-- lang(s): {{ languages }}{% endif %}{% if keywords %}
-- keyword(s): {{ keywords }}{% endif %}{% if latest_release_date and latest_release %}
-- current version: {{ latest_release_date }} {{ latest_release }}{% endif %}{% if coordinator %}
-- contact: <{{ coordinator }}>{% endif %}
+- lang(s): {{ languages }}
+{% endif %}
+{% if keywords %}
+- keyword(s): {{ keywords }}
+{% endif %}
+{% if latest_release_date and latest_release %}
+- current version: {{ latest_release_date }} {{ latest_release }}
+{% endif %}
+{% if coordinator %}
+- contact: <{{ coordinator }}>
+{% endif %}
 
 {{ shortdescription }}
 
