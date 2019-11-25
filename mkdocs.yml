@@ -19,7 +19,7 @@ nav:
   - Community Overview : community.md
   - Community:
       - Github : Community/github.md
-      - Repos : gsod19/repos.md
+      - Repos : Community/repositories.md
       - Membership : Community/membership.md
   - Resources:
       - Resources: Resources/resources.md
