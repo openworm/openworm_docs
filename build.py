@@ -8,6 +8,7 @@ import logging
 import requests
 from tqdm import tqdm
 from github import Github
+from github.GithubException import UnknownObjectException
 import yaml
 from jinja2 import Template
 from funcy import merge
@@ -127,7 +128,13 @@ def repo2content(repo):
     @return {"filename": (File, "content")}
     where `filename` starts with `.openworm.`
     """
-    tree = repo.get_git_tree("master", recursive=False).tree
+    try:
+        tree = repo.get_git_tree("master", recursive=False).tree
+    except UnknownObjectException as exc:
+        try:
+            tree = repo.get_git_tree("develop", recursive=False).tree
+        except UnknownObjectException:
+            raise exc
     files = [i for i in tree if i.path.lower().startswith(".openworm.")]
     if not files:
         return {}
