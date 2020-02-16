@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+"""
+Creates docs/gsod19/repos-graph.html
+Requires env `$GITHUB_API_TOKEN`
+"""
 from __future__ import print_function, division
 import os
 import sys
