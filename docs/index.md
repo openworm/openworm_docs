@@ -19,7 +19,7 @@ Table Of Contents
 Mission/Vision
 --------------
 
-The complexity of computational neuroscience and biology make it extremely difficult to sort through the myriad facts, data, and biological processes that are uncovered on a daily basis by researchers around the world.
+The complexity of computational neuroscience and biology make it extremely difficult to sort through the myriad of facts, data, and biological processes that are uncovered on a daily basis by researchers around the world.
 
 OpenWorm believes that the challenges of solving brain simulation, even for the simplest of model organisms, require open access and collaborative solutions.
 
