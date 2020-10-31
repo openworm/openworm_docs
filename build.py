@@ -12,7 +12,7 @@ import logging
 import requests
 from tqdm import tqdm
 from github import Github
-from github.GithubException import UnknownObjectException
+from github.GithubException import GithubException, UnknownObjectException
 import yaml
 from jinja2 import Template
 from funcy import merge
@@ -139,6 +139,10 @@ def repo2content(repo):
             tree = repo.get_git_tree("develop", recursive=False).tree
         except UnknownObjectException:
             raise exc
+    except GithubException as exc:
+        if "is empty" in str(exc):
+            return {}
+        raise
     files = [i for i in tree if i.path.lower().startswith(".openworm.")]
     if not files:
         return {}
