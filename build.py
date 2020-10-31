@@ -127,22 +127,25 @@ class RepoTree(igraph.Graph):
         fig.write_html(outfile, auto_open=False)
 
 
+def get_first_tree(repo, branches):
+    """
+    @return `tree` corresponding to the first existing branch in `branches`
+    """
+    for branch in branches:
+        try:
+            return repo.get_git_tree(branch, recursive=False).tree
+        except (UnknownObjectException, GithubException):
+            pass
+
+
 def repo2content(repo):
     """
     @return {"filename": (File, "content")}
     where `filename` starts with `.openworm.`
     """
-    try:
-        tree = repo.get_git_tree("master", recursive=False).tree
-    except UnknownObjectException as exc:
-        try:
-            tree = repo.get_git_tree("develop", recursive=False).tree
-        except UnknownObjectException:
-            raise exc
-    except GithubException as exc:
-        if "is empty" in str(exc):
-            return {}
-        raise
+    tree = get_first_tree(repo, ["master", "main", "develop"])
+    if tree is None:
+        return {}
     files = [i for i in tree if i.path.lower().startswith(".openworm.")]
     if not files:
         return {}
