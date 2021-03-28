@@ -1,0 +1,50 @@
+name: Make Documentation
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    # 11:30 and 23:30 every day
+    - cron:  '30 11,23 * * *'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: apt install
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+    - name: Install and check
+      run: |
+        python3 -m venv venv
+        . venv/bin/activate
+        python -m pip install -U pip
+        echo "export MAKEFLAGS=\"PYTHON=$(which python) PIP_OPTS=-U\"" >> ~/.bashrc
+        make install
+        make check
+        export GITHUB_TOKEN=${{ github.token }}
+        make build
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: built-site
+        path: site
+    - name: if master; mkdocs gh-deploy
+      run: |
+        SHA="${{ github.sha }}"
+        git fetch origin gh-pages:gh-pages
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        . venv/bin/activate
+        ghp-import -n site
+        git checkout gh-pages
+        if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
+          echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
+          echo "Skipping already deployed master@$SHA"
+        else
+          git commit --amend -m "Deploy master@$SHA [ci skip]"
+          git remote set-url origin https://${{ github.token }}@github.com/openworm/openworm_docs.git
+          git push -f origin gh-pages
+        fi
