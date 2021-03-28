@@ -8,20 +8,25 @@ import os
 import sys
 from base64 import b64decode
 import logging
+import datetime
+import math
+from time import sleep, time
 
 import requests
-from tqdm import tqdm
+from tqdm import tqdm, trange
 from github import Github
-from github.GithubException import GithubException, UnknownObjectException
+from github.GithubException import UnknownObjectException, RateLimitExceededException
 import yaml
 from jinja2 import Template
 from funcy import merge
 from six import string_types
 import igraph
 
-GH = Github(os.getenv("GITHUB_API_TOKEN"))
+GH = Github(os.getenv("GITHUB_TOKEN"))
 REPOS = list(GH.get_organization("OpenWorm").get_repos())
-TEMPLATE = Template(open("docs/gsod19/repos.md.template").read())
+TEMPLATE = Template(open("resources/repos.md.template").read())
+
+LOGGER = logging.getLogger(__name__)
 
 
 class RepoTree(igraph.Graph):
@@ -132,10 +137,47 @@ def get_first_tree(repo, branches):
     @return `tree` corresponding to the first existing branch in `branches`
     """
     for branch in branches:
-        try:
-            return repo.get_git_tree(branch, recursive=False).tree
-        except (UnknownObjectException, GithubException):
-            pass
+        retry = None
+        while retry is None or retry:
+            retry = False
+            try:
+                return repo.get_git_tree(branch, recursive=False).tree
+            except UnknownObjectException:
+                LOGGER.debug(
+                    "Did not find branch %s in %s", branch, repo, exc_info=True
+                )
+            except RateLimitExceededException as e:
+                try:
+                    print("all the headers", e.headers)
+                    limit = e.headers["x-ratelimit-limit"]
+                    reset = int(e.headers["x-ratelimit-reset"])
+                    wait_time_seconds = reset - time()
+                    LOGGER.warning(
+                        "Rate limit of %s exceeded. Waiting %d seconds",
+                        limit,
+                        wait_time_seconds,
+                        exc_info=True,
+                    )
+                    wait_for_limit_expiration(wait_time_seconds)
+                    retry = True
+                except Exception:
+                    LOGGER.warning(
+                        "Rate limit exceeded. Couldn't determine limit or reset time,"
+                        " so just waiting for five minutes before retrying",
+                        exc_info=True,
+                    )
+                    wait_for_limit_expiration(300)
+                    retry = True
+            except Exception:
+                LOGGER.warning(
+                    "Failed to recover branch %s in %s", branch, repo, exc_info=True
+                )
+
+
+def wait_for_limit_expiration(time):
+    seconds = math.ceil(time / 5)
+    for n in trange(seconds):
+        sleep(5)
 
 
 def repo2content(repo):
@@ -145,9 +187,13 @@ def repo2content(repo):
     """
     tree = get_first_tree(repo, ["master", "main", "develop"])
     if tree is None:
+        LOGGER.info("Skipping %s because we cannot find a branch", repo)
         return {}
     files = [i for i in tree if i.path.lower().startswith(".openworm.")]
     if not files:
+        LOGGER.info(
+            "Skipping %s because we cannot find .openworm.* file among %s", repo, files
+        )
         return {}
 
     reqs = [requests.get(i.url) for i in files]
@@ -179,7 +225,9 @@ def repo2meta(repo):
             meta["mdObj"] = fObj
         else:
             raise KeyError("Unknown file extension: {}".format(name))
-        lastMod = fObj.last_modified_at
+        lastMod = datetime.datetime.strptime(
+            fObj.last_modified, "%a, %d %b %Y %H:%M:%S %Z"
+        )
         meta.setdefault("latest_generated_date", lastMod)
         meta["latest_generated_date"] = max(meta["latest_generated_date"], lastMod)
     meta["latest_generated_date"] = "{:%Y-%m-%d}".format(meta["latest_generated_date"])
@@ -188,8 +236,7 @@ def repo2meta(repo):
 
 def main():
     logging.basicConfig(level=logging.INFO)
-    log = logging.getLogger(__name__)
-    outfile = open("docs/gsod19/repos.md", "w")
+    outfile = open("docs/Community/repositories.md", "w")
 
     def tee(*a):
         tqdm.write(" ".join(map(str, a)))
@@ -201,7 +248,7 @@ def main():
         if fmt:
             fmt["repoObj"] = repo
             meta[repo.name] = fmt
-    log.info(meta)
+    LOGGER.info(meta)
 
     defaults = {
         # TODO: build graph based on the following, and use it to determine
@@ -270,7 +317,7 @@ def main():
 
     outfile.close()
 
-    graph.plot("docs/gsod19/repos-graph.html")
+    graph.plot("docs/Community/repos-graph.html")
 
 
 if __name__ == "__main__":

@@ -1,11 +1,11 @@
 # doc build
-mkdocs
+mkdocs>=1.1.2
 # GitHub pages upload
 ghp-import
 Jinja2
 
 # GitHub metadata parsing
-git+https://github.com/casperdcl/PyGithub.git@master#egg=PyGithub
+git+https://github.com/PyGithub/PyGithub.git@master#egg=PyGithub
 requests
 tqdm
 pyyaml
