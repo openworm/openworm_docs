@@ -10,7 +10,7 @@ This page contains a list of repositories maintained by the OpenWorm project on 
 Repositories
 ------------
 
-View the full current list [repositories](repositories/) of repositories on GitHub.
+View the full current list [repositories](/Community/repositories/) of repositories on GitHub.
 
 Accessing GitHub
 ----------------
