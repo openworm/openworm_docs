@@ -27,7 +27,7 @@ OpenWorm believes that the challenges of solving brain simulation, even for the 
 
 OpenWorm is actively working to achieve its goal - creating the world's first virtual organism in a computer - by:
 
-> -   bringing together highly motivated scientists and engineers in the open space
+> -   bringing together highly motivated scientists and engineers in an open space
 > -   pushing away all the red tape by taking open science to the extreme
 > -   fostering growth of a completely open computational biology community
 
