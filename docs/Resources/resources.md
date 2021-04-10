@@ -71,10 +71,10 @@ Source code for [the web version](https://github.com/openworm/wormbrowser) and [
 Data sets
 ---------
 
-### OWMeta
+### owmeta
 
 A Python API for accessing information about *C. elegans* is available
-at [OWMeta](http://github.com/openworm/OWMeta). This API consolidates
+at [owmeta](http://github.com/openworm/owmeta). This API consolidates
 information from our [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U)
 that we have come across and adapted on Google Drive.
 

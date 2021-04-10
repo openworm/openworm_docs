@@ -12,9 +12,9 @@ Broadly speaking, the team for this project will develop a workflow and tools to
 
 The literature will be mined for scientific papers with ion channel data, which will be fed to the ChannelWorm pipeline. Inside the pipeline, data are extracted from the papers by various means, including digitization of figures. These data are then used to construct ion channel models.
 
-Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (OWMeta) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.
+Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (owmeta) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.
 
-Once the ion channel models are successfully validated and stored in the OWMeta database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - OWMeta database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
+Once the ion channel models are successfully validated and stored in the owmeta database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - owmeta database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
 
 ### Tracking progress
 
@@ -99,32 +99,32 @@ In other words, Neurotune provides a solution for optimizing the parameters of a
 - [Neurotune](https://github.com/vellamike/neurotune/)
 - [NeuroTune docs](http://neurotune.readthedocs.org/en/latest/)
 
-## OWMeta Unified Data Access Layer
+## owmeta Unified Data Access Layer
 
-We have consolidated a lot of data about the worm into a python library that creates a unified data access layer [called OWMeta](https://github.com/openworm/owmeta). [Documentation for OWMeta is available online](http://pyopenworm.readthedocs.org/en/latest/).
+We have consolidated a lot of data about the worm into a python library that creates a unified data access layer [called owmeta](https://github.com/openworm/owmeta). [Documentation for owmeta is available online](http://pyopenworm.readthedocs.org/en/latest/).
 
 ### Previous accomplishments
 
 -   Building the original [OpenWorm database](https://groups.google.com/d/msg/openworm-discuss/2V5kF5na5fw/GnxZMgWYF7wJ)
--   [Initial release of OWMeta](https://github.com/openworm/OWMeta/releases/tag/0.0.1-alpha)
+-   [Initial release of owmeta](https://github.com/openworm/owmeta/releases/tag/0.0.1-alpha)
 
 ### Current roadmap
 
-OWMeta will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use OWMeta to store ion channel data and models that it retrieves from scientific papers. Next steps involve:
+owmeta will be used in the information storage aspect of various other subprojects. For instance, ChannelWorm will use owmeta to store ion channel data and models that it retrieves from scientific papers. Next steps involve:
 
-1.  Adapting OWMeta's existing infrastructure to serve ChannelWorm
+1.  Adapting owmeta's existing infrastructure to serve ChannelWorm
 2.  Filling the database with information, being sure to tag each fact with sources along the way.
-3.  Finalize [remaining issues for OWMeta version alpha0.5](https://github.com/openworm/OWMeta/labels/alpha0.5)
+3.  Finalize [remaining issues for owmeta version alpha0.5](https://github.com/openworm/owmeta/labels/alpha0.5)
 4.  [Document Neuron Ion Channels: Types](https://github.com/openworm/OpenWorm/issues/31)
 5.  [Document Ion channels: Research Claims](https://github.com/openworm/OpenWorm/issues/32)
 
 ### Issues list
 
-Issues for OWMeta are tracked [on Github](https://github.com/openworm/OWMeta/issues/).
+Issues for owmeta are tracked [on Github](https://github.com/openworm/owmeta/issues/).
 
 ### Associated Repositories
 
-- [OWMeta](https://github.com/openworm/OWMeta/)
+- [owmeta](https://github.com/openworm/owmeta/)
 
 Muscle Model
 ------------

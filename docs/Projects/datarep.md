@@ -1,13 +1,13 @@
 Data Collection and Representation
 ==================================
 
-There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different dataset are used in the model.
+There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different datasets are used in the model.
 
-Being an integrative model, OpenWorm utilizes different datasets, each with different file formats and interfaces to the model. There is no master representation of all the data incorporated into the model, instead our aim is to keep the model open to be able to cope with different data structures.
+Being an integrative model, OpenWorm utilizes different datasets, each with different file formats and interfaces to the model. There is no master representation of all the data incorporated into the model: instead our aim is to keep the model open to be able to cope with different data structures.
 
 Consider the connectomics data. There are different useful ways to mine this data set. For example, a [NetworkX](https://networkx.github.io/) representation of the connectome as a complex graph enables questions to be asked about first and second nearest neighbors of a given neuron. In contrast, an [RDF](http://www.w3.org/RDF/) semantic graph representation is useful for reading and writing annotations about multiple aspects of a neuron, such as what papers have been written about it, multiple different properties it may have such as ion channels and neurotransmitter receptors and so on. A [NeuroML](http://www.neuroml.org/) representation is useful for answering questions about model morphology and simulation parameters. Lastly, a [Blender](http://www.blender.org/) representation is a full 3D shape definition that can be used for calculations in 3D space.
 
-Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see OWMeta below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.
+Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see owmeta below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.
 
 Here is a list of some of the data sets that we have used so far:
 
@@ -21,7 +21,7 @@ Currently our work on data collection and representation is divided among four s
 
 -   NeuroML Connectome
 -   Data Visualization
--   OWMeta Unified Data Access Layer
+-   owmeta Unified Data Access Layer
 -   Muscle cell integration
 
 Below you can find information about each subproject, see the project’s current roadmap and access the associated data repositories
@@ -59,7 +59,7 @@ Repository | Description | Language
 <a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C elegans model, contained in a neuroConstruct project  | Java
 <a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
 <a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
-<a href="https://github.com/openworm/OWMeta">OWMeta</a> | Metadata extraction, translation, storage, and sharing | Python
+<a href="https://github.com/openworm/owmeta">owmeta</a> | Metadata extraction, translation, storage, and sharing | Python
 
 
 
