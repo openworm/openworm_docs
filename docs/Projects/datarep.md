@@ -89,3 +89,15 @@ Repository | Description | Language
 <a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans | Javascript
 <a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a> | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser | Objective-C
 <a href="https://github.com/openworm/data-viz">data-viz</a> | Repository for scripts and other code items to create web-based visualizations of data in the project | Python
+
+owmeta
+------
+owmeta is a system for extracting data from disparate resources and connecting them. Connected data are typically brought onto one machine where they can be used for simulations, visualizations, or analysis. owmeta can further aid in sharing the results of such work and relating them to the datasets they come from.
+
+Extracting data from different sources is an ongoing process. Different sub-projects under OpenWorm define "data transformers", data types, and utilities for transforming data and making it shareable within the owmeta system. New, independent projects can be developed as well for data types not supported by OpenWorm and interoperate within the owmeta system.
+
+For sharing, data are organized into "bundles", which are essentially collections of RDF documents and files. The bundles are versioned and named, and they can refer to each other by name and version. Bundles can be shared either by packaging them up into archives (e.g., `.tar.xz` files) or by publishing them to bundle repositories. There is not an official OpenWorm bundle repository to which anyone can upload a bundle.
+
+<!-- "roadmap" section intentionally left out. Trying to keep planning in GitHub issues / projects since such things quickly get stale in docs pages -->
+### Issues
+Issues with owmeta and related projects are managed on the [GitHub projects page](https://github.com/orgs/openworm/projects/2).
