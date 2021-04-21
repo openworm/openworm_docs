@@ -25,6 +25,7 @@ import igraph
 GH = Github(os.getenv("GITHUB_TOKEN"))
 REPOS = list(GH.get_organization("OpenWorm").get_repos())
 TEMPLATE = Template(open("resources/repos.md.template").read())
+REPO_METADATA_SHAS = os.getenv("REPO_METADATA_SHAS")
 
 LOGGER = logging.getLogger(__name__)
 
@@ -225,6 +226,7 @@ def repo2meta(repo):
             meta["mdObj"] = fObj
         else:
             raise KeyError("Unknown file extension: {}".format(name))
+        meta["sha"] = fObj.sha
         lastMod = datetime.datetime.strptime(
             fObj.last_modified, "%a, %d %b %Y %H:%M:%S %Z"
         )
@@ -236,11 +238,6 @@ def repo2meta(repo):
 
 def main():
     logging.basicConfig(level=logging.INFO)
-    outfile = open("docs/Community/repositories.md", "w")
-
-    def tee(*a):
-        tqdm.write(" ".join(map(str, a)))
-        print(*a, file=outfile)
 
     meta = {}
     for repo in tqdm(REPOS, unit="repo"):
@@ -275,47 +272,56 @@ def main():
         "latest_generated_date": "",
     }
 
-    tee('<iframe src="../repos-graph.html" width="100%" height=880></iframe>\n')
     graph = RepoTree()
-    for name, fmt in tqdm(meta.items(), unit="repos"):
-        repo = fmt["repoObj"]
-        fmt = merge(defaults, dict(name=name), fmt)
+    shas = []
+    with open("docs/Community/repositories.md", "w") as outfile:
 
-        fmt.setdefault("shortdescription", repo.description)
-        # TODO: maybe use repo.updated_at or repo.pushed_at ?
+        def tee(*a):
+            tqdm.write(" ".join(map(str, a)))
+            print(*a, file=outfile)
 
-        # TODO: auto determine from repo
-        fmt["keywords"] = ", ".join(fmt["keywords"])
-        # TODO: auto determine from repo
-        fmt["languages"] = ", ".join(fmt["languages"])
+        tee('<iframe src="../repos-graph.html" width="100%" height=880></iframe>\n')
+        for name, fmt in tqdm(meta.items(), unit="repos"):
+            repo = fmt["repoObj"]
+            fmt = merge(defaults, dict(name=name), fmt)
 
-        try:
-            rel = repo.get_latest_release()
-        except:  # NOQA
-            pass
-        else:
-            fmt["latest_release_date"] = fmt[
-                "latest_release_date"
-            ] or "{rel.published_at:%Y-%m-%d}".format(rel=rel)
-            fmt["latest_release"] = fmt[
-                "latest_release"
-            ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
+            fmt.setdefault("shortdescription", repo.description)
+            # TODO: maybe use repo.updated_at or repo.pushed_at ?
 
-        if isinstance(fmt["parent"], string_types):
-            fmt["parent"] = [fmt["parent"]]
-        # for i in filter(None, fmt['children']):
-        for i in fmt["children"]:
-            graph.add_edge(fmt["repo"], i)
-        # for i in filter(None, fmt['parent']):
-        for i in fmt["parent"]:
-            graph.add_edge(i, fmt["repo"])
+            # TODO: auto determine from repo
+            fmt["keywords"] = ", ".join(fmt["keywords"])
+            # TODO: auto determine from repo
+            fmt["languages"] = ", ".join(fmt["languages"])
 
-        if "markdown" in fmt:
-            tee(fmt["markdown"])
-            continue
-        tee(TEMPLATE.render(**fmt))
+            try:
+                rel = repo.get_latest_release()
+            except:  # NOQA
+                pass
+            else:
+                fmt["latest_release_date"] = fmt[
+                    "latest_release_date"
+                ] or "{rel.published_at:%Y-%m-%d}".format(rel=rel)
+                fmt["latest_release"] = fmt[
+                    "latest_release"
+                ] or "{rel.title} ({rel.tag_name})".format(rel=rel)
 
-    outfile.close()
+            if isinstance(fmt["parent"], string_types):
+                fmt["parent"] = [fmt["parent"]]
+            # for i in filter(None, fmt['children']):
+            for i in fmt["children"]:
+                graph.add_edge(fmt["repo"], i)
+            # for i in filter(None, fmt['parent']):
+            for i in fmt["parent"]:
+                graph.add_edge(i, fmt["repo"])
+
+            if "markdown" in fmt:
+                tee(fmt["markdown"])
+                continue
+            tee(TEMPLATE.render(**fmt))
+            shas.append((fmt["repo"], fmt["sha"]))
+    with open(REPO_METADATA_SHAS, "w") as shasfile:
+        for repo, sha in sorted(shas):
+            print(f"{repo} {sha}", file=shasfile)
 
     graph.plot("docs/Community/repos-graph.html")
 
