@@ -3,8 +3,6 @@ on:
   push:
     branches: [ master ]
   schedule:
-    # 11:30 and 23:30 every day
-    #- cron:  '30 11,23 * * *'
     # minute 47 of every hour
     - cron:  '47 * * * *'
 
