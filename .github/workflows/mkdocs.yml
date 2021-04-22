@@ -47,7 +47,7 @@ jobs:
         if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
             echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
             echo "Skipping already deployed master@$SHA"
-        elif git diff HEAD --exit-code $REPO_METADATA_SHAS ; then
+        elif git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
             git commit --amend -m "Deploy master@$SHA [ci skip]"
