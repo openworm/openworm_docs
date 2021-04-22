@@ -5,7 +5,8 @@ on:
   schedule:
     # 11:30 and 23:30 every day
     #- cron:  '30 11,23 * * *'
-    - cron:  '*/5 * * * *'
+    # minute 47 of every hour
+    - cron:  '47 * * * *'
 
 env:
   REPO_METADATA_SHAS: repo-metadata-shas.txt
@@ -34,7 +35,7 @@ jobs:
       with:
         name: built-site
         path: site
-    - name: if master; mkdocs gh-deploy
+    - name: mkdocs gh-deploy
       run: |
         SHA="${{ github.sha }}"
         git fetch origin gh-pages:gh-pages
@@ -44,12 +45,14 @@ jobs:
         ghp-import -n site
         git checkout gh-pages
         git add $REPO_METADATA_SHAS
+        LAST_BUILT_SHA=$(cat last_build_sha)
         if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
             echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
             echo "Skipping already deployed master@$SHA"
-        elif git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
+        elif [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
+            echo -n $SHA > last_build_sha
             git commit --amend -m "Deploy master@$SHA [ci skip]"
             git remote set-url origin https://${{ github.token }}@github.com/openworm/openworm_docs.git
             git push -f origin gh-pages
