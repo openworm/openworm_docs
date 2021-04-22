@@ -2,7 +2,7 @@
 
 Documentation for OpenWorm, hosted at <http://docs.openworm.org>.
 
-[![CircleCI][CI-badge]][CI]
+[![Make Documentation][CI-badge]][CI]
 
 Simply modifying the markdown files in this repository should automatically
 trigger the site to be built and updated via [Read the Docs:dev-openworm-docs][RTD-proj].
@@ -17,8 +17,8 @@ For information on OpenWorm itself and contributing in general, see
 [Contributing]: http://docs.openworm.org/en/latest/community#contributing-to-the-openworm-documentation
 [Contributing-local]: docs/community.md
 [getting involved]: http://openworm.org/get_involved.html
-[CI-badge]: https://img.shields.io/circleci/build/gh/openworm/openworm_docs?logo=circleci
-[CI]: https://circleci.com/gh/openworm/openworm_docs
+[CI-badge]: https://github.com/openworm/openworm_docs/actions/workflows/mkdocs.yml/badge.svg
+[CI]: https://github.com/openworm/openworm_docs/actions/workflows/mkdocs.yml
 
 ## Building
 
