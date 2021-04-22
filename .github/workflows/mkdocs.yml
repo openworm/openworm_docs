@@ -45,7 +45,10 @@ jobs:
         ghp-import -n site
         git checkout gh-pages
         git add $REPO_METADATA_SHAS
-        LAST_BUILT_SHA=$(cat last_build_sha)
+        LAST_BUILT_SHA=
+        if [[ -f last_build_sha ]] ; then
+          LAST_BUILT_SHA=$(cat last_build_sha)
+        fi
         if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
             echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
             echo "Skipping already deployed master@$SHA"
