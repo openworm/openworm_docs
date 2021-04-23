@@ -4,7 +4,7 @@ on:
     branches: [ master ]
   schedule:
     # minute 47 of every hour
-    - cron:  '47 * * * *'
+    - cron:  '*/15 * * * *'
 
 env:
   REPO_METADATA_SHAS: repo-metadata-shas.txt
@@ -36,6 +36,7 @@ jobs:
     - name: mkdocs gh-deploy
       run: |
         SHA="${{ github.sha }}"
+        set -x
         git fetch origin gh-pages:gh-pages
         git config user.name github-actions
         git config user.email github-actions@github.com
@@ -47,10 +48,7 @@ jobs:
         if [[ -f last_build_sha ]] ; then
           LAST_BUILT_SHA=$(cat last_build_sha)
         fi
-        if [[ -z "$(git diff origin/gh-pages --numstat | grep -Ev 'sitemap\.xml|^1\s1\sindex.html$|repos-graph.html')" ]]; then
-            echo "Ignoring sitemap.xml*, only one line changed in index.html (assumed timestamp)"
-            echo "Skipping already deployed master@$SHA"
-        elif [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
+        if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
             echo -n $SHA > last_build_sha
