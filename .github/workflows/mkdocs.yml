@@ -40,18 +40,18 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git config user.name github-actions
         git config user.email github-actions@github.com
-        . venv/bin/activate
-        ghp-import -n site
         git checkout gh-pages
+        ls
         git add $REPO_METADATA_SHAS
         LAST_BUILT_SHA=
-        ls
         if [[ -f ./last_build_sha ]] ; then
           LAST_BUILT_SHA=$(cat last_build_sha)
         fi
         if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
+            . venv/bin/activate
+            ghp-import -o -n site
             echo -n $SHA > last_build_sha
             git add last_build_sha
             git commit --amend -m "Deploy master@$SHA [ci skip]"
