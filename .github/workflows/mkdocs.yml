@@ -40,7 +40,9 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git config user.name github-actions
         git config user.email github-actions@github.com
+        git stash
         git checkout gh-pages
+        git stash pop
         ls
         git add $REPO_METADATA_SHAS
         LAST_BUILT_SHA=
