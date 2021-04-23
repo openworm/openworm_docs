@@ -1,7 +1,7 @@
 name: Make Documentation
 on:
   push:
-    branches: [ master ]
+    branches: [ master, doc-skip ]
   schedule:
     # minute 47 of every hour
     - cron:  '*/15 * * * *'
