@@ -54,6 +54,7 @@ jobs:
             echo "No changes in repo metadata. Skipping deploy"
         else
             echo -n $SHA > last_build_sha
+            git add last_build_sha
             git commit --amend -m "Deploy master@$SHA [ci skip]"
             git remote set-url origin https://${{ github.token }}@github.com/openworm/openworm_docs.git
             git push -f origin gh-pages
