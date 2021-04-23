@@ -4,7 +4,7 @@ on:
     branches: [ master, doc-skip ]
   schedule:
     # minute 47 of every hour
-    - cron:  '*/15 * * * *'
+    - cron:  '47 * * * *'
 
 env:
   REPO_METADATA_SHAS: repo-metadata-shas.txt
