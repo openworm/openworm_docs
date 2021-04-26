@@ -17,7 +17,23 @@ What do I work on? We outline the work we are doing in the project using [GitHub
 
 Another way is you can [browse the Project level view of issues](https://github.com/orgs/openworm/projects) directly.
 
-Once you have identified an issue you want to work on from a [particular project](/Projects), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+Other key boards:
+
+- [Geppetto](https://github.com/orgs/openworm/projects/13)
+- [Movement Validation](https://github.com/orgs/openworm/projects/6)
+- [Muscle-Neuron-Channel integration](https://github.com/orgs/openworm/projects/5)
+
+### Come chat with us!
+
+You can initiate a conversation with us on Slack channels to get more specific about issues.  We ask that you just sign up as a contributor before receiving an invite to join our Slack channel first by [filling out the form here](https://goo.gl/3ncZWn).  Once you are logged in, you will find channels such as:
+
+- [General](https://app.slack.com/client/T02EPNETZ/C02EPNEUT)
+- [Geppetto](https://app.slack.com/client/T02EPNETZ/C89GCLE49)
+- [Movement Validation](https://app.slack.com/client/T02EPNETZ/C49LLAMJQ)
+- [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
+- [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
+
+Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
@@ -122,10 +138,6 @@ We also currently schedule an ad-hoc Muscle / Neuron team meeting about every 3-
 ### Working meetings
 
 Contributors are encouraged to meet with each other on a regular basis to advance areas of the project they need interaction on.
-
-### Chatroom for OpenWorm
-
-We have [a new chatroom on Gitter](https://gitter.im/openworm/OpenWorm). Check it out!
 
 ### Scheduling meetings
 
