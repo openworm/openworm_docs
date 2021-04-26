@@ -26,13 +26,13 @@ Other key boards:
 
 ### Come chat with us!
 
-You can initiate a conversation with us on our chatrooms to get more specific about issues..  Currently these are:
+You can initiate a conversation with us on Slack channels to get more specific about issues.  We ask that you just sign up as a contributor before receiving an invite to join our Slack channel first by [filling out the form here](https://goo.gl/3ncZWn).  Once you are logged in, you will find channels such as:
 
-- [Project-wide](https://gitter.im/openworm/OpenWorm)
-- [Geppetto](https://gitter.im/openworm/org.geppetto)
-- [Movement Validation](https://gitter.im/openworm/movement_validation)
-- [Muscle model](https://gitterm.im/openworm/muscle_model)
-- [ChannelWorm](https://gitter.im/VahidGh/ChannelWorm)
+- [General](https://app.slack.com/client/T02EPNETZ/C02EPNEUT)
+- [Geppetto](https://app.slack.com/client/T02EPNETZ/C89GCLE49)
+- [Movement Validation](https://app.slack.com/client/T02EPNETZ/C49LLAMJQ)
+- [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
+- [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
 Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
 
@@ -141,10 +141,6 @@ We also currently schedule an ad-hoc Muscle / Neuron team meeting about every 3-
 ### Working meetings
 
 Contributors are encouraged to meet with each other on a regular basis to advance areas of the project they need interaction on.
-
-### Chatroom for OpenWorm
-
-We have [a new chatroom on Gitter](https://gitter.im/openworm/OpenWorm). Check it out!
 
 ### Scheduling meetings
 
