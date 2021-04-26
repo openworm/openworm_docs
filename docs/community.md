@@ -6,7 +6,11 @@ This page contains information intended to help individuals understand what step
 An Opening Note
 ---------------
 
+<<<<<<< HEAD
 Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).  See below for additional information on our repo specific chatrooms.
+=======
+Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](http://openworm.org/contacts.html).
+>>>>>>> master
 
 Contribution Best Practices
 ---------------------------
@@ -15,8 +19,9 @@ What do I work on? We outline the work we are doing in the project using [GitHub
 
 ### Find tasks to work on
 
-Another way is you can [browse the top-level board of issues](https://github.com/orgs/openworm/projects/9) directly.
+Another way is you can [browse the Project level view of issues](https://github.com/orgs/openworm/projects) directly.
 
+<<<<<<< HEAD
 Other key boards:
 
 - [Geppetto](https://github.com/orgs/openworm/projects/13)
@@ -34,6 +39,9 @@ You can initiate a conversation with us on Slack channels to get more specific a
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
 Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+=======
+Once you have identified an issue you want to work on from a [particular project](/Projects), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+>>>>>>> master
 
 ### Using OpenWorm repos on GitHub
 
@@ -46,13 +54,11 @@ More details on best practices using OpenWorm repos on GitHub are available on [
 ### Creating organizing documents
 
 Another great way to contribute is by organizing ideas or documentation or proposals via a Google
-doc, and then sharing the link on our [mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
+doc, and then sharing the link on our [Slack](http://openworm.org/contacts.html).
 
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on [this link](https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing).
 
 All documents located in the OpenWorm folder is viewable to the public. Comments can be added to both text documents and spreadsheets. In order to edit existing documents or to add a new document, you will need to be added to the folder. You can request access by email your Google ID to <info@openworm.org>.
-
-[OpenWorm Docs](https://drive.google.com/a/openworm.org/?tab=oo#folders/0B_t3mQaA-HaMaXpxVW5BY2JLa1E)
 
 ### Taking notes as Google docs
 
@@ -71,7 +77,7 @@ An effective progress report should contain the following information:
 
 An example of an effective progress report is [available online](https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit).
 
-Once the document is shared, it should be announced on [the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
+Once the document is shared, it should be announced on [Slack](http://openworm.org/contacts.html).
 
 ### Creating proposals as Google docs
 
