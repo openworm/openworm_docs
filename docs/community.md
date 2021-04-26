@@ -6,8 +6,7 @@ This page contains information intended to help individuals understand what step
 An Opening Note
 ---------------
 
-Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).  See below for
-additional information on our repo specific chatrooms.
+Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).  See below for additional information on our repo specific chatrooms.
 
 Contribution Best Practices
 ---------------------------
@@ -82,7 +81,7 @@ An example of an effective proposal is [available online](https://docs.google.co
 
 ### Contributing to the OpenWorm documentation
 
-The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.
+The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](http://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
 When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/).
 
@@ -94,7 +93,7 @@ The documentation is published on the [ReadTheDocs service](https://readthedocs.
 
 The markdown documentation is rendered using the Python module [MkDocs](https://www.mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
-Changes that appear in GitHub will automatically trigger a hook that will cause the documentation on ReadTheDocs to become rebuilt and pushed onto the site. There are different versions of the documentation that are explained below.
+After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on ReadTheDocs to become rebuilt and pushed onto the site. There are different versions of the documentation that are explained below.
 
 #### OpenWorm Documentation Versions
 
@@ -130,21 +129,13 @@ It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/p
 Meetings
 --------
 
-### Team meetings
-
-We have [a regular meeting](https://www.youtube.com/watch?v=-IyHokN8FkA&list=PL8ACJC0fGE7C7zlCBqkx1LMN1DHGKVp22) of the team that is building applications every month.
-
-We also have a regular Movement Validation team meeting once a month.
-
-We also currently schedule an ad-hoc Muscle / Neuron team meeting about every 3-4 weeks. The events are on [our community calendar](https://www.google.com/calendar/embed?src=bqvlrm642m3irjehbethokkcdg%40group.calendar.google.com). The events are streamed live when they occur and an archive of the meeting videos and [the minutes](https://drive.google.com/#folders/0B8QUskXehbJtNWM2MjUyM2EtOTMxMC00MWY3LWEyNWMtNDUwMjRiNjM0Mjcx) are kept online.
-
 ### Working meetings
 
-Contributors are encouraged to meet with each other on a regular basis to advance areas of the project they need interaction on.
+Contributors are encouraged to meet with each other on Slack on a regular basis to advance areas of the project they need interaction on.
 
 ### Scheduling meetings
 
-We like using the [Doodle service](http://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google+ event to track it and remind everyone it is occurring.
+We like using the [Doodle service](http://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.
 
 Interactions
 ------------
@@ -157,28 +148,6 @@ There are two Google Groups in connection with OpenWorm. We suggest joining both
 
 [This list](https://groups.google.com/forum/?hl=en#!forum/openworm-discuss) is for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.
 
-### Google Plus
-
-[Follow us on OpenWorm Google+](https://plus.google.com/+OpenwormOrg/posts)
-
-Click on the "Follow" button to be a part of the OpenWorm community on Google+.
-
-If you need more help with Google+, check out the handy [guide](https://support.google.com/plus/?hl=en#topic=3049662) put out by Google.
-
-### YouTube
-
-[View our YouTube channel](http://www.youtube.com/user/OpenWorm)
-
-Want to get notified when new content goes live? [Subscribe to the channel](http://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
-
-#### Playlists
-
--   Status Updates - Biweekly updates from the OpenWorm team.
--   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
--   Data Team meetings - Learn more about our [team meetings](#team-meetings).
--   Real *C. elegans*
--   Building Blocks
-
 ### Twitter
 
 [Follow our Twitter feed](http://twitter.com/openworm)
@@ -190,6 +159,20 @@ Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 [Our blog](http://blog.openworm.org) is hosted in Tumblr.
 
 Interesting in being a guest on our blog? We love hearing about what members of the OpenWorm community are doing. If you have something to share, contact us at <info@openworm.org> to discuss.
+
+### YouTube
+
+Our YouTube channel is currently quite out of date, but for historical purposes, you can [view our YouTube channel here.](http://www.youtube.com/user/OpenWorm)
+
+Want to get notified when new content goes live? [Subscribe to the channel](http://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
+
+#### Playlists
+
+-   Status Updates - Biweekly updates from the OpenWorm team.
+-   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
+-   Data Team meetings - Learn more about our [team meetings](#team-meetings).
+-   Real *C. elegans*
+-   Building Blocks
 
 Membership
 ----------
