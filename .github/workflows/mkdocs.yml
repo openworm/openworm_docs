@@ -40,22 +40,22 @@ jobs:
         git fetch origin gh-pages:gh-pages
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git add $REPO_METADATA_SHAS
-        git stash
+        . venv/bin/activate
+        mv $REPO_METADATA_SHAS $REPO_METADATA_SHAS.temp
         git checkout gh-pages
-        git stash pop
-        ls
         LAST_BUILT_SHA=
         if [[ -f ./last_build_sha ]] ; then
           LAST_BUILT_SHA=$(cat last_build_sha)
         fi
-        if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
+        if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && diff -q $REPO_METADATA_SHAS $REPO_METADATA_SHAS.temp ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
-            . venv/bin/activate
+            git checkout -
             ghp-import -o -n site
+            git checkout gh-pages
             echo -n $SHA > last_build_sha
             git add last_build_sha
+            mv $REPO_METADATA_SHAS.temp $REPO_METADATA_SHAS
             git commit --amend -m "Deploy master@$SHA [ci skip]"
             git remote set-url origin https://${{ github.token }}@github.com/openworm/openworm_docs.git
             git push -f origin gh-pages
