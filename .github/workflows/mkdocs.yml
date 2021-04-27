@@ -43,11 +43,12 @@ jobs:
         . venv/bin/activate
         mv $REPO_METADATA_SHAS $REPO_METADATA_SHAS.temp
         git checkout gh-pages
+        cp $REPO_METADATA_SHAS.temp $REPO_METADATA_SHAS
         LAST_BUILT_SHA=
         if [[ -f ./last_build_sha ]] ; then
           LAST_BUILT_SHA=$(cat last_build_sha)
         fi
-        if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && diff -q $REPO_METADATA_SHAS $REPO_METADATA_SHAS.temp ; then
+        if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
             git checkout -
