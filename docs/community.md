@@ -6,11 +6,7 @@ This page contains information intended to help individuals understand what step
 An Opening Note
 ---------------
 
-<<<<<<< HEAD
-Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by reaching out to us to ask for help [on the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).  See below for additional information on our repo specific chatrooms.
-=======
 Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](http://openworm.org/contacts.html).
->>>>>>> master
 
 Contribution Best Practices
 ---------------------------
@@ -21,7 +17,6 @@ What do I work on? We outline the work we are doing in the project using [GitHub
 
 Another way is you can [browse the Project level view of issues](https://github.com/orgs/openworm/projects) directly.
 
-<<<<<<< HEAD
 Other key boards:
 
 - [Geppetto](https://github.com/orgs/openworm/projects/13)
@@ -39,9 +34,6 @@ You can initiate a conversation with us on Slack channels to get more specific a
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
 Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
-=======
-Once you have identified an issue you want to work on from a [particular project](/Projects), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
->>>>>>> master
 
 ### Using OpenWorm repos on GitHub
 
