@@ -4,7 +4,9 @@ Introduction to OpenWorm
 Welcome
 -------
 
-[OpenWorm](http://www.openworm.org) is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a *C. elegans* nematode, via bottom-up "systems biology" computational modeling. It is an association of highly motivated scientists, engineers, coders, and curious citizens from around the world who believe in open science and open access.
+[OpenWorm](http://www.openworm.org) is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a *C. elegans* nematode, via bottom-up "systems biology" computational modeling. 
+
+It is an association of highly motivated scientists, engineers, coders, and curious citizens from around the world who believe in open science and open access.
 
 Table Of Contents
 -----------------
@@ -23,7 +25,7 @@ The complexity of computational neuroscience and biology make it extremely diffi
 
 OpenWorm believes that the challenges of solving brain simulation, even for the simplest of model organisms, require open access and collaborative solutions.
 
-OpenWorm is actively working to achieve its goal - creating the world's first virtual organism in a computer - by:
+OpenWorm is actively working to achieve its goal of creating the world's first virtual organism in a computer by:
 
 > -   bringing together highly motivated scientists and engineers in an open space
 > -   pushing away all the red tape by taking open science to the extreme
