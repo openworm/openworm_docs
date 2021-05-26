@@ -11,7 +11,7 @@ Feeling lost? Not uncommon in open source projects. In fact, there are [whole pa
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/Projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](projects/) you want to contribute to.
 
 ### Find tasks to work on
 
