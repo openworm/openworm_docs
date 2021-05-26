@@ -6,22 +6,22 @@ nav:
   - History : fullhistory.md
   - Releases : releases.md
   - Modelling : modeling.md
-  - Projects Overview : projects.md
   - Projects:
+      - Projects Overview : projects.md
       - Sibernetic : Projects/sibernetic.md
       - Geppetto : Projects/geppetto.md
       - Movement : Projects/worm-movement.md
       - DevoWorm : Projects/DevoWorm.md
       - Optimization : Projects/optimization.md
       - Representation : Projects/datarep.md
-      - Community : Projects/community-proj.md
+      - Community Outreach : Projects/community-proj.md
       - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
-  - Community Overview : community.md
   - Community:
+      - Community Overview : community.md
       - Github : Community/github.md
       - Repos : Community/repositories.md
       - Membership : Community/membership.md
   - Resources:
-      - Resources: Resources/resources.md
+      - Resources Overview: Resources/resources.md
       - Running NeuroML connectome: Resources/running-nc.md
   - FAQ : faq.md

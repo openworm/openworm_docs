@@ -33,11 +33,11 @@ You can initiate a conversation with us on Slack channels to get more specific a
 - [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
-Once you have identified an issue you want to work on from a [particular project](/Projects/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+Once you have identified an issue you want to work on from a [particular project](/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve [forking one of our repositories](github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](/Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 

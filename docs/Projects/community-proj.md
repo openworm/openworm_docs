@@ -1,5 +1,5 @@
-Community Outreach
-==================
+Community Outreach subproject
+=============================
 
 The effort to build the OpenWorm open science community is always ongoing.
 

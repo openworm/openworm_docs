@@ -1,3 +1,10 @@
+Current releases
+================
+
+The recent and planned releases for the Docker image which contains the assembled OpenWorm software stack can be found at the [OpenWorm Milestones](https://github.com/openworm/OpenWorm/milestones).
+
+
+
 Past Releases
 =============
 
