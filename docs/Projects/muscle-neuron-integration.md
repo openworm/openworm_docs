@@ -135,7 +135,7 @@ This depends on what happens in [ChannelWorm](#channelworm), since ion channel d
 
 Because the muscle cell is driven both by an electrical model and a mechanical model, it is a focus of integration between different algorithms. Previously we have created a separate [repository for the muscle model](https://github.com/openworm/muscle_model) that is an adaptation of the work by [Boyle & Cohen, 2008](http://www.comp.leeds.ac.uk/netta/CV/papers/BC08b.pdf). We have an [approximately working version](http://www.opensourcebrain.org/projects/muscle_model/wiki) implemented in NEURON and are porting this to be fully NeuroML2 compliant.
 
-The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team. You can connect with the team [on real time chat](https://gitter.im/openworm/muscle_model).
+The electrical side of the model is currently the focus of the OpenWorm Muscle / Neuron Team. You can connect with the team [on real time chat](https://app.slack.com/client/T02EPNETZ/C40BEV91S) (if you haven't signed up as a contributor to get your Slack invitation, you can [do that here](https://goo.gl/3ncZWn)).
 
 To catch up with recent developments of this team, please see the following resources:
 
