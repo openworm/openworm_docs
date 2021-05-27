@@ -25,7 +25,7 @@ Other key boards:
 
 ### Come chat with us!
 
-You can initiate a conversation with us on Slack channels to get more specific about issues.  We ask that you just sign up as a contributor before receiving an invite to join our Slack channel first by [filling out the form here](https://goo.gl/3ncZWn).  Once you are logged in, you will find channels such as:
+You can initiate a conversation with us on [Slack](https://slack.com) channels to get more specific about issues.  We ask that you just sign up as a contributor before receiving an invite to join our Slack channel first by [filling out the form here](https://goo.gl/3ncZWn).  Once you are logged in, you will find channels such as:
 
 - [General](https://app.slack.com/client/T02EPNETZ/C02EPNEUT)
 - [Geppetto](https://app.slack.com/client/T02EPNETZ/C89GCLE49)
@@ -73,39 +73,25 @@ Once the document is shared, it should be announced on [Slack](http://openworm.o
 
 ### Creating proposals as Google docs
 
-To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [the mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
+To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [Slack](http://openworm.org/contacts.html).
 
-An example of an effective proposal is [available online](https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375)
+An example of an effective proposal is [available online](https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375).
 
 ### Contributing to the OpenWorm documentation
 
 The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](http://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/).
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/resources/).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/Projects/).
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/projects/).
 
-The docs use ["Github-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for Github (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
+The docs use ["GitHub-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for GitHub (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
 
-The documentation is published on the [ReadTheDocs service](https://readthedocs.org/), which helps it remain searchable and beautiful.
+The documentation is published using [GitHub Pages](https://pages.github.com/), which helps it remain searchable and beautiful.
 
 The markdown documentation is rendered using the Python module [MkDocs](https://www.mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
-After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on ReadTheDocs to become rebuilt and pushed onto the site. There are different versions of the documentation that are explained below.
-
-#### OpenWorm Documentation Versions
-
-Multiple versions of the documentation are enabled via GitHub branches. The content that appears as ['latest' online](http://docs.openworm.org/en/latest/) corresponds to what is in the master branch in the repo. This content should be dynamic and a space for adding stuff boldly.
-
-The content that appears as a numbered version, like [0.5](http://docs.openworm.org/en/0.5/) corresponds to what is in the branch named [0.5 in the repo](https://github.com/openworm/openworm_docs/tree/0.5). This content should be considered stable and not updated lightly.
-
-Keeping a division between latest and the versioned documentation is important for several reasons:
-
--   *Latest* acts as a staging area -  We don't want errors exposed to the public, so having an extra layer of review by checking the page on *latest* first is valuable.
--   URL Stability - content in *latest* is easy to update. Pages can be moved or deleted easily, breaking URLs that we have given out. If we make sure not to move pages around on the versioned docs, we can sustain URLs.
--   Versions should correspond to major releases of the project as a whole, which happen approximately every six months. As the project naturally evolves, the versioned docs provide a motivation for the entire documentation to be re-evaluated as a whole.
-
-The recommended best practice when updating the documentation is that if your changes fix bugs with the documentation that don't involve moving pages, renaming pages, or deleting pages, then check them in first to latest. Then on a regular basis the changes can be evaluated to be back applied to the most recent version. If your changes add new projects or new content, or update a documentation page with the results of new events, keep this in latest and it will get rolled into the next version.
+After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at http://docs.openworm.org) to become rebuilt and pushed onto the site (using a [GitHub Action](https://github.com/openworm/openworm_docs/actions)).
 
 ### Guest Blog Post
 
@@ -117,7 +103,7 @@ Every few months an academic journal article comes along we can't resist talking
 
 You can see [past journal clubs we have conducted online](https://www.youtube.com/watch?v=JHSqkZ2sFDA&list=PL8ACJC0fGE7D-EkkR7EFgQESpHONC_kcI).
 
-If you have an idea for a good journal club, please post the suggestion [on our mailing list](https://groups.google.com/forum/?fromgroups#!forum/openworm-discuss).
+If you have an idea for a good journal club, please contact us at <info@openworm.org>.
 
 Coding Standards
 ----------------
@@ -140,11 +126,14 @@ Interactions
 
 ### Mailing Lists
 
-There are two Google Groups in connection with OpenWorm. We suggest joining both lists to stay current, introduce yourself to the project, and participate in ongoing discussions. Simply login with you Gmail username and click on "Join Group" for each list.
+There are two Google Groups in connection with OpenWorm.
 
-[This list](https://groups.google.com/forum/?hl=en#!forum/openworm) is for general updates and announcements related to the project.
+[This list](https://groups.google.com/forum/?hl=en#!forum/openworm) was for general updates and announcements related to the project.
 
-[This list](https://groups.google.com/forum/?hl=en#!forum/openworm-discuss) is for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.
+[This list](https://groups.google.com/forum/?hl=en#!forum/openworm-discuss) was for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.
+
+>> **⚠ NOTE: Discussions have moved to Slack.**  
+>> The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to [Slack](http://openworm.org/contacts.html).
 
 ### Twitter
 
