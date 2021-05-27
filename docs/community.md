@@ -108,7 +108,7 @@ If you have an idea for a good journal club, please contact us at <info@openworm
 Coding Standards
 ----------------
 
-It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8)
+It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8).
 
 Meetings
 --------
