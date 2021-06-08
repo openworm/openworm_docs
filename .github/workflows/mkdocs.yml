@@ -1,7 +1,7 @@
 name: Make Documentation
 on:
   push:
-    branches: [ master, doc-skip ]
+    branches: [ master ]
   schedule:
     # minute 47 of every hour
     - cron:  '47 * * * *'
@@ -15,16 +15,30 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: apt install
-      run: |
-        sudo apt-get update
-        sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
-    - name: Install and check
+      uses: nick-invision/retry@v2.4.0
+      with:
+        max_attempts: 5
+        timeout_minutes: 15
+        command: |
+          sudo apt-get update
+          sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+    - name: Set up Python install env
       run: |
         python3 -m venv venv
         . venv/bin/activate
         python -m pip install -U pip
         echo "export MAKEFLAGS=\"PYTHON=$(which python) PIP_OPTS=-U\"" >> ~/.bashrc
-        make install
+    - name: Install Python dependencies
+      uses: nick-invision/retry@v2.4.0
+      with:
+        max_attempts: 5
+        timeout_minutes: 15
+        command: |
+          . venv/bin/activate
+          make install
+    - name: Check and build
+      run: |
+        . venv/bin/activate
         make check
         export GITHUB_TOKEN=${{ github.token }}
         make build
