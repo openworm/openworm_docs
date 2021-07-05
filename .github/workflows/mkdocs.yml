@@ -37,11 +37,15 @@ jobs:
           . venv/bin/activate
           make install
     - name: Check and build
-      run: |
-        . venv/bin/activate
-        make check
-        export GITHUB_TOKEN=${{ github.token }}
-        make build
+      uses: nick-invision/retry@v2.4.0
+      with:
+        max_attempts: 5
+        timeout_minutes: 15
+        command: |
+          . venv/bin/activate
+          make check
+          export GITHUB_TOKEN=${{ github.token }}
+          make build
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
