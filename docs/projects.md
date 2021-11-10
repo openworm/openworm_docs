@@ -1,6 +1,6 @@
 **OpenWorm Projects**
 
-The project is currently laid out into seven major areas shown below:
+The project is currently laid out into the major areas shown below:
 
 -   Neuromechanical modeling with Sibernetic
 -   Geppetto Simulation Engine
@@ -9,6 +9,7 @@ The project is currently laid out into seven major areas shown below:
 -   Data collection and representation
 -   Community outreach
 -   Muscle-Neuron integration
+-   C. elegans robot
 
 <div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://www.lucidchart.com/documents/embeddedchart/832c1c53-2840-421f-9546-01499bb9c753" id="pf3oYI3Y1wfX"></iframe></div>
 
@@ -57,3 +58,11 @@ More detailed information is available on the [Community project page](/Projects
 The goal of this project is to underpin our muscle and neuron models with biological data. This will be accomplished by creating biologically-realistic ion channel models from experimental data, which will then give rise to neural dynamics.
 
 More detailed information is available on the [Muscle-Neuron integration project page](/Projects/muscle-neuron-integration/).
+
+**C. elegans robot**
+
+The goal of this project is twofold:
+1. To build a robot that simulates sensory-motor functions of a C. elegans nematode worm, including foraging for food.
+2. To specify parts and instructions that will help anyone to build the robot.
+
+More detailed information is available on the [C. elegans robot project page](/Projects/c-elegans-robot/).
