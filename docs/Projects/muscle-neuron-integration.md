@@ -14,7 +14,7 @@ The literature will be mined for scientific papers with ion channel data, which 
 
 Each ion channel model is simulated and, depending on its performance in a set of validation tests, takes one of two paths. If the model passes validation, it is stored in the project's database (OWMeta) for later use. Otherwise the model fails validation, and is used as input for the optimization package. After tuning a model's parameters to the literature values, the model is updated, simulated, and passed to the validation phase again. This loop of modeling, validation and optimization may take several runs before a model passes.
 
-Once the ion channel models are successfully validated and stored in the OWMeta database, they can be incorporated into cellular models in both the Muscle Model and c302 (Neuron) subprojects. In each of these sections - OWMeta database, Muscle Model and c302 - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
+Once the ion channel models are successfully validated and stored in the OWMeta database, they can be incorporated into cellular models in both the Muscle Model and [c302](https://github.com/openworm/c302) subprojects. In each of these sections - OWMeta database, Muscle Model and [c302](https://github.com/openworm/c302) - there are corresponding validation tests that ensure the integrity of their respective components. The validation tests will employ a similar approach in each subproject, and will be written using the same framework.
 
 ### Tracking progress
 
