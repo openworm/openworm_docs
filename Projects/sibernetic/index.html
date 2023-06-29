@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Sibernetic - OpenWorm</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Sibernetic";
+        var mkdocs_page_input_path = "Projects/sibernetic.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OpenWorm
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../background/">Background</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../fullhistory/">History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../releases/">Releases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modeling/">Modelling</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Projects</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../projects/">Projects Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Sibernetic</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#previous-accomplishments">Previous accomplishments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#current-roadmap">Current roadmap</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#electrofluid-paper">Electrofluid Paper</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#issues-list">Issues list</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#associated-repositories">Associated Repositories</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geppetto/">Geppetto</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../worm-movement/">Movement</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DevoWorm/">DevoWorm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../optimization/">Optimization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../datarep/">Representation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community-proj/">Community Outreach</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Community</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../community/">Community Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/github/">GitHub</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/repositories/">Repos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/membership/">Membership</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Resources</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Resources/resources/">Resources Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Resources/running-nc/">Running NeuroML connectome</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../faq/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OpenWorm</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Projects &raquo;</li>
+      <li>Sibernetic</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="neuromechanical-modeling-sibernetic">NeuroMechanical Modeling - Sibernetic</h1>
+<p>While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model of its body, its nervous system, and its environment. <a href="http://sibernetic.org">Sibernetic</a> is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).</p>
+<p>To get a quick idea of what this looks like, check out the <a href="https://www.youtube.com/watch?v=SaovWiZJUWY">latest movie</a>. In this movie you can see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.</p>
+<h2 id="previous-accomplishments">Previous accomplishments</h2>
+<ul>
+<li>Physics tests</li>
+<li>Initial worm crawling</li>
+</ul>
+<h2 id="current-roadmap">Current roadmap</h2>
+<h3 id="electrofluid-paper"><a href="https://github.com/openworm/OpenWorm/issues?milestone=17&amp;state=open">Electrofluid Paper</a></h3>
+<p>We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells and the worm body. @vellamike, @a-palyanov and @skhayrulin are taking the lead on this,</p>
+<p>The proposal is to do this after the Sibernetic proof of concept worm wiggling is complete.</p>
+<h2 id="issues-list">Issues list</h2>
+<p>All issues related to the <a href="https://github.com/openworm/OpenWorm/issues?direction=desc&amp;labels=sibernetic&amp;page=1&amp;sort=comments&amp;state=open">Sibernetic code base</a> can be found on GitHub.</p>
+<h2 id="associated-repositories">Associated Repositories</h2>
+<table>
+<colgroup>
+<col width="45%" />
+<col width="50%" />
+<col width="4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Repository</th>
+<th align="left">Description</th>
+<th align="left">Language</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://github.com/openworm/Smoothed-Particle-Hydrodynamics">Smoothed-Particle-Hydrodynamics</a></td>
+<td align="left"><dl>
+<dt>The Sibernetic code base containing the 2014 version of the worm body model,</dt>
+<dd><p>a C++ implementation of the Smoothed Particle Hydrodynamics algorithm customised for the OpenWorm project.</p>
+</dd>
+</dl></td>
+<td align="left">C++</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/openworm/ConfigurationGenerator">ConfigurationGenerator</a></td>
+<td align="left">Generation start scene configuration for PCI SPH solver</td>
+<td align="left">JavaScript</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://github.com/openworm/CyberElegans">CyberElegans</a></td>
+<td align="left">Circa 2010 Neuromechanical model of C. Elegans</td>
+<td align="left">C++</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../projects/" class="btn btn-neutral float-left" title="Projects Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../geppetto/" class="btn btn-neutral float-right" title="Geppetto">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../projects/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../geppetto/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

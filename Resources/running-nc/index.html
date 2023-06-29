@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Running NeuroML connectome - OpenWorm</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Running NeuroML connectome";
+        var mkdocs_page_input_path = "Resources/running-nc.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OpenWorm
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../background/">Background</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../fullhistory/">History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../releases/">Releases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modeling/">Modelling</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Projects</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../projects/">Projects Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/sibernetic/">Sibernetic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/geppetto/">Geppetto</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/worm-movement/">Movement</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/DevoWorm/">DevoWorm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/optimization/">Optimization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/datarep/">Representation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/community-proj/">Community Outreach</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Community</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../community/">Community Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/github/">GitHub</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/repositories/">Repos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/membership/">Membership</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Resources</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../resources/">Resources Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Running NeuroML connectome</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#install-neuroconstruct-and-the-celegans-project">Install neuroConstruct and the CElegans project</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-the-project">Open the project</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generate-a-network">Generate a network</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#executing-the-network-in-neuron-simulation-environment">Executing the network in NEURON simulation environment.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#check-the-project">Check the project</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generate-neuroml-from-the-project">Generate NeuroML from the project</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#through-the-gui">Through the GUI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-a-python-script">Using a Python script</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#regenerate-the-connectome-in-neuroml-format">Regenerate the connectome in NeuroML format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-installation-instructions">Advanced installation instructions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install-the-latest-neuroconstruct">Install the latest neuroConstruct</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-the-latest-celegans-neuroconstruct-project">Getting the latest CElegans neuroConstruct project</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#a-zip-file-with-latest-project">A) Zip file with latest project</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#b-read-only-copy-of-latest-project">B) Read only copy of latest project</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#c-fork-the-project">C) Fork the project</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../faq/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OpenWorm</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Resources &raquo;</li>
+      <li>Running NeuroML connectome</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="running-the-neuroml-connectome-in-neuroconstruct">Running the NeuroML connectome in NeuroConstruct</h1>
+<p>The NeuroML conversion of the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm Blender files</a> has been imported into a <a href="http://www.neuroConstruct.org">neuroConstruct</a> project.</p>
+<p>This page provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualising the cells and connections.</p>
+<h2 id="install-neuroconstruct-and-the-celegans-project">Install neuroConstruct and the CElegans project</h2>
+<p>There is a <a href="https://www.dropbox.com/s/xdu1bh5sq2x1nx6/CElegansNeuroConstructBundle-snapshot-20140107.zip">quick-start zip file</a> containing neuroConstruct and the C. elegans connectome project. Installation instructions are in the file <a href="https://github.com/rayner/CElegansNeuroConstructBundle/blob/master/README.txt">README.txt</a> inside the zip file.</p>
+<p>If you have any problems installing the quick-start package, please e-mail openworm-bundle -at- magic-cookie.co.uk with a description of what went wrong.</p>
+<p>If you are a developer, or need the very latest changes, you may prefer to install from the GitHub repositories instead. See the <a href="https://github.com/openworm/OpenWorm/wiki/Running-the-C.-elegans-model-in-neuroConstruct#advanced-installation-instructions">advanced installation instructions</a> at the end of this page for details.</p>
+<h2 id="open-the-project">Open the project</h2>
+<p>Run neuroConstruct as outlined in the installation instructions (using <em>ant run</em> or <em>nC.bat/nC.sh</em>). In the main menu select <strong>File</strong> -> <strong>Open</strong> and browse to the location of <strong>CElegans.ncx</strong>. Select this file and press <strong>Open</strong>.</p>
+<p>The project may take up to 20 seconds to load. When it does load, try clicking on one of the cells in the <strong>Cell Types in project</strong> box, e.g. ADAL. This will take you to the <strong>Cell Types</strong> tab and show a summary of the cell's electrical properties (note: these are not yet matched to the real electrophysiological properties of Celegans cells!) and the number of segments in the cell.</p>
+<p>Click on <strong>View/edit morphology</strong> and this will visualise the cell in 3D, see below.</p>
+<p><img alt="ADAL" src="https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/ADAL_nC.png" /></p>
+<h2 id="generate-a-network">Generate a network</h2>
+<p>Now generate a subset network. Go to tab <strong>Generate</strong>, select 'PharyngealNeurons_inputs' from the dropdown and press <strong>Generate cell positions and connections</strong>. Now go to tab <strong>Visualisation</strong> and press <strong>View</strong> with <strong>Latest Generated Positions</strong> selected in the drop down box. On a Mac, you can hold down the option button, click and drag downwards to zoom in further than the slider allows.</p>
+<p>Alternatively, you can generate a network of all 302 neurons. Go to tab <strong>Generate</strong> and select 'Default Simulation Configuration' from the dropdown and press <strong>Generate cell positions and connections</strong>.</p>
+<p>The image below shows the generated full network.</p>
+<p><img alt="CElegansnC" src="https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png" /></p>
+<h2 id="executing-the-network-in-neuron-simulation-environment">Executing the network in NEURON simulation environment.</h2>
+<p><a href="http://www.neuron.yale.edu/neuron/download">Install the NEURON simulation environment</a> and set the path to NEURON's bin directory containing nrniv within neuroConstruct's menu (Settings->General Preferences and Project Defaults). After generating cell positions (easiest to do this with the PharyngealNeurons_inputs configuration), go to the export tab, the NEURON subtab, and press 'create hoc simulation'. Once this is completed the button will stop being greyed out and the 'Run simulation' button will be available. Clicking this should kick off the simulation run. Once this is completed, the output from the simulation should tell you that results are available in a directory named 'Sim_XX' where XX will be a number. Go back to the Visualisation tab and click 'View Prev Sims in 3D..." Click on the box with the 'Sim_XX' name that applies to the simulation run you did and press 'Load Simulation' at the bottom. Then at the bottom of the Visualisation screen click 'Replay' and the 'Replay simulation'. For PharyngealNeurons_inputs, the color changes will be subtle, but they will be happening.</p>
+<h2 id="check-the-project">Check the project</h2>
+<p>In addition to being able to generate and view the project through the main GUI, a number of Python scripts are provided to test the configuration of the project. These scripts access functionality in the Java implementation of neuroConstruct by using <a href="http://www.jython.org">Jython</a>. More details on the Python interface to neuroConstruct can be found <a href="http://www.neuroconstruct.org/docs/python.html">here</a>.</p>
+<p>A script to test various aspects of the project is <em>CheckProject.py</em>. Running this generates a number of the Simulation Configurations in succession and checks that the expected numbers of cells and connections are created:</p>
+<pre><code>cd pythonScripts
+~/neuroConstruct/nC.sh -python CheckProject.py
+</code></pre>
+<h2 id="generate-neuroml-from-the-project">Generate NeuroML from the project</h2>
+<p>A NeuroML file containing the structure of the cells &amp; all connections can be generated in two ways:</p>
+<h3 id="through-the-gui">Through the GUI</h3>
+<p>After generating the network in the GUI as outlined above, go to tab <strong>Export</strong>, click on <strong>Generate all NeuroML scripts</strong>. To have a single file with all the NeuroML for cells, channels and network connections, select <strong>Generate single NeuroML Level 3 file</strong>.</p>
+<h3 id="using-a-python-script">Using a Python script</h3>
+<p>Go to folder <code>pythonScript</code> and run:</p>
+<pre><code>~/neuroConstruct/nC.sh -python GenerateNeuroML.py
+</code></pre>
+<h2 id="regenerate-the-connectome-in-neuroml-format">Regenerate the connectome in NeuroML format</h2>
+<p>See <a href="Regenerate%20the%20connectome%20in%20NeuroML%20format">here</a> for more details.</p>
+<hr />
+<h2 id="advanced-installation-instructions">Advanced installation instructions</h2>
+<p>This section describes how to install directly from the GitHub repositories. If you are a developer, or need the very latest changes, this may be a better option than using the quick-start bundle.</p>
+<h3 id="install-the-latest-neuroconstruct">Install the latest neuroConstruct</h3>
+<p>First, <a href="https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL">get the latest version of neuroConstruct from GitHub</a>. While there are binary installers available on the neuroConstruct download page, it's best to use the latest version of this application from the GitHub repository, as this will most likely be the version in which the C. elegans project was last saved.</p>
+<p>For full details on installing neuroConstruct from GitHub, see here: <a href="https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL">https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL</a></p>
+<p>Contact p.gleeson -at- ucl.ac.uk if there you have any problems with this.</p>
+<h3 id="getting-the-latest-celegans-neuroconstruct-project">Getting the latest CElegans neuroConstruct project</h3>
+<p>The latest CElegans project is being hosted on Github <a href="https://github.com/openworm/CElegansNeuroML">here</a>. You have a number of options for getting the project:</p>
+<h4 id="a-zip-file-with-latest-project">A) Zip file with latest project</h4>
+<p>Get a zipped file with the project <a href="https://github.com/openworm/CElegansNeuroML/zipball/master">here</a>. Unzip this and go to the <em>CElegans</em> folder.</p>
+<h4 id="b-read-only-copy-of-latest-project">B) Read only copy of latest project</h4>
+<p>Install <a href="https://help.github.com/articles/set-up-git">Git</a> and get a read only clone of the Git repository:</p>
+<pre><code>git clone git://github.com/openworm/CElegansNeuroML.git
+cd CElegansNeuroML/CElegans
+</code></pre>
+<p>You'll always be able to retrieve the latest version of the project with</p>
+<pre><code>git pull
+</code></pre>
+<h4 id="c-fork-the-project">C) Fork the project</h4>
+<p>Fork yourself a personal copy of the project repository. Go to <a href="https://github.com/openworm/CElegansNeuroML">https://github.com/openworm/CElegansNeuroML</a> for more details.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../resources/" class="btn btn-neutral float-left" title="Resources Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../faq/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../resources/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../faq/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

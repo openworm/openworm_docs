@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Community Overview - OpenWorm</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Community Overview";
+        var mkdocs_page_input_path = "community.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OpenWorm
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../background/">Background</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../fullhistory/">History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../releases/">Releases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modeling/">Modelling</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Projects</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../projects/">Projects Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/sibernetic/">Sibernetic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/geppetto/">Geppetto</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/worm-movement/">Movement</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/DevoWorm/">DevoWorm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/optimization/">Optimization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/datarep/">Representation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/community-proj/">Community Outreach</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Projects/muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Community</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Community Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#an-opening-note">An Opening Note</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contribution-best-practices">Contribution Best Practices</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#find-tasks-to-work-on">Find tasks to work on</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#come-chat-with-us">Come chat with us!</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-openworm-repos-on-github">Using OpenWorm repos on GitHub</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-organizing-documents">Creating organizing documents</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#taking-notes-as-google-docs">Taking notes as Google docs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-proposals-as-google-docs">Creating proposals as Google docs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#contributing-to-the-openworm-documentation">Contributing to the OpenWorm documentation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#guest-blog-post">Guest Blog Post</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#journal-clubs">Journal Clubs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#coding-standards">Coding Standards</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#meetings">Meetings</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#working-meetings">Working meetings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scheduling-meetings">Scheduling meetings</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interactions">Interactions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mailing-lists">Mailing Lists</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#twitter">Twitter</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blog">Blog</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#youtube">YouTube</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#playlists">Playlists</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#membership">Membership</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-of-openworm-logo">Use of OpenWorm logo</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Community/github/">GitHub</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Community/repositories/">Repos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Community/membership/">Membership</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Resources</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Resources/resources/">Resources Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Resources/running-nc/">Running NeuroML connectome</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../faq/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OpenWorm</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Community &raquo;</li>
+      <li>Community Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="openworm-community">OpenWorm Community</h1>
+<p>This page contains information intended to help individuals understand what steps to take to make contributions to OpenWorm, how to join OpenWorm meetings, how to interact with the community online, and how to become an OpenWorm core member.</p>
+<h2 id="an-opening-note">An Opening Note</h2>
+<p>Feeling lost? Not uncommon in open source projects. In fact, there are <a href="http://www.igor.pro.br/publica/papers/OSS2014.pdf">whole papers</a> describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by <a href="http://openworm.org/contacts.html">reaching out to us to ask for help</a>.</p>
+<h2 id="contribution-best-practices">Contribution Best Practices</h2>
+<p>What do I work on? We outline the work we are doing in the project using <a href="https://guides.github.com/features/issues/">GitHub issues</a>. Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find <a href="/projects/">a project</a> you want to contribute to.</p>
+<h3 id="find-tasks-to-work-on">Find tasks to work on</h3>
+<p>Another way is you can <a href="https://github.com/orgs/openworm/projects">browse the Project level view of issues</a> directly.</p>
+<p>Other key boards:</p>
+<ul>
+<li><a href="https://github.com/orgs/openworm/projects/13">Geppetto</a></li>
+<li><a href="https://github.com/orgs/openworm/projects/6">Movement Validation</a></li>
+<li><a href="https://github.com/orgs/openworm/projects/5">Muscle-Neuron-Channel integration</a></li>
+</ul>
+<h3 id="come-chat-with-us">Come chat with us!</h3>
+<p>You can initiate a conversation with us on <a href="https://slack.com">Slack</a> channels to get more specific about issues.  We ask that you just sign up as a contributor before receiving an invite to join our Slack channel first by <a href="https://goo.gl/3ncZWn">filling out the form here</a>.  Once you are logged in, you will find channels such as:</p>
+<ul>
+<li><a href="https://app.slack.com/client/T02EPNETZ/C02EPNEUT">General</a></li>
+<li><a href="https://app.slack.com/client/T02EPNETZ/C89GCLE49">Geppetto</a></li>
+<li><a href="https://app.slack.com/client/T02EPNETZ/C49LLAMJQ">Movement Validation</a></li>
+<li><a href="https://app.slack.com/client/T02EPNETZ/C40BEV91S">Muscle model</a></li>
+<li><a href="https://app.slack.com/client/T02EPNETZ/C40MMRWDQ">ChannelWorm</a></li>
+</ul>
+<p>Once you have identified an issue you want to work on from a <a href="/projects/">particular project</a>, please announce your intention to help out by commenting on the specific <a href="github/#contributing-and-resolving-issues">GitHub issue</a>.</p>
+<h3 id="using-openworm-repos-on-github">Using OpenWorm repos on GitHub</h3>
+<p>Making a contribution of code to the project will first involve <a href="/Community/github/#forking-github-repositories">forking one of our repositories</a>, making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.</p>
+<p>An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.</p>
+<p>More details on best practices using OpenWorm repos on GitHub are available on <a href="github/">a separate page</a>.</p>
+<h3 id="creating-organizing-documents">Creating organizing documents</h3>
+<p>Another great way to contribute is by organizing ideas or documentation or proposals via a Google
+doc, and then sharing the link on our <a href="http://openworm.org/contacts.html">Slack</a>.</p>
+<p>To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on <a href="https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&amp;usp=sharing">this link</a>.</p>
+<p>All documents located in the OpenWorm folder is viewable to the public. Comments can be added to both text documents and spreadsheets. In order to edit existing documents or to add a new document, you will need to be added to the folder. You can request access by email your Google ID to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;</a>.</p>
+<h3 id="taking-notes-as-google-docs">Taking notes as Google docs</h3>
+<p>It is very useful to create notes and progress reports as the result of meetings as Google docs. Docs should be shared publicly with view and comment access.</p>
+<p>An effective progress report should contain the following information:</p>
+<ul>
+<li>Meeting title</li>
+<li>Attendees</li>
+<li>Date</li>
+<li>Goal being worked on (link back to doc page describing project)</li>
+<li>Previous accomplishments</li>
+<li>Recent progress towards goal</li>
+<li>Next Steps</li>
+<li>Future Steps</li>
+</ul>
+<p>An example of an effective progress report is <a href="https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit">available online</a>.</p>
+<p>Once the document is shared, it should be announced on <a href="http://openworm.org/contacts.html">Slack</a>.</p>
+<h3 id="creating-proposals-as-google-docs">Creating proposals as Google docs</h3>
+<p>To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on <a href="http://openworm.org/contacts.html">Slack</a>.</p>
+<p>An example of an effective proposal is <a href="https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375">available online</a>.</p>
+<h3 id="contributing-to-the-openworm-documentation">Contributing to the OpenWorm documentation</h3>
+<p>The <a href="http://docs.openworm.org">OpenWorm documentation</a> is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation <a href="http://github.com/openworm/openworm_docs">is here</a>.  An issues list for changes that we are working on to improve the documentation <a href="https://github.com/openworm/openworm_docs/issues">is here</a>.</p>
+<p>When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to <a href="/Resources/resources/">the resources page</a>.</p>
+<p>Information about the goals, progress, and roadmap of current or proposed projects should be added to <a href="/projects/">the projects page</a>.</p>
+<p>The docs use <a href="https://help.github.com/articles/github-flavored-markdown/">"GitHub-flavored" markdown format</a>. This makes writing for GitHub (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.</p>
+<p>The documentation is published using <a href="https://pages.github.com/">GitHub Pages</a>, which helps it remain searchable and beautiful.</p>
+<p>The markdown documentation is rendered using the Python module <a href="https://www.mkdocs.org">MkDocs</a>, making theming and structuring much easier. The outline of the Table of Contents tree is structured in <code>mkdocs.yml</code>.</p>
+<p>After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at http://docs.openworm.org) to become rebuilt and pushed onto the site (using a <a href="https://github.com/openworm/openworm_docs/actions">GitHub Action</a>).</p>
+<h3 id="guest-blog-post">Guest Blog Post</h3>
+<p>We love hearing about what members are of the OpenWorm community are doing. If you have something to share, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;</a> to discuss.</p>
+<h3 id="journal-clubs">Journal Clubs</h3>
+<p>Every few months an academic journal article comes along we can't resist talking about. We host a journal club where we invite scientists to present on the paper and to host a discussion about it, hopefully with some of the article authors.</p>
+<p>You can see <a href="https://www.youtube.com/watch?v=JHSqkZ2sFDA&amp;list=PL8ACJC0fGE7D-EkkR7EFgQESpHONC_kcI">past journal clubs we have conducted online</a>.</p>
+<p>If you have an idea for a good journal club, please contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;</a>.</p>
+<h2 id="coding-standards">Coding Standards</h2>
+<p>It is recommended to follow the <a href="http://legacy.python.org/dev/peps/pep-0008/">PEP8 Guidelines</a>. For contributions of Python code to OpenWorm repositories. Compliance can be checked with the <a href="https://pypi.python.org/pypi/pep8">pep8 tool</a> and <a href="http://pypi.python.org/pypi/autopep8">autopep8</a>.</p>
+<h2 id="meetings">Meetings</h2>
+<h3 id="working-meetings">Working meetings</h3>
+<p>Contributors are encouraged to meet with each other on Slack on a regular basis to advance areas of the project they need interaction on.</p>
+<h3 id="scheduling-meetings">Scheduling meetings</h3>
+<p>We like using the <a href="http://doodle.com">Doodle service</a> for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.</p>
+<h2 id="interactions">Interactions</h2>
+<h3 id="mailing-lists">Mailing Lists</h3>
+<p>There are two Google Groups in connection with OpenWorm.</p>
+<p><a href="https://groups.google.com/forum/?hl=en#!forum/openworm">This list</a> was for general updates and announcements related to the project.</p>
+<p><a href="https://groups.google.com/forum/?hl=en#!forum/openworm-discuss">This list</a> was for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.</p>
+<blockquote>
+<blockquote>
+<p><strong>⚠ NOTE: Discussions have moved to Slack.</strong><br />
+The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to <a href="http://openworm.org/contacts.html">Slack</a>.</p>
+</blockquote>
+</blockquote>
+<h3 id="twitter">Twitter</h3>
+<p><a href="http://twitter.com/openworm">Follow our Twitter feed</a></p>
+<p>Want to tag OpenWorm on a tweet? Use @openworm and share the love.</p>
+<h3 id="blog">Blog</h3>
+<p><a href="http://blog.openworm.org">Our blog</a> is hosted in Tumblr.</p>
+<p>Interesting in being a guest on our blog? We love hearing about what members of the OpenWorm community are doing. If you have something to share, contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;</a> to discuss.</p>
+<h3 id="youtube">YouTube</h3>
+<p>Our YouTube channel is currently quite out of date, but for historical purposes, you can <a href="http://www.youtube.com/user/OpenWorm">view our YouTube channel here.</a></p>
+<p>Want to get notified when new content goes live? <a href="http://www.youtube.com/user/OpenWorm">Subscribe to the channel</a> by clicking on the "subscribe" button while logged in to your Google account.</p>
+<h4 id="playlists">Playlists</h4>
+<ul>
+<li>Status Updates - Biweekly updates from the OpenWorm team.</li>
+<li>Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, <em>C. elegans</em>, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our <a href="#journal-clubs">journal clubs</a>.</li>
+<li>Data Team meetings - Learn more about our <a href="#team-meetings">team meetings</a>.</li>
+<li>Real <em>C. elegans</em></li>
+<li>Building Blocks</li>
+</ul>
+<h2 id="membership">Membership</h2>
+<p>More information about the membership policy is available on <a href="../Community/membership/">a separate page</a>.</p>
+<h2 id="use-of-openworm-logo">Use of OpenWorm logo</h2>
+<p>The OpenWorm logo font is Kefa.</p>
+<p>This is the OpenWorm logo:</p>
+<p><img alt="" src="../Community/openworm_logo.png" /></p>
+<p><a href="https://drive.google.com/folderview?id=0B-GW0T4RUrQ6ZDRFWGQwVmpOSm8&amp;usp=sharing">Click here for a vector version of the logo</a>.  All three layers are vector.</p>
+<p>It may be adapted for subteams.  Please follow these style rules when doing so:</p>
+<ul>
+<li>Don't apply effects (e.g. shadows) to the text; use flat style</li>
+<li>If any icon is added it should be flat looking and its colour should be #92bd1e</li>
+<li>Do not use detailed/real looking graphics</li>
+<li>Keep it simple</li>
+<li>Do not alter the OpenWorm logo itself</li>
+<li>Logo needs to be readable when rendered in grayscale</li>
+</ul>
+<p>Such logos are subject to review by the core team to retain consistency across the project.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Projects/muscle-neuron-integration/" class="btn btn-neutral float-left" title="Muscle / Neuron /  Channel"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Community/github/" class="btn btn-neutral float-right" title="GitHub">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Projects/muscle-neuron-integration/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Community/github/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

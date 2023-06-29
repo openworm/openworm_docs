@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Resources Overview - OpenWorm</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Resources Overview";
+        var mkdocs_page_input_path = "Resources/resources.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OpenWorm
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../background/">Background</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../fullhistory/">History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../releases/">Releases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modeling/">Modelling</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Projects</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../projects/">Projects Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/sibernetic/">Sibernetic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/geppetto/">Geppetto</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/worm-movement/">Movement</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/DevoWorm/">DevoWorm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/optimization/">Optimization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/datarep/">Representation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/community-proj/">Community Outreach</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Projects/muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Community</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../community/">Community Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/github/">GitHub</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/repositories/">Repos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/membership/">Membership</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Resources</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Resources Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#simulation-engines">Simulation engines</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#geppetto">Geppetto</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sibernetic">Sibernetic</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#connectome-engine-and-lego-mindstorms-robot">Connectome Engine and Lego Mindstorms robot</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cyberelegans">CyberElegans</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#visualization-environments">Visualization Environments</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#connectome-browser">Connectome Browser</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wormbrowser-html5-and-ios">WormBrowser (HTML5 and iOS)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-sets">Data sets</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#owmeta">OWMeta</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#c-elegans-neuroml-model-in-neuroconstruct">C. elegans NeuroML model in NeuroConstruct</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../running-nc/">Running NeuroML connectome</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../faq/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OpenWorm</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Resources &raquo;</li>
+      <li>Resources Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="using-openworm-resources">Using OpenWorm Resources</h1>
+<p>This page describes content that has been created by the project for use by the public. Currently we make simulation engines, visualization environments, and data sets available.
+Our website <a href="http://www.openworm.org/science.html">contains an additional list of resources</a> that are useful to biologists in particular.</p>
+<h2 id="simulation-engines">Simulation engines</h2>
+<h3 id="geppetto">Geppetto</h3>
+<p>Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry. We are currently working to port the functionality in Sibernetic (see below) into Geppetto, which would transform the experience of seeing the model from looking at a YouTube video to being able to play and interact with the model in 3D.</p>
+<p><img alt="image" src="http://www.geppetto.org/images/cn2.png" /></p>
+<p>More information on running Geppetto is <a href="http://geppetto.org">available online</a>.</p>
+<p><a href="/Projects/geppetto/">The project page for Geppetto</a> has information about getting involved in its development with OpenWorm.</p>
+<h3 id="sibernetic">Sibernetic</h3>
+<p>Sibernetic is the code base that currently implements the crawling model. Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella that has been created expressly for the purpose of doing research and building the model quickly.</p>
+<p><img alt="image" src="http://i.imgur.com/KSWjCaW.jpg" /></p>
+<p>More information on running Sibernetic is <a href="http://sibernetic.org">available online</a>.</p>
+<p><a href="/Projects/sibernetic/">The project page for Sibernetic</a> has information about getting involved with its development.</p>
+<h3 id="connectome-engine-and-lego-mindstorms-robot">Connectome Engine and Lego Mindstorms robot</h3>
+<p>To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can <a href="https://www.youtube.com/watch?v=D8ogHHwqrkI">see a movie of this in action</a>.</p>
+<p><img alt="image" src="http://i.imgur.com/OG7sOAD.jpg" /></p>
+<p>More information is available at [http://www.connectomeengine.com/]</p>
+<h3 id="cyberelegans">CyberElegans</h3>
+<p>When we first started, our team in Novosibirsk had produced an awesome prototype of a neuromechanical c. elegans model which they called 'CyberElegans'. We recently published <a href="http://iospress.metapress.com/content/p61284485326g608/?p=5e3b5e96ad274eb5af0001971360de3e&amp;pi=4">an article</a> about it. If you watch <a href="http://www.youtube.com/watch?v=3uV3yTmUlgo">the movie that goes along with the prototype</a>, you can see the basic components of the loop above in action:</p>
+<p><img alt="CyberElegans with muscle cells" src="https://docs.google.com/drawings/d/142NbGecjnWuq6RxWgqREhKOXJ8oDo55wVvBuKQPyKCg/pub?w=430&amp;h=297" /></p>
+<p>Here muscle cells cause the motion of the body of the worm along the surface of its environment.</p>
+<p><img alt="Inside the CyberElegans model" src="https://docs.google.com/drawings/d/1fO_gQI_febpu4iHd1_UDrMNQ_eqvHgJynMqho7UC6gw/pub?w=460&amp;h=327" /></p>
+<p>Inside the worm, motor neurons are responsible for activating the muscles, which them makes the worms move. The blue portions of the loop diagram above are those aspects that are covered by the initial prototype. We are now in the process of both adding in the missing portions of the loop, as well as making the existing portions more biologically realistic, and making the software platform they are operating on more scalable.</p>
+<p>You can <a href="http://g.ua/MKja">download the binary for the CyberElegans</a> (Windows only)</p>
+<p>This code base is not currently in active development.</p>
+<h2 id="visualization-environments">Visualization Environments</h2>
+<h3 id="connectome-browser">Connectome Browser</h3>
+<p>The <a href="http://goo.gl/XGQPX">Connectome browser</a>, created by the team at the <a href="http://opensourcebrain.org">Open Source Brain</a>, is a way to explore the NeuroML connectome produced by the project. You can investigate the current settings of the dynamics of each neuron, and by clicking "selection mode" you can click on individual neurons to see their synaptic partners in 3D. This is built from the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm Blender files</a></p>
+<p><img alt="Connectome browser" src="https:\/\/docs.google.com\/uc?authuser=0&amp;id=0B_t3mQaA-HaMek5wb0trd00wVFU&amp;export=download&amp;revid=0B_t3mQaA-HaMWkIxc214bk12UU9lOWdDRHZKQzc2eWdOWm4wPQ" /></p>
+<h3 id="wormbrowser-html5-and-ios">WormBrowser (HTML5 and iOS)</h3>
+<p>Explore the c. elegans in 3D! The <a href="http://browser.openworm.org">WormBrowser</a> is an interactive virtual experience of browsing the C. elegans worm anatomy. This is built from the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm Blender files</a></p>
+<p><img alt="WormBrowser" src="https:\/\/docs.google.com\/uc?authuser=0&amp;id=0B_t3mQaA-HaMdkMzaUI3VWVtOG8&amp;export=download&amp;revid=0B_t3mQaA-HaMTXhPY0R0VDlMejd3NVpVTkpRY2diZ01vcXNnPQ" /></p>
+<p>Source code for <a href="https://github.com/openworm/wormbrowser">the web version</a> and <a href="https://github.com/openworm/openwormbrowser-ios">an iOS version</a> are available online. We don't currently have active development happening with either, but if you are interested in helping with the iOS code base, <a href="https://www.youtube.com/watch?v=b5X5fz7pZME">here's a walkthrough</a> of how to get started with the codebase.</p>
+<h2 id="data-sets">Data sets</h2>
+<h3 id="owmeta">OWMeta</h3>
+<p>A Python API for accessing information about <em>C. elegans</em> is available
+at <a href="http://github.com/openworm/OWMeta">OWMeta</a>. This API consolidates
+information from our <a href="https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U">publicly accessible archive of data sets</a>
+that we have come across and adapted on Google Drive.</p>
+<h3 id="c-elegans-neuroml-model-in-neuroconstruct">C. elegans NeuroML model in NeuroConstruct</h3>
+<p>The NeuroML conversion of the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm Blender files</a> has been imported into a <a href="http://www.neuroConstruct.org">neuroConstruct</a> project. <a href="/Resources/running-nc/">This page</a> provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.</p>
+<p><img alt="CElegansnC" src="https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png" /></p>
+<p>More information about working with the data within it and other data entities can be found on the data representation project page \&lt;data-rep>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Community/membership/" class="btn btn-neutral float-left" title="Membership"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../running-nc/" class="btn btn-neutral float-right" title="Running NeuroML connectome">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../Community/membership/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../running-nc/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

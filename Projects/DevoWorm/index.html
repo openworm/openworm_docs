@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>DevoWorm - OpenWorm</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "DevoWorm";
+        var mkdocs_page_input_path = "Projects/DevoWorm.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OpenWorm
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../background/">Background</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../fullhistory/">History</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../releases/">Releases</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modeling/">Modelling</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Projects</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../projects/">Projects Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sibernetic/">Sibernetic</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../geppetto/">Geppetto</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../worm-movement/">Movement</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">DevoWorm</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#roadmap">Roadmap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#repos-in-devoworm-github">Repos in DevoWorm Github</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../optimization/">Optimization</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../datarep/">Representation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../community-proj/">Community Outreach</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../muscle-neuron-integration/">Muscle / Neuron /  Channel</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Community</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../community/">Community Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/github/">GitHub</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/repositories/">Repos</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Community/membership/">Membership</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Resources</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Resources/resources/">Resources Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Resources/running-nc/">Running NeuroML connectome</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../faq/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OpenWorm</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+          <li>Projects &raquo;</li>
+      <li>DevoWorm</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="devoworm">DevoWorm</h1>
+<p>The DevoWorm website is located at <a href="http://devoworm.weebly.com/">devoworm.weebly.com</a>. The website features links to 
+educational, academic, media-related and collaborative opportunities associated with the project. DevoWorm is affiliated with the <a href="http://www.openworm.org/">OpenWorm Foundation</a> and the <a href="http://orthogonal-research.weebly.com/">Orthogonal Research Laboratory</a>. We engage in Open Science, an encourage the use of Jupyter Notebooks, short video descriptions of research, and demos.</p>
+<h2 id="roadmap">Roadmap</h2>
+<p>DevoWorm is currently divided into three loosely-knit interest areas: developmental dynamics, cybernetics and digital morphogenesis, and reproduction and developmental plasticity. While our main interest is in the nematode <em>Caenorhabditis elegans</em>, we are also interested in cross-species comparative work.</p>
+<p><strong>Developmental Dynamics</strong> currently involves using secondary data collected from embryos along with bioinformatic and data science techniques to answer questions regarding the process of early embryogenesis and the timing of later morphogenesis. To address these problems, we have used number of innovative approaches. </p>
+<p><strong>Cybernetics and Digital Morphogenesis</strong> has involved using platforms such as Morphozoic (Cellular Automata) or CompuCell3D (Cellular Potts Model) to better understand physical interactions during embryogenesis and morphogenesis. We have also explored the use of cybernetic models and concepts to better understand the general process of embryogenesis.</p>
+<p><strong>Reproduction and Developmental Plasticity</strong> involves utilizing an evo-devo approach to understand <em>Caenorhabditis elegans</em> more generally. Our existing datasets and papers include a focus on larval development and life-history processes. This area of the project also features primary empirical data, based on formal experimental design.</p>
+<table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Developmental Dynamics (DD)</td>
+<td><a href="http://www.mdpi.com/2079-7737/5/3/33">Comparative Quantitative Embryogenesis</a></td>
+</tr>
+<tr>
+<td>DD</td>
+<td><a href="http://www.biorxiv.org/content/early/2016/07/07/062539">Differentiation Trees and Maps</a></td>
+</tr>
+<tr>
+<td>DD</td>
+<td><a href="https://doi.org/10.1101/146035">Embryo Networks and Developmental Connectomes</a></td>
+</tr>
+<tr>
+<td>DD</td>
+<td>Time-series of Terminal Differentiation</td>
+</tr>
+<tr>
+<td>Cybernetics and Digital Morphogenesis (C-DM)</td>
+<td><a href="https://drive.google.com/open?id=0B4qKWcILZ0ddbzJoeUZsQ0lEZ1k">Morphozoic (Cellular Automata)</a></td>
+</tr>
+<tr>
+<td>C-DM</td>
+<td><a href="https://www.academia.edu/33002276/Origins_of_the_Embryo_self-organization_through_cybernetic_regulation">Cybernetic Embryo</a></td>
+</tr>
+<tr>
+<td>C-DM</td>
+<td>CompuCell 3D</td>
+</tr>
+<tr>
+<td>Reproduction and Developmental Plasticity (R-DP)</td>
+<td><a href="http://rsos.royalsocietypublishing.org/content/3/11/160496">Experimental Evolution</a></td>
+</tr>
+<tr>
+<td>R-DP</td>
+<td><a href="http://www.biorxiv.org/content/early/2016/03/24/045609">Life-history Plasticity</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="repos-in-devoworm-github">Repos in DevoWorm Github</h2>
+<table>
+<thead>
+<tr>
+<th>Repo Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/devoworm/GSoC-2017">Google Summer of Code 2017</a></td>
+<td>GSoC Activities for 2017</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/CC3D-local">CC3D</a></td>
+<td>CompuCell 3D Models</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/embryogenetic-connectome">Embryogenetic Connectome</a></td>
+<td>Embryogenetic Connectome Analysis</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/devoworm.github.io">Assorted Notebooks</a></td>
+<td>Project-related Jupyter Notebooks</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/Graph-Code">Graphical Visualization</a></td>
+<td>Code for Graph Creation</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/DevoWorm">Datasets and Analysis</a></td>
+<td>Tools for Developmental Data Science</td>
+</tr>
+<tr>
+<td><a href="https://github.com/devoworm/Morphozoic">Morphozoic</a></td>
+<td>Morphozoic Models</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../worm-movement/" class="btn btn-neutral float-left" title="Movement"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../optimization/" class="btn btn-neutral float-right" title="Optimization">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../worm-movement/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../optimization/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
