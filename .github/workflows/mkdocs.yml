@@ -1,10 +1,9 @@
 name: Make Documentation
 on:
   push:
-    branches: [ master ]
-  schedule:
-    # minute 47 of every hour
-    - cron:  '47 * * * *'
+    branches: [ master, development ]
+  pull_request:
+    branches: [ master, development ]
 
 env:
   REPO_METADATA_SHAS: repo-metadata-shas.txt
@@ -14,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: apt install
       uses: nick-invision/retry@v2.4.0
       with:
@@ -22,12 +22,14 @@ jobs:
         command: |
           sudo apt-get update
           sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+
     - name: Set up Python install env
       run: |
         python3 -m venv venv
         . venv/bin/activate
         python -m pip install -U pip
         echo "export MAKEFLAGS=\"PYTHON=$(which python) PIP_OPTS=-U\"" >> ~/.bashrc
+
     - name: Install Python dependencies
       uses: nick-invision/retry@v2.4.0
       with:
@@ -35,7 +37,9 @@ jobs:
         timeout_minutes: 15
         command: |
           . venv/bin/activate
+          pip install pygithub
           make install
+
     - name: Check and build
       uses: nick-invision/retry@v2.4.0
       with:
@@ -46,12 +50,16 @@ jobs:
           make check
           export GITHUB_TOKEN=${{ github.token }}
           make build
+
     - name: Archive production artifacts
+      if: github.ref == 'refs/heads/master'
       uses: actions/upload-artifact@v2
       with:
         name: built-site
         path: site
+
     - name: mkdocs gh-deploy
+      if: github.ref == 'refs/heads/master'
       run: |
         SHA="${{ github.sha }}"
         set -x
