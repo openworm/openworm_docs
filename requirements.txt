@@ -5,7 +5,8 @@ ghp-import
 Jinja2
 
 # GitHub metadata parsing
-git+https://github.com/PyGithub/PyGithub.git@master#egg=PyGithub
+#git+https://github.com/PyGithub/PyGithub.git@master#egg=PyGithub
+PyGithub
 requests
 tqdm
 pyyaml
