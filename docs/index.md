@@ -62,4 +62,4 @@ If you have questions about specific things you find, please post them to [the l
 
 More information about the process of making a contribution is available on our [community page](community/)
 
-While the heart of OpenWorm is computational modeling, we are always looking for people with talents beyond programming to contribute. Are you a graphic designer, writer, PR specialist or simply someone with a love of science and expertise to share? Please reach out to us at <info@openworm.org> to discuss opportuntities with OpenWorm.
+While the heart of OpenWorm is computational modeling, we are always looking for people with talents beyond programming to contribute. Are you a graphic designer, writer, PR specialist or simply someone with a love of science and expertise to share? Please reach out to us at <info@openworm.org> to discuss opportunities with OpenWorm.
