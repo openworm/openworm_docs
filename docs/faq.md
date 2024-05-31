@@ -4,9 +4,9 @@ Frequently Asked Questions
 OpenWorm general
 ----------------
 
-### Why C. elegans?
+### Why _C. elegans_?
 
-The tiny worm C. elegans is by far the most understood and studied animal with a brain in all of biology. It was the first multi-cellular organism to have its genome mapped. It has only ~1000 cells and exactly 302 neurons, which have also been mapped as well as its “wiring diagram” making it also the first organism to have a complete connectome produced. This part gets particularly exciting for folks interested in artificial intelligence or computational neuroscience.
+The tiny worm _C. elegans_ is by far the most understood and studied animal with a brain in all of biology. It was the first multi-cellular organism to have its genome mapped. It has only ~1000 cells and exactly 302 neurons, which have also been mapped as well as its “wiring diagram” making it also the first organism to have a complete connectome produced. This part gets particularly exciting for folks interested in artificial intelligence or computational neuroscience.
 
 Three different Nobel prizes have been awarded for work on this worm, and it is increasingly being used as a model for better understanding disease and health relevant to all organisms, including humans. When making a complex computer model, it is important to start where the data are the most complete.
 
@@ -31,21 +31,21 @@ Right now we aren't addressing the egg laying or development capacity, however, 
 
 The "logic" part comes from the dynamics of the neurons interacting with each other. it is a little unintuitive but that's why makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. Of course that will require a good mechanical model of how CE muscles respond to stimulation.
 
-### Given all that we DON'T know about c. elegans (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
+### Given all that we DON'T know about _C. elegans_ (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
 
 All models are wrong, some models are useful :) We must have the model make a prediction and then test it. Based on how well the model fits the available data, we can quantify how well the model recapitulates reality.
 
-We are currently evaluating the database behind [a recent paper on C. elegans behavioral analysis](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545781/pdf/pnas.201211447.pdf), which [resides here](http://wormbehavior.mrc-lmb.cam.ac.uk/index.php), as the standard we will use to test the model's external behavior. More on this [here](https://www.youtube.com/watch?v=YdBGbn_g_ls).
+We are currently evaluating the database behind [a recent paper on _C. elegans_ behavioral analysis](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545781/pdf/pnas.201211447.pdf), which [resides here](http://wormbehavior.mrc-lmb.cam.ac.uk/index.php), as the standard we will use to test the model's external behavior. More on this [here](https://www.youtube.com/watch?v=YdBGbn_g_ls).
 
 As an analogy to what we are aiming for, we are inspired by the work of the Covert lab in the creation of a [whole cell simulation](https://www.dropbox.com/s/jjzxw5f55z8nf5v/A%20Whole-Cell%20Computational%20Model%20Predicts%20Phenotype%20from%20Genotype%20-%20Karr%20et%20al.%20-%202012.pdf) that predicts phenotype from genotype at 80% accuracy. This is just a single cell model, but it has the same challenges of high complexity and fundamental understanding gaps that must be bridged via good assumptions.
 
-### Is there only one solution to all those variables in the connectome that will make a virtual c. elegans that resembles a real one, or are there multiple?
+### Is there only one solution to all those variables in the connectome that will make a virtual _C. elegans_ that resembles a real one, or are there multiple?
 
 It is very likely to be multiple, [given what we know about the variability of neuronal networks in general](https://www.dropbox.com/s/rbab411kf5rb4zh/Similar%20network%20activity%20from%20disparate%20circuit%20parameters.%20-%20Prinz%2C%20Bucher%2C%20Marder%20-%202004.pdf). One technique to deal with this is to [generate multiple models that work](https://www.dropbox.com/s/05zx02h57vpvvqg/Multiple%20models%20to%20capture%20the%20variability%20in%20biological%20neurons%20and%20networks%20-%20Marder%2C%20Taylor%20-%202011.pdf) and analyze them under different conditions. What we are after is the [solution space that works](https://www.dropbox.com/s/hz2pv5cvomvsqez/Complex%20parameter%20landscape%20for%20a%20complex%20neuron%20model.%20-%20Achard%2C%20De%20Schutter%20-%202006.pdf) (see Fig 6 for an example), rather than a single solution. That said, it is extremely likely that the solution space is much smaller than the complete space of possibilities.
 
 ### Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
 
-Nematodes have been studied far more than simpler multi-cellular organisms, and therefore more data exist that we can use to build our model. We would need to get, for example, another connectome and another anatomical 3D map whereas in C. elegans they already exist. The community of scientists using c. elegans as their model organism is much larger than communities that studying simpler multi-cellular organisms, so the effect of the community size also weighed in on the decision.
+Nematodes have been studied far more than simpler multi-cellular organisms, and therefore more data exist that we can use to build our model. We would need to get, for example, another connectome and another anatomical 3D map whereas in _C. elegans_ they already exist. The community of scientists using _C. elegans_ as their model organism is much larger than communities that studying simpler multi-cellular organisms, so the effect of the community size also weighed in on the decision.
 
 ### When do you think the simulation will be "complete", and which behaviors would that include?
 
@@ -86,15 +86,15 @@ Right now our model of the electrical activity neurons is based on the Hodgkin H
 
 There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. Here is a list of some of the data sets that we have used so far:
 
--   [The Virtual Worm (3D atlas of C. elegans anatomy)](http://caltech.wormbase.org/virtualworm/)
--   [The c. elegans connectome (wiring diagram of neurons)](http://www.wormatlas.org/neuronalwiring.html)
--   [Cell list of c. elegans](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
--   [Ion channels used by c. elegans](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html)
+-   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](http://caltech.wormbase.org/virtualworm/)
+-   [The _C. elegans_ connectome (wiring diagram of neurons)](http://www.wormatlas.org/neuronalwiring.html)
+-   [Cell list of _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
+-   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html)
 -   [Database of Worm behavioral phenotypes](http://www.ncbi.nlm.nih.gov/pubmed/23852451)
 
 ### Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 
-There have been [other modeling efforts in C. Elegans and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observe behaviors is still an open question.
+There have been [other modeling efforts in _C. elegans_ and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observe behaviors is still an open question.
 
 ### How are neurons simulated today?
 
@@ -106,7 +106,7 @@ There are a wide variety of ways to simulate neurons, as shown in [figure two](h
 
 It calculates a system of equations to produce a read out of the changing membrane potential of a neuron over time. Some simulators enable ion channel dynamics to be included and enable neurons to be described in detail in space (multi-compartmental models), while others ignore ion channels and treat neurons as points connected directly to other neurons. In OpenWorm, we focus on multi-compartmental neuron models with ion channels.
 
-### What is the connection between the basic proporties of C. elegans neurons and human neurons?
+### What is the connection between the basic proporties of _C. elegans_ neurons and human neurons?
 
 C.elegans neurons do not spike (i.e. have [action potentials](http://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](http://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](http://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](http://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](http://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](http://en.wikipedia.org/wiki/Membrane_potential).
 
@@ -136,7 +136,7 @@ This project is all about biting off small workable pieces of the problem. The p
 
 ### Do you need a connectome for these gap junctions as well or should an accurate enough cell model suffice?
 
-The gap junctions are included in the C. elegans connectome.
+The gap junctions are included in the _C. elegans_ connectome.
 
 ### What's the main differences between the single and multi-compartment models?
 
@@ -160,7 +160,7 @@ Double check that you have set the path to NEURON's **bin** directory containing
 
 ### How does the NemaLoad project relate to OpenWorm?
 
-We both want to see the c. elegans reverse engineered as a means of understanding nervous systems. We've met a few times and David Darlymple contributes to the project and on the mailing list. We have a different approach right now, but they are complementary and could be unified down the road. Both projects have a lot of up front development work that we are doing now, us mainly in software and integrating data that already exists and David in building an ambitious experimental set up to collect a never-before-gathered data set.
+We both want to see the _C. elegans_ reverse engineered as a means of understanding nervous systems. We've met a few times and David Darlymple contributes to the project and on the mailing list. We have a different approach right now, but they are complementary and could be unified down the road. Both projects have a lot of up front development work that we are doing now, us mainly in software and integrating data that already exists and David in building an ambitious experimental set up to collect a never-before-gathered data set.
 
 ### What is SPH?
 
