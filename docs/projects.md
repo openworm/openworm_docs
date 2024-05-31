@@ -1,15 +1,17 @@
 **OpenWorm Projects**
 
-The project is currently laid out into the major areas shown below:
+The OpenWorm project is currently laid out into the major areas shown below:
 
--   Neuromechanical modeling with Sibernetic
--   Geppetto Simulation Engine
--   Movement analysis
--   Optimization engine
--   Data collection and representation
--   Community outreach
--   Muscle-Neuron integration
--   C. elegans robot
+-   [Neuromechanical modeling with Sibernetic](/Projects/sibernetic/)
+-   [c302 multiscale modelling framework](/Projects/c302/)
+-   [Geppetto Simulation Engine](/Projects/geppetto/)
+-   [DevoWorm project](/Projects/DevoWorm/)
+-   [Movement analysis](/Projects/worm-movement/)
+-   [Optimization engine](/Projects/optimization/)
+-   [Data collection and representation](/Projects/datarep/)
+-   [Community outreach](/Projects/community-proj/)
+-   [Muscle-Neuron integration](/Projects/muscle-neuron-integration/)
+-   [C. elegans robots](/Projects/c-elegans-robot/)
 
 <div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://www.lucidchart.com/documents/embeddedchart/832c1c53-2840-421f-9546-01499bb9c753" id="pf3oYI3Y1wfX"></iframe></div>
 
