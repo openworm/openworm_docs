@@ -90,7 +90,7 @@ Our second release pointed us in a good direction for the future, and provided s
 
 ### EPIC-1: As a user, I want to be able to mark synapses and have them integrated into the model
 
-The user will be able to contribute to a shared knowledge space of the positions and identities of c. elegans synapses using an installation of CATMAID. This is important because the c. elegans connectome does not currently incorporate synapse positions at all.
+The user will be able to contribute to a shared knowledge space of the positions and identities of _C. elegans_ synapses using an installation of CATMAID. This is important because the _C. elegans_ connectome does not currently incorporate synapse positions at all.
 
 ### EPIC-2: As a developer, I want to launch the simulation engine on Amazon AWS
 
