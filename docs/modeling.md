@@ -14,16 +14,16 @@ This picture is purposefully drawn with an underlying loop of causal relationshi
 -   Enables the study of the nervous system as a real time control system for a body
 -   Provides the model with a minimum core to which other biological processes and cell types can be added.
 
-Having chosen one loop to focus on first, we can now re-define the problem as how to construct an acceptable neuromechanical model. There have been [other attempts](http://www.artificialbrains.com/openworm#similar) to do this in the past and there are some groups currently working on the problem using different approaches (e.g. [Cohen](http://www.comp.leeds.ac.uk/celegans/), [Lockery](http://lockerylab.uoregon.edu/groups/main/wiki/a99e9/Research.html), [Si Elegans](http://www.si-elegans.eu/)).
+Having chosen one loop to focus on first, we can now re-define the problem as how to construct an acceptable neuromechanical model. There have been [other attempts](http://www.artificialbrains.com/openworm#similar) to do this in the past and there are some groups currently working on the problem using different approaches (e.g. [Cohen](http://www.comp.leeds.ac.uk/celegans/), [Lockery](https://www.lockerylab.org/), [Si Elegans](http://www.si-elegans.eu/)).
 
 Our approach involves building a 3D mechanical model of the worm body and nervous system, tuning the model using model optimization techniques, validating the model using real data, and ensuring the model is reproducible by other labs by exposing it through a web-based simulation engine.
 
 Closing the loop with neuromechanical modeling
 ==============================================
 
-While our ultimate goal is to simulate every cell in the *c. elegans*, we are starting out by building a model of its body and environment, its nervous system, and its muscle cells.
+While our ultimate goal is to simulate every cell in the _C. elegans_, we are starting out by building a model of its body and environment, its nervous system, and its muscle cells.
 
-To get a quick idea of what this looks like, check out the [CyberElegans prototype](http://www.youtube.com/embed/3uV3yTmUlgo). In this movie you can see a simulated 3D c. elegans being activated in an environment. Similar to the CyberElegans model, its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+To get a quick idea of what this looks like, check out the [CyberElegans prototype](http://www.youtube.com/embed/3uV3yTmUlgo). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Similar to the CyberElegans model, its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 These steps are outlined in blue text of the figure below:
 
@@ -51,7 +51,7 @@ Body and environment
 
 One of the aspects of making the model more biologically realistic has been to incorporate a [3d model of the anatomy](http://browser.openworm.org/) of the worm into the simulation.
 
-To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
@@ -68,7 +68,7 @@ Neurons
 
 This is a much more faithful representation of the neurons and their positions within the worm's body.
 
-Our computational strategy to model the nervous system involves first reusing the [c. elegans connectome](http://dx.plos.org/10.1371/journal.pcbi.1001066) and the [3D anatomical map of the c. elegans nervous system and body plan](http://g.ua/MhxC). We have used the NeuroML standard ([Gleeson et al., 2010](http://dx.plos.org/10.1371/journal.pcbi.1000815)) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the “spatial connectome” into the NEURON simulator ([Hines & Carnevale 1997](http://www.ncbi.nlm.nih.gov/pubmed/9248061)) to perform *in silico* experiments.
+Our computational strategy to model the nervous system involves first reusing the [_C. elegans_ connectome](http://dx.plos.org/10.1371/journal.pcbi.1001066) and the [3D anatomical map of the _C. elegans_ nervous system and body plan](http://g.ua/MhxC). We have used the NeuroML standard ([Gleeson et al., 2010](http://dx.plos.org/10.1371/journal.pcbi.1000815)) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the “spatial connectome” into the NEURON simulator ([Hines & Carnevale 1997](http://www.ncbi.nlm.nih.gov/pubmed/9248061)) to perform *in silico* experiments.
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
@@ -79,13 +79,13 @@ These neurons must eventually send signals to muscle cells.
 Muscle cells
 ------------
 
-![Muscle cells in c. elegans](https://docs.google.com/drawings/d/1ayyyu6dv0S4-750j-WRYVBEaziZr3g3V1-UIadAfHck/pub?w=391&h=224)
+![Muscle cells in _C. elegans_](https://docs.google.com/drawings/d/1ayyyu6dv0S4-750j-WRYVBEaziZr3g3V1-UIadAfHck/pub?w=391&h=224)
 
 We have started our process of modeling muscle cells by choosing a specific muscle cell to target:
 
 ![Muscle cell highlighted](https://docs.google.com/drawings/d/1ZzCS0IXTb-n3GgaNLp98HS9X8ngHLtkcnildAYshuME/pub?w=535&h=289)
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/datarep/#muscle-cell-integration).
+More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/muscle-neuron-integration/).
 
 Once the body, neurons, and muscles are represented, we still have a lot of free parameters that we don't know. That's what leads us to the need to tune the model.
 
