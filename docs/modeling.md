@@ -1,4 +1,4 @@
-OpenWorm Modeling Approach
+OpenWorm Modeling Approach Testing
 ==========================
 
 Our main goal is to build the world's first virtual organism-- an *in silico* implementation of a living creature-- for the purpose of achieving an understanding of the events and mechanisms of living cells. Our secondary goal is to enable, via simulation, unprecedented in silico experiments of living cells to power the next generation of advanced systems biology analysis, synthetic biology, computational drug discovery and dynamic disease modeling.
