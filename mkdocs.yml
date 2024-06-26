@@ -1,5 +1,8 @@
-site_name: OpenWorm
-theme: readthedocs
+site_name: OpenWorm Documentation
+theme:
+  name: material    
+  favicon: images/favicon.ico
+  logo: images/favicon.ico
 nav:
   - Introduction : index.md
   - Background : background.md
@@ -9,9 +12,10 @@ nav:
   - Projects:
       - Projects Overview : projects.md
       - Sibernetic : Projects/sibernetic.md
-      - Geppetto : Projects/geppetto.md
-      - Movement : Projects/worm-movement.md
+      - c302 : Projects/c302.md
       - DevoWorm : Projects/DevoWorm.md
+      - Movement : Projects/worm-movement.md
+      - Geppetto : Projects/geppetto.md
       - Optimization : Projects/optimization.md
       - Representation : Projects/datarep.md
       - Community Outreach : Projects/community-proj.md
