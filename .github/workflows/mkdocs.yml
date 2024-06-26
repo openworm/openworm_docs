@@ -84,6 +84,6 @@ jobs:
             git add last_build_sha
             mv $REPO_METADATA_SHAS.temp $REPO_METADATA_SHAS
             git commit --amend -m "Deploy master@$SHA [ci skip]"
-            git remote set-url origin https://${{ github.token }}@github.com/openworm/openworm_docs.git
+            git remote set-url origin https://${{ github.token }}@github.com/${{ github.repository_owner }}/openworm_docs.git
             git push -f origin gh-pages
         fi
