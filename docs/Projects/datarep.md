@@ -11,10 +11,10 @@ Using these different representations separately leads to ad hoc scripting for f
 
 Here is a list of some of the data sets that we have used so far:
 
--   [The Virtual Worm (3D atlas of C. elegans anatomy)](http://caltech.wormbase.org/virtualworm/)
--   [The c. elegans connectome (wiring diagram of neurons)](http://www.wormatlas.org/neuronalwiring.html)
--   [Cell list of c. elegans](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
--   [Ion channels used by c. elegans](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html)
+-   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](http://caltech.wormbase.org/virtualworm/)
+-   [The _C. elegans_ connectome (wiring diagram of neurons)](http://www.wormatlas.org/neuronalwiring.html)
+-   [Cell list of _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
+-   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html)
 -   [Database of Worm behavioral phenotypes](http://www.ncbi.nlm.nih.gov/pubmed/23852451)
 
 Currently our work on data collection and representation is divided among four subprojects:
@@ -26,26 +26,26 @@ Currently our work on data collection and representation is divided among four s
 
 Below you can find information about each subproject, see the project’s current roadmap and access the associated data repositories
 
-A lot of data about *C. elegans* is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
+A lot of data about _C. elegans_ is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
 
 NeuroML Connectome
 ------------------
 
-Our computational strategy to accomplish this involves first reusing the *C. elegans* connectome and the 3D anatomical map of the *C. elegans* nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the *C. elegans* nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the *C. elegans* connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
+Our computational strategy to accomplish this involves first reusing the _C. elegans_ connectome and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the NeuroML standard (Gleeson et al., 2010) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator (Hines & Carnevale 1997) to perform in silico experiments.
 
 ### Previous accomplishments
 
--   Building the *C. elegans* NeuroML file
+-   Building the _C. elegans_ NeuroML file
 
 ### Current roadmap
 
 ###[Updated NeuroML connectome model](https://github.com/openworm/OpenWorm/issues?milestone=15&state=open)
 
-The [NeuroML connectome model](https://github.com/openworm/CElegansNeuroML) provides a framework for [multi-compartmental modeling](https://en.wikipedia.org/wiki/Multi-compartment_model) of the *C. elegans* nervous system. We are continuing to refine this to include more and more information that is known about the anatomy and dynamics of the nervous system in order to reach ever-improving biological realism.
+The [NeuroML connectome model](https://github.com/openworm/CElegansNeuroML) provides a framework for [multi-compartmental modeling](https://en.wikipedia.org/wiki/Multi-compartment_model) of the _C. elegans_ nervous system. We are continuing to refine this to include more and more information that is known about the anatomy and dynamics of the nervous system in order to reach ever-improving biological realism.
 
 -   [Create sample NeuroML connectome output](https://github.com/openworm/OpenWorm/issues/114)
 -   [Remove Glutamate\_GJ etc in neuroConstruct project](https://github.com/openworm/OpenWorm/issues/50)
--   [Create or reuse a NeuroML description of c. elegans motor neuron synapses](https://github.com/openworm/OpenWorm/issues/124)
+-   [Create or reuse a NeuroML description of _C. elegans_ motor neuron synapses](https://github.com/openworm/OpenWorm/issues/124)
 
 ### Issues list
 
@@ -56,9 +56,9 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 
 Repository | Description | Language
 ------------ | ------------- | ------------
-<a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based C. elegans model, contained in a neuroConstruct project  | Java
+<a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a> | NeuroML based <em>C. elegans<em> model, contained in a neuroConstruct project  | Java
 <a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a> | Conversion script to bring neuron models drawn in Blender into NeuroML format  | Python
-<a href="https://github.com/openworm/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of C. elegans conectome | Python
+<a href="https://github.com/openworm/neuronal-analysis/tree/master/NEURONSimData">NEURONSimData</a> | Graphing voltage data from NEURON sims of <em>C. elegans<em> conectome | Python
 <a href="https://github.com/openworm/OWMeta">OWMeta</a> | Metadata extraction, translation, storage, and sharing | Python
 
 
@@ -76,7 +76,7 @@ With the ever increasing capacity to collect data about biological system, the n
 
 ### Current roadmap
 
--   [Create a D3 implementation of the C. elegans connectome HivePlot](https://github.com/openworm/OpenWorm/issues/89)
+-   [Create a D3 implementation of the _C. elegans_ connectome HivePlot](https://github.com/openworm/OpenWorm/issues/89)
 
 ### Issues list
 
@@ -86,6 +86,6 @@ All issues related to [working with data](https://github.com/openworm/OpenWorm/i
 
 Repository | Description | Language
 ------------ | ------------- | ------------
-<a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the c. elegans | Javascript
+<a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the <em>c. elegans<em> | Javascript
 <a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a> | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser | Objective-C
 <a href="https://github.com/openworm/data-viz">data-viz</a> | Repository for scripts and other code items to create web-based visualizations of data in the project | Python
