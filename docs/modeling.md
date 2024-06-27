@@ -57,7 +57,7 @@ In turn, the activity of the muscles are being driven by the activity of neurons
 
 ![image](http://i.imgur.com/KSWjCaW.jpg)
 
-More detailed information is available on the Sibernetic project page \<sibernetic-project\>.
+More detailed information is available on the [Sibernetic](https://openworm.org/sibernetic/) project page.
 
 Having a virtual body now allows us to try out many different ways to control it using signals that could arise from neurons. Separately, we have been doing work to create a realistic model of the worm's neurons.
 
@@ -72,7 +72,7 @@ Our computational strategy to model the nervous system involves first reusing th
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/datarep/#neuroml-connectome).
+More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/datarep/#neuroml-connectome).
 
 These neurons must eventually send signals to muscle cells.
 
@@ -85,7 +85,7 @@ We have started our process of modeling muscle cells by choosing a specific musc
 
 ![Muscle cell highlighted](https://docs.google.com/drawings/d/1ZzCS0IXTb-n3GgaNLp98HS9X8ngHLtkcnildAYshuME/pub?w=535&h=289)
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/muscle-neuron-integration/).
+More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/muscle-neuron-integration/).
 
 Once the body, neurons, and muscles are represented, we still have a lot of free parameters that we don't know. That's what leads us to the need to tune the model.
 
@@ -104,7 +104,7 @@ These two algorithms, Hodgkin-Huxley and SPH, require parameters to be set in or
 
 To deal with the space of free parameters, two strategies are employed. First, by using parameters that are based on actual physical processes, many different means can be used to provide sensible estimates. For example, we can estimate the volume and mass of a muscle cell based on figures that have been created in the scientific literature that show its basic dimensions, and some educated guesses about the weight of muscle tissue. Secondly, to go beyond educated estimates into more detailed measurements, we can employ model optimization techniques. Briefly stated, these computational techniques enable a rational way to generate multiple models with differing parameters and choose those sets of parameters that best pass a series of tests. For example, the conductances of motor neurons can be set by what keeps the activity those neurons within the boundaries of an appropriate dynamic range, given calcium trace recordings data of those neurons as constraints.
 
-If you'd be interested to help with tuning the model, please check out the [Optimization project page](/Projects/optimization/).
+If you'd be interested to help with tuning the model, please check out the [Optimization project page](../Projects/optimization/).
 
 Validation
 ==========
@@ -113,7 +113,7 @@ In order to know that we are making meaningful scientific progress, we need to v
 
 The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
 
-More detailed information is available on the [movement validation project page](/Projects/worm-movement/).
+More detailed information is available on the [movement validation project page](../Projects/worm-movement/).
 
 Reproducibility
 ===============
@@ -122,4 +122,4 @@ In order to allow the world to play with the model easily, we are engineering [G
 
 ![image](http://www.geppetto.org/images/cn2.png)
 
-The [project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
+The [project page for Geppetto](../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
