@@ -1,12 +1,12 @@
-**OpenWorm Projects**
+**OpenWorm Projects Testing**
 
 The OpenWorm project is currently laid out into the major areas shown below:
 
 -   [Neuromechanical modeling with Sibernetic](/Projects/sibernetic/)
 -   [c302 multiscale modelling framework](/Projects/c302/)
--   [Geppetto Simulation Engine](/Projects/geppetto/)
 -   [DevoWorm project](/Projects/DevoWorm/)
 -   [Movement analysis](/Projects/worm-movement/)
+-   [Geppetto Simulation Engine](/Projects/geppetto/)
 -   [Optimization engine](/Projects/optimization/)
 -   [Data collection and representation](/Projects/datarep/)
 -   [Community outreach](/Projects/community-proj/)
