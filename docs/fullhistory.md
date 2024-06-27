@@ -64,11 +64,11 @@ August 2012: [Article](http://www.openworm.org/publications.html): Towards a vir
 
 November 2012: [OpenWorm Release 3](../releases/)
 
-21 March 2013: [OpenWorm Journal Club with John White](http://blog.openworm.org/post/45995934318/openworm-journal-club-father-of-the-connectome `again not sure if this one exists`), the "father of the connectome".
+21 March 2013: [OpenWorm Journal Club with John White](https://openworm.tumblr.com/post/76206246089/dr-john-white-talks-about-openworm-and-more-on), the "father of the connectome".
 
 July 2013:
 
--   [**First OpenWorm Conference**](http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris), in Paris.
+-   [**First OpenWorm Conference**](https://openworm.tumblr.com/post/57193347335/community-updates-from-openworm-in-paris), in Paris.
 -   [Article](http://www.openworm.org/publications.html): Integration of predictive-corrective incompressible SPH and Hodgkin-Huxley based models in the OpenWorm in silico model of _C. elegans_.
 -   [Article](http://www.openworm.org/publications.html): Beyond the connectome hairball: Rational visualizations and analysis of the _C. elegans_ connectome as a network graph using hive plots.
 -   [OpenWorm Release 4](../releases/)
