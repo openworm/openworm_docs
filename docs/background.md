@@ -8,7 +8,7 @@ Established in January 2011, OpenWorm has since that time built a community of h
 
 Please [visit here](fullhistory/) for a more extensive history of the project.
 
-More information is available on the past history of [OpenWorm releases](releases/).
+More information is available on the past history of [OpenWorm releases](/releases/).
 
 Why do this?
 ------------
