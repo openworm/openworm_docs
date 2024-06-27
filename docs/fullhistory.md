@@ -6,7 +6,7 @@ What follows is a history of _C. elegans_ research, of the OpenWorm Project, as 
 Historical Milestones
 ---------------------
 
-1900: _C. elegans_ was [first described](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by Émile Maupas, who isolated it from soil in Algeria.
+1900: _C. elegans_ was [first described](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by **Émile Maupas**, who isolated it from soil in Algeria.
 
 1963: **Sydney Brenner**, at MRC Laboratory in Cambridge, [**proposed using _C. elegans_ as a model organism**](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) for scientific study. He won a Nobel prize for this work in 2002.
 
@@ -33,7 +33,7 @@ Fall of 2007: Andrey Palyanov starts the CyberElegans project.
 
 June 2008: First CyberElegans publication: Palyanov A.Yu., Dibert A.A., Computer simulation of _C. elegans_ muscular system and neural network // In: Proc. 6-th Int. Conf. Bioinformatics of Genome Regulation and Structure (BGRS), June 22-28, 2008, p. 61.
 
-~2009: Andrey posts the first CyberElegans video to youtube: <https://www.youtube.com/watch?v=Ek49JSAiKjY>
+~2009: Andrey Palyanov posts the first CyberElegans video to youtube: <https://www.youtube.com/watch?v=Ek49JSAiKjY>
 
 Jan 2010: Sergey Khayrulin joins Andrey on the CyberElegans project.
 
@@ -54,15 +54,15 @@ Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brai
 
 4 September 2011: [Article](http://www.openworm.org/publications.html): Managing Complexity in Multi-Algorithm, Multi-Scale Biological Simulations: An Integrated Software Engineering and Neuroinformatics Approach.
 
-September 2011: [OpenWorm Release 1](/releases/)
+September 2011: [OpenWorm Release 1](../releases/)
 
 December 2011: [OpenWorm's Blog is initiated](https://openworm.tumblr.com/)
 
-April 2012: [OpenWorm Release 2](/releases/)
+April 2012: [OpenWorm Release 2](../releases/)
 
 August 2012: [Article](http://www.openworm.org/publications.html): Towards a virtual _C. elegans_: A framework for simulation and visualization of the neuromuscular system in a 3D physical environment.
 
-November 2012: [OpenWorm Release 3](/releases/)
+November 2012: [OpenWorm Release 3](../releases/)
 
 21 March 2013: [OpenWorm Journal Club with John White](http://blog.openworm.org/post/45995934318/openworm-journal-club-father-of-the-connectome `again not sure if this one exists`), the "father of the connectome".
 
@@ -71,9 +71,9 @@ July 2013:
 -   [**First OpenWorm Conference**](http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris), in Paris.
 -   [Article](http://www.openworm.org/publications.html): Integration of predictive-corrective incompressible SPH and Hodgkin-Huxley based models in the OpenWorm in silico model of _C. elegans_.
 -   [Article](http://www.openworm.org/publications.html): Beyond the connectome hairball: Rational visualizations and analysis of the _C. elegans_ connectome as a network graph using hive plots.
--   [OpenWorm Release 4](/releases/)
+-   [OpenWorm Release 4](../releases/)
 
-January 2014: [OpenWorm Release 5](/releases/)
+January 2014: [OpenWorm Release 5](../releases/)
 
 19 May 2014: OpenWorm raises 121,000 USD [via Kickstarter](https://www.kickstarter.com/projects/openworm/openworm-a-digital-organism-in-your-browser)
 
