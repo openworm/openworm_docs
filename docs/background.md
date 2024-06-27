@@ -6,9 +6,9 @@ History
 
 Established in January 2011, OpenWorm has since that time built a community of highly-motivated and highly-skilled individuals and coordinated their work. This community has produced scientific publications making use of scientific research published through open access, helping to show the validity of the open science approach we have taken.
 
-Please [visit here](fullhistory/) for a more extensive history of the project.
+Please [visit here](../fullhistory/) for a more extensive history of the project.
 
-More information is available on the past history of [OpenWorm releases](/releases/).
+More information is available on the past history of [OpenWorm releases](../releases/).
 
 Why do this?
 ------------
