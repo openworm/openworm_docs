@@ -1,7 +1,7 @@
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
-While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model of its body, its nervous system, and its environment. [Sibernetic](http://sibernetic.org) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
+While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model of its body, its nervous system, and its environment. [Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
 
 To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
@@ -14,11 +14,11 @@ Previous accomplishments
 Current roadmap
 ---------------
 
-### [Electrofluid Paper](https://github.com/openworm/OpenWorm/issues?milestone=17&state=open)
+### [Electrofluid Paper](https://github.com/openworm/OpenWorm/issues?milestone=17&state=closed)
 
-We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells and the worm body. @vellamike, @a-palyanov and @skhayrulin are taking the lead on this,
+We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells and the worm body. [@vellamike](https://github.com/vellamike), [@a-palyanov](https://github.com/a-palyanov) and [@skhayrulin](https://github.com/skhayrulin) are taking the lead on this.
 
-The proposal is to do this after the Sibernetic proof of concept worm wiggling is complete.
+The proposal is to do this after the Sibernetic proof of concept worm wiggling, both of which have since been completed.
 
 Issues list
 -----------
