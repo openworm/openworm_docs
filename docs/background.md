@@ -6,9 +6,9 @@ History
 
 Established in January 2011, OpenWorm has since that time built a community of highly-motivated and highly-skilled individuals and coordinated their work. This community has produced scientific publications making use of scientific research published through open access, helping to show the validity of the open science approach we have taken.
 
-Please [visit here](fullhistory/) for a more extensive history of the project.
+Please [visit here](../fullhistory/) for a more extensive history of the project.
 
-More information is available on the past history of [OpenWorm releases](releases/).
+More information is available on the past history of [OpenWorm releases](../releases/).
 
 Why do this?
 ------------
@@ -21,10 +21,10 @@ Complex neuronal activity is the result of countless interactions between molecu
 
 We are building a simulation platform to prove it is possible to make good models of complex neuronal activity, starting with a digital worm. We are making the simulation platform open source because we believe anyone should be able to use it to understand how neurons and cells work.
 
-Why *C. elegans*?
+Why _C. elegans_?
 -----------------
 
-In the field of neuroscience, one of the simplest organisms that are studied is *Caenorhabditis elegans*, or *C. elegans* for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving muscles on a body in a complex world.
+In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving muscles on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building a simple system to capture it, we are starting with making models of the individual cells and their interactions. If we do this correctly so that the cells act on each other as they do in the real organism, we will have a much more realistic model than we would get trying to go straight to the behavior.
 
@@ -72,7 +72,7 @@ The consequence of this from an engineering perspective is, in order to simulate
 
 ### Model optimization
 
-There are a lot of aspects of *C. elegans* that we will not be able to measure directly for a while based on experimental limitations. These are ["free parameters"](http://en.wikipedia.org/wiki/Free_parameter). The conventional wisdom on modeling is to minimize the number of free parameters as much as possible. Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.
+There are a lot of aspects of _C. elegans_ that we will not be able to measure directly for a while based on experimental limitations. These are ["free parameters"](http://en.wikipedia.org/wiki/Free_parameter). The conventional wisdom on modeling is to minimize the number of free parameters as much as possible. Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.
 
 In this case, we have to make do with what we have and make some good educated guesses about the free parameters. There is a [mathematical discipline that helps us do that known as optimization](http://en.wikipedia.org/wiki/Mathematical_optimization). For our purposes, you can think of this as generating many different versions of a model, each version with slightly different parameters, and then measuring if the model produces good results. If a model produces better results by changing the parameters in a particular way, you try to keep changing the parameters in that way and see if you get even better results. In this way, roughly speaking, optimization techniques enable scientists to turn a problem of lack of data into a problem that a computer can address using brute force calculations.
 
