@@ -44,7 +44,7 @@ Associated Repositories
 **OpenWorm Port of Schafer Lab's Worm Analysis Toolbox 1.3.4**
 
 - [https://github.com/openworm/SegWorm](https://github.com/openworm/SegWorm)  (original MATLAB code, static)
-- [https://github.com/JimHokanson/SegwormMatlabClasses](https://github.com/JimHokanson/SegwormMatlabClasses)  (Jim's MATLAB fork, now static)
+- [https://github.com/JimHokanson/SegwormMatlabClasses](https://github.com/JimHokanson/SegwormMatlabClasses)  (Jim Hokanson's MATLAB fork, now static)
 - [https://github.com/openworm/open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox)  (active Python port; formerly movement_validation)
 
 **Cloud Computing**
@@ -66,5 +66,5 @@ Associated Repositories
 **Brown Lab Multiworm Tracking Code**
 
 - [https://github.com/Behavioural-Genomics/tracking](https://github.com/Behavioural-Genomics/tracking) (not sure what this is, looks stale?)
-- [https://github.com/ver228/Multiworm_Tracking](https://github.com/ver228/Multiworm_Tracking) (Avelino's work)
-- [https://github.com/KezhiLi/Tracking_Hypo](https://github.com/KezhiLi/Tracking_Hypo)   (Kezhi's work; the computer vision code)
+- [https://github.com/ver228/Multiworm_Tracking](https://github.com/ver228/Multiworm_Tracking) (Avelino Javer's work)
+- [https://github.com/KezhiLi/Tracking_Hypo](https://github.com/KezhiLi/Tracking_Hypo)   (Kezhi Li's work; the computer vision code)
