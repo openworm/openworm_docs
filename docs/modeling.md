@@ -14,16 +14,16 @@ This picture is purposefully drawn with an underlying loop of causal relationshi
 -   Enables the study of the nervous system as a real time control system for a body
 -   Provides the model with a minimum core to which other biological processes and cell types can be added.
 
-Having chosen one loop to focus on first, we can now re-define the problem as how to construct an acceptable neuromechanical model. There have been [other attempts](http://www.artificialbrains.com/openworm#similar) to do this in the past and there are some groups currently working on the problem using different approaches (e.g. [Cohen](http://www.comp.leeds.ac.uk/celegans/), [Lockery](http://lockerylab.uoregon.edu/groups/main/wiki/a99e9/Research.html), [Si Elegans](http://www.si-elegans.eu/)).
+Having chosen one loop to focus on first, we can now re-define the problem as how to construct an acceptable neuromechanical model. There have been [other attempts](http://www.artificialbrains.com/openworm#similar) to do this in the past and there are some groups currently working on the problem using different approaches (e.g. [Cohen](http://www.comp.leeds.ac.uk/celegans/), [Lockery](https://www.lockerylab.org/), [Si Elegans](http://www.si-elegans.eu/)).
 
 Our approach involves building a 3D mechanical model of the worm body and nervous system, tuning the model using model optimization techniques, validating the model using real data, and ensuring the model is reproducible by other labs by exposing it through a web-based simulation engine.
 
 Closing the loop with neuromechanical modeling
 ==============================================
 
-While our ultimate goal is to simulate every cell in the *c. elegans*, we are starting out by building a model of its body and environment, its nervous system, and its muscle cells.
+While our ultimate goal is to simulate every cell in the _C. elegans_, we are starting out by building a model of its body and environment, its nervous system, and its muscle cells.
 
-To get a quick idea of what this looks like, check out the [CyberElegans prototype](http://www.youtube.com/embed/3uV3yTmUlgo). In this movie you can see a simulated 3D c. elegans being activated in an environment. Similar to the CyberElegans model, its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+To get a quick idea of what this looks like, check out the [CyberElegans prototype](http://www.youtube.com/embed/3uV3yTmUlgo). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Similar to the CyberElegans model, its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 These steps are outlined in blue text of the figure below:
 
@@ -51,13 +51,13 @@ Body and environment
 
 One of the aspects of making the model more biologically realistic has been to incorporate a [3d model of the anatomy](http://browser.openworm.org/) of the worm into the simulation.
 
-To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D c. elegans being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
 ![image](http://i.imgur.com/KSWjCaW.jpg)
 
-More detailed information is available on the Sibernetic project page \<sibernetic-project\>.
+More detailed information is available on the [Sibernetic](https://openworm.org/sibernetic/) project page.
 
 Having a virtual body now allows us to try out many different ways to control it using signals that could arise from neurons. Separately, we have been doing work to create a realistic model of the worm's neurons.
 
@@ -68,24 +68,24 @@ Neurons
 
 This is a much more faithful representation of the neurons and their positions within the worm's body.
 
-Our computational strategy to model the nervous system involves first reusing the [c. elegans connectome](http://dx.plos.org/10.1371/journal.pcbi.1001066) and the [3D anatomical map of the c. elegans nervous system and body plan](http://g.ua/MhxC). We have used the NeuroML standard ([Gleeson et al., 2010](http://dx.plos.org/10.1371/journal.pcbi.1000815)) to describe the 3D anatomical map of the c. elegans nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the c. elegans connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the “spatial connectome” into the NEURON simulator ([Hines & Carnevale 1997](http://www.ncbi.nlm.nih.gov/pubmed/9248061)) to perform *in silico* experiments.
+Our computational strategy to model the nervous system involves first reusing the [_C. elegans_ connectome](http://dx.plos.org/10.1371/journal.pcbi.1001066) and the [3D anatomical map of the _C. elegans_ nervous system and body plan](http://g.ua/MhxC). We have used the NeuroML standard ([Gleeson et al., 2010](http://dx.plos.org/10.1371/journal.pcbi.1000815)) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the “spatial connectome” into the NEURON simulator ([Hines & Carnevale 1997](http://www.ncbi.nlm.nih.gov/pubmed/9248061)) to perform *in silico* experiments.
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/datarep/#neuroml-connectome).
+More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/datarep/#neuroml-connectome).
 
 These neurons must eventually send signals to muscle cells.
 
 Muscle cells
 ------------
 
-![Muscle cells in c. elegans](https://docs.google.com/drawings/d/1ayyyu6dv0S4-750j-WRYVBEaziZr3g3V1-UIadAfHck/pub?w=391&h=224)
+![Muscle cells in _C. elegans_](https://docs.google.com/drawings/d/1ayyyu6dv0S4-750j-WRYVBEaziZr3g3V1-UIadAfHck/pub?w=391&h=224)
 
 We have started our process of modeling muscle cells by choosing a specific muscle cell to target:
 
 ![Muscle cell highlighted](https://docs.google.com/drawings/d/1ZzCS0IXTb-n3GgaNLp98HS9X8ngHLtkcnildAYshuME/pub?w=535&h=289)
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](/Projects/datarep/#muscle-cell-integration).
+More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/muscle-neuron-integration/).
 
 Once the body, neurons, and muscles are represented, we still have a lot of free parameters that we don't know. That's what leads us to the need to tune the model.
 
@@ -104,7 +104,7 @@ These two algorithms, Hodgkin-Huxley and SPH, require parameters to be set in or
 
 To deal with the space of free parameters, two strategies are employed. First, by using parameters that are based on actual physical processes, many different means can be used to provide sensible estimates. For example, we can estimate the volume and mass of a muscle cell based on figures that have been created in the scientific literature that show its basic dimensions, and some educated guesses about the weight of muscle tissue. Secondly, to go beyond educated estimates into more detailed measurements, we can employ model optimization techniques. Briefly stated, these computational techniques enable a rational way to generate multiple models with differing parameters and choose those sets of parameters that best pass a series of tests. For example, the conductances of motor neurons can be set by what keeps the activity those neurons within the boundaries of an appropriate dynamic range, given calcium trace recordings data of those neurons as constraints.
 
-If you'd be interested to help with tuning the model, please check out the [Optimization project page](/Projects/optimization/).
+If you'd be interested to help with tuning the model, please check out the [Optimization project page](../Projects/optimization/).
 
 Validation
 ==========
@@ -113,7 +113,7 @@ In order to know that we are making meaningful scientific progress, we need to v
 
 The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
 
-More detailed information is available on the [movement validation project page](/Projects/worm-movement/).
+More detailed information is available on the [movement validation project page](../Projects/worm-movement/).
 
 Reproducibility
 ===============
@@ -122,4 +122,4 @@ In order to allow the world to play with the model easily, we are engineering [G
 
 ![image](http://www.geppetto.org/images/cn2.png)
 
-The [project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
+The [project page for Geppetto](../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
