@@ -71,7 +71,7 @@ In general, you won't step on any toes though -- multiple people doing the same 
 
 ### Do you all ever meet up somewhere physically?
 
-Subsets of us meet frequently, and there have been two meetings of the core OpenWorm team, one in [Paris in July 2014](http://blog.openworm.org/post/57193347335/community-updates-from-openworm-in-paris), and a second in London in Fall of 2014.  We use Google+ hangout to meet face to face on a regular basis in general meetings and in standing meetings of the subprojects.
+Subsets of us meet frequently, and there have been two meetings of the core OpenWorm team, one in [Paris in July 2014](https://openworm.tumblr.com/post/57193347335/community-updates-from-openworm-in-paris), and a second in London in Fall of 2014.  We use Google+ hangout to meet face to face on a regular basis in general meetings and in standing meetings of the subprojects.
 
 OpenWorm simulation and modeling
 --------------------------------
@@ -108,7 +108,7 @@ It calculates a system of equations to produce a read out of the changing membra
 
 ### What is the connection between the basic proporties of _C. elegans_ neurons and human neurons?
 
-C.elegans neurons do not spike (i.e. have [action potentials](http://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](http://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](http://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](http://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](http://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](http://en.wikipedia.org/wiki/Membrane_potential).
+_C.elegans_ neurons do not spike (i.e. have [action potentials](http://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](http://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](http://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](http://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](http://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](http://en.wikipedia.org/wiki/Membrane_potential).
 
 ### What is the level of detail of the wiring diagram for the non-neuron elements?
 
@@ -144,7 +144,7 @@ Single compartment models lack sufficient detail to capture the detailed shape o
 
 ### What is NeuroML and what does it represent?
 
-An introduction to NeuroML is available [on their website](http://neuroml.org/introduction.php). In short, it is an XML based description of biological descriptions of neurons.
+An introduction to NeuroML is available [on their website](https://neuroml.org/). In short, it is an XML based description of biological descriptions of neurons.
 
 ### How is excitation and inhibition in neurons handled in OpenWorm?
 
@@ -175,7 +175,7 @@ OpenWorm code reuse
 
 ### What are LEMS and jLEMS?
 
-[LEMS (Low Entropy Model Specification)](http://lems.github.io/jLEMS/) is a compact model specification that allows definition of mathematical models in a transparent machine readable way. [NeuroML 2.0](http://www.neuroml.org/neuroml2.php) is built on top of LEMS and defines component types useful for describing neural systems (e.g. ion channels, synapses). [jLEMS](https://github.com/LEMS/jLEMS) is the Java library that reads, validates, and provides basic solving for LEMS. A utility, [jNeuroML](https://github.com/NeuroML/jNeuroML), has been created which bundles jLEMS, and allows any LEMS or NeuroML 2 model to be executed, can validate NeuroML 2 files, and convert LEMS/NeuroML 2 models to multiple simulator languages (e.g. NEURON, Brian) and to other formats.
+[LEMS (Low Entropy Model Specification)](http://lems.github.io/jLEMS/) is a compact model specification that allows definition of mathematical models in a transparent machine readable way. [NeuroML 2.0](https://docs.neuroml.org/Userdocs/NeuroMLv2.html) is built on top of LEMS and defines component types useful for describing neural systems (e.g. ion channels, synapses). [jLEMS](https://lems.github.io/LEMS/) is the Java library that reads, validates, and provides basic solving for LEMS. A utility, [jNeuroML](https://github.com/NeuroML/jNeuroML), has been created which bundles jLEMS, and allows any LEMS or NeuroML 2 model to be executed, can validate NeuroML 2 files, and convert LEMS/NeuroML 2 models to multiple simulator languages (e.g. NEURON, Brian) and to other formats.
 
 ### What is OSGi and how is it being used?
 

@@ -17,7 +17,7 @@ For more information, please visit the above pages.
 Current roadmap
 ---------------
 
-###[STORY: Build a test suite for the simulation from WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=19&state=open)
+###[STORY: Build a test suite for the simulation from WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=19&state=closed)
 
 As a scientist or developer, I want to be able to run a test suite against the simulation that will show me how close the model is to real data.
 
@@ -25,7 +25,7 @@ In order for a model to demonstrate scientific value, it has to make falsifiable
 
 This story breaks down the epic to predict behavior from the WormBehavior database.
 
-###[EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database](https://github.com/openworm/OpenWorm/issues?milestone=22&state=open)
+###[EPIC: Correctly predict 80% of wild type (N2) behavior in WormBehavior database](https://github.com/openworm/OpenWorm/milestone/22)
 
 This epic is to have a simulation that can demonstrate it can predict (and therefore reproduce) 80% of the data collected about the N2 worm in the WormBehavior database. This means building a training set and a test set that are kept separate from each other, using the training set to tune up the model, then generating predictions, and comparing them against the test set, and doing some cross-validation).
 
@@ -43,28 +43,27 @@ Associated Repositories
 
 **OpenWorm Port of Schafer Lab's Worm Analysis Toolbox 1.3.4**
 
-- https://github.com/openworm/SegWorm  (original MATLAB code, static)
-- https://github.com/JimHokanson/SegwormMatlabClasses  (Jim's MATLAB fork, now static)
-- https://github.com/openworm/open-worm-analysis-toolbox  (active Python port; formerly movement_validation)
+- [https://github.com/openworm/SegWorm](https://github.com/openworm/SegWorm)  (original MATLAB code, static)
+- [https://github.com/JimHokanson/SegwormMatlabClasses](https://github.com/JimHokanson/SegwormMatlabClasses)  (Jim Hokanson's MATLAB fork, now static)
+- [https://github.com/openworm/open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox)  (active Python port; formerly movement_validation)
 
 **Cloud Computing**
 
-- https://github.com/openworm/movement_validation_cloud, forked from
-- https://github.com/joebowen/movement_validation_cloud
+- [https://github.com/openworm/movement_validation_cloud](https://github.com/openworm/movement_validation_cloud), forked from
+- [https://github.com/joebowen/movement_validation_cloud](https://github.com/joebowen/movement_validation_cloud)
 
 **Worm Tracker File Format Specification and Parser**
 
-- https://github.com/openworm/tracker-commons
-- https://github.com/openworm/biological_data   (placeholder repo to discuss worm video data)
+- [https://github.com/openworm/tracker-commons](https://github.com/openworm/tracker-commons)
 
 **André Brown's "Eigenworms" Code**
 
-- https://github.com/aexbrown/Motif_Analysis   (Deprecated in favour of Behavioural_Syntax below)
-- https://github.com/aexbrown/Behavioural_Syntax   (in MATLAB)
-- https://github.com/AidanRocke/behavioral_syntax  (Aidan Rocke's Python port)
+- [https://github.com/aexbrown/Motif_Analysis](https://github.com/aexbrown/Motif_Analysis) (Deprecated in favour of Behavioural_Syntax below)
+- [https://github.com/aexbrown/Behavioural_Syntax](https://github.com/aexbrown/Behavioural_Syntax) (in MATLAB)
+- [https://github.com/AidanRocke/behavioral_syntax](https://github.com/AidanRocke/behavioral_syntax) (Aidan Rocke's Python port)
 
 **Brown Lab Multiworm Tracking Code**
 
-- https://github.com/Behavioural-Genomics/tracking   (not sure what this is, looks stale?)
-- https://github.com/ver228/Multiworm_Tracking    (Avelino's work)
-- https://github.com/KezhiLi/Tracking_Hypo   (Kezhi's work; the computer vision code)
+- [https://github.com/Behavioural-Genomics/tracking](https://github.com/Behavioural-Genomics/tracking) (Closed)
+- [https://github.com/ver228/Multiworm_Tracking](https://github.com/ver228/Multiworm_Tracking) (Avelino Javer's work)
+- [https://github.com/KezhiLi/Tracking_Hypo](https://github.com/KezhiLi/Tracking_Hypo)   (Kezhi Li's work; the computer vision code)

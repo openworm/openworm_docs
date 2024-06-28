@@ -6,13 +6,13 @@ educational, academic, media-related and collaborative opportunities associated 
 
 ## Roadmap
 
-DevoWorm is currently divided into three loosely-knit interest areas: developmental dynamics, cybernetics and digital morphogenesis, and reproduction and developmental plasticity. While our main interest is in the nematode *Caenorhabditis elegans*, we are also interested in cross-species comparative work.
+DevoWorm is currently divided into three loosely-knit interest areas: developmental dynamics, cybernetics and digital morphogenesis, and reproduction and developmental plasticity. While our main interest is in the nematode _Caenorhabditis elegans_, we are also interested in cross-species comparative work.
 
 **Developmental Dynamics** currently involves using secondary data collected from embryos along with bioinformatic and data science techniques to answer questions regarding the process of early embryogenesis and the timing of later morphogenesis. To address these problems, we have used number of innovative approaches. 
 
 **Cybernetics and Digital Morphogenesis** has involved using platforms such as Morphozoic (Cellular Automata) or CompuCell3D (Cellular Potts Model) to better understand physical interactions during embryogenesis and morphogenesis. We have also explored the use of cybernetic models and concepts to better understand the general process of embryogenesis.
 
-**Reproduction and Developmental Plasticity** involves utilizing an evo-devo approach to understand *Caenorhabditis elegans* more generally. Our existing datasets and papers include a focus on larval development and life-history processes. This area of the project also features primary empirical data, based on formal experimental design.
+**Reproduction and Developmental Plasticity** involves utilizing an evo-devo approach to understand _Caenorhabditis elegans_ more generally. Our existing datasets and papers include a focus on larval development and life-history processes. This area of the project also features primary empirical data, based on formal experimental design.
 
 Objective                                        | Examples                    
 ---                                              | ---

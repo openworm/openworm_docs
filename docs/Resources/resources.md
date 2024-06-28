@@ -15,7 +15,7 @@ Geppetto is a generic multi-algorithm integration platform written in Java and H
 
 More information on running Geppetto is [available online](http://geppetto.org).
 
-[The project page for Geppetto](/Projects/geppetto/) has information about getting involved in its development with OpenWorm.
+[The project page for Geppetto](../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
 
 ### Sibernetic
 
@@ -23,9 +23,9 @@ Sibernetic is the code base that currently implements the crawling model. Sibern
 
 ![image](http://i.imgur.com/KSWjCaW.jpg)
 
-More information on running Sibernetic is [available online](http://sibernetic.org).
+More information on running Sibernetic is [available online](https://openworm.org/sibernetic/).
 
-[The project page for Sibernetic](/Projects/sibernetic/) has information about getting involved with its development.
+[The project page for Sibernetic](../Projects/sibernetic/) has information about getting involved with its development.
 
 ### Connectome Engine and Lego Mindstorms robot
 
@@ -80,8 +80,8 @@ that we have come across and adapted on Google Drive.
 
 ### C. elegans NeuroML model in NeuroConstruct
 
-The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. [This page](/Resources/running-nc/) provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
+The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. [This page](../Resources/running-nc/) provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
 
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
-More information about working with the data within it and other data entities can be found on the data representation project page \<data-rep\>.
+More information about working with the data within it and other data entities can be found on the data representation [project page](../Projects/datarep/)
