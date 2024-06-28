@@ -11,7 +11,7 @@ Feeling lost? Not uncommon in open source projects. In fact, there are [whole pa
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](/projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](../projects/) you want to contribute to.
 
 ### Find tasks to work on
 
@@ -33,15 +33,15 @@ You can initiate a conversation with us on [Slack](https://slack.com) channels t
 - [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
-Once you have identified an issue you want to work on from a [particular project](/projects/), please announce your intention to help out by commenting on the specific [GitHub issue](github/#contributing-and-resolving-issues).
+Once you have identified an issue you want to work on from a [particular project](../projects/), please announce your intention to help out by commenting on the specific [GitHub issue](../Community/github/#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve [forking one of our repositories](/Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](../Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-More details on best practices using OpenWorm repos on GitHub are available on [a separate page](github/).
+More details on best practices using OpenWorm repos on GitHub are available on [a separate page](../Community/github/).
 
 ### Creating organizing documents
 
@@ -81,9 +81,9 @@ An example of an effective proposal is [available online](https://docs.google.co
 
 The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](http://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](/Resources/resources/).
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](../Resources/resources/).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](/projects/).
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](../projects/).
 
 The docs use ["GitHub-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for GitHub (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
 
@@ -143,7 +143,7 @@ Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
 ### Blog
 
-[Our blog](http://blog.openworm.org) is hosted in Tumblr.
+[Our blog](https://openworm.tumblr.com/) is hosted in Tumblr.
 
 Interesting in being a guest on our blog? We love hearing about what members of the OpenWorm community are doing. If you have something to share, contact us at <info@openworm.org> to discuss.
 
@@ -155,10 +155,10 @@ Want to get notified when new content goes live? [Subscribe to the channel](http
 
 #### Playlists
 
--   Status Updates - Biweekly updates from the OpenWorm team.
--   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, *C. elegans*, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
+-   Status Updates - Frequent updates from the OpenWorm team.
+-   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, _C. elegans_, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
 -   Data Team meetings - Learn more about our [team meetings](#team-meetings).
--   Real *C. elegans*
+-   Real _C. elegans_
 -   Building Blocks
 
 Membership
