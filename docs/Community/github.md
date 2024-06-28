@@ -10,7 +10,7 @@ This page contains a list of repositories maintained by the OpenWorm project on 
 Repositories
 ------------
 
-View the full current list [repositories](/Community/repositories/) of repositories on GitHub.
+View the full current list [repositories](../Community/repositories/) of repositories on GitHub.
 
 Accessing GitHub
 ----------------
@@ -84,10 +84,9 @@ Gist is a simple way to share snippets and pastes with others. All gists are Git
 
 How to:
 
--   [Create Gists](https://help.github.com/articles/creating-gists)
--   [Embed, Download and Copy Gists](https://help.github.com/articles/embedding-downloading-and-copying-gists)
+-   [Create Gists](https://docs.github.com/en/get-started/writing-on-github/editing-and-sharing-content-with-gists/creating-gists)
+-   [Fork and Clone Gists](https://docs.github.com/en/get-started/writing-on-github/editing-and-sharing-content-with-gists/forking-and-cloning-gists)
 
-Read the [latest news and updates](https://github.com/blog/search?page=1&q=gis) on Gists at GitHub.
 
 Creating or Adding New Repositories
 -----------------------------------
