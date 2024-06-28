@@ -55,7 +55,6 @@ Associated Repositories
 **Worm Tracker File Format Specification and Parser**
 
 - [https://github.com/openworm/tracker-commons](https://github.com/openworm/tracker-commons)
-- [https://github.com/openworm/biological_data](https://github.com/openworm/biological_data) (placeholder repo to discuss worm video data)
 
 **André Brown's "Eigenworms" Code**
 
@@ -65,6 +64,6 @@ Associated Repositories
 
 **Brown Lab Multiworm Tracking Code**
 
-- [https://github.com/Behavioural-Genomics/tracking](https://github.com/Behavioural-Genomics/tracking) (not sure what this is, looks stale?)
+- [https://github.com/Behavioural-Genomics/tracking](https://github.com/Behavioural-Genomics/tracking) (Closed)
 - [https://github.com/ver228/Multiworm_Tracking](https://github.com/ver228/Multiworm_Tracking) (Avelino Javer's work)
 - [https://github.com/KezhiLi/Tracking_Hypo](https://github.com/KezhiLi/Tracking_Hypo)   (Kezhi Li's work; the computer vision code)
