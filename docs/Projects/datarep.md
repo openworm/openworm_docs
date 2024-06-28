@@ -88,4 +88,3 @@ Repository | Description | Language
 ------------ | ------------- | ------------
 <a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the <em>c. elegans<em> | Javascript
 <a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a> | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser | Objective-C
-<a href="https://github.com/openworm/data-viz">data-viz</a> | Repository for scripts and other code items to create web-based visualizations of data in the project | Python
