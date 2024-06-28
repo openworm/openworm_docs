@@ -81,11 +81,36 @@ January 2014: [OpenWorm Release 5](../releases/)
 
 Summer 2014: Two OpenWorm volunteers are sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
 
+3 November 2014: [Article](https://www.frontiersin.org/journals/computational-neuroscience/articles/10.3389/fncom.2014.00137/full): OpenWorm: an open-science approach to modeling Caenorhabditis elegans
+
 4-6 November 2014: **Second OpenWorm Conference**, in London, UK.
 
 April 2015: Amazon Web Services donates credits to the OpenWorm project.
 
 Summer 2015: One OpenWorm volunteer is sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
+
+18 July 2015: [Article](https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-16-S1-P141): The OpenWorm Project: currently available resources and future plans
+
+8 March 2016: [Article](https://drive.google.com/file/d/0B_t3mQaA-HaMWEJ4aG5fVm9QUWc/view?resourcekey=0-ZZ7AAhC17f2Vt3JDBmv4_g): Application of smoothed particle hydrodynamics to modeling mechanisms of biological tissue
+
+18 August 2016: [Article](https://www.mdpi.com/2079-7737/5/3/33): Quantifying Mosaic Development: Towards an Evo-Devo Postmodern Synthesis of the Evolution of Development Via Differentiation Trees of Embryos
+
+10 August 2016: [Article](https://f1000research.com/articles/5-1946/v1): Unit Testing, Model Validation, and Biological Simulation
+
+September 2018: 
+-   [Article](https://royalsocietypublishing.org/doi/10.1098/rstb.2017.0376): Three-dimensional simulation of the Caenorhabditis elegans body and muscle cells in liquid and gel environments for behavioural analysis
+-   [Article](https://royalsocietypublishing.org/doi/10.1098/rstb.2017.0379): c302: a multiscale framework for modelling the nervous system of Caenorhabditis elegans
+-   [Article](https://royalsocietypublishing.org/doi/10.1098/rstb.2017.0380): Geppetto: a reusable modular open platform for exploring neuroscience data and models
+-   [Article](https://royalsocietypublishing.org/doi/10.1098/rstb.2017.0381): Towards systematic, data-driven validation of a collaborative, multi-scale model of Caenorhabditis elegans
+-   [Article](https://royalsocietypublishing.org/doi/10.1098/rstb.2017.0382): OpenWorm: overview and recent advances in integrative biological simulation of Caenorhabditis elegans
+-   [Article](https://www.sciencedirect.com/science/article/abs/pii/S030326471830220X): Cell differentiation processes as spatial networks: Identifying four-dimensional structure in embryogenesis
+-   [Article](https://www.sciencedirect.com/science/article/abs/pii/S0303264718302120): The Emergent Connectome in Caenorhabditis elegans Embryogenesis
+
+15 September 2020: [Article](https://www.frontiersin.org/journals/cellular-neuroscience/articles/10.3389/fncel.2020.524791/full): Raising the Connectome: the emergence of neuronal activity and behavior in C. elegans
+
+22 December 2020: [Article](https://link.springer.com/epdf/10.1007/s12021-020-09508-1?sharing_token=SfbCril4XIxa5dgqd7LItve4RwlQNchNByi7wbcMAY77bKFVCUdSZ0ZaLpXFrJ62d0wsNV70TpSD7PMHFW2pjlOQt8qjlwvfr5BFDdTMwhzQj9AbfORflfPVm45t-7xEoVn2UKvEnNnJSZYmt67DEQlxSUqkL4lxeCDFwUJpVYA%3D): Data-theoretical Synthesis of the Early Developmental Process
+
+6 January 2021: [Article](https://www.sciencedirect.com/science/article/abs/pii/S0303264721000629): Periodicity in the Embryo: emergence of order in space, diffusion of order in time
 
 Projects similar to OpenWorm
 ----------------------------
