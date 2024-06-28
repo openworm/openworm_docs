@@ -20,6 +20,7 @@ nav:
       - Representation : Projects/datarep.md
       - Community Outreach : Projects/community-proj.md
       - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
+      - C. elegans Robots : Projects/c-elegans-robot.md
   - Community:
       - Community Overview : community.md
       - GitHub : Community/github.md
