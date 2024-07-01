@@ -84,4 +84,4 @@ The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormba
 
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
-More information about working with the data within it and other data entities can be found on the data representation [project page](../Projects/datarep/)
+More information about working with the data within it and other data entities can be found on the data representation [project page](../../Projects/datarep/)
