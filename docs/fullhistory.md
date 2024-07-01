@@ -113,6 +113,12 @@ September 2018:
 
 6 January 2021: [Article](https://www.sciencedirect.com/science/article/abs/pii/S0303264721000629): Periodicity in the Embryo: emergence of order in space, diffusion of order in time
 
+September 2022: DevoWorm hosted four Google summer of Code students, working on Digital Microshperes and a Graph Neural Network pipeline for the DevoWorm platform. Bradley Alicia had a prescence in NetSci 2022's virtual conference hosted in Shanghai, presenting on Embodied Hypernetworks and representing the group at the Network Neuroscience satellite session.
+
+June 2023: OpenWorm presented at the main _C. elegans_ scientific conference in Glasgow and connected with groups at the leading edge of experimental data to further build and contrain the worm models. An interactive tutorial for the Hodgkin Huxley model of neural activity was developed by Rahul Sonkar during the Google Summer of Code. 2D worm body model visualisations have been created for the Olivares, Izquierdo & Beer model, as well as the Boyle, Berri & Cohen model, this python based visualisation tool was developed to compliment the full 3D Sibernetic-based models.
+
+May 2024: DevoWorm celebrated its 10th anniversary in April with a prepared speech by Bradly Alicia reviewing the progress in computational developmental biology. Pakhi Banchalia and Mehul Arora were accepted to work on the Developmental Graph Neural Networks (D-GNNs) project under the Google Summer of Code Program. A major update to the simulation stack of the OpenWorm project was released enabling automated tests for building the Docker container using Intel and AMD libraries. Research into new cell and ion channel models in NeuroML by [Nicoletti et al](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218738) presents new models of two _C. elegans_ neurons with the ionic currents underlying their electrical activity.  
+
 Projects similar to OpenWorm
 ----------------------------
 
@@ -136,6 +142,5 @@ September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/)
 Acknowledgements
 ----------------
 
-Credit to James Pearn of [Artificial Brains](http://www.artificialbrains.com/openworm) for the information on projects similar to OpenWorm.
+Credit to James Pearn of Artificial Brains for contributions to the early OpenWorm history.
 
-Credit to Eugenio Battaglia for the [story on his blog](http://www.sciencetogrok.com/2013/03/a-great-role-model-for-collaborative.html) of the early OpenWorm history
