@@ -15,7 +15,7 @@ Geppetto is a generic multi-algorithm integration platform written in Java and H
 
 More information on running Geppetto is [available online](http://geppetto.org).
 
-[The project page for Geppetto](../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
+[The project page for Geppetto](../../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
 
 ### Sibernetic
 
@@ -25,7 +25,7 @@ Sibernetic is the code base that currently implements the crawling model. Sibern
 
 More information on running Sibernetic is [available online](https://openworm.org/sibernetic/).
 
-[The project page for Sibernetic](../Projects/sibernetic/) has information about getting involved with its development.
+[The project page for Sibernetic](../../Projects/sibernetic/) has information about getting involved with its development.
 
 ### Connectome Engine and Lego Mindstorms robot
 
@@ -47,7 +47,7 @@ Here muscle cells cause the motion of the body of the worm along the surface of 
 
 Inside the worm, motor neurons are responsible for activating the muscles, which them makes the worms move. The blue portions of the loop diagram above are those aspects that are covered by the initial prototype. We are now in the process of both adding in the missing portions of the loop, as well as making the existing portions more biologically realistic, and making the software platform they are operating on more scalable.
 
-You can [download the binary for the CyberElegans](http://g.ua/MKja) (Windows only)
+You can [download the binary for the CyberElegans](https://github.com/openworm/CyberElegans) (Windows only)
 
 This code base is not currently in active development.
 
@@ -56,7 +56,7 @@ Visualization Environments
 
 ### Connectome Browser
 
-The [Connectome browser](http://goo.gl/XGQPX), created by the team at the [Open Source Brain](http://opensourcebrain.org), is a way to explore the NeuroML connectome produced by the project. You can investigate the current settings of the dynamics of each neuron, and by clicking "selection mode" you can click on individual neurons to see their synaptic partners in 3D. This is built from the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/)
+The [Connectome browser](https://v1.opensourcebrain.org/projects/celegans), created by the team at the [Open Source Brain](http://opensourcebrain.org), is a way to explore the NeuroML connectome produced by the project. You can investigate the current settings of the dynamics of each neuron, and by clicking "selection mode" you can click on individual neurons to see their synaptic partners in 3D. This is built from the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/)
 
 ![Connectome browser](https:\/\/docs.google.com\/uc?authuser=0&id=0B_t3mQaA-HaMek5wb0trd00wVFU&export=download&revid=0B_t3mQaA-HaMWkIxc214bk12UU9lOWdDRHZKQzc2eWdOWm4wPQ)
 
@@ -80,8 +80,8 @@ that we have come across and adapted on Google Drive.
 
 ### C. elegans NeuroML model in NeuroConstruct
 
-The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. [This page](../Resources/running-nc/) provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
+The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project. [This page](../running-nc/) provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualizing the cells and connections.
 
 ![CElegansnC](https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png)
 
-More information about working with the data within it and other data entities can be found on the data representation [project page](../Projects/datarep/)
+More information about working with the data within it and other data entities can be found on the data representation [project page](../../Projects/datarep/)
