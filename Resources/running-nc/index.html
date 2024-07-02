@@ -1,0 +1,1308 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../resources/">
+      
+      
+        <link rel="next" href="../../faq/">
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>Running NeuroML connectome - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-the-neuroml-connectome-in-neuroconstruct" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Running NeuroML connectome
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    History
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projects Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sibernetic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    c302
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Worm Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevoWorm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker simulation stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Movement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geppetto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Outreach
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Muscle / Neuron /  Channel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C. elegans Robots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Community
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Community
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Membership
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Running NeuroML connectome
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Running NeuroML connectome
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-neuroconstruct-and-the-celegans-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install neuroConstruct and the CElegans project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-a-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate a network
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-the-network-in-neuron-simulation-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing the network in NEURON simulation environment.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check the project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-neuroml-from-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate NeuroML from the project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate NeuroML from the project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#through-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Through the GUI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-python-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using a Python script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-installation-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced installation instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced installation instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-the-latest-neuroconstruct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install the latest neuroConstruct
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-latest-celegans-neuroconstruct-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting the latest CElegans neuroConstruct project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting the latest CElegans neuroConstruct project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-zip-file-with-latest-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      A) Zip file with latest project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-read-only-copy-of-latest-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      B) Read only copy of latest project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-fork-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      C) Fork the project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-neuroconstruct-and-the-celegans-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install neuroConstruct and the CElegans project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-a-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate a network
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-the-network-in-neuron-simulation-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing the network in NEURON simulation environment.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check the project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-neuroml-from-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generate NeuroML from the project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate NeuroML from the project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#through-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Through the GUI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-a-python-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using a Python script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-installation-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced installation instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced installation instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-the-latest-neuroconstruct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install the latest neuroConstruct
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-the-latest-celegans-neuroconstruct-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting the latest CElegans neuroConstruct project
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting the latest CElegans neuroConstruct project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-zip-file-with-latest-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      A) Zip file with latest project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-read-only-copy-of-latest-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      B) Read only copy of latest project
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-fork-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      C) Fork the project
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="running-the-neuroml-connectome-in-neuroconstruct">Running the NeuroML connectome in NeuroConstruct</h1>
+<p>The NeuroML conversion of the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm Blender files</a> has been imported into a <a href="http://www.neuroConstruct.org">neuroConstruct</a> project.</p>
+<p>This page provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualising the cells and connections.</p>
+<h2 id="install-neuroconstruct-and-the-celegans-project">Install neuroConstruct and the CElegans project</h2>
+<p>There is a <a href="https://www.dropbox.com/s/xdu1bh5sq2x1nx6/CElegansNeuroConstructBundle-snapshot-20140107.zip">quick-start zip file</a> containing neuroConstruct and the C. elegans connectome project. Installation instructions are in the file <a href="https://github.com/rayner/CElegansNeuroConstructBundle/blob/master/README.txt">README.txt</a> inside the zip file.</p>
+<p>If you have any problems installing the quick-start package, please e-mail openworm-bundle -at- magic-cookie.co.uk with a description of what went wrong.</p>
+<p>If you are a developer, or need the very latest changes, you may prefer to install from the GitHub repositories instead. See the <a href="https://github.com/openworm/OpenWorm/wiki/Running-the-C.-elegans-model-in-neuroConstruct#advanced-installation-instructions">advanced installation instructions</a> at the end of this page for details.</p>
+<h2 id="open-the-project">Open the project</h2>
+<p>Run neuroConstruct as outlined in the installation instructions (using <em>ant run</em> or <em>nC.bat/nC.sh</em>). In the main menu select <strong>File</strong> -&gt; <strong>Open</strong> and browse to the location of <strong>CElegans.ncx</strong>. Select this file and press <strong>Open</strong>.</p>
+<p>The project may take up to 20 seconds to load. When it does load, try clicking on one of the cells in the <strong>Cell Types in project</strong> box, e.g. ADAL. This will take you to the <strong>Cell Types</strong> tab and show a summary of the cell's electrical properties (note: these are not yet matched to the real electrophysiological properties of Celegans cells!) and the number of segments in the cell.</p>
+<p>Click on <strong>View/edit morphology</strong> and this will visualise the cell in 3D, see below.</p>
+<p><img alt="ADAL" src="https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/ADAL_nC.png" /></p>
+<h2 id="generate-a-network">Generate a network</h2>
+<p>Now generate a subset network. Go to tab <strong>Generate</strong>, select 'PharyngealNeurons_inputs' from the dropdown and press <strong>Generate cell positions and connections</strong>. Now go to tab <strong>Visualisation</strong> and press <strong>View</strong> with <strong>Latest Generated Positions</strong> selected in the drop down box. On a Mac, you can hold down the option button, click and drag downwards to zoom in further than the slider allows.</p>
+<p>Alternatively, you can generate a network of all 302 neurons. Go to tab <strong>Generate</strong> and select 'Default Simulation Configuration' from the dropdown and press <strong>Generate cell positions and connections</strong>.</p>
+<p>The image below shows the generated full network.</p>
+<p><img alt="CElegansnC" src="https://github.com/openworm/CElegansNeuroML/raw/master/CElegans/images/CElegans_nC.png" /></p>
+<h2 id="executing-the-network-in-neuron-simulation-environment">Executing the network in NEURON simulation environment.</h2>
+<p><a href="http://www.neuron.yale.edu/neuron/download">Install the NEURON simulation environment</a> and set the path to NEURON's bin directory containing nrniv within neuroConstruct's menu (Settings-&gt;General Preferences and Project Defaults). After generating cell positions (easiest to do this with the PharyngealNeurons_inputs configuration), go to the export tab, the NEURON subtab, and press 'create hoc simulation'. Once this is completed the button will stop being greyed out and the 'Run simulation' button will be available. Clicking this should kick off the simulation run. Once this is completed, the output from the simulation should tell you that results are available in a directory named 'Sim_XX' where XX will be a number. Go back to the Visualisation tab and click 'View Prev Sims in 3D..." Click on the box with the 'Sim_XX' name that applies to the simulation run you did and press 'Load Simulation' at the bottom. Then at the bottom of the Visualisation screen click 'Replay' and the 'Replay simulation'. For PharyngealNeurons_inputs, the color changes will be subtle, but they will be happening.</p>
+<h2 id="check-the-project">Check the project</h2>
+<p>In addition to being able to generate and view the project through the main GUI, a number of Python scripts are provided to test the configuration of the project. These scripts access functionality in the Java implementation of neuroConstruct by using <a href="http://www.jython.org">Jython</a>. More details on the Python interface to neuroConstruct can be found <a href="http://www.neuroconstruct.org/docs/python.html">here</a>.</p>
+<p>A script to test various aspects of the project is <em>CheckProject.py</em>. Running this generates a number of the Simulation Configurations in succession and checks that the expected numbers of cells and connections are created:</p>
+<pre><code>cd pythonScripts
+~/neuroConstruct/nC.sh -python CheckProject.py
+</code></pre>
+<h2 id="generate-neuroml-from-the-project">Generate NeuroML from the project</h2>
+<p>A NeuroML file containing the structure of the cells &amp; all connections can be generated in two ways:</p>
+<h3 id="through-the-gui">Through the GUI</h3>
+<p>After generating the network in the GUI as outlined above, go to tab <strong>Export</strong>, click on <strong>Generate all NeuroML scripts</strong>. To have a single file with all the NeuroML for cells, channels and network connections, select <strong>Generate single NeuroML Level 3 file</strong>.</p>
+<h3 id="using-a-python-script">Using a Python script</h3>
+<p>Go to folder <code>pythonScript</code> and run:</p>
+<pre><code>~/neuroConstruct/nC.sh -python GenerateNeuroML.py
+</code></pre>
+<hr />
+<h2 id="advanced-installation-instructions">Advanced installation instructions</h2>
+<p>This section describes how to install directly from the GitHub repositories. If you are a developer, or need the very latest changes, this may be a better option than using the quick-start bundle.</p>
+<h3 id="install-the-latest-neuroconstruct">Install the latest neuroConstruct</h3>
+<p>First, <a href="https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL">get the latest version of neuroConstruct from GitHub</a>. While there are binary installers available on the neuroConstruct download page, it's best to use the latest version of this application from the GitHub repository, as this will most likely be the version in which the C. elegans project was last saved.</p>
+<p>For full details on installing neuroConstruct from GitHub, see here: <a href="https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL">https://github.com/NeuralEnsemble/neuroConstruct/blob/master/INSTALL</a></p>
+<p>Contact p.gleeson -at- ucl.ac.uk if there you have any problems with this.</p>
+<h3 id="getting-the-latest-celegans-neuroconstruct-project">Getting the latest CElegans neuroConstruct project</h3>
+<p>The latest CElegans project is being hosted on Github <a href="https://github.com/openworm/CElegansNeuroML">here</a>. You have a number of options for getting the project:</p>
+<h4 id="a-zip-file-with-latest-project">A) Zip file with latest project</h4>
+<p>Get a zipped file with the project <a href="https://github.com/openworm/CElegansNeuroML/zipball/master">here</a>. Unzip this and go to the <em>CElegans</em> folder.</p>
+<h4 id="b-read-only-copy-of-latest-project">B) Read only copy of latest project</h4>
+<p>Install <a href="https://help.github.com/articles/set-up-git">Git</a> and get a read only clone of the Git repository:</p>
+<pre><code>git clone git://github.com/openworm/CElegansNeuroML.git
+cd CElegansNeuroML/CElegans
+</code></pre>
+<p>You'll always be able to retrieve the latest version of the project with</p>
+<pre><code>git pull
+</code></pre>
+<h4 id="c-fork-the-project">C) Fork the project</h4>
+<p>Fork yourself a personal copy of the project repository. Go to <a href="https://github.com/openworm/CElegansNeuroML">https://github.com/openworm/CElegansNeuroML</a> for more details.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

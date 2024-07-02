@@ -1,0 +1,1294 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../optimization/">
+      
+      
+        <link rel="next" href="../community-proj/">
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>Representation - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-collection-and-representation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Representation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    History
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projects Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sibernetic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sibernetic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c302/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    c302
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../browser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Worm Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DevoWorm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevoWorm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker simulation stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../worm-movement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Movement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geppetto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geppetto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Representation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Representation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#neuroml-connectome" class="md-nav__link">
+    <span class="md-ellipsis">
+      NeuroML Connectome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NeuroML Connectome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previous-accomplishments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previous accomplishments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current roadmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-neuroml-connectome-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated NeuroML connectome model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associated-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associated Repositories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previous-accomplishments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previous accomplishments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-roadmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current roadmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues-list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associated-repositories_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associated Repositories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../community-proj/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Outreach
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Muscle / Neuron /  Channel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c-elegans-robot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C. elegans Robots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Community
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Community
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Membership
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running NeuroML connectome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#neuroml-connectome" class="md-nav__link">
+    <span class="md-ellipsis">
+      NeuroML Connectome
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NeuroML Connectome">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previous-accomplishments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previous accomplishments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current roadmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-neuroml-connectome-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated NeuroML connectome model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associated-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associated Repositories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previous-accomplishments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previous accomplishments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-roadmap_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current roadmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues-list_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#associated-repositories_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Associated Repositories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="data-collection-and-representation">Data Collection and Representation</h1>
+<p>There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different dataset are used in the model.</p>
+<p>Being an integrative model, OpenWorm utilizes different datasets, each with different file formats and interfaces to the model. There is no master representation of all the data incorporated into the model, instead our aim is to keep the model open to be able to cope with different data structures.</p>
+<p>Consider the connectomics data. There are different useful ways to mine this data set. For example, a <a href="https://networkx.github.io/">NetworkX</a> representation of the connectome as a complex graph enables questions to be asked about first and second nearest neighbors of a given neuron. In contrast, an <a href="http://www.w3.org/RDF/">RDF</a> semantic graph representation is useful for reading and writing annotations about multiple aspects of a neuron, such as what papers have been written about it, multiple different properties it may have such as ion channels and neurotransmitter receptors and so on. A <a href="http://www.neuroml.org/">NeuroML</a> representation is useful for answering questions about model morphology and simulation parameters. Lastly, a <a href="http://www.blender.org/">Blender</a> representation is a full 3D shape definition that can be used for calculations in 3D space.</p>
+<p>Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see OWMeta below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.</p>
+<p>Here is a list of some of the data sets that we have used so far:</p>
+<ul>
+<li><a href="http://caltech.wormbase.org/virtualworm/">The Virtual Worm (3D atlas of <em>C. elegans</em> anatomy)</a></li>
+<li><a href="http://www.wormatlas.org/neuronalwiring.html">The <em>C. elegans</em> connectome (wiring diagram of neurons)</a></li>
+<li><a href="https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&amp;output=html">Cell list of <em>C. elegans</em></a></li>
+<li><a href="https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&amp;output=html">Ion channels used by <em>C. elegans</em></a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/pubmed/23852451">Database of Worm behavioral phenotypes</a></li>
+</ul>
+<p>Currently our work on data collection and representation is divided among four subprojects:</p>
+<ul>
+<li>NeuroML Connectome</li>
+<li>Data Visualization</li>
+<li>OWMeta Unified Data Access Layer</li>
+<li>Muscle cell integration</li>
+</ul>
+<p>Below you can find information about each subproject, see the project’s current roadmap and access the associated data repositories</p>
+<p>A lot of data about <em>C. elegans</em> is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.</p>
+<h2 id="neuroml-connectome">NeuroML Connectome</h2>
+<p>Our computational strategy to accomplish this involves first reusing the <em>C. elegans</em> connectome and the 3D anatomical map of the <em>C. elegans</em> nervous system and body plan. We have used the NeuroML standard <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000815">(Gleeson et al., 2010)</a> to describe the 3D anatomical map of the <em>C. elegans</em> nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the <em>C. elegans</em> connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator <a href="https://ieeexplore.ieee.org/abstract/document/6795645">(Hines &amp; Carnevale 1997)</a> to perform in silico experiments.</p>
+<h3 id="previous-accomplishments">Previous accomplishments</h3>
+<ul>
+<li>Building the <em>C. elegans</em> NeuroML file</li>
+</ul>
+<h3 id="current-roadmap">Current roadmap</h3>
+<h3 id="updated-neuroml-connectome-model"><a href="https://github.com/openworm/OpenWorm/issues?milestone=15&amp;state=open">Updated NeuroML connectome model</a></h3>
+<p>The <a href="https://github.com/openworm/CElegansNeuroML">NeuroML connectome model</a> provides a framework for <a href="https://en.wikipedia.org/wiki/Multi-compartment_model">multi-compartmental modeling</a> of the <em>C. elegans</em> nervous system. We are continuing to refine this to include more and more information that is known about the anatomy and dynamics of the nervous system in order to reach ever-improving biological realism.</p>
+<ul>
+<li><a href="https://github.com/openworm/OpenWorm/issues/114">Create sample NeuroML connectome output</a></li>
+<li><a href="https://github.com/openworm/OpenWorm/issues/50">Remove Glutamate_GJ etc in neuroConstruct project</a></li>
+<li><a href="https://github.com/openworm/OpenWorm/issues/124">Create or reuse a NeuroML description of <em>C. elegans</em> motor neuron synapses</a></li>
+</ul>
+<h3 id="issues-list">Issues list</h3>
+<p>All issues related to <a href="https://github.com/openworm/OpenWorm/issues?direction=desc&amp;labels=data+parsing&amp;page=1&amp;sort=comments&amp;state=open">working with data</a>, and <a href="https://github.com/openworm/OpenWorm/issues?direction=desc&amp;labels=research&amp;page=1&amp;sort=comments&amp;state=open">doing research</a> can be found on GitHub.</p>
+<h3 id="associated-repositories">Associated Repositories</h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Description</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/openworm/CElegansNeuroML">CElegansNeuroML</a></td>
+<td>NeuroML based <em>C. elegans<em> model, contained in a neuroConstruct project</td>
+<td>Java</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openworm/Blender2NeuroML">Blender2NeuroML</a></td>
+<td>Conversion script to bring neuron models drawn in Blender into NeuroML format</td>
+<td>Python</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openworm/neuronal-analysis/tree/master/NEURONSimData">NEURONSimData</a></td>
+<td>Graphing voltage data from NEURON sims of <em>C. elegans<em> conectome</td>
+<td>Python</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openworm/OWMeta">OWMeta</a></td>
+<td>Metadata extraction, translation, storage, and sharing</td>
+<td>Python</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-visualization">Data Visualization</h2>
+<p>With the ever increasing capacity to collect data about biological system, the new challenge is to understand what these dataset tell us about the system. The computational neuroscience community is developing a range of methods to extract knowledge from these datasets. One approach the accomplish this task is to represent the data visually. Our team has already produced the <a href="http://browser.openworm.org">OpenWorm browser for web</a> and <a href="https://itunes.apple.com/us/app/openworm-browser/id595581306?mt=8">iOS</a>, which makes it easy to visually study the anatomy of the the worm.</p>
+<h3 id="previous-accomplishments_1">Previous accomplishments</h3>
+<ul>
+<li>OpenWorm browser</li>
+<li>OpenWorm browser iOS</li>
+<li>Hive Plots visualizations of connectome</li>
+</ul>
+<h3 id="current-roadmap_1">Current roadmap</h3>
+<ul>
+<li><a href="https://github.com/openworm/OpenWorm/issues/89">Create a D3 implementation of the <em>C. elegans</em> connectome HivePlot</a></li>
+</ul>
+<h3 id="issues-list_1">Issues list</h3>
+<p>All issues related to <a href="https://github.com/openworm/OpenWorm/issues?direction=desc&amp;labels=data+parsing&amp;page=1&amp;sort=comments&amp;state=open">working with data</a>, and <a href="https://github.com/openworm/OpenWorm/issues?direction=desc&amp;labels=research&amp;page=1&amp;sort=comments&amp;state=open">doing research</a> can be found on GitHub.</p>
+<h3 id="associated-repositories_1">Associated Repositories</h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Description</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/openworm/wormbrowser">wormbrowser</a></td>
+<td>The Worm Browser -- a 3D browser of the cellular anatomy of the <em>c. elegans<em></td>
+<td>Javascript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a></td>
+<td>OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser</td>
+<td>Objective-C</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

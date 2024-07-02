@@ -1,0 +1,1107 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../fullhistory/">
+      
+      
+        <link rel="next" href="../modeling/">
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>Releases - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#current-releases" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Releases
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fullhistory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    History
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projects Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sibernetic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/c302/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    c302
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/browser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Worm Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevoWorm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker simulation stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Movement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/geppetto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geppetto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/datarep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/community-proj/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Outreach
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Muscle / Neuron /  Channel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C. elegans Robots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Community
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Community
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../community/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/membership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Membership
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/running-nc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running NeuroML connectome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="current-releases">Current releases</h1>
+<p>The recent and planned releases for the Docker image which contains the assembled OpenWorm software stack can be found at the <a href="https://github.com/openworm/OpenWorm/milestones">OpenWorm Milestones</a>.</p>
+<h1 id="past-releases">Past Releases</h1>
+<h2 id="release-567-2nd-half-of-2013-1st-half-of-2014-2nd-half-of-2014">Release 5,6,7 (2nd Half of 2013, 1st half of 2014, 2nd half of 2014)</h2>
+<p>These releases have yet to be fully documented, as the project has transitioned
+from a small group-only run project into a much larger volunteer-based
+organization.</p>
+<p>Some key milestones that were reached:</p>
+<p>Release 7</p>
+<ul>
+<li><strong>First OpenWorm Paper published</strong></li>
+<li><strong>Donation of Brown Lab worm movement data</strong></li>
+<li><strong>Successful shipments of physical rewards to Kickstarter backers</strong></li>
+</ul>
+<p>Release 6</p>
+<ul>
+<li><strong>First version of PyOpenWorm released</strong></li>
+<li><strong>Successful Kickstarter campaign</strong></li>
+</ul>
+<p>Release 5</p>
+<ul>
+<li><strong>Movement validation team formed</strong></li>
+<li><strong>Donation of code to reproduce movement validation</strong></li>
+</ul>
+<h2 id="release-4-1st-half-of-2013-january-july-2013">Release 4 (1st Half of 2013) January - July 2013</h2>
+<ul>
+<li><strong>OpenWorm website update</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=10&amp;state=closed">milestone</a><ul>
+<li>completely renewed version of the website using bootstrap</li>
+</ul>
+</li>
+<li><strong>Tuning neurons based on real worm recordings</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=16&amp;state=closed">milestone</a><ul>
+<li>plotted some calcium traces from Leifer's lab</li>
+</ul>
+</li>
+<li><strong>Ion Channel and Neuropeptide database</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=16&amp;state=closed">milestone</a><ul>
+<li>Defined known neuropeptides for each neuron</li>
+</ul>
+</li>
+<li><strong>Data visualization experiments</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=8&amp;state=closed">milestone</a><ul>
+<li>hive plots of connectome - poster at Neuroinformatics 2013</li>
+<li>D3JS experiments</li>
+</ul>
+</li>
+<li><strong>Submit a perspectives paper on OpenWorm</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=9&amp;state=closed">milestone</a><ul>
+<li>drafted and submitted to frontiers - review process ongoing</li>
+</ul>
+</li>
+<li><strong>Synapse position crowdsourcing</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=11&amp;state=closed">milestone</a></li>
+<li><strong>C++ Fluid mechanics engine improvements</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=2&amp;state=closed">milestone</a><ul>
+<li>independent bundles of contracting elastic matter</li>
+<li>impermeable surfaces</li>
+<li>bug fixes on liquid and elastic matter</li>
+<li>renamed C++ implementation to Sibernetic</li>
+</ul>
+</li>
+<li><strong>Integration of membrane electrophysiology and muscle cell mechanics</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=1&amp;state=closed">milestone</a><ul>
+<li>poster at CNS 2013</li>
+</ul>
+</li>
+<li><strong>Geppetto platform: 1st release</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=4&amp;state=closed">milestone</a> / <a href="https://github.com/openworm/org.geppetto/releases/tag/v0.0.2-alpha">release</a><ul>
+<li>basic simulation file XML specification</li>
+<li>simulation lifecycle and basic interaction<ul>
+<li>load / start / stop / reset</li>
+</ul>
+</li>
+<li>WebGL frontend visualization<ul>
+<li>particle systems</li>
+<li>ball-stick morphologies</li>
+<li>camera controls: rotation / zoom / panning</li>
+</ul>
+</li>
+<li>Multi-user support<ul>
+<li>multiple-users can observe the same simulation</li>
+</ul>
+</li>
+<li>Tooling and scripts to facilitate deployment / install etc.</li>
+</ul>
+</li>
+<li><strong>Geppetto plugin: single-compartment neuronal simulator</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=3&amp;state=closed">milestone</a></li>
+<li><strong>Geppetto plugin: fluid mechanics solver</strong> - <a href="https://github.com/openworm/OpenWorm/issues?milestone=14&amp;state=closed">milestone</a><ul>
+<li>ported C++ version to Java for liquid and elastic matter support</li>
+<li>porting validation - <a href="https://github.com/openworm/OpenWorm/issues?milestone=18&amp;state=open">milestone</a><ul>
+<li>unit testing infrastructure to validate codebase</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Journal clubs Posts Media Coverage</p>
+<h2 id="release-3-completed-may-2012-november-2012">Release 3 (completed) May 2012 - November 2012</h2>
+<p>This release, among many acheivements, we accomplished the following:</p>
+<ul>
+<li>Published a paper</li>
+<li>Made several presentations</li>
+<li>Interacted with lots of folks doing community building</li>
+<li>Got mentioned, pointed to, or referenced in several interesting articles</li>
+<li>Built and advanced several code products</li>
+</ul>
+<p><a href="https://docs.google.com/a/metacell.us/document/d/1cg1YnKI92tN9HZeXachTfpRlKP10OuJhXlRBabeTnuI/pub">Detailed release notes from this release can be found online</a></p>
+<p>Our second release pointed us in a good direction for the future, and provided some <a href="http://browser.openworm.org">exciting products</a>. In release 3, we worked to develop additional products that are more easily used by the outside world.</p>
+<h3 id="epic-1-as-a-user-i-want-to-be-able-to-mark-synapses-and-have-them-integrated-into-the-model">EPIC-1: As a user, I want to be able to mark synapses and have them integrated into the model</h3>
+<p>The user will be able to contribute to a shared knowledge space of the positions and identities of <em>C. elegans</em> synapses using an installation of CATMAID. This is important because the <em>C. elegans</em> connectome does not currently incorporate synapse positions at all.</p>
+<h3 id="epic-2-as-a-developer-i-want-to-launch-the-simulation-engine-on-amazon-aws">EPIC-2: As a developer, I want to launch the simulation engine on Amazon AWS</h3>
+<p>This could be implemented with an auto-configuration system like <a href="http://docs.fabfile.org/en/1.8/">Fabric</a> that automatically launches AWS instances and runs an installation script on it. This way we can control what OS / drivers are used on the target system.</p>
+<h3 id="epic-3-as-a-user-i-want-to-be-able-to-see-the-body-of-the-worm-moving-and-changing-color-driven-by-activity-of-the-simulation-engine-simplified-worm">EPIC-3: As a user, I want to be able to see the body of the worm moving and changing color, driven by activity of the simulation engine (Simplified Worm)</h3>
+<p>It is important the outside users can see a visual representation of the simulation engine so that they can get a sense of what is going on with the project.</p>
+<h3 id="epic-4-as-a-user-i-want-to-be-able-to-run-a-simulation-that-includes-muscle-cell-physics-as-well-as-muscle-cell-membrane-excitability">EPIC-4: As a user, I want to be able to run a simulation that includes muscle cell physics as well as muscle cell membrane excitability</h3>
+<h3 id="epic-5-as-a-scientist-i-want-a-detailed-written-summary-of-the-physiology-we-intend-to-include-in-the-model">EPIC-5: As a scientist, I want a detailed written summary of the physiology we intend to include in the model</h3>
+<p>This is a document written as prose that summarizes the physiological data that is known.. This should structure the information that currently exists and show where the gaps of knowledge are.</p>
+<p>This is important because we want to build cells which are conductance based models. At the moment we don't know all the channels. This allows others to contribute what they know about this.</p>
+<h3 id="epic-6-as-a-user-i-want-to-see-the-optimized-data-matching-the-experimental-results">EPIC-6: As a user, I want to see the optimized data matching the experimental results</h3>
+<p>This should enable the parameters of the muscle cell to be tuned with respect to real data.</p>
+<p>EPIC-7: As a user, I want to see a WebGL visualization of <a href="http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">Smoothed Particle Hydrodynamics</a> -----------------------------------------------------------------------------------------We want to be able to run the Smoothed Particle Hydrodynamics demos so we can see them through the browser.</p>
+<h3 id="presentation-update">Presentation update</h3>
+<h2 id="release-2-completed-october-2011-to-april-2012">Release 2 (completed) October 2011 to April 2012</h2>
+<p>Our major goal for this release was to integrate the work we have done in release one to do a detailed simulation of a body wall muscle cell, MDL08 (pictured below). While we did not complete all of the epics we set out for ourselves, we made significant progress in all of them, and learned a lot in the process. See the <a href="https://github.com/openworm/OpenWorm/wiki/Roadmap">Roadmap</a> for more information on where we are now.</p>
+<p>This muscle cell receives input from 8 motor neurons:</p>
+<ul>
+<li>AS01</li>
+<li>AS02</li>
+<li>DA01</li>
+<li>DA02</li>
+<li>DB01</li>
+<li>DD01</li>
+<li>SMDDL</li>
+<li>SMDDR</li>
+</ul>
+<p>We want to combine the physical simulator, running PCI SPH, that should model the walls of the muscle cell and the force pulling on those walls when the muscle is active, with the cell membrane excitability simulator, (e.g., the Hodgkin Huxley simulator). In order to ensure that our simulation is returning results that match reality, we will tune the significant number of parameters in our simulation using a genetic algorithm.</p>
+<h3 id="component-genetic-algorithm">Component: Genetic Algorithm</h3>
+<p><strong>EPIC-1</strong> As a user, I want to use a genetic algorithm to fit the parameters of the muscle cell and motor neurons to real data Component: Simulation Engine</p>
+<p><strong>EPIC-2</strong> As a user, I want to run a model developed in NeuroML on our simulation engine to be able to run NeuroML models on the Amazon cloud</p>
+<p><strong>EPIC-3</strong> As a user, I want to be able to run a simulation that includes muscle cell physics as well as muscle cell membrane excitability.</p>
+<h3 id="component-worm-browser">Component: Worm Browser</h3>
+<p><strong>EPIC-4</strong> As a user of the simulation engine, I want a browser-based visualization to show me the muscle cell output</p>
+<h3 id="component-database">Component: Database</h3>
+<p><strong>EPIC-5</strong> As a model builder, I want the best definition of the muscle cell model and motor neurons</p>
+<p><strong>EPIC-6</strong> As a model builder, I want to have a target output of the muscle cell.</p>
+<h3 id="component-website">Component: Website</h3>
+<p><strong>EPIC-7</strong> As a visitor to openworm.org, I want to be impressed with the professionalism of the project and want to contribute</p>
+<h3 id="component-kickstarter">Component: Kickstarter</h3>
+<p><strong>EPIC-8</strong> As an open worm team member, I want to launch a fundraising campaign to raise money for the project</p>
+<h2 id="release-1-completed-may-2011-september-2011">Release 1 (completed) May 2011 - September 2011</h2>
+<p>We have set a completed a successful release 1 in September. It included the following features:</p>
+<ul>
+<li>Multi-algorithm simulation engine</li>
+<li>Create a generic architecture for combining algorithms operating at different time scales on different models</li>
+<li>Create <a href="http://www.scholarpedia.org/article/Conductance-based_models">conductance-based simulator</a> using <a href="http://en.wikipedia.org/wiki/OpenCL">OpenCL</a></li>
+<li>Create a <a href="http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">smoothed particle hydrodynamics (SPH)</a> simulator</li>
+<li>Use the simulation engine architecture to combine these two algorithms to prove its generality and ability to cross algorithmic domains</li>
+<li>Neuron database</li>
+<li>Use the <a href="http://caltech.wormbase.org/virtualworm/">Virtual Worm</a> Blender files to create a NeuroML compartmental description of the 302 neurons</li>
+<li>Combine knowledge about the <a href="http://www.wormatlas.org/neuronalwiring.html">synaptic structure of the neuronal network</a> with the compartmental description</li>
+<li>Combine knowledge about the ion channel structure of the neuronal network with the compartmental description</li>
+<li>Worm browser</li>
+<li>Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the <a href="http://www.zygotebody.com/">Google Body Browser</a></li>
+</ul>
+<h3 id="simulation-engine">Simulation Engine</h3>
+<ul>
+<li>As a developer, I would like a simulation engine prototype that provides a design proof of concept</li>
+<li>As a developer, I want an alpha kernel for neuronal simulation for the prototype.</li>
+<li>As a developer, I want a first draft of a simulation engine design</li>
+<li>As a product manager, I want to see a working prototype of the SPH algorithm working with the existing <a href="http://www.youtube.com/watch?v=Ek49JSAiKjY">CyberElegans</a> code</li>
+<li>As a product manager, I want a initial test implementation example of the SPH algorithm implemented as a solver</li>
+<li>As a developer, I want a simple test harness to function as client for the simulation engine prototype to ensure everything is working.</li>
+<li>As a developer, I would like to have a prototype of a solver service, using the HH OpenCL alpha kernel.</li>
+</ul>
+<h3 id="neuron-database">Neuron Database</h3>
+<ul>
+<li>As a developer, I want the Virtual Worm Blender files to include details about synapses so simulatable NeuroML can be produced</li>
+<li>As a developer, I want to be able to convert the Virtual Worm meshes for neurons into complete simulation ready NeuroML descriptions of the neurons</li>
+</ul>
+<h3 id="worm-browser">Worm Browser</h3>
+<ul>
+<li>As a user I want to visualize 3D models of the worm in the browser</li>
+<li>As a user, I want to have GUI controls to zoom in and out of the worm</li>
+<li>As a user, I want to drag the worm using "cylindrical mouse orbit" like google body browser</li>
+<li>As a product manager, I want an example of a Unity3D web player that can visualize the Virtual Worm blender files to mitigate risk</li>
+<li>As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser</li>
+<li>As a user, I want to use a slider to smoothly make systems in the worm transparent</li>
+<li>A more complete document describing our plans for release 2 is available.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

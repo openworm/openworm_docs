@@ -1,0 +1,1221 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../community/">
+      
+      
+        <link rel="next" href="../repositories/">
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+    
+    
+      
+        <title>GitHub - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-openworm-repositories-on-github" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitHub
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    History
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modelling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projects
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projects Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sibernetic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    c302
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Worm Browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevoWorm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker simulation stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Movement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geppetto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Outreach
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Muscle / Neuron /  Channel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C. elegans Robots
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Community
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Community
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    GitHub
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    GitHub
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forking-github-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forking GitHub Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-and-resolving-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing and Resolving Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing and Resolving Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interacting-with-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interacting with Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closing-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closing an Issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-a-new-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening a New Issue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posting-gists-gistgithubcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Posting Gists (gist.github.com)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-or-adding-new-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating or Adding New Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenses-on-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenses on repositories
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../membership/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Membership
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running NeuroML connectome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forking-github-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forking GitHub Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-and-resolving-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing and Resolving Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing and Resolving Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interacting-with-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interacting with Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closing-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closing an Issue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-a-new-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opening a New Issue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posting-gists-gistgithubcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Posting Gists (gist.github.com)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-or-adding-new-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating or Adding New Repositories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenses-on-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenses on repositories
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="using-openworm-repositories-on-github">Using OpenWorm Repositories on GitHub</h1>
+<p>Making a contribution of code to the project will first involve <a href="#forking-github-repositories">forking one of our repositories</a>, making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.</p>
+<p>An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.</p>
+<p>This page contains a list of repositories maintained by the OpenWorm project on GitHub, provides simple instructions for how to access GitHub, contribute and resolve issues, opening new issues, and creating Gists.</p>
+<h2 id="repositories">Repositories</h2>
+<p>View the full current list <a href="../Community/repositories/">repositories</a> of repositories on GitHub.</p>
+<h2 id="accessing-github">Accessing GitHub</h2>
+<p>To access the OpenWorm organization on GitHub and fully participate on issues, you will first need to create an account if you do not already have one. Note, you can comment on issues without a GitHub account, however, we recommend joining to maximize your ability to contribute to OpenWorm. Accounts are free and can be <a href="https://github.com/">created on the Github website</a>.</p>
+<h2 id="forking-github-repositories">Forking GitHub Repositories</h2>
+<p>On GitHub, click the Fork button on a project to create a "copy" that you can then modify independently.</p>
+<p>To fork an OpenWorm repository, go to the repository's page and hit the "Fork" button. GitHub will copy the repository to your personal repository. You can then make changes to the repository. Once you are done with the changes, commit them back to your personal account. Then hit the 'Pull Request' button on the repo page under your account. This will create a pull request asking the OpenWorm team to review, comment and merge the changes into the original repository. This follows the so-called <a href="https://help.github.com/articles/using-pull-requests#fork--pull">'fork and pull' model</a>.</p>
+<p>For further details on doing this, check out the <a href="https://help.github.com/articles/fork-a-repo">help page from Github</a>.</p>
+<h2 id="contributing-and-resolving-issues">Contributing and Resolving Issues</h2>
+<p><a href="https://github.com/organizations/openworm/dashboard/issues">View the complete list of issues on GitHub</a></p>
+<p>To find issues that are relevant to your skillset and interest, first browse the list above and look for tags related to areas of functionality and coding language. Alternatively, you can view a specific repository and the filter by tags related to the type of issue and coding language. Click on the issue name to open the details. Feel free to explore and dig around.</p>
+<h3 id="interacting-with-issues">Interacting with Issues</h3>
+<p><a href="https://github.com/blog/831-issues-2-0-the-next-generation">Generic information from GitHub</a></p>
+<h3 id="closing-an-issue">Closing an Issue</h3>
+<ul>
+<li><a href="https://github.com/blog/1506-closing-issues-via-pull-requests">Via pull requests</a></li>
+<li><a href="https://github.com/blog/1386-closing-issues-via-commit-messages">Via commit messages</a></li>
+</ul>
+<h2 id="opening-a-new-issue">Opening a New Issue</h2>
+<p>After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.</p>
+<p><img alt="image" src="http://i.imgur.com/Rh1uvmn.png" /></p>
+<p>Next, click on the New Image button in the upper right corner of the screen.</p>
+<p><img alt="image" src="http://i.imgur.com/fvEQOJQ.png" /></p>
+<p>This will open the interface to create a new issue. You will need to add the following information:</p>
+<ul>
+<li>Name or short description of the issue</li>
+<li>Full description of the issue, including images if available. (See below for more details on formatting the description.)</li>
+<li>Assign team members to the issue if appropriate</li>
+<li>Add a milestone if appropriate</li>
+<li>Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.</li>
+</ul>
+<p><img alt="image" src="http://i.imgur.com/ozkZFsh.png" /></p>
+<p>Finally, click on Submit New Issue.</p>
+<p><strong>Best Practices for OpenWorm</strong></p>
+<p>When writing up the description for a given issue, provide as much context and detail as possible. For clarity, we suggest the following format:</p>
+<ul>
+<li>Issue: Summarize the issue at hand and provide links when possible to relevant code, databases and information.</li>
+<li>Motivation: Provide a reasoning for the request and what resolving the issue will fix or what purpose it will serve.</li>
+<li>Steps: Create a list of specific steps that need to be completed to resolve the issue.</li>
+</ul>
+<p>Links to relevant code, databases, documentation and related issues are strongly recommended.</p>
+<p>Check out <a href="https://github.com/openworm/OpenWorm/issues/140">this example</a> of a clearly written issue that follows best practices.</p>
+<h2 id="posting-gists-gistgithubcom">Posting Gists (gist.github.com)</h2>
+<p>Gist is a simple way to share snippets and pastes with others. All gists are Git repositories, so they are automatically versioned, forkable and usable from Git. You can create a <a href="https://gist.github.com/">new gist here</a>.</p>
+<p>How to:</p>
+<ul>
+<li><a href="https://docs.github.com/en/get-started/writing-on-github/editing-and-sharing-content-with-gists/creating-gists">Create Gists</a></li>
+<li><a href="https://docs.github.com/en/get-started/writing-on-github/editing-and-sharing-content-with-gists/forking-and-cloning-gists">Fork and Clone Gists</a></li>
+</ul>
+<h2 id="creating-or-adding-new-repositories">Creating or Adding New Repositories</h2>
+<p>Already existing repositories can be transferred into the OpenWorm GitHub organization via the <a href="https://help.github.com/articles/how-to-transfer-a-repository">"transfer" mechanism provided by GitHub</a>. New repositories <a href="https://help.github.com/articles/create-a-repo">can be created</a> under the OpenWorm GitHub organization by request.</p>
+<h2 id="licenses-on-repositories">Licenses on repositories</h2>
+<p>In historical practice, OpenWorm members have chosen to use the <a href="http://opensource.org/licenses/MIT">MIT open source license</a> for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors <a href="http://choosealicense.com/">choose some open source license for your repository</a> and display a LICENSE file in the root of the repository to make it clear how to use it.</p>
+<p>An example of using the MIT license for OpenWorm code follows:</p>
+<p>The MIT License (MIT)</p>
+<p>Copyright (c) 2014 OpenWorm</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>
