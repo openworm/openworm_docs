@@ -66,10 +66,6 @@ Go to folder `pythonScript` and run:
 
     ~/neuroConstruct/nC.sh -python GenerateNeuroML.py
 
-Regenerate the connectome in NeuroML format
--------------------------------------------
-
-See [here](Regenerate%20the%20connectome%20in%20NeuroML%20format) for more details.
 
 ------------------------------------------------------------------------
 
