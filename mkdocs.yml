@@ -13,7 +13,9 @@ nav:
       - Projects Overview : projects.md
       - Sibernetic : Projects/sibernetic.md
       - c302 : Projects/c302.md
+      - Worm Browser : Projects/browser.md
       - DevoWorm : Projects/DevoWorm.md
+      - Docker simulation stack : Projects/docker.md
       - Movement : Projects/worm-movement.md
       - Geppetto : Projects/geppetto.md
       - Optimization : Projects/optimization.md

@@ -1,15 +1,22 @@
-**OpenWorm Projects**
+## OpenWorm Projects
 
 The OpenWorm project is currently laid out into the major areas shown below:
 
+###  Currently active projects
+
 -   [Neuromechanical modeling with Sibernetic](../Projects/sibernetic/)
 -   [c302 multiscale modelling framework](../Projects/c302/)
+-   [OpenWorm Browser](../Projects/browser/)
 -   [DevoWorm project](../Projects/DevoWorm/)
+-   [Docker simulation stack](../Projects/docker/)
+-   [Community outreach](../Projects/community-proj/)
+
+###  Projects still maintained, less active
+
+-   [Data collection and representation](../Projects/datarep/)
 -   [Movement analysis](../Projects/worm-movement/)
 -   [Geppetto Simulation Engine](../Projects/geppetto/)
 -   [Optimization engine](../Projects/optimization/)
--   [Data collection and representation](../Projects/datarep/)
--   [Community outreach](../Projects/community-proj/)
 -   [Muscle-Neuron integration](../Projects/muscle-neuron-integration/)
 -   [_C. elegans_ robots](../Projects/c-elegans-robot/)
 
