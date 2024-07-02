@@ -86,7 +86,7 @@ This release, among many acheivements, we accomplished the following:
 
 [Detailed release notes from this release can be found online](https://docs.google.com/a/metacell.us/document/d/1cg1YnKI92tN9HZeXachTfpRlKP10OuJhXlRBabeTnuI/pub)
 
-Our second release pointed us in a good direction for the future, and provided some [[<http://browser.openworm.org>](http://browser.openworm.org) exciting products]. In release 3, we worked to develop additional products that are more easily used by the outside world.
+Our second release pointed us in a good direction for the future, and provided some [exciting products](http://browser.openworm.org). In release 3, we worked to develop additional products that are more easily used by the outside world.
 
 ### EPIC-1: As a user, I want to be able to mark synapses and have them integrated into the model
 
