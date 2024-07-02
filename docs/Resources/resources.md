@@ -54,17 +54,9 @@ This code base is not currently in active development.
 Visualization Environments
 --------------------------
 
-### Connectome Browser
-
-The [Connectome browser](https://v1.opensourcebrain.org/projects/celegans), created by the team at the [Open Source Brain](http://opensourcebrain.org), is a way to explore the NeuroML connectome produced by the project. You can investigate the current settings of the dynamics of each neuron, and by clicking "selection mode" you can click on individual neurons to see their synaptic partners in 3D. This is built from the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/)
-
-![Connectome browser](https:\/\/docs.google.com\/uc?authuser=0&id=0B_t3mQaA-HaMek5wb0trd00wVFU&export=download&revid=0B_t3mQaA-HaMWkIxc214bk12UU9lOWdDRHZKQzc2eWdOWm4wPQ)
-
-### WormBrowser (HTML5 and iOS)
+### WormBrowser
 
 Explore the c. elegans in 3D! The [WormBrowser](http://browser.openworm.org) is an interactive virtual experience of browsing the C. elegans worm anatomy. This is built from the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/)
-
-![WormBrowser](https:\/\/docs.google.com\/uc?authuser=0&id=0B_t3mQaA-HaMdkMzaUI3VWVtOG8&export=download&revid=0B_t3mQaA-HaMTXhPY0R0VDlMejd3NVpVTkpRY2diZ01vcXNnPQ)
 
 Source code for [the web version](https://github.com/openworm/wormbrowser) and [an iOS version](https://github.com/openworm/openwormbrowser-ios) are available online. We don't currently have active development happening with either, but if you are interested in helping with the iOS code base, [here's a walkthrough](https://www.youtube.com/watch?v=b5X5fz7pZME) of how to get started with the codebase.
 
