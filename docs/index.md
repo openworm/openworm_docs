@@ -11,6 +11,7 @@ It is an association of highly motivated scientists, engineers, coders, and curi
 Table Of Contents
 -----------------
 
+- **[Design Documents](design_documents/)** ⭐ NEW - Technical roadmap to 959-cell organism
 - [Projects](projects/)
 - [Community](community/)
 - [Background](background/)
@@ -40,6 +41,8 @@ Navigating OpenWorm
 -------------------
 
 We've created this documentation to help orient you to the different locations on the web where OpenWorm material is found and where contributions can be made.
+
+The **[Design Documents](design_documents/)** provide the complete technical roadmap — 25 architectural specifications (DD001-DD023) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **Start here** if you want to understand the engineering blueprint.
 
 The [modeling approach page](modeling/) explains how we have broken down this problem and what steps we are currently taking.
 

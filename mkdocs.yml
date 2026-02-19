@@ -7,6 +7,11 @@ nav:
   - Introduction : index.md
   - Background : background.md
   - History : fullhistory.md
+  - Design Documents:
+      - Overview: design_documents/index.md
+      - Phase Roadmap: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_PHASE_ROADMAP.md
+      - Integration Map: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md
+      - Complete Index: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/README.md
   - Releases : releases.md
   - Modelling : modeling.md
   - Projects:
