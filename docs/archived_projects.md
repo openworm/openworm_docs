@@ -69,7 +69,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 - Established the principle of quantitative behavioral validation
 - Ported key feature extraction algorithms from MATLAB to Python
 
-**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md). The toolbox revival is a Phase A priority, as it enables Tier 3 behavioral validation.
+**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md). The toolbox revival is an infrastructure priority, as it enables Tier 3 behavioral validation.
 
 ---
 

@@ -18,7 +18,7 @@ nav:
           - DD002 Muscle Model: design_documents/DD002_Muscle_Model_Architecture.md
           - DD003 Body Physics: design_documents/DD003_Body_Physics_Architecture.md
           - DD020 Connectome Data Access: design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md
-      - "Phase A — Infrastructure":
+      - "Infrastructure Bootstrap":
           - DD011 Contributor Progression: design_documents/DD011_Contributor_Progression_Model.md
           - DD012 RFC Process: design_documents/DD012_Design_Document_RFC_Process.md
           - DD013 Simulation Stack: design_documents/DD013_Simulation_Stack_Architecture.md

@@ -28,7 +28,7 @@ OpenWorm is on a **quantified, validated path** from today's 302-neuron simulati
 | Phase | Milestone | What Gets Added |
 |-------|-----------|----------------|
 | **Phase 0** | First Whole-Nervous-System Simulation | 302 neurons + 95 muscles + body physics (working today) |
-| **Phase A** | Containerized Stack with Automated Validation | Docker, CI/CD, contributor workflow (4 weeks) |
+| **Infrastructure Bootstrap** | Containerized Stack with Automated Validation | Docker, CI/CD, contributor workflow (4 weeks) |
 | **Phase 1** | Biologically Distinct Neurons | 128 neuron classes from CeNGEN (3 months) |
 | **Phase 2** | The Worm Can Feel and Modulate | Neuropeptides + closed-loop touch (3 months) |
 | **Phase 3** | Multi-Organ Digital Organism | Pharynx, intestine, egg-laying (6 months) |

@@ -110,7 +110,7 @@ docker compose run validate      # Full 3-tier validation
 | **Tier 2** | Randi 2023 data identified, needs ingestion pipeline | No |
 | **Tier 3** | **BLOCKED** — analysis toolbox needs revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | No |
 
-**Phase A priority:** Get all 3 tiers automated in CI so every PR is validated automatically.
+**Infrastructure priority:** Get all 3 tiers automated in CI so every PR is validated automatically.
 
 ---
 

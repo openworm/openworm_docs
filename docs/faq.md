@@ -81,7 +81,7 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 **Current priorities:**
 
-- **Phase A infrastructure:** Docker stack (DD013), toolbox revival (DD021), CI/CD pipeline
+- **Infrastructure bootstrap:** Docker stack (DD013), toolbox revival (DD021), CI/CD pipeline
 - **Phase 1 science:** CeNGEN cell differentiation (DD005), functional connectivity validation (DD010 Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 

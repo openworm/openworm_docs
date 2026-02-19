@@ -48,7 +48,7 @@
 | [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Accepted | Sibernetic SPH, ~100K particles |
 | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, Cook2019 default |
 
-### Phase A: Infrastructure Bootstrap ⚠️
+### Infrastructure Bootstrap ⚠️
 
 **Milestone:** "Containerized Stack with Automated Validation"
 **Duration:** 4 weeks

@@ -216,7 +216,7 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 | Phase | Timeline | What Gets Added |
 |-------|----------|----------------|
-| **Phase A** | Next 4 weeks | Infrastructure bootstrap (DD013 Docker stack, DD021 toolbox revival) |
+| **Infrastructure Bootstrap** | Next 4 weeks | DD013 Docker stack, DD021 toolbox revival |
 | **Phase 1** | Months 1-3 | 128 biologically distinct neurons from CeNGEN |
 | **Phase 2** | Months 4-6 | Neuropeptides + closed-loop touch + proprioception |
 | **Phase 3** | Months 7-12 | Pharynx, intestine, egg-laying, ML acceleration |
