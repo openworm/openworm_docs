@@ -1,39 +1,43 @@
 site_name: OpenWorm Documentation
 theme:
-  name: material    
+  name: material
   favicon: images/favicon.ico
   logo: images/favicon.ico
 nav:
-  - Introduction : index.md
-  - Background : background.md
-  - History : fullhistory.md
+  - Home: index.md
+  - Background: background.md
   - Design Documents:
       - Overview: design_documents/index.md
-      - Phase Roadmap: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_PHASE_ROADMAP.md
-      - Integration Map: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md
-      - Complete Index: https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/README.md
-  - Releases : releases.md
-  - Modelling : modeling.md
+      - Phase Roadmap: https://github.com/openworm/openworm-admin/blob/main/design_documents/DD_PHASE_ROADMAP.md
+      - Integration Map: https://github.com/openworm/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md
+      - Complete Index: https://github.com/openworm/openworm-admin/blob/main/design_documents/README.md
+  - How It Works:
+      - Modeling Approach: modeling.md
+      - Validation Framework: validation.md
+  - History:
+      - Full History: fullhistory.md
+      - Releases: releases.md
+      - Archived Projects: archived_projects.md
   - Projects:
-      - Projects Overview : projects.md
-      - Sibernetic : Projects/sibernetic.md
-      - c302 : Projects/c302.md
-      - Worm Browser : Projects/browser.md
-      - DevoWorm : Projects/DevoWorm.md
-      - Docker simulation stack : Projects/docker.md
-      - Movement : Projects/worm-movement.md
-      - Geppetto : Projects/geppetto.md
-      - Optimization : Projects/optimization.md
-      - Representation : Projects/datarep.md
-      - Community Outreach : Projects/community-proj.md
-      - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
-      - C. elegans Robots : Projects/c-elegans-robot.md
+      - Projects Overview: projects.md
+      - Sibernetic: Projects/sibernetic.md
+      - c302: Projects/c302.md
+      - Worm Browser: Projects/browser.md
+      - DevoWorm: Projects/DevoWorm.md
+      - Docker simulation stack: Projects/docker.md
+      - Movement: Projects/worm-movement.md
+      - Geppetto: Projects/geppetto.md
+      - Optimization: Projects/optimization.md
+      - Representation: Projects/datarep.md
+      - Community Outreach: Projects/community-proj.md
+      - Muscle / Neuron /  Channel: Projects/muscle-neuron-integration.md
+      - C. elegans Robots: Projects/c-elegans-robot.md
   - Community:
-      - Community Overview : community.md
-      - GitHub : Community/github.md
-      - Repos : Community/repositories.md
-      - Membership : Community/membership.md
+      - Community Overview: community.md
+      - GitHub: Community/github.md
+      - Repos: Community/repositories.md
+      - Membership: Community/membership.md
   - Resources:
       - Resources Overview: Resources/resources.md
       - Running NeuroML connectome: Resources/running-nc.md
-  - FAQ : faq.md
+  - FAQ: faq.md

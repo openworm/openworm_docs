@@ -59,7 +59,7 @@
 | [DD013](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD013_Simulation_Stack_Architecture.md) | Simulation Stack | Docker, CI/CD, openworm.yml config |
 | [DD021](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Movement Toolbox Revival | Tier 3 validation (8 tasks, 33 hours) |
 | [DD012](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
-| [DD011](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) | Contributor Progression | L0-L5 levels, badges |
+| [DD011](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
 
 ### Phase 1: Cell-Type Differentiation ⚠️
 

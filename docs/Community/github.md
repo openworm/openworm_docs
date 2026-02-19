@@ -93,6 +93,37 @@ Creating or Adding New Repositories
 
 Already existing repositories can be transferred into the OpenWorm GitHub organization via the ["transfer" mechanism provided by GitHub](https://help.github.com/articles/how-to-transfer-a-repository). New repositories [can be created](https://help.github.com/articles/create-a-repo) under the OpenWorm GitHub organization by request.
 
+Contributing to Design Document Implementation
+-----------------------------------------------
+
+**[Design Documents](../design_documents/) specify what to build.** GitHub issues (generated from DD Integration Contracts) specify the work breakdown.
+
+### DD Contribution Workflow
+
+1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> DD001, visualization -> DD014, etc.)
+2. **Read the DD** — understand the goal, deliverables, and quality criteria
+3. **Read "How to Build & Test" section** — copy-pasteable commands to get started
+4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for DD005)
+5. **Claim an issue** — comment: "I'll work on this, ETA: X days"
+6. **Implement according to DD spec** — Quality Criteria define acceptance
+7. **Run tests:** `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge)
+8. **Open PR** referencing the DD and issue
+9. **Mind-of-a-Worm pre-review** — AI checks DD compliance automatically
+10. **Human L3+ review** — Final approval gate
+
+### Contributor Levels
+
+See **[DD011 (Contributor Progression)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md)** for the L0 to L5 path:
+
+| Level | Role | Can Do |
+|-------|------|--------|
+| L0 | Observer | Read DDs, watch meetings, join Slack |
+| L1 | Apprentice | Doc fixes, test improvements (3 orientation tasks) |
+| L2 | Junior Contributor | Open PRs to designated subsystems |
+| L3 | Contributor | Review/merge L1-L2 PRs, GitHub commit access |
+| L4 | Senior Contributor | Architectural decisions, write Design Documents |
+| L5 | Founder / Steering | Set direction, approve DDs, resolve conflicts |
+
 Licenses on repositories
 ------------------------
 
