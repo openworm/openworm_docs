@@ -75,7 +75,7 @@ Contributing to OpenWorm
 
 We primarily use Slack to communicate and coordinate our daily activities, you are welcome to join us! For an invitation, fill out our [volunteer application form](https://goo.gl/3ncZWn).
 
-**New contributors:** Check the [Design Documents](design_documents/) for areas matching your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation). The [contributor progression model (DD011)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) describes the path from Observer to Senior Contributor.
+**New contributors:** Check the [Design Documents](design_documents/) for areas matching your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation). The [contributor progression model (DD011)](design_documents/DD011_Contributor_Progression_Model.md) describes the path from Observer to Senior Contributor.
 
 Then, please browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling/) we are taking.
 

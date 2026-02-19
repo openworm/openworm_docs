@@ -28,9 +28,9 @@ This prototype proved the concept worked. But it was:
 
 **Today, OpenWorm is built on formal Design Documents** that specify:
 
-- **[DD001: Neural Circuit](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
-- **[DD002: Muscle Model](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, Boyle & Cohen 2008 parameters
-- **[DD003: Body Physics](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
+- **[DD001: Neural Circuit](design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
+- **[DD002: Muscle Model](design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, Boyle & Cohen 2008 parameters
+- **[DD003: Body Physics](design_documents/DD003_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
 
 **These three DDs (the "core chain") are WORKING and VALIDATED:**
 
@@ -147,7 +147,7 @@ These weren't in the original vision but are now formalized with quantitative va
 
 **Historical:** "Movement validation project" (vague)
 
-**Current Specification: [DD010: Validation Framework](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md)**
+**Current Specification: [DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)**
 
 | Tier | What | Validation Data | Blocking? |
 |------|------|----------------|-----------|
@@ -165,7 +165,7 @@ More details available on the [Validation page](validation/).
 
 **Historical:** "Use genetic algorithms to search parameter space"
 
-**Current Specification: [DD017: Hybrid Mechanistic-ML Framework](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)**
+**Current Specification: [DD017: Hybrid Mechanistic-ML Framework](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)**
 
 4 components:
 
@@ -182,7 +182,7 @@ More details available on the [Validation page](validation/).
 
 **Historical:** [Geppetto](http://geppetto.org) (2014-2020) — Java-based web platform for multi-algorithm simulation
 
-**Current Specification: [DD014: Dynamic Visualization](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md)**
+**Current Specification: [DD014: Dynamic Visualization](design_documents/DD014_Dynamic_Visualization_Architecture.md)**
 
 - **Phase 1:** Trame viewer (PyVista + live server, organism + tissue scales)
 - **Phase 2:** Interactive layers (neuropeptides, organs, validation overlay)
@@ -198,7 +198,7 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 **Historical:** "Multi-algorithm integration" concept (no formal spec)
 
-**Current Specification: [DD013: Simulation Stack](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD013_Simulation_Stack_Architecture.md)**
+**Current Specification: [DD013: Simulation Stack](design_documents/DD013_Simulation_Stack_Architecture.md)**
 
 - openworm.yml config system (single source of truth)
 - Multi-stage Docker build (neural, body, validation, viewer stages)

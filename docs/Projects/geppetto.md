@@ -2,7 +2,7 @@ Geppetto Simulation Engine
 ==========================
 
 !!! note "Platform Evolution"
-    Geppetto served as OpenWorm's primary simulation and visualization platform from 2014-2020. For Phase 1-2 work, it has been superseded by **[DD014 (Dynamic Visualization Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md)**, which specifies a Trame-based (Python) approach. See [Archived Projects](../archived_projects/#geppetto-web-platform-2014-2020) for full historical context.
+    Geppetto served as OpenWorm's primary simulation and visualization platform from 2014-2020. For Phase 1-2 work, it has been superseded by **[DD014 (Dynamic Visualization Architecture)](../design_documents/DD014_Dynamic_Visualization_Architecture.md)**, which specifies a Trame-based (Python) approach. See [Archived Projects](../archived_projects/#geppetto-web-platform-2014-2020) for full historical context.
 
 [Geppetto](http://geppetto.org) is an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser.
 

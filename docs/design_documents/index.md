@@ -22,16 +22,16 @@
 
 **New to Design Documents?**
 
-- 📋 [DD012: RFC Process](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD012_Design_Document_RFC_Process.md) — How DDs work
-- 🌟 [DD005: Cell Differentiation](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation
-- 🗺️ [Integration Map](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md) — How all DDs couple together
-- 📅 [Phase Roadmap](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_PHASE_ROADMAP.md) — 18-month timeline to 959 cells
+- 📋 [DD012: RFC Process](DD012_Design_Document_RFC_Process.md) — How DDs work
+- 🌟 [DD005: Cell Differentiation](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation
+- 🗺️ [Integration Map](INTEGRATION_MAP.md) — How all DDs couple together
+- 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month timeline to 959 cells
 
 **Analysis & Resources:**
 
-- 📊 [Comprehensive Analysis](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_COMPREHENSIVE_ANALYSIS_2026-02-19.md) — Inconsistencies, gaps, recommendations
-- 💎 [Code Reuse Opportunities](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_CODE_REUSE_OPPORTUNITIES.md) — Existing repos, 200-300 hour savings
-- 📦 [GitHub Repo Inventory](https://github.com/SlarsonTech/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm repositories
+- 📊 [Comprehensive Analysis](DD_COMPREHENSIVE_ANALYSIS_2026-02-19.md) — Inconsistencies, gaps, recommendations
+- 💎 [Code Reuse Opportunities](DD_CODE_REUSE_OPPORTUNITIES.md) — Existing repos, 200-300 hour savings
+- 📦 [GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm repositories
 
 ---
 
@@ -43,10 +43,10 @@
 
 | DD | Title | Status | What It Does |
 |----|-------|--------|--------------|
-| [DD001](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ Accepted | 302 neurons, HH Level C1, graded synapses |
-| [DD002](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ Accepted | 95 muscles, Ca²⁺→force coupling |
-| [DD003](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Accepted | Sibernetic SPH, ~100K particles |
-| [DD020](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, Cook2019 default |
+| [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ Accepted | 302 neurons, HH Level C1, graded synapses |
+| [DD002](DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ Accepted | 95 muscles, Ca²⁺→force coupling |
+| [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Accepted | Sibernetic SPH, ~100K particles |
+| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, Cook2019 default |
 
 ### Phase A: Infrastructure Bootstrap ⚠️
 
@@ -56,10 +56,10 @@
 
 | DD | Title | What It Delivers |
 |----|-------|------------------|
-| [DD013](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD013_Simulation_Stack_Architecture.md) | Simulation Stack | Docker, CI/CD, openworm.yml config |
-| [DD021](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Movement Toolbox Revival | Tier 3 validation (8 tasks, 33 hours) |
-| [DD012](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
-| [DD011](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
+| [DD013](DD013_Simulation_Stack_Architecture.md) | Simulation Stack | Docker, CI/CD, openworm.yml config |
+| [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Movement Toolbox Revival | Tier 3 validation (8 tasks, 33 hours) |
+| [DD012](DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
+| [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
 
 ### Phase 1: Cell-Type Differentiation ⚠️
 
@@ -69,9 +69,9 @@
 
 | DD | Title | What Changes |
 |----|-------|--------------|
-| [DD005](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Differentiation | 128 distinct neuron classes (not 302 identical) |
-| [DD014 Phase 1](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md) | Trame Viewer | OME-Zarr export, organism + tissue scales |
-| [DD010 Tier 2](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. Randi 2023 (r > 0.5) |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Differentiation | 128 distinct neuron classes (not 302 identical) |
+| [DD014 Phase 1](DD014_Dynamic_Visualization_Architecture.md) | Trame Viewer | OME-Zarr export, organism + tissue scales |
+| [DD010 Tier 2](DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. Randi 2023 (r > 0.5) |
 
 ### Phase 2: Slow Modulation + Closed-Loop ⚠️
 
@@ -81,10 +81,10 @@
 
 | DD | Title | What Adds |
 |----|-------|-----------|
-| [DD006](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Neuropeptides | GPCR modulation, seconds timescale |
-| [DD019](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
-| [DD022](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
-| [DD023](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
+| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Neuropeptides | GPCR modulation, seconds timescale |
+| [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
+| [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
+| [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
 
 ### Phase 3: Organ Systems ⚠️
 
@@ -94,10 +94,10 @@
 
 | DD | Title | What Adds |
 |----|-------|-----------|
-| [DD007](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD007_Pharyngeal_System_Architecture.md) | Pharyngeal System | 63 cells, 3-4 Hz pumping |
-| [DD009](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD009_Intestinal_Oscillator_Model.md) | Intestinal Oscillator | 20 cells, 50s defecation |
-| [DD018](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD018_Egg_Laying_System_Architecture.md) | Egg-Laying System | 28-cell circuit, two-state |
-| [DD017](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid ML | Differentiable sim, 1000× speedup |
+| [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal System | 63 cells, 3-4 Hz pumping |
+| [DD009](DD009_Intestinal_Oscillator_Model.md) | Intestinal Oscillator | 20 cells, 50s defecation |
+| [DD018](DD018_Egg_Laying_System_Architecture.md) | Egg-Laying System | 28-cell circuit, two-state |
+| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid ML | Differentiable sim, 1000× speedup |
 
 ### Phase 4: Complete Organism ⚠️
 
@@ -107,16 +107,16 @@
 
 | DD | Title | What Adds |
 |----|-------|-----------|
-| [DD004](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD004_Mechanical_Cell_Identity.md) | Mechanical Cell Identity | 959 cells with cell-type mechanics |
-| [DD014.2](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Mesh Deformation | GPU skinning, photorealistic |
-| [DD014 Phase 3](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md) | Public Viewer | Molecular scale, viewer.openworm.org |
+| [DD004](DD004_Mechanical_Cell_Identity.md) | Mechanical Cell Identity | 959 cells with cell-type mechanics |
+| [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Mesh Deformation | GPU skinning, photorealistic |
+| [DD014 Phase 3](DD014_Dynamic_Visualization_Architecture.md) | Public Viewer | Molecular scale, viewer.openworm.org |
 
 ---
 
 ## All Design Documents (Complete List)
 
 !!! tip "Browse on GitHub"
-    All Design Documents are maintained in the [openworm-admin repository](https://github.com/SlarsonTech/openworm-admin/tree/main/design_documents).
+    All Design Documents are maintained in the [openworm-admin repository](https://github.com/openworm/openworm-admin/tree/main/design_documents).
     **Total:** 25 DDs (DD001-DD023 + DD014.1/DD014.2 + DD016 archived)
 
 ### By Topic
@@ -169,8 +169,8 @@ DD017 (mechanistic-ML hybrid)
 
 ### Writing a New DD
 
-Follow [DD012 (RFC Process)](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD012_Design_Document_RFC_Process.md) template.
-Use [DD005 (Cell Differentiation)](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
+Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template.
+Use [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
 
 ---
 
@@ -185,7 +185,7 @@ Use [DD005 (Cell Differentiation)](https://github.com/SlarsonTech/openworm-admin
 
 ## External Links
 
-- **[GitHub Repository](https://github.com/SlarsonTech/openworm-admin/tree/main/design_documents)** — All DD markdown files
-- **[Phase Roadmap](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_PHASE_ROADMAP.md)** — Timeline and milestones
-- **[Integration Map](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md)** — Dependency graph
-- **[Code Reuse Guide](https://github.com/SlarsonTech/openworm-admin/blob/main/design_documents/DD_CODE_REUSE_OPPORTUNITIES.md)** — Accelerate implementation
+- **[GitHub Repository](https://github.com/openworm/openworm-admin/tree/main/design_documents)** — All DD markdown files
+- **[Phase Roadmap](DD_PHASE_ROADMAP.md)** — Timeline and milestones
+- **[Integration Map](INTEGRATION_MAP.md)** — Dependency graph
+- **[Code Reuse Guide](DD_CODE_REUSE_OPPORTUNITIES.md)** — Accelerate implementation

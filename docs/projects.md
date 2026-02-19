@@ -14,7 +14,7 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 | [OpenWorm (meta-repo)](Projects/docker/) | DD013 | Proposed | Integration, Docker stack |
 | [Geppetto](Projects/geppetto/) | DD014 (historical) | Dormant | Web platform (superseded by Trame) |
 
-**See [Integration Map](https://github.com/openworm/openworm-admin/blob/main/design_documents/INTEGRATION_MAP.md)** for the complete dependency graph.
+**See [Integration Map](design_documents/INTEGRATION_MAP.md)** for the complete dependency graph.
 
 ---
 
@@ -40,7 +40,7 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 
 **NeuroMechanical Modeling - Sibernetic**
 
-Sibernetic implements **[DD003 (Body Physics Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics including the PCISPH algorithm, ~100K particles, and fluid-structure interaction. See [DD003](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md) for the complete spec including particle types, validation criteria, and integration contract.
+Sibernetic implements **[DD003 (Body Physics Architecture)](design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics including the PCISPH algorithm, ~100K particles, and fluid-structure interaction. See [DD003](design_documents/DD003_Body_Physics_Architecture.md) for the complete spec including particle types, validation criteria, and integration contract.
 
 [Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs.
 
@@ -50,7 +50,7 @@ More detailed information is available on the [Sibernetic project page](Projects
 
 **c302 Neural Modeling Framework**
 
-c302 implements **[DD001 (Neural Circuit Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for DD005 (cell differentiation), DD006 (neuropeptides), DD007-DD009 (organ circuits), DD018 (egg-laying), and DD019 (touch response).
+c302 implements **[DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for DD005 (cell differentiation), DD006 (neuropeptides), DD007-DD009 (organ circuits), DD018 (egg-laying), and DD019 (touch response).
 
 c302 generates NeuroML2 networks at multiple levels of biophysical detail (Levels A-D), with **Level C1 (HH + graded synapses)** as the recommended default for coupling with Sibernetic.
 
@@ -58,7 +58,7 @@ More detailed information is available on the [c302 project page](Projects/c302/
 
 **Visualization**
 
-The visualization platform is evolving per **[DD014 (Dynamic Visualization Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md)**:
+The visualization platform is evolving per **[DD014 (Dynamic Visualization Architecture)](design_documents/DD014_Dynamic_Visualization_Architecture.md)**:
 
 - **Phase 1:** Trame viewer (PyVista + live server)
 - **Phase 2:** Interactive layers with validation overlays
@@ -68,25 +68,25 @@ The visualization platform is evolving per **[DD014 (Dynamic Visualization Archi
 
 **Movement Analysis and Validation**
 
-The Movement Analysis project implements **[DD010 (Validation Framework)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md)** — the 3-tier validation system that ensures our simulation matches real worm behavior. The analysis toolbox is being revived per **[DD021](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)**.
+The Movement Analysis project implements **[DD010 (Validation Framework)](design_documents/DD010_Validation_Framework.md)** — the 3-tier validation system that ensures our simulation matches real worm behavior. The analysis toolbox is being revived per **[DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)**.
 
 More detailed information is available on the [Movement analysis project page](Projects/worm-movement/) and the [Validation page](validation/).
 
 **Optimization and Parameter Fitting**
 
-Now formalized in **[DD017 (Hybrid Mechanistic-ML Framework)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)** — differentiable simulation with gradient descent, neural surrogates for 1000x speedup, and foundation model predictions for channel kinetics.
+Now formalized in **[DD017 (Hybrid Mechanistic-ML Framework)](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)** — differentiable simulation with gradient descent, neural surrogates for 1000x speedup, and foundation model predictions for channel kinetics.
 
 More detailed information is available on the [Optimization project page](Projects/optimization/).
 
 **Data Collection and Representation**
 
-Formalized in **[DD008 (Data Integration Pipeline)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD008_Data_Integration_Pipeline.md)** and **[DD020 (Connectome Data Access)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)** — the ConnectomeToolbox (cect) is the canonical API for connectome data.
+Formalized in **[DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md)** and **[DD020 (Connectome Data Access)](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)** — the ConnectomeToolbox (cect) is the canonical API for connectome data.
 
 More detailed information is available on the [Data representation project page](Projects/datarep/).
 
 **Community Outreach**
 
-The effort to build the OpenWorm open science community is always ongoing. See the [contributor progression model (DD011)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) for the L0-L5 path.
+The effort to build the OpenWorm open science community is always ongoing. See the [contributor progression model (DD011)](design_documents/DD011_Contributor_Progression_Model.md) for the L0-L5 path.
 
 More detailed information is available on the [Community project page](Projects/community-proj/).
 

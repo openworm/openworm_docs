@@ -113,7 +113,7 @@ Contributing to Design Document Implementation
 
 ### Contributor Levels
 
-See **[DD011 (Contributor Progression)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md)** for the L0 to L5 path:
+See **[DD011 (Contributor Progression)](../design_documents/DD011_Contributor_Progression_Model.md)** for the L0 to L5 path:
 
 | Level | Role | Can Do |
 |-------|------|--------|

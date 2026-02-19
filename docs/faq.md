@@ -25,26 +25,26 @@ Yes! Our roadmap progresses from today's 302-neuron crawling simulation to a com
 
 - **Phase 0** (today): Crawling (302 neurons + 95 muscles + body physics, validated against Schafer lab kinematics)
 - **Phase 1-2:** Cell differentiation (128 neuron classes from CeNGEN) + closed-loop touch response + neuropeptide modulation
-- **Phase 3:** Pharynx pumping ([DD007](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD007_Pharyngeal_System_Architecture.md)), intestinal defecation ([DD009](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD009_Intestinal_Oscillator_Model.md)), egg-laying ([DD018](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD018_Egg_Laying_System_Architecture.md))
+- **Phase 3:** Pharynx pumping ([DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)), intestinal defecation ([DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)), egg-laying ([DD018](design_documents/DD018_Egg_Laying_System_Architecture.md))
 - **Phase 4:** All 959 somatic cells with photorealistic visualization
 
 The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
-Egg-laying is specified in **[DD018 (Egg-Laying System Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD018_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.
+Egg-laying is specified in **[DD018 (Egg-Laying System Architecture)](design_documents/DD018_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.
 
 Developmental modeling (embryo to L1 to L4 to adult) is Phase 6 work in our roadmap, using the Witvliet developmental connectome series (8 stages). _C. elegans_ has the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing), making it a fascinating future direction.
 
 ### Does it need to know how to be a worm to act like a worm?
 
-The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in [DD001 (Neural Circuit Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD001_Neural_Circuit_Architecture.md), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
+The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in [DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
 
 ### Given all that we DON'T know about _C. elegans_ (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
 
 All models are wrong, some models are useful :) We must have the model make a prediction and then test it. Based on how well the model fits the available data, we can quantify how well the model recapitulates reality.
 
-We now have a formal **3-tier validation framework** ([DD010](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md)):
+We now have a formal **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)):
 
 - **Tier 1:** Single-cell electrophysiology (patch clamp comparison)
 - **Tier 2:** Circuit-level functional connectivity (must correlate r > 0.5 with Randi 2023 whole-brain imaging)
@@ -56,7 +56,7 @@ We now have a formal **3-tier validation framework** ([DD010](https://github.com
 
 It is very likely to be multiple, [given what we know about the variability of neuronal networks in general](https://www.dropbox.com/s/rbab411kf5rb4zh/Similar%20network%20activity%20from%20disparate%20circuit%20parameters.%20-%20Prinz%2C%20Bucher%2C%20Marder%20-%202004.pdf). One technique to deal with this is to [generate multiple models that work](https://www.dropbox.com/s/05zx02h57vpvvqg/Multiple%20models%20to%20capture%20the%20variability%20in%20biological%20neurons%20and%20networks%20-%20Marder%2C%20Taylor%20-%202011.pdf) and analyze them under different conditions. What we are after is the [solution space that works](https://www.dropbox.com/s/hz2pv5cvomvsqez/Complex%20parameter%20landscape%20for%20a%20complex%20neuron%20model.%20-%20Achard%2C%20De%20Schutter%20-%202006.pdf) (see Fig 6 for an example), rather than a single solution.
 
-[DD017 (Hybrid Mechanistic-ML Framework)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
+[DD017 (Hybrid Mechanistic-ML Framework)](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
 
 ### Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
 
@@ -66,9 +66,9 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 
 **Phase 4 completion (~18 months from start):** 959 somatic cells, all major organ systems (pharynx, intestine, reproductive), validated against:
 
-- [DD010](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md) Tier 3: Behavioral kinematics (Schafer lab)
+- [DD010](design_documents/DD010_Validation_Framework.md) Tier 3: Behavioral kinematics (Schafer lab)
 - Organ-specific validation: Pumping 3-4 Hz, defecation 50+/-10s, egg-laying two-state pattern
-- All cells have cell-type-specific mechanics ([DD004](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD004_Mechanical_Cell_Identity.md))
+- All cells have cell-type-specific mechanics ([DD004](design_documents/DD004_Mechanical_Cell_Identity.md))
 - Public web viewer at viewer.openworm.org
 
 **Beyond Phase 4:** Intracellular signaling (IP3/cAMP cascades), developmental modeling (growth, neuron birth/death), male-specific systems.
@@ -99,7 +99,7 @@ We primarily use [Slack](http://openworm.org/contacts.html) for coordination. If
 
 In general, you won't step on any toes though -- multiple people doing the same thing can still be helpful as different individuals bring different perspectives to the table.
 
-For a structured approach, see the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation) and the [contributor progression model](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD011_Contributor_Progression_Model.md) (Observer to Senior Contributor, L0-L5).
+For a structured approach, see the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation) and the [contributor progression model](design_documents/DD011_Contributor_Progression_Model.md) (Observer to Senior Contributor, L0-L5).
 
 ### Do you all ever meet up somewhere physically?
 
@@ -120,14 +120,14 @@ We model at **five scales simultaneously** (detailed on the [modeling approach p
 | Tissue | DD003, DD004 | High (~100K SPH particles) |
 | Organism | DD010, DD019 | Validation overhead |
 
-In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD017](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
+In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
 
 ### What's the data source for your computer simulation of the living worm?
 
-There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. [DD008 (Data Integration Pipeline)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD008_Data_Integration_Pipeline.md) specifies the formal approach. Key datasets include:
+There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. [DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md) specifies the formal approach. Key datasets include:
 
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](http://caltech.wormbase.org/virtualworm/)
--   [The _C. elegans_ connectome](http://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD020](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)
+-   [The _C. elegans_ connectome](http://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 -   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives DD005 cell differentiation
 -   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — Tier 2 validation target (DD010)
 -   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions (DD006)
@@ -135,11 +135,11 @@ There is not a single data source for our simulation; in fact one of our unique 
 
 ### Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 
-There have been [other modeling efforts in _C. elegans_ and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observed behaviors is still an open question. Our [DD_CODE_REUSE_OPPORTUNITIES](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD_CODE_REUSE_OPPORTUNITIES.md) document identifies 15 existing repos with reusable code, potentially saving 200-300 hours of implementation.
+There have been [other modeling efforts in _C. elegans_ and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observed behaviors is still an open question. Our [DD_CODE_REUSE_OPPORTUNITIES](design_documents/DD_CODE_REUSE_OPPORTUNITIES.md) document identifies 15 existing repos with reusable code, potentially saving 200-300 hours of implementation.
 
 ### How are neurons simulated today?
 
-Our neural models are specified in [DD001 (Neural Circuit Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD001_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
+Our neural models are specified in [DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
 
 | Level | Cell Type | Synapses | Use Case |
 |-------|-----------|----------|----------|
@@ -157,7 +157,7 @@ _C. elegans_ neurons do not spike (i.e. have [action potentials](http://en.wikip
 
 ### What is the level of detail of the wiring diagram for the non-neuron elements?
 
-There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, [DD020 (Connectome Data Access)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
+There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, [DD020 (Connectome Data Access)](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
 
 ### What is SPH?
 
@@ -165,7 +165,7 @@ There is a map between motor neurons and muscle cells in the published wiring di
 
 ### What are you doing with SPH?
 
-We are building the body of the worm using particles that are being driven by SPH. This is formally specified in [DD003 (Body Physics Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md), which defines the PCISPH pressure solver, ~100K particles (liquid, elastic, boundary types), and validated body mechanics. This allows for physical interactions between the body of the worm and its environment.
+We are building the body of the worm using particles that are being driven by SPH. This is formally specified in [DD003 (Body Physics Architecture)](design_documents/DD003_Body_Physics_Architecture.md), which defines the PCISPH pressure solver, ~100K particles (liquid, elastic, boundary types), and validated body mechanics. This allows for physical interactions between the body of the worm and its environment.
 
 OpenWorm code reuse
 -------------------
@@ -176,7 +176,7 @@ OpenWorm code reuse
 
 ### What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
 
-These were core technologies for the [Geppetto simulation platform](archived_projects/#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD014 (Dynamic Visualization)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
+These were core technologies for the [Geppetto simulation platform](archived_projects/#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD014 (Dynamic Visualization)](design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
 
 See [Archived Projects](archived_projects/) for the full historical context.
 

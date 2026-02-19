@@ -5,7 +5,7 @@ How We Know It's Working: The Validation Framework
 
 Building a digital organism is hard. How do we know we're getting it right?
 
-**Answer:** We validate at 3 levels, specified in **[DD010: Validation Framework](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md)**.
+**Answer:** We validate at 3 levels, specified in **[DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)**.
 
 ---
 
@@ -57,7 +57,7 @@ Building a digital organism is hard. How do we know we're getting it right?
 
 **Status:** **BLOCKING** — a PR cannot merge if it causes Tier 3 regression.
 
-**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — being revived per [DD021](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md).
+**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md).
 
 ---
 
@@ -93,7 +93,7 @@ Beyond the 3-tier framework for locomotion, organ systems have their own validat
 2. **Pre-merge (validate):** Runs all 3 tiers (~30 min)
 3. **Nightly (full):** Extended runs with statistical analysis
 
-The [DD013 Simulation Stack](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD013_Simulation_Stack_Architecture.md) specifies the Docker commands:
+The [DD013 Simulation Stack](design_documents/DD013_Simulation_Stack_Architecture.md) specifies the Docker commands:
 
 ```bash
 docker compose run quick-test    # Per-PR validation
@@ -108,10 +108,10 @@ docker compose run validate      # Full 3-tier validation
 |------|---------------|------------|
 | **Tier 1** | Scripts exist but not integrated into CI | No |
 | **Tier 2** | Randi 2023 data identified, needs ingestion pipeline | No |
-| **Tier 3** | **BLOCKED** — analysis toolbox needs revival ([DD021](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | No |
+| **Tier 3** | **BLOCKED** — analysis toolbox needs revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | No |
 
 **Phase A priority:** Get all 3 tiers automated in CI so every PR is validated automatically.
 
 ---
 
-[Read the complete specification](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md)
+[Read the complete specification](design_documents/DD010_Validation_Framework.md)

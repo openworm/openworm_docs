@@ -1,7 +1,7 @@
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
-Sibernetic implements **[DD003 (Body Physics Architecture)](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics.
+Sibernetic implements **[DD003 (Body Physics Architecture)](../design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics.
 
 ## What It Does
 
@@ -21,24 +21,24 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 
 - 3D body model with fluid-structure interaction
 - Muscle activation produces emergent undulatory locomotion
-- Validated against Schafer lab kinematics ([DD010](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD010_Validation_Framework.md) Tier 3: speed, wavelength, frequency within +/-15%)
+- Validated against Schafer lab kinematics ([DD010](../design_documents/DD010_Validation_Framework.md) Tier 3: speed, wavelength, frequency within +/-15%)
 
 To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 ## Roadmap
 
-**Phase 1-2 ([DD004](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
+**Phase 1-2 ([DD004](../design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
 
 - Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
 - Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
 
-**Phase 2 ([DD022](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
+**Phase 2 ([DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
 
 - Substrate types (agar, liquid, soil)
 - Chemical/thermal gradients
 - Food particles and obstacles
 
-**Phase 4 ([DD014.2](https://github.com/openworm/openworm-admin/blob/main/design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
+**Phase 4 ([DD014.2](../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
 
 - GPU skinning from SPH particles to Virtual Worm anatomical meshes
 - Photorealistic rendering
