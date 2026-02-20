@@ -15,7 +15,7 @@
 | **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
-| **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 3: 5 kinematic metrics within ±15% of Schafer lab data |
+| **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 3: 5 kinematic metrics within ±15% of [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab data |
 | **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
@@ -26,7 +26,7 @@
 
 ## Context
 
-OpenWorm's core philosophy, articulated in Sarma et al. 2016 "Unit Testing, Model Validation, and Biological Simulation" (*F1000Research*), is that **model validation is a form of testing**. Just as software has unit tests, integration tests, and system tests, biological models must be validated at multiple levels:
+OpenWorm's core philosophy, articulated in [Sarma et al. 2016](https://doi.org/10.12688/f1000research.9095.1) "Unit Testing, Model Validation, and Biological Simulation" (*F1000Research*), is that **model validation is a form of testing**. Just as software has unit tests, integration tests, and system tests, biological models must be validated at multiple levels:
 
 - **Single-cell level:** Electrophysiology (voltage, conductance, kinetics)
 - **Circuit level:** Functional connectivity (calcium correlations)
@@ -42,9 +42,9 @@ A simulation that produces movement but fails electrophysiology validation has *
 
 | Tier | What Is Validated | Validation Data | Acceptance Criteria | Blocking? |
 |------|------------------|-----------------|-------------------|-----------|
-| **Tier 1: Unit (Single Cell)** | Membrane voltage, conductances, calcium dynamics | Goodman lab patch-clamp, Randi et al. single-neuron Ca imaging | Quantitative match within 20% | No (warning) |
+| **Tier 1: Unit (Single Cell)** | Membrane voltage, conductances, calcium dynamics | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) patch-clamp, [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) single-neuron Ca imaging | Quantitative match within 20% | No (warning) |
 | **Tier 2: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
-| **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | Schafer lab WCON, Raizen EPG, Thomas defecation assays | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
+| **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab kinematics), [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (pharyngeal EPG), [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (defecation) | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
 
@@ -110,7 +110,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 
 ### Tier 3: Behavioral Validation (System Tests)
 
-**Primary tool:** `open-worm-analysis-toolbox` (see **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to Schafer lab experimental data in WCON format.
+**Primary tool:** `open-worm-analysis-toolbox` (see **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab experimental data in WCON format.
 
 **Validated metrics:**
 
@@ -120,7 +120,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 4. **Amplitude:** Body bend amplitude (degrees)
 5. **Crawl/swim classification:** Behavioral mode based on gait
 
-**Acceptance criteria (from Palyanov et al. validation):**
+**Acceptance criteria:**
 
 - All 5 metrics within **±15% of experimental mean**
 - Movement trajectory visually resembles real worm (qualitative check)
@@ -189,7 +189,7 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 | Defecation motor program | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | Event log | ms |
 | Experimental data (electrophysiology) | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | Patch-clamp recordings | CSV | mV, nA |
 | Experimental data (functional connectivity) | [DD008](DD008_Data_Integration_Pipeline.md) / [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
-| Experimental data (kinematics) | [DD008](DD008_Data_Integration_Pipeline.md) / Schafer lab | Movement trajectories | WCON | µm |
+| Experimental data (kinematics) | [DD008](DD008_Data_Integration_Pipeline.md) / [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab) | Movement trajectories | WCON | µm |
 | Experimental data (defecation) | [DD008](DD008_Data_Integration_Pipeline.md) / [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) | Defecation cycle periods | CSV | seconds |
 | Experimental data (pumping) | [DD008](DD008_Data_Integration_Pipeline.md) / [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | EPG recordings | CSV | mV |
 
@@ -491,9 +491,12 @@ jobs:
 
 ## References
 
-1. **Sarma GP, Ghayoomie V, Jacobs T, et al. (2016).** "Unit testing, model validation, and biological simulation." *F1000Research* 5:1946.
-2. **Randi F et al. (2023).** "Neural signal propagation atlas." *Nature* 623:406-414.
-3. **Yemini E, Jucikas T, Grundy LJ, et al. (2013).** "A database of *Caenorhabditis elegans* behavioral phenotypes." *Nature Methods* 10:877-879.
+1. **[Sarma et al. 2016](https://doi.org/10.12688/f1000research.9095.1)** — "Unit testing, model validation, and biological simulation." *F1000Research* 5:1946.
+2. **[Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4)** — "Neural signal propagation atlas of *Caenorhabditis elegans*." *Nature* 623:406-414.
+3. **[Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560)** — "A database of *Caenorhabditis elegans* behavioral phenotypes." *Nature Methods* 10:877-879.
+4. **[Goodman et al. 2002](https://doi.org/10.1038/4151039a)** — "Active currents regulate sensitivity and dynamic range in *C. elegans* neurons." *Nature* 415:1039-1042.
+5. **[Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0)** — "Electrical activity and behavior in the pharynx of *Caenorhabditis elegans*." *Neuron* 12:483-495.
+6. **[Thomas 1990](https://doi.org/10.1093/genetics/124.4.855)** — "The defecation motor program of *Caenorhabditis elegans*." *Genetics* 124:855-872.
 
 ---
 
