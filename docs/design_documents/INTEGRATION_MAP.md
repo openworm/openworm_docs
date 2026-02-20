@@ -38,6 +38,8 @@ This document visualizes **how all Design Documents couple together** at the arc
 
 ## Complete Dependency Graph
 
+**Reading guide:** DDs are grouped into functional clusters. Arrows show major data flows between clusters (not every internal edge). Color-coded: green = core chain, red = closed-loop, blue = validation, purple = visualization. The 4 chain diagrams below show detailed data flow for each pathway.
+
 ![OpenWorm Integration Map](../images/integration_map.svg)
 
 <details>
@@ -46,184 +48,143 @@ This document visualizes **how all Design Documents couple together** at the arc
 ```plantuml
 @startuml OpenWorm_Integration_Map
 
-' Styling
 skinparam backgroundColor #FEFEFE
-skinparam componentStyle rectangle
 skinparam defaultTextAlignment center
+skinparam ArrowThickness 1.5
+skinparam PackageBorderThickness 2
+skinparam PackageFontSize 13
+skinparam ComponentFontSize 11
+skinparam NoteFontSize 10
+skinparam Padding 4
+left to right direction
 
-' Legend
-rectangle "Legend" as legend {
-  component "Accepted (Working)" as leg_accepted #90EE90
-  component "Proposed (Ready)" as leg_proposed #FFE4B5
-  component "Blocked" as leg_blocked #FFB6C1
-  component "External Data" as leg_external #87CEEB
+' === EXTERNAL DATA ===
+package "External Data" as extdata #E6F3FF {
+  component "Connectomes\n(Cook, Witvliet,\nWang, Ripoll-Sanchez)" as ext_conn #87CEEB
+  component "CeNGEN\nExpression Atlas" as ext_cen #87CEEB
+  component "Behavioral Data\n(Schafer, Raizen)" as ext_beh #87CEEB
+  component "Virtual Worm\nMeshes (688)" as ext_vw #87CEEB
 }
 
-' Layer 0: External Data Sources
-package "Layer 0: External Data" #E6F3FF {
-  component "Published\nConnectomes\n(White, Cook,\nWitvliet, Wang)" as ext_connectome #87CEEB
-  component "CeNGEN\nExpression\nAtlas" as ext_cengen #87CEEB
-  component "Experimental\nBehavioral\nData\n(Schafer, Raizen)" as ext_behavior #87CEEB
-  component "EM\nReconstructions\n(Witvliet 2021)" as ext_em #87CEEB
-  component "Virtual Worm\nBlender\nMeshes" as ext_vw #87CEEB
+' === DATA ACCESS ===
+package "Data Access" as databox #F0F8FF {
+  component "DD020\ncect API" as DD020 #90EE90
+  component "DD008\nOWMeta" as DD008 #FFB6C1
 }
 
-' Layer 1: Data Providers
-package "Layer 1: Data Access APIs" #F0F8FF {
-  component "[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)\nConnectome\nData Access\n(cect API)" as [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) #90EE90
-  component "[DD008](DD008_Data_Integration_Pipeline.md)\nOWMeta\nKnowledge\nGraph" as [DD008](DD008_Data_Integration_Pipeline.md) #FFB6C1
-  component "[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)\nMovement\nToolbox\n(WCON)" as [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) #FFB6C1
+' === CORE CHAIN (the spine) ===
+package "Core Simulation Chain" as core #E8F5E9 {
+  component "DD001\n302 Neurons\n(HH, graded syn)" as DD001 #90EE90
+  component "DD002\n95 Muscles\n(Ca -> force)" as DD002 #90EE90
+  component "DD003\nBody Physics\n(SPH ~100K)" as DD003 #90EE90
 }
 
-' Layer 2: Validation Framework
-package "Layer 2: Validation" #FFF5E6 {
-  component "[DD010](DD010_Validation_Framework.md)\nValidation\nFramework\n(3 Tiers)" as [DD010](DD010_Validation_Framework.md) #FFE4B5
+' === EXTENSIONS ===
+package "Neural Extensions" as neurext #F3E5F5 {
+  component "DD005\n128 Neuron\nClasses" as DD005 #FFE4B5
+  component "DD006\nNeuropeptides\n(31K interactions)" as DD006 #FFE4B5
 }
 
-' Layer 3: Core Simulation Chain
-package "Layer 3: Core Simulation" #E8F5E9 {
-  component "[DD001](DD001_Neural_Circuit_Architecture.md)\nNeural\nCircuit\n(302 neurons)" as [DD001](DD001_Neural_Circuit_Architecture.md) #90EE90
-  component "[DD002](DD002_Muscle_Model_Architecture.md)\nMuscle\nModel\n(95 muscles)" as [DD002](DD002_Muscle_Model_Architecture.md) #90EE90
-  component "[DD003](DD003_Body_Physics_Architecture.md)\nBody\nPhysics\n(SPH)" as [DD003](DD003_Body_Physics_Architecture.md) #90EE90
+package "Sensory & Motor" as sensory #FFF3E0 {
+  component "DD019\nTouch Response\n(closed-loop)" as DD019 #FFE4B5
+  component "DD022\nEnvironment\n(gradients)" as DD022 #FFE4B5
+  component "DD023\nProprioception\n(stretch)" as DD023 #FFE4B5
 }
 
-' Layer 4: Integration Orchestrator
-package "Layer 4: Integration" #FFF9E6 {
-  component "[DD013](DD013_Simulation_Stack_Architecture.md)\nSimulation\nStack\n(Docker, CI)" as [DD013](DD013_Simulation_Stack_Architecture.md) #FFE4B5
+' === ORGANS ===
+package "Organ Systems" as organs #FCE4EC {
+  component "DD007\nPharynx\n(63 cells)" as DD007 #FFE4B5
+  component "DD009\nIntestine\n(20 cells)" as DD009 #FFE4B5
+  component "DD018\nEgg-Laying\n(28 cells)" as DD018 #FFE4B5
 }
 
-' Layer 5: Extensions to Core
-package "Layer 5: Extensions" #F3E5F5 {
-  component "[DD005](DD005_Cell_Type_Differentiation_Strategy.md)\nCell-Type\nDifferentiation\n(128 classes)" as [DD005](DD005_Cell_Type_Differentiation_Strategy.md) #FFE4B5
-  component "[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)\nNeuropeptides\n(31,479 interactions)" as [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) #FFE4B5
-  component "[DD004](DD004_Mechanical_Cell_Identity.md)\nMechanical\nCell Identity\n(959 cells)" as [DD004](DD004_Mechanical_Cell_Identity.md) #FFE4B5
-  component "[DD019](DD019_Closed_Loop_Touch_Response.md)\nTouch\nResponse\n(Closed-Loop)" as [DD019](DD019_Closed_Loop_Touch_Response.md) #FFE4B5
-  component "[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md)\nEnvironmental\nModeling\n(Gradients, Stimuli)" as [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) #FFE4B5
-  component "[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)\nProprioception\n(Stretch Receptors)" as [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) #FFE4B5
+' === WHOLE-ORGANISM CELL IDENTITY ===
+package "Whole Organism" as whole #FFEBEE {
+  component "DD004\n959 Cell IDs\n(mechanical)" as DD004 #FFE4B5
 }
 
-' Layer 6: Organ Systems
-package "Layer 6: Organ Systems" #FCE4EC {
-  component "[DD007](DD007_Pharyngeal_System_Architecture.md)\nPharyngeal\nSystem\n(63 cells)" as [DD007](DD007_Pharyngeal_System_Architecture.md) #FFE4B5
-  component "[DD009](DD009_Intestinal_Oscillator_Model.md)\nIntestinal\nOscillator\n(20 cells)" as [DD009](DD009_Intestinal_Oscillator_Model.md) #FFE4B5
-  component "[DD018](DD018_Egg_Laying_System_Architecture.md)\nEgg-Laying\n(28 cells)" as [DD018](DD018_Egg_Laying_System_Architecture.md) #FFE4B5
+' === INFRASTRUCTURE ===
+package "Infrastructure" as infra #FFF9C4 {
+  component "DD013\nDocker Stack\n(orchestrator)" as DD013 #FFE4B5
+  component "DD017\nHybrid ML\n(1000x speedup)" as DD017 #FFE4B5
 }
 
-' Layer 7: Visualization
-package "Layer 7: Visualization" #E8EAF6 {
-  component "[DD014](DD014_Dynamic_Visualization_Architecture.md)\nDynamic\nVisualization" as [DD014](DD014_Dynamic_Visualization_Architecture.md) #FFE4B5
-  component "[DD014.1](DD014.1_Visual_Rendering_Specification.md)\nVisual\nRendering\nSpec" as [DD014.1](DD014.1_Visual_Rendering_Specification.md) #FFE4B5
-  component "[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)\nMesh\nDeformation" as [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) #FFE4B5
+' === VALIDATION ===
+package "Validation" as valbox #FFF5E6 {
+  component "DD010\n3-Tier\nValidation" as DD010 #FFE4B5
+  component "DD021\nMovement\nToolbox" as DD021 #FFB6C1
 }
 
-' Layer 8: Hybrid/Advanced
-package "Layer 8: Hybrid ML" #FFF3E0 {
-  component "[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)\nHybrid\nMechanistic-ML" as [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) #FFE4B5
+' === VISUALIZATION ===
+package "Visualization (WormSim 2.0)" as visbox #E8EAF6 {
+  component "DD014\nDynamic Viewer\n(Trame->Three.js)" as DD014 #FFE4B5
+  component "DD014.1\nRendering Spec" as DD0141 #FFE4B5
+  component "DD014.2\nMesh Deform" as DD0142 #FFE4B5
 }
 
-' External Data → Data APIs
-ext_connectome --> [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) : "EM adjacency\nmatrices"
-ext_cengen --> [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) : "scRNA-seq\nexpression"
-ext_cengen --> [DD008](DD008_Data_Integration_Pipeline.md) : "Gene expression\n(future)"
-ext_behavior --> [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) : "WCON\ntrajectories"
-ext_em --> [DD008](DD008_Data_Integration_Pipeline.md) : "Cell positions\n(future)"
-ext_vw --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) : "688 meshes\n~1.6M vertices"
+' === GOVERNANCE ===
+package "Governance" as gov #F5F5F5 {
+  component "DD011 Contributors\nDD012 RFC Process\nDD015 AI Agents" as GOV #E0E0E0
+}
 
-' Data APIs → Core
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Connectome\ntopology"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD002](DD002_Muscle_Model_Architecture.md) : "NMJ\nconnectivity"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD005](DD005_Cell_Type_Differentiation_Strategy.md) : "Neuron\nclass list"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) : "Peptide-receptor\npairs"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD007](DD007_Pharyngeal_System_Architecture.md) : "Pharyngeal\nconnectome"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD018](DD018_Egg_Laying_System_Architecture.md) : "HSN/VC/sex muscle\nconnectivity"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD019](DD019_Closed_Loop_Touch_Response.md) : "Touch circuit\ntopology"
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "Graph structure\nfor GNNs"
+' === EDGES: Major data flows only ===
 
-[DD008](DD008_Data_Integration_Pipeline.md) --> [DD005](DD005_Cell_Type_Differentiation_Strategy.md) : "CeNGEN\nexpression"
-[DD008](DD008_Data_Integration_Pipeline.md) --> [DD004](DD004_Mechanical_Cell_Identity.md) : "Cell positions,\nWBbt IDs"
-[DD008](DD008_Data_Integration_Pipeline.md) --> [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) : "3D cell\npositions"
+' External -> Data Access
+ext_conn --> DD020
+ext_cen --> DD020
+ext_beh --> DD021
 
-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) --> [DD010](DD010_Validation_Framework.md) : "Kinematic\nfeature\nextraction"
+' Data Access -> Core
+DD020 --> DD001 : connectome\ntopology
+DD020 --> DD005 : neuron classes
 
-' Core Simulation Chain
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD002](DD002_Muscle_Model_Architecture.md) : "Neuron voltage,\ncalcium (NMJ)"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD003](DD003_Body_Physics_Architecture.md) : "Muscle Ca²⁺\n→ activation"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD019](DD019_Closed_Loop_Touch_Response.md) : "SPH particle\npositions\n→ strain"
-[DD019](DD019_Closed_Loop_Touch_Response.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Strain\n→ MEC-4 current\n(CLOSES LOOP)" #FF0000
+' Core chain (THE SPINE)
+DD001 -[#008000,bold]-> DD002 : voltage/Ca\n(NMJ)
+DD002 -[#008000,bold]-> DD003 : muscle\nactivation
 
-' Extensions to Core
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD005](DD005_Cell_Type_Differentiation_Strategy.md) : "Generic neuron\ntemplate"
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "128 cell-type\nNeuroML files"
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) : "Neuron calcium\n(peptide release)"
-[DD006](DD006_Neuropeptidergic_Connectome_Integration.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Conductance\nmodulation"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD004](DD004_Mechanical_Cell_Identity.md) : "Particle struct,\ninitialization"
-[DD004](DD004_Mechanical_Cell_Identity.md) --> [DD003](DD003_Body_Physics_Architecture.md) : "Tagged particles\nwith cell IDs"
+' Neural extensions <-> Core
+DD005 --> DD001 : 128 cell\ntemplates
+DD006 --> DD001 : conductance\nmodulation
 
-' Environment & Proprioception
-[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD019](DD019_Closed_Loop_Touch_Response.md) : "Stimulus\ndelivery"
-[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD003](DD003_Body_Physics_Architecture.md) : "Substrate\nproperties"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) : "Body curvature\n(SPH particles)"
-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Stretch current\non B-class\nmotor neurons"
+' Sensory <-> Core (CLOSED LOOP)
+DD003 -[#CC0000,bold]-> DD019 : SPH strain
+DD019 -[#CC0000,bold]-> DD001 : MEC-4\ncurrent
+DD022 --> DD019 : stimuli
+DD003 --> DD023 : curvature
+DD023 --> DD001 : stretch\ncurrent
 
-' Organ Systems
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD007](DD007_Pharyngeal_System_Architecture.md) : "Pharyngeal\nneural circuit"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD007](DD007_Pharyngeal_System_Architecture.md) : "Muscle model\nframework"
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD009](DD009_Intestinal_Oscillator_Model.md) : "Enteric neuron\ncoupling"
-[DD004](DD004_Mechanical_Cell_Identity.md) --> [DD009](DD009_Intestinal_Oscillator_Model.md) : "Intestinal cell\nIDs (optional)"
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD018](DD018_Egg_Laying_System_Architecture.md) : "HSN/VC\nvoltage/calcium"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD018](DD018_Egg_Laying_System_Architecture.md) : "Muscle HH\nframework"
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) --> [DD018](DD018_Egg_Laying_System_Architecture.md) : "HSN/VC\nconductances"
-[DD006](DD006_Neuropeptidergic_Connectome_Integration.md) --> [DD018](DD018_Egg_Laying_System_Architecture.md) : "Serotonin/NLP-3\nmodulation"
+' Organs <- Core
+DD001 --> DD007 : pharyngeal\ncircuit
+DD001 --> DD018 : HSN/VC
+DD006 --> DD018 : serotonin
 
-' All → Integration
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Neural output"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Muscle output"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Body output"
-[DD007](DD007_Pharyngeal_System_Architecture.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Pharynx output"
-[DD009](DD009_Intestinal_Oscillator_Model.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Intestine output"
-[DD018](DD018_Egg_Laying_System_Architecture.md) --> [DD013](DD013_Simulation_Stack_Architecture.md) : "Egg-laying output"
+' Whole organism
+DD003 --> DD004 : particle\nstruct
+DD004 --> DD003 : cell IDs
 
-' All → Validation
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD010](DD010_Validation_Framework.md) : "Calcium traces\n(Tier 1+2)"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD010](DD010_Validation_Framework.md) : "Kinematics\n(Tier 3)"
-[DD007](DD007_Pharyngeal_System_Architecture.md) --> [DD010](DD010_Validation_Framework.md) : "Pumping freq\n(Tier 3)"
-[DD009](DD009_Intestinal_Oscillator_Model.md) --> [DD010](DD010_Validation_Framework.md) : "Defecation period\n(Tier 3)"
-[DD018](DD018_Egg_Laying_System_Architecture.md) --> [DD010](DD010_Validation_Framework.md) : "Egg-laying pattern\n(Tier 3)"
+' Core -> Validation
+DD003 -[#0000CC]-> DD010 : kinematics
+DD021 --> DD010 : feature\nextraction
 
-' All → Visualization
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Neural voltage,\ncalcium, positions"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Muscle activation,\ncalcium"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Particle positions,\ntypes"
-[DD004](DD004_Mechanical_Cell_Identity.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Cell IDs\n(color-by-type)"
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Neuron class\nlabels"
-[DD006](DD006_Neuropeptidergic_Connectome_Integration.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Peptide\nconcentrations"
-[DD007](DD007_Pharyngeal_System_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Pumping state"
-[DD009](DD009_Intestinal_Oscillator_Model.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Intestinal calcium,\ndefecation events"
-[DD018](DD018_Egg_Laying_System_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Sex muscle\nactivation"
-[DD019](DD019_Closed_Loop_Touch_Response.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Cuticle strain,\nreversal events"
-[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Environment\ngradients"
-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Body curvature\nheatmap"
-[DD010](DD010_Validation_Framework.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Validation\noverlay"
+' Core -> Visualization
+DD003 -[#660099]-> DD014 : OME-Zarr\n(all subsystems)
+ext_vw --> DD0142 : meshes
+DD003 --> DD0142 : SPH\npositions
 
-' Visualization Internal
-[DD014](DD014_Dynamic_Visualization_Architecture.md) --> [DD014.1](DD014.1_Visual_Rendering_Specification.md) : "OME-Zarr schema,\nlayer structure"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) : "SPH particle\npositions"
-[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Deformed meshes\n(~1.6M vertices)"
+' ML
+DD017 --> DD001 : fitted\nparams
 
-' Hybrid ML
-[DD001](DD001_Neural_Circuit_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "HH equations\n(reference)"
-[DD002](DD002_Muscle_Model_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "Muscle dynamics"
-[DD003](DD003_Body_Physics_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "SPH output\n(training data)"
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "CeNGEN expression"
-[DD010](DD010_Validation_Framework.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) : "Validation targets\n(loss function)"
-[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Auto-fitted\nparameters"
-[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) --> [DD010](DD010_Validation_Framework.md) : "Surrogate\npredictions"
-
-' [DD013](DD013_Simulation_Stack_Architecture.md) orchestrates all
-[DD013](DD013_Simulation_Stack_Architecture.md) ..> [DD001](DD001_Neural_Circuit_Architecture.md) : "Orchestrates"
-[DD013](DD013_Simulation_Stack_Architecture.md) ..> [DD002](DD002_Muscle_Model_Architecture.md) : "Orchestrates"
-[DD013](DD013_Simulation_Stack_Architecture.md) ..> [DD003](DD003_Body_Physics_Architecture.md) : "Orchestrates"
-[DD013](DD013_Simulation_Stack_Architecture.md) ..> [DD010](DD010_Validation_Framework.md) : "Runs validation"
+legend bottom left
+  |= Color |= Meaning |
+  | <#90EE90> | Accepted (working) |
+  | <#FFE4B5> | Proposed |
+  | <#FFB6C1> | Blocked |
+  | <#87CEEB> | External data |
+  | <color:#008000>**Green arrows**</color> | Core chain |
+  | <color:#CC0000>**Red arrows**</color> | Closed loop |
+  | <color:#0000CC>**Blue arrow**</color> | Validation |
+  | <color:#660099>**Purple arrow**</color> | Visualization |
+end legend
 
 @enduml
 ```
