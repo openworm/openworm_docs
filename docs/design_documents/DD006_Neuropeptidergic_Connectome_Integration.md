@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-Add 31,479 neuropeptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Success: at least 3 peptide knockout phenotypes reproduced within 30% error.
+Model the 31,479 neuropeptide-receptor interactions (already in the ConnectomeToolbox as "extrasynaptic" data from [Ripoll-Sánchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Primary validation: neuropeptide contribution to functional connectivity matches Randi 2023 wt-vs-unc-31 difference (r > 0.3). Secondary: at least 3 peptide knockout phenotypes reproduced within 30% error.
 
 ---
 
@@ -21,7 +21,7 @@ Add 31,479 neuropeptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi
 | **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **What does this produce?** | NeuroML `<peptideRelease>` + `<peptideReceptor>` components for 31,479 peptide-receptor interactions; conductance modulation layer |
-| **Success metric** | ≥3 peptide knockout phenotypes reproduced within 30% error ([DD010](DD010_Validation_Framework.md) Tier 3); wild-type kinematics not degraded |
+| **Success metric** | Functional connectivity: neuropeptide contribution correlates with Randi 2023 wt-vs-unc-31 difference (r > 0.3, [DD010](DD010_Validation_Framework.md) Tier 2); Behavioral: ≥3 peptide knockout phenotypes within 30% error (Tier 3) |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd006` |
 | **Config toggle** | `neural.neuropeptides: true` / `neural.peptide_dataset: "RipollSanchez2023"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `neuropeptides: false` (backward compat), then `neuropeptides: true` |
@@ -33,13 +33,14 @@ Add 31,479 neuropeptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi
 
 | Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
-| **Primary:** Peptide knockout phenotype reproduction | ≥3 known knockouts within 30% quantitative error | Tier 3 (blocking) |
-| **Secondary:** Wild-type kinematic preservation | Within ±15% of baseline (peptides modulate, not destroy, locomotion) | Tier 3 (blocking) |
-| **Tertiary:** Conductance modulation range | All modulation factors in [0.5, 3.0] | Tier 1 (non-blocking) |
+| **Primary:** Functional connectivity improvement | Neuropeptides-ON simulation matches wild-type Randi 2023 better than neuropeptides-OFF; difference matrix correlates with experimental wt-vs-unc-31 difference (r > 0.3) | Tier 2 (blocking) |
+| **Secondary:** Peptide knockout phenotype reproduction | ≥3 known knockouts within 30% quantitative error | Tier 3 (blocking) |
+| **Tertiary:** Wild-type kinematic preservation | Within ±15% of baseline (peptides modulate, not destroy, locomotion) | Tier 3 (blocking) |
+| **Quaternary:** Conductance modulation range | All modulation factors in [0.5, 3.0] | Tier 1 (non-blocking) |
 
-**Before:** 302 neurons connected only by ~5,000 chemical synapses and ~900 gap junctions — fast transmission only, no slow modulatory layer.
+**Before:** 302 neurons connected only by ~5,000 chemical synapses and ~900 gap junctions — fast transmission only, no slow modulatory layer. The ConnectomeToolbox already stores the neuropeptidergic connectome as static adjacency data, but OpenWorm simulations don't use it.
 
-**After:** 31,479 neuropeptide-receptor interactions layered on top, providing seconds-timescale conductance modulation via GPCR-mediated signaling. Each neuron class expresses ~23 peptide genes and ~36 receptors.
+**After:** 31,479 neuropeptide-receptor interactions (consumed from ConnectomeToolbox via `cect` API) layered on top as a *dynamic* modulatory layer, providing seconds-timescale conductance modulation via GPCR-mediated signaling. Each neuron class expresses ~23 peptide genes and ~36 receptors. Validated against Randi 2023 unc-31 functional connectivity data.
 
 ---
 
@@ -90,9 +91,10 @@ Each LEMS extension includes metadata:
 ### Step-by-step
 
 ```bash
-# Step 1: Download Ripoll-Sanchez Table S1 and convert to CSV
-# Data goes into c302/data/neuropeptidergic_connectome.csv
-# [MANUAL] — download from Neuron journal supplementary data
+# Step 1: Access Ripoll-Sanchez neuropeptidergic data via ConnectomeToolbox
+# Data is ALREADY in the cect package as extrasynaptic connectivity
+# pip install cect  # if not already installed via DD020
+python -c "from cect import ConnectomeDataset; print('Extrasynaptic data available')"
 
 # Step 2: Generate network with neuropeptides
 python c302/CElegans.py C1DifferentiatedWithPeptides
@@ -222,30 +224,37 @@ Where:
 
 ### Data Structure: Neuropeptidergic Adjacency Matrix
 
-Extend the ConnectomeToolbox to include a third connection type:
+The ConnectomeToolbox (`cect` package, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) **already contains** neuropeptidergic connectivity as "extrasynaptic" data — both the preliminary Bentley et al. (2016) monoaminergic/peptidergic connectome and the comprehensive Ripoll-Sánchez et al. (2023) neuropeptidergic connectome with short-, medium-, and long-range diffusion models. This data does NOT need to be added; DD006 consumes it via the `cect` API.
 
-| Connection Type | Matrix Dimensions | Entries | Timescale |
-|----------------|------------------|---------|-----------|
-| Chemical synapses | 302 x 302 | ~5,000 | Milliseconds |
-| Gap junctions | 302 x 302 | ~900 | Instantaneous |
-| **Neuropeptides** | 302 x 302 | **31,479** | Seconds |
+| Connection Type | Matrix Dimensions | Entries | Timescale | ConnectomeToolbox Status |
+|----------------|------------------|---------|-----------|------------------------|
+| Chemical synapses | 302 x 302 | ~5,000 | Milliseconds | In toolbox (multiple datasets) |
+| Gap junctions | 302 x 302 | ~900 | Instantaneous | In toolbox (multiple datasets) |
+| **Neuropeptides (extrasynaptic)** | 302 x 302 | **31,479** | Seconds | **Already in toolbox** (Ripoll-Sánchez 2023) |
+| Functional connectivity | 302 x 302 | Full matrix | Empirical | **Already in toolbox** (Randi 2023) |
 
-Each neuropeptidergic connection stores:
+**Accessing extrasynaptic data via `cect` API:**
+```python
+from cect import ConnectomeDataset
+
+# Ripoll-Sánchez 2023 neuropeptidergic connectome (already in cect)
+peptidergic = ConnectomeDataset("RipollSanchez2023")
+# Returns extrasynaptic connections with short/medium/long range categories
+
+# Bentley 2016 monoaminergic/peptidergic (earlier version, also in cect)
+bentley = ConnectomeDataset("Bentley2016")
+```
+
+Each neuropeptidergic connection in the toolbox stores:
 
 - Source neuron ID
 - Target neuron ID
 - Peptide ID (e.g., FLP-1, INS-3, NLP-12)
 - Receptor ID (e.g., NPR-1, DAF-2, TYRA-2)
 - Distance category (short/mid/long)
-- Modulation type (excitatory/inhibitory/unknown)
+- Connection weight
 
-**File format (CSV):**
-```
-source_neuron,target_neuron,peptide_gene,receptor_gene,distance_category,modulation_type,distance_um
-AVAL,AVAR,flp-1,npr-1,short,excitatory,8.2
-RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
-...
-```
+**What DD006 adds on top:** The toolbox provides the static adjacency matrix. DD006 adds the *dynamics* — calcium-dependent peptide release, distance-dependent attenuation, receptor binding kinetics, and conductance modulation — that transform the static connectome into a time-evolving modulatory layer in the simulation.
 
 ---
 
@@ -368,12 +377,55 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 
 ### Validation Procedure
 
-**Primary validation target:** Behavioral assays showing neuropeptide effects.
+DD006 validation has **two independent validation approaches**: functional connectivity comparison (Tier 1, using ConnectomeToolbox data) and behavioral phenotype reproduction (Tier 2, using knockout studies).
+
+#### Tier 1: Functional Connectivity Validation (unc-31 Natural Experiment)
+
+The ConnectomeToolbox and `wormneuroatlas` package ([DD010](DD010_Validation_Framework.md)) contain the [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity data — a whole-brain pairwise correlation matrix showing the effective excitatory/inhibitory influence of each neuron on all others. Critically, this data is available for both **wild-type** and **unc-31 mutant** strains.
+
+**Why this matters for DD006:** UNC-31 is a CAPS protein required for dense-core vesicle fusion — i.e., it is required for neuropeptide release. The unc-31 mutant functional connectome is therefore the functional connectome **without neuropeptide signaling**. This provides a natural experiment that directly isolates the contribution of neuropeptides:
+
+| Condition | Experimental Data | Simulation Equivalent |
+|-----------|------------------|----------------------|
+| **Wild-type** functional connectivity | `wormneuroatlas.get_signal_propagation_atlas(strain="wt")` | Simulation with `neuropeptides: true` |
+| **unc-31 mutant** functional connectivity | `wormneuroatlas.get_signal_propagation_atlas(strain="unc31")` | Simulation with `neuropeptides: false` |
+| **Difference** (wt - unc-31) | Computed from above | Computed from above |
+
+**Acceptance criteria:**
+
+1. The simulation with neuropeptides ON should correlate more strongly with wild-type functional connectivity than the simulation with neuropeptides OFF (r_ON > r_OFF)
+2. The simulation with neuropeptides OFF should correlate more strongly with unc-31 functional connectivity than wild-type (r_OFF_unc31 > r_OFF_wt)
+3. The **difference matrix** (neuropeptides ON minus OFF) should have positive correlation with the experimental difference matrix (wt minus unc-31): r_diff > 0.3
+
+**Testing command:**
+```python
+from wormneuroatlas import NeuroAtlas
+
+atlas = NeuroAtlas()
+fc_wt = atlas.get_signal_propagation_atlas(strain="wt")      # 302x302
+fc_unc31 = atlas.get_signal_propagation_atlas(strain="unc31") # 302x302
+fc_diff_exp = fc_wt - fc_unc31  # Neuropeptide contribution (experimental)
+
+# Compare to simulation
+sim_fc_on  = compute_pairwise_correlations(sim_with_peptides)
+sim_fc_off = compute_pairwise_correlations(sim_without_peptides)
+sim_fc_diff = sim_fc_on - sim_fc_off  # Neuropeptide contribution (simulated)
+
+# Tier 1 acceptance: difference matrices correlate
+r_diff = np.corrcoef(fc_diff_exp.flatten(), sim_fc_diff.flatten())[0, 1]
+assert r_diff > 0.3, f"DD006 Tier 1 FAILED: r_diff = {r_diff}"
+```
+
+**Why this is Tier 1 (not Tier 3):** This validation does not require running a full behavioral simulation — it tests the *circuit-level* effect of neuropeptide modulation directly against experimental data. It can be run as soon as DD006 is implemented, before behavioral validation infrastructure is in place.
+
+#### Tier 2: Behavioral Phenotype Reproduction
+
+**Target:** Behavioral assays showing neuropeptide effects in genetic knockouts.
 
 | Peptide | Knockout Phenotype | Modeling Prediction | Data Source |
 |---------|-------------------|---------------------|-------------|
 | **FLP peptides** | Altered locomotion speed and reversal frequency | Modulation of motor circuit excitability | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers et al. 2003](https://doi.org/10.1038/nn1140) |
-| **NLP-12** (RIM neurons) | Reduced reversal initiation | Reduced excitability of backward command circuit | Ripoll-Sanchez supp data |
+| **NLP-12** (RIM neurons) | Reduced reversal initiation | Reduced excitability of backward command circuit | Ripoll-Sánchez supp data |
 | **INS-1** (ASI neurons) | Dauer decision, lifespan | Modulation of DAF-2 pathway (out of scope for Phase 2) | Future |
 | **PDF-1** (DVA neuron) | Arousal state | Modulation of global excitability | [Choi et al. 2013](https://doi.org/10.1016/j.neuron.2013.04.002) |
 
@@ -431,7 +483,8 @@ python scripts/validate_knockout.py \
 
 **Success criteria:**
 
-- At least 3 peptide knockouts reproduce known phenotypes within 30% error
+- **Tier 1 (functional connectivity):** Neuropeptide contribution difference matrix correlates with experimental (r_diff > 0.3)
+- **Tier 2 (behavioral):** At least 3 peptide knockouts reproduce known phenotypes within 30% error
 - Wild-type simulation does not degrade (kinematic validation still passes)
 - Peptide modulation onset time is >1 second (slower than synapses)
 
@@ -451,7 +504,7 @@ python scripts/validate_knockout.py \
 
 5. **Behavioral state models:** Arousal, stress, satiety are emergent network properties. No explicit "state variable" for arousal. These emerge from peptide modulation of circuit excitability.
 
-6. **Monoaminergic signaling:** Serotonin, dopamine, octopamine, tyramine are small-molecule transmitters, not peptides. Already partially in ConnectomeToolbox (Bentley et al. 2016). Separate from peptide signaling.
+6. **Monoaminergic signaling:** Serotonin, dopamine, octopamine, tyramine are small-molecule transmitters, not peptides. Already in ConnectomeToolbox via Bentley et al. 2016 and Wang et al. 2024 neurotransmitter atlas. Separate from peptide signaling.
 
 7. **Endocrine signaling:** Insulin, TGF-beta, steroids released from non-neural tissues (intestine, hypodermis) into the pseudocoelom. Phase 5 (inter-tissue signaling).
 
@@ -486,13 +539,7 @@ This extrasynaptic layer likely governs slow behavioral states (arousal, stress,
 ```
 Ripoll-Sanchez et al. (2023) Supplementary Data Table S1
 ```
-Download from *Neuron* journal website or request from authors.
-
-**Integrated into ConnectomeToolbox:**
-```
-openworm.org/ConnectomeToolbox
-```
-Add as new connection type alongside chemical synapses and gap junctions.
+**Already integrated into ConnectomeToolbox** (`cect` package v0.2.7+) as "extrasynaptic" connection type. Access via the `cect` Python API ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) — no manual download needed. The toolbox provides standardized access to the full Ripoll-Sánchez 2023 dataset including short-, medium-, and long-range diffusion categories, as well as the earlier Bentley et al. 2016 monoaminergic/peptidergic data for cross-validation.
 
 ### NeuroML Extension Proposal
 
@@ -565,40 +612,45 @@ Each neuron cell template extends to include:
 
 ### Connectome Data Structure
 
-Extend the c302 network generation to read peptide-receptor adjacency matrix:
+Extend the c302 network generation to consume the neuropeptidergic adjacency matrix from the ConnectomeToolbox (`cect` API):
 
 ```python
 # c302/neuroml/CeNGENConnectome.py
 
-def add_neuropeptide_connections(network, peptide_data):
-    for _, row in peptide_data.iterrows():
-        source = row['source_neuron']
-        target = row['target_neuron']
-        peptide = row['peptide_gene']
-        receptor = row['receptor_gene']
-        distance = row['distance_um']
-        mod_type = row['modulation_type']  # excitatory/inhibitory
+from cect import ConnectomeDataset
+
+def add_neuropeptide_connections(network):
+    """Pull extrasynaptic (neuropeptidergic) data from ConnectomeToolbox."""
+    # Access Ripoll-Sánchez 2023 data already in cect
+    peptidergic = ConnectomeDataset("RipollSanchez2023")
+
+    for conn in peptidergic.get_connections(conn_type="extrasynaptic"):
+        source = conn.pre_cell
+        target = conn.post_cell
+        weight = conn.weight
+        # Distance category (short/medium/long) from Ripoll-Sánchez
+        distance_cat = conn.get_annotation("distance_category")
 
         # Create peptide release in source neuron
         network.add_component(
             source,
             "peptideRelease",
-            id=f"{peptide}_release",
-            tau_release=infer_tau_from_distance(distance)
+            id=f"{conn.syntype}_release",
+            tau_release=infer_tau_from_distance_category(distance_cat)
         )
 
         # Create receptor in target neuron
-        mod_factor = 0.5 if mod_type == "excitatory" else -0.3
+        mod_factor = infer_modulation_factor(conn)
         network.add_component(
             target,
             "peptideReceptor",
-            id=f"{receptor}_receptor",
+            id=f"{conn.syntype}_receptor",
             modulation_factor=mod_factor,
-            target_channel=infer_target_channel(receptor)
+            target_channel=infer_target_channel(conn)
         )
 
         # Link source release to target receptor
-        network.link_peptide(source, peptide, target, receptor, distance)
+        network.link_peptide(source, target, conn)
 ```
 
 ### Ripoll-Sanchez Dataset
@@ -618,11 +670,7 @@ DOI: 10.1016/j.neuron.2023.07.002
 - Table S3: Receptor expression
 - Table S4: Distance categories
 
-**Integration:**
-Download Table S1, convert to CSV, add to:
-```
-openworm.org/ConnectomeToolbox/data/neuropeptidergic_connectome.csv
-```
+**Integration status:** All of this data is **already in the ConnectomeToolbox** (`cect` package) as extrasynaptic connectivity. The toolbox has custom Python DataReaders that import the Ripoll-Sánchez data from its original format, standardize neuron naming to Cook et al. 2019 conventions, and expose it through the same `ConnectomeDataset` API used for anatomical and functional connectivity. See the [ConnectomeToolbox website](https://openworm.org/ConnectomeToolbox) for pre-generated visualizations of neuropeptidergic adjacency matrices (e.g., Fig. 4c in Gleeson et al., in preparation).
 
 ### WormBase Neuropeptide Annotations
 
@@ -637,14 +685,26 @@ Gene classes:
 - INS insulin-like: ins-1 through ins-39
 - Receptors: npr-1 through npr-38, dmsr-1, tyra-2, etc.
 
-### Existing Partial Implementation
+### Existing Data in ConnectomeToolbox
 
-The **Bentley et al. 2016 monoaminergic/peptidergic connectome** is already in ConnectomeToolbox:
-```
-https://github.com/openworm/ConnectomeToolbox
-```
+Multiple neuropeptide-relevant datasets are already integrated into the ConnectomeToolbox ([`cect` package](https://github.com/openworm/ConnectomeToolbox)):
 
-The [Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043) dataset is a comprehensive update. Bentley data can serve as a validation subset (check that Ripoll-Sanchez reproduces Bentley's interactions).
+**Extrasynaptic connectivity (neuropeptidergic):**
+
+1. **Bentley et al. 2016** — preliminary monoaminergic/peptidergic connectome (the "multilayer connectome")
+2. **Ripoll-Sánchez et al. 2023** — comprehensive neuropeptidergic connectome (31,479 interactions, short/medium/long range diffusion categories)
+
+**Neurotransmitter atlases (relevant to peptide expression and co-transmission):**
+
+3. **[Pereira et al. 2015](https://doi.org/10.7554/eLife.12432)** — cholinergic nervous system map, includes peptide co-expression data for cholinergic neurons
+4. **[Beets et al. 2022](https://doi.org/10.7554/eLife.81548)** — system-wide mapping of neuropeptide-GPCR interactions in *C. elegans* (precursor to Ripoll-Sánchez, complementary deorphanization data)
+5. **[Wang et al. 2024](https://doi.org/10.7554/eLife.95402)** — comprehensive neurotransmitter atlas for both sexes, including betaine as neuromodulator
+
+**Functional connectivity (validation):**
+
+6. **[Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4)** — whole-brain functional connectivity (wild-type and unc-31 mutant), provides ground truth for neuropeptide modulation effects (see Validation section below)
+
+Bentley data can serve as a validation subset (check that Ripoll-Sánchez reproduces Bentley's interactions). Beets 2022 provides independent GPCR deorphanization data for cross-validation. The toolbox's unified API allows direct comparison between all dataset versions.
 
 ---
 
@@ -736,6 +796,21 @@ The neuropeptidergic connectome likely changes across L1, L4, adult, dauer stage
 5. **Taylor SR et al. (2021).** "Molecular topography of an entire nervous system." *Cell* 184:4329-4347.
    *CeNGEN provides receptor expression data.*
 
+6. **Randi F, Sharma AK, Dvali S, Leifer AM (2023).** "Neural signal propagation atlas of *Caenorhabditis elegans*." *Nature* 623:406-414.
+   *Functional connectivity for wild-type and unc-31 mutant. unc-31 lacks dense-core vesicle release (neuropeptide signaling), providing a natural experiment for DD006 validation. Data accessible via `wormneuroatlas` package and ConnectomeToolbox.*
+
+7. **Pereira L, Kratsios P, Serrano-Saiz E, et al. (2015).** "A cellular and regulatory map of the cholinergic nervous system of *C. elegans*." *eLife* 4:e12432.
+   *Cholinergic map with peptide co-expression data. In ConnectomeToolbox.*
+
+8. **Beets I, Zels S, Vandewyer E, et al. (2022).** "System-wide mapping of neuropeptide-GPCR interactions in *C. elegans*." *eLife* 12:e81548.
+   *Independent GPCR deorphanization data, complementary to Ripoll-Sánchez. In ConnectomeToolbox.*
+
+9. **Wang C, Vidal B, Sural S, et al. (2024).** "A neurotransmitter atlas of *C. elegans* males and hermaphrodites." *eLife* 13:RP95402.
+   *Comprehensive neurotransmitter atlas including betaine. In ConnectomeToolbox.*
+
+10. **Gleeson P, Vickneswaran Y, Ponzi A, Sinha A, Larson SD (in preparation).** "The *C. elegans* Connectome Toolbox: consolidating datasets on multimodal connectivity."
+    *Describes the ConnectomeToolbox framework that consolidates all datasets above into a unified Python API (`cect` package).*
+
 ---
 
 ## Integration Contract
@@ -748,8 +823,9 @@ The neuropeptidergic connectome likely changes across L1, L4, adult, dauer stage
 |-------|----------|----------|--------|-------|
 | Neuron [Ca2+]i (triggers peptide release) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `ca_internal` per neuron | NeuroML state variable | mol/cm3 |
 | 3D cell positions (distance calculation) | [DD008](DD008_Data_Integration_Pipeline.md) / WormAtlas | Per-neuron (x, y, z) | OWMeta query or CSV | um |
-| Ripoll-Sanchez peptide-receptor dataset | External / OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) | 31,479 interaction table | CSV: source, target, peptide, receptor, distance, modulation_type | mixed |
+| Neuropeptidergic connectome (extrasynaptic) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) / `cect` API | 31,479 interactions (Ripoll-Sánchez 2023), already in ConnectomeToolbox as extrasynaptic data | `cect.ConnectomeDataset` | mixed |
 | Ion channel conductance baselines | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `g_baseline` per channel per neuron | NeuroML `<channelDensity>` | S/cm2 |
+| Functional connectivity (validation) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) / `wormneuroatlas` | Randi 2023 wild-type + unc-31 302×302 matrices | `wormneuroatlas` API | dimensionless |
 
 **Outputs (What This Subsystem Produces)**
 
