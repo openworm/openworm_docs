@@ -319,15 +319,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
 | **[DD004](DD004_Mechanical_Cell_Identity.md)** | Mechanical Cell Identity | [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD007](DD007_Pharyngeal_System_Architecture.md)/DD009 (cell positions) | Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion |
-| **[DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)** | Anatomical Mesh Deformation Pipeline | [DD003](DD003_Body_Physics_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices |
-| **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 3)** | Public Experience Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2, [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) | Three.js + WebGPU, molecular scale, static site deployment, "Digital Organism In Your Browser" |
+| **[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)** | Anatomical Mesh Deformation Pipeline | [DD003](DD003_Body_Physics_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices |
+| **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 3)** | Public Experience Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2, [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Three.js + WebGPU, molecular scale, static site deployment, "Digital Organism In Your Browser" |
 
 **Key Deliverables:**
 
 1. **Tagged particle file** (extended SPH_Particle_v2 struct: 44 bytes with `cell_id`, `elasticity_mult`, `adhesion`)
 2. **Cell-to-particle mapping** (`data/cell_to_particle_map.json`) — 959 somatic cells → particle indices
 3. **Cell boundary meshes** (`data/cell_boundaries/*.obj`) — Per-cell 3D volumes from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM
-4. **Deformed Virtual Worm meshes** ([DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)) — 688 anatomical meshes follow SPH body shape in real-time
+4. **Deformed Virtual Worm meshes** ([DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) — 688 anatomical meshes follow SPH body shape in real-time
 5. **Three.js viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — viewer.openworm.org (GitHub Pages or CDN)
 
@@ -345,14 +345,14 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Tier 3 validation: kinematic metrics within ±15% with `cell_identity: true` enabled
 - ✅ Mesh deformation: All 688 Virtual Worm meshes deform with SPH body, no interpenetration, <4ms per frame (60fps budget)
 - ✅ Three.js viewer: 60fps on 2020-era laptop, all 3 scales working, static deployment (no server required)
-- ✅ Molecular scale: Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion visible ([DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14)
+- ✅ Molecular scale: Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion visible ([DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14)
 
 **Datasets Needed for Phase 4:**
 
 | Dataset | Source | Format | Use Case | Status |
 |---------|--------|--------|----------|--------|
 | **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions (OBJ or STL per cell) | [DD004](DD004_Mechanical_Cell_Identity.md) particle tagging | ⚠️ Needs extraction/conversion from EM data |
-| **Virtual Worm Blender meshes** | Blender2NeuroML repo | .blend file (688 meshes, ~1.6M vertices) | [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) deformation | ✅ Available (Virtual_Worm_February_2012.blend) |
+| **Virtual Worm Blender meshes** | Blender2NeuroML repo | .blend file (688 meshes, ~1.6M vertices) | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) deformation | ✅ Available (Virtual_Worm_February_2012.blend) |
 | **Cell-type mechanical properties** | Literature review (elasticity, adhesion per tissue type) | CSV (cell_type, elasticity_mult, adhesion_strength) | [DD004](DD004_Mechanical_Cell_Identity.md) physics params | ⚠️ Needs curation from biomechanics literature |
 | **WBbt cell ontology** | WormBase | RDF or CSV (cell_name → WBbt_ID mapping) | [DD004](DD004_Mechanical_Cell_Identity.md) cell identity normalization | ✅ Available via WormBase API |
 
@@ -474,11 +474,11 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 | CeNGEN L1 | cengen.org | 2021+ | CSV (L1 neuron classes × genes) | Phase 6 (developmental) | ✅ Available but less mature |
 | [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Science 365:eaax1971 | 2019 | Embryonic gene expression | Phase 6 (embryonic modeling) | ⚠️ Needs ingestion |
 
-### Anatomical / Morphological Datasets ([DD004](DD004_Mechanical_Cell_Identity.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md))
+### Anatomical / Morphological Datasets ([DD004](DD004_Mechanical_Cell_Identity.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
 
 | Dataset | Source | Year | Format | Used In | Status |
 |---------|--------|------|--------|---------|--------|
-| **Virtual Worm Blender model** | Caltech/WormBase (Grove & Sternberg) | 2012 | .blend (688 meshes, 37 materials) | [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation | ✅ In Blender2NeuroML repo |
+| **Virtual Worm Blender model** | Caltech/WormBase (Grove & Sternberg) | 2012 | .blend (688 meshes, 37 materials) | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation | ✅ In Blender2NeuroML repo |
 | [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) 3D atlas | Nature Methods 6:667 | 2009 | 3D nuclear positions (357 nuclei, L1) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (distance), [DD004](DD004_Mechanical_Cell_Identity.md) (cell positions) | ⚠️ Needs extraction |
 | **WormAtlas anatomy** | wormatlas.org | Ongoing | EM images, cell descriptions, Slidable Worm | [DD004](DD004_Mechanical_Cell_Identity.md) (cell boundaries), [DD008](DD008_Data_Integration_Pipeline.md) (cell positions) | ✅ Available via web scraping or API |
 | **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions** | Nature 596:257 | 2021 | 3D cell volumes (8 animals × 8 stages) | **Phase 4** — [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries | ⚠️ Needs conversion from EM data |
@@ -522,7 +522,7 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD021](DD021_Movement
 
 - Phase 1 [DD014](DD014_Dynamic_Visualization_Architecture.md) (viewer) can proceed alongside [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell differentiation)
 - Phase 3 organ DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) can be implemented in any order or in parallel
-- Phase 4 [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation) can proceed in either order
+- Phase 4 [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation) can proceed in either order
 
 **What Blocks Everything:**
 
@@ -541,7 +541,7 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD021](DD021_Movement
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (differentiated, not added) | +2 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1) |
 | Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +2 DDs ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2) |
 | Phase 3 | 6 months | Oct 2026-Mar 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) |
-| Phase 4 | 6 months | Apr-Sep 2027 | **959** (all somatic cells) | +2 DDs ([DD004](DD004_Mechanical_Cell_Identity.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) |
+| Phase 4 | 6 months | Apr-Sep 2027 | **959** (all somatic cells) | +2 DDs ([DD004](DD004_Mechanical_Cell_Identity.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) |
 | **TOTAL** | **~18 months** | **Mar 2026 - Sep 2027** | **959 cells** | **18 DDs implemented** |
 
 **Phases 5-7:** Year 3+ (intracellular, developmental, male-specific)
@@ -607,7 +607,7 @@ A: Without the config system ([DD013](DD013_Simulation_Stack_Architecture.md)) a
 A: Yes — they're semi-independent subsystems. Different contributors can work on pharynx, intestine, and egg-laying simultaneously. [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (hybrid ML) can also proceed in parallel.
 
 **Q: Why is [DD004](DD004_Mechanical_Cell_Identity.md) (Cell Identity) in Phase 4, not earlier?**
-A: [DD004](DD004_Mechanical_Cell_Identity.md) requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 3), observe their mechanics, then add cell-specific properties in Phase 4. [DD004](DD004_Mechanical_Cell_Identity.md) is also needed for [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation.
+A: [DD004](DD004_Mechanical_Cell_Identity.md) requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 3), observe their mechanics, then add cell-specific properties in Phase 4. [DD004](DD004_Mechanical_Cell_Identity.md) is also needed for [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation.
 
 **Q: What if Phase 1 [DD005](DD005_Cell_Type_Differentiation_Strategy.md) fails validation (Tier 2 doesn't improve)?**
 A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 (foundation model→params) or manual curation. [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s scientific risk is why it's Phase 1 — validate the approach early before building more on top of it.

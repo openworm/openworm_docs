@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1–4](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Visualization
+> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3), [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) | **Layer:** Visualization
 
 ## Context
 
@@ -71,7 +71,7 @@ The visualization technology available in 2026 is dramatically better than what 
 
 ## Decision
 
-### Build a Multi-Scale Dynamic Visualization Layer in Three Phases
+### Build a Multi-Scale Dynamic Visualization Layer in Three Stages
 
 The visualization layer is not a single tool. It is a **data export pipeline** (from simulation to viewable format), a **viewer application** (renders the data), and a **multi-scale exploration experience** (lets users zoom between organism, tissue/cell, and molecular scales).
 
@@ -83,19 +83,25 @@ The visualization layer is not a single tool. It is a **data export pipeline** (
 | **Tissue / Cell** | Individual cells colored by activity. Click a muscle to see its calcium trace. Neurons glow when they fire. Intestinal calcium waves propagate as color gradients. | [DD001](DD001_Neural_Circuit_Architecture.md) neuron V/Ca, [DD002](DD002_Muscle_Model_Architecture.md) muscle activation, [DD004](DD004_Mechanical_Cell_Identity.md) cell IDs, [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx cells, [DD009](DD009_Intestinal_Oscillator_Model.md) intestinal cells | Google Earth street view |
 | **Molecular** | Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells. | [DD001](DD001_Neural_Circuit_Architecture.md) channel states, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance densities, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) peptide concentrations | Google Earth indoor view |
 
-**Phase Allocation:**
+**DD014 Viewer Phases vs. Roadmap Phases:**
 
-- **Phase 1 (post-hoc Trame viewer):** Organism + Tissue/Cell scales. Smooth body surface, individual neurons/muscles visible and selectable, activity coloring, time scrubbing.
-- **Phase 2 (interactive dynamic viewer):** All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system.
-- **Phase 3 (public experience):** **Molecular scale** (ion channels, gene expression pipeline, intracellular dynamics per [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org.
+DD014 is developed incrementally across three Roadmap phases. To avoid confusion, the table below maps DD014's internal viewer stages to the [Phase Roadmap](DD_PHASE_ROADMAP.md):
 
-See **[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Phase 3 only** — not part of Phase 1-2 deliverables.
+| DD014 Viewer Stage | Roadmap Phase | Timeline | What Ships |
+|--------------------|---------------|----------|------------|
+| **Viewer Stage 1** — Post-hoc Trame viewer | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (Cell Differentiation, months 1-3) | Weeks 1-8 | Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing. |
+| **Viewer Stage 2** — Interactive dynamic viewer | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Modulation + Closed-Loop, months 4-6) | Weeks 9-20 | All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins. |
+| **Viewer Stage 3** — Public experience | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org. |
 
-**Phase 1 (Option A): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
+Note: There is no DD014 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
 
-**Phase 2 (Option B): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
+See **[DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Viewer Stage 3 only** (Roadmap Phase 4) — not part of Stage 1-2 deliverables.
 
-**Phase 3 (Option C): Public experience.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
+**Viewer Stage 1 (Roadmap Phase 1): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
+
+**Viewer Stage 2 (Roadmap Phase 2): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
+
+**Viewer Stage 3 (Roadmap Phase 4): Public experience.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1](DD014.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
 
 ### Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
 
@@ -474,7 +480,7 @@ docker compose run quick-test  # with visualization.export_format: "legacy"
 
 ## Implementation Roadmap
 
-### Phase 1: Post-Hoc Trame Viewer (Weeks 1-8)
+### Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3), Weeks 1-8)
 
 Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
@@ -493,7 +499,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
 **Deliverable:** `docker compose up viewer` serves a web app with time-animated, multi-layer, interactive 3D worm at `localhost:8501`.
 
-### Phase 2: Interactive Dynamic Viewer (Weeks 9-20)
+### Viewer Stage 2: Interactive Dynamic Viewer (Roadmap [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), Weeks 9-20)
 
 Enhance the viewer with deeper interactivity and begin Three.js migration for public deployment.
 
@@ -503,28 +509,28 @@ Enhance the viewer with deeper interactivity and begin Three.js migration for pu
 | Add intestine layer (when enabled) | Visualization L4 | 8 hrs | [DD009](DD009_Intestinal_Oscillator_Model.md) output |
 | Add neuropeptide volumetric layer (when enabled) | Visualization L4 | 16 hrs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) output |
 | Add validation overlay (green/red pass/fail markers) | Visualization L4 | 4 hrs | [DD010](DD010_Validation_Framework.md) output |
-| Mesh skinning (VirtualWorm mesh deformed by particles) | Visualization L4 | 24 hrs | Phase 1 surface |
-| Begin Three.js + WebGPU prototype | Visualization L4 + community | 40 hrs | Phase 1 data pipeline |
+| Mesh skinning (VirtualWorm mesh deformed by particles) | Visualization L4 | 24 hrs | Stage 1 surface |
+| Begin Three.js + WebGPU prototype | Visualization L4 + community | 40 hrs | Stage 1 data pipeline |
 | Static OME-Zarr hosting (no server required for viewing) | Integration Maintainer | 8 hrs | OME-Zarr export |
 | Multi-scale zoom (organism → tissue transition) | Visualization L4 | 16 hrs | All layers working |
 
 **Deliverable:** Full tissue/cell-scale exploration. Early Three.js prototype for server-free deployment.
 
-### Phase 3: Public Experience — "A Digital Organism In Your Browser" (Weeks 21-32+)
+### Viewer Stage 3: Public Experience — "A Digital Organism In Your Browser" (Roadmap [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18), Weeks 21-32+)
 
 The full WormSim vision, rebuilt on modern technology.
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Complete Three.js + WebGPU viewer | Visualization L4 + community | 80 hrs | Phase 2 prototype |
-| OME-Zarr served from cloud storage (GitHub Pages, S3) | Integration Maintainer | 8 hrs | Phase 2 static hosting |
+| Complete Three.js + WebGPU viewer | Visualization L4 + community | 80 hrs | Stage 2 prototype |
+| OME-Zarr served from cloud storage (GitHub Pages, S3) | Integration Maintainer | 8 hrs | Stage 2 static hosting |
 | Narrative-guided onboarding (tutorial mode) | Community contributor | 24 hrs | Three.js viewer |
 | Educational annotations (cell labels, biology facts) | Community contributor | 16 hrs | Three.js viewer |
 | Molecular-scale view (ion channels, Ca dynamics) | Visualization L4 | 40 hrs | Three.js viewer |
 | Mobile-responsive design | Community contributor | 16 hrs | Three.js viewer |
 | WebXR support (VR/AR exploration) | Community contributor | 24 hrs | Three.js viewer |
 | Deploy to `viewer.openworm.org` (static site) | Integration Maintainer | 4 hrs | Three.js viewer |
-| MyBinder/Colab integration (zero-install demo) | Community contributor | 8 hrs | Phase 1 Trame viewer |
+| MyBinder/Colab integration (zero-install demo) | Community contributor | 8 hrs | Stage 1 Trame viewer |
 
 **Deliverable:** Anyone with a browser can visit `viewer.openworm.org` and explore a dynamic, multi-scale simulation of *C. elegans* — no Docker, no installation, no server.
 

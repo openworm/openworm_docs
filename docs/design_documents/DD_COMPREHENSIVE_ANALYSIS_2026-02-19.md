@@ -2,7 +2,7 @@
 ## OpenWorm Architecture Review — February 19, 2026
 
 **Prepared by:** Claude (Sonnet 4.5)
-**Scope:** All 23 Design Documents ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b + DD016 archived)
+**Scope:** All 23 Design Documents ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b + DD016 archived)
 **Purpose:** Identify inconsistencies, gaps, redundancies, and propose reorganization
 
 ---
@@ -42,9 +42,9 @@
 
 5. **[DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 Scope Unclear**
    - [DD014](DD014_Dynamic_Visualization_Architecture.md) says Phase 1 is "post-hoc static viewer" with "organism and tissue scales"
-   - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) specifies **molecular scale** in extreme detail (nucleus, gene transcription, vesicle trafficking, 14 reference mockups)
+   - [DD014.1](DD014.1_Visual_Rendering_Specification.md) specifies **molecular scale** in extreme detail (nucleus, gene transcription, vesicle trafficking, 14 reference mockups)
    - Is molecular scale Phase 1, 2, or 3?
-   - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14 are molecular — but roadmap suggests this is Phase 3
+   - [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14 are molecular — but roadmap suggests this is Phase 3
    - **Resolution:** Clarify in [DD014](DD014_Dynamic_Visualization_Architecture.md): molecular scale is **Phase 3 only**; Phase 1 = organism + tissue scales
 
 6. **Phase Numbering Is Inconsistent**
@@ -62,11 +62,11 @@
    - **Resolution:** Generate **INTEGRATION_MAP.md** with visual coupling diagram (auto-generated from DD Integration Contracts)
 
 8. **[DD014](DD014_Dynamic_Visualization_Architecture.md) Companions Should Be Renumbered**
-   - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) are companions to [DD014](DD014_Dynamic_Visualization_Architecture.md), not standalone
-   - Current numbering ([DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b) is informal
-   - **Better:** [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) — signals they're sub-documents
+   - [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) are companions to [DD014](DD014_Dynamic_Visualization_Architecture.md), not standalone
+   - Current numbering ([DD014.1](DD014.1_Visual_Rendering_Specification.md)/b) is informal
+   - **Better:** [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) — signals they're sub-documents
    - **Alternative:** Fold into [DD014](DD014_Dynamic_Visualization_Architecture.md) as sections (single massive DD)
-   - **Resolution:** Renumber to [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md), update all cross-references
+   - **Resolution:** Renumber to [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), update all cross-references
 
 9. **Validation L4 Maintainer Is Vacant**
    - [DD011](DD011_Contributor_Progression_Model.md) Subsystem Ownership Map: "Validation: **TBD**"
@@ -177,19 +177,19 @@ Contributors might set `body.backend: taichi-metal` and expect it to work (it mi
 
 ---
 
-### I4. [DD014](DD014_Dynamic_Visualization_Architecture.md) Companions Numbering ([DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b vs. [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2)
+### I4. [DD014](DD014_Dynamic_Visualization_Architecture.md) Companions Numbering ([DD014.1](DD014.1_Visual_Rendering_Specification.md)/b vs. [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2)
 
 **The Issue:**
-[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) are **companion documents** to [DD014](DD014_Dynamic_Visualization_Architecture.md), not standalone DDs. The "a/b" suffix is informal and doesn't appear in other DDs (no DD001a, DD002a, etc.).
+[DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) are **companion documents** to [DD014](DD014_Dynamic_Visualization_Architecture.md), not standalone DDs. The "a/b" suffix is informal and doesn't appear in other DDs (no DD001a, DD002a, etc.).
 
 **Impact:**
 
 - Inconsistent numbering scheme
-- Cross-references use "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)" which looks like a typo
+- Cross-references use "[DD014.1](DD014.1_Visual_Rendering_Specification.md)" which looks like a typo
 - Index/README tables need special cases for companion DDs
 
 **Resolution:**
-**Option A:** Renumber to [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation)
+**Option A:** Renumber to [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation)
 **Option B:** Fold into [DD014](DD014_Dynamic_Visualization_Architecture.md) as sections (single 2000-line mega-DD)
 **Option C:** Keep as-is but document the companion convention in [DD012](DD012_Design_Document_RFC_Process.md)
 
@@ -251,7 +251,7 @@ Almost every science DD ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](
 - [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): 3 scripts
 - [DD007](DD007_Pharyngeal_System_Architecture.md): 4 scripts
 - [DD009](DD009_Intestinal_Oscillator_Model.md): 8 scripts
-- [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md): 9 scripts
+- [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md): 9 scripts
 - [DD018](DD018_Egg_Laying_System_Architecture.md): 6 scripts
 - [DD019](DD019_Closed_Loop_Touch_Response.md): 7 scripts
 - [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md): 0 (toolbox itself is the issue)
@@ -315,7 +315,7 @@ Cuticle is mentioned in 5 DDs but never fully specified:
 |----|-----------|------------------|
 | [DD003](DD003_Body_Physics_Architecture.md) | Line 290 | "Cuticle fine structure: basal, medial, cortical layers with distinct mechanical properties. Homogeneous elastic particles used. Phase 4 work." |
 | [DD004](DD004_Mechanical_Cell_Identity.md) | Line 144-148 | Cuticle elasticity multipliers (5x basal, 3x medial, 10x cortical) but no implementation |
-| [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) | Line 263 | Cuticle opacity 0.85, roughness 0.3, subsurface scattering — visual only, not mechanical |
+| [DD014.1](DD014.1_Visual_Rendering_Specification.md) | Line 263 | Cuticle opacity 0.85, roughness 0.3, subsurface scattering — visual only, not mechanical |
 | [DD019](DD019_Closed_Loop_Touch_Response.md) | Line 595 | "Detailed cuticle layer mechanics... homogeneous elastic particles sufficient for [DD019](DD019_Closed_Loop_Touch_Response.md)." |
 
 **The Gap:**
@@ -484,7 +484,7 @@ No single source of truth for "What is Phase 1? Which DDs belong to it? What's t
 
 ## Phase 4: Mechanical Cell Identity (Months 13-18)
 - [DD004](DD004_Mechanical_Cell_Identity.md) (Per-particle cell IDs, 959 cells)
-- [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh deformation — cage-based, PBD collision)
+- [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh deformation — cage-based, PBD collision)
 
 ## Phase 5: Intracellular Signaling (Months 19-24+)
 - [To be written] — IP3/cAMP/MAPK cascades, detailed GPCR biochemistry
@@ -549,8 +549,8 @@ graph TD
     [DD009](DD009_Intestinal_Oscillator_Model.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md)
     [DD018](DD018_Egg_Laying_System_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md)
     [DD019](DD019_Closed_Loop_Touch_Response.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md)
-    [DD014](DD014_Dynamic_Visualization_Architecture.md) --> [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)[DD014.1: Visual Rendering]
-    [DD003](DD003_Body_Physics_Architecture.md) --> [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)[DD014.2: Mesh Deformation]
+    [DD014](DD014_Dynamic_Visualization_Architecture.md) --> [DD014.1](DD014.1_Visual_Rendering_Specification.md)[DD014.1: Visual Rendering]
+    [DD003](DD003_Body_Physics_Architecture.md) --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)[DD014.2: Mesh Deformation]
     [DD001](DD001_Neural_Circuit_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)[DD017: Hybrid ML]
     [DD002](DD002_Muscle_Model_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)
     [DD003](DD003_Body_Physics_Architecture.md) --> [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)
@@ -787,7 +787,7 @@ The README groups DDs as:
 1. **Core Architecture** ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md))
 2. **Proposed Extensions** ([DD004](DD004_Mechanical_Cell_Identity.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md))
 3. **Infrastructure** ([DD008](DD008_Data_Integration_Pipeline.md), [DD010](DD010_Validation_Framework.md)-[DD013](DD013_Simulation_Stack_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
-4. **Visualization** ([DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md))
+4. **Visualization** ([DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
 5. **AI/ML** ([DD015](DD015_AI_Contributor_Model.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
 6. **Archived** (DD016)
 
@@ -845,8 +845,8 @@ This grouping shows **how data flows through the system** from foundational laye
 **Layer 7: Visualization (Consumes All Outputs)**
 
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) (Dynamic Visualization Architecture)
-- [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering Specification)
-- [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Anatomical Mesh Deformation Pipeline)
+- [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)
+- [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Anatomical Mesh Deformation Pipeline)
 
 **Layer 8: Advanced/Hybrid (Future)**
 
@@ -904,7 +904,7 @@ This grouping shows **when each DD gets implemented** (matches Phase Roadmap fro
 **Phase 4: Mechanical Detail (Months 13-18)**
 
 - [DD004](DD004_Mechanical_Cell_Identity.md) (Cell Identity — 959 cells)
-- [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation — cage-based)
+- [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation — cage-based)
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3 (Public experience, molecular scale)
 
 **Phase 5-6: Future (Not Yet Specified)**
@@ -946,7 +946,7 @@ Both views are useful for different purposes.
 | I2 | Toolbox "partial" vs. "completely broken" | [DD010](DD010_Validation_Framework.md) vs [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | 🔴 Major | Update [DD010](DD010_Validation_Framework.md): mark Tier 3 as BLOCKED, reference [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival |
 | I3 | Backend options (4 listed) vs. reality (1 stable) | [DD013](DD013_Simulation_Stack_Architecture.md) vs [DD003](DD003_Body_Physics_Architecture.md) | 🟡 Moderate | Annotate [DD013](DD013_Simulation_Stack_Architecture.md) config: opencl (stable), others (experimental) |
 | I4 | Boyle & Cohen used for both neurons and muscles | [DD001](DD001_Neural_Circuit_Architecture.md) vs [DD002](DD002_Muscle_Model_Architecture.md) | 🟢 Minor | Clarify [DD001](DD001_Neural_Circuit_Architecture.md): muscle params used for neurons due to data scarcity |
-| I5 | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 scope (molecular scale yes/no?) | [DD014](DD014_Dynamic_Visualization_Architecture.md) vs [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) | 🟡 Moderate | Clarify [DD014](DD014_Dynamic_Visualization_Architecture.md) roadmap: molecular is Phase 3 only |
+| I5 | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 scope (molecular scale yes/no?) | [DD014](DD014_Dynamic_Visualization_Architecture.md) vs [DD014.1](DD014.1_Visual_Rendering_Specification.md) | 🟡 Moderate | Clarify [DD014](DD014_Dynamic_Visualization_Architecture.md) roadmap: molecular is Phase 3 only |
 | I6 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) "~20 neuron electrophysiology" but only 5-7 listed | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) internal | 🟡 Moderate | Expand training set table with all 20, or correct to "~7" |
 | I7 | [DD008](DD008_Data_Integration_Pipeline.md) "dormant since Jul 2024" but marked Accepted | [DD008](DD008_Data_Integration_Pipeline.md) status | 🟢 Minor | Update status to "Accepted (with dormant components)" |
 | I8 | [DD019](DD019_Closed_Loop_Touch_Response.md) says proprioception "could be [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)" but [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) is connectome | [DD019](DD019_Closed_Loop_Touch_Response.md) line 583 | 🟢 Minor | Fix typo: "could be [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)" or "future DD" |
@@ -959,7 +959,7 @@ Both views are useful for different purposes.
 |---|-----|------|----------|---------------------|
 | G1 | ~50 missing scripts marked `[TO BE CREATED]` with no GitHub issues | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | 🔴 Critical | Run dd_issue_generator.py, create issues, update DDs with real issue numbers |
 | G2 | No DD for Environment / Boundary Conditions / Stimulus Delivery | Multiple DDs reference but none specify | 🟡 Moderate | Create [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md): Environmental Modeling (substrates, gradients, obstacles, food) |
-| G3 | No DD for Cuticle Fine Structure (3 layers, anisotropy) | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🟡 Moderate | Fold into [DD004](DD004_Mechanical_Cell_Identity.md) or create [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) |
+| G3 | No DD for Cuticle Fine Structure (3 layers, anisotropy) | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🟡 Moderate | Fold into [DD004](DD004_Mechanical_Cell_Identity.md) or create [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) |
 | G4 | No DD for Proprioceptive Feedback (motor neuron stretch receptors) | [DD019](DD019_Closed_Loop_Touch_Response.md) scopes out | 🟡 Moderate | Create [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) or DD024: Proprioceptive Feedback (Wen et al. 2012) |
 | G5 | No DDs for Chemosensory / Thermosensory / Olfactory Transduction | [DD019](DD019_Closed_Loop_Touch_Response.md) scopes out, [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) defers | 🟡 Moderate | Phase 3+ work; defer until [DD019](DD019_Closed_Loop_Touch_Response.md) mechanistic approach validated |
 | G6 | No DD for Male-Specific Modeling (385 neurons, mating circuit) | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | 🟢 Low (Phase 6+) | Acknowledge in Phase 6 roadmap when created |
@@ -1046,7 +1046,7 @@ Both views are useful for different purposes.
 | DD | Title | Dependencies | What It Does |
 |----|-------|-------------|--------------|
 | [DD004](DD004_Mechanical_Cell_Identity.md) | Mechanical Cell Identity | [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md) | Per-particle cell IDs, 959 somatic cells, cell-type-specific elasticity |
-| [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) | Anatomical Mesh Deformation | [DD003](DD003_Body_Physics_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) | GPU skinning, cage-based MVC, PBD collision for ~1.6M vertices |
+| [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Anatomical Mesh Deformation | [DD003](DD003_Body_Physics_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) | GPU skinning, cage-based MVC, PBD collision for ~1.6M vertices |
 | [DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 3) | Public Experience Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2 | Three.js + WebGPU, molecular scale, "Digital Organism In Your Browser" |
 
 ### Phase 5-6: Future (Not Yet Specified)
@@ -1079,7 +1079,7 @@ Both views are useful for different purposes.
 [DD002](DD002_Muscle_Model_Architecture.md) (body wall), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharyngeal muscles), [DD018](DD018_Egg_Laying_System_Architecture.md) (vulval/uterine muscles)
 
 **Body Mechanics:**
-[DD003](DD003_Body_Physics_Architecture.md) (SPH), [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD019](DD019_Closed_Loop_Touch_Response.md) (strain readout)
+[DD003](DD003_Body_Physics_Architecture.md) (SPH), [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD019](DD019_Closed_Loop_Touch_Response.md) (strain readout)
 
 **Sensory Transduction:**
 [DD019](DD019_Closed_Loop_Touch_Response.md) (touch — MEC-4), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned, ML-based)
@@ -1094,7 +1094,7 @@ Both views are useful for different purposes.
 [DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack)
 
 **Visualization:**
-[DD014](DD014_Dynamic_Visualization_Architecture.md) (architecture), [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (visual spec), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
+[DD014](DD014_Dynamic_Visualization_Architecture.md) (architecture), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual spec), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
 
 **Governance:**
 [DD011](DD011_Contributor_Progression_Model.md) (progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC), [DD015](DD015_AI_Contributor_Model.md) (AI)
@@ -1131,7 +1131,7 @@ Last updated: 2026-02-19
 | DD | Producers (count) | Consumers (count) | Criticality |
 |----|------------------|------------------|-------------|
 | **[DD001](DD001_Neural_Circuit_Architecture.md)** (Neural) | 1 ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) | 11 ([DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) | 🔴 CRITICAL BOTTLENECK |
-| **[DD003](DD003_Body_Physics_Architecture.md)** (Body Physics) | 1 ([DD002](DD002_Muscle_Model_Architecture.md)) | 7 ([DD004](DD004_Mechanical_Cell_Identity.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) | 🔴 CRITICAL |
+| **[DD003](DD003_Body_Physics_Architecture.md)** (Body Physics) | 1 ([DD002](DD002_Muscle_Model_Architecture.md)) | 7 ([DD004](DD004_Mechanical_Cell_Identity.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) | 🔴 CRITICAL |
 | **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome) | 0 (external data) | 9 ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) | 🔴 CRITICAL FOUNDATION |
 | **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** (Toolbox) | 0 (external data) | 1 ([DD010](DD010_Validation_Framework.md) Tier 3) | 🟡 BLOCKING (for validation only) |
 | **[DD013](DD013_Simulation_Stack_Architecture.md)** (Integration) | 10+ (all science DDs) | 0 (orchestrator, no one depends on it) | ℹ️ LEAF NODE |
@@ -1191,9 +1191,9 @@ Last updated: 2026-02-19
   ↓ (all export to OME-Zarr)
 [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr groups: neural/, muscle/, body/, pharynx/, intestine/, etc.)
   ↓
-[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (color mapping, activity overlays)
+[DD014.1](DD014.1_Visual_Rendering_Specification.md) (color mapping, activity overlays)
   ↓
-[DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation from SPH particles)
+[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation from SPH particles)
   ↓
 Viewer renders all subsystems in a single 3D scene
 ```
@@ -1399,7 +1399,7 @@ done
 
 ---
 
-### R7. Renumber [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b to [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2
+### R7. Renumber [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b to [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2
 
 **Files to rename:**
 
@@ -1407,14 +1407,14 @@ done
 - `DD014.2_Anatomical_Mesh_Deformation_Pipeline.md` → `DD014.2_Anatomical_Mesh_Deformation_Pipeline.md`
 
 **Cross-references to update:**
-Search all DDs for "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)" and "[DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)", replace with "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)" and "[DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)".
+Search all DDs for "[DD014.1](DD014.1_Visual_Rendering_Specification.md)" and "[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)", replace with "[DD014.1](DD014.1_Visual_Rendering_Specification.md)" and "[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)".
 
 **README.md:** Update Visualization section to show hierarchy:
 ```markdown
 **Visualization:**
 - [DD014](DD014_Dynamic_Visualization_Architecture.md): Dynamic Visualization Architecture (parent)
-  - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md): Visual Rendering Specification (companion)
-  - [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md): Anatomical Mesh Deformation Pipeline (companion)
+  - [DD014.1](DD014.1_Visual_Rendering_Specification.md): Visual Rendering Specification (companion)
+  - [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md): Anatomical Mesh Deformation Pipeline (companion)
 ```
 
 **Benefits:**
@@ -1441,7 +1441,7 @@ Search all DDs for "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.m
 - **Phase 3 (public experience):** Molecular scale (ion channels, gene expression pipeline,
   intracellular dynamics), Three.js + WebGPU static site, narrative-guided exploration.
 
-See [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) for complete visual specifications at all three scales. Note: [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14
+See [DD014.1](DD014.1_Visual_Rendering_Specification.md) for complete visual specifications at all three scales. Note: [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14
 (nucleus, gene expression) are **Phase 3 only** — not part of Phase 1-2 deliverables.
 ```
 
@@ -1509,11 +1509,11 @@ Examples:
 
 ---
 
-### ✅ 4. Companion Documents for Complex Topics ([DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b)
+### ✅ 4. Companion Documents for Complex Topics ([DD014.1](DD014.1_Visual_Rendering_Specification.md)/b)
 
-[DD014](DD014_Dynamic_Visualization_Architecture.md) is already 585 lines. Adding the visual rendering spec ([DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md), 917 lines) and mesh deformation ([DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md), 878 lines) would create a **2,380-line mega-document** (unreadable).
+[DD014](DD014_Dynamic_Visualization_Architecture.md) is already 585 lines. Adding the visual rendering spec ([DD014.1](DD014.1_Visual_Rendering_Specification.md), 917 lines) and mesh deformation ([DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), 878 lines) would create a **2,380-line mega-document** (unreadable).
 
-Splitting into companions is the right call. The only issue is numbering (should be [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2, not [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b).
+Splitting into companions is the right call. The only issue is numbering (should be [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2, not [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b).
 
 **Keep the companion pattern.** It scales well when a DD grows too large.
 
@@ -1557,7 +1557,7 @@ See **[DD_PHASE_ROADMAP.md](DD_PHASE_ROADMAP.md)** for the complete timeline.
 - **Phase 1 (Months 1-3):** Cell differentiation — [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1
 - **Phase 2 (Months 4-6):** Neuropeptides + closed-loop — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md)
 - **Phase 3 (Months 7-12):** Organ systems — [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)
-- **Phase 4 (Months 13-18):** Cell identity + mesh deformation — [DD004](DD004_Mechanical_Cell_Identity.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)
+- **Phase 4 (Months 13-18):** Cell identity + mesh deformation — [DD004](DD004_Mechanical_Cell_Identity.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)
 - **Phase 5-6 (Year 2+):** Future work (intracellular, developmental, male-specific)
 
 **Status Legend:**
@@ -1661,7 +1661,7 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 ### Body Mechanics
 - **Physics Engine:** [DD003](DD003_Body_Physics_Architecture.md) (SPH, ~100K particles, PCISPH)
 - **Cell Identity:** [DD004](DD004_Mechanical_Cell_Identity.md) (per-particle cell IDs, 959 cells, cell-type elasticity)
-- **Mesh Deformation:** [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (cage-based MVC, GPU skinning, PBD collision)
+- **Mesh Deformation:** [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (cage-based MVC, GPU skinning, PBD collision)
 - **Strain Readout:** [DD019](DD019_Closed_Loop_Touch_Response.md) (cuticle strain for mechanotransduction)
 
 ### Organ Systems
@@ -1682,8 +1682,8 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 ### Infrastructure & Integration
 - **Simulation Stack:** [DD013](DD013_Simulation_Stack_Architecture.md) (Docker, config, CI/CD, Integration Maintainer)
 - **Visualization:** [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr, Trame/Three.js, 3-phase roadmap)
-  - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (colors, materials, lighting, 14 mockups)
-  - [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation, GPU shaders)
+  - [DD014.1](DD014.1_Visual_Rendering_Specification.md) (colors, materials, lighting, 14 mockups)
+  - [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation, GPU shaders)
 
 ### Governance & Process
 - **Contributor Model:** [DD011](DD011_Contributor_Progression_Model.md) (L0-L5, badges, subsystem ownership)
@@ -1781,12 +1781,12 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 
 ## Part 12: Summary Scorecard
 
-**Total DDs Analyzed:** 23 ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
+**Total DDs Analyzed:** 23 ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
 
 **Status Breakdown:**
 
 - ✅ Accepted: 6 ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md) partial, [DD010](DD010_Validation_Framework.md) partial, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md))
-- ⚠️ Proposed: 16 ([DD004](DD004_Mechanical_Cell_Identity.md)-[DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD011](DD011_Contributor_Progression_Model.md)-[DD015](DD015_AI_Contributor_Model.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)-[DD019](DD019_Closed_Loop_Touch_Response.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b)
+- ⚠️ Proposed: 16 ([DD004](DD004_Mechanical_Cell_Identity.md)-[DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD011](DD011_Contributor_Progression_Model.md)-[DD015](DD015_AI_Contributor_Model.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)-[DD019](DD019_Closed_Loop_Touch_Response.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b)
 - 📦 Archived: 1 (DD016)
 
 **Critical Issues Found:** 10 (see Executive Summary)
@@ -1807,7 +1807,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 2. ✅ Create INTEGRATION_MAP.md (2-4 hours, or auto-generate)
 3. ✅ Update [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta-cect reconciliation, 30 min)
 4. ✅ Update [DD010](DD010_Validation_Framework.md) (Tier 3 blocked status, 15 min)
-5. ✅ Renumber [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b → [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2 (30 min)
+5. ✅ Renumber [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b → [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 (30 min)
 6. ⚠️ Recruit Integration Maintainer (founder decision, timeline TBD)
 7. ⚠️ Recruit Validation Maintainer (founder decision, timeline TBD)
 8. ⚠️ Approve Phase A prioritization (founder decision)
