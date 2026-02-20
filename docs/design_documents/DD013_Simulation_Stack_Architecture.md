@@ -12,20 +12,20 @@
 
 ### The Gap Between Vision and Execution
 
-Design Documents DD001-DD012 specify a rich, multi-tissue, multi-scale organism simulation:
+Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD012](DD012_Design_Document_RFC_Process.md) specify a rich, multi-tissue, multi-scale organism simulation:
 
 | Subsystem | DD | Primary Repo | Integration Status |
 |-----------|----|--------------|--------------------|
-| Neural circuit (c302) | DD001 | `openworm/c302` | **Working** — runs via NEURON |
-| Muscle model | DD002 | `openworm/c302` + `openworm/muscle_model` | **Working** — coupled to c302 |
-| Body physics (Sibernetic) | DD003 | `openworm/sibernetic` | **Working** — coupled to c302 via `sibernetic_c302.py` |
-| Mechanical cell identity | DD004 | `openworm/sibernetic` (future) | **Not started** |
-| Cell-type differentiation | DD005 | `openworm/c302` (future) | **Not started** |
-| Neuropeptides | DD006 | `openworm/c302` (future) | **Not started** |
-| Pharynx | DD007 | New repo TBD | **Not started** |
-| Data integration (OWMeta) | DD008 | `openworm/owmeta` | **Dormant** (last real commit Jul 2024) |
-| Intestinal oscillator | DD009 | New repo TBD | **Not started** |
-| Validation framework | DD010, DD021 | `openworm/open-worm-analysis-toolbox` + `openworm/tracker-commons` | **Dormant** (last commit Jan 2020) — DD021 revival plan |
+| Neural circuit (c302) | [DD001](DD001_Neural_Circuit_Architecture.md) | `openworm/c302` | **Working** — runs via NEURON |
+| Muscle model | [DD002](DD002_Muscle_Model_Architecture.md) | `openworm/c302` + `openworm/muscle_model` | **Working** — coupled to c302 |
+| Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | `openworm/sibernetic` | **Working** — coupled to c302 via `sibernetic_c302.py` |
+| Mechanical cell identity | [DD004](DD004_Mechanical_Cell_Identity.md) | `openworm/sibernetic` (future) | **Not started** |
+| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `openworm/c302` (future) | **Not started** |
+| Neuropeptides | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | `openworm/c302` (future) | **Not started** |
+| Pharynx | [DD007](DD007_Pharyngeal_System_Architecture.md) | New repo TBD | **Not started** |
+| Data integration (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | `openworm/owmeta` | **Dormant** (last real commit Jul 2024) |
+| Intestinal oscillator | [DD009](DD009_Intestinal_Oscillator_Model.md) | New repo TBD | **Not started** |
+| Validation framework | [DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `openworm/open-worm-analysis-toolbox` + `openworm/tracker-commons` | **Dormant** (last commit Jan 2020) — [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival plan |
 
 The `openworm/OpenWorm` meta-repository is the only place where these subsystems come together as a runnable simulation. **It is the architectural backbone of the entire project.** And right now, it consists of:
 
@@ -116,38 +116,38 @@ Replace hardcoded defaults in `master_openworm.py` with a declarative YAML confi
 
 version: "0.10.0"
 
-# === Neural Subsystem (DD001, DD005, DD006) ===
+# === Neural Subsystem ([DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) ===
 neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1: CeNGEN cell-type differentiation (DD005)
-  neuropeptides: false               # Phase 2: peptidergic modulation (DD006)
+  differentiated: false              # Phase 1: CeNGEN cell-type differentiation ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+  neuropeptides: false               # Phase 2: peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
   reference: "FW"                    # FW (forward crawl), BA (backward), TU (turning)
 
-# === Body Physics (DD003, DD004) ===
+# === Body Physics ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md)) ===
 body:
   enabled: true
   engine: sibernetic
   backend: opencl                    # opencl, taichi-metal, taichi-cuda, pytorch
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000             # ~100K for standard, ~25K for quick
-  cell_identity: false               # Phase 4: tagged particles (DD004)
+  cell_identity: false               # Phase 4: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))
   timestep: 0.00002                  # seconds
 
-# === Muscle Model (DD002) ===
+# === Muscle Model ([DD002](DD002_Muscle_Model_Architecture.md)) ===
 muscle:
   enabled: true                      # Requires neural.enabled
   calcium_coupling: true             # Ca²⁺ → force pipeline
 
-# === Pharynx (DD007) — Phase 3 ===
+# === Pharynx ([DD007](DD007_Pharyngeal_System_Architecture.md)) — Phase 3 ===
 pharynx:
   enabled: false
   pumping_frequency_target: 3.5      # Hz
 
-# === Intestine (DD009) — Phase 3 ===
+# === Intestine ([DD009](DD009_Intestinal_Oscillator_Model.md)) — Phase 3 ===
 intestine:
   enabled: false
   oscillator_period_target: 50.0     # seconds
@@ -159,7 +159,7 @@ simulation:
   dt_coupling: 0.005                 # ms (neural↔body coupling interval)
   output_interval: 100               # steps between output frames
 
-# === Validation (DD010) ===
+# === Validation ([DD010](DD010_Validation_Framework.md)) ===
 validation:
   run_after_simulation: false        # Set true for CI
   tier1_electrophysiology: false     # Single-cell validation
@@ -174,7 +174,7 @@ output:
   wcon: true                         # WCON movement file
   raw_data: false                    # Full simulation state dumps
 
-# === Visualization (DD014) ===
+# === Visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===
 visualization:
   enabled: true                      # Export OME-Zarr for viewer
   export_format: "zarr"              # "zarr" (OME-Zarr, recommended) or "legacy" (position_buffer.txt)
@@ -225,7 +225,7 @@ RUN git clone --branch $SIBERNETIC_REF --depth 1 \
 RUN cd /opt/openworm/sibernetic && mkdir build && cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)
 
-# === Stage 3: Subsystem — Validation Tools (DD010) ===
+# === Stage 3: Subsystem — Validation Tools ([DD010](DD010_Validation_Framework.md)) ===
 FROM base AS validation
 RUN git clone --depth 1 \
     https://github.com/openworm/open-worm-analysis-toolbox.git \
@@ -241,7 +241,7 @@ COPY --from=validation /opt/openworm/validation /opt/openworm/validation
 COPY master_openworm.py /opt/openworm/
 COPY openworm.yml /opt/openworm/default_config.yml
 
-# === Stage 5: Viewer (DD014 Dynamic Visualization) ===
+# === Stage 5: Viewer ([DD014](DD014_Dynamic_Visualization_Architecture.md) Dynamic Visualization) ===
 FROM full AS viewer
 ARG WORM3DVIEWER_REF=main
 RUN git clone --branch $WORM3DVIEWER_REF --depth 1 \
@@ -310,7 +310,7 @@ services:
         limits:
           memory: 16G
 
-  # === Viewer — Dynamic visualization (DD014) ===
+  # === Viewer — Dynamic visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===
   viewer:
     build:
       context: .
@@ -399,11 +399,11 @@ neuron:
 
 open_worm_analysis_toolbox:
   repo: "https://github.com/openworm/open-worm-analysis-toolbox.git"
-  commit: "6f5e4d3c2b1a"  # DD021 revival — pin after Python 3.12 update
+  commit: "6f5e4d3c2b1a"  # [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival — pin after Python 3.12 update
 
 tracker_commons:
   repo: "https://github.com/openworm/tracker-commons.git"
-  commit: "a1b2c3d4e5f6"  # DD021 — WCON 1.0 spec pin
+  commit: "a1b2c3d4e5f6"  # [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) — WCON 1.0 spec pin
   wcon_version: "1.0"
 
 owmeta:
@@ -451,15 +451,15 @@ Step 4: Generate outputs
          - Plots (membrane potentials, calcium, movement)
          - WCON trajectory file
          - Video (if enabled — fix the memory leak first)
-Step 4b: Export OME-Zarr (DD014, if visualization.enabled)
+Step 4b: Export OME-Zarr ([DD014](DD014_Dynamic_Visualization_Architecture.md), if visualization.enabled)
          - Collect all subsystem outputs into openworm.zarr
-         - body/positions, body/types, body/cell_ids (DD003, DD004)
-         - neural/voltage, neural/calcium, neural/positions (DD001)
-         - muscle/activation, muscle/calcium (DD002)
-         - pharynx/pumping_state (DD007, if pharynx.enabled)
-         - intestine/calcium, intestine/defecation_events (DD009, if intestine.enabled)
-         - neuropeptides/concentrations (DD006, if neural.neuropeptides)
-         - validation/overlay (DD010, if validation.run_after_simulation)
+         - body/positions, body/types, body/cell_ids ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
+         - neural/voltage, neural/calcium, neural/positions ([DD001](DD001_Neural_Circuit_Architecture.md))
+         - muscle/activation, muscle/calcium ([DD002](DD002_Muscle_Model_Architecture.md))
+         - pharynx/pumping_state ([DD007](DD007_Pharyngeal_System_Architecture.md), if pharynx.enabled)
+         - intestine/calcium, intestine/defecation_events ([DD009](DD009_Intestinal_Oscillator_Model.md), if intestine.enabled)
+         - neuropeptides/concentrations ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), if neural.neuropeptides)
+         - validation/overlay ([DD010](DD010_Validation_Framework.md), if validation.run_after_simulation)
          - geometry/ (cell metadata, VirtualWorm meshes)
          - Run surface reconstruction (marching cubes) if visualization.surface_reconstruction
 Step 5: Run validation (if enabled)
@@ -569,7 +569,7 @@ docker compose run validate
 # CI on the meta-repo will automatically test the integration
 ```
 
-#### For contributors adding a new subsystem (e.g., DD007 pharynx):
+#### For contributors adding a new subsystem (e.g., [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx):
 
 ```bash
 # 1. Create new repo (L4 maintainer action)
@@ -642,7 +642,7 @@ Add an optional JupyterLab service for interactive exploration:
 - `03_analyze_output.ipynb` — Plot simulation results
 - `04_validate_against_data.ipynb` — Run validation comparisons
 
-This directly addresses newcomer onboarding (DD011 L0→L1 tasks) and makes orientation tasks executable in a browser.
+This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progression_Model.md) L0→L1 tasks) and makes orientation tasks executable in a browser.
 
 ---
 
@@ -737,7 +737,7 @@ This directly addresses newcomer onboarding (DD011 L0→L1 tasks) and makes orie
 
 3. **Multi-node / HPC distribution.** The simulation runs on a single machine. Distributing across nodes (MPI) is future work.
 
-4. **Specific subsystem implementations.** This DD covers how subsystems plug together, not what they compute internally (that's DD001-DD009).
+4. **Specific subsystem implementations.** This DD covers how subsystems plug together, not what they compute internally (that's [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)).
 
 5. **AI agent deployment.** N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist are separate infrastructure (see AI_Agent_Architecture.md).
 
@@ -764,11 +764,11 @@ The fix: **every DD now has an Integration Contract section** (inputs, outputs, 
 
 ### New Role: L4 Integration Maintainer
 
-This Design Document introduces a new entry in the Subsystem Ownership Map (DD011):
+This Design Document introduces a new entry in the Subsystem Ownership Map ([DD011](DD011_Contributor_Progression_Model.md)):
 
 | Subsystem | Design Documents | L4 Maintainer | Primary Repository |
 |-----------|-----------------|---------------|-------------------|
-| **Integration Stack** | **DD013** (this), DD010 | **TBD — Critical hire** | `openworm/OpenWorm` |
+| **Integration Stack** | **[DD013](DD013_Simulation_Stack_Architecture.md)** (this), [DD010](DD010_Validation_Framework.md) | **TBD — Critical hire** | `openworm/OpenWorm` |
 
 The Integration Maintainer is responsible for:
 
@@ -791,7 +791,7 @@ The Integration Maintainer is responsible for:
 - Alternative: An L3 contributor who can be mentored into this role
 - Mind-of-a-Worm AI can assist with routine tasks (dependency updates, CI triage) but cannot own architectural decisions
 
-**Founder involvement:** Approve L4 appointment, review major architectural changes (per DD011). This role should **reduce** founder time, not increase it.
+**Founder involvement:** Approve L4 appointment, review major architectural changes (per [DD011](DD011_Contributor_Progression_Model.md)). This role should **reduce** founder time, not increase it.
 
 ### Mind-of-a-Worm Support for Integration
 
@@ -843,11 +843,11 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| DD005 cell differentiation hooks in config | Neural L4 | 8 hrs | Phase A |
-| DD007 pharynx model repo + integration | Muscle L4 | 16 hrs | Phase A |
-| DD009 intestine model repo + integration | Muscle L4 | 16 hrs | Phase A |
-| DD004 mechanical cell identity integration | Body Physics L4 | 12 hrs | Phase A |
-| DD006 neuropeptide integration | Neural L4 | 16 hrs | Phase B (needs validation) |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) cell differentiation hooks in config | Neural L4 | 8 hrs | Phase A |
+| [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx model repo + integration | Muscle L4 | 16 hrs | Phase A |
+| [DD009](DD009_Intestinal_Oscillator_Model.md) intestine model repo + integration | Muscle L4 | 16 hrs | Phase A |
+| [DD004](DD004_Mechanical_Cell_Identity.md) mechanical cell identity integration | Body Physics L4 | 12 hrs | Phase A |
+| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptide integration | Neural L4 | 16 hrs | Phase B (needs validation) |
 
 **Deliverable:** New subsystems plug into the stack via config toggles.
 

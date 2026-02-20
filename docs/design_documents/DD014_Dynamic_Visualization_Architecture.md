@@ -12,7 +12,7 @@
 
 ### The Missing Layer
 
-Design Documents DD001-DD013 specify a scientifically rigorous simulation engine and its integration backbone. But **none of them describe what a human being actually sees when the simulation runs.** The current visual output is:
+Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD013](DD013_Simulation_Stack_Architecture.md) specify a scientifically rigorous simulation engine and its integration backbone. But **none of them describe what a human being actually sees when the simulation runs.** The current visual output is:
 
 | What Exists | What You See |
 |-------------|-------------|
@@ -33,7 +33,7 @@ The Kickstarter-funded WormSim project (`org.wormsim.frontend`) envisioned "A Di
 - Neurons glow when they fire
 - "Now you are having a look INSIDE MY MIND!"
 
-WormSim's frontend has been dormant since December 2015. The underlying Geppetto platform is maintained but not connected to the current simulation pipeline. DD013 explicitly declared Geppetto "out of scope."
+WormSim's frontend has been dormant since December 2015. The underlying Geppetto platform is maintained but not connected to the current simulation pipeline. [DD013](DD013_Simulation_Stack_Architecture.md) explicitly declared Geppetto "out of scope."
 
 ### Worm3DViewer (2025): A Starting Point
 
@@ -77,22 +77,22 @@ The visualization layer is not a single tool. It is a **data export pipeline** (
 
 | Scale | What the User Sees | Data Sources | Analogy |
 |-------|-------------------|-------------|---------|
-| **Organism** | Smooth-surfaced worm crawling in an environment. Pharynx pumps. Body bends. Defecation events visible. | DD003 particle positions → surface reconstruction, DD007 pumping state, DD009 defecation events | Google Earth from orbit |
-| **Tissue / Cell** | Individual cells colored by activity. Click a muscle to see its calcium trace. Neurons glow when they fire. Intestinal calcium waves propagate as color gradients. | DD001 neuron V/Ca, DD002 muscle activation, DD004 cell IDs, DD007 pharynx cells, DD009 intestinal cells | Google Earth street view |
-| **Molecular** | Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells. | DD001 channel states, DD005 conductance densities, DD006 peptide concentrations | Google Earth indoor view |
+| **Organism** | Smooth-surfaced worm crawling in an environment. Pharynx pumps. Body bends. Defecation events visible. | [DD003](DD003_Body_Physics_Architecture.md) particle positions → surface reconstruction, [DD007](DD007_Pharyngeal_System_Architecture.md) pumping state, [DD009](DD009_Intestinal_Oscillator_Model.md) defecation events | Google Earth from orbit |
+| **Tissue / Cell** | Individual cells colored by activity. Click a muscle to see its calcium trace. Neurons glow when they fire. Intestinal calcium waves propagate as color gradients. | [DD001](DD001_Neural_Circuit_Architecture.md) neuron V/Ca, [DD002](DD002_Muscle_Model_Architecture.md) muscle activation, [DD004](DD004_Mechanical_Cell_Identity.md) cell IDs, [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx cells, [DD009](DD009_Intestinal_Oscillator_Model.md) intestinal cells | Google Earth street view |
+| **Molecular** | Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells. | [DD001](DD001_Neural_Circuit_Architecture.md) channel states, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance densities, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) peptide concentrations | Google Earth indoor view |
 
 **Phase Allocation:**
 - **Phase 1 (post-hoc Trame viewer):** Organism + Tissue/Cell scales. Smooth body surface, individual neurons/muscles visible and selectable, activity coloring, time scrubbing.
 - **Phase 2 (interactive dynamic viewer):** All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system.
-- **Phase 3 (public experience):** **Molecular scale** (ion channels, gene expression pipeline, intracellular dynamics per DD014.1 Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org.
+- **Phase 3 (public experience):** **Molecular scale** (ion channels, gene expression pipeline, intracellular dynamics per [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org.
 
-See **DD014.1 (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: DD014.1 Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Phase 3 only** — not part of Phase 1-2 deliverables.
+See **[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Phase 3 only** — not part of Phase 1-2 deliverables.
 
 **Phase 1 (Option A): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
 
 **Phase 2 (Option B): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
 
-**Phase 3 (Option C): Public experience.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per DD014.1), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
+**Phase 3 (Option C): Public experience.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
 
 ### Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
 
@@ -121,34 +121,34 @@ All simulation subsystems must export their time-varying state to a common forma
 output/
 ├── openworm.zarr/                    # Root Zarr store
 │   ├── .zattrs                       # Global metadata (config, duration, dt)
-│   ├── body/                         # DD003: SPH particle positions
+│   ├── body/                         # [DD003](DD003_Body_Physics_Architecture.md): SPH particle positions
 │   │   ├── positions/                # Shape: (n_timesteps, n_particles, 3)
 │   │   ├── types/                    # Shape: (n_particles,) — liquid/elastic/boundary
-│   │   ├── cell_ids/                 # Shape: (n_particles,) — DD004 cell identity (when enabled)
+│   │   ├── cell_ids/                 # Shape: (n_particles,) — [DD004](DD004_Mechanical_Cell_Identity.md) cell identity (when enabled)
 │   │   └── .zattrs                   # Particle count, dt, coordinate units
-│   ├── neural/                       # DD001: Neuron state
+│   ├── neural/                       # [DD001](DD001_Neural_Circuit_Architecture.md): Neuron state
 │   │   ├── voltage/                  # Shape: (n_timesteps, 302)
 │   │   ├── calcium/                  # Shape: (n_timesteps, 302)
 │   │   ├── positions/                # Shape: (302, 3) — static neuron positions
 │   │   ├── neuron_ids/               # Shape: (302,) — neuron names
 │   │   └── .zattrs                   # Neuron count, dt, class labels
-│   ├── muscle/                       # DD002: Muscle state
+│   ├── muscle/                       # [DD002](DD002_Muscle_Model_Architecture.md): Muscle state
 │   │   ├── activation/               # Shape: (n_timesteps, 95)
 │   │   ├── calcium/                  # Shape: (n_timesteps, 95)
 │   │   ├── positions/                # Shape: (95, 3) — muscle center positions
 │   │   ├── muscle_ids/               # Shape: (95,) — muscle names (MDR01-MDR24, etc.)
 │   │   └── .zattrs                   # Muscle count, quadrant mapping
-│   ├── pharynx/                      # DD007: Pharyngeal state (when enabled)
+│   ├── pharynx/                      # [DD007](DD007_Pharyngeal_System_Architecture.md): Pharyngeal state (when enabled)
 │   │   ├── pumping_state/            # Shape: (n_timesteps, 3) — corpus/isthmus/terminal_bulb
 │   │   └── .zattrs
-│   ├── intestine/                    # DD009: Intestinal state (when enabled)
+│   ├── intestine/                    # [DD009](DD009_Intestinal_Oscillator_Model.md): Intestinal state (when enabled)
 │   │   ├── calcium/                  # Shape: (n_timesteps, 20) — per intestinal cell
 │   │   ├── defecation_events/        # Shape: (n_events, 3) — timestamp, type (pBoc/aBoc/Exp)
 │   │   └── .zattrs
-│   ├── neuropeptides/                # DD006: Peptide state (when enabled)
+│   ├── neuropeptides/                # [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Peptide state (when enabled)
 │   │   ├── concentrations/           # Shape: (n_timesteps, n_peptides, 302) — per-neuron concentrations
 │   │   └── .zattrs
-│   ├── validation/                   # DD010: Validation results
+│   ├── validation/                   # [DD010](DD010_Validation_Framework.md): Validation results
 │   │   ├── tier2_report.json
 │   │   ├── tier3_report.json
 │   │   └── .zattrs
@@ -196,7 +196,7 @@ The viewer maps simulation state to visual properties:
 | Pharynx pumping | Section opacity | Transparent (relaxed) → Opaque (contracted) | 0.0 to 1.0 |
 | Neuropeptide concentration | Volumetric cloud | Transparent (low) → Colored (high) | 0 to max_conc |
 | Particle type | Point color | Blue/Green/Gray (liquid/elastic/boundary) | Categorical |
-| Cell identity (DD004) | Cell outline color | Per-tissue-type color | Categorical |
+| Cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)) | Cell outline color | Per-tissue-type color | Categorical |
 
 ### Layer System
 
@@ -204,15 +204,15 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 | Layer | What It Shows | Default State | Prerequisite |
 |-------|-------------|---------------|-------------|
-| **Body surface** | Smooth reconstructed surface from SPH particles | ON | DD003 output |
-| **Body particles** | Raw SPH particle cloud (scientific view) | OFF | DD003 output |
-| **Neurons** | 302 neuron morphologies colored by voltage/calcium | OFF | DD001 output |
-| **Muscles** | 95 body wall muscles colored by activation | ON | DD002 output |
-| **Pharynx** | 63 pharyngeal cells with pumping animation | OFF | DD007 output + enabled |
-| **Intestine** | 20 intestinal cells with calcium wave | OFF | DD009 output + enabled |
-| **Neuropeptides** | Volumetric peptide concentration clouds | OFF | DD006 output + enabled |
-| **Cell boundaries** | Per-cell outlines from DD004 tagging | OFF | DD004 output + enabled |
-| **Validation overlay** | Green/red markers showing pass/fail per metric | OFF | DD010 output |
+| **Body surface** | Smooth reconstructed surface from SPH particles | ON | [DD003](DD003_Body_Physics_Architecture.md) output |
+| **Body particles** | Raw SPH particle cloud (scientific view) | OFF | [DD003](DD003_Body_Physics_Architecture.md) output |
+| **Neurons** | 302 neuron morphologies colored by voltage/calcium | OFF | [DD001](DD001_Neural_Circuit_Architecture.md) output |
+| **Muscles** | 95 body wall muscles colored by activation | ON | [DD002](DD002_Muscle_Model_Architecture.md) output |
+| **Pharynx** | 63 pharyngeal cells with pumping animation | OFF | [DD007](DD007_Pharyngeal_System_Architecture.md) output + enabled |
+| **Intestine** | 20 intestinal cells with calcium wave | OFF | [DD009](DD009_Intestinal_Oscillator_Model.md) output + enabled |
+| **Neuropeptides** | Volumetric peptide concentration clouds | OFF | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) output + enabled |
+| **Cell boundaries** | Per-cell outlines from [DD004](DD004_Mechanical_Cell_Identity.md) tagging | OFF | [DD004](DD004_Mechanical_Cell_Identity.md) output + enabled |
+| **Validation overlay** | Green/red markers showing pass/fail per metric | OFF | [DD010](DD010_Validation_Framework.md) output |
 | **Annotations** | Text labels on cells/structures (educational) | OFF | Static data |
 
 ### Viewer UI Layout
@@ -269,7 +269,7 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 ### 4. Use Neuroglancer
 
-**Rejected for primary viewer:** Neuroglancer is optimized for volumetric EM data, not dynamic simulation state. It could be useful for viewing the static EM data that underlies cell boundary definitions (DD004), but it cannot play back time-varying particle simulations or display ion channel dynamics.
+**Rejected for primary viewer:** Neuroglancer is optimized for volumetric EM data, not dynamic simulation state. It could be useful for viewing the static EM data that underlies cell boundary definitions ([DD004](DD004_Mechanical_Cell_Identity.md)), but it cannot play back time-varying particle simulations or display ion channel dynamics.
 
 ### 5. Use Unity/Unreal for a Game-Engine Experience
 
@@ -303,31 +303,31 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| SPH particle positions (all timesteps) | DD003 | Per-particle (x, y, z) over time | OME-Zarr: `body/positions/` | µm |
-| Particle types | DD003 | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/` | enum |
-| Particle cell IDs (when enabled) | DD004 | Per-particle cell identity | OME-Zarr: `body/cell_ids/` | WBbt ID |
-| Neuron voltage time series | DD001 | Per-neuron membrane voltage | OME-Zarr: `neural/voltage/` | mV |
-| Neuron calcium time series | DD001 | Per-neuron [Ca²⁺]ᵢ | OME-Zarr: `neural/calcium/` | mol/cm³ |
-| Neuron 3D positions | DD001 / DD008 | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/` | µm |
-| Neuron morphologies | DD001 (c302) | NeuroML cell files with segment geometry | `.cell.nml` files (static) | µm |
-| Muscle activation time series | DD002 | Per-muscle activation [0, 1] | OME-Zarr: `muscle/activation/` | dimensionless |
-| Muscle calcium time series | DD002 | Per-muscle [Ca²⁺]ᵢ | OME-Zarr: `muscle/calcium/` | mol/cm³ |
-| Muscle 3D positions | DD002 / DD008 | Static 3D coordinates for 95 muscles | OME-Zarr: `muscle/positions/` | µm |
+| SPH particle positions (all timesteps) | [DD003](DD003_Body_Physics_Architecture.md) | Per-particle (x, y, z) over time | OME-Zarr: `body/positions/` | µm |
+| Particle types | [DD003](DD003_Body_Physics_Architecture.md) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/` | enum |
+| Particle cell IDs (when enabled) | [DD004](DD004_Mechanical_Cell_Identity.md) | Per-particle cell identity | OME-Zarr: `body/cell_ids/` | WBbt ID |
+| Neuron voltage time series | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-neuron membrane voltage | OME-Zarr: `neural/voltage/` | mV |
+| Neuron calcium time series | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-neuron [Ca²⁺]ᵢ | OME-Zarr: `neural/calcium/` | mol/cm³ |
+| Neuron 3D positions | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/` | µm |
+| Neuron morphologies | [DD001](DD001_Neural_Circuit_Architecture.md) (c302) | NeuroML cell files with segment geometry | `.cell.nml` files (static) | µm |
+| Muscle activation time series | [DD002](DD002_Muscle_Model_Architecture.md) | Per-muscle activation [0, 1] | OME-Zarr: `muscle/activation/` | dimensionless |
+| Muscle calcium time series | [DD002](DD002_Muscle_Model_Architecture.md) | Per-muscle [Ca²⁺]ᵢ | OME-Zarr: `muscle/calcium/` | mol/cm³ |
+| Muscle 3D positions | [DD002](DD002_Muscle_Model_Architecture.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Static 3D coordinates for 95 muscles | OME-Zarr: `muscle/positions/` | µm |
 | Muscle 3D meshes | VirtualWorm project | OBJ mesh of body wall muscles | `bwm.obj` (static) | µm |
 | Neuron 3D meshes | VirtualWorm project | OBJ mesh of neuron anatomy | `neurons.obj` (static) | µm |
-| Pharyngeal pumping state | DD007 | Per-section contraction over time | OME-Zarr: `pharynx/pumping_state/` | [0, 1] |
-| Intestinal calcium per cell | DD009 | Per-cell [Ca²⁺] over time | OME-Zarr: `intestine/calcium/` | µM |
-| Defecation events | DD009 | pBoc/aBoc/Exp timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
-| Neuropeptide concentrations | DD006 | Per-peptide, per-neuron concentration over time | OME-Zarr: `neuropeptides/concentrations/` | µM |
-| Validation results | DD010 | Tier 1/2/3 pass/fail + metrics | JSON in `validation/` | mixed |
-| Simulation config | DD013 | `openworm.yml` used for this run | Zarr `.zattrs` metadata | — |
+| Pharyngeal pumping state | [DD007](DD007_Pharyngeal_System_Architecture.md) | Per-section contraction over time | OME-Zarr: `pharynx/pumping_state/` | [0, 1] |
+| Intestinal calcium per cell | [DD009](DD009_Intestinal_Oscillator_Model.md) | Per-cell [Ca²⁺] over time | OME-Zarr: `intestine/calcium/` | µM |
+| Defecation events | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
+| Neuropeptide concentrations | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Per-peptide, per-neuron concentration over time | OME-Zarr: `neuropeptides/concentrations/` | µM |
+| Validation results | [DD010](DD010_Validation_Framework.md) | Tier 1/2/3 pass/fail + metrics | JSON in `validation/` | mixed |
+| Simulation config | [DD013](DD013_Simulation_Stack_Architecture.md) | `openworm.yml` used for this run | Zarr `.zattrs` metadata | — |
 
 ### Outputs (What This Subsystem Produces)
 
 | Output | Consumer | Variable | Format | Units |
 |--------|----------|----------|--------|-------|
 | Interactive 3D viewer | Human users (scientists, public) | Web application on port 8501 | HTML + WebGL/vtk.js | — |
-| Screenshot / video export | DD013 (output pipeline), publications | Static images or MP4 from viewer | PNG, MP4 | pixels |
+| Screenshot / video export | [DD013](DD013_Simulation_Stack_Architecture.md) (output pipeline), publications | Static images or MP4 from viewer | PNG, MP4 | pixels |
 | Selected cell state (inspector) | Human users | Time series for selected cell | In-app plot | mV, µM, etc. |
 
 ### Configuration (`openworm.yml` Section)
@@ -444,24 +444,24 @@ docker compose run quick-test  # with visualization.export_format: "legacy"
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Particle positions format | DD003 | If SPH output format changes, Zarr export script must update |
-| Neuron state output | DD001 | If calcium/voltage file format or neuron count changes, neural Zarr group breaks |
-| Muscle activation output | DD002 | If activation format changes, muscle Zarr group breaks |
-| Cell identity (particle tagging) | DD004 | If cell_id scheme changes, cell-based coloring/selection breaks |
-| Pharyngeal output format | DD007 | If pumping state format changes, pharynx layer breaks |
-| Intestinal output format | DD009 | If calcium per-cell format changes, intestine layer breaks |
-| Neuropeptide output format | DD006 | If concentration format changes, neuropeptide volumetric layer breaks |
-| Validation report format | DD010 | If report JSON schema changes, validation overlay breaks |
-| Docker compose structure | DD013 | If output directory or service naming changes, viewer service breaks |
+| Particle positions format | [DD003](DD003_Body_Physics_Architecture.md) | If SPH output format changes, Zarr export script must update |
+| Neuron state output | [DD001](DD001_Neural_Circuit_Architecture.md) | If calcium/voltage file format or neuron count changes, neural Zarr group breaks |
+| Muscle activation output | [DD002](DD002_Muscle_Model_Architecture.md) | If activation format changes, muscle Zarr group breaks |
+| Cell identity (particle tagging) | [DD004](DD004_Mechanical_Cell_Identity.md) | If cell_id scheme changes, cell-based coloring/selection breaks |
+| Pharyngeal output format | [DD007](DD007_Pharyngeal_System_Architecture.md) | If pumping state format changes, pharynx layer breaks |
+| Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If calcium per-cell format changes, intestine layer breaks |
+| Neuropeptide output format | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If concentration format changes, neuropeptide volumetric layer breaks |
+| Validation report format | [DD010](DD010_Validation_Framework.md) | If report JSON schema changes, validation overlay breaks |
+| Docker compose structure | [DD013](DD013_Simulation_Stack_Architecture.md) | If output directory or service naming changes, viewer service breaks |
 | VirtualWorm 3D meshes | External (Caltech/WormBase) | If mesh coordinates or structure change, anatomy layers break |
-| NeuroML cell morphologies | DD001 (c302) | If cell morphology files change, neuron rendering breaks |
+| NeuroML cell morphologies | [DD001](DD001_Neural_Circuit_Architecture.md) (c302) | If cell morphology files change, neuron rendering breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Simulation stack (export step) | DD013 | If Zarr schema changes, `master_openworm.py` export step must update |
-| Contributor onboarding | DD011 | If viewer Docker service changes, L0 orientation task B1 instructions must update |
+| Simulation stack (export step) | [DD013](DD013_Simulation_Stack_Architecture.md) | If Zarr schema changes, `master_openworm.py` export step must update |
+| Contributor onboarding | [DD011](DD011_Contributor_Progression_Model.md) | If viewer Docker service changes, L0 orientation task B1 instructions must update |
 | N2-Whisperer orientation | AI Agents | If viewer URL/port changes, N2-Whisperer "run simulation" instructions must update |
-| Output pipeline | DD013 | If screenshot/video export changes, automated output generation changes |
+| Output pipeline | [DD013](DD013_Simulation_Stack_Architecture.md) | If screenshot/video export changes, automated output generation changes |
 
 ---
 
@@ -473,7 +473,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | DD013 Phase A |
+| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A |
 | Port Worm3DViewer from Streamlit to Trame | Visualization L4 | 24 hrs | None |
 | Implement time scrubbing (slider + play/pause) | Visualization L4 | 8 hrs | Trame port |
 | Implement layer toggle system | Visualization L4 | 8 hrs | Trame port |
@@ -481,7 +481,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 | Add neuron voltage → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add muscle activation → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add cell click → inspector panel | Visualization L4 | 8 hrs | Trame port |
-| Add Docker stage + compose service | Integration Maintainer | 4 hrs | DD013 Phase A |
+| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A |
 | Add to CI (build + smoke test) | Integration Maintainer | 4 hrs | Docker stage |
 
 **Deliverable:** `docker compose up viewer` serves a web app with time-animated, multi-layer, interactive 3D worm at `localhost:8501`.
@@ -492,10 +492,10 @@ Enhance the viewer with deeper interactivity and begin Three.js migration for pu
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Add pharynx layer (when enabled) | Visualization L4 | 8 hrs | DD007 output |
-| Add intestine layer (when enabled) | Visualization L4 | 8 hrs | DD009 output |
-| Add neuropeptide volumetric layer (when enabled) | Visualization L4 | 16 hrs | DD006 output |
-| Add validation overlay (green/red pass/fail markers) | Visualization L4 | 4 hrs | DD010 output |
+| Add pharynx layer (when enabled) | Visualization L4 | 8 hrs | [DD007](DD007_Pharyngeal_System_Architecture.md) output |
+| Add intestine layer (when enabled) | Visualization L4 | 8 hrs | [DD009](DD009_Intestinal_Oscillator_Model.md) output |
+| Add neuropeptide volumetric layer (when enabled) | Visualization L4 | 16 hrs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) output |
+| Add validation overlay (green/red pass/fail markers) | Visualization L4 | 4 hrs | [DD010](DD010_Validation_Framework.md) output |
 | Mesh skinning (VirtualWorm mesh deformed by particles) | Visualization L4 | 24 hrs | Phase 1 surface |
 | Begin Three.js + WebGPU prototype | Visualization L4 + community | 40 hrs | Phase 1 data pipeline |
 | Static OME-Zarr hosting (no server required for viewing) | Integration Maintainer | 8 hrs | OME-Zarr export |

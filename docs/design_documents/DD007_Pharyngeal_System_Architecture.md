@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Pharyngeal network: 20 neurons + 20 muscles (NeuroML), 1D pumping oscillator module, pumping state time series |
-| **Success metric** | DD010 Tier 3: pumping frequency 3-4 Hz; body locomotion not degraded when pharynx enabled |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: pumping frequency 3-4 Hz; body locomotion not degraded when pharynx enabled |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_pharynx.py`, `pharynx/` module) — issues labeled `dd007` |
 | **Config toggle** | `pharynx.enabled: true` / `pharynx.model: "1d_oscillator"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `pharynx.enabled: true` (body still moves?), `scripts/measure_pumping.py` (3-4 Hz?) |
-| **Visualize** | DD014 `pharynx/pumping_state/` layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `pharynx/pumping_state/` layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap |
 | **CI gate** | Pumping frequency validation (Tier 3) blocks merge; backward compatibility with `pharynx.enabled: false` required |
 
 ---
@@ -30,7 +30,7 @@ Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level 
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Pumping frequency | 3-4 Hz (0.25-0.33 s period) under feeding conditions | Tier 3 (blocking) |
 | **Secondary:** Body locomotion preservation | Within +/-15% of baseline kinematic metrics when pharynx enabled | Tier 3 (blocking) |
@@ -82,7 +82,7 @@ Each pharyngeal NeuroML file includes metadata:
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 
 ### Step-by-step
@@ -126,7 +126,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**DD014 viewer layer:** Pharyngeal pumping state as a 3-section contraction heatmap.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** Pharyngeal pumping state as a 3-section contraction heatmap.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -166,7 +166,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 - Strong gap junction coupling (inx-2, inx-3, inx-7 innexins)
 
 **Modeling approach:**
-- Same HH framework as body muscles (DD002) but with:
+- Same HH framework as body muscles ([DD002](DD002_Muscle_Model_Architecture.md)) but with:
   - Higher gap junction conductance (0.1-0.5 nS vs. 0.01 nS for neurons)
   - Adjusted Ca2+ channel kinetics for plateau potentials
   - Coupling to pharyngeal body mechanics (separate from main body SPH)
@@ -223,7 +223,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 
 3. **Grinder mechanics:** The terminal bulb grinder crushes bacteria. Not modeled until Option B SPH pharynx is implemented.
 
-4. **Pharynx-intestine coupling:** Food transfer from pharynx to intestine is the interface with DD009. Only the pumping state output is provided; actual material flow is future work.
+4. **Pharynx-intestine coupling:** Food transfer from pharynx to intestine is the interface with [DD009](DD009_Intestinal_Oscillator_Model.md). Only the pumping state output is provided; actual material flow is future work.
 
 5. **Egg-laying coordination:** Vulva-uterus-pharynx coordination requires Option B (SPH pharynx) and is Phase 4+ work.
 
@@ -252,9 +252,9 @@ The pharynx pumps bacterial food from the mouth to the intestine at **~3-4 Hz** 
 **Repository 1:** `openworm/pharyngeal_muscle_model` (pushed 2017-01-19, dormant but complete)
 
 Contains a **NEURON implementation of pm3 pharyngeal muscle** with:
-- EAT-2, EGL-19, UNC-2 Ca²⁺ channels (exactly DD007's target channels)
+- EAT-2, EGL-19, UNC-2 Ca²⁺ channels (exactly [DD007](DD007_Pharyngeal_System_Architecture.md)'s target channels)
 - Ca²⁺ slow action potential (plateau potentials, ~100ms duration)
-- Output matches Raizen & Avery 1994 EPG recordings (DD007's validation target)
+- Output matches Raizen & Avery 1994 EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s validation target)
 
 **Reuse Plan:**
 ```bash
@@ -274,14 +274,14 @@ nrngui _run.hoc
 **Repository 2:** `openworm/PlateauNoiseModel` (pushed 2025-01-30, recently active)
 
 Jupyter notebook with pharyngeal muscle plateau model (Kenngott et al. 2025).
-- Use for cross-validation of DD007 muscle model
+- Use for cross-validation of [DD007](DD007_Pharyngeal_System_Architecture.md) muscle model
 - Plotting code for EPG-style output
 
 **Next Actions:**
 - [ ] Test pharyngeal_muscle_model on modern NEURON (version compatibility?)
 - [ ] Extract channel kinetics (eat-2, egl-19, unc-2 conductances)
 - [ ] Compare to PlateauNoiseModel (two independent implementations → cross-validate)
-- [ ] Convert to NeuroML2 for DD007's `PharyngealMuscleCell.cell.nml`
+- [ ] Convert to NeuroML2 for [DD007](DD007_Pharyngeal_System_Architecture.md)'s `PharyngealMuscleCell.cell.nml`
 
 ---
 
@@ -302,27 +302,27 @@ Jupyter notebook with pharyngeal muscle plateau model (Kenngott et al. 2025).
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Pharyngeal neuron connectome | ConnectomeToolbox / DD001 | Pharyngeal neuron adjacency (20 neurons) | Same format as body connectome | synapse pairs + weights |
-| CeNGEN expression (pharyngeal neurons) | DD005 | Per-class conductance densities | NeuroML `<channelDensity>` | S/cm2 |
-| RIP->I2 synaptic input (rare body<->pharynx connection) | DD001 | RIP neuron voltage | NeuroML coupling | mV |
+| Pharyngeal neuron connectome | ConnectomeToolbox / [DD001](DD001_Neural_Circuit_Architecture.md) | Pharyngeal neuron adjacency (20 neurons) | Same format as body connectome | synapse pairs + weights |
+| CeNGEN expression (pharyngeal neurons) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-class conductance densities | NeuroML `<channelDensity>` | S/cm2 |
+| RIP->I2 synaptic input (rare body<->pharynx connection) | [DD001](DD001_Neural_Circuit_Architecture.md) | RIP neuron voltage | NeuroML coupling | mV |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Pumping state (contracted/relaxed per section) | DD010 (pumping frequency validation) | Per-section contraction time series | Tab-separated file | binary (0/1) or continuous [0,1] |
-| Pharyngeal particle forces (Option B only) | DD003 | Per-particle force for pharyngeal muscles | Same format as body muscle activation | dimensionless [0,1] |
-| Food transport rate (future) | DD009 | Rate of material entering intestine | Scalar time series | um3/s |
-| Pumping state time series (for viewer) | **DD014** (visualization) | Per-section contraction state over all timesteps | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | continuous [0, 1] |
+| Pumping state (contracted/relaxed per section) | [DD010](DD010_Validation_Framework.md) (pumping frequency validation) | Per-section contraction time series | Tab-separated file | binary (0/1) or continuous [0,1] |
+| Pharyngeal particle forces (Option B only) | [DD003](DD003_Body_Physics_Architecture.md) | Per-particle force for pharyngeal muscles | Same format as body muscle activation | dimensionless [0,1] |
+| Food transport rate (future) | [DD009](DD009_Intestinal_Oscillator_Model.md) | Rate of material entering intestine | Scalar time series | um3/s |
+| Pumping state time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-section contraction state over all timesteps | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | continuous [0, 1] |
 
 ### Repository & Packaging
 
 - **Primary repository:** `openworm/c302` (same package, new module)
-- **Docker stage:** `neural` (same as DD001)
+- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md))
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), numpy (pip)
 - **No additional Docker changes** for Option A (1D oscillator is pure Python/NeuroML)
-- **Option B would require:** Additional ~5K particles in Sibernetic initialization, changes to DD003 Docker stage
+- **Option B would require:** Additional ~5K particles in Sibernetic initialization, changes to [DD003](DD003_Body_Physics_Architecture.md) Docker stage
 
 ### Configuration
 
@@ -372,7 +372,7 @@ docker compose run validate
 - [ ] `measure_pumping.py` reports 3-4 Hz pumping frequency
 - [ ] `validate` passes (Tier 3 body kinematics within +/-15%)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -385,8 +385,8 @@ docker compose run validate
 **Option A (current):** The 1D oscillator runs independently. No coupling to Sibernetic. Pharynx behavior is output as a time series but does not mechanically affect the body.
 
 **Option B (future):** Requires:
-1. ~5,000 additional SPH particles tagged as pharyngeal cells (DD004 cell_identity)
-2. Pharyngeal muscle activation -> pharyngeal particle forces (same coupling pattern as DD002->DD003)
+1. ~5,000 additional SPH particles tagged as pharyngeal cells ([DD004](DD004_Mechanical_Cell_Identity.md) cell_identity)
+2. Pharyngeal muscle activation -> pharyngeal particle forces (same coupling pattern as [DD002](DD002_Muscle_Model_Architecture.md)->[DD003](DD003_Body_Physics_Architecture.md))
 3. Anterior attachment: pharyngeal particles mechanically connected to body wall particles at lips
 4. **This changes total particle count** (100K -> 105K), affecting simulation time and memory
 
@@ -396,15 +396,15 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| c302 HH framework | DD001 | Pharyngeal neurons use same framework — channel model changes propagate |
-| CeNGEN differentiation | DD005 | Pharyngeal neuron conductances come from CeNGEN |
-| Cell identity (Option B) | DD004 | Pharyngeal particle tagging uses DD004's cell_id system |
+| c302 HH framework | [DD001](DD001_Neural_Circuit_Architecture.md) | Pharyngeal neurons use same framework — channel model changes propagate |
+| CeNGEN differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Pharyngeal neuron conductances come from CeNGEN |
+| Cell identity (Option B) | [DD004](DD004_Mechanical_Cell_Identity.md) | Pharyngeal particle tagging uses [DD004](DD004_Mechanical_Cell_Identity.md)'s cell_id system |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Intestinal input | DD009 | Eventually pharynx pumps food to intestine — if pumping dynamics change, food arrival rate changes |
-| Behavioral validation | DD010 | Pumping frequency is a Tier 3 validation target |
-| Body physics (Option B) | DD003 | Additional particles change total count and body initialization |
+| Intestinal input | [DD009](DD009_Intestinal_Oscillator_Model.md) | Eventually pharynx pumps food to intestine — if pumping dynamics change, food arrival rate changes |
+| Behavioral validation | [DD010](DD010_Validation_Framework.md) | Pumping frequency is a Tier 3 validation target |
+| Body physics (Option B) | [DD003](DD003_Body_Physics_Architecture.md) | Additional particles change total count and body initialization |
 
 ---
 

@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | NeuroML `<peptideRelease>` + `<peptideReceptor>` components for 31,479 peptide-receptor interactions; conductance modulation layer |
-| **Success metric** | ≥3 peptide knockout phenotypes reproduced within 30% error (DD010 Tier 3); wild-type kinematics not degraded |
+| **Success metric** | ≥3 peptide knockout phenotypes reproduced within 30% error ([DD010](DD010_Validation_Framework.md) Tier 3); wild-type kinematics not degraded |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd006` |
 | **Config toggle** | `neural.neuropeptides: true` / `neural.peptide_dataset: "RipollSanchez2023"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `neuropeptides: false` (backward compat), then `neuropeptides: true` |
-| **Visualize** | DD014 `neuropeptides/concentrations/` layer — volumetric peptide concentration fields; `neuropeptides/release_events/` for per-neuron release timing |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neuropeptides/concentrations/` layer — volumetric peptide concentration fields; `neuropeptides/release_events/` for per-neuron release timing |
 | **CI gate** | Tier 3 kinematic validation blocks merge; conductance modulation must stay in [0.5, 3.0] range |
 
 ---
@@ -30,7 +30,7 @@ Add 31,479 neuropeptide-receptor interactions (Ripoll-Sanchez 2023) as a slow mo
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Peptide knockout phenotype reproduction | ≥3 known knockouts within 30% quantitative error | Tier 3 (blocking) |
 | **Secondary:** Wild-type kinematic preservation | Within ±15% of baseline (peptides modulate, not destroy, locomotion) | Tier 3 (blocking) |
@@ -82,7 +82,7 @@ Each LEMS extension includes metadata:
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 - Ripoll-Sanchez Table S1 data (downloaded to `data/`)
 
@@ -138,7 +138,7 @@ python scripts/validate_knockout.py \
 
 ## How to Visualize
 
-**DD014 viewer layers:** Neuropeptide concentration fields and release events.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layers:** Neuropeptide concentration fields and release events.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -155,10 +155,10 @@ python scripts/validate_knockout.py \
 
 ### Add Neuropeptidergic Signaling as a Second Coupling Layer
 
-Layer the extrasynaptic connectome on top of the synaptic connectome without replacing or modifying the existing fast synaptic transmission (DD001). Each neuron will have:
+Layer the extrasynaptic connectome on top of the synaptic connectome without replacing or modifying the existing fast synaptic transmission ([DD001](DD001_Neural_Circuit_Architecture.md)). Each neuron will have:
 
-1. **Fast synaptic inputs** (DD001: graded synapses, ~ms timescale)
-2. **Gap junction inputs** (DD001: electrical coupling)
+1. **Fast synaptic inputs** ([DD001](DD001_Neural_Circuit_Architecture.md): graded synapses, ~ms timescale)
+2. **Gap junction inputs** ([DD001](DD001_Neural_Circuit_Architecture.md): electrical coupling)
 3. **Neuropeptide inputs** (this DD: slow modulatory, ~seconds timescale)
 
 ### Modeling Framework
@@ -726,24 +726,24 @@ The neuropeptidergic connectome likely changes across L1, L4, adult, dauer stage
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Neuron [Ca2+]i (triggers peptide release) | DD001 / DD005 | `ca_internal` per neuron | NeuroML state variable | mol/cm3 |
-| 3D cell positions (distance calculation) | DD008 / WormAtlas | Per-neuron (x, y, z) | OWMeta query or CSV | um |
-| Ripoll-Sanchez peptide-receptor dataset | External / OWMeta (DD008) | 31,479 interaction table | CSV: source, target, peptide, receptor, distance, modulation_type | mixed |
-| Ion channel conductance baselines | DD001 / DD005 | `g_baseline` per channel per neuron | NeuroML `<channelDensity>` | S/cm2 |
+| Neuron [Ca2+]i (triggers peptide release) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `ca_internal` per neuron | NeuroML state variable | mol/cm3 |
+| 3D cell positions (distance calculation) | [DD008](DD008_Data_Integration_Pipeline.md) / WormAtlas | Per-neuron (x, y, z) | OWMeta query or CSV | um |
+| Ripoll-Sanchez peptide-receptor dataset | External / OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) | 31,479 interaction table | CSV: source, target, peptide, receptor, distance, modulation_type | mixed |
+| Ion channel conductance baselines | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `g_baseline` per channel per neuron | NeuroML `<channelDensity>` | S/cm2 |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Conductance modulation factors | DD001 (modifies channel conductances in real-time) | `g_effective = g_baseline * conductance_modulation` | NeuroML `<peptideReceptor>` exposure | dimensionless multiplier [0.5, 3.0] |
+| Conductance modulation factors | [DD001](DD001_Neural_Circuit_Architecture.md) (modifies channel conductances in real-time) | `g_effective = g_baseline * conductance_modulation` | NeuroML `<peptideReceptor>` exposure | dimensionless multiplier [0.5, 3.0] |
 | Peptide concentration fields | Internal (receptor activation) | Per-source peptide concentration | NeuroML state variable | mol/cm3 |
-| Neuropeptide concentration fields (for viewer) | **DD014** (visualization) | Per-peptide volumetric concentration over time | OME-Zarr: `neuropeptides/concentrations/`, shape (n_timesteps, n_peptides, n_spatial_bins) | mol/cm3 |
-| Peptide release events (for viewer) | **DD014** (visualization) | Per-neuron peptide release timestamps | OME-Zarr: `neuropeptides/release_events/` | ms |
+| Neuropeptide concentration fields (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-peptide volumetric concentration over time | OME-Zarr: `neuropeptides/concentrations/`, shape (n_timesteps, n_peptides, n_spatial_bins) | mol/cm3 |
+| Peptide release events (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron peptide release timestamps | OME-Zarr: `neuropeptides/release_events/` | ms |
 
 ### Repository & Packaging
 
 - **Primary repository:** `openworm/c302` (NeuroML extensions for peptides)
-- **Docker stage:** `neural` (same as DD001)
+- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md))
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), pandas (pip), numpy (pip)
 - **Additional data in image:** Ripoll-Sanchez Table S1 (~5MB CSV), 3D neuron positions (~100KB)
@@ -793,7 +793,7 @@ docker compose run validate
 - [ ] Conductance modulation factors in [0.5, 3.0] range
 - [ ] `validate` passes (Tier 3 kinematic metrics within +/-15%)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -812,7 +812,7 @@ docker compose run validate
 
 ### Multi-Rate Integration Requirement
 
-Neuropeptides operate on seconds timescale, synapses on milliseconds. The `master_openworm.py` orchestrator (DD013) must support multi-rate stepping:
+Neuropeptides operate on seconds timescale, synapses on milliseconds. The `master_openworm.py` orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)) must support multi-rate stepping:
 
 ```python
 # Pseudocode for multi-rate coupling in master_openworm.py
@@ -825,23 +825,23 @@ for t in range(0, duration, dt_fast):
         step_slow_dynamics(dt_slow)   # Peptide release, diffusion, receptor binding
 ```
 
-**This is a change to the orchestrator (DD013), not just to c302.** The Integration Maintainer must implement multi-rate stepping support.
+**This is a change to the orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)), not just to c302.** The Integration Maintainer must implement multi-rate stepping support.
 
 ### Coupling Dependencies
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neuron calcium dynamics | DD001 / DD005 | Peptide release is triggered by [Ca2+]i — if calcium dynamics change, release timing shifts |
-| 3D positions | DD008 | Distance-dependent attenuation uses cell positions — if atlas data updates, all distances recalculate |
-| Channel conductance baselines | DD001 / DD005 | Modulation is multiplicative on baseline g — if baselines change, effective g changes |
+| Neuron calcium dynamics | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Peptide release is triggered by [Ca2+]i — if calcium dynamics change, release timing shifts |
+| 3D positions | [DD008](DD008_Data_Integration_Pipeline.md) | Distance-dependent attenuation uses cell positions — if atlas data updates, all distances recalculate |
+| Channel conductance baselines | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Modulation is multiplicative on baseline g — if baselines change, effective g changes |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit dynamics | DD001 | Conductance modulation changes every neuron's excitability |
-| Muscle activation | DD002 | Changed neuron excitability -> changed motor output |
-| Locomotion | DD003 | Changed motor output -> changed movement |
-| Behavioral validation | DD010 | Peptide modulation shifts behavioral metrics |
-| Orchestrator | DD013 | Multi-rate stepping requirement — if peptide dt changes, orchestrator must adapt |
+| Neural circuit dynamics | [DD001](DD001_Neural_Circuit_Architecture.md) | Conductance modulation changes every neuron's excitability |
+| Muscle activation | [DD002](DD002_Muscle_Model_Architecture.md) | Changed neuron excitability -> changed motor output |
+| Locomotion | [DD003](DD003_Body_Physics_Architecture.md) | Changed motor output -> changed movement |
+| Behavioral validation | [DD010](DD010_Validation_Framework.md) | Peptide modulation shifts behavioral metrics |
+| Orchestrator | [DD013](DD013_Simulation_Stack_Architecture.md) | Multi-rate stepping requirement — if peptide dt changes, orchestrator must adapt |
 
 ---
 

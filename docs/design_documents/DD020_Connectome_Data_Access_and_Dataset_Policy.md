@@ -13,7 +13,7 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Standardized connectome data access via `cect` Python API: adjacency matrices, `ConnectionInfo` objects, cell classification, neurotransmitter identities, bilateral symmetry metrics |
-| **Success metric** | All consuming DDs (DD001, DD002, DD005, DD006, DD007, DD017, DD019) obtain connectome data exclusively through `cect`; dataset selection is explicit and reproducible |
+| **Success metric** | All consuming DDs ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) obtain connectome data exclusively through `cect`; dataset selection is explicit and reproducible |
 | **Repository** | [`openworm/ConnectomeToolbox`](https://github.com/openworm/ConnectomeToolbox) — issues labeled `dd020` |
 | **Config toggle** | `data.connectome.dataset: "Cook2019Herm"` / `data.connectome.cect_version: "0.2.7"` in `openworm.yml` |
 | **Build & test** | `pip install cect==0.2.7` then `python -c "from cect.Cook2019HermReader import get_instance; cds = get_instance(); cds.summary()"` |
@@ -30,15 +30,15 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Unified data access | All 9 consuming DDs obtain connectome data via `cect` API, not raw file parsing | Tier 1 (blocking) |
 | **Secondary:** Reproducibility | Dataset selection and `cect` version pinned in `openworm.yml` + `versions.lock`; any two runs with same config produce identical adjacency matrices | Tier 1 (blocking) |
 | **Tertiary:** Multi-dataset validation | Simulation results compared against ≥2 independent connectome datasets (e.g., Cook2019Herm primary, Witvliet8 cross-validation) | Tier 2 (non-blocking initially, blocking Phase 3+) |
 
-**Before:** Each consuming DD independently decides which connectome dataset to use, how to parse it, and how to handle cell name variants. DD001 uses `UpdatedSpreadsheetDataReader2`, DD006 uses Ripoll-Sanchez data, DD007 may use Cook2019 pharyngeal subset — no coordination, no version pinning, no comparison.
+**Before:** Each consuming DD independently decides which connectome dataset to use, how to parse it, and how to handle cell name variants. [DD001](DD001_Neural_Circuit_Architecture.md) uses `UpdatedSpreadsheetDataReader2`, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) uses Ripoll-Sanchez data, [DD007](DD007_Pharyngeal_System_Architecture.md) may use Cook2019 pharyngeal subset — no coordination, no version pinning, no comparison.
 
-**After:** A single DD (this one) specifies dataset selection, version pinning, API contract, and validation strategy. Consuming DDs reference DD020 for connectome access. Changes to default dataset or `cect` version are reviewed centrally.
+**After:** A single DD (this one) specifies dataset selection, version pinning, API contract, and validation strategy. Consuming DDs reference [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for connectome access. Changes to default dataset or `cect` version are reviewed centrally.
 
 ---
 
@@ -49,7 +49,7 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 | `cect` package (external) | PyPI: `pip install cect` / GitHub: `openworm/ConnectomeToolbox` | Python package | `from cect.Cook2019HermReader import get_instance` |
 | Dataset selection policy | This DD (Section: Dataset Selection Policy) | Markdown specification | "Default adult hermaphrodite: Cook2019Herm" |
 | `openworm.yml` connectome config | `data.connectome.*` keys | YAML | `dataset: "Cook2019Herm"`, `cect_version: "0.2.7"` |
-| `versions.lock` entry | `cect` key in `versions.lock` (DD013) | Lock file | `cect: "0.2.7"` |
+| `versions.lock` entry | `cect` key in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)) | Lock file | `cect: "0.2.7"` |
 | Connectome adjacency matrices | In-memory via `cect` API | `numpy.ndarray` per synclass | `cds.connections["Generic_CS"]` shape (N, N) |
 | Cell classification metadata | `cect.Cells` module | Python API | `get_SIM_class("AVAL")` → `"Interneuron"` |
 | Bilateral symmetry metrics | `cect.Analysis.convert_to_symmetry_array()` | `(ndarray, float, str)` | `(array, 56.25, "Of 441 possible edges...")` |
@@ -120,7 +120,7 @@ print(f'Symmetry: {pct:.1f}%')
 print(info)
 "
 
-# Step 6: Docker-based verification (DD013 stack)
+# Step 6: Docker-based verification ([DD013](DD013_Simulation_Stack_Architecture.md) stack)
 docker compose run shell python -c "import cect; print(cect.__version__)"
 ```
 
@@ -138,7 +138,7 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 | **Symmetry view** | `cds.to_plotly_matrix_fig(synclass="Generic_CS", view="Neurons", symmetry=True)` — bilateral symmetry overlay (red=asymmetric, blue=symmetric) |
 | **Filtering** | Views: `"Neurons"`, `"Full"`, `"Pharynx"`, `"MotorMuscle"`, custom via `get_connectome_view()` |
 
-**DD014 viewer connection:** Connectome topology exported as part of `neural/` OME-Zarr group. The DD014 viewer reads connectivity from the simulation output, not directly from `cect` — but `cect` is the upstream source of truth.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer connection:** Connectome topology exported as part of `neural/` OME-Zarr group. The [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer reads connectivity from the simulation output, not directly from `cect` — but `cect` is the upstream source of truth.
 
 ---
 
@@ -152,8 +152,8 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 | **Adult male connectome** | Cook et al. 2019 (male) | `Cook2019MaleReader` | Only complete male connectome; 385 neurons including male-specific |
 | **Pharyngeal nervous system** | Cook et al. 2019 (pharyngeal subset) | `Cook2019HermReader` with pharynx view filter | Same dataset, filtered via `cds.get_connectome_view("Pharynx")` |
 | **Developmental series** | Witvliet et al. 2021 (stages 1-8) | `WitvlietDataReader1` through `WitvlietDataReader8` | Only developmental connectome series; L1 through adult |
-| **Functional connectivity validation** | Randi et al. 2023 | `WormNeuroAtlasFuncReader` | Whole-brain calcium imaging functional connectivity; primary validation target for DD005 |
-| **Neuropeptidergic network** | Ripoll-Sanchez et al. 2023 | `RipollSanchezShortRangeReader`, `RipollSanchezMidRangeReader`, `RipollSanchezLongRangeReader` | Extrasynaptic neuropeptide signaling; DD006 primary data source |
+| **Functional connectivity validation** | Randi et al. 2023 | `WormNeuroAtlasFuncReader` | Whole-brain calcium imaging functional connectivity; primary validation target for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) |
+| **Neuropeptidergic network** | Ripoll-Sanchez et al. 2023 | `RipollSanchezShortRangeReader`, `RipollSanchezMidRangeReader`, `RipollSanchezLongRangeReader` | Extrasynaptic neuropeptide signaling; [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) primary data source |
 | **Neurotransmitter identity** | Wang et al. 2024 | `Wang2024HermReader`, `Wang2024MaleReader` | CRISPR/Cas9 fluorescent reporter atlas; 16 neurotransmitter systems; reveals co-transmission |
 | **OpenWorm unified (experimental)** | Wang 2024 hermaphrodite base | `OpenWormUnifiedReader` | WIP — subject to change; currently wraps Wang2024Reader with electrical connections. Use for forward-looking development, not production simulations |
 | **Legacy / backward compatibility** | Varshney et al. 2011 | `VarshneyDataReader` | Historical dataset; use only for comparing to pre-2019 publications |
@@ -184,7 +184,7 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
    cds = get_instance(from_cache=True)  # Fast, deterministic
    ```
 
-5. **Record the `cect` version** in `versions.lock` (DD013). Dataset reader behavior may change across versions.
+5. **Record the `cect` version** in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)). Dataset reader behavior may change across versions.
 
 ### Policy for Adopting New Datasets
 
@@ -193,8 +193,8 @@ When a new connectome dataset is published (e.g., a future revision or new speci
 1. **Padraig adds a reader** to ConnectomeToolbox (he typically does this within days of publication)
 2. **Bump `cect` version** in `versions.lock` after reviewing the changelog
 3. **Run regression tests** — ensure existing simulations produce equivalent results with the new version
-4. **Do NOT change the default dataset** without an RFC (DD012 process). Changing from Cook2019Herm to a new default affects all consuming DDs
-5. **New datasets can be used for cross-validation** without changing defaults — add them as comparison targets in DD010
+4. **Do NOT change the default dataset** without an RFC ([DD012](DD012_Design_Document_RFC_Process.md) process). Changing from Cook2019Herm to a new default affects all consuming DDs
+5. **New datasets can be used for cross-validation** without changing defaults — add them as comparison targets in [DD010](DD010_Validation_Framework.md)
 
 ---
 
@@ -243,12 +243,12 @@ for ci in nn_conns:
     print(f"{ci.pre_cell} -> {ci.post_cell}: {ci.number} ({ci.synclass})")
 ```
 
-**Pattern 3: Get neuron-to-muscle connections (for DD002)**
+**Pattern 3: Get neuron-to-muscle connections (for [DD002](DD002_Muscle_Model_Architecture.md))**
 ```python
 nm_conns = cds.get_neuron_to_muscle_conns()
 ```
 
-**Pattern 4: Filter to pharyngeal view (for DD007)**
+**Pattern 4: Filter to pharyngeal view (for [DD007](DD007_Pharyngeal_System_Architecture.md))**
 ```python
 pharynx_cds = cds.get_connectome_view("Pharynx")
 pharynx_cds.summary()
@@ -296,7 +296,7 @@ arr, symmetry_pct, info = convert_to_symmetry_array(cds, ["Generic_CS"])
 print(f"Bilateral symmetry: {symmetry_pct:.1f}%")
 ```
 
-**Pattern 8: Neurotransmitter-specific queries (for DD006)**
+**Pattern 8: Neurotransmitter-specific queries (for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))**
 ```python
 from cect.Neurotransmitters import (
     ACETYLCHOLINE, GABA, GLUTAMATE, SEROTONIN, DOPAMINE,
@@ -347,8 +347,8 @@ assert is_known_muscle("MDL01")
 ### Pinning
 
 ```yaml
-# versions.lock (DD013)
-cect: "0.2.7"  # ConnectomeToolbox — pinned per DD020
+# versions.lock ([DD013](DD013_Simulation_Stack_Architecture.md))
+cect: "0.2.7"  # ConnectomeToolbox — pinned per [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 ```
 
 ```yaml
@@ -360,7 +360,7 @@ data:
     pharyngeal_dataset: "Cook2019Herm"  # Pharynx subset (view filter)
     developmental_dataset: null      # Set to "Witvliet1" through "Witvliet8" for developmental
     functional_dataset: "Randi2023"  # Functional connectivity validation target
-    neuropeptide_dataset: "RipollSanchezShortRange"  # DD006 neuropeptide data
+    neuropeptide_dataset: "RipollSanchezShortRange"  # [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptide data
     use_cache: true                  # Load from cached JSON (recommended for CI)
 ```
 
@@ -372,13 +372,13 @@ When a new `cect` version is released:
 2. **Install new version locally:** `pip install cect==X.Y.Z`
 3. **Run dataset load test:** Verify default dataset returns same neuron count and connection count as previous version
 4. **Run full simulation regression:** `docker compose run validate` with new `cect` version
-5. **If regression passes:** Update `versions.lock` and `openworm.yml`, open PR referencing DD020
+5. **If regression passes:** Update `versions.lock` and `openworm.yml`, open PR referencing [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 6. **If regression fails:** Investigate which dataset reader changed, report issue on `openworm/ConnectomeToolbox`
 
 **Breaking change policy:** If a `cect` update changes the default dataset's adjacency matrix (e.g., corrected connection counts), this is a **simulation-affecting change** requiring:
-- Re-running all DD010 validation tiers
+- Re-running all [DD010](DD010_Validation_Framework.md) validation tiers
 - Documenting the delta (which connections changed, why)
-- Approval from the Integration Maintainer (DD013)
+- Approval from the Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md))
 
 ---
 
@@ -392,7 +392,7 @@ Biological connectome data are noisy — different labs, different animals, diff
 
 | Validation Level | Datasets | What to Compare | Acceptance Criterion |
 |-----------------|----------|-----------------|---------------------|
-| **Primary** | Cook2019Herm (default) | Full simulation kinematic metrics | DD010 Tier 3: ±15% of Schafer lab data |
+| **Primary** | Cook2019Herm (default) | Full simulation kinematic metrics | [DD010](DD010_Validation_Framework.md) Tier 3: ±15% of Schafer lab data |
 | **Cross-validation** | Witvliet8 (independent adult) | Same simulation, different connectome | Locomotion pattern preserved (forward crawling); speed within ±30% of Cook2019 result |
 | **Sensitivity analysis** | Cook2019 + Varshney2011 | Compare which connections are critical | Identify connections present in both datasets that most affect behavior |
 | **Bilateral symmetry** | All datasets | `convert_to_symmetry_array()` metric | Datasets should show >40% bilateral symmetry for chemical synapses (biological expectation) |
@@ -432,22 +432,22 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 | Witvliet 7 | `WitvlietDataReader7` | ~280 | L4 |
 | Witvliet 8 | `WitvlietDataReader8` | ~300 | Adult |
 
-### Interaction with DD001
+### Interaction with [DD001](DD001_Neural_Circuit_Architecture.md)
 
-DD001 assumes a single adult hermaphrodite connectome (302 neurons). Developmental connectome support requires:
+[DD001](DD001_Neural_Circuit_Architecture.md) assumes a single adult hermaphrodite connectome (302 neurons). Developmental connectome support requires:
 
 1. **Neuron birth/death:** Not all 302 neurons exist at all stages. `cect` handles this — each stage reader returns only the neurons present at that stage.
 2. **Connection strength changes:** Synapse counts change during development. The `number` field in `ConnectionInfo` reflects the stage-specific count.
-3. **Simulation implication:** To simulate a developmental stage, set `data.connectome.dataset: "WitvlietN"` in `openworm.yml`. DD001's c302 framework handles variable neuron counts.
-4. **Validation caveat:** DD010 kinematic benchmarks are from adult worms. Developmental stage simulations require stage-specific behavioral data for validation (limited availability).
+3. **Simulation implication:** To simulate a developmental stage, set `data.connectome.dataset: "WitvlietN"` in `openworm.yml`. [DD001](DD001_Neural_Circuit_Architecture.md)'s c302 framework handles variable neuron counts.
+4. **Validation caveat:** [DD010](DD010_Validation_Framework.md) kinematic benchmarks are from adult worms. Developmental stage simulations require stage-specific behavioral data for validation (limited availability).
 
-**Current recommendation:** Use Witvliet stages for cross-validation and sensitivity analysis, not as primary simulation input. DD001's default remains Cook2019Herm (adult).
+**Current recommendation:** Use Witvliet stages for cross-validation and sensitivity analysis, not as primary simulation input. [DD001](DD001_Neural_Circuit_Architecture.md)'s default remains Cook2019Herm (adult).
 
 ---
 
 ## Alternatives Considered
 
-### 1. Use OWMeta (DD008) as the Sole Connectome Data Access Layer
+### 1. Use OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) as the Sole Connectome Data Access Layer
 
 **Description:** Route all connectome queries through OWMeta's RDF knowledge graph.
 
@@ -457,7 +457,7 @@ DD001 assumes a single adult hermaphrodite connectome (302 neurons). Development
 - `cect` provides direct Python API access to 30+ datasets; OWMeta has ingestion scripts for fewer datasets
 - `cect` already has caching, cell classification, neurotransmitter identity, and visualization built in
 
-**When to reconsider:** In Phase 3+, when OWMeta integrates CeNGEN, WormAtlas, and other non-connectome data sources, `cect` data should flow *through* OWMeta to provide a unified semantic layer. At that point, DD008's OWMeta would call `cect` internally, and consuming DDs could use either API. See "Relationship to DD008" below.
+**When to reconsider:** In Phase 3+, when OWMeta integrates CeNGEN, WormAtlas, and other non-connectome data sources, `cect` data should flow *through* OWMeta to provide a unified semantic layer. At that point, [DD008](DD008_Data_Integration_Pipeline.md)'s OWMeta would call `cect` internally, and consuming DDs could use either API. See "Relationship to [DD008](DD008_Data_Integration_Pipeline.md)" below.
 
 ### 2. Parse Raw Published Data Files Directly
 
@@ -525,17 +525,17 @@ DD001 assumes a single adult hermaphrodite connectome (302 neurons). Development
 
 ### What This Design Document Does NOT Cover:
 
-1. **OWMeta/RDF knowledge graph:** DD008 owns the semantic data layer. This DD owns the direct Python API layer (`cect`). See "Relationship to DD008" for the boundary.
+1. **OWMeta/RDF knowledge graph:** [DD008](DD008_Data_Integration_Pipeline.md) owns the semantic data layer. This DD owns the direct Python API layer (`cect`). See "Relationship to [DD008](DD008_Data_Integration_Pipeline.md)" for the boundary.
 
-2. **Neural circuit modeling:** DD001 owns how connectome topology is translated into NeuroML network files. This DD provides the topology; DD001 consumes it.
+2. **Neural circuit modeling:** [DD001](DD001_Neural_Circuit_Architecture.md) owns how connectome topology is translated into NeuroML network files. This DD provides the topology; [DD001](DD001_Neural_Circuit_Architecture.md) consumes it.
 
-3. **Neuropeptidergic modeling:** DD006 owns the biological interpretation of Ripoll-Sanchez neuropeptide data. This DD provides access to the data.
+3. **Neuropeptidergic modeling:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) owns the biological interpretation of Ripoll-Sanchez neuropeptide data. This DD provides access to the data.
 
-4. **Cell-type differentiation:** DD005 owns CeNGEN expression-to-conductance mapping. This DD does not cover transcriptomic data access.
+4. **Cell-type differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) owns CeNGEN expression-to-conductance mapping. This DD does not cover transcriptomic data access.
 
-5. **Pharyngeal system modeling:** DD007 owns the pharyngeal oscillator model. This DD provides the pharyngeal subset of the connectome.
+5. **Pharyngeal system modeling:** [DD007](DD007_Pharyngeal_System_Architecture.md) owns the pharyngeal oscillator model. This DD provides the pharyngeal subset of the connectome.
 
-6. **Visualization rendering:** DD014/DD014.1 own the viewer. This DD's visualization is for data exploration via `cect`'s built-in Plotly figures, not for the simulation viewer.
+6. **Visualization rendering:** [DD014](DD014_Dynamic_Visualization_Architecture.md)/DD014.1 own the viewer. This DD's visualization is for data exploration via `cect`'s built-in Plotly figures, not for the simulation viewer.
 
 7. **Individual connectome variation:** Natural genetic variation affecting synaptic connectivity is out of scope. This DD uses population-representative published reconstructions.
 
@@ -573,20 +573,20 @@ Padraig Gleeson created the ConnectomeToolbox (`cect`) to provide unified access
 
 ### Why This DD Is Needed Now
 
-ConnectomeToolbox is already referenced as a dependency in 9 existing DDs (DD001, DD002, DD005, DD006, DD007, DD008, DD013, DD017, DD019), yet no DD specifies *how* it should be used, *which* dataset to default to, or *how* to pin versions. Key risks without DD020:
+ConnectomeToolbox is already referenced as a dependency in 9 existing DDs ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD019](DD019_Closed_Loop_Touch_Response.md)), yet no DD specifies *how* it should be used, *which* dataset to default to, or *how* to pin versions. Key risks without [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md):
 
-1. **Dataset drift:** DD001 uses `Cook2019Herm` while DD006 uses `RipollSanchezShortRange` — both valid, but no policy coordinates them
+1. **Dataset drift:** [DD001](DD001_Neural_Circuit_Architecture.md) uses `Cook2019Herm` while [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) uses `RipollSanchezShortRange` — both valid, but no policy coordinates them
 2. **Version skew:** One consumer pins `cect==0.2.5`, another installs latest; connection counts differ silently
 3. **API inconsistency:** Some consumers parse `original_connection_infos`, others use `connections` matrices; no canonical pattern
 4. **Update risk:** `cect` updates break simulations because no regression testing policy exists
 
 ---
 
-## Relationship to DD008 (OWMeta)
+## Relationship to [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta)
 
 **Clear boundary:** `cect` and OWMeta serve different purposes and should coexist:
 
-| Aspect | `cect` (DD020) | OWMeta (DD008) |
+| Aspect | `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) |
 |--------|----------------|----------------|
 | **Architecture** | Direct Python API | RDF semantic graph |
 | **Query style** | `get_instance()` → `ConnectomeDataset` | `connect("openworm_data")` → SPARQL-like |
@@ -597,10 +597,10 @@ ConnectomeToolbox is already referenced as a dependency in 9 existing DDs (DD001
 
 **Phase 1-2 (now):** Use `cect` directly. It's actively maintained, has the datasets we need, and provides the API patterns consuming DDs require.
 
-**Phase 3+ (future):** When OWMeta becomes active again, it should call `cect` internally as its connectome data provider. Consuming DDs could then use either `cect` (direct) or OWMeta (semantic) depending on their needs. DD008 should add a `cect` ingestion adapter:
+**Phase 3+ (future):** When OWMeta becomes active again, it should call `cect` internally as its connectome data provider. Consuming DDs could then use either `cect` (direct) or OWMeta (semantic) depending on their needs. [DD008](DD008_Data_Integration_Pipeline.md) should add a `cect` ingestion adapter:
 
 ```python
-# Future DD008 integration (Phase 3+)
+# Future [DD008](DD008_Data_Integration_Pipeline.md) integration (Phase 3+)
 # OWMeta calls cect internally
 from owmeta_core import connect
 conn = connect("openworm_data")
@@ -622,23 +622,23 @@ data:
     cect_version: "0.2.7"              # Required. Must match versions.lock.
     use_cache: true                     # Recommended. Use cached JSON for speed/reproducibility.
 
-    # Pharyngeal subset (DD007)
+    # Pharyngeal subset ([DD007](DD007_Pharyngeal_System_Architecture.md))
     pharyngeal_dataset: "Cook2019Herm"  # Same dataset, different view filter
     pharyngeal_view: "Pharynx"          # View filter name
 
     # Developmental (optional, null = disabled)
     developmental_dataset: null         # "Witvliet1" through "Witvliet8"
 
-    # Functional connectivity validation target (DD005, DD010)
+    # Functional connectivity validation target ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md))
     functional_dataset: "Randi2023"     # WormNeuroAtlasFuncReader
 
-    # Neuropeptidergic (DD006)
+    # Neuropeptidergic ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
     neuropeptide_dataset: "RipollSanchezShortRange"
 
-    # Neurotransmitter identity (DD006, experimental)
+    # Neurotransmitter identity ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), experimental)
     neurotransmitter_dataset: "Wang2024Herm"
 
-    # Cross-validation dataset (DD010)
+    # Cross-validation dataset ([DD010](DD010_Validation_Framework.md))
     cross_validation_dataset: "Witvliet8"
 ```
 
@@ -666,25 +666,25 @@ data:
 | Input | Source | Variable | Format | Units |
 |-------|--------|----------|--------|-------|
 | Published connectome datasets (external) | Journal supplementary materials | EM reconstructions, neurotransmitter atlases | Excel, CSV, TSV | Connection counts |
-| `openworm.yml` connectome config | DD013 config system | Dataset selection, version pin | YAML | config keys |
-| `versions.lock` cect version | DD013 build system | `cect` package version | Lock file | semver |
+| `openworm.yml` connectome config | [DD013](DD013_Simulation_Stack_Architecture.md) config system | Dataset selection, version pin | YAML | config keys |
+| `versions.lock` cect version | [DD013](DD013_Simulation_Stack_Architecture.md) build system | `cect` package version | Lock file | semver |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Structural adjacency matrices (chemical + electrical) | DD001 (neural circuit topology) | `ConnectomeDataset.connections` dict | `dict[str, np.ndarray]` | Connection counts |
-| `ConnectionInfo` list | DD001, DD002 (neuron→muscle mapping) | `ConnectomeDataset.original_connection_infos` | `list[ConnectionInfo]` | pre_cell, post_cell, number, syntype, synclass |
-| Neuron-to-neuron connections | DD001 (synapse generation) | `get_neuron_to_neuron_conns()` | `list[ConnectionInfo]` | Connection counts |
-| Neuron-to-muscle connections | DD002 (NMJ coupling) | `get_neuron_to_muscle_conns()` | `list[ConnectionInfo]` | Connection counts |
-| Pharyngeal connectome view | DD007 (pharynx circuit) | `get_connectome_view("Pharynx")` | `ConnectomeDataset` (filtered) | Connection counts |
-| Cell classification | DD001, DD005, DD014 (neuron type labeling) | `get_SIM_class()`, cell lists | Python API | Category strings |
-| Neuropeptide network | DD006 (peptidergic modulation) | Ripoll-Sanchez readers | `ConnectomeDataset` | Interaction scores |
-| Neurotransmitter identity | DD006 (synapse type assignment) | Wang2024Reader | `ConnectionInfo.synclass` | NT names |
-| Bilateral symmetry metrics | DD010 (validation), DD017 (ML targets) | `convert_to_symmetry_array()` | `(ndarray, float, str)` | Percentage |
-| Developmental connectome series | DD019 (developmental validation) | Witvliet 1-8 readers | `ConnectomeDataset` per stage | Connection counts |
-| Functional connectivity matrix | DD005, DD010 (validation target) | `WormNeuroAtlasFuncReader` | `ConnectomeDataset` | Correlation values |
-| NetworkX graph | DD017 (graph neural networks) | `to_networkx_graph()` | `networkx.DiGraph` | Weighted edges |
+| Structural adjacency matrices (chemical + electrical) | [DD001](DD001_Neural_Circuit_Architecture.md) (neural circuit topology) | `ConnectomeDataset.connections` dict | `dict[str, np.ndarray]` | Connection counts |
+| `ConnectionInfo` list | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md) (neuron→muscle mapping) | `ConnectomeDataset.original_connection_infos` | `list[ConnectionInfo]` | pre_cell, post_cell, number, syntype, synclass |
+| Neuron-to-neuron connections | [DD001](DD001_Neural_Circuit_Architecture.md) (synapse generation) | `get_neuron_to_neuron_conns()` | `list[ConnectionInfo]` | Connection counts |
+| Neuron-to-muscle connections | [DD002](DD002_Muscle_Model_Architecture.md) (NMJ coupling) | `get_neuron_to_muscle_conns()` | `list[ConnectionInfo]` | Connection counts |
+| Pharyngeal connectome view | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx circuit) | `get_connectome_view("Pharynx")` | `ConnectomeDataset` (filtered) | Connection counts |
+| Cell classification | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) (neuron type labeling) | `get_SIM_class()`, cell lists | Python API | Category strings |
+| Neuropeptide network | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptidergic modulation) | Ripoll-Sanchez readers | `ConnectomeDataset` | Interaction scores |
+| Neurotransmitter identity | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (synapse type assignment) | Wang2024Reader | `ConnectionInfo.synclass` | NT names |
+| Bilateral symmetry metrics | [DD010](DD010_Validation_Framework.md) (validation), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (ML targets) | `convert_to_symmetry_array()` | `(ndarray, float, str)` | Percentage |
+| Developmental connectome series | [DD019](DD019_Closed_Loop_Touch_Response.md) (developmental validation) | Witvliet 1-8 readers | `ConnectomeDataset` per stage | Connection counts |
+| Functional connectivity matrix | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) (validation target) | `WormNeuroAtlasFuncReader` | `ConnectomeDataset` | Correlation values |
+| NetworkX graph | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (graph neural networks) | `to_networkx_graph()` | `networkx.DiGraph` | Weighted edges |
 
 ### Repository & Packaging
 
@@ -705,7 +705,7 @@ from cect.Cook2019HermReader import get_instance
 cds = get_instance(from_cache=True)
 assert len(cds.nodes) >= 300, f'Expected 300+ nodes, got {len(cds.nodes)}'
 assert len(cds.original_connection_infos) > 0, 'No connections loaded'
-print('DD020 quick test: PASS')
+print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) quick test: PASS')
 "
 
 # Full validation (must pass before merge)
@@ -731,15 +731,15 @@ from cect.Analysis import convert_to_symmetry_array
 arr, pct, info = convert_to_symmetry_array(cds, ['Generic_CS'])
 assert 0 < pct < 100, f'Symmetry percentage out of range: {pct}'
 
-print('DD020 full validation: PASS')
+print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) full validation: PASS')
 "
 ```
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | Data Flow | Description |
 |-----------|-------------|
-| `cect` → DD001 → OME-Zarr → DD014 | Connectome topology flows through c302 into simulation output; DD014 viewer displays neuron connectivity as part of the neural layer |
+| `cect` → [DD001](DD001_Neural_Circuit_Architecture.md) → OME-Zarr → [DD014](DD014_Dynamic_Visualization_Architecture.md) | Connectome topology flows through c302 into simulation output; [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer displays neuron connectivity as part of the neural layer |
 | `cect` → Plotly (direct) | `cect`'s built-in `to_plotly_*` methods for data exploration and publication figures |
 
 ### Coupling Dependencies
@@ -748,19 +748,19 @@ print('DD020 full validation: PASS')
 |-------------|----|-----------------------------|
 | Published connectome datasets (external) | None | If Cook et al. publish corrections, `cect` readers must be updated by Padraig |
 | `cect` Python package (external) | None | If `cect` API changes, all consuming DDs must update imports |
-| DD013 config system | DD013 | If `openworm.yml` schema changes, `data.connectome` keys must be updated |
+| [DD013](DD013_Simulation_Stack_Architecture.md) config system | [DD013](DD013_Simulation_Stack_Architecture.md) | If `openworm.yml` schema changes, `data.connectome` keys must be updated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit topology | DD001 | Changing default dataset changes every synapse in the simulation |
-| Muscle innervation | DD002 | Neuron-to-muscle connection list drives NMJ coupling |
-| Cell-type differentiation | DD005 | Cook2019 neuron list defines which cells to differentiate |
-| Neuropeptidergic network | DD006 | Ripoll-Sanchez data defines peptide-receptor interactions |
-| Pharyngeal circuit | DD007 | Pharyngeal view filter defines pharynx neuron connectivity |
-| Data integration | DD008 | OWMeta ingests connectome data from `cect` (Phase 3+) |
-| Simulation stack | DD013 | `cect` version pinned in `versions.lock` |
-| Hybrid ML framework | DD017 | Graph structure (via NetworkX) used for graph neural networks |
-| Closed-loop touch response | DD019 | Touch neuron connectivity (MEC-4 neurons) from `cect` |
+| Neural circuit topology | [DD001](DD001_Neural_Circuit_Architecture.md) | Changing default dataset changes every synapse in the simulation |
+| Muscle innervation | [DD002](DD002_Muscle_Model_Architecture.md) | Neuron-to-muscle connection list drives NMJ coupling |
+| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cook2019 neuron list defines which cells to differentiate |
+| Neuropeptidergic network | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Ripoll-Sanchez data defines peptide-receptor interactions |
+| Pharyngeal circuit | [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal view filter defines pharynx neuron connectivity |
+| Data integration | [DD008](DD008_Data_Integration_Pipeline.md) | OWMeta ingests connectome data from `cect` (Phase 3+) |
+| Simulation stack | [DD013](DD013_Simulation_Stack_Architecture.md) | `cect` version pinned in `versions.lock` |
+| Hybrid ML framework | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Graph structure (via NetworkX) used for graph neural networks |
+| Closed-loop touch response | [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch neuron connectivity (MEC-4 neurons) from `cect` |
 
 ---
 
@@ -825,7 +825,7 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 **Next Actions:**
 1. Pin `cect==0.2.7` in `versions.lock`
 2. Add `data.connectome` section to `openworm.yml` schema
-3. Update DD001 coupling table: `ConnectomeToolbox (external)` → `DD020`
-4. Update DD008 coupling table: add DD020 as connectome data source
+3. Update [DD001](DD001_Neural_Circuit_Architecture.md) coupling table: `ConnectomeToolbox (external)` → `DD020`
+4. Update [DD008](DD008_Data_Integration_Pipeline.md) coupling table: add [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) as connectome data source
 5. Create CI test for `cect` version and default dataset load
 6. Monitor OpenWormUnifiedReader stability for future default adoption

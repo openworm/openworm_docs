@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Unified data access layer (OWMeta) for connectome, CeNGEN expression, cell positions, neuropeptide interactions — all via Python API |
-| **Success metric** | All downstream DDs (DD001-DD009) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
+| **Success metric** | All downstream DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) — issues labeled `dd008` |
 | **Config toggle** | `data.backend: owmeta` (recommended) or `data.backend: direct` (legacy) in `openworm.yml` |
 | **Build & test** | `docker compose run shell python -c "import owmeta_core"` (installs?), query 302 neurons (returns correct count?) |
-| **Visualize** | DD014 `geometry/cell_metadata.json` — cell names, types, lineage for viewer tooltips and search |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `geometry/cell_metadata.json` — cell names, types, lineage for viewer tooltips and search |
 | **CI gate** | OWMeta installation + basic query test blocks merge for data-layer changes |
 
 ---
@@ -30,7 +30,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** ID consistency | All neuron/cell IDs map to WBbt ontology; no orphaned IDs | Tier 1 (blocking) |
 | **Secondary:** Dataset ingestion | All Phase 1-3 datasets ingested and queryable via OWMeta | Tier 1 (blocking) |
@@ -71,7 +71,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pip
 
 ### Step-by-step
@@ -120,7 +120,7 @@ docker compose run quick-test  # with data.backend: "direct"
 
 ## How to Visualize
 
-**DD014 viewer layer:** `geometry/cell_metadata.json` for tooltips, search, and cell identification.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `geometry/cell_metadata.json` for tooltips, search, and cell identification.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -192,7 +192,7 @@ for cell in intestine_cells:
 | CeNGEN L4 expression | Integrated | -- | Maintain |
 | CeNGEN L1 expression | Not yet | Medium | Add in Phase 1 |
 | Witvliet 2021 dev. connectomes | Not yet | High | Add for Phase 6 (development) |
-| Ripoll-Sanchez neuropeptides | Not yet | High | Add for Phase 2 (DD006) |
+| Ripoll-Sanchez neuropeptides | Not yet | High | Add for Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | Randi 2023 functional connectivity | Not yet | High | Add for validation |
 | Packer 2019 embryonic scRNA-seq | Not yet | Medium | Add for Phase 6 |
 | Ben-David 2021 eQTLs | Not yet | Low | Phase 6+ |
@@ -256,7 +256,7 @@ OWMeta aggregates WormBase + all other sources.
 
 OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook connectome, Witvliet developmental data, Ripoll-Sanchez neuropeptides, Randi functional connectivity, Schafer kinematics, and more. These datasets use different formats, identifiers, and coordinate systems.
 
-**The challenge:** A contributor implementing DD005 (cell differentiation) must pull CeNGEN expression, map neuron IDs to CeNGEN classes, extract channel genes, and generate NeuroML. Without a unified data layer, this requires writing custom parsers for each dataset.
+**The challenge:** A contributor implementing [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell differentiation) must pull CeNGEN expression, map neuron IDs to CeNGEN classes, extract channel genes, and generate NeuroML. Without a unified data layer, this requires writing custom parsers for each dataset.
 
 **The solution:** **OWMeta** (openworm.org/OWMeta) — a semantic knowledge graph providing unified programmatic access to all OpenWorm-relevant biological data.
 
@@ -281,20 +281,20 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 | Cook 2019 connectome | wormwiring.org | Neuron adjacency + weights | CSV/Excel → RDF ingestion | Already integrated |
 | CeNGEN L4 scRNA-seq | cengen.org | Per-neuron-class TPM values | CSV → RDF ingestion | Already integrated |
 | WormAtlas anatomy | wormatlas.org | Cell positions, morphology, EM images | HTML/images → RDF ingestion | Partial |
-| Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested** (needed for DD006) |
-| Randi 2023 functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for DD010) |
+| Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested** (needed for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
+| Randi 2023 functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for [DD010](DD010_Validation_Framework.md)) |
 | Witvliet 2021 dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 6) |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Neuron adjacency (connectome) | DD001 | Synapse pairs + weights | OWMeta query → Python objects | synapse count |
-| Per-class gene expression | DD005 | TPM per gene per neuron class | OWMeta query → DataFrame | TPM |
-| Neuropeptide-receptor pairs | DD006 | Peptide ligand → receptor → expressing cells | OWMeta query → edge list | binary (expressed/not) |
-| Cell positions (3D) | DD004 | Per-cell x, y, z coordinates | OWMeta query → NumPy array | um |
-| Cell ontology IDs | DD004 | Cell name → WBbt ID mapping | OWMeta query → dict | identifiers |
-| Cell metadata (for viewer) | **DD014** (visualization) | Cell names, types, lineage, WormAtlas links | OME-Zarr: `geometry/cell_metadata.json` | mixed |
+| Neuron adjacency (connectome) | [DD001](DD001_Neural_Circuit_Architecture.md) | Synapse pairs + weights | OWMeta query → Python objects | synapse count |
+| Per-class gene expression | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | TPM per gene per neuron class | OWMeta query → DataFrame | TPM |
+| Neuropeptide-receptor pairs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Peptide ligand → receptor → expressing cells | OWMeta query → edge list | binary (expressed/not) |
+| Cell positions (3D) | [DD004](DD004_Mechanical_Cell_Identity.md) | Per-cell x, y, z coordinates | OWMeta query → NumPy array | um |
+| Cell ontology IDs | [DD004](DD004_Mechanical_Cell_Identity.md) | Cell name → WBbt ID mapping | OWMeta query → dict | identifiers |
+| Cell metadata (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Cell names, types, lineage, WormAtlas links | OME-Zarr: `geometry/cell_metadata.json` | mixed |
 
 ### Repository & Packaging
 
@@ -361,7 +361,7 @@ docker compose run quick-test  # with data.backend: "direct"
 - [ ] New ingestion scripts include source DOI, version, and ID mapping documentation
 - [ ] No orphaned IDs (all IDs map to WBbt ontology)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -377,11 +377,11 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 
 **Trigger for Phase 2→3 transition:** OWMeta is installable on Python 3.12, all Phase 1-2 datasets are ingested, and at least 3 downstream consumers (c302, Sibernetic init, validation) have been successfully migrated.
 
-### Reconciliation with DD020 (Connectome Data Access Policy)
+### Reconciliation with [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access Policy)
 
-**DD020** specifies ConnectomeToolbox (`cect`, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
+**[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** specifies ConnectomeToolbox (`cect`, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
 
-| Aspect | `cect` (DD020) | OWMeta (DD008) |
+| Aspect | `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) |
 |--------|---------------|----------------|
 | **Purpose** | Direct connectome data access | Semantic knowledge graph (multi-modal) |
 | **Architecture** | Direct Python API | RDF semantic graph |
@@ -391,7 +391,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 | **Current status** | v0.2.7, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 
-**Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see DD020 API contract). This is the actively maintained, stable tool with 30+ dataset readers.
+**Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
 
 **Future integration (Phase 3+):** When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, Randi 2023, Ripoll-Sanchez, Wang 2024), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
 
@@ -403,15 +403,15 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 |-------------|----|-----------------------------|
 | WormBase releases | External | New WormBase releases may change gene IDs or annotations |
 | CeNGEN updates | External | New expression data may change downstream conductances |
-| ConnectomeToolbox | DD001 | If connectome representation changes, OWMeta ingestion scripts must update |
+| ConnectomeToolbox | [DD001](DD001_Neural_Circuit_Architecture.md) | If connectome representation changes, OWMeta ingestion scripts must update |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit (connectome queries) | DD001 | If neuron adjacency format or ID scheme changes, c302 network generation breaks |
-| Cell differentiation (expression data) | DD005 | If CeNGEN query format changes, conductance pipeline breaks |
-| Neuropeptides (peptide-receptor data) | DD006 | If peptide interaction data format changes, neuropeptide layer breaks |
-| Mechanical cell identity (cell positions) | DD004 | If cell position queries change, particle tagging breaks |
-| Validation (experimental data metadata) | DD010 | If data provenance metadata changes, validation data versioning breaks |
+| Neural circuit (connectome queries) | [DD001](DD001_Neural_Circuit_Architecture.md) | If neuron adjacency format or ID scheme changes, c302 network generation breaks |
+| Cell differentiation (expression data) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN query format changes, conductance pipeline breaks |
+| Neuropeptides (peptide-receptor data) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If peptide interaction data format changes, neuropeptide layer breaks |
+| Mechanical cell identity (cell positions) | [DD004](DD004_Mechanical_Cell_Identity.md) | If cell position queries change, particle tagging breaks |
+| Validation (experimental data metadata) | [DD010](DD010_Validation_Framework.md) | If data provenance metadata changes, validation data versioning breaks |
 
 ---
 

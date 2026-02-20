@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | NeuroML network files: `LEMS_c302_C1_*.xml` with 302 neurons, 95 muscles, graded synapses, gap junctions |
-| **Success metric** | DD010 Tier 3: kinematic metrics within ±15% of Schafer lab WCON data |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% of Schafer lab WCON data |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd001` |
 | **Config toggle** | `neural.level: C1` / `neural.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge) |
-| **Visualize** | DD014 `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
 | **CI gate** | Tier 3 kinematic validation blocks merge; `jnml -validate` blocks PR |
 
 ---
@@ -30,7 +30,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Kinematic validation | Forward speed, wavelength, frequency, amplitude, crawling/swimming classification within ±15% of Schafer lab WCON data | Tier 3 (blocking) |
 | **Secondary:** Functional connectivity | Calcium correlation matrix comparable to experimental recordings | Tier 2 (blocking) |
@@ -77,7 +77,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6, ConnectomeToolbox/`cect`
 
 ### Step-by-step
@@ -134,7 +134,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**DD014 viewer layer:** `neural/` — 302 neurons with voltage and calcium trace overlays, color-by-activity.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `neural/` — 302 neurons with voltage and calcium trace overlays, color-by-activity.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -226,7 +226,7 @@ I_gap = g_gap * (V_neighbor - V)
 
 ### 2. AlphaFold-predicted Channel Structures + MD Simulations
 
-**Rejected (for now) because:** While ESM3 and AlphaFold can predict protein structures, converting structures to Hodgkin-Huxley parameters requires electrophysiology data we don't have for most neurons. See DD005 for how we address this using CeNGEN transcriptomics.
+**Rejected (for now) because:** While ESM3 and AlphaFold can predict protein structures, converting structures to Hodgkin-Huxley parameters requires electrophysiology data we don't have for most neurons. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) for how we address this using CeNGEN transcriptomics.
 
 ### 3. Detailed Multicompartmental Models for All 302 Neurons
 
@@ -282,13 +282,13 @@ python scripts/check_regression.py validation_report.json baseline_score.json
 
 ### What This Design Document Does NOT Cover:
 
-1. **Cell-type-specific differentiation:** Covered in DD005 (Cell-Type Differentiation Using CeNGEN). This document defines the *generic* cell template.
+1. **Cell-type-specific differentiation:** Covered in [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation Using CeNGEN). This document defines the *generic* cell template.
 
-2. **Neuropeptidergic / extrasynaptic signaling:** Covered in DD006 (Neuropeptidergic Connectome Integration). This document covers only fast synaptic and gap junction transmission.
+2. **Neuropeptidergic / extrasynaptic signaling:** Covered in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration). This document covers only fast synaptic and gap junction transmission.
 
 3. **Sensory transduction:** How mechanosensors, chemosensors, thermosensors convert stimuli to voltage is out of scope. Currently sensory neurons receive generic current injections.
 
-4. **Muscle actuation:** Covered in DD002 (Muscle Model). This document defines neuron-to-muscle signaling interface (calcium concentration) but not the muscle dynamics themselves.
+4. **Muscle actuation:** Covered in [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model). This document defines neuron-to-muscle signaling interface (calcium concentration) but not the muscle dynamics themselves.
 
 5. **Intracellular signaling cascades:** IP3, cAMP, MAPK cascades are future work (Phases 4-5). This document covers membrane voltage and calcium only.
 
@@ -365,7 +365,7 @@ Ingests: Cook et al. 2019 (both sexes), Witvliet et al. 2021 (developmental), Va
 If future research demonstrates that Level C1 graded synapses are insufficient (e.g., specific neurons require action potentials, or detailed dendritic computation is essential):
 
 1. **Add a new level (e.g., Level E)** rather than modifying C1. Backward compatibility is sacred.
-2. **Document the biological justification** in a new DD (e.g., DD015: Action Potential Mechanisms in Specific Neurons).
+2. **Document the biological justification** in a new DD (e.g., [DD015](DD015_AI_Contributor_Model.md): Action Potential Mechanisms in Specific Neurons).
 3. **Provide a conversion script** from C1 to the new level.
 4. **Re-validate** against all existing benchmarks.
 
@@ -383,20 +383,20 @@ Do NOT modify Level C1 unless a critical bug is found.
 |-------|--------|----------|--------|-------|
 | Connectome topology (synapses + gap junctions) | ConnectomeToolbox (`cect` package) | Adjacency matrices | Python API / CSV | Neuron pairs + weights |
 | Sensory stimulation (external) | `master_openworm.py` orchestrator | `I_ext` current injection per neuron | NeuroML `<pulseGenerator>` | nA |
-| CeNGEN expression (when differentiated) | DD005 pipeline | Per-class conductance densities | NeuroML `<channelDensity>` elements | S/cm² |
-| Neuropeptide modulation (when enabled) | DD006 | `conductance_modulation` per channel | NeuroML `<peptideReceptor>` exposure | dimensionless multiplier |
+| CeNGEN expression (when differentiated) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) pipeline | Per-class conductance densities | NeuroML `<channelDensity>` elements | S/cm² |
+| Neuropeptide modulation (when enabled) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | `conductance_modulation` per channel | NeuroML `<peptideReceptor>` exposure | dimensionless multiplier |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units | Timestep |
 |--------|------------|----------|--------|-------|----------|
-| Neuron membrane voltage | DD002 (via NMJ synapses) | `V` per neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
-| Neuron [Ca²⁺]ᵢ | DD002 (muscle activation), DD006 (peptide release trigger) | `ca_internal` per neuron | NeuroML state variable | mol/cm³ | dt_neuron (0.05 ms) |
-| Muscle [Ca²⁺]ᵢ (via DD002 muscle cells in same LEMS simulation) | DD003 (Sibernetic, via `sibernetic_c302.py`) | `muscle_ca` per muscle | Tab-separated file: muscle_id, timestep, ca_value | mol/cm³ | dt_coupling (0.005 ms) |
-| Network activity recordings | DD010 (Tier 2 validation) | `*_calcium.dat`, `*_voltages.dat` | Tab-separated, neuron_id columns × timestep rows | mV or mol | dt_neuron |
-| Neuron voltage time series (for viewer) | **DD014** (visualization) | Per-neuron V over all timesteps | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | mV | output_interval |
-| Neuron calcium time series (for viewer) | **DD014** (visualization) | Per-neuron [Ca²⁺] over all timesteps | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | mol/cm³ | output_interval |
-| Neuron 3D positions | **DD014** (visualization) | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/`, shape (302, 3) | µm | one-time |
+| Neuron membrane voltage | [DD002](DD002_Muscle_Model_Architecture.md) (via NMJ synapses) | `V` per neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
+| Neuron [Ca²⁺]ᵢ | [DD002](DD002_Muscle_Model_Architecture.md) (muscle activation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptide release trigger) | `ca_internal` per neuron | NeuroML state variable | mol/cm³ | dt_neuron (0.05 ms) |
+| Muscle [Ca²⁺]ᵢ (via [DD002](DD002_Muscle_Model_Architecture.md) muscle cells in same LEMS simulation) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic, via `sibernetic_c302.py`) | `muscle_ca` per muscle | Tab-separated file: muscle_id, timestep, ca_value | mol/cm³ | dt_coupling (0.005 ms) |
+| Network activity recordings | [DD010](DD010_Validation_Framework.md) (Tier 2 validation) | `*_calcium.dat`, `*_voltages.dat` | Tab-separated, neuron_id columns × timestep rows | mV or mol | dt_neuron |
+| Neuron voltage time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron V over all timesteps | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | mV | output_interval |
+| Neuron calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron [Ca²⁺] over all timesteps | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | mol/cm³ | output_interval |
+| Neuron 3D positions | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/`, shape (302, 3) | µm | one-time |
 
 ### Repository & Packaging
 
@@ -416,8 +416,8 @@ neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1 (DD005): CeNGEN cell-type differentiation
-  neuropeptides: false               # Phase 2 (DD006): peptidergic modulation
+  differentiated: false              # Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)): CeNGEN cell-type differentiation
+  neuropeptides: false               # Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): peptidergic modulation
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
   reference: "FW"                    # FW (forward crawl), BA (backward), TU (turning)
@@ -428,8 +428,8 @@ neural:
 | `neural.enabled` | `true` | `true`/`false` | Enable neural circuit simulation |
 | `neural.framework` | `c302` | `c302` | Neural framework (only c302 currently) |
 | `neural.level` | `C1` | `A`, `B`, `C`, `C1`, `C2`, `D` | Biophysical detail level |
-| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN cell-type differentiation (DD005) |
-| `neural.neuropeptides` | `false` | `true`/`false` | Enable peptidergic modulation (DD006) |
+| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN cell-type differentiation ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
+| `neural.neuropeptides` | `false` | `true`/`false` | Enable peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | `neural.connectome_dataset` | `"Cook2019"` | `"Cook2019"`, `"Witvliet2021"`, `"Varshney2011"` | Connectome data source |
 | `neural.data_reader` | `"UpdatedSpreadsheetDataReader2"` | String | Data reader class |
 | `neural.reference` | `"FW"` | `"FW"`, `"BA"`, `"TU"` | Behavior reference (forward, backward, turning) |
@@ -456,7 +456,7 @@ docker compose run validate
 - [ ] No changes to connectome topology (synapse existence) without explicit justification
 - [ ] All parameters have correct biophysical units
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -469,21 +469,21 @@ docker compose run validate
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
 | ConnectomeToolbox data | (external) | Synapse counts or neuron IDs change → network topology changes |
-| CeNGEN expression data | DD005 | Calibration parameters change → all conductance densities shift |
+| CeNGEN expression data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Calibration parameters change → all conductance densities shift |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Muscle activation | DD002 | If neuron→muscle synaptic output changes, muscle calcium dynamics change |
-| Body physics | DD003 | If muscle calcium output format/units change, `sibernetic_c302.py` coupling breaks |
-| Neuropeptide release | DD006 | If `ca_internal` variable name or units change, peptide release triggers break |
-| Tier 2 validation | DD010 | If calcium recording file format changes, validation scripts break |
+| Muscle activation | [DD002](DD002_Muscle_Model_Architecture.md) | If neuron→muscle synaptic output changes, muscle calcium dynamics change |
+| Body physics | [DD003](DD003_Body_Physics_Architecture.md) | If muscle calcium output format/units change, `sibernetic_c302.py` coupling breaks |
+| Neuropeptide release | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If `ca_internal` variable name or units change, peptide release triggers break |
+| Tier 2 validation | [DD010](DD010_Validation_Framework.md) | If calcium recording file format changes, validation scripts break |
 
 ### Coupling Bridge Ownership
 
-The `sibernetic_c302.py` script (in the Sibernetic repo) implements the DD001→DD002→DD003 coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer (DD003) and the Integration Maintainer (DD013).**
+The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD003](DD003_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md)).**
 
 ---
 
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Complete (c302 Levels A-D exist)
-**Next Review:** After Phase 1 cell-type differentiation (see DD005)
+**Next Review:** After Phase 1 cell-type differentiation (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))

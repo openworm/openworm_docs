@@ -57,7 +57,7 @@ Every Design Document follows this structure. **Lead with impact, end with backg
 and the single most important success metric.
 
 ## Goal & Success Criteria                        ← REQUIRED
-- Which DD010 validation tier does this improve?
+- Which [DD010](DD010_Validation_Framework.md) validation tier does this improve?
 - Quantitative success metric (threshold, not vague)
 - Before/after: what simulation gains
 
@@ -81,7 +81,7 @@ and the single most important success metric.
   with a GitHub issue link
 
 ## How to Visualize                               ← REQUIRED
-- Which DD014 viewer layer displays this work
+- Which [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer displays this work
 - Color mapping or rendering specification
 - What you should SEE when it works correctly
 - (If not applicable, e.g., governance DDs: state "N/A")
@@ -134,7 +134,7 @@ Variable name, Format, Units, Timestep (if applicable).
 
 ### Repository & Packaging
 - Primary repository (e.g., `openworm/c302`)
-- Docker stage in multi-stage build (DD013)
+- Docker stage in multi-stage build ([DD013](DD013_Simulation_Stack_Architecture.md))
 - `versions.lock` key
 - Build dependencies (pip/apt packages)
 
@@ -144,11 +144,11 @@ Variable name, Format, Units, Timestep (if applicable).
 
 ### How to Test (Contributor Workflow)
 - `docker compose run quick-test` — what it checks
-- `docker compose run validate` — which DD010 tiers
+- `docker compose run validate` — which [DD010](DD010_Validation_Framework.md) tiers
   block merge
 - Per-PR checklist (what must pass before merge)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 - Which OME-Zarr groups this DD's output populates
 - Which viewer layer displays it
 - Color mapping specification
@@ -163,7 +163,7 @@ Variable name, Format, Units, Timestep (if applicable).
 **Step 1: Proposal**
 - Anyone (L1+) can propose a Design Document
 - Open a PR to `openworm-admin/design_documents/` with a new DD file
-- Assign a DD number (next available, e.g., DD013)
+- Assign a DD number (next available, e.g., [DD013](DD013_Simulation_Stack_Architecture.md))
 - Tag relevant subsystem maintainers (L4) for review
 
 **Step 2: Discussion**
@@ -239,13 +239,13 @@ Variable name, Format, Units, Timestep (if applicable).
 
 6. **Living Document:** Can be amended. If a DD proves wrong or incomplete, propose a new DD that supersedes it.
 
-7. **Validation-First:** Goal & Success Criteria section must reference a specific DD010 tier and quantitative threshold. The reader should know what "done" looks like before reading the technical approach.
+7. **Validation-First:** Goal & Success Criteria section must reference a specific [DD010](DD010_Validation_Framework.md) tier and quantitative threshold. The reader should know what "done" looks like before reading the technical approach.
 
 8. **Concrete Deliverables:** Must list exact output files with paths, not just describe them in prose. A contributor should know precisely what artifacts they are building.
 
 9. **Runnable Commands:** Build & Test section must contain commands that a contributor can copy-paste. Scripts referenced must either exist or be marked `[TO BE CREATED]` with a GitHub issue link.
 
-10. **Visualizable:** Must describe what the work looks like in the DD014 viewer. If not applicable (governance DDs), state "N/A."
+10. **Visualizable:** Must describe what the work looks like in the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
 
 ### Bad Design Document Anti-Patterns
 
@@ -267,21 +267,21 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **When a PR is opened:**
 1. Mind-of-a-Worm identifies which subsystem (based on files modified)
-2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers DD001, DD005)
+2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 3. Checks **subsystem compliance:**
    - Are changes within the DD's scope?
    - Do quality criteria pass? (e.g., NeuroML validation, test coverage)
-   - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when DD001 explicitly rejected this)
+   - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when [DD001](DD001_Neural_Circuit_Architecture.md) explicitly rejected this)
 4. Checks **integration compliance** (Integration Contract section):
    - Does the PR change any **output variable** listed in the DD's Integration Contract?
    - If yes: Identify all **consuming DDs** from the Coupling Dependencies table and tag their maintainers
    - Does the PR add configurable parameters? If yes: verify `openworm.yml` schema is updated
    - Has the contributor run the integration test (`docker compose run quick-test`)?
 5. Posts automated review comment:
-   - ✅ "Passes DD001 quality criteria (NeuroML validates, units correct)"
-   - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with DD001 Section 2.3"
-   - ⚠️ "**Integration alert:** This PR modifies calcium output format (DD001 Integration Contract). DD002 (Muscle) and DD003 (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
-   - ❌ "Violates DD001: Uses IAF model for all neurons (rejected in DD001 Alternatives)"
+   - ✅ "Passes [DD001](DD001_Neural_Circuit_Architecture.md) quality criteria (NeuroML validates, units correct)"
+   - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with [DD001](DD001_Neural_Circuit_Architecture.md) Section 2.3"
+   - ⚠️ "**Integration alert:** This PR modifies calcium output format ([DD001](DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) and [DD003](DD003_Body_Physics_Architecture.md) (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
+   - ❌ "Violates [DD001](DD001_Neural_Circuit_Architecture.md): Uses IAF model for all neurons (rejected in [DD001](DD001_Neural_Circuit_Architecture.md) Alternatives)"
    - ❌ "Missing integration test: No evidence of `docker compose run quick-test` in PR description"
 
 **Human reviewer** (L3+) considers Mind-of-a-Worm's assessment but makes final decision. **For PRs that modify coupling interfaces, at least one reviewer from each affected consuming subsystem must approve.**
@@ -295,9 +295,9 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Current state:** Zero Design Documents exist (except those created in this proposal).
 
 **Phase 1 (Week 1-4):** Founder writes initial DDs for existing subsystems:
-- DD001-DD003: Neural, Muscle, Physics (document current architecture)
-- DD005-DD010: Future work (document proposed phases)
-- DD011-DD012: Governance
+- [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md): Neural, Muscle, Physics (document current architecture)
+- [DD005](DD005_Cell_Type_Differentiation_Strategy.md)-[DD010](DD010_Validation_Framework.md): Future work (document proposed phases)
+- [DD011](DD011_Contributor_Progression_Model.md)-[DD012](DD012_Design_Document_RFC_Process.md): Governance
 
 **Phase 2 (Month 2-3):** Community reviews. Open each DD as a PR, invite discussion, revise.
 
@@ -312,7 +312,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Trigger:** Contributor proposes replacing NEURON with Brian2 for faster simulation.
 
 **Action:**
-1. Write DD013: "Simulator Backend Selection"
+1. Write [DD013](DD013_Simulation_Stack_Architecture.md): "Simulator Backend Selection"
 2. Include: Context (why switch?), Decision (Brian2 vs. NEURON), Alternatives (NEST, custom solver), Quality Criteria (must reproduce all existing validation), Migration Path (parallel implementation during transition)
 3. Open RFC PR
 4. Community discusses performance benchmarks, NeuroML compatibility, learning curve
@@ -325,13 +325,13 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Trigger:** Contributor wants to model mechanosensation in touch neurons (ALM, AVM, PLM).
 
 **Action:**
-1. Write DD014: "Mechanosensory Transduction (MEC-4 Channel Model)"
+1. Write [DD014](DD014_Dynamic_Visualization_Architecture.md): "Mechanosensory Transduction (MEC-4 Channel Model)"
 2. Include: MEC-4/MEC-10 DEG/ENaC channel kinetics, Goodman et al. 1998 data, coupling to Sibernetic mechanical strain
 3. Open RFC PR
 4. Discuss with L4 Neural Circuit maintainer
 5. Approve
 
-**Outcome:** DD014 becomes the specification. Contributor implements according to DD014. Mind-of-a-Worm checks compliance.
+**Outcome:** [DD014](DD014_Dynamic_Visualization_Architecture.md) becomes the specification. Contributor implements according to [DD014](DD014_Dynamic_Visualization_Architecture.md). Mind-of-a-Worm checks compliance.
 
 ---
 
@@ -347,7 +347,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Approved by:** Pending (governance DD, requires community ratification)
 **Implementation Status:** Proposed
 **Next Actions:**
-1. Publish DD001-DD012 for community review
+1. Publish [DD001](DD001_Neural_Circuit_Architecture.md)-[DD012](DD012_Design_Document_RFC_Process.md) for community review
 2. Set up design_documents/ directory in CElegansNeuroML and Sibernetic repos
 3. Document DD RFC process in CONTRIBUTING.md
 4. Train Mind-of-a-Worm on DD compliance checking

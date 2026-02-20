@@ -15,31 +15,31 @@
 | **What does this produce?** | Revived `open-worm-analysis-toolbox` package: installs on Python 3.12, extracts 5 kinematic features from WCON files, compares simulated vs. experimental worm movement, outputs pass/fail validation report |
 | **Success metric** | Toolbox installs cleanly; `NormalizedWorm.from_schafer_file()` + `WormFeatures()` produces speed, wavelength, frequency, amplitude, gait classification for Schafer N2 baseline data; Sibernetic WCON output parses without error |
 | **Repository** | [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) (primary) + [`openworm/tracker-commons`](https://github.com/openworm/tracker-commons) (WCON spec). Note: `openworm/movement_validation` is the **archived predecessor** — do not use. |
-| **Config toggle** | `validation.tier3_behavioral: true` in `openworm.yml` (DD010/DD013) |
+| **Config toggle** | `validation.tier3_behavioral: true` in `openworm.yml` ([DD010](DD010_Validation_Framework.md)/DD013) |
 | **Build & test** | `pip install open-worm-analysis-toolbox` then `python -c "from open_worm_analysis_toolbox import NormalizedWorm; print('OK')"` |
-| **Visualize** | Toolbox generates matplotlib comparison plots (simulated vs. experimental feature distributions); DD014 viewer shows validation overlay in `validation/overlay/` OME-Zarr group |
+| **Visualize** | Toolbox generates matplotlib comparison plots (simulated vs. experimental feature distributions); [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer shows validation overlay in `validation/overlay/` OME-Zarr group |
 | **CI gate** | Toolbox import succeeds; feature extraction on sample WCON returns 5 non-NaN metrics; version matches `versions.lock` |
 
 ---
 
 ## TL;DR
 
-The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behavioral validation** (DD010). It compares simulated worm movement trajectories against Schafer lab experimental data by extracting kinematic features from WCON (Worm tracker Commons Object Notation) files. The toolbox is **dormant** (last commit: January 16, 2020 — 6 years ago) with 28 open issues and broken Python 3.12 compatibility. This DD specifies: (1) the toolbox's revival plan with owners and effort estimates, (2) WCON 1.0 format pinning from tracker-commons, (3) the canonical API contract for feature extraction and comparison, (4) version pinning policy, and (5) the relationship to Tierpsy Tracker (modern community successor). **Without a working analysis toolbox, Tier 3 validation is impossible — this is a blocking dependency for DD010 and DD013.**
+The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behavioral validation** ([DD010](DD010_Validation_Framework.md)). It compares simulated worm movement trajectories against Schafer lab experimental data by extracting kinematic features from WCON (Worm tracker Commons Object Notation) files. The toolbox is **dormant** (last commit: January 16, 2020 — 6 years ago) with 28 open issues and broken Python 3.12 compatibility. This DD specifies: (1) the toolbox's revival plan with owners and effort estimates, (2) WCON 1.0 format pinning from tracker-commons, (3) the canonical API contract for feature extraction and comparison, (4) version pinning policy, and (5) the relationship to Tierpsy Tracker (modern community successor). **Without a working analysis toolbox, Tier 3 validation is impossible — this is a blocking dependency for [DD010](DD010_Validation_Framework.md) and [DD013](DD013_Simulation_Stack_Architecture.md).**
 
 ---
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Toolbox installs on Python 3.12 | `pip install` succeeds in Docker image with no import errors | Tier 3 (blocking) |
 | **Secondary:** 5 kinematic metrics computable | Speed, wavelength, frequency, amplitude, crawl/swim classification extracted from sample WCON | Tier 3 (blocking) |
 | **Tertiary:** Sibernetic WCON output parseable | `NormalizedWorm.from_simulation()` successfully loads Sibernetic's WCON output file | Tier 3 (blocking) |
 | **Quaternary:** Test suite passes | ≥80% of existing tests pass on Python 3.12 after dependency updates | Non-blocking (quality gate) |
 
-**Before:** DD010 specifies Tier 3 behavioral validation but the tool to perform it is broken. The revival checklist (DD010 lines 260-270) is buried, unactionable, and has no owners or timeline. The WCON format is referenced but not pinned to a version. Tierpsy Tracker (the modern successor used by the broader community) is never mentioned. The archived predecessor repo (`movement_validation`) is not noted, risking contributor confusion.
+**Before:** [DD010](DD010_Validation_Framework.md) specifies Tier 3 behavioral validation but the tool to perform it is broken. The revival checklist ([DD010](DD010_Validation_Framework.md) lines 260-270) is buried, unactionable, and has no owners or timeline. The WCON format is referenced but not pinned to a version. Tierpsy Tracker (the modern successor used by the broader community) is never mentioned. The archived predecessor repo (`movement_validation`) is not noted, risking contributor confusion.
 
-**After:** A single DD (this one) specifies the toolbox revival, WCON format pinning, API contract, and landscape context. DD010 points here for "how to perform Tier 3 validation." DD013 points here for the Docker stage and `versions.lock` entry. Contributors know exactly what to build, test, and validate.
+**After:** A single DD (this one) specifies the toolbox revival, WCON format pinning, API contract, and landscape context. [DD010](DD010_Validation_Framework.md) points here for "how to perform Tier 3 validation." [DD013](DD013_Simulation_Stack_Architecture.md) points here for the Docker stage and `versions.lock` entry. Contributors know exactly what to build, test, and validate.
 
 ---
 
@@ -49,8 +49,8 @@ The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behav
 |----------|----------------|--------|---------|
 | Revived `open-worm-analysis-toolbox` | GitHub: `openworm/open-worm-analysis-toolbox` / PyPI (future) | Python package | `from open_worm_analysis_toolbox import NormalizedWorm` |
 | WCON format pin | This DD (Section: WCON Format Specification) | Markdown specification | "WCON 1.0 per tracker-commons" |
-| `openworm.yml` validation config | `validation.tier3_behavioral` key (defined in DD010, consumed here) | YAML | `tier3_behavioral: true` |
-| `versions.lock` entries | `open_worm_analysis_toolbox` + `tracker_commons` keys in `versions.lock` (DD013) | Lock file | `open_worm_analysis_toolbox: { commit: "abc123" }` |
+| `openworm.yml` validation config | `validation.tier3_behavioral` key (defined in [DD010](DD010_Validation_Framework.md), consumed here) | YAML | `tier3_behavioral: true` |
+| `versions.lock` entries | `open_worm_analysis_toolbox` + `tracker_commons` keys in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)) | Lock file | `open_worm_analysis_toolbox: { commit: "abc123" }` |
 | Feature extraction report | `output/validation_report.json` (Tier 3 section) | JSON | `{ "speed": { "simulated": 0.22, "experimental": 0.25, "pass": true } }` |
 | Comparison plots | `output/validation_plots/` | PNG (matplotlib) | `speed_comparison.png`, `wavelength_histogram.png` |
 
@@ -129,7 +129,7 @@ cd open-worm-analysis-toolbox/
 python -m pytest tests/ -v --tb=short
 # Target: ≥80% pass rate after dependency updates
 
-# Step 6: Docker-based verification (DD013 stack)
+# Step 6: Docker-based verification ([DD013](DD013_Simulation_Stack_Architecture.md) stack)
 docker compose run shell python -c "
 from open_worm_analysis_toolbox import NormalizedWorm, WormFeatures
 print('Toolbox in Docker: OK')
@@ -230,7 +230,7 @@ speed_match = comparison.check_metric("speed", tolerance=0.15)
 # Returns: True if within ±15%
 ```
 
-### Five Core Validation Metrics (DD010 Tier 3)
+### Five Core Validation Metrics ([DD010](DD010_Validation_Framework.md) Tier 3)
 
 | Metric | Feature Path | Units | Experimental Range (N2) | Tolerance |
 |--------|-------------|-------|------------------------|-----------|
@@ -256,7 +256,7 @@ WCON 1.0 specification: https://github.com/openworm/tracker-commons/blob/master/
 
 ### Required Fields for OpenWorm Simulation Output
 
-Sibernetic (DD003) must produce WCON files with at minimum these fields:
+Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) must produce WCON files with at minimum these fields:
 
 ```json
 {
@@ -312,12 +312,12 @@ The analysis toolbox's WCON parser must:
 4. **Validate units** — reject files with inconsistent or missing unit declarations
 5. **Handle chunked files** — WCON supports splitting large datasets across multiple files via `"files"` array
 
-### Sibernetic WCON Output (DD003 Coupling)
+### Sibernetic WCON Output ([DD003](DD003_Body_Physics_Architecture.md) Coupling)
 
 Sibernetic currently outputs body positions in a custom format (`position_buffer.txt`). A WCON exporter must be added:
 
 ```python
-# In master_openworm.py (DD013 orchestrator), Step 4:
+# In master_openworm.py ([DD013](DD013_Simulation_Stack_Architecture.md) orchestrator), Step 4:
 # Convert Sibernetic particle positions → 49-point skeleton → WCON
 
 from open_worm_analysis_toolbox.wcon import WCONExporter
@@ -336,7 +336,7 @@ for frame in simulation_frames:
 exporter.save("output/worm_trajectory.wcon")
 ```
 
-**This WCON exporter is a deliverable of DD003/DD013, not DD021.** DD021 specifies what the toolbox expects to receive; DD003/DD013 specify how to produce it.
+**This WCON exporter is a deliverable of [DD003](DD003_Body_Physics_Architecture.md)/DD013, not [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md).** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) specifies what the toolbox expects to receive; [DD003](DD003_Body_Physics_Architecture.md)/DD013 specify how to produce it.
 
 ---
 
@@ -350,7 +350,7 @@ The analysis toolbox has been dormant for 6 years. The following 8-task plan bri
 | 2 | Update NumPy/SciPy/matplotlib to current versions | Validation L4 | 8h | Task 1 |  Not started |
 | 3 | Verify WCON parser vs. tracker-commons spec | Validation L4 | 4h | Task 2 | Not started |
 | 4 | Fix test suite failures | Validation L4 | 8h | Task 2 | Not started |
-| 5 | Pin in `versions.lock` (DD013) | Integration Maintainer | 1h | Task 4 (tests pass) | Not started |
+| 5 | Pin in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)) | Integration Maintainer | 1h | Task 4 (tests pass) | Not started |
 | 6 | Add Docker `validation` stage | Integration Maintainer | 2h | Task 5 | Not started |
 | 7 | Verify Sibernetic WCON output parses | Body Physics L4 | 2h | Task 6 | Not started |
 | 8 | End-to-end `NormalizedWorm.from_simulation()` | Validation L4 | 4h | All above | Not started |
@@ -401,7 +401,7 @@ tracker_commons:
 
 **Task 6: Add Docker Stage**
 ```dockerfile
-# In multi-stage Dockerfile (DD013)
+# In multi-stage Dockerfile ([DD013](DD013_Simulation_Stack_Architecture.md))
 FROM base AS validation
 ARG OWAT_REF=dd021/python312-compat
 RUN git clone --branch $OWAT_REF --depth 1 \
@@ -443,9 +443,9 @@ print(report)
 
 ### Revival Priority
 
-**This is a Phase A (DD013 roadmap) task.** Without a working analysis toolbox:
-- DD010 Tier 3 validation cannot run
-- DD013 CI pipeline Steps 4-5 remain unimplemented
+**This is a Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task.** Without a working analysis toolbox:
+- [DD010](DD010_Validation_Framework.md) Tier 3 validation cannot run
+- [DD013](DD013_Simulation_Stack_Architecture.md) CI pipeline Steps 4-5 remain unimplemented
 - Behavioral regression detection is impossible
 - The simulation stack has no automated quality gate for movement
 
@@ -473,7 +473,7 @@ print(report)
 | **Designed for** | Comparing simulated vs. experimental data | Analyzing video of real worms |
 | **Input format** | WCON files, Schafer .mat files | Video files (.avi, .hdf5) |
 | **Simulation coupling** | `NormalizedWorm.from_simulation()` convenience method | No simulation input pathway |
-| **OpenWorm integration** | Referenced in DD010, DD013; Docker stage planned | Not integrated; would require adapter layer |
+| **OpenWorm integration** | Referenced in [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md); Docker stage planned | Not integrated; would require adapter layer |
 | **Feature set** | Same 726 features (Yemini 2013) | Same 726 features (extended) |
 | **Maintenance** | Dormant (6 years) | Actively maintained |
 | **Community** | OpenWorm-specific | Broader *C. elegans* community |
@@ -501,9 +501,9 @@ from tierpsy import ...  # (inspect their API)
 ```
 
 **Decision Point:**
-- **If OpenWorm's tierpsy fork works with WCON:** Skip the entire DD021 8-task revival (saves 33 hours!), use tierpsy directly
+- **If OpenWorm's tierpsy fork works with WCON:** Skip the entire [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) 8-task revival (saves 33 hours!), use tierpsy directly
 - **If it doesn't work but upstream tierpsy does:** Sync OpenWorm's fork with upstream
-- **If neither works:** Proceed with DD021 analysis toolbox revival as planned
+- **If neither works:** Proceed with [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) analysis toolbox revival as planned
 
 **This evaluation is Phase A Week 1 priority** (before committing to 33-hour toolbox revival).
 
@@ -527,8 +527,8 @@ from tierpsy import ...  # (inspect their API)
 **If adopting Tierpsy:**
 - Create `tierpsy_adapter.py` that wraps Tierpsy's feature extraction with OpenWorm's comparison API
 - Maintain backward compatibility with existing validation scripts
-- Update DD010 acceptance criteria if Tierpsy's feature definitions differ slightly
-- File DD amendment via DD012 RFC process
+- Update [DD010](DD010_Validation_Framework.md) acceptance criteria if Tierpsy's feature definitions differ slightly
+- File DD amendment via [DD012](DD012_Design_Document_RFC_Process.md) RFC process
 
 ---
 
@@ -562,7 +562,7 @@ from tierpsy import ...  # (inspect their API)
 
 **Rejected because:**
 - Loses biological interpretability — "speed is 20% too fast" is actionable; "DTW distance is 0.42" is not
-- DD010 Tier 3 criteria are defined in terms of biological features (speed, wavelength, frequency, amplitude, gait)
+- [DD010](DD010_Validation_Framework.md) Tier 3 criteria are defined in terms of biological features (speed, wavelength, frequency, amplitude, gait)
 - Cannot diagnose which aspect of movement is wrong without feature decomposition
 
 ### 4. Abandon WCON (Use Custom Binary Format)
@@ -592,7 +592,7 @@ from tierpsy import ...  # (inspect their API)
 
 5. **Test Suite:** ≥80% of existing tests pass after dependency updates. New tests added for WCON 1.0 parsing and Python 3.12 compatibility.
 
-6. **Docker Integration:** The toolbox is installable in the DD013 Docker `validation` stage and accessible from `docker compose run validate`.
+6. **Docker Integration:** The toolbox is installable in the [DD013](DD013_Simulation_Stack_Architecture.md) Docker `validation` stage and accessible from `docker compose run validate`.
 
 7. **Reproducibility:** Same input file + same toolbox version always produces identical feature values.
 
@@ -602,17 +602,17 @@ from tierpsy import ...  # (inspect their API)
 
 ### What This Design Document Does NOT Cover:
 
-1. **What to validate (acceptance criteria):** DD010 defines the three-tier validation framework and acceptance thresholds (±15% for Tier 3 metrics). This DD specifies the tool that performs the validation.
+1. **What to validate (acceptance criteria):** [DD010](DD010_Validation_Framework.md) defines the three-tier validation framework and acceptance thresholds (±15% for Tier 3 metrics). This DD specifies the tool that performs the validation.
 
-2. **CI/CD pipeline:** DD013 defines how validation runs in Docker and CI. This DD specifies the tool that DD013's pipeline invokes.
+2. **CI/CD pipeline:** [DD013](DD013_Simulation_Stack_Architecture.md) defines how validation runs in Docker and CI. This DD specifies the tool that [DD013](DD013_Simulation_Stack_Architecture.md)'s pipeline invokes.
 
-3. **Experimental data curation:** DD008 (OWMeta) and DD010 define how experimental data (Schafer lab, Raizen pumping, Thomas defecation) are ingested, versioned, and stored. This DD specifies how the toolbox consumes that data.
+3. **Experimental data curation:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta) and [DD010](DD010_Validation_Framework.md) define how experimental data (Schafer lab, Raizen pumping, Thomas defecation) are ingested, versioned, and stored. This DD specifies how the toolbox consumes that data.
 
-4. **WCON production (Sibernetic output):** DD003 defines how Sibernetic produces body positions. DD013's orchestrator converts particle positions to skeleton → WCON. This DD specifies what the toolbox expects to receive.
+4. **WCON production (Sibernetic output):** [DD003](DD003_Body_Physics_Architecture.md) defines how Sibernetic produces body positions. [DD013](DD013_Simulation_Stack_Architecture.md)'s orchestrator converts particle positions to skeleton → WCON. This DD specifies what the toolbox expects to receive.
 
-5. **Visualization:** DD014 defines the viewer. The toolbox produces matplotlib plots for validation reports; DD014's viewer shows validation overlays in the OME-Zarr output.
+5. **Visualization:** [DD014](DD014_Dynamic_Visualization_Architecture.md) defines the viewer. The toolbox produces matplotlib plots for validation reports; [DD014](DD014_Dynamic_Visualization_Architecture.md)'s viewer shows validation overlays in the OME-Zarr output.
 
-6. **Pharyngeal pumping / defecation validation:** DD007 and DD009 define pumping and defecation metrics. The analysis toolbox covers locomotion only. Pumping and defecation are validated by separate scripts (DD010).
+6. **Pharyngeal pumping / defecation validation:** [DD007](DD007_Pharyngeal_System_Architecture.md) and [DD009](DD009_Intestinal_Oscillator_Model.md) define pumping and defecation metrics. The analysis toolbox covers locomotion only. Pumping and defecation are validated by separate scripts ([DD010](DD010_Validation_Framework.md)).
 
 7. **Video tracking:** The toolbox does not track worms from video. It analyzes pre-tracked data (skeleton time series). For video tracking, use Tierpsy Tracker.
 
@@ -624,35 +624,35 @@ from tierpsy import ...  # (inspect their API)
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Simulated movement trajectory | DD003 (via DD013 orchestrator) | Body centroid + 49-point skeleton over time | WCON 1.0 file | mm, seconds |
-| Experimental kinematic data | DD008 / DD010 / Schafer lab | N2 baseline and mutant recordings | Schafer .mat or WCON | mm, seconds |
-| Validation config | DD010 / DD013 | Acceptance criteria (tolerance, metric selection) | `openworm.yml` YAML | config keys |
+| Simulated movement trajectory | [DD003](DD003_Body_Physics_Architecture.md) (via [DD013](DD013_Simulation_Stack_Architecture.md) orchestrator) | Body centroid + 49-point skeleton over time | WCON 1.0 file | mm, seconds |
+| Experimental kinematic data | [DD008](DD008_Data_Integration_Pipeline.md) / [DD010](DD010_Validation_Framework.md) / Schafer lab | N2 baseline and mutant recordings | Schafer .mat or WCON | mm, seconds |
+| Validation config | [DD010](DD010_Validation_Framework.md) / [DD013](DD013_Simulation_Stack_Architecture.md) | Acceptance criteria (tolerance, metric selection) | `openworm.yml` YAML | config keys |
 
 ### Outputs (What This Subsystem Produces)
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Kinematic feature values | DD010 (Tier 3 report) | Speed, wavelength, frequency, amplitude, gait per frame | JSON | mm/s, mm, Hz, degrees, categorical |
-| Comparison report | DD010 (pass/fail), DD013 (CI gate) | Per-metric simulated vs. experimental, deviation %, pass/fail | JSON | mixed |
-| Comparison plots | DD010 (validation report), DD014 (overlay) | Feature distribution histograms, time series overlays | PNG (matplotlib) | visual |
-| CI exit code | DD013 (pipeline gate) | 0 if all blocking metrics pass, non-zero if any fail | Process exit code | integer |
+| Kinematic feature values | [DD010](DD010_Validation_Framework.md) (Tier 3 report) | Speed, wavelength, frequency, amplitude, gait per frame | JSON | mm/s, mm, Hz, degrees, categorical |
+| Comparison report | [DD010](DD010_Validation_Framework.md) (pass/fail), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Per-metric simulated vs. experimental, deviation %, pass/fail | JSON | mixed |
+| Comparison plots | [DD010](DD010_Validation_Framework.md) (validation report), [DD014](DD014_Dynamic_Visualization_Architecture.md) (overlay) | Feature distribution histograms, time series overlays | PNG (matplotlib) | visual |
+| CI exit code | [DD013](DD013_Simulation_Stack_Architecture.md) (pipeline gate) | 0 if all blocking metrics pass, non-zero if any fail | Process exit code | integer |
 
 ### Repository & Packaging
 
 | Item | Value |
 |------|-------|
 | **Repository** | `openworm/open-worm-analysis-toolbox` |
-| **Docker stage** | `validation` in multi-stage Dockerfile (DD013) |
+| **Docker stage** | `validation` in multi-stage Dockerfile ([DD013](DD013_Simulation_Stack_Architecture.md)) |
 | **`versions.lock` keys** | `open_worm_analysis_toolbox`, `tracker_commons` |
 | **Build dependencies** | numpy, scipy, matplotlib, h5py |
 | **Data in image** | Schafer lab N2 baseline data (~10MB), example WCON files |
 
 ### Configuration (`openworm.yml` Section)
 
-The toolbox is invoked via DD010's validation config (no separate config section):
+The toolbox is invoked via [DD010](DD010_Validation_Framework.md)'s validation config (no separate config section):
 
 ```yaml
-# openworm.yml (DD010 section, consumed by toolbox)
+# openworm.yml ([DD010](DD010_Validation_Framework.md) section, consumed by toolbox)
 validation:
   tier3_behavioral: true              # Enable behavioral validation
   acceptance_criteria:
@@ -673,7 +673,7 @@ features = WormFeatures(worm)
 speed = features.locomotion.velocity.midbody.speed
 assert speed is not None, 'Speed computation failed'
 assert not all(v is None for v in speed), 'All speed values are None'
-print('DD021 quick test: PASS')
+print('[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) quick test: PASS')
 "
 
 # Full validation (must pass before merge)
@@ -691,34 +691,34 @@ assert features.posture.wavelength is not None, 'Wavelength failed'
 assert features.locomotion.bends.midbody is not None, 'Frequency failed'
 assert features.posture.bends.midbody is not None, 'Amplitude failed'
 
-print('DD021 full validation: PASS')
+print('[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) full validation: PASS')
 "
 ```
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | Data Flow | Description |
 |-----------|-------------|
-| Toolbox → JSON report → DD010 | Feature comparison results flow into validation report |
+| Toolbox → JSON report → [DD010](DD010_Validation_Framework.md) | Feature comparison results flow into validation report |
 | Toolbox → matplotlib PNGs → `output/validation_plots/` | Standalone comparison plots for human review |
-| Toolbox → DD014 overlay | Validation pass/fail per metric exported to `validation/overlay/` in OME-Zarr for viewer overlay |
+| Toolbox → [DD014](DD014_Dynamic_Visualization_Architecture.md) overlay | Validation pass/fail per metric exported to `validation/overlay/` in OME-Zarr for viewer overlay |
 
 ### Coupling Dependencies
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Movement output format (WCON) | DD003 | If Sibernetic changes skeleton format or WCON structure, parser breaks |
-| Experimental data (Schafer lab) | DD008 / DD010 | If experimental data files are relocated or reformatted, loading fails |
-| Docker validation stage | DD013 | If `validation` service configuration changes, toolbox environment breaks |
-| `versions.lock` entry | DD013 | If toolbox version is bumped, must verify feature computation is unchanged |
+| Movement output format (WCON) | [DD003](DD003_Body_Physics_Architecture.md) | If Sibernetic changes skeleton format or WCON structure, parser breaks |
+| Experimental data (Schafer lab) | [DD008](DD008_Data_Integration_Pipeline.md) / [DD010](DD010_Validation_Framework.md) | If experimental data files are relocated or reformatted, loading fails |
+| Docker validation stage | [DD013](DD013_Simulation_Stack_Architecture.md) | If `validation` service configuration changes, toolbox environment breaks |
+| `versions.lock` entry | [DD013](DD013_Simulation_Stack_Architecture.md) | If toolbox version is bumped, must verify feature computation is unchanged |
 | WCON specification | tracker-commons | If WCON spec changes, parser must be updated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Tier 3 validation (acceptance criteria) | DD010 | If feature computation changes, Tier 3 pass/fail thresholds may need recalibration |
-| CI pipeline (behavioral gate) | DD013 | If toolbox API changes, CI validation scripts must be updated |
-| Validation report format | DD012 (PR review) | If report JSON schema changes, Mind-of-a-Worm can't parse Tier 3 results |
-| Visualization overlay | DD014 | If validation output format changes, viewer overlay breaks |
+| Tier 3 validation (acceptance criteria) | [DD010](DD010_Validation_Framework.md) | If feature computation changes, Tier 3 pass/fail thresholds may need recalibration |
+| CI pipeline (behavioral gate) | [DD013](DD013_Simulation_Stack_Architecture.md) | If toolbox API changes, CI validation scripts must be updated |
+| Validation report format | [DD012](DD012_Design_Document_RFC_Process.md) (PR review) | If report JSON schema changes, Mind-of-a-Worm can't parse Tier 3 results |
+| Visualization overlay | [DD014](DD014_Dynamic_Visualization_Architecture.md) | If validation output format changes, viewer overlay breaks |
 
 ### Integration Test
 
@@ -771,9 +771,9 @@ The open-worm-analysis-toolbox has its origins in the Schafer lab's worm behavio
 ### Why This DD Is Needed Now
 
 The analysis toolbox is referenced as a critical dependency in:
-- **DD010** (lines 95, 229, 260-270, 326-346): Tier 3 behavioral validation tool
-- **DD013** (lines 28, 54, 61): Validation pipeline Steps 4-5 (unimplemented)
-- **DD001/DD003**: Success metrics reference kinematic validation
+- **[DD010](DD010_Validation_Framework.md)** (lines 95, 229, 260-270, 326-346): Tier 3 behavioral validation tool
+- **[DD013](DD013_Simulation_Stack_Architecture.md)** (lines 28, 54, 61): Validation pipeline Steps 4-5 (unimplemented)
+- **[DD001](DD001_Neural_Circuit_Architecture.md)/DD003**: Success metrics reference kinematic validation
 
 Yet no DD specifies:
 - How to revive the dormant toolbox
@@ -782,7 +782,7 @@ Yet no DD specifies:
 - The relationship to Tierpsy Tracker
 - That `movement_validation` is archived and should not be used
 
-This is the same "referenced everywhere, specified nowhere" pattern that ConnectomeToolbox had before DD020.
+This is the same "referenced everywhere, specified nowhere" pattern that ConnectomeToolbox had before [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md).
 
 ---
 
@@ -802,7 +802,7 @@ The original Schafer lab data was in MATLAB `.mat` format (HDF5-backed). Newer d
 
 The toolbox assumes 49 skeleton points per frame (Schafer lab convention). Sibernetic's output may have a different number of points depending on particle resolution.
 
-**Mitigation:** The WCON exporter (DD013) must interpolate/resample to exactly 49 points before writing WCON.
+**Mitigation:** The WCON exporter ([DD013](DD013_Simulation_Stack_Architecture.md)) must interpolate/resample to exactly 49 points before writing WCON.
 
 ### Issue 4: Feature Definitions May Diverge from Tierpsy
 
@@ -840,5 +840,5 @@ While both tools implement Yemini 2013, minor implementation differences may cau
 1. Appoint or recruit Validation L4 maintainer (or assign revival to existing contributor)
 2. Begin Task 1: Test toolbox on Python 3.12 in Docker
 3. File `dd021` issues on `openworm/open-worm-analysis-toolbox` for each revival task
-4. Coordinate with DD003/DD013 owners on WCON exporter timeline
+4. Coordinate with [DD003](DD003_Body_Physics_Architecture.md)/DD013 owners on WCON exporter timeline
 5. Pin `tracker_commons` commit in `versions.lock`

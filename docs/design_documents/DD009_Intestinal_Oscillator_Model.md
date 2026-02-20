@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | 20 intestinal cell models (IP3/Ca2+ oscillator in NeuroML/LEMS), defecation trigger signal, per-cell calcium time series |
-| **Success metric** | DD010 Tier 3: defecation cycle period 50 +/- 10 seconds; posterior-to-anterior wave; >=3 consecutive cycles |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: defecation cycle period 50 +/- 10 seconds; posterior-to-anterior wave; >=3 consecutive cycles |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_intestine.py`, `intestine/` module) — issues labeled `dd009` |
 | **Config toggle** | `intestine.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `intestine.enabled: true` (5s partial cycle), nightly: `measure_defecation_period.py` (200s full validation) |
-| **Visualize** | DD014 `intestine/calcium/` layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); `intestine/defecation_events/` for pBoc/aBoc/Exp markers |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `intestine/calcium/` layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); `intestine/defecation_events/` for pBoc/aBoc/Exp markers |
 | **CI gate** | Per-PR: 5s quick-test (no crash); nightly: full 200s period validation (Tier 3) blocks merge |
 
 ---
@@ -30,7 +30,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Defecation cycle period | 50 +/- 10 seconds (Thomas 1990) | Tier 3 (blocking) |
 | **Secondary:** Wave direction | Posterior-to-anterior (int20 -> int1) | Tier 3 (blocking) |
@@ -73,7 +73,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml
 
 ### Step-by-step
@@ -130,7 +130,7 @@ docker compose run quick-test  # with intestine.enabled: false
 
 ## How to Visualize
 
-**DD014 viewer layer:** `intestine/calcium/` for 20-cell calcium heatmap; `intestine/defecation_events/` for motor program markers.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `intestine/calcium/` for 20-cell calcium heatmap; `intestine/defecation_events/` for motor program markers.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -147,7 +147,7 @@ docker compose run quick-test  # with intestine.enabled: false
 ### Model the 20 Intestinal Cells with IP3/Calcium Oscillator Dynamics
 
 Each intestinal cell has:
-- **Membrane voltage** (HH framework as in DD001/DD002, but with intestine-specific channels)
+- **Membrane voltage** (HH framework as in [DD001](DD001_Neural_Circuit_Architecture.md)/DD002, but with intestine-specific channels)
 - **Cytoplasmic [Ca2+]**
 - **ER luminal [Ca2+]_ER**
 - **[IP3]** (inositol 1,4,5-trisphosphate)
@@ -292,27 +292,27 @@ The intestinal oscillator is driven by **IP3 receptor (ITR-1) mediated calcium w
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
 | IP3 production rate | Internal (cell-autonomous) | `k_production` | Scalar parameter per cell | uM/s |
-| Gap junction conductances | DD001 framework (innexin expression) | `g_gap` per innexin pair | NeuroML `<gapJunction>` | nS |
-| CeNGEN expression (intestinal cells) | DD005 / DD008 | Per-cell channel densities | NeuroML `<channelDensity>` | S/cm2 |
-| Intestinal cell positions | DD004 (when cell_identity enabled) | 3D coordinates for int1-int20 | Cell-to-particle mapping JSON | um |
+| Gap junction conductances | [DD001](DD001_Neural_Circuit_Architecture.md) framework (innexin expression) | `g_gap` per innexin pair | NeuroML `<gapJunction>` | nS |
+| CeNGEN expression (intestinal cells) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-cell channel densities | NeuroML `<channelDensity>` | S/cm2 |
+| Intestinal cell positions | [DD004](DD004_Mechanical_Cell_Identity.md) (when cell_identity enabled) | 3D coordinates for int1-int20 | Cell-to-particle mapping JSON | um |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Intestinal [Ca2+] per cell | DD004 (drives intestinal particle mechanics) | Per-cell calcium time series | Tab-separated: cell_id, timestep, [Ca2+] | uM |
-| Defecation trigger signal | DD001 (DVB/AVL neuron activation) | Binary trigger when Ca peaks in int1 | Event file: timestamp of each peak | ms |
-| Defecation motor program state | DD010 (Tier 3 validation) | pBoc/aBoc/Exp occurrence timestamps | Tab-separated event log | ms |
+| Intestinal [Ca2+] per cell | [DD004](DD004_Mechanical_Cell_Identity.md) (drives intestinal particle mechanics) | Per-cell calcium time series | Tab-separated: cell_id, timestep, [Ca2+] | uM |
+| Defecation trigger signal | [DD001](DD001_Neural_Circuit_Architecture.md) (DVB/AVL neuron activation) | Binary trigger when Ca peaks in int1 | Event file: timestamp of each peak | ms |
+| Defecation motor program state | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | pBoc/aBoc/Exp occurrence timestamps | Tab-separated event log | ms |
 | ER [Ca2+] per cell | Internal (diagnostics) | Per-cell ER calcium time series | Tab-separated | uM |
-| Intestinal calcium time series (for viewer) | **DD014** (visualization) | Per-cell [Ca2+] over all timesteps | OME-Zarr: `intestine/calcium/`, shape (n_timesteps, 20) | uM |
-| Defecation event markers (for viewer) | **DD014** (visualization) | pBoc/aBoc/Exp event timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
+| Intestinal calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-cell [Ca2+] over all timesteps | OME-Zarr: `intestine/calcium/`, shape (n_timesteps, 20) | uM |
+| Defecation event markers (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | pBoc/aBoc/Exp event timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
 
 ### Repository & Packaging
 
 - **Repository:** `openworm/c302` (same package, new module)
-- **Docker stage:** `neural` (same as DD001 — intestinal models use NeuroML/LEMS)
+- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md) — intestinal models use NeuroML/LEMS)
 - **No additional Docker changes** for the intestinal oscillator itself
-- **Coupling to DD004 particles** (future): requires `body` stage to have cell_identity enabled
+- **Coupling to [DD004](DD004_Mechanical_Cell_Identity.md) particles** (future): requires `body` stage to have cell_identity enabled
 
 **Repository structure:**
 ```
@@ -321,7 +321,7 @@ c302/
 ├── intestine/
 │   ├── IntestinalCell.cell.nml    # IP3R + Ca dynamics cell template
 │   ├── IP3Receptor.channel.nml    # Li-Rinzel IP3R model in LEMS
-│   └── intestine_coupling.py     # Coupling to enteric muscles (DD001 neurons DVB/AVL)
+│   └── intestine_coupling.py     # Coupling to enteric muscles ([DD001](DD001_Neural_Circuit_Architecture.md) neurons DVB/AVL)
 ```
 
 ### Configuration
@@ -378,7 +378,7 @@ docker compose run quick-test  # with intestine.enabled: false
 - [ ] No NaN values in calcium output
 - [ ] Calcium values are oscillatory (not flat, not diverging)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -392,7 +392,7 @@ docker compose run quick-test  # with intestine.enabled: false
 | Metric | Value | Implication |
 |--------|-------|-------------|
 | Simulation wall time | ~10 hours for 200s sim | Not practical for CI (use nightly builds) |
-| Memory (with video pipeline) | >64 GB (OOM) | **Video pipeline memory leak (DD013 Issue #332) MUST be fixed first** |
+| Memory (with video pipeline) | >64 GB (OOM) | **Video pipeline memory leak ([DD013](DD013_Simulation_Stack_Architecture.md) Issue #332) MUST be fixed first** |
 | Memory (no video) | ~4 GB | Feasible if video is disabled |
 | CI strategy | Nightly validation job, not per-PR | Per-PR tests run 5s (one partial cycle), nightly runs 200s |
 
@@ -403,38 +403,38 @@ docker compose run quick-test  # with intestine.enabled: false
 The intestinal calcium wave must trigger enteric muscle contraction via the neural circuit. **Interface:**
 
 1. Intestinal oscillator produces per-cell [Ca2+] time series
-2. When int1 [Ca2+] peaks (anterior cell), a **trigger signal** is sent to DVB and AVL neurons in the DD001 neural circuit
-3. DVB/AVL activate enteric muscles via standard NMJ synapses (DD002 framework)
+2. When int1 [Ca2+] peaks (anterior cell), a **trigger signal** is sent to DVB and AVL neurons in the [DD001](DD001_Neural_Circuit_Architecture.md) neural circuit
+3. DVB/AVL activate enteric muscles via standard NMJ synapses ([DD002](DD002_Muscle_Model_Architecture.md) framework)
 4. Enteric muscles contract -> pBoc -> aBoc -> Exp sequence
 
 **Coupling mechanism:** A new coupling script (`intestine_coupling.py`) translates intestinal calcium peaks into current injection on DVB/AVL neurons. This is analogous to how `sibernetic_c302.py` couples neural output to body physics.
 
-### Coupling to DD004 (Mechanical Identity)
+### Coupling to [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Identity)
 
 When `body.cell_identity: true`, intestinal cells are represented by tagged SPH particles. The coupling works as:
 
-1. DD009 outputs per-cell activation (from [Ca2+])
-2. DD004's cell-to-particle mapping translates cell_id -> list of particle indices
+1. [DD009](DD009_Intestinal_Oscillator_Model.md) outputs per-cell activation (from [Ca2+])
+2. [DD004](DD004_Mechanical_Cell_Identity.md)'s cell-to-particle mapping translates cell_id -> list of particle indices
 3. Intestinal particle elasticity is modulated: `k_particle = k_baseline * (1 + activation * peristalsis_strength)`
 4. This produces peristaltic waves in the SPH simulation
 
-**This coupling is Phase 4 work** (requires DD004 to be implemented first).
+**This coupling is Phase 4 work** (requires [DD004](DD004_Mechanical_Cell_Identity.md) to be implemented first).
 
 ### Coupling Dependencies
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| NeuroML/LEMS framework | DD001 | Intestinal cells use same framework — solver or channel model changes propagate |
-| CeNGEN expression (intestinal cells) | DD005 / DD008 | If intestinal cell expression data changes, channel densities change, period may shift |
-| Cell identity (for mechanical coupling) | DD004 | If intestinal cell_ids change, wrong particles contract |
-| Video pipeline fix | DD013 (Issue #332) | Until fixed, cannot run 200s validation with video/plots enabled |
+| NeuroML/LEMS framework | [DD001](DD001_Neural_Circuit_Architecture.md) | Intestinal cells use same framework — solver or channel model changes propagate |
+| CeNGEN expression (intestinal cells) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | If intestinal cell expression data changes, channel densities change, period may shift |
+| Cell identity (for mechanical coupling) | [DD004](DD004_Mechanical_Cell_Identity.md) | If intestinal cell_ids change, wrong particles contract |
+| Video pipeline fix | [DD013](DD013_Simulation_Stack_Architecture.md) (Issue #332) | Until fixed, cannot run 200s validation with video/plots enabled |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Validation (defecation cycle) | DD010 | Defecation period is a Tier 3 validation target; if oscillator dynamics change, validation criteria may need updating |
-| Neural circuit (DVB/AVL activation) | DD001 | If trigger signal timing or format changes, enteric muscle activation breaks |
-| Mechanical identity (peristalsis) | DD004 | If per-cell activation format changes, particle force modulation breaks |
-| Pharynx (food transport, future) | DD007 | Eventually pharynx pumps food to intestine; if intestinal acceptance changes, food arrival modeling is affected |
+| Validation (defecation cycle) | [DD010](DD010_Validation_Framework.md) | Defecation period is a Tier 3 validation target; if oscillator dynamics change, validation criteria may need updating |
+| Neural circuit (DVB/AVL activation) | [DD001](DD001_Neural_Circuit_Architecture.md) | If trigger signal timing or format changes, enteric muscle activation breaks |
+| Mechanical identity (peristalsis) | [DD004](DD004_Mechanical_Cell_Identity.md) | If per-cell activation format changes, particle force modulation breaks |
+| Pharynx (food transport, future) | [DD007](DD007_Pharyngeal_System_Architecture.md) | Eventually pharynx pumps food to intestine; if intestinal acceptance changes, food arrival modeling is affected |
 
 ---
 

@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Closed-loop mechanosensory transduction model: Sibernetic cuticle strain → MEC-4 channel currents on touch neurons (ALM, AVM, PLM, PVD) → tap withdrawal circuit → motor reversal → backward locomotion |
-| **Success metric** | DD010 Tier 3: tap stimulus → reversal onset <1 s, backward locomotion ≥1 body length, return to forward crawling within 10 s |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: tap stimulus → reversal onset <1 s, backward locomotion ≥1 body length, return to forward crawling within 10 s |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (mechanosensory model, circuit) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (strain readout, tap stimulus, bidirectional coupling) |
 | **Config toggle** | `sensory.mechanotransduction: true` / `behavior.tap_withdrawal: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (closed-loop runs, reversal occurs), `docker compose run validate` (Tier 3 behavioral) |
-| **Visualize** | DD014 `sensory/strain/` layer — cuticle strain heatmap; `neural/` layer — touch neuron + command interneuron activation; `body/` layer — body trajectory with reversal event markers |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `sensory/strain/` layer — cuticle strain heatmap; `neural/` layer — touch neuron + command interneuron activation; `body/` layer — body trajectory with reversal event markers |
 | **CI gate** | Tier 3 behavioral validation blocks merge; closed-loop stability (no NaN/divergence over 30 s) blocks PR |
 
 ---
@@ -30,7 +30,7 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Reversal onset latency | Tap stimulus → first backward body bend <1 s (Chalfie et al. 1985: 300-800 ms) | Tier 3 (blocking) |
 | **Primary:** Reversal distance | ≥1 body length backward travel | Tier 3 (blocking) |
@@ -78,7 +78,7 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6, Sibernetic (with OpenCL or Taichi backend)
 
 ### Step-by-step
@@ -135,7 +135,7 @@ docker compose run validate --config tap_withdrawal
 
 ## How to Visualize
 
-**DD014 viewer layers:** Three new overlays for closed-loop touch response.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layers:** Three new overlays for closed-loop touch response.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -158,12 +158,12 @@ Environment → Cuticle deformation → Cuticle strain (SPH)
     → Touch receptor neuron depolarization (ALM, AVM, PLM, PVD)
     → Command interneuron decision (AVA backward / AVB forward)
     → Motor neuron pattern switch (DA/VA backward wave vs. DB/VB forward wave)
-    → Muscle activation (DD002 calcium-force)
-    → Body deformation (DD003 SPH)
+    → Muscle activation ([DD002](DD002_Muscle_Model_Architecture.md) calcium-force)
+    → Body deformation ([DD003](DD003_Body_Physics_Architecture.md) SPH)
     → Movement in environment → (loop)
 ```
 
-Currently, the **forward path** (neural → muscle → body) is implemented via `sibernetic_c302.py`. DD019 adds the **reverse path** (body → sensory) and connects them into a single closed loop.
+Currently, the **forward path** (neural → muscle → body) is implemented via `sibernetic_c302.py`. [DD019](DD019_Closed_Loop_Touch_Response.md) adds the **reverse path** (body → sensory) and connects them into a single closed loop.
 
 ### Component 1: Cuticle Strain Readout from SPH Particles
 
@@ -329,7 +329,7 @@ This produces the experimentally observed response: rapid onset current that ada
 
 ### Component 3: Touch Receptor Neuron Cell Templates
 
-Each touch receptor neuron has the standard DD001 channels (leak, K_slow, K_fast, Ca_boyle) PLUS the MEC-4 mechanosensory channel:
+Each touch receptor neuron has the standard [DD001](DD001_Neural_Circuit_Architecture.md) channels (leak, K_slow, K_fast, Ca_boyle) PLUS the MEC-4 mechanosensory channel:
 
 ```python
 # c302/cells/ALMCell.cell.nml (pseudocode)
@@ -337,14 +337,14 @@ cell = GenericCell.copy()
 cell.id = "ALMCell"
 cell.add_channel("mec4_chan", g=20e-9)  # 20 nS mechanosensory
 cell.add_exposure("strain", source="sibernetic_strain_readout")
-# Standard channels remain at DD001/DD005 defaults
+# Standard channels remain at [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 defaults
 ```
 
-If DD005 (cell-type differentiation) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.
+If [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type differentiation) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.
 
 ### Component 4: Tap Withdrawal Neural Circuit
 
-The existing `c302_TapWithdrawal.py` defines 16 interneurons forming the tap withdrawal circuit. DD019 integrates mechanosensory input into this existing circuit rather than replacing it.
+The existing `c302_TapWithdrawal.py` defines 16 interneurons forming the tap withdrawal circuit. [DD019](DD019_Closed_Loop_Touch_Response.md) integrates mechanosensory input into this existing circuit rather than replacing it.
 
 **Circuit architecture (Chalfie et al. 1985, Wicks et al. 1996):**
 
@@ -446,7 +446,7 @@ class ClosedLoopCoupling:
         # Write to Sibernetic
         self.body.set_muscle_activation(activation)
 
-        # === REVERSE PATH (new: DD019) ===
+        # === REVERSE PATH (new: [DD019](DD019_Closed_Loop_Touch_Response.md)) ===
         # Read current elastic particle positions from Sibernetic
         current_positions = self.body.get_elastic_particle_positions()
 
@@ -538,7 +538,7 @@ class TapStimulus:
 - Cannot distinguish gentle vs. harsh touch (different channel populations)
 - The existing c302_TapWithdrawal.py already tried this approach (empty `cells_to_stimulate`) and "does not produce the correct behavior"
 
-**When to reconsider:** Never. The whole point of DD019 is mechanistically closing this loop.
+**When to reconsider:** Never. The whole point of [DD019](DD019_Closed_Loop_Touch_Response.md) is mechanistically closing this loop.
 
 ### 2. Simplified Linear Transduction (Strain → Current, No Channel Model)
 
@@ -552,7 +552,7 @@ class TapStimulus:
 
 **When to reconsider:** If MEC-4 channel parameters prove too uncertain and the linear model suffices for behavioral validation.
 
-### 3. Machine-Learned Transduction Model (DD017 Component 4)
+### 3. Machine-Learned Transduction Model ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4)
 
 **Description:** Train an RNN on calcium imaging data from touch neurons to learn the strain→activity mapping.
 
@@ -561,7 +561,7 @@ class TapStimulus:
 - Black-box model — cannot interpret the transduction mechanism
 - Better to start with the biophysical model and compare to ML later
 
-**When to try:** After the biophysical MEC-4 model is validated. If it performs poorly, the learned model from DD017 Component 4 may capture nonlinear dynamics that the HH approximation misses.
+**When to try:** After the biophysical MEC-4 model is validated. If it performs poorly, the learned model from [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 may capture nonlinear dynamics that the HH approximation misses.
 
 ### 4. Finite Element Strain Computation Instead of SPH Particle Displacement
 
@@ -571,7 +571,7 @@ class TapStimulus:
 - Adds significant computational cost (FEM mesh + SPH particles in parallel)
 - SPH particle displacement provides sufficient strain resolution for the ~6 touch neuron receptive fields
 - Maintaining FEM/SPH consistency during large deformations is non-trivial
-- FEM was already rejected for body physics in DD003
+- FEM was already rejected for body physics in [DD003](DD003_Body_Physics_Architecture.md)
 
 **When to reconsider:** If strain computation from SPH particles proves too noisy or spatially inaccurate for fine mechanosensory discrimination.
 
@@ -584,15 +584,15 @@ class TapStimulus:
 - Adding it simultaneously would confound validation of the touch circuit
 - Motor neuron proprioception is likely needed for stable undulatory locomotion but is not required for tap withdrawal specifically
 
-**When to add:** Phase 3, after DD019's touch-response closed loop is validated. Proprioceptive feedback could be DD020.
+**When to add:** Phase 3, after [DD019](DD019_Closed_Loop_Touch_Response.md)'s touch-response closed loop is validated. Proprioceptive feedback could be [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md).
 
 ### 6. Detailed Cuticle Layer Mechanics
 
 **Description:** Model the three cuticle layers (cortical, medial, basal) with distinct mechanical properties and the MEC protein complex (MEC-1/MEC-5/MEC-9 extracellular attachment) explicitly.
 
 **Rejected because:**
-- DD003 currently uses homogeneous elastic particles for the body wall
-- Adding cuticle microstructure requires DD004 (Mechanical Cell Identity) to tag particles with tissue layers
+- [DD003](DD003_Body_Physics_Architecture.md) currently uses homogeneous elastic particles for the body wall
+- Adding cuticle microstructure requires [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) to tag particles with tissue layers
 - Overkill for the behavioral validation target (tap withdrawal doesn't require cuticle layer resolution)
 - Insufficient mechanical characterization of individual cuticle layers
 
@@ -671,13 +671,13 @@ docker compose run validate --config tap_withdrawal --duration 30
 
 4. **Nose touch:** The nose-touch response involves different neurons (OLQ, CEP, FLP, ASH) and likely different mechanosensory channels (TRP family, not DEG/ENaC). Separate behavior circuit.
 
-5. **Habituation and sensitization:** Repeated taps cause habituation (decreased reversal probability). This involves neuromodulatory mechanisms (dopamine, serotonin) not modeled in DD019. See DD006 (Neuropeptidergic Connectome) for the modulatory framework.
+5. **Habituation and sensitization:** Repeated taps cause habituation (decreased reversal probability). This involves neuromodulatory mechanisms (dopamine, serotonin) not modeled in [DD019](DD019_Closed_Loop_Touch_Response.md). See [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome) for the modulatory framework.
 
-6. **Male-specific touch neurons:** Males have additional touch-related neurons (e.g., ray neurons for mating). Hermaphrodite only in DD019.
+6. **Male-specific touch neurons:** Males have additional touch-related neurons (e.g., ray neurons for mating). Hermaphrodite only in [DD019](DD019_Closed_Loop_Touch_Response.md).
 
-7. **Environmental mechanics beyond flat agar:** Soil, bacterial lawns, geometric obstacles, microfluidic channels. DD003 currently supports simple boundary conditions only.
+7. **Environmental mechanics beyond flat agar:** Soil, bacterial lawns, geometric obstacles, microfluidic channels. [DD003](DD003_Body_Physics_Architecture.md) currently supports simple boundary conditions only.
 
-8. **Cuticle fine structure:** Three-layer cuticle mechanics, annuli, alae. Homogeneous elastic particles are sufficient for DD019.
+8. **Cuticle fine structure:** Three-layer cuticle mechanics, annuli, alae. Homogeneous elastic particles are sufficient for [DD019](DD019_Closed_Loop_Touch_Response.md).
 
 ---
 
@@ -688,14 +688,14 @@ docker compose run validate --config tap_withdrawal --duration 30
 **Repository:** `openworm/CE_locomotion` (pushed 2026-02-18, **VERY ACTIVE**)
 **Collaboration:** Dr. Erick Olivares & Prof. Randall Beer
 
-This repo contains a **complete neuromechanical C++ model** with a `StretchReceptor` module implementing proprioceptive feedback on motor neurons (Wen et al. 2012). This is the **missing piece** DD019 scopes out for future work.
+This repo contains a **complete neuromechanical C++ model** with a `StretchReceptor` module implementing proprioceptive feedback on motor neurons (Wen et al. 2012). This is the **missing piece** [DD019](DD019_Closed_Loop_Touch_Response.md) scopes out for future work.
 
 **What It Provides:**
 - `StretchReceptor.cpp/h` — B-class motor neuron stretch-sensitive currents
 - Produces forward + backward locomotion from the same circuit (gait modulation)
 - Evolutionary parameter fitting algorithm
 
-**Reuse Plan for DD023 (Proprioceptive Feedback):**
+**Reuse Plan for [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (Proprioceptive Feedback):**
 ```bash
 # Clone and test
 git clone https://github.com/openworm/CE_locomotion.git
@@ -712,8 +712,8 @@ python viz.py  # Visualize neural/muscle activity
 **Next Actions:**
 - [ ] Contact authors (still active as of 2026-02-18) — collaborate on proprioception DD?
 - [ ] Extract StretchReceptor model, compare to Wen et al. 2012 data
-- [ ] Write DD023: Proprioceptive Feedback (references CE_locomotion as source)
-- [ ] Integrate with DD001 B-class motor neurons
+- [ ] Write [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback (references CE_locomotion as source)
+- [ ] Integrate with [DD001](DD001_Neural_Circuit_Architecture.md) B-class motor neurons
 
 **Estimated Time Savings:** 30-40 hours (proprioceptive model exists, just needs porting)
 
@@ -747,7 +747,7 @@ For OpenWorm, implementing closed-loop touch response has been a goal since the 
 - Writes to Sibernetic muscle input file
 - **But:** no reverse path (body → sensory)
 
-### What's Missing (DD019 Fills This)
+### What's Missing ([DD019](DD019_Closed_Loop_Touch_Response.md) Fills This)
 
 1. **Mechanosensory transduction model** — converting cuticle strain to neural current
 2. **Cuticle strain readout** — computing strain from SPH particle displacements
@@ -778,14 +778,14 @@ The tap withdrawal circuit is one of the best-characterized neural circuits in a
 ```
 openworm/c302/
 ├── c302/c302_TapWithdrawal.py         # Existing circuit definition (to be updated)
-├── c302/c302_GenericCell.py            # Generic neuron template (DD001)
+├── c302/c302_GenericCell.py            # Generic neuron template ([DD001](DD001_Neural_Circuit_Architecture.md))
 ├── channel_models/                     # Existing channel models
 │   ├── leak_chan.channel.nml
 │   ├── k_slow_chan.channel.nml
 │   ├── k_fast_chan.channel.nml
 │   └── ca_boyle_chan.channel.nml
-├── channel_models/mec4_chan.channel.nml  # NEW (DD019)
-└── cells/                              # NEW touch neuron templates (DD019)
+├── channel_models/mec4_chan.channel.nml  # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
+└── cells/                              # NEW touch neuron templates ([DD019](DD019_Closed_Loop_Touch_Response.md))
     ├── ALMCell.cell.nml
     ├── AVMCell.cell.nml
     ├── PLMCell.cell.nml
@@ -793,11 +793,11 @@ openworm/c302/
 
 openworm/sibernetic/
 ├── sibernetic_c302.py                  # Existing forward coupling
-├── sibernetic_c302_closedloop.py       # NEW bidirectional (DD019)
+├── sibernetic_c302_closedloop.py       # NEW bidirectional ([DD019](DD019_Closed_Loop_Touch_Response.md))
 ├── coupling/
-│   └── strain_readout.py              # NEW (DD019)
+│   └── strain_readout.py              # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
 └── stimuli/
-    └── tap_stimulus.py                # NEW (DD019)
+    └── tap_stimulus.py                # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
 ```
 
 ### Key Data Sources
@@ -820,7 +820,7 @@ openworm/sibernetic/
 
 ### If Additional Sensory Modalities Are Added
 
-Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows the DD019 pattern:
+Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows the [DD019](DD019_Closed_Loop_Touch_Response.md) pattern:
 1. Define the transduction channel model
 2. Create a stimulus readout module (chemical concentration, temperature, stretch)
 3. Extend the bidirectional coupling script
@@ -843,10 +843,10 @@ Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows 
    *MEC channel complex characterization. Reversal potential, conductance.*
 
 5. **Wen Q, Po MD, Hulme E, Chen S, Liu X, Kwok SW, Gershow M, Leifer AM, Butler V, Fang-Yen C, Samuel ADT (2012).** "Proprioceptive coupling within motor neurons drives undulatory locomotion in *C. elegans*." *Neuron* 76:750-761.
-   *B-class motor neuron proprioception (stretch-sensitive, out of scope for DD019).*
+   *B-class motor neuron proprioception (stretch-sensitive, out of scope for [DD019](DD019_Closed_Loop_Touch_Response.md)).*
 
 6. **Boyle JH, Cohen N (2008).** "Caenorhabditis elegans body wall muscles are simple actuators." *Biosystems* 94:170-181.
-   *Muscle model parameters used in DD002 calcium-force coupling.*
+   *Muscle model parameters used in [DD002](DD002_Muscle_Model_Architecture.md) calcium-force coupling.*
 
 7. **Cook SJ et al. (2019).** "Whole-animal connectomes of both *Caenorhabditis elegans* sexes." *Nature* 571:63-71.
    *Connectome topology for circuit definition.*
@@ -864,22 +864,22 @@ Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows 
 
 | Input | Source DD | Variable | Format | Units | Timestep |
 |-------|----------|----------|--------|-------|----------|
-| Elastic particle positions | DD003 (Sibernetic) | Per-particle (x, y, z) for body wall particles | Sibernetic internal state / shared memory | µm | dt_body (20 µs) |
-| Rest particle positions | DD003 (Sibernetic) | Per-particle (x, y, z) at t=0 | Snapshot at initialization | µm | One-time |
-| Boundary particle positions | DD003 (Sibernetic) | Per-particle (x, y, z) for agar surface | Sibernetic internal state | µm | dt_body |
-| Connectome (touch circuit) | DD001 (ConnectomeToolbox) | Touch neuron → interneuron → motor neuron adjacency | ConnectomeToolbox API | neuron pairs + weights | One-time |
-| Cell-type channel densities (optional) | DD005 | CeNGEN-derived conductances for ALM, AVM, PLM, PVD | NeuroML `<channelDensity>` | S/cm² | One-time |
+| Elastic particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for body wall particles | Sibernetic internal state / shared memory | µm | dt_body (20 µs) |
+| Rest particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) at t=0 | Snapshot at initialization | µm | One-time |
+| Boundary particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for agar surface | Sibernetic internal state | µm | dt_body |
+| Connectome (touch circuit) | [DD001](DD001_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Touch neuron → interneuron → motor neuron adjacency | ConnectomeToolbox API | neuron pairs + weights | One-time |
+| Cell-type channel densities (optional) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | CeNGEN-derived conductances for ALM, AVM, PLM, PVD | NeuroML `<channelDensity>` | S/cm² | One-time |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units | Timestep |
 |--------|------------|----------|--------|-------|----------|
-| Touch neuron membrane voltage | DD001 (part of network simulation) | `V` per touch neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
-| Touch neuron [Ca²⁺]ᵢ | DD001 (downstream synaptic output) | `ca_internal` per touch neuron | NeuroML state variable | mol/cm³ | dt_neuron |
-| Command interneuron activity (AVA, AVB) | DD002 (motor neuron drive) | Calcium/voltage of command interneurons | NeuroML state variable | mV, mol/cm³ | dt_neuron |
-| Reversal event log | DD010 (Tier 3 validation) | Event onset/offset/type | JSON or CSV | s (timestamps) | Per-event |
-| Cuticle strain time series (viewer) | **DD014** (visualization) | Per-body-segment strain magnitude | OME-Zarr: `sensory/strain/`, shape (n_timesteps, n_segments) | dimensionless | output_interval |
-| Reversal event annotations (viewer) | **DD014** (visualization) | Event markers on timeline | OME-Zarr: `behavior/events/`, shape (n_events, 3) | s, enum | Per-event |
+| Touch neuron membrane voltage | [DD001](DD001_Neural_Circuit_Architecture.md) (part of network simulation) | `V` per touch neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
+| Touch neuron [Ca²⁺]ᵢ | [DD001](DD001_Neural_Circuit_Architecture.md) (downstream synaptic output) | `ca_internal` per touch neuron | NeuroML state variable | mol/cm³ | dt_neuron |
+| Command interneuron activity (AVA, AVB) | [DD002](DD002_Muscle_Model_Architecture.md) (motor neuron drive) | Calcium/voltage of command interneurons | NeuroML state variable | mV, mol/cm³ | dt_neuron |
+| Reversal event log | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | Event onset/offset/type | JSON or CSV | s (timestamps) | Per-event |
+| Cuticle strain time series (viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-body-segment strain magnitude | OME-Zarr: `sensory/strain/`, shape (n_timesteps, n_segments) | dimensionless | output_interval |
+| Reversal event annotations (viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Event markers on timeline | OME-Zarr: `behavior/events/`, shape (n_events, 3) | s, enum | Per-event |
 
 ### Repository & Packaging
 
@@ -889,7 +889,7 @@ Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows 
 | **Repository (coupling + stimulus)** | `openworm/sibernetic` |
 | **Docker stage** | `neural` (c302 changes) + `body` (Sibernetic changes) |
 | **`versions.lock` keys** | `c302`, `sibernetic` (both must be pinned together for closed-loop) |
-| **Build dependencies** | Same as DD001 + DD003; no new dependencies |
+| **Build dependencies** | Same as [DD001](DD001_Neural_Circuit_Architecture.md) + [DD003](DD003_Body_Physics_Architecture.md); no new dependencies |
 
 ### Configuration
 
@@ -902,7 +902,7 @@ sensory:
 
 behavior:
   tap_withdrawal: true                 # Enable closed-loop tap withdrawal
-  motor_switching: "command_interneuron"  # "command_interneuron" (DD019) or "sinusoidal" (legacy)
+  motor_switching: "command_interneuron"  # "command_interneuron" ([DD019](DD019_Closed_Loop_Touch_Response.md)) or "sinusoidal" (legacy)
 
 stimulus:
   type: "tap"                          # Stimulus type
@@ -953,7 +953,7 @@ docker compose run validate --config tap_withdrawal
 - [ ] `validate` passes (Tier 3 behavioral + no forward-crawl regression)
 - [ ] Existing open-loop simulations produce identical results when mechanotransduction is disabled
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -966,18 +966,18 @@ docker compose run validate --config tap_withdrawal
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Elastic particle positions | DD003 | If particle count, indexing, or coordinate frame changes, strain readout breaks |
-| Muscle activation interface | DD002 | Forward coupling path (existing) — if activation format changes, coupling script breaks |
-| Touch circuit connectivity | DD001 | If connectome data for touch neurons or command interneurons changes, circuit behavior changes |
-| Cell-type conductances (optional) | DD005 | If CeNGEN-derived densities for touch neurons change, baseline excitability changes |
-| Neuropeptide modulation (optional) | DD006 | Dopamine/serotonin modulation of touch sensitivity (habituation) — future work |
+| Elastic particle positions | [DD003](DD003_Body_Physics_Architecture.md) | If particle count, indexing, or coordinate frame changes, strain readout breaks |
+| Muscle activation interface | [DD002](DD002_Muscle_Model_Architecture.md) | Forward coupling path (existing) — if activation format changes, coupling script breaks |
+| Touch circuit connectivity | [DD001](DD001_Neural_Circuit_Architecture.md) | If connectome data for touch neurons or command interneurons changes, circuit behavior changes |
+| Cell-type conductances (optional) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN-derived densities for touch neurons change, baseline excitability changes |
+| Neuropeptide modulation (optional) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Dopamine/serotonin modulation of touch sensitivity (habituation) — future work |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Behavioral validation | DD010 | Tier 3 behavioral tests are defined by DD019 success criteria |
-| Learned sensory transduction | DD017 | DD017 Component 4 may replace MEC-4 model with learned alternative — interface must match |
-| Future sensory DDs | Future | DD019 establishes the pattern for body→sensory coupling; future modalities follow same architecture |
-| Visualization | DD014 | New OME-Zarr groups (`sensory/`, `behavior/`) require viewer support |
+| Behavioral validation | [DD010](DD010_Validation_Framework.md) | Tier 3 behavioral tests are defined by [DD019](DD019_Closed_Loop_Touch_Response.md) success criteria |
+| Learned sensory transduction | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 may replace MEC-4 model with learned alternative — interface must match |
+| Future sensory DDs | Future | [DD019](DD019_Closed_Loop_Touch_Response.md) establishes the pattern for body→sensory coupling; future modalities follow same architecture |
+| Visualization | [DD014](DD014_Dynamic_Visualization_Architecture.md) | New OME-Zarr groups (`sensory/`, `behavior/`) require viewer support |
 
 ---
 

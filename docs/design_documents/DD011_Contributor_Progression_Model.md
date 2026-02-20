@@ -51,7 +51,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 **L2 (Junior Contributor):**
 - Can: Open PRs to designated "contributor-ready" subsystems (data pipelines, validation scripts, non-critical NeuroML extensions)
-- Cannot: Modify core cell models (DD001-DD003), merge others' PRs
+- Cannot: Modify core cell models ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md)), merge others' PRs
 - Review process: Mind-of-a-Worm pre-review (subsystem + integration compliance) → L3/L4 human review → merge
 - **Integration requirement:** Must run `docker compose run quick-test` before submitting PRs and include results in PR description
 - Progression: Sustained quality (error-free PRs, good communication, alignment with Design Documents **including Integration Contracts**) over 3+ months → L3 nomination
@@ -61,7 +61,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Cannot: Change Design Documents, make cross-cutting architectural decisions
 - Responsibilities:
   - Mentor L1/L2 contributors in their subsystem
-  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** (DD001-DD013)
+  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD013](DD013_Simulation_Stack_Architecture.md))
   - **When reviewing PRs that change a coupling interface, coordinate with Senior Contributors of consuming subsystems before merging**
   - Run `docker compose run validate` for PRs that modify core model parameters
   - Triage issues specific to their subsystem
@@ -96,13 +96,13 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 | Subsystem | Design Documents | Current Senior Contributor (L4) | Primary Repository |
 |-----------|-----------------|---------------------|-------------------|
-| **Neural Circuit** | DD001, DD005, DD006 | Padraig Gleeson | CElegansNeuroML, c302 |
-| **Body Physics** | DD003, DD004 | Andrey Palyanov | Sibernetic |
-| **Muscle Models** | DD002, DD007, DD009 | TBD (propose from community) | c302, Sibernetic |
-| **Data Integration** | DD008 | TBD | OWMeta, ConnectomeToolbox |
-| **Validation** | DD010 | TBD | open-worm-analysis-toolbox |
-| **Integration Stack** | DD013 | TBD — **Critical hire** | OpenWorm (meta-repo) |
-| **Visualization** | DD014 | TBD | Worm3DViewer, Worm Browser |
+| **Neural Circuit** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Padraig Gleeson | CElegansNeuroML, c302 |
+| **Body Physics** | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) | Andrey Palyanov | Sibernetic |
+| **Muscle Models** | [DD002](DD002_Muscle_Model_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | TBD (propose from community) | c302, Sibernetic |
+| **Data Integration** | [DD008](DD008_Data_Integration_Pipeline.md) | TBD | OWMeta, ConnectomeToolbox |
+| **Validation** | [DD010](DD010_Validation_Framework.md) | TBD | open-worm-analysis-toolbox |
+| **Integration Stack** | [DD013](DD013_Simulation_Stack_Architecture.md) | TBD — **Critical hire** | OpenWorm (meta-repo) |
+| **Visualization** | [DD014](DD014_Dynamic_Visualization_Architecture.md) | TBD | Worm3DViewer, Worm Browser |
 
 **Critical:** At least one L4 Senior Contributor per subsystem. If a subsystem lacks an L4, the founder is the de-facto owner (unsustainable).
 
@@ -235,7 +235,7 @@ Mind-of-a-Worm maintains a **contributor database**:
 }
 ```
 
-**For AI agent contributors** (see DD015), the schema adds `sponsor_id` and `agent_type`:
+**For AI agent contributors** (see [DD015](DD015_AI_Contributor_Model.md)), the schema adds `sponsor_id` and `agent_type`:
 ```json
 {
   "contributor_id": "agent:claude-code-slarson-001",
@@ -270,9 +270,9 @@ Mind-of-a-Worm maintains a **contributor database**:
     "teach_back": ["i_understand_neurons", "i_understand_muscles", "i_understand_the_body"],
     "sponsor_domains_covered": 3,
     "explain_level_overrides": {
-      "DD001": "graduate",
-      "DD002": "undergrad",
-      "DD003": "undergrad"
+      "[DD001](DD001_Neural_Circuit_Architecture.md)": "graduate",
+      "[DD002](DD002_Muscle_Model_Architecture.md)": "undergrad",
+      "[DD003](DD003_Body_Physics_Architecture.md)": "undergrad"
     }
   }
 }
@@ -334,7 +334,7 @@ Update openworm.org/people.html to include:
 
 OpenWorm has operated a badge-based onboarding system since May 2016 via [BadgeList](https://badgelist.com/openworm) — 162 registered users, 20 badges, 8 tags. The progression funnels work: 79 people earned "Simulation Stack Apprentice" (install Docker, run the sim) → 17 completed "Hodgkin-Huxley Tutorial Graduate" → 9 explored the muscle model → 2 built it → 12 hacked it. That's an organic L0→L2 funnel before any formal system existed.
 
-The badge system proposed here builds on that foundation, aligning badges with Design Documents, the contributor ladder, and the AI contributor model (DD015).
+The badge system proposed here builds on that foundation, aligning badges with Design Documents, the contributor ladder, and the AI contributor model ([DD015](DD015_AI_Contributor_Model.md)).
 
 ### Badge Types
 
@@ -359,14 +359,14 @@ Earned by demonstrating specific technical capabilities. Verified by Mind-of-a-W
 
 | Badge | Criteria | DD Alignment | BadgeList Equivalent |
 |-------|----------|-------------|---------------------|
-| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | DD001 | "H-H Tutorial Graduate" (17 earners) |
-| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | DD002 | "Muscle Model Explorer" (9 earners) |
-| **Body Physics Basics** | Run Sibernetic, explain SPH approach | DD003 | — |
-| **Data Wrangler** | Extract data from a paper using DD008 pipeline | DD008 | "Literature Mining I" (4 earners) |
-| **Movement Analyst** | Run analysis toolbox on sample data, generate report | DD021 | "Movement Database User" (3 earners) |
+| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | [DD001](DD001_Neural_Circuit_Architecture.md) | "H-H Tutorial Graduate" (17 earners) |
+| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | [DD002](DD002_Muscle_Model_Architecture.md) | "Muscle Model Explorer" (9 earners) |
+| **Body Physics Basics** | Run Sibernetic, explain SPH approach | [DD003](DD003_Body_Physics_Architecture.md) | — |
+| **Data Wrangler** | Extract data from a paper using [DD008](DD008_Data_Integration_Pipeline.md) pipeline | [DD008](DD008_Data_Integration_Pipeline.md) | "Literature Mining I" (4 earners) |
+| **Movement Analyst** | Run analysis toolbox on sample data, generate report | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | "Movement Database User" (3 earners) |
 | **GitHub Proficient** | Submit clean PR with tests, respond to review | General | "GitHub Best Practices" (10 earners) |
 | **First Issue Resolved** | First merged PR (any subsystem) | General | "Code Warrior" (9 earners) |
-| **Cell Biology Foundations** | Complete worm development tutorial | DD004 | "Worm Development I" (3 earners) |
+| **Cell Biology Foundations** | Complete worm development tutorial | [DD004](DD004_Mechanical_Cell_Identity.md) | "Worm Development I" (3 earners) |
 
 **L1 → L2 (Junior Contributor) requirement:** Earn "First Issue Resolved" + 2 skill badges + 5 total merged PRs.
 
@@ -376,33 +376,33 @@ Earned by sustained contribution to a specific Design Document's domain. Tracked
 
 | Badge | Criteria | DD |
 |-------|----------|----|
-| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | DD001 |
-| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | DD002 |
-| **Body Physics Contributor** | 5+ merged PRs in Sibernetic | DD003 |
-| **Data Pipeline Contributor** | 5+ merged PRs in OWMeta/data tools | DD008 |
-| **Validation Contributor** | 5+ merged PRs in analysis toolbox | DD010 |
-| **Visualization Contributor** | 5+ merged PRs in Worm3DViewer/browser | DD014 |
-| **Integration Contributor** | 5+ merged PRs in simulation stack glue | DD013 |
-| **Neuropeptide Contributor** | 5+ merged PRs in neuropeptide subsystem | DD006 |
-| **Pharyngeal Contributor** | 5+ merged PRs in pharyngeal system | DD007 |
+| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | [DD001](DD001_Neural_Circuit_Architecture.md) |
+| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | [DD002](DD002_Muscle_Model_Architecture.md) |
+| **Body Physics Contributor** | 5+ merged PRs in Sibernetic | [DD003](DD003_Body_Physics_Architecture.md) |
+| **Data Pipeline Contributor** | 5+ merged PRs in OWMeta/data tools | [DD008](DD008_Data_Integration_Pipeline.md) |
+| **Validation Contributor** | 5+ merged PRs in analysis toolbox | [DD010](DD010_Validation_Framework.md) |
+| **Visualization Contributor** | 5+ merged PRs in Worm3DViewer/browser | [DD014](DD014_Dynamic_Visualization_Architecture.md) |
+| **Integration Contributor** | 5+ merged PRs in simulation stack glue | [DD013](DD013_Simulation_Stack_Architecture.md) |
+| **Neuropeptide Contributor** | 5+ merged PRs in neuropeptide subsystem | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) |
+| **Pharyngeal Contributor** | 5+ merged PRs in pharyngeal system | [DD007](DD007_Pharyngeal_System_Architecture.md) |
 
 **L2 → L3 (Contributor) requirement:** Earn at least 1 domain badge + sustained activity over 3+ months.
 
-#### 4. Teach-Back Badges (Human Sponsors Only — DD015)
+#### 4. Teach-Back Badges (Human Sponsors Only — [DD015](DD015_AI_Contributor_Model.md))
 
-Unique to the AI contributor model. Earned when a human sponsor's AI agent lands a PR and the Sponsor Summary (see DD015 §3.2) passes Mind-of-a-Worm's scientific accuracy review. These badges represent **knowledge earned through contributing** — the sponsor learns the science through their agent's explanations.
+Unique to the AI contributor model. Earned when a human sponsor's AI agent lands a PR and the Sponsor Summary (see [DD015](DD015_AI_Contributor_Model.md) §3.2) passes Mind-of-a-Worm's scientific accuracy review. These badges represent **knowledge earned through contributing** — the sponsor learns the science through their agent's explanations.
 
 | Badge | Criteria | Domain |
 |-------|----------|--------|
-| **I Understand Neurons** | Sponsor Summary for a DD001 contribution passes review | Neural Circuit |
-| **I Understand Muscles** | Sponsor Summary for a DD002 contribution passes review | Muscle Model |
-| **I Understand the Body** | Sponsor Summary for a DD003 contribution passes review | Body Physics |
-| **I Understand Peptides** | Sponsor Summary for a DD006 contribution passes review | Neuropeptides |
-| **I Understand Validation** | Sponsor Summary for a DD010 contribution passes review | Validation |
+| **I Understand Neurons** | Sponsor Summary for a [DD001](DD001_Neural_Circuit_Architecture.md) contribution passes review | Neural Circuit |
+| **I Understand Muscles** | Sponsor Summary for a [DD002](DD002_Muscle_Model_Architecture.md) contribution passes review | Muscle Model |
+| **I Understand the Body** | Sponsor Summary for a [DD003](DD003_Body_Physics_Architecture.md) contribution passes review | Body Physics |
+| **I Understand Peptides** | Sponsor Summary for a [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) contribution passes review | Neuropeptides |
+| **I Understand Validation** | Sponsor Summary for a [DD010](DD010_Validation_Framework.md) contribution passes review | Validation |
 | **I Understand the Whole Worm** | Earn teach-back badges in 5+ different domains | Cross-domain |
 
 **How this works in practice:**
-1. A middle schooler sponsors an AI agent that implements a gap junction in DD001
+1. A middle schooler sponsors an AI agent that implements a gap junction in [DD001](DD001_Neural_Circuit_Architecture.md)
 2. The agent writes a Sponsor Summary at `explain_level: child`: "You helped connect two brain cells that tell the worm to back up!"
 3. Mind-of-a-Worm verifies the summary is scientifically accurate at that level
 4. The sponsor earns **"I Understand Neurons"** badge
@@ -529,7 +529,7 @@ Badges make level progression **transparent and objective**. Instead of subjecti
 | **L2 → L3** | Contributor | 1+ domain badge + 3 months sustained activity + L4 nomination |
 | **L3 → L4** | Senior Contributor | 2+ domain badges + "Mentor" badge + DD authorship + founder approval |
 
-For AI agents (DD015): same badge requirements through L3. L4 remains human-only.
+For AI agents ([DD015](DD015_AI_Contributor_Model.md)): same badge requirements through L3. L4 remains human-only.
 
 For human sponsors of AI agents: teach-back badges accumulate alongside (or instead of) contribution badges. A sponsor who never writes code but sponsors 50 successful AI contributions and earns "I Understand the Whole Worm" has demonstrated genuine engagement. Their badge profile tells a story of learning through contributing.
 

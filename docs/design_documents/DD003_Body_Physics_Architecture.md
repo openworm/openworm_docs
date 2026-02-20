@@ -13,24 +13,24 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Particle position time series (~100K SPH particles), WCON trajectory files, rendered body frames |
-| **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd003` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
-| **Visualize** | DD014 `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
 | **CI gate** | Tier 3 kinematic validation + physical stability (no particle escape) blocks merge |
 
 ---
 
 ## TL;DR
 
-PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from DD002 calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
+PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD002](DD002_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
 
 ---
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Kinematic metrics | Within ±15% of Schafer lab baseline | Tier 3 (blocking) |
 | **Secondary:** Physical stability | No particle escape, no NaN, no divergence over 10 s simulation | Tier 3 (blocking) |
@@ -38,7 +38,7 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 
 **Before:** No fluid-structure interaction — rigid body or mass-spring models that cannot capture pseudocoelomic pressure or hydrostatic skeleton mechanics.
 
-**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from DD002.
+**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from [DD002](DD002_Muscle_Model_Architecture.md).
 
 ---
 
@@ -73,7 +73,7 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: OpenCL SDK (AMD or Intel), CMake, C++ compiler
 - Optional: `pip install taichi` for Taichi Metal/CUDA backends
 
@@ -120,7 +120,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**DD014 viewer layer:** `body/positions/` — SPH particles colored by type.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `body/positions/` — SPH particles colored by type.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -197,7 +197,7 @@ Bonds are created during initialization based on spatial proximity. Particles wi
 
 ### Muscle Actuation (Force Injection)
 
-Muscle forces from the calcium-force coupling (DD002) are injected by modulating elastic bond stiffness:
+Muscle forces from the calcium-force coupling ([DD002](DD002_Muscle_Model_Architecture.md)) are injected by modulating elastic bond stiffness:
 
 ```
 k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
@@ -285,7 +285,7 @@ A contribution to Sibernetic MUST:
 
 ### This Design Document Does NOT Cover:
 
-1. **Per-cell mechanical identity:** Current Sibernetic represents tissue as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to tag particles with cell IDs.
+1. **Per-cell mechanical identity:** Current Sibernetic represents tissue as bulk elastic/liquid without cell boundaries. See [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) for the proposal to tag particles with cell IDs.
 
 2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.
 
@@ -386,19 +386,19 @@ elasticity = 0.0006
 
 | Input | Source DD | Variable | Format | Units | Timestep |
 |-------|----------|----------|--------|-------|----------|
-| Muscle activation coefficients | DD002 (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
-| Particle initialization geometry | DD004 (when cell_identity enabled) | Per-particle position, type, cell_id | Binary or CSV particle file | µm (positions), enum (type) | One-time at sim start |
+| Muscle activation coefficients | [DD002](DD002_Muscle_Model_Architecture.md) (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
+| Particle initialization geometry | [DD004](DD004_Mechanical_Cell_Identity.md) (when cell_identity enabled) | Per-particle position, type, cell_id | Binary or CSV particle file | µm (positions), enum (type) | One-time at sim start |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Particle position time series | DD010 (Tier 3 validation) | All particle positions per output frame | Binary state dump or WCON trajectory | µm |
-| Rendered frames / video | DD013 (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
-| Body deformation state | DD007 (pharynx, if Option B) | Anterior attachment point displacement | Shared memory or file | µm |
-| Particle positions (for viewer) | **DD014** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
-| Particle types (for viewer) | **DD014** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
-| Surface mesh (for viewer) | **DD014** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
+| Particle position time series | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | All particle positions per output frame | Binary state dump or WCON trajectory | µm |
+| Rendered frames / video | [DD013](DD013_Simulation_Stack_Architecture.md) (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
+| Body deformation state | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx, if Option B) | Anterior attachment point displacement | Shared memory or file | µm |
+| Particle positions (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
+| Particle types (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
+| Surface mesh (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
 
 ### Repository & Packaging
 
@@ -419,7 +419,7 @@ body:
   backend: opencl                    # opencl, taichi-metal, taichi-cuda, pytorch
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
-  cell_identity: false               # Phase 4 (DD004): per-particle cell IDs
+  cell_identity: false               # Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): per-particle cell IDs
   timestep: 0.00002                  # seconds
 ```
 
@@ -430,7 +430,7 @@ body:
 | `body.backend` | `opencl` | `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch` | Compute backend |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
-| `body.cell_identity` | `false` | `true`/`false` | Enable per-particle cell IDs (DD004) |
+| `body.cell_identity` | `false` | `true`/`false` | Enable per-particle cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md)) |
 | `body.timestep` | `0.00002` | Float (seconds) | Simulation timestep |
 
 ### How to Test (Contributor Workflow)
@@ -456,7 +456,7 @@ docker compose run validate
 - [ ] Tested on at least two backends if core SPH algorithms changed
 - [ ] No particle escape (all positions within bounding box)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -466,7 +466,7 @@ docker compose run validate
 
 ### Backend-Config Translation
 
-Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator (DD013) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
+Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
 
 ```python
 # master_openworm.py (pseudocode)
@@ -482,21 +482,21 @@ def write_sibernetic_config(openworm_config):
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Muscle activation format | DD002 | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
-| `sibernetic_c302.py` script | DD001/DD002 | This script bridges neural→body; changes to it affect coupling timing |
-| Cell boundary data | DD004 | If particle initialization changes (cell-tagged particles), body geometry changes |
+| Muscle activation format | [DD002](DD002_Muscle_Model_Architecture.md) | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
+| `sibernetic_c302.py` script | [DD001](DD001_Neural_Circuit_Architecture.md)/DD002 | This script bridges neural→body; changes to it affect coupling timing |
+| Cell boundary data | [DD004](DD004_Mechanical_Cell_Identity.md) | If particle initialization changes (cell-tagged particles), body geometry changes |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Movement validation | DD010 | If particle output format changes, validation toolbox can't read trajectory data |
-| Mechanical cell identity | DD004 | If particle struct changes (adding/removing fields), DD004 initialization must match |
-| Pharynx attachment | DD007 | If body geometry changes at anterior, pharynx coupling point shifts |
+| Movement validation | [DD010](DD010_Validation_Framework.md) | If particle output format changes, validation toolbox can't read trajectory data |
+| Mechanical cell identity | [DD004](DD004_Mechanical_Cell_Identity.md) | If particle struct changes (adding/removing fields), [DD004](DD004_Mechanical_Cell_Identity.md) initialization must match |
+| Pharynx attachment | [DD007](DD007_Pharyngeal_System_Architecture.md) | If body geometry changes at anterior, pharynx coupling point shifts |
 
 ---
 
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Complete (Sibernetic v1.0+)
 **Next Actions:**
-1. Tag particles with cell IDs (DD004, Phase 4)
+1. Tag particles with cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4)
 2. Add cell-type-specific mechanical properties
 3. Optimize Taichi backends for production use

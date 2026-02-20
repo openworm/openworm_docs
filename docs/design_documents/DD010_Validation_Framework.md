@@ -12,12 +12,12 @@
 
 | Question | Answer |
 |----------|--------|
-| **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see DD021) |
+| **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. Randi 2023; Tier 3: 5 kinematic metrics within ±15% of Schafer lab data |
-| **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) (DD021) |
+| **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
-| **Visualize** | Validation overlay in DD014 viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
+| **Visualize** | Validation overlay in [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
 | **CI gate** | Tier 2 blocks PR merge (r < 0.5 = fail); Tier 3 blocks merge to main (>15% deviation = fail) |
 
 ---
@@ -106,7 +106,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 
 ### Tier 3: Behavioral Validation (System Tests)
 
-**Primary tool:** `open-worm-analysis-toolbox` (see **DD021** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to Schafer lab experimental data in WCON format.
+**Primary tool:** `open-worm-analysis-toolbox` (see **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to Schafer lab experimental data in WCON format.
 
 **Validated metrics:**
 1. **Speed:** Mean forward velocity (µm/s)
@@ -133,8 +133,8 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 ```
 
 **Additional behavioral tests:**
-1. **Pharyngeal pumping:** 3-4 Hz (DD007)
-2. **Defecation cycle:** 50 ± 10 seconds period (DD009)
+1. **Pharyngeal pumping:** 3-4 Hz ([DD007](DD007_Pharyngeal_System_Architecture.md))
+2. **Defecation cycle:** 50 ± 10 seconds period ([DD009](DD009_Intestinal_Oscillator_Model.md))
 3. **Reversal initiation:** Response to aversive stimulus (<1 second latency)
 
 **Blocking:** If movement validation degrades by >15%, the PR is blocked.
@@ -175,41 +175,41 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Neuron calcium time series | DD001 | Per-neuron [Ca²⁺] over time | Tab-separated `*_calcium.dat` | mol/cm³ |
-| Single-cell electrophysiology | DD001 | V, I_Ca, I_K per cell | Tab-separated from NEURON | mV, nA |
-| Movement trajectory | DD003 | Body centroid + posture over time | WCON file | µm, frames |
-| Pharyngeal pumping state | DD007 | Per-section contraction time series | Tab-separated | binary or [0,1] |
-| Defecation motor program | DD009 | pBoc/aBoc/Exp timestamps | Event log | ms |
-| Experimental data (electrophysiology) | DD008 / published papers | Patch-clamp recordings | CSV | mV, nA |
-| Experimental data (functional connectivity) | DD008 / Randi 2023 | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
-| Experimental data (kinematics) | DD008 / Schafer lab | Movement trajectories | WCON | µm |
-| Experimental data (defecation) | DD008 / Thomas 1990 | Defecation cycle periods | CSV | seconds |
-| Experimental data (pumping) | DD008 / Raizen 1994 | EPG recordings | CSV | mV |
+| Neuron calcium time series | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-neuron [Ca²⁺] over time | Tab-separated `*_calcium.dat` | mol/cm³ |
+| Single-cell electrophysiology | [DD001](DD001_Neural_Circuit_Architecture.md) | V, I_Ca, I_K per cell | Tab-separated from NEURON | mV, nA |
+| Movement trajectory | [DD003](DD003_Body_Physics_Architecture.md) | Body centroid + posture over time | WCON file | µm, frames |
+| Pharyngeal pumping state | [DD007](DD007_Pharyngeal_System_Architecture.md) | Per-section contraction time series | Tab-separated | binary or [0,1] |
+| Defecation motor program | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | Event log | ms |
+| Experimental data (electrophysiology) | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | Patch-clamp recordings | CSV | mV, nA |
+| Experimental data (functional connectivity) | [DD008](DD008_Data_Integration_Pipeline.md) / Randi 2023 | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
+| Experimental data (kinematics) | [DD008](DD008_Data_Integration_Pipeline.md) / Schafer lab | Movement trajectories | WCON | µm |
+| Experimental data (defecation) | [DD008](DD008_Data_Integration_Pipeline.md) / Thomas 1990 | Defecation cycle periods | CSV | seconds |
+| Experimental data (pumping) | [DD008](DD008_Data_Integration_Pipeline.md) / Raizen 1994 | EPG recordings | CSV | mV |
 
 ### Outputs (What This Subsystem Produces)
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Tier 1 validation report | DD012 (PR review) | Per-cell pass/fail + metrics | JSON | mixed |
-| Tier 2 validation report | DD012 (PR review), DD013 (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
-| Tier 3 validation report | DD012 (PR review), DD013 (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
-| Regression alert | DD013 (CI pipeline) | Pass/fail + diff from baseline | JSON + exit code | boolean |
+| Tier 1 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review) | Per-cell pass/fail + metrics | JSON | mixed |
+| Tier 2 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
+| Tier 3 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
+| Regression alert | [DD013](DD013_Simulation_Stack_Architecture.md) (CI pipeline) | Pass/fail + diff from baseline | JSON + exit code | boolean |
 | Validation dashboard | Mad-Worm-Scientist (daily digest) | Summary metrics for all tiers | JSON | mixed |
-| Validation overlay data (for viewer) | **DD014** (visualization) | Per-metric pass/fail + experimental comparison traces | OME-Zarr: `validation/overlay/` (tier results + reference data) | mixed |
+| Validation overlay data (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-metric pass/fail + experimental comparison traces | OME-Zarr: `validation/overlay/` (tier results + reference data) | mixed |
 
-### CI/CD Ownership Split (DD010 vs. DD013)
+### CI/CD Ownership Split ([DD010](DD010_Validation_Framework.md) vs. [DD013](DD013_Simulation_Stack_Architecture.md))
 
-**DD010 defines WHAT to validate.** DD013 defines HOW to run it in Docker and CI.
+**[DD010](DD010_Validation_Framework.md) defines WHAT to validate.** [DD013](DD013_Simulation_Stack_Architecture.md) defines HOW to run it in Docker and CI.
 
 | Responsibility | Owned By |
 |---------------|----------|
-| Validation metrics, acceptance criteria, test scripts | DD010 |
-| Docker compose services (`quick-test`, `validate`) | DD013 |
-| CI/CD pipeline (GitHub Actions workflow) | DD013 |
-| Validation data packaging in Docker image | DD010 + DD013 (shared) |
-| Pass/fail decision logic (blocking PRs) | DD010 (criteria) + DD013 (enforcement) |
+| Validation metrics, acceptance criteria, test scripts | [DD010](DD010_Validation_Framework.md) |
+| Docker compose services (`quick-test`, `validate`) | [DD013](DD013_Simulation_Stack_Architecture.md) |
+| CI/CD pipeline (GitHub Actions workflow) | [DD013](DD013_Simulation_Stack_Architecture.md) |
+| Validation data packaging in Docker image | [DD010](DD010_Validation_Framework.md) + [DD013](DD013_Simulation_Stack_Architecture.md) (shared) |
+| Pass/fail decision logic (blocking PRs) | [DD010](DD010_Validation_Framework.md) (criteria) + [DD013](DD013_Simulation_Stack_Architecture.md) (enforcement) |
 
-**Reconciliation:** The `docker compose run validate` service (DD013) runs the validation scripts defined by DD010. The scripts produce JSON reports. DD013's CI pipeline reads those reports and applies DD010's acceptance criteria to determine pass/fail.
+**Reconciliation:** The `docker compose run validate` service ([DD013](DD013_Simulation_Stack_Architecture.md)) runs the validation scripts defined by [DD010](DD010_Validation_Framework.md). The scripts produce JSON reports. [DD013](DD013_Simulation_Stack_Architecture.md)'s CI pipeline reads those reports and applies [DD010](DD010_Validation_Framework.md)'s acceptance criteria to determine pass/fail.
 
 ### Configuration (`openworm.yml` Section)
 
@@ -240,9 +240,9 @@ validation:
 
 ### Docker Build
 
-- **Repository:** `openworm/open-worm-analysis-toolbox` (movement validation, see DD021) + `openworm/tracker-commons` (WCON spec, see DD021) + validation scripts in `openworm/OpenWorm` meta-repo
+- **Repository:** `openworm/open-worm-analysis-toolbox` (movement validation, see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + `openworm/tracker-commons` (WCON spec, see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + validation scripts in `openworm/OpenWorm` meta-repo
 - **Docker stage:** `validation` in multi-stage Dockerfile
-- **`versions.lock` keys:** `open_worm_analysis_toolbox`, `tracker_commons` (both managed per DD021)
+- **`versions.lock` keys:** `open_worm_analysis_toolbox`, `tracker_commons` (both managed per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 - **Build dependencies:** `pip install open-worm-analysis-toolbox` + validation data files
 
 ### Validation Data Location
@@ -306,7 +306,7 @@ python -c "from wormneuroatlas import NeuroAtlas; fc = NeuroAtlas().get_signal_p
 ```
 
 **Action Items:**
-- [ ] Add `wormneuroatlas` to DD013 Docker validation stage
+- [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
 - [ ] Pin version in `versions.lock`
 - [ ] Update Tier 2 validation scripts to use wormneuroatlas API
 - [ ] Also available: unc-31 mutant functional connectivity via `strain="unc31"`
@@ -315,9 +315,9 @@ python -c "from wormneuroatlas import NeuroAtlas; fc = NeuroAtlas().get_signal_p
 
 ---
 
-### `open-worm-analysis-toolbox` Revival (DD021)
+### `open-worm-analysis-toolbox` Revival ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 
-This repo is **dormant** (last commit Jan 2020). **DD021 (Movement Analysis Toolbox and WCON Policy)** owns the full revival plan, including:
+This repo is **dormant** (last commit Jan 2020). **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** owns the full revival plan, including:
 
 - 8-task revival roadmap with owners, effort estimates, and dependencies (~33 hours total)
 - Python 3.12 compatibility, dependency updates, test suite fixes
@@ -326,7 +326,7 @@ This repo is **dormant** (last commit Jan 2020). **DD021 (Movement Analysis Tool
 - API contract for `NormalizedWorm` and `WormFeatures` classes
 - Relationship to Tierpsy Tracker (modern successor)
 
-**See DD021 for the complete revival plan.** This is a Phase A (DD013 roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
+**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
 
 Note: The archived predecessor repo `openworm/movement_validation` should not be used — it was superseded by the analysis toolbox.
 
@@ -359,19 +359,19 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neural output format | DD001 | If calcium time series format changes, Tier 1 and Tier 2 validators can't read data |
-| Movement output format | DD003 | If WCON format or particle output changes, Tier 3 movement validator breaks |
-| Pharyngeal output format | DD007 | If pumping state format changes, pumping validation breaks |
-| Intestinal output format | DD009 | If defecation event format changes, defecation validation breaks |
-| Experimental data (OWMeta) | DD008 | If data provenance or versioning changes, validation baselines may shift |
-| Docker compose services | DD013 | If `validate` service configuration changes, validation pipeline breaks |
+| Neural output format | [DD001](DD001_Neural_Circuit_Architecture.md) | If calcium time series format changes, Tier 1 and Tier 2 validators can't read data |
+| Movement output format | [DD003](DD003_Body_Physics_Architecture.md) | If WCON format or particle output changes, Tier 3 movement validator breaks |
+| Pharyngeal output format | [DD007](DD007_Pharyngeal_System_Architecture.md) | If pumping state format changes, pumping validation breaks |
+| Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If defecation event format changes, defecation validation breaks |
+| Experimental data (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | If data provenance or versioning changes, validation baselines may shift |
+| Docker compose services | [DD013](DD013_Simulation_Stack_Architecture.md) | If `validate` service configuration changes, validation pipeline breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| CI pipeline (blocking gates) | DD013 | If acceptance criteria change, CI may pass/fail differently |
-| PR review (Mind-of-a-Worm) | DD012 | Mind-of-a-Worm references DD010 criteria when checking PR compliance |
+| CI pipeline (blocking gates) | [DD013](DD013_Simulation_Stack_Architecture.md) | If acceptance criteria change, CI may pass/fail differently |
+| PR review (Mind-of-a-Worm) | [DD012](DD012_Design_Document_RFC_Process.md) | Mind-of-a-Worm references [DD010](DD010_Validation_Framework.md) criteria when checking PR compliance |
 | Founder digest (Mad-Worm-Scientist) | AI Agents | If validation report format changes, Mad-Worm-Scientist can't parse regression alerts |
-| All subsystem DDs | DD001-DD009 | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
+| All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
 
 ---
 
@@ -384,7 +384,7 @@ docker compose run validate
 https://github.com/openworm/open-worm-analysis-toolbox
 ```
 
-> **Note:** The predecessor repo `openworm/movement_validation` is **archived** and should not be used. The analysis toolbox is the current, canonical implementation. See DD021 for full repository landscape and revival plan.
+> **Note:** The predecessor repo `openworm/movement_validation` is **archived** and should not be used. The analysis toolbox is the current, canonical implementation. See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for full repository landscape and revival plan.
 
 **Key modules:**
 - `movement_validation/` — Statistical feature extraction from WCON files
@@ -491,14 +491,14 @@ jobs:
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Partial
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
-- **Tier 2** (functional connectivity): Randi 2023 data needs ingestion into DD008/DD020 (blocking)
+- **Tier 2** (functional connectivity): Randi 2023 data needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (blocking)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
 
-**See DD021 (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
+**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
 
 **Next Actions:**
-1. **URGENT:** Prioritize DD021 toolbox revival as Phase A work (parallel with DD013)
+1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
 3. After revival: Ingest Randi 2023 data for Tier 2 validation
-4. After DD013: Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
+4. After [DD013](DD013_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
 5. Set up GitHub Actions CI with Tier 2+3 blocking gates

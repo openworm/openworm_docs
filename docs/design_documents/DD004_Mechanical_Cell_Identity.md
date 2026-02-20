@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Tagged particle file: each of ~100K SPH particles gets a WBbt cell ID + cell-type-specific elasticity/adhesion |
-| **Success metric** | DD010 Tier 3: kinematic metrics within ±15% with `cell_identity: true`; all 959 somatic cells mapped |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% with `cell_identity: true`; all 959 somatic cells mapped |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd004` |
 | **Config toggle** | `body.cell_identity: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `cell_identity: false` (backward compat), then `cell_identity: true` (tagged sim) |
-| **Visualize** | DD014 `body/cell_ids/` layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray) |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `body/cell_ids/` layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray) |
 | **CI gate** | Tier 3 kinematic validation blocks merge; backward compatibility with `cell_identity: false` required |
 
 ---
@@ -30,7 +30,7 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Kinematic metrics | Within ±15% of Schafer lab baseline with `cell_identity: true` | Tier 3 (blocking) |
 | **Secondary:** Cell coverage | All 959 somatic cells mapped to at least one SPH particle | Required (blocking) |
@@ -70,8 +70,8 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
-- OR: OpenCL SDK, CMake, C++ compiler (same as DD003)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- OR: OpenCL SDK, CMake, C++ compiler (same as [DD003](DD003_Body_Physics_Architecture.md))
 - Cell boundary mesh data from Witvliet et al. 2021 (included in Docker image or downloaded at build time)
 
 ### Step-by-step
@@ -107,7 +107,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**DD014 viewer layer:** `body/cell_ids/` — particles colored by cell type.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `body/cell_ids/` — particles colored by cell type.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -115,7 +115,7 @@ docker compose run validate
 | **Color mode** | Particles colored by cell type: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta, seam cells=orange |
 | **Data source** | OME-Zarr: `body/cell_ids/`, shape (n_particles,) — integer ID mapping each particle to its WBbt cell |
 | **What you should SEE** | The worm body with distinct cell boundaries visible as color transitions. Intestinal cells should form a tube along the body axis. Muscle quadrants (MDR, MVR, MVL, MDL) should be visible as four colored bands. Cuticle should form the outermost shell. Clicking a particle shows its WBbt cell ID and cell-type-specific mechanical properties. |
-| **Comparison view** | Side-by-side: bulk tissue (all elastic=green, DD003 default) vs. cell-tagged (distinct colors per cell type) |
+| **Comparison view** | Side-by-side: bulk tissue (all elastic=green, [DD003](DD003_Body_Physics_Architecture.md) default) vs. cell-tagged (distinct colors per cell type) |
 
 ---
 
@@ -147,7 +147,7 @@ typedef struct {
 | **Cuticle (medial)** | -- | 3x | N/A | No | Layered structure |
 | **Cuticle (cortical)** | -- | 10x (rigid) | N/A | No | Outermost |
 | **Gonad sheath** | 2 | 1.0x | Medium | Yes (cAMP-driven) | Oocyte transport |
-| **Pharyngeal muscle** | 20 | 2x | High | Yes (pumping) | See DD007 |
+| **Pharyngeal muscle** | 20 | 2x | High | Yes (pumping) | See [DD007](DD007_Pharyngeal_System_Architecture.md) |
 | **Seam cells** | 10 | 1.2x | Medium | No | Lateral epidermis |
 
 **Elasticity coefficient per particle:**
@@ -222,7 +222,7 @@ particle_id,x,y,z,type,cell_id,elasticity,adhesion
 
 ### What This Design Document Does NOT Cover:
 
-1. **Neural cell identity:** Neurons are covered by DD001 and DD005. This DD covers non-neural somatic cells only (muscle, intestine, hypodermis, cuticle, gonad, seam cells, pharyngeal muscle).
+1. **Neural cell identity:** Neurons are covered by [DD001](DD001_Neural_Circuit_Architecture.md) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md). This DD covers non-neural somatic cells only (muscle, intestine, hypodermis, cuticle, gonad, seam cells, pharyngeal muscle).
 
 2. **Developmental stage transitions:** Cell boundaries change during development (L1 through adult). This DD uses adult hermaphrodite as the reference stage. Multi-stage support is future work.
 
@@ -262,27 +262,27 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Cell boundary meshes | OWMeta (DD008) / Witvliet 2021 EM | 3D surface reconstruction per cell | OBJ or STL mesh files | µm |
-| WBbt cell ontology IDs | OWMeta (DD008) / WormBase | Cell name → WBbt ID mapping | CSV or OWMeta query | identifiers |
-| Baseline SPH particle layout | DD003 | Current particle initialization | Binary particle file | µm (positions) |
+| Cell boundary meshes | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / Witvliet 2021 EM | 3D surface reconstruction per cell | OBJ or STL mesh files | µm |
+| WBbt cell ontology IDs | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / WormBase | Cell name → WBbt ID mapping | CSV or OWMeta query | identifiers |
+| Baseline SPH particle layout | [DD003](DD003_Body_Physics_Architecture.md) | Current particle initialization | Binary particle file | µm (positions) |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Tagged particle file | DD003 (Sibernetic initialization) | Per-particle: position, type, cell_id, elasticity, adhesion | Extended binary or CSV (see struct below) | mixed |
-| Cell-to-particle mapping | DD009 (intestinal oscillator) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
-| Cell-to-particle mapping | DD007 (pharynx) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
-| Cell identity labels (for viewer) | **DD014** (visualization) | Per-particle cell_id for cell-based coloring/selection | OME-Zarr: `body/cell_ids/`, shape (n_particles,) | integer ID |
+| Tagged particle file | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic initialization) | Per-particle: position, type, cell_id, elasticity, adhesion | Extended binary or CSV (see struct below) | mixed |
+| Cell-to-particle mapping | [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal oscillator) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
+| Cell-to-particle mapping | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
+| Cell identity labels (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle cell_id for cell-based coloring/selection | OME-Zarr: `body/cell_ids/`, shape (n_particles,) | integer ID |
 
 ### Repository & Packaging
 
 | Item | Value |
 |------|-------|
 | **Repository** | `openworm/sibernetic` (particle initialization is part of Sibernetic) |
-| **Docker stage** | `body` (same as DD003) |
+| **Docker stage** | `body` (same as [DD003](DD003_Body_Physics_Architecture.md)) |
 | **`versions.lock` key** | `sibernetic` |
-| **Build dependencies** | Same as DD003 + cell boundary mesh data from Witvliet 2021 |
+| **Build dependencies** | Same as [DD003](DD003_Body_Physics_Architecture.md) + cell boundary mesh data from Witvliet 2021 |
 | **Additional data** | Cell boundary meshes must be included in the Docker image (or downloaded at build time from a pinned release) |
 
 ### Configuration
@@ -290,7 +290,7 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 ```yaml
 body:
   cell_identity: false               # false = bulk tissue (backward compatible)
-                                     # true = per-particle cell IDs (DD004)
+                                     # true = per-particle cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md))
 ```
 
 | Key | Default | Valid Range | Description |
@@ -325,19 +325,19 @@ docker compose run validate
 - [ ] All 959 somatic cells mapped to at least one particle
 - [ ] Particle file version header present (first 4 bytes = format version)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
 | `body/cell_ids/` (n_particles,) | Cell identity overlay | Cell type → color: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta |
-| `body/positions/` (n_timesteps, n_particles, 3) | Body particles (from DD003) | Combined with cell_ids for cell-aware particle rendering |
+| `body/positions/` (n_timesteps, n_particles, 3) | Body particles (from [DD003](DD003_Body_Physics_Architecture.md)) | Combined with cell_ids for cell-aware particle rendering |
 
 ### Breaking Change: Particle Data Structure
 
 Adding `cell_id` to the SPH particle struct is a **breaking change** to the Sibernetic binary format. Migration plan:
 
 ```c
-// Old struct (DD003 current)
+// Old struct ([DD003](DD003_Body_Physics_Architecture.md) current)
 typedef struct {
     float pos[3];
     float vel[3];
@@ -345,7 +345,7 @@ typedef struct {
     int particle_type;     // LIQUID, ELASTIC, BOUNDARY
 } SPH_Particle;            // 32 bytes
 
-// New struct (DD004)
+// New struct ([DD004](DD004_Mechanical_Cell_Identity.md))
 typedef struct {
     float pos[3];
     float vel[3];
@@ -371,14 +371,14 @@ When `body.cell_identity: true`:
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| SPH particle struct | DD003 | If DD003 changes the base struct, DD004 extension must match |
-| EM cell boundary data | DD008/OWMeta | If cell boundary meshes are updated (new EM data), particle tagging must be regenerated |
+| SPH particle struct | [DD003](DD003_Body_Physics_Architecture.md) | If [DD003](DD003_Body_Physics_Architecture.md) changes the base struct, [DD004](DD004_Mechanical_Cell_Identity.md) extension must match |
+| EM cell boundary data | [DD008](DD008_Data_Integration_Pipeline.md)/OWMeta | If cell boundary meshes are updated (new EM data), particle tagging must be regenerated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Intestinal oscillator | DD009 | DD009 drives intestinal-tagged particles; if cell_id assignment changes, wrong particles contract |
-| Pharynx mechanics | DD007 (Option B) | Pharyngeal-tagged particles need correct cell_ids for pumping |
-| Cuticle mechanics | DD003 (future) | Cuticle stiffness multiplier affects body bending — changes affect locomotion |
+| Intestinal oscillator | [DD009](DD009_Intestinal_Oscillator_Model.md) | [DD009](DD009_Intestinal_Oscillator_Model.md) drives intestinal-tagged particles; if cell_id assignment changes, wrong particles contract |
+| Pharynx mechanics | [DD007](DD007_Pharyngeal_System_Architecture.md) (Option B) | Pharyngeal-tagged particles need correct cell_ids for pumping |
+| Cuticle mechanics | [DD003](DD003_Body_Physics_Architecture.md) (future) | Cuticle stiffness multiplier affects body bending — changes affect locomotion |
 
 ---
 
@@ -388,4 +388,4 @@ When `body.cell_identity: true`:
 1. Extract cell boundaries from Witvliet EM data
 2. Implement particle tagging in Sibernetic data structures
 3. Assign cell-type-specific mechanical properties
-4. Validate with intestinal model (DD009)
+4. Validate with intestinal model ([DD009](DD009_Intestinal_Oscillator_Model.md))

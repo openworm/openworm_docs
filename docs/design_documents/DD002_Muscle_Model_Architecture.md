@@ -13,11 +13,11 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | `GenericMuscleCell` NeuroML template (95 body wall muscles), muscle [Ca²⁺]→activation coupling via `sibernetic_c302.py` |
-| **Success metric** | DD010 Tier 3: forward speed and body bend amplitude within ±15% of baseline |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: forward speed and body bend amplitude within ±15% of baseline |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (muscle templates) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (coupling script) — issues labeled `dd002` |
 | **Config toggle** | `muscle.enabled: true` / `muscle.calcium_coupling: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (activation in [0,1]?), `docker compose run validate` (Tier 3 kinematics) |
-| **Visualize** | DD014 `muscle/activation/` layer — 95 muscles with [0,1] activation heatmap, warm colormap |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `muscle/activation/` layer — 95 muscles with [0,1] activation heatmap, warm colormap |
 | **CI gate** | Tier 3 kinematic validation blocks merge |
 
 ---
@@ -30,7 +30,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Forward speed | Within ±15% of Schafer lab WCON baseline | Tier 3 (blocking) |
 | **Primary:** Body bend amplitude | Within ±15% of Schafer lab WCON baseline | Tier 3 (blocking) |
@@ -72,7 +72,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 
 ### Prerequisites
 
-- Docker with `docker compose` (DD013 simulation stack)
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6
 
 ### Step-by-step
@@ -126,7 +126,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**DD014 viewer layer:** `muscle/activation/` — 95 body wall muscles with [0, 1] activation heatmap, warm colormap.
+**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `muscle/activation/` — 95 body wall muscles with [0, 1] activation heatmap, warm colormap.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -272,7 +272,7 @@ python scripts/validate_muscle_calcium.py
 
 ### This Design Document Does NOT Cover:
 
-1. **Pharyngeal muscles:** Modeled separately (see DD007: Pharyngeal System). Pharyngeal muscle is nonstriated and functionally distinct from body wall muscle.
+1. **Pharyngeal muscles:** Modeled separately (see [DD007](DD007_Pharyngeal_System_Architecture.md): Pharyngeal System). Pharyngeal muscle is nonstriated and functionally distinct from body wall muscle.
 
 2. **Specialized muscles (vulval, uterine, anal, intestinal):** Future work. These may require different channel complements or calcium-to-force relationships.
 
@@ -338,7 +338,7 @@ The `c302_Sibernetic` integration script:
 
 ### If Muscle-Type Diversity Is Required (Phase 3):
 
-See DD007 (Pharyngeal System) for an example of creating a distinct muscle cell type. The general pattern:
+See [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System) for an example of creating a distinct muscle cell type. The general pattern:
 - Create a new LEMS cell template (e.g., `PharyngealMuscleCell`)
 - Adjust channel densities based on transcriptomic or electrophysiological data
 - Adjust calcium-to-force parameters if pharyngeal contraction dynamics differ
@@ -392,17 +392,17 @@ The simulation includes MVL24 for symmetry (4 quadrants × 24 rows = 96 muscles)
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Motor neuron synaptic current | DD001 (via NMJ graded synapses) | `I_syn` on each muscle cell | NeuroML synapse coupling (within same LEMS simulation) | nA |
-| Motor neuron identity | DD001 connectome | NMJ adjacency (which neurons innervate which muscles) | ConnectomeToolbox | neuron-muscle pairs |
+| Motor neuron synaptic current | [DD001](DD001_Neural_Circuit_Architecture.md) (via NMJ graded synapses) | `I_syn` on each muscle cell | NeuroML synapse coupling (within same LEMS simulation) | nA |
+| Motor neuron identity | [DD001](DD001_Neural_Circuit_Architecture.md) connectome | NMJ adjacency (which neurons innervate which muscles) | ConnectomeToolbox | neuron-muscle pairs |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units | Timestep |
 |--------|------------|----------|--------|-------|----------|
-| Muscle [Ca²⁺]ᵢ | DD003 (Sibernetic) | `ca_internal` per muscle | Read by `sibernetic_c302.py` from NEURON state | mol/cm³ | dt_coupling (0.005 ms) |
-| Muscle activation coefficient | DD003 (Sibernetic) | `activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)` | Computed in `sibernetic_c302.py`, written to Sibernetic muscle activation input | dimensionless [0, 1] | dt_coupling |
-| Muscle activation time series (for viewer) | **DD014** (visualization) | Per-muscle activation over all timesteps | OME-Zarr: `muscle/activation/`, shape (n_timesteps, 95) | dimensionless [0, 1] | output_interval |
-| Muscle calcium time series (for viewer) | **DD014** (visualization) | Per-muscle [Ca²⁺] over all timesteps | OME-Zarr: `muscle/calcium/`, shape (n_timesteps, 95) | mol/cm³ | output_interval |
+| Muscle [Ca²⁺]ᵢ | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | `ca_internal` per muscle | Read by `sibernetic_c302.py` from NEURON state | mol/cm³ | dt_coupling (0.005 ms) |
+| Muscle activation coefficient | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | `activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)` | Computed in `sibernetic_c302.py`, written to Sibernetic muscle activation input | dimensionless [0, 1] | dt_coupling |
+| Muscle activation time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle activation over all timesteps | OME-Zarr: `muscle/activation/`, shape (n_timesteps, 95) | dimensionless [0, 1] | output_interval |
+| Muscle calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle [Ca²⁺] over all timesteps | OME-Zarr: `muscle/calcium/`, shape (n_timesteps, 95) | mol/cm³ | output_interval |
 
 ### Repository & Packaging
 
@@ -410,9 +410,9 @@ The simulation includes MVL24 for symmetry (4 quadrants × 24 rows = 96 muscles)
 |------|-------|
 | **Repository (templates)** | `openworm/c302` (muscle cells are NeuroML templates within c302) |
 | **Repository (coupling)** | `openworm/sibernetic` (`sibernetic_c302.py`) |
-| **Docker stage** | Same as DD001 (`neural` stage) |
+| **Docker stage** | Same as [DD001](DD001_Neural_Circuit_Architecture.md) (`neural` stage) |
 | **`versions.lock` key** | No separate pin — muscles are part of the c302 package |
-| **Build dependencies** | Same as DD001 (NEURON 8.2.6, pyNeuroML) |
+| **Build dependencies** | Same as [DD001](DD001_Neural_Circuit_Architecture.md) (NEURON 8.2.6, pyNeuroML) |
 
 ### Configuration
 
@@ -455,7 +455,7 @@ docker compose run validate
 - [ ] Muscle conductance densities are 10-1000x smaller than neuron densities (no copy-paste from neuron params)
 - [ ] Calcium interface to Sibernetic is preserved (variable name, units)
 
-### How to Visualize (DD014 Connection)
+### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -466,22 +466,22 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neuron→muscle synaptic conductance | DD001 | NMJ weight changes → muscle depolarization amplitude changes |
-| c302 HH framework | DD001 | If channel model equations change, muscle dynamics change (same framework) |
+| Neuron→muscle synaptic conductance | [DD001](DD001_Neural_Circuit_Architecture.md) | NMJ weight changes → muscle depolarization amplitude changes |
+| c302 HH framework | [DD001](DD001_Neural_Circuit_Architecture.md) | If channel model equations change, muscle dynamics change (same framework) |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Body physics forces | DD003 | If calcium→activation mapping changes (max_ca, activation formula), Sibernetic locomotion behavior changes |
-| Kinematic validation | DD010 | Muscle force directly determines movement — any change affects Tier 3 |
+| Body physics forces | [DD003](DD003_Body_Physics_Architecture.md) | If calcium→activation mapping changes (max_ca, activation formula), Sibernetic locomotion behavior changes |
+| Kinematic validation | [DD010](DD010_Validation_Framework.md) | Muscle force directly determines movement — any change affects Tier 3 |
 
 ### Coupling Bridge Ownership
 
-**The `sibernetic_c302.py` coupling script** (lives in `openworm/sibernetic` repo) reads muscle calcium from NEURON and writes activation to Sibernetic. This script is the single point where DD002 output format matters. Changes to:
+**The `sibernetic_c302.py` coupling script** (lives in `openworm/sibernetic` repo) reads muscle calcium from NEURON and writes activation to Sibernetic. This script is the single point where [DD002](DD002_Muscle_Model_Architecture.md) output format matters. Changes to:
 - Muscle calcium variable name → must update `sibernetic_c302.py`
 - Activation formula → must update `sibernetic_c302.py`
-- Number of muscles (e.g., adding pharyngeal muscles per DD007) → must update muscle mapping in `sibernetic_c302.py`
+- Number of muscles (e.g., adding pharyngeal muscles per [DD007](DD007_Pharyngeal_System_Architecture.md)) → must update muscle mapping in `sibernetic_c302.py`
 
-**Coordination required:** Muscle model maintainer + Body Physics maintainer (DD003) + Integration Maintainer (DD013)
+**Coordination required:** Muscle model maintainer + Body Physics maintainer ([DD003](DD003_Body_Physics_Architecture.md)) + Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md))
 
 ---
 
@@ -489,5 +489,5 @@ docker compose run validate
 **Implementation Status:** Complete (GenericMuscleCell in c302)
 **Next Actions:**
 1. Differentiate into muscle-type-specific models using transcriptomics (Phase 3)
-2. Add pharyngeal muscles (DD007)
+2. Add pharyngeal muscles ([DD007](DD007_Pharyngeal_System_Architecture.md))
 3. Model specialized muscles (vulval, uterine, enteric) as needed

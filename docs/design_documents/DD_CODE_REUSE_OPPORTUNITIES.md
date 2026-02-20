@@ -19,7 +19,7 @@
 
 ## HIGH-IMPACT REUSE OPPORTUNITIES (Immediate)
 
-### 1. wormneuroatlas → DD005 (CeNGEN API) + DD010 (Randi 2023 Data)
+### 1. wormneuroatlas → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN API) + [DD010](DD010_Validation_Framework.md) (Randi 2023 Data)
 
 **Repo:** [openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas) (pushed 2025-10-22)
 **Status:** ✅ **Production-ready Python package on PyPI**
@@ -29,13 +29,13 @@
 
 | Feature | API | DD Deliverable It Replaces |
 |---------|-----|---------------------------|
-| **Randi 2023 functional connectivity** | `NeuroAtlas.get_signal_propagation_atlas(strain="wt")` | DD010 Tier 2 validation target (302×302 correlation matrix) |
-| **CeNGEN gene expression** | `NeuroAtlas.get_gene_expression(gene_names, neuron_names)` | DD005 expression data access (currently: download CSV from cengen.org) |
-| **Neuropeptide/GPCR binding** | `PeptideGPCR.get_gpcrs_binding_to(peptides)` | DD006 neuropeptide-receptor mapping |
-| **Anatomical connectome** | `NeuroAtlas` class (includes Cook et al. data) | DD020 connectome (complements `cect`) |
+| **Randi 2023 functional connectivity** | `NeuroAtlas.get_signal_propagation_atlas(strain="wt")` | [DD010](DD010_Validation_Framework.md) Tier 2 validation target (302×302 correlation matrix) |
+| **CeNGEN gene expression** | `NeuroAtlas.get_gene_expression(gene_names, neuron_names)` | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) expression data access (currently: download CSV from cengen.org) |
+| **Neuropeptide/GPCR binding** | `PeptideGPCR.get_gpcrs_binding_to(peptides)` | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptide-receptor mapping |
+| **Anatomical connectome** | `NeuroAtlas` class (includes Cook et al. data) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) connectome (complements `cect`) |
 | **Neuron ID conversion** | `merge_bilateral=True` etc. | Handles AVAL/AVAR → AVA_ merging |
 
-**Reuse Plan for DD005:**
+**Reuse Plan for [DD005](DD005_Cell_Type_Differentiation_Strategy.md):**
 
 Instead of:
 ```python
@@ -63,7 +63,7 @@ expression_data = atlas.get_gene_expression(
 - ✅ Maintained by Randi lab (Francesco Randi's repo)
 - ✅ Already integrates CeNGEN, WormBase, and Randi 2023 datasets
 
-**Reuse Plan for DD010 Tier 2:**
+**Reuse Plan for [DD010](DD010_Validation_Framework.md) Tier 2:**
 
 ```python
 # Load Randi 2023 functional connectivity for validation
@@ -71,7 +71,7 @@ from wormneuroatlas import NeuroAtlas
 
 atlas = NeuroAtlas()
 func_conn_matrix = atlas.get_signal_propagation_atlas(strain="wt")
-# Returns: 302×302 correlation matrix (exactly what DD010 Tier 2 needs)
+# Returns: 302×302 correlation matrix (exactly what [DD010](DD010_Validation_Framework.md) Tier 2 needs)
 
 # Compare simulated to experimental
 simulated_fc = compute_functional_connectivity(simulation_calcium_traces)
@@ -85,18 +85,18 @@ assert correlation_of_correlations > 0.5, "Tier 2 validation failed"
 ```
 
 **Action Items:**
-- [ ] Add `wormneuroatlas` to DD013 `versions.lock` (pin version)
-- [ ] Add to DD013 Docker `neural` stage: `pip install wormneuroatlas`
-- [ ] Update DD005 calibration scripts to use `wormneuroatlas` API
-- [ ] Update DD010 Tier 2 validation to load Randi data via `wormneuroatlas`
-- [ ] Update DD006 to reference `PeptideGPCR` class for neuropeptide-receptor mapping
-- [ ] Add to DD020 as **complementary** to `cect` (wormneuroatlas has different data: functional connectivity, neuropeptide deorphanization)
+- [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) `versions.lock` (pin version)
+- [ ] Add to [DD013](DD013_Simulation_Stack_Architecture.md) Docker `neural` stage: `pip install wormneuroatlas`
+- [ ] Update [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration scripts to use `wormneuroatlas` API
+- [ ] Update [DD010](DD010_Validation_Framework.md) Tier 2 validation to load Randi data via `wormneuroatlas`
+- [ ] Update [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) to reference `PeptideGPCR` class for neuropeptide-receptor mapping
+- [ ] Add to [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) as **complementary** to `cect` (wormneuroatlas has different data: functional connectivity, neuropeptide deorphanization)
 
 **Estimated Time Savings:** 20-30 hours (no manual data download, parsing, or API building)
 
 ---
 
-### 2. ChannelWorm → DD005 (Ion Channel Database + HH Parameters)
+### 2. ChannelWorm → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Ion Channel Database + HH Parameters)
 
 **Repo:** [openworm/ChannelWorm](https://github.com/openworm/ChannelWorm) (pushed 2018-08-27, dormant but complete)
 **Status:** ⚠️ Dormant (6 years) but **contains curated ion channel data and NeuroML2 models**
@@ -119,9 +119,9 @@ ChannelWorm/
 └── tests/                         # SciUnit validation tests
 ```
 
-**Reuse Plan for DD005:**
+**Reuse Plan for [DD005](DD005_Cell_Type_Differentiation_Strategy.md):**
 
-DD005 needs (lines 442-448):
+[DD005](DD005_Cell_Type_Differentiation_Strategy.md) needs (lines 442-448):
 - ~20 neurons with electrophysiology for calibration training set
 - Ion channel→NeuroML model mapping
 - HH parameter fitting from patch clamp data
@@ -130,38 +130,38 @@ DD005 needs (lines 442-448):
 
 **Instead of building from scratch:**
 1. **Clone ChannelWorm:** `git clone https://github.com/openworm/ChannelWorm.git`
-2. **Extract ion channel database:** `data/ion_channel_database.xlsx` → Convert to CSV for DD005 calibration
-3. **Use existing NeuroML2 models:** `models/*.channel.nml` → These are DD005's channel definitions
+2. **Extract ion channel database:** `data/ion_channel_database.xlsx` → Convert to CSV for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration
+3. **Use existing NeuroML2 models:** `models/*.channel.nml` → These are [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s channel definitions
 4. **Reuse fitting pipeline:** `channelworm/fitter.py` → Adapt for CeNGEN expression→conductance calibration
-5. **Reuse validation:** `tests/` SciUnit framework → DD010 Tier 1 single-cell validation
+5. **Reuse validation:** `tests/` SciUnit framework → [DD010](DD010_Validation_Framework.md) Tier 1 single-cell validation
 
-**ChannelWorm was designed to feed c302** (per README: "models are used by c302 for simulating nervous system dynamics"). It's the EXACT pipeline DD005 needs.
+**ChannelWorm was designed to feed c302** (per README: "models are used by c302 for simulating nervous system dynamics"). It's the EXACT pipeline [DD005](DD005_Cell_Type_Differentiation_Strategy.md) needs.
 
 **Action Items:**
 - [ ] Review ChannelWorm `models/` directory — how many NeuroML2 channels already exist?
-- [ ] Extract ion channel database to DD005's `data/electrophysiology_training_set.csv`
-- [ ] Port `channelworm/fitter.py` HH fitting code to DD005's `scripts/fit_calibration.py`
-- [ ] Reference ChannelWorm in DD005 Implementation References section
-- [ ] Consider reviving ChannelWorm as the **canonical ion channel database** for OpenWorm (update dependencies, merge into c302 or make it a DD020-style data access layer)
+- [ ] Extract ion channel database to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `data/electrophysiology_training_set.csv`
+- [ ] Port `channelworm/fitter.py` HH fitting code to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `scripts/fit_calibration.py`
+- [ ] Reference ChannelWorm in [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Implementation References section
+- [ ] Consider reviving ChannelWorm as the **canonical ion channel database** for OpenWorm (update dependencies, merge into c302 or make it a [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)-style data access layer)
 
 **Estimated Time Savings:** 40-60 hours (no manual channel curation, no HH fitter from scratch)
 
 ---
 
-### 3. pharyngeal_muscle_model → DD007 (Pharyngeal Muscle HH Model)
+### 3. pharyngeal_muscle_model → [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal Muscle HH Model)
 
 **Repo:** [openworm/pharyngeal_muscle_model](https://github.com/openworm/pharyngeal_muscle_model) (pushed 2017-01-19, dormant but complete)
 **Status:** ⚠️ Dormant (9 years) but **contains working NEURON model of pm3 pharyngeal muscle**
 
 **What It Contains:**
 - **pm3 muscle NEURON model** with Ca²⁺ slow action potential (NMODL)
-- Implements **EAT-2, EGL-19, UNC-2 channels** (exactly what DD007 needs!)
+- Implements **EAT-2, EGL-19, UNC-2 channels** (exactly what [DD007](DD007_Pharyngeal_System_Architecture.md) needs!)
 - Output visualization showing plateau potentials (~100ms duration)
-- Matches Raizen & Avery 1994 EPG recordings (DD007's primary validation target)
+- Matches Raizen & Avery 1994 EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s primary validation target)
 
-**Reuse Plan for DD007:**
+**Reuse Plan for [DD007](DD007_Pharyngeal_System_Architecture.md):**
 
-DD007 needs (lines 48-49):
+[DD007](DD007_Pharyngeal_System_Architecture.md) needs (lines 48-49):
 - Pharyngeal muscle cell template (`PharyngealMuscleCell.cell.nml`)
 - Plateau potential kinetics (eat-2, egl-19, unc-2 channels)
 
@@ -172,21 +172,21 @@ DD007 needs (lines 48-49):
 2. Extract pm3 muscle NMODL code
 3. Convert NEURON/NMODL → NeuroML2 (use `pyNeuroML` conversion tools or rewrite)
 4. Validate against Raizen & Avery 1994 (the repo claims to match EPG data)
-5. Use as `PharyngealMuscleCell.cell.nml` in DD007
+5. Use as `PharyngealMuscleCell.cell.nml` in [DD007](DD007_Pharyngeal_System_Architecture.md)
 
-**Alternative:** Run NEURON model directly in DD007 (no conversion needed), couple to c302 via existing `sibernetic_NEURON` bridge (see below).
+**Alternative:** Run NEURON model directly in [DD007](DD007_Pharyngeal_System_Architecture.md) (no conversion needed), couple to c302 via existing `sibernetic_NEURON` bridge (see below).
 
 **Action Items:**
 - [ ] Test pharyngeal_muscle_model (run `_run.hoc` in NEURON, verify Ca²⁺ plateau)
-- [ ] Compare output to DD007's target: plateau duration ~100ms, pumping frequency compatible
+- [ ] Compare output to [DD007](DD007_Pharyngeal_System_Architecture.md)'s target: plateau duration ~100ms, pumping frequency compatible
 - [ ] Convert to NeuroML2 OR use NEURON directly (decision: NeuroML for consistency)
-- [ ] Reference in DD007 Implementation References
+- [ ] Reference in [DD007](DD007_Pharyngeal_System_Architecture.md) Implementation References
 
 **Estimated Time Savings:** 20-30 hours (pharyngeal muscle model already validated)
 
 ---
 
-### 4. CE_locomotion → DD019 (Proprioceptive Feedback) + DD017 (Evolutionary Parameter Fit)
+### 4. CE_locomotion → [DD019](DD019_Closed_Loop_Touch_Response.md) (Proprioceptive Feedback) + [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Evolutionary Parameter Fit)
 
 **Repo:** [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) (pushed 2026-02-18, **VERY ACTIVE**)
 **Status:** ✅ **ACTIVE** — Collaboration with Dr. Erick Olivares & Prof. Randall Beer
@@ -198,52 +198,52 @@ DD007 needs (lines 48-49):
 - Produces forward and backward locomotion from same neural circuit (gait modulation)
 - Visualization tools (Python + Mathematica)
 
-**Reuse Plan for DD019 Follow-Up (Proprioception DD):**
+**Reuse Plan for [DD019](DD019_Closed_Loop_Touch_Response.md) Follow-Up (Proprioception DD):**
 
-DD019 line 579 scopes out proprioceptive feedback: "B-class motor neuron stretch receptors (Wen et al. 2012). Deferred to future DD."
+[DD019](DD019_Closed_Loop_Touch_Response.md) line 579 scopes out proprioceptive feedback: "B-class motor neuron stretch receptors (Wen et al. 2012). Deferred to future DD."
 
 **CE_locomotion already implemented this!**
 
 **Action:**
 1. Extract `StretchReceptor.cpp/h` algorithm
 2. Port to Python or NeuroML for integration with c302
-3. Add as a new DD (DD023: Proprioceptive Feedback and Motor Coordination)
+3. Add as a new DD ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback and Motor Coordination)
 4. Reference CE_locomotion as source of stretch receptor model
 
-**Reuse Plan for DD017 (Auto-Fitting):**
+**Reuse Plan for [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Auto-Fitting):**
 
-DD017 proposes gradient descent for parameter fitting. CE_locomotion uses **evolutionary algorithms** (genetic algorithm or CMA-ES) for the same purpose.
+[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) proposes gradient descent for parameter fitting. CE_locomotion uses **evolutionary algorithms** (genetic algorithm or CMA-ES) for the same purpose.
 
 **Action:**
 1. Extract evolutionary algorithm code (`main.cpp` optimization loop)
-2. Compare to DD017's gradient descent approach
+2. Compare to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)'s gradient descent approach
 3. Hybrid approach: Use evolutionary for global search, gradient descent for local refinement
 4. Reference CE_locomotion's fitness function (how they define "good locomotion")
 
 **Action Items:**
 - [ ] **Contact repo owners** (Erick Olivares, Randall Beer) — ask if this is still active, can we collaborate?
 - [ ] Extract StretchReceptor model, port to Python/NeuroML
-- [ ] Write DD023 (Proprioceptive Feedback) using CE_locomotion's approach
+- [ ] Write [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (Proprioceptive Feedback) using CE_locomotion's approach
 - [ ] Compare CE_locomotion's neuromechanical model to c302+Sibernetic (publication opportunity: "Two Approaches to C. elegans Neuromechanical Modeling")
-- [ ] Extract evolutionary parameter fitting for DD017 Component 1
+- [ ] Extract evolutionary parameter fitting for [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1
 
 **Estimated Time Savings:** 30-50 hours (proprioceptive model already implemented + evolutionary fitting algorithm exists)
 
 ---
 
-### 5. sibernetic_config_gen → DD013 (Configuration System)
+### 5. sibernetic_config_gen → [DD013](DD013_Simulation_Stack_Architecture.md) (Configuration System)
 
 **Repo:** [openworm/sibernetic_config_gen](https://github.com/openworm/sibernetic_config_gen) (pushed 2016-12-19, dormant)
 **Status:** ⚠️ Dormant (10 years) but **already generates Sibernetic scene configs**
 
 **What It Does:**
 - Generates starting particle positions for Sibernetic
-- Creates `.ini` config files (DD013 needs to read these!)
+- Creates `.ini` config files ([DD013](DD013_Simulation_Stack_Architecture.md) needs to read these!)
 - Handles different body resolutions (full, half, quarter)
 
-**Reuse Plan for DD013:**
+**Reuse Plan for [DD013](DD013_Simulation_Stack_Architecture.md):**
 
-DD013 needs (lines 469-479):
+[DD013](DD013_Simulation_Stack_Architecture.md) needs (lines 469-479):
 - Translator from `openworm.yml` → Sibernetic `.ini` format
 - Particle initialization for different configs
 
@@ -251,20 +251,20 @@ DD013 needs (lines 469-479):
 
 **Action:**
 1. Review `sibernetic_config_gen` particle generation algorithms
-2. Reuse particle placement code in DD013's `master_openworm.py`
+2. Reuse particle placement code in [DD013](DD013_Simulation_Stack_Architecture.md)'s `master_openworm.py`
 3. Extend to read `openworm.yml` and call config_gen as subprocess
 
 **Action Items:**
 - [ ] Test sibernetic_config_gen (does it still work with current Sibernetic?)
 - [ ] Extract particle generation algorithms
-- [ ] Integrate into DD013's config→ini translation layer
-- [ ] Reference in DD013 Implementation References
+- [ ] Integrate into [DD013](DD013_Simulation_Stack_Architecture.md)'s config→ini translation layer
+- [ ] Reference in [DD013](DD013_Simulation_Stack_Architecture.md) Implementation References
 
 **Estimated Time Savings:** 10-20 hours (particle init already solved)
 
 ---
 
-### 6. sibernetic_NEURON → DD013 (Coupling Script Foundation)
+### 6. sibernetic_NEURON → [DD013](DD013_Simulation_Stack_Architecture.md) (Coupling Script Foundation)
 
 **Repo:** [openworm/sibernetic_NEURON](https://github.com/openworm/sibernetic_NEURON) (pushed 2016-12-19, dormant)
 **Status:** ⚠️ Dormant but **contains Sibernetic↔NEURON interface code**
@@ -272,24 +272,24 @@ DD013 needs (lines 469-479):
 **What It Contains:**
 - Interface between Sibernetic and NEURON simulator
 - Reads NEURON output, writes Sibernetic input
-- **This is the predecessor to `sibernetic_c302.py`** (DD002→DD003 coupling)
+- **This is the predecessor to `sibernetic_c302.py`** ([DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) coupling)
 
-**Reuse Plan for DD013:**
+**Reuse Plan for [DD013](DD013_Simulation_Stack_Architecture.md):**
 
 The current `sibernetic_c302.py` may have originated from this repo. Check if:
 - Current coupling script is a fork/evolution of sibernetic_NEURON
-- Lessons learned from sibernetic_NEURON inform DD019's bidirectional coupling (`sibernetic_c302_closedloop.py`)
+- Lessons learned from sibernetic_NEURON inform [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling (`sibernetic_c302_closedloop.py`)
 
 **Action:**
 1. Compare sibernetic_NEURON to current `sibernetic_c302.py`
 2. Check git history — was it forked from this repo?
-3. Extract any reusable patterns for DD019's reverse path (body→sensory)
+3. Extract any reusable patterns for [DD019](DD019_Closed_Loop_Touch_Response.md)'s reverse path (body→sensory)
 
 **Estimated Time Savings:** 5-10 hours (learn from existing coupling code)
 
 ---
 
-### 7. skeletonExtraction → DD013 (WCON Export), DD021 (Skeleton Generation)
+### 7. skeletonExtraction → [DD013](DD013_Simulation_Stack_Architecture.md) (WCON Export), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Skeleton Generation)
 
 **Repo:** [openworm/skeletonExtraction](https://github.com/openworm/skeletonExtraction) (pushed 2016-12-19, dormant)
 **Status:** ⚠️ Dormant but **transforms Sibernetic particle output to skeleton + COLLADA animation**
@@ -299,12 +299,12 @@ The current `sibernetic_c302.py` may have originated from this repo. Check if:
 - Extracts 49-point skeleton (centerline of worm body)
 - Exports to COLLADA for animation
 
-**Reuse Plan for DD013 + DD021:**
+**Reuse Plan for [DD013](DD013_Simulation_Stack_Architecture.md) + [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md):**
 
-DD013 needs (Step 4 in `master_openworm.py`):
+[DD013](DD013_Simulation_Stack_Architecture.md) needs (Step 4 in `master_openworm.py`):
 - Convert SPH particles → 49-point skeleton → WCON file
 
-DD021 needs:
+[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) needs:
 - WCON files with 49 skeleton points per frame (required by analysis toolbox)
 
 **This repo already does skeleton extraction!**
@@ -313,19 +313,19 @@ DD021 needs:
 1. Extract skeleton algorithm from `skeletonExtraction`
 2. Port to Python (if it's not already)
 3. Modify output: COLLADA → WCON format
-4. Use in DD013's WCON exporter
+4. Use in [DD013](DD013_Simulation_Stack_Architecture.md)'s WCON exporter
 
 **Action Items:**
 - [ ] Clone and test skeletonExtraction
 - [ ] Extract centerline algorithm (how does it find the 49-point spine from ~40K particles?)
-- [ ] Port to DD013's WCON export pipeline
-- [ ] Reference in DD013 + DD021
+- [ ] Port to [DD013](DD013_Simulation_Stack_Architecture.md)'s WCON export pipeline
+- [ ] Reference in [DD013](DD013_Simulation_Stack_Architecture.md) + [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 
 **Estimated Time Savings:** 15-25 hours (skeleton extraction algorithm is non-trivial)
 
 ---
 
-### 8. openworm.ai → DD015 (AI Contributor Infrastructure)
+### 8. openworm.ai → [DD015](DD015_AI_Contributor_Model.md) (AI Contributor Infrastructure)
 
 **Repo:** [openworm/openworm.ai](https://github.com/openworm/openworm.ai) (pushed 2026-02-19, **VERY ACTIVE**)
 **Status:** ✅ **ACTIVE** — Contains LLM/AI scripts
@@ -338,9 +338,9 @@ openworm_ai/
 └── openworm_ai/       # Python package
 ```
 
-**Reuse Plan for DD015:**
+**Reuse Plan for [DD015](DD015_AI_Contributor_Model.md):**
 
-DD015 needs (Section 8, lines 560-673):
+[DD015](DD015_AI_Contributor_Model.md) needs (Section 8, lines 560-673):
 - GitHub App bot (Mind-of-a-Worm)
 - OpenClaw backend for webhook handling
 - AI agent registration system
@@ -362,7 +362,7 @@ DD015 needs (Section 8, lines 560-673):
 - [ ] Deep-dive openworm.ai source code (inspect `openworm_ai/` Python package)
 - [ ] Check `corpus/` — is this Design Documents, papers, or something else?
 - [ ] Identify maintainer (GitHub contributors list)
-- [ ] Integrate with DD015 if overlap exists
+- [ ] Integrate with [DD015](DD015_AI_Contributor_Model.md) if overlap exists
 
 **Estimated Time Savings:** 10-30 hours (depends on what's already built)
 
@@ -370,7 +370,7 @@ DD015 needs (Section 8, lines 560-673):
 
 ## MEDIUM-IMPACT REUSE OPPORTUNITIES
 
-### 9. PlateauNoiseModel → DD007 (Pharyngeal Muscle Validation)
+### 9. PlateauNoiseModel → [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal Muscle Validation)
 
 **Repo:** [openworm/PlateauNoiseModel](https://github.com/openworm/PlateauNoiseModel) (pushed 2025-01-30)
 **Status:** ✅ **Recently active** (1 year ago)
@@ -383,13 +383,13 @@ DD015 needs (Section 8, lines 560-673):
 **Reuse Plan:**
 - Review notebook for pharyngeal muscle kinetics
 - Compare to `pharyngeal_muscle_model` (older repo)
-- Use as validation data for DD007 pharyngeal muscle model
+- Use as validation data for [DD007](DD007_Pharyngeal_System_Architecture.md) pharyngeal muscle model
 
 **Estimated Time Savings:** 5-10 hours (validation data + plotting code)
 
 ---
 
-### 10. CyberElegans → DD017 (Alternative Model for Comparison)
+### 10. CyberElegans → [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Alternative Model for Comparison)
 
 **Repo:** [openworm/CyberElegans](https://github.com/openworm/CyberElegans) (pushed 2016-12-19, 36 stars)
 **Status:** ⚠️ Dormant but **complete neuromechanical model**
@@ -399,23 +399,23 @@ DD015 needs (Section 8, lines 560-673):
 - 36 stars (popular for a research repo)
 - Likely different approach to same problem
 
-**Reuse Plan for DD017:**
+**Reuse Plan for [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md):**
 
-DD017 is about hybrid mechanistic-ML approaches. **CyberElegans provides a comparison point:**
+[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) is about hybrid mechanistic-ML approaches. **CyberElegans provides a comparison point:**
 - How does CyberElegans differ from c302+Sibernetic?
 - What trade-offs did they make?
-- Can we benchmark DD017's SPH surrogate against CyberElegans's approach?
+- Can we benchmark [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)'s SPH surrogate against CyberElegans's approach?
 
 **Action:**
 - Review CyberElegans architecture
-- Compare to DD001-003
+- Compare to [DD001](DD001_Neural_Circuit_Architecture.md)-003
 - If CyberElegans is faster or more accurate on some metrics, learn from it
 
 **Estimated Time Savings:** 10-15 hours (comparative analysis)
 
 ---
 
-### 11. bionet → DD017 (Neural Network Component)
+### 11. bionet → [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Neural Network Component)
 
 **Repo:** [openworm/bionet](https://github.com/openworm/bionet) (pushed 2015-04-26, 32 stars)
 **Status:** ⚠️ Dormant but **32 stars** suggest it was significant
@@ -425,7 +425,7 @@ DD017 is about hybrid mechanistic-ML approaches. **CyberElegans provides a compa
 - Could be ML component or spiking network framework
 
 **Reuse Plan:**
-- Check if bionet has neural network architectures (LSTM, GRU, transformer) for DD017 Component 2 (SPH surrogate) or Component 4 (learned sensory)
+- Check if bionet has neural network architectures (LSTM, GRU, transformer) for [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (SPH surrogate) or Component 4 (learned sensory)
 - May have training pipelines
 
 **Action:** Deep-dive to assess usefulness
@@ -434,7 +434,7 @@ DD017 is about hybrid mechanistic-ML approaches. **CyberElegans provides a compa
 
 ---
 
-### 12. WormsenseLab_ASH → DD019 (ASH Neuron Validation Data)
+### 12. WormsenseLab_ASH → [DD019](DD019_Closed_Loop_Touch_Response.md) (ASH Neuron Validation Data)
 
 **Repo:** [openworm/WormsenseLab_ASH](https://github.com/openworm/WormsenseLab_ASH) (pushed 2021-09-28)
 **Status:** ⚠️ Dormant but **contains electrophysiology recordings**
@@ -442,18 +442,18 @@ DD017 is about hybrid mechanistic-ML approaches. **CyberElegans provides a compa
 **What It Contains:**
 - ASH neuron patch clamp recordings
 - ASH is a polymodal nociceptor (responds to mechanical, chemical, osmotic stimuli)
-- Could validate DD019's touch neuron model (ASH is one of the touch-responsive neurons alongside ALM/AVM/PLM)
+- Could validate [DD019](DD019_Closed_Loop_Touch_Response.md)'s touch neuron model (ASH is one of the touch-responsive neurons alongside ALM/AVM/PLM)
 
 **Reuse Plan:**
 - Extract ASH electrophysiology traces
-- Use for DD005 calibration training set (ASH channel conductances)
-- Use for DD019 validation (ASH's mechanosensory response)
+- Use for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration training set (ASH channel conductances)
+- Use for [DD019](DD019_Closed_Loop_Touch_Response.md) validation (ASH's mechanosensory response)
 
 **Estimated Time Savings:** 5-10 hours (validation data extraction)
 
 ---
 
-### 13. SegWorm → DD021 (Original Schafer Lab Code)
+### 13. SegWorm → [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Original Schafer Lab Code)
 
 **Repo:** [openworm/SegWorm](https://github.com/openworm/SegWorm) (pushed 2016-05-27, 5 stars)
 **Status:** ⚠️ Dormant, MATLAB code
@@ -463,23 +463,23 @@ DD017 is about hybrid mechanistic-ML approaches. **CyberElegans provides a compa
 - Part of WormBehavior database
 - **This is the source code for the 726-feature phenotyping** that `open-worm-analysis-toolbox` implements!
 
-**Reuse Plan for DD021:**
+**Reuse Plan for [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md):**
 
-The analysis toolbox is a **Python port of SegWorm**. When reviving the toolbox (DD021 8-task plan):
+The analysis toolbox is a **Python port of SegWorm**. When reviving the toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) 8-task plan):
 - Cross-reference SegWorm MATLAB for feature definitions
 - If Python toolbox has ambiguous implementations, check SegWorm for ground truth
 - Use SegWorm as validation (MATLAB vs. Python should produce identical features)
 
 **Action Items:**
-- [ ] During DD021 revival, compare analysis toolbox feature implementations to SegWorm MATLAB
+- [ ] During [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival, compare analysis toolbox feature implementations to SegWorm MATLAB
 - [ ] If discrepancies found, defer to SegWorm (original source)
-- [ ] Reference SegWorm in DD021 as "original implementation"
+- [ ] Reference SegWorm in [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) as "original implementation"
 
 **Estimated Time Savings:** 5-10 hours (clarifies ambiguous feature definitions during revival)
 
 ---
 
-### 14. tierpsy-tracker → DD021 (Modern Alternative)
+### 14. tierpsy-tracker → [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Modern Alternative)
 
 **Repo:** [openworm/tierpsy-tracker](https://github.com/openworm/tierpsy-tracker) (pushed 2025-06-29, fork of ver228/tierpsy-tracker)
 **Status:** ✅ **Maintained** (OpenWorm has a fork)
@@ -490,25 +490,25 @@ The analysis toolbox is a **Python port of SegWorm**. When reviving the toolbox 
 - **Actively maintained** (original repo by ver228 has 2024 commits)
 - Python 3.x compatible
 
-**Reuse Plan for DD021:**
+**Reuse Plan for [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md):**
 
-DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But OpenWorm **already has a fork**!
+[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But OpenWorm **already has a fork**!
 
 **Options:**
-1. **Use tierpsy-tracker instead of reviving analysis toolbox** (DD021 Alternative 1)
+1. **Use tierpsy-tracker instead of reviving analysis toolbox** ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) Alternative 1)
 2. **Revive analysis toolbox AND use tierpsy for cross-validation** (both tools, verify they agree)
 3. **Hybrid:** Use tierpsy's feature extraction, analysis toolbox's comparison API
 
 **Action:**
 - Check why OpenWorm forked tierpsy (what customizations were made?)
-- Evaluate: Is OpenWorm's fork compatible with DD021's WCON input needs?
+- Evaluate: Is OpenWorm's fork compatible with [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)'s WCON input needs?
 - Decision: Revive toolbox OR switch to tierpsy (founder decides)
 
-**Estimated Time Savings:** Potentially **33 hours** (the entire DD021 revival) if tierpsy works out-of-the-box
+**Estimated Time Savings:** Potentially **33 hours** (the entire [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival) if tierpsy works out-of-the-box
 
 ---
 
-### 15. simple-C-elegans → DD017 (Minimalist Reference)
+### 15. simple-C-elegans → [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Minimalist Reference)
 
 **Repo:** [openworm/simple-C-elegans](https://github.com/openworm/simple-C-elegans) (pushed 2020-06-08, 6 stars)
 **Status:** ⚠️ Dormant
@@ -519,8 +519,8 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 **Reuse Plan:**
 - Educational reference (how to explain OpenWorm's complex models simply)
-- Possible basis for DD017 Component 1 (differentiable backend) — simpler starting point than full c302
-- Code examples for DD011 orientation tasks
+- Possible basis for [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1 (differentiable backend) — simpler starting point than full c302
+- Code examples for [DD011](DD011_Contributor_Progression_Model.md) orientation tasks
 
 **Estimated Time Savings:** 5-10 hours (educational materials, code examples)
 
@@ -528,7 +528,7 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 ## INFRASTRUCTURE REUSE OPPORTUNITIES
 
-### 16. NemaNode → DD014 (Interactive Connectome Visualization)
+### 16. NemaNode → [DD014](DD014_Dynamic_Visualization_Architecture.md) (Interactive Connectome Visualization)
 
 **Repo:** [openworm/NemaNode](https://github.com/openworm/NemaNode) (pushed 2024-05-30)
 **Status:** ⚠️ Dormant but **was online at nemanode.org**
@@ -539,44 +539,44 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 - Likely uses D3.js or similar
 
 **Reuse Plan:**
-- Check if NemaNode's connectome visualization can be integrated into DD014 viewer
+- Check if NemaNode's connectome visualization can be integrated into [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer
 - Reuse web visualization patterns (layer toggle, node selection)
-- May have graph layout algorithms useful for DD014's neural circuit view
+- May have graph layout algorithms useful for [DD014](DD014_Dynamic_Visualization_Architecture.md)'s neural circuit view
 
 **Estimated Time Savings:** 10-20 hours (graph visualization code)
 
 ---
 
-### 17. WCONViewer → DD021 (WCON Visualization)
+### 17. WCONViewer → [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON Visualization)
 
 **Repo:** [openworm/WCONViewer](https://github.com/openworm/WCONViewer) (pushed 2025-12-17, RECENT!)
 **Status:** ✅ **Maintained** (2 months ago)
 
 **What It Is:**
 - Python-based 2D viewer for WCON files
-- Already reads WCON 1.0 format (DD021's target)
+- Already reads WCON 1.0 format ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)'s target)
 
 **Reuse Plan:**
-- Use WCONViewer's WCON parser in DD021 toolbox revival
+- Use WCONViewer's WCON parser in [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival
 - Or: Recommend WCONViewer as a lightweight alternative to full analysis toolbox for quick trajectory inspection
-- Integrate with DD014 viewer (2D trajectory overlay)
+- Integrate with [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer (2D trajectory overlay)
 
 **Estimated Time Savings:** 5-10 hours (WCON parser already implemented)
 
 ---
 
-### 18. neuronal-analysis → DD010 (Tier 1 Validation)
+### 18. neuronal-analysis → [DD010](DD010_Validation_Framework.md) (Tier 1 Validation)
 
 **Repo:** [openworm/neuronal-analysis](https://github.com/openworm/neuronal-analysis) (pushed 2017-03-05, dormant)
 **Status:** ⚠️ Dormant
 
 **What It Is:**
 - "Tools to produce, analyse and compare simulated and recorded neuronal datasets"
-- Exactly DD010 Tier 1's purpose!
+- Exactly [DD010](DD010_Validation_Framework.md) Tier 1's purpose!
 
 **Reuse Plan:**
 - Check for electrophysiology comparison tools
-- May have single-cell validation scripts DD010 Tier 1 needs
+- May have single-cell validation scripts [DD010](DD010_Validation_Framework.md) Tier 1 needs
 - Compare to ChannelWorm's SciUnit validation
 
 **Estimated Time Savings:** 10-15 hours (Tier 1 validation tools)
@@ -589,12 +589,12 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 | DD | Existing Repo | What to Reuse | Time Saved | Action |
 |----|--------------|---------------|------------|--------|
-| **DD013** | sibernetic_config_gen | Particle init, .ini generation | 15 hours | Extract particle placement algorithms, integrate into config→ini translator |
-| **DD013** | sibernetic_NEURON | Coupling script patterns | 5 hours | Review as precedent for bidirectional coupling (DD019) |
-| **DD013** | skeletonExtraction | 49-point skeleton extraction | 20 hours | Port to Python, use in WCON export pipeline |
-| **DD021** | **tierpsy-tracker** (OpenWorm fork) | **Modern analysis toolbox** | **33 hours?** | **EVALUATE FIRST** — If tierpsy works, skip toolbox revival entirely |
-| **DD021** | WCONViewer | WCON parser | 5 hours | Reuse WCON 1.0 parsing code |
-| **DD021** | SegWorm | Original feature definitions | 5 hours | Reference for ambiguous feature implementations |
+| **[DD013](DD013_Simulation_Stack_Architecture.md)** | sibernetic_config_gen | Particle init, .ini generation | 15 hours | Extract particle placement algorithms, integrate into config→ini translator |
+| **[DD013](DD013_Simulation_Stack_Architecture.md)** | sibernetic_NEURON | Coupling script patterns | 5 hours | Review as precedent for bidirectional coupling ([DD019](DD019_Closed_Loop_Touch_Response.md)) |
+| **[DD013](DD013_Simulation_Stack_Architecture.md)** | skeletonExtraction | 49-point skeleton extraction | 20 hours | Port to Python, use in WCON export pipeline |
+| **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | **tierpsy-tracker** (OpenWorm fork) | **Modern analysis toolbox** | **33 hours?** | **EVALUATE FIRST** — If tierpsy works, skip toolbox revival entirely |
+| **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | WCONViewer | WCON parser | 5 hours | Reuse WCON 1.0 parsing code |
+| **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | SegWorm | Original feature definitions | 5 hours | Reference for ambiguous feature implementations |
 
 **Phase A Total Potential Savings:** 83 hours (if tierpsy works) or 50 hours (if still need toolbox revival)
 
@@ -604,10 +604,10 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 | DD | Existing Repo | What to Reuse | Time Saved | Action |
 |----|--------------|---------------|------------|--------|
-| **DD005** | **ChannelWorm** | **Ion channel database + HH fitter** | **50 hours** | Extract `data/` spreadsheet → electrophysiology_training_set.csv; reuse `fitter.py` for calibration |
-| **DD005** | **wormneuroatlas** | **CeNGEN API + gene expression** | **25 hours** | Use `NeuroAtlas.get_gene_expression()` instead of manual CSV parsing |
-| **DD005** | NicolettiEtAl models | Validation data (AWCon, RMD neuron models) | 5 hours | Use as Tier 1 single-cell validation targets |
-| **DD010 Tier 2** | **wormneuroatlas** | **Randi 2023 functional connectivity** | **15 hours** | Use `get_signal_propagation_atlas()` instead of manual .npy download |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | **ChannelWorm** | **Ion channel database + HH fitter** | **50 hours** | Extract `data/` spreadsheet → electrophysiology_training_set.csv; reuse `fitter.py` for calibration |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | **wormneuroatlas** | **CeNGEN API + gene expression** | **25 hours** | Use `NeuroAtlas.get_gene_expression()` instead of manual CSV parsing |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | NicolettiEtAl models | Validation data (AWCon, RMD neuron models) | 5 hours | Use as Tier 1 single-cell validation targets |
+| **[DD010](DD010_Validation_Framework.md) Tier 2** | **wormneuroatlas** | **Randi 2023 functional connectivity** | **15 hours** | Use `get_signal_propagation_atlas()` instead of manual .npy download |
 
 **Phase 1 Total Potential Savings:** 95 hours
 
@@ -617,9 +617,9 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 | DD | Existing Repo | What to Reuse | Time Saved | Action |
 |----|--------------|---------------|------------|--------|
-| **DD006** | wormneuroatlas | Peptide-GPCR deorphanization | 15 hours | Use `PeptideGPCR.get_gpcrs_binding_to()` for receptor mapping |
-| **DD019** | WormsenseLab_ASH | ASH electrophysiology data | 5 hours | Validation data for touch neuron model |
-| **DD019** | CE_locomotion | **StretchReceptor proprioceptive model** | **30 hours** | Extract for DD023 (proprioception follow-up) |
+| **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)** | wormneuroatlas | Peptide-GPCR deorphanization | 15 hours | Use `PeptideGPCR.get_gpcrs_binding_to()` for receptor mapping |
+| **[DD019](DD019_Closed_Loop_Touch_Response.md)** | WormsenseLab_ASH | ASH electrophysiology data | 5 hours | Validation data for touch neuron model |
+| **[DD019](DD019_Closed_Loop_Touch_Response.md)** | CE_locomotion | **StretchReceptor proprioceptive model** | **30 hours** | Extract for [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception follow-up) |
 
 **Phase 2 Total Potential Savings:** 50 hours
 
@@ -629,12 +629,12 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 | DD | Existing Repo | What to Reuse | Time Saved | Action |
 |----|--------------|---------------|------------|--------|
-| **DD007** | **pharyngeal_muscle_model** | **pm3 NEURON model (plateau potentials)** | **25 hours** | Convert NMODL → NeuroML2 or use NEURON directly |
-| **DD007** | PlateauNoiseModel | Pharyngeal muscle validation data | 5 hours | Cross-validate plateau kinetics |
-| **DD017** | CE_locomotion | Evolutionary parameter fitting | 20 hours | Extract optimization algorithm, compare to gradient descent |
-| **DD017** | CyberElegans | Alternative neuromechanical model | 10 hours | Benchmark comparison, learn from different approach |
-| **DD017** | bionet | Neural network architectures | 10 hours | Check for reusable ML components |
-| **DD017** | wormvae | Connectome-constrained latent variable model | 10 hours | Compare to DD017's graph neural network approach |
+| **[DD007](DD007_Pharyngeal_System_Architecture.md)** | **pharyngeal_muscle_model** | **pm3 NEURON model (plateau potentials)** | **25 hours** | Convert NMODL → NeuroML2 or use NEURON directly |
+| **[DD007](DD007_Pharyngeal_System_Architecture.md)** | PlateauNoiseModel | Pharyngeal muscle validation data | 5 hours | Cross-validate plateau kinetics |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | CE_locomotion | Evolutionary parameter fitting | 20 hours | Extract optimization algorithm, compare to gradient descent |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | CyberElegans | Alternative neuromechanical model | 10 hours | Benchmark comparison, learn from different approach |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | bionet | Neural network architectures | 10 hours | Check for reusable ML components |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | wormvae | Connectome-constrained latent variable model | 10 hours | Compare to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)'s graph neural network approach |
 
 **Phase 3 Total Potential Savings:** 80 hours
 
@@ -658,7 +658,7 @@ DD021 mentions tierpsy-tracker as a "future evaluation" (lines 456-496). But Ope
 
 ## CRITICAL NEXT STEPS (Priority Order)
 
-### 1. URGENT: Evaluate tierpsy-tracker for DD021 (Could Save 33 Hours)
+### 1. URGENT: Evaluate tierpsy-tracker for [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Could Save 33 Hours)
 
 **Question:** Does OpenWorm's tierpsy-tracker fork work with WCON input?
 
@@ -677,27 +677,27 @@ from tierpsy import ... # (check their API)
 ```
 
 **Decision Point:**
-- **If tierpsy works:** Skip DD021 toolbox revival, use tierpsy directly (saves 33 hours)
-- **If tierpsy doesn't work:** Proceed with DD021 8-task revival as planned
+- **If tierpsy works:** Skip [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival, use tierpsy directly (saves 33 hours)
+- **If tierpsy doesn't work:** Proceed with [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) 8-task revival as planned
 
 **Owner:** Validation L4 (when appointed) or founder makes call
 
 ---
 
-### 2. HIGH PRIORITY: Integrate wormneuroatlas into DD005 + DD010
+### 2. HIGH PRIORITY: Integrate wormneuroatlas into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) + [DD010](DD010_Validation_Framework.md)
 
 **Action Plan:**
 
 **Week 1:**
-- [ ] Add `wormneuroatlas` to DD013 Docker neural stage
+- [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker neural stage
 - [ ] Pin version in `versions.lock`
 - [ ] Test CeNGEN API: `atlas.get_gene_expression()`
 - [ ] Test Randi 2023 API: `atlas.get_signal_propagation_atlas()`
 
 **Week 2:**
-- [ ] Update DD005 scripts to use wormneuroatlas instead of manual CSV download
-- [ ] Update DD010 Tier 2 to load Randi data via wormneuroatlas
-- [ ] Add wormneuroatlas to DD020 as complementary data source
+- [ ] Update [DD005](DD005_Cell_Type_Differentiation_Strategy.md) scripts to use wormneuroatlas instead of manual CSV download
+- [ ] Update [DD010](DD010_Validation_Framework.md) Tier 2 to load Randi data via wormneuroatlas
+- [ ] Add wormneuroatlas to [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) as complementary data source
 
 **Benefit:** **40 hours saved** (no manual data wrangling, API is production-ready)
 
@@ -709,16 +709,16 @@ from tierpsy import ... # (check their API)
 
 **Week 3-4 (during Phase 1):**
 - [ ] Clone ChannelWorm, navigate to `data/` directory
-- [ ] Convert `ion_channel_database.xlsx` → CSV for DD005
+- [ ] Convert `ion_channel_database.xlsx` → CSV for [DD005](DD005_Cell_Type_Differentiation_Strategy.md)
 - [ ] Review `models/*.channel.nml` — count how many NeuroML2 channels already exist
 - [ ] Extract HH fitting code from `channelworm/fitter.py`
-- [ ] Port to DD005's `scripts/fit_calibration.py`
+- [ ] Port to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `scripts/fit_calibration.py`
 
 **Benefit:** **50 hours saved** (ion channel database + fitting pipeline already built)
 
 ---
 
-### 4. EXPLORE: openworm.ai for DD015 AI Infrastructure
+### 4. EXPLORE: openworm.ai for [DD015](DD015_AI_Contributor_Model.md) AI Infrastructure
 
 **Action:**
 ```bash
@@ -731,19 +731,19 @@ cat README.md          # Check for docs
 **Questions:**
 - What's in the `corpus/` — Design Documents? Papers? OpenWorm docs?
 - What's in `openworm_ai/` package — Bot code? Prompt templates? RAG?
-- Who's the maintainer — coordinate with DD015 implementation
+- Who's the maintainer — coordinate with [DD015](DD015_AI_Contributor_Model.md) implementation
 
-**Benefit:** 10-30 hours (depends on overlap with DD015 GitHub bot infrastructure)
+**Benefit:** 10-30 hours (depends on overlap with [DD015](DD015_AI_Contributor_Model.md) GitHub bot infrastructure)
 
 ---
 
 ### 5. PHASE 3: Pharyngeal Muscle Model Conversion
 
-**Action Plan (Phase 3, DD007 implementation):**
+**Action Plan (Phase 3, [DD007](DD007_Pharyngeal_System_Architecture.md) implementation):**
 - [ ] Clone pharyngeal_muscle_model
 - [ ] Run NEURON simulation (`_run.hoc`), verify plateau potentials
 - [ ] Convert NMODL → NeuroML2 using pyNeuroML
-- [ ] Integrate into DD007 as `PharyngealMuscleCell.cell.nml`
+- [ ] Integrate into [DD007](DD007_Pharyngeal_System_Architecture.md) as `PharyngealMuscleCell.cell.nml`
 - [ ] Validate against Raizen & Avery 1994
 
 **Benefit:** 25 hours (pharyngeal muscle already modeled)
@@ -755,8 +755,8 @@ cat README.md          # Check for docs
 **Action Plan:**
 - [ ] Extract StretchReceptor.cpp algorithm from CE_locomotion
 - [ ] Port to Python or NeuroML
-- [ ] Write DD023: Proprioceptive Feedback (references CE_locomotion as source)
-- [ ] Integrate with DD001 B-class motor neurons
+- [ ] Write [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback (references CE_locomotion as source)
+- [ ] Integrate with [DD001](DD001_Neural_Circuit_Architecture.md) B-class motor neurons
 - [ ] Validate against Wen et al. 2012
 
 **Benefit:** 30 hours (stretch receptor model exists)
@@ -765,7 +765,7 @@ cat README.md          # Check for docs
 
 ## RECOMMENDED UPDATES TO DDs
 
-### Update DD005 (add ChannelWorm + wormneuroatlas)
+### Update [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (add ChannelWorm + wormneuroatlas)
 
 **Add to Implementation References section (after line 520):**
 
@@ -780,13 +780,13 @@ ChannelWorm contains a curated database of C. elegans ion channels with:
 - HH parameter fitting tools (`channelworm/fitter.py`)
 - Pre-generated NeuroML2 channel models (`models/*.channel.nml`)
 
-**Reuse for DD005:**
+**Reuse for [DD005](DD005_Cell_Type_Differentiation_Strategy.md):**
 1. Extract `data/ion_channel_database.xlsx` → `c302/data/electrophysiology_training_set.csv`
 2. Reuse HH fitting algorithms from `channelworm/fitter.py`
 3. Cross-reference pre-generated NeuroML2 models in `models/` directory
-4. SciUnit validation framework from `tests/` → DD010 Tier 1 single-cell tests
+4. SciUnit validation framework from `tests/` → [DD010](DD010_Validation_Framework.md) Tier 1 single-cell tests
 
-**Action:** Review ChannelWorm database for completeness (how many of DD005's ~20 calibration neurons are covered?).
+**Action:** Review ChannelWorm database for completeness (how many of [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s ~20 calibration neurons are covered?).
 
 ### Wormneuroatlas Python Package
 
@@ -800,7 +800,7 @@ Provides unified Python API for:
 - Neuropeptide/GPCR mapping: `PeptideGPCR.get_gpcrs_binding_to(peptides)`
 - Neuron ID normalization (bilateral merging, class merging)
 
-**Reuse for DD005:**
+**Reuse for [DD005](DD005_Cell_Type_Differentiation_Strategy.md):**
 Replace manual CeNGEN CSV download (lines 78-79) with:
 ```python
 from wormneuroatlas import NeuroAtlas
@@ -811,7 +811,7 @@ expression = atlas.get_gene_expression(
 )
 ```
 
-**Reuse for DD010 Tier 2:**
+**Reuse for [DD010](DD010_Validation_Framework.md) Tier 2:**
 Replace manual Randi 2023 data download with:
 ```python
 from wormneuroatlas import NeuroAtlas
@@ -820,12 +820,12 @@ experimental_fc = atlas.get_signal_propagation_atlas(strain="wt")
 # Returns 302×302 correlation matrix
 ```
 
-**Action:** Add `wormneuroatlas` to DD013 `versions.lock` and Docker neural stage.
+**Action:** Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) `versions.lock` and Docker neural stage.
 ```
 
 ---
 
-### Update DD007 (add pharyngeal_muscle_model)
+### Update [DD007](DD007_Pharyngeal_System_Architecture.md) (add pharyngeal_muscle_model)
 
 **Add to Implementation References (after line 250):**
 
@@ -835,11 +835,11 @@ experimental_fc = atlas.get_signal_propagation_atlas(strain="wt")
 **Repository:** `openworm/pharyngeal_muscle_model` (2017-01-19, dormant but complete)
 
 Contains a NEURON implementation of pm3 pharyngeal muscle with:
-- EAT-2, EGL-19, UNC-2 Ca²⁺ channels (DD007's target channels)
+- EAT-2, EGL-19, UNC-2 Ca²⁺ channels ([DD007](DD007_Pharyngeal_System_Architecture.md)'s target channels)
 - Ca²⁺ slow action potential (plateau potentials, ~100ms duration)
 - Output matches Raizen & Avery 1994 EPG recordings
 
-**Reuse for DD007:**
+**Reuse for [DD007](DD007_Pharyngeal_System_Architecture.md):**
 1. Test NEURON model (`nrngui _run.hoc`)
 2. Convert NMODL channel files → NeuroML2 using pyNeuroML
 3. Use as `PharyngealMuscleCell.cell.nml` baseline
@@ -847,41 +847,41 @@ Contains a NEURON implementation of pm3 pharyngeal muscle with:
 5. Adjust conductances if needed for 3-4 Hz pumping frequency
 
 **Alternative:** Use NEURON model directly (no NeuroML conversion), couple to c302 via
-`sibernetic_NEURON` interface. Decision: NeuroML preferred for consistency with DD001-002.
+`sibernetic_NEURON` interface. Decision: NeuroML preferred for consistency with [DD001](DD001_Neural_Circuit_Architecture.md)-002.
 ```
 
 ---
 
-### Update DD019 (reference CE_locomotion for proprioception)
+### Update [DD019](DD019_Closed_Loop_Touch_Response.md) (reference CE_locomotion for proprioception)
 
 **Add to Known Issues section (after line 709):**
 
 ```markdown
 ### Issue 4: Proprioceptive Feedback Model Already Exists
 
-DD019 scopes out proprioceptive feedback (B-class motor neuron stretch receptors, Wen et al. 2012)
+[DD019](DD019_Closed_Loop_Touch_Response.md) scopes out proprioceptive feedback (B-class motor neuron stretch receptors, Wen et al. 2012)
 as future work. However, `openworm/CE_locomotion` (pushed 2026-02-18, VERY ACTIVE) already
 implements proprioceptive feedback via its `StretchReceptor.cpp/h` module.
 
 **Reuse opportunity:**
 1. Extract StretchReceptor algorithm from CE_locomotion
 2. Port C++ → Python or NeuroML
-3. Integrate with DD001 B-class motor neurons
-4. Create DD023: Proprioceptive Feedback and Motor Coordination (references CE_locomotion)
+3. Integrate with [DD001](DD001_Neural_Circuit_Architecture.md) B-class motor neurons
+4. Create [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback and Motor Coordination (references CE_locomotion)
 
 **Contact:** Collaborate with Dr. Erick Olivares & Prof. Randall Beer (CE_locomotion authors).
 ```
 
 ---
 
-### Update DD010 (add wormneuroatlas for Tier 2)
+### Update [DD010](DD010_Validation_Framework.md) (add wormneuroatlas for Tier 2)
 
 **Add to Known Issues section:**
 
 ```markdown
 ### Randi 2023 Data Already Accessible via wormneuroatlas
 
-DD010 Tier 2 requires Randi et al. 2023 functional connectivity (302×302 correlation matrix).
+[DD010](DD010_Validation_Framework.md) Tier 2 requires Randi et al. 2023 functional connectivity (302×302 correlation matrix).
 Manual download from Nature supplement is not needed:
 
 **Use wormneuroatlas Python package:**
@@ -893,12 +893,12 @@ experimental_fc = NeuroAtlas().get_signal_propagation_atlas(strain="wt")
 
 This provides the exact 302×302 matrix needed for correlation-of-correlations validation.
 
-**Action:** Add `wormneuroatlas` to DD013 Docker validation stage, update Tier 2 scripts to use API.
+**Action:** Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage, update Tier 2 scripts to use API.
 ```
 
 ---
 
-### Update DD015 (reference openworm.ai)
+### Update [DD015](DD015_AI_Contributor_Model.md) (reference openworm.ai)
 
 **Add to Implementation Checklist (Phase 1, after line 785):**
 
@@ -915,13 +915,13 @@ This repo may already contain:
 **Action:**
 - [ ] Deep-dive `openworm_ai/` Python package source code
 - [ ] Check `corpus/` contents — is this DD knowledge base?
-- [ ] Identify repo maintainer, coordinate with DD015 GitHub bot implementation
+- [ ] Identify repo maintainer, coordinate with [DD015](DD015_AI_Contributor_Model.md) GitHub bot implementation
 - [ ] Reuse any existing prompt templates, knowledge bases, or webhook handlers
 ```
 
 ---
 
-### Update DD017 (add CE_locomotion + CyberElegans comparisons)
+### Update [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (add CE_locomotion + CyberElegans comparisons)
 
 **Add to Alternatives Considered (after Component 4):**
 
@@ -937,13 +937,13 @@ This repo may already contain:
 **Rejected as replacement because:**
 - c302+Sibernetic is the established, validated pipeline (Sarma 2018, Gleeson 2018 publications)
 - 15 years of development invested in current stack
-- DD001-003 are Accepted and working
+- [DD001](DD001_Neural_Circuit_Architecture.md)-003 are Accepted and working
 - Migration cost would be massive (all downstream DDs assume c302+Sibernetic)
 
 **But: Use as comparison points and learning opportunities:**
-- CE_locomotion's **StretchReceptor** → Extract for DD019 proprioceptive follow-up (DD023)
-- CE_locomotion's **evolutionary algorithm** → Compare to DD017 Component 1 gradient descent
-- CyberElegans architecture → Benchmark DD017 surrogate against alternative approach
+- CE_locomotion's **StretchReceptor** → Extract for [DD019](DD019_Closed_Loop_Touch_Response.md) proprioceptive follow-up ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md))
+- CE_locomotion's **evolutionary algorithm** → Compare to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1 gradient descent
+- CyberElegans architecture → Benchmark [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) surrogate against alternative approach
 - Both models likely solve problems (parameter tuning, sensory transduction) we can learn from
 
 **Action:**
@@ -965,7 +965,7 @@ This repo may already contain:
    pip install wormneuroatlas
    python -c "from wormneuroatlas import NeuroAtlas; atlas = NeuroAtlas(); print(atlas.get_gene_expression(['unc-2'], ['AVAL']))"
    ```
-   **If it works:** Add to DD013 Docker, update DD005 + DD010 to use it
+   **If it works:** Add to [DD013](DD013_Simulation_Stack_Architecture.md) Docker, update [DD005](DD005_Cell_Type_Differentiation_Strategy.md) + [DD010](DD010_Validation_Framework.md) to use it
 
 2. **Test ChannelWorm:**
    ```bash
@@ -974,7 +974,7 @@ This repo may already contain:
    pip install -r requirements.txt
    # Check data/ and models/ directories
    ```
-   **If usable:** Extract ion channel database, add to DD005 references
+   **If usable:** Extract ion channel database, add to [DD005](DD005_Cell_Type_Differentiation_Strategy.md) references
 
 3. **Evaluate tierpsy-tracker:**
    ```bash
@@ -994,7 +994,7 @@ This repo may already contain:
    nrngui _run.hoc
    # Verify plateau potentials appear in output
    ```
-   **If works:** Plan NeuroML2 conversion for DD007
+   **If works:** Plan NeuroML2 conversion for [DD007](DD007_Pharyngeal_System_Architecture.md)
 
 2. **Explore CE_locomotion:**
    ```bash
@@ -1003,7 +1003,7 @@ This repo may already contain:
    ./main  # Run evolution
    # Review StretchReceptor.cpp source
    ```
-   **Action:** Extract proprioceptive algorithm, propose DD023
+   **Action:** Extract proprioceptive algorithm, propose [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)
 
 3. **Audit openworm.ai:**
    ```bash
@@ -1011,7 +1011,7 @@ This repo may already contain:
    ls -R openworm_ai/
    cat corpus/*  # What's the knowledge base?
    ```
-   **Action:** Identify reuse for DD015
+   **Action:** Identify reuse for [DD015](DD015_AI_Contributor_Model.md)
 
 ---
 
@@ -1023,14 +1023,14 @@ This repo may already contain:
 - Infrastructure tools (config gen, skeleton extraction, WCON viewer)
 
 **By systematically auditing and reusing, we can:**
-1. **Accelerate Phase 1 by 70-95 hours** (wormneuroatlas + ChannelWorm for DD005)
-2. **Potentially skip DD021 toolbox revival** (if tierpsy-tracker works, saves 33 hours)
+1. **Accelerate Phase 1 by 70-95 hours** (wormneuroatlas + ChannelWorm for [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+2. **Potentially skip [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival** (if tierpsy-tracker works, saves 33 hours)
 3. **Reduce Phase 3 implementation by 50-80 hours** (pharyngeal muscle, proprioception, ML components)
 
 **Immediate Actions:**
 1. **This week:** Test wormneuroatlas, ChannelWorm, tierpsy-tracker (3 repos, 4-8 hours total)
-2. **Phase A:** Integrate working tools into DD013 Docker + `versions.lock`
-3. **Phase 1:** Rewrite DD005 scripts to use wormneuroatlas + ChannelWorm APIs
+2. **Phase A:** Integrate working tools into [DD013](DD013_Simulation_Stack_Architecture.md) Docker + `versions.lock`
+3. **Phase 1:** Rewrite [DD005](DD005_Cell_Type_Differentiation_Strategy.md) scripts to use wormneuroatlas + ChannelWorm APIs
 
 **Don't rebuild what already exists. BUILD ON IT.** 🚀
 

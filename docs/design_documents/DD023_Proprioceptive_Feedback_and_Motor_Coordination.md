@@ -1,6 +1,6 @@
 # DD023: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
-**Status:** Proposed (Phase 2-3, after DD019)  
+**Status:** Proposed (Phase 2-3, after [DD019](DD019_Closed_Loop_Touch_Response.md))  
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-19  
 **Supersedes:** None  
@@ -13,18 +13,18 @@
 | Question | Answer |
 |----------|--------|
 | **What does this produce?** | Stretch-sensitive channels on B-class motor neurons (DB, VB), proprioceptive feedback from body curvature to motor pattern, stable undulatory wave propagation |
-| **Success metric** | DD010 Tier 3: locomotion wavelength stability improved (±10% vs. ±15% baseline), proprioceptive ablation (disable stretch receptors) degrades coordination by >30% |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: locomotion wavelength stability improved (±10% vs. ±15% baseline), proprioceptive ablation (disable stretch receptors) degrades coordination by >30% |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (stretch receptor channel model) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (body curvature readout) — issues labeled `dd023` |
 | **Config toggle** | `sensory.proprioception: true` / `neural.stretch_receptors: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `proprioception: true` (wave propagates?), `docker compose run validate` (wavelength stability) |
-| **Visualize** | DD014 `sensory/curvature/` layer — body curvature heatmap; `neural/` layer — B-class motor neurons with proprioceptive input highlighted |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `sensory/curvature/` layer — body curvature heatmap; `neural/` layer — B-class motor neurons with proprioceptive input highlighted |
 | **CI gate** | Tier 3 wavelength validation (±10% with proprioception) blocks merge; backward compat with `proprioception: false` required |
 
 ---
 
 ## TL;DR
 
-B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that detect local body curvature, providing proprioceptive feedback for stable undulatory locomotion. This feedback loop (Wen et al. 2012) complements the touch response (DD019) and likely stabilizes the locomotion wave by coupling adjacent body segments. Success: locomotion wavelength stability improves to ±10% (vs. ±15% without proprioception), and ablating stretch receptors degrades coordination by >30%.
+B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that detect local body curvature, providing proprioceptive feedback for stable undulatory locomotion. This feedback loop (Wen et al. 2012) complements the touch response ([DD019](DD019_Closed_Loop_Touch_Response.md)) and likely stabilizes the locomotion wave by coupling adjacent body segments. Success: locomotion wavelength stability improves to ±10% (vs. ±15% without proprioception), and ablating stretch receptors degrades coordination by >30%.
 
 ---
 
@@ -32,13 +32,13 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 **OpenWorm Mission:** "Creating the world's first virtual organism."
 
-**DD023 serves this by:** Proprioception (self-sensing body position) is how the nervous system knows what the body is doing. Without it, the motor pattern is open-loop (neurons fire blindly). With it, the worm adjusts motor output based on actual body curvature — closed-loop motor control. This is essential for stable, adaptive locomotion.
+**[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) serves this by:** Proprioception (self-sensing body position) is how the nervous system knows what the body is doing. Without it, the motor pattern is open-loop (neurons fire blindly). With it, the worm adjusts motor output based on actual body curvature — closed-loop motor control. This is essential for stable, adaptive locomotion.
 
 ---
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Wavelength stability | ±10% of baseline (improved from ±15% without proprioception) | Tier 3 (blocking) |
 | **Secondary:** Proprioceptive ablation effect | Disabling stretch receptors degrades coordination by >30% (wider wavelength variance) | Tier 3 (blocking) |
@@ -55,9 +55,9 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 | Artifact | Path | Format | Example |
 |----------|------|--------|---------|
 | Stretch receptor channel model | `c302/channel_models/stretch_receptor_chan.channel.nml` | NeuroML 2 XML | Curvature-gated cation channel |
-| B-class motor neuron templates | `cells/DB01Cell.cell.nml`, `VB01Cell.cell.nml`, etc. | NeuroML 2 XML | Add stretch receptor channel to DD001/DD005 HH models |
+| B-class motor neuron templates | `cells/DB01Cell.cell.nml`, `VB01Cell.cell.nml`, etc. | NeuroML 2 XML | Add stretch receptor channel to [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 HH models |
 | Body curvature readout module | `sibernetic/coupling/curvature_readout.py` | Python | Computes local curvature from SPH particle positions |
-| Extended bidirectional coupling | `sibernetic_c302_closedloop.py` (extend DD019's script) | Python | Add body→motor neuron proprioceptive path |
+| Extended bidirectional coupling | `sibernetic_c302_closedloop.py` (extend [DD019](DD019_Closed_Loop_Touch_Response.md)'s script) | Python | Add body→motor neuron proprioceptive path |
 | Curvature time series (viewer) | OME-Zarr: `sensory/curvature/`, shape (n_timesteps, n_segments) | OME-Zarr | Per-segment curvature angle over time |
 
 ---
@@ -138,22 +138,22 @@ This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Bee
 
 | Input | Source DD | Variable | Format |
 |-------|----------|----------|--------|
-| Body curvature per segment | DD003 | Local curvature from SPH particle positions | Computed via curvature_readout.py |
-| B-class motor neuron models | DD001 / DD005 | HH cell templates | NeuroML |
+| Body curvature per segment | [DD003](DD003_Body_Physics_Architecture.md) | Local curvature from SPH particle positions | Computed via curvature_readout.py |
+| B-class motor neuron models | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | HH cell templates | NeuroML |
 
 ### Outputs
 
 | Output | Consumer DD | Variable | Format |
 |--------|------------|----------|--------|
-| Stretch receptor current | DD001 | `I_stretch` on B-class motor neurons | NeuroML state variable |
-| Motor neuron excitability | DD002 | Modulates motor output → muscle activation | Indirect (via DD001→DD002 chain) |
+| Stretch receptor current | [DD001](DD001_Neural_Circuit_Architecture.md) | `I_stretch` on B-class motor neurons | NeuroML state variable |
+| Motor neuron excitability | [DD002](DD002_Muscle_Model_Architecture.md) | Modulates motor output → muscle activation | Indirect (via [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md) chain) |
 
 ---
 
 **Approved by:** Pending
-**Implementation Status:** Proposed (Phase 2-3, after DD019 bidirectional coupling established)
+**Implementation Status:** Proposed (Phase 2-3, after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
 **Next Actions:**
 1. Contact CE_locomotion authors (collaboration opportunity)
 2. Extract StretchReceptor algorithm
 3. Port to NeuroML or Python
-4. Integrate with DD019's bidirectional coupling framework
+4. Integrate with [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling framework

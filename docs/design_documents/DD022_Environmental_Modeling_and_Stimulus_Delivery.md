@@ -17,7 +17,7 @@
 | **Repository** | `openworm/sibernetic` (substrate mechanics) + `openworm/c302` (stimulus coupling to sensory neurons) — issues labeled `dd022` |
 | **Config toggle** | `environment.substrate: "agar"`, `environment.chemical_gradient: true`, `environment.food_particles: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test --config chemotaxis` (worm navigates gradient?), `docker compose run validate` (CI index validation) |
-| **Visualize** | DD014 `environment/substrate/` layer (agar surface heatmap), `environment/gradients/` (chemical/thermal field visualization), `environment/food/` (bacterial particles) |
+| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `environment/substrate/` layer (agar surface heatmap), `environment/gradients/` (chemical/thermal field visualization), `environment/food/` (bacterial particles) |
 | **CI gate** | Behavioral validation (chemotaxis, thermotaxis) blocks merge; substrate mechanics must not destabilize body physics |
 
 ---
@@ -32,17 +32,17 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 **OpenWorm Mission:** "Creating the world's first virtual organism."
 
-**DD022 serves this by:** An organism doesn't exist in isolation — it interacts with its environment. Chemotaxis (navigating toward food), thermotaxis (seeking optimal temperature), and mechanosensation (detecting surfaces) are core *C. elegans* behaviors that require environmental context. Without gradients and substrates, the worm can't exhibit naturalistic behavior.
+**[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) serves this by:** An organism doesn't exist in isolation — it interacts with its environment. Chemotaxis (navigating toward food), thermotaxis (seeking optimal temperature), and mechanosensation (detecting surfaces) are core *C. elegans* behaviors that require environmental context. Without gradients and substrates, the worm can't exhibit naturalistic behavior.
 
 **Core Principle:** "Building in the physics... because it matters."
 
-**DD022 delivers:** Physical substrates (agar = viscoelastic solid, liquid = low-Reynolds-number fluid, soil = granular medium) with realistic mechanical properties, enabling validation against environment-dependent behaviors.
+**[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) delivers:** Physical substrates (agar = viscoelastic solid, liquid = low-Reynolds-number fluid, soil = granular medium) with realistic mechanical properties, enabling validation against environment-dependent behaviors.
 
 ---
 
 ## Goal & Success Criteria
 
-| Criterion | Target | DD010 Tier |
+| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** Chemotaxis behavior | CI (chemotaxis index) >0.5 on NaCl gradient (Iino & Yoshida 2009) | Tier 3 (blocking) |
 | **Primary:** Thermotaxis behavior | Navigate to cultivation temperature (20°C) within ±2°C on thermal gradient | Tier 3 (blocking) |
@@ -51,7 +51,7 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 **Before:** Worm exists in an infinite, featureless void. No substrate, no gradients, no food. Cannot exhibit naturalistic navigation behaviors.
 
-**After:** Worm crawls on agar (or swims in liquid, or burrows in soil), senses chemical/thermal gradients via DD019/DD017 sensory transduction, navigates toward attractants (food, optimal temperature), avoids repellents.
+**After:** Worm crawls on agar (or swims in liquid, or burrows in soil), senses chemical/thermal gradients via [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 sensory transduction, navigates toward attractants (food, optimal temperature), avoids repellents.
 
 ---
 
@@ -79,10 +79,10 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 - Viscoelastic solid (not purely elastic, not purely viscous)
 - Young's modulus: 3-10 kPa (depends on agarose concentration, typically 2%)
 - Poisson ratio: 0.45 (nearly incompressible)
-- DD003 boundary particles model agar as fixed constraints; extend to deformable substrate
+- [DD003](DD003_Body_Physics_Architecture.md) boundary particles model agar as fixed constraints; extend to deformable substrate
 
 **Liquid (swimming experiments):**
-- Newtonian fluid (same Navier-Stokes as DD003 pseudocoelom)
+- Newtonian fluid (same Navier-Stokes as [DD003](DD003_Body_Physics_Architecture.md) pseudocoelom)
 - Viscosity: 1e-3 Pa·s (water) to 1e-2 Pa·s (M9 buffer)
 - No solid substrate → worm swims, different gait (higher frequency, lower amplitude)
 
@@ -106,7 +106,7 @@ Diffusion equation in 2D (agar surface):
 **Simplified implementation:**
 - Pre-compute steady-state gradient field (no time evolution during simulation)
 - Lookup concentration at worm's (x, y) position each timestep
-- Feed to DD019/DD017 chemosensory transduction model
+- Feed to [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 chemosensory transduction model
 
 ### Component 3: Thermal Gradient Delivery
 
@@ -115,13 +115,13 @@ Diffusion equation in 2D (agar surface):
 Similar to chemical gradient but for temperature:
 - Cultivation temperature (20°C) at one end, 15°C or 25°C at other
 - Linear or radial gradient
-- Feed to DD017 Component 4 learned thermosensory model
+- Feed to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 learned thermosensory model
 
 ### Component 4: Food Particles (OP50 Bacteria)
 
 **For pharyngeal pumping + feeding behavior:**
 - Bacteria modeled as small deformable SPH particles (~1 µm diameter)
-- Delivered to pharyngeal lumen via pumping (DD007)
+- Delivered to pharyngeal lumen via pumping ([DD007](DD007_Pharyngeal_System_Architecture.md))
 - Grinder crushes bacteria (future: mechanical food processing)
 
 **Phase 3 work** (not required for basic pumping frequency validation).
@@ -136,7 +136,7 @@ Similar to chemical gradient but for temperature:
 
 ### 2. Simplified: Boundary Conditions Only (No Substrate Mechanics)
 
-**Description:** Keep boundary particles fixed (current DD003), just add chemical/thermal fields.
+**Description:** Keep boundary particles fixed (current [DD003](DD003_Body_Physics_Architecture.md)), just add chemical/thermal fields.
 
 **Partially adopted:** For Phase 2-3, this is the pragmatic approach. Substrate mechanics (agar deformability) can be deferred to Phase 5+.
 
@@ -147,7 +147,7 @@ Similar to chemical gradient but for temperature:
 1. **Chemotaxis reproduction:** Simulated worm on NaCl gradient produces CI (chemotaxis index) >0.5 (Iino & Yoshida 2009 experimental data).
 2. **Thermotaxis reproduction:** Worm navigates to 20°C on 15-25°C gradient within ±2°C.
 3. **Substrate-dependent gait:** Crawling on agar vs. swimming in liquid produces ~2:1 speed ratio (matches experiments).
-4. **No destabilization:** Adding environment must not break DD003 body physics (no particle escape, no NaN).
+4. **No destabilization:** Adding environment must not break [DD003](DD003_Body_Physics_Architecture.md) body physics (no particle escape, no NaN).
 
 ---
 
@@ -166,16 +166,16 @@ Similar to chemical gradient but for temperature:
 
 | Input | Source DD | Variable | Format |
 |-------|----------|----------|--------|
-| Worm body position | DD003 | Centroid (x, y) from SPH particles | Computed from body/ OME-Zarr |
-| Sensory neuron positions | DD001 / DD008 | Per-neuron (x, y, z) | Static coordinates |
+| Worm body position | [DD003](DD003_Body_Physics_Architecture.md) | Centroid (x, y) from SPH particles | Computed from body/ OME-Zarr |
+| Sensory neuron positions | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-neuron (x, y, z) | Static coordinates |
 
 ### Outputs
 
 | Output | Consumer DD | Variable | Format |
 |--------|------------|----------|--------|
-| Local chemical concentration | DD017 Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
-| Local temperature | DD017 Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
-| Substrate reaction force | DD003 | Boundary particle forces | SPH force vectors |
+| Local chemical concentration | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
+| Local temperature | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
+| Substrate reaction force | [DD003](DD003_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
 
 ---
 
@@ -184,5 +184,5 @@ Similar to chemical gradient but for temperature:
 **Next Actions:**
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
 2. Implement steady-state gradient solver (chemical, thermal)
-3. Test with DD019 closed-loop touch + chemotaxis
+3. Test with [DD019](DD019_Closed_Loop_Touch_Response.md) closed-loop touch + chemotaxis
 4. Validate against Iino & Yoshida 2009 chemotaxis data
