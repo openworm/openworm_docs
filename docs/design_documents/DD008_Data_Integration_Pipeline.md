@@ -1,9 +1,9 @@
 # DD008: Data Integration Pipeline and OWMeta Knowledge Graph
 
-**Status:** Accepted (with proposed extensions)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
+**Status:** Accepted (with proposed extensions)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
 **Related:** All other DDs (data layer for entire project)
 
 ---

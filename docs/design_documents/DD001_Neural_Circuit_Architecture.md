@@ -1,10 +1,10 @@
 # DD001: Neural Circuit Architecture and Multi-Level Framework
 
-**Status:** Accepted
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD002 (Muscle Model), DD003 (Body Physics), DD005 (Cell-Type Differentiation)
+**Status:** Accepted  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation)
 
 ---
 

@@ -1,10 +1,10 @@
 # DD023: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
-**Status:** Proposed (Phase 2-3, after DD019)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-19
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD003 (Body Physics), DD019 (Touch Response — established bidirectional coupling pattern)
+**Status:** Proposed (Phase 2-3, after DD019)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-19  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — established bidirectional coupling pattern)
 
 ---
 

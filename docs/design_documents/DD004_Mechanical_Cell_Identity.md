@@ -1,10 +1,10 @@
 # DD004: Mechanical Cell Identity in Sibernetic (Per-Cell Physics)
 
-**Status:** Proposed (Phase 4)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD003 (Body Physics), DD007 (Pharyngeal System), DD009 (Intestinal Model)
+**Status:** Proposed (Phase 4)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 

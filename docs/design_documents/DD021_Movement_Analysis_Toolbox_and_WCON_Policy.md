@@ -1,10 +1,10 @@
 # DD021: Movement Analysis Toolbox and WCON Policy
 
-**Status:** Proposed
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-16
-**Supersedes:** None
-**Related:** DD003 (Body Physics — WCON producer), DD008 (Data Integration Pipeline), DD010 (Validation Framework — Tier 3 consumer), DD013 (Simulation Stack — CI consumer), DD020 (Connectome Data Access — structural model)
+**Status:** Proposed  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-16  
+**Supersedes:** None  
+**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — WCON producer), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD010](DD010_Validation_Framework.md) (Validation Framework — Tier 3 consumer), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack — CI consumer), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — structural model)
 
 ---
 

@@ -187,3 +187,13 @@ It may be adapted for subteams.  Please follow these style rules when doing so:
 - Logo needs to be readable when rendered in grayscale
 
 Such logos are subject to review by the core team to retain consistency across the project.
+
+---
+
+## Continue Reading
+
+- **[GitHub Workflow](Community/github.md)** — Detailed guide to contributing via GitHub, including Design Document implementation
+- **[Design Documents](design_documents/index.md)** — The technical roadmap with contributor-facing specifications
+- **[DD011: Contributor Progression](design_documents/DD011_Contributor_Progression_Model.md)** — The L0-L5 contributor progression framework
+- **[Projects](projects.md)** — Find a project matching your interests
+- **[Resources](Resources/resources.md)** — Simulation engines, visualizations, and data sets

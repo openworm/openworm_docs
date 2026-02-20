@@ -48,3 +48,19 @@ Associated Repositories
 </tr>
 </tbody>
 </table>
+
+---
+
+## Related Design Documents
+
+- **[DD011: Contributor Progression Model](../design_documents/DD011_Contributor_Progression_Model.md)** — The L0-L5 contributor progression framework (Observer → Senior Contributor)
+- **[DD012: RFC Process](../design_documents/DD012_Design_Document_RFC_Process.md)** — How Design Documents are proposed, reviewed, and accepted
+- **[DD015: AI Contributor Model](../design_documents/DD015_AI_Contributor_Model.md)** — How AI contributors participate in the project
+
+---
+
+## Continue Reading
+
+- **[Community Overview](../community.md)** — How to get involved with OpenWorm
+- **[GitHub Workflow](../Community/github.md)** — Contributing to Design Document implementation
+- **[Design Documents](../design_documents/index.md)** — The complete technical roadmap

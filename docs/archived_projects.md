@@ -1,7 +1,7 @@
 Archived Projects & Historical Context
 =======================================
 
-OpenWorm has evolved significantly since 2011. These projects were important milestones but have been **superseded by current [Design Documents](design_documents/)**.
+OpenWorm has evolved significantly since 2011. These projects were important milestones but have been **superseded by current [Design Documents](design_documents/index.md)**.
 
 **Principle:** We don't delete history — we contextualize it. Understanding where we came from helps explain where we're going.
 
@@ -21,7 +21,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 - Graded synapses match _C. elegans_ biology better than spiking models (now formalized in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md))
 - Muscle calcium is the coupling variable between neural and mechanical domains (now formalized in [DD002](design_documents/DD002_Muscle_Model_Architecture.md))
 
-**Current status:** Superseded by DD001-003 (the formal, validated core chain). Preserved as historical reference and [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) comparison point.
+**Current status:** Superseded by [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](design_documents/DD003_Body_Physics_Architecture.md) (the formal, validated core chain). Preserved as historical reference and [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) comparison point.
+
+**See today's version:** [Sibernetic](Projects/sibernetic.md) (body physics) and [c302](Projects/c302.md) (neural modeling)
 
 ---
 
@@ -50,7 +52,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **Current status:** Dormant in OpenWorm (last commit ~2020). Still maintained upstream at [geppetto.org](http://geppetto.org). Could be re-evaluated if needs change.
 
-**What replaced it:** DD014 specifies a 3-phase evolution:
+**See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and DD014 evolution roadmap)
+
+**What replaced it:** [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) specifies a 3-phase evolution:
 
 1. **Phase 1:** Trame viewer (PyVista + live server)
 2. **Phase 2:** Interactive layers with validation overlays
@@ -69,7 +73,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 - Established the principle of quantitative behavioral validation
 - Ported key feature extraction algorithms from MATLAB to Python
 
-**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md). The toolbox revival is an infrastructure priority, as it enables Tier 3 behavioral validation.
+**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md). The toolbox revival is an infrastructure priority, as it enables [Tier 3 behavioral validation](validation.md).
+
+**See today's version:** [Movement Analysis](Projects/worm-movement.md) project page
 
 ---
 
@@ -78,6 +84,8 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 **What it was:** The original 3D anatomical model of the _C. elegans_ nervous system in NeuroML format, loaded and simulated via NeuroConstruct + NEURON.
 
 **What it evolved into:** [c302](https://github.com/openworm/c302) — the current multi-scale modeling framework specified by [DD001](design_documents/DD001_Neural_Circuit_Architecture.md). c302 generates NeuroML2 networks at multiple biophysical detail levels (A-D) and uses [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) for data access ([DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)).
+
+**See today's version:** [c302 project page](Projects/c302.md)
 
 ---
 
@@ -89,7 +97,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it proved:** Connectome-derived neural dynamics can produce meaningful sensorimotor behavior even in a simplified robot body.
 
-**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in DD001 + DD019 (closed-loop touch response).
+**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) + [DD019 (closed-loop touch response)](design_documents/DD019_Closed_Loop_Touch_Response.md).
+
+**See today's version:** [C. elegans Robots](Projects/c-elegans-robot.md) project page
 
 ---
 
@@ -105,4 +115,13 @@ The journey from "cool demo" to "validated engineering blueprint" is what makes 
 
 ---
 
-**See [Design Documents](design_documents/) for the current formal specifications.**
+**See [Design Documents](design_documents/index.md) for the current formal specifications.**
+
+---
+
+## Continue Reading
+
+- **[Design Documents](design_documents/index.md)** — The complete roadmap from 302 neurons to 959 cells
+- **[How It Works: Modeling](modeling.md)** — The current multi-scale simulation architecture
+- **[Full History](fullhistory.md)** — Detailed timeline from 1900 to present
+- **[Projects](projects.md)** — Active projects and their governing DDs

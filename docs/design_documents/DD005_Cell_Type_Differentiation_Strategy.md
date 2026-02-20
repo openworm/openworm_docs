@@ -1,10 +1,10 @@
 # DD005: Cell-Type Differentiation Strategy Using Single-Cell Transcriptomics
 
-**Status:** Proposed (Phase 1)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD008 (Data Integration Pipeline)
+**Status:** Proposed (Phase 1)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline)
 
 ---
 

@@ -32,3 +32,19 @@ Boyle, Berri and Cohen, "Gait modulation in C. elegans: an integrated neuromecha
 
 Eduardo J. Izquierdo and Randall D. Beer, "An Integrated Neuromechanical Model of Steering in C. elegans", ECAL15
 
+---
+
+## Related Design Documents
+
+The robot project embodies the same neuromechanical coupling that the full simulation formalizes:
+
+- **[DD001: Neural Circuit Architecture](../design_documents/DD001_Neural_Circuit_Architecture.md)** — The 302-neuron model that drives the robot's simplified connectome
+- **[DD019: Closed-Loop Touch Response](../design_documents/DD019_Closed_Loop_Touch_Response.md)** — Bidirectional sensorimotor coupling (the simulation equivalent of the robot's sensor-motor loop)
+
+---
+
+## Continue Reading
+
+- **[Archived Projects](../archived_projects.md#connectome-engine--lego-robot)** — Historical context for the Lego robot demonstration
+- **[How It Works: Modeling](../modeling.md)** — The full multi-scale simulation architecture
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

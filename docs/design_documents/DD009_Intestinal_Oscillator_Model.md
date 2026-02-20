@@ -1,10 +1,10 @@
 # DD009: Intestinal Calcium Oscillator and Defecation Motor Program
 
-**Status:** Proposed (Phase 3)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD004 (Mechanical Cell Identity), DD008 (Data Integration)
+**Status:** Proposed (Phase 3)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration)
 
 ---
 

@@ -3,6 +3,9 @@ Current releases
 
 The recent and planned releases for the Docker image which contains the assembled OpenWorm software stack can be found at the [OpenWorm Milestones](https://github.com/openworm/OpenWorm/milestones).
 
+!!! note "Current Approach"
+    The simulation stack is now containerized via Docker, as specified in [DD013: Simulation Stack Architecture](design_documents/DD013_Simulation_Stack_Architecture.md). The Docker image bundles [Sibernetic](Projects/sibernetic.md) (body physics), [c302](Projects/c302.md) (neural network), and validation tooling into a single reproducible environment. See the [Docker simulation stack](Projects/docker.md) page for setup instructions.
+
 
 
 Past Releases
@@ -201,3 +204,12 @@ We have set a completed a successful release 1 in September. It included the fol
 -   As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser
 -   As a user, I want to use a slider to smoothly make systems in the worm transparent
 -   A more complete document describing our plans for release 2 is available.
+
+---
+
+## Continue Reading
+
+- **[Full History](fullhistory.md)** — Complete timeline from 1900 to the Design Document era
+- **[Archived Projects](archived_projects.md)** — How early prototypes evolved into current specifications
+- **[Design Documents](design_documents/index.md)** — The current technical roadmap
+- **[Docker simulation stack](Projects/docker.md)** — Running the current simulation

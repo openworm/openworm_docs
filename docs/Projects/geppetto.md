@@ -28,3 +28,12 @@ DD014 evaluated Geppetto against alternatives and chose Trame because:
 | Phase 1 | Trame (PyVista) | Organism + tissue scales, live server |
 | Phase 2 | Trame + layers | Neuropeptides, organs, validation overlay |
 | Phase 3 | Three.js + WebGPU | Molecular scale, static site at viewer.openworm.org |
+
+---
+
+## Continue Reading
+
+- **[DD014: Dynamic Visualization Architecture](../design_documents/DD014_Dynamic_Visualization_Architecture.md)** — The next-generation visualization specification
+- **[Archived Projects](../archived_projects.md#geppetto-web-platform-2014-2020)** — Geppetto's historical context
+- **[Worm Browser](browser.md)** — The original WebGL anatomy browser
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

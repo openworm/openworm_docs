@@ -1,6 +1,9 @@
 Data Collection and Representation
 ==================================
 
+!!! info "Governed by DD008 + DD020"
+    Data integration is specified by [DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md) (OWMeta unified data layer) and [DD020: Connectome Data Access](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) (cect API with Cook2019 as default dataset).
+
 There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different dataset are used in the model.
 
 Being an integrative model, OpenWorm utilizes different datasets, each with different file formats and interfaces to the model. There is no master representation of all the data incorporated into the model, instead our aim is to keep the model open to be able to cope with different data structures.
@@ -88,3 +91,13 @@ Repository | Description | Language
 ------------ | ------------- | ------------
 <a href="https://github.com/openworm/wormbrowser">wormbrowser</a> | The Worm Browser -- a 3D browser of the cellular anatomy of the <em>c. elegans<em> | Javascript
 <a href="https://github.com/openworm/openwormbrowser-ios">openwormbrowser-ios</a> | OpenWorm Browser for iOS, based on the open-3d-viewer, which was based on Google Body Browser | Objective-C
+
+---
+
+## Continue Reading
+
+- **[DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md)** — The OWMeta data layer specification
+- **[DD020: Connectome Data Access](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)** — cect API and dataset policy
+- **[c302](c302.md)** — The neural framework that consumes connectome data
+- **[How It Works: Modeling](../modeling.md)** — Multi-scale architecture overview
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

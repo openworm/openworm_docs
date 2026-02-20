@@ -1,10 +1,10 @@
 # DD010: Validation Framework and Quantitative Benchmarks
 
-**Status:** Accepted
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** All other DDs (validation applies to all models), DD021 (Movement Analysis Toolbox — Tier 3 validation tool)
+**Status:** Accepted  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** All other DDs (validation applies to all models), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool)
 
 ---
 

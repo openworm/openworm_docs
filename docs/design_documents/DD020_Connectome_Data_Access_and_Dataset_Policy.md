@@ -1,10 +1,10 @@
 # DD020: Connectome Data Access and Dataset Policy
 
-**Status:** Proposed
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-16
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD002 (Muscle Model), DD005 (Cell-Type Differentiation), DD006 (Neuropeptidergic Connectome), DD007 (Pharyngeal System), DD008 (Data Integration Pipeline), DD013 (Simulation Stack), DD017 (Hybrid Mechanistic-ML), DD019 (Closed-Loop Touch Response)
+**Status:** Proposed  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-16  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML), [DD019](DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)
 
 ---
 

@@ -1,10 +1,10 @@
 # DD019: Closed-Loop Touch Response and Tap Withdrawal Behavior
 
-**Status:** Proposed (Phase 2-3)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-16
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD002 (Muscle Model), DD003 (Body Physics), DD005 (Cell-Type Differentiation), DD010 (Validation Framework), DD017 (Hybrid Mechanistic-ML Framework)
+**Status:** Proposed (Phase 2-3)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-16  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
 
 ---
 

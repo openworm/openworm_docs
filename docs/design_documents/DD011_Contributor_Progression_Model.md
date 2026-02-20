@@ -1,9 +1,9 @@
 # DD011: Contributor Progression Model (The Graduated Access System)
 
-**Status:** Proposed (Governance)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** Informal contributor model
+**Status:** Proposed (Governance)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** Informal contributor model  
 **Related:** AI-Augmented Open Science Proposal
 
 ---

@@ -1,10 +1,10 @@
 # DD014: Dynamic Visualization and Multi-Scale Exploration Architecture
 
-**Status:** Proposed
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-15
-**Supersedes:** WormSim (org.wormsim.frontend, dormant since 2015), informal Geppetto coupling
-**Related:** DD003 (Body Physics), DD001 (Neural Circuit), DD013 (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
+**Status:** Proposed  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-15  
+**Supersedes:** WormSim (org.wormsim.frontend, dormant since 2015), informal Geppetto coupling  
+**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
 
 ---
 

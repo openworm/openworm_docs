@@ -1,10 +1,10 @@
 # DD022: Environmental Modeling and Stimulus Delivery
 
-**Status:** Proposed (Phase 2-3)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-19
-**Supersedes:** None
-**Related:** DD003 (Body Physics — boundary particles), DD019 (Touch Response — tap stimulus), DD017 (Hybrid ML — learned sensory)
+**Status:** Proposed (Phase 2-3)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-19  
+**Supersedes:** None  
+**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
 
 ---
 

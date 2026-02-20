@@ -1,10 +1,10 @@
 # DD017: Hybrid Mechanistic-ML Framework
 
-**Status:** Proposed (Phase 3-4)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-16
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD002 (Muscle Model), DD003 (Body Physics), DD005 (Cell-Type Differentiation), DD009 (Intestinal Oscillator), DD010 (Validation Framework), DD013 (Simulation Stack)
+**Status:** Proposed (Phase 3-4)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-16  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 

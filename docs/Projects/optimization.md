@@ -1,6 +1,9 @@
 Optimization engine
 ===================
 
+!!! info "Related Design Document"
+    Model optimization is being formalized in [DD017: Hybrid Mechanistic-ML Framework](../design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md), which specifies differentiable simulation and automated parameter fitting for 1000x speedup over brute-force approaches.
+
 The Optimization engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of _C. elegans_ muscle cells and neurons.
 
 These two algorithms, Hodgkin-Huxley and SPH, require parameters to be set in order for them to function properly, and therefore create some "known unknowns" or "free parameters" we must define in order for the algorithm to function at all. For Hodgkin-Huxley we must define the ion channel species and set their conductance parameters. For SPH, we must define mass and the forces that one set of particles exert on another, which in turn means defining the mass of muscles and how much they pull. The conventional wisdom on modeling is to minimize the number of free parameters as much as possible, but we know there will be a vast parameter space associated with the model.
@@ -65,3 +68,12 @@ Associated Repositories
 </tr>
 </tbody>
 </table>
+
+---
+
+## Continue Reading
+
+- **[DD017: Hybrid Mechanistic-ML Framework](../design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)** — The next-generation optimization approach
+- **[How It Works: Modeling](../modeling.md)** — How optimization fits into the multi-scale architecture
+- **[Validation Framework](../validation.md)** — The tests that optimization must satisfy
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

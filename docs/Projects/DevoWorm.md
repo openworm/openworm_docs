@@ -37,3 +37,20 @@ Repo Name                                                                       
 [Graphical Visualization](https://github.com/devoworm/Graph-Code)               | Code for Graph Creation
 [Datasets and Analysis](https://github.com/devoworm/DevoWorm)                   | Tools for Developmental Data Science
 [Morphozoic](https://github.com/devoworm/Morphozoic)                            | Morphozoic Models
+
+---
+
+## Related Design Documents
+
+DevoWorm's developmental dynamics work connects to several aspects of the OpenWorm simulation:
+
+- **[DD005: Cell-Type Differentiation](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** — DevoWorm's embryogenetic data informs the cell differentiation strategy
+- **[DD004: Mechanical Cell Identity](../design_documents/DD004_Mechanical_Cell_Identity.md)** — The 959-cell whole-organism model that DevoWorm's morphogenesis work contributes to
+
+---
+
+## Continue Reading
+
+- **[Design Documents](../design_documents/index.md)** — The complete technical roadmap
+- **[How It Works: Modeling](../modeling.md)** — Multi-scale architecture overview
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

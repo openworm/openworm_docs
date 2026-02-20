@@ -1,10 +1,10 @@
 # DD018: Egg-Laying System Architecture (Reproductive Behavioral Circuit)
 
-**Status:** Proposed (Phase 3)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-16
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD002 (Muscle Model), DD004 (Mechanical Cell Identity), DD005 (Cell Differentiation), DD006 (Neuropeptidergic Connectome)
+**Status:** Proposed (Phase 3)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-16  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome)
 
 ---
 

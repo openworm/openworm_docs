@@ -59,4 +59,14 @@ All issues related to the [Sibernetic code base](https://github.com/openworm/Ope
 |------------|-------------|----------|
 | [Smoothed-Particle-Hydrodynamics](https://github.com/openworm/Smoothed-Particle-Hydrodynamics) | The Sibernetic code base — C++ implementation of SPH customised for OpenWorm | C++ |
 | [ConfigurationGenerator](https://github.com/openworm/ConfigurationGenerator) | Generation of start scene configuration for PCISPH solver | JavaScript |
-| [CyberElegans](https://github.com/openworm/CyberElegans) | Circa 2010 neuromechanical prototype ([archived](../archived_projects/#cyberelegans-2010-2014)) | C++ |
+| [CyberElegans](https://github.com/openworm/CyberElegans) | Circa 2010 neuromechanical prototype ([archived](../archived_projects.md#cyberelegans-2010-2014)) | C++ |
+
+---
+
+## Continue Reading
+
+- **[DD003: Body Physics Architecture](../design_documents/DD003_Body_Physics_Architecture.md)** — The governing specification for Sibernetic
+- **[c302](c302.md)** — The neural network framework that drives Sibernetic
+- **[Docker simulation stack](docker.md)** — Running the complete simulation
+- **[Validation Framework](../validation.md)** — How body physics outputs are validated
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

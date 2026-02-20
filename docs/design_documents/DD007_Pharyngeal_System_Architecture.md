@@ -1,10 +1,10 @@
 # DD007: Pharyngeal System Architecture (Semi-Autonomous Organ)
 
-**Status:** Proposed (Phase 3)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD002 (Muscle Model), DD009 (Intestinal Model)
+**Status:** Proposed (Phase 3)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 

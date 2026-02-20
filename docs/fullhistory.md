@@ -142,6 +142,31 @@ Detailed [spreadsheet](https://docs.google.com/spreadsheets/d/1NclOVMRIqY\_hn-aL
 
 September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/) ([David Dalrymple](http://syntheticneurobiology.org/people/display/144/26))**. The aim was to use optogenetics to record the firing dynamics of the _C. elegans_ neurons and then replicate it in a simulation. [He delivered a lecture on the project in November 2011](http://www.youtube.com/watch?v=xW77lANeJas). As of June 2014 [he works for Twitter](https://www.linkedin.com/profile/view?id=66199655) so the project may now be defunct.
 
+The Design Document Era (2024-present)
+--------------------------------------
+
+Building on over a decade of prototyping and publishing, the project entered a new phase in 2024 with the creation of **Design Documents (DDs)** — formal architectural specifications that convert lessons from prototypes into validated engineering blueprints.
+
+Key developments:
+
+- **25 Design Documents** written (DD001-DD023 + DD014.1/DD014.2), covering every subsystem from ion channels to organ systems
+- **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)) established: single-cell electrophysiology, circuit-level functional connectivity, and whole-organism behavioral kinematics
+- **Phase roadmap** defined: from the existing 302-neuron foundation (Phase 0) through cell differentiation, slow modulation, organ systems, to a complete 959-cell organism (Phase 4)
+- **Contributor progression model** ([DD011](design_documents/DD011_Contributor_Progression_Model.md)) formalized for scaling the community
+
+The shift from "cool demo" to "validated engineering blueprint" is what distinguishes the current approach from the prototyping era. See [Archived Projects](archived_projects.md) for how early prototypes like CyberElegans and Geppetto evolved into current Design Documents.
+
+---
+
+## Continue Reading
+
+- **[Design Documents](design_documents/index.md)** — The complete roadmap and all 25 DDs
+- **[Archived Projects](archived_projects.md)** — How early prototypes became formal specifications
+- **[Releases](releases.md)** — Past release milestones
+- **[Background](background.md)** — The scientific concepts behind the project
+
+---
+
 Acknowledgements
 ----------------
 

@@ -1,10 +1,10 @@
 # DD002: Muscle Model Architecture and Calcium-Force Coupling
 
-**Status:** Accepted
-**Author:** OpenWorm Core Team (based on Boyle & Cohen 2008)
-**Date:** 2026-02-14
-**Supersedes:** None
-**Related:** DD001 (Neural Circuit), DD003 (Body Physics)
+**Status:** Accepted  
+**Author:** OpenWorm Core Team (based on Boyle & Cohen 2008)  
+**Date:** 2026-02-14  
+**Supersedes:** None  
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics)
 
 ---
 

@@ -1,10 +1,10 @@
 # DD012: Design Document RFC Process (How Decisions Are Made)
 
-**Status:** Proposed (Governance)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-14
-**Supersedes:** Informal decision-making
-**Related:** DD011 (Contributor Progression), AI-Augmented Open Science Proposal
+**Status:** Proposed (Governance)  
+**Author:** OpenWorm Core Team  
+**Date:** 2026-02-14  
+**Supersedes:** Informal decision-making  
+**Related:** [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression), AI-Augmented Open Science Proposal
 
 ---
 
@@ -46,10 +46,10 @@ Every Design Document follows this structure. **Lead with impact, end with backg
 ```markdown
 # DD###: Title
 
-**Status:** Proposed | Accepted | Superseded | Rejected
-**Author:** Name(s)
-**Date:** YYYY-MM-DD
-**Supersedes:** DD### (if applicable)
+**Status:** Proposed | Accepted | Superseded | Rejected  
+**Author:** Name(s)  
+**Date:** YYYY-MM-DD  
+**Supersedes:** DD### (if applicable)  
 **Related:** DD### (cross-references)
 
 ## TL;DR                                         ← REQUIRED

@@ -1,9 +1,9 @@
 # DD015: AI-Native Contributor Model
 
-**Design Document 015**
-**Status:** Proposed
-**Created:** February 15, 2026
-**Author:** OpenWorm Core Team
+**Design Document 015**  
+**Status:** Proposed  
+**Created:** February 15, 2026  
+**Author:** OpenWorm Core Team  
 **Inspired by:** Moltbook AI social network (launched Jan 28, 2026)
 
 ---

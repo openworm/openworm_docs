@@ -24,9 +24,9 @@ It has all sorts of behaviors! Some include:
 Yes! Our roadmap progresses from today's 302-neuron crawling simulation to a complete 959-cell organism over 18 months:
 
 - **Phase 0** (today): Crawling (302 neurons + 95 muscles + body physics, validated against Schafer lab kinematics)
-- **Phase 1-2:** Cell differentiation (128 neuron classes from CeNGEN) + closed-loop touch response + neuropeptide modulation
+- **Phase 1-2:** Cell differentiation (128 neuron classes from CeNGEN, [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)) + closed-loop touch response ([DD019](design_documents/DD019_Closed_Loop_Touch_Response.md)) + neuropeptide modulation ([DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md))
 - **Phase 3:** Pharynx pumping ([DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)), intestinal defecation ([DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)), egg-laying ([DD018](design_documents/DD018_Egg_Laying_System_Architecture.md))
-- **Phase 4:** All 959 somatic cells with photorealistic visualization
+- **Phase 4:** All 959 somatic cells ([DD004](design_documents/DD004_Mechanical_Cell_Identity.md)) with photorealistic visualization ([DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
 
 The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets.
 
@@ -73,7 +73,7 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 
 **Beyond Phase 4:** Intracellular signaling (IP3/cAMP cascades), developmental modeling (growth, neuron birth/death), male-specific systems.
 
-**"Complete" is relative** — biology is infinitely complex. We define completion as meeting all DD010 validation criteria at the current phase. See the [Design Documents](design_documents/) for the full roadmap.
+**"Complete" is relative** — biology is infinitely complex. We define completion as meeting all [DD010 validation criteria](design_documents/DD010_Validation_Framework.md) at the current phase. See the [Design Documents](design_documents/) for the full roadmap.
 
 ### Currently, what are your biggest problems or needs?
 
@@ -81,8 +81,8 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 **Current priorities:**
 
-- **Infrastructure bootstrap:** Docker stack (DD013), toolbox revival (DD021), CI/CD pipeline
-- **Phase 1 science:** CeNGEN cell differentiation (DD005), functional connectivity validation (DD010 Tier 2)
+- **Infrastructure bootstrap:** Docker stack ([DD013](design_documents/DD013_Simulation_Stack_Architecture.md)), toolbox revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
+- **Phase 1 science:** CeNGEN cell differentiation ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 
 Read more about ways to help [on our website](http://www.openworm.org/get_involved.html) or check the [contributor guide](community/).
@@ -114,11 +114,11 @@ We model at **five scales simultaneously** (detailed on the [modeling approach p
 
 | Scale | Design Documents | Computational Cost |
 |-------|------------------|-------------------|
-| Molecular | DD017 | Low (parameter lookup) |
-| Channel | DD001, DD005 | Moderate (HH equations per cell) |
-| Cellular | DD001, DD002, DD007-DD009 | Moderate-High (302-959 cells) |
-| Tissue | DD003, DD004 | High (~100K SPH particles) |
-| Organism | DD010, DD019 | Validation overhead |
+| Molecular | [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) | Low (parameter lookup) |
+| Channel | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Moderate (HH equations per cell) |
+| Cellular | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Moderate-High (302-959 cells) |
+| Tissue | [DD003](design_documents/DD003_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | High (~100K SPH particles) |
+| Organism | [DD010](design_documents/DD010_Validation_Framework.md), [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) | Validation overhead |
 
 In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
 
@@ -128,10 +128,10 @@ There is not a single data source for our simulation; in fact one of our unique 
 
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](http://caltech.wormbase.org/virtualworm/)
 -   [The _C. elegans_ connectome](http://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)
--   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives DD005 cell differentiation
--   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — Tier 2 validation target (DD010)
--   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions (DD006)
--   [Schafer lab WCON behavioral database](http://wormbehavior.mrc-lmb.cam.ac.uk/) — Tier 3 validation target (DD010)
+-   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives [cell-type differentiation](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
+-   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — [Tier 2 validation](design_documents/DD010_Validation_Framework.md) target for functional connectivity
+-   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions feeding the [neuropeptide model](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)
+-   [Schafer lab WCON behavioral database](http://wormbehavior.mrc-lmb.cam.ac.uk/) — [Tier 3 validation](design_documents/DD010_Validation_Framework.md) target for behavioral kinematics
 
 ### Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 
@@ -176,9 +176,9 @@ OpenWorm code reuse
 
 ### What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
 
-These were core technologies for the [Geppetto simulation platform](archived_projects/#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD014 (Dynamic Visualization)](design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
+These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD014 (Dynamic Visualization)](design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
 
-See [Archived Projects](archived_projects/) for the full historical context.
+See [Archived Projects](archived_projects.md) for the full historical context.
 
 OpenWorm links and resources
 ----------------------------

@@ -79,3 +79,27 @@ In this case, we have to make do with what we have and make some good educated g
 ### NeuroML
 
 [NeuroML is](http://en.wikipedia.org/wiki/NeuroML) an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
+
+OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in [DD001: Neural Circuit Architecture](design_documents/DD001_Neural_Circuit_Architecture.md).
+
+---
+
+## How These Concepts Connect to Design Documents
+
+Each concept on this page has been formalized into an actionable Design Document (DD):
+
+| Concept | Design Document | What It Specifies |
+|---------|----------------|-------------------|
+| Bottom-up simulation | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD003](design_documents/DD003_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
+| Multi-algorithm integration | [DD013](design_documents/DD013_Simulation_Stack_Architecture.md) | Docker-based simulation stack assembling all algorithms |
+| Model optimization | [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid mechanistic-ML framework for parameter fitting |
+| NeuroML | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
+
+---
+
+## Continue Reading
+
+- **[How It Works: Modeling](modeling.md)** — How these concepts come together in the current multi-scale architecture
+- **[Validation Framework](validation.md)** — How we test that the model matches real worm biology
+- **[Design Documents](design_documents/index.md)** — The complete technical roadmap from 302 neurons to 959 cells
+- **[Full History](fullhistory.md)** — Detailed timeline from 1900 to present
