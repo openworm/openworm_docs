@@ -69,7 +69,7 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 - [DD010](design_documents/DD010_Validation_Framework.md) Tier 3: Behavioral kinematics (Schafer lab)
 - Organ-specific validation: Pumping 3-4 Hz, defecation 50+/-10s, egg-laying two-state pattern
 - All cells have cell-type-specific mechanics ([DD004](design_documents/DD004_Mechanical_Cell_Identity.md))
-- Public web viewer at viewer.openworm.org
+- Public web viewer at wormsim.openworm.org (WormSim 2.0)
 
 **Beyond Phase 4:** Intracellular signaling (IP3/cAMP cascades), developmental modeling (growth, neuron birth/death), male-specific systems.
 

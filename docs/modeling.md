@@ -184,7 +184,7 @@ More details available on the [Validation page](validation/).
 
 - **Phase 1:** Trame viewer (PyVista + live server, organism + tissue scales)
 - **Phase 2:** Interactive layers (neuropeptides, organs, validation overlay)
-- **Phase 3:** Three.js + WebGPU static site, molecular scale, viewer.openworm.org
+- **Phase 3:** Three.js + WebGPU static site, molecular scale, wormsim.openworm.org (WormSim 2.0)
 
 **Why the evolution from Geppetto?** [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) Alternatives Considered: Geppetto is Java-based, requires per-client server processes, not updated for WebGPU. Trame is lighter, Python-native (matches contributor skillset), actively maintained.
 

@@ -58,7 +58,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 1. **Phase 1:** Trame viewer (PyVista + live server)
 2. **Phase 2:** Interactive layers with validation overlays
-3. **Phase 3:** Three.js + WebGPU static site at viewer.openworm.org
+3. **Phase 3:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
 
 ---
 

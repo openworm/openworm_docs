@@ -12,7 +12,7 @@ The OpenWorm Browser can be accessed [here](http://browser.openworm.org/).
 The source code for this project can be found [here](https://github.com/openworm/wormbrowser).
 
 !!! note "Future Visualization"
-    The next-generation visualization is specified by [DD014: Dynamic Visualization Architecture](../design_documents/DD014_Dynamic_Visualization_Architecture.md), which plans a Trame-based viewer evolving toward a public Three.js + WebGPU site at viewer.openworm.org.
+    The next-generation visualization is specified by [DD014: Dynamic Visualization Architecture](../design_documents/DD014_Dynamic_Visualization_Architecture.md), which plans a Trame-based viewer evolving toward **WormSim 2.0** — a public Three.js + WebGPU site at wormsim.openworm.org. The WormBrowser at browser.openworm.org will continue to be maintained until WormSim 2.0 achieves full feature parity (see DD014 deployment timeline).
 
 ---
 

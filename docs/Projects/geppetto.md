@@ -27,7 +27,7 @@ The definitive documentation for Geppetto [is available online](http://docs.gepp
 |-------|-----------|------------|
 | Phase 1 | Trame (PyVista) | Organism + tissue scales, live server |
 | Phase 2 | Trame + layers | Neuropeptides, organs, validation overlay |
-| Phase 3 | Three.js + WebGPU | Molecular scale, static site at viewer.openworm.org |
+| Phase 3 | Three.js + WebGPU | Molecular scale, static site at wormsim.openworm.org (WormSim 2.0) |
 
 ---
 

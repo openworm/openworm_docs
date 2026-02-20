@@ -109,7 +109,7 @@
 |----|-------|-----------|
 | [DD004](DD004_Mechanical_Cell_Identity.md) | Mechanical Cell Identity | 959 cells with cell-type mechanics |
 | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Mesh Deformation | GPU skinning, photorealistic |
-| [DD014 Phase 3](DD014_Dynamic_Visualization_Architecture.md) | Public Viewer | Molecular scale, viewer.openworm.org |
+| [DD014 Phase 3](DD014_Dynamic_Visualization_Architecture.md) | WormSim 2.0 | Molecular scale, wormsim.openworm.org |
 
 ---
 

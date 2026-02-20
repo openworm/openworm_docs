@@ -3,7 +3,7 @@
 **Status:** Proposed  
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-15  
-**Supersedes:** WormSim (org.wormsim.frontend, dormant since 2015), informal Geppetto coupling  
+**Supersedes:** WormBrowser (browser.openworm.org, 2012), WormSim (org.wormsim.frontend, 2014-2015), informal Geppetto coupling  
 **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
 
 ---
@@ -24,6 +24,31 @@ Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD013](DD013_Sim
 | WCON trajectory file | Numerical data (not visual) |
 
 There is no smooth-surfaced worm, no way to zoom into a firing neuron, no way for a non-scientist to understand what they're looking at, and no way to experience the multi-scale nature of the simulation (ion channels → neurons → muscles → body → behavior).
+
+### The WormBrowser (2012): What People Actually Use
+
+The most-used OpenWorm visualization tool is not a simulation viewer — it's the **WormBrowser** ([browser.openworm.org](http://browser.openworm.org)), a static 3D anatomy browser live since 2012.
+
+| Feature | Description |
+|---------|-------------|
+| **3D anatomy** | Full *C. elegans* cellular anatomy from VirtualWorm meshes (Caltech/WormBase) |
+| **Layer peeling** | Opacity slider revealing cuticle → organs → muscles → neurons |
+| **Layer toggles** | Individual on/off for cuticle, organs, muscles, neurons |
+| **Search** | Find any cell by name |
+| **Click-to-select** | Click any entity to see its identity |
+| **Zero installation** | WebGL in any modern browser — no Docker, no server |
+
+**Technology:** jQuery 1.6.3, open-3d-viewer (WebGL), hosted on Google App Engine. Built by Giovanni Idili (2012). iOS version: `openworm/openwormbrowser-ios` (2013). Last code update: 2013, but the site remains live and widely referenced — papers, Wikipedia, Experiments with Google, talks.
+
+**John White (Feb 12, 2026 meeting):** *"One of the things that gets OpenWorm known... that could do with an update."* Specific suggestions:
+
+- **Multiple developmental stages** — L1, L4, adult, dauer reconstructions now exist
+- **Male anatomy** — being reconstructed (Cook 2019 male connectome)
+- **Comparative species** — *Pristionchus pacificus* and other nematodes now mapped
+- **Click neuron → link to WormAtlas** — *"click on and identify a particular neuron and have a link"*
+- **Work with WormAtlas team** (Nate Schroeder)
+
+The WormBrowser is approaching end of life (legacy jQuery, no updates since 2013), but it's too important to abandon without a replacement that matches its features. **WormSim 2.0 must achieve WormBrowser feature parity before browser.openworm.org can redirect.**
 
 ### The WormSim Vision (2014)
 
@@ -91,7 +116,7 @@ DD014 is developed incrementally across three Roadmap phases. To avoid confusion
 |--------------------|---------------|----------|------------|
 | **Viewer Stage 1** — Post-hoc Trame viewer | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (Cell Differentiation, months 1-3) | Weeks 1-8 | Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing. |
 | **Viewer Stage 2** — Interactive dynamic viewer | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Modulation + Closed-Loop, months 4-6) | Weeks 9-20 | All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins. |
-| **Viewer Stage 3** — Public experience | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org. |
+| **Viewer Stage 3** — WormSim 2.0 | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. **browser.openworm.org redirects here after feature parity achieved.** |
 
 Note: There is no DD014 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
 
@@ -101,7 +126,7 @@ See **[DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Spe
 
 **Viewer Stage 2 (Roadmap Phase 2): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
 
-**Viewer Stage 3 (Roadmap Phase 4): Public experience.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1](DD014.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
+**Viewer Stage 3 (Roadmap Phase 4): WormSim 2.0.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1](DD014.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
 
 ### Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
 
@@ -516,9 +541,9 @@ Enhance the viewer with deeper interactivity and begin Three.js migration for pu
 
 **Deliverable:** Full tissue/cell-scale exploration. Early Three.js prototype for server-free deployment.
 
-### Viewer Stage 3: Public Experience — "A Digital Organism In Your Browser" (Roadmap [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18), Weeks 21-32+)
+### Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18), Weeks 21-32+)
 
-The full WormSim vision, rebuilt on modern technology.
+The full WormSim vision, rebuilt on modern technology. Deploys to `wormsim.openworm.org` as a static site. browser.openworm.org redirects here once WormBrowser feature parity is achieved (see Deployment Plan below).
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
@@ -529,16 +554,18 @@ The full WormSim vision, rebuilt on modern technology.
 | Molecular-scale view (ion channels, Ca dynamics) | Visualization L4 | 40 hrs | Three.js viewer |
 | Mobile-responsive design | Community contributor | 16 hrs | Three.js viewer |
 | WebXR support (VR/AR exploration) | Community contributor | 24 hrs | Three.js viewer |
-| Deploy to `viewer.openworm.org` (static site) | Integration Maintainer | 4 hrs | Three.js viewer |
+| Deploy to `wormsim.openworm.org` (static site) | Integration Maintainer | 4 hrs | Three.js viewer |
+| Verify WormBrowser feature parity (see checklist) | Visualization L4 | 4 hrs | All Stage 3 features |
+| Redirect browser.openworm.org → wormsim.openworm.org | Integration Maintainer | 2 hrs | Feature parity confirmed |
 | MyBinder/Colab integration (zero-install demo) | Community contributor | 8 hrs | Stage 1 Trame viewer |
 
-**Deliverable:** Anyone with a browser can visit `viewer.openworm.org` and explore a dynamic, multi-scale simulation of *C. elegans* — no Docker, no installation, no server.
+**Deliverable:** Anyone with a browser can visit `wormsim.openworm.org` and explore a dynamic, multi-scale simulation of *C. elegans* — no Docker, no installation, no server.
 
 ---
 
 ## The End-State Vision
 
-When the full system is running (all phases complete), a user visiting `viewer.openworm.org` would experience:
+When the full system is running (all phases complete), a user visiting `wormsim.openworm.org` would experience:
 
 **Organism Scale (default view):**
 A smooth, translucent *C. elegans* crawling across the screen. Body bends propagate anterior to posterior. The pharynx pumps rhythmically at 3-4 Hz at the head. Every ~50 seconds, a visible contraction wave runs posterior-to-anterior as the defecation motor program fires.
@@ -564,7 +591,64 @@ Faint volumetric clouds appear between neurons, showing neuropeptide diffusion f
 **Toggle "Validation":**
 Green checkmarks appear on subsystems passing validation (locomotion speed within ±15% of experimental data, pumping frequency 3-4 Hz, defecation period 40-60s). Red marks highlight any deviations.
 
-**This is the end state.** Not a static anatomy browser, not a particle cloud, not a matplotlib plot — a living, dynamic, multi-scale simulation that anyone can explore in a web browser, backed by the most complete computational model of any organism ever built.
+**This is WormSim 2.0** — the fulfillment of the 2014 Kickstarter promise, rebuilt with 2026 technology. Not a static anatomy browser, not a particle cloud, not a matplotlib plot — a living, dynamic, multi-scale simulation that anyone can explore in a web browser, backed by the most complete computational model of any organism ever built. When this launches, browser.openworm.org redirects here.
+
+---
+
+## Deployment Plan: From WormBrowser to WormSim 2.0
+
+### What's Live Where, When
+
+| Phase | browser.openworm.org | wormsim.openworm.org | Docker viewer |
+|-------|---------------------|---------------------|---------------|
+| Phase A | WormBrowser (legacy, live) | Does not exist | — |
+| Phase 1 | **WormBrowser enhanced** — click neuron/cell → links to WormAtlas + WormBase | Does not exist | `docker compose up viewer` → Trame at localhost:8501 |
+| Phase 2 | WormBrowser enhanced (continues) | Three.js prototype (may lack some WormBrowser features) | Trame viewer continues |
+| Phase 3 | WormBrowser enhanced (continues) | Three.js with organ systems (approaching parity) | Trame viewer continues |
+| Phase 4 | **Redirects → wormsim.openworm.org** | **WormSim 2.0** — full public experience | Trame viewer continues (local dev) |
+
+### Phase 1 Quick Win: WormBrowser Enhancement
+
+The existing WormBrowser at browser.openworm.org gets a targeted enhancement in Phase 1 — not a full rewrite, just adding click-to-identify with database links:
+
+- **Click any neuron** → tooltip/panel shows: neuron name, class (sensory/inter/motor), [WormAtlas](https://wormatlas.org) link, [WormBase](https://wormbase.org) link
+- **Click any muscle** → similar links
+- JavaScript patch to the existing legacy codebase (jQuery + open-3d-viewer)
+- Estimated effort: ~8-16 hours (AI-assisted)
+- Directly addresses John White's Feb 12 request: *"click on and identify a particular neuron and have a link"*
+- Ships to browser.openworm.org independently of WormSim 2.0 development
+- Timeline: gives John a tangible result for the April 10, 2026 NYC prize meeting
+
+### WormBrowser Feature Parity Checklist
+
+WormSim 2.0 must have ALL of the following before browser.openworm.org redirects to it:
+
+**WormBrowser features (must match):**
+
+- [ ] 3D anatomy from VirtualWorm meshes (688 meshes, 37 material categories)
+- [ ] Layer peeling / opacity control (opacity slider)
+- [ ] Individual layer toggles (cuticle, organs, muscles, neurons)
+- [ ] Search by cell name
+- [ ] Click any cell → identify it (name, type, links to WormAtlas + WormBase)
+- [ ] Zero installation (works in any WebGL/WebGPU browser)
+- [ ] Static hosting (no server process required)
+
+**WormSim 2.0 additions (why users switch):**
+
+- [ ] Simulation data overlay (neurons fire, muscles contract, organs pump)
+- [ ] Time scrubbing (play, pause, scrub through simulation)
+- [ ] Inspector panel (click cell → voltage trace, calcium trace, connections)
+- [ ] Multi-scale zoom (organism → tissue → molecular)
+- [ ] Validation overlay (pass/fail vs. experimental data)
+
+**John White requirements (phased):**
+
+- [ ] Click neuron → links to WormAtlas and WormBase — **Phase 1 quick win on existing WormBrowser**
+- [ ] Multiple developmental stages (L1, L4, adult) — from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions (Phase 4+)
+- [ ] Dauer larva anatomy — from [Yim et al. 2024](https://doi.org/10.1038/s41467-024-45943-3) (Phase 4+)
+- [ ] Male anatomy — from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) male connectome (Phase 4+)
+- [ ] Comparative species view — *Pristionchus pacificus* and other nematodes (Phase 5+)
+- [ ] Stage/sex comparison mode (Phase 4+)
 
 ---
 
@@ -584,7 +668,9 @@ Green checkmarks appear on subsystems passing validation (locomotion speed withi
 
 ## References
 
-1. **WormSim original vision:** `openworm/org.wormsim.frontend` (2014 Kickstarter, dormant since 2015)
+1. **WormBrowser:** `openworm/wormbrowser` (Idili, 2012, [browser.openworm.org](http://browser.openworm.org)) — Static 3D anatomy browser, still live
+1. **WormBrowser iOS:** `openworm/openwormbrowser-ios` (2013) — iOS companion app
+1. **WormSim original vision:** `openworm/org.wormsim.frontend` (2014 Kickstarter, $121K raised from 799 backers, dormant since 2015)
 2. **Worm3DViewer:** `openworm/Worm3DViewer` (Gleeson, 2025, v0.0.8, Streamlit + PyVista)
 3. **Trame (Kitware):** https://kitware.github.io/trame/ — Production web framework for VTK/PyVista
 4. **OME-Zarr specification:** https://ngff.openmicroscopy.org/ — Cloud-native bioimaging format

@@ -171,6 +171,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 5. **Trame viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Replaces Streamlit+stpyvista, supports time animation in browser
 6. **Tier 2 validation** ([DD010](DD010_Validation_Framework.md)) — Automated correlation vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); CI blocks PRs if r < 0.5
 7. **Visual rendering spec** ([DD014.1](DD014.1_Visual_Rendering_Specification.md)) — 37-material color palette, activity-state overlays, 14 reference mockups as acceptance tests
+8. **WormBrowser enhancement** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Click neuron/cell → links to WormAtlas + WormBase on browser.openworm.org (quick win for John White, ~8-16 hrs)
 
 **Milestone:** 🎉 **"Biologically Distinct Neurons"**
 
@@ -353,11 +354,11 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 3. **Cell boundary meshes** (`data/cell_boundaries/*.obj`) — Per-cell 3D volumes from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM
 4. **Deformed Virtual Worm meshes** ([DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) — 688 anatomical meshes follow SPH body shape in real-time
 5. **Three.js viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
-6. **Static site deployment** — viewer.openworm.org (GitHub Pages or CDN)
+6. **Static site deployment** — wormsim.openworm.org (GitHub Pages or CDN)
 
-**Milestone:** 🎉 **"959-Cell Digital Organism — Explore in Your Browser"**
+**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"**
 
-- **What you run:** Open `viewer.openworm.org` in any browser. No Docker, no installation, no server.
+- **What you run:** Open `wormsim.openworm.org` in any browser. No Docker, no installation, no server.
 - **What you see — 3 scales of exploration:**
     - **Organism scale (default):** Smooth, translucent *C. elegans* crawling across the screen. Anatomical meshes (688 Virtual Worm pieces) deform with the SPH body in real-time. Pharynx pumps at the head, defecation contractions visible every ~50s.
     - **Tissue/Cell scale (zoom in):** Click any of 959 individually labeled cells. Neurons glow by voltage. Muscles flash by contraction. Intestinal cells show calcium waves. Inspector panel shows cell identity (WBbt ID), real-time traces, and links to WormBase.
@@ -373,6 +374,8 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Mesh deformation: All 688 Virtual Worm meshes deform with SPH body, no interpenetration, <4ms per frame (60fps budget)
 - ✅ Three.js viewer: 60fps on 2020-era laptop, all 3 scales working, static deployment (no server required)
 - ✅ Molecular scale: Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion visible ([DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14)
+- ✅ WormBrowser feature parity: layer peeling, search by cell name, click-to-identify, static hosting — all WormBrowser features matched ([DD014](DD014_Dynamic_Visualization_Architecture.md) checklist)
+- ✅ browser.openworm.org redirects to wormsim.openworm.org
 
 **Datasets Needed for Phase 4:**
 
@@ -603,9 +606,9 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 **See:** Worm crawls while pharynx pumps at 3-4 Hz, intestine fires calcium waves every ~50s triggering defecation, and egg-laying bouts occur every ~20 min. All visible simultaneously in the viewer.
 **Validated against:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) pharyngeal EPG; [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation period; [Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging
 
-### Milestone 5: "959-Cell Browser Experience" (End of Phase 4)
+### Milestone 5: "WormSim 2.0" (End of Phase 4)
 **When:** Month 18 (September 2027)
-**Run:** Open `viewer.openworm.org` — no installation required
+**Run:** Open `wormsim.openworm.org` — no installation required
 **See:** Smooth worm with 688 deforming anatomical meshes. Zoom from organism → tissue (click any of 959 cells) → molecular (ion channels, gene transcription). 60fps on a laptop.
 **Validated against:** All previous tiers passing. Cell-type-specific mechanics produce realistic body deformation.
 

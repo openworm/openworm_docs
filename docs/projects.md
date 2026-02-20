@@ -62,7 +62,7 @@ The visualization platform is evolving per **[DD014 (Dynamic Visualization Archi
 
 - **Phase 1:** Trame viewer (PyVista + live server)
 - **Phase 2:** Interactive layers with validation overlays
-- **Phase 3:** Three.js + WebGPU static site at viewer.openworm.org
+- **Phase 3:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
 
 [Geppetto](Projects/geppetto/) served this role historically (2014-2020) and is preserved as [archival reference](archived_projects/).
 
