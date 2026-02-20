@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
+| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | Standardized connectome data access via `cect` Python API: adjacency matrices, `ConnectionInfo` objects, cell classification, neurotransmitter identities, bilateral symmetry metrics |
 | **Success metric** | All consuming DDs ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD019](DD019_Closed_Loop_Touch_Response.md)) obtain connectome data exclusively through `cect`; dataset selection is explicit and reproducible |
 | **Repository** | [`openworm/ConnectomeToolbox`](https://github.com/openworm/ConnectomeToolbox) — issues labeled `dd020` |

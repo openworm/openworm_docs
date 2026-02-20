@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **What does this produce?** | Pharyngeal network: 20 neurons + 20 muscles (NeuroML), 1D pumping oscillator module, pumping state time series |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: pumping frequency 3-4 Hz; body locomotion not degraded when pharynx enabled |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_pharynx.py`, `pharynx/` module) — issues labeled `dd007` |

@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
+| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. Randi 2023; Tier 3: 5 kinematic metrics within ±15% of Schafer lab data |
 | **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |

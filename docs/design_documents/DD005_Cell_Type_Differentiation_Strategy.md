@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Cell Differentiation
+
 ## TL;DR
 
 Replace the single generic neuron template used for all 302 neurons with **128 cell-type-specific templates** parameterized from CeNGEN single-cell RNA-seq data. This is Phase 1 work — the first DD to produce biologically distinct neurons. Success metric: **20%+ improvement in functional connectivity correlation** vs. Randi et al. 2023 experimental data.

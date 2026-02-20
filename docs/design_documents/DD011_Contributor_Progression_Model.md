@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Governance
+
 ## Context
 
 OpenWorm has operated with **informal, organic leadership emergence**: "experienced and enthusiastic volunteers often establish themselves as leaders without any prompting" (Sarma et al. 2018). This has strengths (low bureaucracy, self-motivation) but creates problems:

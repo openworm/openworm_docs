@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **What does this produce?** | NeuroML `<peptideRelease>` + `<peptideReceptor>` components for 31,479 peptide-receptor interactions; conductance modulation layer |
 | **Success metric** | ≥3 peptide knockout phenotypes reproduced within 30% error ([DD010](DD010_Validation_Framework.md) Tier 3); wild-type kinematics not degraded |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd006` |

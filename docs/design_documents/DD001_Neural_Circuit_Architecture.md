@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
+| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | NeuroML network files: `LEMS_c302_C1_*.xml` with 302 neurons, 95 muscles, graded synapses, gap junctions |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% of Schafer lab WCON data |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd001` |

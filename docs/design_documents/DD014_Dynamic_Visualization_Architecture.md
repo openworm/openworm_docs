@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Phase 1–4](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Visualization
+
 ## Context
 
 ### The Missing Layer

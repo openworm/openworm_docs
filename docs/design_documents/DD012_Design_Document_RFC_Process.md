@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Governance
+
 ## Context
 
 Currently, architectural decisions in OpenWorm happen through:

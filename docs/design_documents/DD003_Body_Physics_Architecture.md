@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
+| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | Particle position time series (~100K SPH particles), WCON trajectory files, rendered body frames |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd003` |

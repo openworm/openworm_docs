@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** Governance | **Layer:** AI Contributor Model
+
 ## Context
 
 OpenWorm's AI-Augmented Open Science model ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), AI Agent Architecture) describes how **AI agents assist human contributors** — N2-Whisperer onboards newcomers, Mind-of-a-Worm reviews PRs, Mad-Worm-Scientist filters information for the founder. But what if we went further?

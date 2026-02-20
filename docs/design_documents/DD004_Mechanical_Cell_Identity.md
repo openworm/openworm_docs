@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) |
+| **Layer** | Complete Organism — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) |
 | **What does this produce?** | Tagged particle file: each of ~100K SPH particles gets a WBbt cell ID + cell-type-specific elasticity/adhesion |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% with `cell_identity: true`; all 959 somatic cells mapped |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd004` |

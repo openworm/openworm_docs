@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **What does this produce?** | Closed-loop mechanosensory transduction model: Sibernetic cuticle strain → MEC-4 channel currents on touch neurons (ALM, AVM, PLM, PVD) → tap withdrawal circuit → motor reversal → backward locomotion |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: tap stimulus → reversal onset <1 s, backward locomotion ≥1 body length, return to forward crawling within 10 s |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (mechanosensory model, circuit) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (strain readout, tap stimulus, bidirectional coupling) |

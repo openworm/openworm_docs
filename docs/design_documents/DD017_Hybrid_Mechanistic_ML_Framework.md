@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (3) Foundation model → ODE parameter pipeline, (4) Learned sensory transduction module |
 | **Success metric** | Differentiable model matches [DD010](DD010_Validation_Framework.md) Tier 2+3 validation within ±5% of reference NEURON/jNML; SPH surrogate achieves 1000x speedup with <5% trajectory error; auto-fitted parameters outperform hand-tuned on [DD010](DD010_Validation_Framework.md) metrics |
 | **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd017` |

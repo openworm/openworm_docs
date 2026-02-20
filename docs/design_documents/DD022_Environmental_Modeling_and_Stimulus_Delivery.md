@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Layer** | Environment — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **What does this produce?** | Substrate models (agar stiffness, liquid viscosity, soil), chemical/thermal gradient fields, geometric obstacles, bacterial lawn particle system |
 | **Success metric** | Chemotaxis on NaCl gradient (CI chemotaxis index >0.5), thermotaxis to cultivation temp (±2°C), tap withdrawal on agar vs. liquid (latency difference reproduced) |
 | **Repository** | `openworm/sibernetic` (substrate mechanics) + `openworm/c302` (stimulus coupling to sensory neurons) — issues labeled `dd022` |

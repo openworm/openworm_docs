@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
+| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | `GenericMuscleCell` NeuroML template (95 body wall muscles), muscle [Ca²⁺]→activation coupling via `sibernetic_c302.py` |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: forward speed and body bend amplitude within ±15% of baseline |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (muscle templates) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (coupling script) — issues labeled `dd002` |

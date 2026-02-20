@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
+| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
 | **What does this produce?** | Revived `open-worm-analysis-toolbox` package: installs on Python 3.12, extracts 5 kinematic features from WCON files, compares simulated vs. experimental worm movement, outputs pass/fail validation report |
 | **Success metric** | Toolbox installs cleanly; `NormalizedWorm.from_schafer_file()` + `WormFeatures()` produces speed, wavelength, frequency, amplitude, gait classification for Schafer N2 baseline data; Sibernetic WCON output parses without error |
 | **Repository** | [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) (primary) + [`openworm/tracker-commons`](https://github.com/openworm/tracker-commons) (WCON spec). Note: `openworm/movement_validation` is the **archived predecessor** — do not use. |

@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **What does this produce?** | Egg-laying circuit: 2 HSN neurons + 6 VC neurons + 16 sex muscles (NeuroML), serotonergic/cholinergic signaling, two-state behavioral output |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: egg-laying bout interval 20 +/- 10 min, 3-5 eggs per bout; inactive/active two-state pattern reproduced |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_egglaying.py`, `egglaying/` module) — issues labeled `dd018` |

@@ -12,6 +12,8 @@
 
 | Question | Answer |
 |----------|--------|
+| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **What does this produce?** | 20 intestinal cell models (IP3/Ca2+ oscillator in NeuroML/LEMS), defecation trigger signal, per-cell calcium time series |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: defecation cycle period 50 +/- 10 seconds; posterior-to-anterior wave; >=3 consecutive cycles |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_intestine.py`, `intestine/` module) — issues labeled `dd009` |

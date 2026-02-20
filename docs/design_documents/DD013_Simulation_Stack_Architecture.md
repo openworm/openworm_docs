@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Integration
+
 ## Context
 
 ### The Gap Between Vision and Execution
@@ -89,7 +91,7 @@ A contributor who wants to test a change against the full simulation must:
 
 ### The Scale of What's Coming
 
-The Whole-Organism Modeling Proposal (Phases 1-6) will expand the simulation from:
+The [Whole-Organism Modeling Proposal](DD_PHASE_ROADMAP.md) (Phases 1-6) will expand the simulation from:
 
 - **302 identical neurons + body wall muscles + fluid body** →
 - **128 differentiated neuron types + neuropeptides + pharynx (63 cells) + intestine (20 cells) + mechanical cell identity + intercellular signaling**
