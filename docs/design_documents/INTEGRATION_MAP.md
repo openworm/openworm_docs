@@ -9,7 +9,7 @@
 
 **OpenWorm Mission:** "Creating the world's first virtual organism in a computer, a *C. elegans* nematode." (openworm.org)
 
-**This Integration Map shows:** How 21 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
+**This Integration Map shows:** How 23 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
@@ -31,12 +31,17 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-**Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
+**Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)
 **Last updated:** 2026-02-19
 
 ---
 
-## Complete Dependency Graph (PlantUML)
+## Complete Dependency Graph
+
+![OpenWorm Integration Map](../images/integration_map.svg)
+
+<details>
+<summary>PlantUML Source (click to expand)</summary>
 
 ```plantuml
 @startuml OpenWorm_Integration_Map
@@ -93,6 +98,8 @@ package "Layer 5: Extensions" #F3E5F5 {
   component "[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)\nNeuropeptides\n(31,479 interactions)" as [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) #FFE4B5
   component "[DD004](DD004_Mechanical_Cell_Identity.md)\nMechanical\nCell Identity\n(959 cells)" as [DD004](DD004_Mechanical_Cell_Identity.md) #FFE4B5
   component "[DD019](DD019_Closed_Loop_Touch_Response.md)\nTouch\nResponse\n(Closed-Loop)" as [DD019](DD019_Closed_Loop_Touch_Response.md) #FFE4B5
+  component "[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md)\nEnvironmental\nModeling\n(Gradients, Stimuli)" as [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) #FFE4B5
+  component "[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)\nProprioception\n(Stretch Receptors)" as [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) #FFE4B5
 }
 
 ' Layer 6: Organ Systems
@@ -152,6 +159,12 @@ ext_vw --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) : "688 mes
 [DD003](DD003_Body_Physics_Architecture.md) --> [DD004](DD004_Mechanical_Cell_Identity.md) : "Particle struct,\ninitialization"
 [DD004](DD004_Mechanical_Cell_Identity.md) --> [DD003](DD003_Body_Physics_Architecture.md) : "Tagged particles\nwith cell IDs"
 
+' Environment & Proprioception
+[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD019](DD019_Closed_Loop_Touch_Response.md) : "Stimulus\ndelivery"
+[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD003](DD003_Body_Physics_Architecture.md) : "Substrate\nproperties"
+[DD003](DD003_Body_Physics_Architecture.md) --> [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) : "Body curvature\n(SPH particles)"
+[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) --> [DD001](DD001_Neural_Circuit_Architecture.md) : "Stretch current\non B-class\nmotor neurons"
+
 ' Organ Systems
 [DD001](DD001_Neural_Circuit_Architecture.md) --> [DD007](DD007_Pharyngeal_System_Architecture.md) : "Pharyngeal\nneural circuit"
 [DD002](DD002_Muscle_Model_Architecture.md) --> [DD007](DD007_Pharyngeal_System_Architecture.md) : "Muscle model\nframework"
@@ -188,6 +201,8 @@ ext_vw --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) : "688 mes
 [DD009](DD009_Intestinal_Oscillator_Model.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Intestinal calcium,\ndefecation events"
 [DD018](DD018_Egg_Laying_System_Architecture.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Sex muscle\nactivation"
 [DD019](DD019_Closed_Loop_Touch_Response.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Cuticle strain,\nreversal events"
+[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Environment\ngradients"
+[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Body curvature\nheatmap"
 [DD010](DD010_Validation_Framework.md) --> [DD014](DD014_Dynamic_Visualization_Architecture.md) : "Validation\noverlay"
 
 ' Visualization Internal
@@ -213,7 +228,9 @@ ext_vw --> [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) : "688 mes
 @enduml
 ```
 
-**To render:** Use PlantUML online (plantuml.com/plantuml) or local PlantUML jar:
+</details>
+
+**To re-render:** Use PlantUML online (plantuml.com/plantuml) or local PlantUML jar:
 ```bash
 java -jar plantuml.jar INTEGRATION_MAP.md
 # Generates INTEGRATION_MAP.png
@@ -250,19 +267,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Primary data flow** through the simulation:
 
-```
-[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Cook2019Herm connectome topology)
-  ↓
-[DD001](DD001_Neural_Circuit_Architecture.md) (302 neurons, HH dynamics, voltage/calcium time series)
-  ↓ (NMJ synapses: V_neuron → I_syn on muscle)
-[DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, calcium accumulation → activation coefficient [0,1])
-  ↓ (via sibernetic_c302.py: muscle_ca → Sibernetic input file)
-[DD003](DD003_Body_Physics_Architecture.md) (SPH particles, muscle forces → body deformation → movement)
-  ↓ (via master_openworm.py: particle positions → WCON export)
-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Analysis toolbox: WCON → 5 kinematic features)
-  ↓
-[DD010](DD010_Validation_Framework.md) Tier 3 (Compare to Schafer baseline → pass/fail report)
-```
+![Chain 1: Core Loop](../images/chain1_core_loop.svg)
 
 **Coupling scripts:**
 
@@ -284,15 +289,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Phase 1 validation chain:**
 
-```
-[DD008](DD008_Data_Integration_Pipeline.md)/DD020 (CeNGEN L4 expression: 128 classes × 20,500 genes)
-  ↓
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Expression → conductance calibration via regression on 20 neurons with electrophysiology)
-  ↓ (Generates 128 .cell.nml files with class-specific conductances)
-[DD001](DD001_Neural_Circuit_Architecture.md) (Replaces GenericCell with differentiated cells when neural.differentiated: true)
-  ↓ (Run 60s simulation with calcium recording)
-[DD010](DD010_Validation_Framework.md) Tier 2 (Compute 302×302 functional connectivity, compare to Randi 2023)
-```
+![Chain 2: Cell Differentiation](../images/chain2_cell_differentiation.svg)
 
 **What breaks if:**
 
@@ -306,22 +303,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **New in Phase 2** — adds reverse path (body → sensory):
 
-```
-FORWARD PATH (existing):
-  [DD001](DD001_Neural_Circuit_Architecture.md) (touch neurons → command interneurons → motor neurons)
-    ↓
-  [DD002](DD002_Muscle_Model_Architecture.md) (motor neuron → muscle calcium → activation)
-    ↓
-  [DD003](DD003_Body_Physics_Architecture.md) (muscle forces → SPH body deformation → movement)
-
-REVERSE PATH (new in [DD019](DD019_Closed_Loop_Touch_Response.md)):
-  [DD003](DD003_Body_Physics_Architecture.md) (elastic particle positions)
-    ↓ (strain_readout.py: local strain at touch neuron receptive fields)
-  [DD019](DD019_Closed_Loop_Touch_Response.md) (MEC-4 channel: strain → current injection on ALM/AVM/PLM)
-    ↓ (via NeuroML exposure variable)
-  [DD001](DD001_Neural_Circuit_Architecture.md) (touch neurons depolarize → synaptic drive to AVA/AVB)
-    ↓ (LOOP BACK TO FORWARD PATH)
-```
+![Chain 3: Closed-Loop Touch](../images/chain3_closed_loop.svg)
 
 **Coupling script:**
 
@@ -342,30 +324,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 
 **Every science DD exports to OME-Zarr for the viewer:**
 
-```
-[DD001](DD001_Neural_Circuit_Architecture.md) (neural/voltage/, neural/calcium/, neural/positions/) ----+
-[DD002](DD002_Muscle_Model_Architecture.md) (muscle/activation/, muscle/calcium/) --------------------+
-[DD003](DD003_Body_Physics_Architecture.md) (body/positions/, body/types/) ---------------------------+
-[DD004](DD004_Mechanical_Cell_Identity.md) (body/cell_ids/) [Phase 4] -------------------------------+
-[DD005](DD005_Cell_Type_Differentiation_Strategy.md) (neural/neuron_class/) [Phase 1] -------------------------+
-[DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides/concentrations/) [Phase 2] ----------------+
-[DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx/pumping_state/) [Phase 3] -----------------------+
-[DD009](DD009_Intestinal_Oscillator_Model.md) (intestine/calcium/, defecation_events/) [Phase 3] -------+
-[DD018](DD018_Egg_Laying_System_Architecture.md) (egglaying/muscle_activation/, circuit_state/) [Phase 3] -+
-[DD019](DD019_Closed_Loop_Touch_Response.md) (sensory/strain/, behavior/events/) [Phase 2] ------------+
-[DD010](DD010_Validation_Framework.md) (validation/tier2_report.json, tier3_report.json) --------+
-                                                                 |
-                                                                 ↓
-                            [DD013](DD013_Simulation_Stack_Architecture.md) Step 4b (master_openworm.py OME-Zarr export)
-                                                                 ↓
-                            output/openworm.zarr/ (OME-Zarr store)
-                                                                 ↓
-                            [DD014](DD014_Dynamic_Visualization_Architecture.md) (Trame/Three.js viewer reads and renders)
-                                                                 ↓
-                            [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Color mapping: activity → visual properties)
-                                                                 ↓
-                            [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh deformation: SPH particles → Virtual Worm meshes)
-```
+![Chain 4: Visualization Pipeline](../images/chain4_visualization.svg)
 
 **Coupling owner:**
 

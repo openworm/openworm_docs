@@ -66,22 +66,7 @@ OpenWorm doesn't model at one scale — it models at **five scales simultaneousl
 
 Inspired by [Robert Rosen's work on causal loops](http://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
 
-![Complex causation loop](https://docs.google.com/drawings/d/1VwzSDl_a_YCqOkO4tqrG8FzB0B5A50FWgO0qdkBpNB4/pub?w=401&h=312)
-
-**Environment** — [DD022](design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md): gradients, substrates
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *sensory transduction*
-**Sensory Neurons** — [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md): MEC-4 channels, [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md): learned sensory
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *synaptic transmission*
-**Interneurons** — [DD001](design_documents/DD001_Neural_Circuit_Architecture.md): HH dynamics, [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md): 128 classes, [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md): neuropeptide modulation
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *motor output*
-**Motor Neurons** — [DD001](design_documents/DD001_Neural_Circuit_Architecture.md): command interneurons + motor neurons
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *neuromuscular junctions*
-**Muscle Cells** — [DD002](design_documents/DD002_Muscle_Model_Architecture.md): calcium-force coupling
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *force generation*
-**Body Deformation** — [DD003](design_documents/DD003_Body_Physics_Architecture.md): SPH particles, [DD004](design_documents/DD004_Mechanical_Cell_Identity.md): cell-specific mechanics
-&nbsp;&nbsp;&nbsp;&nbsp;↓ *locomotion in environment*
-**Movement** — [DD010](design_documents/DD010_Validation_Framework.md) Tier 3: validated against Schafer lab kinematics
-&nbsp;&nbsp;&nbsp;&nbsp;↑ *LOOP BACK: body position → sensory neurons detect new stimuli*
+![OpenWorm Sensorimotor Causal Loop](images/causal_loop.svg)
 
 **[DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)** closes this loop — the worm can sense its environment (cuticle strain to MEC-4 channels to neural response to motor pattern to movement).
 
