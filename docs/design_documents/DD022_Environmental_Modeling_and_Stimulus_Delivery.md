@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+The worm doesn't live in a void — it crawls on agar, swims in liquid, navigates chemical gradients, seeks preferred temperatures, and eats bacteria. This DD specifies how to model substrates (agar stiffness, liquid viscosity, soil mechanics), deliver stimuli (NaCl gradients, temperature ramps, tap impulses), and represent food (OP50 bacterial particles in pharyngeal lumen). Success: reproduce chemotaxis (CI index >0.5) and thermotaxis (navigate to cultivation temp) on simulated gradients.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test --config chemotaxis` (worm navigates gradient?), `docker compose run validate` (CI index validation) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `environment/substrate/` layer (agar surface heatmap), `environment/gradients/` (chemical/thermal field visualization), `environment/food/` (bacterial particles) |
 | **CI gate** | Behavioral validation (chemotaxis, thermotaxis) blocks merge; substrate mechanics must not destabilize body physics |
-
----
-
-## TL;DR
-
-The worm doesn't live in a void — it crawls on agar, swims in liquid, navigates chemical gradients, seeks preferred temperatures, and eats bacteria. This DD specifies how to model substrates (agar stiffness, liquid viscosity, soil mechanics), deliver stimuli (NaCl gradients, temperature ramps, tap impulses), and represent food (OP50 bacterial particles in pharyngeal lumen). Success: reproduce chemotaxis (CI index >0.5) and thermotaxis (navigate to cultivation temp) on simulated gradients.
-
 ---
 
 ## Mission Alignment

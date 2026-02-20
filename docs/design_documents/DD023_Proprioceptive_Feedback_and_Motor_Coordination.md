@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that detect local body curvature, providing proprioceptive feedback for stable undulatory locomotion. This feedback loop (Wen et al. 2012) complements the touch response ([DD019](DD019_Closed_Loop_Touch_Response.md)) and likely stabilizes the locomotion wave by coupling adjacent body segments. Success: locomotion wavelength stability improves to ±10% (vs. ±15% without proprioception), and ablating stretch receptors degrades coordination by >30%.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `proprioception: true` (wave propagates?), `docker compose run validate` (wavelength stability) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `sensory/curvature/` layer — body curvature heatmap; `neural/` layer — B-class motor neurons with proprioceptive input highlighted |
 | **CI gate** | Tier 3 wavelength validation (±10% with proprioception) blocks merge; backward compat with `proprioception: false` required |
-
----
-
-## TL;DR
-
-B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that detect local body curvature, providing proprioceptive feedback for stable undulatory locomotion. This feedback loop (Wen et al. 2012) complements the touch response ([DD019](DD019_Closed_Loop_Touch_Response.md)) and likely stabilizes the locomotion wave by coupling adjacent body segments. Success: locomotion wavelength stability improves to ±10% (vs. ±15% without proprioception), and ablating stretch receptors degrades coordination by >30%.
-
 ---
 
 ## Mission Alignment

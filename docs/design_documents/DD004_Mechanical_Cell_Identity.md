@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cell-type-specific mechanics (intestinal peristalsis, cuticle stiffness, hypodermal compliance). Extends the particle struct from 32 to 44 bytes. Success: all 959 somatic cells represented, Tier 3 kinematics within ±15%.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `cell_identity: false` (backward compat), then `cell_identity: true` (tagged sim) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `body/cell_ids/` layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray) |
 | **CI gate** | Tier 3 kinematic validation blocks merge; backward compatibility with `cell_identity: false` required |
-
----
-
-## TL;DR
-
-Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cell-type-specific mechanics (intestinal peristalsis, cuticle stiffness, hypodermal compliance). Extends the particle struct from 32 to 44 bytes. Success: all 959 somatic cells represented, Tier 3 kinematics within ±15%.
-
 ---
 
 ## Goal & Success Criteria

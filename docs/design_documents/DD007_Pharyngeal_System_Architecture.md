@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level C1 Hodgkin-Huxley), 20 nonstriated muscles (plateau potentials), and a 1D pumping oscillator. The pharynx is functionally isolated from the body circuit. Success: pumping frequency 3-4 Hz, with body locomotion not degraded when the pharynx is enabled.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `pharynx.enabled: true` (body still moves?), `scripts/measure_pumping.py` (3-4 Hz?) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `pharynx/pumping_state/` layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap |
 | **CI gate** | Pumping frequency validation (Tier 3) blocks merge; backward compatibility with `pharynx.enabled: false` required |
-
----
-
-## TL;DR
-
-Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level C1 Hodgkin-Huxley), 20 nonstriated muscles (plateau potentials), and a 1D pumping oscillator. The pharynx is functionally isolated from the body circuit. Success: pumping frequency 3-4 Hz, with body locomotion not degraded when the pharynx is enabled.
-
 ---
 
 ## Goal & Success Criteria

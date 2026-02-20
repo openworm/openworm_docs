@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the defecation motor program (~50s period). Calcium waves propagate posterior-to-anterior through gap-junction-coupled intestinal cells and trigger the pBoc, aBoc, Exp behavioral sequence via enteric muscle innervation. Success: oscillation period 50+/-10 seconds, correct wave direction, and >=3 consecutive cycles without damping.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `intestine.enabled: true` (5s partial cycle), nightly: `measure_defecation_period.py` (200s full validation) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `intestine/calcium/` layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); `intestine/defecation_events/` for pBoc/aBoc/Exp markers |
 | **CI gate** | Per-PR: 5s quick-test (no crash); nightly: full 200s period validation (Tier 3) blocks merge |
-
----
-
-## TL;DR
-
-Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the defecation motor program (~50s period). Calcium waves propagate posterior-to-anterior through gap-junction-coupled intestinal cells and trigger the pBoc, aBoc, Exp behavioral sequence via enteric muscle innervation. Success: oscillation period 50+/-10 seconds, correct wave direction, and >=3 consecutive cycles without damping.
-
 ---
 
 ## Goal & Success Criteria

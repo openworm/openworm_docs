@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, Wang 2024 neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `pip install cect==0.2.7` then `python -c "from cect.Cook2019HermReader import get_instance; cds = get_instance(); cds.summary()"` |
 | **Visualize** | `cect` built-in: `cds.to_plotly_matrix_fig(synclass, view)`, `cds.to_plotly_graph_fig(synclass, view)`, `cds.to_plotly_hive_plot_fig(synclass, view)` |
 | **CI gate** | `cect` import + default dataset query returns expected neuron count; version matches `versions.lock` |
-
----
-
-## TL;DR
-
-The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, Wang 2024 neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
-
 ---
 
 ## Goal & Success Criteria

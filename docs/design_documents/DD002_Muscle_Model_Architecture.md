@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling, bridging the neural voltage domain (mV, milliseconds) to the Sibernetic body physics domain (forces, mechanical strain). 95 body wall muscles in 4 quadrants convert intracellular calcium concentration to a linear activation coefficient [0, 1] consumed by Sibernetic. Success: forward speed and body bend amplitude within ±15% of Schafer lab experimental data.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` (activation in [0,1]?), `docker compose run validate` (Tier 3 kinematics) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `muscle/activation/` layer — 95 muscles with [0,1] activation heatmap, warm colormap |
 | **CI gate** | Tier 3 kinematic validation blocks merge |
-
----
-
-## TL;DR
-
-The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling, bridging the neural voltage domain (mV, milliseconds) to the Sibernetic body physics domain (forces, mechanical strain). 95 body wall muscles in 4 quadrants convert intracellular calcium concentration to a linear activation coefficient [0, 1] consumed by Sibernetic. Success: forward speed and body bend amplitude within ±15% of Schafer lab experimental data.
-
 ---
 
 ## Goal & Success Criteria

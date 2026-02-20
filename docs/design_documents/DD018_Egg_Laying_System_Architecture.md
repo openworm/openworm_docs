@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serotonergic HSN command neurons, 6 cholinergic VC motor neurons, and 16 non-striated sex muscles (8 vulval + 8 uterine), with uv1 neuroendocrine feedback cells providing tyramine-mediated inhibition. The circuit produces a characteristic two-state behavioral pattern: ~20-minute inactive phases alternating with ~2-minute active bouts of 3-5 eggs each. Success: reproduce the two-state temporal pattern within quantitative bounds of Collins et al. 2016 experimental data.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `egglaying.enabled: true` (body still moves?), `scripts/measure_egglaying.py` (two-state pattern?) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `egglaying/muscle_activation/` layer — 16 sex muscles with contraction heatmap; `egglaying/circuit_state/` for active/inactive state timeline |
 | **CI gate** | Two-state behavioral validation (Tier 3) blocks merge; backward compatibility with `egglaying.enabled: false` required |
-
----
-
-## TL;DR
-
-Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serotonergic HSN command neurons, 6 cholinergic VC motor neurons, and 16 non-striated sex muscles (8 vulval + 8 uterine), with uv1 neuroendocrine feedback cells providing tyramine-mediated inhibition. The circuit produces a characteristic two-state behavioral pattern: ~20-minute inactive phases alternating with ~2-minute active bouts of 3-5 eggs each. Success: reproduce the two-state temporal pattern within quantitative bounds of Collins et al. 2016 experimental data.
-
 ---
 
 ## Goal & Success Criteria

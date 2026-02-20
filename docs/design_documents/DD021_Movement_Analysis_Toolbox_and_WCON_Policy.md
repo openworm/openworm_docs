@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behavioral validation** ([DD010](DD010_Validation_Framework.md)). It compares simulated worm movement trajectories against Schafer lab experimental data by extracting kinematic features from WCON (Worm tracker Commons Object Notation) files. The toolbox is **dormant** (last commit: January 16, 2020 — 6 years ago) with 28 open issues and broken Python 3.12 compatibility. This DD specifies: (1) the toolbox's revival plan with owners and effort estimates, (2) WCON 1.0 format pinning from tracker-commons, (3) the canonical API contract for feature extraction and comparison, (4) version pinning policy, and (5) the relationship to Tierpsy Tracker (modern community successor). **Without a working analysis toolbox, Tier 3 validation is impossible — this is a blocking dependency for [DD010](DD010_Validation_Framework.md) and [DD013](DD013_Simulation_Stack_Architecture.md).**
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `pip install open-worm-analysis-toolbox` then `python -c "from open_worm_analysis_toolbox import NormalizedWorm; print('OK')"` |
 | **Visualize** | Toolbox generates matplotlib comparison plots (simulated vs. experimental feature distributions); [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer shows validation overlay in `validation/overlay/` OME-Zarr group |
 | **CI gate** | Toolbox import succeeds; feature extraction on sample WCON returns 5 non-NaN metrics; version matches `versions.lock` |
-
----
-
-## TL;DR
-
-The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behavioral validation** ([DD010](DD010_Validation_Framework.md)). It compares simulated worm movement trajectories against Schafer lab experimental data by extracting kinematic features from WCON (Worm tracker Commons Object Notation) files. The toolbox is **dormant** (last commit: January 16, 2020 — 6 years ago) with 28 open issues and broken Python 3.12 compatibility. This DD specifies: (1) the toolbox's revival plan with owners and effort estimates, (2) WCON 1.0 format pinning from tracker-commons, (3) the canonical API contract for feature extraction and comparison, (4) version pinning policy, and (5) the relationship to Tierpsy Tracker (modern community successor). **Without a working analysis toolbox, Tier 3 validation is impossible — this is a blocking dependency for [DD010](DD010_Validation_Framework.md) and [DD013](DD013_Simulation_Stack_Architecture.md).**
-
 ---
 
 ## Goal & Success Criteria

@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level Hodgkin-Huxley conductance-based framework (c302), with Level C1 (graded synapses) as the default. Graded synapses match worm biology — these neurons do not fire action potentials. Success: kinematic validation of emergent locomotion within ±15% of Schafer lab experimental data.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
 | **CI gate** | Tier 3 kinematic validation blocks merge; `jnml -validate` blocks PR |
-
----
-
-## TL;DR
-
-OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level Hodgkin-Huxley conductance-based framework (c302), with Level C1 (graded synapses) as the default. Graded synapses match worm biology — these neurons do not fire action potentials. Success: kinematic validation of emergent locomotion within ±15% of Schafer lab experimental data.
-
 ---
 
 ## Goal & Success Criteria

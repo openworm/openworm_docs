@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic SPH particles, transducing it through a biophysical MEC-4/MEC-10 channel model on touch receptor neurons (ALM, AVM, PLM, PVD), and coupling this into the existing c302 tap withdrawal circuit — producing emergent backward locomotion in response to a simulated tap. This is the first behavior that requires **bidirectional coupling**: body physics → sensory neurons (new) AND neurons → muscles → body physics (existing). Success: a forward-crawling worm reverses direction within 1 second of a tap stimulus, travels ≥1 body length backward, and resumes forward crawling within 10 seconds.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` (closed-loop runs, reversal occurs), `docker compose run validate` (Tier 3 behavioral) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `sensory/strain/` layer — cuticle strain heatmap; `neural/` layer — touch neuron + command interneuron activation; `body/` layer — body trajectory with reversal event markers |
 | **CI gate** | Tier 3 behavioral validation blocks merge; closed-loop stability (no NaN/divergence over 30 s) blocks PR |
-
----
-
-## TL;DR
-
-Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic SPH particles, transducing it through a biophysical MEC-4/MEC-10 channel model on touch receptor neurons (ALM, AVM, PLM, PVD), and coupling this into the existing c302 tap withdrawal circuit — producing emergent backward locomotion in response to a simulated tap. This is the first behavior that requires **bidirectional coupling**: body physics → sensory neurons (new) AND neurons → muscles → body physics (existing). Success: a forward-crawling worm reverses direction within 1 second of a tap stimulus, travels ≥1 body length backward, and resumes forward crawling within 10 seconds.
-
 ---
 
 ## Goal & Success Criteria

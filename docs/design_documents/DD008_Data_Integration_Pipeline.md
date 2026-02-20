@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+OWMeta is a semantic knowledge graph providing unified programmatic access to 15+ biological data sources (WormBase, CeNGEN, Cook connectome, Ripoll-Sanchez neuropeptides, Randi functional connectivity, etc.). All modeling code should access data through OWMeta, not by parsing raw files. Success: all downstream DDs can query data via a unified API; ID consistency across all datasets with every neuron/cell ID mapping to the WBbt ontology.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run shell python -c "import owmeta_core"` (installs?), query 302 neurons (returns correct count?) |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `geometry/cell_metadata.json` — cell names, types, lineage for viewer tooltips and search |
 | **CI gate** | OWMeta installation + basic query test blocks merge for data-layer changes |
-
----
-
-## TL;DR
-
-OWMeta is a semantic knowledge graph providing unified programmatic access to 15+ biological data sources (WormBase, CeNGEN, Cook connectome, Ripoll-Sanchez neuropeptides, Randi functional connectivity, etc.). All modeling code should access data through OWMeta, not by parsing raw files. Success: all downstream DDs can query data via a unified API; ID consistency across all datasets with every neuron/cell ID mapping to the WBbt ontology.
-
 ---
 
 ## Goal & Success Criteria

@@ -8,6 +8,12 @@
 
 ---
 
+## TL;DR
+
+Add 31,479 neuropeptide-receptor interactions (Ripoll-Sanchez 2023) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Success: at least 3 peptide knockout phenotypes reproduced within 30% error.
+
+---
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -21,13 +27,6 @@
 | **Build & test** | `docker compose run quick-test` with `neuropeptides: false` (backward compat), then `neuropeptides: true` |
 | **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neuropeptides/concentrations/` layer — volumetric peptide concentration fields; `neuropeptides/release_events/` for per-neuron release timing |
 | **CI gate** | Tier 3 kinematic validation blocks merge; conductance modulation must stay in [0.5, 3.0] range |
-
----
-
-## TL;DR
-
-Add 31,479 neuropeptide-receptor interactions (Ripoll-Sanchez 2023) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Success: at least 3 peptide knockout phenotypes reproduced within 30% error.
-
 ---
 
 ## Goal & Success Criteria
