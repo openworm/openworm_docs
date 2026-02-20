@@ -3,6 +3,9 @@ theme:
   name: material
   favicon: images/favicon.ico
   logo: images/favicon.ico
+markdown_extensions:
+  - toc:
+      permalink: true
 nav:
   - Home: index.md
   - Background: background.md
