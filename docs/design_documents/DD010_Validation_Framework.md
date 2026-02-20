@@ -76,11 +76,63 @@ Run the cell model in isolation (no synaptic inputs, no network effects) with st
 
 **Coverage:** ~7 neuron classes have direct patch-clamp or detailed calcium imaging data suitable for Tier 1 spot-checks. An additional ~13 classes have partial recordings (single-channel data, calcium responses to specific stimuli) curated in the `openworm/ChannelWorm` ion channel database. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Calibration Dataset for the full training set.
 
-**Gap:** The majority of the 128 CeNGEN neuron classes lack direct electrophysiology. For these, Tier 1 validation is limited to checking that model predictions are *consistent with* CeNGEN expression (e.g., a neuron expressing high EGL-19 should show large L-type calcium currents). This is why Tier 1 is non-blocking — it validates where data exist but cannot cover all neurons.
+**For the ~121 neuron classes without direct electrophysiology:** Tier 1 cannot compare to patch-clamp recordings that don't exist. Instead, we run **expression-consistency checks** — systematic tests that the model's electrical behavior is consistent with its [CeNGEN](https://cengen.org) ([Taylor et al. 2021](https://doi.org/10.1016/j.cell.2021.06.023)) ion channel expression profile. This catches gross errors (e.g., a model with large calcium currents in a neuron that doesn't express calcium channels) without requiring experimental recordings.
 
-**Example (AVA neuron validation):**
+**Expression-consistency check: gene → expected electrical property**
+
+For each neuron class, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) maps CeNGEN expression to conductance densities. The following table defines what each major channel gene predicts about the model's electrical behavior:
+
+| CeNGEN Gene | Channel Type | If Highly Expressed (top quartile) | If Not Expressed (<1 TPM) | Model Check |
+|-------------|-------------|-----------------------------------|--------------------------|-------------|
+| **egl-19** | Cav1 (L-type Ca²⁺) | Large sustained calcium current during depolarization; high resting [Ca²⁺] | No L-type calcium current | Inject +20mV step → measure I_Ca amplitude |
+| **unc-2** | Cav2 (P/Q-type Ca²⁺) | Large transient calcium current; fast synaptic release | No P/Q-type current | Voltage ramp → I-V curve shows Ca²⁺ peak |
+| **cca-1** | Cav3 (T-type Ca²⁺) | Low-threshold calcium spikes; rebound bursting after hyperpolarization | No rebound activity | Hyperpolarize → release → check for rebound depolarization |
+| **shl-1** | Kv4 (A-type K⁺) | Fast transient outward current; delays depolarization onset | No A-type current | Depolarize from -80mV → measure transient K⁺ peak |
+| **shk-1** | Kv1 (delayed rectifier K⁺) | Sustained outward current; limits depolarization duration | No sustained K⁺ current | Sustained depolarization → measure steady-state K⁺ current |
+| **unc-103** | Kir (inward rectifier) | Inward current at hyperpolarized potentials; stabilizes resting potential | No inward rectification | I-V curve shows inward current below -80mV |
+| **twk-18** | TWIK (two-pore leak K⁺) | Low input resistance; hyperpolarized resting potential | High input resistance | Measure R_in and V_rest |
+| **osm-9** | TRPV (mechanosensory) | Mechanically-gated inward current (sensory neurons only) | No mechanosensory response | Only in ASH, AWA, etc. — check for presence/absence |
+
+**Systematic validation procedure:**
+
+1. **Rank channels by expression.** For each neuron class, sort its ion channel genes by CeNGEN TPM (transcripts per million). The top 3 expressed channels define the neuron's expected "electrical fingerprint."
+
+2. **Run the model.** Simulate each neuron class in isolation with a standard voltage-clamp protocol (ramp from -100mV to +40mV, 200ms).
+
+3. **Extract current contributions.** Measure the peak current carried by each channel type in the model.
+
+4. **Check rank-order consistency.** The model's current ranking should match the expression ranking:
+    - If CeNGEN says `egl-19 >> shl-1 >> unc-2` for neuron X, then the model's L-type Ca²⁺ current should be larger than its A-type K⁺ current, which should be larger than its P/Q-type Ca²⁺ current.
+    - Rank-order correlation (Spearman) between expression and model current magnitudes should be positive.
+
+5. **Check qualitative predictions.** Verify the binary checks from the table above:
+    - Gene not expressed (<1 TPM) → corresponding current is absent (<1% of total)
+    - Gene highly expressed (top quartile) → corresponding current is present and substantial (>10% of total)
+
+**Acceptance criteria (expression-consistency):**
+
+- **Rank-order correlation:** Spearman ρ > 0.5 between CeNGEN expression rank and model current rank, averaged across all 128 neuron classes
+- **Absence check:** For genes with <1 TPM expression, the corresponding model current must be <1% of total current in ≥95% of cases
+- **Presence check:** For genes in the top quartile of expression, the corresponding model current must be >10% of total current in ≥80% of cases
+- **Zero known violations:** No neuron class should have its dominant current type contradicted by CeNGEN (e.g., a neuron dominated by L-type Ca²⁺ current that doesn't express egl-19)
+
+**Testing command:**
 ```bash
-# Run isolated AVA model
+# Run expression-consistency validation across all 128 neuron classes
+python scripts/validate_expression_consistency.py \
+    --cell_models cells/*.cell.nml \
+    --cengen_expression data/CeNGEN_L4_expression.csv \
+    --gene_channel_map data/gene_to_channel_map.csv \
+    --output validation_report_tier1_consistency.json
+
+# Output: per-neuron rank correlation, absence/presence checks, violations
+```
+
+**This is non-blocking** because (a) the expression→conductance calibration ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) is approximate, (b) post-transcriptional regulation means mRNA ≠ protein ≠ membrane conductance, and (c) some channel genes have poorly characterized kinetics. But it catches the most common failure mode: a calibration error that gives a neuron the wrong dominant current type.
+
+**Example (AVA neuron validation — direct electrophysiology):**
+```bash
+# Run isolated AVA model (one of ~7 neurons with patch-clamp data)
 python c302/test_single_cell.py --cell AVACell --protocol voltage_clamp
 
 # Compare to Lockery lab data (Lindsay et al. 2011)
@@ -90,7 +142,7 @@ python scripts/validate_single_cell_electrophys.py \
     --output validation_report_AVA.html
 ```
 
-**Outcome:** Report file showing parameter-by-parameter comparison. If >2 parameters fail (exceed acceptance range), flag for review.
+**Outcome:** For neurons with electrophysiology: parameter-by-parameter comparison report. If >2 parameters fail (exceed acceptance range), flag for review. For all 128 neurons: expression-consistency report with rank correlations and violation flags.
 
 ### Tier 2: Circuit-Level Validation (Integration Tests)
 
