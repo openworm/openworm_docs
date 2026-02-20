@@ -57,14 +57,14 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 ### Phase 0: Existing Foundation (Accepted, Working)
 
 **Status:** ✅ Complete (but needs Phase A containerization work)
-**Milestone:** "First Whole-Nervous-System Simulation" (already achieved, Sarma et al. 2018)
+**Milestone:** "First Whole-Nervous-System Simulation" (already achieved, [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382))
 
 | DD | Title | Status | What It Does |
 |----|-------|--------|--------------|
 | **[DD001](DD001_Neural_Circuit_Architecture.md)** | [Neural Circuit Architecture](DD001_Neural_Circuit_Architecture.md) | ✅ Accepted | 302 neurons, HH Level C1, graded synapses, validated kinematics |
 | **[DD002](DD002_Muscle_Model_Architecture.md)** | [Muscle Model Architecture](DD002_Muscle_Model_Architecture.md) | ✅ Accepted | 95 body wall muscles, Ca²⁺→force coupling, Boyle & Cohen parameters |
 | **[DD003](DD003_Body_Physics_Architecture.md)** | [Body Physics Architecture](DD003_Body_Physics_Architecture.md) | ✅ Accepted | Sibernetic SPH, PCISPH pressure solver, ~100K particles, fluid-structure interaction |
-| **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** | [Connectome Data Access & Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | ✅ Accepted (needs version pinning) | ConnectomeToolbox (`cect` v0.2.7), Cook2019Herm default, 30+ dataset readers |
+| **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** | [Connectome Data Access & Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | ✅ Accepted (needs version pinning) | ConnectomeToolbox (`cect` v0.2.7), [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm default, 30+ dataset readers |
 
 ---
 
@@ -87,7 +87,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 **Status:** ⚠️ Ready to start (after Phase A)
 **Milestone:** "Biologically Distinct Neurons" — 128 neuron classes from CeNGEN, Tier 2 validation, 3D viewer
-**Key Dataset:** CeNGEN L4 expression (128 classes × 20,500 genes), Randi 2023 functional connectivity
+**Key Dataset:** CeNGEN L4 expression (128 classes × 20,500 genes), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity
 
 | DD | Title | Dependencies | What Changes |
 |----|-------|-------------|--------------|
@@ -101,7 +101,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 **Status:** ⚠️ Proposed (ready after Phase 1)
 **Milestone:** "The Worm Can Feel and Modulate" — Closed-loop touch, neuropeptides, interactive viewer
-**Key Datasets:** Ripoll-Sanchez 2023 (31,479 peptide-receptor interactions), O'Hagan 2005 (MEC-4 kinetics)
+**Key Datasets:** [Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043) (31,479 peptide-receptor interactions), O'Hagan 2005 (MEC-4 kinetics)
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
@@ -115,7 +115,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 **Status:** ⚠️ Proposed (ready after Phase 2)
 **Milestone:** "Multi-Organ Digital Organism" — Pharynx, intestine, egg-laying, ML acceleration
-**Key Datasets:** Raizen 1994 (EPG), Thomas 1990 (defecation), Collins 2016 (egg-laying calcium imaging)
+**Key Datasets:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (EPG), [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (defecation), [Collins 2016](https://doi.org/10.7554/eLife.21126) (egg-laying calcium imaging)
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
@@ -130,7 +130,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 **Status:** ⚠️ Proposed (ready after Phase 3)
 **Milestone:** "959-Cell Photorealistic Whole Organism" — All somatic cells, mesh deformation, public web viewer
-**Key Datasets:** Witvliet 2021 cell boundaries (EM), Virtual Worm Blender meshes (688 meshes, ~1.6M vertices)
+**Key Datasets:** [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) cell boundaries (EM), Virtual Worm Blender meshes (688 meshes, ~1.6M vertices)
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
@@ -277,7 +277,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 
 ### Muscle Systems
 
-- **Body Wall:** [DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, Ca²⁺→force coupling, Boyle & Cohen 2008 parameters)
+- **Body Wall:** [DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, Ca²⁺→force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters)
 - **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal muscles, nonstriated, plateau potentials, gap-junction-synchronized)
 - **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (16 sex muscles: 8 vulval [vm1, vm2], 8 uterine [um1, um2]; EGL-19/UNC-103 channels)
 
@@ -301,7 +301,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 
 ### Data & Validation
 
-- **Connectome:** [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (`cect` API v0.2.7, Cook2019Herm default, 30+ datasets including Witvliet developmental series, Ripoll-Sanchez neuropeptides, Wang 2024 neurotransmitters)
+- **Connectome:** [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (`cect` API v0.2.7, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm default, 30+ datasets including Witvliet developmental series, Ripoll-Sanchez neuropeptides, [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitters)
 - **Data Integration:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta semantic RDF graph; Phase 3+ wraps [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) `cect` internally)
 - **Movement Validation:** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (open-worm-analysis-toolbox revival, WCON 1.0 spec, 5 kinematic metrics, Tier 3 behavioral validation)
 - **Validation Framework:** [DD010](DD010_Validation_Framework.md) (3 tiers: Tier 1 electrophysiology, Tier 2 functional connectivity r > 0.5, Tier 3 behavioral ±15%)

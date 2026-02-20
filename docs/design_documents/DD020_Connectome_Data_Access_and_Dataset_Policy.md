@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, Wang 2024 neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
+The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
 
 ---
 
@@ -35,9 +35,9 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 |-----------|--------|------------|
 | **Primary:** Unified data access | All 9 consuming DDs obtain connectome data via `cect` API, not raw file parsing | Tier 1 (blocking) |
 | **Secondary:** Reproducibility | Dataset selection and `cect` version pinned in `openworm.yml` + `versions.lock`; any two runs with same config produce identical adjacency matrices | Tier 1 (blocking) |
-| **Tertiary:** Multi-dataset validation | Simulation results compared against ≥2 independent connectome datasets (e.g., Cook2019Herm primary, Witvliet8 cross-validation) | Tier 2 (non-blocking initially, blocking Phase 3+) |
+| **Tertiary:** Multi-dataset validation | Simulation results compared against ≥2 independent connectome datasets (e.g., [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm primary, Witvliet8 cross-validation) | Tier 2 (non-blocking initially, blocking Phase 3+) |
 
-**Before:** Each consuming DD independently decides which connectome dataset to use, how to parse it, and how to handle cell name variants. [DD001](DD001_Neural_Circuit_Architecture.md) uses `UpdatedSpreadsheetDataReader2`, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) uses Ripoll-Sanchez data, [DD007](DD007_Pharyngeal_System_Architecture.md) may use Cook2019 pharyngeal subset — no coordination, no version pinning, no comparison.
+**Before:** Each consuming DD independently decides which connectome dataset to use, how to parse it, and how to handle cell name variants. [DD001](DD001_Neural_Circuit_Architecture.md) uses `UpdatedSpreadsheetDataReader2`, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) uses Ripoll-Sanchez data, [DD007](DD007_Pharyngeal_System_Architecture.md) may use [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) pharyngeal subset — no coordination, no version pinning, no comparison.
 
 **After:** A single DD (this one) specifies dataset selection, version pinning, API contract, and validation strategy. Consuming DDs reference [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for connectome access. Changes to default dataset or `cect` version are reviewed centrally.
 
@@ -48,7 +48,7 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 | Artifact | Path / Location | Format | Example |
 |----------|----------------|--------|---------|
 | `cect` package (external) | PyPI: `pip install cect` / GitHub: `openworm/ConnectomeToolbox` | Python package | `from cect.Cook2019HermReader import get_instance` |
-| Dataset selection policy | This DD (Section: Dataset Selection Policy) | Markdown specification | "Default adult hermaphrodite: Cook2019Herm" |
+| Dataset selection policy | This DD (Section: Dataset Selection Policy) | Markdown specification | "Default adult hermaphrodite: [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm" |
 | `openworm.yml` connectome config | `data.connectome.*` keys | YAML | `dataset: "Cook2019Herm"`, `cect_version: "0.2.7"` |
 | `versions.lock` entry | `cect` key in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)) | Lock file | `cect: "0.2.7"` |
 | Connectome adjacency matrices | In-memory via `cect` API | `numpy.ndarray` per synclass | `cds.connections["Generic_CS"]` shape (N, N) |
@@ -149,20 +149,20 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 
 | Use Case | Default Dataset | `cect` Reader | Rationale |
 |----------|----------------|---------------|-----------|
-| **Adult hermaphrodite somatic connectome** | Cook et al. 2019 (hermaphrodite) | `Cook2019HermReader` | Gold standard whole-animal EM reconstruction; corrects White 1986 errors; includes both chemical and electrical synapses |
-| **Adult male connectome** | Cook et al. 2019 (male) | `Cook2019MaleReader` | Only complete male connectome; 385 neurons including male-specific |
-| **Pharyngeal nervous system** | Cook et al. 2019 (pharyngeal subset) | `Cook2019HermReader` with pharynx view filter | Same dataset, filtered via `cds.get_connectome_view("Pharynx")` |
-| **Developmental series** | Witvliet et al. 2021 (stages 1-8) | `WitvlietDataReader1` through `WitvlietDataReader8` | Only developmental connectome series; L1 through adult |
-| **Functional connectivity validation** | Randi et al. 2023 | `WormNeuroAtlasFuncReader` | Whole-brain calcium imaging functional connectivity; primary validation target for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) |
-| **Neuropeptidergic network** | Ripoll-Sanchez et al. 2023 | `RipollSanchezShortRangeReader`, `RipollSanchezMidRangeReader`, `RipollSanchezLongRangeReader` | Extrasynaptic neuropeptide signaling; [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) primary data source |
-| **Neurotransmitter identity** | Wang et al. 2024 | `Wang2024HermReader`, `Wang2024MaleReader` | CRISPR/Cas9 fluorescent reporter atlas; 16 neurotransmitter systems; reveals co-transmission |
-| **OpenWorm unified (experimental)** | Wang 2024 hermaphrodite base | `OpenWormUnifiedReader` | WIP — subject to change; currently wraps Wang2024Reader with electrical connections. Use for forward-looking development, not production simulations |
-| **Legacy / backward compatibility** | Varshney et al. 2011 | `VarshneyDataReader` | Historical dataset; use only for comparing to pre-2019 publications |
-| **Cross-validation** | Witvliet stage 8 (adult) | `WitvlietDataReader8` | Independent adult reconstruction for comparing against Cook2019Herm |
+| **Adult hermaphrodite somatic connectome** | [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) (hermaphrodite) | `Cook2019HermReader` | Gold standard whole-animal EM reconstruction; corrects White 1986 errors; includes both chemical and electrical synapses |
+| **Adult male connectome** | [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) (male) | `Cook2019MaleReader` | Only complete male connectome; 385 neurons including male-specific |
+| **Pharyngeal nervous system** | [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) (pharyngeal subset) | `Cook2019HermReader` with pharynx view filter | Same dataset, filtered via `cds.get_connectome_view("Pharynx")` |
+| **Developmental series** | [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (stages 1-8) | `WitvlietDataReader1` through `WitvlietDataReader8` | Only developmental connectome series; L1 through adult |
+| **Functional connectivity validation** | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) | `WormNeuroAtlasFuncReader` | Whole-brain calcium imaging functional connectivity; primary validation target for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) |
+| **Neuropeptidergic network** | [Ripoll-Sanchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043) | `RipollSanchezShortRangeReader`, `RipollSanchezMidRangeReader`, `RipollSanchezLongRangeReader` | Extrasynaptic neuropeptide signaling; [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) primary data source |
+| **Neurotransmitter identity** | [Wang et al. 2024](https://doi.org/10.7554/eLife.95402) | `Wang2024HermReader`, `Wang2024MaleReader` | CRISPR/Cas9 fluorescent reporter atlas; 16 neurotransmitter systems; reveals co-transmission |
+| **OpenWorm unified (experimental)** | [Wang 2024](https://doi.org/10.7554/eLife.95402) hermaphrodite base | `OpenWormUnifiedReader` | WIP — subject to change; currently wraps Wang2024Reader with electrical connections. Use for forward-looking development, not production simulations |
+| **Legacy / backward compatibility** | [Varshney et al. 2011](https://doi.org/10.1371/journal.pcbi.1001066) | `VarshneyDataReader` | Historical dataset; use only for comparing to pre-2019 publications |
+| **Cross-validation** | Witvliet stage 8 (adult) | `WitvlietDataReader8` | Independent adult reconstruction for comparing against [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm |
 
 ### Dataset Selection Rules
 
-1. **Default to Cook2019Herm** unless your DD explicitly requires a different dataset. Cook2019 corrects the ~150 errors found in White 1986 and includes both sexes.
+1. **Default to [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm** unless your DD explicitly requires a different dataset. [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) corrects the ~150 errors found in White 1986 and includes both sexes.
 
 2. **Never parse raw files.** All connectome data access MUST go through `cect` readers. The readers handle:
    - Cell name normalization (e.g., `DB1/3` → `DB1`, `DB3`)
@@ -194,7 +194,7 @@ When a new connectome dataset is published (e.g., a future revision or new speci
 1. **Padraig adds a reader** to ConnectomeToolbox (he typically does this within days of publication)
 2. **Bump `cect` version** in `versions.lock` after reviewing the changelog
 3. **Run regression tests** — ensure existing simulations produce equivalent results with the new version
-4. **Do NOT change the default dataset** without an RFC ([DD012](DD012_Design_Document_RFC_Process.md) process). Changing from Cook2019Herm to a new default affects all consuming DDs
+4. **Do NOT change the default dataset** without an RFC ([DD012](DD012_Design_Document_RFC_Process.md) process). Changing from [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm to a new default affects all consuming DDs
 5. **New datasets can be used for cross-validation** without changing defaults — add them as comparison targets in [DD010](DD010_Validation_Framework.md)
 
 ---
@@ -313,7 +313,7 @@ from cect.RipollSanchezShortRangeReader import get_instance as get_rs_short
 rs_cds = get_rs_short(from_cache=True)
 ```
 
-**Pattern 9: Wang 2024 neurotransmitter atlas**
+**Pattern 9: [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitter atlas**
 ```python
 from cect.Wang2024HermReader import get_instance as get_wang2024
 
@@ -394,9 +394,9 @@ Biological connectome data are noisy — different labs, different animals, diff
 
 | Validation Level | Datasets | What to Compare | Acceptance Criterion |
 |-----------------|----------|-----------------|---------------------|
-| **Primary** | Cook2019Herm (default) | Full simulation kinematic metrics | [DD010](DD010_Validation_Framework.md) Tier 3: ±15% of Schafer lab data |
-| **Cross-validation** | Witvliet8 (independent adult) | Same simulation, different connectome | Locomotion pattern preserved (forward crawling); speed within ±30% of Cook2019 result |
-| **Sensitivity analysis** | Cook2019 + Varshney2011 | Compare which connections are critical | Identify connections present in both datasets that most affect behavior |
+| **Primary** | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm (default) | Full simulation kinematic metrics | [DD010](DD010_Validation_Framework.md) Tier 3: ±15% of Schafer lab data |
+| **Cross-validation** | Witvliet8 (independent adult) | Same simulation, different connectome | Locomotion pattern preserved (forward crawling); speed within ±30% of [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) result |
+| **Sensitivity analysis** | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) + [Varshney2011](https://doi.org/10.1371/journal.pcbi.1001066) | Compare which connections are critical | Identify connections present in both datasets that most affect behavior |
 | **Bilateral symmetry** | All datasets | `convert_to_symmetry_array()` metric | Datasets should show >40% bilateral symmetry for chemical synapses (biological expectation) |
 
 ### Bilateral Symmetry as a Validation Metric
@@ -443,7 +443,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 3. **Simulation implication:** To simulate a developmental stage, set `data.connectome.dataset: "WitvlietN"` in `openworm.yml`. [DD001](DD001_Neural_Circuit_Architecture.md)'s c302 framework handles variable neuron counts.
 4. **Validation caveat:** [DD010](DD010_Validation_Framework.md) kinematic benchmarks are from adult worms. Developmental stage simulations require stage-specific behavioral data for validation (limited availability).
 
-**Current recommendation:** Use Witvliet stages for cross-validation and sensitivity analysis, not as primary simulation input. [DD001](DD001_Neural_Circuit_Architecture.md)'s default remains Cook2019Herm (adult).
+**Current recommendation:** Use Witvliet stages for cross-validation and sensitivity analysis, not as primary simulation input. [DD001](DD001_Neural_Circuit_Architecture.md)'s default remains [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm (adult).
 
 ---
 
@@ -476,7 +476,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 
 ### 3. Maintain a Static Adjacency Matrix in the OpenWorm Meta-Repo
 
-**Description:** Export Cook2019Herm as a static CSV/NumPy file, commit to `openworm/OpenWorm`, and have all DDs read from that file.
+**Description:** Export [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm as a static CSV/NumPy file, commit to `openworm/OpenWorm`, and have all DDs read from that file.
 
 **Rejected because:**
 
@@ -495,14 +495,14 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 - Duplicating effort; `cect` has ~4 years of development and 30+ dataset readers
 - OpenWorm should contribute to `cect`, not compete with it
 
-### 5. Default to OpenWormUnifiedReader Instead of Cook2019Herm
+### 5. Default to OpenWormUnifiedReader Instead of [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm
 
 **Description:** Use the "unified" reader as the default for all simulations.
 
 **Deferred because:**
 
 - OpenWormUnifiedReader is explicitly marked "WIP — subject to change without notice" (as of Feb 2026)
-- Currently wraps Wang2024Reader, which is based on neurotransmitter reporter data, not EM reconstruction — different methodology than Cook2019
+- Currently wraps Wang2024Reader, which is based on neurotransmitter reporter data, not EM reconstruction — different methodology than [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)
 - The unified reader's connection counts and topology may change as it evolves
 - Use for forward-looking development, not production simulations
 
@@ -552,7 +552,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 
 ### ConnectomeToolbox History
 
-The *C. elegans* connectome — the complete wiring diagram of the nervous system — has been the foundation of the OpenWorm project since its inception. The original dataset (White et al. 1986) was manually compiled from electron micrographs. Over four decades, multiple groups have re-analyzed, corrected, and extended this data:
+The *C. elegans* connectome — the complete wiring diagram of the nervous system — has been the foundation of the OpenWorm project since its inception. The original dataset ([White et al. 1986](https://doi.org/10.1098/rstb.1986.0056)) was manually compiled from electron micrographs. Over four decades, multiple groups have re-analyzed, corrected, and extended this data:
 
 | Year | Dataset | Key Contribution | `cect` Reader |
 |------|---------|------------------|---------------|
@@ -564,7 +564,7 @@ The *C. elegans* connectome — the complete wiring diagram of the nervous syste
 | 2021 | Witvliet et al. | 8-stage developmental series (L1 through adult) | `WitvlietDataReader1-8` |
 | 2021 | Brittin et al. | Contact area-based adjacency | `BrittinDataReader` |
 | 2023 | Randi et al. | Whole-brain calcium imaging functional connectivity | `WormNeuroAtlasFuncReader` |
-| 2023 | Ripoll-Sanchez et al. | Neuropeptide-receptor network (31,479 interactions) | `RipollSanchezShortRangeReader` etc. |
+| 2023 | [Ripoll-Sanchez et al.](https://doi.org/10.1016/j.neuron.2023.09.043) | Neuropeptide-receptor network (31,479 interactions) | `RipollSanchezShortRangeReader` etc. |
 | 2024 | Wang et al. | Neurotransmitter atlas (16 systems, CRISPR/Cas9 reporters) | `Wang2024HermReader`, `Wang2024MaleReader` |
 | 2024 | Yim et al. | Updated connectivity analysis | `Yim2024DataReader` |
 
@@ -761,7 +761,7 @@ print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) full validati
 |---------------|----|-----------------------------|
 | Neural circuit topology | [DD001](DD001_Neural_Circuit_Architecture.md) | Changing default dataset changes every synapse in the simulation |
 | Muscle innervation | [DD002](DD002_Muscle_Model_Architecture.md) | Neuron-to-muscle connection list drives NMJ coupling |
-| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cook2019 neuron list defines which cells to differentiate |
+| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) neuron list defines which cells to differentiate |
 | Neuropeptidergic network | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Ripoll-Sanchez data defines peptide-receptor interactions |
 | Pharyngeal circuit | [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal view filter defines pharynx neuron connectivity |
 | Data integration | [DD008](DD008_Data_Integration_Pipeline.md) | OWMeta ingests connectome data from `cect` (Phase 3+) |
@@ -777,7 +777,7 @@ print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) full validati
 
 The "unified" reader is intended to become the single best-estimate connectome, but as of Feb 2026 it wraps Wang2024Reader and is marked "subject to change without notice." Using it as a default would introduce instability.
 
-**Mitigation:** Default to Cook2019Herm. Monitor OpenWormUnifiedReader stability. Adopt as default only after WIP designation is removed and regression tests pass.
+**Mitigation:** Default to [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm. Monitor OpenWormUnifiedReader stability. Adopt as default only after WIP designation is removed and regression tests pass.
 
 ### Issue 2: Cell Name Variants Across Datasets
 
@@ -787,9 +787,9 @@ Different datasets use slightly different cell naming conventions. `cect` handle
 
 ### Issue 3: Connection Count Discrepancies Between Datasets
 
-Cook2019 and Witvliet8 are both adult hermaphrodite connectomes but report different connection counts for some neuron pairs. This is expected (different animals, different EM volumes) but can confuse validation.
+[Cook2019](https://doi.org/10.1038/s41586-019-1352-7) and Witvliet8 are both adult hermaphrodite connectomes but report different connection counts for some neuron pairs. This is expected (different animals, different EM volumes) but can confuse validation.
 
-**Mitigation:** Use Cook2019Herm as primary, Witvliet8 as cross-validation. Document expected discrepancy ranges.
+**Mitigation:** Use [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm as primary, Witvliet8 as cross-validation. Document expected discrepancy ranges.
 
 ### Issue 4: Preprint Not Yet Published
 

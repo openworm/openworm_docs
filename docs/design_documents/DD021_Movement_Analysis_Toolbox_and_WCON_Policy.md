@@ -143,7 +143,7 @@ print('Toolbox in Docker: OK')
 
 ### Package Structure
 
-The `open-worm-analysis-toolbox` is organized around a feature extraction pipeline derived from Yemini et al. 2013:
+The `open-worm-analysis-toolbox` is organized around a feature extraction pipeline derived from [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560):
 
 ```
 open-worm-analysis-toolbox/
@@ -196,7 +196,7 @@ sim_worm = NormalizedWorm.from_simulation("c302_output.wcon")
 # exp_worm.length          — (n_frames,) worm length per frame
 ```
 
-**`WormFeatures`** — Computes the full Yemini et al. 2013 feature set (~726 features in 6 categories).
+**`WormFeatures`** — Computes the full [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) feature set (~726 features in 6 categories).
 
 ```python
 from open_worm_analysis_toolbox import WormFeatures
@@ -459,10 +459,10 @@ print(report)
 
 ### What Is Tierpsy?
 
-**Tierpsy Tracker** (Javer et al. 2018) is the modern community-standard tool for *C. elegans* behavioral phenotyping. It is the spiritual successor to the Schafer lab's original Worm Tracker 2.0 software and provides:
+**Tierpsy Tracker** ([Javer et al. 2018](https://doi.org/10.1038/s41592-018-0112-1)) is the modern community-standard tool for *C. elegans* behavioral phenotyping. It is the spiritual successor to the Schafer lab's original Worm Tracker 2.0 software and provides:
 
 - Multi-worm tracking from video
-- 726-feature behavioral phenotyping (same feature set as the analysis toolbox, based on Yemini et al. 2013)
+- 726-feature behavioral phenotyping (same feature set as the analysis toolbox, based on [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560))
 - Automated quality control
 - Database of wild-type and mutant phenotypes
 - Active development (last commit: 2024)
@@ -478,7 +478,7 @@ print(report)
 | **Input format** | WCON files, Schafer .mat files | Video files (.avi, .hdf5) |
 | **Simulation coupling** | `NormalizedWorm.from_simulation()` convenience method | No simulation input pathway |
 | **OpenWorm integration** | Referenced in [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md); Docker stage planned | Not integrated; would require adapter layer |
-| **Feature set** | Same 726 features (Yemini 2013) | Same 726 features (extended) |
+| **Feature set** | Same 726 features ([Yemini 2013](https://doi.org/10.1038/nmeth.2560)) | Same 726 features (extended) |
 | **Maintenance** | Dormant (6 years) | Actively maintained |
 | **Community** | OpenWorm-specific | Broader *C. elegans* community |
 
@@ -519,7 +519,7 @@ from tierpsy import ...  # (inspect their API)
 1. The toolbox has an existing `from_simulation()` API designed for comparing simulated vs. real data
 2. Tierpsy's input pathway assumes video, not simulation output
 3. Reviving the toolbox (~33 hours) is less effort than building a Tierpsy adapter (~60+ hours)
-4. The feature computation is identical (both implement Yemini 2013)
+4. The feature computation is identical (both implement [Yemini 2013](https://doi.org/10.1038/nmeth.2560))
 
 ### Future Evaluation
 
@@ -563,7 +563,7 @@ from tierpsy import ...  # (inspect their API)
 - Duplicates effort already done in the toolbox (6+ years of feature extraction code)
 - Feature computation is non-trivial (skeleton normalization, bend detection, motion event classification)
 - No standardization across metrics — each script would use different conventions
-- The analysis toolbox already implements the full Yemini 2013 feature set
+- The analysis toolbox already implements the full [Yemini 2013](https://doi.org/10.1038/nmeth.2560) feature set
 
 ### 3. Statistical-Only Comparison (Skip Feature Extraction)
 
@@ -766,7 +766,7 @@ docker compose run validate
 
 ### History
 
-The open-worm-analysis-toolbox has its origins in the Schafer lab's worm behavioral database (Yemini et al. 2013), which defined a standardized set of ~726 features for phenotyping *C. elegans* movement. The original MATLAB code was ported to Python as `movement_validation` (now archived), then refactored into `open-worm-analysis-toolbox`.
+The open-worm-analysis-toolbox has its origins in the Schafer lab's worm behavioral database ([Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560)), which defined a standardized set of ~726 features for phenotyping *C. elegans* movement. The original MATLAB code was ported to Python as `movement_validation` (now archived), then refactored into `open-worm-analysis-toolbox`.
 
 | Year | Event |
 |------|-------|
@@ -819,7 +819,7 @@ The toolbox assumes 49 skeleton points per frame (Schafer lab convention). Siber
 
 ### Issue 4: Feature Definitions May Diverge from Tierpsy
 
-While both tools implement Yemini 2013, minor implementation differences may cause feature values to differ slightly. If OpenWorm later switches to Tierpsy, acceptance thresholds may need recalibration.
+While both tools implement [Yemini 2013](https://doi.org/10.1038/nmeth.2560), minor implementation differences may cause feature values to differ slightly. If OpenWorm later switches to Tierpsy, acceptance thresholds may need recalibration.
 
 **Future work:** Benchmark analysis toolbox vs. Tierpsy feature values on identical input data. Document any systematic offsets.
 

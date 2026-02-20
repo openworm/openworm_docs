@@ -29,14 +29,14 @@ This prototype proved the concept worked. But it was:
 **Today, OpenWorm is built on formal Design Documents** that specify:
 
 - **[DD001: Neural Circuit](design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
-- **[DD002: Muscle Model](design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, Boyle & Cohen 2008 parameters
+- **[DD002: Muscle Model](design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters
 - **[DD003: Body Physics](design_documents/DD003_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
 
 **These three DDs (the "core chain") are WORKING and VALIDATED:**
 
 - 15ms simulations produce emergent locomotion
 - Validated against Schafer lab kinematics (speed, wavelength, frequency within +/-15%)
-- Published: Sarma et al. 2018, Gleeson et al. 2018
+- Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
 
 [Watch the current simulation](https://www.youtube.com/watch?v=SaovWiZJUWY)
 
@@ -109,7 +109,7 @@ Inspired by [Robert Rosen's work on causal loops](http://www.amazon.com/Life-Its
 
 - **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (Neural Circuit):** Multi-level HH framework (Levels A-D), graded synapses (Level C1 default)
 - **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation):** 128 distinct neuron classes from CeNGEN single-cell transcriptomics
-- **[DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides):** 31,479 peptide-receptor interactions (Ripoll-Sanchez 2023), slow modulation
+- **[DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides):** 31,479 peptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)), slow modulation
 - **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 20 pharyngeal neurons (semi-autonomous pumping circuit)
 - **[DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (Egg-Laying):** 2 HSN serotonergic + 6 VC cholinergic neurons (two-state pattern)
 - **[DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (Touch):** 6 touch receptor neurons (MEC-4 mechanotransduction)
@@ -150,7 +150,7 @@ These weren't in the original vision but are now formalized with quantitative va
 | Tier | What | Validation Data | Blocking? |
 |------|------|----------------|-----------|
 | **Tier 1** | Single-cell electrophysiology | Goodman lab patch clamp | No (warning) |
-| **Tier 2** | Circuit functional connectivity | Randi 2023 whole-brain imaging | **YES** (r > 0.5) |
+| **Tier 2** | Circuit functional connectivity | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain imaging | **YES** (r > 0.5) |
 | **Tier 3** | Behavioral kinematics | Schafer lab WCON database | **YES** (+/-15%) |
 
 **Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) (being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))

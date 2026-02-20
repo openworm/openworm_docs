@@ -188,15 +188,15 @@ for cell in intestine_cells:
 
 | Dataset | OWMeta Status | Priority | Action |
 |---------|--------------|---------|--------|
-| Cook 2019 connectome | Integrated | -- | Maintain |
+| [Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) connectome | Integrated | -- | Maintain |
 | WormBase WS298 | Integrated | -- | Maintain (archival) |
 | WormAtlas anatomy | Partial | High | Complete integration |
 | CeNGEN L4 expression | Integrated | -- | Maintain |
 | CeNGEN L1 expression | Not yet | Medium | Add in Phase 1 |
-| Witvliet 2021 dev. connectomes | Not yet | High | Add for Phase 6 (development) |
+| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Not yet | High | Add for Phase 6 (development) |
 | Ripoll-Sanchez neuropeptides | Not yet | High | Add for Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
-| Randi 2023 functional connectivity | Not yet | High | Add for validation |
-| Packer 2019 embryonic scRNA-seq | Not yet | Medium | Add for Phase 6 |
+| [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity | Not yet | High | Add for validation |
+| [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Not yet | Medium | Add for Phase 6 |
 | Ben-David 2021 eQTLs | Not yet | Low | Phase 6+ |
 
 ### OWMeta Update Process (For Contributors)
@@ -283,12 +283,12 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 
 | Input | Source | Variable | Format | Notes |
 |-------|--------|----------|--------|-------|
-| Cook 2019 connectome | wormwiring.org | Neuron adjacency + weights | CSV/Excel → RDF ingestion | Already integrated |
+| [Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) connectome | wormwiring.org | Neuron adjacency + weights | CSV/Excel → RDF ingestion | Already integrated |
 | CeNGEN L4 scRNA-seq | cengen.org | Per-neuron-class TPM values | CSV → RDF ingestion | Already integrated |
 | WormAtlas anatomy | wormatlas.org | Cell positions, morphology, EM images | HTML/images → RDF ingestion | Partial |
 | Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested** (needed for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
-| Randi 2023 functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for [DD010](DD010_Validation_Framework.md)) |
-| Witvliet 2021 dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 6) |
+| [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for [DD010](DD010_Validation_Framework.md)) |
+| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 6) |
 
 **Outputs (What This Subsystem Produces)**
 
@@ -399,7 +399,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 
 **Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
 
-**Future integration (Phase 3+):** When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, Randi 2023, Ripoll-Sanchez, Wang 2024), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
+**Future integration (Phase 3+):** When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4), Ripoll-Sanchez, [Wang 2024](https://doi.org/10.7554/eLife.95402)), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
 
 **Action for OWMeta revival:** Add a `cect` ingestion adapter so OWMeta wraps `cect` readers rather than duplicating connectome parsing logic.
 

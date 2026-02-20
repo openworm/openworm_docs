@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-Add 31,479 neuropeptide-receptor interactions (Ripoll-Sanchez 2023) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Success: at least 3 peptide knockout phenotypes reproduced within 30% error.
+Add 31,479 neuropeptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)) as a slow modulatory layer on top of fast synaptic transmission. Only 5% overlap with the synaptic connectome — this is an orthogonal signaling network that governs slow behavioral states (arousal, stress, dwelling/roaming). Success: at least 3 peptide knockout phenotypes reproduced within 30% error.
 
 ---
 
@@ -319,7 +319,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 - 31,479 interactions is >5x the synaptic connectome (5,000 synapses)
 - Only 5% overlap means peptides provide orthogonal information
 - Known behavioral phenotypes (arousal, feeding, stress) depend on neuropeptides
-- The data exist and are well-curated (Ripoll-Sanchez et al. 2023)
+- The data exist and are well-curated ([Ripoll-Sanchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043))
 
 ---
 
@@ -327,7 +327,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 
 ### What Defines a Valid Neuropeptidergic Model?
 
-1. **Data Provenance:** Every modeled interaction must trace to the Ripoll-Sanchez et al. 2023 dataset. Include source DOI in metadata.
+1. **Data Provenance:** Every modeled interaction must trace to the [Ripoll-Sanchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043) dataset. Include source DOI in metadata.
 
 2. **NeuroML 2 Extensions:** Neuropeptide signaling requires extending NeuroML to include:
    - `<peptideRelease>` component type
@@ -338,7 +338,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 
 3. **Timescale Separation:** Neuropeptide dynamics (seconds) must be numerically stable when coupled with fast synaptic dynamics (milliseconds). Use appropriate timestep or multi-rate integration.
 
-4. **Distance Calculation:** Requires 3D cell positions. Source: WormAtlas 3D atlases, Long et al. 2009 nuclear positions, or Witvliet et al. 2021 EM reconstructions. Do not hardcode distances; compute from spatial data.
+4. **Distance Calculation:** Requires 3D cell positions. Source: WormAtlas 3D atlases, [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) nuclear positions, or [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions. Do not hardcode distances; compute from spatial data.
 
 5. **Modulation Magnitude Constraints:** Conductance modulation factors must be biophysically plausible:
    - Minimum: 0.5x (50% reduction)
@@ -372,10 +372,10 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 
 | Peptide | Knockout Phenotype | Modeling Prediction | Data Source |
 |---------|-------------------|---------------------|-------------|
-| **FLP peptides** | Altered locomotion speed and reversal frequency | Modulation of motor circuit excitability | Li et al. 1999, Rogers et al. 2003 |
+| **FLP peptides** | Altered locomotion speed and reversal frequency | Modulation of motor circuit excitability | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers et al. 2003](https://doi.org/10.1038/nn1140) |
 | **NLP-12** (RIM neurons) | Reduced reversal initiation | Reduced excitability of backward command circuit | Ripoll-Sanchez supp data |
 | **INS-1** (ASI neurons) | Dauer decision, lifespan | Modulation of DAF-2 pathway (out of scope for Phase 2) | Future |
-| **PDF-1** (DVA neuron) | Arousal state | Modulation of global excitability | Choi et al. 2013 |
+| **PDF-1** (DVA neuron) | Arousal state | Modulation of global excitability | [Choi et al. 2013](https://doi.org/10.1016/j.neuron.2013.04.002) |
 
 **Testing workflow:**
 
@@ -465,9 +465,9 @@ python scripts/validate_knockout.py \
 
 ## Context & Background
 
-The classical *C. elegans* connectome (White et al. 1986, Cook et al. 2019) describes **synaptic** (chemical) and **gap junction** (electrical) connections. But neurons also communicate via **neuropeptides** — small signaling molecules released into the extracellular space that diffuse to receptors on distant cells. This "wireless" signaling layer was recently mapped at whole-organism scale:
+The classical *C. elegans* connectome ([White et al. 1986](https://doi.org/10.1098/rstb.1986.0056), [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) describes **synaptic** (chemical) and **gap junction** (electrical) connections. But neurons also communicate via **neuropeptides** — small signaling molecules released into the extracellular space that diffuse to receptors on distant cells. This "wireless" signaling layer was recently mapped at whole-organism scale:
 
-**Ripoll-Sanchez et al. (2023), *Neuron*:** "The neuropeptidergic connectome of *C. elegans*"
+**[Ripoll-Sanchez et al.](https://doi.org/10.1016/j.neuron.2023.09.043) (2023), *Neuron*:** "The neuropeptidergic connectome of *C. elegans*"
 
 - **31,479 peptide-receptor interactions** across all 302 neurons
 - Each neuron class expresses ~23 neuropeptide genes and ~36 neuropeptide receptors
@@ -644,7 +644,7 @@ The **Bentley et al. 2016 monoaminergic/peptidergic connectome** is already in C
 https://github.com/openworm/ConnectomeToolbox
 ```
 
-The Ripoll-Sanchez 2023 dataset is a comprehensive update. Bentley data can serve as a validation subset (check that Ripoll-Sanchez reproduces Bentley's interactions).
+The [Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043) dataset is a comprehensive update. Bentley data can serve as a validation subset (check that Ripoll-Sanchez reproduces Bentley's interactions).
 
 ---
 
@@ -709,7 +709,7 @@ The Ripoll-Sanchez dataset includes spatial proximity and expression but not alw
 
 3D cell positions are from EM reconstructions of specific animals. Different animals have slight positional variation. Distance calculations are approximate.
 
-**Mitigation:** Use population-averaged positions from multiple EM datasets (Witvliet et al. 2021 has 8 animals). Report mean +/- SD for distances.
+**Mitigation:** Use population-averaged positions from multiple EM datasets ([Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) has 8 animals). Report mean +/- SD for distances.
 
 ### Issue 3: Developmental Changes in Peptide Expression
 

@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serotonergic HSN command neurons, 6 cholinergic VC motor neurons, and 16 non-striated sex muscles (8 vulval + 8 uterine), with uv1 neuroendocrine feedback cells providing tyramine-mediated inhibition. The circuit produces a characteristic two-state behavioral pattern: ~20-minute inactive phases alternating with ~2-minute active bouts of 3-5 eggs each. Success: reproduce the two-state temporal pattern within quantitative bounds of Collins et al. 2016 experimental data.
+Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serotonergic HSN command neurons, 6 cholinergic VC motor neurons, and 16 non-striated sex muscles (8 vulval + 8 uterine), with uv1 neuroendocrine feedback cells providing tyramine-mediated inhibition. The circuit produces a characteristic two-state behavioral pattern: ~20-minute inactive phases alternating with ~2-minute active bouts of 3-5 eggs each. Success: reproduce the two-state temporal pattern within quantitative bounds of [Collins et al. 2016](https://doi.org/10.7554/eLife.21126) experimental data.
 
 ---
 
@@ -269,7 +269,7 @@ Vulval muscles are non-striated, excitable cells distinct from body wall muscles
 
 - Same channel types as vm2 but **no direct synaptic input**
 - Receives rhythmic excitation from VA/VB motor neurons via body wall muscle connections (ACh, every ~10 s during locomotion body bends)
-- Gap-junction-coupled to vm2: calcium transients initiate in vm1 and propagate to vm2 (Brewer et al. 2019)
+- Gap-junction-coupled to vm2: calcium transients initiate in vm1 and propagate to vm2 ([Brewer et al. 2019](https://doi.org/10.1371/journal.pgen.1007896))
 
 **Calcium dynamics in vulval muscles:**
 
@@ -473,7 +473,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Rejected because:**
 
 - Direct recordings from vulval muscles in vivo are extremely difficult (cells are embedded in tissue)
-- Calcium imaging data (Collins et al. 2016, Brewer et al. 2019) provide quantitative constraints
+- Calcium imaging data ([Collins et al. 2016](https://doi.org/10.7554/eLife.21126), [Brewer et al. 2019](https://doi.org/10.1371/journal.pgen.1007896)) provide quantitative constraints
 - Genetic perturbation data (egl-19, unc-103, egl-36 alleles) constrain the channel model
 - Model predictions can guide future experimental priorities
 
@@ -591,7 +591,7 @@ https://www.wormatlas.org/hermaphrodite/egglaying%20apparatus/mainframe.htm
 
 Detailed anatomical descriptions with electron micrographs of vulval muscles, HSN synapses, uv1 cells, and sex muscle arrangement.
 
-### Connectome Data (Cook et al. 2019)
+### Connectome Data ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7))
 
 ```
 https://wormwiring.org/pages/adjacency.html
@@ -599,7 +599,7 @@ https://wormwiring.org/pages/adjacency.html
 
 Quantitative adjacency matrices for HSN, VC, and sex muscle synaptic connections.
 
-### Egg-Laying Circuit Connectivity (from Cook et al. 2019 and White et al. 1986)
+### Egg-Laying Circuit Connectivity (from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) and [White et al. 1986](https://doi.org/10.1098/rstb.1986.0056))
 
 **Chemical synapses (directed):**
 
@@ -706,7 +706,7 @@ HSN and VC neurons exist in the [DD001](DD001_Neural_Circuit_Architecture.md) co
 No direct patch-clamp recordings from vm1/vm2 exist. Channel properties are inferred from:
 
 - Genetic perturbation (egl-19, unc-103, egl-36 alleles)
-- Calcium imaging (Collins et al. 2016, Brewer et al. 2019)
+- Calcium imaging ([Collins et al. 2016](https://doi.org/10.7554/eLife.21126), [Brewer et al. 2019](https://doi.org/10.1371/journal.pgen.1007896))
 - Heterologous expression studies
 
 **Future work:** If in vivo vulval muscle recordings become available, recalibrate conductance densities.
@@ -938,4 +938,4 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 5. Implement serotonergic synapse (5-HT -> SER-1 -> conductance modulation)
 6. Validate two-state pattern in isolated circuit
 7. Couple to locomotion body bend drive
-8. Full behavioral validation against Collins et al. 2016
+8. Full behavioral validation against [Collins et al. 2016](https://doi.org/10.7554/eLife.21126)

@@ -18,6 +18,7 @@ Table Of Contents
 - [Community](community/) — Get involved, contribute, join meetings
 - [Background](background/) — History, why _C. elegans_, modeling concepts
 - [Resources](Resources/resources/) — Simulation engines, data sets, tools
+- [References](references/) — Master list of publications and datasets
 - [Frequently Asked Questions](faq/)
 
 The Path to 959 Cells

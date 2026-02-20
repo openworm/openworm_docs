@@ -55,7 +55,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 | Graded synapse definition | `synapse_models/GradedSynapse.synapse.nml` | NeuroML 2 XML | Level C1 default |
 | Event-driven synapse definition | `synapse_models/EventDrivenSynapse.synapse.nml` | NeuroML 2 XML | Level C |
 | LEMS network files | `examples/generated/LEMS_c302_C1_*.xml` | LEMS XML | `LEMS_c302_C1_Muscles.xml` |
-| Connectome data | ConnectomeToolbox / `cect` package | Python API / CSV | Cook2019, Witvliet2021, Varshney2011 |
+| Connectome data | ConnectomeToolbox / `cect` package | Python API / CSV | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7), [Witvliet2021](https://doi.org/10.1038/s41586-021-03778-8), [Varshney2011](https://doi.org/10.1371/journal.pcbi.1001066) |
 | Neuron voltage time series (viewer) | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | OME-Zarr | mV per neuron per timestep |
 | Neuron calcium time series (viewer) | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | OME-Zarr | mol/cm³ per neuron per timestep |
 | Neuron 3D positions (viewer) | OME-Zarr: `neural/positions/`, shape (302, 3) | OME-Zarr | µm static coordinates |
@@ -178,7 +178,7 @@ OpenWorm implements a **multi-level framework (c302)** offering increasing bioph
 C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 ```
 
-**Ion channels (derived from Boyle & Cohen 2008 muscle model):**
+**Ion channels (derived from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle model):**
 
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
@@ -253,7 +253,7 @@ A contribution to the neural circuit model MUST:
 
 3. **Biophysical Units:** All parameters must have correct units (mV, nS, ms, µm). NeuroML enforces dimensional analysis.
 
-4. **Connectome Topology Preservation:** The connectome structure (adjacency matrices) is defined by Cook et al. 2019 data in ConnectomeToolbox. Do not edit synapse existence; only edit synapse properties (weights, time constants).
+4. **Connectome Topology Preservation:** The connectome structure (adjacency matrices) is defined by [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) data in ConnectomeToolbox. Do not edit synapse existence; only edit synapse properties (weights, time constants).
 
 5. **Validation Against Movement Data:** Any change to the default Level C1 model must not degrade the kinematic validation score vs. Schafer lab WCON data. Run `open-worm-analysis-toolbox` before and after the change.
 
@@ -342,7 +342,7 @@ CElegansNeuroML/CElegans/pythonScripts/c302/synapse_models/
 ```
 openworm.org/ConnectomeToolbox
 ```
-Ingests: Cook et al. 2019 (both sexes), Witvliet et al. 2021 (developmental), Varshney 2011 (original)
+Ingests: [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) (both sexes), [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (developmental), Varshney 2011 (original)
 
 ---
 

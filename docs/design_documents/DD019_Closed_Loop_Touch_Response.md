@@ -33,7 +33,7 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 
 | Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
-| **Primary:** Reversal onset latency | Tap stimulus → first backward body bend <1 s (Chalfie et al. 1985: 300-800 ms) | Tier 3 (blocking) |
+| **Primary:** Reversal onset latency | Tap stimulus → first backward body bend <1 s ([Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985): 300-800 ms) | Tier 3 (blocking) |
 | **Primary:** Reversal distance | ≥1 body length backward travel | Tier 3 (blocking) |
 | **Primary:** Recovery to forward | Resume forward crawling within 10 s of tap | Tier 3 (blocking) |
 | **Secondary:** Anterior vs. posterior discrimination | Anterior touch (ALM/AVM activated) → backward; posterior touch (PLM activated) → forward acceleration | Tier 3 (blocking) |
@@ -172,7 +172,7 @@ Currently, the **forward path** (neural → muscle → body) is implemented via 
 
 **Approach:** Compute strain as the local deformation of elastic particles relative to their rest configuration, averaged over a receptive field centered at each touch neuron's known anatomical position.
 
-**Touch neuron positions (White et al. 1986, WormAtlas):**
+**Touch neuron positions ([White et al. 1986](https://doi.org/10.1098/rstb.1986.0056), WormAtlas):**
 
 | Neuron | Position (% body length from anterior) | Receptive Field | Touch Modality |
 |--------|---------------------------------------|-----------------|----------------|
@@ -242,14 +242,14 @@ d(strain_filtered)/dt = (strain_raw - strain_filtered) / tau_filter
 
 **Biology:** The six gentle-touch receptor neurons (ALML/R, AVM, PLML/R, PVD for harsh touch) express the MEC-4/MEC-10 DEG/ENaC mechanically-gated ion channel complex. This channel opens in response to mechanical deformation of the cuticle transmitted through a specialized extracellular matrix (the "mantle") attached via MEC-1/MEC-5/MEC-9 linker proteins.
 
-The MEC-4 channel is a non-selective cation channel with these electrophysiological properties (O'Hagan et al. 2005, Goodman et al. 2002):
+The MEC-4 channel is a non-selective cation channel with these electrophysiological properties ([O'Hagan et al. 2005](https://doi.org/10.1038/nn1362), [Goodman et al. 2002](https://doi.org/10.1038/4151039a)):
 
 | Property | Value | Source |
 |----------|-------|--------|
 | Reversal potential (E_MEC) | +10 mV | Non-selective cation (Na⁺/K⁺/Ca²⁺) |
-| Maximum conductance | 100-150 pS per channel complex | O'Hagan et al. 2005 |
+| Maximum conductance | 100-150 pS per channel complex | [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) |
 | Total conductance per cell | ~20 nS (estimated, ~130-200 channels) | Goodman lab |
-| Activation threshold | ~1-2 µm cuticle indentation | O'Hagan et al. 2005 |
+| Activation threshold | ~1-2 µm cuticle indentation | [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) |
 | Activation time constant | ~1-5 ms | Rapid onset |
 | Inactivation time constant | ~50-200 ms | Adapts during sustained touch |
 | Deactivation time constant | ~5-10 ms | Rapid offset after stimulus removal |
@@ -290,7 +290,7 @@ dh/dt = (h_inf - h) / tau_h
 - `k_strain_h` = 0.02
 - `tau_h` = 100 ms (slow inactivation → adaptation to sustained touch)
 
-This produces the experimentally observed response: rapid onset current that adapts over ~100-200 ms during sustained touch, matching O'Hagan et al. 2005 recordings from ALM.
+This produces the experimentally observed response: rapid onset current that adapts over ~100-200 ms during sustained touch, matching [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) recordings from ALM.
 
 **NeuroML implementation:**
 
@@ -350,7 +350,7 @@ If [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type differentiati
 
 The existing `c302_TapWithdrawal.py` defines 16 interneurons forming the tap withdrawal circuit. [DD019](DD019_Closed_Loop_Touch_Response.md) integrates mechanosensory input into this existing circuit rather than replacing it.
 
-**Circuit architecture (Chalfie et al. 1985, Wicks et al. 1996):**
+**Circuit architecture ([Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996)):**
 
 ```
 GENTLE ANTERIOR TOUCH:
@@ -524,7 +524,7 @@ class TapStimulus:
 
 **Stimulus parameters:**
 
-- Duration: 10 ms (brief mechanical impulse, as in Chalfie et al. 1985)
+- Duration: 10 ms (brief mechanical impulse, as in [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985))
 - Amplitude: 5-20 µm (boundary particle displacement — produces cuticle strain above MEC-4 threshold)
 - Position: configurable (whole plate, anterior only, posterior only — for testing directional discrimination)
 
@@ -554,7 +554,7 @@ class TapStimulus:
 
 - Loses adaptation dynamics (the hallmark of touch receptor neuron responses)
 - Cannot reproduce the rapid onset + slow decay profile observed electrophysiologically
-- Cannot be validated against O'Hagan et al. 2005 channel recordings
+- Cannot be validated against [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) channel recordings
 - Minimal complexity savings — the HH-style channel adds only 2 state variables per touch neuron
 
 **When to reconsider:** If MEC-4 channel parameters prove too uncertain and the linear model suffices for behavioral validation.
@@ -615,7 +615,7 @@ class TapStimulus:
 
 ### What Defines a Valid Closed-Loop Touch Response Implementation?
 
-1. **MEC-4 Channel Electrophysiology:** The channel model must reproduce the key features of O'Hagan et al. 2005 recordings:
+1. **MEC-4 Channel Electrophysiology:** The channel model must reproduce the key features of [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) recordings:
    - Rapid onset (<5 ms from strain application)
    - Peak current 50-150 pA for threshold strain
    - Reversal potential near +10 mV
@@ -740,7 +740,7 @@ The tap withdrawal reflex is arguably the most studied mechanosensory behavior i
 
 - Six touch receptor neurons mediate gentle body touch
 - MEC genes encode the mechanosensory channel complex
-- The neural circuit for tap withdrawal was mapped by Chalfie et al. 1985 and refined by Wicks et al. 1996
+- The neural circuit for tap withdrawal was mapped by [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) and refined by [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996)
 
 For OpenWorm, implementing closed-loop touch response has been a goal since the project's inception. GitHub issues #223-#227 (openworm/openworm) document multi-year efforts to connect the c302 neural circuit with Sibernetic body physics for this behavior.
 
@@ -775,13 +775,13 @@ For OpenWorm, implementing closed-loop touch response has been a goal since the 
 
 The tap withdrawal circuit is one of the best-characterized neural circuits in any organism:
 
-**Chalfie et al. 1985** — defined the gentle touch circuit: ALM/AVM (anterior) and PLM (posterior) touch neurons, AVA/AVD (backward command) and AVB/PVC (forward command) interneurons.
+**[Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985)** — defined the gentle touch circuit: ALM/AVM (anterior) and PLM (posterior) touch neurons, AVA/AVD (backward command) and AVB/PVC (forward command) interneurons.
 
-**Wicks et al. 1996** — showed that anterior touch preferentially activates backward locomotion, posterior touch activates forward locomotion, and a whole-plate tap produces a net backward response because the anterior pathway dominates.
+**[Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996)** — showed that anterior touch preferentially activates backward locomotion, posterior touch activates forward locomotion, and a whole-plate tap produces a net backward response because the anterior pathway dominates.
 
-**O'Hagan et al. 2005** — first direct electrophysiological recordings from *C. elegans* touch receptor neurons. Showed MEC-4 channel responses with rapid onset, adaptation, and ~100-150 pA peak currents.
+**[O'Hagan et al. 2005](https://doi.org/10.1038/nn1362)** — first direct electrophysiological recordings from *C. elegans* touch receptor neurons. Showed MEC-4 channel responses with rapid onset, adaptation, and ~100-150 pA peak currents.
 
-**Goodman et al. 2002** — characterized MEC-4/MEC-10 as a DEG/ENaC family channel with non-selective cation permeability (E_rev ≈ +10 mV).
+**[Goodman et al. 2002](https://doi.org/10.1038/4151039a)** — characterized MEC-4/MEC-10 as a DEG/ENaC family channel with non-selective cation permeability (E_rev ≈ +10 mV).
 
 **Wen et al. 2012** — demonstrated proprioceptive feedback in B-class motor neurons, suggesting the locomotion wave is partially driven by stretch-sensitive mechanisms (deferred to future DD, out of scope here).
 
@@ -818,10 +818,10 @@ openworm/sibernetic/
 
 ### Key Data Sources
 
-- **Connectome (NMJ + interneuron):** ConnectomeToolbox / `cect` package (Cook et al. 2019)
-- **MEC-4 electrophysiology:** O'Hagan et al. 2005, Goodman et al. 2002
-- **Behavioral data:** Chalfie et al. 1985 (reversal latency), Wicks et al. 1996 (direction discrimination)
-- **Touch neuron positions:** WormAtlas, White et al. 1986
+- **Connectome (NMJ + interneuron):** ConnectomeToolbox / `cect` package ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7))
+- **MEC-4 electrophysiology:** [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362), [Goodman et al. 2002](https://doi.org/10.1038/4151039a)
+- **Behavioral data:** [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) (reversal latency), [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) (direction discrimination)
+- **Touch neuron positions:** WormAtlas, [White et al. 1986](https://doi.org/10.1098/rstb.1986.0056)
 
 ---
 

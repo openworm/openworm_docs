@@ -15,7 +15,7 @@
 | **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
-| **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. Randi 2023; Tier 3: 5 kinematic metrics within ±15% of Schafer lab data |
+| **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 3: 5 kinematic metrics within ±15% of Schafer lab data |
 | **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
@@ -43,7 +43,7 @@ A simulation that produces movement but fails electrophysiology validation has *
 | Tier | What Is Validated | Validation Data | Acceptance Criteria | Blocking? |
 |------|------------------|-----------------|-------------------|-----------|
 | **Tier 1: Unit (Single Cell)** | Membrane voltage, conductances, calcium dynamics | Goodman lab patch-clamp, Randi et al. single-neuron Ca imaging | Quantitative match within 20% | No (warning) |
-| **Tier 2: Integration (Circuit)** | Functional connectivity, network dynamics | Randi et al. 2023 whole-brain pairwise correlations | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
+| **Tier 2: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
 | **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | Schafer lab WCON, Raizen EPG, Thomas defecation assays | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
@@ -78,7 +78,7 @@ python scripts/validate_single_cell_electrophys.py \
 
 ### Tier 2: Circuit-Level Validation (Integration Tests)
 
-**Primary target:** Randi et al. 2023 functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity).
+**Primary target:** [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity).
 
 **Validation procedure:**
 
@@ -188,10 +188,10 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 | Pharyngeal pumping state | [DD007](DD007_Pharyngeal_System_Architecture.md) | Per-section contraction time series | Tab-separated | binary or [0,1] |
 | Defecation motor program | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | Event log | ms |
 | Experimental data (electrophysiology) | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | Patch-clamp recordings | CSV | mV, nA |
-| Experimental data (functional connectivity) | [DD008](DD008_Data_Integration_Pipeline.md) / Randi 2023 | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
+| Experimental data (functional connectivity) | [DD008](DD008_Data_Integration_Pipeline.md) / [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
 | Experimental data (kinematics) | [DD008](DD008_Data_Integration_Pipeline.md) / Schafer lab | Movement trajectories | WCON | µm |
-| Experimental data (defecation) | [DD008](DD008_Data_Integration_Pipeline.md) / Thomas 1990 | Defecation cycle periods | CSV | seconds |
-| Experimental data (pumping) | [DD008](DD008_Data_Integration_Pipeline.md) / Raizen 1994 | EPG recordings | CSV | mV |
+| Experimental data (defecation) | [DD008](DD008_Data_Integration_Pipeline.md) / [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) | Defecation cycle periods | CSV | seconds |
+| Experimental data (pumping) | [DD008](DD008_Data_Integration_Pipeline.md) / [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | EPG recordings | CSV | mV |
 
 ### Outputs (What This Subsystem Produces)
 
@@ -283,7 +283,7 @@ All validation datasets are **baked into the Docker image at build time** (not d
 **Repository:** `openworm/wormneuroatlas` (pushed 2025-10-22, maintained)
 **Installation:** `pip install wormneuroatlas`
 
-**Randi 2023 functional connectivity is already accessible via API:**
+**[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity is already accessible via API:**
 
 ```python
 from wormneuroatlas import NeuroAtlas
@@ -501,7 +501,7 @@ jobs:
 **Implementation Status:** Partial
 
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
-- **Tier 2** (functional connectivity): Randi 2023 data needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (blocking)
+- **Tier 2** (functional connectivity): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (blocking)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
 
 **See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
@@ -510,6 +510,6 @@ jobs:
 
 1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
-3. After revival: Ingest Randi 2023 data for Tier 2 validation
+3. After revival: Ingest [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data for Tier 2 validation
 4. After [DD013](DD013_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
 5. Set up GitHub Actions CI with Tier 2+3 blocking gates

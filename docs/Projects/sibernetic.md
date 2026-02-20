@@ -47,7 +47,7 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 
 -   Physics tests
 -   Initial worm crawling
--   Published: Sarma et al. 2018
+-   Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382)
 
 ## Issues list
 

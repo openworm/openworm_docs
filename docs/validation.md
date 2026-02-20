@@ -29,7 +29,7 @@ Building a digital organism is hard. How do we know we're getting it right?
 
 **What:** Do neurons interact correctly as a network?
 
-**Test:** Compute pairwise calcium correlations (302x302 matrix), compare to Randi et al. 2023 whole-brain imaging data.
+**Test:** Compute pairwise calcium correlations (302x302 matrix), compare to [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain imaging data.
 
 **Acceptance Criteria:** Correlation-of-correlations r > 0.5
 
@@ -107,7 +107,7 @@ docker compose run validate      # Full 3-tier validation
 | Tier | Implementation | Automated? |
 |------|---------------|------------|
 | **Tier 1** | Scripts exist but not integrated into CI | No |
-| **Tier 2** | Randi 2023 data identified, needs ingestion pipeline | No |
+| **Tier 2** | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data identified, needs ingestion pipeline | No |
 | **Tier 3** | **BLOCKED** — analysis toolbox needs revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | No |
 
 **Infrastructure priority:** Get all 3 tiers automated in CI so every PR is validated automatically.

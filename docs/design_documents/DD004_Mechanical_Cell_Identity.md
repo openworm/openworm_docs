@@ -73,7 +73,7 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: OpenCL SDK, CMake, C++ compiler (same as [DD003](DD003_Body_Physics_Architecture.md))
-- Cell boundary mesh data from Witvliet et al. 2021 (included in Docker image or downloaded at build time)
+- Cell boundary mesh data from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (included in Docker image or downloaded at build time)
 
 ### Step-by-step
 
@@ -124,7 +124,7 @@ docker compose run validate
 
 ### Tag Every SPH Particle with a Cell ID from the WBbt Ontology
 
-Use the Witvliet et al. 2021 full-body EM reconstructions (8 animals, L1 through adult) to define 3D cell boundaries at multiple developmental stages. Assign each SPH particle a cell ID (WBbt identifier, e.g., `WBbt:0005189` for intestinal cell int1).
+Use the [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) full-body EM reconstructions (8 animals, L1 through adult) to define 3D cell boundaries at multiple developmental stages. Assign each SPH particle a cell ID (WBbt identifier, e.g., `WBbt:0005189` for intestinal cell int1).
 
 **Data structure:**
 ```c
@@ -167,9 +167,9 @@ Where `adhesion_strength` depends on both source and target cell types (e.g., mu
 
 **Data sources:**
 
-1. **Witvliet et al. 2021:** 3D cell volumes at L1, L4, adult (choose adult hermaphrodite as reference)
+1. **[Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8):** 3D cell volumes at L1, L4, adult (choose adult hermaphrodite as reference)
 2. **WormAtlas Slidable Worm:** Consecutive TEM sections with hand-annotated cell boundaries
-3. **Long et al. 2009:** 3D nuclear positions for L1 (357 nuclei)
+3. **[Long et al. 2009](https://doi.org/10.1038/nmeth.1366):** 3D nuclear positions for L1 (357 nuclei)
 
 **Initialization algorithm:**
 
@@ -266,7 +266,7 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Cell boundary meshes | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / Witvliet 2021 EM | 3D surface reconstruction per cell | OBJ or STL mesh files | µm |
+| Cell boundary meshes | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM | 3D surface reconstruction per cell | OBJ or STL mesh files | µm |
 | WBbt cell ontology IDs | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / WormBase | Cell name → WBbt ID mapping | CSV or OWMeta query | identifiers |
 | Baseline SPH particle layout | [DD003](DD003_Body_Physics_Architecture.md) | Current particle initialization | Binary particle file | µm (positions) |
 
@@ -286,7 +286,7 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 | **Repository** | `openworm/sibernetic` (particle initialization is part of Sibernetic) |
 | **Docker stage** | `body` (same as [DD003](DD003_Body_Physics_Architecture.md)) |
 | **`versions.lock` key** | `sibernetic` |
-| **Build dependencies** | Same as [DD003](DD003_Body_Physics_Architecture.md) + cell boundary mesh data from Witvliet 2021 |
+| **Build dependencies** | Same as [DD003](DD003_Body_Physics_Architecture.md) + cell boundary mesh data from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) |
 | **Additional data** | Cell boundary meshes must be included in the Docker image (or downloaded at build time from a pinned release) |
 
 ### Configuration

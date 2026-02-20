@@ -46,7 +46,7 @@
 | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ Accepted | 302 neurons, HH Level C1, graded synapses |
 | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ Accepted | 95 muscles, Ca²⁺→force coupling |
 | [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Accepted | Sibernetic SPH, ~100K particles |
-| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, Cook2019 default |
+| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) default |
 
 ### Infrastructure Bootstrap ⚠️
 
@@ -71,7 +71,7 @@
 |----|-------|--------------|
 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Differentiation | 128 distinct neuron classes (not 302 identical) |
 | [DD014 Phase 1](DD014_Dynamic_Visualization_Architecture.md) | Trame Viewer | OME-Zarr export, organism + tissue scales |
-| [DD010 Tier 2](DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. Randi 2023 (r > 0.5) |
+| [DD010 Tier 2](DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) (r > 0.5) |
 
 ### Phase 2: Slow Modulation + Closed-Loop ⚠️
 

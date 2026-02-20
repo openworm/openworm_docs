@@ -76,4 +76,5 @@ nav:
   - Resources:
       - Resources Overview: Resources/resources.md
       - Running NeuroML connectome: Resources/running-nc.md
+  - References: references.md
   - FAQ: faq.md

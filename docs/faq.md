@@ -47,7 +47,7 @@ All models are wrong, some models are useful :) We must have the model make a pr
 We now have a formal **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)):
 
 - **Tier 1:** Single-cell electrophysiology (patch clamp comparison)
-- **Tier 2:** Circuit-level functional connectivity (must correlate r > 0.5 with Randi 2023 whole-brain imaging)
+- **Tier 2:** Circuit-level functional connectivity (must correlate r > 0.5 with [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain imaging)
 - **Tier 3:** Behavioral kinematics (speed, wavelength, frequency within +/-15% of Schafer lab database)
 
 **Tiers 2 and 3 are blocking** — code cannot merge if validation regresses. See the [Validation page](validation/) for details.

@@ -35,7 +35,7 @@ Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level 
 |-----------|--------|------------|
 | **Primary:** Pumping frequency | 3-4 Hz (0.25-0.33 s period) under feeding conditions | Tier 3 (blocking) |
 | **Secondary:** Body locomotion preservation | Within +/-15% of baseline kinematic metrics when pharynx enabled | Tier 3 (blocking) |
-| **Tertiary:** Electropharyngeogram match | Simulated pharyngeal muscle voltage qualitatively matches Raizen & Avery 1994 EPG plateau potentials | Tier 1 (non-blocking) |
+| **Tertiary:** Electropharyngeogram match | Simulated pharyngeal muscle voltage qualitatively matches [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) EPG plateau potentials | Tier 1 (non-blocking) |
 
 **Before:** No pharyngeal model. The 20 pharyngeal neurons and 20 pharyngeal muscles are absent from simulation. Pumping is not modeled.
 
@@ -247,7 +247,7 @@ The pharynx is a **semi-autonomous neuromuscular organ** comprising 63 cells:
 - **4 gland cells** (g1, g2L, g2R, gl)
 - **1 valve cell (vpi1)**
 
-The pharynx pumps bacterial food from the mouth to the intestine at **~3-4 Hz** during feeding, with distinct electrophysiological dynamics (Raizen & Avery 1994 electropharyngeogram recordings). It is functionally isolated from the body circuit — pharyngeal neurons do not synapse onto body neurons and vice versa (with rare exceptions: RIP -> I2).
+The pharynx pumps bacterial food from the mouth to the intestine at **~3-4 Hz** during feeding, with distinct electrophysiological dynamics ([Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) electropharyngeogram recordings). It is functionally isolated from the body circuit — pharyngeal neurons do not synapse onto body neurons and vice versa (with rare exceptions: RIP -> I2).
 
 ---
 
@@ -261,7 +261,7 @@ Contains a **NEURON implementation of pm3 pharyngeal muscle** with:
 
 - EAT-2, EGL-19, UNC-2 Ca²⁺ channels (exactly [DD007](DD007_Pharyngeal_System_Architecture.md)'s target channels)
 - Ca²⁺ slow action potential (plateau potentials, ~100ms duration)
-- Output matches Raizen & Avery 1994 EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s validation target)
+- Output matches [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s validation target)
 
 **Reuse Plan:**
 ```bash

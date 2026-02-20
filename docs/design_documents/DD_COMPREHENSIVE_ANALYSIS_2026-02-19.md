@@ -200,8 +200,8 @@ Contributors might set `body.backend: taichi-metal` and expect it to work (it mi
 ### I5. Parameter Sources: [DD001](DD001_Neural_Circuit_Architecture.md) (Boyle & Cohen) vs. [DD002](DD002_Muscle_Model_Architecture.md) (Also Boyle & Cohen)
 
 **The Confusion:**
-[DD001](DD001_Neural_Circuit_Architecture.md) line 179 says neuron channel kinetics are "derived from Boyle & Cohen 2008 **muscle model**."
-[DD002](DD002_Muscle_Model_Architecture.md) line 4 says muscle model is "based on Boyle & Cohen 2008."
+[DD001](DD001_Neural_Circuit_Architecture.md) line 179 says neuron channel kinetics are "derived from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) **muscle model**."
+[DD002](DD002_Muscle_Model_Architecture.md) line 4 says muscle model is "based on [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)."
 
 Both neurons AND muscles use parameters from the same paper about muscle electrophysiology.
 
@@ -387,7 +387,7 @@ Or create a **single comprehensive DD: Sensory Transduction Suite** covering all
 ### G6. No DD for Male-Specific Modeling
 
 **What's Missing:**
-Cook et al. 2019 mapped the male connectome (385 neurons, +83 male-specific). [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) includes `Cook2019MaleReader`. But no DD specifies how to model:
+[Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) mapped the male connectome (385 neurons, +83 male-specific). [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) includes `Cook2019MaleReader`. But no DD specifies how to model:
 
 - Male-specific neurons (83 cells)
 - Mating circuit (ray neurons, spicule muscles, HOB sensory neurons)
@@ -748,7 +748,7 @@ Every science DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_In
 |----|------------------|------------------|
 | [DD001](DD001_Neural_Circuit_Architecture.md) line 253 | "Kinematic validation score... within 15%" | Tier 3 acceptance: ±15% |
 | [DD002](DD002_Muscle_Model_Architecture.md) line 237 | "Kinematic validation scores... not degrade" | Tier 3 (same) |
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) line 347 | "Must improve correlation with Randi 2023" | Tier 2 functional connectivity |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) line 347 | "Must improve correlation with [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)" | Tier 2 functional connectivity |
 
 **Is This Bad?**
 **No, this is good redundancy.** It reinforces that DD-specific criteria align with global validation ([DD010](DD010_Validation_Framework.md)). Each DD is explicit about its validation requirements.
@@ -1166,7 +1166,7 @@ Last updated: 2026-02-19
   ↓
 [DD001](DD001_Neural_Circuit_Architecture.md) (differentiated neuron models)
   ↓
-[DD010](DD010_Validation_Framework.md) Tier 2 (functional connectivity vs. Randi 2023)
+[DD010](DD010_Validation_Framework.md) Tier 2 (functional connectivity vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4))
 ```
 
 ### Chain 3: Bidirectional Touch Loop ([DD019](DD019_Closed_Loop_Touch_Response.md) Closes the Loop)

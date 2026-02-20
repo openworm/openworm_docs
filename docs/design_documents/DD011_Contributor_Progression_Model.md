@@ -12,7 +12,7 @@
 
 ## Context
 
-OpenWorm has operated with **informal, organic leadership emergence**: "experienced and enthusiastic volunteers often establish themselves as leaders without any prompting" (Sarma et al. 2018). This has strengths (low bureaucracy, self-motivation) but creates problems:
+OpenWorm has operated with **informal, organic leadership emergence**: "experienced and enthusiastic volunteers often establish themselves as leaders without any prompting" ([Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382)). This has strengths (low bureaucracy, self-motivation) but creates problems:
 
 - Newcomers don't know how to progress from observer to contributor to leader
 - No clear criteria for when someone is "ready" for more responsibility
@@ -127,7 +127,7 @@ Earn **3 of 4 orientation badges** (assigned by N2-Whisperer based on background
 | **Connected** | Join Slack, GitHub, subscribe to mailing list |
 | **Simulation Runner** | Install and run the OpenWorm Docker simulation stack, post screenshot |
 | **Explorer** | Navigate the Worm Browser, identify 5 neurons and describe their function |
-| **Paper Reader** | Read Sarma et al. 2018 overview paper, summarize in 3 bullet points |
+| **Paper Reader** | Read [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382) overview paper, summarize in 3 bullet points |
 
 See **Badge & Recognition System** section for full badge details.
 
@@ -367,7 +367,7 @@ Earned by completing onboarding milestones. Assigned and verified by N2-Whispere
 | **Connected** | Join Slack, GitHub, subscribe to mailing list | N2-Whisperer confirms channel presence | "Plugged In" (15 earners) |
 | **Simulation Runner** | Install Docker, run simulation stack, post output | Screenshot with version number | "Simulation Stack Apprentice" (79 earners) |
 | **Explorer** | Navigate Worm Browser, identify 5 neurons, describe functions | N2-Whisperer evaluates response | — |
-| **Paper Reader** | Read Sarma et al. 2018, summarize in 3 bullets | N2-Whisperer evaluates summary | — |
+| **Paper Reader** | Read [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), summarize in 3 bullets | N2-Whisperer evaluates summary | — |
 
 **L0 → L1 requirement:** Earn 3 of 4 orientation badges.
 
@@ -607,7 +607,7 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 1. **Apache Software Foundation Contributor Ladder:** community.apache.org/contributor-ladder.html
 2. **Linux Kernel Maintainer Model:** LWN.net/Articles/703005
 3. **Medical Residency Graduated Autonomy:** PMC4675449
-4. **Sarma et al. (2018).** "OpenWorm: overview." *Phil Trans R Soc B* 373:20170382.
+4. **[Sarma et al. (2018)](https://doi.org/10.1098/rstb.2017.0382).** "OpenWorm: overview." *Phil Trans R Soc B* 373:20170382.
 
 ---
 

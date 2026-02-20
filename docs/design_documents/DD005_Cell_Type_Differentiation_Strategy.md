@@ -12,7 +12,7 @@
 
 ## TL;DR
 
-Replace the single generic neuron template used for all 302 neurons with **128 cell-type-specific templates** parameterized from CeNGEN single-cell RNA-seq data. This is Phase 1 work — the first DD to produce biologically distinct neurons. Success metric: **20%+ improvement in functional connectivity correlation** vs. Randi et al. 2023 experimental data.
+Replace the single generic neuron template used for all 302 neurons with **128 cell-type-specific templates** parameterized from CeNGEN single-cell RNA-seq data. This is Phase 1 work — the first DD to produce biologically distinct neurons. Success metric: **20%+ improvement in functional connectivity correlation** vs. [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) experimental data.
 
 ---
 
@@ -72,7 +72,7 @@ Each `.cell.nml` file includes metadata:
 
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy
-- **Recommended:** `pip install wormneuroatlas` (provides CeNGEN API + Randi 2023 data, see reuse opportunities below)
+- **Recommended:** `pip install wormneuroatlas` (provides CeNGEN API + [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data, see reuse opportunities below)
 
 ### Step-by-step
 
@@ -271,7 +271,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 ### Step 6: Validate Against Functional Connectivity
 
-**Primary validation:** Randi et al. 2023 whole-brain calcium imaging functional connectivity matrix.
+**Primary validation:** [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain calcium imaging functional connectivity matrix.
 
 - Compute pairwise correlations in simulated calcium signals
 - Compare to experimental pairwise correlations
@@ -371,7 +371,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 2. **NeuroML 2 Compliance:** Each cell type is a separate NeuroML `<cell>` element with unique `id` (e.g., `AVALCell`, `ASHCell`).
 
-3. **Preserve Connectome Topology:** The number of neurons (302 hermaphrodite, 385 male) and their connectivity (Cook et al. 2019) must match the biological data. Differentiation changes cell properties, not network structure.
+3. **Preserve Connectome Topology:** The number of neurons (302 hermaphrodite, 385 male) and their connectivity ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) must match the biological data. Differentiation changes cell properties, not network structure.
 
 4. **Calibration Transparency:** The `expression_to_conductance_calibration.csv` file must document:
    - Training set (which neurons with electrophysiology)
@@ -379,7 +379,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
    - Cross-validation R² or error metric
    - Date of calibration and CeNGEN version
 
-5. **Validation Against Functional Data:** The differentiated model must improve the correlation with Randi et al. 2023 functional connectivity compared to the generic model.
+5. **Validation Against Functional Data:** The differentiated model must improve the correlation with [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity compared to the generic model.
 
 6. **CeNGEN Expression Data as Ground Truth:** All conductance densities must be traceable to CeNGEN expression values via the documented calibration relationship.
 
@@ -432,7 +432,7 @@ python scripts/benchmark_improvement.py \
 
 2. **Developmental stage differences:** CeNGEN L4 is the reference stage. L1, adult, dauer require separate expression datasets (CeNGEN L1 is available; others are future work).
 
-3. **Male-specific neurons:** The 83 male-specific neurons (Cook et al. 2019) lack CeNGEN data. Use hermaphrodite classes as proxy until male scRNA-seq is available.
+3. **Male-specific neurons:** The 83 male-specific neurons ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) lack CeNGEN data. Use hermaphrodite classes as proxy until male scRNA-seq is available.
 
 4. **Neuropeptide receptors:** Expression is in CeNGEN, but receptor dynamics are covered in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome).
 
@@ -448,7 +448,7 @@ python scripts/benchmark_improvement.py \
 
 The current c302 model uses a **single generic neuron cell template** for all 302 neurons, with identical ion channel types and conductance densities. The only distinguishing feature between neuron types is their connectivity pattern. As stated in the CElegansNeuroML repository: "an accurate representation of the ion channels and their distributions in each neuron has not yet been attempted."
 
-This is biologically inaccurate. Real neurons express distinct complements of ion channels, receptors, and signaling machinery. The CeNGEN database (Taylor et al. 2021) provides single-cell RNA-seq for 100,955 neurons across 128 neuron classes at L4 larval stage, making cell-type-specific differentiation feasible for the first time.
+This is biologically inaccurate. Real neurons express distinct complements of ion channels, receptors, and signaling machinery. The CeNGEN database ([Taylor et al. 2021](https://doi.org/10.1016/j.cell.2021.06.023)) provides single-cell RNA-seq for 100,955 neurons across 128 neuron classes at L4 larval stage, making cell-type-specific differentiation feasible for the first time.
 
 John White, in the February 12, 2026 meeting, emphasized: "there's a huge amount of information there" (referring to CeNGEN) and urged integration of this dataset into the modeling framework.
 
@@ -481,7 +481,7 @@ expression_data = atlas.get_gene_expression(
 - ✅ Handles neuron ID variants automatically
 - ✅ pip-installable (works in Docker)
 - ✅ Maintained by Randi lab (Francesco Randi)
-- ✅ Also provides Randi 2023 functional connectivity for [DD010](DD010_Validation_Framework.md) Tier 2 validation
+- ✅ Also provides [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity for [DD010](DD010_Validation_Framework.md) Tier 2 validation
 
 **Fallback: Manual download from cengen.org**
 
@@ -504,7 +504,7 @@ https://cengen.org/downloads
 | AVA interneuron | CeNGEN | Lockery lab | unc-2, shl-1 |
 | RIM motor neuron | CeNGEN | Liu et al. 2018 | egl-19, unc-2 |
 | ASH polymodal nociceptor | CeNGEN | Hilliard et al. 2002, **WormsenseLab_ASH repo** | osm-9 |
-| AWC olfactory neuron | CeNGEN | Chalasani et al. 2007 | tax-2/tax-4 |
+| AWC olfactory neuron | CeNGEN | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | tax-2/tax-4 |
 
 Approximately **20 neuron types** have published electrophysiological recordings suitable for calibration.
 
@@ -612,7 +612,7 @@ Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assum
 
 CeNGEN L1 data exist but are less mature. Adult and dauer expression are unavailable. Developmental changes in channel expression are not captured.
 
-**Future work:** Integrate CeNGEN L1 when validated. Use Packer et al. 2019 embryonic atlas for earlier stages.
+**Future work:** Integrate CeNGEN L1 when validated. Use [Packer et al. 2019](https://doi.org/10.1126/science.aax1971) embryonic atlas for earlier stages.
 
 ### Issue 3: Post-Transcriptional Regulation
 
@@ -754,4 +754,4 @@ docker compose run validate
 3. Collect electrophysiology data for calibration training set (20 neurons)
 4. Fit calibration relationship
 5. Generate 128 cell-type-specific NeuroML files
-6. Validate against Randi et al. 2023
+6. Validate against [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4)

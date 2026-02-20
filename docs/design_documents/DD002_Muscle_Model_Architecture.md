@@ -1,7 +1,7 @@
 # DD002: Muscle Model Architecture and Calcium-Force Coupling
 
 **Status:** Accepted  
-**Author:** OpenWorm Core Team (based on Boyle & Cohen 2008)  
+**Author:** OpenWorm Core Team (based on [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025))  
 **Date:** 2026-02-14  
 **Supersedes:** None  
 **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics)
@@ -36,7 +36,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 | **Primary:** Forward speed | Within ±15% of Schafer lab WCON baseline | Tier 3 (blocking) |
 | **Primary:** Body bend amplitude | Within ±15% of Schafer lab WCON baseline | Tier 3 (blocking) |
 | **Secondary:** Muscle activation range | All activations in [0, 1], peak > 0.3 during neural drive | Quick-test (blocking per-PR) |
-| **Tertiary:** Calcium decay dynamics | Decay time constant ~12 ms, consistent with Boyle & Cohen 2008 | Tier 1 (non-blocking) |
+| **Tertiary:** Calcium decay dynamics | Decay time constant ~12 ms, consistent with [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) | Tier 1 (non-blocking) |
 
 **Before:** No electrophysiological muscle model — neurons could not drive body physics through a biophysically realistic pathway.
 
@@ -145,7 +145,7 @@ docker compose run validate
 
 Muscles are modeled as single-compartment conductance-based cells using the **same ion channel types** (leak, K_slow, K_fast, Ca_boyle) with **muscle-specific conductance densities** tuned to produce slower, sustained depolarizations rather than sharp action potentials.
 
-**Muscle conductance densities (from Boyle & Cohen 2008):**
+**Muscle conductance densities (from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)):**
 
 | Channel | Muscle g_max | E_rev | Notes |
 |---------|-------------|-------|-------|

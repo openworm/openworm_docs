@@ -74,7 +74,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ~100K SPH particles (fluid-structure interaction)
 - Coupled simulation via `sibernetic_c302.py`
 - 15ms simulations produce movement (validated against Schafer lab kinematics)
-- ConnectomeToolbox provides Cook2019, Witvliet, Randi, Ripoll-Sanchez data
+- ConnectomeToolbox provides [Cook2019](https://doi.org/10.1038/s41586-019-1352-7), Witvliet, Randi, Ripoll-Sanchez data
 
 **What's Missing (addressed in Phase A):**
 
@@ -87,7 +87,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
 - Announcement: "OpenWorm simulates all 302 neurons + 95 muscles + body physics in a coupled loop, producing emergent locomotion validated against real worm movement."
-- Published: Sarma et al. 2018, Gleeson et al. 2018
+- Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
 
 ---
 
@@ -131,7 +131,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 **Datasets Needed for Phase A:**
 
 - Schafer lab N2 baseline kinematics (WCON format, for Tier 3) — **Status:** Partial (MAT format exists, needs WCON conversion)
-- Randi et al. 2023 functional connectivity (302×302 correlation matrix) — **Status:** Needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020
+- [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (302×302 correlation matrix) — **Status:** Needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020
 
 **Blocking Dependencies:**
 
@@ -150,7 +150,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 |----|-------|-------------|--------------|
 | **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | Cell-Type Differentiation Strategy | [DD001](DD001_Neural_Circuit_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (CeNGEN) | Replace 302 identical neurons with 128 distinct neuron classes |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 1)** | Post-Hoc Trame Viewer | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Evolve Worm3DViewer from Streamlit to Trame; OME-Zarr export |
-| **[DD010](DD010_Validation_Framework.md) (Tier 2)** | Functional Connectivity Validation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD008](DD008_Data_Integration_Pipeline.md) | Activate Tier 2 blocking gate (r > 0.5 vs. Randi 2023) |
+| **[DD010](DD010_Validation_Framework.md) (Tier 2)** | Functional Connectivity Validation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD008](DD008_Data_Integration_Pipeline.md) | Activate Tier 2 blocking gate (r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)) |
 
 **Key Deliverables:**
 
@@ -159,7 +159,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 3. **Differentiated c302 network** (`LEMS_c302_C1_Differentiated.xml`) — Generated via `python CElegans.py C1Differentiated`
 4. **OME-Zarr export pipeline** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — `master_openworm.py` Step 4b writes `output/openworm.zarr/` with neural/, muscle/, body/ groups
 5. **Trame viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Replaces Streamlit+stpyvista, supports time animation in browser
-6. **Tier 2 validation** ([DD010](DD010_Validation_Framework.md)) — Automated correlation vs. Randi 2023; CI blocks PRs if r < 0.5
+6. **Tier 2 validation** ([DD010](DD010_Validation_Framework.md)) — Automated correlation vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); CI blocks PRs if r < 0.5
 
 **Milestone:** 🎉 **"Biologically Distinct Neurons"**
 
@@ -172,7 +172,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 - ✅ All 128 `.cell.nml` files generated without error
 - ✅ `jnml -validate` passes for each cell type
-- ✅ Tier 2 validation: correlation with Randi 2023 improves ≥20% vs. generic baseline
+- ✅ Tier 2 validation: correlation with [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) improves ≥20% vs. generic baseline
 - ✅ Tier 3 validation: kinematic metrics remain within ±15% (no regression)
 - ✅ Trame viewer launches via `docker compose up viewer`, shows time-animated worm at localhost:8501
 - ✅ OME-Zarr export complete: `neural/`, `muscle/`, `body/` groups all populated
@@ -183,7 +183,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 |---------|--------|--------|----------|--------|
 | **CeNGEN L4 expression** | cengen.org | CSV (128 classes × 20,500 genes) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance calibration | ✅ Available (download from cengen.org/downloads) |
 | **Electrophysiology training set** | Goodman lab, Lockery lab, published papers | CSV (neuron_class, channel, measured_g, source_doi) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration regression | ⚠️ Needs curation (~20 neurons) |
-| **Randi 2023 functional connectivity** | Nature 623:406 supplement | NumPy .npy (302×302 correlation matrix) | [DD010](DD010_Validation_Framework.md) Tier 2 validation | ⚠️ Needs download + ingestion |
+| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity** | Nature 623:406 supplement | NumPy .npy (302×302 correlation matrix) | [DD010](DD010_Validation_Framework.md) Tier 2 validation | ⚠️ Needs download + ingestion |
 | **Ion channel gene list** | WormBase, CeNGEN | CSV (gene_symbol, channel_family, neuroml_model) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) gene→channel mapping | ⚠️ Needs curation (~100 ion channel genes) |
 
 **Blocking Dependencies:**
@@ -237,11 +237,11 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 | Dataset | Source | Format | Use Case | Status |
 |---------|--------|--------|----------|--------|
-| **Ripoll-Sanchez 2023 neuropeptides** | Neuron 111:3570 Table S1 | CSV (31,479 interactions: source, target, peptide, receptor, distance) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) extrasynaptic connectome | ⚠️ Needs download from journal supplement |
-| **3D neuron positions** | WormAtlas, Long et al. 2009 | CSV (302 neurons × 3 coordinates) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) distance calculation | ⚠️ Needs extraction from WormAtlas or EM data |
-| **Touch neuron electrophysiology** | O'Hagan et al. 2005, Goodman et al. 2002 | CSV (MEC-4 channel kinetics: V_half, tau, conductance) | [DD019](DD019_Closed_Loop_Touch_Response.md) MEC-4 model validation | ⚠️ Needs extraction from papers |
-| **Tap withdrawal behavioral data** | Chalfie et al. 1985, Wicks et al. 1996 | CSV (reversal latency, distance, direction) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Needs extraction from papers |
-| **Peptide knockout phenotypes** | Li et al. 1999, Rogers et al. 2003 (FLP), others | CSV (peptide_gene, phenotype, metric, wild_type, knockout) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Needs curation from literature |
+| **[Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043) neuropeptides** | Neuron 111:3570 Table S1 | CSV (31,479 interactions: source, target, peptide, receptor, distance) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) extrasynaptic connectome | ⚠️ Needs download from journal supplement |
+| **3D neuron positions** | WormAtlas, [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) | CSV (302 neurons × 3 coordinates) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) distance calculation | ⚠️ Needs extraction from WormAtlas or EM data |
+| **Touch neuron electrophysiology** | [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362), [Goodman et al. 2002](https://doi.org/10.1038/4151039a) | CSV (MEC-4 channel kinetics: V_half, tau, conductance) | [DD019](DD019_Closed_Loop_Touch_Response.md) MEC-4 model validation | ⚠️ Needs extraction from papers |
+| **Tap withdrawal behavioral data** | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) | CSV (reversal latency, distance, direction) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Needs extraction from papers |
+| **Peptide knockout phenotypes** | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers et al. 2003](https://doi.org/10.1038/nn1140) (FLP), others | CSV (peptide_gene, phenotype, metric, wild_type, knockout) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Needs curation from literature |
 
 **Blocking Dependencies:**
 
@@ -295,9 +295,9 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 | Dataset | Source | Format | Use Case | Status |
 |---------|--------|--------|----------|--------|
-| **Raizen 1994 EPG recordings** | Neuron 12:483 | CSV (pharyngeal muscle voltage traces) | [DD007](DD007_Pharyngeal_System_Architecture.md) validation | ⚠️ Needs digitization from paper figures |
-| **Thomas 1990 defecation data** | Genetics 124:855 | CSV (defecation cycle period distribution) | [DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3 validation | ⚠️ Needs extraction |
-| **Collins 2016 egg-laying calcium imaging** | eLife 5:e21126 | CSV (HSN/VC/vm2 calcium traces, bout intervals) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Needs extraction from supplement |
+| **[Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) EPG recordings** | Neuron 12:483 | CSV (pharyngeal muscle voltage traces) | [DD007](DD007_Pharyngeal_System_Architecture.md) validation | ⚠️ Needs digitization from paper figures |
+| **[Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation data** | Genetics 124:855 | CSV (defecation cycle period distribution) | [DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3 validation | ⚠️ Needs extraction |
+| **[Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging** | eLife 5:e21126 | CSV (HSN/VC/vm2 calcium traces, bout intervals) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Needs extraction from supplement |
 | **SPH simulation training set** | Generate from Sibernetic | HDF5 (500+ runs: muscle_activation → trajectory pairs) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) surrogate training | ⚠️ Generate during Phase 3 (~2,500 GPU-hours) |
 | **Ion channel structures** | AlphaFold3, PDB | PDB files (C. elegans ion channel proteins) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 (foundation model→params) | ⚠️ Needs prediction runs |
 | **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | CSV (subset of L4 expression for non-neural cells) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md) cell-type-specific params | ✅ Available (filter CeNGEN L4 by cell type) |
@@ -326,7 +326,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 1. **Tagged particle file** (extended SPH_Particle_v2 struct: 44 bytes with `cell_id`, `elasticity_mult`, `adhesion`)
 2. **Cell-to-particle mapping** (`data/cell_to_particle_map.json`) — 959 somatic cells → particle indices
-3. **Cell boundary meshes** (`data/cell_boundaries/*.obj`) — Per-cell 3D volumes from Witvliet 2021 EM
+3. **Cell boundary meshes** (`data/cell_boundaries/*.obj`) — Per-cell 3D volumes from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM
 4. **Deformed Virtual Worm meshes** ([DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md)) — 688 anatomical meshes follow SPH body shape in real-time
 5. **Three.js viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — viewer.openworm.org (GitHub Pages or CDN)
@@ -351,7 +351,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 | Dataset | Source | Format | Use Case | Status |
 |---------|--------|--------|----------|--------|
-| **Witvliet 2021 cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions (OBJ or STL per cell) | [DD004](DD004_Mechanical_Cell_Identity.md) particle tagging | ⚠️ Needs extraction/conversion from EM data |
+| **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions (OBJ or STL per cell) | [DD004](DD004_Mechanical_Cell_Identity.md) particle tagging | ⚠️ Needs extraction/conversion from EM data |
 | **Virtual Worm Blender meshes** | Blender2NeuroML repo | .blend file (688 meshes, ~1.6M vertices) | [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) deformation | ✅ Available (Virtual_Worm_February_2012.blend) |
 | **Cell-type mechanical properties** | Literature review (elasticity, adhesion per tissue type) | CSV (cell_type, elasticity_mult, adhesion_strength) | [DD004](DD004_Mechanical_Cell_Identity.md) physics params | ⚠️ Needs curation from biomechanics literature |
 | **WBbt cell ontology** | WormBase | RDF or CSV (cell_name → WBbt_ID mapping) | [DD004](DD004_Mechanical_Cell_Identity.md) cell identity normalization | ✅ Available via WormBase API |
@@ -412,7 +412,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 |---------|--------|----------|--------|
 | **Witvliet series connectomes** (8 stages) | Nature 596:257 | Stage-specific neural topology | ✅ Available via `cect` WitvlietDataReader1-8 |
 | **CeNGEN L1 expression** | cengen.org | L1 neuron differentiation | ✅ Available but less mature than L4 |
-| **Packer 2019 embryonic scRNA-seq** | Science 365:eaax1971 | Embryonic gene expression | ⚠️ Needs ingestion |
+| **[Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq** | Science 365:eaax1971 | Embryonic gene expression | ⚠️ Needs ingestion |
 | **Developmental behavioral data** | Literature (L1-L4 locomotion, feeding) | Stage-specific validation | ⚠️ Needs curation |
 
 ---
@@ -423,7 +423,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 
 **Anticipated Scope:**
 
-- 385-neuron male connectome (Cook2019MaleReader)
+- 385-neuron male connectome ([Cook2019](https://doi.org/10.1038/s41586-019-1352-7)MaleReader)
 - 83 male-specific neurons (ray neurons, HOB, spicule motor neurons)
 - Male tail anatomy (fan, rays, spicules) in [DD003](DD003_Body_Physics_Architecture.md)/DD004
 - Mating circuit and copulation behavior
@@ -432,7 +432,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 
 **Datasets Needed (Projected):**
 
-- Cook 2019 male connectome (available via `cect`)
+- [Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) male connectome (available via `cect`)
 - Male behavioral data (mating assays, vulva location, spicule insertion)
 - Male-specific anatomy (tail SPH model, spicule mechanics)
 
@@ -446,23 +446,23 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 |---------|--------|------|---------------|---------|--------|
 | White et al. | Phil Trans R Soc B 314:1 | 1986 | `WhiteDataReader` | Historical reference | ✅ In `cect` |
 | Varshney et al. | PLoS Comput Biol 7:e1001066 | 2011 | `VarshneyDataReader` | Legacy comparison | ✅ In `cect` |
-| **Cook 2019 Hermaphrodite** | Nature 571:63 | 2019 | `Cook2019HermReader` | **PRIMARY** — [DD001](DD001_Neural_Circuit_Architecture.md) default | ✅ In `cect` |
-| **Cook 2019 Male** | Nature 571:63 | 2019 | `Cook2019MaleReader` | Phase 7 (male modeling) | ✅ In `cect` |
-| Cook 2020 | Update | 2020 | `Cook2020DataReader` | Updated analysis | ✅ In `cect` |
+| **[Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) Hermaphrodite** | Nature 571:63 | 2019 | `Cook2019HermReader` | **PRIMARY** — [DD001](DD001_Neural_Circuit_Architecture.md) default | ✅ In `cect` |
+| **[Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) Male** | Nature 571:63 | 2019 | `Cook2019MaleReader` | Phase 7 (male modeling) | ✅ In `cect` |
+| [Cook 2020](https://doi.org/10.1038/s41586-019-1352-7) | Update | 2020 | `Cook2020DataReader` | Updated analysis | ✅ In `cect` |
 | **Witvliet Series (Stages 1-8)** | Nature 596:257 | 2021 | `WitvlietDataReader1-8` | Phase 6 (developmental), cross-validation | ✅ In `cect` |
 | Brittin et al. | Contact area-based | 2021 | `BrittinDataReader` | Alternative weighting | ✅ In `cect` |
-| **Ripoll-Sanchez 2023** | Neuron 111:3570 | 2023 | `RipollSanchez*RangeReader` | **Phase 2** — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptides | ✅ In `cect` |
-| **Wang 2024 Hermaphrodite** | eLife 13:RP95402 | 2024 | `Wang2024HermReader` | Neurotransmitter identity | ✅ In `cect` |
-| Wang 2024 Male | eLife 13:RP95402 | 2024 | `Wang2024MaleReader` | Male neurotransmitters | ✅ In `cect` |
-| Yim 2024 | Updated connectivity | 2024 | `Yim2024DataReader` | Recent analysis | ✅ In `cect` |
+| **[Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)** | Neuron 111:3570 | 2023 | `RipollSanchez*RangeReader` | **Phase 2** — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptides | ✅ In `cect` |
+| **[Wang 2024](https://doi.org/10.7554/eLife.95402) Hermaphrodite** | eLife 13:RP95402 | 2024 | `Wang2024HermReader` | Neurotransmitter identity | ✅ In `cect` |
+| [Wang 2024](https://doi.org/10.7554/eLife.95402) Male | eLife 13:RP95402 | 2024 | `Wang2024MaleReader` | Male neurotransmitters | ✅ In `cect` |
+| [Yim 2024](https://doi.org/10.1038/s41467-024-45943-3) | Updated connectivity | 2024 | `Yim2024DataReader` | Recent analysis | ✅ In `cect` |
 | OpenWormUnified | Experimental | 2024+ | `OpenWormUnifiedReader` | **WIP** — future default | ⚠️ Subject to change |
 
 ### Functional Datasets ([DD010](DD010_Validation_Framework.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 | Dataset | Source | Year | Format | Used In | Status |
 |---------|--------|------|--------|---------|--------|
-| **Randi 2023 whole-brain calcium imaging** | Nature 623:406 | 2023 | 302×302 correlation matrix (.npy) | **Phase 1** — [DD010](DD010_Validation_Framework.md) Tier 2, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) validation | ⚠️ Download from supplement |
-| **Randi 2023 neuron atlas** | Nature 623:406 | 2023 | Functional connectivity | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | ✅ In `cect` (WormNeuroAtlasFuncReader) |
+| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain calcium imaging** | Nature 623:406 | 2023 | 302×302 correlation matrix (.npy) | **Phase 1** — [DD010](DD010_Validation_Framework.md) Tier 2, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) validation | ⚠️ Download from supplement |
+| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) neuron atlas** | Nature 623:406 | 2023 | Functional connectivity | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | ✅ In `cect` (WormNeuroAtlasFuncReader) |
 | Goodman lab electrophysiology | Various papers 1998-2005 | 1998+ | CSV (touch neurons: MEC-4, voltage-clamp traces) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration, [DD019](DD019_Closed_Loop_Touch_Response.md) validation | ⚠️ Needs curation |
 | Lockery lab recordings | Various papers | 2000s | CSV (AVA, other interneurons) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration | ⚠️ Needs curation |
 
@@ -472,34 +472,34 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 |---------|--------|------|--------|---------|--------|
 | **CeNGEN L4** | Cell 184:4329 | 2021 | CSV (128 neuron classes × 20,500 genes) | **Phase 1** — [DD005](DD005_Cell_Type_Differentiation_Strategy.md) neuron differentiation | ✅ Download from cengen.org |
 | CeNGEN L1 | cengen.org | 2021+ | CSV (L1 neuron classes × genes) | Phase 6 (developmental) | ✅ Available but less mature |
-| Packer 2019 embryonic scRNA-seq | Science 365:eaax1971 | 2019 | Embryonic gene expression | Phase 6 (embryonic modeling) | ⚠️ Needs ingestion |
+| [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Science 365:eaax1971 | 2019 | Embryonic gene expression | Phase 6 (embryonic modeling) | ⚠️ Needs ingestion |
 
 ### Anatomical / Morphological Datasets ([DD004](DD004_Mechanical_Cell_Identity.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md))
 
 | Dataset | Source | Year | Format | Used In | Status |
 |---------|--------|------|--------|---------|--------|
 | **Virtual Worm Blender model** | Caltech/WormBase (Grove & Sternberg) | 2012 | .blend (688 meshes, 37 materials) | [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation | ✅ In Blender2NeuroML repo |
-| Long et al. 2009 3D atlas | Nature Methods 6:667 | 2009 | 3D nuclear positions (357 nuclei, L1) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (distance), [DD004](DD004_Mechanical_Cell_Identity.md) (cell positions) | ⚠️ Needs extraction |
+| [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) 3D atlas | Nature Methods 6:667 | 2009 | 3D nuclear positions (357 nuclei, L1) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (distance), [DD004](DD004_Mechanical_Cell_Identity.md) (cell positions) | ⚠️ Needs extraction |
 | **WormAtlas anatomy** | wormatlas.org | Ongoing | EM images, cell descriptions, Slidable Worm | [DD004](DD004_Mechanical_Cell_Identity.md) (cell boundaries), [DD008](DD008_Data_Integration_Pipeline.md) (cell positions) | ✅ Available via web scraping or API |
-| **Witvliet 2021 EM reconstructions** | Nature 596:257 | 2021 | 3D cell volumes (8 animals × 8 stages) | **Phase 4** — [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries | ⚠️ Needs conversion from EM data |
+| **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions** | Nature 596:257 | 2021 | 3D cell volumes (8 animals × 8 stages) | **Phase 4** — [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries | ⚠️ Needs conversion from EM data |
 
 ### Behavioral / Kinematic Datasets ([DD010](DD010_Validation_Framework.md) Tier 3)
 
 | Dataset | Source | Year | Format | Used In | Status |
 |---------|--------|------|--------|---------|--------|
-| **Schafer lab N2 baseline** | Yemini et al. 2013 database | 2013 | MAT files (skeleton time series) | [DD010](DD010_Validation_Framework.md) Tier 3 (primary) | ✅ In analysis toolbox examples/, needs WCON conversion |
+| **Schafer lab N2 baseline** | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) database | 2013 | MAT files (skeleton time series) | [DD010](DD010_Validation_Framework.md) Tier 3 (primary) | ✅ In analysis toolbox examples/, needs WCON conversion |
 | Schafer lab mutants | Yemini database | 2013+ | MAT files (unc-2, egl-19, others) | [DD010](DD010_Validation_Framework.md) mutant validation | ✅ In database |
-| **Tierpsy Tracker dataset** | Javer et al. 2018 | 2018+ | WCON + HDF5 (multi-worm tracking) | [DD010](DD010_Validation_Framework.md) cross-validation | ⚠️ Explore for additional baselines |
-| Chalfie 1985 tap withdrawal | Neuron 5:956 | 1985 | Behavioral metrics (reversal latency, distance) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Digitize from paper |
-| Wicks 1996 tap direction | J Neurobiol 31:1 | 1996 | Direction discrimination data | [DD019](DD019_Closed_Loop_Touch_Response.md) validation | ⚠️ Digitize from paper |
+| **Tierpsy Tracker dataset** | [Javer et al. 2018](https://doi.org/10.1038/s41592-018-0112-1) | 2018+ | WCON + HDF5 (multi-worm tracking) | [DD010](DD010_Validation_Framework.md) cross-validation | ⚠️ Explore for additional baselines |
+| [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal | Neuron 5:956 | 1985 | Behavioral metrics (reversal latency, distance) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Digitize from paper |
+| [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) tap direction | J Neurobiol 31:1 | 1996 | Direction discrimination data | [DD019](DD019_Closed_Loop_Touch_Response.md) validation | ⚠️ Digitize from paper |
 
 ### Pharmacological / Genetic Perturbation Datasets ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD018](DD018_Egg_Laying_System_Architecture.md))
 
 | Dataset | Source | Year | Format | Used In | Status |
 |---------|--------|------|--------|---------|--------|
-| FLP peptide knockout phenotypes | Li et al. 1999, Rogers 2003 | 1999+ | Behavioral assays (locomotion, reversal) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Extract from papers |
-| EGL mutant phenotypes | Trent et al. 1983 (145 mutants) | 1983+ | Egg-laying defects (frequency, timing) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from papers |
-| Serotonin pharmacology | Waggoner et al. 1998 | 1998 | Exogenous 5-HT effects on egg-laying | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from paper |
+| FLP peptide knockout phenotypes | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), Rogers 2003 | 1999+ | Behavioral assays (locomotion, reversal) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Extract from papers |
+| EGL mutant phenotypes | [Trent et al. 1983](https://doi.org/10.1093/genetics/104.4.619) (145 mutants) | 1983+ | Egg-laying defects (frequency, timing) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from papers |
+| Serotonin pharmacology | [Waggoner et al. 1998](https://doi.org/10.1016/S0896-6273(00)80527-9) | 1998 | Exogenous 5-HT effects on egg-laying | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from paper |
 
 ### Training Datasets for ML Components ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
 

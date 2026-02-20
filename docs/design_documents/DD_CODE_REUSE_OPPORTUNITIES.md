@@ -19,7 +19,7 @@
 
 ## HIGH-IMPACT REUSE OPPORTUNITIES (Immediate)
 
-### 1. wormneuroatlas → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN API) + [DD010](DD010_Validation_Framework.md) (Randi 2023 Data)
+### 1. wormneuroatlas → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN API) + [DD010](DD010_Validation_Framework.md) ([Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) Data)
 
 **Repo:** [openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas) (pushed 2025-10-22)
 **Status:** ✅ **Production-ready Python package on PyPI**
@@ -29,7 +29,7 @@
 
 | Feature | API | DD Deliverable It Replaces |
 |---------|-----|---------------------------|
-| **Randi 2023 functional connectivity** | `NeuroAtlas.get_signal_propagation_atlas(strain="wt")` | [DD010](DD010_Validation_Framework.md) Tier 2 validation target (302×302 correlation matrix) |
+| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity** | `NeuroAtlas.get_signal_propagation_atlas(strain="wt")` | [DD010](DD010_Validation_Framework.md) Tier 2 validation target (302×302 correlation matrix) |
 | **CeNGEN gene expression** | `NeuroAtlas.get_gene_expression(gene_names, neuron_names)` | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) expression data access (currently: download CSV from cengen.org) |
 | **Neuropeptide/GPCR binding** | `PeptideGPCR.get_gpcrs_binding_to(peptides)` | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptide-receptor mapping |
 | **Anatomical connectome** | `NeuroAtlas` class (includes Cook et al. data) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) connectome (complements `cect`) |
@@ -62,7 +62,7 @@ expression_data = atlas.get_gene_expression(
 - ✅ Handles neuron ID normalization (AVAL vs AVA_ vs bilateral merging)
 - ✅ pip-installable (works in Docker)
 - ✅ Maintained by Randi lab (Francesco Randi's repo)
-- ✅ Already integrates CeNGEN, WormBase, and Randi 2023 datasets
+- ✅ Already integrates CeNGEN, WormBase, and [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) datasets
 
 **Reuse Plan for [DD010](DD010_Validation_Framework.md) Tier 2:**
 
@@ -163,7 +163,7 @@ ChannelWorm/
 - **pm3 muscle NEURON model** with Ca²⁺ slow action potential (NMODL)
 - Implements **EAT-2, EGL-19, UNC-2 channels** (exactly what [DD007](DD007_Pharyngeal_System_Architecture.md) needs!)
 - Output visualization showing plateau potentials (~100ms duration)
-- Matches Raizen & Avery 1994 EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s primary validation target)
+- Matches [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s primary validation target)
 
 **Reuse Plan for [DD007](DD007_Pharyngeal_System_Architecture.md):**
 
@@ -179,7 +179,7 @@ ChannelWorm/
 1. Clone `pharyngeal_muscle_model`
 2. Extract pm3 muscle NMODL code
 3. Convert NEURON/NMODL → NeuroML2 (use `pyNeuroML` conversion tools or rewrite)
-4. Validate against Raizen & Avery 1994 (the repo claims to match EPG data)
+4. Validate against [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (the repo claims to match EPG data)
 5. Use as `PharyngealMuscleCell.cell.nml` in [DD007](DD007_Pharyngeal_System_Architecture.md)
 
 **Alternative:** Run NEURON model directly in [DD007](DD007_Pharyngeal_System_Architecture.md) (no conversion needed), couple to c302 via existing `sibernetic_NEURON` bridge (see below).
@@ -528,7 +528,7 @@ The analysis toolbox is a **Python port of SegWorm**. When reviving the toolbox 
 **What It Is:**
 
 - Modern successor to SegWorm + open-worm-analysis-toolbox
-- Implements same 726-feature set (Yemini 2013)
+- Implements same 726-feature set ([Yemini 2013](https://doi.org/10.1038/nmeth.2560))
 - **Actively maintained** (original repo by ver228 has 2024 commits)
 - Python 3.x compatible
 
@@ -659,7 +659,7 @@ The analysis toolbox is a **Python port of SegWorm**. When reviving the toolbox 
 | **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | **ChannelWorm** | **Ion channel database + HH fitter** | **50 hours** | Extract `data/` spreadsheet → electrophysiology_training_set.csv; reuse `fitter.py` for calibration |
 | **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | **wormneuroatlas** | **CeNGEN API + gene expression** | **25 hours** | Use `NeuroAtlas.get_gene_expression()` instead of manual CSV parsing |
 | **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | NicolettiEtAl models | Validation data (AWCon, RMD neuron models) | 5 hours | Use as Tier 1 single-cell validation targets |
-| **[DD010](DD010_Validation_Framework.md) Tier 2** | **wormneuroatlas** | **Randi 2023 functional connectivity** | **15 hours** | Use `get_signal_propagation_atlas()` instead of manual .npy download |
+| **[DD010](DD010_Validation_Framework.md) Tier 2** | **wormneuroatlas** | **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity** | **15 hours** | Use `get_signal_propagation_atlas()` instead of manual .npy download |
 
 **Phase 1 Total Potential Savings:** 95 hours
 
@@ -746,7 +746,7 @@ from tierpsy import ... # (check their API)
 - [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker neural stage
 - [ ] Pin version in `versions.lock`
 - [ ] Test CeNGEN API: `atlas.get_gene_expression()`
-- [ ] Test Randi 2023 API: `atlas.get_signal_propagation_atlas()`
+- [ ] Test [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) API: `atlas.get_signal_propagation_atlas()`
 
 **Week 2:**
 
@@ -802,7 +802,7 @@ cat README.md          # Check for docs
 - [ ] Run NEURON simulation (`_run.hoc`), verify plateau potentials
 - [ ] Convert NMODL → NeuroML2 using pyNeuroML
 - [ ] Integrate into [DD007](DD007_Pharyngeal_System_Architecture.md) as `PharyngealMuscleCell.cell.nml`
-- [ ] Validate against Raizen & Avery 1994
+- [ ] Validate against [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0)
 
 **Benefit:** 25 hours (pharyngeal muscle already modeled)
 

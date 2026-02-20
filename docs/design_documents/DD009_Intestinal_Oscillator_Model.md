@@ -33,7 +33,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 
 | Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
-| **Primary:** Defecation cycle period | 50 +/- 10 seconds (Thomas 1990) | Tier 3 (blocking) |
+| **Primary:** Defecation cycle period | 50 +/- 10 seconds ([Thomas 1990](https://doi.org/10.1093/genetics/124.4.855)) | Tier 3 (blocking) |
 | **Secondary:** Wave direction | Posterior-to-anterior (int20 -> int1) | Tier 3 (blocking) |
 | **Tertiary:** Motor program sequence | pBoc -> aBoc -> Exp in correct temporal order | Tier 3 (blocking) |
 | **Quaternary:** Cycle stability | >=3 consecutive cycles without damping | Tier 3 (blocking) |
@@ -230,7 +230,7 @@ The intestinal calcium wave triggers the **defecation motor program** via innerv
 
 **Hypothesis:** Defecation is driven by a neural pacemaker circuit, not intestinal oscillations.
 
-**Rejected:** Experiments show intestinal calcium oscillations are **cell-autonomous** (Thomas 1990, Dal Santo et al. 1999). Isolated intestinal cells oscillate in culture. Neurons modulate but do not generate.
+**Rejected:** Experiments show intestinal calcium oscillations are **cell-autonomous** ([Thomas 1990](https://doi.org/10.1093/genetics/124.4.855), [Dal Santo et al. 1999](https://doi.org/10.1016/S0092-8674(00)81510-X)). Isolated intestinal cells oscillate in culture. Neurons modulate but do not generate.
 
 ### 2. Detailed ER Geometry and Diffusion
 
@@ -248,7 +248,7 @@ The intestinal calcium wave triggers the **defecation motor program** via innerv
 
 ## Quality Criteria
 
-1. **Oscillation Period:** Simulated defecation cycle period must be 50 +/- 10 seconds (Thomas 1990 experimental data).
+1. **Oscillation Period:** Simulated defecation cycle period must be 50 +/- 10 seconds ([Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) experimental data).
 
 2. **Wave Direction:** Calcium wave must propagate **posterior-to-anterior** (int20 -> int1).
 

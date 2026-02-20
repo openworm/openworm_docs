@@ -2,7 +2,7 @@ Data Collection and Representation
 ==================================
 
 !!! info "Governed by DD008 + DD020"
-    Data integration is specified by [DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md) (OWMeta unified data layer) and [DD020: Connectome Data Access](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) (cect API with Cook2019 as default dataset).
+    Data integration is specified by [DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md) (OWMeta unified data layer) and [DD020: Connectome Data Access](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) (cect API with [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) as default dataset).
 
 There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different dataset are used in the model.
 

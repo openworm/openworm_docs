@@ -847,7 +847,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
 | Implement Step 5 (validation) in master_openworm.py | Validation L4 | 16 hrs | Phase A |
-| Ingest Randi 2023 functional connectivity data | Data L4 | 8 hrs | None |
+| Ingest [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity data | Data L4 | 8 hrs | None |
 | Tier 2 validation in CI (blocking) | Integration Maintainer | 8 hrs | Validation implementation |
 | Tier 3 validation in CI (blocking for main) | Integration Maintainer | 8 hrs | Validation implementation |
 | JupyterLab service + starter notebooks | Community contributor | 16 hrs | Phase A |
@@ -950,7 +950,7 @@ Next newcomer who runs the Docker image sees the improvement
 2. **Docker Compose specification.** https://docs.docker.com/compose/compose-file/
 3. **GitHub Actions for Docker.** https://docs.docker.com/build/ci/github-actions/
 4. **MyBinder.org.** https://mybinder.org/ — Zero-install reproducible environments
-5. **Sarma et al. (2016).** "Unit testing, model validation, and biological simulation." *F1000Research* 5:1946.
+5. **[Sarma et al. (2016)](https://doi.org/10.12688/f1000research.9095.1).** "Unit testing, model validation, and biological simulation." *F1000Research* 5:1946.
 6. **OpenWorm/OpenWorm repository.** https://github.com/openworm/OpenWorm
 
 ---
