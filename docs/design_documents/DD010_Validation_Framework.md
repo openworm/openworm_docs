@@ -4,7 +4,7 @@
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-14  
 **Supersedes:** None  
-**Related:** All other DDs (validation applies to all models), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool)
+**Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool)
 
 ---
 
@@ -15,9 +15,9 @@
 | **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
-| **Success metric** | Tier 2: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 3: 5 kinematic metrics within ±15% of [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab data |
+| **Success metric** | Tier 2a: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 2b: neuropeptide contribution r > 0.3 (wt-vs-unc-31); Tier 3: 5 kinematic metrics within ±15% of [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab data |
 | **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
-| **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
+| **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier2_neuropeptide_unc31: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
 | **Visualize** | Validation overlay in [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
 | **CI gate** | Tier 2 blocks PR merge (r < 0.5 = fail); Tier 3 blocks merge to main (>15% deviation = fail) |
@@ -43,7 +43,8 @@ A simulation that produces movement but fails electrophysiology validation has *
 | Tier | What Is Validated | Validation Data | Acceptance Criteria | Blocking? |
 |------|------------------|-----------------|-------------------|-----------|
 | **Tier 1: Unit (Single Cell)** | Membrane voltage, conductances, calcium dynamics | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) patch-clamp, [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) single-neuron Ca imaging | Quantitative match within 20% | No (warning) |
-| **Tier 2: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
+| **Tier 2a: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations (wild-type) | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
+| **Tier 2b: Integration (Neuropeptides)** | Neuropeptide modulation effect on functional connectivity | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) wild-type vs. *unc-31* mutant | Neuropeptide contribution correlation r > 0.3 | Yes (after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab kinematics), [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (pharyngeal EPG), [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (defecation) | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
@@ -146,7 +147,9 @@ python scripts/validate_single_cell_electrophys.py \
 
 ### Tier 2: Circuit-Level Validation (Integration Tests)
 
-**Primary target:** [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity).
+**Primary target:** [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity). Available via `wormneuroatlas` API and also integrated into the [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) (`cect` package) as one of five connectivity modalities (anatomical, contactome, neurotransmitter, extrasynaptic, **functional**).
+
+#### Tier 2a: Whole-Network Functional Connectivity
 
 **Validation procedure:**
 
@@ -175,6 +178,52 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 ```
 
 **Blocking:** If this test fails (r < 0.5), the PR cannot merge to `main`.
+
+#### Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)
+
+**Purpose:** Validate that [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptide modulation) produces the correct effect on functional connectivity.
+
+**The natural experiment:** UNC-31 is the CAPS protein required for dense-core vesicle fusion — the mechanism by which neuropeptides are released. The *unc-31* mutant has intact synaptic transmission but **no neuropeptide signaling**. [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) measured functional connectivity for both wild-type and *unc-31* mutant strains. The **difference** between the two matrices isolates the neuropeptide contribution to neural dynamics.
+
+**Validation procedure:**
+
+| | Experimental (Randi 2023) | Simulated |
+|---|---|---|
+| **With neuropeptides** | `fc_wt` (wild-type) | `sim_fc_on` (DD006 enabled) |
+| **Without neuropeptides** | `fc_unc31` (*unc-31* mutant) | `sim_fc_off` (DD006 disabled) |
+| **Neuropeptide contribution** | `fc_diff_exp = fc_wt - fc_unc31` | `sim_fc_diff = sim_fc_on - sim_fc_off` |
+
+**Acceptance criterion:**
+
+- Correlation between `fc_diff_exp` and `sim_fc_diff` (flattened) **r > 0.3**
+- This is a weaker threshold than Tier 2a (r > 0.5) because the difference signal is smaller and noisier than the absolute functional connectivity
+
+**Testing command:**
+```bash
+# Run unc-31 validation (requires two simulation runs)
+python scripts/validate_neuropeptide_fc.py \
+    --model_with_neuropeptides c302_C1_DD006_enabled \
+    --model_without_neuropeptides c302_C1_DD006_disabled \
+    --duration 60 \
+    --output neuropeptide_fc_validation.json
+
+# Check acceptance
+python scripts/check_validation_criteria.py neuropeptide_fc_validation.json
+```
+
+**Data access:**
+```python
+from wormneuroatlas import NeuroAtlas
+
+atlas = NeuroAtlas()
+fc_wt = atlas.get_signal_propagation_atlas(strain="wt")
+fc_unc31 = atlas.get_signal_propagation_atlas(strain="unc31")
+fc_diff_exp = fc_wt - fc_unc31  # Neuropeptide contribution (experimental)
+```
+
+**Blocking:** This sub-test becomes blocking after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) is implemented (Phase 2). Before DD006, it is informational only.
+
+**Cross-reference:** See [DD006 §Validation](DD006_Neuropeptidergic_Connectome_Integration.md#validation-procedure) for the full neuropeptide validation methodology, which uses this same unc-31 comparison as its Tier 1 functional connectivity validation.
 
 ### Tier 3: Behavioral Validation (System Tests)
 
@@ -256,7 +305,9 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 | Pharyngeal pumping state | [DD007](DD007_Pharyngeal_System_Architecture.md) | Per-section contraction time series | Tab-separated | binary or [0,1] |
 | Defecation motor program | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | Event log | ms |
 | Experimental data (electrophysiology) | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | Patch-clamp recordings | CSV | mV, nA |
-| Experimental data (functional connectivity) | [DD008](DD008_Data_Integration_Pipeline.md) / [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
+| Experimental data (functional connectivity, wild-type) | `wormneuroatlas` API / [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) | 302×302 correlation matrix | NumPy `.npy` | dimensionless |
+| Experimental data (functional connectivity, *unc-31*) | `wormneuroatlas` API / [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) | 302×302 correlation matrix (no neuropeptide release) | NumPy `.npy` | dimensionless |
+| Neuropeptide-on/off simulation outputs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Per-neuron [Ca²⁺] with DD006 enabled vs. disabled | Tab-separated `*_calcium.dat` | mol/cm³ |
 | Experimental data (kinematics) | [DD008](DD008_Data_Integration_Pipeline.md) / [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab) | Movement trajectories | WCON | µm |
 | Experimental data (defecation) | [DD008](DD008_Data_Integration_Pipeline.md) / [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) | Defecation cycle periods | CSV | seconds |
 | Experimental data (pumping) | [DD008](DD008_Data_Integration_Pipeline.md) / [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | EPG recordings | CSV | mV |
@@ -292,7 +343,8 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 validation:
   run_after_simulation: false         # Set true for CI; false for interactive use
   tier1_electrophysiology: false      # Single-cell validation (requires specific cell models)
-  tier2_functional_connectivity: false  # Circuit-level (requires 60s sim)
+  tier2_functional_connectivity: false  # Tier 2a: Circuit-level (requires 60s sim)
+  tier2_neuropeptide_unc31: false       # Tier 2b: unc-31 comparison (requires 2×60s sim, DD006)
   tier3_behavioral: false             # Movement kinematics (requires ~5s sim)
   tier3_pumping: false                # Pharyngeal pumping (requires pharynx.enabled + ~5s sim)
   tier3_defecation: false             # Defecation cycle (requires intestine.enabled + ~200s sim)
@@ -331,7 +383,8 @@ All validation datasets are **baked into the Docker image at build time** (not d
 │   ├── lockery_AVA_recordings.csv
 │   └── README.md (sources, DOIs, licenses)
 ├── functional_connectivity/
-│   ├── randi2023_full_matrix.npy
+│   ├── randi2023_wt_matrix.npy
+│   ├── randi2023_unc31_matrix.npy
 │   ├── randi2023_metadata.json
 │   └── README.md
 ├── kinematics/
@@ -346,48 +399,74 @@ All validation datasets are **baked into the Docker image at build time** (not d
 
 **Licensing requirement:** All validation data must be openly accessible (CC-BY or equivalent). Each directory includes a README with source DOIs and licenses.
 
-### Code Reuse: wormneuroatlas for Tier 2 Validation
+### Code Reuse: wormneuroatlas and ConnectomeToolbox for Tier 2 Validation
+
+Two existing OpenWorm packages provide all the experimental data needed for Tier 2 validation — no manual data extraction required:
+
+**1. wormneuroatlas** — Functional connectivity matrices from [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)
 
 **Repository:** `openworm/wormneuroatlas` (pushed 2025-10-22, maintained)
 **Installation:** `pip install wormneuroatlas`
-
-**[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity is already accessible via API:**
 
 ```python
 from wormneuroatlas import NeuroAtlas
 
 atlas = NeuroAtlas()
-experimental_fc = atlas.get_signal_propagation_atlas(strain="wt")
-# Returns: 302×302 correlation matrix (exactly what Tier 2 needs)
 
-# Use in validation
-simulated_fc = compute_pairwise_correlations(simulation_calcium_traces)
-correlation_of_correlations = np.corrcoef(
-    experimental_fc.flatten(),
-    simulated_fc.flatten()
-)[0, 1]
+# Tier 2a: Wild-type functional connectivity
+fc_wt = atlas.get_signal_propagation_atlas(strain="wt")
+# Returns: 302×302 correlation matrix (exactly what Tier 2a needs)
 
-# DD010 Tier 2 acceptance: r > 0.5
-assert correlation_of_correlations > 0.5, "Tier 2 FAILED"
+# Tier 2b: unc-31 mutant functional connectivity (no neuropeptide release)
+fc_unc31 = atlas.get_signal_propagation_atlas(strain="unc31")
+# Returns: 302×302 correlation matrix without neuropeptide modulation
+
+# Tier 2b: Neuropeptide contribution = difference
+fc_neuropeptide_contribution = fc_wt - fc_unc31
 ```
 
-**No manual download from Nature supplement needed.** The wormneuroatlas package handles data access, versioning, and neuron ID normalization.
+Both wild-type and *unc-31* datasets are production-ready. No manual download from Nature supplement needed — the package handles data access, versioning, and neuron ID normalization.
+
+**2. ConnectomeToolbox (`cect`)** — Unified connectivity data across five modalities
+
+**Repository:** `openworm/ConnectomeToolbox` ([Gleeson et al., in preparation](https://github.com/openworm/ConnectomeToolbox))
+**Installation:** `pip install cect`
+
+The ConnectomeToolbox aggregates C. elegans connectivity data into a unified API with five modalities: anatomical, contactome, neurotransmitter atlases, extrasynaptic (neuropeptidergic — [Ripoll-Sánchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043), [Bentley 2016](https://doi.org/10.1371/journal.pcbi.1005283), [Pereira 2015](https://doi.org/10.7554/eLife.12432), [Beets 2022](https://doi.org/10.1101/2022.10.30.514428)), and functional ([Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)). For Tier 2 validation, the functional connectivity modality provides an alternative access path to the same Randi 2023 data:
+
+```python
+from cect import ConnectomeDataset
+
+# Access functional connectivity via cect
+functional = ConnectomeDataset("Randi2023")
+```
+
+**Recommendation:** Use `wormneuroatlas` directly for Tier 2 validation (more mature API for functional connectivity matrices, strain-specific access). Use `cect` when you need structural + functional connectivity together (e.g., comparing structural predictions to functional observations).
 
 **Testing:**
 ```bash
 pip install wormneuroatlas
-python -c "from wormneuroatlas import NeuroAtlas; fc = NeuroAtlas().get_signal_propagation_atlas(strain='wt'); print(f'Randi 2023 data: {fc.shape}')"
-# Expected: (302, 302) or similar
+python -c "
+from wormneuroatlas import NeuroAtlas
+atlas = NeuroAtlas()
+fc_wt = atlas.get_signal_propagation_atlas(strain='wt')
+fc_unc31 = atlas.get_signal_propagation_atlas(strain='unc31')
+print(f'Wild-type FC: {fc_wt.shape}')
+print(f'unc-31 FC: {fc_unc31.shape}')
+print(f'Neuropeptide contribution matrix: {(fc_wt - fc_unc31).shape}')
+"
+# Expected: (302, 302) for all three
 ```
 
 **Action Items:**
 
 - [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
-- [ ] Pin version in `versions.lock`
-- [ ] Update Tier 2 validation scripts to use wormneuroatlas API
-- [ ] Also available: unc-31 mutant functional connectivity via `strain="unc31"`
+- [ ] Add `cect` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
+- [ ] Pin versions for both in `versions.lock`
+- [ ] Update Tier 2a validation scripts to use wormneuroatlas API
+- [ ] Implement Tier 2b (unc-31 comparison) validation script after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)
 
-**Estimated Time Savings:** 15-20 hours (no manual data extraction, API is production-ready)
+**Estimated Time Savings:** 15-20 hours (no manual data extraction, both APIs are production-ready)
 
 ---
 
@@ -436,6 +515,7 @@ docker compose run validate
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
 | Neural output format | [DD001](DD001_Neural_Circuit_Architecture.md) | If calcium time series format changes, Tier 1 and Tier 2 validators can't read data |
+| Neuropeptide on/off toggle | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If DD006 enable/disable mechanism changes, Tier 2b (unc-31) validation can't run paired simulations |
 | Movement output format | [DD003](DD003_Body_Physics_Architecture.md) | If WCON format or particle output changes, Tier 3 movement validator breaks |
 | Pharyngeal output format | [DD007](DD007_Pharyngeal_System_Architecture.md) | If pumping state format changes, pumping validation breaks |
 | Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If defecation event format changes, defecation validation breaks |
@@ -494,7 +574,8 @@ openworm/validation_data/
 │   ├── lockery_AVA_recordings.csv
 │   └── ...
 ├── functional_connectivity/
-│   ├── randi2023_full_matrix.npy
+│   ├── randi2023_wt_matrix.npy
+│   ├── randi2023_unc31_matrix.npy
 │   ├── randi2023_metadata.json
 │   └── ...
 ├── kinematics/
@@ -565,6 +646,9 @@ jobs:
 4. **[Goodman et al. 2002](https://doi.org/10.1038/4151039a)** — "Active currents regulate sensitivity and dynamic range in *C. elegans* neurons." *Nature* 415:1039-1042.
 5. **[Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0)** — "Electrical activity and behavior in the pharynx of *Caenorhabditis elegans*." *Neuron* 12:483-495.
 6. **[Thomas 1990](https://doi.org/10.1093/genetics/124.4.855)** — "The defecation motor program of *Caenorhabditis elegans*." *Genetics* 124:855-872.
+7. **[Gleeson et al., in preparation](https://github.com/openworm/ConnectomeToolbox)** — "ConnectomeToolbox: a unified software framework for *C. elegans* connectivity data." (Manuscript in preparation; `cect` Python package published.)
+8. **[Ripoll-Sánchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043)** — "The neuropeptidergic connectome of *C. elegans*." *Neuron* 111:3570-3589. (Extrasynaptic connectivity data in ConnectomeToolbox.)
+9. **[Pereira et al. 2015](https://doi.org/10.7554/eLife.12432)** — "A cellular and regulatory map of the cholinergic nervous system of *C. elegans*." *eLife* 4:e12432. (Peptide co-expression data in ConnectomeToolbox.)
 
 ---
 
@@ -572,7 +656,8 @@ jobs:
 **Implementation Status:** Partial
 
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
-- **Tier 2** (functional connectivity): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (blocking)
+- **Tier 2a** (functional connectivity): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data accessible via `wormneuroatlas` API — no manual ingestion needed (blocking)
+- **Tier 2b** (neuropeptide unc-31 comparison): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) *unc-31* data also in `wormneuroatlas` — blocked on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) implementation (Phase 2)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
 
 **See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
@@ -581,6 +666,7 @@ jobs:
 
 1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
-3. After revival: Ingest [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data for Tier 2 validation
-4. After [DD013](DD013_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
-5. Set up GitHub Actions CI with Tier 2+3 blocking gates
+3. Add `wormneuroatlas` + `cect` to Docker validation stage — [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data is already accessible via API (no manual ingestion needed)
+4. After [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Implement Tier 2b (unc-31 comparison) validation script
+5. After [DD013](DD013_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
+6. Set up GitHub Actions CI with Tier 2a+2b+3 blocking gates
