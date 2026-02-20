@@ -142,10 +142,10 @@ Detailed [spreadsheet](https://docs.google.com/spreadsheets/d/1NclOVMRIqY\_hn-aL
 
 September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/) ([David Dalrymple](http://syntheticneurobiology.org/people/display/144/26))**. The aim was to use optogenetics to record the firing dynamics of the _C. elegans_ neurons and then replicate it in a simulation. [He delivered a lecture on the project in November 2011](http://www.youtube.com/watch?v=xW77lANeJas). As of June 2014 [he works for Twitter](https://www.linkedin.com/profile/view?id=66199655) so the project may now be defunct.
 
-The Design Document Era (2024-present)
+The Design Document Era (2026-present)
 --------------------------------------
 
-Building on over a decade of prototyping and publishing, the project entered a new phase in 2024 with the creation of **Design Documents (DDs)** — formal architectural specifications that convert lessons from prototypes into validated engineering blueprints.
+Building on over a decade of prototyping and publishing, the project entered a new phase in 2026 with the creation of **Design Documents (DDs)** — formal architectural specifications that convert lessons from prototypes into validated engineering blueprints.
 
 Key developments:
 
