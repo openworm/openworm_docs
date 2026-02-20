@@ -62,15 +62,31 @@ Run the cell model in isolation (no synaptic inputs, no network effects) with st
 | Spike threshold | Depolarizing current | ± 10 mV (if applicable) |
 | Calcium influx | Depolarization-evoked | ± 40% (noisy measurement) |
 
+**Primary Tier 1 datasets:**
+
+| Neuron(s) | Dataset | What It Provides | Validation Use |
+|-----------|---------|------------------|----------------|
+| ALM, AVM, PLM (touch receptors) | [Goodman et al. 2002](https://doi.org/10.1038/4151039a), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) | Whole-cell patch-clamp: resting potential, I-V curves, MEC-4/DEG-ENaC channel kinetics | Validate touch neuron resting potential, input resistance, mechanoreceptor current amplitude |
+| ALM, AVM, PLM (touch receptors) | [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | In vivo calcium imaging during mechanical stimulation | Validate calcium transient amplitude and kinetics in response to touch |
+| AWC (olfactory) | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Calcium imaging with odor presentation, TAX-2/TAX-4 channel characterization | Validate sensory transduction dynamics, OFF-response calcium kinetics |
+| ASH (nociceptor) | Hilliard et al. 2004, **WormsenseLab_ASH** repo | Calcium imaging, OSM-9/TRPV channel characterization | Validate polymodal nociceptor response profile |
+| AVA (command interneuron) | Lockery lab (Lindsay et al. 2011) | Whole-cell recordings, graded potential dynamics | Validate command interneuron I-V curve, graded (non-spiking) response |
+| RIM (motor/modulatory) | Liu et al. 2018 | Calcium imaging + electrophysiology, EGL-19/UNC-2 channels | Validate motor neuron calcium dynamics, channel conductance ratios |
+| Pharyngeal neurons (MC, M3) | [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | Electropharyngeogram (EPG): extracellular field potentials from pharyngeal muscles and neurons | Validate pharyngeal neuron firing patterns (Phase 3, [DD007](DD007_Pharyngeal_System_Architecture.md)) |
+
+**Coverage:** ~7 neuron classes have direct patch-clamp or detailed calcium imaging data suitable for Tier 1 spot-checks. An additional ~13 classes have partial recordings (single-channel data, calcium responses to specific stimuli) curated in the `openworm/ChannelWorm` ion channel database. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Calibration Dataset for the full training set.
+
+**Gap:** The majority of the 128 CeNGEN neuron classes lack direct electrophysiology. For these, Tier 1 validation is limited to checking that model predictions are *consistent with* CeNGEN expression (e.g., a neuron expressing high EGL-19 should show large L-type calcium currents). This is why Tier 1 is non-blocking — it validates where data exist but cannot cover all neurons.
+
 **Example (AVA neuron validation):**
 ```bash
 # Run isolated AVA model
 python c302/test_single_cell.py --cell AVACell --protocol voltage_clamp
 
-# Compare to Lockery lab data
+# Compare to Lockery lab data (Lindsay et al. 2011)
 python scripts/validate_single_cell_electrophys.py \
     --simulated AVA_voltage_clamp.csv \
-    --experimental data/AVA_lockery_vclamp.csv \
+    --experimental data/electrophysiology/AVA_lockery_vclamp.csv \
     --output validation_report_AVA.html
 ```
 

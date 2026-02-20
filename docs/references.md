@@ -48,6 +48,20 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 
 ---
 
+## Single-Cell Electrophysiology (Tier 1 Validation)
+
+| Citation | Journal | Year | Description |
+|----------|---------|------|-------------|
+| [Goodman et al. 2002](https://doi.org/10.1038/4151039a) | Nature 415:1039-1042 | 2002 | Touch receptor whole-cell patch-clamp — **primary Tier 1 data for ALM, AVM, PLM** |
+| [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) | Nat Neurosci 8:43-50 | 2005 | MEC-4 DEG/ENaC channel kinetics in touch neurons |
+| [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | Neuron 39:1005-1017 | 2003 | In vivo calcium imaging of mechanosensory neurons (ALM, AVM, PLM) |
+| [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Nature 449:63-71 | 2007 | AWC olfactory neuron calcium imaging, TAX-2/TAX-4 channel characterization |
+| Lindsay et al. 2011 | J Neurophysiol 105:1-9 | 2011 | AVA command interneuron whole-cell recordings — graded potential dynamics |
+| Liu et al. 2018 | eLife 7:e36607 | 2018 | RIM motor neuron electrophysiology, EGL-19/UNC-2 channel characterization |
+| Mellem et al. 2002 | PNAS 99:3184-3189 | 2002 | Interneuron electrophysiology — AVA, AVD, AVB recordings |
+
+---
+
 ## Gene Expression & Transcriptomics
 
 | Citation | Journal | Year | Description |
@@ -145,6 +159,6 @@ OpenWorm validates its simulation against experimental data at three tiers ([DD0
 
 | Tier | What's Validated | Key Data Sources |
 |------|-----------------|------------------|
-| **Tier 1** | Single-cell electrophysiology | [Goodman et al. 2002](https://doi.org/10.1038/4151039a), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) |
+| **Tier 1** | Single-cell electrophysiology | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) (touch neurons), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) (MEC-4 channels), [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) (AWC), Lindsay et al. 2011 (AVA), Liu et al. 2018 (RIM) |
 | **Tier 2** | Circuit functional connectivity | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) |
 | **Tier 3** | Behavioral kinematics | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560), [Schafer Lab Database](http://wormbehavior.mrc-lmb.cam.ac.uk/) |
