@@ -143,6 +143,7 @@ docker compose run validate
 ### Model the Pharynx as a Separate Subsystem
 
 **Rationale:**
+
 - Functional isolation allows independent modeling
 - Pharyngeal muscle is **nonstriated** with distinct electrophysiology from body wall muscle
 - Pumping behavior (3-4 Hz oscillation) is a clear validation target
@@ -151,6 +152,7 @@ docker compose run validate
 ### Pharyngeal Neuron Models
 
 Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body neurons, but with pharynx-specific:
+
 - Connectome topology (pharyngeal neuron -> pharyngeal neuron connections only)
 - Cell-type-specific differentiation using CeNGEN expression (128 neuron classes include pharyngeal neurons)
 
@@ -161,11 +163,13 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 **Key difference from body wall muscle:** Pharyngeal muscles are **nonstriated**, electrically coupled via gap junctions, and pump synchronously.
 
 **Electrophysiology:**
+
 - Raizen & Avery (1994): pharyngeal muscles show **plateau potentials** (~100 ms duration) synchronized across the pharynx
 - Eat-2 Ca2+ channel is pharynx-specific (egl-19 and unc-2 also expressed)
 - Strong gap junction coupling (inx-2, inx-3, inx-7 innexins)
 
 **Modeling approach:**
+
 - Same HH framework as body muscles ([DD002](DD002_Muscle_Model_Architecture.md)) but with:
   - Higher gap junction conductance (0.1-0.5 nS vs. 0.01 nS for neurons)
   - Adjusted Ca2+ channel kinetics for plateau potentials
@@ -234,6 +238,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 ## Context & Background
 
 The pharynx is a **semi-autonomous neuromuscular organ** comprising 63 cells:
+
 - **20 pharyngeal neurons** (M1-M5, I1-I6, MC, MI, NSM, RIP)
 - **20 pharyngeal muscles** (pm1-pm8 in corpus, pm3-pm5 in isthmus, pm6-pm8 in terminal bulb)
 - **9 epithelial cells** (e1-e3 per section)
@@ -252,6 +257,7 @@ The pharynx pumps bacterial food from the mouth to the intestine at **~3-4 Hz** 
 **Repository 1:** `openworm/pharyngeal_muscle_model` (pushed 2017-01-19, dormant but complete)
 
 Contains a **NEURON implementation of pm3 pharyngeal muscle** with:
+
 - EAT-2, EGL-19, UNC-2 Ca²⁺ channels (exactly [DD007](DD007_Pharyngeal_System_Architecture.md)'s target channels)
 - Ca²⁺ slow action potential (plateau potentials, ~100ms duration)
 - Output matches Raizen & Avery 1994 EPG recordings ([DD007](DD007_Pharyngeal_System_Architecture.md)'s validation target)
@@ -266,6 +272,7 @@ nrngui _run.hoc
 ```
 
 **Integration:**
+
 1. Convert NMODL → NeuroML2 using pyNeuroML OR
 2. Use NEURON model directly, couple via `sibernetic_NEURON` interface
 
@@ -274,10 +281,12 @@ nrngui _run.hoc
 **Repository 2:** `openworm/PlateauNoiseModel` (pushed 2025-01-30, recently active)
 
 Jupyter notebook with pharyngeal muscle plateau model (Kenngott et al. 2025).
+
 - Use for cross-validation of [DD007](DD007_Pharyngeal_System_Architecture.md) muscle model
 - Plotting code for EPG-style output
 
 **Next Actions:**
+
 - [ ] Test pharyngeal_muscle_model on modern NEURON (version compatibility?)
 - [ ] Extract channel kinetics (eat-2, egl-19, unc-2 conductances)
 - [ ] Compare to PlateauNoiseModel (two independent implementations → cross-validate)
@@ -365,6 +374,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for PharyngealMuscleCell.cell.nml
 - [ ] `quick-test` passes with `pharynx.enabled: false` (backward compatibility)
 - [ ] `quick-test` passes with `pharynx.enabled: true` (body still moves)
@@ -385,6 +395,7 @@ docker compose run validate
 **Option A (current):** The 1D oscillator runs independently. No coupling to Sibernetic. Pharynx behavior is output as a time series but does not mechanically affect the body.
 
 **Option B (future):** Requires:
+
 1. ~5,000 additional SPH particles tagged as pharyngeal cells ([DD004](DD004_Mechanical_Cell_Identity.md) cell_identity)
 2. Pharyngeal muscle activation -> pharyngeal particle forces (same coupling pattern as [DD002](DD002_Muscle_Model_Architecture.md)->[DD003](DD003_Body_Physics_Architecture.md))
 3. Anterior attachment: pharyngeal particles mechanically connected to body wall particles at lips
@@ -411,6 +422,7 @@ docker compose run validate
 **Approved by:** Pending (Phase 3)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Extract pharyngeal neuron expression from CeNGEN
 2. Implement pharyngeal muscle HH models with plateau kinetics
 3. Create 1D pumping oscillator

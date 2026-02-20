@@ -79,6 +79,7 @@ python scripts/validate_single_cell_electrophys.py \
 **Primary target:** Randi et al. 2023 functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity).
 
 **Validation procedure:**
+
 1. Run c302 simulation for 60 seconds (spontaneous activity, no stimulus)
 2. Extract calcium time series for all neurons
 3. Compute pairwise Pearson correlations → 302×302 matrix
@@ -86,6 +87,7 @@ python scripts/validate_single_cell_electrophys.py \
 5. Metric: **Correlation of correlations** (Pearson r between simulated and experimental matrices, flattened to vectors)
 
 **Acceptance criterion:**
+
 - **r > 0.5** between simulated and experimental functional connectivity
 - At least 70% of neuron pairs have correlation sign agreement (both positive, both negative, or both near-zero)
 
@@ -109,6 +111,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 **Primary tool:** `open-worm-analysis-toolbox` (see **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to Schafer lab experimental data in WCON format.
 
 **Validated metrics:**
+
 1. **Speed:** Mean forward velocity (µm/s)
 2. **Wavelength:** Body bend wavelength (µm)
 3. **Frequency:** Undulation frequency (Hz)
@@ -116,6 +119,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 5. **Crawl/swim classification:** Behavioral mode based on gait
 
 **Acceptance criteria (from Palyanov et al. validation):**
+
 - All 5 metrics within **±15% of experimental mean**
 - Movement trajectory visually resembles real worm (qualitative check)
 
@@ -133,6 +137,7 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 ```
 
 **Additional behavioral tests:**
+
 1. **Pharyngeal pumping:** 3-4 Hz ([DD007](DD007_Pharyngeal_System_Architecture.md))
 2. **Defecation cycle:** 50 ± 10 seconds period ([DD009](DD009_Intestinal_Oscillator_Model.md))
 3. **Reversal initiation:** Response to aversive stimulus (<1 second latency)
@@ -306,6 +311,7 @@ python -c "from wormneuroatlas import NeuroAtlas; fc = NeuroAtlas().get_signal_p
 ```
 
 **Action Items:**
+
 - [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
 - [ ] Pin version in `versions.lock`
 - [ ] Update Tier 2 validation scripts to use wormneuroatlas API
@@ -387,6 +393,7 @@ https://github.com/openworm/open-worm-analysis-toolbox
 > **Note:** The predecessor repo `openworm/movement_validation` is **archived** and should not be used. The analysis toolbox is the current, canonical implementation. See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for full repository landscape and revival plan.
 
 **Key modules:**
+
 - `movement_validation/` — Statistical feature extraction from WCON files
 - `comparison/` — Compare simulated vs. real
 - `wcon_parser/` — WCON format handling
@@ -490,6 +497,7 @@ jobs:
 
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Partial
+
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
 - **Tier 2** (functional connectivity): Randi 2023 data needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (blocking)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
@@ -497,6 +505,7 @@ jobs:
 **See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
 
 **Next Actions:**
+
 1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
 3. After revival: Ingest Randi 2023 data for Tier 2 validation

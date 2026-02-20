@@ -147,6 +147,7 @@ docker compose run quick-test  # with intestine.enabled: false
 ### Model the 20 Intestinal Cells with IP3/Calcium Oscillator Dynamics
 
 Each intestinal cell has:
+
 - **Membrane voltage** (HH framework as in [DD001](DD001_Neural_Circuit_Architecture.md)/DD002, but with intestine-specific channels)
 - **Cytoplasmic [Ca2+]**
 - **ER luminal [Ca2+]_ER**
@@ -189,6 +190,7 @@ Where:
 ```
 
 Parameters (fit to match ~50 second period):
+
 - v_release (max release rate): ~10 uM/s
 - K_IP3 (IP3 half-activation): ~0.3 uM
 - Ca activation threshold: ~0.2 uM
@@ -371,6 +373,7 @@ docker compose run quick-test  # with intestine.enabled: false
 ```
 
 **Per-PR checklist:**
+
 - [ ] `c302_intestine.py` generates LEMS XML without error
 - [ ] `jnml -validate` passes on generated XML
 - [ ] `quick-test` passes with `intestine.enabled: true`
@@ -441,6 +444,7 @@ When `body.cell_identity: true`, intestinal cells are represented by tagged SPH 
 **Approved by:** Pending (Phase 3)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Implement IP3R dynamics in LEMS
 2. Add intestinal cell-specific HH models from CeNGEN
 3. Couple to enteric muscles

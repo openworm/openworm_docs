@@ -11,12 +11,14 @@
 ## Context
 
 Currently, architectural decisions in OpenWorm happen through:
+
 - Informal Slack discussions
 - GitHub issue debates
 - Private conversations
 - Founder's judgment
 
 This creates problems:
+
 - Decisions are **not documented** (newcomers re-propose rejected approaches)
 - **Rationale is lost** (future contributors don't know *why* decisions were made)
 - **No clear process** for contributors to propose changes
@@ -31,6 +33,7 @@ The Rust project's **RFC (Request for Comments) process** provides a proven mode
 ### All Major Architectural Decisions Must Be Documented as Design Documents
 
 A "major architectural decision" is any change that:
+
 - Affects multiple subsystems
 - Changes a fundamental modeling approach (e.g., switching from HH to FitzHugh-Nagumo)
 - Adds a new data source or validation target
@@ -161,27 +164,32 @@ Variable name, Format, Units, Timestep (if applicable).
 ### RFC Workflow (Rust-Style)
 
 **Step 1: Proposal**
+
 - Anyone (L1+) can propose a Design Document
 - Open a PR to `openworm-admin/design_documents/` with a new DD file
 - Assign a DD number (next available, e.g., [DD013](DD013_Simulation_Stack_Architecture.md))
 - Tag relevant subsystem maintainers (L4) for review
 
 **Step 2: Discussion**
+
 - Community discusses in PR comments
 - Author revises based on feedback
 - Subsystem maintainer (L4) facilitates discussion, ensures all concerns are addressed
 
 **Step 3: Decision**
+
 - **For subsystem-specific DDs:** L4 maintainer makes final decision (approve/reject/request-changes)
 - **For cross-cutting DDs:** L4 maintainers reach consensus; if conflict, founder (L5) arbitrates
 - **For governance DDs:** Founder decides after community input
 
 **Step 4: Approval**
+
 - Status changed to "Accepted"
 - PR merged
 - DD becomes binding
 
 **Step 5: Implementation**
+
 - Code changes to implement the DD are tracked separately (GitHub issues, milestones)
 - Implementation PRs reference the DD number
 - Mind-of-a-Worm checks that implementation PRs comply with the DD
@@ -189,12 +197,14 @@ Variable name, Format, Units, Timestep (if applicable).
 ### When to Write a Design Document vs. Just Opening a PR
 
 **Write a DD if:**
+
 - The change affects how other contributors will work
 - You are proposing a new modeling approach
 - You are adding a major dataset or validation target
 - You are changing an existing Design Document
 
 **Just open a PR if:**
+
 - Fixing a bug
 - Improving documentation
 - Adding tests
@@ -266,6 +276,7 @@ Variable name, Format, Units, Timestep (if applicable).
 Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **When a PR is opened:**
+
 1. Mind-of-a-Worm identifies which subsystem (based on files modified)
 2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 3. Checks **subsystem compliance:**
@@ -295,6 +306,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Current state:** Zero Design Documents exist (except those created in this proposal).
 
 **Phase 1 (Week 1-4):** Founder writes initial DDs for existing subsystems:
+
 - [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md): Neural, Muscle, Physics (document current architecture)
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md)-[DD010](DD010_Validation_Framework.md): Future work (document proposed phases)
 - [DD011](DD011_Contributor_Progression_Model.md)-[DD012](DD012_Design_Document_RFC_Process.md): Governance
@@ -312,6 +324,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Trigger:** Contributor proposes replacing NEURON with Brian2 for faster simulation.
 
 **Action:**
+
 1. Write [DD013](DD013_Simulation_Stack_Architecture.md): "Simulator Backend Selection"
 2. Include: Context (why switch?), Decision (Brian2 vs. NEURON), Alternatives (NEST, custom solver), Quality Criteria (must reproduce all existing validation), Migration Path (parallel implementation during transition)
 3. Open RFC PR
@@ -325,6 +338,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Trigger:** Contributor wants to model mechanosensation in touch neurons (ALM, AVM, PLM).
 
 **Action:**
+
 1. Write [DD014](DD014_Dynamic_Visualization_Architecture.md): "Mechanosensory Transduction (MEC-4 Channel Model)"
 2. Include: MEC-4/MEC-10 DEG/ENaC channel kinetics, Goodman et al. 1998 data, coupling to Sibernetic mechanical strain
 3. Open RFC PR
@@ -347,6 +361,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **Approved by:** Pending (governance DD, requires community ratification)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Publish [DD001](DD001_Neural_Circuit_Architecture.md)-[DD012](DD012_Design_Document_RFC_Process.md) for community review
 2. Set up design_documents/ directory in CElegansNeuroML and Sibernetic repos
 3. Document DD RFC process in CONTRIBUTING.md

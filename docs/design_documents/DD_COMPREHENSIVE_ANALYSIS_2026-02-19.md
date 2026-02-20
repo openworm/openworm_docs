@@ -100,6 +100,7 @@
 Contributors don't know which API to use. [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) reference "ConnectomeToolbox" but don't specify whether to use `cect` directly or wrap via OWMeta.
 
 **Resolution:**
+
 1. **Update [DD008](DD008_Data_Integration_Pipeline.md) (add phasing section):**
    ```markdown
    ## Phased OWMeta Mandate (Reconciliation with [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md))
@@ -131,6 +132,7 @@ Contributors don't know which API to use. [DD001](DD001_Neural_Circuit_Architect
 [DD010](DD010_Validation_Framework.md)'s acceptance criteria (Tier 3 behavioral validation) **cannot currently be enforced**. [DD013](DD013_Simulation_Stack_Architecture.md)'s CI/CD pipeline has unimplemented steps. Contributors attempting Tier 3 validation will fail.
 
 **Resolution:**
+
 1. **Update [DD010](DD010_Validation_Framework.md) Implementation Status:**
    ```markdown
    **Implementation Status:** Partial
@@ -159,6 +161,7 @@ Config suggests 4 backends work. [DD003](DD003_Body_Physics_Architecture.md) say
 Contributors might set `body.backend: taichi-metal` and expect it to work (it might not).
 
 **Resolution:**
+
 1. **Update [DD013](DD013_Simulation_Stack_Architecture.md) openworm.yml schema with status annotations:**
    ```yaml
    body:
@@ -180,6 +183,7 @@ Contributors might set `body.backend: taichi-metal` and expect it to work (it mi
 [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) are **companion documents** to [DD014](DD014_Dynamic_Visualization_Architecture.md), not standalone DDs. The "a/b" suffix is informal and doesn't appear in other DDs (no DD001a, DD002a, etc.).
 
 **Impact:**
+
 - Inconsistent numbering scheme
 - Cross-references use "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)" which looks like a typo
 - Index/README tables need special cases for companion DDs
@@ -202,6 +206,7 @@ Contributors might set `body.backend: taichi-metal` and expect it to work (it mi
 Both neurons AND muscles use parameters from the same paper about muscle electrophysiology.
 
 **This is actually correct** (not a contradiction), but it's confusing:
+
 - Boyle & Cohen measured body wall **muscle** ion channels
 - [DD001](DD001_Neural_Circuit_Architecture.md) borrowed those parameters for **neurons** because no neuron-specific data existed
 - [DD002](DD002_Muscle_Model_Architecture.md) uses the muscle parameters for muscles (original purpose)
@@ -238,6 +243,7 @@ Almost every science DD ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](
 **But `#TBD` is not a real GitHub issue number.** The issues don't exist.
 
 **Count of missing scripts:**
+
 - [DD001](DD001_Neural_Circuit_Architecture.md): 3 scripts
 - [DD002](DD002_Muscle_Model_Architecture.md): 2 scripts
 - [DD003](DD003_Body_Physics_Architecture.md): 2 scripts
@@ -253,11 +259,13 @@ Almost every science DD ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](
 **Total: ~50 missing scripts across 10 DDs.**
 
 **Impact:**
+
 - Contributors can't discover or claim this work (no issues to browse)
 - No one owns creating these scripts
 - Implementation roadmaps reference scripts that don't exist
 
 **Resolution:**
+
 1. **Immediate:** Run [DD015](DD015_AI_Contributor_Model.md)'s `dd_issue_generator.py` (if it exists) to create GitHub issues from all Integration Contracts
 2. **If script doesn't exist:** Create it as first [DD015](DD015_AI_Contributor_Model.md) task
 3. **Label all generated issues:** `dd###`, `ai-workable` or `human-expert`, difficulty level (`L1`/`L2`/`L3`)
@@ -278,6 +286,7 @@ Multiple DDs reference "environment" but no DD specifies it:
 
 **What's Needed:**
 A DD that specifies:
+
 - Substrate types (agar stiffness, liquid viscosity, soil particle dynamics)
 - Chemical gradient delivery (NaCl, diacetyl, attractants/repellents)
 - Temperature gradient (thermotaxis)
@@ -289,6 +298,7 @@ A DD that specifies:
 **Create [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md): Environmental Modeling and Stimulus Delivery**
 
 Scope:
+
 - Substrate mechanics (couples to [DD003](DD003_Body_Physics_Architecture.md) boundary particles)
 - Chemical/thermal gradient fields (couples to [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 Component 4 sensory transduction)
 - Food particle dynamics (couples to [DD007](DD007_Pharyngeal_System_Architecture.md) pharyngeal pumping)
@@ -336,6 +346,7 @@ Proprioceptive feedback is important for undulatory locomotion (Wen et al. 2012 
 (Or [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) if environment takes [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md))
 
 Scope:
+
 - Stretch-sensitive channels on B-class motor neurons
 - Coupling to body deformation (strain readout from [DD003](DD003_Body_Physics_Architecture.md))
 - Effect on locomotion wave propagation
@@ -364,6 +375,7 @@ Closed-loop chemotaxis, thermotaxis, and oxygen avoidance require sensory transd
 
 **Resolution:**
 **Defer to Phase 3+** but acknowledge the gap. Could create:
+
 - DD024: Chemosensory Transduction (ASEL/ASER, cGMP signaling)
 - DD025: Thermosensory Transduction (AFD, cGMP signaling)
 - DD026: Olfactory Transduction (AWC/AWA, odorant receptors)
@@ -406,6 +418,7 @@ Male modeling is Phase 6+ work, but there's no placeholder DD or even a proposal
 
 **The Gap:**
 Developmental connectomes exist (Witvliet 1-8). CeNGEN L1 expression exists. But no DD specifies:
+
 - How to simulate neuron birth/death during development
 - Body size scaling (L1 is ~240 µm, adult is ~1000 µm)
 - Stage-specific validation targets (L1 locomotion is different from adult)
@@ -497,6 +510,7 @@ Every DD has local coupling tables:
 But there's no **global view** of all coupling dependencies.
 
 **Impact:**
+
 - Can't visualize the full coupling graph
 - Can't identify bottleneck DDs (which DD is depended on by the most others?)
 - Can't plan integration order (which DDs must be implemented first to unblock others?)
@@ -573,6 +587,7 @@ graph TD
 Roadmaps exist but no one owns executing them.
 
 **Resolution:**
+
 1. **Immediate:** Founder assigns Phase A tasks to existing L3+ contributors (even if not L4)
 2. **Medium-term:** Recruit L4 maintainers for Integration, Validation, Visualization
 3. **Update [DD011](DD011_Contributor_Progression_Model.md) Subsystem Ownership Map** when filled
@@ -583,6 +598,7 @@ Roadmaps exist but no one owns executing them.
 
 **The Gap:**
 [DD005](DD005_Cell_Type_Differentiation_Strategy.md) line 442-448 lists ~5 neuron types with electrophysiology (ALM, AVM, PLM, AVA, RIM, ASH, AWC). But:
+
 - No table of actual measured conductances
 - No data files specified
 - No DOIs for source papers beyond general citations
@@ -593,12 +609,14 @@ Line 185: "Fit a scaling relationship... using the ~20 neuron types with publish
 
 **Impact:**
 A contributor implementing [DD005](DD005_Cell_Type_Differentiation_Strategy.md) doesn't know:
+
 - Where to get the training data
 - What the measured conductance values are
 - Which 20 neurons (only 5-7 are named)
 
 **Resolution:**
 **Update [DD005](DD005_Cell_Type_Differentiation_Strategy.md) with:**
+
 1. **Complete training set table:**
 
 ```markdown
@@ -623,6 +641,7 @@ Format: neuron_class, channel, measured_g, E_rev, source_doi
 
 **The Gap:**
 [DD015](DD015_AI_Contributor_Model.md) says "AI agents earn the same badges as human contributors" but doesn't specify:
+
 - Does N2-Whisperer verify AI agent badge completion differently?
 - Do AI agents get BadgeList profiles? (human-facing platform)
 - Can AI agents earn teach-back badges? (No — those are sponsor-only per [DD011](DD011_Contributor_Progression_Model.md))
@@ -658,6 +677,7 @@ See [DD011](DD011_Contributor_Progression_Model.md) §Teach-Back Badges (lines 3
 
 **The Pattern:**
 [DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (21 DDs) all include full Integration Contract sections with 5 required sub-sections ([DD012](DD012_Design_Document_RFC_Process.md) lines 119-159):
+
 - Inputs / Outputs
 - Repository & Packaging
 - Configuration
@@ -672,6 +692,7 @@ If [DD012](DD012_Design_Document_RFC_Process.md) adds a 6th required sub-section
 **Not necessarily.** The redundancy provides **locality** — a contributor working on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) can read everything about [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) in one place without jumping to [DD013](DD013_Simulation_Stack_Architecture.md) for config schema or [DD014](DD014_Dynamic_Visualization_Architecture.md) for visualization.
 
 **Trade-off:**
+
 - **Locality (good):** Each DD is self-contained
 - **Maintenance burden (bad):** Changes to Integration Contract format ripple across 21 DDs
 
@@ -743,6 +764,7 @@ Every DD specifies its Docker stage, `openworm.yml` keys, and `versions.lock` en
 
 **Is This Bad?**
 **No.** Same locality vs. centralization trade-off as R1. The repetition is acceptable because:
+
 - Contributors working on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) can see [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)'s config without jumping to [DD013](DD013_Simulation_Stack_Architecture.md)
 - If [DD013](DD013_Simulation_Stack_Architecture.md)'s schema changes, affected DDs update their local copies
 - Validation script can catch inconsistencies
@@ -770,6 +792,7 @@ The README groups DDs as:
 6. **Archived** (DD016)
 
 **Problems with this grouping:**
+
 - Mixes **status** (Accepted vs. Proposed) with **category** (Architecture vs. Infrastructure)
 - Phase progression unclear ([DD005](DD005_Cell_Type_Differentiation_Strategy.md) is Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) is Phase 2, but both are in "Proposed Extensions")
 - Dependencies not visible ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) feeds [DD001](DD001_Neural_Circuit_Architecture.md), but [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) is in "Infrastructure" while [DD001](DD001_Neural_Circuit_Architecture.md) is in "Core")
@@ -781,49 +804,60 @@ The README groups DDs as:
 This grouping shows **how data flows through the system** from foundational layers up to consumers.
 
 **Layer 0: Governance & Process (Meta)**
+
 - [DD012](DD012_Design_Document_RFC_Process.md) (Design Document RFC Process)
 - [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression Model)
 - [DD015](DD015_AI_Contributor_Model.md) (AI-Native Contributor Model)
 
 **Layer 1: Data Providers (Foundation)**
+
 - [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — `cect`)
 - [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline — OWMeta, Phase 3+)
 - [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — WCON, validation data)
 
 **Layer 2: Validation Framework**
+
 - [DD010](DD010_Validation_Framework.md) (3-Tier Validation)
 
 **Layer 3: Core Simulation Chain (The Coupling Backbone)**
+
 - [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit) ← consumes [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 - [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model) ← consumes [DD001](DD001_Neural_Circuit_Architecture.md)
 - [DD003](DD003_Body_Physics_Architecture.md) (Body Physics) ← consumes [DD002](DD002_Muscle_Model_Architecture.md)
 
 **Layer 4: Integration Orchestrator**
+
 - [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack) ← consumes [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md)
 
 **Layer 5: Extensions to Core**
+
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation) ← enhances [DD001](DD001_Neural_Circuit_Architecture.md)
 - [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides) ← adds to [DD001](DD001_Neural_Circuit_Architecture.md)
 - [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) ← enhances [DD003](DD003_Body_Physics_Architecture.md)
 - [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response) ← closes loop [DD003](DD003_Body_Physics_Architecture.md) → [DD001](DD001_Neural_Circuit_Architecture.md)
 
 **Layer 6: Organ Systems (Semi-Independent Subsystems)**
+
 - [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System)
 - [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator)
 - [DD018](DD018_Egg_Laying_System_Architecture.md) (Egg-Laying System)
 
 **Layer 7: Visualization (Consumes All Outputs)**
+
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) (Dynamic Visualization Architecture)
 - [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) (Visual Rendering Specification)
 - [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Anatomical Mesh Deformation Pipeline)
 
 **Layer 8: Advanced/Hybrid (Future)**
+
 - [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
 
 **Archived:**
+
 - DD016 (Tokenomics)
 
 **Benefits:**
+
 - Shows data flow clearly
 - Dependency order visible (implement Layer 1 before Layer 3)
 - Integration ([DD013](DD013_Simulation_Stack_Architecture.md)) is correctly placed as orchestrator that consumes Layers 1-3
@@ -835,50 +869,60 @@ This grouping shows **how data flows through the system** from foundational laye
 This grouping shows **when each DD gets implemented** (matches Phase Roadmap from G8).
 
 **Phase 0: Existing Foundation**
+
 - [DD001](DD001_Neural_Circuit_Architecture.md) (Neural — Accepted, working)
 - [DD002](DD002_Muscle_Model_Architecture.md) (Muscle — Accepted, working)
 - [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — Accepted, working)
 - [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome — `cect` exists, needs pinning)
 
 **Phase A: Infrastructure Bootstrap (Weeks 1-4, Prerequisite for All Phases)**
+
 - [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack — config, Docker, CI)
 - [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox Revival — 8 tasks, 33 hours)
 - [DD012](DD012_Design_Document_RFC_Process.md) (RFC Process — governance)
 - [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression — levels, badges)
 
 **Phase 1: Cell Differentiation (Months 1-3)**
+
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN)
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 (Trame viewer, organism + tissue)
 - [DD010](DD010_Validation_Framework.md) Tier 2 validation (functional connectivity)
 
 **Phase 2: Slow Modulation + Closed-Loop (Months 4-6)**
+
 - [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — 31,479 interactions)
 - [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — bidirectional coupling)
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2 (Interactive layers, cell selection)
 
 **Phase 3: Organ Systems + Hybrid ML (Months 7-12)**
+
 - [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharynx — 63 cells)
 - [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestine — 20 cells)
 - [DD018](DD018_Egg_Laying_System_Architecture.md) (Egg-Laying — 28 cells)
 - [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Differentiable backend, SPH surrogate)
 
 **Phase 4: Mechanical Detail (Months 13-18)**
+
 - [DD004](DD004_Mechanical_Cell_Identity.md) (Cell Identity — 959 cells)
 - [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation — cage-based)
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3 (Public experience, molecular scale)
 
 **Phase 5-6: Future (Not Yet Specified)**
+
 - Intracellular signaling (IP3/cAMP cascades)
 - Developmental modeling (Witvliet series)
 - Male-specific modeling
 
 **Governance (Ongoing):**
+
 - [DD015](DD015_AI_Contributor_Model.md) (AI Contributors — can deploy anytime after [DD011](DD011_Contributor_Progression_Model.md)/DD012)
 
 **Archived:**
+
 - DD016 (Tokenomics — backburner)
 
 **Benefits:**
+
 - Clear implementation order
 - Timeline visible
 - Phase dependencies explicit (Phase 2 requires Phase 1, etc.)
@@ -1214,6 +1258,7 @@ Viewer renders all subsystems in a single 3D scene
 ```
 
 **Benefits:**
+
 - **README:** Shows timeline and what to implement
 - **INTEGRATION_MAP:** Shows architecture and how pieces fit together
 - **Both views needed** for different audiences (contributors vs. architects)
@@ -1277,6 +1322,7 @@ Ripoll-Sanchez, Wang 2024).
 **Content:** See Part 6 proposed README timeline section (extract to standalone file)
 
 This becomes the single source of truth for:
+
 - What each phase contains
 - Which DDs belong to which phase
 - Timeline estimates
@@ -1294,6 +1340,7 @@ All DD## (status lines) can then reference: "Phase 1 (see DD_PHASE_ROADMAP.md)"
 This becomes the architectural overview that new L4 maintainers and senior contributors consult when making cross-cutting decisions.
 
 **Auto-generation:** Build a script that parses all DD Integration Contract tables and generates:
+
 - Mermaid diagram (dependency graph)
 - Bottleneck table (who's depended on most)
 - Interface table (what data is exchanged, what format)
@@ -1344,6 +1391,7 @@ done
 **Integration and Validation are the two most critical hires.** Without these, Phase A cannot proceed.
 
 **Options:**
+
 1. **Promote existing L3 contributors** (if any qualify)
 2. **Recruit from community** (announce L4 openings, accept applications)
 3. **Founder temporarily fills role** (unsustainable but unblocks work)
@@ -1354,6 +1402,7 @@ done
 ### R7. Renumber [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b to [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2
 
 **Files to rename:**
+
 - `DD014.1_Visual_Rendering_Specification.md` → `DD014.1_Visual_Rendering_Specification.md`
 - `DD014.2_Anatomical_Mesh_Deformation_Pipeline.md` → `DD014.2_Anatomical_Mesh_Deformation_Pipeline.md`
 
@@ -1369,6 +1418,7 @@ Search all DDs for "[DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.m
 ```
 
 **Benefits:**
+
 - Consistent numbering scheme
 - Signals companion relationship clearly
 - Matches software versioning conventions
@@ -1404,6 +1454,7 @@ See [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rend
 Every science DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) has a complete Integration Contract. This is **excellent** and should be preserved despite the maintenance burden (R1). The contracts make coupling explicit and enforceable.
 
 **Why it's good:**
+
 - Mind-of-a-Worm can automatically detect when a PR changes a coupling interface
 - Contributors know exactly what their DD consumes and produces
 - Regression is detectable (if [DD001](DD001_Neural_Circuit_Architecture.md) changes calcium output format, [DD002](DD002_Muscle_Model_Architecture.md) breaks)
@@ -1429,6 +1480,7 @@ The 7-question reference table at the top of science DDs (added during [DD005](D
 ```
 
 **Why it's good:**
+
 - Answers contributor questions immediately (no scrolling to line 300 for repo link)
 - Makes DDs scannable
 - Enforces that every DD has these 7 critical pieces of info
@@ -1442,11 +1494,13 @@ The 7-question reference table at the top of science DDs (added during [DD005](D
 All DDs include "Alternatives Considered" with rejection rationale. This is **best practice** from Rust RFCs and prevents endless re-proposals of rejected approaches.
 
 Examples:
+
 - [DD001](DD001_Neural_Circuit_Architecture.md) rejects IAF (integrate-and-fire) for all levels — graded potentials are biological
 - [DD003](DD003_Body_Physics_Architecture.md) rejects FEM (finite element) — SPH is meshless and better for large deformations
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md) rejects AlphaFold3 + MD for channel kinetics — too slow, CeNGEN expression is faster
 
 **Why it's good:**
+
 - Preserves institutional memory
 - Newcomers learn why decisions were made
 - Mind-of-a-Worm can flag PRs that violate alternatives-considered (e.g., a PR proposing FEM body physics gets auto-flagged: "[DD003](DD003_Body_Physics_Architecture.md) explicitly rejected FEM. See [DD003](DD003_Body_Physics_Architecture.md) Alternatives section.")
@@ -1470,6 +1524,7 @@ Splitting into companions is the right call. The only issue is numbering (should
 [DD012](DD012_Design_Document_RFC_Process.md) line 86 designates [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as the reference implementation of the expanded template. This is **excellent** — having a canonical example prevents template ambiguity.
 
 **Why it's good:**
+
 - Contributors writing new DDs can copy [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s structure
 - [DD012](DD012_Design_Document_RFC_Process.md) can say "see [DD005](DD005_Cell_Type_Differentiation_Strategy.md) for example" instead of explaining every section
 - Mind-of-a-Worm can compare new DDs to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s format
@@ -1550,6 +1605,7 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 ```
 
 **Legend:**
+
 - ✅ Accepted — Implemented or stable specification
 - ⚠️ Proposed — Under review, ready for implementation
 - 🔴 Blocked — Cannot proceed (missing prerequisite)
@@ -1650,6 +1706,7 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 **Question:** Should [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack) and [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox Revival) be the **absolute top priorities** before any science DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) proceed?
 
 **Rationale:**
+
 - Without [DD013](DD013_Simulation_Stack_Architecture.md): No config system, no CI, no contributor workflow
 - Without [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md): No Tier 3 validation, no behavioral regression detection
 - Both are **infrastructure blockers** for all modeling phases
@@ -1657,6 +1714,7 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 **Recommendation:** **YES.** Make Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) + [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD011](DD011_Contributor_Progression_Model.md)/DD012 governance) the next 4-8 weeks of work before starting Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)).
 
 **Impact:**
+
 - Delays science DDs by 1-2 months
 - But unblocks sustainable contributor workflow and validation
 - Better to have infrastructure in place before 100+ contributors start submitting PRs
@@ -1668,12 +1726,14 @@ See **[INTEGRATION_MAP.md](INTEGRATION_MAP.md)** for the complete dependency gra
 **Question:** Who fills these critical L4 roles?
 
 **Options:**
+
 1. **Promote from existing community** (if any L3 contributors qualify)
 2. **Founder temporarily fills both** (unsustainable but unblocks work)
 3. **Recruit externally** (post L4 openings on job boards, pay if necessary)
 4. **Assign to Padraig** (Integration) and split Validation across existing L3s
 
 **Recommendation:**
+
 - **Integration:** Formalize Padraig as L4 Integration Maintainer + recruit a co-maintainer (bus factor issue)
 - **Validation:** Post opening, recruit from community, or pay ($20-30/hour, ~10 hours/week = $800-1,200/month)
 
@@ -1695,6 +1755,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 **Question:** Should we immediately run `dd_issue_generator.py` to create ~50 missing GitHub issues, or defer until Phase A is complete?
 
 **Options:**
+
 1. **Create now:** Issues exist, contributors can browse/claim
 2. **Defer:** Wait until [DD013](DD013_Simulation_Stack_Architecture.md) CI is working so issues can be validated
 
@@ -1709,6 +1770,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 **Question:** Should [DD008](DD008_Data_Integration_Pipeline.md) be updated to acknowledge [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md), or should [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) be rewritten to defer to OWMeta?
 
 **Recommendation:** **Update [DD008](DD008_Data_Integration_Pipeline.md)** (acknowledge [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)'s phasing). Reason:
+
 - `cect` is active and maintained (Padraig, v0.2.7, commits within days)
 - OWMeta is dormant (last real commit Jul 2024)
 - Pragmatic to use the working tool now, integrate later
@@ -1722,6 +1784,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 **Total DDs Analyzed:** 23 ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) + [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
 
 **Status Breakdown:**
+
 - ✅ Accepted: 6 ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md) partial, [DD010](DD010_Validation_Framework.md) partial, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md))
 - ⚠️ Proposed: 16 ([DD004](DD004_Mechanical_Cell_Identity.md)-[DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD011](DD011_Contributor_Progression_Model.md)-[DD015](DD015_AI_Contributor_Model.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)-[DD019](DD019_Closed_Loop_Touch_Response.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md)/b)
 - 📦 Archived: 1 (DD016)
@@ -1732,12 +1795,14 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 **Redundancies:** 4 (all acceptable)
 
 **Blocked Work:**
+
 - Tier 3 validation ([DD010](DD010_Validation_Framework.md)) — **blocked on [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival**
 - Phase 1-6 science DDs — **blocked on [DD013](DD013_Simulation_Stack_Architecture.md) + [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** (Phase A)
 - Integration work — **blocked on vacant Integration Maintainer role**
 - Validation work — **blocked on vacant Validation Maintainer role**
 
 **Immediate Actions (Priority Order):**
+
 1. ✅ Create DD_PHASE_ROADMAP.md (1 hour)
 2. ✅ Create INTEGRATION_MAP.md (2-4 hours, or auto-generate)
 3. ✅ Update [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta-cect reconciliation, 30 min)
@@ -1756,6 +1821,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 **The OpenWorm Design Document collection is IMPRESSIVE AS HELL** — 23 interconnected specs covering everything from ion channels to AI contributor models. The depth is unmatched in open source computational biology.
 
 **But:**
+
 - **2 critical roles are vacant** (Integration, Validation)
 - **Key infrastructure is broken** (toolbox) or missing ([DD013](DD013_Simulation_Stack_Architecture.md) Docker stack)
 - **50+ scripts are phantom references** (marked TO BE CREATED with no issues)
@@ -1763,6 +1829,7 @@ Rewrite README.md using the Phase-based structure from Part 7, add DD_PHASE_ROAD
 - **Coupling graph is distributed** across 21 local tables
 
 **The fix is straightforward:**
+
 1. **Phase A first** ([DD013](DD013_Simulation_Stack_Architecture.md) + [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), recruit maintainers)
 2. **Create 3 master documents** (Phase Roadmap, Integration Map, Issue Generator output)
 3. **Resolve 5 inconsistencies** (mostly documentation updates)

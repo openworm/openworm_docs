@@ -39,17 +39,20 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 ### Level-Specific Responsibilities
 
 **L0 (Observer):**
+
 - Can: Read all code/docs, ask questions in public Slack, attend public meetings
 - Cannot: Open PRs, modify anything
 - Progression: Complete 3 orientation tasks (see L1)
 
 **L1 (Apprentice):**
+
 - Can: Submit documentation fixes, improve test coverage, triage GitHub issues
 - Cannot: Modify core modeling code
 - Progression: 5 merged contributions that pass Mind-of-a-Worm pre-review
 - Typical contributions: Fix typos, add docstrings, improve README, label issues, update dependencies
 
 **L2 (Junior Contributor):**
+
 - Can: Open PRs to designated "contributor-ready" subsystems (data pipelines, validation scripts, non-critical NeuroML extensions)
 - Cannot: Modify core cell models ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md)), merge others' PRs
 - Review process: Mind-of-a-Worm pre-review (subsystem + integration compliance) → L3/L4 human review → merge
@@ -57,6 +60,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Progression: Sustained quality (error-free PRs, good communication, alignment with Design Documents **including Integration Contracts**) over 3+ months → L3 nomination
 
 **L3 (Contributor — with review access):**
+
 - Can: Review and merge L1/L2 PRs in their subsystem, modify core models within Design Document boundaries
 - Cannot: Change Design Documents, make cross-cutting architectural decisions
 - Responsibilities:
@@ -69,6 +73,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Progression: Demonstrate deep expertise, propose Design Document improvements → L4 nomination by founder
 
 **L4 (Senior Contributor):**
+
 - Can: Make architectural decisions within subsystem scope, write/amend Design Documents for their subsystem, represent subsystem in cross-cutting decisions
 - Cannot: Make unilateral changes affecting other subsystems
 - Responsibilities:
@@ -82,6 +87,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Progression: Invitation to Steering (rare)
 
 **L5 (Founder / Steering):**
+
 - Responsibilities:
   - Write cross-cutting Design Documents
   - Approve/reject L3→L4 promotions
@@ -128,11 +134,13 @@ See **Badge & Recognition System** section for full badge details.
 ### L1 → L2 (Prove Code Quality — earn Junior Contributor)
 
 Submit at least **5 merged contributions** that:
+
 - Pass Mind-of-a-Worm pre-review (Design Document compliance, test coverage, code style)
 - Receive human approval from L3+ reviewer
 - Span at least 2 different subsystems (proves breadth)
 
 **Quality markers Mind-of-a-Worm tracks:**
+
 - Code style adherence (PEP-8 for Python, NeuroML schema compliance)
 - Test coverage (contributions include tests or improve existing tests)
 - Documentation (docstrings, inline comments where needed)
@@ -143,12 +151,14 @@ Submit at least **5 merged contributions** that:
 ### L2 → L3 (Prove Subsystem Expertise — earn Contributor)
 
 Demonstrate:
+
 1. **Deep understanding** of at least one subsystem (can explain design decisions, knows the codebase)
 2. **Sustained contribution** over 3+ months in that subsystem
 3. **Review participation:** Has reviewed others' PRs (even as L2, reviews are valuable)
 4. **Alignment with project values:** Respectful communication, collaborative approach, open science ethos
 
 **Nomination process:**
+
 - Current L4 Senior Contributor nominates to founder
 - Founder reviews contributor history, consults Mind-of-a-Worm metrics
 - Founder approves or requests more time
@@ -158,12 +168,14 @@ Demonstrate:
 ### L3 → L4 (Prove Leadership — earn Senior Contributor)
 
 Demonstrate:
+
 1. **Architectural thinking:** Has proposed or written Design Documents
 2. **Mentorship:** Has successfully mentored L1/L2 contributors
 3. **Subsystem ownership:** Has become the go-to person for their domain
 4. **Cross-subsystem collaboration:** Works effectively with other maintainers on integration issues
 
 **Nomination process:**
+
 - Self-nomination or nomination by current L4/L5
 - Founder reviews, consults Scientific Advisory Board for scientific roles
 - Approval requires consensus (founder + at least one SAB member)
@@ -279,6 +291,7 @@ Mind-of-a-Worm maintains a **contributor database**:
 ```
 
 **Mind-of-a-Worm generates weekly reports:**
+
 - Contributors ready for promotion (send to L4 Senior Contributors)
 - Contributors fading (inactive >1 month, send to Mad-Worm-Scientist)
 - New contributors onboarding (L0→L1 conversions)
@@ -288,6 +301,7 @@ Mind-of-a-Worm maintains a **contributor database**:
 Update openworm.org/people.html to include:
 
 **Current structure:**
+
 - Board of Directors
 - Scientific Advisory Board
 - Operations Team
@@ -296,6 +310,7 @@ Update openworm.org/people.html to include:
 - Contributors (~100+)
 
 **Proposed structure (add levels):**
+
 - Board / Scientific Advisory (L5)
 - Senior Contributors (L4) — **NEW, explicit list with subsystem ownership**
 - Contributors (L3) — **NEW, explicit list**
@@ -319,6 +334,7 @@ Update openworm.org/people.html to include:
 | Others | L3 Contributor | Active code contributors |
 
 **Current Contributors (~100+):** Retroactive assignment based on recent activity:
+
 - Active in last 6 months → L2 (Junior Contributor)
 - Inactive → L1 (can re-earn L2)
 
@@ -402,6 +418,7 @@ Unique to the AI contributor model. Earned when a human sponsor's AI agent lands
 | **I Understand the Whole Worm** | Earn teach-back badges in 5+ different domains | Cross-domain |
 
 **How this works in practice:**
+
 1. A middle schooler sponsors an AI agent that implements a gap junction in [DD001](DD001_Neural_Circuit_Architecture.md)
 2. The agent writes a Sponsor Summary at `explain_level: child`: "You helped connect two brain cells that tell the worm to back up!"
 3. Mind-of-a-Worm verifies the summary is scientifically accurate at that level
@@ -468,12 +485,14 @@ BadgeList (badgelist.com) provides a REST API (v1) at `https://badgelist.com/api
 **Authentication:** API Key token (passed as header or query param). Requires contacting hello@badgelist.com for a token.
 
 **What the endorsement endpoint does:** When you call `POST /badges/{badge_id}/endorsements` with an email address, BadgeList handles all the edge cases:
+
 - **New user:** Invites them to create an account, stores the badge award pending signup
 - **Existing user, not in group:** Auto-adds them to the OpenWorm group, awards badge
 - **Existing seeker:** Awards badge immediately
 - **Already holds badge:** Adds endorsement to existing portfolio
 
 **What BadgeList does NOT provide (confirmed gaps):**
+
 - No incoming webhooks (can't push events TO our systems — we must poll or fire-and-forget)
 - No conditional/prerequisite logic (badge A requires badge B — must enforce in our code)
 - No custom metadata on awards (can't attach PR number or DD reference to a badge award)
@@ -513,6 +532,7 @@ BadgeList for public-facing profiles (social layer). GitHub registry as source o
 **Recommendation:** Start with **Option 1 (BadgeList)**. The API has everything we need for automated issuance, and 162 users already have profiles there. Mind-of-a-Worm enforces prerequisite logic and level thresholds — BadgeList just handles badge display and user management. If we outgrow BadgeList or need custom features (DD metadata, progression visualization), migrate to Option 2 or 3.
 
 **Immediate next steps:**
+
 1. Contact hello@badgelist.com for an API token (Stephen owns the group as @slarson)
 2. Create the new DD-aligned badges via `POST /badges`
 3. Wire Mind-of-a-Worm to call `POST /badges/{badge_id}/endorsements` on PR merge
@@ -571,6 +591,7 @@ Many contributors are episodic (intense activity for weeks, then disappear). Lev
 Science writing, outreach, documentation, community building are valuable but not captured by "merged PRs."
 
 **Mitigation:** L1→L2 criteria include:
+
 - Technical writing (blog posts, documentation)
 - Community support (answering Slack questions, mentoring newcomers)
 - Scientific contribution (literature review, experimental validation)
@@ -591,6 +612,7 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 **Approved by:** Pending (requires community discussion)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Map current contributors to proposed levels
 2. Publish criteria on openworm.org
 3. Implement Mind-of-a-Worm tracking

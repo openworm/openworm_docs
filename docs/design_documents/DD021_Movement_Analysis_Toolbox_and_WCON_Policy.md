@@ -369,12 +369,14 @@ python -c "from open_worm_analysis_toolbox import NormalizedWorm"
 ```
 
 **Task 2: Update Dependencies**
+
 - NumPy: likely needs `np.float` → `np.float64`, `np.int` → `np.int64` fixes (deprecated aliases removed in NumPy 1.24+)
 - SciPy: check for removed functions (`scipy.misc.comb` → `scipy.special.comb`, etc.)
 - matplotlib: update deprecated API calls
 - h5py: verify MAT file reading compatibility
 
 **Task 3: Verify WCON Parser**
+
 - Load example WCON files from `tracker-commons/tests/`
 - Verify parser handles all WCON 1.0 required fields
 - Test with Sibernetic's actual output format (once available)
@@ -444,6 +446,7 @@ print(report)
 ### Revival Priority
 
 **This is a Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task.** Without a working analysis toolbox:
+
 - [DD010](DD010_Validation_Framework.md) Tier 3 validation cannot run
 - [DD013](DD013_Simulation_Stack_Architecture.md) CI pipeline Steps 4-5 remain unimplemented
 - Behavioral regression detection is impossible
@@ -501,6 +504,7 @@ from tierpsy import ...  # (inspect their API)
 ```
 
 **Decision Point:**
+
 - **If OpenWorm's tierpsy fork works with WCON:** Skip the entire [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) 8-task revival (saves 33 hours!), use tierpsy directly
 - **If it doesn't work but upstream tierpsy does:** Sync OpenWorm's fork with upstream
 - **If neither works:** Proceed with [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) analysis toolbox revival as planned
@@ -519,12 +523,14 @@ from tierpsy import ...  # (inspect their API)
 ### Future Evaluation
 
 **Evaluate Tierpsy as a replacement in Phase 3+ when:**
+
 1. The toolbox revival is complete and Tier 3 validation is running
 2. Tierpsy has a stable WCON/simulation input pathway
 3. The broader community has standardized on Tierpsy for phenotyping
 4. Maintaining two tools becomes burdensome
 
 **If adopting Tierpsy:**
+
 - Create `tierpsy_adapter.py` that wraps Tierpsy's feature extraction with OpenWorm's comparison API
 - Maintain backward compatibility with existing validation scripts
 - Update [DD010](DD010_Validation_Framework.md) acceptance criteria if Tierpsy's feature definitions differ slightly
@@ -539,6 +545,7 @@ from tierpsy import ...  # (inspect their API)
 **Description:** Abandon the dormant analysis toolbox entirely and use Tierpsy Tracker for all behavioral validation.
 
 **Deferred (not rejected) because:**
+
 - Tierpsy is designed for video analysis, not simulation-to-experiment comparison
 - No `from_simulation()` or WCON input pathway exists in Tierpsy
 - Building an adapter layer is more effort than reviving the existing toolbox
@@ -551,6 +558,7 @@ from tierpsy import ...  # (inspect their API)
 **Description:** Write one-off Python scripts for each kinematic metric (speed, wavelength, etc.) without using a shared feature extraction library.
 
 **Rejected because:**
+
 - Duplicates effort already done in the toolbox (6+ years of feature extraction code)
 - Feature computation is non-trivial (skeleton normalization, bend detection, motion event classification)
 - No standardization across metrics — each script would use different conventions
@@ -561,6 +569,7 @@ from tierpsy import ...  # (inspect their API)
 **Description:** Compare simulated and experimental WCON files using raw statistical measures (DTW distance, Frechet distance) on trajectories, without extracting biological features.
 
 **Rejected because:**
+
 - Loses biological interpretability — "speed is 20% too fast" is actionable; "DTW distance is 0.42" is not
 - [DD010](DD010_Validation_Framework.md) Tier 3 criteria are defined in terms of biological features (speed, wavelength, frequency, amplitude, gait)
 - Cannot diagnose which aspect of movement is wrong without feature decomposition
@@ -570,6 +579,7 @@ from tierpsy import ...  # (inspect their API)
 **Description:** Replace WCON with a more efficient binary format (HDF5, NumPy .npz) for simulation output.
 
 **Rejected because:**
+
 - WCON is the community standard for worm tracking data (adopted by Tierpsy, WormBase, tracker-commons)
 - WCON is human-readable (JSON), which aids debugging
 - The overhead of JSON for ~1000 frames of 49-point skeletons is trivial (~1MB)
@@ -771,11 +781,13 @@ The open-worm-analysis-toolbox has its origins in the Schafer lab's worm behavio
 ### Why This DD Is Needed Now
 
 The analysis toolbox is referenced as a critical dependency in:
+
 - **[DD010](DD010_Validation_Framework.md)** (lines 95, 229, 260-270, 326-346): Tier 3 behavioral validation tool
 - **[DD013](DD013_Simulation_Stack_Architecture.md)** (lines 28, 54, 61): Validation pipeline Steps 4-5 (unimplemented)
 - **[DD001](DD001_Neural_Circuit_Architecture.md)/DD003**: Success metrics reference kinematic validation
 
 Yet no DD specifies:
+
 - How to revive the dormant toolbox
 - Which WCON version to target
 - The API contract for simulation-to-experiment comparison
@@ -837,6 +849,7 @@ While both tools implement Yemini 2013, minor implementation differences may cau
 **Approved by:** Pending (Validation Tools)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Appoint or recruit Validation L4 maintainer (or assign revival to existing contributor)
 2. Begin Task 1: Test toolbox on Python 3.12 in Docker
 3. File `dd021` issues on `openworm/open-worm-analysis-toolbox` for each revival task

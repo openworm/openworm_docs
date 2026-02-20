@@ -81,6 +81,7 @@ CE_locomotion/
 ```
 
 **StretchReceptor Algorithm:**
+
 - Detects local body curvature
 - Generates stretch-dependent current on B-class motor neurons
 - Stabilizes undulatory locomotion wave
@@ -104,6 +105,7 @@ cat StretchReceptor.cpp
 
 **Contact Authors:**
 This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Beer:**
+
 - Collaboration opportunity: Integrate their proprioceptive model into c302/Sibernetic
 - Compare approaches: CE_locomotion (C++, evolutionary fit) vs. OpenWorm (NeuroML, mechanistic)
 - Potential joint publication: "Two Approaches to Whole-Organism Neuromechanical Modeling"
@@ -153,6 +155,7 @@ This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Bee
 **Approved by:** Pending
 **Implementation Status:** Proposed (Phase 2-3, after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
 **Next Actions:**
+
 1. Contact CE_locomotion authors (collaboration opportunity)
 2. Extract StretchReceptor algorithm
 3. Port to NeuroML or Python

@@ -68,6 +68,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ `cect` v0.2.7 exists (needs version pinning per [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
 
 **What Works Today:**
+
 - 302 identical neurons (Level C1 graded synapses)
 - 95 body wall muscles with calcium-force coupling
 - ~100K SPH particles (fluid-structure interaction)
@@ -76,6 +77,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ConnectomeToolbox provides Cook2019, Witvliet, Randi, Ripoll-Sanchez data
 
 **What's Missing (addressed in Phase A):**
+
 - No config system (parameters hardcoded in `master_openworm.py`)
 - No docker-compose (raw shell scripts)
 - No dependency pinning (branch names, not commits)
@@ -83,6 +85,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Video pipeline has memory leak (OOMs >2s simulations)
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
+
 - Announcement: "OpenWorm simulates all 302 neurons + 95 muscles + body physics in a coupled loop, producing emergent locomotion validated against real worm movement."
 - Published: Sarma et al. 2018, Gleeson et al. 2018
 
@@ -102,6 +105,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression Model | Founder | ~8 hours | Governance |
 
 **Key Deliverables:**
+
 1. **`openworm.yml`** config schema ([DD013](DD013_Simulation_Stack_Architecture.md)) — Single source of truth for simulation parameters
 2. **Multi-stage Docker** build ([DD013](DD013_Simulation_Stack_Architecture.md)) — Subsystem caching, contributor override (--build-arg)
 3. **`docker-compose.yml`** ([DD013](DD013_Simulation_Stack_Architecture.md)) — quick-test, simulation, validate, viewer, shell services
@@ -110,12 +114,14 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 6. **Contributor workflow** ([DD013](DD013_Simulation_Stack_Architecture.md)) — Fork subsystem → build with custom branch → quick-test → validate → PR
 
 **Milestone:** 🎉 **"Containerized Stack with Automated Validation"**
+
 - **Shout about it:** "Contributors can now test changes against the full simulation in <5 minutes. Behavioral validation is automated via CI. No more manual parameter tuning!"
 - **Demo:** `docker compose run quick-test` completes in <5min, `docker compose run validate` reports pass/fail on Tier 2+3
 - **Visibility:** Blog post with before/after comparison (old: 20min rebuild + manual validation; new: 5min + automated CI)
 - **Impact:** Reduces contributor feedback loop from hours to minutes; enables rapid iteration
 
 **Success Criteria:**
+
 - ✅ `docker compose run quick-test` completes in <5 minutes
 - ✅ `docker compose run validate` runs Tier 2 functional connectivity + Tier 3 kinematics, produces JSON report
 - ✅ `versions.lock` pins c302, Sibernetic, cect, toolbox to exact commits
@@ -123,10 +129,12 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Analysis toolbox installs on Python 3.12, extracts 5 metrics from sample WCON file
 
 **Datasets Needed for Phase A:**
+
 - Schafer lab N2 baseline kinematics (WCON format, for Tier 3) — **Status:** Partial (MAT format exists, needs WCON conversion)
 - Randi et al. 2023 functional connectivity (302×302 correlation matrix) — **Status:** Needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020
 
 **Blocking Dependencies:**
+
 - Recruit Integration L4 Maintainer (owns [DD013](DD013_Simulation_Stack_Architecture.md) implementation)
 - Recruit Validation L4 Maintainer (owns [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival)
 
@@ -145,6 +153,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **[DD010](DD010_Validation_Framework.md) (Tier 2)** | Functional Connectivity Validation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD008](DD008_Data_Integration_Pipeline.md) | Activate Tier 2 blocking gate (r > 0.5 vs. Randi 2023) |
 
 **Key Deliverables:**
+
 1. **128 cell-type NeuroML files** (`cells/AVALCell.cell.nml`, etc.) — CeNGEN expression → conductance densities
 2. **Calibration parameters CSV** (`data/expression_to_conductance_calibration.csv`) — Fit from ~20 neurons with electrophysiology
 3. **Differentiated c302 network** (`LEMS_c302_C1_Differentiated.xml`) — Generated via `python CElegans.py C1Differentiated`
@@ -153,12 +162,14 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 6. **Tier 2 validation** ([DD010](DD010_Validation_Framework.md)) — Automated correlation vs. Randi 2023; CI blocks PRs if r < 0.5
 
 **Milestone:** 🎉 **"Biologically Distinct Neurons"**
+
 - **Shout about it:** "OpenWorm now simulates 128 different neuron types (not 302 copies of the same cell), parameterized from the CeNGEN single-cell atlas. Functional connectivity improves by ≥20% vs. generic model. You can see each neuron class's distinct dynamics in the new 3D viewer."
 - **Demo:** Launch viewer showing neurons colored by class (128 colors), click AVAL to see its class-specific calcium dynamics, compare to generic model side-by-side
 - **Visibility:** Blog post: "From Generic to Specific: 128 Neuron Classes" + video showing color-by-class mode + comparison plot (Tier 2 correlation improved from r=0.3 to r≥0.36)
 - **Paper opportunity:** "CeNGEN-Parameterized Whole-Circuit Simulation Improves Functional Connectivity Prediction" (collaborate with Randi/Leifer labs)
 
 **Success Criteria:**
+
 - ✅ All 128 `.cell.nml` files generated without error
 - ✅ `jnml -validate` passes for each cell type
 - ✅ Tier 2 validation: correlation with Randi 2023 improves ≥20% vs. generic baseline
@@ -176,6 +187,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **Ion channel gene list** | WormBase, CeNGEN | CSV (gene_symbol, channel_family, neuroml_model) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) gene→channel mapping | ⚠️ Needs curation (~100 ion channel genes) |
 
 **Blocking Dependencies:**
+
 - Phase A complete ([DD013](DD013_Simulation_Stack_Architecture.md) Docker stack, [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox working)
 - CeNGEN data downloaded and validated
 - Electrophysiology training set curated (20 neurons with measured conductances)
@@ -195,6 +207,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
 
 **Key Deliverables:**
+
 1. **NeuroML peptide extensions** (`lems/PeptideReleaseDynamics.xml`, `lems/PeptideReceptorDynamics.xml`)
 2. **Neuropeptidergic adjacency CSV** (31,479 rows: source, target, peptide, receptor, distance, modulation_type)
 3. **MEC-4 channel model** (`channel_models/mec4_chan.channel.nml`) — Strain-gated DEG/ENaC channel
@@ -204,6 +217,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 7. **Viewer enhancements** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Neuropeptide volumetric layer, strain heatmap, reversal event markers
 
 **Milestone:** 🎉 **"The Worm Can Feel and Modulate"**
+
 - **Shout about it:** "OpenWorm is now closed-loop! Tap the worm in the simulation and watch it reverse direction in real-time. Plus: 31,479 neuropeptide connections add a slow modulatory layer governing behavioral states."
 - **Demo 1:** Interactive demo — user clicks "Tap Anterior" button, worm reverses within 1 second, travels backward 1+ body lengths, resumes forward crawling
 - **Demo 2:** Neuropeptide knockout simulation — disable FLP peptides, watch locomotion pattern change
@@ -211,6 +225,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - **Paper opportunity:** "Bidirectional Coupling Enables Emergent Sensorimotor Behavior in Whole-Organism Simulation"
 
 **Success Criteria:**
+
 - ✅ Peptide-enabled simulation completes without crash (Tier 3 kinematics not degraded)
 - ✅ ≥3 peptide knockout phenotypes reproduced within 30% error ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation)
 - ✅ Tap stimulus → reversal onset <1 s, distance ≥1 body length ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3)
@@ -229,6 +244,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **Peptide knockout phenotypes** | Li et al. 1999, Rogers et al. 2003 (FLP), others | CSV (peptide_gene, phenotype, metric, wild_type, knockout) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Needs curation from literature |
 
 **Blocking Dependencies:**
+
 - Phase 1 complete (differentiated neurons are substrate for peptide modulation)
 - Ripoll-Sanchez data downloaded and ingested into ConnectomeToolbox/OWMeta
 - 3D cell positions extracted (for peptide distance-dependent attenuation)
@@ -249,6 +265,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | Hybrid Mechanistic-ML Framework | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | Differentiable backend (auto parameter fit), SPH surrogate (1000× speedup), foundation model→params, learned sensory |
 
 **Key Deliverables:**
+
 1. **Pharyngeal network** (`LEMS_c302_pharynx.xml`) — 20 neurons + 20 muscles, pumping oscillator module
 2. **Intestinal network** (`LEMS_IntestineOscillator.xml`) — 20 cells with IP3R, gap-junction-coupled
 3. **Egg-laying network** (`LEMS_c302_EggLaying.xml`) — HSN, VC, vulval/uterine muscles, serotonin/ACh/tyramine synapses
@@ -257,6 +274,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 6. **Auto-fitted parameters** — Gradient descent on [DD010](DD010_Validation_Framework.md) validation loss, per-neuron-class conductances
 
 **Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"**
+
 - **Shout about it:** "OpenWorm now includes pharynx (63 cells pumping at 3-4 Hz), intestine (20 cells with 50-second defecation rhythm), and egg-laying circuit (28 cells producing two-state bursts). Plus: ML-accelerated parameter fitting and 1000× faster surrogate for rapid exploration."
 - **Demo 1:** Full simulation video showing: worm crawling (body), pharynx pumping at head (3-4 Hz visible), intestinal calcium wave every ~50s (posterior-to-anterior), egg-laying bout every ~20 min (vulval contraction)
 - **Demo 2:** SPH surrogate comparison — same muscle activation input, full SPH takes 10 hours, surrogate takes <1 minute, <5% trajectory difference
@@ -264,6 +282,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - **Impact:** OpenWorm is no longer just locomotion — it's a multi-organ, multi-timescale (milliseconds to minutes) simulation
 
 **Success Criteria:**
+
 - ✅ Pharyngeal pumping frequency: 3-4 Hz ([DD007](DD007_Pharyngeal_System_Architecture.md) Tier 3)
 - ✅ Intestinal defecation period: 50 ± 10 s ([DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3)
 - ✅ Egg-laying two-state pattern: inactive ~20 min, active ~2 min, 3-5 eggs/bout ([DD018](DD018_Egg_Laying_System_Architecture.md) Tier 3)
@@ -284,6 +303,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | CSV (subset of L4 expression for non-neural cells) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md) cell-type-specific params | ✅ Available (filter CeNGEN L4 by cell type) |
 
 **Blocking Dependencies:**
+
 - Phase 1 complete (differentiated neurons)
 - Organ-specific validation data curated (pharynx EPG, defecation period, egg-laying patterns)
 - GPU cluster access for SPH surrogate training (500+ long runs)
@@ -303,6 +323,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 3)** | Public Experience Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2, [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) | Three.js + WebGPU, molecular scale, static site deployment, "Digital Organism In Your Browser" |
 
 **Key Deliverables:**
+
 1. **Tagged particle file** (extended SPH_Particle_v2 struct: 44 bytes with `cell_id`, `elasticity_mult`, `adhesion`)
 2. **Cell-to-particle mapping** (`data/cell_to_particle_map.json`) — 959 somatic cells → particle indices
 3. **Cell boundary meshes** (`data/cell_boundaries/*.obj`) — Per-cell 3D volumes from Witvliet 2021 EM
@@ -311,12 +332,14 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 6. **Static site deployment** — viewer.openworm.org (GitHub Pages or CDN)
 
 **Milestone:** 🎉 **"959-Cell Digital Organism with Photorealistic Visualization"**
+
 - **Shout about it:** "OpenWorm now represents all 959 somatic cells of the adult hermaphrodite with cell-type-specific mechanics. Visit viewer.openworm.org in any browser and explore the worm at three scales: organism (smooth crawling body), tissue (individual cells + neurons glowing), and molecular (ion channels opening, gene transcription visible). No installation, no server — just a web browser."
 - **Demo:** Public URL (viewer.openworm.org) — zoom from full worm to a single neuron to its membrane showing calcium channels opening
 - **Visibility:** Press release: "First Whole-Organism Simulation You Can Explore in a Web Browser" + Video: screencast of multi-scale zoom + WSJ/Wired/Nature News coverage potential
 - **Impact:** Public engagement — non-scientists can experience the simulation; educators can use it in classrooms; collaborators (CZI, Arc) can explore results without Docker
 
 **Success Criteria:**
+
 - ✅ All 959 somatic cells mapped to ≥1 SPH particle each
 - ✅ Cell-type-specific elasticity: intestine (0.8x baseline), cuticle (5-10x), muscles (1.5x), hypodermis (0.5x)
 - ✅ Tier 3 validation: kinematic metrics within ±15% with `cell_identity: true` enabled
@@ -334,6 +357,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **WBbt cell ontology** | WormBase | RDF or CSV (cell_name → WBbt_ID mapping) | [DD004](DD004_Mechanical_Cell_Identity.md) cell identity normalization | ✅ Available via WormBase API |
 
 **Blocking Dependencies:**
+
 - Phase 3 complete (organ systems implemented)
 - Witvliet EM data converted to cell boundary meshes
 - Virtual Worm meshes exported from Blender to individual OBJ files
@@ -346,6 +370,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 **Status:** 📝 **Not Yet Specified** — Placeholder for future work
 
 **Anticipated Scope:**
+
 - Detailed GPCR cascades (Gq/Gs/Gi → PLC/adenylyl cyclase → IP3/cAMP → PKA/PKC)
 - Second messenger dynamics (IP3, DAG, cAMP, cGMP)
 - Channel phosphorylation and trafficking
@@ -358,6 +383,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 **Milestone (Projected):** **"Molecular-Level Intracellular Dynamics"**
 
 **Datasets Needed (Projected):**
+
 - Biochemical rate constants (PLC activity, cAMP degradation, PKA/PKC kinetics)
 - Protein abundance (proteomics for C. elegans neurons/muscles)
 - Calcium imaging with subcellular resolution (ER, mitochondria, plasma membrane compartments)
@@ -369,6 +395,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 **Status:** 📝 **Not Yet Specified** — Placeholder for multi-stage simulation
 
 **Anticipated Scope:**
+
 - Witvliet developmental connectome series (L1 → L2 → L3 → L4 → adult, 8 stages)
 - Neuron birth and death (programmed cell death, 131 cells die during development)
 - Body size scaling (L1 ~240 µm → adult ~1000 µm)
@@ -376,6 +403,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 - CeNGEN L1 expression integration
 
 **Milestone (Projected):** **"Worm That Grows"**
+
 - Announcement: "Simulate C. elegans development from L1 larva to adult, watching neurons born and the body grow."
 
 **Datasets Needed (Projected):**
@@ -394,6 +422,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 **Status:** 📝 **Not Yet Specified** — Placeholder for male hermaphrodite simulation
 
 **Anticipated Scope:**
+
 - 385-neuron male connectome (Cook2019MaleReader)
 - 83 male-specific neurons (ray neurons, HOB, spicule motor neurons)
 - Male tail anatomy (fan, rays, spicules) in [DD003](DD003_Body_Physics_Architecture.md)/DD004
@@ -402,6 +431,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 **Milestone (Projected):** **"Both Sexes Simulated"**
 
 **Datasets Needed (Projected):**
+
 - Cook 2019 male connectome (available via `cect`)
 - Male behavioral data (mating assays, vulva location, spicule insertion)
 - Male-specific anatomy (tail SPH model, spicule mechanics)
@@ -489,11 +519,13 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD021](DD021_Movement
 ```
 
 **Parallelizable:**
+
 - Phase 1 [DD014](DD014_Dynamic_Visualization_Architecture.md) (viewer) can proceed alongside [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell differentiation)
 - Phase 3 organ DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) can be implemented in any order or in parallel
 - Phase 4 [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity) and [DD014.2]([DD014](DD014_Dynamic_Visualization_Architecture.md).2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation) can proceed in either order
 
 **What Blocks Everything:**
+
 - **Integration Maintainer recruitment** — Without this, [DD013](DD013_Simulation_Stack_Architecture.md) doesn't get implemented
 - **Validation Maintainer recruitment** — Without this, [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) doesn't get revived
 - **Phase A completion** — Without config system + automated validation, contributor workflow doesn't work
@@ -582,6 +614,7 @@ A: The calibration approach (expression→conductance scaling) is uncertain. If 
 
 **Q: When do we write papers?**
 A: After each major milestone:
+
 - Phase 1: "CeNGEN-Parameterized Neural Circuit" (target: *eNeuro* or *Frontiers in Neuroinformatics*)
 - Phase 2: "Closed-Loop Sensorimotor Behavior in Whole-Organism Simulation" (target: *PLoS Computational Biology*)
 - Phase 3: "Multi-Organ, Multi-Timescale C. elegans Simulation" (target: *Nature Communications* or *Cell Systems*)

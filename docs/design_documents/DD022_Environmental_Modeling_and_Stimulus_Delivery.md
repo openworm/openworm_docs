@@ -76,17 +76,20 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 ### Component 1: Substrate Mechanics (Agar vs. Liquid vs. Soil)
 
 **Agar (most common experimental substrate):**
+
 - Viscoelastic solid (not purely elastic, not purely viscous)
 - Young's modulus: 3-10 kPa (depends on agarose concentration, typically 2%)
 - Poisson ratio: 0.45 (nearly incompressible)
 - [DD003](DD003_Body_Physics_Architecture.md) boundary particles model agar as fixed constraints; extend to deformable substrate
 
 **Liquid (swimming experiments):**
+
 - Newtonian fluid (same Navier-Stokes as [DD003](DD003_Body_Physics_Architecture.md) pseudocoelom)
 - Viscosity: 1e-3 Pa·s (water) to 1e-2 Pa·s (M9 buffer)
 - No solid substrate → worm swims, different gait (higher frequency, lower amplitude)
 
 **Soil (naturalistic environment):**
+
 - Granular medium (sand, decomposed organic matter)
 - Modeled as additional SPH particles or DEM (discrete element method)
 - Phase 5+ work (complex, low priority)
@@ -99,11 +102,13 @@ Diffusion equation in 2D (agar surface):
 ```
 ∂C/∂t = D ∇²C
 ```
+
 - D = diffusion coefficient (~1e-5 cm²/s for small molecules in agar)
 - Boundary conditions: Source (high concentration) at one end, sink (low) at other
 - Steady-state: Linear or exponential gradient
 
 **Simplified implementation:**
+
 - Pre-compute steady-state gradient field (no time evolution during simulation)
 - Lookup concentration at worm's (x, y) position each timestep
 - Feed to [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 chemosensory transduction model
@@ -113,6 +118,7 @@ Diffusion equation in 2D (agar surface):
 **For thermotaxis experiments (AFD neuron responds to temperature):**
 
 Similar to chemical gradient but for temperature:
+
 - Cultivation temperature (20°C) at one end, 15°C or 25°C at other
 - Linear or radial gradient
 - Feed to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 learned thermosensory model
@@ -120,6 +126,7 @@ Similar to chemical gradient but for temperature:
 ### Component 4: Food Particles (OP50 Bacteria)
 
 **For pharyngeal pumping + feeding behavior:**
+
 - Bacteria modeled as small deformable SPH particles (~1 µm diameter)
 - Delivered to pharyngeal lumen via pumping ([DD007](DD007_Pharyngeal_System_Architecture.md))
 - Grinder crushes bacteria (future: mechanical food processing)
@@ -182,6 +189,7 @@ Similar to chemical gradient but for temperature:
 **Approved by:** Pending
 **Implementation Status:** Proposed (Phase 2-3)
 **Next Actions:**
+
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
 2. Implement steady-state gradient solver (chemical, thermal)
 3. Test with [DD019](DD019_Closed_Loop_Touch_Response.md) closed-loop touch + chemotaxis

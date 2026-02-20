@@ -376,6 +376,7 @@ When a new `cect` version is released:
 6. **If regression fails:** Investigate which dataset reader changed, report issue on `openworm/ConnectomeToolbox`
 
 **Breaking change policy:** If a `cect` update changes the default dataset's adjacency matrix (e.g., corrected connection counts), this is a **simulation-affecting change** requiring:
+
 - Re-running all [DD010](DD010_Validation_Framework.md) validation tiers
 - Documenting the delta (which connections changed, why)
 - Approval from the Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md))
@@ -452,6 +453,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 **Description:** Route all connectome queries through OWMeta's RDF knowledge graph.
 
 **Deferred (not rejected) because:**
+
 - OWMeta wraps connectome data in a semantic layer (RDF triples, SPARQL-like queries) that adds complexity without clear benefit for adjacency matrix access
 - OWMeta's `owmeta` package is dormant (last real commit Jul 2024); `cect` is actively maintained (commits within days)
 - `cect` provides direct Python API access to 30+ datasets; OWMeta has ingestion scripts for fewer datasets
@@ -464,6 +466,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 **Description:** Each consuming DD downloads CSV/Excel files from journal supplementary materials and parses them with custom scripts.
 
 **Rejected because:**
+
 - Cell name inconsistencies across publications (Cook uses "AVAL", some papers use "AVA(L)", White uses different conventions)
 - No shared cell classification or neurotransmitter identity
 - Each DD reinvents parsing logic; bugs are not shared/fixed centrally
@@ -475,6 +478,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 **Description:** Export Cook2019Herm as a static CSV/NumPy file, commit to `openworm/OpenWorm`, and have all DDs read from that file.
 
 **Rejected because:**
+
 - Loses dataset metadata (neurotransmitter identity, synapse types, cell classification)
 - Cannot easily switch datasets for cross-validation
 - Must manually update when corrections are published
@@ -485,6 +489,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 **Description:** Write an OpenWorm-specific connectome library separate from `cect`.
 
 **Rejected because:**
+
 - `cect` already exists, is actively maintained by Padraig, and is approaching preprint publication
 - Duplicating effort; `cect` has ~4 years of development and 30+ dataset readers
 - OpenWorm should contribute to `cect`, not compete with it
@@ -494,6 +499,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 **Description:** Use the "unified" reader as the default for all simulations.
 
 **Deferred because:**
+
 - OpenWormUnifiedReader is explicitly marked "WIP — subject to change without notice" (as of Feb 2026)
 - Currently wraps Wang2024Reader, which is based on neurotransmitter reporter data, not EM reconstruction — different methodology than Cook2019
 - The unified reader's connection counts and topology may change as it evolves
@@ -823,6 +829,7 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 **Approved by:** Pending (Dataset Policy)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Pin `cect==0.2.7` in `versions.lock`
 2. Add `data.connectome` section to `openworm.yml` schema
 3. Update [DD001](DD001_Neural_Circuit_Architecture.md) coupling table: `ConnectomeToolbox (external)` → `DD020`

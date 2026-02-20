@@ -262,6 +262,7 @@ I_MEC = g_MEC * m(strain) * h(strain, t) * (V - E_MEC)
 ```
 
 Where:
+
 - `m(strain)` = activation gate — opens with cuticle strain (Boltzmann sigmoid)
 - `h(strain, t)` = inactivation gate — adapts during sustained strain (slow exponential decay)
 - `E_MEC` = +10 mV (cation reversal potential)
@@ -272,6 +273,7 @@ Where:
 ```
 m_inf(strain) = 1 / (1 + exp(-(strain - strain_half) / k_strain))
 ```
+
 - `strain_half` = 0.05 (dimensionless strain at half-activation, ~1-2 µm indentation)
 - `k_strain` = 0.015 (sensitivity slope)
 - `tau_m` = 2 ms (fast activation)
@@ -282,6 +284,7 @@ m_inf(strain) = 1 / (1 + exp(-(strain - strain_half) / k_strain))
 h_inf(strain) = 1 / (1 + exp((strain - strain_half_h) / k_strain_h))
 dh/dt = (h_inf - h) / tau_h
 ```
+
 - `strain_half_h` = 0.08 (adapts at stronger sustained strain)
 - `k_strain_h` = 0.02
 - `tau_h` = 100 ms (slow inactivation → adaptation to sustained touch)
@@ -519,6 +522,7 @@ class TapStimulus:
 ```
 
 **Stimulus parameters:**
+
 - Duration: 10 ms (brief mechanical impulse, as in Chalfie et al. 1985)
 - Amplitude: 5-20 µm (boundary particle displacement — produces cuticle strain above MEC-4 threshold)
 - Position: configurable (whole plate, anterior only, posterior only — for testing directional discrimination)
@@ -532,6 +536,7 @@ class TapStimulus:
 **Description:** Skip the MEC-4 channel model entirely. Inject a fixed current pulse into touch neurons when a "tap" event is triggered.
 
 **Rejected because:**
+
 - Does not close the loop — the stimulus is artificial, not derived from body mechanics
 - Cannot produce graded responses to varying touch intensity
 - Cannot model adaptation (MEC-4 channels inactivate during sustained touch)
@@ -545,6 +550,7 @@ class TapStimulus:
 **Description:** Use a simple proportional mapping `I_touch = k * strain` without modeling MEC-4 channel kinetics.
 
 **Rejected because:**
+
 - Loses adaptation dynamics (the hallmark of touch receptor neuron responses)
 - Cannot reproduce the rapid onset + slow decay profile observed electrophysiologically
 - Cannot be validated against O'Hagan et al. 2005 channel recordings
@@ -557,6 +563,7 @@ class TapStimulus:
 **Description:** Train an RNN on calcium imaging data from touch neurons to learn the strain→activity mapping.
 
 **Deferred because:**
+
 - Insufficient training data (calcium imaging during calibrated mechanical stimulation is scarce)
 - Black-box model — cannot interpret the transduction mechanism
 - Better to start with the biophysical model and compare to ML later
@@ -568,6 +575,7 @@ class TapStimulus:
 **Description:** Compute strain using a finite element mesh overlaid on the SPH body, for more accurate continuum mechanics.
 
 **Rejected because:**
+
 - Adds significant computational cost (FEM mesh + SPH particles in parallel)
 - SPH particle displacement provides sufficient strain resolution for the ~6 touch neuron receptive fields
 - Maintaining FEM/SPH consistency during large deformations is non-trivial
@@ -580,6 +588,7 @@ class TapStimulus:
 **Description:** In addition to touch neurons, model stretch-sensitive channels on B-class motor neurons (Wen et al. 2012) for proprioceptive wave propagation.
 
 **Deferred (but important) because:**
+
 - This is a separate proprioceptive feedback loop, not the touch response loop
 - Adding it simultaneously would confound validation of the touch circuit
 - Motor neuron proprioception is likely needed for stable undulatory locomotion but is not required for tap withdrawal specifically
@@ -591,6 +600,7 @@ class TapStimulus:
 **Description:** Model the three cuticle layers (cortical, medial, basal) with distinct mechanical properties and the MEC protein complex (MEC-1/MEC-5/MEC-9 extracellular attachment) explicitly.
 
 **Rejected because:**
+
 - [DD003](DD003_Body_Physics_Architecture.md) currently uses homogeneous elastic particles for the body wall
 - Adding cuticle microstructure requires [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) to tag particles with tissue layers
 - Overkill for the behavioral validation target (tap withdrawal doesn't require cuticle layer resolution)
@@ -691,6 +701,7 @@ docker compose run validate --config tap_withdrawal --duration 30
 This repo contains a **complete neuromechanical C++ model** with a `StretchReceptor` module implementing proprioceptive feedback on motor neurons (Wen et al. 2012). This is the **missing piece** [DD019](DD019_Closed_Loop_Touch_Response.md) scopes out for future work.
 
 **What It Provides:**
+
 - `StretchReceptor.cpp/h` — B-class motor neuron stretch-sensitive currents
 - Produces forward + backward locomotion from the same circuit (gait modulation)
 - Evolutionary parameter fitting algorithm
@@ -710,6 +721,7 @@ python viz.py  # Visualize neural/muscle activity
 ```
 
 **Next Actions:**
+
 - [ ] Contact authors (still active as of 2026-02-18) — collaborate on proprioception DD?
 - [ ] Extract StretchReceptor model, compare to Wen et al. 2012 data
 - [ ] Write [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback (references CE_locomotion as source)
@@ -724,6 +736,7 @@ python viz.py  # Visualize neural/muscle activity
 ### The Longstanding Goal
 
 The tap withdrawal reflex is arguably the most studied mechanosensory behavior in *C. elegans*. Martin Chalfie's pioneering work (Nobel Prize 2008, partly for GFP discovery in touch neuron studies) established the genetic and cellular basis:
+
 - Six touch receptor neurons mediate gentle body touch
 - MEC genes encode the mechanosensory channel complex
 - The neural circuit for tap withdrawal was mapped by Chalfie et al. 1985 and refined by Wicks et al. 1996
@@ -733,6 +746,7 @@ For OpenWorm, implementing closed-loop touch response has been a goal since the 
 ### What Exists Today
 
 **c302_TapWithdrawal.py** defines the tap withdrawal circuit with:
+
 - 16 interneurons: AVAL/R, AVBL/R, PVCL/R, AVDL/R, DVA, PVDL/R, PLML/R, AVM, ALML/R
 - Motor neuron groups: VA1-12, VB1-11, DA1-9, DB1-7, DD1-6, VD1-13
 - 130+ connection polarity overrides (exc/inh assignments, manually curated from Chalfie et al.)
@@ -742,6 +756,7 @@ For OpenWorm, implementing closed-loop touch response has been a goal since the 
 - **Header note:** "Tap-Withdrawal circuit still under development — it does not produce the correct behavior!"
 
 **sibernetic_c302.py** implements the forward coupling (neural → body):
+
 - Reads muscle calcium from NEURON
 - Converts to activation coefficients
 - Writes to Sibernetic muscle input file
@@ -821,6 +836,7 @@ openworm/sibernetic/
 ### If Additional Sensory Modalities Are Added
 
 Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows the [DD019](DD019_Closed_Loop_Touch_Response.md) pattern:
+
 1. Define the transduction channel model
 2. Create a stimulus readout module (chemical concentration, temperature, stretch)
 3. Extend the bidirectional coupling script
@@ -946,6 +962,7 @@ docker compose run validate --config tap_withdrawal
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for MEC-4 channel model and touch neuron cell files
 - [ ] MEC-4 unit test passes (onset, peak current, adaptation, reversal potential)
 - [ ] Strain readout unit test passes (spatial localization, proportionality)
@@ -984,6 +1001,7 @@ docker compose run validate --config tap_withdrawal
 **Approved by:** Pending
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Implement MEC-4 channel model in NeuroML (`mec4_chan.channel.nml`)
 2. Implement cuticle strain readout from SPH particles (`strain_readout.py`)
 3. Implement tap stimulus delivery (`tap_stimulus.py`)

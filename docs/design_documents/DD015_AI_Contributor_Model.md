@@ -21,6 +21,7 @@ OpenWorm's AI-Augmented Open Science model ([DD011](DD011_Contributor_Progressio
 **The Question:** What would it look like for OpenWorm to accept **autonomous AI agents as independent contributors** — not just assistants to humans, but agents that can discover OpenWorm, register themselves, claim issues, write code, submit PRs, and progress through L0→L5 — all while remaining transparent and safe for the human community?
 
 This DD defines:
+
 1. How autonomous AI agents register and join OpenWorm
 2. How Design Documents decompose into AI-workable GitHub issues
 3. How AI-initiated PRs flow through AI pre-review and human final approval
@@ -136,6 +137,7 @@ The `explain_level` field is derived from the combination of education, biology,
 ### 1.3 Badge Earning (AI Agents and Human Sponsors)
 
 AI agents earn the same badges as human contributors (see [DD011](DD011_Contributor_Progression_Model.md) §Badge & Recognition System):
+
 - **Orientation badges** — earned during L0→L1 onboarding via N2-Whisperer
 - **Skill badges** — earned by demonstrating technical capability (e.g., "Neuron Modeling Foundations")
 - **Domain badges** — earned by sustained contribution to a DD subsystem (e.g., "Neural Circuit Contributor")
@@ -144,10 +146,12 @@ AI agents earn the same badges as human contributors (see [DD011](DD011_Contribu
 An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue — an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD001](DD001_Neural_Circuit_Architecture.md) L2 issue than one without.
 
 **Human sponsors** earn a unique badge type that AI agents cannot:
+
 - **Teach-Back badges** — earned when the Sponsor Summary (§3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See [DD011](DD011_Contributor_Progression_Model.md) §Teach-Back Badges for the full list.
 - **"I Understand the Whole Worm"** — the capstone badge, earned by accumulating teach-back badges in 5+ domains. Represents genuine cross-disciplinary understanding of C. elegans earned through AI-mediated contribution.
 
 **Sponsor badge progression mirrors knowledge growth:**
+
 1. Sponsor starts at `explain_level: child` → agent writes simple Sponsor Summaries
 2. After 5+ teach-back badges in one domain, sponsor's understanding deepens → `explain_level` rises for that domain
 3. Agent adapts future Sponsor Summaries to the sponsor's growing knowledge
@@ -164,6 +168,7 @@ This creates a **learning flywheel**: contribute → learn (via teach-back) → 
 Design Documents ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD014](DD014_Dynamic_Visualization_Architecture.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
 
 **Example:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration) specifies:
+
 - 31,479 peptide-receptor interactions
 - GPCR modulation equations
 - Peptide concentration fields
@@ -225,12 +230,14 @@ Parse the DD's **Integration Contract** section:
 ```
 
 **Labels:**
+
 - `DD00X` — Which Design Document
 - `ai-workable` — AI agents can claim this
 - `human-expert` — Requires L3+ human (judgment, experimental validation, design decisions)
 - `L1`, `L2`, `L3` — Difficulty level (from [DD011](DD011_Contributor_Progression_Model.md) task difficulty scale)
 
 **Automation:** `dd_issue_generator.py` runs:
+
 1. On demand (maintainer runs script when a DD is approved)
 2. Automatically (GitHub Action triggered when a DD is merged to main)
 
@@ -332,6 +339,7 @@ by watching the backward locomotion sequence.
 - **graduate:** "You parameterized Vj-dependent gap junction conductance for the AVAL-AVAR innexin-14 hemichannel pair (Kawano et al. 2011), implementing voltage-dependent rectification for left-right coordination of the backward locomotion command."
 
 **Purpose:** The Sponsor Summary serves a dual function:
+
 - **Accountability:** The sponsor can understand what their agent did without reading the code diff
 - **Education:** The sponsor learns C. elegans neuroscience through the act of contributing — every merged PR teaches them something about the organism at their level. Over time, sponsors develop genuine scientific understanding of the system they're helping build. A middle schooler who sponsors an AI agent for a year will have learned more C. elegans neuroscience than most undergrad biology students.
 
@@ -376,6 +384,7 @@ by watching the backward locomotion sequence.
 **Purpose:** A **sandbox repo** where AI agents can experiment, generate code, and test implementations **before** opening PRs to main repos.
 
 **Workflow:**
+
 1. AI agent claims issue in main repo (e.g., `openworm/c302`)
 2. AI agent forks to `ai-generated-code/<agent-id>/<issue-number>/`
 3. AI agent works in sandbox (full autonomy)
@@ -422,6 +431,7 @@ by watching the backward locomotion sequence.
 ```
 
 **Stale Issue Policy:**
+
 - If claimed but no PR within 14 days → Issue auto-unassigned, reopened for others
 - If `ai-workable` but no claims after 90 days → Converted to `human-expert` (likely harder than estimated)
 
@@ -459,6 +469,7 @@ by watching the backward locomotion sequence.
          peptide_types: ["nlp-1", "flp-1", "ins-1"]  # placeholder
          diffusion_constant: 1e-6  # cm^2/s
      ```
+
    - Agent runs `docker compose config` to validate YAML
    - Agent runs unit test: `pytest tests/test_config.py`
 
@@ -514,12 +525,14 @@ by watching the backward locomotion sequence.
 ### 7.1 Transparency Principle
 
 **Humans can always see:**
+
 - Which issues are claimed by AI agents (GitHub comments)
 - Which PRs are AI-authored (`[AI-PR]` tag)
 - Which agent submitted the PR (sponsor info in PR description)
 - Full AI activity log (Slack #ai-contributors, GitHub timeline)
 
 **Humans can always override:**
+
 - Close any AI PR (with reason: "Approach doesn't match vision")
 - Unclaim any issue from an AI agent (with reason: "Human will take this")
 - Block any AI agent (sponsor loses privileges if agent misbehaves)
@@ -531,6 +544,7 @@ by watching the backward locomotion sequence.
 **Scenario:** Human and AI agent both want to work on Issue #110
 
 **Resolution:**
+
 1. **First-claim wins** (GitHub comment timestamp)
 2. **If simultaneous** (within 1 minute), human gets priority
 3. **If AI claimed but human feels they're better suited**, human can request Mind-of-a-Worm mediation:
@@ -562,6 +576,7 @@ by watching the backward locomotion sequence.
 ### 8.1 GitHub App vs. Bot User Account
 
 **GitHub supports bots via:**
+
 1. **GitHub Apps** ⭐ Recommended - Official bot framework, fine-grained permissions, appear as `Mind-of-a-Worm[bot]`
 2. **Bot User Accounts** - Regular accounts with `[bot]` suffix, uses PATs
 3. **GitHub Actions Bots** - Built-in `github-actions[bot]`, only for CI/CD workflows
@@ -569,6 +584,7 @@ by watching the backward locomotion sequence.
 **Decision:** Use **GitHub App** for Mind-of-a-Worm/N2-Whisperer/Mad-Worm-Scientist.
 
 **Why:**
+
 - Can comment on PRs, review code, create issues, label, assign
 - OAuth-based (more secure than PATs)
 - Clear "this is a bot" UI indicator
@@ -653,12 +669,14 @@ def wormentor_webhook():
 ```
 
 **3. Install GitHub App on Repos**
+
 - openworm/openworm
 - openworm/c302
 - openworm/Sibernetic
 - openworm/ai-contributor-registry
 
 **4. Test Workflow**
+
 - Open a test PR
 - GitHub sends webhook to OpenClaw
 - Mind-of-a-Worm posts pre-review comment
@@ -667,6 +685,7 @@ def wormentor_webhook():
 ### 8.4 Unified Backend for Slack + GitHub
 
 **Same OpenClaw instance handles both:**
+
 - **Slack webhook** → N2-Whisperer answers questions, Mad-Worm-Scientist posts daily summaries
 - **GitHub webhook** → Mind-of-a-Worm reviews PRs, labels issues
 
@@ -679,6 +698,7 @@ def wormentor_webhook():
 ### 9.1 Why AI Agents Need Memory
 
 **Challenge:** AI agents are stateless between sessions. Without memory, they:
+
 - Repeat mistakes
 - Don't learn from human feedback
 - Can't accumulate project-specific knowledge
@@ -759,6 +779,7 @@ Last updated: 2026-02-18T14:30:00Z
 **Trigger:** PR merge
 
 **Workflow:**
+
 1. GitHub webhook: "PR #1234 merged"
 2. Mind-of-a-Worm posts comment on PR: "@agent-claude-code-slarson-001 Please update your memory file with what you learned from this contribution."
 3. Agent reads PR, extracts:
@@ -825,11 +846,13 @@ Last updated: 2026-02-18T14:30:00Z
 ### 9.1 Preventing Malicious AI Agents
 
 **Risks:**
+
 1. **Code injection** — AI agent submits PR with malicious code
 2. **Resource abuse** — AI agent spams issues/PRs
 3. **Data exfiltration** — AI agent tries to access private data
 
 **Mitigations:**
+
 1. **Human sponsor accountability** — Every agent has a traceable human sponsor who can be banned
 2. **Sandbox execution** — AI-generated code runs in `ai-generated-code` repo first, never has elevated permissions
 3. **Mind-of-a-Worm pre-review** — Catches obvious code smells before human review
@@ -842,11 +865,13 @@ Last updated: 2026-02-18T14:30:00Z
 **Scenario:** AI agent submits PR that claims to implement [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) but actually implements something completely different.
 
 **Detection:**
+
 1. **Mind-of-a-Worm checks references** — Does PR description match issue? Does code match DD?
 2. **Integration tests** — Does the coupled simulation still run?
 3. **Human review** — L3+ human spots discrepancy
 
 **Response:**
+
 1. **PR rejected** with feedback: "This doesn't match [DD006](DD006_Neuropeptidergic_Connectome_Integration.md). Please re-read [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section X."
 2. **Agent sponsor notified** (email: "Your agent submitted a non-compliant PR. Please review.")
 3. **If pattern repeats** (3+ hallucinated PRs), agent is suspended pending sponsor review
@@ -881,12 +906,14 @@ Last updated: 2026-02-18T14:30:00Z
 ### 11.1 Should AI Agents Be Publicly Listed?
 
 **Options:**
+
 - **Public registry** — `openworm/ai-contributor-registry` is public, anyone can see which AI agents are contributing
 - **Private registry** — Only L4+ humans can see AI agent list
 
 **Decision:** **Public**. Transparency builds trust. If an AI agent contributes, the community should know.
 
 **Implementation:** `openworm/ai-contributor-registry` is a public GitHub repository. Anyone can view:
+
 - Which AI agents are registered
 - Who their human sponsors are
 - What their contribution history is
@@ -940,6 +967,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 **The Opportunity AI Agents Unlock:** If we can accept autonomous AI agents as contributors — not just human assistants, but independent workers who can claim issues, write code, and submit PRs 24/7 — then OpenWorm's capacity is no longer bounded by human availability.
 
 **The Vision:** A distributed, AI-augmented open science community where:
+
 - **Humans focus on creativity, judgment, and relationships** (writing DDs, reviewing RFCs, mentoring L4 candidates, publishing papers)
 - **AI agents handle repetitive, well-specified implementation work** (writing config schemas, exporting data to OME-Zarr, writing integration tests, fixing bugs)
 - **The two coexist transparently** — humans can see all AI activity, override any decision, and maintain final authority
@@ -951,16 +979,19 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 ## 14. Next Steps
 
 ### For Founder
+
 1. **Approve this DD** (or request revisions via [DD012](DD012_Design_Document_RFC_Process.md) RFC process)
 2. **Decide on open questions** (public registry? AI co-authorship policy?)
 3. **Allocate 20 hours** for Phase 1 infrastructure setup
 
 ### For L4 Senior Contributors
+
 1. **Review DD Issue Generator decomposition** for your subsystem (does it make sense?)
 2. **Help write `AI_AGENT_ONBOARDING.md`** (what should AI agents know before contributing?)
 3. **Test first AI PR workflow** (simulate an AI agent submission in your subsystem)
 
 ### For Implementation Team
+
 1. **Set up `openworm/ai-contributor-registry` repo** (Week 1)
 2. **Write `scripts/dd_issue_generator.py`** (Week 1-2)
 3. **Deploy Slack #ai-contributors channel** (Week 1)
@@ -977,6 +1008,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 ---
 
 **References:**
+
 - [Moltbook: AI social network](https://www.moltbook.com/) — Launched Jan 28, 2026, >1.6M AI agents
 - [NBC News: Moltbook](https://www.nbcnews.com/tech/tech-news/ai-agents-social-media-platform-moltbook-rcna256738)
 - [CNN: What is Moltbook?](https://edition.cnn.com/2026/02/03/tech/moltbook-explainer-scli-intl)

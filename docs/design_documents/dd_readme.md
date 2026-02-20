@@ -17,6 +17,7 @@
 
 **How Design Documents serve the mission:**
 Design Documents are the **technical roadmap** from today's 302-neuron simulation to the complete 959-cell digital organism. Each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, validation, visualization), ensuring every piece is:
+
 1. **Biophysically realistic** (grounded in experimental data)
 2. **Causally interpretable** (we can trace why behavior emerges)
 3. **Validated** (tested against real worm physiology and behavior)
@@ -27,6 +28,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 ## Quick Links
 
 **New to Design Documents?**
+
 - 📋 **Start here:** [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) — How DDs work, template structure
 - 🌟 **Reference example:** [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) — Best-practice DD with all sections filled
 - 🗺️ **Architecture:** [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — PlantUML diagram showing how all DDs couple together
@@ -35,11 +37,13 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 - 📦 **Repositories:** [GITHUB_REPO_INVENTORY.md](../GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm GitHub repos with DD cross-references
 
 **Implementing a DD?**
+
 - Check prerequisites: [DD_PHASE_ROADMAP.md](DD_PHASE_ROADMAP.md) — What must be done first, which datasets are needed
 - Find coupling info: [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — What your DD consumes/produces, who depends on you
 - GitHub issues: (To be created after DD approval via `dd_issue_generator.py`)
 
 **Contributing?**
+
 - Level up: [DD011 (Contributor Progression)](DD011_Contributor_Progression_Model.md) — L0→L5 path, badge system
 - AI agents: [DD015 (AI-Native Model)](DD015_AI_Contributor_Model.md) — Autonomous agent registration
 - Write a DD: [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) — Proposal workflow
@@ -171,6 +175,7 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 - **[DD001](DD001_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
 
 All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
+
 1. What does this produce?
 2. Success metric (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
 3. Repository (GitHub link, issue label convention)
@@ -186,6 +191,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 ### For Contributors
 
 **Before implementing a feature:**
+
 1. Check if a relevant DD exists (search this directory or ask in #development Slack)
 2. Read the DD's "Technical Approach" and "Quality Criteria" sections
 3. Check the DD's Integration Contract (what it consumes from other DDs, what it produces)
@@ -194,12 +200,14 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 6. Reference the DD number in your PR description (e.g., "Implements [DD005](DD005_Cell_Type_Differentiation_Strategy.md) CeNGEN calibration")
 
 **If you disagree with a DD:**
+
 1. Propose a new DD that supersedes it (follow [DD012](DD012_Design_Document_RFC_Process.md) RFC process)
 2. Do NOT silently deviate from an accepted DD without approval
 
 ### For Reviewers (L3+)
 
 **When reviewing a PR:**
+
 1. Check which DDs are relevant (Mind-of-a-Worm will flag these automatically)
 2. Verify the PR aligns with DD specifications (check Quality Criteria section)
 3. **If PR modifies a coupling interface** (changes output format, variable names, OME-Zarr schema):
@@ -211,6 +219,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 ### For Mind-of-a-Worm AI
 
 **Automated compliance checking:**
+
 - Parse PR files to identify affected subsystems (e.g., `c302/` → [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
 - Retrieve relevant DDs and their Integration Contracts
 - Check:
@@ -245,6 +254,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 ```
 
 **Status definitions:**
+
 - ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [DD012](DD012_Design_Document_RFC_Process.md) RFC.
 - ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
 - 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
@@ -257,6 +267,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 ## Cross-Reference by Topic
 
 ### Neural Systems
+
 - **Core:** [DD001](DD001_Neural_Circuit_Architecture.md) (302-neuron HH architecture, graded synapses, Level C1)
 - **Differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN scRNA-seq)
 - **Modulation:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (31,479 neuropeptide-receptor interactions, GPCR modulation, seconds timescale)
@@ -265,43 +276,51 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 - **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (6 touch receptor neurons: ALM, AVM, PLM; tap withdrawal circuit, MEC-4 channel)
 
 ### Muscle Systems
+
 - **Body Wall:** [DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, Ca²⁺→force coupling, Boyle & Cohen 2008 parameters)
 - **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal muscles, nonstriated, plateau potentials, gap-junction-synchronized)
 - **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (16 sex muscles: 8 vulval [vm1, vm2], 8 uterine [um1, um2]; EGL-19/UNC-103 channels)
 
 ### Body Mechanics
+
 - **Physics Engine:** [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic SPH, ~100K particles, PCISPH incompressibility, elastic bonds, muscle force injection)
 - **Cell Identity:** [DD004](DD004_Mechanical_Cell_Identity.md) (per-particle cell IDs from WBbt ontology, 959 somatic cells, cell-type-specific elasticity/adhesion multipliers)
 - **Mesh Deformation:** [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (GPU skinning, cage-based MVC, PBD collision for Virtual Worm's 688 meshes)
 - **Strain Readout:** [DD019](DD019_Closed_Loop_Touch_Response.md) (cuticle strain from SPH particles for mechanotransduction)
 
 ### Organ Systems
+
 - **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (63 cells total: 20 neurons + 20 muscles + 9 epithelial + 9 marginal + 4 gland + 1 valve; 3-4 Hz pumping)
 - **Intestine:** [DD009](DD009_Intestinal_Oscillator_Model.md) (20 cells, IP3 receptor-mediated Ca²⁺ oscillator, defecation motor program 50±10s period)
 - **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (28-cell egg-laying circuit: 2 HSN + 6 VC + 16 sex muscles + 4 uv1 feedback cells; two-state pattern)
 
 ### Sensory Systems
+
 - **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (MEC-4/MEC-10 DEG/ENaC mechanosensory channel, ALM/AVM/PLM gentle touch, PVD harsh touch)
 - **Other Modalities:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory transduction, ML-based) — mechanistic models deferred to Phase 5+
 
 ### Data & Validation
+
 - **Connectome:** [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (`cect` API v0.2.7, Cook2019Herm default, 30+ datasets including Witvliet developmental series, Ripoll-Sanchez neuropeptides, Wang 2024 neurotransmitters)
 - **Data Integration:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta semantic RDF graph; Phase 3+ wraps [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) `cect` internally)
 - **Movement Validation:** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (open-worm-analysis-toolbox revival, WCON 1.0 spec, 5 kinematic metrics, Tier 3 behavioral validation)
 - **Validation Framework:** [DD010](DD010_Validation_Framework.md) (3 tiers: Tier 1 electrophysiology, Tier 2 functional connectivity r > 0.5, Tier 3 behavioral ±15%)
 
 ### Infrastructure & Integration
+
 - **Simulation Stack:** [DD013](DD013_Simulation_Stack_Architecture.md) (Docker multi-stage build, openworm.yml config system, versions.lock pinning, CI/CD pipeline, Integration Maintainer role definition)
 - **Visualization:** [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr export pipeline, Trame→Three.js evolution, 3-phase roadmap: post-hoc → interactive → public static site)
   - **[DD014.1](DD014.1_Visual_Rendering_Specification.md):** Visual Rendering Specification (37 Virtual Worm material colors, activity-state dynamic colors, molecular-scale palette, lighting, 14 reference mockups)
   - **[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md):** Anatomical Mesh Deformation Pipeline (GPU skinning, cage-based MVC, PBD collision for ~1.6M vertices; spine-based Phase 1 shortcut)
 
 ### Governance & Process
+
 - **Contributor Model:** [DD011](DD011_Contributor_Progression_Model.md) (L0-L5 progression, badge system [orientation, skill, domain, teach-back, community, milestone], subsystem ownership map)
 - **RFC Process:** [DD012](DD012_Design_Document_RFC_Process.md) (DD template with required sections, RFC approval workflow, Mind-of-a-Worm enforcement, alternatives-considered requirement)
 - **AI Contributors:** [DD015](DD015_AI_Contributor_Model.md) (autonomous AI agents as L1-L3 contributors [L4 ceiling], GitHub bot, sponsor knowledge profiles, teach-back education, Moltbook-inspired)
 
 ### Hybrid & Advanced
+
 - **Mechanistic-ML Hybrid:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (4 components: differentiable simulation backend [PyTorch], neural surrogate for SPH [FNO], foundation model→ODE parameters [ESM3→conductances], learned sensory transduction [RNN]; ML at boundaries, mechanistic core preserved)
 
 ---
@@ -311,6 +330,7 @@ All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 ### Step 1: Check Mission Alignment
 
 **Before writing a DD, ask:**
+
 - Does this advance the mission ("world's first virtual organism")?
 - Does it maintain physical realism ("soft and squishy")?
 - Is it experimentally validated ([DD010](DD010_Validation_Framework.md) tiers)?
@@ -332,6 +352,7 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template structure. Use [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
 
 **Required sections (from [DD012](DD012_Design_Document_RFC_Process.md)):**
+
 - TL;DR (2-3 sentences)
 - Goal & Success Criteria (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
 - Deliverables (exact files, paths, formats)
@@ -349,6 +370,7 @@ Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template stru
 ### Step 4: Check Integration Map
 
 Before finalizing your DD, check [INTEGRATION_MAP.md](INTEGRATION_MAP.md):
+
 - Which DDs does yours depend on? (Add to "I Depend On" table)
 - Which DDs will depend on yours? (Add to "Depends On Me" table)
 - What data format do you consume/produce? (Document in Integration Contract)
@@ -376,6 +398,7 @@ git push origin rfc/dd0XX-your-topic
 ### Step 7: Implementation (After Approval)
 
 Once DD is approved and merged:
+
 - DD status changes to "Accepted"
 - Open implementation issues (or run `dd_issue_generator.py` to auto-generate from Integration Contract)
 - Implementation PRs reference the DD number
@@ -388,6 +411,7 @@ Once DD is approved and merged:
 ### [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) — REFERENCE IMPLEMENTATION
 
 **Why it's excellent:**
+
 - ✅ **TL;DR at top** — Reader knows what/why/success metric in 3 sentences (lines 12-14)
 - ✅ **Mission-aligned** — Uses CeNGEN (world's largest single-cell atlas for any organism) to create biologically distinct neurons, advancing toward "virtual organism"
 - ✅ **Goal & Success Criteria** — [DD010](DD010_Validation_Framework.md) Tier 2, quantitative threshold (≥20% improvement in functional connectivity), before/after comparison table
@@ -402,6 +426,7 @@ Once DD is approved and merged:
 ### [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture)
 
 **Why it's excellent:**
+
 - ✅ **Quick Action Reference** — 7-question table at top (lines 11-22) answers contributor questions immediately
 - ✅ **Clear decision** — Level C1 graded synapses (not IAF, not spiking), biologically justified
 - ✅ **Quantitative parameters** — Table of conductances (g_leak, g_Kslow, etc.) with exact values and units

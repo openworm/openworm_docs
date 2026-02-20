@@ -154,6 +154,7 @@ Muscles are modeled as single-compartment conductance-based cells using the **sa
 | Ca_boyle | 0.0007 S/cm² | +40 mV | ~4300x smaller than neurons |
 
 **Membrane properties:**
+
 - Specific capacitance: 1 µF/cm²
 - Cell diameter: larger than neurons (varies by muscle, ~5-10 µm)
 - Initial voltage: -45 mV
@@ -166,6 +167,7 @@ Intracellular calcium concentration ([Ca²⁺]ᵢ) is the coupling variable betw
 ```
 d[Ca]/dt = -rho * I_Ca - [Ca]/tau_Ca
 ```
+
 - rho = 0.000238 mol/(C·cm)
 - tau_Ca = 11.5943 ms
 
@@ -173,12 +175,14 @@ d[Ca]/dt = -rho * I_Ca - [Ca]/tau_Ca
 ```
 activation = min(1.0, [Ca²⁺]ᵢ / [Ca²⁺]_max)
 ```
+
 - [Ca²⁺]_max = 4e-7 mol (maximum calcium for full contraction)
 
 **Force generation:**
 ```
 F_muscle = activation * max_muscle_force
 ```
+
 - max_muscle_force = 4000 (Sibernetic units)
 
 This linear scaling is a **simplification**. Real muscle involves crossbridge dynamics (actin-myosin binding), cooperative activation, length-tension relationships, and force-velocity curves. But Boyle & Cohen (2008) showed that "*Caenorhabditis elegans* body wall muscles are simple actuators" -- they behave as direct transducers of calcium to force without complex mechanical nonlinearities.
@@ -202,6 +206,7 @@ Neurons communicate to muscles via **neuromuscular junctions (NMJs)** modeled as
 **Description:** Explicitly model actin-myosin binding, ADP/ATP cycling, length-tension curves, force-velocity relationships.
 
 **Rejected because:**
+
 - Boyle & Cohen (2008) demonstrated that simple linear activation is sufficient to reproduce *C. elegans* locomotion
 - Adds significant computational cost (6+ additional state variables per muscle)
 - Lacks experimental data to parameterize crossbridge kinetics in *C. elegans* muscles
@@ -214,6 +219,7 @@ Neurons communicate to muscles via **neuromuscular junctions (NMJs)** modeled as
 **Description:** Skip the muscle HH model entirely. Let neurons directly control Sibernetic particle forces.
 
 **Rejected because:**
+
 - Throws away the biophysical realism that is OpenWorm's core strength
 - Loses the voltage-to-calcium-to-force causal chain, making the model less interpretable
 - Cannot capture muscle dynamics like refractory periods, fatigue, or calcium-dependent force modulation
@@ -223,6 +229,7 @@ Neurons communicate to muscles via **neuromuscular junctions (NMJs)** modeled as
 **Description:** Use a 2-variable reduced model (V, recovery variable) instead of full HH.
 
 **Rejected because:**
+
 - FHN does not explicitly model calcium, which is the critical coupling variable to Sibernetic
 - Parameters are abstract (not directly tied to conductances and ion channels)
 - Loses the modularity of being able to add/remove specific channels
@@ -261,6 +268,7 @@ python scripts/validate_muscle_calcium.py
 ```
 
 **Expected results:**
+
 - Muscle activation range: [0, 1]
 - Peak activation during neural drive: >0.5
 - Calcium decay time constant: ~12 ms
@@ -320,6 +328,7 @@ Each muscle row: `muscle_id, quadrant (MDR/MVR/MVL/MDL), row_number (1-24), ante
 ### Coupling to Sibernetic
 
 The `c302_Sibernetic` integration script:
+
 1. Reads muscle [Ca²⁺]ᵢ time series from NEURON simulation
 2. Converts to activation coefficients via `activation = min(1, ca/max_ca)`
 3. Writes to Sibernetic-readable muscle activation file
@@ -339,6 +348,7 @@ The `c302_Sibernetic` integration script:
 ### If Muscle-Type Diversity Is Required (Phase 3):
 
 See [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System) for an example of creating a distinct muscle cell type. The general pattern:
+
 - Create a new LEMS cell template (e.g., `PharyngealMuscleCell`)
 - Adjust channel densities based on transcriptomic or electrophysiological data
 - Adjust calcium-to-force parameters if pharyngeal contraction dynamics differ
@@ -351,6 +361,7 @@ See [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System) for an 
 ### Issue 1: Single Muscle Compartment
 
 Real *C. elegans* body wall muscles are spindle-shaped with ~60 µm length. Voltage may not be uniform along the length. Multicompartmental muscle models (Level D equivalent for muscle) would require:
+
 - Morphological reconstructions (EM data exists but not yet digitized in cable-equation-compatible format)
 - Axial resistance parameters
 - Increased compute cost (24 compartments/muscle × 95 muscles = 2,280 compartments)
@@ -449,6 +460,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for muscle NeuroML/LEMS files
 - [ ] `docker compose run quick-test` passes (activation in [0, 1], peak > 0.3)
 - [ ] `docker compose run validate` passes (Tier 3 kinematics)
@@ -477,6 +489,7 @@ docker compose run validate
 ### Coupling Bridge Ownership
 
 **The `sibernetic_c302.py` coupling script** (lives in `openworm/sibernetic` repo) reads muscle calcium from NEURON and writes activation to Sibernetic. This script is the single point where [DD002](DD002_Muscle_Model_Architecture.md) output format matters. Changes to:
+
 - Muscle calcium variable name → must update `sibernetic_c302.py`
 - Activation formula → must update `sibernetic_c302.py`
 - Number of muscles (e.g., adding pharyngeal muscles per [DD007](DD007_Pharyngeal_System_Architecture.md)) → must update muscle mapping in `sibernetic_c302.py`
@@ -488,6 +501,7 @@ docker compose run validate
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Complete (GenericMuscleCell in c302)
 **Next Actions:**
+
 1. Differentiate into muscle-type-specific models using transcriptomics (Phase 3)
 2. Add pharyngeal muscles ([DD007](DD007_Pharyngeal_System_Architecture.md))
 3. Model specialized muscles (vulval, uterine, enteric) as needed

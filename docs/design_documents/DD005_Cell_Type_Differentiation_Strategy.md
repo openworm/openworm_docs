@@ -164,6 +164,7 @@ docker compose run validate
 ### Step 1: Extract Ion Channel Expression from CeNGEN
 
 For each of the 128 neuron classes, extract normalized expression (TPM or log-normalized counts) for all ion channel genes. CeNGEN categorizes genes as:
+
 - Voltage-gated K⁺ channels (unc-2, egl-2, shl-1, shk-1, kvs-1, etc.)
 - Voltage-gated Ca²⁺ channels (unc-2, egl-19, cca-1)
 - Leak/background K⁺ channels (twk, kcnk families)
@@ -186,6 +187,7 @@ For each of the 128 neuron classes, extract normalized expression (TPM or log-no
 | **unc-49** | GABA-A receptor | `gaba_a_syn` | Inhibitory ligand-gated |
 
 For genes without existing NeuroML models, create new channel models by:
+
 1. Finding published kinetics (activation curves, time constants) if available
 2. Using generic kinetics from the channel family if specific data unavailable
 3. Flagging as "inferred" in metadata
@@ -193,6 +195,7 @@ For genes without existing NeuroML models, create new channel models by:
 ### Step 3: Calibrate Expression → Conductance Scaling
 
 The relationship between mRNA expression and membrane conductance is **not 1:1** due to:
+
 - Post-transcriptional regulation
 - Protein translation efficiency
 - Subcellular localization
@@ -201,6 +204,7 @@ The relationship between mRNA expression and membrane conductance is **not 1:1**
 **Calibration approach:** Use the ~20 neuron types with published patch-clamp data (Goodman lab, Lockery lab) as a training set.
 
 For each of these neurons:
+
 1. Extract CeNGEN expression for all ion channel genes
 2. Extract measured conductances from electrophysiology papers
 3. Fit a scaling relationship: `g_channel = alpha * expression^beta + baseline`
@@ -282,6 +286,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Use AlphaFold to predict 3D structures of all *C. elegans* ion channels, then run molecular dynamics simulations to extract gating kinetics (activation curves, time constants).
 
 **Rejected (for now) because:**
+
 - Computationally expensive (days-weeks per channel)
 - MD-to-HH parameter conversion is non-trivial and error-prone
 - Published kinetics exist for many channel families; borrow from orthologs
@@ -294,6 +299,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Perform patch-clamp recordings for all 128 CeNGEN neuron classes.
 
 **Rejected because:**
+
 - Experimentally infeasible. Each neuron type requires identifying the cell in vivo (NeuroPAL), dissecting, patching, recording across multiple voltage protocols, and analyzing. ~1-2 weeks per neuron type × 128 = years of work.
 - Not necessary if scaling relationship from expression works.
 
@@ -304,6 +310,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Train a neural network (e.g., gradient boosting or transformer) to predict conductance densities from full expression profiles, using the 20 neurons with electrophysiology as training data.
 
 **Deferred (but promising) because:**
+
 - Only 20 training examples (neurons with electrophysiology) may be insufficient
 - Requires careful hyperparameter tuning and cross-validation
 - Black-box learned mapping is less interpretable than explicit scaling
@@ -315,6 +322,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Search the literature for each neuron type, extract reported channel expression, manually set conductances.
 
 **Rejected because:**
+
 - Labor-intensive (128 neuron classes × literature search)
 - Incomplete (most neurons lack published channel data)
 - Not reproducible or updatable as new data arrive
@@ -324,6 +332,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Keep the generic model but add random ±20% variation to conductances across neurons.
 
 **Rejected because:**
+
 - Biologically meaningless
 - Does not improve model accuracy
 - Confuses rather than clarifies
@@ -333,6 +342,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Cluster the 128 CeNGEN neuron classes into 10-20 "super-types" based on expression similarity, then create one model per super-type.
 
 **Rejected because:**
+
 - Arbitrary clustering (how many clusters? which genes to cluster on?)
 - Loses biological specificity (ASH nociceptor ≠ AWA olfactory neuron, even if they cluster together)
 - The data exist to differentiate all 128 classes, so why reduce resolution?
@@ -344,6 +354,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 **Description:** Do not differentiate until direct patch-clamp data exist for all 128 classes.
 
 **Rejected because:**
+
 - Will never happen (experimentally infeasible)
 - Perpetuates the known inaccuracy of the generic model
 - CeNGEN data are available now; use them
@@ -403,6 +414,7 @@ python scripts/benchmark_improvement.py \
 ```
 
 **Success criteria:**
+
 - Correlation (simulated vs. experimental functional connectivity) improves ≥20% vs. generic model
 - At least 50% of neuron classes show expression-predicted channel dominance
 - No simulation instabilities (no NaN, no voltage explosions)
@@ -462,6 +474,7 @@ expression_data = atlas.get_gene_expression(
 ```
 
 **Benefits:**
+
 - ✅ No manual CSV download/parsing
 - ✅ Handles neuron ID variants automatically
 - ✅ pip-installable (works in Docker)
@@ -476,6 +489,7 @@ https://cengen.org/downloads
 ```
 
 **Files:**
+
 - `CeNGEN_gene_expression_matrix_L4.csv` — 128 neuron classes × 20,500 genes
 - `CeNGEN_neuron_class_annotations.csv` — Maps Cook et al. neuron IDs to CeNGEN classes
 - `CeNGEN_ion_channel_genes.csv` — Curated list of ion channel genes with functional classifications
@@ -545,6 +559,7 @@ ChannelWorm/
 ```
 
 **Reuse Plan:**
+
 1. **Extract ion channel database:** `data/ion_channel_database.xlsx` → Convert to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `electrophysiology_training_set.csv`
    - Contains: gene, channel family, measured conductances, patch clamp paper DOIs
    - Covers many of the ~20 neurons needed for calibration training set
@@ -572,6 +587,7 @@ head -20 ion_channels.csv
 ```
 
 **Next Actions:**
+
 - [ ] Test ChannelWorm installation on Python 3.12 (may need dependency updates)
 - [ ] Extract ion channel database, count coverage (how many of 20 training neurons present?)
 - [ ] Compare ChannelWorm's NeuroML2 models to [DD001](DD001_Neural_Circuit_Architecture.md)'s current channel definitions
@@ -648,6 +664,7 @@ mRNA levels ≠ protein levels ≠ surface channel density. The calibration impl
 Changing neuron conductance densities changes calcium dynamics → changes muscle activation magnitudes → changes body forces → changes locomotion. **This is a full-stack cascade.** Any change to the calibration relationship or CeNGEN data version MUST be validated against the complete coupling chain, not just Tier 2 functional connectivity.
 
 Validation sequence after calibration changes:
+
 1. Tier 1: Single-cell electrophysiology spot-checks (non-blocking)
 2. Tier 2: Functional connectivity correlation > 0.5 (blocking)
 3. **Tier 3: Full coupled simulation kinematic metrics within ±15% (BLOCKING)**
@@ -693,6 +710,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] All 128 `.cell.nml` files generated without error
 - [ ] `jnml -validate` passes for each cell file
 - [ ] `quick-test` passes with `differentiated: true`
@@ -728,6 +746,7 @@ docker compose run validate
 **Approved by:** Pending (Phase 1 work)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Download CeNGEN L4 expression matrix
 2. Curate ion channel gene list
 3. Collect electrophysiology data for calibration training set (20 neurons)

@@ -165,11 +165,13 @@ Where `adhesion_strength` depends on both source and target cell types (e.g., mu
 ### Spatial Initialization (Cell Boundaries)
 
 **Data sources:**
+
 1. **Witvliet et al. 2021:** 3D cell volumes at L1, L4, adult (choose adult hermaphrodite as reference)
 2. **WormAtlas Slidable Worm:** Consecutive TEM sections with hand-annotated cell boundaries
 3. **Long et al. 2009:** 3D nuclear positions for L1 (357 nuclei)
 
 **Initialization algorithm:**
+
 1. Load cell boundary meshes from Witvliet EM data (3D surface reconstruction)
 2. For each cell, fill its 3D volume with SPH particles at spacing = smoothing radius h
 3. Tag particles with the cell's WBbt ID
@@ -200,6 +202,7 @@ particle_id,x,y,z,type,cell_id,elasticity,adhesion
 **Description:** Tag particles as "muscle," "intestine," "hypodermis" without individual cell identity.
 
 **Rejected:** The data exist for single-cell resolution (959 cells). Why reduce? Individual cell identity enables:
+
 - Per-cell state tracking (e.g., intestinal cell 1 vs. cell 20 calcium)
 - Cell division / death during development
 - Fine-grained validation
@@ -319,6 +322,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] `quick-test` passes with `cell_identity: false` (backward compat)
 - [ ] `quick-test` passes with `cell_identity: true` (tagged sim)
 - [ ] `validate` passes (Tier 3 kinematics with cell identity)
@@ -358,11 +362,13 @@ typedef struct {
 ```
 
 **Backward compatibility:** When `body.cell_identity: false` in `openworm.yml`:
+
 - Use the old struct (32 bytes)
 - Sibernetic reads old-format particle files
 - All existing tools continue to work
 
 When `body.cell_identity: true`:
+
 - Use new struct (44 bytes)
 - Particle file includes a **version header** (first 4 bytes = format version number)
 - All downstream tools must check the version header before reading
@@ -385,6 +391,7 @@ When `body.cell_identity: true`:
 **Approved by:** Pending (Phase 4)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Extract cell boundaries from Witvliet EM data
 2. Implement particle tagging in Sibernetic data structures
 3. Assign cell-type-specific mechanical properties

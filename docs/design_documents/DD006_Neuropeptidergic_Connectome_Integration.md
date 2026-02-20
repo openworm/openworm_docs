@@ -169,6 +169,7 @@ d[peptide]_released/dt = k_release * H([Ca²⁺]ᵢ - threshold) - [peptide]_rel
 ```
 
 Where:
+
 - H(x) = Heaviside step function (1 if x > 0, else 0)
 - k_release = release rate constant
 - threshold = [Ca²⁺]ᵢ level that triggers release (~2x baseline, matching synaptic vesicle release)
@@ -183,6 +184,7 @@ Rather than solving full 3D diffusion PDEs (computationally expensive), use **di
 ```
 
 Where:
+
 - distance = Euclidean distance between source and target cell (from WormAtlas 3D positions)
 - lambda = diffusion length constant:
   - Short-range: lambda = 5 um (steep decay)
@@ -198,6 +200,7 @@ d[receptor]_active/dt = k_on * [peptide]_at_target * (1 - [receptor]_active) - k
 ```
 
 Where:
+
 - k_on = binding rate constant (~10^3 M^-1 s^-1, typical for GPCRs)
 - k_off = unbinding rate constant (~0.1-1 s^-1, giving seconds-to-minutes timescale)
 
@@ -210,6 +213,7 @@ g_effective = g_baseline * (1 + modulation_factor * [receptor]_active)
 ```
 
 Where:
+
 - modulation_factor is receptor-specific:
   - Excitatory peptides (e.g., FLP neuropeptides): increase g_Ca or decrease g_K -> depolarization
   - Inhibitory peptides: increase g_K -> hyperpolarization
@@ -226,6 +230,7 @@ Extend the ConnectomeToolbox to include a third connection type:
 | **Neuropeptides** | 302 x 302 | **31,479** | Seconds |
 
 Each neuropeptidergic connection stores:
+
 - Source neuron ID
 - Target neuron ID
 - Peptide ID (e.g., FLP-1, INS-3, NLP-12)
@@ -250,6 +255,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Solve the diffusion equation `dC/dt = D nabla^2 C` in 3D space for each peptide species.
 
 **Rejected because:**
+
 - Computationally prohibitive (31 peptide species x 3D grid x seconds-long timescales)
 - Requires meshing the extracellular space
 - Diffusion coefficients for neuropeptides in worm tissue are not well-characterized
@@ -263,6 +269,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Peptide present -> receptor fully active. Peptide absent -> receptor inactive. No dynamics.
 
 **Rejected because:**
+
 - Ignores temporal dynamics (seconds timescale is biologically important)
 - Oversimplifies dose-response relationships
 - Cannot capture graded modulation
@@ -272,6 +279,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Do not model any peptide-receptor interaction until experimentally validated in vivo.
 
 **Rejected because:**
+
 - The Ripoll-Sanchez map is based on spatial proximity + expression, not direct functional validation. But it is the best available whole-organism dataset.
 - Most interactions will never be individually validated (infeasible to test 31K interactions)
 - Modeling predictions can guide experimental prioritization
@@ -283,6 +291,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Ignore peptide diversity. Model two generic peptide types.
 
 **Rejected because:**
+
 - Throws away biological specificity
 - The Ripoll-Sanchez data provide peptide-receptor specificity; use it
 - Peptide diversity is functionally important (different peptides have different spatiotemporal profiles)
@@ -292,6 +301,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Explicitly model G-protein activation, PLC/adenylyl cyclase, IP3/cAMP production, PKA/PKC, and downstream channel phosphorylation.
 
 **Rejected (for Phase 2) because:**
+
 - Adds 10-20 state variables per receptor per cell (x36 receptors x 302 neurons = ~200,000 additional variables)
 - Biochemical rate constants are largely unknown for *C. elegans* GPCRs
 - Phenomenological modulation (direct conductance scaling) captures the functional effect without mechanistic detail
@@ -304,6 +314,7 @@ RIM,AVA,nlp-12,ckr-2,mid,excitatory,25.4
 **Description:** Stick with synaptic + gap junction connectome only.
 
 **Rejected because:**
+
 - 31,479 interactions is >5x the synaptic connectome (5,000 synapses)
 - Only 5% overlap means peptides provide orthogonal information
 - Known behavioral phenotypes (arousal, feeding, stress) depend on neuropeptides
@@ -418,6 +429,7 @@ python scripts/validate_knockout.py \
 ```
 
 **Success criteria:**
+
 - At least 3 peptide knockouts reproduce known phenotypes within 30% error
 - Wild-type simulation does not degrade (kinematic validation still passes)
 - Peptide modulation onset time is >1 second (slower than synapses)
@@ -455,6 +467,7 @@ python scripts/validate_knockout.py \
 The classical *C. elegans* connectome (White et al. 1986, Cook et al. 2019) describes **synaptic** (chemical) and **gap junction** (electrical) connections. But neurons also communicate via **neuropeptides** — small signaling molecules released into the extracellular space that diffuse to receptors on distant cells. This "wireless" signaling layer was recently mapped at whole-organism scale:
 
 **Ripoll-Sanchez et al. (2023), *Neuron*:** "The neuropeptidergic connectome of *C. elegans*"
+
 - **31,479 peptide-receptor interactions** across all 302 neurons
 - Each neuron class expresses ~23 neuropeptide genes and ~36 neuropeptide receptors
 - **Only 5% overlap** with the synaptic connectome
@@ -598,6 +611,7 @@ DOI: 10.1016/j.neuron.2023.07.002
 ```
 
 **Supplementary data:**
+
 - Table S1: All 31,479 peptide-receptor interactions
 - Table S2: Neuron-by-neuron peptide expression
 - Table S3: Receptor expression
@@ -616,6 +630,7 @@ https://wormbase.org/
 ```
 
 Gene classes:
+
 - FLP peptides: flp-1 through flp-34
 - NLP peptides: nlp-1 through nlp-50
 - INS insulin-like: ins-1 through ins-39
@@ -639,15 +654,18 @@ The Ripoll-Sanchez 2023 dataset is a comprehensive update. Bentley data can serv
 Do not add all 31,479 interactions at once. Rollout:
 
 **Stage 1 (Proof of Concept):**
+
 - FLP peptides only (~5,000 interactions)
 - Validate against FLP knockout behavioral phenotypes
 - Confirm NeuroML extensions work
 
 **Stage 2 (Core Neuropeptides):**
+
 - Add NLP, INS, PDF peptides (~15,000 interactions)
 - Validate against published knockout/overexpression studies
 
 **Stage 3 (Complete Dataset):**
+
 - Add remaining peptides (full 31,479 interactions)
 - Full validation suite
 
@@ -679,6 +697,7 @@ Simulations without `<peptideRelease>` components run as before.
 The Ripoll-Sanchez dataset includes spatial proximity and expression but not always functional validation. For many peptide-receptor pairs, whether the effect is excitatory or inhibitory is unknown.
 
 **Mitigation:**
+
 - Use WormBase phenotype data (e.g., "increased activity" suggests excitatory)
 - Use mammalian ortholog data (e.g., NPY receptors are typically inhibitory)
 - Flag as "inferred" in metadata
@@ -786,6 +805,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for peptideRelease and peptideReceptor LEMS types
 - [ ] `quick-test` passes with `neuropeptides: false` (backward compatibility)
 - [ ] `quick-test` passes with `neuropeptides: true` (peptide-enabled)
@@ -848,6 +868,7 @@ for t in range(0, duration, dt_fast):
 **Approved by:** Pending (Phase 2 proposal)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Download Ripoll-Sanchez Table S1
 2. Design NeuroML peptide extension schema
 3. Implement proof-of-concept with FLP peptides only

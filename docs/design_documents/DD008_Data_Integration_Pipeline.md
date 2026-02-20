@@ -138,6 +138,7 @@ docker compose run quick-test  # with data.backend: "direct"
 All modeling code (c302, Sibernetic initialization, validation scripts) MUST access biological data through OWMeta, not by directly parsing raw files.
 
 **Rationale:**
+
 - **Single source of truth:** WormBase IDs, cell names, gene symbols are normalized
 - **Versioned:** OWMeta tracks dataset versions (e.g., WS298, CeNGEN v1.0)
 - **Queryable:** Semantic queries like "Get all neurons in the nerve ring expressing unc-2" are one-liners
@@ -210,6 +211,7 @@ for cell in intestine_cells:
 7. **Merge and version:** New dataset becomes available in next OWMeta release
 
 **Do not:**
+
 - Parse raw CSV/JSON files directly in modeling code
 - Hardcode cell IDs or gene names
 - Duplicate data across repositories
@@ -221,6 +223,7 @@ for cell in intestine_cells:
 ### 1. Direct File Parsing (No OWMeta)
 
 **Rejected:** Every contributor writing their own CSV parser leads to:
+
 - ID mismatches (Cook uses "AVAL," WormBase uses "WBGene00006748")
 - Version drift (contributor uses old WormBase release)
 - Code duplication
@@ -232,6 +235,7 @@ for cell in intestine_cells:
 ### 3. Use WormBase API Directly
 
 **Partial use:** WormBase REST API is a data source for OWMeta. But WormBase lacks:
+
 - Connectome data (ConnectomeToolbox)
 - Single-cell expression (CeNGEN)
 - 3D positions (WormAtlas)
@@ -355,6 +359,7 @@ docker compose run quick-test  # with data.backend: "direct"
 ```
 
 **Per-PR checklist:**
+
 - [ ] `import owmeta_core` succeeds in Docker
 - [ ] Neuron count query returns >= 302
 - [ ] `quick-test` passes with `data.backend: "direct"` (backward compatibility)
@@ -418,6 +423,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Partial (core OWMeta exists, extensions proposed)
 **Next Actions:**
+
 1. Ingest Ripoll-Sanchez neuropeptides
 2. Ingest Witvliet developmental connectomes
 3. Ingest Randi functional connectivity

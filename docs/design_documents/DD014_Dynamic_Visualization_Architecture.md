@@ -82,6 +82,7 @@ The visualization layer is not a single tool. It is a **data export pipeline** (
 | **Molecular** | Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells. | [DD001](DD001_Neural_Circuit_Architecture.md) channel states, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance densities, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) peptide concentrations | Google Earth indoor view |
 
 **Phase Allocation:**
+
 - **Phase 1 (post-hoc Trame viewer):** Organism + Tissue/Cell scales. Smooth body surface, individual neurons/muscles visible and selectable, activity coloring, time scrubbing.
 - **Phase 2 (interactive dynamic viewer):** All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system.
 - **Phase 3 (public experience):** **Molecular scale** (ion channels, gene expression pipeline, intracellular dynamics per [DD014.1]([DD014](DD014_Dynamic_Visualization_Architecture.md).1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to viewer.openworm.org.
@@ -160,6 +161,7 @@ output/
 ```
 
 **Why OME-Zarr:**
+
 - **Chunked:** Browser fetches only the time window being viewed, not the entire dataset
 - **Cloud-native:** Can be served from S3/GCS or a simple HTTP server (no custom backend)
 - **Standardized:** Supported by Neuroglancer, Vitessce, napari — not an OpenWorm-specific format
@@ -171,6 +173,7 @@ output/
 The SPH particle cloud must be converted to a smooth surface for the Organism-scale view. Two approaches:
 
 **Option 1: Marching Cubes on density field (recommended for Phase 1)**
+
 - Compute a density field from particle positions (Gaussian kernel smoothing)
 - Extract an isosurface via marching cubes (VTK's `vtkMarchingCubes`)
 - Result: smooth triangulated mesh of the body surface
@@ -178,6 +181,7 @@ The SPH particle cloud must be converted to a smooth surface for the Organism-sc
 - PyVista has built-in support: `pv.wrap(points).reconstruct_surface()`
 
 **Option 2: Mesh skinning from reference anatomy**
+
 - Start with the VirtualWorm OBJ mesh (smooth anatomical surface)
 - Deform it to match particle positions at each timestep (skinning)
 - Higher visual quality but requires mapping between particles and mesh vertices
@@ -245,6 +249,7 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 ```
 
 **Key interactions:**
+
 - **Click** any cell/neuron/muscle → Inspector panel shows identity, state, time series
 - **Scroll wheel** zooms between scales (organism → tissue → cell)
 - **Layer toggle** shows/hides different subsystems
@@ -585,6 +590,7 @@ Green checkmarks appear on subsystems passing validation (locomotion speed withi
 **Approved by:** Pending
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Evolve Worm3DViewer from Streamlit to Trame (Phase 1, critical path)
 2. Implement OME-Zarr export in `master_openworm.py`
 3. Implement surface reconstruction pipeline

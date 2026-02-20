@@ -198,11 +198,13 @@ The egg-laying circuit implements a three-component motif (Zhang et al. 2008):
 HSN neurons are serotonergic command neurons that act as the primary driver of egg-laying. They release both serotonin and NLP-3 neuropeptides.
 
 **HSN dynamics:** HSN neurons generate sustained calcium bursts during active states. The burst-to-silence transition is driven by:
+
 1. Intrinsic HSN excitability (modulated by Gaq/EGL-30 signaling)
 2. Feedback inhibition from uv1 (tyramine via LGC-55 Cl- channel)
 3. Feedback inhibition from VC neurons (during active state)
 
 **HSN channel complement (from CeNGEN, [DD005](DD005_Cell_Type_Differentiation_Strategy.md)):**
+
 - Standard c302 HH channels (leak, K_slow, K_fast, Ca_boyle)
 - Cell-type-specific conductance densities from CeNGEN expression
 - Additional: serotonin vesicular release mechanism (Ca2+-dependent exocytosis)
@@ -214,11 +216,13 @@ d[5-HT]_released/dt = k_release * max(0, ([Ca2+]_HSN - ca_threshold)) - [5-HT]_r
 ```
 
 Where:
+
 - k_release: serotonin release rate (Ca2+-dependent)
 - ca_threshold: calcium threshold for vesicle fusion
 - tau_clearance: serotonin reuptake/degradation time constant (~1-5 s)
 
 **NLP-3 neuropeptide co-release:**
+
 - Dense core vesicle release, slower than small clear vesicle serotonin
 - Either serotonin or NLP-3 alone provides partial drive; both required for full HSN function
 - Modeled as [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) `<peptideRelease>` component if neuropeptides are enabled
@@ -228,10 +232,12 @@ Where:
 VC neurons are cholinergic motor neurons with a dual role: they excite vm2 muscles AND provide feedback inhibition to HSN.
 
 **VC specialization:**
+
 - **VC4, VC5** (vulva-proximal): Make extensive chemical synapses onto vm2 muscles; synapse onto HSN
 - **VC1-3, VC6** (distant): Synapse onto ventral body wall muscles; mediate locomotion slowing during egg-laying
 
 **VC4/VC5 are mechanosensitive** (Kopchock et al. 2021):
+
 - Vulval muscle contraction activates VC4/VC5 mechanically
 - This creates a positive feedback loop during active state: vm2 contraction -> VC activation -> more vm2 contraction
 - Mechanosensory activation modeled as stretch-dependent current injection
@@ -259,6 +265,7 @@ Vulval muscles are non-striated, excitable cells distinct from body wall muscles
 **Note:** vm2 conductance densities are approximate. EGL-19 and UNC-103 are the two most critical channels — EGL-19 drives calcium entry for contraction; UNC-103 (ERG K+) keeps the muscle subthreshold during the inactive state. The balance between these two channels is the primary determinant of the two-state pattern.
 
 **vm1 model:**
+
 - Same channel types as vm2 but **no direct synaptic input**
 - Receives rhythmic excitation from VA/VB motor neurons via body wall muscle connections (ACh, every ~10 s during locomotion body bends)
 - Gap-junction-coupled to vm2: calcium transients initiate in vm1 and propagate to vm2 (Brewer et al. 2019)
@@ -299,6 +306,7 @@ The two-state pattern emerges from the balance between EGL-19 (excitatory) and U
 4 uv1 cells sit at the uterine-vulval junction and sense egg passage mechanically.
 
 **uv1 outputs:**
+
 1. **Tyramine** → LGC-55 (Cl- channel, EC50 = 12.1 uM) on HSN → hyperpolarization → HSN silencing
 2. **NLP-7 neuropeptide** → inhibits serotonin vesicular release from HSN (if [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) enabled)
 3. **FLP-11 neuropeptide** → inhibits circuit activity (if [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) enabled)
@@ -378,6 +386,7 @@ Where:
 ### Egg Event Model
 
 An egg-laying event is triggered when:
+
 1. All 8 vulval muscles are synchronously contracted (vm1 + vm2 calcium above threshold)
 2. AND uterine muscles are contracted (squeeze)
 3. The egg counter increments; egg passage triggers uv1 feedback
@@ -403,6 +412,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Focus exclusively on locomotion and body wall muscle contraction; do not model the reproductive system.
 
 **Rejected because:**
+
 - Egg-laying is one of the most-studied *C. elegans* behaviors with rich quantitative data
 - The circuit is small (28 cells) and well-characterized — ideal for whole-organism modeling
 - HSN and VC neurons already exist in the [DD001](DD001_Neural_Circuit_Architecture.md) connectome; their primary function is egg-laying
@@ -413,6 +423,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Model egg-laying as a two-state Markov chain (inactive ↔ active) without biophysical neurons or muscles.
 
 **Rejected because:**
+
 - Throws away the mechanistic causal chain that OpenWorm aims to capture
 - Cannot predict mutant phenotypes (egl-1, unc-103, etc.)
 - Cannot respond to simulated pharmacology (exogenous serotonin)
@@ -425,6 +436,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Explicitly model the Gaq → PLCbeta / Trio RhoGEF → DAG → PKC → channel phosphorylation cascade with 15+ state variables per cell.
 
 **Rejected (for Phase 3) because:**
+
 - Biochemical rate constants are largely unknown for *C. elegans* Gaq signaling in vulval muscles
 - Phenomenological conductance modulation captures the net functional effect
 - Phase 5 (intracellular signaling) is the appropriate place for detailed biochemical cascades
@@ -436,6 +448,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Use the same GenericMuscleCell ([DD002](DD002_Muscle_Model_Architecture.md)) with Boyle & Cohen parameters for vulval muscles.
 
 **Rejected because:**
+
 - Vulval muscles are non-striated; body wall muscles are obliquely striated
 - Vulval muscles express distinct channel complement: EGL-19 (L-type Ca) dominates rather than ca_boyle, plus UNC-103 ERG K+ channel (absent in body wall)
 - The two-state pattern requires the EGL-19/UNC-103 balance, which does not exist in the [DD002](DD002_Muscle_Model_Architecture.md) GenericMuscleCell
@@ -446,6 +459,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Simplify the circuit to HSN → vm2 only, omitting VC neurons and uv1 feedback.
 
 **Rejected because:**
+
 - The two-state pattern emerges from the balance of excitation (HSN + VC) and inhibition (uv1)
 - VC neurons provide the critical feedback inhibition that terminates active bouts
 - HSN-only models produce continuous egg-laying, not the observed bursty pattern
@@ -456,6 +470,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 **Description:** Do not model vulval muscles until direct patch-clamp recordings from vm1/vm2 are available.
 
 **Rejected because:**
+
 - Direct recordings from vulval muscles in vivo are extremely difficult (cells are embedded in tissue)
 - Calcium imaging data (Collins et al. 2016, Brewer et al. 2019) provide quantitative constraints
 - Genetic perturbation data (egl-19, unc-103, egl-36 alleles) constrain the channel model
@@ -515,6 +530,7 @@ python scripts/test_serotonin_response.py \
 ```
 
 **Success criteria:**
+
 - Inactive state: 10-30 min (mean ~20 min)
 - Active state: 1-3 min (mean ~2 min)
 - Eggs per bout: 3-5
@@ -611,6 +627,7 @@ Quantitative adjacency matrices for HSN, VC, and sex muscle synaptic connections
 ### Sun & Bhatt 2010 Circuit Model
 
 The first computational model of egg-laying temporal pattern generation (BMC Systems Biology 4:81):
+
 - HSN modeled as a NOR gate (active only when both VC and uv1 are silent)
 - VC modeled as "single egg counters" providing short-term inhibition after each egg event
 - Successfully reproduces the clustered temporal pattern
@@ -619,17 +636,20 @@ The first computational model of egg-laying temporal pattern generation (BMC Sys
 ### Vulval Muscle Channel Data
 
 **EGL-19 (L-type Ca2+ channel):**
+
 - Activation: V_half ~ -20 mV, slope ~ 7 mV
 - Inactivation: V_half ~ -40 mV, slope ~ 5 mV (slow, tau ~ 100-500 ms)
 - Permeation: primarily Ca2+ (P_Ca >> P_Na, P_K)
 
 **UNC-103 (ERG K+ channel):**
+
 - Activation: V_half ~ -30 mV (shifted from mammalian hERG)
 - Fast inactivation (C-type): tau ~ 50-100 ms
 - Recovery from inactivation: tau ~ 200-500 ms
 - ERG channels have characteristic resurgent current on repolarization
 
 **EGL-36 (Shaw K+ channel):**
+
 - Fast-activating K+ channel
 - egl-36(gf): shift activation to more negative voltages -> hyperpolarized muscles -> Egl
 - egl-36(dn): reduced K+ current -> hyperexcitable muscles -> hyperactive egg-laying
@@ -641,16 +661,19 @@ The first computational model of egg-laying temporal pattern generation (BMC Sys
 ### Incremental Integration Strategy
 
 **Stage 1 (Circuit Only — Isolated):**
+
 - Implement HSN + VC4/VC5 + vm2 circuit without coupling to body physics
 - Validate two-state pattern in isolation
 - ~10 cells; fast simulation
 
 **Stage 2 (Circuit + Locomotion Coupling):**
+
 - Couple vm1 to body-bend-driven rhythmic excitation from [DD001](DD001_Neural_Circuit_Architecture.md)/DD003 locomotion
 - Validate that egg-laying does not degrade locomotion
 - Validate that body bend coupling provides the ~10 s rhythmic drive
 
 **Stage 3 (Full Integration):**
+
 - Add uterine muscles, uv1 feedback, gap junction network
 - Validate full behavioral statistics
 - Add mutant simulations (egl-1, unc-103, egl-36)
@@ -680,6 +703,7 @@ HSN and VC neurons exist in the [DD001](DD001_Neural_Circuit_Architecture.md) co
 ### Issue 1: Vulval Muscle Electrophysiology Is Indirect
 
 No direct patch-clamp recordings from vm1/vm2 exist. Channel properties are inferred from:
+
 - Genetic perturbation (egl-19, unc-103, egl-36 alleles)
 - Calcium imaging (Collins et al. 2016, Brewer et al. 2019)
 - Heterologous expression studies
@@ -689,6 +713,7 @@ No direct patch-clamp recordings from vm1/vm2 exist. Channel properties are infe
 ### Issue 2: Serotonin Receptor Signaling Is Simplified
 
 The Gaq -> DAG cascade is modeled as phenomenological conductance modulation, not biochemical dynamics. This may miss:
+
 - Temporal dynamics of DAG accumulation/degradation
 - Cross-talk between SER-1 and SER-7 pathways
 - PKC-mediated phosphorylation of specific channels
@@ -704,6 +729,7 @@ Eggs are not physically modeled as objects. The "egg in uterus" is a counter, no
 ### Issue 4: Missing Modulatory Inputs
 
 Several known modulatory inputs are not included in Phase 3:
+
 - PLM mechanosensory inhibition of HSN (posterior touch suppresses egg-laying)
 - Food-dependent modulation (AWC, ASI chemosensory pathways)
 - DVA/PVT stretch-sensitive modulation
@@ -853,6 +879,7 @@ docker compose run simulation -- \
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for all egg-laying NeuroML/LEMS files
 - [ ] `quick-test` passes with `egglaying.enabled: false` (backward compatibility)
 - [ ] `quick-test` passes with `egglaying.enabled: true` (simulation completes)
@@ -902,6 +929,7 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 **Approved by:** Pending (Phase 3)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Extract HSN and VC channel densities from CeNGEN ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 2. Implement EGL-19 L-type Ca2+ channel model in NeuroML/LEMS
 3. Implement UNC-103 ERG K+ channel model in NeuroML/LEMS

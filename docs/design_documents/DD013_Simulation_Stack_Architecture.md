@@ -55,6 +55,7 @@ The current simulation pipeline (v0.9.7) executes Step 3 of `master_openworm.py`
 ```
 
 Steps 1, 2, 4, and 5 of `master_openworm.py` are stubs ("Not yet implemented"):
+
 - Step 1: Rebuild c302 from latest OWMeta
 - Step 2: Execute unit tests
 - Step 4: Movement analysis
@@ -89,10 +90,12 @@ A contributor who wants to test a change against the full simulation must:
 ### The Scale of What's Coming
 
 The Whole-Organism Modeling Proposal (Phases 1-6) will expand the simulation from:
+
 - **302 identical neurons + body wall muscles + fluid body** →
 - **128 differentiated neuron types + neuropeptides + pharynx (63 cells) + intestine (20 cells) + mechanical cell identity + intercellular signaling**
 
 This means:
+
 - More repos to integrate (pharynx model, intestinal oscillator, neuropeptide layer)
 - More configuration knobs (which tissues enabled, which c302 level, which backend)
 - More validation targets (Tier 1, 2, 3 across multiple tissues)
@@ -191,6 +194,7 @@ viewer:
 ```
 
 **Why this matters:**
+
 - Contributors can toggle subsystems on/off to test specific changes
 - CI can run different configurations (quick smoke test vs. full validation)
 - New subsystems (pharynx, intestine) plug in by adding a config section
@@ -253,6 +257,7 @@ EXPOSE 8501
 ```
 
 **Benefits:**
+
 - **Build caching:** Changing c302 code only rebuilds Stage 1 + Stage 4 (not Sibernetic)
 - **Contributor override:** `docker build --build-arg C302_REF=my-feature-branch .` swaps in a custom c302
 - **Modular images:** Can run just c302 (Stage 1) for neural-only development
@@ -471,6 +476,7 @@ Step 5: Run validation (if enabled)
 ```
 
 **Critical fix needed:** The video generation pipeline (xvfb + tmux + ffmpeg screen capture) must be replaced. Options:
+
 1. **Headless rendering** via OSMesa or EGL (no X server needed)
 2. **Post-hoc visualization** from saved particle positions (decouple recording from simulation)
 3. **Skip video in CI** (validation doesn't need video, only data)
@@ -637,6 +643,7 @@ Add an optional JupyterLab service for interactive exploration:
 ```
 
 **Include starter notebooks:**
+
 - `01_explore_connectome.ipynb` — Load and visualize the connectome
 - `02_run_c302_network.ipynb` — Generate and simulate a neural circuit
 - `03_analyze_output.ipynb` — Plot simulation results
@@ -653,6 +660,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 **Advantages:** Single clone, atomic commits across subsystems, simple CI.
 
 **Rejected because:**
+
 - OpenWorm already has 109 repos with established histories
 - Different subsystems have different maintainers and release cadences
 - Monorepo migration would be massively disruptive
@@ -665,6 +673,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 **Advantages:** Built-in Git feature, pins exact commits.
 
 **Rejected because:**
+
 - Submodules are notoriously confusing for contributors (`git clone --recursive`, detached HEAD, update commands)
 - OpenWorm tried this before (the meta-repo once had submodules — they were removed)
 - The `versions.lock` + build-arg approach gives the same pinning benefits without submodule pain
@@ -674,6 +683,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 **Advantages:** Perfectly reproducible, content-addressed, covers system deps.
 
 **Rejected because:**
+
 - Extremely steep learning curve (most contributors won't know Nix)
 - Docker is already the standard in this project and the broader scientific computing community
 - Nix inside Docker is possible but adds complexity without clear benefit for this project size
@@ -683,6 +693,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 **Advantages:** Clean separation, independent scaling, true composability.
 
 **Rejected because:**
+
 - Massive operational overhead for a volunteer-run open source project
 - The subsystems communicate via shared memory and files, not network APIs
 - Latency between containers would harm the tight neural↔body coupling loop
@@ -691,6 +702,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 ### 5. Keep Current Approach (Single Dockerfile, Shell Scripts)
 
 **Rejected because:**
+
 - Cannot support adding new subsystems without growing a monolithic Dockerfile
 - No contributor workflow for testing changes against the full stack
 - No automated validation
@@ -786,6 +798,7 @@ The Integration Maintainer is responsible for:
 **Total estimated effort: 5-10 hrs/week.**
 
 **Who should fill this role:**
+
 - Currently Padraig is doing this de facto but it's not formalized or sustainable alongside his L4 Neural Circuit role
 - Ideal candidate: Someone with strong DevOps/Docker experience who also understands the science
 - Alternative: An L3 contributor who can be mentored into this role
@@ -955,6 +968,7 @@ Next newcomer who runs the Docker image sees the improvement
 **Approved by:** Pending (requires founder + Integration Maintainer appointment)
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Appoint or recruit L4 Integration Maintainer
 2. Begin Phase A (config system + multi-stage Docker)
 3. Fix the video pipeline memory leak (critical for any serious use)

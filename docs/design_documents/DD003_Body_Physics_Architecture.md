@@ -190,6 +190,7 @@ Elastic particles are connected by spring-like bonds with rest lengths:
 ```
 F_elastic = k * (|rᵢⱼ| - L₀) * (rᵢⱼ / |rᵢⱼ|)
 ```
+
 - k = elasticity coefficient (see table above)
 - L₀ = rest length (initial inter-particle distance)
 
@@ -224,6 +225,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 **Advantages:** Higher accuracy for solid mechanics, well-established in biomechanics.
 
 **Rejected because:**
+
 - Mesh generation for complex morphology is labor-intensive
 - Large deformations (bending during crawling) cause mesh distortion
 - Fluid-structure coupling in FEM+CFD is computationally expensive
@@ -236,6 +238,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 **Advantages:** Extremely fast, simple to implement.
 
 **Rejected because:**
+
 - No fluid mechanics (pseudocoelom is critical for worm locomotion)
 - Difficult to enforce incompressibility
 - No pressure dynamics
@@ -247,6 +250,7 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 **Advantages:** Good for fluid flow, naturally parallelizes.
 
 **Rejected because:**
+
 - Fixed Cartesian grid poorly represents complex worm morphology
 - Deformable solid modeling in LBM is cumbersome
 - SPH is more natural for moving, deforming boundaries
@@ -256,6 +260,7 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 **Advantages:** Unconditionally stable, used in real-time graphics/games.
 
 **Rejected because:**
+
 - Sacrifices physical accuracy for stability (violates momentum conservation in general)
 - Not suited for quantitative biophysical validation
 - OpenWorm prioritizes biological accuracy over simulation speed
@@ -300,6 +305,7 @@ A contribution to Sibernetic MUST:
 ## Context & Background
 
 *C. elegans* is a soft-bodied organism. Locomotion emerges from the interaction between:
+
 - Muscle contractile forces (internal)
 - Body wall elasticity (structural)
 - Pseudocoelomic fluid pressure (hydrostatic skeleton)
@@ -318,6 +324,7 @@ https://github.com/openworm/Sibernetic
 ```
 
 **Key files:**
+
 - `src/owPhysicsFluidSimulator.cpp` — Main SPH loop
 - `src/owWorldSimulation.cpp` — Particle initialization, boundary conditions
 - `kernels/sph_cl.cl` — OpenCL kernel for GPU acceleration
@@ -326,6 +333,7 @@ https://github.com/openworm/Sibernetic
 ### Configuration Format
 
 Sibernetic reads `.ini` files specifying:
+
 - Particle counts (liquid, elastic, boundary)
 - Initial positions (from pre-generated `.obj` 3D mesh or procedural)
 - Muscle activation input file
@@ -450,6 +458,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] Build succeeds (`cmake .. && make -j8`)
 - [ ] `quick-test` passes (no NaN, no segfault, *.wcon exists)
 - [ ] `validate` passes (Tier 3 kinematics + density constraint)
@@ -497,6 +506,7 @@ def write_sibernetic_config(openworm_config):
 **Approved by:** OpenWorm Steering
 **Implementation Status:** Complete (Sibernetic v1.0+)
 **Next Actions:**
+
 1. Tag particles with cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4)
 2. Add cell-type-specific mechanical properties
 3. Optimize Taichi backends for production use

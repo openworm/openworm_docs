@@ -163,6 +163,7 @@ OpenWorm implements a **multi-level framework (c302)** offering increasing bioph
 ### Chosen Default: Level C1
 
 **Rationale:**
+
 - Graded synapses match *C. elegans* biology (Goodman et al. 1998)
 - Continuous voltage coupling enables realistic sensorimotor feedback via Sibernetic
 - Computationally tractable for whole-circuit simulation
@@ -192,6 +193,7 @@ d[Ca]/dt = -rho * I_Ca - [Ca]/tau_Ca
 Where: rho = 0.000238 mol/(C*cm), tau_Ca = 11.5943 ms
 
 **Membrane properties:**
+
 - Initial voltage: -45 mV
 - Specific capacitance: 1 µF/cm²
 - Cell diameter: 5 µm (single compartment approximation)
@@ -203,6 +205,7 @@ I_syn = g_syn * s * (V_post - E_rev)
 ds/dt = k * sigmoid((V_pre - V_th)/delta) * (1 - s) - s/tau_syn
 ```
 Parameters:
+
 - g_syn = 0.09 nS
 - delta = 5 mV (sigmoid slope)
 - V_th = 0 mV (threshold)
@@ -214,6 +217,7 @@ Parameters:
 ```
 I_gap = g_gap * (V_neighbor - V)
 ```
+
 - g_gap = 0.01 nS
 
 ---
@@ -450,6 +454,7 @@ docker compose run validate
 ```
 
 **Per-PR checklist:**
+
 - [ ] `jnml -validate` passes for all modified NeuroML/LEMS files
 - [ ] `docker compose run quick-test` passes (worm moves, non-flat traces)
 - [ ] `docker compose run validate` passes (Tier 2 + Tier 3)

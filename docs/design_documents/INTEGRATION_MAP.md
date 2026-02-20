@@ -20,12 +20,14 @@
 ## Purpose
 
 This document visualizes **how all Design Documents couple together** at the architectural level:
+
 - Which DDs produce data (sources)
 - Which DDs consume data (sinks)
 - What breaks if coupling interfaces change
 - Bottleneck analysis (which DDs are critical dependencies)
 
 **Companion to DD_PHASE_ROADMAP.md:**
+
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
@@ -235,6 +237,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox) | 1 DD | [DD010](DD010_Validation_Framework.md) (Tier 3 only) | 🟡 **BLOCKING** (for validation) | TBD (Validation L4) — **VACANT** |
 
 **Key Insight:**
+
 - **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 11 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, OME-Zarr schema) affects almost everything.
 - **[DD013](DD013_Simulation_Stack_Architecture.md) and [DD014](DD014_Dynamic_Visualization_Architecture.md) are pure consumers** — They orchestrate/visualize but don't produce data that other DDs depend on. This is correct (leaf nodes in the dependency graph).
 - **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) is the foundational data layer** — 9 DDs pull connectome data from it. If `cect` API changes or default dataset switches, widespread updates needed.
@@ -262,12 +265,14 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 ```
 
 **Coupling scripts:**
+
 - NeuroML/LEMS handles [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md) (within same simulation)
 - `sibernetic_c302.py` handles [DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) (file-based coupling)
 - WCON exporter in `master_openworm.py` handles [DD003](DD003_Body_Physics_Architecture.md)→[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 - Validation scripts handle [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)→[DD010](DD010_Validation_Framework.md)
 
 **What breaks if:**
+
 - [DD001](DD001_Neural_Circuit_Architecture.md) changes `ca_internal` variable name → [DD002](DD002_Muscle_Model_Architecture.md) can't read muscle calcium
 - [DD002](DD002_Muscle_Model_Architecture.md) changes activation file format → [DD003](DD003_Body_Physics_Architecture.md) reads wrong forces
 - [DD003](DD003_Body_Physics_Architecture.md) changes particle output or WCON schema → [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) parser fails
@@ -290,6 +295,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 ```
 
 **What breaks if:**
+
 - [DD008](DD008_Data_Integration_Pipeline.md) CeNGEN query format changes → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration pipeline fails
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance formula changes → All 128 neuron classes change → Tier 2 correlation shifts
 - [DD010](DD010_Validation_Framework.md) changes Tier 2 acceptance threshold → Previously passing simulations may now fail
@@ -318,10 +324,12 @@ REVERSE PATH (new in [DD019](DD019_Closed_Loop_Touch_Response.md)):
 ```
 
 **Coupling script:**
+
 - `sibernetic_c302_closedloop.py` extends `sibernetic_c302.py` with bidirectional communication
 
 **Stability requirement:**
 Closed-loop coupling can cause **oscillatory instability** if:
+
 - Touch neuron gain too high (strain → current → motor → movement → more strain → positive feedback)
 - Timestep mismatch between neural (0.05ms) and body (0.02ms) physics
 - MEC-4 adaptation dynamics insufficient (no low-pass filtering on strain)
@@ -360,11 +368,13 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ```
 
 **Coupling owner:**
+
 - **Integration L4** owns the OME-Zarr export step in `master_openworm.py` ([DD013](DD013_Simulation_Stack_Architecture.md) Step 4b)
 - **Visualization L4** owns the viewer ([DD014](DD014_Dynamic_Visualization_Architecture.md)) and rendering spec ([DD014.1](DD014.1_Visual_Rendering_Specification.md))
 - **Each science DD** owns producing its OME-Zarr group in the correct format
 
 **What breaks if:**
+
 - Any DD changes its OME-Zarr group schema (shape, data type, chunk size) → Viewer can't parse it
 - [DD014](DD014_Dynamic_Visualization_Architecture.md) changes the OME-Zarr hierarchy (renames groups, adds required metadata) → All science DDs must update export
 - [DD014.1](DD014.1_Visual_Rendering_Specification.md) changes activity color mapping (voltage range, colormap) → Not a breaking change, purely visual
@@ -385,6 +395,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 | **CeNGEN expression** | [DD008](DD008_Data_Integration_Pipeline.md)/DD020 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | CSV or OWMeta query | 🟢 **LOW** | Expression data is fixed per CeNGEN version (L4 v1.0), won't change unless re-analysis |
 
 **Recommendation:**
+
 - **High-criticality interfaces** (muscle→body, OME-Zarr) should have **integration tests** that run on every PR touching the interface
 - **Medium-criticality** (WCON, cect) should be version-pinned in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md))
 - **Low-criticality** (topology, expression) can rely on upstream data versioning
@@ -415,6 +426,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 **Example:** [DD001](DD001_Neural_Circuit_Architecture.md) PR proposes renaming `ca_internal` to `calcium_concentration`.
 
 **Integration L4 workflow:**
+
 1. **Mind-of-a-Worm flags PR:** "⚠️ **Integration alert:** This PR modifies calcium output variable name ([DD001](DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](DD002_Muscle_Model_Architecture.md) (Muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal feedback), and [DD014](DD014_Dynamic_Visualization_Architecture.md) (Visualization) consume this output. Tagging maintainers."
 2. **Integration L4 reviews:** Checks [DD002](DD002_Muscle_Model_Architecture.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) code for `ca_internal` references
 3. **Coordination:** Opens issues on each consuming DD: "Update calcium variable name from ca_internal to calcium_concentration ([DD001](DD001_Neural_Circuit_Architecture.md) change)"
@@ -426,6 +438,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 **Example:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) is implemented, adds `neuropeptides/concentrations/` group.
 
 **Integration L4 workflow:**
+
 1. **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md) PR merged:** `master_openworm.py` Step 4b updated to export peptide concentrations
 2. **Integration L4 updates [DD014](DD014_Dynamic_Visualization_Architecture.md):** Add `neuropeptides/` layer to viewer layer spec
 3. **Visualization L4 implements:** Volumetric rendering in Trame viewer
@@ -436,6 +449,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 **Example:** Phase 2 implementation — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) and [DD019](DD019_Closed_Loop_Touch_Response.md) (touch) both modify [DD001](DD001_Neural_Circuit_Architecture.md).
 
 **Integration L4 workflow:**
+
 1. **Coordinate merge order:** [DD019](DD019_Closed_Loop_Touch_Response.md) first (adds MEC-4 channel to touch neurons), then [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (adds peptide components)
 2. **Integration test after each:** Run `docker compose run validate` after [DD019](DD019_Closed_Loop_Touch_Response.md) merge, again after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) merge
 3. **Regression detection:** If Tier 3 kinematics degrade after [DD019](DD019_Closed_Loop_Touch_Response.md), block [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) until fixed
@@ -467,6 +481,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ### For Neural L4 (Padraig — [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
 
 **When modifying [DD001](DD001_Neural_Circuit_Architecture.md) outputs:**
+
 1. Check Integration Contract "Depends On Me" table (lines 473-479 in [DD001](DD001_Neural_Circuit_Architecture.md))
 2. Identify consuming DDs: [DD002](DD002_Muscle_Model_Architecture.md) (muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal feedback), [DD010](DD010_Validation_Framework.md) (validation), [DD013](DD013_Simulation_Stack_Architecture.md) (integration), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (ML), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch)
 3. **If changing calcium variable name, file format, or OME-Zarr schema:** Tag Integration L4 and all consuming DD maintainers
@@ -476,6 +491,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ### For Body Physics L4 (Andrey — [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
 
 **When modifying [DD003](DD003_Body_Physics_Architecture.md) outputs:**
+
 1. Check "Depends On Me" table ([DD003](DD003_Body_Physics_Architecture.md) lines 489-493)
 2. Identify consumers: [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx mechanics), [DD010](DD010_Validation_Framework.md) (kinematics), [DD013](DD013_Simulation_Stack_Architecture.md) (integration), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD019](DD019_Closed_Loop_Touch_Response.md) (strain readout)
 3. **If changing particle struct (adding fields):** [DD004](DD004_Mechanical_Cell_Identity.md) must update particle initialization
@@ -485,6 +501,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ### For Integration L4 (TBD — [DD013](DD013_Simulation_Stack_Architecture.md))
 
 **Ongoing responsibilities:**
+
 1. **Review all PRs that modify coupling scripts** (sibernetic_c302.py, master_openworm.py, OME-Zarr export)
 2. **Run integration tests** after merging PRs to [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md) (the core chain)
 3. **Update this Integration Map** when new DDs are added or coupling changes
@@ -494,6 +511,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ### For Validation L4 (TBD — [DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 
 **Ongoing responsibilities:**
+
 1. **Maintain analysis toolbox** ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) — keep it working on latest Python, update dependencies
 2. **Curate validation datasets** — Schafer kinematics, Randi functional connectivity, behavioral assays
 3. **Update acceptance criteria** in [DD010](DD010_Validation_Framework.md) if biological ground truth changes (new experimental data)
@@ -502,6 +520,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ### For Visualization L4 (TBD — [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
 
 **Ongoing responsibilities:**
+
 1. **Implement viewer features** per [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1-3 roadmap
 2. **Update color mappings** in [DD014.1](DD014.1_Visual_Rendering_Specification.md) if new cell types added (e.g., pharynx, intestine)
 3. **Maintain OME-Zarr import** — when science DDs add new groups, update viewer to display them
@@ -528,6 +547,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
      commit: "ghi789..."
      tag: "revival-0.1.0"
    ```
+
 3. **Run full validation suite:** All Tier 1-3 tests on the pinned combination
 4. **Tag release** if validation passes
 5. **Publish Docker image** to Docker Hub: `openworm/openworm:0.10.0`
@@ -582,6 +602,7 @@ docker compose run validate --config full_validation
 **Problem:** When a DD changes an output variable, **Mind-of-a-Worm must manually parse the Integration Contract** to identify consumers.
 
 **Future:** Build a static analyzer that:
+
 - Parses all DD Integration Contract tables
 - Builds coupling graph programmatically
 - Auto-generates "Depends On Me" alerts when a PR touches a coupling interface

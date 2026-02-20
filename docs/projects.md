@@ -99,6 +99,7 @@ More detailed information is available on the [Muscle-Neuron integration project
 **_C. elegans_ robot**
 
 The goal of this project is twofold:
+
 1. To build a robot that simulates sensory-motor functions of a _C. elegans_ nematode worm, including foraging for food.
 2. To specify parts and instructions that will help anyone to build the robot.
 

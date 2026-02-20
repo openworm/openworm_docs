@@ -77,6 +77,7 @@ This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's
 ```
 
 The mechanistic ODEs remain the source of truth. ML is used for:
+
 1. **Speeding up** the simulation (surrogate models)
 2. **Parameterizing** the simulation (foundation models → ODE parameters)
 3. **Fitting** the simulation to data (differentiable simulation + gradient descent)
@@ -200,6 +201,7 @@ A differentiable simulation enables:
        weight_wavelength * (sim_wavelength - exp_wavelength)**2
    )
    ```
+
 3. Automatically find **per-neuron-class** conductances that satisfy ALL validation tiers simultaneously
 4. Do this in hours of compute instead of months of manual tuning
 
@@ -212,6 +214,7 @@ The result is still a mechanistic HH model with physically meaningful parameters
 #### Implementation
 
 **Language/Framework:** PyTorch with `torchdiffeq` (Neural ODE solver). PyTorch chosen over JAX because:
+
 - Sibernetic PyTorch backend already exists
 - Larger community, more accessible to contributors
 - `torchdiffeq` is mature and well-tested for ODE systems
@@ -275,6 +278,7 @@ for epoch in range(1000):
 #### Problem
 
 [DD003](DD003_Body_Physics_Architecture.md)'s SPH simulation is the speed bottleneck. With ~100K particles and a timestep of 20µs, simulating 200 seconds of biological time takes ~10 hours. This makes:
+
 - CI validation painfully slow ([DD010](DD010_Validation_Framework.md) Tier 3)
 - Parameter sweeps impractical (exploring 10 parameter combinations = 100 hours)
 - Interactive exploration impossible
@@ -321,6 +325,7 @@ Target: 500-1000 simulation runs × 5 seconds each = 2,500-5,000 hours of SPH co
 #### Architecture
 
 **Fourier Neural Operator (FNO)** is the recommended architecture:
+
 - Naturally handles time-series → time-series mapping
 - Resolution-independent (can train on coarse timesteps, evaluate on fine)
 - Well-validated in fluid dynamics applications (weather prediction, turbulence)
@@ -406,6 +411,7 @@ This pipeline creates a direct dependency on CZI's ESM3 and DeepMind's AlphaFold
 #### Training Data for Step 2
 
 Approximately 50-100 ion channels across species have both:
+
 - Known 3D structures (from X-ray crystallography or cryo-EM)
 - Known HH kinetic parameters (from patch-clamp electrophysiology)
 
@@ -564,6 +570,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 **Description:** Train a large transformer model on C. elegans behavioral data (video, calcium imaging, electrophysiology) to directly predict behavior from neural state.
 
 **Rejected because:**
+
 - Destroys mechanistic interpretability — OpenWorm's core value
 - Would match [DD010](DD010_Validation_Framework.md) Tier 3 (behavior) but fail Tier 1 and 2 (electrophysiology, connectivity)
 - Requires far more training data than exists for C. elegans
@@ -575,6 +582,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 **Description:** Use neural networks constrained by the ODE residuals to approximate solutions, rather than traditional ODE solvers.
 
 **Rejected (for now) because:**
+
 - PINNs struggle with stiff ODE systems (which HH equations are — fast channel kinetics + slow calcium dynamics)
 - Training stability is poor for coupled multi-scale systems
 - Traditional ODE solvers (CVODE, RK45) are fast and reliable for our system size
@@ -587,6 +595,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 **Description:** Replace the explicit ODE-per-neuron approach with a GNN that operates on the connectome graph structure.
 
 **Deferred because:**
+
 - Promising research direction (Bhatt et al. 2024 applied GNNs to C. elegans connectome)
 - Could be more parameter-efficient than 302 separate ODE systems
 - But loses per-neuron biophysical interpretability
@@ -595,6 +604,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 ### 4. Do Nothing (Stay Pure ODE)
 
 **Rejected because:**
+
 - Manual parameter fitting will not scale to 959 cells (the whole-organism goal)
 - Simulation speed is already a bottleneck blocking CI and iteration
 - The sensory front-end gap prevents closed-loop behavior
@@ -811,6 +821,7 @@ ml:
 **Approved by:** Pending
 **Implementation Status:** Proposed
 **Next Actions:**
+
 1. Create `openworm/openworm-ml` repository
 2. Port [DD001](DD001_Neural_Circuit_Architecture.md) single-neuron HH model to PyTorch (Phase A, Week 1)
 3. Verify equivalence against NEURON/jNML reference
