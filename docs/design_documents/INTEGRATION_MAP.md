@@ -40,7 +40,7 @@ This document visualizes **how all Design Documents couple together** at the arc
 
 **Reading guide:** DDs are grouped into functional clusters. Arrows show major data flows between clusters (not every internal edge). Color-coded: green = core chain, red = closed-loop, blue = validation, purple = visualization. The 4 chain diagrams below show detailed data flow for each pathway.
 
-![OpenWorm Integration Map](../images/integration_map.svg)
+<object data="../../images/integration_map.svg" type="image/svg+xml" style="width:100%; max-width:1200px;">OpenWorm Integration Map — click any DD to navigate to its design document</object>
 
 <details>
 <summary>PlantUML Source (click to expand)</summary>
@@ -228,7 +228,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Primary data flow** through the simulation:
 
-![Chain 1: Core Loop](../images/chain1_core_loop.svg)
+<object data="../../images/chain1_core_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 1: Core Loop</object>
 
 **Coupling scripts:**
 
@@ -250,7 +250,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Phase 1 validation chain:**
 
-![Chain 2: Cell Differentiation](../images/chain2_cell_differentiation.svg)
+<object data="../../images/chain2_cell_differentiation.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 2: Cell Differentiation</object>
 
 **What breaks if:**
 
@@ -264,7 +264,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **New in Phase 2** — adds reverse path (body → sensory):
 
-![Chain 3: Closed-Loop Touch](../images/chain3_closed_loop.svg)
+<object data="../../images/chain3_closed_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 3: Closed-Loop Touch</object>
 
 **Coupling script:**
 
@@ -285,7 +285,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 
 **Every science DD exports to OME-Zarr for the viewer:**
 
-![Chain 4: Visualization Pipeline](../images/chain4_visualization.svg)
+<object data="../../images/chain4_visualization.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 4: Visualization Pipeline</object>
 
 **Coupling owner:**
 
