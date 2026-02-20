@@ -86,8 +86,10 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
-- Announcement: "OpenWorm simulates all 302 neurons + 95 muscles + body physics in a coupled loop, producing emergent locomotion validated against real worm movement."
-- Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
+- **What you run:** `python master_openworm.py` — coupled c302 + Sibernetic simulation, 15ms of worm locomotion
+- **What you see:** ~100K SPH particles forming a worm shape that bends and propagates undulatory waves. Voltage traces for 302 neurons. Muscle activation patterns.
+- **Validated against:** [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab kinematic features — locomotion speed, body curvature, wave frequency within ±15% of wild-type N2
+- **Published:** [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
 
 ---
 
@@ -115,10 +117,10 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Milestone:** 🎉 **"Containerized Stack with Automated Validation"**
 
-- **Shout about it:** "Contributors can now test changes against the full simulation in <5 minutes. Behavioral validation is automated via CI. No more manual parameter tuning!"
-- **Demo:** `docker compose run quick-test` completes in <5min, `docker compose run validate` reports pass/fail on Tier 2+3
-- **Visibility:** Blog post with before/after comparison (old: 20min rebuild + manual validation; new: 5min + automated CI)
-- **Impact:** Reduces contributor feedback loop from hours to minutes; enables rapid iteration
+- **What you run:** `docker compose run quick-test` (completes in <5 min) — builds the full simulation stack, runs a short simulation, checks for crashes
+- **What you see:** Terminal output showing build → simulate → validate pipeline. JSON report with pass/fail on each metric. Video of worm locomotion (no more OOM at >2s).
+- **Then try:** `docker compose run validate` — runs Tier 2 (functional connectivity vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)) + Tier 3 (kinematics vs. [Yemini 2013](https://doi.org/10.1038/nmeth.2560)). Produces `output/validation_report.json` with per-metric scores.
+- **Contributor workflow:** Fork a subsystem → `docker compose run quick-test --build-arg C302_BRANCH=my-branch` → see if your change breaks anything → PR with CI green
 
 **Success Criteria:**
 
@@ -163,10 +165,10 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Milestone:** 🎉 **"Biologically Distinct Neurons"**
 
-- **Shout about it:** "OpenWorm now simulates 128 different neuron types (not 302 copies of the same cell), parameterized from the CeNGEN single-cell atlas. Functional connectivity improves by ≥20% vs. generic model. You can see each neuron class's distinct dynamics in the new 3D viewer."
-- **Demo:** Launch viewer showing neurons colored by class (128 colors), click AVAL to see its class-specific calcium dynamics, compare to generic model side-by-side
-- **Visibility:** Blog post: "From Generic to Specific: 128 Neuron Classes" + video showing color-by-class mode + comparison plot (Tier 2 correlation improved from r=0.3 to r≥0.36)
-- **Paper opportunity:** "CeNGEN-Parameterized Whole-Circuit Simulation Improves Functional Connectivity Prediction" (collaborate with Randi/Leifer labs)
+- **What you run:** `docker compose run simulation` then `docker compose up viewer` — open `localhost:8501`
+- **What you see:** 3D viewer with smooth worm body crawling. Toggle "Neurons" layer — 302 neurons appear, colored by class (128 distinct colors). Click AVAL — inspector panel shows its class-specific voltage and calcium traces, visibly different from ASER or AWCL. Toggle "color by class" mode to see the diversity.
+- **Validated against:** [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain calcium imaging — simulated functional connectivity correlation improves ≥20% over generic baseline (e.g., r=0.3 → r≥0.36). Side-by-side comparison plot: generic model vs. CeNGEN-parameterized model vs. experimental data.
+- **Video:** Time-lapse of simulation with neurons glowing by activity — command interneurons (AVA, AVB) show graded potentials, sensory neurons (ASEL, ASER) show distinct response profiles, motor neurons fire rhythmically driving visible muscle contractions.
 
 **Success Criteria:**
 
@@ -218,11 +220,11 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Milestone:** 🎉 **"The Worm Can Feel and Modulate"**
 
-- **Shout about it:** "OpenWorm is now closed-loop! Tap the worm in the simulation and watch it reverse direction in real-time. Plus: 31,479 neuropeptide connections add a slow modulatory layer governing behavioral states."
-- **Demo 1:** Interactive demo — user clicks "Tap Anterior" button, worm reverses within 1 second, travels backward 1+ body lengths, resumes forward crawling
-- **Demo 2:** Neuropeptide knockout simulation — disable FLP peptides, watch locomotion pattern change
-- **Visibility:** Blog post: "Closing the Loop: Touch-Responsive Digital Worm" + Video: side-by-side (open-loop vs. closed-loop tap withdrawal)
-- **Paper opportunity:** "Bidirectional Coupling Enables Emergent Sensorimotor Behavior in Whole-Organism Simulation"
+- **What you run:** `docker compose run simulation --config closedloop_touch` then open the viewer
+- **Demo 1 — Tap withdrawal:** Worm crawls forward. At t=5s, anterior tap stimulus fires. Watch: touch receptor neurons (ALM, AVM) activate → command interneurons (AVA, AVD) depolarize → motor neurons reverse → worm reverses direction within <1 second, travels backward ≥1 body length, then resumes forward crawling. Compare: `--config openloop` (same tap, no reversal — the worm is deaf).
+- **Demo 2 — Neuropeptide knockout:** Run with `neuropeptides.flp_knockout: true`. Watch locomotion pattern change — speed, reversal frequency, body wave amplitude all shift. Compare side-by-side with wild-type. Matches [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x) / [Rogers et al. 2003](https://doi.org/10.1038/nn1140) FLP loss-of-function phenotypes.
+- **Validated against:** [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal (reversal latency, distance, direction discrimination); [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) anterior-vs-posterior direction selectivity; ≥3 peptide knockout phenotypes within 30% of experimental measurements.
+- **In the viewer:** Neuropeptide volumetric clouds visible as colored mist waxing/waning on seconds timescale. Cuticle strain heatmap shows where the body is being compressed. Reversal events marked on the time scrubber.
 
 **Success Criteria:**
 
@@ -275,11 +277,13 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"**
 
-- **Shout about it:** "OpenWorm now includes pharynx (63 cells pumping at 3-4 Hz), intestine (20 cells with 50-second defecation rhythm), and egg-laying circuit (28 cells producing two-state bursts). Plus: ML-accelerated parameter fitting and 1000× faster surrogate for rapid exploration."
-- **Demo 1:** Full simulation video showing: worm crawling (body), pharynx pumping at head (3-4 Hz visible), intestinal calcium wave every ~50s (posterior-to-anterior), egg-laying bout every ~20 min (vulval contraction)
-- **Demo 2:** SPH surrogate comparison — same muscle activation input, full SPH takes 10 hours, surrogate takes <1 minute, <5% trajectory difference
-- **Visibility:** Blog post: "Multi-Organ Digital Worm" + Paper: "Whole-Organism Simulation with Pharynx, Intestine, and Reproductive Circuits" (target: *PLoS Computational Biology*)
-- **Impact:** OpenWorm is no longer just locomotion — it's a multi-organ, multi-timescale (milliseconds to minutes) simulation
+- **What you run:** `docker compose run simulation --config full_organism` (runs for ~20 simulated minutes to capture egg-laying cycle). Then open viewer.
+- **What you see — 3 organs running simultaneously:**
+    - **Pharynx** (toggle layer ON): 63 pharyngeal cells at the head pump rhythmically at 3-4 Hz. Corpus contracts → isthmus peristalsis → terminal bulb grinds. Pharyngeal neurons (MC, M3) fire in sync with the pump cycle. Validated against [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) electropharyngeogram recordings.
+    - **Intestine** (toggle layer ON): 20 intestinal cells show a calcium wave propagating posterior-to-anterior every ~50 seconds. Cells color from blue→red as [Ca2+] rises. Every wave triggers a visible defecation motor program — body contraction runs anterior-to-posterior. Validated against [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (50 ± 10s cycle period).
+    - **Egg-laying** (toggle layer ON): HSN neurons fire serotonergic bursts → vulval muscles contract → eggs deposited. Two-state pattern: ~20 min inactive, ~2 min active bout (3-5 eggs). Validated against [Collins et al. 2016](https://doi.org/10.7554/eLife.21126) calcium imaging.
+- **Demo — ML surrogate:** `docker compose run surrogate` — same muscle activation input, full SPH takes hours, surrogate completes in <1 minute. Overlay both trajectories: <5% difference. Enables rapid parameter sweeps that were previously impossible.
+- **All the while:** Body locomotion continues in background — worm crawls, pharynx pumps, intestine oscillates, eggs are laid. Multiple timescales visible simultaneously (ms for neurons, seconds for pumping, minutes for defecation, tens of minutes for egg-laying).
 
 **Success Criteria:**
 
@@ -331,12 +335,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 5. **Three.js viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — viewer.openworm.org (GitHub Pages or CDN)
 
-**Milestone:** 🎉 **"959-Cell Digital Organism with Photorealistic Visualization"**
+**Milestone:** 🎉 **"959-Cell Digital Organism — Explore in Your Browser"**
 
-- **Shout about it:** "OpenWorm now represents all 959 somatic cells of the adult hermaphrodite with cell-type-specific mechanics. Visit viewer.openworm.org in any browser and explore the worm at three scales: organism (smooth crawling body), tissue (individual cells + neurons glowing), and molecular (ion channels opening, gene transcription visible). No installation, no server — just a web browser."
-- **Demo:** Public URL (viewer.openworm.org) — zoom from full worm to a single neuron to its membrane showing calcium channels opening
-- **Visibility:** Press release: "First Whole-Organism Simulation You Can Explore in a Web Browser" + Video: screencast of multi-scale zoom + WSJ/Wired/Nature News coverage potential
-- **Impact:** Public engagement — non-scientists can experience the simulation; educators can use it in classrooms; collaborators (CZI, Arc) can explore results without Docker
+- **What you run:** Open `viewer.openworm.org` in any browser. No Docker, no installation, no server.
+- **What you see — 3 scales of exploration:**
+    - **Organism scale (default):** Smooth, translucent *C. elegans* crawling across the screen. Anatomical meshes (688 Virtual Worm pieces) deform with the SPH body in real-time. Pharynx pumps at the head, defecation contractions visible every ~50s.
+    - **Tissue/Cell scale (zoom in):** Click any of 959 individually labeled cells. Neurons glow by voltage. Muscles flash by contraction. Intestinal cells show calcium waves. Inspector panel shows cell identity (WBbt ID), real-time traces, and links to WormBase.
+    - **Molecular scale (zoom further):** See ion channels opening/closing on a neuron's membrane. Calcium flowing through IP3 receptors in intestinal cells. Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion (per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14).
+- **Validated against:** All previous tiers still passing — kinematics ([Yemini 2013](https://doi.org/10.1038/nmeth.2560) ±15%), functional connectivity ([Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)), organ rhythms (pharynx, intestine, egg-laying). Cell-type-specific elasticity produces realistic body mechanics: intestine soft (0.8x), cuticle stiff (5-10x), muscles intermediate (1.5x).
+- **Performance:** 60fps on a 2020-era laptop. All 688 meshes deform in <4ms per frame. Progressive OME-Zarr loading — start viewing immediately while more data streams in background.
 
 **Success Criteria:**
 
@@ -548,37 +555,37 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD021](DD021_Movement
 
 ---
 
-## Major Milestones (What to Announce)
+## Major Milestones (What You Run, What You See)
 
-### Milestone 1: "Contributor Infrastructure Ready" (End of Phase A)
+### Milestone 1: "Containerized Stack" (End of Phase A)
 **When:** Week 4 (late March 2026)
-**Announce:** "OpenWorm simulation stack is now containerized with automated validation. Contributors can test changes in <5 minutes."
-**Impact:** Removes contributor friction; enables rapid iteration
-**Metrics:** CI green badge, docker-compose services all working, toolbox revived
+**Run:** `docker compose run quick-test` — full build + simulation + validation in <5 minutes
+**See:** Terminal pass/fail report. Video output of worm locomotion. JSON validation scores.
+**Validated against:** [Yemini 2013](https://doi.org/10.1038/nmeth.2560) kinematics (Tier 3), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (Tier 2)
 
 ### Milestone 2: "Biologically Distinct Neurons" (End of Phase 1)
 **When:** Month 3 (June 2026)
-**Announce:** "128 different neuron types parameterized from CeNGEN single-cell atlas. Functional connectivity prediction improves 20%+."
-**Impact:** First biologically differentiated whole-circuit simulation
-**Metrics:** Tier 2 correlation r > 0.5, 128 cell-type NeuroML files, 3D viewer shows color-by-class
+**Run:** `docker compose up viewer` — open `localhost:8501`
+**See:** 3D worm with 302 neurons colored by 128 classes. Click any neuron — inspector shows class-specific dynamics. Compare differentiated vs. generic model side-by-side.
+**Validated against:** [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) — functional connectivity correlation improves ≥20% over generic baseline
 
-### Milestone 3: "The Worm Can Feel and Modulate" (End of Phase 2)
+### Milestone 3: "The Worm Can Feel" (End of Phase 2)
 **When:** Month 6 (September 2026)
-**Announce:** "Closed-loop touch response + 31,479 neuropeptide connections. Tap the worm, watch it reverse direction."
-**Impact:** First sensorimotor closed-loop whole-organism simulation
-**Metrics:** Tap→reversal <1s, peptide knockouts reproduced, viewer shows strain + peptide clouds
+**Run:** `docker compose run simulation --config closedloop_touch` — tap the worm at t=5s
+**See:** Worm reverses direction within <1s, travels backward ≥1 body length, resumes forward. Anterior tap → backward, posterior tap → forward. Neuropeptide clouds visible as slow modulatory mist.
+**Validated against:** [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal; [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) direction discrimination; ≥3 peptide knockout phenotypes ([Li 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers 2003](https://doi.org/10.1038/nn1140))
 
-### Milestone 4: "Multi-Organ Digital Organism" (End of Phase 3)
+### Milestone 4: "Multi-Organ Organism" (End of Phase 3)
 **When:** Month 12 (March 2027)
-**Announce:** "Pharynx pumping (3-4 Hz), intestine oscillating (50s), egg-laying (two-state pattern). 433 cells active. ML surrogate enables 1000× faster exploration."
-**Impact:** Multi-timescale, multi-organ simulation; ML acceleration
-**Metrics:** All 3 organ Tier 3 validations pass, surrogate <5% error, differentiable backend working
+**Run:** `docker compose run simulation --config full_organism` (~20 simulated minutes)
+**See:** Worm crawls while pharynx pumps at 3-4 Hz, intestine fires calcium waves every ~50s triggering defecation, and egg-laying bouts occur every ~20 min. All visible simultaneously in the viewer.
+**Validated against:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) pharyngeal EPG; [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation period; [Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging
 
-### Milestone 5: "959-Cell Photorealistic Whole Organism" (End of Phase 4)
+### Milestone 5: "959-Cell Browser Experience" (End of Phase 4)
 **When:** Month 18 (September 2027)
-**Announce:** "Every somatic cell of C. elegans simulated with cell-type-specific mechanics. Explore the digital worm in any web browser at viewer.openworm.org — from organism to tissue to molecular scale."
-**Impact:** Public engagement, educational use, complete adult hermaphrodite
-**Metrics:** 959 cells, mesh deformation working, Three.js viewer deployed, molecular scale visible
+**Run:** Open `viewer.openworm.org` — no installation required
+**See:** Smooth worm with 688 deforming anatomical meshes. Zoom from organism → tissue (click any of 959 cells) → molecular (ion channels, gene transcription). 60fps on a laptop.
+**Validated against:** All previous tiers passing. Cell-type-specific mechanics produce realistic body deformation.
 
 ---
 
