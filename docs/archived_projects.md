@@ -52,7 +52,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **Current status:** Dormant in OpenWorm (last commit ~2020). Still maintained upstream at [geppetto.org](http://geppetto.org). Could be re-evaluated if needs change.
 
-**See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and DD014 evolution roadmap)
+**See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) evolution roadmap)
 
 **What replaced it:** [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) specifies a 3-phase evolution:
 

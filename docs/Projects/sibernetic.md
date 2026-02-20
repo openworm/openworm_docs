@@ -9,9 +9,9 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 
 | Particle Type | Count | Role | DD Reference |
 |---------------|-------|------|--------------|
-| Liquid | ~50K | Surrounding fluid medium | DD003 |
-| Elastic | ~30K | Body wall, muscles, cuticle | DD003 |
-| Boundary | ~20K | Substrate surface | DD003, DD022 |
+| Liquid | ~50K | Surrounding fluid medium | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
+| Elastic | ~30K | Body wall, muscles, cuticle | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
+| Boundary | ~20K | Substrate surface | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md) |
 
 **Key algorithm:** PCISPH (Predictive-Corrective Incompressible SPH) pressure solver, implemented in C++ with GPU acceleration (OpenCL).
 

@@ -100,10 +100,10 @@ Contributing to Design Document Implementation
 
 ### DD Contribution Workflow
 
-1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> DD001, visualization -> DD014, etc.)
+1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), visualization -> [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md), etc.)
 2. **Read the DD** — understand the goal, deliverables, and quality criteria
 3. **Read "How to Build & Test" section** — copy-pasteable commands to get started
-4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for DD005)
+4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md))
 5. **Claim an issue** — comment: "I'll work on this, ETA: X days"
 6. **Implement according to DD spec** — Quality Criteria define acceptance
 7. **Run tests:** `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge)

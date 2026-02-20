@@ -149,7 +149,7 @@ Building on over a decade of prototyping and publishing, the project entered a n
 
 Key developments:
 
-- **25 Design Documents** written (DD001-DD023 + DD014.1/DD014.2), covering every subsystem from ion channels to organ systems
+- **25 Design Documents** written ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD023](design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) + [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md)/DD014.2), covering every subsystem from ion channels to organ systems
 - **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)) established: single-cell electrophysiology, circuit-level functional connectivity, and whole-organism behavioral kinematics
 - **Phase roadmap** defined: from the existing 302-neuron foundation (Phase 0) through cell differentiation, slow modulation, organ systems, to a complete 959-cell organism (Phase 4)
 - **Contributor progression model** ([DD011](design_documents/DD011_Contributor_Progression_Model.md)) formalized for scaling the community

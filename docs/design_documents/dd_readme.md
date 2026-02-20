@@ -57,10 +57,10 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Status | What It Does |
 |----|-------|--------|--------------|
-| **DD001** | [Neural Circuit Architecture](DD001_Neural_Circuit_Architecture.md) | ✅ Accepted | 302 neurons, HH Level C1, graded synapses, validated kinematics |
-| **DD002** | [Muscle Model Architecture](DD002_Muscle_Model_Architecture.md) | ✅ Accepted | 95 body wall muscles, Ca²⁺→force coupling, Boyle & Cohen parameters |
-| **DD003** | [Body Physics Architecture](DD003_Body_Physics_Architecture.md) | ✅ Accepted | Sibernetic SPH, PCISPH pressure solver, ~100K particles, fluid-structure interaction |
-| **DD020** | [Connectome Data Access & Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | ✅ Accepted (needs version pinning) | ConnectomeToolbox (`cect` v0.2.7), Cook2019Herm default, 30+ dataset readers |
+| **[DD001](DD001_Neural_Circuit_Architecture.md)** | [Neural Circuit Architecture](DD001_Neural_Circuit_Architecture.md) | ✅ Accepted | 302 neurons, HH Level C1, graded synapses, validated kinematics |
+| **[DD002](DD002_Muscle_Model_Architecture.md)** | [Muscle Model Architecture](DD002_Muscle_Model_Architecture.md) | ✅ Accepted | 95 body wall muscles, Ca²⁺→force coupling, Boyle & Cohen parameters |
+| **[DD003](DD003_Body_Physics_Architecture.md)** | [Body Physics Architecture](DD003_Body_Physics_Architecture.md) | ✅ Accepted | Sibernetic SPH, PCISPH pressure solver, ~100K particles, fluid-structure interaction |
+| **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** | [Connectome Data Access & Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | ✅ Accepted (needs version pinning) | ConnectomeToolbox (`cect` v0.2.7), Cook2019Herm default, 30+ dataset readers |
 
 ---
 
@@ -72,10 +72,10 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Status | Criticality | What It Delivers |
 |----|-------|--------|-------------|------------------|
-| **DD013** | [Simulation Stack Architecture](DD013_Simulation_Stack_Architecture.md) | ⚠️ Proposed | 🔴 **CRITICAL** | `openworm.yml` config, multi-stage Docker, `docker-compose.yml`, `versions.lock`, CI/CD, Integration Maintainer role |
-| **DD021** | [Movement Toolbox & WCON Policy](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | 🔴 **BLOCKED** — Toolbox dormant | 🔴 **CRITICAL** | Revive analysis toolbox (8 tasks, 33 hours), WCON 1.0 pin, Tier 3 validation |
-| **DD012** | [Design Document RFC Process](DD012_Design_Document_RFC_Process.md) | ⚠️ Proposed | Governance | DD template, RFC workflow, Mind-of-a-Worm enforcement rules |
-| **DD011** | [Contributor Progression Model](DD011_Contributor_Progression_Model.md) | ⚠️ Proposed | Governance | L0-L5 levels, badge system, subsystem ownership map, teach-back learning |
+| **[DD013](DD013_Simulation_Stack_Architecture.md)** | [Simulation Stack Architecture](DD013_Simulation_Stack_Architecture.md) | ⚠️ Proposed | 🔴 **CRITICAL** | `openworm.yml` config, multi-stage Docker, `docker-compose.yml`, `versions.lock`, CI/CD, Integration Maintainer role |
+| **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | [Movement Toolbox & WCON Policy](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | 🔴 **BLOCKED** — Toolbox dormant | 🔴 **CRITICAL** | Revive analysis toolbox (8 tasks, 33 hours), WCON 1.0 pin, Tier 3 validation |
+| **[DD012](DD012_Design_Document_RFC_Process.md)** | [Design Document RFC Process](DD012_Design_Document_RFC_Process.md) | ⚠️ Proposed | Governance | DD template, RFC workflow, Mind-of-a-Worm enforcement rules |
+| **[DD011](DD011_Contributor_Progression_Model.md)** | [Contributor Progression Model](DD011_Contributor_Progression_Model.md) | ⚠️ Proposed | Governance | L0-L5 levels, badge system, subsystem ownership map, teach-back learning |
 
 ---
 
@@ -87,9 +87,9 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Dependencies | What Changes |
 |----|-------|-------------|--------------|
-| **DD005** | [Cell-Type Differentiation Strategy](DD005_Cell_Type_Differentiation_Strategy.md) | DD001, DD008/DD020 (CeNGEN) | Replace 302 identical neurons with 128 distinct classes, ≥20% improvement in functional connectivity correlation |
-| **DD014 (Phase 1)** | [Dynamic Visualization (Phase 1)](DD014_Dynamic_Visualization_Architecture.md) | DD001-DD003, DD005 | Evolve Worm3DViewer to Trame, OME-Zarr export, organism + tissue scales, time animation |
-| **DD010 (Tier 2)** | [Validation Framework (Tier 2 active)](DD010_Validation_Framework.md) | DD005, DD008 | Activate Tier 2 blocking gate (functional connectivity r > 0.5) |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | [Cell-Type Differentiation Strategy](DD005_Cell_Type_Differentiation_Strategy.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md)/DD020 (CeNGEN) | Replace 302 identical neurons with 128 distinct classes, ≥20% improvement in functional connectivity correlation |
+| **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 1)** | [Dynamic Visualization (Phase 1)](DD014_Dynamic_Visualization_Architecture.md) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Evolve Worm3DViewer to Trame, OME-Zarr export, organism + tissue scales, time animation |
+| **[DD010](DD010_Validation_Framework.md) (Tier 2)** | [Validation Framework (Tier 2 active)](DD010_Validation_Framework.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD008](DD008_Data_Integration_Pipeline.md) | Activate Tier 2 blocking gate (functional connectivity r > 0.5) |
 
 ---
 
@@ -101,9 +101,9 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
-| **DD006** | [Neuropeptidergic Connectome Integration](DD006_Neuropeptidergic_Connectome_Integration.md) | DD001, DD005 | 31,479 peptide-receptor interactions, GPCR modulation, seconds-timescale behavioral states |
-| **DD019** | [Closed-Loop Touch Response](DD019_Closed_Loop_Touch_Response.md) | DD001, DD003, DD005 | MEC-4 mechanotransduction, bidirectional coupling (body→sensory), tap withdrawal behavior |
-| **DD014 (Phase 2)** | [Dynamic Visualization (Phase 2)](DD014_Dynamic_Visualization_Architecture.md) | DD014 Phase 1, DD006, DD019 | Interactive layers, neuropeptide volumetric clouds, strain heatmap, validation overlay |
+| **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)** | [Neuropeptidergic Connectome Integration](DD006_Neuropeptidergic_Connectome_Integration.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 31,479 peptide-receptor interactions, GPCR modulation, seconds-timescale behavioral states |
+| **[DD019](DD019_Closed_Loop_Touch_Response.md)** | [Closed-Loop Touch Response](DD019_Closed_Loop_Touch_Response.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | MEC-4 mechanotransduction, bidirectional coupling (body→sensory), tap withdrawal behavior |
+| **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | [Dynamic Visualization (Phase 2)](DD014_Dynamic_Visualization_Architecture.md) | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Interactive layers, neuropeptide volumetric clouds, strain heatmap, validation overlay |
 
 ---
 
@@ -115,10 +115,10 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
-| **DD007** | [Pharyngeal System Architecture](DD007_Pharyngeal_System_Architecture.md) | DD001, DD002, DD005 | 63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping oscillator |
-| **DD009** | [Intestinal Oscillator Model](DD009_Intestinal_Oscillator_Model.md) | DD001, DD004 (optional) | 20-cell IP3/Ca oscillator, defecation motor program (50±10s period), pBoc→aBoc→Exp sequence |
-| **DD018** | [Egg-Laying System Architecture](DD018_Egg_Laying_System_Architecture.md) | DD001, DD002, DD005, DD006 | 28-cell reproductive circuit, HSN serotonergic, VC cholinergic, 16 sex muscles, two-state pattern (inactive ~20min, active ~2min) |
-| **DD017** | [Hybrid Mechanistic-ML Framework](DD017_Hybrid_Mechanistic_ML_Framework.md) | DD001-DD005, DD010 | Differentiable backend (PyTorch ODE), SPH surrogate (1000× speedup), foundation model→params (ESM3/AlphaFold), learned sensory transduction |
+| **[DD007](DD007_Pharyngeal_System_Architecture.md)** | [Pharyngeal System Architecture](DD007_Pharyngeal_System_Architecture.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping oscillator |
+| **[DD009](DD009_Intestinal_Oscillator_Model.md)** | [Intestinal Oscillator Model](DD009_Intestinal_Oscillator_Model.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) (optional) | 20-cell IP3/Ca oscillator, defecation motor program (50±10s period), pBoc→aBoc→Exp sequence |
+| **[DD018](DD018_Egg_Laying_System_Architecture.md)** | [Egg-Laying System Architecture](DD018_Egg_Laying_System_Architecture.md) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | 28-cell reproductive circuit, HSN serotonergic, VC cholinergic, 16 sex muscles, two-state pattern (inactive ~20min, active ~2min) |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | [Hybrid Mechanistic-ML Framework](DD017_Hybrid_Mechanistic_ML_Framework.md) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | Differentiable backend (PyTorch ODE), SPH surrogate (1000× speedup), foundation model→params (ESM3/AlphaFold), learned sensory transduction |
 
 ---
 
@@ -130,19 +130,19 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
-| **DD004** | [Mechanical Cell Identity](DD004_Mechanical_Cell_Identity.md) | DD003, DD008, DD007/DD009 (cell positions) | Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion, WBbt ontology integration |
-| **DD014.2** | [Anatomical Mesh Deformation Pipeline](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | DD003, DD014 | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices, 60fps in WebGPU |
-| **DD014 (Phase 3)** | [Dynamic Visualization (Phase 3)](DD014_Dynamic_Visualization_Architecture.md) | DD014 Phase 2, DD014.2 | Three.js + WebGPU, **molecular scale** (gene expression, ion channels per DD014.1 Mockups 10-14), static site deployment to viewer.openworm.org |
+| **[DD004](DD004_Mechanical_Cell_Identity.md)** | [Mechanical Cell Identity](DD004_Mechanical_Cell_Identity.md) | [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD007](DD007_Pharyngeal_System_Architecture.md)/DD009 (cell positions) | Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion, WBbt ontology integration |
+| **[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)** | [Anatomical Mesh Deformation Pipeline](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | [DD003](DD003_Body_Physics_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices, 60fps in WebGPU |
+| **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 3)** | [Dynamic Visualization (Phase 3)](DD014_Dynamic_Visualization_Architecture.md) | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2, [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Three.js + WebGPU, **molecular scale** (gene expression, ion channels per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 10-14), static site deployment to viewer.openworm.org |
 
 ---
 
-### Governance & Process (Can Deploy Anytime After DD011/DD012)
+### Governance & Process (Can Deploy Anytime After [DD011](DD011_Contributor_Progression_Model.md)/DD012)
 
 | DD | Title | Status | What It Enables |
 |----|-------|--------|----------------|
-| **DD011** | [Contributor Progression Model](DD011_Contributor_Progression_Model.md) | ⚠️ Proposed | L0-L5 meritocratic ladder, badge system, subsystem ownership, teach-back learning for AI agent sponsors |
-| **DD012** | [Design Document RFC Process](DD012_Design_Document_RFC_Process.md) | ⚠️ Proposed | DD template, RFC workflow, Mind-of-a-Worm automated compliance checking |
-| **DD015** | [AI-Native Contributor Model](DD015_AI_Contributor_Model.md) | ⚠️ Proposed (depends on DD011/DD012) | Autonomous AI agents as independent contributors, GitHub bot, Moltbook-inspired, sponsor knowledge profiles |
+| **[DD011](DD011_Contributor_Progression_Model.md)** | [Contributor Progression Model](DD011_Contributor_Progression_Model.md) | ⚠️ Proposed | L0-L5 meritocratic ladder, badge system, subsystem ownership, teach-back learning for AI agent sponsors |
+| **[DD012](DD012_Design_Document_RFC_Process.md)** | [Design Document RFC Process](DD012_Design_Document_RFC_Process.md) | ⚠️ Proposed | DD template, RFC workflow, Mind-of-a-Worm automated compliance checking |
+| **[DD015](DD015_AI_Contributor_Model.md)** | [AI-Native Contributor Model](DD015_AI_Contributor_Model.md) | ⚠️ Proposed (depends on [DD011](DD011_Contributor_Progression_Model.md)/DD012) | Autonomous AI agents as independent contributors, GitHub bot, Moltbook-inspired, sponsor knowledge profiles |
 
 ---
 
@@ -150,9 +150,9 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 | DD | Title | Status | What It Provides |
 |----|-------|--------|------------------|
-| **DD008** | [Data Integration Pipeline](DD008_Data_Integration_Pipeline.md) | Accepted (partial) | OWMeta semantic knowledge graph (Phase 3+); Phase 1-2 use DD020 `cect` directly |
-| **DD010** | [Validation Framework](DD010_Validation_Framework.md) | Accepted (partial) | 3-tier validation (Tier 1: electrophysiology, Tier 2: functional connectivity, Tier 3: behavioral kinematics) |
-| **DD014.1** | [Visual Rendering Specification](DD014.1_Visual_Rendering_Specification.md) | ⚠️ Proposed | Canonical color palette (37 Virtual Worm materials), activity-state dynamic colors, molecular-scale palette, lighting, 14 reference mockups. Companion to DD014. |
+| **[DD008](DD008_Data_Integration_Pipeline.md)** | [Data Integration Pipeline](DD008_Data_Integration_Pipeline.md) | Accepted (partial) | OWMeta semantic knowledge graph (Phase 3+); Phase 1-2 use [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) `cect` directly |
+| **[DD010](DD010_Validation_Framework.md)** | [Validation Framework](DD010_Validation_Framework.md) | Accepted (partial) | 3-tier validation (Tier 1: electrophysiology, Tier 2: functional connectivity, Tier 3: behavioral kinematics) |
+| **[DD014.1](DD014.1_Visual_Rendering_Specification.md)** | [Visual Rendering Specification](DD014.1_Visual_Rendering_Specification.md) | ⚠️ Proposed | Canonical color palette (37 Virtual Worm materials), activity-state dynamic colors, molecular-scale palette, lighting, 14 reference mockups. Companion to [DD014](DD014_Dynamic_Visualization_Architecture.md). |
 
 ---
 
@@ -166,17 +166,17 @@ Design Documents are the **technical roadmap** from today's 302-neuron simulatio
 
 ## Template & Reference
 
-- **DD012:** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
-- **DD005:** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use DD005 as your model when writing a new DD.
-- **DD001:** Example of Quick Action Reference table (7 key questions answered at the top)
+- **[DD012](DD012_Design_Document_RFC_Process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
+- **[DD005](DD005_Cell_Type_Differentiation_Strategy.md):** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as your model when writing a new DD.
+- **[DD001](DD001_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
 
-All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** table answering:
+All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
 1. What does this produce?
-2. Success metric (which DD010 tier, quantitative threshold)
+2. Success metric (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
 3. Repository (GitHub link, issue label convention)
 4. Config toggle (openworm.yml keys)
 5. Build & test (docker commands, green-light criteria)
-6. Visualize (DD014 layer, color mapping, what you should see)
+6. Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
 7. CI gate (what blocks merge)
 
 ---
@@ -191,10 +191,10 @@ All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** 
 3. Check the DD's Integration Contract (what it consumes from other DDs, what it produces)
 4. Implement according to the DD's specifications
 5. Run the DD's validation procedure (`docker compose run quick-test`, `docker compose run validate`)
-6. Reference the DD number in your PR description (e.g., "Implements DD005 CeNGEN calibration")
+6. Reference the DD number in your PR description (e.g., "Implements [DD005](DD005_Cell_Type_Differentiation_Strategy.md) CeNGEN calibration")
 
 **If you disagree with a DD:**
-1. Propose a new DD that supersedes it (follow DD012 RFC process)
+1. Propose a new DD that supersedes it (follow [DD012](DD012_Design_Document_RFC_Process.md) RFC process)
 2. Do NOT silently deviate from an accepted DD without approval
 
 ### For Reviewers (L3+)
@@ -206,16 +206,16 @@ All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** 
    - Check the DD's "Depends On Me" table in Integration Contract
    - Tag maintainers of consuming DDs for coordination
    - Require integration test evidence (`docker compose run validate` output)
-4. If the PR deviates from a DD, request justification or DD amendment via DD012 RFC
+4. If the PR deviates from a DD, request justification or DD amendment via [DD012](DD012_Design_Document_RFC_Process.md) RFC
 
 ### For Mind-of-a-Worm AI
 
 **Automated compliance checking:**
-- Parse PR files to identify affected subsystems (e.g., `c302/` → DD001, DD005, DD006)
+- Parse PR files to identify affected subsystems (e.g., `c302/` → [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
 - Retrieve relevant DDs and their Integration Contracts
 - Check:
-  - ✅ NeuroML validation (DD001, DD002: `jnml -validate` must pass)
-  - ✅ Unit compliance (DD010: biophysical units correct)
+  - ✅ NeuroML validation ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md): `jnml -validate` must pass)
+  - ✅ Unit compliance ([DD010](DD010_Validation_Framework.md): biophysical units correct)
   - ✅ Parameter ranges (conductances, voltages, time constants within DD-specified ranges)
   - ⚠️ Coupling interface changes (flag if output variables, file formats, or OME-Zarr schema modified)
   - ❌ Alternatives-considered violations (re-proposing explicitly rejected approaches)
@@ -245,9 +245,9 @@ All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** 
 ```
 
 **Status definitions:**
-- ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via DD012 RFC.
+- ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [DD012](DD012_Design_Document_RFC_Process.md) RFC.
 - ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
-- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., DD021 blocked on toolbox dormancy).
+- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
 - 📦 **Archived / Backburner:** Deferred or superseded. Do not implement without reopening discussion.
 - **Superseded:** Replaced by a newer DD. Reference the superseding DD number.
 - **Rejected:** Explicitly not adopted. Alternatives Considered section documents why.
@@ -257,52 +257,52 @@ All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** 
 ## Cross-Reference by Topic
 
 ### Neural Systems
-- **Core:** DD001 (302-neuron HH architecture, graded synapses, Level C1)
-- **Differentiation:** DD005 (128 neuron classes from CeNGEN scRNA-seq)
-- **Modulation:** DD006 (31,479 neuropeptide-receptor interactions, GPCR modulation, seconds timescale)
-- **Pharynx:** DD007 (20 pharyngeal neurons, pumping circuit)
-- **Egg-Laying:** DD018 (2 HSN serotonergic command neurons, 6 VC cholinergic motor neurons)
-- **Touch:** DD019 (6 touch receptor neurons: ALM, AVM, PLM; tap withdrawal circuit, MEC-4 channel)
+- **Core:** [DD001](DD001_Neural_Circuit_Architecture.md) (302-neuron HH architecture, graded synapses, Level C1)
+- **Differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN scRNA-seq)
+- **Modulation:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (31,479 neuropeptide-receptor interactions, GPCR modulation, seconds timescale)
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal neurons, pumping circuit)
+- **Egg-Laying:** [DD018](DD018_Egg_Laying_System_Architecture.md) (2 HSN serotonergic command neurons, 6 VC cholinergic motor neurons)
+- **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (6 touch receptor neurons: ALM, AVM, PLM; tap withdrawal circuit, MEC-4 channel)
 
 ### Muscle Systems
-- **Body Wall:** DD002 (95 muscles, Ca²⁺→force coupling, Boyle & Cohen 2008 parameters)
-- **Pharynx:** DD007 (20 pharyngeal muscles, nonstriated, plateau potentials, gap-junction-synchronized)
-- **Reproductive:** DD018 (16 sex muscles: 8 vulval [vm1, vm2], 8 uterine [um1, um2]; EGL-19/UNC-103 channels)
+- **Body Wall:** [DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, Ca²⁺→force coupling, Boyle & Cohen 2008 parameters)
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal muscles, nonstriated, plateau potentials, gap-junction-synchronized)
+- **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (16 sex muscles: 8 vulval [vm1, vm2], 8 uterine [um1, um2]; EGL-19/UNC-103 channels)
 
 ### Body Mechanics
-- **Physics Engine:** DD003 (Sibernetic SPH, ~100K particles, PCISPH incompressibility, elastic bonds, muscle force injection)
-- **Cell Identity:** DD004 (per-particle cell IDs from WBbt ontology, 959 somatic cells, cell-type-specific elasticity/adhesion multipliers)
-- **Mesh Deformation:** DD014.2 (GPU skinning, cage-based MVC, PBD collision for Virtual Worm's 688 meshes)
-- **Strain Readout:** DD019 (cuticle strain from SPH particles for mechanotransduction)
+- **Physics Engine:** [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic SPH, ~100K particles, PCISPH incompressibility, elastic bonds, muscle force injection)
+- **Cell Identity:** [DD004](DD004_Mechanical_Cell_Identity.md) (per-particle cell IDs from WBbt ontology, 959 somatic cells, cell-type-specific elasticity/adhesion multipliers)
+- **Mesh Deformation:** [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (GPU skinning, cage-based MVC, PBD collision for Virtual Worm's 688 meshes)
+- **Strain Readout:** [DD019](DD019_Closed_Loop_Touch_Response.md) (cuticle strain from SPH particles for mechanotransduction)
 
 ### Organ Systems
-- **Pharynx:** DD007 (63 cells total: 20 neurons + 20 muscles + 9 epithelial + 9 marginal + 4 gland + 1 valve; 3-4 Hz pumping)
-- **Intestine:** DD009 (20 cells, IP3 receptor-mediated Ca²⁺ oscillator, defecation motor program 50±10s period)
-- **Reproductive:** DD018 (28-cell egg-laying circuit: 2 HSN + 6 VC + 16 sex muscles + 4 uv1 feedback cells; two-state pattern)
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (63 cells total: 20 neurons + 20 muscles + 9 epithelial + 9 marginal + 4 gland + 1 valve; 3-4 Hz pumping)
+- **Intestine:** [DD009](DD009_Intestinal_Oscillator_Model.md) (20 cells, IP3 receptor-mediated Ca²⁺ oscillator, defecation motor program 50±10s period)
+- **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (28-cell egg-laying circuit: 2 HSN + 6 VC + 16 sex muscles + 4 uv1 feedback cells; two-state pattern)
 
 ### Sensory Systems
-- **Touch:** DD019 (MEC-4/MEC-10 DEG/ENaC mechanosensory channel, ALM/AVM/PLM gentle touch, PVD harsh touch)
-- **Other Modalities:** DD017 Component 4 (learned sensory transduction, ML-based) — mechanistic models deferred to Phase 5+
+- **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (MEC-4/MEC-10 DEG/ENaC mechanosensory channel, ALM/AVM/PLM gentle touch, PVD harsh touch)
+- **Other Modalities:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory transduction, ML-based) — mechanistic models deferred to Phase 5+
 
 ### Data & Validation
-- **Connectome:** DD020 (`cect` API v0.2.7, Cook2019Herm default, 30+ datasets including Witvliet developmental series, Ripoll-Sanchez neuropeptides, Wang 2024 neurotransmitters)
-- **Data Integration:** DD008 (OWMeta semantic RDF graph; Phase 3+ wraps DD020 `cect` internally)
-- **Movement Validation:** DD021 (open-worm-analysis-toolbox revival, WCON 1.0 spec, 5 kinematic metrics, Tier 3 behavioral validation)
-- **Validation Framework:** DD010 (3 tiers: Tier 1 electrophysiology, Tier 2 functional connectivity r > 0.5, Tier 3 behavioral ±15%)
+- **Connectome:** [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (`cect` API v0.2.7, Cook2019Herm default, 30+ datasets including Witvliet developmental series, Ripoll-Sanchez neuropeptides, Wang 2024 neurotransmitters)
+- **Data Integration:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta semantic RDF graph; Phase 3+ wraps [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) `cect` internally)
+- **Movement Validation:** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (open-worm-analysis-toolbox revival, WCON 1.0 spec, 5 kinematic metrics, Tier 3 behavioral validation)
+- **Validation Framework:** [DD010](DD010_Validation_Framework.md) (3 tiers: Tier 1 electrophysiology, Tier 2 functional connectivity r > 0.5, Tier 3 behavioral ±15%)
 
 ### Infrastructure & Integration
-- **Simulation Stack:** DD013 (Docker multi-stage build, openworm.yml config system, versions.lock pinning, CI/CD pipeline, Integration Maintainer role definition)
-- **Visualization:** DD014 (OME-Zarr export pipeline, Trame→Three.js evolution, 3-phase roadmap: post-hoc → interactive → public static site)
-  - **DD014.1:** Visual Rendering Specification (37 Virtual Worm material colors, activity-state dynamic colors, molecular-scale palette, lighting, 14 reference mockups)
-  - **DD014.2:** Anatomical Mesh Deformation Pipeline (GPU skinning, cage-based MVC, PBD collision for ~1.6M vertices; spine-based Phase 1 shortcut)
+- **Simulation Stack:** [DD013](DD013_Simulation_Stack_Architecture.md) (Docker multi-stage build, openworm.yml config system, versions.lock pinning, CI/CD pipeline, Integration Maintainer role definition)
+- **Visualization:** [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr export pipeline, Trame→Three.js evolution, 3-phase roadmap: post-hoc → interactive → public static site)
+  - **[DD014.1](DD014.1_Visual_Rendering_Specification.md):** Visual Rendering Specification (37 Virtual Worm material colors, activity-state dynamic colors, molecular-scale palette, lighting, 14 reference mockups)
+  - **[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md):** Anatomical Mesh Deformation Pipeline (GPU skinning, cage-based MVC, PBD collision for ~1.6M vertices; spine-based Phase 1 shortcut)
 
 ### Governance & Process
-- **Contributor Model:** DD011 (L0-L5 progression, badge system [orientation, skill, domain, teach-back, community, milestone], subsystem ownership map)
-- **RFC Process:** DD012 (DD template with required sections, RFC approval workflow, Mind-of-a-Worm enforcement, alternatives-considered requirement)
-- **AI Contributors:** DD015 (autonomous AI agents as L1-L3 contributors [L4 ceiling], GitHub bot, sponsor knowledge profiles, teach-back education, Moltbook-inspired)
+- **Contributor Model:** [DD011](DD011_Contributor_Progression_Model.md) (L0-L5 progression, badge system [orientation, skill, domain, teach-back, community, milestone], subsystem ownership map)
+- **RFC Process:** [DD012](DD012_Design_Document_RFC_Process.md) (DD template with required sections, RFC approval workflow, Mind-of-a-Worm enforcement, alternatives-considered requirement)
+- **AI Contributors:** [DD015](DD015_AI_Contributor_Model.md) (autonomous AI agents as L1-L3 contributors [L4 ceiling], GitHub bot, sponsor knowledge profiles, teach-back education, Moltbook-inspired)
 
 ### Hybrid & Advanced
-- **Mechanistic-ML Hybrid:** DD017 (4 components: differentiable simulation backend [PyTorch], neural surrogate for SPH [FNO], foundation model→ODE parameters [ESM3→conductances], learned sensory transduction [RNN]; ML at boundaries, mechanistic core preserved)
+- **Mechanistic-ML Hybrid:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (4 components: differentiable simulation backend [PyTorch], neural surrogate for SPH [FNO], foundation model→ODE parameters [ESM3→conductances], learned sensory transduction [RNN]; ML at boundaries, mechanistic core preserved)
 
 ---
 
@@ -313,7 +313,7 @@ All science DDs (DD001-DD009, DD018-DD019) include a **Quick Action Reference** 
 **Before writing a DD, ask:**
 - Does this advance the mission ("world's first virtual organism")?
 - Does it maintain physical realism ("soft and squishy")?
-- Is it experimentally validated (DD010 tiers)?
+- Is it experimentally validated ([DD010](DD010_Validation_Framework.md) tiers)?
 - Is it open source and causally interpretable?
 
 **If yes to all:** Proceed. **If no:** Reconsider or clarify how it serves the mission.
@@ -331,13 +331,13 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template structure. Use [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
 
-**Required sections (from DD012):**
+**Required sections (from [DD012](DD012_Design_Document_RFC_Process.md)):**
 - TL;DR (2-3 sentences)
-- Goal & Success Criteria (which DD010 tier, quantitative threshold)
+- Goal & Success Criteria (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
 - Deliverables (exact files, paths, formats)
 - Repository & Issues (GitHub repo, issue label, branch convention)
 - How to Build & Test (copy-pasteable commands, green-light criteria)
-- How to Visualize (DD014 layer, color mapping, what you should see)
+- How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
 - Technical Approach (equations, parameters, algorithms)
 - Alternatives Considered (why other approaches were rejected)
 - Quality Criteria (testable acceptance criteria)
@@ -385,21 +385,21 @@ Once DD is approved and merged:
 
 ## Examples of Excellent Design Documents
 
-### DD005 (Cell-Type Differentiation) — REFERENCE IMPLEMENTATION
+### [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) — REFERENCE IMPLEMENTATION
 
 **Why it's excellent:**
 - ✅ **TL;DR at top** — Reader knows what/why/success metric in 3 sentences (lines 12-14)
 - ✅ **Mission-aligned** — Uses CeNGEN (world's largest single-cell atlas for any organism) to create biologically distinct neurons, advancing toward "virtual organism"
-- ✅ **Goal & Success Criteria** — DD010 Tier 2, quantitative threshold (≥20% improvement in functional connectivity), before/after comparison table
+- ✅ **Goal & Success Criteria** — [DD010](DD010_Validation_Framework.md) Tier 2, quantitative threshold (≥20% improvement in functional connectivity), before/after comparison table
 - ✅ **Deliverables** — Exact files (128 `.cell.nml` files), paths (`cells/AVALCell.cell.nml`), formats (NeuroML 2 XML), example metadata snippet
 - ✅ **Repository & Issues** — `openworm/c302`, issue label `dd005`, branch convention `dd005/description`, example PR title
 - ✅ **How to Build & Test** — 8 copy-pasteable commands, green-light criteria (simulation completes, r > 0.5, kinematics within ±15%), scripts marked `[TO BE CREATED]` with tracking
-- ✅ **How to Visualize** — DD014 neural/ layer, color-by-neuron-class mode (128 distinct colors), what you should see
+- ✅ **How to Visualize** — [DD014](DD014_Dynamic_Visualization_Architecture.md) neural/ layer, color-by-neuron-class mode (128 distinct colors), what you should see
 - ✅ **Technical Approach** — 6-step pipeline (CeNGEN → gene→channel mapping → calibration → cell generation → network generation → validation) with code examples
 - ✅ **7 alternatives considered** — AlphaFold+MD, direct electrophysiology, foundation model regression, manual curation, uniform random, clustering, wait-for-data — all rejected with rationale
 - ✅ **Integration Contract** — Complete with all 5 required sub-sections (inputs/outputs, repository & packaging, configuration with openworm.yml keys and valid ranges, how to test with per-PR checklist, how to visualize with OME-Zarr groups, coupling dependencies with upstream/downstream tables)
 
-### DD001 (Neural Circuit Architecture)
+### [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture)
 
 **Why it's excellent:**
 - ✅ **Quick Action Reference** — 7-question table at top (lines 11-22) answers contributor questions immediately
@@ -413,7 +413,7 @@ Once DD is approved and merged:
 
 ## Anti-Patterns (What NOT to Do)
 
-From DD012 Quality Criteria section:
+From [DD012](DD012_Design_Document_RFC_Process.md) Quality Criteria section:
 
 **❌ Too vague:**
 > "We should use realistic channel models."
@@ -428,7 +428,7 @@ From DD012 Quality Criteria section:
 **❌ No validation:**
 > "Implement IP3 receptor model."
 
-*How do you know if it works? What's the acceptance test? Which DD010 tier?*
+*How do you know if it works? What's the acceptance test? Which [DD010](DD010_Validation_Framework.md) tier?*
 
 **❌ Scope creep:**
 > "This DD covers neurons, muscles, intestine, hypodermis, and gonad."
@@ -438,7 +438,7 @@ From DD012 Quality Criteria section:
 **❌ Buried punchline:**
 > Validation goal appears at line 300 instead of the Goal section (line 30).
 
-*Lead with WHY and WHAT (impact), end with HOW (background). DD012 template enforces this.*
+*Lead with WHY and WHAT (impact), end with HOW (background). [DD012](DD012_Design_Document_RFC_Process.md) template enforces this.*
 
 **❌ Phantom scripts:**
 > Commands reference `validate_network.py` with no tracking, no `[TO BE CREATED]` marker.
@@ -446,9 +446,9 @@ From DD012 Quality Criteria section:
 *Mark all non-existent scripts `[TO BE CREATED]` with GitHub issue link or #TBD (to be replaced with real issue after dd_issue_generator.py runs).*
 
 **❌ Disconnected from viewer:**
-> No "How to Visualize" section, no mention of DD014 layers.
+> No "How to Visualize" section, no mention of [DD014](DD014_Dynamic_Visualization_Architecture.md) layers.
 
-*Contributors can't see what they're building. Every science DD must specify its DD014 visualization.*
+*Contributors can't see what they're building. Every science DD must specify its [DD014](DD014_Dynamic_Visualization_Architecture.md) visualization.*
 
 **❌ No repo guidance:**
 > Doesn't specify which GitHub repo, where to file issues, branch naming convention.
@@ -463,10 +463,10 @@ From DD012 Quality Criteria section:
 A: No. Trivial fixes (typos, dead link updates, comment improvements) do not require DDs.
 
 **Q: Do I need a DD to add a new neuron to the connectome?**
-A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth (DD020), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
+A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
 
 **Q: Can I modify an accepted DD?**
-A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through DD012 RFC process. L4 maintainer or founder approves amendments.
+A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [DD012](DD012_Design_Document_RFC_Process.md) RFC process. L4 maintainer or founder approves amendments.
 
 **Q: What if my DD is rejected?**
 A: The rejection itself is documented (DD status → Rejected, Alternatives Considered explains why). You (and future contributors) now know that approach was considered and why it doesn't serve the mission. This preserves institutional memory.
@@ -474,16 +474,16 @@ A: The rejection itself is documented (DD status → Rejected, Alternatives Cons
 **Q: How do DDs relate to the Scientific Advisory Board?**
 A: DDs with major scientific implications (e.g., choosing what biological detail to model, which validation targets to prioritize) should be reviewed by SAB before final approval. L4 maintainers coordinate SAB review for their subsystem.
 
-**Q: What's the difference between DD014, DD014.1, and DD014.2?**
-A: DD014 is the main visualization architecture (data pipeline, viewer framework, phase roadmap). DD014.1 (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). DD014.2 (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles. Together they fully specify the visualization system.
+**Q: What's the difference between [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)?**
+A: [DD014](DD014_Dynamic_Visualization_Architecture.md) is the main visualization architecture (data pipeline, viewer framework, phase roadmap). [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles. Together they fully specify the visualization system.
 
-**Note:** DD014.1/b will be renumbered to DD014.1/DD014.2 in a future update for consistency.
+**Note:** [DD014.1](DD014.1_Visual_Rendering_Specification.md)/b will be renumbered to [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 in a future update for consistency.
 
 **Q: Where are the GitHub issues for DD implementation?**
-A: Not yet created. After DDs are approved, `dd_issue_generator.py` (DD015) will auto-generate GitHub issues from Integration Contract sections. All `#TBD` markers in DDs will be replaced with real issue numbers.
+A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([DD015](DD015_AI_Contributor_Model.md)) will auto-generate GitHub issues from Integration Contract sections. All `#TBD` markers in DDs will be replaced with real issue numbers.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs (DD001-003, DD020) are Accepted because they're implemented and working. Phase A-4 DDs (DD004-DD019, DD021) are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A-4 DDs ([DD004](DD004_Mechanical_Cell_Identity.md)-[DD019](DD019_Closed_Loop_Touch_Response.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
 
 ---
 
@@ -497,5 +497,5 @@ A: Phase 0 DDs (DD001-003, DD020) are Accepted because they're implemented and w
 ---
 
 **Maintained by:** Founder (Stephen Larson) + L4 Senior Contributors (when appointed)
-**Next Review:** After Phase A completion (update based on DD013/DD021 implementation experience)
+**Next Review:** After Phase A completion (update based on [DD013](DD013_Simulation_Stack_Architecture.md)/DD021 implementation experience)
 **Living Document:** This README evolves as DDs are added, phases complete, and architecture matures

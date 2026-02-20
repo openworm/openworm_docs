@@ -14,14 +14,14 @@ The definitive documentation for Geppetto [is available online](http://docs.gepp
 
 ## Why the Evolution?
 
-DD014 evaluated Geppetto against alternatives and chose Trame because:
+[DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) evaluated Geppetto against alternatives and chose Trame because:
 
 - **Language mismatch:** Geppetto is Java; most OpenWorm contributors write Python
 - **Scalability:** Requires a server process per client; doesn't work for a public viewer
 - **Maintenance:** Not updated for WebGPU (the next generation of browser graphics)
 - **Weight:** Trame is lighter and actively maintained
 
-## Current Visualization Roadmap (DD014)
+## Current Visualization Roadmap ([DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md))
 
 | Phase | Technology | Capability |
 |-------|-----------|------------|

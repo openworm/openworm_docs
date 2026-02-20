@@ -117,36 +117,36 @@
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in the [openworm-admin repository](https://github.com/openworm/openworm-admin/tree/main/design_documents).
-    **Total:** 25 DDs (DD001-DD023 + DD014.1/DD014.2 + DD016 archived)
+    **Total:** 25 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
 
 ### By Topic
 
 **Neural Systems:**
-DD001 (architecture), DD005 (differentiation), DD006 (neuropeptides), DD007 (pharynx neurons), DD018 (egg-laying HSN/VC), DD019 (touch neurons)
+[DD001](DD001_Neural_Circuit_Architecture.md) (architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx neurons), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying HSN/VC), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch neurons)
 
 **Muscle Systems:**
-DD002 (body wall), DD007 (pharyngeal), DD018 (reproductive)
+[DD002](DD002_Muscle_Model_Architecture.md) (body wall), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharyngeal), [DD018](DD018_Egg_Laying_System_Architecture.md) (reproductive)
 
 **Body Mechanics:**
-DD003 (SPH), DD004 (cell identity), DD014.2 (mesh deformation), DD019 (strain readout)
+[DD003](DD003_Body_Physics_Architecture.md) (SPH), [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD019](DD019_Closed_Loop_Touch_Response.md) (strain readout)
 
 **Organ Systems:**
-DD007 (pharynx), DD009 (intestine), DD018 (egg-laying)
+[DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx), [DD009](DD009_Intestinal_Oscillator_Model.md) (intestine), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying)
 
 **Sensory Systems:**
-DD019 (touch/MEC-4), DD022 (environment), DD023 (proprioception)
+[DD019](DD019_Closed_Loop_Touch_Response.md) (touch/MEC-4), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (environment), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception)
 
 **Data & Validation:**
-DD008 (OWMeta), DD010 (3-tier validation), DD020 (connectome/cect), DD021 (movement toolbox)
+[DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (3-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox)
 
 **Infrastructure:**
-DD013 (simulation stack), DD014 (visualization), DD014.1 (visual rendering), DD014.2 (mesh deformation)
+[DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
 
 **Governance:**
-DD011 (contributor progression), DD012 (RFC process), DD015 (AI contributors)
+[DD011](DD011_Contributor_Progression_Model.md) (contributor progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC process), [DD015](DD015_AI_Contributor_Model.md) (AI contributors)
 
 **Hybrid/Advanced:**
-DD017 (mechanistic-ML hybrid)
+[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid)
 
 ---
 
@@ -154,7 +154,7 @@ DD017 (mechanistic-ML hybrid)
 
 ### For Contributors
 
-1. **Find a DD** matching your interest (neural modeling → DD001, visualization → DD014, etc.)
+1. **Find a DD** matching your interest (neural modeling → [DD001](DD001_Neural_Circuit_Architecture.md), visualization → [DD014](DD014_Dynamic_Visualization_Architecture.md), etc.)
 2. **Read the "How to Build & Test" section** — copy-pasteable commands, green-light criteria
 3. **Check Integration Contract** — what the DD consumes from other DDs, what it produces
 4. **Implement according to spec** — DDs define quality criteria and validation procedures

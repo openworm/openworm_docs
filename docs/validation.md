@@ -81,9 +81,9 @@ Beyond the 3-tier framework for locomotion, organ systems have their own validat
 
 | Organ | DD | Validation Metric | Target |
 |-------|----|-------------------|--------|
-| **Pharynx** | DD007 | Pumping frequency | 3-4 Hz |
-| **Intestine** | DD009 | Defecation cycle period | 50 +/- 10 seconds |
-| **Egg-laying** | DD018 | Active/inactive pattern | ~20 min inactive, ~2 min active |
+| **Pharynx** | [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) | Pumping frequency | 3-4 Hz |
+| **Intestine** | [DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Defecation cycle period | 50 +/- 10 seconds |
+| **Egg-laying** | [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) | Active/inactive pattern | ~20 min inactive, ~2 min active |
 
 ---
 
