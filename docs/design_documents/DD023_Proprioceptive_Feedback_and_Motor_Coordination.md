@@ -1,6 +1,6 @@
 # DD023: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
-**Status:** Proposed (Phase 2-3, after [DD019](DD019_Closed_Loop_Touch_Response.md))  
+**Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md))  
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-19  
 **Supersedes:** None  
@@ -154,7 +154,7 @@ This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Bee
 ---
 
 **Approved by:** Pending
-**Implementation Status:** Proposed (Phase 2-3, after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
+**Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
 **Next Actions:**
 
 1. Contact CE_locomotion authors (collaboration opportunity)

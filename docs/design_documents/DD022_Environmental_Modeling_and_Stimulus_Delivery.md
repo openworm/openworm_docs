@@ -1,6 +1,6 @@
 # DD022: Environmental Modeling and Stimulus Delivery
 
-**Status:** Proposed (Phase 2-3)  
+**Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))  
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-19  
 **Supersedes:** None  
@@ -188,7 +188,7 @@ Similar to chemical gradient but for temperature:
 ---
 
 **Approved by:** Pending
-**Implementation Status:** Proposed (Phase 2-3)
+**Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
 **Next Actions:**
 
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
