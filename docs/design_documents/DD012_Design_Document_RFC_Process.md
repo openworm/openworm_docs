@@ -282,20 +282,20 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 1. Mind-of-a-Worm identifies which subsystem (based on files modified)
 2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 3. Checks **subsystem compliance:**
-   - Are changes within the DD's scope?
-   - Do quality criteria pass? (e.g., NeuroML validation, test coverage)
-   - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when [DD001](DD001_Neural_Circuit_Architecture.md) explicitly rejected this)
+    - Are changes within the DD's scope?
+    - Do quality criteria pass? (e.g., NeuroML validation, test coverage)
+    - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when [DD001](DD001_Neural_Circuit_Architecture.md) explicitly rejected this)
 4. Checks **integration compliance** (Integration Contract section):
-   - Does the PR change any **output variable** listed in the DD's Integration Contract?
-   - If yes: Identify all **consuming DDs** from the Coupling Dependencies table and tag their maintainers
-   - Does the PR add configurable parameters? If yes: verify `openworm.yml` schema is updated
-   - Has the contributor run the integration test (`docker compose run quick-test`)?
+    - Does the PR change any **output variable** listed in the DD's Integration Contract?
+    - If yes: Identify all **consuming DDs** from the Coupling Dependencies table and tag their maintainers
+    - Does the PR add configurable parameters? If yes: verify `openworm.yml` schema is updated
+    - Has the contributor run the integration test (`docker compose run quick-test`)?
 5. Posts automated review comment:
-   - ✅ "Passes [DD001](DD001_Neural_Circuit_Architecture.md) quality criteria (NeuroML validates, units correct)"
-   - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with [DD001](DD001_Neural_Circuit_Architecture.md) Section 2.3"
-   - ⚠️ "**Integration alert:** This PR modifies calcium output format ([DD001](DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) and [DD003](DD003_Body_Physics_Architecture.md) (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
-   - ❌ "Violates [DD001](DD001_Neural_Circuit_Architecture.md): Uses IAF model for all neurons (rejected in [DD001](DD001_Neural_Circuit_Architecture.md) Alternatives)"
-   - ❌ "Missing integration test: No evidence of `docker compose run quick-test` in PR description"
+    - ✅ "Passes [DD001](DD001_Neural_Circuit_Architecture.md) quality criteria (NeuroML validates, units correct)"
+    - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with [DD001](DD001_Neural_Circuit_Architecture.md) Section 2.3"
+    - ⚠️ "**Integration alert:** This PR modifies calcium output format ([DD001](DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) and [DD003](DD003_Body_Physics_Architecture.md) (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
+    - ❌ "Violates [DD001](DD001_Neural_Circuit_Architecture.md): Uses IAF model for all neurons (rejected in [DD001](DD001_Neural_Circuit_Architecture.md) Alternatives)"
+    - ❌ "Missing integration test: No evidence of `docker compose run quick-test` in PR description"
 
 **Human reviewer** (L3+) considers Mind-of-a-Worm's assessment but makes final decision. **For PRs that modify coupling interfaces, at least one reviewer from each affected consuming subsystem must approve.**
 

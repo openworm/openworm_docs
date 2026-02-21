@@ -629,6 +629,34 @@ from tierpsy import ...  # (inspect their API)
 
 ---
 
+## Body-Reference Coordinate System for Deformation-Invariant Tracking
+
+Standard centroid-based trajectory tracking becomes unstable when the worm body undergoes large deformations (sharp bends, coils, omega turns). Zhao et al. (2024) proposed a Target Body Reference Coordinate System (TBRCS) that addresses this by computing an SVD-based rigid-body transformation between a standard (straight) body template and the deformed body at each timestep.
+
+**Approach:**
+
+1. Define N tracking points (e.g., 17) at standardized anatomical positions along the body surface (nose tip, pharynx boundary, vulva, anus, tail tip, plus intermediate points)
+2. At each timestep, compute the optimal rotation and translation (via singular value decomposition) that maps the standard body template to the current deformed body
+3. This transformation defines a body-frame origin, heading direction, and local coordinate axes at each timestep
+4. Compute all kinematic metrics in the body frame: forward speed, lateral speed, angular velocity, steering angle
+
+**Benefits:**
+
+- Forward velocity in the body frame is stable even during sharp turns (unlike Cartesian centroid velocity)
+- Steering angle is well-defined without requiring centerline extraction
+- Dorsoventral oscillation (relevant for 3D swimming) can be measured as the Z-component in the body frame
+- Compatible with existing WCON format — TBRCS metrics can be stored as additional feature columns
+
+**Integration with analysis toolbox:** These body-frame metrics should be added to the `WormFeatures` class as optional features, computed from the raw WCON trajectory data. They complement (not replace) the existing 5 kinematic metrics.
+
+**References:**
+
+- Stephens GJ, Johnson-Kerner B, Bialek W, Ryu WS (2008). "Dimensionality and dynamics in the behavior of *C. elegans*." *PLoS Comput Biol* 4:e1000028.
+- Broekmans OD, Rodgers JB, Ryu WS, Stephens GJ (2016). "Resolving coiled shapes reveals new reorientation behaviors in *C. elegans*." *eLife* 5:e17227.
+- Zhao et al. (2024) *Nat Comp Sci* 4:978-990.
+
+---
+
 ## Integration Contract
 
 ### Inputs (What This Subsystem Consumes)
@@ -822,6 +850,17 @@ The toolbox assumes 49 skeleton points per frame (Schafer lab convention). Siber
 While both tools implement [Yemini 2013](https://doi.org/10.1038/nmeth.2560), minor implementation differences may cause feature values to differ slightly. If OpenWorm later switches to Tierpsy, acceptance thresholds may need recalibration.
 
 **Future work:** Benchmark analysis toolbox vs. Tierpsy feature values on identical input data. Document any systematic offsets.
+
+### Existing Code Resources
+
+**SegWorm** ([openworm/SegWorm](https://github.com/openworm/SegWorm), 2016, MATLAB):
+Original Schafer lab code from Dr. Eviatar Yemini — the source code for the 726-feature phenotyping that `open-worm-analysis-toolbox` implements. Use as ground truth reference when reviving the Python toolbox; if implementations differ, defer to SegWorm.
+
+**tierpsy-tracker** ([openworm/tierpsy-tracker](https://github.com/openworm/tierpsy-tracker), maintained, OpenWorm fork):
+Modern successor to SegWorm + analysis toolbox, implementing the same 726-feature set (Yemini 2013). Python 3.x compatible and actively maintained upstream. **Evaluate whether tierpsy-tracker can replace the analysis toolbox revival entirely — potential savings of 33 hours.** If tierpsy reads WCON input natively, this is the preferred path.
+
+**WCONViewer** ([openworm/WCONViewer](https://github.com/openworm/WCONViewer), active 2025):
+Python-based 2D viewer for WCON files. Already reads WCON 1.0 format. Reuse its WCON parser for toolbox revival, or recommend as a lightweight alternative for quick trajectory inspection.
 
 ---
 

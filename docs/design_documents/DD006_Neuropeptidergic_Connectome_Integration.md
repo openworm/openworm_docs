@@ -37,6 +37,9 @@ Model the 31,479 neuropeptide-receptor interactions (already in the ConnectomeTo
 | **Secondary:** Peptide knockout phenotype reproduction | ≥3 known knockouts within 30% quantitative error | Tier 3 (blocking) |
 | **Tertiary:** Wild-type kinematic preservation | Within ±15% of baseline (peptides modulate, not destroy, locomotion) | Tier 3 (blocking) |
 | **Quaternary:** Conductance modulation range | All modulation factors in [0.5, 3.0] | Tier 1 (non-blocking) |
+| **Quaternary:** Behavioral state transitions | Dwelling/roaming transitions emerge from peptide modulation | Tier 4 (advisory) |
+
+**Behavioral states as a validation target:** *C. elegans* exhibits discrete, long-timescale behavioral states — notably the dwelling/roaming transition in foraging (Flavell et al. 2020). Dwelling animals move slowly with frequent reversals and high-angle turns; roaming animals move rapidly in long, straight runs. These transitions are governed by neuropeptidergic and serotonergic modulation, not by the fast synaptic connectome alone. A successful neuropeptidergic model should produce state-dependent locomotion patterns where global network excitability shifts on timescales of minutes, consistent with the rich behavioral repertoire observed in freely foraging animals (Flavell et al. 2020; Atanas et al. 2022).
 
 **Before:** 302 neurons connected only by ~5,000 chemical synapses and ~900 gap junctions — fast transmission only, no slow modulatory layer. The ConnectomeToolbox already stores the neuropeptidergic connectome as static adjacency data, but OpenWorm simulations don't use it.
 
@@ -339,9 +342,9 @@ Each neuropeptidergic connection in the toolbox stores:
 1. **Data Provenance:** Every modeled interaction must trace to the [Ripoll-Sanchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043) dataset. Include source DOI in metadata.
 
 2. **NeuroML 2 Extensions:** Neuropeptide signaling requires extending NeuroML to include:
-   - `<peptideRelease>` component type
-   - `<peptideReceptor>` component type
-   - `<modulatorySynapse>` (GPCR-mediated modulation)
+    - `<peptideRelease>` component type
+    - `<peptideReceptor>` component type
+    - `<modulatorySynapse>` (GPCR-mediated modulation)
 
    These extensions must follow LEMS syntax and be backward-compatible (i.e., simulations without peptides still run).
 
@@ -350,28 +353,28 @@ Each neuropeptidergic connection in the toolbox stores:
 4. **Distance Calculation:** Requires 3D cell positions. Source: WormAtlas 3D atlases, [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) nuclear positions, or [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions. Do not hardcode distances; compute from spatial data.
 
 5. **Modulation Magnitude Constraints:** Conductance modulation factors must be biophysically plausible:
-   - Minimum: 0.5x (50% reduction)
-   - Maximum: 3.0x (300% increase)
-   - Do not allow negative conductances or voltage flips (E_rev changes)
+    - Minimum: 0.5x (50% reduction)
+    - Maximum: 3.0x (300% increase)
+    - Do not allow negative conductances or voltage flips (E_rev changes)
 
 ### What Defines a Valid Implementation?
 
 6. **All 31,479 Interactions Included:** The Ripoll-Sanchez dataset is complete. Do not cherry-pick. If a peptide-receptor pair is in the dataset, it must be in the model (or explicitly flagged as excluded with justification).
 
 7. **NeuroML Extensions Validated:** The new `peptideRelease` and `peptideReceptor` component types must:
-   - Pass `jnml -validate`
-   - Be documented in a LEMS schema file
-   - Include example usage in a standalone test case
+    - Pass `jnml -validate`
+    - Be documented in a LEMS schema file
+    - Include example usage in a standalone test case
 
 8. **Timescale Validation:** Neuropeptide effects should:
-   - Onset: seconds (not milliseconds like synapses)
-   - Duration: tens of seconds to minutes
-   - Clearance: exponential decay with tau ~ 10-100 seconds
+    - Onset: seconds (not milliseconds like synapses)
+    - Duration: tens of seconds to minutes
+    - Clearance: exponential decay with tau ~ 10-100 seconds
 
 9. **Behavioral Phenotype Reproduction:** At least **3 known peptide knockout phenotypes** must be reproduced:
-   - FLP peptides -> locomotion changes
-   - NLP-12 -> reversal defects
-   - PDF-1 -> arousal modulation
+    - FLP peptides -> locomotion changes
+    - NLP-12 -> reversal defects
+    - PDF-1 -> arousal modulation
 
 10. **Computational Performance:** Adding neuropeptides must not increase simulation time by >50% compared to synaptic-only model. Profile and optimize if needed.
 
@@ -777,6 +780,11 @@ The neuropeptidergic connectome likely changes across L1, L4, adult, dauer stage
 
 **Future work:** Integrate with CeNGEN L1 and Packer et al. embryonic data to model stage-specific peptide signaling.
 
+### Existing Code Resources
+
+**wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
+Provides `PeptideGPCR.get_gpcrs_binding_to(peptides)` for neuropeptide-receptor deorphanization mapping. This complements the NeuroPAL dataset by providing programmatic access to peptide-GPCR binding data. **Estimated time savings: 15 hours.**
+
 ---
 
 ## References
@@ -810,6 +818,12 @@ The neuropeptidergic connectome likely changes across L1, L4, adult, dauer stage
 
 10. **Gleeson P, Vickneswaran Y, Ponzi A, Sinha A, Larson SD (in preparation).** "The *C. elegans* Connectome Toolbox: consolidating datasets on multimodal connectivity."
     *Describes the ConnectomeToolbox framework that consolidates all datasets above into a unified Python API (`cect` package).*
+
+11. **Flavell SW, Raizen DM, You YJ (2020).** "Behavioral States." *Genetics* 216:315-332.
+    *Comprehensive review of C. elegans behavioral states including dwelling/roaming, sleep, and arousal — key validation targets for neuropeptidergic modulation.*
+
+12. **Atanas AA, Kim J, Wang Z, Bueno E, et al. (2022).** "Brain-wide representations of behavior spanning multiple timescales and states in *C. elegans*." *bioRxiv*:2022.11.11.516186.
+    *Whole-brain imaging spanning behavioral states — demonstrates that neural activity patterns during dwelling vs. roaming reflect global network modulation, not just local circuit switching.*
 
 ---
 

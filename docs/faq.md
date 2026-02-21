@@ -135,7 +135,7 @@ There is not a single data source for our simulation; in fact one of our unique 
 
 ### Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 
-There have been [other modeling efforts in _C. elegans_ and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observed behaviors is still an open question. Our [DD_CODE_REUSE_OPPORTUNITIES](design_documents/DD_CODE_REUSE_OPPORTUNITIES.md) document identifies 15 existing repos with reusable code, potentially saving 200-300 hours of implementation.
+There have been [other modeling efforts in _C. elegans_ and their subsystems](http://www.artificialbrains.com/openworm#similar), as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observed behaviors is still an open question. Each Design Document includes an "Existing Code Resources" section identifying reusable repos from the OpenWorm GitHub org (15+ repos with production-ready data APIs, validated models, and infrastructure tools).
 
 ### How are neurons simulated today?
 

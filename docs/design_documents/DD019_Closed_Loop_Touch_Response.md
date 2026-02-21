@@ -616,27 +616,27 @@ class TapStimulus:
 ### What Defines a Valid Closed-Loop Touch Response Implementation?
 
 1. **MEC-4 Channel Electrophysiology:** The channel model must reproduce the key features of [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) recordings:
-   - Rapid onset (<5 ms from strain application)
-   - Peak current 50-150 pA for threshold strain
-   - Reversal potential near +10 mV
-   - Adaptation (current decays to <20% of peak within 200 ms of sustained strain)
+    - Rapid onset (<5 ms from strain application)
+    - Peak current 50-150 pA for threshold strain
+    - Reversal potential near +10 mV
+    - Adaptation (current decays to <20% of peak within 200 ms of sustained strain)
 
 2. **Strain Readout Physical Consistency:** Computed strain values must be:
-   - Zero when no external force is applied (resting state)
-   - Proportional to applied boundary displacement (linear regime)
-   - Spatially localized (strain at posterior should not affect anterior touch neurons)
-   - Temporally consistent with SPH timestep (no aliasing artifacts)
+    - Zero when no external force is applied (resting state)
+    - Proportional to applied boundary displacement (linear regime)
+    - Spatially localized (strain at posterior should not affect anterior touch neurons)
+    - Temporally consistent with SPH timestep (no aliasing artifacts)
 
 3. **Closed-Loop Stability:** The bidirectional coupling must not introduce:
-   - Oscillatory instability (positive feedback: strain → touch → motor → movement → more strain)
-   - Numerical divergence (NaN, infinite voltages, particle escape)
-   - Must remain stable for at least 30 seconds of simulated time
+    - Oscillatory instability (positive feedback: strain → touch → motor → movement → more strain)
+    - Numerical divergence (NaN, infinite voltages, particle escape)
+    - Must remain stable for at least 30 seconds of simulated time
 
 4. **Behavioral Correctness:**
-   - Anterior touch → backward locomotion (ALM/AVM → AVA pathway)
-   - Posterior touch → forward acceleration (PLM → AVB pathway)
-   - Whole-plate tap → backward (anterior-dominant response, as in real worms)
-   - No response without stimulus (baseline forward crawling preserved)
+    - Anterior touch → backward locomotion (ALM/AVM → AVA pathway)
+    - Posterior touch → forward acceleration (PLM → AVB pathway)
+    - Whole-plate tap → backward (anterior-dominant response, as in real worms)
+    - No response without stimulus (baseline forward crawling preserved)
 
 5. **Preservation of Existing Behavior:** With `sensory.mechanotransduction: false`, the simulation must produce identical results to the existing open-loop model. No regression in forward crawling kinematics.
 
@@ -842,6 +842,14 @@ Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows 
 2. Create a stimulus readout module (chemical concentration, temperature, stretch)
 3. Extend the bidirectional coupling script
 4. Validate the emergent behavior
+
+### Existing Code Resources
+
+**WormsenseLab_ASH** ([openworm/WormsenseLab_ASH](https://github.com/openworm/WormsenseLab_ASH), 2021, dormant):
+Contains ASH neuron patch clamp recordings. ASH is a polymodal nociceptor responding to mechanical, chemical, and osmotic stimuli — relevant for validating touch neuron models and extending beyond gentle touch.
+
+**CE_locomotion** ([openworm/CE_locomotion](https://github.com/openworm/CE_locomotion), active 2026):
+Contains `StretchReceptor.cpp/h` implementing proprioceptive feedback on B-class motor neurons (Wen et al. 2012 model). Directly relevant for the proprioceptive feedback deferred to [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md). **Estimated time savings: 30 hours.**
 
 ---
 

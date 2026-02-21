@@ -295,6 +295,16 @@ Jupyter notebook with pharyngeal muscle plateau model (Kenngott et al. 2025).
 
 ---
 
+### Existing Code Resources
+
+**pharyngeal_muscle_model** ([openworm/pharyngeal_muscle_model](https://github.com/openworm/pharyngeal_muscle_model), 2017, dormant but complete):
+Contains a NEURON implementation of pm3 pharyngeal muscle with EAT-2, EGL-19, UNC-2 Ca2+ channels — exactly the channels DD007 needs. Produces Ca2+ slow action potentials (plateau potentials, ~100ms duration) matching Raizen & Avery 1994 EPG recordings. Can be converted to NeuroML2 via pyNeuroML or used directly via NEURON. **Estimated time savings: 20-30 hours.**
+
+**PlateauNoiseModel** ([openworm/PlateauNoiseModel](https://github.com/openworm/PlateauNoiseModel), active 2025):
+Jupyter notebook with pharyngeal muscle plateau potential model and plotting code, related to Kenngott et al. 2025 paper. Provides validation data and reference kinetics for pharyngeal muscle models.
+
+---
+
 ## References
 
 1. **Raizen DM, Avery L (1994).** "Electrical activity and behavior in the pharynx of *Caenorhabditis elegans*." *Neuron* 12:483-495.

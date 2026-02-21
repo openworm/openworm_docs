@@ -165,10 +165,10 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 1. **Default to [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm** unless your DD explicitly requires a different dataset. [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) corrects the ~150 errors found in White 1986 and includes both sexes.
 
 2. **Never parse raw files.** All connectome data access MUST go through `cect` readers. The readers handle:
-   - Cell name normalization (e.g., `DB1/3` → `DB1`, `DB3`)
-   - Synapse type classification
-   - Consistent `ConnectionInfo` format
-   - Caching for fast repeated access
+    - Cell name normalization (e.g., `DB1/3` → `DB1`, `DB3`)
+    - Synapse type classification
+    - Consistent `ConnectionInfo` format
+    - Caching for fast repeated access
 
 3. **Specify the dataset explicitly.** Do not rely on `cect` defaults. Every consuming DD must name the dataset in its configuration or code:
    ```python
@@ -444,6 +444,10 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 4. **Validation caveat:** [DD010](DD010_Validation_Framework.md) kinematic benchmarks are from adult worms. Developmental stage simulations require stage-specific behavioral data for validation (limited availability).
 
 **Current recommendation:** Use Witvliet stages for cross-validation and sensitivity analysis, not as primary simulation input. [DD001](DD001_Neural_Circuit_Architecture.md)'s default remains [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm (adult).
+
+### Per-Synapse Spatial Position Data
+
+The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates along neurites, enabling spatially resolved synapse placement for multicompartmental neuron models ([DD001](DD001_Neural_Circuit_Architecture.md) Level E). Zhao et al. (2024) demonstrated that the distribution of synapse-to-soma distances along neurites is well-described by an inverse Gaussian distribution, fitted from these EM measurements. The ConnectomeToolbox `WitvlietDataReader` series may need extension to expose per-synapse position data, as current readers provide only neuron-level adjacency matrices.
 
 ---
 
@@ -799,6 +803,13 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 
 ---
 
+### Existing Code Resources
+
+**wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
+Complements `cect` with additional data not in the connectome: CeNGEN gene expression (`NeuroAtlas.get_gene_expression()`), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (`NeuroAtlas.get_signal_propagation_atlas()`), and neuropeptide/GPCR deorphanization (`PeptideGPCR` class). Consider adding to [DD013](DD013_Simulation_Stack_Architecture.md) Docker and `versions.lock`.
+
+---
+
 ## References
 
 1. **White JG, Southgate E, Thomson JN, Brenner S (1986).** "The structure of the nervous system of the nematode *Caenorhabditis elegans*." *Phil Trans R Soc B* 314:1-340.
@@ -824,6 +835,9 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 
 8. **Gleeson P et al. (in preparation).** "ConnectomeToolbox: a unified Python toolkit for *C. elegans* connectome data."
    *`cect` package preprint.*
+
+9. **Zhao M et al. (2024).** *Nat Comp Sci* 4:978-990.
+   *Per-synapse spatial data from Witvliet EM reconstructions modeled as inverse Gaussian distributions.*
 
 ---
 

@@ -107,6 +107,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | [DD012](DD012_Design_Document_RFC_Process.md) | Design Document RFC Process | Founder | ~8 hours | Governance |
 | [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression Model | Founder | ~8 hours | Governance |
 | [DD015](DD015_AI_Contributor_Model.md) | AI-Native Contributor Model | Founder | ~12 hours | Governance (AI agent workflow) |
+| **[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)** | Validation Data Acquisition Pipeline | Validation L4 (TBD) | ~18 hours | All validation tiers — data must exist before validation can run |
 
 **Key Deliverables:**
 
@@ -136,10 +137,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ OWMeta installs, `connect("openworm_data")` returns 302 neurons with WBbt IDs ([DD008](DD008_Data_Integration_Pipeline.md))
 - ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
 
-**Datasets Needed for Phase A:**
+**Datasets Needed for Phase A** (see [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for complete inventory)**:**
 
 - Schafer lab N2 baseline kinematics (WCON format, for Tier 3) — **Status:** Partial (MAT format exists, needs WCON conversion)
 - [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (302×302 correlation matrix) — **Status:** Needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020
+- Yemini 2013 behavioral phenotype statistics (grounding for ±15% threshold) — **Status:** Needs supplement download
+- Thomas 1990 defecation cycle data — **Status:** Needs digitization from paper
+- Raizen 1994 pumping EPG data — **Status:** Needs digitization from paper
+- O'Hagan 2005 MEC-4 channel kinetics — **Status:** Needs digitization from paper
+- Chalfie 1985 touch response latency data — **Status:** Needs digitization from paper
 
 **Blocking Dependencies:**
 
@@ -219,6 +225,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environmental Modeling & Stimulus Delivery | [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Agar substrate, chemical/thermal gradients, chemotaxis (CI >0.5) + thermotaxis |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
+| **[DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
 
 **Key Deliverables:**
 
@@ -265,6 +272,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **Thermotaxis behavioral data** | Hedgecock & Russell 1975, Mori & Ohshima 1995 | CSV (isothermal tracking, cultivation temp preference) | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) Tier 3 validation | ⚠️ Needs extraction from papers |
 | **B-class motor neuron stretch response** | Wen et al. 2012 | Calcium imaging (DB, VB response to body bending) | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) Tier 1 validation | ⚠️ Needs extraction from paper |
 | **CE_locomotion stretch receptor model** | [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) | C++ (StretchReceptor.cpp) | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) reference implementation | ✅ Available (repo active 2026-02-18) |
+| **BAAIWorm NMODL ion channel files and SWC morphology data** | [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0, Zenodo: [10.5281/zenodo.13951773](https://doi.org/10.5281/zenodo.13951773) | NMODL (.mod) + SWC (.swc) | [DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1 | ✅ Available (open-source) |
 
 **Blocking Dependencies:**
 

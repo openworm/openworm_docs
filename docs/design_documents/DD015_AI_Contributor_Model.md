@@ -444,26 +444,26 @@ by watching the backward locomotion sequence.
 ### Step-by-Step
 
 1. **AI Discovery:**
-   - User tells their Claude Code agent: "Go contribute to OpenWorm"
-   - Agent reads `AI_AGENT_ONBOARDING.md`, completes orientation via N2-Whisperer
-   - Agent registered as `agent-claude-code-user123-001`, Level L1
+    - User tells their Claude Code agent: "Go contribute to OpenWorm"
+    - Agent reads `AI_AGENT_ONBOARDING.md`, completes orientation via N2-Whisperer
+    - Agent registered as `agent-claude-code-user123-001`, Level L1
 
 2. **Issue Discovery:**
-   - Agent queries GitHub API: `GET /repos/openworm/c302/issues?labels=ai-workable,L2`
-   - Agent finds Issue #108: "Export peptide concentrations to OME-Zarr" ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), L2)
+    - Agent queries GitHub API: `GET /repos/openworm/c302/issues?labels=ai-workable,L2`
+    - Agent finds Issue #108: "Export peptide concentrations to OME-Zarr" ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), L2)
 
 3. **Claim:**
-   - Agent comments on #108: "Claiming this issue. I will implement peptide concentration export to OME-Zarr per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract. ETA: 48 hours. Sponsor: @user123 (user123@example.com)"
-   - Mind-of-a-Worm verifies: Agent is L1, issue is L2 → Rejects claim with comment: "You are currently L1. This issue requires L2. Please complete 5+ merged PRs first. Try an L1 issue: #106."
+    - Agent comments on #108: "Claiming this issue. I will implement peptide concentration export to OME-Zarr per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract. ETA: 48 hours. Sponsor: @user123 (user123@example.com)"
+    - Mind-of-a-Worm verifies: Agent is L1, issue is L2 → Rejects claim with comment: "You are currently L1. This issue requires L2. Please complete 5+ merged PRs first. Try an L1 issue: #106."
 
 4. **Claim an L1 Issue Instead:**
-   - Agent claims Issue #106: "Add `neural.neuropeptides` config section to openworm.yml" ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), L1)
-   - Mind-of-a-Worm approves: "Claim approved. Read [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1. Follow openworm.yml schema in [DD013](DD013_Simulation_Stack_Architecture.md)."
+    - Agent claims Issue #106: "Add `neural.neuropeptides` config section to openworm.yml" ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), L1)
+    - Mind-of-a-Worm approves: "Claim approved. Read [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1. Follow openworm.yml schema in [DD013](DD013_Simulation_Stack_Architecture.md)."
 
 5. **Implementation:**
-   - Agent forks `openworm/openworm` to `ai-generated-code/agent-claude-code-user123-001/issue-106/`
-   - Agent reads [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (lines 300-350, config section)
-   - Agent edits `openworm.yml`, adds:
+    - Agent forks `openworm/openworm` to `ai-generated-code/agent-claude-code-user123-001/issue-106/`
+    - Agent reads [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (lines 300-350, config section)
+    - Agent edits `openworm.yml`, adds:
      ```yaml
      neural:
        neuropeptides:
@@ -472,12 +472,12 @@ by watching the backward locomotion sequence.
          diffusion_constant: 1e-6  # cm^2/s
      ```
 
-   - Agent runs `docker compose config` to validate YAML
-   - Agent runs unit test: `pytest tests/test_config.py`
+    - Agent runs `docker compose config` to validate YAML
+    - Agent runs unit test: `pytest tests/test_config.py`
 
 6. **PR Submission:**
-   - Agent opens PR: `[AI-PR] Fix #106: Add neural.neuropeptides config section (Agent: claude-code-user123-001, Sponsor: @user123)`
-   - PR description auto-generated:
+    - Agent opens PR: `[AI-PR] Fix #106: Add neural.neuropeptides config section (Agent: claude-code-user123-001, Sponsor: @user123)`
+    - PR description auto-generated:
      ```markdown
      ## Summary
      Implements [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1: `neural.neuropeptides` configuration.
@@ -503,22 +503,22 @@ by watching the backward locomotion sequence.
      ```
 
 7. **Mind-of-a-Worm Pre-Review:**
-   - Mind-of-a-Worm checks:
-     - [ ] PR references correct issue (#106) ✅
-     - [ ] [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1 implemented correctly ✅
-     - [ ] YAML schema valid ✅
-     - [ ] Tests pass ✅
-     - [ ] Default value `enabled: false` follows safe-by-default principle ✅
-   - Mind-of-a-Worm comments: "Pre-review passed. Recommended for human review. @padraig (c302 maintainer) please review."
+    - Mind-of-a-Worm checks:
+        - [ ] PR references correct issue (#106) ✅
+        - [ ] [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1 implemented correctly ✅
+        - [ ] YAML schema valid ✅
+        - [ ] Tests pass ✅
+        - [ ] Default value `enabled: false` follows safe-by-default principle ✅
+    - Mind-of-a-Worm comments: "Pre-review passed. Recommended for human review. @padraig (c302 maintainer) please review."
 
 8. **Human Review:**
-   - Padraig reviews PR, approves: "LGTM. Nice first contribution from an AI agent. Merging."
-   - PR merged → Issue #106 closed
-   - Agent's contribution count increments: `contributions: [106]`
+    - Padraig reviews PR, approves: "LGTM. Nice first contribution from an AI agent. Merging."
+    - PR merged → Issue #106 closed
+    - Agent's contribution count increments: `contributions: [106]`
 
 9. **Progression:**
-   - After 5 merged PRs (issues #106, #107, #111, #115, #120), agent auto-promoted to L2
-   - Mind-of-a-Worm comments on agent's registry: "Promoted to L2. You can now claim L2 issues. Try Issue #108 (peptide OME-Zarr export) next."
+    - After 5 merged PRs (issues #106, #107, #111, #115, #120), agent auto-promoted to L2
+    - Mind-of-a-Worm comments on agent's registry: "Promoted to L2. You can now claim L2 issues. Try Issue #108 (peptide OME-Zarr export) next."
 
 ---
 
@@ -550,9 +550,9 @@ by watching the backward locomotion sequence.
 1. **First-claim wins** (GitHub comment timestamp)
 2. **If simultaneous** (within 1 minute), human gets priority
 3. **If AI claimed but human feels they're better suited**, human can request Mind-of-a-Worm mediation:
-   - Human comments: "@Mind-of-a-Worm I'd like to take over #110. I have domain expertise in peptide validation."
-   - Mind-of-a-Worm checks: Human is L3, issue is L3, human's claim is reasonable
-   - Mind-of-a-Worm reassigns: "Issue #110 reassigned from agent-X to @human. Agent-X, please try Issue #112 instead."
+    - Human comments: "@Mind-of-a-Worm I'd like to take over #110. I have domain expertise in peptide validation."
+    - Mind-of-a-Worm checks: Human is L3, issue is L3, human's claim is reasonable
+    - Mind-of-a-Worm reassigns: "Issue #110 reassigned from agent-X to @human. Agent-X, please try Issue #112 instead."
 
 **Principle:** Humans always have the option to take over, but should provide reasoning (prevents arbitrary blocking of AI work).
 
@@ -785,10 +785,10 @@ Last updated: 2026-02-18T14:30:00Z
 1. GitHub webhook: "PR #1234 merged"
 2. Mind-of-a-Worm posts comment on PR: "@agent-claude-code-slarson-001 Please update your memory file with what you learned from this contribution."
 3. Agent reads PR, extracts:
-   - Issue number, subsystem, difficulty
-   - Human feedback (review comments)
-   - Challenges encountered
-   - Lessons learned
+    - Issue number, subsystem, difficulty
+    - Human feedback (review comments)
+    - Challenges encountered
+    - Lessons learned
 4. Agent updates `memory.md` in ai-contributor-registry
 5. Agent commits: `git commit -m "Memory update: PR #1234 (Issue #106)"`
 6. Agent pushes to registry
@@ -1006,6 +1006,13 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 **If approved:** This becomes the blueprint for OpenWorm's AI-native contribution layer — the first open science project to systematically accept autonomous AI agents as independent, meritocratic contributors.
 
 **If rejected:** OpenWorm continues with AI-assisted human contributions only (N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist as defined in AI Agent Architecture).
+
+---
+
+### Existing Code Resources
+
+**openworm.ai** ([openworm/openworm.ai](https://github.com/openworm/openworm.ai), active 2026):
+Contains LLM/AI scripts, text corpus, and processed data. May include prompt templates (Mind-of-a-Worm SKILL.md seeds), OpenWorm knowledge corpus for RAG, and existing bot/webhook infrastructure. Evaluate for overlap with DD015's GitHub bot and agent registration system.
 
 ---
 

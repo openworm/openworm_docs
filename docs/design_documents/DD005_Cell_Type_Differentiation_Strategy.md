@@ -4,7 +4,7 @@
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-14  
 **Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline)
+**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
 
 ---
 
@@ -374,10 +374,10 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 3. **Preserve Connectome Topology:** The number of neurons (302 hermaphrodite, 385 male) and their connectivity ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) must match the biological data. Differentiation changes cell properties, not network structure.
 
 4. **Calibration Transparency:** The `expression_to_conductance_calibration.csv` file must document:
-   - Training set (which neurons with electrophysiology)
-   - Fit parameters (alpha, beta, baseline for each channel type)
-   - Cross-validation R² or error metric
-   - Date of calibration and CeNGEN version
+    - Training set (which neurons with electrophysiology)
+    - Fit parameters (alpha, beta, baseline for each channel type)
+    - Cross-validation R² or error metric
+    - Date of calibration and CeNGEN version
 
 5. **Validation Against Functional Data:** The differentiated model must improve the correlation with [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity compared to the generic model.
 
@@ -441,6 +441,20 @@ python scripts/benchmark_improvement.py \
 6. **Synaptic weight differences:** Expression-based differentiation affects postsynaptic channels but not synaptic weights (connection strengths). Synapse-specific weights from functional data are future work.
 
 7. **Channel post-translational modifications:** Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.
+
+8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models.
+
+---
+
+### Roadmap: From Class-Average to Synapse-Level Resolution
+
+The current power-law expression-to-conductance pipeline is a necessary first step. It uses the best available systematic data (CeNGEN) to move beyond the generic neuron template. Future phases will refine this in stages:
+
+1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates)
+2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
+3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models
+
+Each stage preserves backward compatibility with earlier stages via the `openworm.yml` configuration system.
 
 ---
 
@@ -508,6 +522,8 @@ https://cengen.org/downloads
 
 Approximately **20 neuron types** have published electrophysiological recordings suitable for calibration.
 
+**Note:** The calibration training set should be expanded with a complete table listing each neuron, channel, measured conductance, reversal potential, and source DOI. See ChannelWorm ion channel database as a starting point.
+
 **CODE REUSE:** The `openworm/ChannelWorm` repository (dormant since 2018 but complete) contains a curated ion channel database (`data/ion_channel_database.xlsx`) with patch clamp sources, HH parameter fitting tools (`channelworm/fitter.py`), and pre-generated NeuroML2 channel models (`models/*.channel.nml`). **This is 50-70% of [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s calibration pipeline already built.** See "ChannelWorm Reuse" section below for integration plan.
 
 ---
@@ -563,14 +579,14 @@ ChannelWorm/
 **Reuse Plan:**
 
 1. **Extract ion channel database:** `data/ion_channel_database.xlsx` → Convert to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `electrophysiology_training_set.csv`
-   - Contains: gene, channel family, measured conductances, patch clamp paper DOIs
-   - Covers many of the ~20 neurons needed for calibration training set
+    - Contains: gene, channel family, measured conductances, patch clamp paper DOIs
+    - Covers many of the ~20 neurons needed for calibration training set
 2. **Reuse HH fitting code:** `channelworm/fitter.py` → Adapt for [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s `scripts/fit_calibration.py`
-   - Already implements least-squares fitting of HH parameters to experimental I-V curves
-   - Handles activation/inactivation gate fitting separately
+    - Already implements least-squares fitting of HH parameters to experimental I-V curves
+    - Handles activation/inactivation gate fitting separately
 3. **Use pre-generated NeuroML2 models:** `models/unc2_L-type_Ca.channel.nml`, `models/egl19_L-type_Ca.channel.nml`, etc.
-   - These can be [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s initial channel definitions (before calibration)
-   - Cross-validate: Do ChannelWorm's models match [DD001](DD001_Neural_Circuit_Architecture.md)'s current channels?
+    - These can be [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s initial channel definitions (before calibration)
+    - Cross-validate: Do ChannelWorm's models match [DD001](DD001_Neural_Circuit_Architecture.md)'s current channels?
 4. **Reuse SciUnit validation:** `tests/` directory → [DD010](DD010_Validation_Framework.md) Tier 1 single-cell validation framework
 
 **Estimated Time Savings:** 40-60 hours (no manual channel curation, HH fitter exists, NeuroML2 models already generated)
@@ -620,6 +636,17 @@ mRNA levels ≠ protein levels ≠ surface channel density. The calibration impl
 
 **Future work:** If proteomics data become available (currently scarce), refine calibration using protein abundance instead of transcript abundance.
 
+### Existing Code Resources
+
+**wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
+Provides unified Python API for CeNGEN gene expression (`NeuroAtlas.get_gene_expression(gene_names, neuron_names)`), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity, neuropeptide/GPCR mapping, and neuron ID normalization. Replaces manual CeNGEN CSV download with a production-ready, pip-installable package. **Estimated time savings: 25 hours.**
+
+**ChannelWorm** ([openworm/ChannelWorm](https://github.com/openworm/ChannelWorm), dormant since 2018 but complete):
+Contains curated ion channel database (`data/ion_channel_database.xlsx`), pre-generated NeuroML2 channel models (`models/*.channel.nml`), HH parameter fitting tools (`channelworm/fitter.py`), and SciUnit validation tests. This was designed to feed c302 and provides the exact calibration pipeline DD005 needs. **Estimated time savings: 40-60 hours.**
+
+**WormsenseLab_ASH** ([openworm/WormsenseLab_ASH](https://github.com/openworm/WormsenseLab_ASH), dormant):
+Contains ASH neuron patch clamp recordings useful for calibration training set (ASH channel conductances).
+
 ---
 
 ## References
@@ -638,6 +665,12 @@ mRNA levels ≠ protein levels ≠ surface channel density. The calibration impl
 
 5. **Yemini E et al. (2021).** "NeuroPAL: A multicolor atlas for whole-brain neuronal identification in *C. elegans*." *Cell* 184:272-288.
    *In vivo neuron identification for validation.*
+
+6. **Alon S et al. (2021).** "Expansion sequencing: spatially precise in situ transcriptomics in intact biological systems." *Science* 371.
+   *In-situ sequencing enabling subcellular-resolution gene expression maps — future data source for per-compartment channel densities.*
+
+7. **Shaib AH et al. (2023).** "*C. elegans*-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
+   *Future data source for synapse-level protein localization, enabling refinement beyond class-average expression.*
 
 ---
 

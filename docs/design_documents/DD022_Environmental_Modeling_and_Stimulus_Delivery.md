@@ -114,6 +114,27 @@ Diffusion equation in 2D (agar surface):
 - Lookup concentration at worm's (x, y) position each timestep
 - Feed to [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 chemosensory transduction model
 
+### Closed-Loop Sensorimotor Interaction for Chemotaxis
+
+The defining feature of naturalistic chemotaxis is the closed-loop interaction between sensation and movement. Zhao et al. (2024) demonstrated this with their MetaWorm model, achieving zigzag navigation toward food attractors that matches experimentally observed trajectories (Pierce-Shimomura et al. 1999).
+
+**Closed-loop cycle (each simulation timestep):**
+
+1. **Body position** ([DD003](DD003_Body_Physics_Architecture.md)) provides the worm's current location in the environment
+2. **Local concentration** (DD022 gradient field) sampled at the worm's head position
+3. **Temporal derivative** `dC/dt = (C(t) - C(t-dt)) / dt` computed — this implements the biased random walk strategy where the worm responds to concentration *changes*, not absolute levels
+4. **Sensory neuron activation** ([DD001](DD001_Neural_Circuit_Architecture.md)/[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)): `dC/dt` converted to current injection on chemosensory neurons (AWC for odors, ASEL/ASER for salt)
+5. **Neural circuit computation** ([DD001](DD001_Neural_Circuit_Architecture.md)): sensory input propagates through interneurons to motor neurons
+6. **Motor output** ([DD002](DD002_Muscle_Model_Architecture.md)): motor neuron calcium drives muscle contraction
+7. **Body movement** ([DD003](DD003_Body_Physics_Architecture.md)): muscles deform the body, propelling it through the environment
+8. Return to step 1
+
+**Key biological insight:** Sensory activation uses the temporal derivative `dC/dt`, not the absolute concentration `C(t)`. This is because *C. elegans* employs a biased random walk strategy: it extends forward runs when moving up-gradient (positive dC/dt) and initiates turns/reversals when moving down-gradient (negative dC/dt) (Pierce-Shimomura et al. 1999).
+
+**OpenWorm's approach differs from Zhao et al.** in a critical way: they used a linear readout layer from motor neuron membrane potentials to muscle activations (treating the neural circuit as a 'reservoir computer'). OpenWorm instead uses biophysical neuromuscular junction synapses ([DD002](DD002_Muscle_Model_Architecture.md)), producing a fully mechanistic chain from sensation to movement with no learned components in the motor pathway.
+
+**Validation target:** The simulated worm's trajectory in a chemical gradient should exhibit the characteristic zigzag pattern toward the food source, with a chemotaxis index (CI) > 0.5 on a standard NaCl gradient assay (Iino & Yoshida 2009).
+
 ### Component 3: Thermal Gradient Delivery
 
 **For thermotaxis experiments (AFD neuron responds to temperature):**
@@ -184,6 +205,14 @@ Similar to chemical gradient but for temperature:
 | Local chemical concentration | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
 | Local temperature | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
 | Substrate reaction force | [DD003](DD003_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
+
+---
+
+## References
+
+1. **Iino Y, Yoshida K (2009).** "Parallel use of two behavioral mechanisms for chemotaxis in *Caenorhabditis elegans*." *J Neurosci* 29:5370-5380. *NaCl chemotaxis assay — chemotaxis index (CI) metric and experimental benchmarks.*
+2. **Pierce-Shimomura JT, Morse TM, Lockery SR (1999).** "The fundamental role of pirouettes in *Caenorhabditis elegans* chemotaxis." *J Neurosci* 19:9557-9569. *Biased random walk strategy — temporal derivative of concentration drives run/pirouette decisions.*
+3. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990. *MetaWorm model — closed-loop chemotaxis demonstration with zigzag trajectories matching experimental observations.*
 
 ---
 

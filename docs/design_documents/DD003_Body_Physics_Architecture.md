@@ -234,6 +234,16 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 
 **When to reconsider:** If future work requires extremely accurate stress/strain fields (e.g., modeling cuticle fracture, cell rupture). Not needed for behavior simulation.
 
+**Update (2026-02):** Zhao et al. (2024) demonstrated that modern Projective Dynamics FEM solvers (Bouaziz et al. 2014) address the mesh distortion and speed concerns listed above. Their implementation used a tetrahedral mesh of 984 vertices and 3,341 tetrahedrons with 96 muscle actuators and achieved real-time simulation at 30 frames per second — orders of magnitude faster than the current Sibernetic SPH approach (~100K particles). The key insight is that a Projective Dynamics solver uses a local-global optimization that is unconditionally stable under large deformations, eliminating the traditional FEM mesh distortion problem.
+
+However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of *C. elegans* locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.
+
+**OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)'s learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
+
+Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch`.
+
+Reference: Bouaziz S et al. (2014). "Projective Dynamics: Fusing constraint projections for fast simulation." *ACM Trans Graphics* 33:154.
+
 ### 2. Mass-Spring System (Simple Elastic Network)
 
 **Advantages:** Extremely fast, simple to implement.
@@ -279,9 +289,9 @@ A contribution to Sibernetic MUST:
 3. **Pass Unit Tests:** Sibernetic repository contains unit tests for kernel functions, neighbor search, and pressure solver. All must pass.
 
 4. **Validate Against Known Cases:**
-   - Drop test: Sphere of liquid particles under gravity should settle and spread
-   - Elastic deformation: A suspended elastic body under gravity should sag
-   - Muscle contraction: Activating one muscle quadrant should bend the body
+    - Drop test: Sphere of liquid particles under gravity should settle and spread
+    - Elastic deformation: A suspended elastic body under gravity should sag
+    - Muscle contraction: Activating one muscle quadrant should bend the body
 
 5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and PyTorch (CPU reference). Test on at least two backends.
 
@@ -384,6 +394,12 @@ elasticity = 0.0006
 
 4. **Palyanov A, Khayrulin S, Larson SD (2011-2016).** Sibernetic development.
    *OpenWorm Sibernetic implementations.*
+
+5. **Zhao M et al. (2024).** *Nat Comp Sci* 4:978-990.
+   *Demonstrated real-time FEM body simulation of C. elegans at 30 FPS.*
+
+6. **Bouaziz S et al. (2014).** *ACM Trans Graphics* 33:154.
+   *Projective Dynamics FEM solver.*
 
 ---
 

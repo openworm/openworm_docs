@@ -111,8 +111,9 @@ package "Infrastructure" as infra #FFF9C4 {
 
 ' === VALIDATION ===
 package "Validation" as valbox #FFF5E6 {
-  component "DD010\n3-Tier\nValidation" as DD010 #FFE4B5
+  component "DD010\n4-Tier\nValidation" as DD010 #FFE4B5
   component "DD021\nMovement\nToolbox" as DD021 #FFB6C1
+  component "DD024\nValidation\nData\nAcquisition" as DD024 #FFB6C1
 }
 
 ' === VISUALIZATION ===
@@ -165,6 +166,7 @@ DD004 --> DD003 : cell IDs
 ' Core -> Validation
 DD003 -[#0000CC]-> DD010 : kinematics
 DD021 --> DD010 : feature\nextraction
+DD024 --> DD010 : "Versioned\nexperimental\ndata\n(all tiers)"
 
 ' Core -> Visualization
 DD003 -[#660099]-> DD014 : OME-Zarr\n(all subsystems)
@@ -335,7 +337,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 | **CeNGEN → Calibration** | [DD008](DD008_Data_Integration_Pipeline.md)/DD020 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | OWMeta query or direct download | Data L4 (TBD) + Neural L4 | Low (expression data is fixed per version) |
 
 **Key Finding:**
-**5 of 7 coupling boundaries require Integration L4** — this is why the role is critical (DD_COMPREHENSIVE_ANALYSIS Finding #2). The Integration Maintainer is the **coupling bridge owner** for muscle→body, body→sensory, all→OME-Zarr, simulation→WCON, and orchestration.
+**5 of 7 coupling boundaries require Integration L4** — this is why the role is critical. The Integration Maintainer is the **coupling bridge owner** for muscle→body, body→sensory, all→OME-Zarr, simulation→WCON, and orchestration.
 
 ---
 

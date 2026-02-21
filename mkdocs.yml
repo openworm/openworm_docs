@@ -6,6 +6,9 @@ theme:
 markdown_extensions:
   - toc:
       permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 nav:
   - Home: index.md
   - Background: background.md
@@ -13,9 +16,7 @@ nav:
       - Overview: design_documents/index.md
       - Phase Roadmap: design_documents/DD_PHASE_ROADMAP.md
       - Integration Map: design_documents/INTEGRATION_MAP.md
-      - Complete Index: design_documents/dd_readme.md
-      - Code Reuse Opportunities: design_documents/DD_CODE_REUSE_OPPORTUNITIES.md
-      - Comprehensive Analysis: design_documents/DD_COMPREHENSIVE_ANALYSIS_2026-02-19.md
+      - Contributing Guide: design_documents/contributing_guide.md
       - "Phase 0 — Core Architecture":
           - DD001 Neural Circuit: design_documents/DD001_Neural_Circuit_Architecture.md
           - DD002 Muscle Model: design_documents/DD002_Muscle_Model_Architecture.md
@@ -26,6 +27,7 @@ nav:
           - DD012 RFC Process: design_documents/DD012_Design_Document_RFC_Process.md
           - DD013 Simulation Stack: design_documents/DD013_Simulation_Stack_Architecture.md
           - DD021 Movement Toolbox: design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md
+          - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
       - "Phase 1 — Cell Differentiation":
           - DD005 Cell-Type Differentiation: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD010 Validation Framework: design_documents/DD010_Validation_Framework.md

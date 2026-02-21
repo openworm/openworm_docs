@@ -817,10 +817,10 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 2. **CI failure triage:** When CI fails, Mind-of-a-Worm reads the logs, identifies which subsystem broke, and tags the relevant L4 maintainer.
 
 3. **PR integration checklist:** When a PR modifies `openworm.yml`, `versions.lock`, or `Dockerfile`, Mind-of-a-Worm verifies:
-   - Config schema is valid
-   - All referenced repos/commits exist
-   - No subsystem accidentally disabled
-   - Version numbers are consistent
+    - Config schema is valid
+    - All referenced repos/commits exist
+    - No subsystem accidentally disabled
+    - Version numbers are consistent
 
 4. **Onboarding verification:** For L0→L1 Task B1 ("Install and run Docker simulation"), Mind-of-a-Worm can verify the output screenshot includes the correct version string.
 
@@ -941,6 +941,19 @@ Next newcomer who runs the Docker image sees the improvement
 4. **OpenCL SDK hosting:** The AMD SDK is currently downloaded from SourceForge at build time. Should we host it in the OpenWorm org (GitHub Releases on the sibernetic repo) for reliability?
 
 5. **Release cadence target:** Current cadence is roughly quarterly. Should we aim for monthly releases once the new stack is in place?
+
+---
+
+### Existing Code Resources
+
+**sibernetic_config_gen** ([openworm/sibernetic_config_gen](https://github.com/openworm/sibernetic_config_gen), 2016, dormant):
+Generates starting particle positions and `.ini` config files for Sibernetic. Contains particle placement algorithms for different body resolutions. Reusable for DD013's `openworm.yml` → Sibernetic `.ini` translation layer. **Estimated time savings: 10-20 hours.**
+
+**sibernetic_NEURON** ([openworm/sibernetic_NEURON](https://github.com/openworm/sibernetic_NEURON), 2016, dormant):
+Predecessor to `sibernetic_c302.py` — contains Sibernetic-NEURON interface code. Review for patterns applicable to [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling.
+
+**skeletonExtraction** ([openworm/skeletonExtraction](https://github.com/openworm/skeletonExtraction), 2016, dormant):
+Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports to COLLADA. The skeleton extraction algorithm is directly needed for DD013's SPH → WCON export pipeline and [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)'s analysis toolbox input. **Estimated time savings: 15-25 hours.**
 
 ---
 

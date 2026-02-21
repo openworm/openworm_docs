@@ -18,20 +18,47 @@
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
+### Philosophical Foundations
+
+OpenWorm is not just a software project — it engages with deep questions about what it means to understand a biological system. Our design decisions are informed by several philosophical commitments:
+
+**Mechanistic explanation.** We follow the tradition of Machamer, Darden & Craver (2000), who argue that biological understanding requires identifying mechanisms — organized systems of entities and activities that produce phenomena. Each DD specifies a mechanism (ion channels produce membrane dynamics, muscles produce force, neurons produce behavior). Understanding means being able to trace the causal chain from molecular parts through cellular activities to organismal behavior.
+
+**Causal interpretability over prediction.** Pearl (2000) distinguishes between systems that can predict outcomes (statistical models) and systems that can answer "what if?" questions (causal models). OpenWorm is designed as a causal model: we can ablate a virtual neuron and predict the behavioral consequence, not because we trained on ablation data, but because the model captures the mechanistic structure that makes the prediction follow from first principles. This is our core differentiator from data-driven foundation models.
+
+**Emergence and reduction.** A simulated organism that exhibits behavior not explicitly programmed raises questions about emergence — whether higher-level properties (locomotion, foraging, arousal states) can be fully explained by lower-level mechanisms (channel kinetics, calcium dynamics, synaptic transmission). Chalmers (2006) distinguishes "weak" emergence (deducible in principle from lower-level laws) from "strong" emergence (not so deducible). OpenWorm's multi-tier validation framework ([DD010](DD010_Validation_Framework.md)) directly tests whether behavior emerges from mechanism by validating at every level independently.
+
+**The significance of completeness.** Haspel et al. (2023) argue that *C. elegans* offers a unique opportunity for observational and perturbational completeness — recording from and manipulating every neuron — which is a prerequisite for causal understanding (Pearl & Mackenzie 2018). OpenWorm complements this experimental agenda with computational completeness: modeling every cell, every connection, every signaling pathway. Together, experimental and computational completeness enable a depth of understanding that partial approaches cannot achieve.
+
+??? note "References"
+    - Machamer P, Darden L, Craver CF (2000). "Thinking about Mechanisms." *Philos Sci* 67:1-25.
+    - Pearl J (2000). *Causality: Models, Reasoning, and Inference.* Cambridge University Press.
+    - Chalmers DJ (2006). "Strong and Weak Emergence." In: *The Re-Emergence of Emergence.* Oxford University Press.
+    - Haspel G et al. (2023). "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
+    - Pearl J, Mackenzie D (2018). *The Book of Why: The New Science of Cause and Effect.* Basic Books.
+
+### Related Work: MetaWorm (Zhao et al. 2024)
+
+Zhao et al. (2024) published MetaWorm (*Nature Computational Science* 4:978-990), the first integrative data-driven model achieving closed-loop brain-body-environment simulation of *C. elegans*. Their model used 136 multicompartmental neurons with 14 ion channel classes, a Projective Dynamics FEM body at 30 FPS, and gradient-descent optimization of synaptic weights against whole-brain calcium imaging data. OpenWorm's design documents incorporate lessons from MetaWorm throughout ([DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md)) while extending the scope significantly: 302 neurons (not 136), neuropeptidergic signaling ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)), organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)), the whole 959-cell organism ([DD004](DD004_Mechanical_Cell_Identity.md)), internal fluid dynamics via SPH ([DD003](DD003_Body_Physics_Architecture.md)), NeuroML standard format ([DD001](DD001_Neural_Circuit_Architecture.md)), and a formal 4-tier validation framework with automated CI ([DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md)). MetaWorm's open-source code ([github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0) provides reusable NMODL ion channel files and neuron morphology data.
+
 ## Quick Links
 
 **New to Design Documents?**
 
-- 📋 [DD012: RFC Process](DD012_Design_Document_RFC_Process.md) — How DDs work
-- 🌟 [DD005: Cell Differentiation](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation
-- 🗺️ [Integration Map](INTEGRATION_MAP.md) — How all DDs couple together
-- 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month timeline to 959 cells
+- 📋 [DD012: RFC Process](DD012_Design_Document_RFC_Process.md) — How DDs work, template structure
+- 🌟 [DD005: Cell Differentiation](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation with all sections filled
+- 🗺️ [Integration Map](INTEGRATION_MAP.md) — PlantUML diagram showing how all DDs couple together
+- 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month implementation timeline with milestones
 
-**Analysis & Resources:**
+**Implementing or Contributing?**
 
-- 📊 [Comprehensive Analysis](DD_COMPREHENSIVE_ANALYSIS_2026-02-19.md) — Inconsistencies, gaps, recommendations
-- 💎 [Code Reuse Opportunities](DD_CODE_REUSE_OPPORTUNITIES.md) — Existing repos, 200-300 hour savings
-- 📦 [GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm repositories
+- 🛠️ [Contributing Guide](contributing_guide.md) — How to use, write, and review DDs (lifecycle, templates, examples, anti-patterns, FAQ)
+- 📈 [DD011: Contributor Progression](DD011_Contributor_Progression_Model.md) — L0→L5 path, badge system
+- 🤖 [DD015: AI-Native Model](DD015_AI_Contributor_Model.md) — Autonomous agent registration
+
+**Resources:**
+
+- 📦 [GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm repositories (existing code resources are documented in each DD's "Existing Code Resources" section)
 
 ---
 
@@ -85,6 +112,7 @@
 | [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
+| [DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1 | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
 
 ### Phase 3: Organ Systems ⚠️
 
@@ -117,7 +145,7 @@
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in the [openworm-admin repository](https://github.com/openworm/openworm-admin/tree/main/design_documents).
-    **Total:** 25 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
+    **Total:** 26 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD024](DD024_Validation_Data_Acquisition_Pipeline.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/DD014.2 + DD016 archived)
 
 ### By Topic
 
@@ -137,7 +165,7 @@
 [DD019](DD019_Closed_Loop_Touch_Response.md) (touch/MEC-4), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (environment), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception)
 
 **Data & Validation:**
-[DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (3-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox)
+[DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (4-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (validation data acquisition)
 
 **Infrastructure:**
 [DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
@@ -150,42 +178,84 @@
 
 ---
 
-## How to Use Design Documents
+## Cross-Reference by Topic
 
-### For Contributors
+### Neural Systems
 
-1. **Find a DD** matching your interest (neural modeling → [DD001](DD001_Neural_Circuit_Architecture.md), visualization → [DD014](DD014_Dynamic_Visualization_Architecture.md), etc.)
-2. **Read the "How to Build & Test" section** — copy-pasteable commands, green-light criteria
-3. **Check Integration Contract** — what the DD consumes from other DDs, what it produces
-4. **Implement according to spec** — DDs define quality criteria and validation procedures
-5. **Reference DD in your PR** — Mind-of-a-Worm AI checks for DD compliance
+- **Core:** [DD001](DD001_Neural_Circuit_Architecture.md) (302-neuron HH architecture, graded synapses, Level C1)
+- **Differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN scRNA-seq)
+- **Modulation:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (31,479 neuropeptide-receptor interactions, GPCR modulation, seconds timescale)
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal neurons, pumping circuit)
+- **Egg-Laying:** [DD018](DD018_Egg_Laying_System_Architecture.md) (2 HSN serotonergic command neurons, 6 VC cholinergic motor neurons)
+- **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (6 touch receptor neurons: ALM, AVM, PLM; tap withdrawal circuit, MEC-4 channel)
 
-### For Reviewers
+### Muscle Systems
 
-1. **Mind-of-a-Worm flags relevant DDs** for each PR automatically
-2. **Check Quality Criteria** — does the PR meet the DD's acceptance tests?
-3. **Check Integration Contract** — if PR modifies coupling interfaces, coordinate with consuming DDs
-4. **Check Alternatives Considered** — is the PR re-proposing a rejected approach?
+- **Body Wall:** [DD002](DD002_Muscle_Model_Architecture.md) (95 muscles, Ca²⁺→force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters)
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal muscles, nonstriated, plateau potentials, gap-junction-synchronized)
+- **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (16 sex muscles: 8 vulval, 8 uterine; EGL-19/UNC-103 channels)
 
-### Writing a New DD
+### Body Mechanics
 
-Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template.
-Use [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
+- **Physics Engine:** [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic SPH, ~100K particles, PCISPH incompressibility, elastic bonds, muscle force injection)
+- **Cell Identity:** [DD004](DD004_Mechanical_Cell_Identity.md) (per-particle cell IDs from WBbt ontology, 959 somatic cells, cell-type-specific elasticity/adhesion)
+- **Mesh Deformation:** [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (GPU skinning, cage-based MVC, PBD collision for Virtual Worm's 688 meshes)
+- **Strain Readout:** [DD019](DD019_Closed_Loop_Touch_Response.md) (cuticle strain from SPH particles for mechanotransduction)
+
+### Organ Systems
+
+- **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (63 cells: 20 neurons + 20 muscles + 9 epithelial + 9 marginal + 4 gland + 1 valve; 3-4 Hz pumping)
+- **Intestine:** [DD009](DD009_Intestinal_Oscillator_Model.md) (20 cells, IP3/Ca²⁺ oscillator, defecation motor program 50±10s period)
+- **Reproductive:** [DD018](DD018_Egg_Laying_System_Architecture.md) (28-cell circuit: 2 HSN + 6 VC + 16 sex muscles + 4 uv1 feedback; two-state pattern)
+
+### Sensory & Environment
+
+- **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (MEC-4/MEC-10 DEG/ENaC mechanosensory channel, gentle + harsh touch)
+- **Environment:** [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (substrates, chemical gradients, temperature, food particles)
+- **Proprioception:** [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (stretch receptors, motor coordination)
+
+### Data & Validation
+
+- **Connectome:** [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (`cect` API v0.2.7, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) default, 30+ datasets)
+- **Data Integration:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta semantic RDF graph; Phase 3+ wraps `cect`)
+- **Movement Validation:** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (analysis toolbox revival, WCON 1.0, 5 kinematic metrics)
+- **Validation Framework:** [DD010](DD010_Validation_Framework.md) (4 tiers: electrophysiology, functional connectivity r > 0.5, behavioral ±15%, causal/interventional)
+- **Validation Data:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (acquire, format, version-control all experimental datasets)
+
+### Infrastructure & Visualization
+
+- **Simulation Stack:** [DD013](DD013_Simulation_Stack_Architecture.md) (Docker, openworm.yml, CI/CD, Integration Maintainer role)
+- **Visualization:** [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr, Trame→Three.js, 3-phase roadmap)
+    - [DD014.1](DD014.1_Visual_Rendering_Specification.md): Visual Rendering Specification (colors, materials, lighting, 14 mockups)
+    - [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md): Anatomical Mesh Deformation Pipeline (GPU skinning, ~1.6M vertices)
+
+### Governance
+
+- **Contributors:** [DD011](DD011_Contributor_Progression_Model.md) (L0-L5 progression, badge system)
+- **RFC Process:** [DD012](DD012_Design_Document_RFC_Process.md) (DD template, approval workflow, Mind-of-a-Worm enforcement)
+- **AI Contributors:** [DD015](DD015_AI_Contributor_Model.md) (autonomous agents as L1-L3 contributors)
+
+### Hybrid & Advanced
+
+- **Mechanistic-ML:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (differentiable simulation, SPH surrogate, foundation model→params, learned sensory transduction)
 
 ---
 
-## Status Badges
+## Contributing
 
-- ✅ **Accepted** — Binding specification, implementations must comply
-- ⚠️ **Proposed** — Under review or approved but not yet implemented
-- 🔴 **Blocked** — Cannot proceed (missing prerequisite)
-- 📦 **Archived** — Deferred or superseded
+See the **[Contributing Guide](contributing_guide.md)** for:
+
+- How to use DDs as a contributor or reviewer
+- Design Document lifecycle and status definitions
+- Writing your first DD (7-step guide with template)
+- Examples of excellent DDs
+- Anti-patterns to avoid
+- Frequently asked questions
 
 ---
 
-## External Links
+## Additional Resources
 
-- **[GitHub Repository](https://github.com/openworm/openworm-admin/tree/main/design_documents)** — All DD markdown files
-- **[Phase Roadmap](DD_PHASE_ROADMAP.md)** — Timeline and milestones
-- **[Integration Map](INTEGRATION_MAP.md)** — Dependency graph
-- **[Code Reuse Guide](DD_CODE_REUSE_OPPORTUNITIES.md)** — Accelerate implementation
+- **[Phase Roadmap](DD_PHASE_ROADMAP.md)** — Complete timeline, milestones, dataset inventory
+- **[Integration Map](INTEGRATION_MAP.md)** — Dependency graph, bottleneck analysis, coupling chains
+- **[GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md)** — All 109 OpenWorm repos

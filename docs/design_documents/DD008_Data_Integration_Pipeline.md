@@ -145,6 +145,15 @@ All modeling code (c302, Sibernetic initialization, validation scripts) MUST acc
 - **Queryable:** Semantic queries like "Get all neurons in the nerve ring expressing unc-2" are one-liners
 - **Extensible:** New datasets (Ripoll-Sanchez neuropeptides, Witvliet development) can be added without modifying downstream code
 
+### Reconciliation with [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access)
+
+OWMeta and `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) serve complementary purposes:
+
+- **Phase 1-2 (current):** Use `cect` directly for connectome data ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)). OWMeta is optional for semantic queries.
+- **Phase 3+ (future):** OWMeta wraps `cect` internally. Consuming DDs can use either API.
+
+Contributors should follow [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for connectome-specific data access and use OWMeta when broader semantic queries across multiple data types are needed.
+
 ### OWMeta Entity Types
 
 | Entity | Properties | Example |

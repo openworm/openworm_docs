@@ -666,6 +666,13 @@ WormSim 2.0 must have ALL of the following before browser.openworm.org redirects
 
 ---
 
+### Existing Code Resources
+
+**NemaNode** ([openworm/NemaNode](https://github.com/openworm/NemaNode), 2024, dormant):
+Interactive web-based map of neural connections (formerly nemanode.org). May contain reusable graph layout algorithms and layer toggle patterns for DD014's neural circuit visualization layer.
+
+---
+
 ## References
 
 1. **WormBrowser:** `openworm/wormbrowser` (Idili, 2012, [browser.openworm.org](http://browser.openworm.org)) — Static 3D anatomy browser, still live

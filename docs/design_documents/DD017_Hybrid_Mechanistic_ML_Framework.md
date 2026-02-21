@@ -209,6 +209,19 @@ A differentiable simulation enables:
 
 The result is still a mechanistic HH model with physically meaningful parameters — you just found the right parameter values automatically instead of by hand. Every parameter still means something: `g_Kslow = 2.7 mS/cm² for AVAL, 3.4 mS/cm² for AWCL` is still a measurable, falsifiable prediction about ion channel conductance.
 
+#### First Application: Synaptic Weight and Polarity Optimization
+
+The most impactful near-term application of the differentiable backend is automated optimization of synaptic connection weights and excitatory/inhibitory polarities. Zhao et al. (2024) demonstrated this approach on a 136-neuron locomotion circuit, achieving an MSE of 0.076 between simulated and experimental Pearson correlation matrices of membrane potentials. OpenWorm's differentiable backend will enable the same approach on the full 302-neuron network.
+
+Concrete loss function:
+```
+loss_fc = MSE(simulated_correlation_matrix, randi2023_experimental_matrix)
+loss_nt = neurotransmitter_consistency_penalty(polarities, wang2024_identities)
+total_loss = loss_fc + lambda_nt * loss_nt
+```
+
+The neurotransmitter consistency term constrains the optimizer to respect experimentally determined transmitter identities (Wang et al. 2024, eLife), preventing biologically implausible polarity assignments. This is an improvement over unconstrained optimization.
+
 #### The Existing Starting Point
 
 [DD003](DD003_Body_Physics_Architecture.md)'s compute backends already include a PyTorch solver (`pytorch_solver.py` in Sibernetic). This is the body physics side. The neural circuit side (c302) is locked in NEURON/jNML. Bridging that gap — getting the full [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) chain into a single differentiable framework — is the core engineering work.
@@ -567,17 +580,19 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 
 ## Alternatives Considered
 
-### 1. Replace ODEs Entirely with a Transformer
+### 1. Replace ODEs Entirely with a Data-Driven Transformer
 
-**Description:** Train a large transformer model on C. elegans behavioral data (video, calcium imaging, electrophysiology) to directly predict behavior from neural state.
+**Description:** Train a large transformer on tokenized neural activity and behavioral data to directly predict whole-nervous-system dynamics, bypassing biophysical ODEs entirely. Recent work shows this approach can predict *C. elegans* behavior from whole-brain activity with near-zero error when trained on sufficient data (Azabou et al. 2023). Digital twin approaches have shown promise in simulating individual neuron responses in other systems (Cobos et al. 2022).
 
 **Rejected because:**
 
-- Destroys mechanistic interpretability — OpenWorm's core value
-- Would match [DD010](DD010_Validation_Framework.md) Tier 3 (behavior) but fail Tier 1 and 2 (electrophysiology, connectivity)
-- Requires far more training data than exists for C. elegans
-- Cannot predict behavior in novel conditions (new genetic backgrounds, drug effects)
-- Would make OpenWorm another black-box foundation model, eliminating its unique positioning
+- Destroys mechanistic interpretability — OpenWorm's core value. A transformer can predict *what* will happen but cannot explain *why* in terms of biophysical mechanisms
+- Would match [DD010](DD010_Validation_Framework.md) Tier 3 (behavior) but fail Tier 1, 2, and 4 (electrophysiology, connectivity, causal intervention predictions)
+- Cannot predict behavior under truly novel perturbations (new mutations, new drug targets) that fall outside the training distribution. Mechanistic models generalize by construction to any condition expressible in the ODE system
+- The training data requirements (thousands of whole-brain recordings during perturbation) are not yet publicly available, though they are being collected by multiple labs (Haspel et al. 2023)
+- Would make OpenWorm a black-box prediction engine, eliminating its unique positioning as a causally interpretable whole-organism model
+
+**Complementary role:** Pure data-driven models will be powerful tools for benchmarking. If a transformer trained on perturbation data makes predictions that disagree with our mechanistic model, the disagreement itself identifies where the mechanistic model needs improvement. OpenWorm's hybrid approach (this DD) and a pure data-driven model are complementary, not competing.
 
 ### 2. Physics-Informed Neural Networks (PINNs) as Primary Solver
 
@@ -623,10 +638,10 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 2. **Gradient correctness:** Gradients must be verified against finite-difference approximations for a subset of parameters. Relative error < 1%.
 
 3. **Auto-fitted parameters must be physical:** After gradient-descent fitting, all parameters must remain within biologically plausible ranges:
-   - Conductances: 0 < g < 100 mS/cm²
-   - Reversal potentials: -100 < E_rev < +80 mV
-   - Time constants: 0.01 < tau < 10,000 ms
-   - Calcium concentrations: > 0
+    - Conductances: 0 < g < 100 mS/cm²
+    - Reversal potentials: -100 < E_rev < +80 mV
+    - Time constants: 0.01 < tau < 10,000 ms
+    - Calcium concentrations: > 0
 
 4. **[DD010](DD010_Validation_Framework.md) validation improvement:** Auto-fitted parameters must produce [DD010](DD010_Validation_Framework.md) scores equal to or better than hand-tuned parameters.
 
@@ -787,6 +802,20 @@ ml:
 
 5. **Hardware-specific optimization:** This DD specifies the ML architecture and algorithms. GPU kernel optimization, distributed training, and hardware-specific tuning are implementation details.
 
+### Existing Code Resources
+
+**CE_locomotion** ([openworm/CE_locomotion](https://github.com/openworm/CE_locomotion), active 2026, collaboration with Olivares & Beer):
+Complete C++ neuromechanical model with evolutionary algorithm for parameter fitting (auto-tunes parameters to produce forward/backward locomotion). Compare to DD017 Component 1's gradient descent approach; a hybrid strategy (evolutionary global search + gradient local refinement) may be optimal.
+
+**CyberElegans** ([openworm/CyberElegans](https://github.com/openworm/CyberElegans), 2016, 36 stars):
+Alternative neuromechanical model. Useful as a benchmark comparison for DD017's SPH surrogate and for learning from different architectural trade-offs.
+
+**bionet** ([openworm/bionet](https://github.com/openworm/bionet), 2015, 32 stars):
+"Artificial biological neural network" — check for reusable neural network architectures or training pipelines applicable to DD017 Component 2 (SPH surrogate) or Component 4 (learned sensory transduction).
+
+**simple-C-elegans** ([openworm/simple-C-elegans](https://github.com/openworm/simple-C-elegans), 2020):
+Minimalist Python model based on OpenWorm and published literature. Possible starting point for DD017 Component 1 (differentiable backend) — simpler than full c302 for initial prototyping.
+
 ---
 
 ## References
@@ -817,6 +846,18 @@ ml:
 
 9. **Kochkov D et al. (2024).** "Neural General Circulation Models for Weather and Climate." *Nature* 632:1060-1066.
    *Precedent for learned surrogates in physical simulation (Google DeepMind).*
+
+10. **Azabou M, Arora V, Ganesh V, et al. (2023).** "A Unified, Scalable Framework for Neural Population Decoding." *arXiv*.
+    *Demonstrates transformer-based prediction of behavior from whole-brain neural activity — relevant as a benchmark for the mechanistic approach and as evidence that data-driven digital twins are feasible for C. elegans.*
+
+11. **Cobos E, Muhammad T, Fahey PG, et al. (2022).** "It takes neurons to understand neurons: Digital twins of visual cortex synthesize neural metamers." *bioRxiv*:2022.12.09.519708.
+    *Data-driven digital twin approach — complementary to (not replacing) mechanistic modeling.*
+
+12. **Haspel G et al. (2023).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
+    *White paper arguing for observational and perturbational completeness — the scale of data collection proposed would enable both mechanistic and data-driven approaches to C. elegans neural simulation.*
+
+13. **Zhao M et al. (2024).** *Nat Comp Sci* 4:978-990.
+    *Demonstrated differentiable optimization of synaptic weights and polarities for a 136-neuron C. elegans locomotion circuit.*
 
 ---
 

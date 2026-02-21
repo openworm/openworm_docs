@@ -4,7 +4,7 @@
 **Author:** OpenWorm Core Team  
 **Date:** 2026-02-14  
 **Supersedes:** None  
-**Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool)
+**Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline — data sourcing for all tiers)
 
 ---
 
@@ -46,6 +46,7 @@ A simulation that produces movement but fails electrophysiology validation has *
 | **Tier 2a: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations (wild-type) | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
 | **Tier 2b: Integration (Neuropeptides)** | Neuropeptide modulation effect on functional connectivity | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) wild-type vs. *unc-31* mutant | Neuropeptide contribution correlation r > 0.3 | Yes (after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab kinematics), [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (pharyngeal EPG), [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (defecation) | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
+| **Tier 4: Causal (Intervention)** | Perturbation response: ablation, silencing, mutation | Published laser ablation, optogenetics, mutant phenotype data | Direction of effect matches ≥70%; magnitude within ±30% | No (advisory → blocking Phase 3+) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
 
@@ -179,6 +180,8 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 
 **Blocking:** If this test fails (r < 0.5), the PR cannot merge to `main`.
 
+**PCA structure validation (additional Tier 2 metric):** Beyond pairwise correlation matching, the low-dimensional dynamical structure of the neural network should be validated. Kato et al. (2015) showed that PCA of whole-brain calcium activity reveals a dominant mode (PC1) that separates forward-locomotion neurons (AVB, PVC, VB, DB classes) from backward-locomotion neurons (AVA, AVD, VA, DA classes). After synaptic weight optimization ([DD001](DD001_Neural_Circuit_Architecture.md)), simulated membrane potential time series should reproduce this PC1 separation. Zhao et al. (2024) demonstrated this validation approach on a 136-neuron circuit; OpenWorm will apply it to the full 302-neuron network.
+
 #### Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)
 
 **Purpose:** Validate that [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptide modulation) produces the correct effect on functional connectivity.
@@ -262,6 +265,63 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 3. **Reversal initiation:** Response to aversive stimulus (<1 second latency)
 
 **Blocking:** If movement validation degrades by >15%, the PR is blocked.
+
+### Tier 4: Causal / Interventional Validation (Non-Blocking, Advisory)
+
+**Rationale:** Tiers 1-3 validate against observational data — recordings from intact, unperturbed animals. However, a model that reproduces normal behavior may do so for the wrong mechanistic reasons (parameter compensation, degenerate solutions). As Pearl & Mackenzie (2018) argue in their framework for causal inference, observational data alone cannot distinguish correlation from causation. To establish that the model captures true causal relationships between neurons, we need to validate against *interventional* data — experiments where specific neurons are ablated, silenced, or activated, and the resulting changes in neural activity and behavior are measured.
+
+**Validation data sources (published):**
+
+| Intervention | Organism Response | Data Source |
+|-------------|-------------------|-------------|
+| Touch neuron ablation (ALM, AVM, PLM) | Loss of gentle touch response | Chalfie et al. (1985), *J Neurosci* 5:956-964 |
+| Pharyngeal neuron laser killing | Pumping continues (semi-autonomous organ) | Avery & Horvitz (1989), *Neuron* 3:473-485 |
+| Optogenetic activation of specific neurons | Stimulus-specific behavioral responses | Leifer et al. (2011), *Nat Methods* 8:147-152 |
+| unc-2 (Cav2) loss of function | Reduced locomotion speed | Schafer lab WCON mutant data |
+| egl-1, unc-103 loss of function | Egg-laying phenotypes | Trent et al. (1983), Collins & Koelle (2013) |
+| flp peptide knockouts | Altered locomotion patterns | Rogers et al. (2003), Li et al. (1999) |
+
+**Validation procedure:** Simulate the specific perturbation (zero out a neuron's output, remove a channel type, delete a peptide gene) and compare the resulting behavioral change to published experimental data. The model should predict the *direction* of the effect (faster/slower, more/fewer reversals) and ideally the *magnitude* within 30%.
+
+**Acceptance criteria:**
+- Direction of effect matches experimental observation for ≥70% of tested perturbations
+- Magnitude within ±30% for well-characterized perturbations (e.g., touch neuron ablation latency, unc-2 speed reduction)
+- Model does not predict catastrophic failure (NaN, divergence) for perturbations that produce viable animals in vivo
+
+**Status:** Non-blocking (advisory) in Phase 1-2. Becomes blocking in Phase 3+ as more subsystems come online and the model makes increasingly specific causal predictions.
+
+**Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals (Randi et al. 2023; Haspel et al. 2023). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
+
+### Standard In-Silico Perturbation Battery
+
+Zhao et al. (2024) demonstrated several informative in-silico perturbation experiments that reveal how network structure shapes dynamics and behavior. OpenWorm should formalize these as a standard perturbation battery that every model version is tested against:
+
+| Perturbation | Expected Effect | Experimental Basis |
+|-------------|----------------|-------------------|
+| Remove all gap junctions | Greater disruption to correlation matrix than removing chemical synapses | Zhao et al. 2024 Fig. 10D-G; Randi et al. 2023 unc-7 data |
+| Remove neurites (soma-only model) | Higher body twisting, degraded forward locomotion | Zhao et al. 2024 Fig. 10B |
+| Shuffle synapse locations on neurites | Faster head/tail oscillation, slower forward speed | Zhao et al. 2024 Fig. 10C |
+| Ablate AVA bilaterally | Loss of backward locomotion command | Chalfie et al. 1985 |
+| Silence all B-class motor neurons | Loss of forward locomotion | Zheng et al. 1999 |
+| Block Cav2 (unc-2 null) | Reduced locomotion speed | Schafer lab mutant data |
+
+These perturbation experiments serve dual purposes: (a) validation that the model responds correctly to interventions, and (b) scientific discovery — any unexpected model response identifies a gap in understanding.
+
+### Statistical Grounding for Acceptance Thresholds
+
+The ±15% tolerance used in Tier 3 is grounded in measured inter-animal variability. Yemini et al. (2013) compiled a database of *C. elegans* behavioral phenotypes from thousands of tracked animals and found that wild-type (N2) locomotion metrics typically exhibit coefficients of variation (CV) in the range of 15-25% for speed, body bend amplitude, and wavelength. A model that matches the experimental mean within one CV is performing within the biological noise floor — tighter matching would be overfitting to a specific animal rather than capturing the population behavior.
+
+For Tier 2 (functional connectivity), the r > 0.5 threshold reflects the observation that calcium correlation matrices from independent recording sessions of the same genotype show inter-session correlations in the range of r = 0.6-0.8 (Randi et al. 2023). A model achieving r > 0.5 is thus approaching the reproducibility ceiling of the experimental data itself.
+
+### Behavioral Quantification Methods
+
+Tiers 3 and 4 require robust, unbiased behavioral quantification. The field of computational neuroethology has developed systematic approaches to this challenge:
+
+- **Unsupervised behavioral decomposition** (Berman et al. 2014) identifies stereotyped behavioral motifs from continuous recordings without pre-defined categories, enabling discovery of behavioral states that the model should reproduce
+- **Deep learning-based pose estimation** (Pereira et al. 2022, SLEAP) provides sub-pixel body posture tracking that can extract kinematic features more precisely than centroid-only approaches
+- **Computational neuroethology frameworks** (Datta et al. 2019) advocate for treating behavior as a high-dimensional continuous signal rather than a set of discrete categories, which aligns with how our simulation outputs movement data
+
+As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) is revived, it should incorporate or interface with these modern approaches rather than relying solely on the classic 5-metric kinematic comparison.
 
 ---
 
@@ -638,6 +698,16 @@ jobs:
 
 ---
 
+### Existing Code Resources
+
+**wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
+Provides direct API access to [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity via `NeuroAtlas.get_signal_propagation_atlas(strain="wt")`, returning the exact 302x302 correlation matrix needed for Tier 2 validation. No manual data download required. **Estimated time savings: 15 hours.**
+
+**neuronal-analysis** ([openworm/neuronal-analysis](https://github.com/openworm/neuronal-analysis), 2017, dormant):
+Tools to produce, analyse and compare simulated and recorded neuronal datasets — directly relevant to Tier 1 electrophysiology validation. May contain reusable single-cell comparison scripts.
+
+---
+
 ## References
 
 1. **[Sarma et al. 2016](https://doi.org/10.12688/f1000research.9095.1)** — "Unit testing, model validation, and biological simulation." *F1000Research* 5:1946.
@@ -649,6 +719,14 @@ jobs:
 7. **[Gleeson et al., in preparation](https://github.com/openworm/ConnectomeToolbox)** — "ConnectomeToolbox: a unified software framework for *C. elegans* connectivity data." (Manuscript in preparation; `cect` Python package published.)
 8. **[Ripoll-Sánchez et al. 2023](https://doi.org/10.1016/j.neuron.2023.09.043)** — "The neuropeptidergic connectome of *C. elegans*." *Neuron* 111:3570-3589. (Extrasynaptic connectivity data in ConnectomeToolbox.)
 9. **[Pereira et al. 2015](https://doi.org/10.7554/eLife.12432)** — "A cellular and regulatory map of the cholinergic nervous system of *C. elegans*." *eLife* 4:e12432. (Peptide co-expression data in ConnectomeToolbox.)
+10. **Pearl J, Mackenzie D (2018).** *The Book of Why: The New Science of Cause and Effect.* Basic Books. *Theoretical framework for causal inference — observational data is insufficient for validating causal models; interventional data (perturbations) is required.*
+11. **Berman GJ, Choi DM, Bialek W, Shaevitz JW (2014).** "Mapping the stereotyped behaviour of freely moving fruit flies." *J R Soc Interface* 11:20140672. *Unsupervised behavioral decomposition — systematic approach to identifying behavioral motifs from continuous recordings.*
+12. **[Pereira TD et al. 2022](https://doi.org/10.1038/s41592-022-01426-1)** — "SLEAP: A deep learning system for multi-animal pose estimation." *Nature Methods* 19:486-495. *Deep learning pose estimation for high-precision behavioral quantification.*
+13. **Datta SR, Anderson DJ, Branson K, Perona P, Leifer A (2019).** "Computational neuroethology: a call to action." *Neuron* 104:11-24. *Framework for treating behavior as a high-dimensional continuous signal — relevant to how we quantify simulated vs. real movement.*
+14. **Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S (1985).** "The neural circuit for touch sensitivity in *Caenorhabditis elegans*." *J Neurosci* 5:956-964. *Foundational touch neuron ablation data — Tier 4 causal validation target.*
+15. **Haspel G et al. (2023).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578. *White paper on observational and perturbational completeness in C. elegans neuroscience — motivates Tier 4 validation.*
+16. **Kato S, Kaplan HS, Schrodel T, Skora S, Lindsay TH, Yemini E, Lockery S, Zimmer M (2015).** "Global brain dynamics embed the motor command sequence of *Caenorhabditis elegans*." *Cell* 163:656-669. *Whole-brain calcium imaging showing PCA structure of neural dynamics — PC1 separates forward vs. backward locomotion command neurons.*
+17. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990. *MetaWorm model — 136-neuron circuit with neurite-level spatial detail, demonstrates PCA validation, gap junction perturbation, and closed-loop chemotaxis.*
 
 ---
 
