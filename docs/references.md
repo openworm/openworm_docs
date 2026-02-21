@@ -56,9 +56,9 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) | Nat Neurosci 8:43-50 | 2005 | MEC-4 DEG/ENaC channel kinetics in touch neurons |
 | [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | Neuron 39:1005-1017 | 2003 | In vivo calcium imaging of mechanosensory neurons (ALM, AVM, PLM) |
 | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Nature 449:63-71 | 2007 | AWC olfactory neuron calcium imaging, TAX-2/TAX-4 channel characterization |
-| Lindsay et al. 2011 | J Neurophysiol 105:1-9 | 2011 | AVA command interneuron whole-cell recordings — graded potential dynamics |
+| [Lindsay et al. 2011](https://doi.org/10.1038/ncomms1304) | Nat Commun 2:306 | 2011 | AVA command interneuron whole-cell recordings — graded potential dynamics |
 | Liu et al. 2018 | eLife 7:e36607 | 2018 | RIM motor neuron electrophysiology, EGL-19/UNC-2 channel characterization |
-| Mellem et al. 2002 | PNAS 99:3184-3189 | 2002 | Interneuron electrophysiology — AVA, AVD, AVB recordings |
+| [Mellem et al. 2002](https://doi.org/10.1016/S0896-6273(02)01088-7) | Neuron 36:933-944 | 2002 | Interneuron electrophysiology — AVA, AVD, AVB recordings |
 
 ---
 
@@ -145,7 +145,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | **CeNGEN** | [cengen.org](https://cengen.org) | Single-cell transcriptome atlas of 128 *C. elegans* neuron classes | [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) |
 | **WormAtlas** | [wormatlas.org](https://wormatlas.org) | Anatomical atlas, cell descriptions, EM images, Slidable Worm | [DD004](design_documents/DD004_Mechanical_Cell_Identity.md), [DD008](design_documents/DD008_Data_Integration_Pipeline.md) |
 | **WormBase** | [wormbase.org](https://wormbase.org) | Gene annotation, cell ontology (WBbt), phenotype data | [DD008](design_documents/DD008_Data_Integration_Pipeline.md) |
-| **Schafer Lab Database** | [wormbehavior.mrc-lmb.cam.ac.uk](http://wormbehavior.mrc-lmb.cam.ac.uk/) | Behavioral feature database for N2 and mutant strains | [DD010](design_documents/DD010_Validation_Framework.md), [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) |
+| **Schafer Lab Database** | [wormbehavior.mrc-lmb.cam.ac.uk](https://wormbehavior.mrc-lmb.cam.ac.uk/) | Behavioral feature database for N2 and mutant strains | [DD010](design_documents/DD010_Validation_Framework.md), [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) |
 | **ConnectomeToolbox** | [github.com/openworm/ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | Canonical API for all connectome datasets (`cect`) | [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) |
 | **open-worm-analysis-toolbox** | [github.com/openworm/open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | Movement analysis and Tier 3 behavioral validation | [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) |
 | **OpenWorm Docker** | [github.com/openworm/OpenWorm](https://github.com/openworm/OpenWorm) | Meta-repository and simulation stack | [DD013](design_documents/DD013_Simulation_Stack_Architecture.md) |
@@ -159,6 +159,6 @@ OpenWorm validates its simulation against experimental data at three tiers ([DD0
 
 | Tier | What's Validated | Key Data Sources |
 |------|-----------------|------------------|
-| **Tier 1** | Single-cell electrophysiology | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) (touch neurons), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) (MEC-4 channels), [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) (AWC), Lindsay et al. 2011 (AVA), Liu et al. 2018 (RIM) |
+| **Tier 1** | Single-cell electrophysiology | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) (touch neurons), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) (MEC-4 channels), [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) (AWC), [Lindsay et al. 2011](https://doi.org/10.1038/ncomms1304) (AVA), Liu et al. 2018 (RIM) |
 | **Tier 2** | Circuit functional connectivity | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) |
-| **Tier 3** | Behavioral kinematics | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560), [Schafer Lab Database](http://wormbehavior.mrc-lmb.cam.ac.uk/) |
+| **Tier 3** | Behavioral kinematics | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560), [Schafer Lab Database](https://wormbehavior.mrc-lmb.cam.ac.uk/) |

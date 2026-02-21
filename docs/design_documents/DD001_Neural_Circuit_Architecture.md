@@ -165,7 +165,7 @@ OpenWorm implements a **multi-level framework (c302)** offering increasing bioph
 
 **Rationale:**
 
-- Graded synapses match *C. elegans* biology (Goodman et al. 1998)
+- Graded synapses match *C. elegans* biology ([Goodman et al. 1998](https://doi.org/10.1016/S0896-6273(00)81014-4))
 - Continuous voltage coupling enables realistic sensorimotor feedback via Sibernetic
 - Computationally tractable for whole-circuit simulation
 - Validated against movement kinematics
@@ -285,7 +285,7 @@ OpenWorm will adopt this approach with one improvement: quantitative validation 
 
 ### 1. Pure Integrate-and-Fire for All Levels
 
-**Rejected because:** *C. elegans* neurons do not fire action potentials. IAF models produce biologically incorrect all-or-nothing spiking. Goodman et al. (1998) electrophysiology shows graded, continuous responses.
+**Rejected because:** *C. elegans* neurons do not fire action potentials. IAF models produce biologically incorrect all-or-nothing spiking. [Goodman et al. (1998)](https://doi.org/10.1016/S0896-6273(00)81014-4) electrophysiology shows graded, continuous responses.
 
 ### 2. AlphaFold-predicted Channel Structures + MD Simulations
 
@@ -416,37 +416,37 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
 1. **Boyle JH, Cohen N (2008).** "Caenorhabditis elegans body wall muscles are simple actuators." *Biosystems* 94:170-181.
    *Source of channel kinetics.*
 
-2. **Goodman MB, Hall DH, Avery L, Bhatt R (1998).** "Active currents regulate sensitivity and dynamic range in *C. elegans* neurons." *Neuron* 20:763-772.
+2. **[Goodman MB, Hall DH, Avery L, Bhatt R (1998)](https://doi.org/10.1016/S0896-6273(00)81014-4).** "Active currents regulate sensitivity and dynamic range in *C. elegans* neurons." *Neuron* 20:763-772.
    *Evidence for graded potentials.*
 
 3. **Cook SJ et al. (2019).** "Whole-animal connectomes of both *Caenorhabditis elegans* sexes." *Nature* 571:63-71.
    *Connectome topology.*
 
-4. **Gleeson P et al. (2018).** "c302: a multiscale framework for modelling the nervous system of *Caenorhabditis elegans*." *Phil Trans R Soc B* 373:20170379.
+4. **[Gleeson P et al. (2018)](https://doi.org/10.1098/rstb.2017.0379).** "c302: a multiscale framework for modelling the nervous system of *Caenorhabditis elegans*." *Phil Trans R Soc B* 373:20170379.
    *c302 architecture paper.*
 
 5. **Rosen R (1991).** *Life Itself: A Comprehensive Inquiry Into the Nature, Origin, and Fabrication of Life.*
    *Causal loop philosophy.*
 
-6. **Hendricks M, Ha H, Maffey N, Zhang Y (2012).** "Compartmentalized calcium dynamics in a *C. elegans* interneuron encode head movement." *Nature* 487:99-103.
+6. **[Hendricks M, Ha H, Maffey N, Zhang Y (2012)](https://doi.org/10.1038/nature11081).** "Compartmentalized calcium dynamics in a *C. elegans* interneuron encode head movement." *Nature* 487:99-103.
    *Evidence for spatially compartmentalized signaling within individual neurons — motivates multicompartmental Level E.*
 
-7. **Liu Q, Kidd PB, Dobosiewicz M, Bhatt R (2018).** "*C. elegans* AWA olfactory neurons fire calcium-mediated all-or-none action potentials." *Cell* 175:57-70.e17.
+7. **[Liu Q, Kidd PB, Dobosiewicz M, Bhatt R (2018)](https://doi.org/10.1016/j.cell.2018.08.018).** "*C. elegans* AWA olfactory neurons fire calcium-mediated all-or-none action potentials." *Cell* 175:57-70.e17.
    *Evidence that some C. elegans neurons use action potentials, not just graded signaling — motivates neuron-class-specific model complexity.*
 
-8. **Cannon RC, Gleeson P, Crook S, et al. (2014).** "LEMS: a language for expressing complex biological models in concise and hierarchical form and its use in underpinning NeuroML 2." *Front Neuroinform* 8:79.
+8. **[Cannon RC, Gleeson P, Crook S, et al. (2014)](https://doi.org/10.3389/fninf.2014.00079).** "LEMS: a language for expressing complex biological models in concise and hierarchical form and its use in underpinning NeuroML 2." *Front Neuroinform* 8:79.
    *LEMS/NeuroML 2 specification — supports multicompartmental morphologies natively.*
 
-9. **Linka K, Pierre SRS, Kuhl E (2023).** "Automated model discovery for human brain using Constitutive Artificial Neural Networks." *Acta Biomater*.
+9. **[Linka K, Pierre SRS, Kuhl E (2023)](https://doi.org/10.1016/j.actbio.2023.01.055).** "Automated model discovery for human brain using Constitutive Artificial Neural Networks." *Acta Biomater*.
    *RNN-based approach for inferring biophysical parameters from experimental recordings — applicable to cable equation fitting.*
 
 10. **Alon S et al. (2021).** "Expansion sequencing: spatially precise in situ transcriptomics in intact biological systems." *Science* 371.
     *In-situ sequencing at subcellular resolution — future data source for spatially resolved channel densities in Level E models.*
 
-11. **Shaib AH et al. (2023).** "*C. elegans*-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
+11. **[Shaib AH et al. (2023)](https://doi.org/10.1038/s41587-024-02431-9).** "*C. elegans*-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
     *Future data source for synapse-level molecular identity and subcellular protein localization.*
 
-12. **Haspel G et al. (2023).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
+12. **[Haspel G et al. (2023)](https://arxiv.org/abs/2308.06578).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
     *White paper arguing for observational and perturbational completeness in C. elegans neuroscience — conceptual alignment with OpenWorm's whole-organism approach.*
 
 13. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990.
@@ -479,9 +479,9 @@ Do NOT modify Level C1 unless a critical bug is found.
 
 ### Level E: Multicompartmental Cable Equation Models
 
-Experimental evidence shows that single-compartment (isopotential) models are insufficient for a subset of *C. elegans* neurons. Hendricks et al. (2012) demonstrated that calcium dynamics in the RIA interneuron are compartmentalized across distinct segments of the neurite, encoding head movement direction through spatially separated signals within a single cell. Liu et al. (2018) showed that AWA olfactory neurons fire calcium-mediated all-or-none action potentials — a fundamentally different signaling mode from the graded potentials assumed by Level C1. These findings indicate that model complexity must vary among neurons: some are well-described by the single-compartment approximation, while others require multicompartmental representations that capture signal propagation along neurites.
+Experimental evidence shows that single-compartment (isopotential) models are insufficient for a subset of *C. elegans* neurons. [Hendricks et al. (2012)](https://doi.org/10.1038/nature11081) demonstrated that calcium dynamics in the RIA interneuron are compartmentalized across distinct segments of the neurite, encoding head movement direction through spatially separated signals within a single cell. [Liu et al. (2018)](https://doi.org/10.1016/j.cell.2018.08.018) showed that AWA olfactory neurons fire calcium-mediated all-or-none action potentials — a fundamentally different signaling mode from the graded potentials assumed by Level C1. These findings indicate that model complexity must vary among neurons: some are well-described by the single-compartment approximation, while others require multicompartmental representations that capture signal propagation along neurites.
 
-**NeuroML 2 natively supports multicompartmental morphologies.** The `<cell>` element can contain a `<morphology>` with multiple `<segment>` elements organized into `<segmentGroup>` definitions, with per-segment channel density assignments. This means Level E can be implemented within the existing NeuroML/LEMS framework without a new file format — the same `jnml -validate` pipeline applies, and the same NEURON simulator backend can execute multicompartmental cells alongside single-compartment ones in the same network simulation (Cannon et al. 2014; Gleeson et al. 2018).
+**NeuroML 2 natively supports multicompartmental morphologies.** The `<cell>` element can contain a `<morphology>` with multiple `<segment>` elements organized into `<segmentGroup>` definitions, with per-segment channel density assignments. This means Level E can be implemented within the existing NeuroML/LEMS framework without a new file format — the same `jnml -validate` pipeline applies, and the same NEURON simulator backend can execute multicompartmental cells alongside single-compartment ones in the same network simulation ([Cannon et al. 2014](https://doi.org/10.3389/fninf.2014.00079); [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)).
 
 **Feasibility demonstrated.** Zhao et al. (2024) showed that the "representative neuron" strategy makes multicompartmental modeling tractable at scale: build detailed models for a small set of representative neurons (one per functional group), fit them to published electrophysiology, then propagate fitted parameters to all neurons in the same functional class. Using this approach with 5 representative neurons (AWC, AIY, AVA, RIM, VD5), they produced 136 multicompartmental neurons whose I-V curves matched experimental recordings. Nicoletti et al. (2019) earlier demonstrated a similar multicompartmental approach for AWCon with multiple ion channel types. This establishes that Level E is achievable with current data — it does not require waiting for new experimental techniques.
 
@@ -500,13 +500,13 @@ Experimental evidence shows that single-compartment (isopotential) models are in
 **Stage 2 (Phase 4-5 — Scale to Full Circuit):**
 
 1. Extend to all 302 neurons using the representative-neuron approach
-2. Incorporate subcellular molecular data from expansion microscopy (Alon et al. 2021; Shaib et al. 2023) as it becomes available
+2. Incorporate subcellular molecular data from expansion microscopy (Alon et al. 2021; [Shaib et al. 2023](https://doi.org/10.1038/s41587-024-02431-9)) as it becomes available
 3. Apply spatially resolved synapse placement (see section above)
-4. Infer parameters using data-constrained fitting methods including RNN-based approaches (Linka et al. 2023)
+4. Infer parameters using data-constrained fitting methods including RNN-based approaches ([Linka et al. 2023](https://doi.org/10.1016/j.actbio.2023.01.055))
 
 **OpenWorm extends beyond Zhao et al.:** (a) We target all 302 neurons, not 136; (b) we use NeuroML standard format enabling multi-simulator support and community sharing; (c) we integrate with CeNGEN transcriptomics for principled parameter propagation rather than purely functional-group-based assignment; (d) our models include neuropeptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) and organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) that the locomotion-only circuit does not capture.
 
-**Validation:** Level E neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers. Individual cell models should additionally reproduce published I-V curves and compartmentalized calcium dynamics where available (e.g., RIA spatial signals per Hendricks et al. 2012, AWC responses per Nicoletti et al. 2019).
+**Validation:** Level E neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers. Individual cell models should additionally reproduce published I-V curves and compartmentalized calcium dynamics where available (e.g., RIA spatial signals per [Hendricks et al. 2012](https://doi.org/10.1038/nature11081), AWC responses per Nicoletti et al. 2019).
 
 ---
 

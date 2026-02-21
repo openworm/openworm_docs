@@ -96,14 +96,14 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High |
 | Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium |
 | Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD018](DD018_Egg_Laying_System_Architecture.md) | Medium |
-| Touch response latency | Chalfie et al. 1985, *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High |
+| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High |
 | Foraging behavior decomposition | Flavell et al. 2020, *Genetics* 216:315-332 | Dwelling/roaming state durations, transition rates | CSV: state, duration, transition_probability | Digitize from paper or request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Medium |
 
 ### Tier 4: Causal / Interventional
 
 | Dataset | Source Publication | Intervention | Expected Phenotype | Format Needed | Consumer DD | Priority |
 |---------|-------------------|-------------|-------------------|---------------|-------------|----------|
-| Touch neuron ablation | Chalfie et al. 1985 | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High |
+| Touch neuron ablation | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High |
 | Pharyngeal neuron ablation | Avery & Horvitz 1989, *Neuron* 3:473-485 | Laser killing of pharyngeal neurons | Pumping persists (semi-autonomous) | CSV: ablated_neurons, pumping_frequency | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium |
 | Neuropeptide knockouts (FLP, NLP) | Li et al. 1999; Rogers et al. 2003 | Gene deletion | Altered locomotion | CSV: genotype, speed, reversal_rate | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | High |
 | unc-103 loss-of-function | Collins & Koelle 2013, *J Neurosci* 33:761-775 | ERG channel removal from vm2 | Constitutive egg-laying | CSV: genotype, egg_count, bout_pattern | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium |
@@ -186,7 +186,7 @@ These datasets are blocking for the two critical validation tiers (Tier 2 and Ti
 4. **Thomas 1990 defecation periods** ([DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3) — Digitize Table 1. ~2 hours.
 5. **Raizen 1994 pumping frequency** ([DD007](DD007_Pharyngeal_System_Architecture.md) Tier 3) — Digitize from figures. ~3 hours.
 6. **O'Hagan 2005 MEC-4 kinetics** ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 1) — Digitize activation/inactivation curves. ~4 hours.
-7. **Chalfie 1985 touch response** ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 + Tier 4) — Digitize latency data. ~2 hours.
+7. **[Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) touch response** ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 + Tier 4) — Digitize latency data. ~2 hours.
 
 **Estimated total: ~18 hours**
 
@@ -318,7 +318,7 @@ validation:
 3. **Thomas JH (1990).** "Genetic analysis of defecation in *Caenorhabditis elegans*." *Genetics* 124:855-872.
 4. **Raizen DM, Avery L (1994).** "Electrical activity and behavior in the pharynx of *Caenorhabditis elegans*." *Neuron* 12:483-495.
 5. **O'Hagan R, Chalfie M, Bhatt R (2005).** "The MEC-4 DEG/ENaC channel of *Caenorhabditis elegans* touch receptor neurons transduces mechanical signals." *Nature Neurosci* 8:43-50.
-6. **Chalfie M et al. (1985).** "The neural circuit for touch sensitivity in *Caenorhabditis elegans*." *J Neurosci* 5:956-964.
+6. **[Chalfie M et al. (1985)](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985).** "The neural circuit for touch sensitivity in *Caenorhabditis elegans*." *J Neurosci* 5:956-964.
 7. **Collins KM et al. (2016).** "Activity of the *C. elegans* egg-laying behavior circuit is controlled by competing activation and feedback inhibition." *eLife* 5:e21126.
 8. **Flavell SW, Raizen DM, You YJ (2020).** "Behavioral States." *Genetics* 216:315-332.
 9. **Goodman MB, Hall DH, Avery L, Bhatt R (1998).** "Active currents regulate sensitivity and dynamic range in *C. elegans* neurons." *Neuron* 20:763-772.

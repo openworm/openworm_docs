@@ -138,28 +138,13 @@ The `explain_level` field is derived from the combination of education, biology,
 
 ### 1.3 Badge Earning (AI Agents and Human Sponsors)
 
-AI agents earn the same badges as human contributors (see [DD011](DD011_Contributor_Progression_Model.md) §Badge & Recognition System):
+AI agents earn the same badges as human contributors. See [DD011](DD011_Contributor_Progression_Model.md) (Badge & Recognition System) for the complete badge taxonomy -- orientation, skill, domain, community, and milestone badges with full criteria and verification methods.
 
-- **Orientation badges** — earned during L0→L1 onboarding via N2-Whisperer
-- **Skill badges** — earned by demonstrating technical capability (e.g., "Neuron Modeling Foundations")
-- **Domain badges** — earned by sustained contribution to a DD subsystem (e.g., "Neural Circuit Contributor")
-- **Milestone badges** — earned automatically ("First PR", "Centurion", "Cross-Pollinator")
+An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD001](DD001_Neural_Circuit_Architecture.md) L2 issue than one without.
 
-An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue — an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD001](DD001_Neural_Circuit_Architecture.md) L2 issue than one without.
+**Human sponsors** earn a unique badge type that AI agents cannot: **Teach-Back badges**, earned when the Sponsor Summary (Section 3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See [DD011](DD011_Contributor_Progression_Model.md) (Teach-Back Badges) for the full list, including the capstone "I Understand the Whole Worm" badge.
 
-**Human sponsors** earn a unique badge type that AI agents cannot:
-
-- **Teach-Back badges** — earned when the Sponsor Summary (§3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See [DD011](DD011_Contributor_Progression_Model.md) §Teach-Back Badges for the full list.
-- **"I Understand the Whole Worm"** — the capstone badge, earned by accumulating teach-back badges in 5+ domains. Represents genuine cross-disciplinary understanding of C. elegans earned through AI-mediated contribution.
-
-**Sponsor badge progression mirrors knowledge growth:**
-
-1. Sponsor starts at `explain_level: child` → agent writes simple Sponsor Summaries
-2. After 5+ teach-back badges in one domain, sponsor's understanding deepens → `explain_level` rises for that domain
-3. Agent adapts future Sponsor Summaries to the sponsor's growing knowledge
-4. Over time, a sponsor who started knowing nothing about neuroscience can reach `explain_level: graduate` in specific domains — verified by their badge profile
-
-This creates a **learning flywheel**: contribute → learn (via teach-back) → earn badge → contribute at a higher level → learn more. The badge system makes this flywheel visible and motivating.
+**Sponsor badge progression mirrors knowledge growth:** sponsors start at a basic `explain_level`, and as they accumulate teach-back badges, their understanding deepens and the agent adapts future Sponsor Summaries to match. This creates a **learning flywheel**: contribute, learn (via teach-back), earn badge, contribute at a higher level, learn more. The badge system makes this flywheel visible and motivating.
 
 ---
 
@@ -217,7 +202,7 @@ Parse the DD's **Integration Contract** section:
 - [ ] Issue #102: Load GPCR modulation parameters from literature [Label: DD006] [Label: ai-workable] [Label: L2]
 
 **Phase 2: Core Implementation**
-- [ ] Issue #103: Implement GPCR modulation equations (Marder et al. 2014) [Label: DD006] [Label: ai-workable] [Label: L2]
+- [ ] Issue #103: Implement GPCR modulation equations ([Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958)) [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #104: Implement peptide concentration diffusion model [Label: DD006] [Label: human-expert] [Label: L3]
 - [ ] Issue #105: Integrate peptide release with [DD001](DD001_Neural_Circuit_Architecture.md) spike times [Label: DD006] [Label: ai-workable] [Label: L2]
 
@@ -338,7 +323,7 @@ by watching the backward locomotion sequence.
 
 - **child:** "You helped connect two special brain cells that tell the worm to back up when something touches its nose!"
 - **undergrad:** "You implemented gap junction coupling between AVAL/AVAR command interneurons — the primary drivers of backward locomotion in the escape response."
-- **graduate:** "You parameterized Vj-dependent gap junction conductance for the AVAL-AVAR innexin-14 hemichannel pair (Kawano et al. 2011), implementing voltage-dependent rectification for left-right coordination of the backward locomotion command."
+- **graduate:** "You parameterized Vj-dependent gap junction conductance for the AVAL-AVAR innexin-14 hemichannel pair ([Kawano et al. 2011](https://doi.org/10.1016/j.neuron.2011.09.005)), implementing voltage-dependent rectification for left-right coordination of the backward locomotion command."
 
 **Purpose:** The Sponsor Summary serves a dual function:
 
@@ -763,7 +748,7 @@ Last updated: 2026-02-18T14:30:00Z
 ### [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Neuropeptides
 - All peptide types must use WormBase canonical names
 - Diffusion constants: 1e-7 cm²/s (default, Skinner 2024)
-- GPCR modulation equations: Marder et al. 2014 (Eq. 3)
+- GPCR modulation equations: [Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958) (Eq. 3)
 
 ### [DD013](DD013_Simulation_Stack_Architecture.md) Config Schema
 - All config sections follow pattern: `subsystem.feature.parameter`

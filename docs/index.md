@@ -4,7 +4,7 @@ Introduction to OpenWorm
 Welcome
 -------
 
-[OpenWorm](http://www.openworm.org) is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a _C. elegans_ nematode, via bottom-up "systems biology" computational modeling.
+[OpenWorm](https://www.openworm.org) is an open source project and open science community dedicated to creating the world's first whole organism in a computer, a _C. elegans_ nematode, via bottom-up "systems biology" computational modeling.
 
 It is an association of highly motivated scientists, engineers, coders, and curious citizens from around the world who believe in open science and open access.
 
@@ -24,19 +24,9 @@ Table Of Contents
 The Path to 959 Cells
 ---------------------
 
-OpenWorm is on a **quantified, validated path** from today's 302-neuron simulation to a complete 959-cell adult hermaphrodite, organized into **7 implementation phases** over ~18 months:
+OpenWorm is on a **quantified, validated path** from today's 302-neuron simulation to a complete 959-cell adult hermaphrodite, organized into implementation phases over ~18 months -- from today's working crawling simulation through cell differentiation, sensory integration, organ systems (pharynx, intestine, egg-laying), and finally all 959 somatic cells with a photorealistic web viewer.
 
-| Phase | Milestone | What Gets Added |
-|-------|-----------|----------------|
-| **Phase 0** | First Whole-Nervous-System Simulation | 302 neurons + 95 muscles + body physics (working today) |
-| **Infrastructure Bootstrap** | Containerized Stack with Automated Validation | Docker, CI/CD, contributor workflow (4 weeks) |
-| **Phase 1** | Biologically Distinct Neurons | 128 neuron classes from CeNGEN (3 months) |
-| **Phase 2** | The Worm Can Feel and Modulate | Neuropeptides + closed-loop touch (3 months) |
-| **Phase 3** | Multi-Organ Digital Organism | Pharynx, intestine, egg-laying (6 months) |
-| **Phase 4** | 959-Cell Photorealistic Organism | All somatic cells, public web viewer (6 months) |
-| **Future** | Intracellular, Developmental, Male | Gene regulation, growth, mating (Year 2+) |
-
-**See [Design Documents](design_documents/)** for the complete technical specifications.
+**See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase)** for the complete phase-by-phase timeline with milestones and Design Document assignments.
 
 Mission/Vision
 --------------
@@ -82,7 +72,7 @@ Then, please browse our [project list](projects/) to understand the different ar
 
 If you are interested in a specific programming language, check out links to issues specifically for [Python](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open) or [C++](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open).
 
-If you have questions about specific things you find, please reach out on [Slack](http://openworm.org/contacts.html).
+If you have questions about specific things you find, please reach out on [Slack](https://openworm.org/contacts.html).
 
 More information about the process of making a contribution is available on our [community page](community/).
 

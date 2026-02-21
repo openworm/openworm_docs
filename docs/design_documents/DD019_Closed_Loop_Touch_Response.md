@@ -855,7 +855,7 @@ Contains `StretchReceptor.cpp/h` implementing proprioceptive feedback on B-class
 
 ## References
 
-1. **Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S (1985).** "The neural circuit for touch sensitivity in *Caenorhabditis elegans*." *J Neurosci* 5:956-964.
+1. **[Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S (1985)](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985).** "The neural circuit for touch sensitivity in *Caenorhabditis elegans*." *J Neurosci* 5:956-964.
    *Foundational touch circuit: touch neurons, command interneurons, reversal behavior.*
 
 2. **Wicks SR, Roehrig CJ, Bhatt R, Rankin CH (1996).** "Tap withdrawal in *Caenorhabditis elegans*: Identification of neural substrates." *J Neurobiol* 31:1-11.

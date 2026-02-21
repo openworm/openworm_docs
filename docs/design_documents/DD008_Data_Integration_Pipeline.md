@@ -295,7 +295,7 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 | [Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) connectome | wormwiring.org | Neuron adjacency + weights | CSV/Excel → RDF ingestion | Already integrated |
 | CeNGEN L4 scRNA-seq | cengen.org | Per-neuron-class TPM values | CSV → RDF ingestion | Already integrated |
 | WormAtlas anatomy | wormatlas.org | Cell positions, morphology, EM images | HTML/images → RDF ingestion | Partial |
-| Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested** (needed for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
+| Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested into OWMeta** (needed for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)). Note: this data *is* already available in ConnectomeToolbox (`cect`) per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md); the "not yet ingested" status refers specifically to OWMeta's RDF graph. |
 | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for [DD010](DD010_Validation_Framework.md)) |
 | [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 6) |
 

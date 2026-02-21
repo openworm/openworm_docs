@@ -64,7 +64,7 @@ OpenWorm doesn't model at one scale — it models at **five scales simultaneousl
 
 ## The Causal Loop (Bottom-Up + Validated)
 
-Inspired by [Robert Rosen's work on causal loops](http://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
+Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
 
 <object data="../images/causal_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">OpenWorm Sensorimotor Causal Loop — click any DD to navigate</object>
 
@@ -163,7 +163,7 @@ More details available on the [Validation page](validation/).
 
 ## Reproducibility (Platform Evolution)
 
-**Historical:** [Geppetto](http://geppetto.org) (2014-2020) — Java-based web platform for multi-algorithm simulation
+**Historical:** [Geppetto](https://geppetto.org) (2014-2020) — Java-based web platform for multi-algorithm simulation
 
 **Current Specification: [DD014: Dynamic Visualization](design_documents/DD014_Dynamic_Visualization_Architecture.md)**
 
@@ -195,14 +195,6 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 ## What's Next
 
-**See [Design Documents](design_documents/)** for the complete 25-DD roadmap.
-
-| Phase | Timeline | What Gets Added |
-|-------|----------|----------------|
-| **Infrastructure Bootstrap** | Next 4 weeks | [DD013](design_documents/DD013_Simulation_Stack_Architecture.md) Docker stack, [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival |
-| **Phase 1** | Months 1-3 | 128 biologically distinct neurons from CeNGEN |
-| **Phase 2** | Months 4-6 | Neuropeptides + closed-loop touch + proprioception |
-| **Phase 3** | Months 7-12 | Pharynx, intestine, egg-laying, ML acceleration |
-| **Phase 4** | Months 13-18 | All 959 somatic cells, photorealistic viewer |
+The path from today's 302-neuron simulation to the complete 959-cell organism is organized into 4 implementation phases over ~18 months, progressing through cell differentiation, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase timeline with milestones and Design Document assignments.
 
 **Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation).

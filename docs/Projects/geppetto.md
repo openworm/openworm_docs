@@ -4,13 +4,13 @@ Geppetto Simulation Engine
 !!! note "Platform Evolution"
     Geppetto served as OpenWorm's primary simulation and visualization platform from 2014-2020. For Phase 1-2 work, it has been superseded by **[DD014 (Dynamic Visualization Architecture)](../design_documents/DD014_Dynamic_Visualization_Architecture.md)**, which specifies a Trame-based (Python) approach. See [Archived Projects](../archived_projects/#geppetto-web-platform-2014-2020) for full historical context.
 
-[Geppetto](http://geppetto.org) is an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser.
+[Geppetto](https://geppetto.org) is an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser.
 
-Geppetto is written in Java and leverages technologies like [OSGi](http://www.osgi.org/), [Spring Framework](http://www.springsource.org/spring-framework), [OpenCL](http://www.khronos.org/opencl/) and [Maven](http://maven.apache.org/).
+Geppetto is written in Java and leverages technologies like [OSGi](https://www.osgi.org/), [Spring Framework](http://www.springsource.org/spring-framework), [OpenCL](https://www.khronos.org/opencl/) and [Maven](https://maven.apache.org/).
 
-Geppetto's frontend is written using [THREE.js](https://github.com/mrdoob/three.js) and [WebGL](http://www.khronos.org/webgl/). Back-end / front-end communication happens via [JSON](http://www.json.org/) messages through [WebSocket](http://www.websocket.org/).
+Geppetto's frontend is written using [THREE.js](https://github.com/mrdoob/three.js) and [WebGL](https://www.khronos.org/webgl/). Back-end / front-end communication happens via [JSON](https://www.json.org/) messages through [WebSocket](https://www.websocket.org/).
 
-The definitive documentation for Geppetto [is available online](http://docs.geppetto.org).
+The definitive documentation for Geppetto [is available online](https://docs.geppetto.org).
 
 ## Why the Evolution?
 

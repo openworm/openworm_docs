@@ -872,10 +872,10 @@ Python-based 2D viewer for WCON files. Already reads WCON 1.0 format. Reuse its 
 2. **Javer A, Currie M, Lee CW, Hokanson J, Li K, Martineau CN, et al. (2018).** "An open-source platform for analyzing and sharing worm-behavior data." *Nature Methods* 15:645-646.
    *Tierpsy Tracker — modern reimplementation of Schafer lab phenotyping.*
 
-3. **Schafer WR (2005).** "Deciphering the neural and molecular mechanisms of *C. elegans* behavior." *Current Biology* 15:R723-R729.
+3. **[Schafer WR (2005)](https://doi.org/10.1016/j.cub.2005.08.020).** "Deciphering the neural and molecular mechanisms of *C. elegans* behavior." *Current Biology* 15:R723-R729.
    *Context for behavioral analysis in C. elegans.*
 
-4. **Brown AEX, Yemini EI, Grundy LJ, Jucikas T, Schafer WR (2013).** "A dictionary of behavioral motifs reveals clusters of genes affecting *Caenorhabditis elegans* locomotion." *PNAS* 110:791-796.
+4. **[Brown AEX, Yemini EI, Grundy LJ, Jucikas T, Schafer WR (2013)](https://doi.org/10.1073/pnas.1211447110).** "A dictionary of behavioral motifs reveals clusters of genes affecting *Caenorhabditis elegans* locomotion." *PNAS* 110:791-796.
    *Behavioral motif analysis using the feature set.*
 
 5. **WCON Format Specification.** https://github.com/openworm/tracker-commons/blob/master/WCON_format.md

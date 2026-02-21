@@ -24,7 +24,7 @@ We are building a simulation platform to prove it is possible to make good model
 Why _C. elegans_?
 -----------------
 
-In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving muscles on a body in a complex world.
+In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD002_Muscle_Model_Architecture.md) on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building a simple system to capture it, we are starting with making models of the individual cells and their interactions. If we do this correctly so that the cells act on each other as they do in the real organism, we will have a much more realistic model than we would get trying to go straight to the behavior.
 
@@ -52,7 +52,7 @@ Instead of a pure top-down approach, we employ a balanced top-down, bottom-up ap
 
 ### Bottom-up simulation
 
-Biology teaches us that when it comes to understanding how animals work, understanding the [behavior of cells is critical](http://en.wikipedia.org/wiki/Cell_biology). Our bodies are made up of between 40 and 100 trillion cells, and it is these cells working together that make up everything we are and do. Of particular interest are the cells in the brain and larger nervous system, that are responsible for our thoughts, creativity and feelings.
+Biology teaches us that when it comes to understanding how animals work, understanding the [behavior of cells is critical](https://en.wikipedia.org/wiki/Cell_biology). Our bodies are made up of between 40 and 100 trillion cells, and it is these cells working together that make up everything we are and do. Of particular interest are the cells in the brain and larger nervous system, that are responsible for our thoughts, creativity and feelings.
 
 Today, science has barely scratched the surface of how to make best use of the enormous power of computers to create models of cellular activity. Scientists have not yet placed computer models of cells at the center of biology.
 
@@ -62,9 +62,9 @@ In reality, we always have to do some bottom-up simulation along with top-down s
 
 ### Multi-algorithm integration
 
-Just as mathematics has played a crucial role in the [description of physics](http://en.wikipedia.org/wiki/Mathematical_physics), [mathematicians have approached the field of biology](http://en.wikipedia.org/wiki/Mathematical_and_theoretical_biology) with the goal of describing biological activity more precisely. Generally speaking, this means that if it happens inside a biological organism, there should be a set of equations that can explain how it works. A great deal of creativity goes into coming up with such equations.
+Just as mathematics has played a crucial role in the [description of physics](https://en.wikipedia.org/wiki/Mathematical_physics), [mathematicians have approached the field of biology](https://en.wikipedia.org/wiki/Mathematical_and_theoretical_biology) with the goal of describing biological activity more precisely. Generally speaking, this means that if it happens inside a biological organism, there should be a set of equations that can explain how it works. A great deal of creativity goes into coming up with such equations.
 
-Once equations have been determined, computers are great at calculating them once they have been [turned into algorithms](http://en.wikipedia.org/wiki/Algorithm). Algorithms become the computer's way of handling a bunch of equations.
+Once equations have been determined, computers are great at calculating them once they have been [turned into algorithms](https://en.wikipedia.org/wiki/Algorithm). Algorithms become the computer's way of handling a bunch of equations.
 
 The challenge is that there are a lot of equations that are necessary to fully specify how cellular activity works. A [recent whole cell model](https://simtk.org/home/wholecell) of a relatively simple cell came up with 32 algorithms composed of many more equations and a ton of data.
 
@@ -72,13 +72,13 @@ The consequence of this from an engineering perspective is, in order to simulate
 
 ### Model optimization
 
-There are a lot of aspects of _C. elegans_ that we will not be able to measure directly for a while based on experimental limitations. These are ["free parameters"](http://en.wikipedia.org/wiki/Free_parameter). The conventional wisdom on modeling is to minimize the number of free parameters as much as possible. Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.
+There are a lot of aspects of _C. elegans_ that we will not be able to measure directly for a while based on experimental limitations. These are ["free parameters"](https://en.wikipedia.org/wiki/Free_parameter). The conventional wisdom on modeling is to minimize the number of free parameters as much as possible. Sometimes, the large number of free parameters are used as an argument to avoid making computational simulations.
 
-In this case, we have to make do with what we have and make some good educated guesses about the free parameters. There is a [mathematical discipline that helps us do that known as optimization](http://en.wikipedia.org/wiki/Mathematical_optimization). For our purposes, you can think of this as generating many different versions of a model, each version with slightly different parameters, and then measuring if the model produces good results. If a model produces better results by changing the parameters in a particular way, you try to keep changing the parameters in that way and see if you get even better results. In this way, roughly speaking, optimization techniques enable scientists to turn a problem of lack of data into a problem that a computer can address using brute force calculations.
+In this case, we have to make do with what we have and make some good educated guesses about the free parameters. There is a [mathematical discipline that helps us do that known as optimization](https://en.wikipedia.org/wiki/Mathematical_optimization). For our purposes, you can think of this as generating many different versions of a model, each version with slightly different parameters, and then measuring if the model produces good results. If a model produces better results by changing the parameters in a particular way, you try to keep changing the parameters in that way and see if you get even better results. In this way, roughly speaking, optimization techniques enable scientists to turn a problem of lack of data into a problem that a computer can address using brute force calculations.
 
 ### NeuroML
 
-[NeuroML is](http://en.wikipedia.org/wiki/NeuroML) an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
+[NeuroML](https://docs.neuroml.org) is an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
 
 OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in [DD001: Neural Circuit Architecture](design_documents/DD001_Neural_Circuit_Architecture.md).
 

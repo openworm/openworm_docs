@@ -10,7 +10,7 @@ This page contains a list of repositories maintained by the OpenWorm project on 
 Repositories
 ------------
 
-View the full current list [repositories](../Community/repositories/) of repositories on GitHub.
+View the full current list of [OpenWorm repositories on GitHub](https://github.com/openworm).
 
 Accessing GitHub
 ----------------
@@ -47,11 +47,11 @@ Opening a New Issue
 
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 
-![image](http://i.imgur.com/Rh1uvmn.png)
+![image](https://i.imgur.com/Rh1uvmn.png)
 
 Next, click on the New Image button in the upper right corner of the screen.
 
-![image](http://i.imgur.com/fvEQOJQ.png)
+![image](https://i.imgur.com/fvEQOJQ.png)
 
 This will open the interface to create a new issue. You will need to add the following information:
 
@@ -61,7 +61,7 @@ This will open the interface to create a new issue. You will need to add the fol
 -   Add a milestone if appropriate
 -   Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
-![image](http://i.imgur.com/ozkZFsh.png)
+![image](https://i.imgur.com/ozkZFsh.png)
 
 Finally, click on Submit New Issue.
 
@@ -127,7 +127,7 @@ See **[DD011 (Contributor Progression)](../design_documents/DD011_Contributor_Pr
 Licenses on repositories
 ------------------------
 
-In historical practice, OpenWorm members have chosen to use the [MIT open source license](http://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](http://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
+In historical practice, OpenWorm members have chosen to use the [MIT open source license](https://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](https://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
 
 An example of using the MIT license for OpenWorm code follows:
 

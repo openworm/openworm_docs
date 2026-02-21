@@ -8,17 +8,17 @@ There is not a single data source for our simulation; in fact one of our unique 
 
 Being an integrative model, OpenWorm utilizes different datasets, each with different file formats and interfaces to the model. There is no master representation of all the data incorporated into the model, instead our aim is to keep the model open to be able to cope with different data structures.
 
-Consider the connectomics data. There are different useful ways to mine this data set. For example, a [NetworkX](https://networkx.github.io/) representation of the connectome as a complex graph enables questions to be asked about first and second nearest neighbors of a given neuron. In contrast, an [RDF](http://www.w3.org/RDF/) semantic graph representation is useful for reading and writing annotations about multiple aspects of a neuron, such as what papers have been written about it, multiple different properties it may have such as ion channels and neurotransmitter receptors and so on. A [NeuroML](http://www.neuroml.org/) representation is useful for answering questions about model morphology and simulation parameters. Lastly, a [Blender](http://www.blender.org/) representation is a full 3D shape definition that can be used for calculations in 3D space.
+Consider the connectomics data. There are different useful ways to mine this data set. For example, a [NetworkX](https://networkx.github.io/) representation of the connectome as a complex graph enables questions to be asked about first and second nearest neighbors of a given neuron. In contrast, an [RDF](https://www.w3.org/RDF/) semantic graph representation is useful for reading and writing annotations about multiple aspects of a neuron, such as what papers have been written about it, multiple different properties it may have such as ion channels and neurotransmitter receptors and so on. A [NeuroML](https://www.neuroml.org/) representation is useful for answering questions about model morphology and simulation parameters. Lastly, a [Blender](https://www.blender.org/) representation is a full 3D shape definition that can be used for calculations in 3D space.
 
 Using these different representations separately leads to ad hoc scripting for for each representation. This presents a challenge for data integration and consolidation of information. An ongoing development of the project is to create a unified data access layer (see OWMeta below), which enables different representations to become encapsulated into an abstract view. This allows the user to work with objects related to the biological reality of the worm. This has the advantage that the user can forget about which representation is being used under the hood.
 
 Here is a list of some of the data sets that we have used so far:
 
--   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](http://caltech.wormbase.org/virtualworm/)
--   [The _C. elegans_ connectome (wiring diagram of neurons)](http://www.wormatlas.org/neuronalwiring.html)
+-   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](https://caltech.wormbase.org/virtualworm/)
+-   [The _C. elegans_ connectome (wiring diagram of neurons)](https://www.wormatlas.org/neuronalwiring.html)
 -   [Cell list of _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
--   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html)
--   [Database of Worm behavioral phenotypes](http://www.ncbi.nlm.nih.gov/pubmed/23852451)
+-   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html) — ion channel models feed into [DD001 (Neural Circuit)](../design_documents/DD001_Neural_Circuit_Architecture.md) and [DD005 (Cell-Type Differentiation)](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
+-   [Database of Worm behavioral phenotypes](https://www.ncbi.nlm.nih.gov/pubmed/23852451)
 
 Currently our work on data collection and representation is divided among four subprojects:
 
@@ -34,7 +34,7 @@ A lot of data about _C. elegans_ is integrated into the model. In this project, 
 NeuroML Connectome
 ------------------
 
-Our computational strategy to accomplish this involves first reusing the _C. elegans_ connectome and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the NeuroML standard [(Gleeson et al., 2010)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000815) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator [(Hines & Carnevale 1997)](https://ieeexplore.ieee.org/abstract/document/6795645) to perform in silico experiments.
+Our computational strategy to accomplish this involves first reusing the _C. elegans_ [connectome](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the [NeuroML](https://docs.neuroml.org) standard [(Gleeson et al., 2010)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000815) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator [(Hines & Carnevale 1997)](https://ieeexplore.ieee.org/abstract/document/6795645) to perform in silico experiments.
 
 ### Previous accomplishments
 
@@ -69,7 +69,7 @@ Repository | Description | Language
 Data Visualization
 ------------------
 
-With the ever increasing capacity to collect data about biological system, the new challenge is to understand what these dataset tell us about the system. The computational neuroscience community is developing a range of methods to extract knowledge from these datasets. One approach the accomplish this task is to represent the data visually. Our team has already produced the [OpenWorm browser for web](http://browser.openworm.org) and [iOS](https://itunes.apple.com/us/app/openworm-browser/id595581306?mt=8), which makes it easy to visually study the anatomy of the the worm.
+With the ever increasing capacity to collect data about biological system, the new challenge is to understand what these dataset tell us about the system. The computational neuroscience community is developing a range of methods to extract knowledge from these datasets. One approach the accomplish this task is to represent the data visually. Our team has already produced the [OpenWorm browser for web](https://browser.openworm.org) and [iOS](https://itunes.apple.com/us/app/openworm-browser/id595581306?mt=8), which makes it easy to visually study the anatomy of the the worm.
 
 ### Previous accomplishments
 

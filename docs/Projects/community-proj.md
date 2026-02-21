@@ -7,9 +7,9 @@ Previous accomplishments
 ------------------------
 
 -   [Past Journal clubs](https://www.youtube.com/watch?v=JHSqkZ2sFDA&list=PL8ACJC0fGE7D-EkkR7EFgQESpHONC_kcI)
--   [Media attention](http://www.openworm.org/media.html)
--   [Attracting contributors](http://www.openworm.org/people.html)
--   [Attracting supporters](http://www.openworm.org/supporters.html)
+-   [Media attention](https://www.openworm.org/media.html)
+-   [Attracting contributors](https://www.openworm.org/people.html)
+-   [Attracting supporters](https://www.openworm.org/supporters.html)
 -   [Successful crowdfunding](https://www.kickstarter.com/projects/openworm/openworm-a-digital-organism-in-your-browser)
 
 

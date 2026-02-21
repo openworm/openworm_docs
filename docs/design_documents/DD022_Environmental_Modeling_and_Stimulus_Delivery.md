@@ -45,7 +45,7 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 | Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
-| **Primary:** Chemotaxis behavior | CI (chemotaxis index) >0.5 on NaCl gradient (Iino & Yoshida 2009) | Tier 3 (blocking) |
+| **Primary:** Chemotaxis behavior | CI (chemotaxis index) >0.5 on NaCl gradient ([Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009)) | Tier 3 (blocking) |
 | **Primary:** Thermotaxis behavior | Navigate to cultivation temperature (20°C) within ±2°C on thermal gradient | Tier 3 (blocking) |
 | **Secondary:** Substrate-dependent locomotion | Crawling speed on agar vs. swimming speed in liquid matches experimental ratio (~2:1) | Tier 3 (blocking) |
 | **Tertiary:** Tap withdrawal latency | Tap on agar (firm) vs. tap in liquid (soft) produces different reversal latencies | Tier 1 (non-blocking) |
@@ -116,7 +116,7 @@ Diffusion equation in 2D (agar surface):
 
 ### Closed-Loop Sensorimotor Interaction for Chemotaxis
 
-The defining feature of naturalistic chemotaxis is the closed-loop interaction between sensation and movement. Zhao et al. (2024) demonstrated this with their MetaWorm model, achieving zigzag navigation toward food attractors that matches experimentally observed trajectories (Pierce-Shimomura et al. 1999).
+The defining feature of naturalistic chemotaxis is the closed-loop interaction between sensation and movement. [Zhao et al. (2024)](https://doi.org/10.1038/s43588-024-00738-w) demonstrated this with their MetaWorm model, achieving zigzag navigation toward food attractors that matches experimentally observed trajectories ([Pierce-Shimomura et al. 1999](https://doi.org/10.1523/JNEUROSCI.19-21-09557.1999)).
 
 **Closed-loop cycle (each simulation timestep):**
 
@@ -129,11 +129,11 @@ The defining feature of naturalistic chemotaxis is the closed-loop interaction b
 7. **Body movement** ([DD003](DD003_Body_Physics_Architecture.md)): muscles deform the body, propelling it through the environment
 8. Return to step 1
 
-**Key biological insight:** Sensory activation uses the temporal derivative `dC/dt`, not the absolute concentration `C(t)`. This is because *C. elegans* employs a biased random walk strategy: it extends forward runs when moving up-gradient (positive dC/dt) and initiates turns/reversals when moving down-gradient (negative dC/dt) (Pierce-Shimomura et al. 1999).
+**Key biological insight:** Sensory activation uses the temporal derivative `dC/dt`, not the absolute concentration `C(t)`. This is because *C. elegans* employs a biased random walk strategy: it extends forward runs when moving up-gradient (positive dC/dt) and initiates turns/reversals when moving down-gradient (negative dC/dt) ([Pierce-Shimomura et al. 1999](https://doi.org/10.1523/JNEUROSCI.19-21-09557.1999)).
 
 **OpenWorm's approach differs from Zhao et al.** in a critical way: they used a linear readout layer from motor neuron membrane potentials to muscle activations (treating the neural circuit as a 'reservoir computer'). OpenWorm instead uses biophysical neuromuscular junction synapses ([DD002](DD002_Muscle_Model_Architecture.md)), producing a fully mechanistic chain from sensation to movement with no learned components in the motor pathway.
 
-**Validation target:** The simulated worm's trajectory in a chemical gradient should exhibit the characteristic zigzag pattern toward the food source, with a chemotaxis index (CI) > 0.5 on a standard NaCl gradient assay (Iino & Yoshida 2009).
+**Validation target:** The simulated worm's trajectory in a chemical gradient should exhibit the characteristic zigzag pattern toward the food source, with a chemotaxis index (CI) > 0.5 on a standard NaCl gradient assay ([Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009)).
 
 ### Component 3: Thermal Gradient Delivery
 
@@ -173,7 +173,7 @@ Similar to chemical gradient but for temperature:
 
 ## Quality Criteria
 
-1. **Chemotaxis reproduction:** Simulated worm on NaCl gradient produces CI (chemotaxis index) >0.5 (Iino & Yoshida 2009 experimental data).
+1. **Chemotaxis reproduction:** Simulated worm on NaCl gradient produces CI (chemotaxis index) >0.5 ([Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009) experimental data).
 2. **Thermotaxis reproduction:** Worm navigates to 20°C on 15-25°C gradient within ±2°C.
 3. **Substrate-dependent gait:** Crawling on agar vs. swimming in liquid produces ~2:1 speed ratio (matches experiments).
 4. **No destabilization:** Adding environment must not break [DD003](DD003_Body_Physics_Architecture.md) body physics (no particle escape, no NaN).
@@ -210,9 +210,9 @@ Similar to chemical gradient but for temperature:
 
 ## References
 
-1. **Iino Y, Yoshida K (2009).** "Parallel use of two behavioral mechanisms for chemotaxis in *Caenorhabditis elegans*." *J Neurosci* 29:5370-5380. *NaCl chemotaxis assay — chemotaxis index (CI) metric and experimental benchmarks.*
-2. **Pierce-Shimomura JT, Morse TM, Lockery SR (1999).** "The fundamental role of pirouettes in *Caenorhabditis elegans* chemotaxis." *J Neurosci* 19:9557-9569. *Biased random walk strategy — temporal derivative of concentration drives run/pirouette decisions.*
-3. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990. *MetaWorm model — closed-loop chemotaxis demonstration with zigzag trajectories matching experimental observations.*
+1. **[Iino Y, Yoshida K (2009)](https://doi.org/10.1523/JNEUROSCI.3633-08.2009).** "Parallel use of two behavioral mechanisms for chemotaxis in *Caenorhabditis elegans*." *J Neurosci* 29:5370-5380. *NaCl chemotaxis assay — chemotaxis index (CI) metric and experimental benchmarks.*
+2. **[Pierce-Shimomura JT, Morse TM, Lockery SR (1999)](https://doi.org/10.1523/JNEUROSCI.19-21-09557.1999).** "The fundamental role of pirouettes in *Caenorhabditis elegans* chemotaxis." *J Neurosci* 19:9557-9569. *Biased random walk strategy — temporal derivative of concentration drives run/pirouette decisions.*
+3. **[Zhao M, Wang N, Jiang X, et al. (2024)](https://doi.org/10.1038/s43588-024-00738-w).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990. *MetaWorm model — closed-loop chemotaxis demonstration with zigzag trajectories matching experimental observations.*
 
 ---
 
@@ -223,4 +223,4 @@ Similar to chemical gradient but for temperature:
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
 2. Implement steady-state gradient solver (chemical, thermal)
 3. Test with [DD019](DD019_Closed_Loop_Touch_Response.md) closed-loop touch + chemotaxis
-4. Validate against Iino & Yoshida 2009 chemotaxis data
+4. Validate against [Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009) chemotaxis data

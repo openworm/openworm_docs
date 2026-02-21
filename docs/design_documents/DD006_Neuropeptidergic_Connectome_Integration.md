@@ -39,7 +39,7 @@ Model the 31,479 neuropeptide-receptor interactions (already in the ConnectomeTo
 | **Quaternary:** Conductance modulation range | All modulation factors in [0.5, 3.0] | Tier 1 (non-blocking) |
 | **Quaternary:** Behavioral state transitions | Dwelling/roaming transitions emerge from peptide modulation | Tier 4 (advisory) |
 
-**Behavioral states as a validation target:** *C. elegans* exhibits discrete, long-timescale behavioral states — notably the dwelling/roaming transition in foraging (Flavell et al. 2020). Dwelling animals move slowly with frequent reversals and high-angle turns; roaming animals move rapidly in long, straight runs. These transitions are governed by neuropeptidergic and serotonergic modulation, not by the fast synaptic connectome alone. A successful neuropeptidergic model should produce state-dependent locomotion patterns where global network excitability shifts on timescales of minutes, consistent with the rich behavioral repertoire observed in freely foraging animals (Flavell et al. 2020; Atanas et al. 2022).
+**Behavioral states as a validation target:** *C. elegans* exhibits discrete, long-timescale behavioral states — notably the dwelling/roaming transition in foraging ([Flavell et al. 2020](https://doi.org/10.1534/genetics.120.303539)). Dwelling animals move slowly with frequent reversals and high-angle turns; roaming animals move rapidly in long, straight runs. These transitions are governed by neuropeptidergic and serotonergic modulation, not by the fast synaptic connectome alone. A successful neuropeptidergic model should produce state-dependent locomotion patterns where global network excitability shifts on timescales of minutes, consistent with the rich behavioral repertoire observed in freely foraging animals ([Flavell et al. 2020](https://doi.org/10.1534/genetics.120.303539); [Atanas et al. 2022](https://doi.org/10.1101/2022.11.11.516186)).
 
 **Before:** 302 neurons connected only by ~5,000 chemical synapses and ~900 gap junctions — fast transmission only, no slow modulatory layer. The ConnectomeToolbox already stores the neuropeptidergic connectome as static adjacency data, but OpenWorm simulations don't use it.
 
@@ -795,7 +795,7 @@ Provides `PeptideGPCR.get_gpcrs_binding_to(peptides)` for neuropeptide-receptor 
 2. **Bentley B, Branicky R, Barnes CL, et al. (2016).** "The multilayer connectome of *Caenorhabditis elegans*." *PLoS Comput Biol* 12:e1005283.
    *Earlier monoaminergic/peptidergic map.*
 
-3. **Li C, Kim K, Nelson LS (1999).** "FMRFamide-related neuropeptide gene family in *Caenorhabditis elegans*." *Brain Res* 848:26-34.
+3. **[Li C, Kim K, Nelson LS (1999).](https://doi.org/10.1016/S0006-8993(99)01972-1)** "FMRFamide-related neuropeptide gene family in *Caenorhabditis elegans*." *Brain Res* 848:26-34.
    *FLP peptide family.*
 
 4. **Choi S, Taylor KP, Chatzigeorgiou M, et al. (2013).** "Analysis of NPR-1 reveals a circuit mechanism for behavioral quiescence in *C. elegans*." *Neuron* 78:869-880.
@@ -819,10 +819,10 @@ Provides `PeptideGPCR.get_gpcrs_binding_to(peptides)` for neuropeptide-receptor 
 10. **Gleeson P, Vickneswaran Y, Ponzi A, Sinha A, Larson SD (in preparation).** "The *C. elegans* Connectome Toolbox: consolidating datasets on multimodal connectivity."
     *Describes the ConnectomeToolbox framework that consolidates all datasets above into a unified Python API (`cect` package).*
 
-11. **Flavell SW, Raizen DM, You YJ (2020).** "Behavioral States." *Genetics* 216:315-332.
+11. **[Flavell SW, Raizen DM, You YJ (2020).](https://doi.org/10.1534/genetics.120.303539)** "Behavioral States." *Genetics* 216:315-332.
     *Comprehensive review of C. elegans behavioral states including dwelling/roaming, sleep, and arousal — key validation targets for neuropeptidergic modulation.*
 
-12. **Atanas AA, Kim J, Wang Z, Bueno E, et al. (2022).** "Brain-wide representations of behavior spanning multiple timescales and states in *C. elegans*." *bioRxiv*:2022.11.11.516186.
+12. **[Atanas AA, Kim J, Wang Z, Bueno E, et al. (2022).](https://doi.org/10.1101/2022.11.11.516186)** "Brain-wide representations of behavior spanning multiple timescales and states in *C. elegans*." *bioRxiv*:2022.11.11.516186.
     *Whole-brain imaging spanning behavioral states — demonstrates that neural activity patterns during dwelling vs. roaming reflect global network modulation, not just local circuit switching.*
 
 ---

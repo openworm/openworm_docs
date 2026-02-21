@@ -1,3 +1,6 @@
+!!! warning "Historical Content"
+    This page describes an older protocol for setting up live video streams for OpenWorm community meetings. It is retained for archival purposes. For current information about participating in OpenWorm meetings, see the [Community page](community.md#meetings).
+
 **How to set up a live video stream:**
 
 1) download the video encoder [Xsplit Broadcaster](https://www.xsplit.com/broadcaster/download).

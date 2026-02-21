@@ -164,7 +164,7 @@ OpenWorm uses **Predictive-Corrective Incompressible SPH (PCISPH)** to simulate 
 
 ### SPH Kernel Functions
 
-Following Müller, Charypar & Gross (2003):
+Following [Müller, Charypar & Gross (2003)](https://doi.org/10.2312/SCA03/154-159):
 
 **Density estimation (Wpoly6):**
 ```
@@ -209,7 +209,7 @@ Where `activation(t)` comes from the [Ca²⁺]ᵢ time series of each muscle cel
 
 ### Predictive-Corrective Pressure Solver
 
-Standard SPH suffers from density fluctuations causing artificial pressure waves. PCISPH (Solenthaler & Pajarola 2009) adds a predictive-corrective iteration:
+Standard SPH suffers from density fluctuations causing artificial pressure waves. PCISPH ([Solenthaler & Pajarola 2009](https://doi.org/10.1145/1531326.1531346)) adds a predictive-corrective iteration:
 
 1. **Predict:** Estimate particle positions at t + dt using current forces
 2. **Correct:** Iteratively adjust pressure forces to maintain incompressibility (ρ ≈ ρ₀)
@@ -234,7 +234,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 
 **When to reconsider:** If future work requires extremely accurate stress/strain fields (e.g., modeling cuticle fracture, cell rupture). Not needed for behavior simulation.
 
-**Update (2026-02):** Zhao et al. (2024) demonstrated that modern Projective Dynamics FEM solvers (Bouaziz et al. 2014) address the mesh distortion and speed concerns listed above. Their implementation used a tetrahedral mesh of 984 vertices and 3,341 tetrahedrons with 96 muscle actuators and achieved real-time simulation at 30 frames per second — orders of magnitude faster than the current Sibernetic SPH approach (~100K particles). The key insight is that a Projective Dynamics solver uses a local-global optimization that is unconditionally stable under large deformations, eliminating the traditional FEM mesh distortion problem.
+**Update (2026-02):** Zhao et al. (2024) demonstrated that modern Projective Dynamics FEM solvers ([Bouaziz et al. 2014](https://doi.org/10.1145/2601097.2601116)) address the mesh distortion and speed concerns listed above. Their implementation used a tetrahedral mesh of 984 vertices and 3,341 tetrahedrons with 96 muscle actuators and achieved real-time simulation at 30 frames per second — orders of magnitude faster than the current Sibernetic SPH approach (~100K particles). The key insight is that a Projective Dynamics solver uses a local-global optimization that is unconditionally stable under large deformations, eliminating the traditional FEM mesh distortion problem.
 
 However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of *C. elegans* locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.
 
@@ -242,7 +242,7 @@ However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrus
 
 Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch`.
 
-Reference: Bouaziz S et al. (2014). "Projective Dynamics: Fusing constraint projections for fast simulation." *ACM Trans Graphics* 33:154.
+Reference: [Bouaziz S et al. (2014)](https://doi.org/10.1145/2601097.2601116). "Projective Dynamics: Fusing constraint projections for fast simulation." *ACM Trans Graphics* 33:154.
 
 ### 2. Mass-Spring System (Simple Elastic Network)
 
@@ -383,10 +383,10 @@ elasticity = 0.0006
 
 ## References
 
-1. **Müller M, Charypar D, Gross M (2003).** "Particle-based fluid simulation for interactive applications." *Proc. ACM SIGGRAPH/Eurographics Symp. Computer Animation*, pp. 154-159.
+1. **[Müller M, Charypar D, Gross M (2003)](https://doi.org/10.2312/SCA03/154-159).** "Particle-based fluid simulation for interactive applications." *Proc. ACM SIGGRAPH/Eurographics Symp. Computer Animation*, pp. 154-159.
    *SPH kernel functions.*
 
-2. **Solenthaler B, Pajarola R (2009).** "Predictive-Corrective Incompressible SPH." *ACM Trans. Graphics* 28(3):40.
+2. **[Solenthaler B, Pajarola R (2009)](https://doi.org/10.1145/1531326.1531346).** "Predictive-Corrective Incompressible SPH." *ACM Trans. Graphics* 28(3):40.
    *PCISPH pressure solver.*
 
 3. **Boyle JH, Cohen N (2008).** "Caenorhabditis elegans body wall muscles are simple actuators." *Biosystems* 94:170-181.
@@ -398,7 +398,7 @@ elasticity = 0.0006
 5. **Zhao M et al. (2024).** *Nat Comp Sci* 4:978-990.
    *Demonstrated real-time FEM body simulation of C. elegans at 30 FPS.*
 
-6. **Bouaziz S et al. (2014).** *ACM Trans Graphics* 33:154.
+6. **[Bouaziz S et al. (2014)](https://doi.org/10.1145/2601097.2601116).** *ACM Trans Graphics* 33:154.
    *Projective Dynamics FEM solver.*
 
 ---

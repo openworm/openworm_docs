@@ -31,7 +31,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **Repository:** [openworm/org.geppetto](https://github.com/openworm/org.geppetto)
 
-**Website:** [geppetto.org](http://geppetto.org)
+**Website:** [geppetto.org](https://geppetto.org)
 
 **What it was:** A Java-based, open-source modular platform for multi-scale and multi-algorithm interactive simulation of biological systems. Featured WebGL visualization, OSGi modularity, and Tomcat deployment.
 
@@ -50,7 +50,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 - Not updated for WebGPU — the next generation of browser graphics
 - Trame is lighter, Python-native, and actively maintained
 
-**Current status:** Dormant in OpenWorm (last commit ~2020). Still maintained upstream at [geppetto.org](http://geppetto.org). Could be re-evaluated if needs change.
+**Current status:** Dormant in OpenWorm (last commit ~2020). Still maintained upstream at [geppetto.org](https://geppetto.org). Could be re-evaluated if needs change.
 
 **See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) evolution roadmap)
 

@@ -6,7 +6,7 @@ This page contains information intended to help individuals understand what step
 An Opening Note
 ---------------
 
-Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](http://openworm.org/contacts.html).
+Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](https://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](https://openworm.org/contacts.html).
 
 Contribution Best Practices
 ---------------------------
@@ -46,7 +46,7 @@ More details on best practices using OpenWorm repos on GitHub are available on [
 ### Creating organizing documents
 
 Another great way to contribute is by organizing ideas or documentation or proposals via a Google
-doc, and then sharing the link on our [Slack](http://openworm.org/contacts.html).
+doc, and then sharing the link on our [Slack](https://openworm.org/contacts.html).
 
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on [this link](https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing).
 
@@ -69,17 +69,17 @@ An effective progress report should contain the following information:
 
 An example of an effective progress report is [available online](https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit).
 
-Once the document is shared, it should be announced on [Slack](http://openworm.org/contacts.html).
+Once the document is shared, it should be announced on [Slack](https://openworm.org/contacts.html).
 
 ### Creating proposals as Google docs
 
-To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [Slack](http://openworm.org/contacts.html).
+To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [Slack](https://openworm.org/contacts.html).
 
 An example of an effective proposal is [available online](https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375).
 
 ### Contributing to the OpenWorm documentation
 
-The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](http://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
+The [OpenWorm documentation](https://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](https://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
 When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](../Resources/resources/).
 
@@ -91,7 +91,7 @@ The documentation is published using [GitHub Pages](https://pages.github.com/), 
 
 The markdown documentation is rendered using the Python module [MkDocs](https://www.mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
-After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at http://docs.openworm.org) to become rebuilt and pushed onto the site (using a [GitHub Action](https://github.com/openworm/openworm_docs/actions)).
+After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at https://docs.openworm.org) to become rebuilt and pushed onto the site (using a [GitHub Action](https://github.com/openworm/openworm_docs/actions)).
 
 ### Guest Blog Post
 
@@ -108,7 +108,7 @@ If you have an idea for a good journal club, please contact us at <info@openworm
 Coding Standards
 ----------------
 
-It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8).
+It is recommended to follow the [PEP8 Guidelines](https://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](https://pypi.python.org/pypi/autopep8).
 
 Meetings
 --------
@@ -119,7 +119,7 @@ Contributors are encouraged to meet with each other on Slack on a regular basis 
 
 ### Scheduling meetings
 
-We like using the [Doodle service](http://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.
+We like using the [Doodle service](https://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.
 
 Interactions
 ------------
@@ -133,11 +133,11 @@ There are two Google Groups in connection with OpenWorm.
 [This list](https://groups.google.com/forum/?hl=en#!forum/openworm-discuss) was for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.
 
 >> **⚠ NOTE: Discussions have moved to Slack.**  
->> The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to [Slack](http://openworm.org/contacts.html).
+>> The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to [Slack](https://openworm.org/contacts.html).
 
 ### Twitter
 
-[Follow our Twitter feed](http://twitter.com/openworm)
+[Follow our Twitter feed](https://twitter.com/openworm)
 
 Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
@@ -149,9 +149,9 @@ Interesting in being a guest on our blog? We love hearing about what members of 
 
 ### YouTube
 
-Our YouTube channel is currently quite out of date, but for historical purposes, you can [view our YouTube channel here.](http://www.youtube.com/user/OpenWorm)
+Our [YouTube channel](https://www.youtube.com/user/OpenWorm) hosts a collection of historical talks, project demos, journal club recordings, and status update presentations from across the project's history. While new content is added infrequently, the archive is a valuable resource for understanding the evolution of the project and its science.
 
-Want to get notified when new content goes live? [Subscribe to the channel](http://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
+Want to get notified when new content goes live? [Subscribe to the channel](https://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
 
 #### Playlists
 

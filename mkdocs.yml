@@ -73,7 +73,7 @@ nav:
   - Community:
       - Community Overview: community.md
       - GitHub: Community/github.md
-      - Repos: Community/repositories.md
+
       - Membership: Community/membership.md
   - Resources:
       - Resources Overview: Resources/resources.md

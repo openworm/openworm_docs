@@ -27,7 +27,7 @@ There is no smooth-surfaced worm, no way to zoom into a firing neuron, no way fo
 
 ### The WormBrowser (2012): What People Actually Use
 
-The most-used OpenWorm visualization tool is not a simulation viewer — it's the **WormBrowser** ([browser.openworm.org](http://browser.openworm.org)), a static 3D anatomy browser live since 2012.
+The most-used OpenWorm visualization tool is not a simulation viewer — it's the **WormBrowser** ([browser.openworm.org](https://browser.openworm.org)), a static 3D anatomy browser live since 2012.
 
 | Feature | Description |
 |---------|-------------|
@@ -675,7 +675,7 @@ Interactive web-based map of neural connections (formerly nemanode.org). May con
 
 ## References
 
-1. **WormBrowser:** `openworm/wormbrowser` (Idili, 2012, [browser.openworm.org](http://browser.openworm.org)) — Static 3D anatomy browser, still live
+1. **WormBrowser:** `openworm/wormbrowser` (Idili, 2012, [browser.openworm.org](https://browser.openworm.org)) — Static 3D anatomy browser, still live
 1. **WormBrowser iOS:** `openworm/openwormbrowser-ios` (2013) — iOS companion app
 1. **WormSim original vision:** `openworm/org.wormsim.frontend` (2014 Kickstarter, $121K raised from 799 backers, dormant since 2015)
 2. **Worm3DViewer:** `openworm/Worm3DViewer` (Gleeson, 2025, v0.0.8, Streamlit + PyVista)
