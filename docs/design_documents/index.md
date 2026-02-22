@@ -92,7 +92,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
-| [DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1 | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
+| [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
 
 ### Phase 3: Organ Systems ⚠️
 

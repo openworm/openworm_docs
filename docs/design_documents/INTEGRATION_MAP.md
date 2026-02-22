@@ -1,6 +1,7 @@
 # OpenWorm Integration Map
-- **Version:** 1.0
+- **Version:** 1.1
 - **Created:** 2026-02-19
+- **Updated:** 2026-02-22
 - **Purpose:** Master coupling dependency graph showing how all Design Documents fit together
 
 ---
@@ -9,11 +10,11 @@
 
 **OpenWorm Mission:** "Creating the world's first virtual organism in a computer, a *C. elegans* nematode." (openworm.org)
 
-**This Integration Map shows:** How 23 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
+**This Integration Map shows:** How 26 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
-**This Map enforces:** The coupling contracts that ensure physical realism — muscle calcium drives body forces ([DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md)), body deformation feeds back to sensory neurons ([DD003](DD003_Body_Physics_Architecture.md)→[DD019](DD019_Closed_Loop_Touch_Response.md)), neuropeptide diffusion modulates neural excitability ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD001](DD001_Neural_Circuit_Architecture.md)). Every coupling is physically meaningful, not a black-box function call.
+**This Map enforces:** The coupling contracts that ensure physical realism — muscle calcium drives body forces ([DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md)), body deformation feeds back to sensory neurons ([DD003](DD003_Body_Physics_Architecture.md)→[DD019](DD019_Closed_Loop_Touch_Response.md)), neuropeptide diffusion modulates neural excitability ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD001](DD001_Neural_Circuit_Architecture.md)), and protein foundation models predict channel kinetics from sequence ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)→[DD005](DD005_Cell_Type_Differentiation_Strategy.md)→[DD001](DD001_Neural_Circuit_Architecture.md)). Every coupling is physically meaningful, not a black-box function call.
 
 ---
 
@@ -31,8 +32,8 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)
-- **Last updated:** 2026-02-19
+- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md)
+- **Last updated:** 2026-02-22
 
 ---
 
@@ -64,6 +65,8 @@ package "External Data" as extdata #E6F3FF {
   component "CeNGEN\nExpression Atlas" as ext_cen #87CEEB
   component "Behavioral Data\n(Schafer, Raizen)" as ext_beh #87CEEB
   component "Virtual Worm\nMeshes (688)" as ext_vw #87CEEB
+  component "bio.rodeo\nFoundation Models\n(AlphaFold 3, BioEmu-1,\nBoltz-2, ESM Cambrian)" as ext_bio #87CEEB
+  component "WormBase\nChannel Sequences" as ext_wb #87CEEB
 }
 
 ' === DATA ACCESS ===
@@ -107,6 +110,7 @@ package "Whole Organism" as whole #FFEBEE {
 package "Infrastructure" as infra #FFF9C4 {
   component "DD013\nDocker Stack\n(orchestrator)" as DD013 #FFE4B5
   component "DD017\nHybrid ML\n(1000x speedup)" as DD017 #FFE4B5
+  component "DD025\nProtein FM\nPipeline" as DD025 #FFE4B5
 }
 
 ' === VALIDATION ===
@@ -173,8 +177,14 @@ DD003 -[#660099]-> DD014 : OME-Zarr\n(all subsystems)
 ext_vw --> DD0142 : meshes
 DD003 --> DD0142 : SPH\npositions
 
-' ML
+' ML & Foundation Models
+ext_bio --> DD025 : model\nweights
+ext_bio --> DD017 : model\nweights
+ext_wb --> DD025 : channel\nsequences
+DD025 --> DD005 : kinetics\npriors
+DD025 --> DD001 : per-class\nHH params
 DD017 --> DD001 : fitted\nparams
+DD017 --> DD006 : binding\naffinities
 
 legend bottom left
   |= Color |= Meaning |
@@ -207,20 +217,23 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 | DD | Depended On By (count) | Consumers | Criticality | Owner |
 |----|----------------------|-----------|-------------|-------|
-| **[DD001](DD001_Neural_Circuit_Architecture.md)** (Neural Circuit) | **11 DDs** | [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL BOTTLENECK** | Padraig Gleeson (Neural L4) |
+| **[DD001](DD001_Neural_Circuit_Architecture.md)** (Neural Circuit) | **12 DDs** | [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | 🔴 **CRITICAL BOTTLENECK** | Padraig Gleeson (Neural L4) |
 | **[DD003](DD003_Body_Physics_Architecture.md)** (Body Physics) | **7 DDs** | [DD004](DD004_Mechanical_Cell_Identity.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL** | Andrey Palyanov (Body Physics L4) |
 | **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome) | **9 DDs** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
 | [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) | 5 DDs | [DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md) | 🟡 Moderate | TBD (Muscle L4) |
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation) | 4 DDs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md) | 🟡 Moderate (Phase 1+) | Padraig Gleeson (Neural L4) |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation) | 6 DDs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | 🟡 Moderate (Phase 1+) | Padraig Gleeson (Neural L4) |
+| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Models) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (per-class HH params), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (kinetics priors) | 🟡 Moderate (Phase A+) | TBD (ML L4) |
+| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (fitted params), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
 | [DD013](DD013_Simulation_Stack_Architecture.md) (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Integration L4) — **VACANT** |
 | [DD014](DD014_Dynamic_Visualization_Architecture.md) (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Visualization L4) |
 | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox) | 1 DD | [DD010](DD010_Validation_Framework.md) (Tier 3 only) | 🟡 **BLOCKING** (for validation) | TBD (Validation L4) — **VACANT** |
 
 **Key Insight:**
 
-- **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 11 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, OME-Zarr schema) affects almost everything.
+- **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 12 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, OME-Zarr schema) affects almost everything.
 - **[DD013](DD013_Simulation_Stack_Architecture.md) and [DD014](DD014_Dynamic_Visualization_Architecture.md) are pure consumers** — They orchestrate/visualize but don't produce data that other DDs depend on. This is correct (leaf nodes in the dependency graph).
 - **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) is the foundational data layer** — 9 DDs pull connectome data from it. If `cect` API changes or default dataset switches, widespread updates needed.
+- **[DD025](DD025_Protein_Foundation_Model_Pipeline.md) and [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) are ML feeders** — They consume external foundation models ([bio.rodeo](https://bio.rodeo/models)) and produce predicted parameters for the mechanistic core. DD025 feeds DD001/DD005 (channel kinetics); DD017 feeds DD001 (fitted params) and DD006 (binding affinities).
 
 ---
 
@@ -303,6 +316,36 @@ Closed-loop coupling can cause **oscillatory instability** if:
 
 ---
 
+### Chain 5: Foundation Models → Mechanistic Parameters (bio.rodeo Pipeline)
+
+**New in v1.1** — external protein foundation models predict parameters for the mechanistic core:
+
+```
+WormBase sequences ──→ DD025 (Protein FM Pipeline) ──→ DD005 (kinetics priors)
+                          │                                    │
+bio.rodeo models ─────────┤                              DD001 (per-class HH params)
+(AlphaFold 3, BioEmu-1,  │
+ Boltz-2, ESM Cambrian)  └──→ DD017 (Hybrid ML Framework)
+                                    │
+                                    ├──→ DD001 (auto-fitted params)
+                                    └──→ DD006 (binding affinities)
+```
+
+**Data flow:**
+
+1. **Ion channel kinetics** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)): Gene sequence → AlphaFold 3/Boltz-2 (structure) → BioEmu-1 (dynamics) → ESM Cambrian (embeddings) → predicted HH parameters (V_half, slope, tau) → feed into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration and [DD001](DD001_Neural_Circuit_Architecture.md) per-class models
+2. **Neuropeptide binding affinities** ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)→[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): Peptide + receptor sequences → Boltz-2/AlphaFold 3 (complex structure) → predicted K_d values → differentiated k_on/k_off in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)
+
+**What breaks if:**
+
+- Foundation model APIs or weights change (e.g., AlphaFold 4 replaces AlphaFold 3) → DD025 pipeline must be revalidated; downstream parameters shift
+- [DD005](DD005_Cell_Type_Differentiation_Strategy.md) changes the expression→conductance formula → DD025 priors must be recalibrated against the new formula
+- Cross-validation thresholds not met (<30% error) → DD025 predictions are not adopted; DD005 falls back to expression-only calibration
+
+**Key difference from Chains 1-4:** This chain runs *offline* (pre-simulation). Foundation model predictions are computed once and stored as CSV/YAML parameter files. The simulation itself never calls foundation model APIs at runtime.
+
+---
+
 ## Interface Criticality Matrix
 
 **Which coupling interfaces are most fragile / highest-impact if changed?**
@@ -315,11 +358,13 @@ Closed-loop coupling can cause **oscillatory instability** if:
 | **`cect` API** | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md) (9 DDs) | Python classes (ConnectomeDataset, ConnectionInfo) | 🟡 **MODERATE** | Padraig maintains `cect`, API is stable, v0.2.7 →0.3.0 should be backward-compatible |
 | **Connectome topology (adjacency matrices)** | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md) | NumPy arrays | 🟢 **LOW** | Topology is biological ground truth, rarely changes (only with new EM data) |
 | **CeNGEN expression** | [DD008](DD008_Data_Integration_Pipeline.md)/DD020 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | CSV or OWMeta query | 🟢 **LOW** | Expression data is fixed per CeNGEN version (L4 v1.0), won't change unless re-analysis |
+| **Foundation model predictions → DD005/DD001** | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | CSV (HH parameters) | 🟡 **MODERATE** | Predictions change when models are updated (AlphaFold 3→4, new ESM version); downstream parameters shift, requiring revalidation against [DD010](DD010_Validation_Framework.md) |
+| **Foundation model binding affinities → DD006** | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | CSV (K_d values) | 🟢 **LOW** | Predicted affinities are optional enhancement; DD006 falls back to uniform defaults if unavailable |
 
 **Recommendation:**
 
 - **High-criticality interfaces** (muscle→body, OME-Zarr) should have **integration tests** that run on every PR touching the interface
-- **Medium-criticality** (WCON, cect) should be version-pinned in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md))
+- **Medium-criticality** (WCON, cect, foundation model predictions) should be version-pinned in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md))
 - **Low-criticality** (topology, expression) can rely on upstream data versioning
 
 ---
@@ -335,9 +380,11 @@ Closed-loop coupling can cause **oscillatory instability** if:
 | **Simulation → WCON** | [DD003](DD003_Body_Physics_Architecture.md) | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | WCON exporter in `master_openworm.py` | **Integration L4** + Validation L4 | Moderate (WCON spec is external standard) |
 | **Connectome → All** | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md)+ (9 DDs) | `cect` Python API | Data L4 (TBD) + Padraig (cect maintainer) | Low (stable API, Padraig maintains both sides) |
 | **CeNGEN → Calibration** | [DD008](DD008_Data_Integration_Pipeline.md)/DD020 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | OWMeta query or direct download | Data L4 (TBD) + Neural L4 | Low (expression data is fixed per version) |
+| **Foundation Models → Channel Kinetics** | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | `generate_dd005_priors.py` (openworm/openworm-ml) | ML L4 (TBD) + Neural L4 | Moderate (predictions must pass cross-validation before adoption) |
+| **Foundation Models → Binding Affinities** | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Foundation model inference scripts (openworm/openworm-ml) | ML L4 (TBD) + Neural L4 | Low (optional enhancement, DD006 has uniform defaults as fallback) |
 
 **Key Finding:**
-**5 of 7 coupling boundaries require Integration L4** — this is why the role is critical. The Integration Maintainer is the **coupling bridge owner** for muscle→body, body→sensory, all→OME-Zarr, simulation→WCON, and orchestration.
+**5 of 9 coupling boundaries require Integration L4** — this is why the role is critical. The Integration Maintainer is the **coupling bridge owner** for muscle→body, body→sensory, all→OME-Zarr, simulation→WCON, and orchestration. The 2 new foundation model boundaries require **ML L4** coordination with Neural L4.
 
 ---
 
@@ -392,9 +439,11 @@ Closed-loop coupling can cause **oscillatory instability** if:
 | **WCON exporter** | Inside `master_openworm.py` (to be created) | Converts SPH particles → 49-point skeleton → WCON file | [DD003](DD003_Body_Physics_Architecture.md) | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Integration L4 + Validation L4 |
 | **c302 network generation** | `openworm/c302` (`CElegans.py`) | Reads connectome via `cect`, generates NeuroML | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural L4 (Padraig) |
 | **Strain readout module** | `openworm/sibernetic/coupling/strain_readout.py` (to be created) | Computes local strain from particle displacements | [DD003](DD003_Body_Physics_Architecture.md) | [DD019](DD019_Closed_Loop_Touch_Response.md) | Body Physics L4 + Integration L4 |
+| **`predict_kinetics.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Predicts HH kinetic parameters from ion channel sequences via AlphaFold 3 + BioEmu-1 + ESM Cambrian | External (bio.rodeo models, WormBase) | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | ML L4 (TBD) |
+| **`generate_dd005_priors.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Combines DD025 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | ML L4 (TBD) + Neural L4 |
 
 **Critical observation:**
-`master_openworm.py` is the **integration bottleneck** — it orchestrates everything. This is why [DD013](DD013_Simulation_Stack_Architecture.md) (which specifies `master_openworm.py`'s architecture) and the Integration L4 role are so critical.
+`master_openworm.py` is the **integration bottleneck** — it orchestrates everything. This is why [DD013](DD013_Simulation_Stack_Architecture.md) (which specifies `master_openworm.py`'s architecture) and the Integration L4 role are so critical. The foundation model scripts (`openworm-ml`) run *offline* and produce static parameter files — they do not require runtime orchestration by `master_openworm.py`.
 
 ---
 
@@ -448,6 +497,16 @@ Closed-loop coupling can cause **oscillatory instability** if:
 3. **Maintain OME-Zarr import** — when science DDs add new groups, update viewer to display them
 4. **Performance optimization** — keep rendering at 60fps as dataset size grows
 
+### For ML L4 (TBD — [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md))
+
+**Ongoing responsibilities:**
+
+1. **Maintain foundation model pipeline** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — keep inference scripts working as upstream models update (AlphaFold 3→4, new ESM versions)
+2. **Version-pin model weights** — record exact model versions (checksums) used for each set of predictions in `foundation_params/models/VERSIONS.md`
+3. **Revalidate on model updates** — when a new foundation model version is released, re-run cross-validation ([DD025](DD025_Protein_Foundation_Model_Pipeline.md) Step 4) and compare error rates against previous version
+4. **Coordinate with Neural L4** when predicted parameters change — any shift in per-class HH parameters requires [DD010](DD010_Validation_Framework.md) Tier 2 revalidation
+5. **Track bio.rodeo ecosystem** — monitor [bio.rodeo/models](https://bio.rodeo/models) for new models that could improve predictions (e.g., protein dynamics models, binding affinity predictors)
+
 ---
 
 ## Version Control and Release Coordination
@@ -468,6 +527,13 @@ Closed-loop coupling can cause **oscillatory instability** if:
    open_worm_analysis_toolbox:
      commit: "ghi789..."
      tag: "revival-0.1.0"
+   openworm_ml:
+     commit: "jkl012..."
+     tag: "ow-0.10.0"
+     foundation_model_versions:
+       alphafold3: "v3.0.0"
+       bioemu1: "v1.0.0"
+       esm_cambrian: "esm-c-300m-2024-12"
    ```
 
 3. **Run full validation suite:** All Tier 1-3 tests on the pinned combination
@@ -475,7 +541,7 @@ Closed-loop coupling can cause **oscillatory instability** if:
 5. **Publish Docker image** to Docker Hub: `openworm/openworm:0.10.0`
 6. **Announce milestone** (see DD_PHASE_ROADMAP milestones)
 
-**All component repos** (c302, Sibernetic, ConnectomeToolbox) also tag their versions (`ow-0.10.0`) so releases are traceable.
+**All component repos** (c302, Sibernetic, ConnectomeToolbox, openworm-ml) also tag their versions (`ow-0.10.0`) so releases are traceable. For `openworm-ml`, foundation model weight versions are also recorded since upstream model updates can change predictions.
 
 ---
 
@@ -556,4 +622,4 @@ docker compose run test-dd019  # Only validates [DD019](DD019_Closed_Loop_Touch_
 
 - **Approved by:** Pending (awaiting founder review)
 - **Maintained by:** Integration L4 Maintainer (when appointed)
-- **Next Update:** After Phase A (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation)
+- **Next Update:** After Phase A (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation and [DD025](DD025_Protein_Foundation_Model_Pipeline.md) cross-validation results)

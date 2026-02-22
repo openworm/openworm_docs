@@ -207,7 +207,7 @@ Once DD is approved and merged:
 - ✅ **Quantitative parameters** — Table of conductances with exact values and units
 - ✅ **Alternatives explained** — IAF rejected, AlphaFold+MD rejected, multicompartmental deferred
 - ✅ **Validation procedure** — 5-step command sequence from `jnml -validate` to kinematic comparison
-- ✅ **Migration path** — If decision changes, add Level E (don't modify C1, backward compatibility sacred)
+- ✅ **Migration path** — If decision changes, add Level D (don't modify C1, backward compatibility sacred)
 
 ---
 

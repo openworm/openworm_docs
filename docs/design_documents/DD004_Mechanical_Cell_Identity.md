@@ -248,6 +248,8 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 - Gonad sheath contraction for oocyte transport
 - Cell-cell adhesion specificity (cadherin-mediated)
 
+The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides the EM foundation for this DD. For developmental modeling beyond static cell identity (e.g., morphogenesis, cell division, body growth), the [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built Cellular Potts (CompuCell3D) and Cellular Automata (Morphozoic) models of embryogenesis that could inform future body-scaling mechanics (see [Phase 6](DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)).
+
 ---
 
 ## References

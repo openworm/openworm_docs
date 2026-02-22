@@ -298,15 +298,15 @@ The current 4-channel model (leak, K_slow, K_fast, Ca_boyle) is derived from mus
 
 **OpenWorm extends beyond Zhao et al.:** We assign channels to neuron classes via CeNGEN single-cell transcriptomics ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)), not just by functional group membership. This is more biologically grounded — two neurons in the same functional group (e.g., interneurons) may express very different channel complements based on their transcriptomic profiles.
 
-### Spatially Resolved Synapse Placement (Phase 2, with Level E)
+### Spatially Resolved Synapse Placement (Phase 2, with Level D)
 
-For the single-compartment models (Levels A-D, C1), synapses are abstract neuron-to-neuron connections with no spatial structure — all inputs sum at the single compartment. However, for multicompartmental neurons (Level E), the location of synapses along neurites matters because it determines signal propagation delays, spatial input integration, and the degree to which nearby synapses interact nonlinearly.
+For the single-compartment models (Levels A-D, C1), synapses are abstract neuron-to-neuron connections with no spatial structure — all inputs sum at the single compartment. However, for multicompartmental neurons (Level D), the location of synapses along neurites matters because it determines signal propagation delays, spatial input integration, and the degree to which nearby synapses interact nonlinearly.
 
 Zhao et al. (2024) demonstrated a practical approach: for each connection in the Cook et al. (2019) adjacency matrix, assign a distance along the neurite drawn from an inverse Gaussian distribution fitted to experimental synapse centroid distance measurements from serial-section EM (Witvliet et al. 2021). Each synapse is then placed on the neurite segment closest to the assigned distance. This produces spatially realistic clustering of synapses along neurites, matching the biological organization observed in EM.
 
 OpenWorm will adopt this approach with one improvement: quantitative validation that the constructed distributions match the experimental distributions (as in Zhao et al. Fig. 4B-C), integrated into [DD010](DD010_Validation_Framework.md) Tier 1 as a non-blocking structural validation.
 
-**Applies only when:** `neural.level: E` and `neural.spatial_synapses: true`. For Level C1, synapse placement is irrelevant and this feature is disabled.
+**Applies only when:** `neural.level: D` and `neural.spatial_synapses: true`. For Level C1, synapse placement is irrelevant and this feature is disabled.
 
 **Data requirement:** Synapse centroid distances from Witvliet et al. 2021, to be acquired per [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline). See also [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for ConnectomeToolbox data access.
 
@@ -460,7 +460,7 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
    *Causal loop philosophy.*
 
 6. **[Hendricks M, Ha H, Maffey N, Zhang Y (2012)](https://doi.org/10.1038/nature11081).** "Compartmentalized calcium dynamics in a *C. elegans* interneuron encode head movement." *Nature* 487:99-103.
-   *Evidence for spatially compartmentalized signaling within individual neurons — motivates multicompartmental Level E.*
+   *Evidence for spatially compartmentalized signaling within individual neurons — motivates multicompartmental Level D.*
 
 7. **[Liu Q, Kidd PB, Dobosiewicz M, Bhatt R (2018)](https://doi.org/10.1016/j.cell.2018.08.018).** "*C. elegans* AWA olfactory neurons fire calcium-mediated all-or-none action potentials." *Cell* 175:57-70.e17.
    *Evidence that some C. elegans neurons use action potentials, not just graded signaling — motivates neuron-class-specific model complexity.*
@@ -472,7 +472,7 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
    *RNN-based approach for inferring biophysical parameters from experimental recordings — applicable to cable equation fitting.*
 
 10. **Alon S et al. (2021).** "Expansion sequencing: spatially precise in situ transcriptomics in intact biological systems." *Science* 371.
-    *In-situ sequencing at subcellular resolution — future data source for spatially resolved channel densities in Level E models.*
+    *In-situ sequencing at subcellular resolution — future data source for spatially resolved channel densities in Level D models.*
 
 11. **[Shaib AH et al. (2023)](https://doi.org/10.1038/s41587-024-02431-9).** "*C. elegans*-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
     *Future data source for synapse-level molecular identity and subcellular protein localization.*
@@ -490,7 +490,7 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
     *Experimentally determined neurotransmitter identities for all connectome synapses — constrains synapse polarity optimization.*
 
 16. **Nicoletti M et al. (2019).** "Biophysical modeling of *C. elegans* neurons: Single ion currents and whole-cell dynamics of AWCon and RMD." *PLoS ONE* 14:e0218738.
-    *Multicompartmental AWC model with multiple ion channel types — precedent for Level E single-neuron models.*
+    *Multicompartmental AWC model with multiple ion channel types — precedent for Level D single-neuron models.*
 
 17. **Bargmann CI, Marder E (2013).** "From the connectome to brain function." *Nature Methods* 10:483-490.
     *Argument that connection topology alone is insufficient — connection properties including spatial location and strength matter for understanding circuit function.*
@@ -507,20 +507,20 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
 
 If future research demonstrates that Level C1 graded synapses are insufficient (e.g., specific neurons require action potentials, or detailed dendritic computation is essential):
 
-1. **Add a new level (e.g., Level E)** rather than modifying C1. Backward compatibility is sacred.
-2. **Document the biological justification** in a new DD.
-3. **Provide a conversion script** from C1 to the new level.
+1. **Upgrade specific neurons to Level D** rather than modifying C1. Backward compatibility is sacred.
+2. **Document the biological justification** for which neurons need multicompartmental treatment.
+3. **Provide a conversion script** from C1 to Level D for those neurons.
 4. **Re-validate** against all existing benchmarks.
 
 Do NOT modify Level C1 unless a critical bug is found.
 
-### Level E: Multicompartmental Cable Equation Models
+### Level D: Multicompartmental Cable Equation Models (Expanded Roadmap)
 
 Experimental evidence shows that single-compartment (isopotential) models are insufficient for a subset of *C. elegans* neurons. [Hendricks et al. (2012)](https://doi.org/10.1038/nature11081) demonstrated that calcium dynamics in the RIA interneuron are compartmentalized across distinct segments of the neurite, encoding head movement direction through spatially separated signals within a single cell. [Liu et al. (2018)](https://doi.org/10.1016/j.cell.2018.08.018) showed that AWA olfactory neurons fire calcium-mediated all-or-none action potentials — a fundamentally different signaling mode from the graded potentials assumed by Level C1. These findings indicate that model complexity must vary among neurons: some are well-described by the single-compartment approximation, while others require multicompartmental representations that capture signal propagation along neurites.
 
-**NeuroML 2 natively supports multicompartmental morphologies.** The `<cell>` element can contain a `<morphology>` with multiple `<segment>` elements organized into `<segmentGroup>` definitions, with per-segment channel density assignments. This means Level E can be implemented within the existing NeuroML/LEMS framework without a new file format — the same `jnml -validate` pipeline applies, and the same NEURON simulator backend can execute multicompartmental cells alongside single-compartment ones in the same network simulation ([Cannon et al. 2014](https://doi.org/10.3389/fninf.2014.00079); [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)).
+**NeuroML 2 natively supports multicompartmental morphologies.** The `<cell>` element can contain a `<morphology>` with multiple `<segment>` elements organized into `<segmentGroup>` definitions, with per-segment channel density assignments. This means Level D can be implemented within the existing NeuroML/LEMS framework without a new file format — the same `jnml -validate` pipeline applies, and the same NEURON simulator backend can execute multicompartmental cells alongside single-compartment ones in the same network simulation ([Cannon et al. 2014](https://doi.org/10.3389/fninf.2014.00079); [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)).
 
-**Feasibility demonstrated.** Zhao et al. (2024) showed that the "representative neuron" strategy makes multicompartmental modeling tractable at scale: build detailed models for a small set of representative neurons (one per functional group), fit them to published electrophysiology, then propagate fitted parameters to all neurons in the same functional class. Using this approach with 5 representative neurons (AWC, AIY, AVA, RIM, VD5), they produced 136 multicompartmental neurons whose I-V curves matched experimental recordings. Nicoletti et al. (2019) earlier demonstrated a similar multicompartmental approach for AWCon with multiple ion channel types. This establishes that Level E is achievable with current data — it does not require waiting for new experimental techniques.
+**Feasibility demonstrated.** Zhao et al. (2024) showed that the "representative neuron" strategy makes multicompartmental modeling tractable at scale: build detailed models for a small set of representative neurons (one per functional group), fit them to published electrophysiology, then propagate fitted parameters to all neurons in the same functional class. Using this approach with 5 representative neurons (AWC, AIY, AVA, RIM, VD5), they produced 136 multicompartmental neurons whose I-V curves matched experimental recordings. Nicoletti et al. (2019) earlier demonstrated a similar multicompartmental approach for AWCon with multiple ion channel types. This establishes that Level D is achievable with current data — it does not require waiting for new experimental techniques.
 
 **Code reuse opportunity.** The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0 license) contains NMODL ion channel files and SWC neuron morphology reconstructions. These can be converted to NeuroML format using pyNeuroML's NMODL→NeuroML converter, providing a head start on the channel library expansion and morphological models.
 
@@ -543,7 +543,7 @@ Experimental evidence shows that single-compartment (isopotential) models are in
 
 **OpenWorm extends beyond Zhao et al.:** (a) We target all 302 neurons, not 136; (b) we use NeuroML standard format enabling multi-simulator support and community sharing; (c) we integrate with CeNGEN transcriptomics for principled parameter propagation rather than purely functional-group-based assignment; (d) our models include neuropeptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) and organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) that the locomotion-only circuit does not capture.
 
-**Validation:** Level E neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers. Individual cell models should additionally reproduce published I-V curves and compartmentalized calcium dynamics where available (e.g., RIA spatial signals per [Hendricks et al. 2012](https://doi.org/10.1038/nature11081), AWC responses per Nicoletti et al. 2019).
+**Validation:** Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers. Individual cell models should additionally reproduce published I-V curves and compartmentalized calcium dynamics where available (e.g., RIA spatial signals per [Hendricks et al. 2012](https://doi.org/10.1038/nature11081), AWC responses per Nicoletti et al. 2019).
 
 ---
 

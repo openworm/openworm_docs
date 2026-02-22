@@ -449,7 +449,7 @@ Witvliet et al. (2021) published 8 connectome reconstructions spanning L1 larval
 
 ### Per-Synapse Spatial Position Data
 
-The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates along neurites, enabling spatially resolved synapse placement for multicompartmental neuron models ([DD001](DD001_Neural_Circuit_Architecture.md) Level E). Zhao et al. (2024) demonstrated that the distribution of synapse-to-soma distances along neurites is well-described by an inverse Gaussian distribution, fitted from these EM measurements. The ConnectomeToolbox `WitvlietDataReader` series may need extension to expose per-synapse position data, as current readers provide only neuron-level adjacency matrices.
+The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates along neurites, enabling spatially resolved synapse placement for multicompartmental neuron models ([DD001](DD001_Neural_Circuit_Architecture.md) Level D). Zhao et al. (2024) demonstrated that the distribution of synapse-to-soma distances along neurites is well-described by an inverse Gaussian distribution, fitted from these EM measurements. The ConnectomeToolbox `WitvlietDataReader` series may need extension to expose per-synapse position data, as current readers provide only neuron-level adjacency matrices.
 
 ---
 
@@ -811,7 +811,7 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 Complements `cect` with additional data not in the connectome: CeNGEN gene expression (`NeuroAtlas.get_gene_expression()`), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (`NeuroAtlas.get_signal_propagation_atlas()`), and neuropeptide/GPCR deorphanization (`PeptideGPCR` class). Consider adding to [DD013](DD013_Simulation_Stack_Architecture.md) Docker and `versions.lock`.
 
 **NemaNode** ([openworm/NemaNode](https://github.com/openworm/NemaNode), 2024, [nemanode.org](https://nemanode.org)):
-Interactive connectome map. Evaluate as cross-validation data source and potential source for per-synapse spatial position data not yet exposed in `cect`'s WitvlietDataReader (needed for [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models).
+Interactive connectome map. Evaluate as cross-validation data source and potential source for per-synapse spatial position data not yet exposed in `cect`'s WitvlietDataReader (needed for [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models).
 
 ---
 

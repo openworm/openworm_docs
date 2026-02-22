@@ -140,17 +140,12 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ DD025 cross-validation: predicted kinetics within <30% relative error of measured values for known channels ([DD025](DD025_Protein_Foundation_Model_Pipeline.md))
 - ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
 
-**Datasets Needed for Phase A** (see [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for complete inventory)**:**
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase A datasets:
 
-- Schafer lab N2 baseline kinematics (WCON format, for Tier 3) — **Status:** Partial (MAT format exists, needs WCON conversion)
-- [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (302×302 correlation matrix) — **Status:** Needs ingestion into [DD008](DD008_Data_Integration_Pipeline.md)/DD020
-- Yemini 2013 behavioral phenotype statistics (grounding for ±15% threshold) — **Status:** Needs supplement download
-- Thomas 1990 defecation cycle data — **Status:** Needs digitization from paper
-- Raizen 1994 pumping EPG data — **Status:** Needs digitization from paper
-- O'Hagan 2005 MEC-4 channel kinetics — **Status:** Needs digitization from paper
-- Chalfie 1985 touch response latency data — **Status:** Needs digitization from paper
-- Ion channels with known kinetics (~50-100 channels, CSV: channel, structure, HH params) — **Status:** Needs curation from PDB + electrophysiology literature
-- C. elegans ion channel sequences (FASTA from WormBase) — **Status:** ✅ Available
+- **Schafer lab N2 baseline kinematics** (WCON format) — Tier 3 validation baseline
+- **Randi 2023 functional connectivity** (302×302 correlation matrix) — Tier 2 validation
+- **Validation data for digitization** — Thomas 1990, Raizen 1994, O'Hagan 2005, Chalfie 1985
+- **DD025 inputs** — Ion channel sequences (WormBase) + known kinetics (~50-100 channels)
 
 **Blocking Dependencies:**
 
@@ -201,14 +196,11 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Trame viewer launches via `docker compose up viewer`, shows time-animated worm at localhost:8501
 - ✅ OME-Zarr export complete: `neural/`, `muscle/`, `body/` groups all populated
 
-**Datasets Needed for Phase 1:**
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase 1 datasets:
 
-| Dataset | Source | Format | Use Case | Status |
-|---------|--------|--------|----------|--------|
-| **CeNGEN L4 expression** | cengen.org | CSV (128 classes × 20,500 genes) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance calibration | ✅ Available (download from cengen.org/downloads) |
-| **Electrophysiology training set** | Goodman lab, Lockery lab, published papers | CSV (neuron_class, channel, measured_g, source_doi) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration regression | ⚠️ Needs curation (~20 neurons) |
-| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity** | Nature 623:406 supplement | NumPy .npy (302×302 correlation matrix) | [DD010](DD010_Validation_Framework.md) Tier 2 validation | ⚠️ Needs download + ingestion |
-| **Ion channel gene list** | WormBase, CeNGEN | CSV (gene_symbol, channel_family, neuroml_model) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) gene→channel mapping | ⚠️ Needs curation (~100 ion channel genes) |
+- **CeNGEN L4 expression** (128 classes × 20,500 genes) — DD005 conductance calibration
+- **Electrophysiology training set** (~20 neurons with measured conductances) — DD005 calibration regression
+- **Ion channel gene list** (~100 genes) — DD005 gene→channel mapping
 
 **Blocking Dependencies:**
 
@@ -231,7 +223,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environmental Modeling & Stimulus Delivery | [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Agar substrate, chemical/thermal gradients, chemotaxis (CI >0.5) + thermotaxis |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
-| **[DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
+| **[DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
 
 **Key Deliverables:**
 
@@ -265,20 +257,13 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Wavelength stability: ±10% with proprioception enabled (improved from ±15%), >30% degradation when stretch receptors disabled ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md))
 - ✅ Viewer shows: neuropeptide volumetric clouds, cuticle strain heatmap, reversal event markers, gradient fields
 
-**Datasets Needed for Phase 2:**
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase 2 datasets:
 
-| Dataset | Source | Format | Use Case | Status |
-|---------|--------|--------|----------|--------|
-| **[Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043) neuropeptides** | Neuron 111:3570 Table S1 | CSV (31,479 interactions: source, target, peptide, receptor, distance) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) extrasynaptic connectome | ⚠️ Needs download from journal supplement |
-| **3D neuron positions** | WormAtlas, [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) | CSV (302 neurons × 3 coordinates) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) distance calculation | ⚠️ Needs extraction from WormAtlas or EM data |
-| **Touch neuron electrophysiology** | [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362), [Goodman et al. 2002](https://doi.org/10.1038/4151039a) | CSV (MEC-4 channel kinetics: V_half, tau, conductance) | [DD019](DD019_Closed_Loop_Touch_Response.md) MEC-4 model validation | ⚠️ Needs extraction from papers |
-| **Tap withdrawal behavioral data** | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) | CSV (reversal latency, distance, direction) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Needs extraction from papers |
-| **Peptide knockout phenotypes** | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers et al. 2003](https://doi.org/10.1038/nn1140) (FLP), others | CSV (peptide_gene, phenotype, metric, wild_type, knockout) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Needs curation from literature |
-| **Chemotaxis behavioral data** | Iino & Yoshida 2009 | CSV (chemotaxis index, trajectory data) | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) Tier 3 validation | ⚠️ Needs extraction from paper |
-| **Thermotaxis behavioral data** | Hedgecock & Russell 1975, Mori & Ohshima 1995 | CSV (isothermal tracking, cultivation temp preference) | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) Tier 3 validation | ⚠️ Needs extraction from papers |
-| **B-class motor neuron stretch response** | Wen et al. 2012 | Calcium imaging (DB, VB response to body bending) | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) Tier 1 validation | ⚠️ Needs extraction from paper |
-| **CE_locomotion stretch receptor model** | [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) | C++ (StretchReceptor.cpp) | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) reference implementation | ✅ Available (repo active 2026-02-18) |
-| **BAAIWorm NMODL ion channel files and SWC morphology data** | [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0, Zenodo: [10.5281/zenodo.13951773](https://doi.org/10.5281/zenodo.13951773) | NMODL (.mod) + SWC (.swc) | [DD001](DD001_Neural_Circuit_Architecture.md) Level E Stage 1 | ✅ Available (open-source) |
+- **Ripoll-Sanchez 2023 neuropeptide connectome** (31,479 interactions) — DD006 extrasynaptic wiring
+- **Touch neuron electrophysiology** (MEC-4 kinetics) — DD019 channel model validation
+- **Tap withdrawal behavioral data** (Chalfie 1985, Wicks 1996) — DD019 Tier 3 validation
+- **BAAIWorm NMODL + SWC data** — DD001 Level D Stage 1 multicompartmental neurons
+- **Chemotaxis and thermotaxis behavioral data** — DD022 Tier 3 validation
 
 **Blocking Dependencies:**
 
@@ -330,16 +315,12 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Auto-fitted parameters equal or improve [DD010](DD010_Validation_Framework.md) scores vs. hand-tuned baseline
 - ✅ Body locomotion still within ±15% (no regression from adding organs)
 
-**Datasets Needed for Phase 3:**
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase 3 datasets:
 
-| Dataset | Source | Format | Use Case | Status |
-|---------|--------|--------|----------|--------|
-| **[Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) EPG recordings** | Neuron 12:483 | CSV (pharyngeal muscle voltage traces) | [DD007](DD007_Pharyngeal_System_Architecture.md) validation | ⚠️ Needs digitization from paper figures |
-| **[Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation data** | Genetics 124:855 | CSV (defecation cycle period distribution) | [DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3 validation | ⚠️ Needs extraction |
-| **[Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging** | eLife 5:e21126 | CSV (HSN/VC/vm2 calcium traces, bout intervals) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Needs extraction from supplement |
-| **SPH simulation training set** | Generate from Sibernetic | HDF5 (500+ runs: muscle_activation → trajectory pairs) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) surrogate training | ⚠️ Generate during Phase 3 (~2,500 GPU-hours) |
-| **Ion channel structures** | AlphaFold3, PDB | PDB files (C. elegans ion channel proteins) | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (moved to Phase A) | ✅ Moved to Phase A datasets |
-| **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | CSV (subset of L4 expression for non-neural cells) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md) cell-type-specific params | ✅ Available (filter CeNGEN L4 by cell type) |
+- **Raizen 1994 EPG recordings** — DD007 pharyngeal validation
+- **Thomas 1990 defecation data** — DD009 Tier 3 validation (50s period)
+- **Collins 2016 egg-laying calcium imaging** — DD018 validation
+- **SPH simulation training set** (500+ runs, ~2,500 GPU-hours) — DD017 surrogate training
 
 **Blocking Dependencies:**
 
@@ -391,14 +372,11 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ WormBrowser feature parity: layer peeling, search by cell name, click-to-identify, static hosting — all WormBrowser features matched ([DD014](DD014_Dynamic_Visualization_Architecture.md) checklist)
 - ✅ browser.openworm.org redirects to wormsim.openworm.org
 
-**Datasets Needed for Phase 4:**
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase 4 datasets:
 
-| Dataset | Source | Format | Use Case | Status |
-|---------|--------|--------|----------|--------|
-| **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions (OBJ or STL per cell) | [DD004](DD004_Mechanical_Cell_Identity.md) particle tagging | ⚠️ Needs extraction/conversion from EM data |
-| **Virtual Worm Blender meshes** | Blender2NeuroML repo | .blend file (688 meshes, ~1.6M vertices) | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) deformation | ✅ Available (Virtual_Worm_February_2012.blend) |
-| **Cell-type mechanical properties** | Literature review (elasticity, adhesion per tissue type) | CSV (cell_type, elasticity_mult, adhesion_strength) | [DD004](DD004_Mechanical_Cell_Identity.md) physics params | ⚠️ Needs curation from biomechanics literature |
-| **WBbt cell ontology** | WormBase | RDF or CSV (cell_name → WBbt_ID mapping) | [DD004](DD004_Mechanical_Cell_Identity.md) cell identity normalization | ✅ Available via WormBase API |
+- **Witvliet 2021 cell boundary meshes** — DD004 particle tagging (needs EM conversion)
+- **Virtual Worm Blender meshes** (688 meshes, ~1.6M vertices) — DD014.2 deformation
+- **Cell-type mechanical properties** — DD004 elasticity/adhesion parameters
 
 **Blocking Dependencies:**
 
@@ -426,17 +404,74 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 
 **Milestone (Projected):** **"Molecular-Level Intracellular Dynamics"**
 
-**Datasets Needed (Projected):**
+**Foundation Model Opportunities ([bio.rodeo](https://bio.rodeo/models))**
 
-- Biochemical rate constants (PLC activity, cAMP degradation, PKA/PKC kinetics)
-- Protein abundance (proteomics for C. elegans neurons/muscles)
-- Calcium imaging with subcellular resolution (ER, mitochondria, plasma membrane compartments)
+Phase 5's biggest blocker is the lack of *C. elegans*-specific biochemical rate constants — most GPCR cascade kinetics come from mammalian systems. Protein foundation models can bridge this gap by predicting binding affinities, conformational dynamics, and pathway structure from sequence rather than requiring per-species experimental measurement:
+
+| Model | Developer | Phase 5 Application |
+|-------|-----------|---------------------|
+| [Boltz-2](https://github.com/jwohlwend/boltz) | MIT/Recursion | Predict GPCR-G protein complex structures AND second messenger (IP3, cAMP, DAG) binding affinities to target proteins (PKA, PKC, IP3R). Single-GPU, approaching FEP+ accuracy |
+| [AlphaFold 3](https://github.com/google-deepmind/alphafold3) | DeepMind | Model full signaling complex assemblies: GPCR→Gα→effector (PLC, adenylyl cyclase) with bound ligands, ions, and lipids |
+| [BioEmu-1](https://github.com/microsoft/BioEmu) | Microsoft | Simulate GPCR activation (inactive→active conformational transition), channel phosphorylation-induced gating changes, and kinase catalytic dynamics at 100,000x MD speed — extract rate constants from conformational landscapes |
+| [NatureLM](https://github.com/microsoft/NatureLM) | Microsoft | Unified protein + small molecule model (46.7B params). Predict cross-domain interactions: neuropeptide → GPCR → second messenger → kinase. Estimate binding affinities and ADMET properties for signaling molecules |
+| [SubCell](https://github.com/CZI-BioHub/SubCell) | CZI/Human Protein Atlas | Subcellular protein localization from microscopy. Map where signaling proteins localize within cells (ER vs. plasma membrane vs. cytoplasm), constraining spatial compartmentalization of cascades. Trained on human cells — would need adaptation for *C. elegans* |
+| [OntoProtein](https://github.com/zjunlp/OntoProtein) | Zhejiang University | GO-informed protein-protein interaction prediction. Infer kinase-substrate relationships (which PKA/PKC isoforms phosphorylate which ion channels) from Gene Ontology structure, filling gaps where direct experimental data is unavailable |
+| [scPRINT](https://github.com/jkobject/scprint) | Institut Pasteur | Gene network inference from 50M cells. Identify co-regulation patterns between GPCR pathway components in CeNGEN data (e.g., which receptor, G protein, and effector genes are co-expressed in each neuron class), suggesting functional pathway wiring |
+
+**Key insight:** BioEmu-1 + Boltz-2 together could predict most of the "Biochemical rate constants" listed below from protein structure alone — GPCR activation rates from conformational dynamics, second messenger binding K_d from complex prediction, and phosphorylation effects on channel gating from before/after conformational ensembles. This reduces Phase 5's dependency on scarce *C. elegans*-specific experimental kinetics.
+
+**Precedent: Whole-Cell Computational Modeling ([Karr et al. 2012](https://doi.org/10.1016/j.cell.2012.05.044))**
+
+Phase 5's goal — mechanistic intracellular signaling from GPCR activation to channel phosphorylation — is conceptually related to the first whole-cell computational model, built for *Mycoplasma genitalium* by [Karr, Sanghvi, Macklin et al. (2012)](https://doi.org/10.1016/j.cell.2012.05.044) in Markus Covert's lab at Stanford. That model demonstrated that a complete intracellular simulation is achievable:
+
+- **28 submodels** covering DNA replication, transcription, translation, metabolism, protein complexation, and cell division — each using the formalism best suited to its biology (FBA for metabolism, stochastic/Gillespie for transcription, ODE for metabolite dynamics, Boolean logic for gene regulation, Markov chains for RNA degradation)
+- **16 shared cell state variables** (chromosome, transcripts, RNA, polypeptides, protein monomers/complexes, metabolites, ribosomes, RNA polymerase, geometry, mass, time, etc.) integrated at 1-second timesteps with sequential random-order execution
+- **1,900+ parameters** curated manually from 900+ publications, with cross-species transfer from mammalian/bacterial data filling gaps
+- **Validation:** 79% accuracy on gene essentiality predictions; correctly predicted phenotypes for 72% of tested single-gene knockouts
+
+Karr's [2014 Stanford dissertation](https://searchworks.stanford.edu/view/10590731) identified three key limitations that constrained the approach:
+
+1. **Parameter curation bottleneck:** ~6 person-years to manually extract 1,900 rate constants from 900 papers — and *M. genitalium* has only 525 genes (the smallest free-living genome). *C. elegans* has ~20,000 genes.
+2. **Cross-species parameter transfer:** ~30% of parameters were borrowed from other organisms (E. coli, yeast, mammalian) due to missing *M. genitalium* measurements. Accuracy of these transfers was unknown.
+3. **Scaling challenge:** The hybrid multi-formalism approach worked for a 525-gene minimal cell but was not demonstrated for organisms with thousands of genes and complex multicellular signaling.
+
+**How Foundation Models Transform the Whole-Cell Approach for *C. elegans***
+
+The Karr/Covert limitations that seemed intractable in 2012 are now addressable with the foundation models listed above:
+
+| Karr 2012 Limitation | Foundation Model Solution | Improvement |
+|----------------------|--------------------------|-------------|
+| **Parameter curation** (6 person-years, 900 papers) | BioEmu-1 predicts conformational dynamics → rate constants from structure alone; Boltz-2 predicts binding affinities from complex structures | Months → days for ~50 key GPCR cascade parameters |
+| **Cross-species transfer** (borrowing mammalian rates) | ESM Cambrian / OntoProtein predict *C. elegans*-specific kinetics from worm protein sequences, no need to borrow from mammals | Species-specific predictions from sequence |
+| **Pathway inference** (manually reading papers) | scPRINT infers gene regulatory networks from CeNGEN 50M-cell atlas; NatureLM predicts protein-small molecule interactions across domains | Automated pathway wiring from expression data |
+| **Scaling to 20,000 genes** | Only ~200-300 signaling genes are relevant to Phase 5 GPCR cascades (not whole-genome); [DD005](DD005_Cell_Type_Differentiation_Strategy.md) CeNGEN data identifies which genes are expressed per cell type | Scoped to signaling genes, not whole genome |
+| **Subcellular compartmentalization** (not modeled in Karr) | SubCell predicts protein localization (ER vs. membrane vs. cytoplasm), constraining spatial cascade models | Compartment assignment from microscopy |
+
+The key architectural lesson from Karr et al. is the **hybrid multi-formalism** approach: use ODEs where kinetics are smooth, stochastic simulation where copy numbers are low, and FBA where metabolic flux balance is the right abstraction. Phase 5 should adopt this principle — GPCR cascades are well-suited to ODEs, but stochastic events (neuropeptide vesicle release, channel insertion) may require Gillespie-style simulation.
+
+**Why Phase 5 is tractable even though whole-cell eukaryotic modeling isn't solved yet.** As of 2026, no one has built a Karr-level "every gene product accounted for" whole-cell model of a eukaryotic cell. The Covert lab scaled from *M. genitalium* (525 genes) to [*E. coli* (4,288 genes)](https://github.com/CovertLab/vEcoli) — still prokaryotic but 8x the gene count — and in [2023 extended it to whole-colony simulations](https://doi.org/10.1371/journal.pcbi.1011232) with single-cell heterogeneity. For eukaryotes, the yeast [WM_S288C model](https://doi.org/10.1016/j.bpj.2020.01.040) integrates 15 cellular states and 26 processes across ~6,447 genes, but is described as ["an important first step"](https://doi.org/10.1016/j.tibtech.2021.06.010) rather than complete — the [data integration challenge alone is still being solved](https://doi.org/10.1093/femsyr/foae011) (YCMDB database, 2024). The eukaryotic gap comes from compartmentalization (nucleus, ER, Golgi, mitochondria), complex gene regulation (chromatin, splicing), and intracellular signaling — exactly the biology Phase 5 targets. But Phase 5 does **not** need to be a whole-cell model. It only needs the GPCR→second messenger→channel phosphorylation cascades for the ~200-300 signaling genes expressed in *C. elegans* neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md) CeNGEN data scopes this precisely). That is a far more tractable problem than modeling all 20,000 genes, and the foundation models above make it feasible without the 6-person-year parameter curation that even the 525-gene *M. genitalium* model required.
+
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) "Projected Datasets (Phases 5-7)" for inventory. Key needs: biochemical rate constants, proteomics, subcellular calcium imaging, GPCR-G protein coupling specificity — many may be predictable via BioEmu-1 + Boltz-2 foundation models.
 
 ---
 
 ## Phase 6: Developmental Modeling (Year 2+)
 
 **Status:** 📝 **Not Yet Specified** — Placeholder for multi-stage simulation
+
+**Existing Work: [DevoWorm](../../Projects/DevoWorm/)**
+
+The [DevoWorm project](../../Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) has been building toward developmental modeling since 2014 as an OpenWorm sub-project. DevoWorm's three research areas map directly onto Phase 6 needs:
+
+- **Developmental Dynamics:** Quantitative embryogenesis datasets, differentiation trees, and embryogenetic connectome analysis — directly applicable to modeling neuron birth order, cell lineage, and stage-specific neural topology
+- **Cybernetics and Digital Morphogenesis:** Cellular automata (Morphozoic) and Cellular Potts (CompuCell3D) models of embryogenesis — candidate frameworks for body morphogenesis simulation (L1 ~240 µm → adult ~1000 µm)
+- **Reproduction and Developmental Plasticity:** Larval development and life-history data — validation targets for stage-specific behavioral differences
+
+Phase 6 should build on DevoWorm's datasets and models rather than starting from scratch. Key integration points:
+
+- DevoWorm's [embryogenetic connectome](https://github.com/devoworm/embryogenetic-connectome) analysis provides the developmental graph connecting cell lineage to neural circuit formation
+- DevoWorm's [differentiation trees](https://www.biorxiv.org/content/early/2016/07/07/062539) complement [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s CeNGEN-based cell-type approach by adding temporal dynamics (when each neuron class differentiates)
+- DevoWorm's CompuCell3D models could inform the body size scaling mechanics in [DD003](DD003_Body_Physics_Architecture.md)/[DD004](DD004_Mechanical_Cell_Identity.md)
 
 **Anticipated Scope:**
 
@@ -445,19 +480,13 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 - Body size scaling (L1 ~240 µm → adult ~1000 µm)
 - Stage-specific validation (L1 locomotion differs from adult)
 - CeNGEN L1 expression integration
+- Integration of DevoWorm embryogenetic connectome and differentiation tree data
 
 **Milestone (Projected):** **"Worm That Grows"**
 
 - Announcement: "Simulate C. elegans development from L1 larva to adult, watching neurons born and the body grow."
 
-**Datasets Needed (Projected):**
-
-| Dataset | Source | Use Case | Status |
-|---------|--------|----------|--------|
-| **Witvliet series connectomes** (8 stages) | Nature 596:257 | Stage-specific neural topology | ✅ Available via `cect` WitvlietDataReader1-8 |
-| **CeNGEN L1 expression** | cengen.org | L1 neuron differentiation | ✅ Available but less mature than L4 |
-| **[Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq** | Science 365:eaax1971 | Embryonic gene expression | ⚠️ Needs ingestion |
-| **Developmental behavioral data** | Literature (L1-L4 locomotion, feeding) | Stage-specific validation | ⚠️ Needs curation |
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) "Projected Datasets (Phases 5-7)" for inventory. Key resources: Witvliet developmental connectome series (in `cect`), CeNGEN L1 expression, Packer 2019 embryonic scRNA-seq, DevoWorm embryogenetic connectome and differentiation trees.
 
 ---
 
@@ -474,84 +503,20 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 
 **Milestone (Projected):** **"Both Sexes Simulated"**
 
-**Datasets Needed (Projected):**
-
-- [Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) male connectome (available via `cect`)
-- Male behavioral data (mating assays, vulva location, spicule insertion)
-- Male-specific anatomy (tail SPH model, spicule mechanics)
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) "Projected Datasets (Phases 5-7)" for inventory. Key resources: Cook 2019 male connectome (in `cect`), male behavioral/mating data, male-specific tail anatomy.
 
 ---
 
-## Complete Dataset Inventory (All Phases)
+## Complete Dataset Inventory
 
-### Connectome Datasets ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md))
+For the canonical inventory of all datasets across all phases, see **[DD024: Validation Data Acquisition Pipeline](DD024_Validation_Data_Acquisition_Pipeline.md)**. DD024 catalogs:
 
-| Dataset | Source | Year | `cect` Reader | Used In | Status |
-|---------|--------|------|---------------|---------|--------|
-| White et al. | Phil Trans R Soc B 314:1 | 1986 | `WhiteDataReader` | Historical reference | ✅ In `cect` |
-| Varshney et al. | PLoS Comput Biol 7:e1001066 | 2011 | `VarshneyDataReader` | Legacy comparison | ✅ In `cect` |
-| **[Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) Hermaphrodite** | Nature 571:63 | 2019 | `Cook2019HermReader` | **PRIMARY** — [DD001](DD001_Neural_Circuit_Architecture.md) default | ✅ In `cect` |
-| **[Cook 2019](https://doi.org/10.1038/s41586-019-1352-7) Male** | Nature 571:63 | 2019 | `Cook2019MaleReader` | Phase 7 (male modeling) | ✅ In `cect` |
-| [Cook 2020](https://doi.org/10.1038/s41586-019-1352-7) | Update | 2020 | `Cook2020DataReader` | Updated analysis | ✅ In `cect` |
-| **Witvliet Series (Stages 1-8)** | Nature 596:257 | 2021 | `WitvlietDataReader1-8` | Phase 6 (developmental), cross-validation | ✅ In `cect` |
-| Brittin et al. | Contact area-based | 2021 | `BrittinDataReader` | Alternative weighting | ✅ In `cect` |
-| **[Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)** | Neuron 111:3570 | 2023 | `RipollSanchez*RangeReader` | **Phase 2** — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptides | ✅ In `cect` |
-| **[Wang 2024](https://doi.org/10.7554/eLife.95402) Hermaphrodite** | eLife 13:RP95402 | 2024 | `Wang2024HermReader` | Neurotransmitter identity | ✅ In `cect` |
-| [Wang 2024](https://doi.org/10.7554/eLife.95402) Male | eLife 13:RP95402 | 2024 | `Wang2024MaleReader` | Male neurotransmitters | ✅ In `cect` |
-| [Yim 2024](https://doi.org/10.1038/s41467-024-45943-3) | Updated connectivity | 2024 | `Yim2024DataReader` | Recent analysis | ✅ In `cect` |
-| OpenWormUnified | Experimental | 2024+ | `OpenWormUnifiedReader` | **WIP** — future default | ⚠️ Subject to change |
+- **Tier 1-4 validation datasets** — Electrophysiology, functional connectivity, behavioral kinematics, causal/interventional data
+- **Connectome & molecular datasets** — Connectome data available via `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)), expression data, cell ontologies
+- **Implementation & reference datasets** — Model inputs (BAAIWorm, Virtual Worm, ion channel sequences), reference implementations (CE_locomotion), training data (SPH simulation runs)
+- **Projected datasets (Phases 5-7)** — Biochemical kinetics, developmental data, male-specific anatomy
 
-### Functional Datasets ([DD010](DD010_Validation_Framework.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
-
-| Dataset | Source | Year | Format | Used In | Status |
-|---------|--------|------|--------|---------|--------|
-| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain calcium imaging** | Nature 623:406 | 2023 | 302×302 correlation matrix (.npy) | **Phase 1** — [DD010](DD010_Validation_Framework.md) Tier 2, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) validation | ⚠️ Download from supplement |
-| **[Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) neuron atlas** | Nature 623:406 | 2023 | Functional connectivity | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | ✅ In `cect` (WormNeuroAtlasFuncReader) |
-| Goodman lab electrophysiology | Various papers 1998-2005 | 1998+ | CSV (touch neurons: MEC-4, voltage-clamp traces) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration, [DD019](DD019_Closed_Loop_Touch_Response.md) validation | ⚠️ Needs curation |
-| Lockery lab recordings | Various papers | 2000s | CSV (AVA, other interneurons) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration | ⚠️ Needs curation |
-
-### Expression Datasets ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
-
-| Dataset | Source | Year | Format | Used In | Status |
-|---------|--------|------|--------|---------|--------|
-| **CeNGEN L4** | Cell 184:4329 | 2021 | CSV (128 neuron classes × 20,500 genes) | **Phase 1** — [DD005](DD005_Cell_Type_Differentiation_Strategy.md) neuron differentiation | ✅ Download from cengen.org |
-| CeNGEN L1 | cengen.org | 2021+ | CSV (L1 neuron classes × genes) | Phase 6 (developmental) | ✅ Available but less mature |
-| [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Science 365:eaax1971 | 2019 | Embryonic gene expression | Phase 6 (embryonic modeling) | ⚠️ Needs ingestion |
-
-### Anatomical / Morphological Datasets ([DD004](DD004_Mechanical_Cell_Identity.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
-
-| Dataset | Source | Year | Format | Used In | Status |
-|---------|--------|------|--------|---------|--------|
-| **Virtual Worm Blender model** | Caltech/WormBase (Grove & Sternberg) | 2012 | .blend (688 meshes, 37 materials) | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation | ✅ In Blender2NeuroML repo |
-| [Long et al. 2009](https://doi.org/10.1038/nmeth.1366) 3D atlas | Nature Methods 6:667 | 2009 | 3D nuclear positions (357 nuclei, L1) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (distance), [DD004](DD004_Mechanical_Cell_Identity.md) (cell positions) | ⚠️ Needs extraction |
-| **WormAtlas anatomy** | wormatlas.org | Ongoing | EM images, cell descriptions, Slidable Worm | [DD004](DD004_Mechanical_Cell_Identity.md) (cell boundaries), [DD008](DD008_Data_Integration_Pipeline.md) (cell positions) | ✅ Available via web scraping or API |
-| **[Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions** | Nature 596:257 | 2021 | 3D cell volumes (8 animals × 8 stages) | **Phase 4** — [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries | ⚠️ Needs conversion from EM data |
-
-### Behavioral / Kinematic Datasets ([DD010](DD010_Validation_Framework.md) Tier 3)
-
-| Dataset | Source | Year | Format | Used In | Status |
-|---------|--------|------|--------|---------|--------|
-| **Schafer lab N2 baseline** | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) database | 2013 | MAT files (skeleton time series) | [DD010](DD010_Validation_Framework.md) Tier 3 (primary) | ✅ In analysis toolbox examples/, needs WCON conversion |
-| Schafer lab mutants | Yemini database | 2013+ | MAT files (unc-2, egl-19, others) | [DD010](DD010_Validation_Framework.md) mutant validation | ✅ In database |
-| **Tierpsy Tracker dataset** | [Javer et al. 2018](https://doi.org/10.1038/s41592-018-0112-1) | 2018+ | WCON + HDF5 (multi-worm tracking) | [DD010](DD010_Validation_Framework.md) cross-validation | ⚠️ Explore for additional baselines |
-| [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal | Neuron 5:956 | 1985 | Behavioral metrics (reversal latency, distance) | [DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 validation | ⚠️ Digitize from paper |
-| [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) tap direction | J Neurobiol 31:1 | 1996 | Direction discrimination data | [DD019](DD019_Closed_Loop_Touch_Response.md) validation | ⚠️ Digitize from paper |
-
-### Pharmacological / Genetic Perturbation Datasets ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD018](DD018_Egg_Laying_System_Architecture.md))
-
-| Dataset | Source | Year | Format | Used In | Status |
-|---------|--------|------|--------|---------|--------|
-| FLP peptide knockout phenotypes | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), Rogers 2003 | 1999+ | Behavioral assays (locomotion, reversal) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) validation | ⚠️ Extract from papers |
-| EGL mutant phenotypes | [Trent et al. 1983](https://doi.org/10.1093/genetics/104.4.619) (145 mutants) | 1983+ | Egg-laying defects (frequency, timing) | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from papers |
-| Serotonin pharmacology | [Waggoner et al. 1998](https://doi.org/10.1016/S0896-6273(00)80527-9) | 1998 | Exogenous 5-HT effects on egg-laying | [DD018](DD018_Egg_Laying_System_Architecture.md) validation | ⚠️ Extract from paper |
-
-### Training Datasets for ML Components ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
-
-| Dataset | Source | Format | Used In | Status |
-|---------|--------|--------|---------|--------|
-| **SPH simulation runs** (muscle activation → trajectory) | Generate from Sibernetic | HDF5 (500-1000 runs) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (SPH surrogate) | 📝 **Generate in Phase 3** (~2,500 GPU-hours) |
-| Ion channels with known kinetics | PDB + electrophysiology papers | CSV (channel, structure, HH params) | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (structure→kinetics) | ⚠️ Curate from literature (~50-100 channels) |
-| Sensory neuron calcium imaging | Suzuki 2003/2008, Chalasani 2007, others | CSV (stimulus → Ca response) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory) | ⚠️ Extract from papers |
+Each dataset is tagged with its phase, consumer DD, acquisition method, and status. For connectome-specific datasets in detail, see also [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md).
 
 ---
 
@@ -645,6 +610,83 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 
 ---
 
+## Phase Placement Rationale
+
+Why is each DD in its current phase — and not earlier or later? This section documents the reasoning so future contributors and reviewers can evaluate whether phase assignments still hold as circumstances change.
+
+### Phase 0: Existing Foundation
+
+These DDs describe **already-implemented** subsystems. They are Phase 0 because the code exists and works.
+
+| DD | Why Phase 0 |
+|----|-------------|
+| [DD001](DD001_Neural_Circuit_Architecture.md) | c302 Levels A-D exist, generate NeuroML networks. The 302-neuron HH circuit runs and produces movement. |
+| [DD002](DD002_Muscle_Model_Architecture.md) | GenericMuscleCell exists with Ca²⁺→force coupling. Validated against Boyle & Cohen 2008. |
+| [DD003](DD003_Body_Physics_Architecture.md) | Sibernetic v1.0+ works (OpenCL backend stable). ~100K SPH particles, fluid-structure interaction. |
+| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | `cect` v0.2.7 exists with 30+ connectome datasets accessible via Python API. |
+
+### Phase A: Infrastructure Bootstrap
+
+Phase A DDs either (a) provide infrastructure that all later phases depend on, or (b) have zero infrastructure dependencies and can run in parallel.
+
+| DD | Why Phase A (not later) | Why not earlier (it's already first) |
+|----|------------------------|--------------------------------------|
+| [DD013](DD013_Simulation_Stack_Architecture.md) | **CRITICAL PATH.** Without Docker, `openworm.yml`, and CI, contributors can't build, test, or validate changes. Every subsequent DD needs this. | It *is* the earliest. Can't implement science DDs without the tools to validate them. |
+| [DD008](DD008_Data_Integration_Pipeline.md) | Phase 1+ datasets (CeNGEN, Randi 2023, connectomes) need unified access via OWMeta. WBbt ID normalization must happen before CeNGEN ingestion. | N/A — already first phase. |
+| [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Tier 3 kinematic validation is broken (toolbox doesn't install on Python 3.12). Can't validate DD005's output without it. | N/A. |
+| [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) | Validation data must exist before validation can run. Digitizing Thomas 1990, Raizen 1994, Chalfie 1985 data takes time and should start immediately. | N/A. |
+| [DD012](DD012_Design_Document_RFC_Process.md) | Governance: need the DD process defined before more DDs are proposed. Low effort (~8 hours). | N/A. |
+| [DD011](DD011_Contributor_Progression_Model.md) | Governance: need contributor framework before recruiting. Low effort (~8 hours). | N/A. |
+| [DD015](DD015_AI_Contributor_Model.md) | AI agents need registration, review gates, and workflow before they contribute code. Depends on [DD012](DD012_Design_Document_RFC_Process.md). | N/A. |
+| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | **Zero infrastructure dependencies.** Inputs (WormBase sequences, literature kinetics) are available today. Derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping. BioEmu-1 (100,000x MD speed) made this feasible. | Originally in Phase 3 as DD017 Component 3. Promoted because it has no blockers and provides a safety net for Phase 1. |
+
+### Phase 1: Cell-Type Differentiation
+
+Phase 1 is the first *modeling* phase. Its DDs differentiate the 302 identical neurons into 128 biologically distinct classes and establish visual + validation infrastructure.
+
+| DD | Why Phase 1 (not earlier) | Why not later |
+|----|--------------------------|---------------|
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Needs CeNGEN data ingested via [DD008](DD008_Data_Integration_Pipeline.md) (Phase A), config system from [DD013](DD013_Simulation_Stack_Architecture.md) (Phase A), and analysis toolbox from [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Phase A) to validate output. | Everything downstream assumes differentiated neurons. If the expression→conductance approach fails, better to discover that in Phase 1 than Phase 3. Also: DD005's scientific risk is highest — validate early. |
+| [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 | Needs DD001-DD003 output formats defined (Phase 0). Produces OME-Zarr export pipeline needed by all later visualization phases. | Viewer is how people *see* the simulation. Delaying it means months of work with no visual feedback, which kills contributor engagement. |
+| [DD014.1](DD014.1_Visual_Rendering_Specification.md) | Defines canonical color palette and materials. Needs the viewer architecture ([DD014](DD014_Dynamic_Visualization_Architecture.md)) to be specified first. | Phase 2 adds neuropeptide volumetric clouds and strain heatmaps — needs the color/material system already established. |
+| [DD010](DD010_Validation_Framework.md) Tier 2 | Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (differentiated neurons to validate) and Randi 2023 data (from [DD008](DD008_Data_Integration_Pipeline.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)). | The functional connectivity gate (r > 0.5) must be active before Phase 2 builds on top of differentiated neurons. Without it, Phase 2 could build on a broken foundation. |
+| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) integration | Phase A cross-validation must complete first. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) pipeline to exist so predictions can feed in as calibration priors. | Predictions are most valuable when [DD005](DD005_Cell_Type_Differentiation_Strategy.md) is actively calibrating — waiting until Phase 3 wastes the derisking opportunity. |
+
+### Phase 2: Slow Modulation + Closed-Loop Sensory
+
+Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. These DDs require differentiated neurons from Phase 1.
+
+| DD | Why Phase 2 (not earlier) | Why not later |
+|----|--------------------------|---------------|
+| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Neuropeptide modulation on generic neurons would be meaningless — the 31,479 peptide-receptor interactions are cell-type-specific. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Phase 1) differentiation. | [DD018](DD018_Egg_Laying_System_Architecture.md) (Phase 3) requires serotonergic modulation (HSN neurons). The neuropeptide layer must exist before egg-laying can work. |
+| [DD019](DD019_Closed_Loop_Touch_Response.md) | Needs differentiated sensory neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) with cell-type-specific MEC-4 channels. Building bidirectional body↔neuron coupling requires stable [DD001](DD001_Neural_Circuit_Architecture.md)+[DD003](DD003_Body_Physics_Architecture.md) integration (Phase 0/A). | Closed-loop sensory input is prerequisite for any emergent behavior (chemotaxis, thermotaxis). Without it, the worm is "deaf" — can't respond to its environment. |
+| [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Needs [DD003](DD003_Body_Physics_Architecture.md) for substrate physics and [DD019](DD019_Closed_Loop_Touch_Response.md) for the sensory coupling framework. Can't do chemotaxis without both gradient fields and sensory neurons that respond to them. | Chemotaxis (CI > 0.5) and thermotaxis are key behavioral validation targets. Demonstrating them in Phase 2 is a major milestone ("The Worm Can Feel"). |
+| [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Needs [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling framework (body→neuron path). Stretch receptors on B-class motor neurons require the same SPH→strain→channel pipeline that touch uses. | Proprioception stabilizes the locomotion wavelength (±10% vs. ±15%). Without it, forward locomotion degrades when other subsystems add load. Phase 3 organ systems need stable locomotion. |
+| [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Proof-of-concept multicompartmental neurons. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) to know which channels each neuron class expresses before you can model their compartmental distribution. | Level D is needed eventually for spatially realistic signal propagation. Starting with 5 representative neurons in Phase 2 validates the approach before committing to all 302. |
+
+### Phase 3: Organ Systems + Hybrid ML
+
+Phase 3 adds three organ subsystems and the ML acceleration framework. These DDs require differentiated neurons (Phase 1) and ideally the modulation layer (Phase 2).
+
+| DD | Why Phase 3 (not earlier) | Why not later |
+|----|--------------------------|---------------|
+| [DD007](DD007_Pharyngeal_System_Architecture.md) | The pharynx has 20 neurons + 20 muscles that need differentiated parameters ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)). Pharyngeal neurons use unique channels (e.g., EAT-2) that benefit from the neuropeptide modulation layer ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)). | Must be implemented before Phase 4's 959-cell integration. The pharynx is a semi-autonomous organ — a visible, validatable milestone. |
+| [DD009](DD009_Intestinal_Oscillator_Model.md) | The 20-cell IP3/Ca²⁺ oscillator is relatively independent but couples to the neural circuit via DVB and AVL neurons. Needs [DD001](DD001_Neural_Circuit_Architecture.md) neural coupling. Validation data (Thomas 1990 defecation timing) needs digitization (started in [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), Phase A). | Defecation motor program (50s period) is one of the best-characterized *C. elegans* behaviors. A quantitative validation target that must be met before Phase 4's full-organism claim. |
+| [DD018](DD018_Egg_Laying_System_Architecture.md) | **Most complex organ circuit.** HSN serotonergic command neurons require [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Phase 2) neuropeptide/serotonin modulation. Vulval muscles use EGL-19/UNC-103 channels that need [DD005](DD005_Cell_Type_Differentiation_Strategy.md). Tyramine/octopamine signaling adds another modulation layer. | Two-state egg-laying pattern (active bouts interspersed with long inactive periods) is a behavioral phenotype used in hundreds of published mutant screens. Must work before claiming "digital organism." |
+| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | **Component 1 (differentiable backend):** Needs stable DD001+DD002+DD009 equations to port to PyTorch. If equations change during Phase 1-2, the port must be redone. Best to wait until the ODE system stabilizes. Also benefits from having multiple coupled subsystems (neural + muscle + intestine) to auto-fit against simultaneously. **Component 2 (SPH surrogate):** Needs 500+ full SPH simulation runs as training data (~2,500 GPU-hours). Training data goes stale if DD004 (Phase 4) changes particle mechanics or DD019 (Phase 2) adds bidirectional coupling that alters body dynamics. Maximum infrastructure dependencies — the opposite of DD025. **Component 4 (learned sensory):** Phase 2 attempts the mechanistic route first (DD019 touch, DD022 chemotaxis, DD023 proprioception). The learned model fills gaps that remain *after* the mechanistic approach is tested. Using ML before trying mechanism contradicts OpenWorm's core commitment to interpretability. | Auto-fitted parameters (Component 1) are needed before Phase 4's 959-cell integration — manual tuning won't scale. The SPH surrogate (Component 2) enables fast iteration for Phase 4's multi-organ coupled simulations. |
+
+### Phase 4: Mechanical Cell Identity + Visualization
+
+Phase 4 completes the organism: all 959 somatic cells with cell-type mechanics and a public web viewer.
+
+| DD | Why Phase 4 (not earlier) | Why not later |
+|----|--------------------------|---------------|
+| [DD004](DD004_Mechanical_Cell_Identity.md) | Per-cell mechanical properties (elasticity, adhesion) should be informed by organ system behavior (Phase 3). Setting intestine elasticity before implementing the intestine means guessing. Also needs [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM cell boundaries, which require significant data conversion work. | This is the final modeling step — assigns all 959 somatic cells to SPH particles with cell-type-specific physics. Completing this means the "virtual organism" claim is real. |
+| [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Needs [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries and [DD003](DD003_Body_Physics_Architecture.md) SPH body shape. The GPU skinning pipeline can't be tested without both. The 688 Virtual Worm meshes need to deform with simulated body motion, which requires a stable coupled simulation. | Photorealistic deformation is what makes "WormSim 2.0" visually compelling. Without it, the viewer shows raw particles instead of anatomical meshes. |
+| [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3 | Needs all previous visualization phases complete. Three.js + WebGPU public deployment requires stable content (all organ systems implemented and validated). Static site deployment to wormsim.openworm.org. | This is the capstone: "Digital Organism In Your Browser." Delays here delay the most visible milestone and the Nature/Science paper. |
+
+---
+
 ## Frequently Asked Questions
 
 **Q: Why is Phase A first if it's infrastructure, not science?**
@@ -657,7 +699,7 @@ A: Yes — they're semi-independent subsystems. Different contributors can work 
 A: [DD004](DD004_Mechanical_Cell_Identity.md) requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 3), observe their mechanics, then add cell-specific properties in Phase 4. [DD004](DD004_Mechanical_Cell_Identity.md) is also needed for [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) mesh deformation.
 
 **Q: What if Phase 1 [DD005](DD005_Cell_Type_Differentiation_Strategy.md) fails validation (Tier 2 doesn't improve)?**
-A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 (foundation model→params) or manual curation. [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s scientific risk is why it's Phase 1 — validate the approach early before building more on top of it.
+A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model→params) or manual curation. [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s scientific risk is why it's Phase 1 — validate the approach early before building more on top of it.
 
 **Q: When do we write papers?**
 A: After each major milestone:

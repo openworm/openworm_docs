@@ -26,7 +26,7 @@
 
 ## TL;DR
 
-Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A infrastructure — without clean, versioned validation data, no validation tier can function.
+Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A infrastructure — without clean, versioned validation data, no validation tier can function. This DD also serves as the **canonical dataset inventory** for all phases, consolidating validation, implementation, and projected datasets in one place (see [Phase Roadmap](DD_PHASE_ROADMAP.md) for implementation timeline).
 
 ---
 
@@ -68,61 +68,103 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 
 ### Tier 1: Single-Cell Electrophysiology
 
-| Dataset | Source Publication | Neurons Covered | Format Needed | Acquisition Method | Consumer DD | Priority |
-|---------|-------------------|-----------------|---------------|-------------------|-------------|----------|
-| Touch neuron patch-clamp (V_rest, R_in, I-V) | Goodman et al. 1998, *Neuron* 20:763-772 | ALM, AVM, PLM (~6 neurons) | CSV: neuron, protocol, V/I traces | Digitize from paper figures or request from authors | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High |
-| AVA interneuron recordings | Lockery lab (unpublished / personal communication) | AVA | CSV: time, V, I | Request from Lockery lab | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High |
-| ASH nociceptor electrophysiology | Hilliard et al. 2002 | ASH | CSV: time, V, I, stimulus | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium |
-| AWC olfactory neuron recordings | Chalasani et al. 2007, *Nature* 450:63-70 | AWC | CSV: time, V, I, odor | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium |
-| RIA compartmentalized calcium | Hendricks et al. 2012, *Nature* 487:99-103 | RIA | CSV: time, Ca_proximal, Ca_distal | Supplement or digitize | [DD001](DD001_Neural_Circuit_Architecture.md) (Level E) | Medium |
-| AWA calcium action potentials | Liu et al. 2018, *Cell* 175:57-70 | AWA | CSV: time, V, Ca | Supplement data | [DD001](DD001_Neural_Circuit_Architecture.md) (Level E) | Medium |
-| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High |
-| Pharyngeal muscle plateau potentials | Raizen & Avery 1994, *Neuron* 12:483-495 | pm3-pm8 | CSV: time, V (intracellular recording) | Digitize from paper figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium |
+| Dataset | Source Publication | Neurons Covered | Format Needed | Acquisition Method | Consumer DD | Priority | Phase |
+|---------|-------------------|-----------------|---------------|-------------------|-------------|----------|-------|
+| Touch neuron patch-clamp (V_rest, R_in, I-V) | Goodman et al. 1998, *Neuron* 20:763-772 | ALM, AVM, PLM (~6 neurons) | CSV: neuron, protocol, V/I traces | Digitize from paper figures or request from authors | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
+| AVA interneuron recordings | Lockery lab (unpublished / personal communication) | AVA | CSV: time, V, I | Request from Lockery lab | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
+| ASH nociceptor electrophysiology | Hilliard et al. 2002 | ASH | CSV: time, V, I, stimulus | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium | Phase 2+ |
+| AWC olfactory neuron recordings | Chalasani et al. 2007, *Nature* 450:63-70 | AWC | CSV: time, V, I, odor | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium | Phase 2+ |
+| RIA compartmentalized calcium | Hendricks et al. 2012, *Nature* 487:99-103 | RIA | CSV: time, Ca_proximal, Ca_distal | Supplement or digitize | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2 |
+| AWA calcium action potentials | Liu et al. 2018, *Cell* 175:57-70 | AWA | CSV: time, V, Ca | Supplement data | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2+ |
+| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A |
+| Pharyngeal muscle plateau potentials | Raizen & Avery 1994, *Neuron* 12:483-495 | pm3-pm8 | CSV: time, V (intracellular recording) | Digitize from paper figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A |
+| Electrophysiology training set (~20 neurons) | Goodman lab, Lockery lab, published papers | ~20 neuron classes | CSV: neuron_class, channel, measured_g, source_doi | Curate from multiple papers | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
 
 ### Tier 2: Functional Connectivity
 
-| Dataset | Source Publication | Scale | Format Needed | Acquisition Method | Consumer DD | Priority |
-|---------|-------------------|-------|---------------|-------------------|-------------|----------|
-| Whole-brain functional connectivity (wild-type) | Randi et al. 2023, *Nature* 623:406-414 | 302x302 correlation matrix | NumPy `.npy` | **Already available via `wormneuroatlas` API** — extract and cache locally | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | **Critical** |
-| Whole-brain functional connectivity (unc-31 mutant) | Randi et al. 2023 (same paper, supplemental) | 302x302 | NumPy `.npy` | Via `wormneuroatlas` API (`strain="unc31"`) | [DD010](DD010_Validation_Framework.md) (Tier 4) | High |
-| Signal propagation atlas | Randi et al. 2023 | Directed functional connectivity | NumPy `.npy` | Via `wormneuroatlas` API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High |
-| Whole-brain activity during behavioral states | Atanas et al. 2022, *bioRxiv* | Time series per neuron during dwelling/roaming | HDF5 or CSV | Download from supplement / request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | Medium |
+| Dataset | Source Publication | Scale | Format Needed | Acquisition Method | Consumer DD | Priority | Phase |
+|---------|-------------------|-------|---------------|-------------------|-------------|----------|-------|
+| Whole-brain functional connectivity (wild-type) | Randi et al. 2023, *Nature* 623:406-414 | 302x302 correlation matrix | NumPy `.npy` | **Already available via `wormneuroatlas` API** — extract and cache locally | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A |
+| Whole-brain functional connectivity (unc-31 mutant) | Randi et al. 2023 (same paper, supplemental) | 302x302 | NumPy `.npy` | Via `wormneuroatlas` API (`strain="unc31"`) | [DD010](DD010_Validation_Framework.md) (Tier 4) | High | Phase 1 |
+| Signal propagation atlas | Randi et al. 2023 | Directed functional connectivity | NumPy `.npy` | Via `wormneuroatlas` API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
+| Whole-brain activity during behavioral states | Atanas et al. 2022, *bioRxiv* | Time series per neuron during dwelling/roaming | HDF5 or CSV | Download from supplement / request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 2+ |
 
 ### Tier 3: Behavioral Kinematics
 
-| Dataset | Source Publication | Content | Format Needed | Acquisition Method | Consumer DD | Priority |
-|---------|-------------------|---------|---------------|-------------------|-------------|----------|
-| N2 wild-type locomotion baseline | Schafer lab / Yemini et al. 2013, *Nat Methods* 10:877-879 | Speed, wavelength, frequency, amplitude | WCON (Worm Tracker Commons) | Download from [wormbase.org/tools/tracker](https://www.wormbase.org/) or Open Worm Movement Database | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md) | **Critical** |
-| unc-2 (Cav2) mutant locomotion | Schafer lab | Reduced speed, altered gait | WCON | Same source as above | [DD010](DD010_Validation_Framework.md) (Tier 4) | High |
-| N2 behavioral phenotype statistics | Yemini et al. 2013 | Population means, CVs for ~700 features | CSV from supplement | Download supplementary data | [DD010](DD010_Validation_Framework.md) (±15% threshold grounding) | High |
-| Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High |
-| Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium |
-| Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD018](DD018_Egg_Laying_System_Architecture.md) | Medium |
-| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High |
-| Foraging behavior decomposition | Flavell et al. 2020, *Genetics* 216:315-332 | Dwelling/roaming state durations, transition rates | CSV: state, duration, transition_probability | Digitize from paper or request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Medium |
+| Dataset | Source Publication | Content | Format Needed | Acquisition Method | Consumer DD | Priority | Phase |
+|---------|-------------------|---------|---------------|-------------------|-------------|----------|-------|
+| N2 wild-type locomotion baseline | Schafer lab / Yemini et al. 2013, *Nat Methods* 10:877-879 | Speed, wavelength, frequency, amplitude | WCON (Worm Tracker Commons) | Download from [wormbase.org/tools/tracker](https://www.wormbase.org/) or Open Worm Movement Database | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A |
+| unc-2 (Cav2) mutant locomotion | Schafer lab | Reduced speed, altered gait | WCON | Same source as above | [DD010](DD010_Validation_Framework.md) (Tier 4) | High | Phase 1 |
+| N2 behavioral phenotype statistics | Yemini et al. 2013 | Population means, CVs for ~700 features | CSV from supplement | Download supplementary data | [DD010](DD010_Validation_Framework.md) (±15% threshold grounding) | High | Phase A |
+| Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High | Phase A |
+| Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A |
+| Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD018](DD018_Egg_Laying_System_Architecture.md) | Medium | Phase 3 |
+| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A |
+| Foraging behavior decomposition | Flavell et al. 2020, *Genetics* 216:315-332 | Dwelling/roaming state durations, transition rates | CSV: state, duration, transition_probability | Digitize from paper or request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Medium | Phase 2 |
+| Chemotaxis behavioral data | Iino & Yoshida 2009, Bargmann & Horvitz 1991 | Chemotaxis assay | CSV: chemotaxis index, trajectory data | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
+| Thermotaxis behavioral data | Hedgecock & Russell 1975, Mori & Ohshima 1995 | Thermotaxis assay | CSV: isothermal tracking, cultivation temp preference | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
+| B-class motor neuron stretch response | Wen et al. 2012 | DB, VB neurons | Calcium imaging (DB, VB response to body bending) | Extract from paper | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Medium | Phase 2 |
 
 ### Tier 4: Causal / Interventional
 
-| Dataset | Source Publication | Intervention | Expected Phenotype | Format Needed | Consumer DD | Priority |
-|---------|-------------------|-------------|-------------------|---------------|-------------|----------|
-| Touch neuron ablation | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High |
-| Pharyngeal neuron ablation | Avery & Horvitz 1989, *Neuron* 3:473-485 | Laser killing of pharyngeal neurons | Pumping persists (semi-autonomous) | CSV: ablated_neurons, pumping_frequency | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium |
-| Neuropeptide knockouts (FLP, NLP) | Li et al. 1999; Rogers et al. 2003 | Gene deletion | Altered locomotion | CSV: genotype, speed, reversal_rate | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | High |
-| unc-103 loss-of-function | Collins & Koelle 2013, *J Neurosci* 33:761-775 | ERG channel removal from vm2 | Constitutive egg-laying | CSV: genotype, egg_count, bout_pattern | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium |
-| egl-1 loss-of-function | Trent et al. 1983, *Genetics* 104:619-647 | HSN cell death | Egg-laying defective | CSV: genotype, phenotype_class | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium |
-| Optogenetic single-neuron activation | Leifer et al. 2011, *Nat Methods* 8:147-152 | Light activation of specific neurons | Stimulus-specific behavioral response | CSV: neuron, stimulus, behavior | [DD010](DD010_Validation_Framework.md) | Low (Phase 3+) |
+| Dataset | Source Publication | Intervention | Expected Phenotype | Format Needed | Consumer DD | Priority | Phase |
+|---------|-------------------|-------------|-------------------|---------------|-------------|----------|-------|
+| Touch neuron ablation | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High | Phase 2 |
+| Pharyngeal neuron ablation | Avery & Horvitz 1989, *Neuron* 3:473-485 | Laser killing of pharyngeal neurons | Pumping persists (semi-autonomous) | CSV: ablated_neurons, pumping_frequency | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
+| Neuropeptide knockouts (FLP, NLP) | Li et al. 1999; Rogers et al. 2003 | Gene deletion | Altered locomotion | CSV: genotype, speed, reversal_rate | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | High | Phase 2 |
+| unc-103 loss-of-function | Collins & Koelle 2013, *J Neurosci* 33:761-775 | ERG channel removal from vm2 | Constitutive egg-laying | CSV: genotype, egg_count, bout_pattern | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
+| egl-1 loss-of-function | Trent et al. 1983, *Genetics* 104:619-647 | HSN cell death | Egg-laying defective | CSV: genotype, phenotype_class | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
+| Optogenetic single-neuron activation | Leifer et al. 2011, *Nat Methods* 8:147-152 | Light activation of specific neurons | Stimulus-specific behavioral response | CSV: neuron, stimulus, behavior | [DD010](DD010_Validation_Framework.md) | Low (Phase 3+) | Phase 3+ |
 
 ### Connectome & Molecular (Supporting)
 
-| Dataset | Source | Content | Format Needed | Acquisition Method | Consumer DD | Status |
-|---------|--------|---------|---------------|-------------------|-------------|--------|
-| Synaptic + gap junction connectome | Cook et al. 2019, *Nature* 571:63-71 | Adjacency matrices | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available |
-| Developmental connectomes | Witvliet et al. 2021, *Nature* 596:257-261 | 8 animals L1-adult | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available |
-| Neuropeptidergic connectome | Ripoll-Sanchez et al. 2023, *Neuron* 111:3570-3589 | 31,479 interactions | CSV + **in `cect`** | Supplement Table S1 + ConnectomeToolbox | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available |
-| CeNGEN L4 expression | Taylor et al. 2021, *Cell* 184:4329-4347 | 128 classes x 20,500 genes | CSV (TPM) via `wormneuroatlas` | API or cengen.org download | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Available |
-| WBbt cell ontology | WormBase | 959 somatic cell IDs | OWL/OBO | WormBase download | [DD004](DD004_Mechanical_Cell_Identity.md) | Available |
-| 3D nuclear positions | Long et al. 2009, *Nat Methods* 6:667-672 | 357 nuclei at L1 | CSV: cell_name, x, y, z | Supplement | [DD004](DD004_Mechanical_Cell_Identity.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Needs acquisition |
-| NeuroPAL neuron ID atlas | Yemini et al. 2021, *Cell* 184:272-288 | Color atlas for all neurons | Reference images + ID mapping | Published with reagents | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Reference only |
+| Dataset | Source | Content | Format Needed | Acquisition Method | Consumer DD | Status | Phase |
+|---------|--------|---------|---------------|-------------------|-------------|--------|-------|
+| Synaptic + gap junction connectome | Cook et al. 2019, *Nature* 571:63-71 | Adjacency matrices | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
+| Developmental connectomes | Witvliet et al. 2021, *Nature* 596:257-261 | 8 animals L1-adult | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
+| Neuropeptidergic connectome | Ripoll-Sanchez et al. 2023, *Neuron* 111:3570-3589 | 31,479 interactions | CSV + **in `cect`** | Supplement Table S1 + ConnectomeToolbox | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 2 |
+| CeNGEN L4 expression | Taylor et al. 2021, *Cell* 184:4329-4347 | 128 classes x 20,500 genes | CSV (TPM) via `wormneuroatlas` | API or cengen.org download | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Available | Phase 1 |
+| WBbt cell ontology | WormBase | 959 somatic cell IDs | OWL/OBO | WormBase download | [DD004](DD004_Mechanical_Cell_Identity.md) | Available | Phase 4 |
+| 3D nuclear positions | Long et al. 2009, *Nat Methods* 6:667-672 | 357 nuclei at L1 | CSV: cell_name, x, y, z | Supplement | [DD004](DD004_Mechanical_Cell_Identity.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Needs acquisition | Phase 2 |
+| NeuroPAL neuron ID atlas | Yemini et al. 2021, *Cell* 184:272-288 | Color atlas for all neurons | Reference images + ID mapping | Published with reagents | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Reference only | Reference |
+| Ion channel gene list | WormBase, CeNGEN | ~100 ion channel genes | CSV: gene_symbol, channel_family, neuroml_model | Curate from WormBase | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
+
+### Implementation & Reference Datasets
+
+These datasets are inputs to model building (not validation). They are included here as the canonical inventory so there is a single source of truth for all datasets across all phases.
+
+| Dataset | Source | Content | Format | Consumer DD | Status | Phase |
+|---------|--------|---------|--------|-------------|--------|-------|
+| **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | Cell-type-specific expression for non-neural cells | CSV (subset of L4 expression) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md) | Available (filter CeNGEN L4 by cell type) | Phase 3 |
+| **CE_locomotion stretch receptor model** | [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) | C++ reference implementation (StretchReceptor.cpp) | C++ source | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Available (repo active 2026-02-18) | Phase 2 |
+| **BAAIWorm NMODL ion channel files and SWC morphology data** | [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0, Zenodo: [10.5281/zenodo.13951773](https://doi.org/10.5281/zenodo.13951773) | NMODL (.mod) + SWC (.swc) for multicompartmental neurons | NMODL + SWC | [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Available (open-source) | Phase 2 |
+| **Virtual Worm Blender meshes** | Blender2NeuroML repo (Grove & Sternberg 2012) | 688 anatomical meshes, ~1.6M vertices | .blend file | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Available (Virtual_Worm_February_2012.blend) | Phase 4 |
+| **Witvliet 2021 cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions per cell | OBJ or STL per cell | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs extraction/conversion from EM data | Phase 4 |
+| **Cell-type mechanical properties** | Literature review (biomechanics) | Elasticity, adhesion per tissue type | CSV: cell_type, elasticity_mult, adhesion_strength | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs curation from biomechanics literature | Phase 4 |
+| **Ion channels with known kinetics** | PDB + electrophysiology literature | ~50-100 channels with measured HH parameters | CSV: channel, structure, V_half, k, tau | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Needs curation | Phase A |
+| **C. elegans ion channel sequences** | WormBase | All C. elegans ion channel protein sequences | FASTA | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Available | Phase A |
+| **SPH simulation training set** | Generate from Sibernetic | 500+ runs: muscle activation to trajectory pairs | HDF5 | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (surrogate) | Generate in Phase 3 (~2,500 GPU-hours) | Phase 3 |
+| **Sensory neuron calcium imaging** | Suzuki 2003/2008, Chalasani 2007 | Stimulus to Ca response curves | CSV | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory) | Extract from papers | Phase 3 |
+
+### Projected Datasets (Phases 5-7)
+
+These datasets are projected needs for future phases. They will be specified in detail when their parent DDs are written.
+
+| Dataset | Phase | Consumer DD | Status |
+|---------|-------|-------------|--------|
+| Biochemical rate constants (PLC activity, cAMP degradation, PKA/PKC kinetics) | Phase 5 | Intracellular Signaling (TBD) | May be predicted via BioEmu-1 + Boltz-2 |
+| Protein abundance (proteomics for *C. elegans* neurons/muscles) | Phase 5 | Intracellular Signaling (TBD) | Needs proteomics data |
+| Calcium imaging with subcellular resolution (ER, mitochondria, plasma membrane) | Phase 5 | Intracellular Signaling (TBD) | Future experimental technique |
+| *C. elegans* GPCR-G protein coupling specificity | Phase 5 | Intracellular Signaling (TBD) | Partially available from WormBase |
+| Witvliet series connectomes (8 stages) | Phase 6 | Developmental Modeling (TBD) | Available via `cect` WitvlietDataReader1-8 |
+| CeNGEN L1 expression | Phase 6 | Developmental Modeling (TBD) | Available but less mature than L4 |
+| Packer 2019 embryonic scRNA-seq | Phase 6 | Developmental Modeling (TBD) | Needs ingestion |
+| Developmental behavioral data (L1-L4 locomotion, feeding) | Phase 6 | Developmental Modeling (TBD) | Needs curation |
+| DevoWorm embryogenetic connectome | Phase 6 | Developmental Modeling (TBD) | Available (open-source) |
+| DevoWorm differentiation trees | Phase 6 | Developmental Modeling (TBD) | Available |
+| Cook 2019 male connectome | Phase 7 | Male-Specific Modeling (TBD) | Available via `cect` |
+| Male behavioral data (mating assays) | Phase 7 | Male-Specific Modeling (TBD) | Needs curation |
+| Male-specific anatomy (tail SPH model) | Phase 7 | Male-Specific Modeling (TBD) | Needs creation |
 
 ---
 
@@ -178,6 +220,8 @@ A root `checksums.sha256` file records the SHA-256 hash of every data file. The 
 
 ## Acquisition Priorities
 
+Acquisition priorities align with the [Phase Roadmap](DD_PHASE_ROADMAP.md) implementation schedule. Datasets are prioritized within each phase by blocking impact.
+
 ### Phase A (Weeks 1-4) — Must Have
 
 These datasets are blocking for the two critical validation tiers (Tier 2 and Tier 3):
@@ -203,8 +247,8 @@ These datasets are blocking for the two critical validation tiers (Tier 2 and Ti
 
 ### Phase 2+ — Nice to Have
 
-14. **Hendricks 2012 RIA compartmentalized calcium** — For [DD001](DD001_Neural_Circuit_Architecture.md) Level E validation.
-15. **Liu 2018 AWA calcium data** — For [DD001](DD001_Neural_Circuit_Architecture.md) Level E validation.
+14. **Hendricks 2012 RIA compartmentalized calcium** — For [DD001](DD001_Neural_Circuit_Architecture.md) Level D validation.
+15. **Liu 2018 AWA calcium data** — For [DD001](DD001_Neural_Circuit_Architecture.md) Level D validation.
 16. **Atanas 2022 whole-brain behavioral states** — For [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) state transition validation.
 17. **Optogenetic perturbation data** (Leifer, Randi) — As published datasets become available.
 18. **Hilliard 2002 ASH, Chalasani 2007 AWC** — For [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration training set expansion.

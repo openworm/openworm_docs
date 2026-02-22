@@ -341,7 +341,7 @@ The `c302_Sibernetic` integration script:
 
 ### If Detailed Crossbridge Mechanics Become Necessary:
 
-1. **Create a new Level E cell type** with crossbridge state variables (attached, detached, power stroke, etc.).
+1. **Create a new Level D cell type** with crossbridge state variables (attached, detached, power stroke, etc.).
 2. **Implement as a LEMS ComponentType extension** rather than modifying the base GenericMuscleCell.
 3. **Provide [Ca²⁺]ᵢ → force mapping** that preserves the Sibernetic interface.
 4. **Validate against isometric force recordings** if such data become available for *C. elegans*.

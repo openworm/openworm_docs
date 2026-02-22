@@ -439,7 +439,7 @@ python scripts/benchmark_improvement.py \
 
 7. **Channel post-translational modifications:** Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.
 
-8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models.
+8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models.
 
 ---
 
@@ -449,7 +449,7 @@ The current power-law expression-to-conductance pipeline is a necessary first st
 
 1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD025](DD025_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
 2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
-3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models
+3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models
 
 Each stage preserves backward compatibility with earlier stages via the `openworm.yml` configuration system.
 
@@ -625,7 +625,7 @@ Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assum
 
 CeNGEN L1 data exist but are less mature. Adult and dauer expression are unavailable. Developmental changes in channel expression are not captured.
 
-**Future work:** Integrate CeNGEN L1 when validated. Use [Packer et al. 2019](https://doi.org/10.1126/science.aax1971) embryonic atlas for earlier stages.
+**Future work:** Integrate CeNGEN L1 when validated. Use [Packer et al. 2019](https://doi.org/10.1126/science.aax1971) embryonic atlas for earlier stages. The [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built differentiation trees and embryogenetic connectome analyses that map temporal dynamics of cell-type specification — these complement CeNGEN's static snapshot by adding the developmental dimension (see [Phase 6](DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)).
 
 ### Issue 3: Post-Transcriptional Regulation
 
