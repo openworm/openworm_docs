@@ -66,6 +66,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Movement Toolbox Revival | Tier 3 validation (8 tasks, 33 hours) |
 | [DD012](DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
 | [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
+| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Foundation Model Channel Kinetics | Predicted ion channel kinetics from sequence (parallel, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
 
 ### Phase 1: Cell-Type Differentiation ⚠️
 
@@ -104,7 +105,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal System | 63 cells, 3-4 Hz pumping |
 | [DD009](DD009_Intestinal_Oscillator_Model.md) | Intestinal Oscillator | 20 cells, 50s defecation |
 | [DD018](DD018_Egg_Laying_System_Architecture.md) | Egg-Laying System | 28-cell circuit, two-state |
-| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid ML | Differentiable sim, 1000× speedup |
+| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid ML | Differentiable sim, 1000× speedup (Component 3 extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
 
 ### Phase 4: Complete Organism ⚠️
 
@@ -124,7 +125,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in this [openworm_docs repository](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents).
-    **Total:** 25 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD024](DD024_Validation_Data_Acquisition_Pipeline.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+    **Total:** 26 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ### By Topic
 
@@ -153,7 +154,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 [DD011](DD011_Contributor_Progression_Model.md) (contributor progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC process), [DD015](DD015_AI_Contributor_Model.md) (AI contributors)
 
 **Hybrid/Advanced:**
-[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid)
+[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model channel kinetics)
 
 ---
 
@@ -216,7 +217,8 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 ### Hybrid & Advanced
 
-- **Mechanistic-ML:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (differentiable simulation, SPH surrogate, foundation model→params, learned sensory transduction)
+- **Mechanistic-ML:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (differentiable simulation, SPH surrogate, learned sensory transduction)
+- **Foundation Model Kinetics:** [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (protein sequence → ion channel HH parameters, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ---
 

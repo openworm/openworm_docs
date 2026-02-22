@@ -12,7 +12,7 @@
 
 ## TL;DR
 
-When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The four components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, (3) a foundation model pipeline mapping gene sequences to ODE parameters, and (4) learned sensory transduction to close the stimulus-response loop.
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A/Phase 1.
 
 ## Goal & Success Criteria
 
@@ -31,7 +31,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 - Framework specification document (this DD)
 - Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
 - Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`)
-- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — ESM/AlphaFold to HH parameters
+- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — **Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md)**
 - Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
 - ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
 - Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
@@ -49,7 +49,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 |----------|--------|
 | **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (3) Foundation model → ODE parameter pipeline, (4) Learned sensory transduction module |
+| **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (4) Learned sensory transduction module. Component 3 (foundation model → ODE parameters) extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) |
 | **Success metric** | Differentiable model matches [DD010](DD010_Validation_Framework.md) Tier 2+3 validation within ±5% of reference NEURON/jNML; SPH surrogate achieves 1000x speedup with <5% trajectory error; auto-fitted parameters outperform hand-tuned on [DD010](DD010_Validation_Framework.md) metrics |
 | **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd017` |
 | **Config toggle** | `ml.differentiable_backend: true`, `ml.sph_surrogate: true`, `ml.sensory_model: learned` in `openworm.yml` |
@@ -452,119 +452,13 @@ for activations, trajectories in training_data:
 
 ### Component 3: Foundation Model → ODE Parameter Pipeline
 
-#### Problem
+**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics).**
 
-[DD001](DD001_Neural_Circuit_Architecture.md) uses the same generic HH parameters for all 302 neurons. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes differentiating via CeNGEN single-cell transcriptomics, but the mapping from mRNA transcript counts to functional conductance densities is a hard, unsolved problem. The current plan ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) proposes a hand-crafted linear mapping:
+Component 3 was promoted from DD017 Phase 3 to a standalone DD in Phase A/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
 
-```
-g_max(neuron_class, channel) = baseline_g * expression_level(neuron_class, channel) / max_expression(channel)
-```
+See [DD025](DD025_Protein_Foundation_Model_Pipeline.md) for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.
 
-This is biologically naive — mRNA levels don't linearly predict protein abundance, protein abundance doesn't linearly predict functional conductance, and post-translational modification, trafficking, and localization all intervene.
-
-#### Solution: ML Prediction Pipeline
-
-Use protein language models and structure predictors to build a more principled (though still approximate) pipeline:
-
-```
-Step 1: Gene sequence → Protein structure
-        Tool: ESM3 (CZI) or AlphaFold (DeepMind)
-        Input: C. elegans ion channel gene sequences (from WormBase)
-        Output: Predicted 3D protein structures
-
-Step 2: Protein structure → Channel kinetics
-        Tool: ML predictor (trained on channels with known kinetics)
-        Input: Predicted structure + known electrophysiology database
-        Output: Predicted HH parameters (V_half, k, tau for each gate)
-
-Step 3: Transcript level → Conductance density
-        Tool: ML predictor (trained on cells with known conductances)
-        Input: CeNGEN expression level + predicted channel kinetics
-        Output: Predicted g_max per channel per neuron class
-
-Step 4: Feed into [DD001](DD001_Neural_Circuit_Architecture.md) HH ODEs
-        Output parameters go directly into NeuroML (or differentiable backend)
-```
-
-#### Specific Foundation Models (from [bio.rodeo](https://bio.rodeo/models))
-
-The pipeline above is enabled by a rapidly expanding ecosystem of protein foundation models. The most relevant for ion channel kinetics prediction:
-
-| Step | Model | What It Provides | Advantage Over Generic Tools |
-|------|-------|-----------------|------------------------------|
-| 1 (Structure) | [AlphaFold 3](https://github.com/google-deepmind/alphafold3) | Protein-ion complex structures | Predicts bound ions/lipids critical for channel selectivity |
-| 1 (Structure) | [Boltz-2](https://github.com/jwohlwend/boltz) | Open-source, single-GPU | Matches AF3 accuracy without cloud dependency |
-| 1 (Structure) | [Protenix](https://github.com/bytedance/protenix) | Apache 2.0 AF3 reproduction | No licensing restrictions for integration |
-| 1→2 (Dynamics) | [BioEmu-1](https://github.com/microsoft/BioEmu) | Conformational ensembles at 100,000x MD speed | Directly predicts gating transitions (open ↔ closed states) |
-| 2 (Embeddings) | [ESM Cambrian](https://github.com/evolutionaryscale/esm) | Protein language model (300M-6B params) | Outperforms ESM-2; captures functional properties from sequence alone |
-| 2 (Embeddings) | [SaProt](https://github.com/westlake-repl/saprot) | Structure-aware protein LM | Combines sequence + 3Di structural tokens; better for mutation effects |
-
-**BioEmu-1 is particularly significant** for Step 2: instead of training a separate ML predictor on the small dataset of ~50-100 channels with known kinetics, BioEmu-1 can directly simulate the gating dynamics of any predicted channel structure and extract V_half, slope, and tau from the conformational landscape. This converts the problem from "learn kinetics from sparse data" to "simulate kinetics from abundant structures."
-
-#### Why This Is Strategically Important
-
-This pipeline creates a direct dependency on CZI's ESM3 and DeepMind's AlphaFold. The pitch to funders becomes:
-
-> "We don't compete with your foundation models — we *consume* them. Your ESM3 predicts our channel kinetics. Our mechanistic simulation is the testbed that validates whether your predictions produce real organism behavior. Fund us, and we provide the multi-scale benchmark that proves your models work."
-
-#### Training Data for Step 2
-
-Approximately 50-100 ion channels across species have both:
-
-- Known 3D structures (from X-ray crystallography or cryo-EM)
-- Known HH kinetic parameters (from patch-clamp electrophysiology)
-
-This is a small dataset but focused. Transfer learning from protein language model representations helps. The key channels to get right:
-
-| Channel Family | C. elegans Gene | Mammalian Homolog | Known Kinetics? |
-|---------------|-----------------|-------------------|-----------------|
-| Voltage-gated K+ (Kv) | egl-36, kvs-1, shk-1 | Kv1-Kv12 | Yes (mammalian) |
-| Voltage-gated Ca2+ (Cav) | egl-19, unc-2, cca-1 | Cav1-Cav3 | Yes (mammalian) |
-| Ca-activated K+ (KCa) | slo-1, slo-2 | BK, SK | Yes |
-| Leak (K2P) | twk-* family | TASK, TREK | Partial |
-| TRP channels | osm-9, ocr-* | TRPV, TRPA | Partial |
-
-#### Implementation
-
-```python
-import esm  # Meta/CZI protein language model
-
-class ChannelKineticsPredictor(torch.nn.Module):
-    """Predicts HH parameters from protein sequence embedding."""
-
-    def __init__(self):
-        super().__init__()
-        self.esm_model = esm.pretrained.esm2_t33_650M_UR50D()
-        self.predictor = torch.nn.Sequential(
-            torch.nn.Linear(1280, 256),  # ESM2 embedding dim
-            torch.nn.ReLU(),
-            torch.nn.Linear(256, 64),
-            torch.nn.ReLU(),
-            torch.nn.Linear(64, 8),  # V_half_m, k_m, tau_m, V_half_h, k_h, tau_h, g_max_scale, E_rev
-        )
-
-    def forward(self, protein_sequence):
-        embedding = self.esm_model(protein_sequence)
-        hh_params = self.predictor(embedding.mean(dim=1))  # Pool over residues
-        return hh_params
-
-# Predict kinetics for C. elegans K_slow channel (egl-36)
-egl36_sequence = load_wormbase_sequence("egl-36")
-predicted_params = predictor(egl36_sequence)
-# → V_half_m=-22mV, k_m=5.3, tau_m=12ms, ...
-# Feed directly into [DD001](DD001_Neural_Circuit_Architecture.md) HH model
-```
-
-#### Validation
-
-Predicted parameters are validated in two ways:
-
-1. **Cross-validation on known channels:** Train on 80% of channels with known kinetics, predict on 20%, compare predicted vs. measured HH parameters.
-2. **End-to-end validation:** Insert predicted per-neuron-class parameters into the full simulation. Run [DD010](DD010_Validation_Framework.md) validation. If Tier 2 functional connectivity improves over generic parameters, the pipeline is adding value.
-
-#### Repository location
-
-`openworm/openworm-ml/foundation_params/`
+**Repository location:** `openworm/openworm-ml/foundation_params/` (unchanged)
 
 ---
 
@@ -737,8 +631,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 
 ### For the Foundation Model Pipeline (Component 3)
 
-1. **Cross-validation:** Leave-one-out cross-validation on known channels must achieve < 30% relative error on HH parameters.
-2. **End-to-end:** Predicted parameters inserted into the full simulation must not degrade [DD010](DD010_Validation_Framework.md) Tier 2 or Tier 3 scores below acceptance thresholds.
+**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md).** See DD025 Quality Criteria for cross-validation and end-to-end validation requirements.
 
 ### For the Sensory Model (Component 4)
 
@@ -783,7 +676,7 @@ When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduc
 | HH equations and parameters (reference) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | All ODE parameters | NeuroML XML (parsed) | mixed |
 | Connectome topology | [DD001](DD001_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Adjacency matrices | Python API / CSV | Neuron pairs + weights |
 | CeNGEN expression data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-class transcript levels | CSV | TPM |
-| Ion channel gene sequences | WormBase | Protein sequences | FASTA | amino acids |
+| Ion channel gene sequences | WormBase — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Protein sequences | FASTA | amino acids |
 | SPH simulation dataset (for surrogate training) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | (muscle_activation, trajectory) pairs | HDF5 | mixed |
 | Sensory neuron calcium imaging data | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | (stimulus, calcium_response) pairs | CSV | µM, °C, mM |
 | [DD010](DD010_Validation_Framework.md) validation targets | [DD010](DD010_Validation_Framework.md) | Experimental baselines | NumPy / CSV | mixed |
@@ -794,7 +687,7 @@ When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduc
 |--------|------------|----------|--------|-------|
 | Auto-fitted ODE parameters | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | Per-neuron-class conductances, time constants | YAML / JSON parameter file | mixed |
 | SPH surrogate predictions | [DD010](DD010_Validation_Framework.md) (fast validation) | Body trajectory | WCON-compatible | µm |
-| Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters | YAML | mV, ms, mS/cm² |
+| Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | YAML | mV, ms, mS/cm² |
 | Sensory current injections | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-sensory-neuron I_ext(t) | Time series (PyTorch tensor) | nA |
 | Gradient information | Internal | ∂(validation_loss) / ∂(parameter) | PyTorch .grad tensors | mixed |
 
@@ -820,10 +713,10 @@ ml:
   surrogate_model: "models/sph_surrogate_v1.pt"
   surrogate_fallback_threshold: 0.15  # Fall back to SPH if error > 15%
 
-  # Component 3: Foundation model parameters
-  foundation_params: false         # Use ESM/AlphaFold-predicted channel kinetics
-  esm_model: "esm2_t33_650M"
-  kinetics_predictor: "models/channel_kinetics_v1.pt"
+  # Component 3: Foundation model parameters — see DD025 for full specification
+  foundation_params: false         # Use ESM/AlphaFold-predicted channel kinetics (DD025)
+  esm_model: "esm2_t33_650M"      # DD025
+  kinetics_predictor: "models/channel_kinetics_v1.pt"  # DD025
 
   # Component 4: Learned sensory model
   sensory_model: "generic"         # "generic" (current I_ext injection), "learned"
@@ -887,11 +780,9 @@ ml:
 
 **Milestone:** Full simulation loop with surrogate runs in < 1 minute.
 
-### Phase D: Foundation Model Pipeline (Weeks 17-24)
+### Phase D: Foundation Model Pipeline
 
-1. **Week 17-18:** Set up ESM2 inference pipeline for C. elegans channel sequences
-2. **Week 19-22:** Train kinetics predictor on known channels
-3. **Week 23-24:** Generate per-neuron-class parameter predictions, validate end-to-end
+**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and moved to Phase A/Phase 1.** See DD025 Implementation Roadmap for the detailed timeline (~20 hours Phase A, ~12 hours Phase 1).
 
 ### Phase E: Sensory Transduction (Weeks 25-32)
 

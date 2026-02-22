@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
 
 ---
 
@@ -283,18 +283,15 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 ## Alternatives Considered
 
-### 1. AlphaFold3 + Molecular Dynamics to Predict Channel Kinetics
+### 1. Protein Foundation Models for Channel Kinetics Prediction
 
-**Description:** Use AlphaFold to predict 3D structures of all *C. elegans* ion channels, then run molecular dynamics simulations to extract gating kinetics (activation curves, time constants).
+**Description:** Use protein foundation models (AlphaFold 3, BioEmu-1, ESM Cambrian) to predict 3D structures of *C. elegans* ion channels, then extract gating kinetics from conformational dynamics.
 
-**Rejected (for now) because:**
+**Promoted to parallel track — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md).**
 
-- Computationally expensive (days-weeks per channel)
-- MD-to-HH parameter conversion is non-trivial and error-prone
-- Published kinetics exist for many channel families; borrow from orthologs
-- CeNGEN expression-based scaling is faster and requires only transcriptomic data
+Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD025 runs cross-validation during Phase A and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
 
-**When to reconsider:** If cell-type-specific electrophysiology becomes available for validation, or if a channel has no known ortholog kinetics.
+**Relationship to DD005:** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
 
 ### 2. Direct Electrophysiology for All 128 Neuron Classes
 
@@ -311,7 +308,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 **Description:** Train a neural network (e.g., gradient boosting or transformer) to predict conductance densities from full expression profiles, using the 20 neurons with electrophysiology as training data.
 
-**Deferred (but promising) because:**
+**Deferred (but promising; see also [DD025](DD025_Protein_Foundation_Model_Pipeline.md) for structure-based approach):**
 
 - Only 20 training examples (neurons with electrophysiology) may be insufficient
 - Requires careful hyperparameter tuning and cross-validation
@@ -450,7 +447,7 @@ python scripts/benchmark_improvement.py \
 
 The current power-law expression-to-conductance pipeline is a necessary first step. It uses the best available systematic data (CeNGEN) to move beyond the generic neuron template. Future phases will refine this in stages:
 
-1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates)
+1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD025](DD025_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
 2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
 3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models
 
@@ -620,7 +617,7 @@ head -20 ion_channels.csv
 
 Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assumes the expression→conductance relationship is conserved. This may fail for highly divergent cell types (e.g., sensory neurons with specialized channels).
 
-**Mitigation:** Flag inferred cell types in metadata. Prioritize experimental validation for high-impact neurons (command interneurons: AVA, AVB, AVD, AVE; motor neurons: DA, DB, VA, VB).
+**Mitigation:** [DD025](DD025_Protein_Foundation_Model_Pipeline.md) expands the effective calibration set by providing structure-based kinetics predictions for channels lacking electrophysiology. For neuron classes where the expression→conductance power law fails, DD025 predictions serve as fallback. Flag inferred cell types in metadata. Prioritize experimental validation for high-impact neurons (command interneurons: AVA, AVB, AVD, AVE; motor neurons: DA, DB, VA, VB).
 
 **CODE REUSE:** The `openworm/ChannelWorm` database may expand the training set beyond 20 neurons if it contains additional patch clamp sources not yet incorporated into [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s curated list.
 
@@ -655,7 +652,7 @@ The calibration training set (Issue 1 above) is limited to ~20 neuron types with
 - **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** / **[Boltz-2](https://github.com/jwohlwend/boltz)**: Predict 3D structures of all *C. elegans* ion channels from sequence, including ion coordination sites that determine selectivity and gating
 - **[BioEmu-1](https://github.com/microsoft/BioEmu)** (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone
 
-This pipeline could expand the calibration training set from ~20 neurons (patch-clamp limited) toward all 128 classes (sequence-limited only). See [DD017 Component 3](DD017_Hybrid_Mechanistic_ML_Framework.md) for the full implementation specification.
+This pipeline is now specified as a standalone Design Document: [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
 
 **Validation step:** For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.
 

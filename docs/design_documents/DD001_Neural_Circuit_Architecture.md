@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
 
 ---
 
@@ -190,7 +190,7 @@ The ~4 generic channels above are a starting point. [DD005](DD005_Cell_Type_Diff
 2. **Conformational dynamics:** [BioEmu-1](https://github.com/microsoft/BioEmu) (Microsoft) simulates ion channel conformational ensembles at 100,000x the speed of molecular dynamics, enabling prediction of gating transitions (open ↔ closed) from which V_half, slope factor, and tau can be extracted
 3. **Sequence embeddings:** [ESM Cambrian](https://github.com/evolutionaryscale/esm) protein language models encode channel sequences into representations that capture functional properties across homologous channel families, enabling transfer from well-characterized mammalian channels to *C. elegans* orthologs
 
-This pipeline is specified in detail in [DD017 Component 3](DD017_Hybrid_Mechanistic_ML_Framework.md) (Foundation Model → ODE Parameter Pipeline). If successful, it would expand the number of neuron classes with predicted kinetics from ~7 (limited by patch-clamp data) to all 128 (limited only by sequence availability).
+This pipeline is specified in detail in [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics). If successful, it would expand the number of neuron classes with predicted kinetics from ~7 (limited by patch-clamp data) to all 128 (limited only by sequence availability).
 
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
