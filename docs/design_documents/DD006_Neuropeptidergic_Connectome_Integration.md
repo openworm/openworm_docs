@@ -210,6 +210,24 @@ Where:
 - k_on = binding rate constant (~10^3 M^-1 s^-1, typical for GPCRs)
 - k_off = unbinding rate constant (~0.1-1 s^-1, giving seconds-to-minutes timescale)
 
+#### Foundation Model-Predicted Binding Affinities
+
+The receptor kinetics above (k_on, k_off, delta_g) currently use uniform default values across all 31,479 peptide-receptor interactions. This is a significant simplification — in reality, binding affinities vary by orders of magnitude across neuropeptide-receptor pairs, and these differences are functionally important (a high-affinity pair activates at picomolar concentrations; a low-affinity pair requires nanomolar).
+
+Protein foundation models from the computational biology ecosystem ([bio.rodeo](https://bio.rodeo/models)) can predict differentiated binding parameters:
+
+- **[Boltz-2](https://github.com/jwohlwend/boltz)** (MIT/Recursion): Jointly predicts protein complex structure AND small-molecule binding affinity, approaching FEP+ (free energy perturbation) accuracy on a single GPU. For each neuropeptide-GPCR pair, Boltz-2 can predict the binding free energy (ΔG_bind), from which k_on/k_off ratios (K_d = k_off/k_on = exp(ΔG_bind/RT)) can be estimated
+- **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** (DeepMind): Predicts peptide-receptor complex structures with atomic accuracy, including binding pose and interface contacts. The predicted binding interface area and contact density correlate with binding affinity
+- **[NatureLM](https://github.com/microsoft/NatureLM)** (Microsoft): Multimodal foundation model treating proteins and small molecules as shared sequence language, enabling cross-modal binding predictions
+
+**Prioritized prediction targets:** The ~150 unique neuropeptide-receptor pairs (from Ripoll-Sánchez 2023) should be ranked by:
+
+1. Connectivity hub neuropeptides (FLP-1, FLP-18, NLP-12 — highest degree in the extrasynaptic network)
+2. Peptides with known behavioral roles (PDF-1 for locomotion state, FLP-18 for feeding)
+3. Peptides involved in the unc-31 validation test (Tier 2b, [DD010](DD010_Validation_Framework.md))
+
+**Validation step:** For the handful of *C. elegans* neuropeptide-receptor pairs with published K_d values (e.g., NLP-12/CKR-2, FLP-18/NPR-5), compare foundation-model-predicted affinities against measured values. If predictions are within 10-fold of measured K_d, adopt predicted affinities for the remaining pairs.
+
 **Conductance modulation:**
 
 Activated receptors modulate existing ion channels:

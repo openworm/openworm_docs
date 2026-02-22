@@ -636,6 +636,29 @@ mRNA levels ≠ protein levels ≠ surface channel density. The calibration impl
 
 **Future work:** If proteomics data become available (currently scarce), refine calibration using protein abundance instead of transcript abundance.
 
+### Opportunity: Biological Foundation Models for Gap-Filling
+
+Three categories of foundation models from the broader computational biology ecosystem ([bio.rodeo](https://bio.rodeo/models)) could address the data gaps above:
+
+#### Single-Cell Foundation Models (Cross-Species Transfer)
+
+- **[TranscriptFormer](https://github.com/CZI-AI/TranscriptFormer)** (Chan Zuckerberg Initiative): Trained on 112 million cells across 12 species spanning 1.5 billion years of evolution. If *C. elegans* is among those species, it has learned cross-species regulatory patterns that could impute missing or noisy CeNGEN expression values. Even if not, its cross-species transfer capabilities could predict expression for poorly-captured neuron classes
+- **[UCE](https://github.com/snap-stanford/UCE)** (Stanford): Zero-shot single-cell model that uses protein language model representations of gene products rather than species-specific training. Could work on *C. elegans* neurons without any *C. elegans*-specific training data — a key advantage for rare or poorly-sequenced cell types
+- **[scPRINT](https://github.com/jkobject/scprint)** (Institut Pasteur): Gene network inference from 50 million cells. Could identify co-regulation patterns between ion channel genes (e.g., if *egl-19* and *unc-2* are always co-expressed, knowing one constrains the other), improving the expression-to-conductance mapping confidence
+
+**Validation step:** Run TranscriptFormer/UCE imputation on the CeNGEN matrix, then compare imputed values against the original measurements for well-characterized neuron classes. If imputed values correlate r > 0.8 with measured values, adopt imputation for under-characterized classes.
+
+#### Protein Structure → Channel Kinetics (Expanding Beyond ~20 Neurons)
+
+The calibration training set (Issue 1 above) is limited to ~20 neuron types with electrophysiology. Protein foundation models offer a complementary route to predict channel kinetics without patch-clamp recordings:
+
+- **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** / **[Boltz-2](https://github.com/jwohlwend/boltz)**: Predict 3D structures of all *C. elegans* ion channels from sequence, including ion coordination sites that determine selectivity and gating
+- **[BioEmu-1](https://github.com/microsoft/BioEmu)** (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone
+
+This pipeline could expand the calibration training set from ~20 neurons (patch-clamp limited) toward all 128 classes (sequence-limited only). See [DD017 Component 3](DD017_Hybrid_Mechanistic_ML_Framework.md) for the full implementation specification.
+
+**Validation step:** For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.
+
 ### Existing Code Resources
 
 **wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):

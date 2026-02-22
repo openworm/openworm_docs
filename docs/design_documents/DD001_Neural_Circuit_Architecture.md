@@ -182,6 +182,16 @@ C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 
 > **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
 
+### Protein Foundation Model Pathway for Channel Kinetics
+
+The ~4 generic channels above are a starting point. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) replaces them with cell-type-specific conductances from CeNGEN transcriptomics, but the mapping from transcript → conductance remains approximate. A complementary approach uses protein foundation models to predict channel kinetics directly from sequence:
+
+1. **Protein structure prediction:** [AlphaFold 3](https://github.com/google-deepmind/alphafold3) or [Boltz-2](https://github.com/jwohlwend/boltz) predict 3D structures of *C. elegans* ion channels (EGL-19, UNC-2, SHL-1, etc.) from amino acid sequence alone, including bound ions and lipids
+2. **Conformational dynamics:** [BioEmu-1](https://github.com/microsoft/BioEmu) (Microsoft) simulates ion channel conformational ensembles at 100,000x the speed of molecular dynamics, enabling prediction of gating transitions (open ↔ closed) from which V_half, slope factor, and tau can be extracted
+3. **Sequence embeddings:** [ESM Cambrian](https://github.com/evolutionaryscale/esm) protein language models encode channel sequences into representations that capture functional properties across homologous channel families, enabling transfer from well-characterized mammalian channels to *C. elegans* orthologs
+
+This pipeline is specified in detail in [DD017 Component 3](DD017_Hybrid_Mechanistic_ML_Framework.md) (Foundation Model → ODE Parameter Pipeline). If successful, it would expand the number of neuron classes with predicted kinetics from ~7 (limited by patch-clamp data) to all 128 (limited only by sequence availability).
+
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
 | **Leak** | Non-gated | 0.005 mS/cm² | -50 mV | None | Ohmic |

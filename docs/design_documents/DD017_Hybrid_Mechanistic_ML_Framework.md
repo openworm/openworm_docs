@@ -36,6 +36,13 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 - ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
 - Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
 
+## Repository & Issues
+
+- **Repository:** `openworm/openworm-ml` (new repo) `[TO BE CREATED]`
+- **Issue label:** `dd017`
+- **Milestone:** Phase 3 — Hybrid ML Framework
+- **Example PR title:** `dd017: differentiable HH backend matches NEURON reference within ±5%`
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -85,7 +92,7 @@ Detailed commands: `[TO BE DEVELOPED as components are implemented]`
 - The ML component registry should provide a dashboard view showing which parameters are ML-derived vs. mechanistic vs. experimentally measured.
 - Auto-fitting convergence curves (loss vs. epoch) should be plottable for debugging and reporting.
 
-## Context
+## Context & Background
 
 ### The Current Approach Works — But Has Real Limitations
 
@@ -149,7 +156,7 @@ The mechanistic ODEs remain the source of truth. ML is used for:
 
 ---
 
-## Decision
+## Technical Approach
 
 ### Component 1: Differentiable Simulation Backend
 
@@ -479,6 +486,21 @@ Step 4: Feed into [DD001](DD001_Neural_Circuit_Architecture.md) HH ODEs
         Output parameters go directly into NeuroML (or differentiable backend)
 ```
 
+#### Specific Foundation Models (from [bio.rodeo](https://bio.rodeo/models))
+
+The pipeline above is enabled by a rapidly expanding ecosystem of protein foundation models. The most relevant for ion channel kinetics prediction:
+
+| Step | Model | What It Provides | Advantage Over Generic Tools |
+|------|-------|-----------------|------------------------------|
+| 1 (Structure) | [AlphaFold 3](https://github.com/google-deepmind/alphafold3) | Protein-ion complex structures | Predicts bound ions/lipids critical for channel selectivity |
+| 1 (Structure) | [Boltz-2](https://github.com/jwohlwend/boltz) | Open-source, single-GPU | Matches AF3 accuracy without cloud dependency |
+| 1 (Structure) | [Protenix](https://github.com/bytedance/protenix) | Apache 2.0 AF3 reproduction | No licensing restrictions for integration |
+| 1→2 (Dynamics) | [BioEmu-1](https://github.com/microsoft/BioEmu) | Conformational ensembles at 100,000x MD speed | Directly predicts gating transitions (open ↔ closed states) |
+| 2 (Embeddings) | [ESM Cambrian](https://github.com/evolutionaryscale/esm) | Protein language model (300M-6B params) | Outperforms ESM-2; captures functional properties from sequence alone |
+| 2 (Embeddings) | [SaProt](https://github.com/westlake-repl/saprot) | Structure-aware protein LM | Combines sequence + 3Di structural tokens; better for mutation effects |
+
+**BioEmu-1 is particularly significant** for Step 2: instead of training a separate ML predictor on the small dataset of ~50-100 channels with known kinetics, BioEmu-1 can directly simulate the gating dynamics of any predicted channel structure and extract V_half, slope, and tau from the conformational landscape. This converts the problem from "learn kinetics from sparse data" to "simulate kinetics from abundant structures."
+
 #### Why This Is Strategically Important
 
 This pipeline creates a direct dependency on CZI's ESM3 and DeepMind's AlphaFold. The pitch to funders becomes:
@@ -723,6 +745,33 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 1. **Stimulus-response match:** Predicted sensory neuron responses within ±20% of published calcium imaging data.
 2. **Behavioral emergence:** At least one emergent behavior (chemotaxis, thermotaxis, or touch avoidance) must qualitatively match experimental observations when sensory model is enabled.
 
+### DCell Validation: Visible Neural Networks as Independent Check
+
+**[DCell](https://github.com/idekerlab/DCell)** (Ideker Lab, UCSD) is a "visible neural network" that embeds the Gene Ontology hierarchy into its architecture — each node in the network corresponds to a biological subsystem, and the connections mirror known biological relationships. It predicts yeast cell growth phenotypes from genotype with interpretable intermediate states.
+
+This is conceptually the same approach OpenWorm takes: making the computational structure mirror biological structure, so internal states are interpretable as biological quantities. DCell provides a key validation strategy for the hybrid ML framework:
+
+#### The DCell Cross-Validation Protocol
+
+1. **Build a *C. elegans* DCell:** Adapt DCell's architecture to use the *C. elegans* Gene Ontology (or a simplified version using the 128 neuron classes from [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as nodes). Train on genotype → behavioral phenotype data (e.g., mutant locomotion phenotypes from WormBase)
+
+2. **Compare predictions:** For each genetic perturbation (ablation, RNAi knockdown, gain-of-function):
+   - Run the OpenWorm mechanistic simulation → predict behavioral change
+   - Run the *C. elegans* DCell → predict behavioral change
+   - Compare both against experimental data
+
+3. **Interpret disagreements:**
+   - **Both agree with experiment:** Mutual validation — the mechanism is captured by both approaches
+   - **OpenWorm correct, DCell wrong:** The mechanistic detail adds value that a data-driven model misses
+   - **DCell correct, OpenWorm wrong:** The mechanistic model has a structural error (wrong connectivity, missing pathway) that DCell's data-driven approach bypasses
+   - **Both wrong:** Missing biology in both models
+
+This provides a fundamentally different validation signal from [DD010](DD010_Validation_Framework.md)'s tier-based approach. DD010 checks "does the output match data?" DCell cross-validation checks "does the *structure* of the model match the *structure* of the biology?" — a deeper test of mechanistic correctness.
+
+#### Why This Matters for the Hybrid Framework
+
+When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduction, surrogate body physics), DCell cross-validation can detect whether the ML component has learned the *right* biological structure or just fitted the training data. If a surrogate model gets the right behavioral output but DCell reveals the wrong intermediate pathway is active, the surrogate has overfit.
+
 ---
 
 ## Integration Contract
@@ -852,7 +901,7 @@ ml:
 
 ---
 
-## Boundaries (Out of Scope)
+## Boundaries (Explicitly Out of Scope)
 
 1. **Replacing the mechanistic core:** ML is used at boundaries, not as the primary model. The HH ODEs, SPH physics, and calcium dynamics remain the source of truth.
 
