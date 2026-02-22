@@ -58,6 +58,8 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 
 **Status:** ✅ **Complete** (but needs containerization work per Phase A)
 
+**Phase Rationale:** These DDs describe **already-implemented** subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and `cect` provides 30+ connectome datasets. They form the working foundation everything else builds on.
+
 **Scope:**
 
 | DD | Title | Implementation Status |
@@ -91,11 +93,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - **Validated against:** [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab kinematic features — locomotion speed, body curvature, wave frequency within ±15% of wild-type N2
 - **Published:** [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
 
+**Cumulative Metrics:** 397 cells (302 neurons + 95 muscles) | 1 neuron class (generic) | 1 coupling loop (neural→body) | 0 organ systems | Tier 3 validated (±15%) | No viewer | 4 DDs implemented
+
 ---
 
 ## Phase A: Infrastructure Bootstrap (Weeks 1-4)
 
 **Status:** ⚠️ **Proposed** — Must complete before modeling phases proceed
+
+**Phase Rationale:** Phase A DDs either (a) provide infrastructure that **all** later phases depend on, or (b) have zero infrastructure dependencies and can run in parallel. Without Docker/CI ([DD013](DD013_Simulation_Stack_Architecture.md)), unified data access ([DD008](DD008_Data_Integration_Pipeline.md)), and working validation ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), contributors can't build, test, or validate. [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) starts validation data digitization immediately. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) has zero infrastructure dependencies and derisks Phase 1's uncertain expression→conductance mapping — BioEmu-1 (100,000x MD speed) made this feasible, and inputs (WormBase sequences, literature kinetics) are available today.
 
 **Scope:**
 
@@ -122,7 +128,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 8. **AI contributor workflow** ([DD015](DD015_AI_Contributor_Model.md)) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates
 9. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
 
-**Milestone:** 🎉 **"Containerized Stack with Automated Validation"**
+**Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 4, late March 2026)*
 
 - **What you run:** `docker compose run quick-test` (completes in <5 min) — builds the full simulation stack, runs a short simulation, checks for crashes
 - **What you see:** Terminal output showing build → simulate → validate pipeline. JSON report with pass/fail on each metric. Video of worm locomotion (no more OOM at >2s).
@@ -153,11 +159,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Recruit Data L4 Maintainer (owns [DD008](DD008_Data_Integration_Pipeline.md) OWMeta revival)
 - Recruit Validation L4 Maintainer (owns [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival)
 
+**Cumulative Metrics:** 397 cells (unchanged — infrastructure phase) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +7 DDs (11 total)
+
 ---
 
 ## Phase 1: Cell-Type Differentiation (Months 1-3)
 
 **Status:** ⚠️ **Ready to Start** (after Phase A complete)
+
+**Phase Rationale:** Phase 1 is the first *modeling* phase — it differentiates the 302 identical neurons into 128 biologically distinct classes. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) is here because it needs CeNGEN data via [DD008](DD008_Data_Integration_Pipeline.md) and validation tools from [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (both Phase A), and because its scientific risk is highest — if expression→conductance mapping fails, better to discover it early. [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md) establish visual infrastructure because months of work with no visual feedback kills contributor engagement. [DD010](DD010_Validation_Framework.md) Tier 2 activates the functional connectivity gate (r > 0.5) so Phase 2 doesn't build on a broken foundation. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) integration feeds foundation model predictions into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration while it's actively running.
 
 **Scope:**
 
@@ -180,7 +190,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 7. **Visual rendering spec** ([DD014.1](DD014.1_Visual_Rendering_Specification.md)) — 37-material color palette, activity-state overlays, 14 reference mockups as acceptance tests
 8. **WormBrowser enhancement** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Click neuron/cell → links to WormAtlas + WormBase on browser.openworm.org (quick win for John White, ~8-16 hrs)
 
-**Milestone:** 🎉 **"Biologically Distinct Neurons"**
+**Milestone:** 🎉 **"Biologically Distinct Neurons"** *(Target: Month 3, June 2026)*
 
 - **What you run:** `docker compose run simulation` then `docker compose up viewer` — open `localhost:8501`
 - **What you see:** 3D viewer with smooth worm body crawling. Toggle "Neurons" layer — 302 neurons appear, colored by class (128 distinct colors). Click AVAL — inspector panel shows its class-specific voltage and calcium traces, visibly different from ASER or AWCL. Toggle "color by class" mode to see the diversity.
@@ -208,11 +218,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - CeNGEN data downloaded and validated
 - Electrophysiology training set curated (20 neurons with measured conductances)
 
+**Cumulative Metrics:** 397 cells (differentiated, not added) | **128** neuron classes | 1 coupling loop | 0 organ systems | Tier 2 validated (r > 0.5) + Tier 3 (±15%) | 2 viewer scales (organism, tissue) | +3 DDs (14 total)
+
 ---
 
 ## Phase 2: Slow Modulation + Closed-Loop Sensory (Months 4-6)
 
 **Status:** ⚠️ **Proposed** (ready after Phase 1)
+
+**Phase Rationale:** Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) requires differentiated neurons from Phase 1 because the 31,479 peptide-receptor interactions are cell-type-specific — modulation on generic neurons would be meaningless. [DD019](DD019_Closed_Loop_Touch_Response.md) needs cell-type-specific MEC-4 channels from [DD005](DD005_Cell_Type_Differentiation_Strategy.md). Both must exist before Phase 3: [DD018](DD018_Egg_Laying_System_Architecture.md) requires serotonergic modulation, and emergent behaviors (chemotaxis, thermotaxis) require sensory input. [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) can proceed in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)/[DD019](DD019_Closed_Loop_Touch_Response.md). DD001 Level D Stage 1 starts with 5 representative multicompartmental neurons to validate the approach before committing to all 302.
 
 **Scope:**
 
@@ -237,7 +251,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 8. **Stretch receptor channel model** ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) — Curvature-gated channels on B-class motor neurons (DB, VB), body curvature readout from SPH
 9. **Viewer enhancements** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Neuropeptide volumetric layer, strain heatmap, reversal event markers, gradient field visualization
 
-**Milestone:** 🎉 **"The Worm Can Feel and Modulate"**
+**Milestone:** 🎉 **"The Worm Can Feel and Modulate"** *(Target: Month 6, September 2026)*
 
 - **What you run:** `docker compose run simulation --config closedloop_touch` then open the viewer
 - **Demo 1 — Tap withdrawal:** Worm crawls forward. At t=5s, anterior tap stimulus fires. Watch: touch receptor neurons (ALM, AVM) activate → command interneurons (AVA, AVD) depolarize → motor neurons reverse → worm reverses direction within <1 second, travels backward ≥1 body length, then resumes forward crawling. Compare: `--config openloop` (same tap, no reversal — the worm is deaf).
@@ -271,11 +285,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Ripoll-Sanchez data downloaded and ingested into ConnectomeToolbox/OWMeta
 - 3D cell positions extracted (for peptide distance-dependent attenuation)
 
+**Cumulative Metrics:** 403 cells (+6 touch neurons) | 128 neuron classes | **2** coupling loops (+body→sensory) | 0 organ systems | **1** modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (18 total)
+
 ---
 
 ## Phase 3: Organ Systems + Hybrid ML (Months 7-12)
 
 **Status:** ⚠️ **Proposed** (ready after Phase 2)
+
+**Phase Rationale:** Phase 3 adds three semi-autonomous organ subsystems and the ML acceleration framework. [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) and [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying) need differentiated parameters from [DD005](DD005_Cell_Type_Differentiation_Strategy.md), and [DD018](DD018_Egg_Laying_System_Architecture.md) specifically requires [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)'s serotonin modulation. [DD009](DD009_Intestinal_Oscillator_Model.md) (intestine) couples to neural circuits via DVB/AVL neurons. All three organ DDs can be implemented in parallel by different contributors. [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (hybrid ML) waits until Phase 3 because: (1) the differentiable backend needs stable ODE equations — porting during Phase 1-2 equation changes wastes effort, (2) the SPH surrogate needs 500+ training runs that go stale if body dynamics change, and (3) learned sensory models are only appropriate *after* the mechanistic approach (Phase 2) has been tried — using ML before mechanism contradicts OpenWorm's interpretability commitment.
 
 **Scope:**
 
@@ -295,7 +313,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 5. **SPH surrogate** (`openworm-ml/surrogate/`) — FNO trained on 500+ SPH runs, <5% trajectory error, 1000× faster
 6. **Auto-fitted parameters** — Gradient descent on [DD010](DD010_Validation_Framework.md) validation loss, per-neuron-class conductances
 
-**Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"**
+**Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"** *(Target: Month 12, March 2027)*
 
 - **What you run:** `docker compose run simulation --config full_organism` (runs for ~20 simulated minutes to capture egg-laying cycle). Then open viewer.
 - **What you see — 3 organs running simultaneously:**
@@ -328,11 +346,15 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Organ-specific validation data curated (pharynx EPG, defecation period, egg-laying patterns)
 - GPU cluster access for SPH surrogate training (500+ long runs)
 
+**Cumulative Metrics:** 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | **3** organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (22 total)
+
 ---
 
 ## Phase 4: Mechanical Cell Identity + High-Fidelity Visualization (Months 13-18)
 
 **Status:** ⚠️ **Proposed** (ready after Phase 3)
+
+**Phase Rationale:** Phase 4 completes the organism: all 959 somatic cells with cell-type mechanics and a public web viewer. [DD004](DD004_Mechanical_Cell_Identity.md) is here because per-cell mechanical properties (elasticity, adhesion) should be informed by organ system behavior — setting intestine elasticity before implementing the intestine means guessing. [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) needs both [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries and stable SPH body dynamics. [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3 (Three.js + WebGPU public deployment) requires all content stable — static site deployment to wormsim.openworm.org is the capstone milestone. [DD004](DD004_Mechanical_Cell_Identity.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) can proceed in parallel.
 
 **Scope:**
 
@@ -351,7 +373,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 5. **Three.js viewer** ([DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — wormsim.openworm.org (GitHub Pages or CDN)
 
-**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"**
+**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"** *(Target: Month 18, September 2027)*
 
 - **What you run:** Open `wormsim.openworm.org` in any browser. No Docker, no installation, no server.
 - **What you see — 3 scales of exploration:**
@@ -384,6 +406,8 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Witvliet EM data converted to cell boundary meshes
 - Virtual Worm meshes exported from Blender to individual OBJ files
 - GPU access for mesh deformation compute shaders (WebGPU or local testing)
+
+**Cumulative Metrics:** **959** cells (all somatic) | 128 neuron classes | 2 coupling loops | 3 organ systems | 1 modulation layer | Tier 2 + Tier 3 validated | **3** viewer scales (organism, tissue, molecular) | **Public access** (static site) | **23 DDs implemented**
 
 ---
 
@@ -557,133 +581,6 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 | **TOTAL** | **~18 months** | **Mar 2026 - Sep 2027** | **959 cells** | **23 DDs implemented** |
 
 **Phases 5-7:** Year 3+ (intracellular, developmental, male-specific)
-
----
-
-## Major Milestones (What You Run, What You See)
-
-### Milestone 1: "Containerized Stack" (End of Phase A)
-- **When:** Week 4 (late March 2026)
-- **Run:** `docker compose run quick-test` — full build + simulation + validation in <5 minutes
-- **See:** Terminal pass/fail report. Video output of worm locomotion. JSON validation scores.
-- **Validated against:** [Yemini 2013](https://doi.org/10.1038/nmeth.2560) kinematics (Tier 3), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (Tier 2)
-
-### Milestone 2: "Biologically Distinct Neurons" (End of Phase 1)
-- **When:** Month 3 (June 2026)
-- **Run:** `docker compose up viewer` — open `localhost:8501`
-- **See:** 3D worm with 302 neurons colored by 128 classes. Click any neuron — inspector shows class-specific dynamics. Compare differentiated vs. generic model side-by-side.
-- **Validated against:** [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) — functional connectivity correlation improves ≥20% over generic baseline
-
-### Milestone 3: "The Worm Can Feel" (End of Phase 2)
-- **When:** Month 6 (September 2026)
-- **Run:** `docker compose run simulation --config closedloop_touch` — tap the worm at t=5s
-- **See:** Worm reverses direction within <1s, travels backward ≥1 body length, resumes forward. Anterior tap → backward, posterior tap → forward. Neuropeptide clouds visible as slow modulatory mist.
-- **Validated against:** [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal; [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) direction discrimination; ≥3 peptide knockout phenotypes ([Li 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers 2003](https://doi.org/10.1038/nn1140))
-
-### Milestone 4: "Multi-Organ Organism" (End of Phase 3)
-- **When:** Month 12 (March 2027)
-- **Run:** `docker compose run simulation --config full_organism` (~20 simulated minutes)
-- **See:** Worm crawls while pharynx pumps at 3-4 Hz, intestine fires calcium waves every ~50s triggering defecation, and egg-laying bouts occur every ~20 min. All visible simultaneously in the viewer.
-- **Validated against:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) pharyngeal EPG; [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation period; [Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging
-
-### Milestone 5: "WormSim 2.0" (End of Phase 4)
-- **When:** Month 18 (September 2027)
-- **Run:** Open `wormsim.openworm.org` — no installation required
-- **See:** Smooth worm with 688 deforming anatomical meshes. Zoom from organism → tissue (click any of 959 cells) → molecular (ion channels, gene transcription). 60fps on a laptop.
-- **Validated against:** All previous tiers passing. Cell-type-specific mechanics produce realistic body deformation.
-
----
-
-## Success Metrics Across All Phases
-
-| Metric | Phase 0 | Phase 1 | Phase 2 | Phase 3 | Phase 4 |
-|--------|---------|---------|---------|---------|---------|
-| **Total Cells** | 397 | 397 (diff.) | 403 | 514 | **959** |
-| **Neuron Classes** | 1 (generic) | **128** | 128 | 128 | 128 |
-| **Coupling Loops** | 1 (neural→body) | 1 | **2** (add body→sensory) | 2 | 2 |
-| **Organ Systems** | 0 | 0 | 0 | **3** (pharynx, intestine, egg-laying) | 3 |
-| **Modulation Layers** | 0 | 0 | **1** (31,479 peptide-receptor) | 1 | 1 |
-| **Tier 2 Validation** | -- | ✅ r > 0.5 | ✅ | ✅ | ✅ |
-| **Tier 3 Validation** | ✅ ±15% | ✅ | ✅ | ✅ | ✅ |
-| **Viewer Scales** | 0 (raw particles) | 2 (organism, tissue) | 2 | 2 | **3** (add molecular) |
-| **Public Access** | No | No | No | No | ✅ Static site |
-
----
-
-## Phase Placement Rationale
-
-Why is each DD in its current phase — and not earlier or later? This section documents the reasoning so future contributors and reviewers can evaluate whether phase assignments still hold as circumstances change.
-
-### Phase 0: Existing Foundation
-
-These DDs describe **already-implemented** subsystems. They are Phase 0 because the code exists and works.
-
-| DD | Why Phase 0 |
-|----|-------------|
-| [DD001](DD001_Neural_Circuit_Architecture.md) | c302 Levels A-D exist, generate NeuroML networks. The 302-neuron HH circuit runs and produces movement. |
-| [DD002](DD002_Muscle_Model_Architecture.md) | GenericMuscleCell exists with Ca²⁺→force coupling. Validated against Boyle & Cohen 2008. |
-| [DD003](DD003_Body_Physics_Architecture.md) | Sibernetic v1.0+ works (OpenCL backend stable). ~100K SPH particles, fluid-structure interaction. |
-| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | `cect` v0.2.7 exists with 30+ connectome datasets accessible via Python API. |
-
-### Phase A: Infrastructure Bootstrap
-
-Phase A DDs either (a) provide infrastructure that all later phases depend on, or (b) have zero infrastructure dependencies and can run in parallel.
-
-| DD | Why Phase A (not later) | Why not earlier (it's already first) |
-|----|------------------------|--------------------------------------|
-| [DD013](DD013_Simulation_Stack_Architecture.md) | **CRITICAL PATH.** Without Docker, `openworm.yml`, and CI, contributors can't build, test, or validate changes. Every subsequent DD needs this. | It *is* the earliest. Can't implement science DDs without the tools to validate them. |
-| [DD008](DD008_Data_Integration_Pipeline.md) | Phase 1+ datasets (CeNGEN, Randi 2023, connectomes) need unified access via OWMeta. WBbt ID normalization must happen before CeNGEN ingestion. | N/A — already first phase. |
-| [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Tier 3 kinematic validation is broken (toolbox doesn't install on Python 3.12). Can't validate DD005's output without it. | N/A. |
-| [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) | Validation data must exist before validation can run. Digitizing Thomas 1990, Raizen 1994, Chalfie 1985 data takes time and should start immediately. | N/A. |
-| [DD012](DD012_Design_Document_RFC_Process.md) | Governance: need the DD process defined before more DDs are proposed. Low effort (~8 hours). | N/A. |
-| [DD011](DD011_Contributor_Progression_Model.md) | Governance: need contributor framework before recruiting. Low effort (~8 hours). | N/A. |
-| [DD015](DD015_AI_Contributor_Model.md) | AI agents need registration, review gates, and workflow before they contribute code. Depends on [DD012](DD012_Design_Document_RFC_Process.md). | N/A. |
-| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | **Zero infrastructure dependencies.** Inputs (WormBase sequences, literature kinetics) are available today. Derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping. BioEmu-1 (100,000x MD speed) made this feasible. | Originally in Phase 3 as DD017 Component 3. Promoted because it has no blockers and provides a safety net for Phase 1. |
-
-### Phase 1: Cell-Type Differentiation
-
-Phase 1 is the first *modeling* phase. Its DDs differentiate the 302 identical neurons into 128 biologically distinct classes and establish visual + validation infrastructure.
-
-| DD | Why Phase 1 (not earlier) | Why not later |
-|----|--------------------------|---------------|
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Needs CeNGEN data ingested via [DD008](DD008_Data_Integration_Pipeline.md) (Phase A), config system from [DD013](DD013_Simulation_Stack_Architecture.md) (Phase A), and analysis toolbox from [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Phase A) to validate output. | Everything downstream assumes differentiated neurons. If the expression→conductance approach fails, better to discover that in Phase 1 than Phase 3. Also: DD005's scientific risk is highest — validate early. |
-| [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1 | Needs DD001-DD003 output formats defined (Phase 0). Produces OME-Zarr export pipeline needed by all later visualization phases. | Viewer is how people *see* the simulation. Delaying it means months of work with no visual feedback, which kills contributor engagement. |
-| [DD014.1](DD014.1_Visual_Rendering_Specification.md) | Defines canonical color palette and materials. Needs the viewer architecture ([DD014](DD014_Dynamic_Visualization_Architecture.md)) to be specified first. | Phase 2 adds neuropeptide volumetric clouds and strain heatmaps — needs the color/material system already established. |
-| [DD010](DD010_Validation_Framework.md) Tier 2 | Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (differentiated neurons to validate) and Randi 2023 data (from [DD008](DD008_Data_Integration_Pipeline.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)). | The functional connectivity gate (r > 0.5) must be active before Phase 2 builds on top of differentiated neurons. Without it, Phase 2 could build on a broken foundation. |
-| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) integration | Phase A cross-validation must complete first. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) pipeline to exist so predictions can feed in as calibration priors. | Predictions are most valuable when [DD005](DD005_Cell_Type_Differentiation_Strategy.md) is actively calibrating — waiting until Phase 3 wastes the derisking opportunity. |
-
-### Phase 2: Slow Modulation + Closed-Loop Sensory
-
-Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. These DDs require differentiated neurons from Phase 1.
-
-| DD | Why Phase 2 (not earlier) | Why not later |
-|----|--------------------------|---------------|
-| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Neuropeptide modulation on generic neurons would be meaningless — the 31,479 peptide-receptor interactions are cell-type-specific. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Phase 1) differentiation. | [DD018](DD018_Egg_Laying_System_Architecture.md) (Phase 3) requires serotonergic modulation (HSN neurons). The neuropeptide layer must exist before egg-laying can work. |
-| [DD019](DD019_Closed_Loop_Touch_Response.md) | Needs differentiated sensory neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) with cell-type-specific MEC-4 channels. Building bidirectional body↔neuron coupling requires stable [DD001](DD001_Neural_Circuit_Architecture.md)+[DD003](DD003_Body_Physics_Architecture.md) integration (Phase 0/A). | Closed-loop sensory input is prerequisite for any emergent behavior (chemotaxis, thermotaxis). Without it, the worm is "deaf" — can't respond to its environment. |
-| [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Needs [DD003](DD003_Body_Physics_Architecture.md) for substrate physics and [DD019](DD019_Closed_Loop_Touch_Response.md) for the sensory coupling framework. Can't do chemotaxis without both gradient fields and sensory neurons that respond to them. | Chemotaxis (CI > 0.5) and thermotaxis are key behavioral validation targets. Demonstrating them in Phase 2 is a major milestone ("The Worm Can Feel"). |
-| [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Needs [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling framework (body→neuron path). Stretch receptors on B-class motor neurons require the same SPH→strain→channel pipeline that touch uses. | Proprioception stabilizes the locomotion wavelength (±10% vs. ±15%). Without it, forward locomotion degrades when other subsystems add load. Phase 3 organ systems need stable locomotion. |
-| [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Proof-of-concept multicompartmental neurons. Needs [DD005](DD005_Cell_Type_Differentiation_Strategy.md) to know which channels each neuron class expresses before you can model their compartmental distribution. | Level D is needed eventually for spatially realistic signal propagation. Starting with 5 representative neurons in Phase 2 validates the approach before committing to all 302. |
-
-### Phase 3: Organ Systems + Hybrid ML
-
-Phase 3 adds three organ subsystems and the ML acceleration framework. These DDs require differentiated neurons (Phase 1) and ideally the modulation layer (Phase 2).
-
-| DD | Why Phase 3 (not earlier) | Why not later |
-|----|--------------------------|---------------|
-| [DD007](DD007_Pharyngeal_System_Architecture.md) | The pharynx has 20 neurons + 20 muscles that need differentiated parameters ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)). Pharyngeal neurons use unique channels (e.g., EAT-2) that benefit from the neuropeptide modulation layer ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)). | Must be implemented before Phase 4's 959-cell integration. The pharynx is a semi-autonomous organ — a visible, validatable milestone. |
-| [DD009](DD009_Intestinal_Oscillator_Model.md) | The 20-cell IP3/Ca²⁺ oscillator is relatively independent but couples to the neural circuit via DVB and AVL neurons. Needs [DD001](DD001_Neural_Circuit_Architecture.md) neural coupling. Validation data (Thomas 1990 defecation timing) needs digitization (started in [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), Phase A). | Defecation motor program (50s period) is one of the best-characterized *C. elegans* behaviors. A quantitative validation target that must be met before Phase 4's full-organism claim. |
-| [DD018](DD018_Egg_Laying_System_Architecture.md) | **Most complex organ circuit.** HSN serotonergic command neurons require [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Phase 2) neuropeptide/serotonin modulation. Vulval muscles use EGL-19/UNC-103 channels that need [DD005](DD005_Cell_Type_Differentiation_Strategy.md). Tyramine/octopamine signaling adds another modulation layer. | Two-state egg-laying pattern (active bouts interspersed with long inactive periods) is a behavioral phenotype used in hundreds of published mutant screens. Must work before claiming "digital organism." |
-| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | **Component 1 (differentiable backend):** Needs stable DD001+DD002+DD009 equations to port to PyTorch. If equations change during Phase 1-2, the port must be redone. Best to wait until the ODE system stabilizes. Also benefits from having multiple coupled subsystems (neural + muscle + intestine) to auto-fit against simultaneously. **Component 2 (SPH surrogate):** Needs 500+ full SPH simulation runs as training data (~2,500 GPU-hours). Training data goes stale if DD004 (Phase 4) changes particle mechanics or DD019 (Phase 2) adds bidirectional coupling that alters body dynamics. Maximum infrastructure dependencies — the opposite of DD025. **Component 4 (learned sensory):** Phase 2 attempts the mechanistic route first (DD019 touch, DD022 chemotaxis, DD023 proprioception). The learned model fills gaps that remain *after* the mechanistic approach is tested. Using ML before trying mechanism contradicts OpenWorm's core commitment to interpretability. | Auto-fitted parameters (Component 1) are needed before Phase 4's 959-cell integration — manual tuning won't scale. The SPH surrogate (Component 2) enables fast iteration for Phase 4's multi-organ coupled simulations. |
-
-### Phase 4: Mechanical Cell Identity + Visualization
-
-Phase 4 completes the organism: all 959 somatic cells with cell-type mechanics and a public web viewer.
-
-| DD | Why Phase 4 (not earlier) | Why not later |
-|----|--------------------------|---------------|
-| [DD004](DD004_Mechanical_Cell_Identity.md) | Per-cell mechanical properties (elasticity, adhesion) should be informed by organ system behavior (Phase 3). Setting intestine elasticity before implementing the intestine means guessing. Also needs [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM cell boundaries, which require significant data conversion work. | This is the final modeling step — assigns all 959 somatic cells to SPH particles with cell-type-specific physics. Completing this means the "virtual organism" claim is real. |
-| [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Needs [DD004](DD004_Mechanical_Cell_Identity.md) cell boundaries and [DD003](DD003_Body_Physics_Architecture.md) SPH body shape. The GPU skinning pipeline can't be tested without both. The 688 Virtual Worm meshes need to deform with simulated body motion, which requires a stable coupled simulation. | Photorealistic deformation is what makes "WormSim 2.0" visually compelling. Without it, the viewer shows raw particles instead of anatomical meshes. |
-| [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3 | Needs all previous visualization phases complete. Three.js + WebGPU public deployment requires stable content (all organ systems implemented and validated). Static site deployment to wormsim.openworm.org. | This is the capstone: "Digital Organism In Your Browser." Delays here delay the most visible milestone and the Nature/Science paper. |
 
 ---
 
