@@ -8,6 +8,12 @@
 
 ---
 
+> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Validation
+
+## TL;DR
+
+Every pull request must pass quantitative validation at four levels — single cells, neural network dynamics, whole-animal locomotion, and causal perturbations — before merging. This DD defines the thresholds, data sources, and CI pipeline for each tier.
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -24,7 +30,7 @@
 
 ---
 
-## Context
+## Context & Background
 
 OpenWorm's core philosophy, articulated in [Sarma et al. 2016](https://doi.org/10.12688/f1000research.9095.1) "Unit Testing, Model Validation, and Biological Simulation" (*F1000Research*), is that **model validation is a form of testing**. Just as software has unit tests, integration tests, and system tests, biological models must be validated at multiple levels:
 
@@ -36,7 +42,82 @@ A simulation that produces movement but fails electrophysiology validation has *
 
 ---
 
-## Decision
+## Goal & Success Criteria
+
+**Goal:** Automated, multi-tier quantitative validation that runs on every PR and blocks merges when model quality degrades.
+
+**Success criteria:**
+
+- Tier 2a functional connectivity correlation r > 0.5 vs. Randi 2023 experimental data
+- Tier 2b neuropeptide contribution correlation r > 0.3 (wild-type vs. unc-31)
+- Tier 3 behavioral kinematics within +/-15% of Yemini et al. 2013 Schafer lab data for all 5 metrics
+- Tier 4 causal perturbation direction-of-effect matches >=70% of published interventions
+- All tiers run without manual intervention via `docker compose run validate`
+
+---
+
+## Deliverables
+
+| Artifact | Path | Status |
+|----------|------|--------|
+| Tier 1 expression-consistency checker | `validation/tier1_expression_consistency.py` | [TO BE CREATED] |
+| Tier 1 single-cell electrophysiology comparator | `validation/tier1_cell_electrophys.py` | [TO BE CREATED] |
+| Tier 2a functional connectivity validator | `validation/tier2a_functional_connectivity.py` | [TO BE CREATED] |
+| Tier 2b unc-31 neuropeptide validator | `validation/tier2b_neuropeptide_unc31.py` | [TO BE CREATED] |
+| Tier 3 behavioral kinematics validator | `validation/tier3_behavioral.py` | [TO BE CREATED] |
+| Tier 4 perturbation battery runner | `validation/tier4_perturbation_battery.py` | [TO BE CREATED] |
+| Acceptance criteria checker | `validation/check_acceptance.py` | [TO BE CREATED] |
+| Reference datasets (baked into Docker) | `/opt/openworm/validation/data/` | Partial |
+| CI workflow | `.github/workflows/validation.yml` | [TO BE CREATED] |
+| Validation config section | `openworm.yml` → `validation:` | Defined below |
+
+---
+
+## Repository & Issues
+
+- **Primary repository:** `openworm/OpenWorm` (meta-repo — validation scripts live here)
+- **Tier 3 toolbox:** `openworm/open-worm-analysis-toolbox` (see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+- **Tier 2 data API:** `openworm/wormneuroatlas` (Randi 2023 functional connectivity)
+- **Issue label:** `dd010`, `validation`
+- **Milestone:** Phase 1 — Validation CI Pipeline
+- **ClickUp task:** 868hjdzqy (Validation L4 Maintainer)
+
+---
+
+## How to Build & Test
+
+```bash
+# Run the full validation suite (all enabled tiers)
+docker compose run validate
+
+# Run a specific tier
+docker compose run validate --tier 2a
+
+# Check results
+cat output/validation_report.json | python -m json.tool
+
+# Quick smoke test (verify tools install and data is present)
+docker compose run shell python -c "from open_worm_analysis_toolbox import NormalizedWorm; print('OK')"
+docker compose run shell ls /opt/openworm/validation/data/
+```
+
+See the [Integration Test](#integration-test) subsection below for a full step-by-step verification procedure.
+
+---
+
+## How to Visualize
+
+Validation results are displayed through the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer and standalone reports:
+
+- **Correlation matrix heatmaps:** Tier 2a produces a simulated 302x302 functional connectivity matrix displayed alongside the Randi 2023 experimental matrix. Difference heatmap highlights neuron pairs with largest discrepancies.
+- **Locomotion parameter dashboards:** Tier 3 produces a bar chart of the 5 kinematic metrics (speed, wavelength, frequency, amplitude, gait) with experimental mean +/-15% tolerance bands.
+- **Per-neuron expression-consistency overlay:** Tier 1 expression-consistency results are rendered as a pass/fail color map over the 3D worm body in the DD014 viewer (`validation/overlay/` OME-Zarr group).
+- **Perturbation effect comparison:** Tier 4 results are displayed as a table of predicted vs. observed effect directions with magnitude bars.
+- **CI summary badge:** GitHub Actions produces a pass/fail badge linked to the full validation report JSON.
+
+---
+
+## Technical Approach
 
 ### Three-Tier Validation Hierarchy
 
@@ -71,9 +152,9 @@ Run the cell model in isolation (no synaptic inputs, no network effects) with st
 | ALM, AVM, PLM (touch receptors) | [Goodman et al. 2002](https://doi.org/10.1038/4151039a), [O'Hagan et al. 2005](https://doi.org/10.1038/nn1362) | Whole-cell patch-clamp: resting potential, I-V curves, MEC-4/DEG-ENaC channel kinetics | Validate touch neuron resting potential, input resistance, mechanoreceptor current amplitude |
 | ALM, AVM, PLM (touch receptors) | [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | In vivo calcium imaging during mechanical stimulation | Validate calcium transient amplitude and kinetics in response to touch |
 | AWC (olfactory) | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Calcium imaging with odor presentation, TAX-2/TAX-4 channel characterization | Validate sensory transduction dynamics, OFF-response calcium kinetics |
-| ASH (nociceptor) | Hilliard et al. 2004, **WormsenseLab_ASH** repo | Calcium imaging, OSM-9/TRPV channel characterization | Validate polymodal nociceptor response profile |
-| AVA (command interneuron) | Lockery lab (Lindsay et al. 2011) | Whole-cell recordings, graded potential dynamics | Validate command interneuron I-V curve, graded (non-spiking) response |
-| RIM (motor/modulatory) | Liu et al. 2018 | Calcium imaging + electrophysiology, EGL-19/UNC-2 channels | Validate motor neuron calcium dynamics, channel conductance ratios |
+| ASH (nociceptor) | [Hilliard et al. 2005](https://doi.org/10.1038/sj.emboj.7600493), **WormsenseLab_ASH** repo | Calcium imaging, OSM-9/TRPV channel characterization | Validate polymodal nociceptor response profile |
+| AVA (command interneuron) | Lockery lab ([Lindsay et al. 2011](https://doi.org/10.1038/ncomms1304)) | Whole-cell recordings, graded potential dynamics | Validate command interneuron I-V curve, graded (non-spiking) response |
+| RIM (motor/modulatory) | [Liu et al. 2018](https://doi.org/10.1016/j.cell.2018.08.018) | Calcium imaging + electrophysiology, EGL-19/UNC-2 channels | Validate motor neuron calcium dynamics, channel conductance ratios |
 | Pharyngeal neurons (MC, M3) | [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | Electropharyngeogram (EPG): extracellular field potentials from pharyngeal muscles and neurons | Validate pharyngeal neuron firing patterns (Phase 3, [DD007](DD007_Pharyngeal_System_Architecture.md)) |
 
 **Coverage:** ~7 neuron classes have direct patch-clamp or detailed calcium imaging data suitable for Tier 1 spot-checks. An additional ~13 classes have partial recordings (single-channel data, calcium responses to specific stimuli) curated in the `openworm/ChannelWorm` ion channel database. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Calibration Dataset for the full training set.
@@ -275,10 +356,10 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 | Intervention | Organism Response | Data Source |
 |-------------|-------------------|-------------|
 | Touch neuron ablation (ALM, AVM, PLM) | Loss of gentle touch response | [Chalfie et al. (1985)](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 |
-| Pharyngeal neuron laser killing | Pumping continues (semi-autonomous organ) | Avery & Horvitz (1989), *Neuron* 3:473-485 |
-| Optogenetic activation of specific neurons | Stimulus-specific behavioral responses | Leifer et al. (2011), *Nat Methods* 8:147-152 |
+| Pharyngeal neuron laser killing | Pumping continues (semi-autonomous organ) | [Avery & Horvitz (1989)](https://doi.org/10.1016/0896-6273(89)90206-7), *Neuron* 3:473-485 |
+| Optogenetic activation of specific neurons | Stimulus-specific behavioral responses | [Leifer et al. (2011)](https://doi.org/10.1038/nmeth.1554), *Nat Methods* 8:147-152 |
 | unc-2 (Cav2) loss of function | Reduced locomotion speed | Schafer lab WCON mutant data |
-| egl-1, unc-103 loss of function | Egg-laying phenotypes | Trent et al. (1983), Collins & Koelle (2013) |
+| egl-1, unc-103 loss of function | Egg-laying phenotypes | [Trent et al. (1983)](https://doi.org/10.1093/genetics/104.4.619), [Collins & Koelle (2013)](https://doi.org/10.1523/JNEUROSCI.3896-12.2013) |
 | flp peptide knockouts | Altered locomotion patterns | [Rogers et al. (2003)](https://doi.org/10.1038/nn1140), [Li et al. (1999)](https://doi.org/10.1016/S0006-8993(99)01972-1) |
 
 **Validation procedure:** Simulate the specific perturbation (zero out a neuron's output, remove a channel type, delete a peptide gene) and compare the resulting behavioral change to published experimental data. The model should predict the *direction* of the effect (faster/slower, more/fewer reversals) and ideally the *magnitude* within 30%.
@@ -290,19 +371,19 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 
 **Status:** Non-blocking (advisory) in Phase 1-2. Becomes blocking in Phase 3+ as more subsystems come online and the model makes increasingly specific causal predictions.
 
-**Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals (Randi et al. 2023; Haspel et al. 2023). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
+**Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals ([Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4); [Haspel et al. 2023](https://arxiv.org/abs/2308.06578)). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
 
 ### Standard In-Silico Perturbation Battery
 
-Zhao et al. (2024) demonstrated several informative in-silico perturbation experiments that reveal how network structure shapes dynamics and behavior. OpenWorm should formalize these as a standard perturbation battery that every model version is tested against:
+[Zhao et al. (2024)](https://doi.org/10.1038/s43588-024-00738-w) demonstrated several informative in-silico perturbation experiments that reveal how network structure shapes dynamics and behavior. OpenWorm should formalize these as a standard perturbation battery that every model version is tested against:
 
 | Perturbation | Expected Effect | Experimental Basis |
 |-------------|----------------|-------------------|
-| Remove all gap junctions | Greater disruption to correlation matrix than removing chemical synapses | Zhao et al. 2024 Fig. 10D-G; Randi et al. 2023 unc-7 data |
-| Remove neurites (soma-only model) | Higher body twisting, degraded forward locomotion | Zhao et al. 2024 Fig. 10B |
-| Shuffle synapse locations on neurites | Faster head/tail oscillation, slower forward speed | Zhao et al. 2024 Fig. 10C |
+| Remove all gap junctions | Greater disruption to correlation matrix than removing chemical synapses | [Zhao et al. 2024](https://doi.org/10.1038/s43588-024-00738-w) Fig. 10D-G; [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) unc-7 data |
+| Remove neurites (soma-only model) | Higher body twisting, degraded forward locomotion | [Zhao et al. 2024](https://doi.org/10.1038/s43588-024-00738-w) Fig. 10B |
+| Shuffle synapse locations on neurites | Faster head/tail oscillation, slower forward speed | [Zhao et al. 2024](https://doi.org/10.1038/s43588-024-00738-w) Fig. 10C |
 | Ablate AVA bilaterally | Loss of backward locomotion command | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) |
-| Silence all B-class motor neurons | Loss of forward locomotion | Zheng et al. 1999 |
+| Silence all B-class motor neurons | Loss of forward locomotion | [Zheng et al. 1999](https://doi.org/10.1016/S0896-6273(00)80849-1) |
 | Block Cav2 (unc-2 null) | Reduced locomotion speed | Schafer lab mutant data |
 
 These perturbation experiments serve dual purposes: (a) validation that the model responds correctly to interventions, and (b) scientific discovery — any unexpected model response identifies a gap in understanding.
@@ -318,7 +399,7 @@ For Tier 2 (functional connectivity), the r > 0.5 threshold reflects the observa
 Tiers 3 and 4 require robust, unbiased behavioral quantification. The field of computational neuroethology has developed systematic approaches to this challenge:
 
 - **Unsupervised behavioral decomposition** ([Berman et al. 2014](https://doi.org/10.1098/rsif.2014.0672)) identifies stereotyped behavioral motifs from continuous recordings without pre-defined categories, enabling discovery of behavioral states that the model should reproduce
-- **Deep learning-based pose estimation** (Pereira et al. 2022, SLEAP) provides sub-pixel body posture tracking that can extract kinematic features more precisely than centroid-only approaches
+- **Deep learning-based pose estimation** ([Pereira et al. 2022](https://doi.org/10.1038/s41592-022-01426-1), SLEAP) provides sub-pixel body posture tracking that can extract kinematic features more precisely than centroid-only approaches
 - **Computational neuroethology frameworks** ([Datta et al. 2019](https://doi.org/10.1016/j.neuron.2019.09.038)) advocate for treating behavior as a high-dimensional continuous signal rather than a set of discrete categories, which aligns with how our simulation outputs movement data
 
 As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) is revived, it should incorporate or interface with these modern approaches rather than relying solely on the classic 5-metric kinematic comparison.
@@ -338,6 +419,14 @@ As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Poli
 ### 3. Strict Thresholds (Must Match Exactly)
 
 **Rejected:** Biological data have measurement noise and animal-to-animal variability. ±15-20% tolerance accounts for this. Exact matches are neither achievable nor necessary.
+
+### 4. Single-Metric Validation (One Number to Rule Them All)
+
+**Rejected:** A single aggregate score (e.g., overall behavioral similarity) allows degenerate solutions — a model can score well by excelling on one metric while failing others. Multi-metric validation across all four tiers prevents this.
+
+### 5. Threshold-Free Qualitative Assessment
+
+**Rejected:** Without explicit numeric thresholds, "good enough" becomes subjective and shifts over time. Quantitative acceptance criteria (r > 0.5, +/-15%, etc.) make pass/fail decisions objective, reproducible, and enforceable in CI.
 
 ---
 
@@ -690,7 +779,7 @@ jobs:
 
 ---
 
-## Boundaries (Out of Scope)
+## Boundaries (Explicitly Out of Scope)
 
 1. **Developmental validation:** Validating stage-specific models (L1, dauer, male) is Phase 6 work.
 2. **Genetic variation:** Validating against natural isolates (Ben-David eQTLs) is Phase 6+ work.

@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Phase 1: Core Neural Platform](DD_PHASE_ROADMAP.md#phase-1-core-neural-platform-months-1-6) | **Layer:** Data Infrastructure
+
 ## TL;DR
 
 The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
@@ -48,7 +50,7 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 | Artifact | Path / Location | Format | Example |
 |----------|----------------|--------|---------|
 | `cect` package (external) | PyPI: `pip install cect` / GitHub: `openworm/ConnectomeToolbox` | Python package | `from cect.Cook2019HermReader import get_instance` |
-| Dataset selection policy | This DD (Section: Dataset Selection Policy) | Markdown specification | "Default adult hermaphrodite: [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm" |
+| Dataset selection policy | This DD (Section: Technical Approach) | Markdown specification | "Default adult hermaphrodite: [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm" |
 | `openworm.yml` connectome config | `data.connectome.*` keys | YAML | `dataset: "Cook2019Herm"`, `cect_version: "0.2.7"` |
 | `versions.lock` entry | `cect` key in `versions.lock` ([DD013](DD013_Simulation_Stack_Architecture.md)) | Lock file | `cect: "0.2.7"` |
 | Connectome adjacency matrices | In-memory via `cect` API | `numpy.ndarray` per synclass | `cds.connections["Generic_CS"]` shape (N, N) |
@@ -143,7 +145,7 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 
 ---
 
-## Dataset Selection Policy
+## Technical Approach
 
 ### Default Datasets by Use Case
 

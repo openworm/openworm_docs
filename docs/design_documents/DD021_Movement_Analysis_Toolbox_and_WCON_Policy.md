@@ -139,7 +139,7 @@ print('Toolbox in Docker: OK')
 
 ---
 
-## Toolbox Architecture
+## Technical Approach
 
 ### Package Structure
 

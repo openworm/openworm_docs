@@ -10,6 +10,10 @@
 
 > **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3), [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) | **Layer:** Visualization
 
+## TL;DR
+
+DD014 defines the three-scale visualization system (molecular, cellular, organism) for the OpenWorm simulation, connecting simulation data to real-time 3D rendering via OME-Zarr export and a Trame/Three.js viewer. The key success metric is that every simulation variable must be visually inspectable within 2 seconds, and the viewer must support full time playback in a web browser with toggleable layers for each subsystem.
+
 ## Context
 
 ### The Missing Layer

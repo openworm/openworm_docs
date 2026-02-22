@@ -63,7 +63,42 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 ---
 
-## Code Reuse Opportunities (HIGH-IMPACT)
+## Repository & Issues
+
+| Item | Value |
+|------|-------|
+| **Primary repository** | `openworm/c302` (proprioceptive circuits, stretch receptor channel model) |
+| **Secondary repository** | `openworm/sibernetic` (body mechanics, curvature readout) |
+| **Issue label** | `dd023`, `proprioception` |
+| **Related DDs** | [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model) |
+
+---
+
+## How to Build & Test
+
+1. **Prerequisites:** Neural circuit ([DD001](DD001_Neural_Circuit_Architecture.md)) and body physics ([DD003](DD003_Body_Physics_Architecture.md)) running in simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md))
+2. **Enable proprioceptive feedback:** Set `sensory.proprioception: true` in `openworm.yml` to activate the feedback channel between Sibernetic body curvature and B-class motor neurons
+3. **Run forward locomotion:** Execute simulation for 60 seconds with proprioception enabled
+4. **Measure wave propagation:** Body wave should show posterior-to-anterior coordination with wavelength stability ±10%
+5. **Ablation control:** Disable proprioceptive feedback (`sensory.proprioception: false`) — wave coordination should degrade by >30%
+6. **Green light:** Wave speed within ±15% of biological value (~0.5 Hz)
+7. **Test scripts:** `[TO BE CREATED]`
+
+---
+
+## Technical Approach
+
+### Proprioceptive Feedback Model
+
+Proprioceptive feedback is modeled as stretch-sensitive conductance in B-class motor neurons (VB1-VB11, DB1-DB7). The mechanism:
+
+1. **Curvature readout:** Body curvature from Sibernetic SPH particles is converted to local strain at each body segment via `curvature_readout.py`
+2. **Strain-to-current transduction:** Local strain is fed back to ipsilateral B-class motor neurons as a stretch-dependent current (`I_stretch`), creating a curvature-gated cation conductance
+3. **Traveling wave generation:** This coupling creates a traveling wave of motor activation without requiring a central pattern generator — bending at one segment stretches the next posterior segment, activating its motor neurons
+4. **Key parameters:** Stretch sensitivity gain (nS/rad), signal propagation delay (ms), segment coupling strength (dimensionless)
+5. **Basis:** [Wen et al. 2012](https://doi.org/10.1016/j.neuron.2012.08.039) proprioceptive coupling model
+
+### Code Reuse Opportunities (HIGH-IMPACT)
 
 ### CE_locomotion Stretch Receptor Model
 
@@ -144,6 +179,33 @@ Motor neuron (MN) and interneuron (IN) HH models (Nicoletti et al. 2024). The B-
 1. **Locomotion stability:** Wavelength variance reduces from ±15% (no proprioception) to ±10% (with proprioception).
 2. **Proprioceptive ablation:** Disabling stretch receptors increases wavelength variance by >30%.
 3. **Stretch-response match:** B-class calcium increases during local bending matches Wen et al. 2012 imaging.
+
+---
+
+## Boundaries (Explicitly Out of Scope)
+
+1. **Central pattern generator models:** This DD uses proprioceptive feedback for wave propagation, not a CPG.
+2. **Head movement coordination:** Head oscillations and foraging movements are handled separately from body wave propagation.
+3. **Omega turns and reversal initiation:** Handled by [DD019](DD019_Closed_Loop_Touch_Response.md) command interneuron circuits (AVA/AVB/AVD).
+4. **Detailed mechanotransduction channel kinetics:** Uses a phenomenological stretch-sensitive conductance rather than modeling individual ion channel gating kinetics.
+
+---
+
+## Context & Background
+
+*C. elegans* locomotion requires coordination of 95 body wall muscle cells along the anterior-posterior axis. Unlike vertebrates, *C. elegans* may not use a central pattern generator; evidence suggests proprioceptive feedback drives wave propagation ([Wen et al. 2012](https://doi.org/10.1016/j.neuron.2012.08.039)).
+
+B-class motor neurons (VB1-VB11, DB1-DB7) are the primary forward locomotion drivers. The proprioceptive mechanism works as follows: body bending at one segment stretches the next posterior segment, activating motor neurons there, creating a self-propagating traveling wave. This means the body's mechanical state directly drives the neural pattern — a fundamentally different architecture from CPG-based locomotion in larger organisms.
+
+The [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling framework (body-to-neuron feedback channel) provides the infrastructure for this proprioceptive loop. DD023 extends that framework from touch-evoked responses to continuous motor coordination.
+
+---
+
+## References
+
+1. **[Wen Q, Po MD, Hulme E, Chen S, Liu X, Bhatt R, et al. (2012)](https://doi.org/10.1016/j.neuron.2012.08.039).** "Proprioceptive coupling within motor neurons drives *C. elegans* forward locomotion." *Neuron* 76:750-761. *Demonstrates stretch-sensitive properties of B-class motor neurons and proprioceptive wave propagation.*
+2. **[Fouad AD, Teng S, Mark JR, Liu A, Alvarez-Illera P, et al. (2018)](https://doi.org/10.7554/eLife.29913).** "Distributed rhythm generators underlie *Caenorhabditis elegans* forward locomotion." *eLife* 7:e29913. *Evidence for distributed oscillators in body segments, complementing proprioceptive coupling.*
+3. **[Nicoletti M, et al. (2024)](https://doi.org/10.1371/journal.pcbi.1012363).** Motor neuron and interneuron HH models. *Pre-fitted B-class motor neuron templates used as the starting point for stretch receptor channel integration.*
 
 ---
 

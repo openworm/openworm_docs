@@ -66,12 +66,12 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | Neuron 39:1005-1017 | 2003 | In vivo calcium imaging of mechanosensory neurons (ALM, AVM, PLM). [DD010](design_documents/DD010_Validation_Framework.md) |
 | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Nature 449:63-71 | 2007 | AWC olfactory neuron calcium imaging, TAX-2/TAX-4 channel characterization. [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD010](design_documents/DD010_Validation_Framework.md) |
 | [Lindsay et al. 2011](https://doi.org/10.1038/ncomms1304) | Nat Commun 2:306 | 2011 | AVA command interneuron whole-cell recordings — graded potential dynamics. [DD010](design_documents/DD010_Validation_Framework.md) |
-| Liu et al. 2018 | eLife 7:e36607 | 2018 | RIM motor neuron electrophysiology, EGL-19/UNC-2 channel characterization. [DD010](design_documents/DD010_Validation_Framework.md) |
+| [Liu et al. 2018](https://doi.org/10.1016/j.cell.2018.08.018) | Cell 175:57-70 | 2018 | AWA olfactory neurons fire all-or-none action potentials; supplementary RIM/AIY electrophysiology. [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD010](design_documents/DD010_Validation_Framework.md) |
 | [Mellem et al. 2002](https://doi.org/10.1016/S0896-6273(02)01088-7) | Neuron 36:933-944 | 2002 | Interneuron electrophysiology — AVA, AVD, AVB recordings. [DD010](design_documents/DD010_Validation_Framework.md) |
 | [Hendricks et al. 2012](https://doi.org/10.1038/nature11081) | Nature 487:99-103 | 2012 | Compartmentalized calcium dynamics in a *C. elegans* interneuron — evidence for spatially compartmentalized signaling within neurons. [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) |
-| [Liu et al. 2018b](https://doi.org/10.1016/j.cell.2018.08.018) | Cell 175:57-70 | 2018 | *C. elegans* AWA olfactory neurons fire calcium-mediated all-or-none action potentials — evidence that some neurons use action potentials. [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) |
 | [Nicoletti et al. 2019](https://doi.org/10.1371/journal.pone.0218738) | PLoS ONE 14:e0218738 | 2019 | Biophysical modeling of *C. elegans* neurons: Single ion currents and whole-cell dynamics of AWCon and RMD. [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) |
-| [Leifer et al. 2011](https://doi.org/10.1038/nmeth.1140) | Nat Methods 8:147-152 | 2011 | Optogenetic stimulation with whole-brain imaging. [DD010](design_documents/DD010_Validation_Framework.md) |
+| [Leifer et al. 2011](https://doi.org/10.1038/nmeth.1554) | Nat Methods 8:147-152 | 2011 | Optogenetic manipulation of neural activity in freely moving *C. elegans*. [DD010](design_documents/DD010_Validation_Framework.md) |
+| [Zheng et al. 1999](https://doi.org/10.1016/S0896-6273(00)80849-1) | Neuron 24:347-361 | 1999 | GLR-1 ionotropic glutamate receptor in locomotion — B-class motor neuron control of forward movement. [DD010](design_documents/DD010_Validation_Framework.md) |
 
 ---
 
@@ -108,6 +108,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | [Wicks et al. 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) | J Neurosci 16:4017-4031 | 1996 | Tap withdrawal circuit — anterior vs. posterior discrimination. [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) |
 | [Goodman et al. 2002](https://doi.org/10.1038/4151039a) | Nature 415:1039-1042 | 2002 | Touch receptor electrophysiology. [DD010](design_documents/DD010_Validation_Framework.md), [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md), [DD024](design_documents/DD024_Validation_Data_Acquisition_Pipeline.md) |
 | [Suzuki et al. 2003](https://doi.org/10.1016/S0896-6273(03)00539-7) | Neuron 39:1005-1017 | 2003 | In vivo calcium imaging of mechanosensory neurons. [DD010](design_documents/DD010_Validation_Framework.md) |
+| [Hilliard et al. 2005](https://doi.org/10.1038/sj.emboj.7600493) | EMBO J 24:63-72 | 2005 | In vivo imaging of ASH nociceptor neurons — calcium response and adaptation to chemical repellents. [DD010](design_documents/DD010_Validation_Framework.md) |
 | [Chalasani et al. 2007](https://doi.org/10.1038/nature06292) | Nature 449:63-71 | 2007 | Chemosensory transduction in AWC neurons. [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD010](design_documents/DD010_Validation_Framework.md) |
 
 ---
@@ -117,7 +118,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | Citation | Journal | Year | Description |
 |----------|---------|------|-------------|
 | [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | Neuron 12:483-495 | 1994 | Electropharyngeogram (EPG) recordings — **pharyngeal validation data**. [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md), [DD010](design_documents/DD010_Validation_Framework.md), [DD024](design_documents/DD024_Validation_Data_Acquisition_Pipeline.md) |
-| [Avery & Horvitz 1989](https://doi.org/10.1016/0896-6273(89)90037-8) | Neuron 3:473-485 | 1989 | Pharyngeal pumping continues after laser killing of the pharyngeal nervous system. [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) |
+| [Avery & Horvitz 1989](https://doi.org/10.1016/0896-6273(89)90206-7) | Neuron 3:473-485 | 1989 | Pharyngeal pumping continues after laser killing of the pharyngeal nervous system. [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md), [DD010](design_documents/DD010_Validation_Framework.md) |
 
 ---
 
@@ -135,12 +136,12 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 
 | Citation | Journal | Year | Description |
 |----------|---------|------|-------------|
-| [Trent et al. 1983](https://doi.org/10.1093/genetics/104.4.619) | Genetics 104:619-647 | 1983 | 145 egg-laying defective (Egl) mutants, 4 pharmacological classes. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
+| [Trent et al. 1983](https://doi.org/10.1093/genetics/104.4.619) | Genetics 104:619-647 | 1983 | 145 egg-laying defective (Egl) mutants, 4 pharmacological classes. [DD010](design_documents/DD010_Validation_Framework.md), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Waggoner et al. 1998](https://doi.org/10.1016/S0896-6273(00)80527-9) | Neuron 21:203-214 | 1998 | Serotonin pharmacology of egg-laying — two-state behavioral model. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Schafer 2006](https://doi.org/10.1895/wormbook.1.38.1) | WormBook | 2006 | Egg-laying comprehensive review. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Zhang et al. 2008](https://doi.org/10.1016/j.cub.2008.09.005) | Curr Biol 18:1445-1455 | 2008 | Self-regulating feed-forward circuit controlling egg-laying behavior. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Sun & Bhatt 2010](https://doi.org/10.1186/1752-0509-4-81) | BMC Syst Biol 4:81 | 2010 | Computational model of egg-laying circuit temporal pattern generation. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
-| [Collins & Koelle 2013](https://doi.org/10.1523/JNEUROSCI.3587-12.2013) | J Neurosci 33:761-775 | 2013 | UNC-103 ERG potassium channel in vulval muscles — two-state excitability mechanism. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
+| [Collins & Koelle 2013](https://doi.org/10.1523/JNEUROSCI.3896-12.2013) | J Neurosci 33:761-775 | 2013 | UNC-103 ERG potassium channel in vulval muscles — two-state excitability mechanism. [DD010](design_documents/DD010_Validation_Framework.md), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Collins et al. 2016](https://doi.org/10.7554/eLife.21126) | eLife 5:e21126 | 2016 | Calcium imaging of egg-laying circuit — **two-state behavioral pattern**. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md), [DD024](design_documents/DD024_Validation_Data_Acquisition_Pipeline.md) |
 | [Brewer et al. 2019](https://doi.org/10.1371/journal.pgen.1007896) | PLoS Genet 15:e1007896 | 2019 | Tyramine/octopamine signaling in egg-laying. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |
 | [Ravi et al. 2020](https://doi.org/10.1523/JNEUROSCI.0173-20.2020) | J Neurosci 40:7475-7488 | 2020 | Expression, function, and pharmacological analysis of all 26 neurotransmitter GPCRs in *C. elegans*. [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) |

@@ -72,6 +72,34 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 ---
 
+## Repository & Issues
+
+| Item | Value |
+|------|-------|
+| **Primary repository** | `openworm/sibernetic` (environment is part of the physics engine) |
+| **Secondary repository** | `openworm/c302` (stimulus coupling to sensory neurons) |
+| **Issue label** | `dd022`, `environment` |
+| **Related DDs** | [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response) |
+
+---
+
+## How to Build & Test
+
+1. **Prerequisites:** Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD013](DD013_Simulation_Stack_Architecture.md))
+2. **Configure environment:** Set environment parameters in `openworm.yml` (temperature, chemical gradients)
+   ```yaml
+   environment:
+     substrate: "agar"
+     chemical_gradient: true
+     food_particles: false
+   ```
+3. **Run simulation:** `docker compose run quick-test --config chemotaxis` with stimulus delivery enabled
+4. **Verify stimulus delivery:** Confirm stimulus reaches sensory neurons at correct timing and magnitude
+5. **Green light:** Chemotaxis gradient produces measurable neural response in AWC neurons; CI index >0.5 on standard NaCl assay
+6. **Detailed test scripts:** `[TO BE CREATED]`
+
+---
+
 ## Technical Approach
 
 ### Component 1: Substrate Mechanics (Agar vs. Liquid vs. Soil)
@@ -205,6 +233,16 @@ Similar to chemical gradient but for temperature:
 | Local chemical concentration | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
 | Local temperature | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
 | Substrate reaction force | [DD003](DD003_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
+
+---
+
+## Context & Background
+
+*C. elegans* lives in soil and responds to multiple environmental stimuli: mechanical touch, chemical gradients (food attractants, repellents), temperature gradients, and osmotic changes. The environment model must deliver these stimuli to the correct sensory neurons with biologically realistic spatial and temporal profiles.
+
+Chemotaxis is the best-studied navigational behavior: the worm uses a biased random walk strategy, extending forward runs when moving up a concentration gradient and initiating turns when moving down-gradient ([Pierce-Shimomura et al. 1999](https://doi.org/10.1523/JNEUROSCI.19-21-09557.1999)). Thermotaxis follows a similar strategy, with the AFD neuron detecting temperature relative to cultivation temperature. Mechanosensation — the detection of substrate properties and external touch — is mediated by dedicated touch receptor neurons ([Goodman 2006](https://www.wormbook.org/chapters/www_mechanostic/mechanostic.html)).
+
+Without an environment model, the virtual worm exists in a featureless void and cannot exhibit any of these naturalistic behaviors. This DD provides the environmental context that makes sensory-driven behavior possible.
 
 ---
 

@@ -180,7 +180,7 @@ C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 
 **Ion channels (derived from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle model):**
 
-> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
+> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
 
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
@@ -222,6 +222,27 @@ I_gap = g_gap * (V_neighbor - V)
 ```
 
 - g_gap = 0.01 nS
+
+### Validated Forward Locomotion Circuit (Gleeson et al. 2018)
+
+The c302 paper demonstrated a working forward locomotion circuit (Figure 3) that successfully generated head-to-tail traveling waves in all 96 body-wall muscle cells. The circuit comprises:
+
+- **Command interneurons:** AVB (AVBL, AVBR) — kept active during forward movement
+- **Excitatory motor neurons:** 18 B-type (DB1–DB7 dorsal, VB1–VB11 ventral) — cholinergic, excite downstream muscles
+- **Inhibitory motor neurons:** 19 D-type (DD1–DD6 dorsal, VD1–VD13 ventral) — GABAergic, inhibit muscles
+- **96 body-wall muscle cells** in 4 quadrants of 24 (MVL24 receives no connections)
+
+**Circuit topology:**
+
+- AVB → B-type motor neurons via **gap junctions**
+- DB/VB → muscles via **excitatory chemical synapses**
+- DD/VD → muscles via **inhibitory chemical synapses**
+- **Cross-inhibition:** DB excites VD and inhibits DD; VB activates DD and inhibits VD
+- **Proprioceptive coupling:** Excitatory connections between neighboring DB/VB neurons approximate stretch receptor feedback (Wen et al. 2012), propagating bends posteriorly along the body
+- **CPG input:** Periodic current pulses to DB1 and VB1 (hypothesized central pattern generator)
+- **Head muscles:** Directly stimulated by synchronized oscillatory current pulses
+
+This circuit produced alternating dorsoventral muscle activation waves propagating from head to tail — the pattern required for forward crawling. The result validates the c302 Level C1 framework as capable of producing locomotion-relevant network dynamics.
 
 ### Synaptic Weight and Polarity Optimization
 
@@ -463,6 +484,12 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
 
 17. **Bargmann CI, Marder E (2013).** "From the connectome to brain function." *Nature Methods* 10:483-490.
     *Argument that connection topology alone is insufficient — connection properties including spatial location and strength matter for understanding circuit function.*
+
+18. **Johnson C, Mailler R (2015).** "Modeling action potentials of body wall muscles in *C. elegans*: a biologically founded computational approach." *7th Int. Conf. Bioinformat. Comput. Biol.*
+    *Second muscle model incorporated into c302 (one K⁺ + one Ca²⁺ channel). Based on Jospin et al. electrophysiology. See [openworm/JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel).*
+
+19. **Wen Q et al. (2012).** "Proprioceptive coupling within motor neurons drives *C. elegans* forward locomotion." *Neuron* 76:750-761.
+    *B-type motor neurons have stretch-sensitive properties. Basis for proprioceptive coupling between neighboring DB/VB neurons in c302 forward locomotion circuit. See also [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md).*
 
 ---
 

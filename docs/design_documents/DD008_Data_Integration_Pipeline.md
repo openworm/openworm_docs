@@ -266,6 +266,20 @@ OWMeta aggregates WormBase + all other sources.
 
 ---
 
+## Boundaries (Explicitly Out of Scope)
+
+### What This Design Document Does NOT Cover:
+
+1. **Raw experimental data storage:** OWMeta stores curated metadata and normalized identifiers, not raw imaging files, electrophysiology recordings, or EM micrographs. Raw data remains at its source (WormBase, CeNGEN portal, journal supplements).
+
+2. **Real-time data ingestion:** OWMeta is a batch pipeline. Datasets are ingested via scripts, reviewed, and released as versioned bundles. There is no streaming or live-update pathway.
+
+3. **Data visualization:** Rendering and interactive exploration of data are handled by [DD014](DD014_Dynamic_Visualization_Architecture.md). OWMeta produces the data; [DD014](DD014_Dynamic_Visualization_Architecture.md) displays it.
+
+4. **Connectome graph algorithms:** Graph analysis, bilateral symmetry metrics, and network topology computations are handled by ConnectomeToolbox (`cect`) per [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md). OWMeta provides semantic queries across data types; `cect` provides direct connectome-specific analysis.
+
+---
+
 ## Context & Background
 
 OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook connectome, Witvliet developmental data, Ripoll-Sanchez neuropeptides, Randi functional connectivity, Schafer kinematics, and more. These datasets use different formats, identifiers, and coordinate systems.

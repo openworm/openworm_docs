@@ -10,6 +10,10 @@
 
 > **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Integration
 
+## TL;DR
+
+The OpenWorm simulation stack uses Docker Compose to orchestrate five containerized subsystems (neural, muscle, body physics, sensory, visualization) with a shared OME-Zarr data bus. Every contributor runs the same environment via `docker compose up`, ensuring reproducibility from laptop to CI server. This DD replaces the current monolithic Dockerfile and shell-script approach with a multi-stage Docker build, a declarative `openworm.yml` configuration system, dependency pinning via `versions.lock`, and automated CI/CD validation gates.
+
 ## Context
 
 ### The Gap Between Vision and Execution
@@ -105,6 +109,19 @@ This means:
 - More compute requirements (longer simulations, more particles, more neurons)
 
 **The current meta-repo architecture cannot support this growth.**
+
+---
+
+## Deliverables
+
+- `docker-compose.yml` — orchestration of all simulation containers (quick-test, simulation, validate, viewer, shell services)
+- `Dockerfile` (multi-stage) — per-subsystem container definitions (base, neural, body, validation, full, viewer stages)
+- `versions.lock` — pinned dependency versions (exact commit hashes) across all subsystems
+- `openworm.yml` — unified declarative configuration file for simulation parameters
+- `master_openworm.py` (enhanced) — orchestrator implementing all 5 pipeline steps driven by config
+- `.github/workflows/integration.yml` — CI/CD pipeline with build, smoke test, and validation gates
+- `scripts/quick-test.sh` — contributor smoke test `[TO BE CREATED]`
+- Starter Jupyter notebooks (4) — orientation and exploration notebooks for newcomers `[TO BE CREATED]`
 
 ---
 
@@ -977,6 +994,42 @@ Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports
 3. **Backward compatibility:** `run.sh` continues to work but prints a deprecation notice pointing to `docker compose run simulation`.
 4. **No behavioral change:** The default `openworm.yml` produces the same simulation output as v0.9.7 (c302 Level C2, Sibernetic half-res, 15ms).
 5. **Phased introduction:** New subsystems (pharynx, intestine, neuropeptides) are added as `enabled: false` config options. Contributors opt in.
+
+---
+
+## Integration Contract
+
+### Inputs / Outputs
+
+The simulation stack is the **integration layer** — it consumes and routes outputs from all science DDs:
+
+| Direction | DD | Data | Format |
+|-----------|------|------|--------|
+| Consumes | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural state | OME-Zarr `/neural/` |
+| Consumes | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle forces | OME-Zarr `/muscle/` |
+| Consumes | [DD003](DD003_Body_Physics_Architecture.md) | Body geometry | OME-Zarr `/physics/` |
+| Produces | All | Unified simulation state | OME-Zarr `/simulation/` |
+
+### Repository & Packaging
+
+- Primary repository: `openworm/simulation-stack` `[TO BE CREATED]`
+- Docker multi-stage build: orchestrator layer
+- `versions.lock` key: `simulation-stack`
+
+### Configuration
+
+- `openworm.yml` root section: `simulation:`
+- Key parameters: `timestep`, `duration`, `output_format`, `subsystems[]`
+
+### How to Test (Contributor Workflow)
+
+- `docker compose run quick-test` — verifies all containers start and communicate
+- `docker compose run validate` — runs [DD010](DD010_Validation_Framework.md) Tier 2 correlation check
+
+### Coupling Dependencies
+
+- **Upstream:** DD001, DD002, DD003, DD005, DD006, DD007, DD009 (all science subsystems)
+- **Downstream:** DD014 (visualization), DD010 (validation)
 
 ---
 

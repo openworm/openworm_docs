@@ -10,6 +10,38 @@
 
 > **Phase:** Governance | **Layer:** AI Contributor Model
 
+## TL;DR
+
+AI agents (Mind-of-a-Worm and others) participate in OpenWorm as contributors within the DD011 progression framework. This DD defines what AI agents can and cannot do: automated code review, validation running, issue claiming, and implementation assistance — but never autonomous merging or architectural decisions without human approval. Every AI agent has a human sponsor for accountability, and the DD Issue Generator decomposes Design Documents into AI-workable GitHub issues.
+
+## Goal & Success Criteria
+
+**Goal:** Define clear boundaries and workflows for AI agent participation in OpenWorm development, enabling autonomous AI contributors to scale implementation capacity while preserving human oversight and scientific rigor.
+
+**Success Criteria:**
+
+- AI agents reduce PR review latency by 50% (via Mind-of-a-Worm pre-review)
+- Zero unauthorized merges — all AI-generated code requires L3+ human approval
+- All AI-generated code passes the same validation standards as human code ([DD010](DD010_Validation_Framework.md))
+- Contributor trust maintained — human override rate < 15% indicates AI contributions are well-targeted
+- 50-100 AI agents registered within 6 months of launch
+- AI PR merge rate > 60%
+
+## Deliverables
+
+- AI contributor policy document (this DD)
+- `AI_AGENT_ONBOARDING.md` — onboarding guide for autonomous AI agents
+- `scripts/dd_issue_generator.py` — automated DD-to-GitHub-issue decomposition tool
+- Mind-of-a-Worm GitHub App configuration and webhook backend
+- AI review checklist templates for Mind-of-a-Worm pre-review
+- DD compliance checking rules for automated review
+- `openworm/ai-contributor-registry` repository with agent YAML schema
+- `openworm/ai-generated-code` sandbox repository
+
+## How to Visualize
+
+N/A — this is a governance and process document. AI contributor activity is tracked via GitHub PR comments (tagged `[AI-PR]`), the `#ai-contributors` Slack channel, and the public `openworm/ai-contributor-registry` repository. Agent progression through L0-L3 is visible in each agent's registry YAML file.
+
 ## Context
 
 OpenWorm's AI-Augmented Open Science model ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), AI Agent Architecture) describes how **AI agents assist human contributors** — N2-Whisperer onboards newcomers, Mind-of-a-Worm reviews PRs, Mad-Worm-Scientist filters information for the founder. But what if we went further?
@@ -935,6 +967,25 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 ---
 
+## Quality Criteria
+
+1. **AI-generated code must pass all [DD010](DD010_Validation_Framework.md) validation tiers** — no reduced standards for AI-authored PRs.
+2. **AI reviews must cite specific DD sections** when flagging issues (e.g., "Violates DD006 Integration Contract section 4.1"), not generic feedback.
+3. **False positive rate for automated DD compliance checks < 10%** — Mind-of-a-Worm pre-review should not create excessive noise for human reviewers.
+4. **Human override mechanism documented and functional** — any L3+ human can close an AI PR, unclaim an AI issue, or suspend an AI agent at any time.
+5. **Sponsor Summary scientific accuracy > 90%** — Mind-of-a-Worm verifies that Sponsor Summaries correctly describe the biological context.
+6. **Agent registration-to-first-PR time < 7 days** — the onboarding process should not be a bottleneck.
+
+## Boundaries (Explicitly Out of Scope)
+
+1. **General-purpose AI safety or alignment research** — this DD governs AI participation in OpenWorm, not AI safety broadly.
+2. **AI agents with autonomous decision-making authority (L4+ permissions)** — AI agents are capped at L3; architectural decisions require human judgment.
+3. **Replacing human scientific judgment in modeling decisions** — AI agents implement specifications written by humans, not the reverse.
+4. **AI-generated Design Documents** — AI may draft sections, but humans must author and take responsibility for DDs.
+5. **Automated deployment to production systems** — AI agents submit PRs; humans merge and deploy.
+6. **AI agent-to-AI agent communication outside monitored channels** — all AI coordination must occur in public GitHub comments or `#ai-contributors` Slack.
+7. **AI agent access to private repositories or sensitive data** — AI agents operate only on public OpenWorm repositories.
+
 ## 12. Relationship to Existing DDs
 
 | DD | How AI Contributor Model Enhances It |
@@ -983,6 +1034,43 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 2. **Write `scripts/dd_issue_generator.py`** (Week 1-2)
 3. **Deploy Slack #ai-contributors channel** (Week 1)
 4. **Run pilot program** with 3 AI agents (Week 7-12)
+
+---
+
+## Integration Contract
+
+### How This DD Interfaces with Other DDs
+
+- **[DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression):** AI agents operate within L1-L3 permission levels. Badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors.
+- **[DD012](DD012_Design_Document_RFC_Process.md) (RFC Process):** AI assists with DD compliance checking during RFC review. AI agents cannot propose or author DDs.
+- **[DD010](DD010_Validation_Framework.md) (Validation Framework):** AI agents run validation suites and report results. AI-generated code must pass all validation tiers.
+- **[DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack):** AI agents can trigger CI builds but not merge. Integration Contract compliance is enforced by Mind-of-a-Worm.
+- **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Visualization):** AI agents can contribute visualization components (e.g., OME-Zarr exporters).
+
+### Configuration
+
+- AI agent permissions defined in repository `.github/` configuration files
+- Mind-of-a-Worm prompt templates stored in `openworm/mind-of-a-worm` repository (or OpenClaw SKILL.md)
+- Agent registry schema defined in `openworm/ai-contributor-registry`
+- DD Issue Generator configuration in `scripts/dd_issue_generator.py`
+
+### Inputs
+
+| Input | Source | Format |
+|-------|--------|--------|
+| Design Documents (DD001-DD024) | `docs/design_documents/` | Markdown |
+| Contributor progression rules | [DD011](DD011_Contributor_Progression_Model.md) | Policy document |
+| Validation criteria | [DD010](DD010_Validation_Framework.md) | Test suites |
+| PR diffs and issue data | GitHub API | JSON |
+
+### Outputs
+
+| Output | Consumer | Format |
+|--------|----------|--------|
+| AI-workable GitHub issues | AI agents, human contributors | GitHub Issues |
+| Pre-review comments | PR authors, human reviewers | GitHub PR comments |
+| Agent registry entries | Community, Mind-of-a-Worm | YAML files |
+| Sponsor Summaries | Human sponsors | Markdown in PR descriptions |
 
 ---
 

@@ -8,6 +8,8 @@
 
 ---
 
+> **Phase:** [Phase 1: Core Neural Platform](DD_PHASE_ROADMAP.md#phase-1-core-neural-platform-months-1-6) | **Layer:** Data Infrastructure
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -254,7 +256,7 @@ python scripts/verify_validation_data.py
 
 ---
 
-## Relationship to Existing Data Infrastructure
+## Context & Background
 
 ### ConnectomeToolbox (`cect`) — [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 
@@ -284,6 +286,35 @@ RUN python scripts/verify_validation_data.py
 ```
 
 Data is NOT downloaded at runtime — all validation data is pre-packaged for reproducibility and offline CI.
+
+---
+
+## Alternatives Considered
+
+### 1. Download All Datasets Upfront
+
+**Rejected:** Multi-GB downloads slow onboarding; some datasets require API access or author permission. A phased acquisition pipeline is more practical.
+
+### 2. Rely on Published Summary Statistics Only
+
+**Rejected:** Need raw traces for correlation matrix computation ([DD010](DD010_Validation_Framework.md) Tier 2) and waveform-level comparisons. Summary statistics are insufficient for rigorous validation.
+
+### 3. Custom Data Format
+
+**Rejected:** Use existing community formats (NWB, WCON per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) to maximize interoperability and reduce maintenance burden.
+
+### 4. Manual Data Curation Only
+
+**Rejected:** Automated pipeline with `manifest.json`, checksums, and verification scripts ensures reproducibility and freshness across contributors.
+
+---
+
+## Quality Criteria
+
+1. **Provenance metadata:** All acquired datasets must have provenance metadata (source, version, download date, checksum) in their `README.md`.
+2. **Refreshable cache:** Cached data must be refreshable without breaking downstream validation scripts.
+3. **Version pinning:** Dataset versions must be pinned in `checksums.sha256` for reproducibility.
+4. **CI compatibility:** Data acquisition and verification scripts must run successfully in CI (Docker environment per [DD013](DD013_Simulation_Stack_Architecture.md)).
 
 ---
 

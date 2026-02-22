@@ -8,6 +8,34 @@
 
 ---
 
+> **Phase:** [Phase 3: Organ Integration & Behavior](DD_PHASE_ROADMAP.md#phase-3-organ-integration--behavior-months-13-18) | **Layer:** ML Framework
+
+## TL;DR
+
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The four components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, (3) a foundation model pipeline mapping gene sequences to ODE parameters, and (4) learned sensory transduction to close the stimulus-response loop.
+
+## Goal & Success Criteria
+
+**Goal:** Provide a principled framework for combining mechanistic models with ML where experimental data is insufficient, while preserving OpenWorm's core commitment to mechanistic interpretability.
+
+**Success Criteria:**
+
+- ML-augmented models match or exceed pure-mechanistic validation scores ([DD010](DD010_Validation_Framework.md) Tier 2 correlation r > 0.5)
+- Differentiable backend reproduces NEURON/jNML reference within +/-5% on all state variables
+- SPH surrogate achieves at least 100x speedup (target 1000x) with < 5% trajectory error
+- Auto-fitted parameters outperform hand-tuned parameters on [DD010](DD010_Validation_Framework.md) metrics
+- Every ML component has a documented replacement pathway for when experimental data becomes available
+
+## Deliverables
+
+- Framework specification document (this DD)
+- Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
+- Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`)
+- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — ESM/AlphaFold to HH parameters
+- Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
+- ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
+- Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
+
 ## Quick Action Reference
 
 | Question | Answer |
@@ -22,6 +50,40 @@
 | **CI gate** | Differentiable model must reproduce [DD010](DD010_Validation_Framework.md) Tier 2+3 scores within ±5% of NEURON reference |
 
 ---
+
+## How to Build & Test
+
+**Prerequisites:** Simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md)) running, training datasets from [DD010](DD010_Validation_Framework.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md).
+
+1. **Differentiable backend:** `docker compose run ml-test` — verifies PyTorch ODE solver matches NEURON/jNML reference within +/-5%
+2. **Auto-fitting:** `docker compose run ml-autofit` — runs gradient descent against [DD010](DD010_Validation_Framework.md) validation targets
+3. **SPH surrogate:** `docker compose run surrogate-validate` — compares surrogate predictions against full SPH on held-out test set
+4. **Foundation model pipeline:** `docker compose run foundation-params` — generates per-neuron-class HH parameters from gene sequences
+5. **Sensory model:** `docker compose run sensory-test` — validates learned sensory responses against published calcium imaging data
+
+**Quick start for a single component:**
+
+```bash
+# Clone and set up
+git clone https://github.com/openworm/openworm-ml.git
+cd openworm-ml
+pip install -r requirements.txt  # torch, torchdiffeq, neuraloperator, esm
+
+# Run equivalence test for differentiable backend
+python differentiable/test_equivalence.py --reference data/neuron_reference.h5
+
+# Train SPH surrogate (requires training data)
+python surrogate/train.py --data data/sph_training/ --epochs 100
+```
+
+Detailed commands: `[TO BE DEVELOPED as components are implemented]`
+
+## How to Visualize
+
+- In the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer, ML-augmented components should be visually distinguished (e.g., dashed outlines or a distinct color) from fully mechanistic components, so users can see where ML is filling gaps.
+- ML uncertainty estimates should be displayable as confidence intervals or heatmaps overlaid on the simulation.
+- The ML component registry should provide a dashboard view showing which parameters are ML-derived vs. mechanistic vs. experimentally measured.
+- Auto-fitting convergence curves (loss vs. epoch) should be plottable for debugging and reporting.
 
 ## Context
 

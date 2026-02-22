@@ -155,12 +155,29 @@ OpenWorm uses **Predictive-Corrective Incompressible SPH (PCISPH)** to simulate 
 | Parameter | Value | Units | Biological Basis |
 |-----------|-------|-------|------------------|
 | Rest density (ρ₀) | 1000 | kg/m³ | Aqueous tissue |
-| Viscosity (µ) | 4e-6 | Pa·s | Low Reynolds number (Re ~0.01) |
+| Viscosity (µ) | 4e-6 | Pa·s | Low Reynolds number (Re ≤ 0.05) |
 | Smoothing radius (h) | 3.34 | Particle units | Determines neighbor interaction range |
 | Timestep (dt) | 2.0e-5 | s | Stability for explicit integration |
 | Simulation length | ~311 | Particles | Adult body length (~1 mm) |
 | Adult worm mass | 3.25e-9 | kg | Mapped to total particle mass |
 | Elasticity coefficient | 4 × 1.5e-4 / mass | -- | Spring stiffness for elastic bonds |
+| Max muscle contraction force | 2.7 × 10⁻⁹ | N | Experimental range: (1.4–9.6) × 10⁻⁹ N |
+| Number of muscle units | 96 | -- | 95 body-wall muscles, 24 per quadrant × 4 |
+
+### Validated Kinematic Outputs (Palyanov et al. 2018)
+
+| Metric | Simulated | Experimental | Source |
+|--------|-----------|-------------|--------|
+| Crawling velocity | 0.13–0.15 mm/s | 0.1–0.3 mm/s | Table 1 |
+| Crawling frequency | 0.36–0.37 Hz | 0.3–0.8 Hz | Table 1 |
+| Crawling wavelength | 0.62–0.72 mm | 0.65 mm | Table 1 |
+| Swimming velocity | 0.26–0.41 mm/s | 0.29 ± 0.03 mm/s | Table 1 |
+| Swimming frequency | 1.76–1.83 Hz | 1.74 ± 0.16 Hz | Table 1 |
+| Swimming wavelength | 0.43–0.47 mm | 0.46 mm | Table 1 |
+| Freq–wavelength slope | 0.59 | 0.64 (Boyle et al.) | Figure 5 |
+| Freq–wavelength intercept | 0.48 | 0.42 (Boyle et al.) | Figure 5 |
+
+**Validated behaviors:** Forward crawling, swimming, omega turns, body shortening, two-frequency undulation (head vs. body).
 
 ### SPH Kernel Functions
 
@@ -199,13 +216,15 @@ Bonds are created during initialization based on spatial proximity. Particles wi
 
 ### Muscle Actuation (Force Injection)
 
+**Muscle cell mapping (Palyanov et al. 2018):** The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing **individual muscle cells** with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.
+
 Muscle forces from the calcium-force coupling ([DD002](DD002_Muscle_Model_Architecture.md)) are injected by modulating elastic bond stiffness:
 
 ```
 k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
 ```
 
-Where `activation(t)` comes from the [Ca²⁺]ᵢ time series of each muscle cell. Bonds tagged as muscle bonds (MDR, MVR, MVL, MDL in 4 quadrants) receive this time-varying stiffness.
+Where `activation(t)` comes from the [Ca²⁺]ᵢ time series of each muscle cell. Bonds tagged as muscle bonds (MDR, MVR, MVL, MDL in 4 quadrants) receive this time-varying stiffness. Each of the 96 muscle units can be activated independently, enabling the full range of body postures observed in *C. elegans*.
 
 ### Predictive-Corrective Pressure Solver
 
@@ -301,11 +320,11 @@ A contribution to Sibernetic MUST:
 
 ### This Design Document Does NOT Cover:
 
-1. **Per-cell mechanical identity:** Current Sibernetic represents tissue as bulk elastic/liquid without cell boundaries. See [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) for the proposal to tag particles with cell IDs.
+1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (Palyanov et al. 2018, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
 
 2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.
 
-3. **Environmental complexity:** Current simulations use simple boundary conditions (flat surface, infinite medium). Realistic soil mechanics, bacterial food, geometric obstacles are out of scope.
+3. **Environmental complexity beyond liquid/gel:** Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid (Palyanov et al. 2018, Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.
 
 4. **Thermodynamics:** No temperature, no heat diffusion, no thermal expansion. *C. elegans* is studied at 20°C but temperature effects are not modeled.
 
@@ -392,8 +411,8 @@ elasticity = 0.0006
 3. **Boyle JH, Cohen N (2008).** "Caenorhabditis elegans body wall muscles are simple actuators." *Biosystems* 94:170-181.
    *Muscle-to-physics coupling validation.*
 
-4. **Palyanov A, Khayrulin S, Larson SD (2011-2016).** Sibernetic development.
-   *OpenWorm Sibernetic implementations.*
+4. **[Palyanov A, Khayrulin S, Larson SD (2018)](https://doi.org/10.1098/rstb.2017.0376).** "Three-dimensional simulation of the *Caenorhabditis elegans* body and muscle cells in liquid and gel environments for behavioural analysis." *Phil. Trans. R. Soc. B* 373:20170376.
+   *Primary Sibernetic publication. Describes muscle cell mapping (96 units), validated kinematics (Table 1), force–velocity/force–length relationships, omega turns, and agar gel simulation.*
 
 5. **Zhao M et al. (2024).** *Nat Comp Sci* 4:978-990.
    *Demonstrated real-time FEM body simulation of C. elegans at 30 FPS.*
@@ -444,7 +463,7 @@ body:
   backend: opencl                    # opencl, taichi-metal, taichi-cuda, pytorch
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
-  cell_identity: false               # Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): per-particle cell IDs
+  cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): extend to all tissue types. "false" = bulk elastic only.
   timestep: 0.00002                  # seconds
 ```
 
@@ -455,7 +474,7 @@ body:
 | `body.backend` | `opencl` | `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch` | Compute backend |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
-| `body.cell_identity` | `false` | `true`/`false` | Enable per-particle cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md)) |
+| `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4). `false` = bulk elastic only. |
 | `body.timestep` | `0.00002` | Float (seconds) | Simulation timestep |
 
 ### How to Test (Contributor Workflow)
@@ -524,6 +543,6 @@ def write_sibernetic_config(openworm_config):
 - **Implementation Status:** Complete (Sibernetic v1.0+)
 - **Next Actions:**
 
-1. Tag particles with cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4)
-2. Add cell-type-specific mechanical properties
+1. Extend per-particle cell IDs beyond muscles to all tissue types — hypodermis, seam cells, neurons ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4). Muscle cell IDs (96 units) are already mapped.
+2. Add cell-type-specific mechanical properties for non-muscle tissues
 3. Optimize Taichi backends for production use

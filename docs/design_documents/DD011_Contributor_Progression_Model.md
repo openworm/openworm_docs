@@ -10,7 +10,54 @@
 
 > **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Governance
 
-## Context
+## TL;DR
+
+OpenWorm uses a five-level contributor progression (L0 Observer through L5 Founder) with explicit criteria for advancement. Each level unlocks specific permissions (code review, merge authority, architectural decisions). This replaces informal trust-based access with transparent, documented governance. Badges earned through contributions make progression objective and visible.
+
+## Goal & Success Criteria
+
+### Goals
+
+1. **Transparent contributor advancement path** — newcomers can see exactly how to progress from observer to leader
+2. **Reduced founder bottleneck** — delegate mentoring, review, and merge authority to L3/L4 contributors
+3. **Clear subsystem ownership** — every Design Document domain has an accountable Senior Contributor (L4)
+
+### Success Criteria
+
+- At least 3 contributors at L3+ within 12 months of adoption
+- All subsystems in the ownership map have assigned L4 maintainers (no "TBD" entries)
+- Decision-making latency reduced: L3 contributors can merge PRs in their subsystem without founder review
+- Mind-of-a-Worm contributor database operational and tracking progression automatically
+
+## Deliverables
+
+- `contributor-levels.md` — public documentation of all five levels, criteria, and permissions
+- GitHub team and permission configuration — teams matching L1-L5 with appropriate repository access
+- Badge definitions — full DD011 badge taxonomy created in BadgeList via API
+- Onboarding checklist template — orientation task checklist for N2-Whisperer to assign new contributors
+- Updated openworm.org/people.html — contributor page restructured by level
+
+## Repository & Issues
+
+- **Primary repository:** `openworm/openworm_docs` (governance documentation)
+- **Administration:** `openworm/openworm-admin` (GitHub team configuration, permission scripts)
+- **Issue labels:** `dd011`, `governance`, `contributor-progression`
+- **Tracking:** Mind-of-a-Worm contributor database (see Implementation References section)
+
+## How to Build & Test
+
+N/A — this is a governance document, not a software component. To validate the contributor progression model:
+
+1. Review the contributor levels table against current community structure
+2. Verify GitHub team permissions match the five-level access model
+3. Test badge issuance via BadgeList API (see Badge Infrastructure section)
+4. Confirm Mind-of-a-Worm contributor database schema matches the examples in Implementation References
+
+## How to Visualize
+
+N/A — this is a governance document. Contributor progression is tracked via GitHub team membership and badge assignments, not simulation visualization. The public contributor page (openworm.org/people.html) displays contributors organized by level, and BadgeList profiles show earned badges.
+
+## Context & Background
 
 OpenWorm has operated with **informal, organic leadership emergence**: "experienced and enthusiastic volunteers often establish themselves as leaders without any prompting" ([Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382)). This has strengths (low bureaucracy, self-motivation) but creates problems:
 
@@ -23,7 +70,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 ---
 
-## Decision
+## Technical Approach
 
 ### Five-Level Contributor System
 
@@ -215,6 +262,16 @@ Demonstrate:
 3. **Demotion (Rare):** If an L3/L4 becomes inactive (no contribution for 6+ months), status reverts to L2. Not punitive; simply reflects activity. Can be re-earned.
 
 4. **Code of Conduct Enforcement:** Violations result in immediate level reduction or removal regardless of technical contributions. Respectful collaboration is non-negotiable.
+
+---
+
+## Boundaries (Explicitly Out of Scope)
+
+- **Compensation and payment structures** — contributor progression is merit-based, not financially compensated
+- **Legal contributor agreements (CLAs)** — intellectual property and licensing are handled separately
+- **Project-external community management** — social media presence, marketing, and external communications
+- **Social media governance** — posting policies, brand guidelines, and platform management
+- **Conflict resolution beyond technical disputes** — interpersonal conflicts outside the scope of code review and architectural decisions are escalated to the Board of Directors
 
 ---
 
@@ -608,6 +665,21 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 2. **Linux Kernel Maintainer Model:** LWN.net/Articles/703005
 3. **Medical Residency Graduated Autonomy:** PMC4675449
 4. **[Sarma et al. (2018)](https://doi.org/10.1098/rstb.2017.0382).** "OpenWorm: overview." *Phil Trans R Soc B* 373:20170382.
+
+## Integration Contract
+
+### How This DD Interfaces with Other DDs
+
+- **DD012 (RFC Process):** Contributor levels determine who can propose, review, and approve Design Documents
+- **DD015 (AI Contributor Model):** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
+- **DD013 (Simulation Stack):** Subsystem ownership map determines merge permissions per repository
+
+### Configuration
+
+- GitHub team structure mirrors the five contributor levels (L1-L5)
+- Repository branch protection rules enforce level-based merge permissions
+- Mind-of-a-Worm contributor database tracks level, badges, and subsystem assignments
+- BadgeList API integration awards badges on GitHub events (PR merge, orientation completion)
 
 ---
 
