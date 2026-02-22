@@ -18,28 +18,7 @@
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
-### Philosophical Foundations
-
-OpenWorm is not just a software project — it engages with deep questions about what it means to understand a biological system. Our design decisions are informed by several philosophical commitments:
-
-**Mechanistic explanation.** We follow the tradition of [Machamer, Darden & Craver (2000)](https://doi.org/10.1086/392759), who argue that biological understanding requires identifying mechanisms — organized systems of entities and activities that produce phenomena. Each DD specifies a mechanism (ion channels produce membrane dynamics, muscles produce force, neurons produce behavior). Understanding means being able to trace the causal chain from molecular parts through cellular activities to organismal behavior.
-
-**Causal interpretability over prediction.** [Pearl (2000)](https://doi.org/10.1017/CBO9780511803161) distinguishes between systems that can predict outcomes (statistical models) and systems that can answer "what if?" questions (causal models). OpenWorm is designed as a causal model: we can ablate a virtual neuron and predict the behavioral consequence, not because we trained on ablation data, but because the model captures the mechanistic structure that makes the prediction follow from first principles. This is our core differentiator from data-driven foundation models.
-
-**Emergence and reduction.** A simulated organism that exhibits behavior not explicitly programmed raises questions about emergence — whether higher-level properties (locomotion, foraging, arousal states) can be fully explained by lower-level mechanisms (channel kinetics, calcium dynamics, synaptic transmission). [Chalmers (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011) distinguishes "weak" emergence (deducible in principle from lower-level laws) from "strong" emergence (not so deducible). OpenWorm's multi-tier validation framework ([DD010](DD010_Validation_Framework.md)) directly tests whether behavior emerges from mechanism by validating at every level independently.
-
-**The significance of completeness.** [Haspel et al. (2023)](https://arxiv.org/abs/2308.06578) argue that *C. elegans* offers a unique opportunity for observational and perturbational completeness — recording from and manipulating every neuron — which is a prerequisite for causal understanding (Pearl & Mackenzie 2018). OpenWorm complements this experimental agenda with computational completeness: modeling every cell, every connection, every signaling pathway. Together, experimental and computational completeness enable a depth of understanding that partial approaches cannot achieve.
-
-??? note "References"
-    - [Machamer P, Darden L, Craver CF (2000)](https://doi.org/10.1086/392759). "Thinking about Mechanisms." *Philos Sci* 67:1-25.
-    - [Pearl J (2000)](https://doi.org/10.1017/CBO9780511803161). *Causality: Models, Reasoning, and Inference.* Cambridge University Press.
-    - [Chalmers DJ (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011). "Strong and Weak Emergence." In: *The Re-Emergence of Emergence.* Oxford University Press.
-    - [Haspel G et al. (2023)](https://arxiv.org/abs/2308.06578). "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
-    - Pearl J, Mackenzie D (2018). *The Book of Why: The New Science of Cause and Effect.* Basic Books.
-
-### Related Work: MetaWorm ([Zhao et al. 2024](https://doi.org/10.1038/s43588-024-00738-w))
-
-[Zhao et al. (2024)](https://doi.org/10.1038/s43588-024-00738-w) published MetaWorm (*Nature Computational Science* 4:978-990), the first integrative data-driven model achieving closed-loop brain-body-environment simulation of *C. elegans*. Their model used 136 multicompartmental neurons with 14 ion channel classes, a Projective Dynamics FEM body at 30 FPS, and gradient-descent optimization of synaptic weights against whole-brain calcium imaging data. OpenWorm's design documents incorporate lessons from MetaWorm throughout ([DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md)) while extending the scope significantly: 302 neurons (not 136), neuropeptidergic signaling ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)), organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)), the whole 959-cell organism ([DD004](DD004_Mechanical_Cell_Identity.md)), internal fluid dynamics via SPH ([DD003](DD003_Body_Physics_Architecture.md)), NeuroML standard format ([DD001](DD001_Neural_Circuit_Architecture.md)), and a formal 4-tier validation framework with automated CI ([DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md)). MetaWorm's open-source code ([github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0) provides reusable NMODL ion channel files and neuron morphology data.
+For the philosophical commitments behind these principles — mechanistic explanation, causal interpretability (Pearl), emergence, and completeness — see [Background: Mission & Design Principles](../background.md#mission-design-principles). For how OpenWorm compares to similar projects, see [Full History](../fullhistory.md#projects-similar-to-openworm).
 
 ## Quick Links
 
@@ -58,7 +37,7 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 **Resources:**
 
-- 📦 [GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md) — All 109 OpenWorm repositories (existing code resources are documented in each DD's "Existing Code Resources" section)
+- 📦 [GitHub Repo Inventory](../Resources/github-repo-inventory.md) — All 109 OpenWorm repositories (existing code resources are documented in each DD's "Existing Code Resources" section)
 
 ---
 
@@ -77,9 +56,9 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 ### Infrastructure Bootstrap ⚠️
 
-**Milestone:** "Containerized Stack with Automated Validation"
-**Duration:** 4 weeks
-**Status:** Proposed — must complete before modeling phases
+- **Milestone:** "Containerized Stack with Automated Validation"
+- **Duration:** 4 weeks
+- **Status:** Proposed — must complete before modeling phases
 
 | DD | Title | What It Delivers |
 |----|-------|------------------|
@@ -90,9 +69,9 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 ### Phase 1: Cell-Type Differentiation ⚠️
 
-**Milestone:** "Biologically Distinct Neurons"
-**Duration:** 3 months
-**Key:** 128 neuron classes from CeNGEN, functional connectivity improves ≥20%
+- **Milestone:** "Biologically Distinct Neurons"
+- **Duration:** 3 months
+- **Key:** 128 neuron classes from CeNGEN, functional connectivity improves ≥20%
 
 | DD | Title | What Changes |
 |----|-------|--------------|
@@ -102,9 +81,9 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 ### Phase 2: Slow Modulation + Closed-Loop ⚠️
 
-**Milestone:** "The Worm Can Feel and Modulate"
-**Duration:** 3 months
-**Key:** 31,479 neuropeptide connections + bidirectional touch response
+- **Milestone:** "The Worm Can Feel and Modulate"
+- **Duration:** 3 months
+- **Key:** 31,479 neuropeptide connections + bidirectional touch response
 
 | DD | Title | What Adds |
 |----|-------|-----------|
@@ -116,9 +95,9 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 ### Phase 3: Organ Systems ⚠️
 
-**Milestone:** "Multi-Organ Digital Organism"
-**Duration:** 6 months
-**Key:** Pharynx, intestine, egg-laying, ML acceleration
+- **Milestone:** "Multi-Organ Digital Organism"
+- **Duration:** 6 months
+- **Key:** Pharynx, intestine, egg-laying, ML acceleration
 
 | DD | Title | What Adds |
 |----|-------|-----------|
@@ -129,9 +108,9 @@ OpenWorm is not just a software project — it engages with deep questions about
 
 ### Phase 4: Complete Organism ⚠️
 
-**Milestone:** "959-Cell Photorealistic Whole Organism"
-**Duration:** 6 months
-**Key:** All somatic cells, mesh deformation, public web viewer
+- **Milestone:** "959-Cell Photorealistic Whole Organism"
+- **Duration:** 6 months
+- **Key:** All somatic cells, mesh deformation, public web viewer
 
 | DD | Title | What Adds |
 |----|-------|-----------|
@@ -258,4 +237,4 @@ See the **[Contributing Guide](contributing_guide.md)** for:
 
 - **[Phase Roadmap](DD_PHASE_ROADMAP.md)** — Complete timeline, milestones, dataset inventory
 - **[Integration Map](INTEGRATION_MAP.md)** — Dependency graph, bottleneck analysis, coupling chains
-- **[GitHub Repo Inventory](https://github.com/openworm/openworm-admin/blob/main/GITHUB_REPO_INVENTORY.md)** — All 109 OpenWorm repos
+- **[GitHub Repo Inventory](../Resources/github-repo-inventory.md)** — All 109 OpenWorm repos

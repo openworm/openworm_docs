@@ -1,10 +1,10 @@
 # DD004: Mechanical Cell Identity in Sibernetic (Per-Cell Physics)
 
-**Status:** Proposed (Phase 4)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
+- **Status:** Proposed (Phase 4)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 
@@ -389,9 +389,9 @@ When `body.cell_identity: true`:
 
 ---
 
-**Approved by:** Pending (Phase 4)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Phase 4)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Extract cell boundaries from Witvliet EM data
 2. Implement particle tagging in Sibernetic data structures

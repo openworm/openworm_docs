@@ -1,10 +1,10 @@
 # DD019: Closed-Loop Touch Response and Tap Withdrawal Behavior
 
-**Status:** Proposed (Phase 2-3)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-16  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
+- **Status:** Proposed (Phase 2-3)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-16
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
 
 ---
 
@@ -696,8 +696,8 @@ docker compose run validate --config tap_withdrawal --duration 30
 
 ### CE_locomotion Proprioceptive Feedback Model
 
-**Repository:** `openworm/CE_locomotion` (pushed 2026-02-18, **VERY ACTIVE**)
-**Collaboration:** Dr. Erick Olivares & Prof. Randall Beer
+- **Repository:** `openworm/CE_locomotion` (pushed 2026-02-18, **VERY ACTIVE**)
+- **Collaboration:** Dr. Erick Olivares & Prof. Randall Beer
 
 This repo contains a **complete neuromechanical C++ model** with a `StretchReceptor` module implementing proprioceptive feedback on motor neurons (Wen et al. 2012). This is the **missing piece** [DD019](DD019_Closed_Loop_Touch_Response.md) scopes out for future work.
 
@@ -1007,9 +1007,9 @@ docker compose run validate --config tap_withdrawal
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Implement MEC-4 channel model in NeuroML (`mec4_chan.channel.nml`)
 2. Implement cuticle strain readout from SPH particles (`strain_readout.py`)

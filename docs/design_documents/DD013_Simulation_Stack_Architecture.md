@@ -1,10 +1,10 @@
 # DD013: Simulation Stack Architecture (The Integration Backbone)
 
-**Status:** Proposed  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-15  
-**Supersedes:** Informal Docker meta-repo approach  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC Process)
+- **Status:** Proposed
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-15
+- **Supersedes:** Informal Docker meta-repo approach
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC Process)
 
 ---
 
@@ -980,9 +980,9 @@ Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports
 
 ---
 
-**Approved by:** Pending (requires founder + Integration Maintainer appointment)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (requires founder + Integration Maintainer appointment)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Appoint or recruit L4 Integration Maintainer
 2. Begin Phase A (config system + multi-stage Docker)

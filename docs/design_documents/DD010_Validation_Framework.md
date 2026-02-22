@@ -1,10 +1,10 @@
 # DD010: Validation Framework and Quantitative Benchmarks
 
-**Status:** Accepted  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline — data sourcing for all tiers)
+- **Status:** Accepted
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline — data sourcing for all tiers)
 
 ---
 
@@ -465,8 +465,8 @@ Two existing OpenWorm packages provide all the experimental data needed for Tier
 
 **1. wormneuroatlas** — Functional connectivity matrices from [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)
 
-**Repository:** `openworm/wormneuroatlas` (pushed 2025-10-22, maintained)
-**Installation:** `pip install wormneuroatlas`
+- **Repository:** `openworm/wormneuroatlas` (pushed 2025-10-22, maintained)
+- **Installation:** `pip install wormneuroatlas`
 
 ```python
 from wormneuroatlas import NeuroAtlas
@@ -489,8 +489,8 @@ Both wild-type and *unc-31* datasets are production-ready. No manual download fr
 
 **2. ConnectomeToolbox (`cect`)** — Unified connectivity data across five modalities
 
-**Repository:** `openworm/ConnectomeToolbox` ([Gleeson et al., in preparation](https://github.com/openworm/ConnectomeToolbox))
-**Installation:** `pip install cect`
+- **Repository:** `openworm/ConnectomeToolbox` ([Gleeson et al., in preparation](https://github.com/openworm/ConnectomeToolbox))
+- **Installation:** `pip install cect`
 
 The ConnectomeToolbox aggregates C. elegans connectivity data into a unified API with five modalities: anatomical, contactome, neurotransmitter atlases, extrasynaptic (neuropeptidergic — [Ripoll-Sánchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043), [Bentley 2016](https://doi.org/10.1371/journal.pcbi.1005283), [Pereira 2015](https://doi.org/10.7554/eLife.12432), [Beets 2022](https://doi.org/10.1101/2022.10.30.514428)), and functional ([Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)). For Tier 2 validation, the functional connectivity modality provides an alternative access path to the same Randi 2023 data:
 
@@ -706,6 +706,15 @@ Provides direct API access to [Randi 2023](https://doi.org/10.1038/s41586-023-06
 **neuronal-analysis** ([openworm/neuronal-analysis](https://github.com/openworm/neuronal-analysis), 2017, dormant):
 Tools to produce, analyse and compare simulated and recorded neuronal datasets — directly relevant to Tier 1 electrophysiology validation. May contain reusable single-cell comparison scripts.
 
+**owmeta-sciunit** ([openworm/owmeta-sciunit](https://github.com/openworm/owmeta-sciunit), 2021):
+OWMeta-integrated SciUnit types providing formalized Tier 1 single-cell validation test classes with Z-scores, pass/fail, and goodness-of-fit metrics. Recommended tooling for automating Tier 1 electrophysiology validation in CI ([DD013](DD013_Simulation_Stack_Architecture.md)).
+
+**worm-functional-connectivity** ([openworm/worm-functional-connectivity](https://github.com/openworm/worm-functional-connectivity), 2023):
+Alternative/supplementary source for Tier 2 functional connectivity matrices. Check if it includes unc-31 neuropeptide-deficient mutant data alongside wild-type.
+
+**NicolettiEtAl2024_MN_IN** + **NicolettiEtAl2019_NeuronModels** ([openworm/NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN), [openworm/NicolettiEtAl2019_NeuronModels](https://github.com/openworm/NicolettiEtAl2019_NeuronModels)):
+Published HH parameter fits for motor neurons, interneurons, AWCon, and RMD. Expand the Tier 1 calibration set beyond the current ~20 neurons.
+
 ---
 
 ## References
@@ -730,8 +739,8 @@ Tools to produce, analyse and compare simulated and recorded neuronal datasets �
 
 ---
 
-**Approved by:** OpenWorm Steering
-**Implementation Status:** Partial
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Partial
 
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
 - **Tier 2a** (functional connectivity): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data accessible via `wormneuroatlas` API — no manual ingestion needed (blocking)

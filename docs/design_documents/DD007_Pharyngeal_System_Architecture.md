@@ -1,10 +1,10 @@
 # DD007: Pharyngeal System Architecture (Semi-Autonomous Organ)
 
-**Status:** Proposed (Phase 3)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
+- **Status:** Proposed (Phase 3)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 
@@ -303,6 +303,12 @@ Contains a NEURON implementation of pm3 pharyngeal muscle with EAT-2, EGL-19, UN
 **PlateauNoiseModel** ([openworm/PlateauNoiseModel](https://github.com/openworm/PlateauNoiseModel), active 2025):
 Jupyter notebook with pharyngeal muscle plateau potential model and plotting code, related to Kenngott et al. 2025 paper. Provides validation data and reference kinetics for pharyngeal muscle models.
 
+**JohnsonMailler_MuscleModel** ([openworm/JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel), 2025):
+Ca²⁺-force coupling mechanics from Johnson & Mailler 2015. Evaluate whether the Ca²⁺ dynamics portion is separable from body wall muscle assumptions and adaptable for nonstriated pharyngeal muscle.
+
+**NicolettiEtAl2019_NeuronModels** / **NicolettiEtAl2024_MN_IN** ([openworm/NicolettiEtAl2019_NeuronModels](https://github.com/openworm/NicolettiEtAl2019_NeuronModels), [openworm/NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN)):
+May contain HH parameter fits for pharyngeal neurons (I1, M3, MC, NSM) that could initialize `c302_pharynx.py` neuron templates.
+
 ---
 
 ## References
@@ -430,9 +436,9 @@ docker compose run validate
 
 ---
 
-**Approved by:** Pending (Phase 3)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Phase 3)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Extract pharyngeal neuron expression from CeNGEN
 2. Implement pharyngeal muscle HH models with plateau kinetics

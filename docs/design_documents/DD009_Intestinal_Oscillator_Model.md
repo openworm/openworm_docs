@@ -1,10 +1,10 @@
 # DD009: Intestinal Calcium Oscillator and Defecation Motor Program
 
-**Status:** Proposed (Phase 3)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration)
+- **Status:** Proposed (Phase 3)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration)
 
 ---
 
@@ -442,9 +442,9 @@ When `body.cell_identity: true`, intestinal cells are represented by tagged SPH 
 
 ---
 
-**Approved by:** Pending (Phase 3)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Phase 3)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Implement IP3R dynamics in LEMS
 2. Add intestinal cell-specific HH models from CeNGEN

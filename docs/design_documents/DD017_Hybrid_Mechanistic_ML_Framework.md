@@ -1,10 +1,10 @@
 # DD017: Hybrid Mechanistic-ML Framework
 
-**Status:** Proposed (Phase 3-4)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-16  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
+- **Status:** Proposed (Phase 3-4)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-16
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 
@@ -816,6 +816,18 @@ Alternative neuromechanical model. Useful as a benchmark comparison for DD017's 
 **simple-C-elegans** ([openworm/simple-C-elegans](https://github.com/openworm/simple-C-elegans), 2020):
 Minimalist Python model based on OpenWorm and published literature. Possible starting point for DD017 Component 1 (differentiable backend) — simpler than full c302 for initial prototyping.
 
+**wormvae** ([openworm/wormvae](https://github.com/openworm/wormvae), 2022):
+Connectome-constrained Variational Autoencoder (ICLR 2022). Directly relevant to Component 2 (SPH surrogate) and Component 4 (sensory transduction) as a pre-trained latent representation of worm dynamics.
+
+**wormpose** ([openworm/wormpose](https://github.com/openworm/wormpose), 2025):
+Image synthesis and CNNs for *C. elegans* pose estimation. Provides labeled (stimulus, posture) pairs that could augment sensory transduction training data for Component 4.
+
+**CelegansNeuromechanicalGaitModulation** ([openworm/CelegansNeuromechanicalGaitModulation](https://github.com/openworm/CelegansNeuromechanicalGaitModulation), 2025):
+Neuromechanical gait modulation model with muscle activation patterns. Training data source for Component 2 (SPH surrogate) or benchmark for Component 1 (differentiable backend).
+
+**multi-dev-sibernetic** ([openworm/multi-dev-sibernetic](https://github.com/openworm/multi-dev-sibernetic), 2023):
+Multi-device Sibernetic engine. Useful for bulk generation of the 500-1000 SPH simulation runs needed for Component 2 surrogate training.
+
 ---
 
 ## References
@@ -861,9 +873,9 @@ Minimalist Python model based on OpenWorm and published literature. Possible sta
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Create `openworm/openworm-ml` repository
 2. Port [DD001](DD001_Neural_Circuit_Architecture.md) single-neuron HH model to PyTorch (Phase A, Week 1)

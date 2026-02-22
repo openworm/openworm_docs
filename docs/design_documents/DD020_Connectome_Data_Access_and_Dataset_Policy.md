@@ -1,10 +1,10 @@
 # DD020: Connectome Data Access and Dataset Policy
 
-**Status:** Proposed  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-16  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML), [DD019](DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)
+- **Status:** Proposed
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-16
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML), [DD019](DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)
 
 ---
 
@@ -808,6 +808,9 @@ The ConnectomeToolbox preprint (Gleeson et al., in preparation) is not yet avail
 **wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
 Complements `cect` with additional data not in the connectome: CeNGEN gene expression (`NeuroAtlas.get_gene_expression()`), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (`NeuroAtlas.get_signal_propagation_atlas()`), and neuropeptide/GPCR deorphanization (`PeptideGPCR` class). Consider adding to [DD013](DD013_Simulation_Stack_Architecture.md) Docker and `versions.lock`.
 
+**NemaNode** ([openworm/NemaNode](https://github.com/openworm/NemaNode), 2024, [nemanode.org](https://nemanode.org)):
+Interactive connectome map. Evaluate as cross-validation data source and potential source for per-synapse spatial position data not yet exposed in `cect`'s WitvlietDataReader (needed for [DD001](DD001_Neural_Circuit_Architecture.md) Level E multicompartmental models).
+
 ---
 
 ## References
@@ -841,9 +844,9 @@ Complements `cect` with additional data not in the connectome: CeNGEN gene expre
 
 ---
 
-**Approved by:** Pending (Dataset Policy)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Dataset Policy)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Pin `cect==0.2.7` in `versions.lock`
 2. Add `data.connectome` section to `openworm.yml` schema

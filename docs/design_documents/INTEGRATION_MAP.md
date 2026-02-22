@@ -1,7 +1,7 @@
 # OpenWorm Integration Map
-**Version:** 1.0
-**Created:** 2026-02-19
-**Purpose:** Master coupling dependency graph showing how all Design Documents fit together
+- **Version:** 1.0
+- **Created:** 2026-02-19
+- **Purpose:** Master coupling dependency graph showing how all Design Documents fit together
 
 ---
 
@@ -31,8 +31,8 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-**Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)
-**Last updated:** 2026-02-19
+- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)
+- **Last updated:** 2026-02-19
 
 ---
 
@@ -554,6 +554,6 @@ docker compose run test-dd019  # Only validates [DD019](DD019_Closed_Loop_Touch_
 
 ---
 
-**Approved by:** Pending (awaiting founder review)
-**Maintained by:** Integration L4 Maintainer (when appointed)
-**Next Update:** After Phase A (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation)
+- **Approved by:** Pending (awaiting founder review)
+- **Maintained by:** Integration L4 Maintainer (when appointed)
+- **Next Update:** After Phase A (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation)

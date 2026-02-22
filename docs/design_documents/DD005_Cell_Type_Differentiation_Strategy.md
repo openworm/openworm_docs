@@ -1,10 +1,10 @@
 # DD005: Cell-Type Differentiation Strategy Using Single-Cell Transcriptomics
 
-**Status:** Proposed (Phase 1)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Status:** Proposed (Phase 1)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
 
 ---
 
@@ -470,8 +470,8 @@ John White, in the February 12, 2026 meeting, emphasized: "there's a huge amount
 
 **RECOMMENDED: Use wormneuroatlas Python Package**
 
-**Repository:** `openworm/wormneuroatlas` (maintained, pip-installable)
-**Docs:** https://francescorandi.github.io/wormneuroatlas/
+- **Repository:** `openworm/wormneuroatlas` (maintained, pip-installable)
+- **Docs:** https://francescorandi.github.io/wormneuroatlas/
 
 ```python
 # Install
@@ -563,8 +563,8 @@ Do not switch the entire community to differentiated models on day 1. Rollout pl
 
 ### ChannelWorm Ion Channel Database (HIGH-IMPACT REUSE)
 
-**Repository:** `openworm/ChannelWorm` (pushed 2018-08-27, dormant but complete)
-**Status:** Contains curated ion channel database + HH parameter fitting tools
+- **Repository:** `openworm/ChannelWorm` (pushed 2018-08-27, dormant but complete)
+- **Status:** Contains curated ion channel database + HH parameter fitting tools
 
 **What It Provides:**
 ```
@@ -646,6 +646,15 @@ Contains curated ion channel database (`data/ion_channel_database.xlsx`), pre-ge
 
 **WormsenseLab_ASH** ([openworm/WormsenseLab_ASH](https://github.com/openworm/WormsenseLab_ASH), dormant):
 Contains ASH neuron patch clamp recordings useful for calibration training set (ASH channel conductances).
+
+**NicolettiEtAl2019_NeuronModels** ([openworm/NicolettiEtAl2019_NeuronModels](https://github.com/openworm/NicolettiEtAl2019_NeuronModels), 2025):
+Pre-fitted HH models for AWCon and RMD neurons (Nicoletti et al. 2019). Expands the ~20-neuron calibration training set with published parameter fits that can serve as cross-validation targets for the expression→conductance scaling pipeline.
+
+**NicolettiEtAl2024_MN_IN** ([openworm/NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN), 2025):
+Motor neuron and interneuron HH models (Nicoletti et al. 2024). Provides B-class motor neuron templates needed for [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) stretch receptor channels, and additional calibration data for motor neuron cell types.
+
+**NeuroPAL** ([openworm/NeuroPAL](https://github.com/openworm/NeuroPAL), 2025):
+Scripts for NeuroPAL dataset analysis and conversion. In-vivo neuron identification datasets for validating that cell-type assignments from CeNGEN expression correctly map to anatomical neuron identities.
 
 ---
 
@@ -778,9 +787,9 @@ docker compose run validate
 
 ---
 
-**Approved by:** Pending (Phase 1 work)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Phase 1 work)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Download CeNGEN L4 expression matrix
 2. Curate ion channel gene list

@@ -84,6 +84,49 @@ OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the
 
 ---
 
+Mission & Design Principles
+----------------------------
+
+The concepts above — bottom-up cell-level modeling, multi-algorithm integration, optimization against experimental data — are all in service of a single mission:
+
+> "OpenWorm is an open source project dedicated to creating the world's first virtual organism in a computer, a *C. elegans* nematode."
+
+Or more simply: **"Building the first digital life form. Open source."**
+
+This is an ambitious goal, and it requires discipline. We've crystallized our approach into four design principles that shape every architectural decision in the project:
+
+1. **Biophysically realistic** — grounded in experimental data, not heuristic shortcuts
+2. **Causally interpretable** — we can trace why behavior emerges from underlying mechanisms
+3. **Validated** — tested against real worm physiology and behavior ([DD010: Validation Framework](design_documents/DD010_Validation_Framework.md))
+4. **Composable** — subsystems integrate via clean interfaces so the whole is greater than the sum of its parts
+
+And one core conviction about *how* to build it:
+
+> "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
+
+These principles are operationalized in the [Design Documents](design_documents/index.md), which serve as the technical roadmap from today's 302-neuron simulation to the complete 959-cell digital organism.
+
+### Philosophical foundations
+
+These design principles didn't emerge in a vacuum — they draw on several intellectual traditions that inform how we think about what it means to truly *understand* a biological system.
+
+**Mechanistic explanation.** We follow [Machamer, Darden & Craver (2000)](https://doi.org/10.1086/392759), who argue that biological understanding requires identifying *mechanisms* — organized systems of entities and activities that produce phenomena. Each Design Document specifies a mechanism: ion channels produce membrane dynamics, muscles produce force, neurons produce behavior. Understanding means tracing the causal chain from molecular parts through cellular activities to organismal behavior.
+
+**Causal models, not just predictive ones.** [Pearl (2000)](https://doi.org/10.1017/CBO9780511803161) draws a crucial distinction between systems that can *predict* outcomes (statistical models) and systems that can answer *"what if?"* questions (causal models). OpenWorm is designed as a causal model — we can ablate a virtual neuron and predict the behavioral consequence, not because we trained on ablation data, but because the model captures the mechanistic structure that makes the prediction follow from first principles. This is our core differentiator from data-driven foundation models.
+
+**Emergence.** A simulated organism that exhibits behavior not explicitly programmed raises deep questions. Can higher-level properties (locomotion, foraging, arousal states) be fully explained by lower-level mechanisms (channel kinetics, calcium dynamics, synaptic transmission)? [Chalmers (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011) distinguishes "weak" emergence (deducible in principle from lower-level laws) from "strong" emergence (not so deducible). Our multi-tier [validation framework](design_documents/DD010_Validation_Framework.md) directly tests whether behavior emerges from mechanism, by validating at every level independently.
+
+**Completeness.** [Haspel et al. (2023)](https://arxiv.org/abs/2308.06578) argue that *C. elegans* offers a unique opportunity for observational and perturbational completeness — recording from and manipulating every neuron — which is a prerequisite for causal understanding ([Pearl & Mackenzie 2018](https://www.hachettebookgroup.com/titles/judea-pearl/the-book-of-why/9780465097616/)). OpenWorm complements this experimental agenda with *computational* completeness: modeling every cell, every connection, every signaling pathway. Together, experimental and computational completeness enable a depth of understanding that partial approaches cannot achieve.
+
+??? note "References"
+    - [Machamer P, Darden L, Craver CF (2000)](https://doi.org/10.1086/392759). "Thinking about Mechanisms." *Philos Sci* 67:1-25.
+    - [Pearl J (2000)](https://doi.org/10.1017/CBO9780511803161). *Causality: Models, Reasoning, and Inference.* Cambridge University Press.
+    - [Chalmers DJ (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011). "Strong and Weak Emergence." In: *The Re-Emergence of Emergence.* Oxford University Press.
+    - [Haspel G et al. (2023)](https://arxiv.org/abs/2308.06578). "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
+    - Pearl J, Mackenzie D (2018). *The Book of Why: The New Science of Cause and Effect.* Basic Books.
+
+---
+
 ## How These Concepts Connect to Design Documents
 
 Each concept on this page has been formalized into an actionable Design Document (DD):

@@ -2,3 +2,4 @@ _build/*
 .DS_Store
 site
 /github.auth
+CLAUDE.md

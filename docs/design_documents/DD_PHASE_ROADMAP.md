@@ -1,7 +1,7 @@
 # OpenWorm Modeling Phase Roadmap
-**Version:** 1.0
-**Created:** 2026-02-19
-**Purpose:** Master timeline for Design Document implementation with visible milestones
+- **Version:** 1.0
+- **Created:** 2026-02-19
+- **Purpose:** Master timeline for Design Document implementation with visible milestones
 
 ---
 
@@ -29,14 +29,14 @@
 
 ### How This Roadmap Serves the Mission
 
-**The Mission says:** "world's first virtual organism."
-**This Roadmap delivers:** 959-cell whole-organism simulation (Phase 4) with neurons, muscles, pharynx, intestine, hypodermis, reproductive system — validated against experimental data at three scales ([DD010](DD010_Validation_Framework.md) Tier 1-3).
+- **The Mission says:** "world's first virtual organism."
+- **This Roadmap delivers:** 959-cell whole-organism simulation (Phase 4) with neurons, muscles, pharynx, intestine, hypodermis, reproductive system — validated against experimental data at three scales ([DD010](DD010_Validation_Framework.md) Tier 1-3).
 
-**The Vision says:** "digital life form."
-**This Roadmap delivers:** Not just anatomy (static 3D models exist), but **dynamic temporal behavior** — pumping, defecating, egg-laying, locomoting, responding to touch — emergent from coupled biophysical subsystems.
+- **The Vision says:** "digital life form."
+- **This Roadmap delivers:** Not just anatomy (static 3D models exist), but **dynamic temporal behavior** — pumping, defecating, egg-laying, locomoting, responding to touch — emergent from coupled biophysical subsystems.
 
-**The Principles say:** "soft and squishy... physics matters."
-**This Roadmap delivers:** SPH body physics ([DD003](DD003_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD002](DD002_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
+- **The Principles say:** "soft and squishy... physics matters."
+- **This Roadmap delivers:** SPH body physics ([DD003](DD003_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD002](DD002_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
 
 ---
 
@@ -591,34 +591,34 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 ## Major Milestones (What You Run, What You See)
 
 ### Milestone 1: "Containerized Stack" (End of Phase A)
-**When:** Week 4 (late March 2026)
-**Run:** `docker compose run quick-test` — full build + simulation + validation in <5 minutes
-**See:** Terminal pass/fail report. Video output of worm locomotion. JSON validation scores.
-**Validated against:** [Yemini 2013](https://doi.org/10.1038/nmeth.2560) kinematics (Tier 3), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (Tier 2)
+- **When:** Week 4 (late March 2026)
+- **Run:** `docker compose run quick-test` — full build + simulation + validation in <5 minutes
+- **See:** Terminal pass/fail report. Video output of worm locomotion. JSON validation scores.
+- **Validated against:** [Yemini 2013](https://doi.org/10.1038/nmeth.2560) kinematics (Tier 3), [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity (Tier 2)
 
 ### Milestone 2: "Biologically Distinct Neurons" (End of Phase 1)
-**When:** Month 3 (June 2026)
-**Run:** `docker compose up viewer` — open `localhost:8501`
-**See:** 3D worm with 302 neurons colored by 128 classes. Click any neuron — inspector shows class-specific dynamics. Compare differentiated vs. generic model side-by-side.
-**Validated against:** [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) — functional connectivity correlation improves ≥20% over generic baseline
+- **When:** Month 3 (June 2026)
+- **Run:** `docker compose up viewer` — open `localhost:8501`
+- **See:** 3D worm with 302 neurons colored by 128 classes. Click any neuron — inspector shows class-specific dynamics. Compare differentiated vs. generic model side-by-side.
+- **Validated against:** [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) — functional connectivity correlation improves ≥20% over generic baseline
 
 ### Milestone 3: "The Worm Can Feel" (End of Phase 2)
-**When:** Month 6 (September 2026)
-**Run:** `docker compose run simulation --config closedloop_touch` — tap the worm at t=5s
-**See:** Worm reverses direction within <1s, travels backward ≥1 body length, resumes forward. Anterior tap → backward, posterior tap → forward. Neuropeptide clouds visible as slow modulatory mist.
-**Validated against:** [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal; [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) direction discrimination; ≥3 peptide knockout phenotypes ([Li 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers 2003](https://doi.org/10.1038/nn1140))
+- **When:** Month 6 (September 2026)
+- **Run:** `docker compose run simulation --config closedloop_touch` — tap the worm at t=5s
+- **See:** Worm reverses direction within <1s, travels backward ≥1 body length, resumes forward. Anterior tap → backward, posterior tap → forward. Neuropeptide clouds visible as slow modulatory mist.
+- **Validated against:** [Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) tap withdrawal; [Wicks 1996](https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996) direction discrimination; ≥3 peptide knockout phenotypes ([Li 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers 2003](https://doi.org/10.1038/nn1140))
 
 ### Milestone 4: "Multi-Organ Organism" (End of Phase 3)
-**When:** Month 12 (March 2027)
-**Run:** `docker compose run simulation --config full_organism` (~20 simulated minutes)
-**See:** Worm crawls while pharynx pumps at 3-4 Hz, intestine fires calcium waves every ~50s triggering defecation, and egg-laying bouts occur every ~20 min. All visible simultaneously in the viewer.
-**Validated against:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) pharyngeal EPG; [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation period; [Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging
+- **When:** Month 12 (March 2027)
+- **Run:** `docker compose run simulation --config full_organism` (~20 simulated minutes)
+- **See:** Worm crawls while pharynx pumps at 3-4 Hz, intestine fires calcium waves every ~50s triggering defecation, and egg-laying bouts occur every ~20 min. All visible simultaneously in the viewer.
+- **Validated against:** [Raizen 1994](https://doi.org/10.1016/0896-6273(94)90207-0) pharyngeal EPG; [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) defecation period; [Collins 2016](https://doi.org/10.7554/eLife.21126) egg-laying calcium imaging
 
 ### Milestone 5: "WormSim 2.0" (End of Phase 4)
-**When:** Month 18 (September 2027)
-**Run:** Open `wormsim.openworm.org` — no installation required
-**See:** Smooth worm with 688 deforming anatomical meshes. Zoom from organism → tissue (click any of 959 cells) → molecular (ion channels, gene transcription). 60fps on a laptop.
-**Validated against:** All previous tiers passing. Cell-type-specific mechanics produce realistic body deformation.
+- **When:** Month 18 (September 2027)
+- **Run:** Open `wormsim.openworm.org` — no installation required
+- **See:** Smooth worm with 688 deforming anatomical meshes. Zoom from organism → tissue (click any of 959 cells) → molecular (ion channels, gene transcription). 60fps on a laptop.
+- **Validated against:** All previous tiers passing. Cell-type-specific mechanics produce realistic body deformation.
 
 ---
 
@@ -662,6 +662,6 @@ A: After each major milestone:
 
 ---
 
-**Approved by:** Pending (awaiting founder review)
-**Maintained by:** Integration L4 Maintainer (when appointed)
-**Next Review:** After Phase A completion (reassess timeline based on actual progress)
+- **Approved by:** Pending (awaiting founder review)
+- **Maintained by:** Integration L4 Maintainer (when appointed)
+- **Next Review:** After Phase A completion (reassess timeline based on actual progress)

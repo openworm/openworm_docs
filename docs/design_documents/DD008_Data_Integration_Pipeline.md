@@ -1,10 +1,10 @@
 # DD008: Data Integration Pipeline and OWMeta Knowledge Graph
 
-**Status:** Accepted (with proposed extensions)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** All other DDs (data layer for entire project)
+- **Status:** Accepted (with proposed extensions)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** All other DDs (data layer for entire project)
 
 ---
 
@@ -430,9 +430,9 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 
 ---
 
-**Approved by:** OpenWorm Steering
-**Implementation Status:** Partial (core OWMeta exists, extensions proposed)
-**Next Actions:**
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Partial (core OWMeta exists, extensions proposed)
+- **Next Actions:**
 
 1. Ingest Ripoll-Sanchez neuropeptides
 2. Ingest Witvliet developmental connectomes

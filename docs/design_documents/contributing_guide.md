@@ -255,6 +255,21 @@ From [DD012](DD012_Design_Document_RFC_Process.md) Quality Criteria section:
 
 *Contributor doesn't know where to start. Repository & Issues section is required.*
 
+**❌ Consecutive bold-key lines without list markers:**
+> ```
+> **Status:** Accepted
+> **Author:** OpenWorm Core Team
+> **Date:** 2026-02-14
+> ```
+
+*Standard Markdown treats consecutive lines as a single paragraph — these will render as one run-together line. Always use list markers (`- `) for metadata blocks:*
+
+> ```
+> - **Status:** Accepted
+> - **Author:** OpenWorm Core Team
+> - **Date:** 2026-02-14
+> ```
+
 ---
 
 ## Frequently Asked Questions

@@ -1,10 +1,10 @@
 # DD011: Contributor Progression Model (The Graduated Access System)
 
-**Status:** Proposed (Governance)  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** Informal contributor model  
-**Related:** AI-Augmented Open Science Proposal
+- **Status:** Proposed (Governance)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** Informal contributor model
+- **Related:** AI-Augmented Open Science Proposal
 
 ---
 
@@ -611,9 +611,9 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 
 ---
 
-**Approved by:** Pending (requires community discussion)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (requires community discussion)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Map current contributors to proposed levels
 2. Publish criteria on openworm.org

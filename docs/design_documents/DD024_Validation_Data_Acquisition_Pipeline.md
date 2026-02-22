@@ -1,10 +1,10 @@
 # DD024: Validation Data Acquisition Pipeline
 
-**Status:** Proposed (Phase A — Infrastructure)
-**Author:** OpenWorm Core Team
-**Date:** 2026-02-21
-**Supersedes:** None
-**Related:** [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox)
+- **Status:** Proposed (Phase A — Infrastructure)
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-21
+- **Supersedes:** None
+- **Related:** [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox)
 
 ---
 
@@ -364,9 +364,9 @@ validation:
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Create `openworm/validation-data` GitHub repository
 2. Acquire Phase A datasets (7 datasets, ~18 hours)

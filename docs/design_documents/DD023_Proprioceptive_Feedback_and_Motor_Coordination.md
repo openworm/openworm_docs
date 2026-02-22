@@ -1,10 +1,10 @@
 # DD023: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
-**Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md))  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-19  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — established bidirectional coupling pattern)
+- **Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md))
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-19
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — established bidirectional coupling pattern)
 
 ---
 
@@ -67,8 +67,8 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 ### CE_locomotion Stretch Receptor Model
 
-**Repository:** `openworm/CE_locomotion` (pushed 2026-02-18, **VERY ACTIVE**)
-**Authors:** Dr. Erick Olivares, Prof. Randall Beer
+- **Repository:** `openworm/CE_locomotion` (pushed 2026-02-18, **VERY ACTIVE**)
+- **Authors:** Dr. Erick Olivares, Prof. Randall Beer
 
 **This repo already implements proprioceptive feedback!**
 
@@ -113,6 +113,18 @@ This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Bee
 
 **Estimated Time Savings:** 30-50 hours (stretch receptor model + validation already done)
 
+### CelegansNeuromechanicalGaitModulation
+
+- **Repository:** `openworm/CelegansNeuromechanicalGaitModulation` (pushed 2025-08-01)
+
+Neuromechanical gait modulation model that likely incorporates proprioceptive or body-state feedback. May contain curvature-based motor control logic directly applicable to the stretch receptor implementation in this DD.
+
+### NicolettiEtAl2024_MN_IN
+
+- **Repository:** `openworm/NicolettiEtAl2024_MN_IN` (pushed 2025-11-04)
+
+Motor neuron (MN) and interneuron (IN) HH models (Nicoletti et al. 2024). The B-class motor neurons (DB, VB) are the target cells for stretch receptor channels — these pre-fitted templates provide the starting point to which `stretch_receptor_chan.channel.nml` gets added.
+
 ---
 
 ## Alternatives Considered
@@ -153,9 +165,9 @@ This model is ACTIVE (2026-02-18). **Reach out to Erick Olivares and Randall Bee
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD019](DD019_Closed_Loop_Touch_Response.md) bidirectional coupling established)
+- **Next Actions:**
 
 1. Contact CE_locomotion authors (collaboration opportunity)
 2. Extract StretchReceptor algorithm

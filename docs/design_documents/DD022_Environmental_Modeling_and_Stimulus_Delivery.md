@@ -1,10 +1,10 @@
 # DD022: Environmental Modeling and Stimulus Delivery
 
-**Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-19  
-**Supersedes:** None  
-**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
+- **Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-19
+- **Supersedes:** None
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
 
 ---
 
@@ -216,9 +216,9 @@ Similar to chemical gradient but for temperature:
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
+- **Next Actions:**
 
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
 2. Implement steady-state gradient solver (chemical, thermal)

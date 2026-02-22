@@ -1,10 +1,10 @@
 # DD014: Dynamic Visualization and Multi-Scale Exploration Architecture
 
-**Status:** Proposed  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-15  
-**Supersedes:** WormBrowser (browser.openworm.org, 2012), WormSim (org.wormsim.frontend, 2014-2015), informal Geppetto coupling  
-**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
+- **Status:** Proposed
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-15
+- **Supersedes:** WormBrowser (browser.openworm.org, 2012), WormSim (org.wormsim.frontend, 2014-2015), informal Geppetto coupling
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
 
 ---
 
@@ -688,9 +688,9 @@ Interactive web-based map of neural connections (formerly nemanode.org). May con
 
 ---
 
-**Approved by:** Pending
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Evolve Worm3DViewer from Streamlit to Trame (Phase 1, critical path)
 2. Implement OME-Zarr export in `master_openworm.py`

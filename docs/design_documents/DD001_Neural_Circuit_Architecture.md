@@ -1,10 +1,10 @@
 # DD001: Neural Circuit Architecture and Multi-Level Framework
 
-**Status:** Accepted  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Status:** Accepted
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
 
 ---
 
@@ -622,6 +622,6 @@ The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](
 
 ---
 
-**Approved by:** OpenWorm Steering
-**Implementation Status:** Complete (c302 Levels A-D exist)
-**Next Review:** After Phase 1 cell-type differentiation (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Complete (c302 Levels A-D exist)
+- **Next Review:** After Phase 1 cell-type differentiation (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))

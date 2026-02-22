@@ -1,10 +1,10 @@
 # DD002: Muscle Model Architecture and Calcium-Force Coupling
 
-**Status:** Accepted  
-**Author:** OpenWorm Core Team (based on [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025))  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics)
+- **Status:** Accepted
+- **Author:** OpenWorm Core Team (based on [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025))
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics)
 
 ---
 
@@ -499,9 +499,9 @@ docker compose run validate
 
 ---
 
-**Approved by:** OpenWorm Steering
-**Implementation Status:** Complete (GenericMuscleCell in c302)
-**Next Actions:**
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Complete (GenericMuscleCell in c302)
+- **Next Actions:**
 
 1. Differentiate into muscle-type-specific models using transcriptomics (Phase 3)
 2. Add pharyngeal muscles ([DD007](DD007_Pharyngeal_System_Architecture.md))

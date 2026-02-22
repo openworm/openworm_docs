@@ -1,10 +1,10 @@
 # DD003: Body Physics Engine (Sibernetic) Architecture
 
-**Status:** Accepted  
-**Author:** Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team  
-**Date:** 2026-02-14  
-**Supersedes:** None  
-**Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity)
+- **Status:** Accepted
+- **Author:** Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team
+- **Date:** 2026-02-14
+- **Supersedes:** None
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity)
 
 ---
 
@@ -520,9 +520,9 @@ def write_sibernetic_config(openworm_config):
 
 ---
 
-**Approved by:** OpenWorm Steering
-**Implementation Status:** Complete (Sibernetic v1.0+)
-**Next Actions:**
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Complete (Sibernetic v1.0+)
+- **Next Actions:**
 
 1. Tag particles with cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4)
 2. Add cell-type-specific mechanical properties

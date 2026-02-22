@@ -1,10 +1,10 @@
 # DD021: Movement Analysis Toolbox and WCON Policy
 
-**Status:** Proposed  
-**Author:** OpenWorm Core Team  
-**Date:** 2026-02-16  
-**Supersedes:** None  
-**Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — WCON producer), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD010](DD010_Validation_Framework.md) (Validation Framework — Tier 3 consumer), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack — CI consumer), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — structural model)
+- **Status:** Proposed
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-16
+- **Supersedes:** None
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — WCON producer), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD010](DD010_Validation_Framework.md) (Validation Framework — Tier 3 consumer), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack — CI consumer), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — structural model)
 
 ---
 
@@ -862,6 +862,9 @@ Modern successor to SegWorm + analysis toolbox, implementing the same 726-featur
 **WCONViewer** ([openworm/WCONViewer](https://github.com/openworm/WCONViewer), active 2025):
 Python-based 2D viewer for WCON files. Already reads WCON 1.0 format. Reuse its WCON parser for toolbox revival, or recommend as a lightweight alternative for quick trajectory inspection.
 
+**wormpose** ([openworm/wormpose](https://github.com/openworm/wormpose), 2025):
+Image synthesis and CNNs for *C. elegans* pose estimation from video. Produces skeleton time series that may bridge between real video data and the toolbox's `NormalizedWorm` format, providing an additional data input path.
+
 ---
 
 ## References
@@ -886,9 +889,9 @@ Python-based 2D viewer for WCON files. Already reads WCON 1.0 format. Reuse its 
 
 ---
 
-**Approved by:** Pending (Validation Tools)
-**Implementation Status:** Proposed
-**Next Actions:**
+- **Approved by:** Pending (Validation Tools)
+- **Implementation Status:** Proposed
+- **Next Actions:**
 
 1. Appoint or recruit Validation L4 maintainer (or assign revival to existing contributor)
 2. Begin Task 1: Test toolbox on Python 3.12 in Docker
