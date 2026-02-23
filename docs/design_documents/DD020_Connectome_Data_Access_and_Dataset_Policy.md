@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML), [DD019](DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML), [DD019](DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)
 
 ---
 
@@ -544,7 +544,7 @@ The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates
 
 3. **Neuropeptidergic modeling:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) owns the biological interpretation of Ripoll-Sanchez neuropeptide data. This DD provides access to the data.
 
-4. **Cell-type differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) owns CeNGEN expression-to-conductance mapping. This DD does not cover transcriptomic data access.
+4. **Cell-type specialization:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) owns CeNGEN expression-to-conductance mapping. This DD does not cover transcriptomic data access.
 
 5. **Pharyngeal system modeling:** [DD007](DD007_Pharyngeal_System_Architecture.md) owns the pharyngeal oscillator model. This DD provides the pharyngeal subset of the connectome.
 
@@ -767,7 +767,7 @@ print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) full validati
 |---------------|----|-----------------------------|
 | Neural circuit topology | [DD001](DD001_Neural_Circuit_Architecture.md) | Changing default dataset changes every synapse in the simulation |
 | Muscle innervation | [DD002](DD002_Muscle_Model_Architecture.md) | Neuron-to-muscle connection list drives NMJ coupling |
-| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) neuron list defines which cells to differentiate |
+| Cell-type specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) neuron list defines which cells to specialize |
 | Neuropeptidergic network | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Ripoll-Sanchez data defines peptide-receptor interactions |
 | Pharyngeal circuit | [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal view filter defines pharynx neuron connectivity |
 | Data integration | [DD008](DD008_Data_Integration_Pipeline.md) | OWMeta ingests connectome data from `cect` (Phase 3+) |

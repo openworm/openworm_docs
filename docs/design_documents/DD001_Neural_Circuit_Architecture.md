@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
+- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
 
 ---
 
@@ -180,7 +180,7 @@ C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 
 **Ion channels (derived from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle model):**
 
-> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
+> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
 
 ### Protein Foundation Model Pathway for Channel Kinetics
 
@@ -376,7 +376,7 @@ python scripts/check_regression.py validation_report.json baseline_score.json
 
 ### What This Design Document Does NOT Cover:
 
-1. **Cell-type-specific differentiation:** Covered in [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation Using CeNGEN). This document defines the *generic* cell template.
+1. **Cell-type-specific specialization:** Covered in [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization Using CeNGEN). This document defines the *generic* cell template.
 
 2. **Neuropeptidergic / extrasynaptic signaling:** Covered in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration). This document covers only fast synaptic and gap junction transmission.
 
@@ -590,7 +590,7 @@ neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)): CeNGEN cell-type differentiation
+  differentiated: false              # Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)): CeNGEN cell-type specialization
   neuropeptides: false               # Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): peptidergic modulation
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
@@ -602,7 +602,7 @@ neural:
 | `neural.enabled` | `true` | `true`/`false` | Enable neural circuit simulation |
 | `neural.framework` | `c302` | `c302` | Neural framework (only c302 currently) |
 | `neural.level` | `C1` | `A`, `B`, `C`, `C1`, `C2`, `D` | Biophysical detail level |
-| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN cell-type differentiation ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
+| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN cell-type specialization ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
 | `neural.neuropeptides` | `false` | `true`/`false` | Enable peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | `neural.connectome_dataset` | `"Cook2019"` | `"Cook2019"`, `"Witvliet2021"`, `"Varshney2011"` | Connectome data source |
 | `neural.data_reader` | `"UpdatedSpreadsheetDataReader2"` | String | Data reader class |
@@ -661,4 +661,4 @@ The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](
 
 - **Approved by:** OpenWorm Steering
 - **Implementation Status:** Complete (c302 Levels A-D exist)
-- **Next Review:** After Phase 1 cell-type differentiation (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+- **Next Review:** After Phase 1 cell-type specialization (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))

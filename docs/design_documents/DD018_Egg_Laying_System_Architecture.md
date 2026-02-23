@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome)
 
 ---
 
@@ -914,7 +914,7 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|----------------------------|
 | Neural circuit (HSN, VC connectivity) | [DD001](DD001_Neural_Circuit_Architecture.md) | If HSN/VC synaptic weights change, egg-laying drive strength changes |
-| CeNGEN differentiation (HSN, VC channel densities) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If HSN/VC conductances change, circuit dynamics change |
+| CeNGEN specialization (HSN, VC channel densities) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If HSN/VC conductances change, circuit dynamics change |
 | Body bend locomotion (vm1 rhythmic drive) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD003](DD003_Body_Physics_Architecture.md) | If body bend period changes, rhythmic vm1 excitation timing changes |
 | Neuropeptide signaling (NLP-3, NLP-7, FLP-11) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If peptide dynamics change, HSN co-transmission and uv1 feedback change |
 | Cell identity (future vulval muscle particles) | [DD004](DD004_Mechanical_Cell_Identity.md) | If vulval muscle cell_ids change, wrong particles contract |

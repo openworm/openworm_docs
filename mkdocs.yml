@@ -34,8 +34,8 @@ nav:
           - DD021 Movement Toolbox: design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md
           - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
           - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
-      - "Phase 1 — Cell Differentiation":
-          - DD005 Cell-Type Differentiation: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
+      - "Phase 1 — Cell-Type Specialization":
+          - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD010 Validation Framework: design_documents/DD010_Validation_Framework.md
           - DD014 Dynamic Visualization: design_documents/DD014_Dynamic_Visualization_Architecture.md
           - DD014.1 Visual Rendering: design_documents/DD014.1_Visual_Rendering_Specification.md

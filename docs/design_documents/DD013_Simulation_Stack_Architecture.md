@@ -26,7 +26,7 @@ Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD012](DD012_Des
 | Muscle model | [DD002](DD002_Muscle_Model_Architecture.md) | `openworm/c302` + `openworm/muscle_model` | **Working** — coupled to c302 |
 | Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | `openworm/sibernetic` | **Working** — coupled to c302 via `sibernetic_c302.py` |
 | Mechanical cell identity | [DD004](DD004_Mechanical_Cell_Identity.md) | `openworm/sibernetic` (future) | **Not started** |
-| Cell-type differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `openworm/c302` (future) | **Not started** |
+| Cell-type specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `openworm/c302` (future) | **Not started** |
 | Neuropeptides | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | `openworm/c302` (future) | **Not started** |
 | Pharynx | [DD007](DD007_Pharyngeal_System_Architecture.md) | New repo TBD | **Not started** |
 | Data integration (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | `openworm/owmeta` | **Dormant** (last real commit Jul 2024) |
@@ -143,7 +143,7 @@ neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1: CeNGEN cell-type differentiation ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+  differentiated: false              # Phase 1: CeNGEN cell-type specialization ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
   neuropeptides: false               # Phase 2: peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
@@ -883,7 +883,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) cell differentiation hooks in config | Neural L4 | 8 hrs | Phase A |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) cell-type specialization hooks in config | Neural L4 | 8 hrs | Phase A |
 | [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx model repo + integration | Muscle L4 | 16 hrs | Phase A |
 | [DD009](DD009_Intestinal_Oscillator_Model.md) intestine model repo + integration | Muscle L4 | 16 hrs | Phase A |
 | [DD004](DD004_Mechanical_Cell_Identity.md) mechanical cell identity integration | Body Physics L4 | 12 hrs | Phase A |

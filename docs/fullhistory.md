@@ -153,7 +153,7 @@ Key developments:
 
 - **25 Design Documents** written ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD023](design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) + [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md)/DD014.2), covering every subsystem from ion channels to organ systems
 - **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)) established: single-cell electrophysiology, circuit-level functional connectivity, and whole-organism behavioral kinematics
-- **Phase roadmap** defined: from the existing 302-neuron foundation (Phase 0) through cell differentiation, slow modulation, organ systems, to a complete 959-cell organism (Phase 4)
+- **Phase roadmap** defined: from the existing 302-neuron foundation (Phase 0) through cell-type specialization, slow modulation, organ systems, to a complete 959-cell organism (Phase 4)
 - **Contributor progression model** ([DD011](design_documents/DD011_Contributor_Progression_Model.md)) formalized for scaling the community
 
 The shift from "cool demo" to "validated engineering blueprint" is what distinguishes the current approach from the prototyping era. See [Archived Projects](archived_projects.md) for how early prototypes like CyberElegans and Geppetto evolved into current Design Documents.

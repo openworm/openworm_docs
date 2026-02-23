@@ -51,7 +51,7 @@ More detailed information is available on the [Sibernetic project page](Projects
 
 **c302 Neural Modeling Framework**
 
-c302 implements **[DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell differentiation), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (egg-laying), and [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (touch response).
+c302 implements **[DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (egg-laying), and [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (touch response).
 
 c302 generates NeuroML2 networks at multiple levels of biophysical detail (Levels A-D), with **Level C1 (HH + graded synapses)** as the recommended default for coupling with Sibernetic.
 
@@ -99,7 +99,7 @@ More detailed information is available on the [Community project page](Projects/
 
 **Muscle-Neuron Integration**
 
-Now formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (neural) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell differentiation). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
+Now formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (neural) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
 
 More detailed information is available on the [Muscle-Neuron integration project page](Projects/muscle-neuron-integration/).
 

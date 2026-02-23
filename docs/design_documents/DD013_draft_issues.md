@@ -664,9 +664,9 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 28: DD005 cell differentiation hooks
+### Issue 28: DD005 cell-type specialization hooks
 
-- **Title:** `[DD013] Add DD005 cell differentiation config hooks and subsystem init`
+- **Title:** `[DD013] Add DD005 cell-type specialization config hooks and subsystem init`
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
@@ -674,11 +674,11 @@ Target: New subsystems plug into the stack via config toggles.
 - **Depends On:** Issue 9
 - **Files to Modify:**
     - `openworm.yml` (verify `neural.differentiated` flag exists)
-    - `master_openworm.py` (add conditional init for cell differentiation)
+    - `master_openworm.py` (add conditional init for cell-type specialization)
 - **Test Commands:**
     - `python3 master_openworm.py --config configs/differentiated.yml --dry-run`
 - **Acceptance Criteria:**
-    - [ ] `neural.differentiated: true` triggers CeNGEN-based cell-type differentiation in c302
+    - [ ] `neural.differentiated: true` triggers CeNGEN-based cell-type specialization in c302
     - [ ] `neural.differentiated: false` uses current behavior (302 identical neurons)
     - [ ] Placeholder integration code in `master_openworm.py` with clear TODO markers for DD005 implementation
     - [ ] Config documented with reference to DD005
@@ -1135,7 +1135,7 @@ Issue 1 (config schema)
             ├→ Issue 18 (output gen) → Issue 19 (OME-Zarr)
             │    └→ Issue 20 (validation) → Issue 21 (CI Gate 3) → Issue 22 (CI Gate 4)
             │                              → Issue 29 (DD004 cell identity)
-            ├→ Issue 28 (DD005 differentiation)
+            ├→ Issue 28 (DD005 cell-type specialization)
             ├→ Issue 30 (DD006 neuropeptides)
             ├→ Issue 31 (DD007 pharynx)
             └→ Issue 32 (DD009 intestine)

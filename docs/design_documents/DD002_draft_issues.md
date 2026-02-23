@@ -355,7 +355,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 - **Labels:** `DD002`, `human-expert`, `L3`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, bioinformatics, neuroscience
-- **DD Section to Read:** [DD002 — Migration Path — Muscle-Type Diversity](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#if-muscle-type-diversity-is-required-phase-3) and [DD005](https://docs.openworm.org/design_documents/DD005_Cell_Type_Differentiation_Strategy/) (Cell-Type Differentiation)
+- **DD Section to Read:** [DD002 — Migration Path — Muscle-Type Diversity](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#if-muscle-type-diversity-is-required-phase-3) and [DD005](https://docs.openworm.org/design_documents/DD005_Cell_Type_Differentiation_Strategy/) (Cell-Type Specialization)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a report)
@@ -531,7 +531,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 |------------|---------------|
 | DD001 (Neural Circuit) | Issues 8, 12 (NMJ connectivity and conductance) |
 | DD003 (Body Physics) | Issues 7, 10, 18 (calcium interface, config, coupling) |
-| DD005 (Cell-Type Differentiation) | Issue 13 (CeNGEN transcriptomics for muscle types) |
+| DD005 (Cell-Type Specialization) | Issue 13 (CeNGEN transcriptomics for muscle types) |
 | DD007 (Pharyngeal System) | Issue 15 (specialized muscle mechanics) |
 | DD010 (Validation Framework) | Issues 1, 2, 7 (validation scripts and integration testing) |
 | DD013 (Simulation Stack) | Issues 6, 10 (config schema and propagation) |

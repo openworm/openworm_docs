@@ -698,7 +698,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
     - [ ] Neuron naming matches between `wormneuroatlas` and c302 (or mapping documented)
     - [ ] Test verifies: load connectivity, load expression, cross-reference neuron names
     - [ ] Document any API versioning or compatibility issues
-- **Sponsor Summary Hint:** `wormneuroatlas` is a Python package that provides unified access to connectome data, gene expression (CeNGEN), and functional connectivity (Randi 2023). This verifies it works in our environment and that neuron names match between the atlas and our model — a critical prerequisite for both synaptic optimization and cell-type differentiation.
+- **Sponsor Summary Hint:** `wormneuroatlas` is a Python package that provides unified access to connectome data, gene expression (CeNGEN), and functional connectivity (Randi 2023). This verifies it works in our environment and that neuron names match between the atlas and our model — a critical prerequisite for both synaptic optimization and cell-type specialization.
 
 ---
 

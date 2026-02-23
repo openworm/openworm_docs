@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-22
 - **Supersedes:** None (extracted from [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3)
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
 
 ---
 
@@ -126,7 +126,7 @@ python scripts/generate_dd005_priors.py \
 
 ### The Problem: Limited Electrophysiology Data
 
-[DD001](DD001_Neural_Circuit_Architecture.md) uses the same generic HH parameters for all 302 neurons. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes differentiating via CeNGEN single-cell transcriptomics, but the mapping from mRNA transcript counts to functional conductance densities is a hard, unsolved problem. The current plan ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) proposes a hand-crafted scaling:
+[DD001](DD001_Neural_Circuit_Architecture.md) uses the same generic HH parameters for all 302 neurons. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN single-cell transcriptomics, but the mapping from mRNA transcript counts to functional conductance densities is a hard, unsolved problem. The current plan ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) proposes a hand-crafted scaling:
 
 ```
 g_max(neuron_class, channel) = baseline_g * expression_level(neuron_class, channel) / max_expression(channel)
@@ -291,7 +291,7 @@ ml:
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Cell differentiation (if using predicted kinetics) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
+| Cell-type specialization (if using predicted kinetics) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
 | Neural circuit (if using per-class params) | [DD001](DD001_Neural_Circuit_Architecture.md) | If per-class parameters change, simulation behavior changes |
 
 ---
@@ -335,7 +335,7 @@ ml:
 
 ## Relationship to DD005 and DD017
 
-**DD005 (Cell-Type Differentiation):** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
+**DD005 (Cell-Type Specialization):** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
 
 **DD017 (Hybrid ML Framework):** DD025 was originally DD017 Component 3. Components 1 (differentiable backend), 2 (SPH surrogate), and 4 (learned sensory) remain in DD017 as Phase 3 work. DD025 was extracted because it has no infrastructure dependencies and derisks DD005's uncertain mapping.
 

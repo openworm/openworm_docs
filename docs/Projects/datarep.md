@@ -17,7 +17,7 @@ Here is a list of some of the data sets that we have used so far:
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](https://caltech.wormbase.org/virtualworm/)
 -   [The _C. elegans_ connectome (wiring diagram of neurons)](https://www.wormatlas.org/neuronalwiring.html)
 -   [Cell list of _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
--   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html) — ion channel models feed into [DD001 (Neural Circuit)](../design_documents/DD001_Neural_Circuit_Architecture.md) and [DD005 (Cell-Type Differentiation)](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
+-   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html) — ion channel models feed into [DD001 (Neural Circuit)](../design_documents/DD001_Neural_Circuit_Architecture.md) and [DD005 (Cell-Type Specialization)](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
 -   [Database of Worm behavioral phenotypes](https://www.ncbi.nlm.nih.gov/pubmed/23852451)
 
 Currently our work on data collection and representation is divided among four subprojects:

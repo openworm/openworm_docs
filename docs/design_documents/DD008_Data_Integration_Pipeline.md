@@ -284,7 +284,7 @@ OWMeta aggregates WormBase + all other sources.
 
 OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook connectome, Witvliet developmental data, Ripoll-Sanchez neuropeptides, Randi functional connectivity, Schafer kinematics, and more. These datasets use different formats, identifiers, and coordinate systems.
 
-**The challenge:** A contributor implementing [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell differentiation) must pull CeNGEN expression, map neuron IDs to CeNGEN classes, extract channel genes, and generate NeuroML. Without a unified data layer, this requires writing custom parsers for each dataset.
+**The challenge:** A contributor implementing [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization) must pull CeNGEN expression, map neuron IDs to CeNGEN classes, extract channel genes, and generate NeuroML. Without a unified data layer, this requires writing custom parsers for each dataset.
 
 **The solution:** **OWMeta** (openworm.org/OWMeta) — a semantic knowledge graph providing unified programmatic access to all OpenWorm-relevant biological data.
 
@@ -437,7 +437,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | Neural circuit (connectome queries) | [DD001](DD001_Neural_Circuit_Architecture.md) | If neuron adjacency format or ID scheme changes, c302 network generation breaks |
-| Cell differentiation (expression data) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN query format changes, conductance pipeline breaks |
+| Cell-type specialization (expression data) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN query format changes, conductance pipeline breaks |
 | Neuropeptides (peptide-receptor data) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If peptide interaction data format changes, neuropeptide layer breaks |
 | Mechanical cell identity (cell positions) | [DD004](DD004_Mechanical_Cell_Identity.md) | If cell position queries change, particle tagging breaks |
 | Validation (experimental data metadata) | [DD010](DD010_Validation_Framework.md) | If data provenance metadata changes, validation data versioning breaks |

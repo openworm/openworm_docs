@@ -45,7 +45,7 @@ Repo Name                                                                       
 DevoWorm's developmental dynamics work connects to several aspects of the OpenWorm simulation:
 
 - **[Phase 6: Developmental Modeling](../design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)** — DevoWorm is the primary existing project for Phase 6 ("Worm That Grows"), which targets multi-stage simulation from L1 larva to adult
-- **[DD005: Cell-Type Differentiation](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** — DevoWorm's differentiation trees add temporal dynamics to DD005's CeNGEN-based cell-type specification
+- **[DD005: Cell-Type Specialization](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** — DevoWorm's differentiation trees add temporal dynamics to DD005's CeNGEN-based cell-type specification
 - **[DD004: Mechanical Cell Identity](../design_documents/DD004_Mechanical_Cell_Identity.md)** — DevoWorm's CompuCell3D morphogenesis models inform body-scaling mechanics across developmental stages
 
 ---

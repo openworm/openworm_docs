@@ -93,7 +93,7 @@ Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-It
 **Current Specifications:**
 
 - **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (Neural Circuit):** Multi-level HH framework (Levels A-D), graded synapses (Level C1 default)
-- **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation):** 128 distinct neuron classes from CeNGEN single-cell transcriptomics
+- **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization):** 128 distinct neuron classes from CeNGEN single-cell transcriptomics
 - **[DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides):** 31,479 peptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)), slow modulation
 - **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 20 pharyngeal neurons (semi-autonomous pumping circuit)
 - **[DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (Egg-Laying):** 2 HSN serotonergic + 6 VC cholinergic neurons (two-state pattern)
@@ -195,6 +195,6 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 ## What's Next
 
-The path from today's 302-neuron simulation to the complete 959-cell organism is organized into 4 implementation phases over ~18 months, progressing through cell differentiation, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase timeline with milestones and Design Document assignments.
+The path from today's 302-neuron simulation to the complete 959-cell organism is organized into 4 implementation phases over ~18 months, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase timeline with milestones and Design Document assignments.
 
 **Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation).

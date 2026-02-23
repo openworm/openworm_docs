@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 
@@ -108,7 +108,7 @@ This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's
 
 **1. Speed:** [DD009](DD009_Intestinal_Oscillator_Model.md) notes that 200 seconds of simulated time takes ~10 hours wall clock. [DD003](DD003_Body_Physics_Architecture.md)'s SPH with ~100K particles is the bottleneck. This makes iteration brutal — a researcher adjusting one parameter waits half a day for feedback.
 
-**2. Parameter gaps:** [DD001](DD001_Neural_Circuit_Architecture.md) uses the *same* generic HH parameters for all 302 neurons (from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle electrophysiology). [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes differentiating via CeNGEN transcriptomics, but the mapping from transcript counts to conductance densities is hand-crafted and unvalidated. Most neurons lack direct electrophysiology data.
+**2. Parameter gaps:** [DD001](DD001_Neural_Circuit_Architecture.md) uses the *same* generic HH parameters for all 302 neurons (from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle electrophysiology). [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN transcriptomics, but the mapping from transcript counts to conductance densities is hand-crafted and unvalidated. Most neurons lack direct electrophysiology data.
 
 **3. Manual parameter fitting:** [DD009](DD009_Intestinal_Oscillator_Model.md) states parameters were "fit to match ~50 second period." [DD002](DD002_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned. [DD001](DD001_Neural_Circuit_Architecture.md)'s synaptic conductance `g_syn = 0.09 nS` was hand-set. With hundreds of parameters across [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), manual tuning doesn't scale.
 
@@ -255,7 +255,7 @@ print(f"g_Ca gradient: {neuron.g_Ca.grad}")
 The system has a **302-neuron, 95-muscle, 20-intestinal-cell model** where:
 
 - [DD001](DD001_Neural_Circuit_Architecture.md) uses the *same* generic conductances for all 302 neurons
-- [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes differentiating them via CeNGEN, but the mapping from transcript levels → conductances is unknown
+- [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing them via CeNGEN, but the mapping from transcript levels → conductances is unknown
 - [DD009](DD009_Intestinal_Oscillator_Model.md) has 4+ parameters that were manually fit to a 50-second target
 - [DD002](DD002_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned
 - [DD010](DD010_Validation_Framework.md) has quantitative validation targets (speed ±15%, period 50±10s, functional connectivity r > 0.5)
@@ -749,7 +749,7 @@ ml:
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | Neural circuit (if using auto-fit params) | [DD001](DD001_Neural_Circuit_Architecture.md) | If auto-fitted parameters change (retrained model), simulation behavior changes |
-| Cell differentiation (if using foundation params) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
+| Cell-type specialization (if using foundation params) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
 | Validation (if using surrogate for fast validation) | [DD010](DD010_Validation_Framework.md) | If surrogate accuracy degrades, false-positive validation passes possible |
 | All subsystems (if sensory model changes) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | Sensory input changes → neural dynamics change → everything downstream changes |
 

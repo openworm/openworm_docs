@@ -1,4 +1,4 @@
-# DD005: Cell-Type Differentiation Strategy Using Single-Cell Transcriptomics
+# DD005: Cell-Type Specialization Strategy Using Single-Cell Transcriptomics
 
 - **Status:** Proposed (Phase 1)
 - **Author:** OpenWorm Core Team
@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Cell Differentiation
+> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Cell-Type Specialization
 
 ## TL;DR
 
@@ -60,7 +60,7 @@ Each `.cell.nml` file includes metadata:
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd005` |
-| **Milestone** | Phase 1: Cell-Type Differentiation |
+| **Milestone** | Phase 1: Cell-Type Specialization |
 | **Branch convention** | `dd005/description` (e.g., `dd005/cengen-calibration`) |
 | **Example PR title** | `DD005: Generate 128 cell-type NeuroML files from CeNGEN L4` |
 
@@ -153,7 +153,7 @@ docker compose run validate
 | **Color mode** | Color-by-neuron-class: 128 distinct colors, one per CeNGEN class |
 | **Data source** | OME-Zarr: `neural/neuron_class/`, shape (302,) — string enum mapping each of 302 neurons to its class |
 | **What you should SEE** | Neurons colored by class. Clicking a neuron shows its CeNGEN class, dominant channels, and calibration status. Calcium traces should show distinct dynamics per class (e.g., sensory neurons with faster kinetics than interneurons). |
-| **Comparison view** | Side-by-side: generic model (all same color/dynamics) vs. differentiated model (distinct colors/dynamics) |
+| **Comparison view** | Side-by-side: generic model (all same color/dynamics) vs. specialized model (distinct colors/dynamics) |
 
 ---
 
@@ -277,7 +277,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 - Compare to experimental pairwise correlations
 - Metric: Pearson correlation between simulated and real correlation matrices
 
-**Expected improvement:** The differentiated model should capture cell-type-specific dynamics (e.g., ASH sensory neurons with fast kinetics, interneurons with slower integration) better than the generic model.
+**Expected improvement:** The specialized model should capture cell-type-specific dynamics (e.g., ASH sensory neurons with fast kinetics, interneurons with slower integration) better than the generic model.
 
 ---
 
@@ -344,13 +344,13 @@ Originally rejected (Feb 2026) because molecular dynamics was "computationally e
 
 - Arbitrary clustering (how many clusters? which genes to cluster on?)
 - Loses biological specificity (ASH nociceptor ≠ AWA olfactory neuron, even if they cluster together)
-- The data exist to differentiate all 128 classes, so why reduce resolution?
+- The data exist to specialize all 128 classes, so why reduce resolution?
 
 **When to reconsider:** If 128 cell types prove computationally intractable or if most classes are near-identical.
 
 ### 7. Wait for Electrophysiology for All Neurons
 
-**Description:** Do not differentiate until direct patch-clamp data exist for all 128 classes.
+**Description:** Do not specialize until direct patch-clamp data exist for all 128 classes.
 
 **Rejected because:**
 
@@ -362,13 +362,13 @@ Originally rejected (Feb 2026) because molecular dynamics was "computationally e
 
 ## Quality Criteria
 
-### What Defines a Valid Differentiated Cell Model?
+### What Defines a Valid Specialized Cell Model?
 
 1. **Expression-Based Parameterization:** All conductance densities must be derived from CeNGEN expression data using the documented calibration relationship. Do not manually tune parameters.
 
 2. **NeuroML 2 Compliance:** Each cell type is a separate NeuroML `<cell>` element with unique `id` (e.g., `AVALCell`, `ASHCell`).
 
-3. **Preserve Connectome Topology:** The number of neurons (302 hermaphrodite, 385 male) and their connectivity ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) must match the biological data. Differentiation changes cell properties, not network structure.
+3. **Preserve Connectome Topology:** The number of neurons (302 hermaphrodite, 385 male) and their connectivity ([Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7)) must match the biological data. Specialization changes cell properties, not network structure.
 
 4. **Calibration Transparency:** The `expression_to_conductance_calibration.csv` file must document:
     - Training set (which neurons with electrophysiology)
@@ -376,7 +376,7 @@ Originally rejected (Feb 2026) because molecular dynamics was "computationally e
     - Cross-validation R² or error metric
     - Date of calibration and CeNGEN version
 
-5. **Validation Against Functional Data:** The differentiated model must improve the correlation with [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity compared to the generic model.
+5. **Validation Against Functional Data:** The specialized model must improve the correlation with [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity compared to the generic model.
 
 6. **CeNGEN Expression Data as Ground Truth:** All conductance densities must be traceable to CeNGEN expression values via the documented calibration relationship.
 
@@ -435,7 +435,7 @@ python scripts/benchmark_improvement.py \
 
 5. **Individual genetic variation:** Natural isolates show expression variation (Ben-David et al. 2021 eQTLs). This DD uses population-averaged expression. Individual variation is Phase 6+ work.
 
-6. **Synaptic weight differences:** Expression-based differentiation affects postsynaptic channels but not synaptic weights (connection strengths). Synapse-specific weights from functional data are future work.
+6. **Synaptic weight differences:** Expression-based specialization affects postsynaptic channels but not synaptic weights (connection strengths). Synapse-specific weights from functional data are future work.
 
 7. **Channel post-translational modifications:** Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.
 
@@ -459,7 +459,7 @@ Each stage preserves backward compatibility with earlier stages via the `openwor
 
 The current c302 model uses a **single generic neuron cell template** for all 302 neurons, with identical ion channel types and conductance densities. The only distinguishing feature between neuron types is their connectivity pattern. As stated in the CElegansNeuroML repository: "an accurate representation of the ion channels and their distributions in each neuron has not yet been attempted."
 
-This is biologically inaccurate. Real neurons express distinct complements of ion channels, receptors, and signaling machinery. The CeNGEN database ([Taylor et al. 2021](https://doi.org/10.1016/j.cell.2021.06.023)) provides single-cell RNA-seq for 100,955 neurons across 128 neuron classes at L4 larval stage, making cell-type-specific differentiation feasible for the first time.
+This is biologically inaccurate. Real neurons express distinct complements of ion channels, receptors, and signaling machinery. The CeNGEN database ([Taylor et al. 2021](https://doi.org/10.1016/j.cell.2021.06.023)) provides single-cell RNA-seq for 100,955 neurons across 128 neuron classes at L4 larval stage, making cell-type-specific specialization feasible for the first time.
 
 John White, in the February 12, 2026 meeting, emphasized: "there's a huge amount of information there" (referring to CeNGEN) and urged integration of this dataset into the modeling framework.
 
@@ -527,7 +527,7 @@ Approximately **20 neuron types** have published electrophysiological recordings
 
 ## Migration Path
 
-### From Generic to Differentiated (Contributor Workflow)
+### From Generic to Specialized (Contributor Workflow)
 
 **Old workflow (generic model):**
 ```bash
@@ -536,7 +536,7 @@ jnml LEMS_c302_C1.xml
 ```
 Output: 302 identical neurons.
 
-**New workflow (differentiated model):**
+**New workflow (specialized model):**
 ```bash
 python c302/CElegans.py C1Differentiated
 jnml LEMS_c302_C1_Differentiated.xml
@@ -547,12 +547,12 @@ Output: 128 distinct neuron types.
 
 ### Incremental Rollout
 
-Do not switch the entire community to differentiated models on day 1. Rollout plan:
+Do not switch the entire community to specialized models on day 1. Rollout plan:
 
-1. **Week 1-2:** Generate differentiated cells, validate locally
+1. **Week 1-2:** Generate specialized cells, validate locally
 2. **Week 3-4:** Publish as experimental branch, invite community testing
 3. **Week 5-6:** Present validation results (functional connectivity improvement, no kinematic degradation)
-4. **Week 7+:** Make differentiated model the recommended default in documentation; keep generic model for backward compatibility
+4. **Week 7+:** Make specialized model the recommended default in documentation; keep generic model for backward compatibility
 
 ---
 
@@ -754,7 +754,7 @@ neural:
 
 | Key | Default | Valid Range | Description |
 |-----|---------|-------------|-------------|
-| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN-based cell differentiation |
+| `neural.differentiated` | `false` | `true`/`false` | Enable CeNGEN-based cell-type specialization |
 | `neural.cengen_version` | `"L4_v1.0"` | String | CeNGEN dataset version pin |
 | `neural.calibration_version` | `"v1"` | String | Calibration parameter version pin |
 

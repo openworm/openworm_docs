@@ -580,7 +580,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
     - [ ] Document: package size, dependencies, Python version compatibility
     - [ ] Recommend: add to versions.lock yes/no, with rationale
     - [ ] Post findings as issue comment
-- **Sponsor Summary Hint:** wormneuroatlas is a companion package to cect that provides data cect doesn't: gene expression from CeNGEN (for DD005 cell differentiation), Randi functional connectivity (for DD010 validation), and peptide-GPCR deorphanization (for DD006). Should we add it to our build? This evaluation determines if it's worth the extra dependency.
+- **Sponsor Summary Hint:** wormneuroatlas is a companion package to cect that provides data cect doesn't: gene expression from CeNGEN (for DD005 cell-type specialization), Randi functional connectivity (for DD010 validation), and peptide-GPCR deorphanization (for DD006). Should we add it to our build? This evaluation determines if it's worth the extra dependency.
 
 ---
 

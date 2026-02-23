@@ -124,7 +124,7 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 ### Step 3: Use the Template
 
-Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template structure. Use [DD005 (Cell Differentiation)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
+Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template structure. Use [DD005 (Cell-Type Specialization)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
 
 **Required sections (from [DD012](DD012_Design_Document_RFC_Process.md)):**
 
@@ -183,7 +183,7 @@ Once DD is approved and merged:
 
 ## Examples of Excellent Design Documents
 
-### [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation) — REFERENCE IMPLEMENTATION
+### [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
 
 **Why it's excellent:**
 

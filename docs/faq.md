@@ -19,7 +19,7 @@ It has all sorts of behaviors! Some include:
 
 ### Do you simulate all that?
 
-Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD002_Muscle_Model_Architecture.md) + [body physics](design_documents/DD003_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell differentiation, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase plan.
+Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD002_Muscle_Model_Architecture.md) + [body physics](design_documents/DD003_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase plan.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
@@ -64,7 +64,7 @@ To make this project move faster, we'd love more help from motivated folks. Both
 **Current priorities:**
 
 - **Infrastructure bootstrap:** Docker stack ([DD013](design_documents/DD013_Simulation_Stack_Architecture.md)), toolbox revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
-- **Phase 1 science:** CeNGEN cell differentiation ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
+- **Phase 1 science:** CeNGEN cell-type specialization ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 
 Read more about ways to help [on our website](https://www.openworm.org/get_involved.html) or check the [contributor guide](community/).

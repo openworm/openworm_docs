@@ -24,7 +24,7 @@ Table Of Contents
 The Path to 959 Cells
 ---------------------
 
-OpenWorm is on a **quantified, validated path** from today's 302-neuron simulation to a complete 959-cell adult hermaphrodite, organized into implementation phases over ~18 months -- from today's working crawling simulation through cell differentiation, sensory integration, organ systems (pharynx, intestine, egg-laying), and finally all 959 somatic cells with a photorealistic web viewer.
+OpenWorm is on a **quantified, validated path** from today's 302-neuron simulation to a complete 959-cell adult hermaphrodite, organized into implementation phases over ~18 months -- from today's working crawling simulation through cell-type specialization, sensory integration, organ systems (pharynx, intestine, egg-laying), and finally all 959 somatic cells with a photorealistic web viewer.
 
 **See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase)** for the complete phase-by-phase timeline with milestones and Design Document assignments.
 

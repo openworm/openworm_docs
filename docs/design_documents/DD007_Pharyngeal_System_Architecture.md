@@ -155,7 +155,7 @@ docker compose run validate
 Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body neurons, but with pharynx-specific:
 
 - Connectome topology (pharyngeal neuron -> pharyngeal neuron connections only)
-- Cell-type-specific differentiation using CeNGEN expression (128 neuron classes include pharyngeal neurons)
+- Cell-type-specific specialization using CeNGEN expression (128 neuron classes include pharyngeal neurons)
 
 **Already partially implemented:** c302 Level B includes pharyngeal neurons with integrate-and-fire dynamics. Phase 3 upgrades to Level C1 HH.
 
@@ -425,7 +425,7 @@ docker compose run validate
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
 | c302 HH framework | [DD001](DD001_Neural_Circuit_Architecture.md) | Pharyngeal neurons use same framework — channel model changes propagate |
-| CeNGEN differentiation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Pharyngeal neuron conductances come from CeNGEN |
+| CeNGEN specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Pharyngeal neuron conductances come from CeNGEN |
 | Cell identity (Option B) | [DD004](DD004_Mechanical_Cell_Identity.md) | Pharyngeal particle tagging uses [DD004](DD004_Mechanical_Cell_Identity.md)'s cell_id system |
 
 | Depends On Me | DD | What Breaks If I Change |

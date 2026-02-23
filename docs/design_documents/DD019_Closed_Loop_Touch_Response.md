@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
 
 ---
 
@@ -344,7 +344,7 @@ cell.add_exposure("strain", source="sibernetic_strain_readout")
 # Standard channels remain at [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 defaults
 ```
 
-If [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type differentiation) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.
+If [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.
 
 ### Component 4: Tap Withdrawal Neural Circuit
 

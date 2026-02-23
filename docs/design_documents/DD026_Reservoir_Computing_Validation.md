@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-23
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Differentiation), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
 
 ---
 
@@ -543,7 +543,7 @@ DD026 is itself a validation document — it validates a *computational framewor
 | 5 | Create `RC_Validation.ipynb` with visualization and interpretation | 4 | Steps 1-4 |
 | 6 | Integration test with Phase 2 simulation output | 2 | Phase 2 simulation running |
 
-**Parallelization:** DD026 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 1 differentiated neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
+**Parallelization:** DD026 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 1 specialized neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
 
 ---
 

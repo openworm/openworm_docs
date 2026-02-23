@@ -2,7 +2,7 @@ Muscle-Neuron-Channel Integration
 =================================
 
 !!! info "Related Design Documents"
-    The muscle-neuron-channel integration pipeline maps to the core simulation chain: [DD001: Neural Circuit Architecture](../design_documents/DD001_Neural_Circuit_Architecture.md) (neurons), [DD002: Muscle Model Architecture](../design_documents/DD002_Muscle_Model_Architecture.md) (muscles), and [DD005: Cell-Type Differentiation](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (128 distinct neuron classes from CeNGEN data).
+    The muscle-neuron-channel integration pipeline maps to the core simulation chain: [DD001: Neural Circuit Architecture](../design_documents/DD001_Neural_Circuit_Architecture.md) (neurons), [DD002: Muscle Model Architecture](../design_documents/DD002_Muscle_Model_Architecture.md) (muscles), and [DD005: Cell-Type Specialization](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (128 distinct neuron classes from CeNGEN data).
 
 High-level Overview
 -------------------
@@ -205,6 +205,6 @@ Issues for c302 are tracked [in the CElegansNeuroML repo.](https://github.com/op
 
 - **[DD001: Neural Circuit Architecture](../design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model specification
 - **[DD002: Muscle Model Architecture](../design_documents/DD002_Muscle_Model_Architecture.md)** — Ca²⁺→force coupling specification
-- **[DD005: Cell-Type Differentiation](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** — 128 distinct neuron classes
+- **[DD005: Cell-Type Specialization](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** — 128 distinct neuron classes
 - **[Validation Framework](../validation.md)** — Tier 1 (single-cell) and Tier 2 (circuit) validation
 - **[Projects Overview](../projects.md)** — All active projects and their governing DDs

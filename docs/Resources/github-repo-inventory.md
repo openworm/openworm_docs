@@ -153,7 +153,7 @@ External research code and datasets forked into the OpenWorm org. Not under acti
 | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (Muscle) | c302, sibernetic (coupling) | muscle_model, JohnsonMailler_MuscleModel (alternatives) |
 | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (Body Physics) | sibernetic | sibernetic_v3 (next-gen), multi-dev-sibernetic (multi-device), CelegansNeuromechanicalGaitModulation (gait) |
 | [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) (Cell Identity) | sibernetic | — |
-| [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell Differentiation) | c302, wormneuroatlas | NeuroPAL (cell ID), NicolettiEtAl models (calibration), WormsenseLab_ASH (electrophysiology) |
+| [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) | c302, wormneuroatlas | NeuroPAL (cell ID), NicolettiEtAl models (calibration), WormsenseLab_ASH (electrophysiology) |
 | [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides) | c302 | — |
 | [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx) | c302 | PlateauNoiseModel (plateau potentials), JohnsonMailler_MuscleModel (Ca²⁺ coupling), NicolettiEtAl models (pharyngeal neurons) |
 | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) (Data Integration) | owmeta, owmeta-core | ConnectomeToolbox (Phase 1-2 bridge), owmeta ecosystem (9 repos — see below) |

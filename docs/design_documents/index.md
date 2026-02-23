@@ -25,7 +25,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 **New to Design Documents?**
 
 - 📋 [DD012: RFC Process](DD012_Design_Document_RFC_Process.md) — How DDs work, template structure
-- 🌟 [DD005: Cell Differentiation](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation with all sections filled
+- 🌟 [DD005: Cell-Type Specialization](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation with all sections filled
 - 🗺️ [Integration Map](INTEGRATION_MAP.md) — PlantUML diagram showing how all DDs couple together
 - 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month implementation timeline with milestones
 
@@ -68,7 +68,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
 | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Foundation Model Channel Kinetics | Predicted ion channel kinetics from sequence (parallel, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
 
-### Phase 1: Cell-Type Differentiation ⚠️
+### Phase 1: Cell-Type Specialization ⚠️
 
 - **Milestone:** "Biologically Distinct Neurons"
 - **Duration:** 3 months
@@ -76,7 +76,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 | DD | Title | What Changes |
 |----|-------|--------------|
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Differentiation | 128 distinct neuron classes (not 302 identical) |
+| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Specialization | 128 distinct neuron classes (not 302 identical) |
 | [DD014 Phase 1](DD014_Dynamic_Visualization_Architecture.md) | Trame Viewer | OME-Zarr export, organism + tissue scales |
 | [DD010 Tier 2](DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) (r > 0.5) |
 
@@ -131,7 +131,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 ### By Topic
 
 **Neural Systems:**
-[DD001](DD001_Neural_Circuit_Architecture.md) (architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (differentiation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx neurons), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying HSN/VC), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch neurons)
+[DD001](DD001_Neural_Circuit_Architecture.md) (architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx neurons), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying HSN/VC), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch neurons)
 
 **Muscle Systems:**
 [DD002](DD002_Muscle_Model_Architecture.md) (body wall), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharyngeal), [DD018](DD018_Egg_Laying_System_Architecture.md) (reproductive)
@@ -164,7 +164,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 ### Neural Systems
 
 - **Core:** [DD001](DD001_Neural_Circuit_Architecture.md) (302-neuron HH architecture, graded synapses, Level C1)
-- **Differentiation:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN scRNA-seq)
+- **Specialization:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (128 neuron classes from CeNGEN scRNA-seq)
 - **Modulation:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (31,479 neuropeptide-receptor interactions, GPCR modulation, seconds timescale)
 - **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal neurons, pumping circuit)
 - **Egg-Laying:** [DD018](DD018_Egg_Laying_System_Architecture.md) (2 HSN serotonergic command neurons, 6 VC cholinergic motor neurons)
