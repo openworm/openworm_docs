@@ -66,7 +66,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 |----|-------|---------------------|
 | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ c302 Levels A-D exist, generate NeuroML networks |
 | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ GenericMuscleCell exists, Ca²⁺→force coupling works |
-| [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL backend stable) |
+| [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL only — PyTorch/Taichi do not yet match result quality; see DD003 Backend Stabilization Roadmap) |
 | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ `cect` v0.2.7 exists (needs version pinning per [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
 
 **What Works Today:**
@@ -85,6 +85,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - No dependency pinning (branch names, not commits)
 - No automated validation (Tier 3 toolbox is broken)
 - Video pipeline has memory leak (OOMs >2s simulations)
+- PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
@@ -236,6 +237,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 | **[DD019](DD019_Closed_Loop_Touch_Response.md)** | Closed-Loop Touch Response | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | MEC-4 mechanotransduction + bidirectional coupling + tap withdrawal |
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environmental Modeling & Stimulus Delivery | [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Agar substrate, chemical/thermal gradients, chemotaxis (CI >0.5) + thermotaxis |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
+| [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes) |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
 | **[DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
 
@@ -250,6 +252,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 7. **Agar substrate + chemical/thermal gradients** ([DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md)) — Steady-state NaCl gradient field, thermal gradient, substrate boundary particles
 8. **Stretch receptor channel model** ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) — Curvature-gated channels on B-class motor neurons (DB, VB), body curvature readout from SPH
 9. **Viewer enhancements** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — Neuropeptide volumetric layer, strain heatmap, reversal event markers, gradient field visualization
+10. **RC validation report** ([DD026](DD026_Reservoir_Computing_Validation.md)) — `rc_validation_report.json` with 5 RC properties × 4 neuron partitions, falsifiable predictions tested
 
 **Milestone:** 🎉 **"The Worm Can Feel and Modulate"** *(Target: Month 6, September 2026)*
 
@@ -270,6 +273,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - ✅ Thermotaxis: worm navigates to cultivation temperature ±2°C ([DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md))
 - ✅ Wavelength stability: ±10% with proprioception enabled (improved from ±15%), >30% degradation when stretch receptors disabled ([DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md))
 - ✅ Viewer shows: neuropeptide volumetric clouds, cuticle strain heatmap, reversal event markers, gradient fields
+- ✅ RC validation: All 5 predictions tested across all 4 partitions; results documented in `rc_validation_report.json` ([DD026](DD026_Reservoir_Computing_Validation.md))
 
 **Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase 2 datasets:
 
@@ -285,7 +289,7 @@ OpenWorm's path from 302 generic neurons to 959 differentiated cells is organize
 - Ripoll-Sanchez data downloaded and ingested into ConnectomeToolbox/OWMeta
 - 3D cell positions extracted (for peptide distance-dependent attenuation)
 
-**Cumulative Metrics:** 403 cells (+6 touch neurons) | 128 neuron classes | **2** coupling loops (+body→sensory) | 0 organ systems | **1** modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (18 total)
+**Cumulative Metrics:** 403 cells (+6 touch neurons) | 128 neuron classes | **2** coupling loops (+body→sensory) | 0 organ systems | **1** modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +5 DDs (19 total)
 
 ---
 
@@ -575,7 +579,7 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 | Phase 0 | Complete | Already done | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
 | Phase A | 4 weeks | Mar 2026 | (no change) | +7 DDs ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (differentiated, not added) | +3 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD014.1](DD014.1_Visual_Rendering_Specification.md)) |
-| Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +4 DDs ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2) |
+| Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +5 DDs ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md), [DD026](DD026_Reservoir_Computing_Validation.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2) |
 | Phase 3 | 6 months | Oct 2026-Mar 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) |
 | Phase 4 | 6 months | Apr-Sep 2027 | **959** (all somatic cells) | +2 DDs ([DD004](DD004_Mechanical_Cell_Identity.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 3) |
 | **TOTAL** | **~18 months** | **Mar 2026 - Sep 2027** | **959 cells** | **23 DDs implemented** |

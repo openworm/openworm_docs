@@ -339,6 +339,15 @@ docker compose run validate
 | `body/cell_ids/` (n_particles,) | Cell identity overlay | Cell type → color: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta |
 | `body/positions/` (n_timesteps, n_particles, 3) | Body particles (from [DD003](DD003_Body_Physics_Architecture.md)) | Combined with cell_ids for cell-aware particle rendering |
 
+### Multi-Backend Validation Requirement
+
+The particle struct change must be validated across **all stable backends** per [DD003](DD003_Body_Physics_Architecture.md) Quality Criterion 5 ("GPU Backend Compatibility") and Criterion 6 ("Cross-Backend Parity"). Specifically:
+
+- **OpenCL:** Updated struct definition required in `.cl` kernel files (`sphFluid.cl`)
+- **PyTorch:** Updated tensor shapes in `pytorch_solver.py` to accommodate new fields
+- **Taichi:** Updated struct in `taichi_solver.py` field definitions
+- **All backends:** Must pass the [DD003 cross-backend parity tests](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements) after the struct change
+
 ### Breaking Change: Particle Data Structure
 
 Adding `cell_id` to the SPH particle struct is a **breaking change** to the Sibernetic binary format. Migration plan:

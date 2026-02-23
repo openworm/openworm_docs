@@ -55,6 +55,9 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 | Particle positions (viewer) | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | OME-Zarr | Per-particle (x, y, z) over all output timesteps |
 | Particle types (viewer) | OME-Zarr: `body/types/`, shape (n_particles,) | OME-Zarr | Enum: liquid/elastic/boundary |
 | Surface mesh (viewer) | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | OME-Zarr | Reconstructed smooth body surface per timestep |
+| Stability checker | `scripts/check_stability.py` | Python script | Verify no NaN, no particle escape, no divergence `[TO BE CREATED]` |
+| Incompressibility validator | `scripts/validate_incompressibility.py` | Python script | Verify density deviation <1% `[TO BE CREATED]` |
+| Backend parity test suite | `scripts/backend_parity_test.py` | Python script | Cross-backend kinematic comparison `[TO BE CREATED]` |
 
 ---
 
@@ -314,6 +317,8 @@ A contribution to Sibernetic MUST:
 
 5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and PyTorch (CPU reference). Test on at least two backends.
 
+6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
+
 ---
 
 ## Boundaries (Explicitly Out of Scope)
@@ -389,14 +394,98 @@ elasticity = 0.0006
 
 ### Compute Backends
 
-| Backend | Language | Hardware | Speed | Status |
-|---------|----------|----------|-------|--------|
-| OpenCL | C++ | CPU/GPU (cross-platform) | Baseline | Stable |
-| Taichi Metal | Python/Taichi | Apple Silicon GPU | ~3x faster | Experimental |
-| Taichi CUDA | Python/Taichi | NVIDIA GPU | ~5x faster | Experimental |
-| PyTorch | Python | CPU | Slow (reference only) | Stable |
+| Backend | Language | Hardware | Speed | Result Quality | Status |
+|---------|----------|----------|-------|---------------|--------|
+| OpenCL | C++ | CPU/GPU (Linux) | Baseline | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
+| PyTorch | Python | CPU | Slow | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; results need work) |
+| Taichi Metal | Python/Taichi | Apple Silicon GPU | ~3x faster (target) | Does not yet match OpenCL | **Blocked** — elastic coordinate bug |
+| Taichi CUDA | Python/Taichi | NVIDIA GPU | ~5x faster (target) | Does not yet match OpenCL | **Blocked** — elastic coordinate bug |
 
-**Recommendation:** Use Taichi Metal for Apple Silicon, Taichi CUDA for NVIDIA GPUs. OpenCL for maximum portability.
+**Recommendation:** OpenCL remains the only backend producing validated simulation results. However, OpenCL driver support is shrinking across platforms (Apple dropped OpenCL; AMD/NVIDIA deprioritizing). PyTorch and Taichi backends must achieve result parity with OpenCL before they can serve as replacements. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
+
+---
+
+## Backend Stabilization Roadmap
+
+### Why OpenCL Must Be Replaced
+
+The OpenCL backend is the **only** backend producing validated simulation results (kinematic metrics within ±15% of Schafer lab baseline). However, OpenCL driver support is shrinking across all major platforms:
+
+- **Apple** dropped OpenCL entirely (deprecated since macOS 10.14, removed from Apple Silicon native support)
+- **AMD** is deprioritizing OpenCL in favor of ROCm/HIP
+- **NVIDIA** is deprioritizing OpenCL in favor of CUDA
+- **Docker** — OpenCL runs CPU-only in Docker (GPU passthrough broken, issue #320)
+
+The core challenge: the only backend producing good simulation results is losing the platforms it runs on. The goal is to achieve OpenCL-equivalent result quality on PyTorch and/or Taichi **before** OpenCL becomes unusable.
+
+### The Result Quality Gap
+
+Neither PyTorch nor Taichi currently matches OpenCL's validated kinematics:
+
+- **PyTorch:** Stable (doesn't crash, 76+ tests pass, 3+ second simulations without divergence). But simulation results don't yet match OpenCL quality. Good as a correctness reference for debugging, not yet a replacement.
+- **Taichi:** Has an additional elastic coordinate-space bug on top of the general quality gap (see below). Elastic forces ~287x too weak, causing elastic bodies to flatten to floor.
+
+**Root cause analysis needed:** What specific algorithmic differences produce the quality gap? The OpenCL C++ kernels (`sphFluid.cl`, ~64KB) are the reference implementation — PyTorch/Taichi must match their behavior line-by-line.
+
+### The Taichi Coordinate-Space Bug
+
+Taichi has a **known coordinate-space bug** that is separate from (and on top of) the general result quality gap shared with PyTorch:
+
+- SPH forces are computed in world coordinates, but elastic forces are computed in scaled coordinates
+- This mismatch makes elastic forces effectively ~287x too weak (factor of 1/simulation_scale)
+- Result: elastic bodies flatten to floor instead of maintaining shape
+
+**Comparison data:**
+
+| Metric | PyTorch | Taichi | Expected |
+|--------|---------|--------|----------|
+| Elastic body mean Y (after 3s floor collision) | 1.45 | 0.24 | >1.0 |
+
+**Three-step fix (documented in Sibernetic README):**
+
+1. Remove incorrect `/sim_scale` division in elastic force calculation
+2. Add `simulationScaleInv` to the integration step
+3. Use `h_scaled` for kernel coefficients instead of unscaled `h`
+
+### Cross-Backend Parity Requirements
+
+Replacement backends must produce kinematic outputs matching OpenCL within ±5% on the same configuration. The parity test suite consists of:
+
+| Test | What It Measures | Pass Criterion |
+|------|-----------------|----------------|
+| Drop test | Liquid sphere under gravity settles and spreads | Position/velocity metrics within ±5% of OpenCL |
+| Elastic deformation | Suspended elastic body sags under gravity | Mean displacement within ±5% of OpenCL |
+| Muscle contraction | Single quadrant activation bends body | Curvature within ±5% of OpenCL |
+| Full worm crawling | 15ms coupled simulation | WCON trajectory metrics within ±5% of OpenCL |
+
+Each test produces numeric metrics; the parity suite compares against OpenCL baseline values stored in a reference file.
+
+### Backend Graduation Criteria
+
+| Level | Requirements |
+|-------|-------------|
+| **Experimental** | Compiles, runs, produces output without crashing |
+| **Stable** | Runs 10s without divergence, passes parity tests within ±5% of OpenCL |
+| **Production** | Stable + integrated in Docker + CI-gated + performance benchmarked |
+
+**Current status:**
+
+| Backend | Level | Blocking Issue |
+|---------|-------|---------------|
+| OpenCL | **Production** | Losing platform support |
+| PyTorch | **Experimental** | Stable but results don't match OpenCL |
+| Taichi Metal | **Experimental** | Elastic coordinate-space bug + results don't match |
+| Taichi CUDA | **Experimental** | Elastic coordinate-space bug + results don't match |
+
+### Stabilization Sequence
+
+1. **Create validation scripts:** `scripts/check_stability.py` and `scripts/validate_incompressibility.py`
+2. **Create cross-backend parity test suite:** `scripts/backend_parity_test.py` — compare against OpenCL baseline
+3. **Fix Taichi elastic coordinate bug:** Apply the documented 3-step fix (remove `/sim_scale`, add `simulationScaleInv`, use `h_scaled`)
+4. **Audit and fix result quality gap:** Line-by-line algorithmic audit of PyTorch/Taichi kernel implementations against OpenCL `sphFluid.cl`
+5. **Run parity tests:** Graduate backends that pass to Stable
+6. **Add to Dockerfile and CI:** Add graduated backends to Docker image, add backend-specific CI gates
+7. **Performance benchmark:** Update recommendation for which backend to use on which platform
 
 ---
 
@@ -540,9 +629,13 @@ def write_sibernetic_config(openworm_config):
 ---
 
 - **Approved by:** OpenWorm Steering
-- **Implementation Status:** Complete (Sibernetic v1.0+)
+- **Implementation Status:** Complete (OpenCL production but losing platform support; PyTorch/Taichi experimental — results do not yet match OpenCL. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap))
 - **Next Actions:**
 
-1. Extend per-particle cell IDs beyond muscles to all tissue types — hypodermis, seam cells, neurons ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4). Muscle cell IDs (96 units) are already mapped.
-2. Add cell-type-specific mechanical properties for non-muscle tissues
-3. Optimize Taichi backends for production use
+1. Create stability validation scripts (`scripts/check_stability.py`, `scripts/validate_incompressibility.py`)
+2. Create cross-backend parity test suite against OpenCL baseline (`scripts/backend_parity_test.py`)
+3. **Fix Taichi elastic coordinate-space bug** (3-step fix documented in Sibernetic README)
+4. **Audit and fix PyTorch/Taichi result quality gap vs OpenCL** (algorithmic audit of kernel implementations)
+5. Graduate backends that pass parity tests; add to Dockerfile and CI
+6. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
+7. Add cell-type-specific mechanical properties

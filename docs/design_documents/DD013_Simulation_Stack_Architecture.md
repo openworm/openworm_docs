@@ -42,7 +42,7 @@ The `openworm/OpenWorm` meta-repository is the only place where these subsystems
 - No dependency pinning beyond branch names
 - No automated validation
 - No docker-compose
-- One active maintainer (Padraig Gleeson)
+- One active maintainer (Neural Circuit L4)
 
 ### What Actually Runs Today
 
@@ -153,7 +153,7 @@ neural:
 body:
   enabled: true
   engine: sibernetic
-  backend: opencl                    # opencl, taichi-metal, taichi-cuda, pytorch
+  backend: opencl                    # opencl (production), pytorch (testing), taichi-metal (experimental), taichi-cuda (experimental)
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000             # ~100K for standard, ~25K for quick
   cell_identity: false               # Phase 4: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))
@@ -247,6 +247,10 @@ RUN git clone --branch $SIBERNETIC_REF --depth 1 \
 # OpenCL SDK + build
 RUN cd /opt/openworm/sibernetic && mkdir build && cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release && make -j$(nproc)
+# NOTE: Taichi/PyTorch backends require additional dependencies:
+#   pip install taichi torch
+# These should be installed conditionally based on body.backend config.
+# See DD003 Backend Stabilization Roadmap for when Taichi will be Dockerfile-ready.
 
 # === Stage 3: Subsystem — Validation Tools ([DD010](DD010_Validation_Framework.md)) ===
 FROM base AS validation
@@ -564,6 +568,10 @@ jobs:
         with:
           name: validation-report
           path: output/validation_report.json
+
+  # NOTE: Once Taichi graduates to Production (see DD003 Backend Stabilization Roadmap),
+  # CI should run smoke tests on multiple backends (at minimum OpenCL + one Python backend)
+  # to catch backend-specific regressions.
 ```
 
 ### 7. Contributor Development Workflow
@@ -770,7 +778,7 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 
 4. **Specific subsystem implementations.** This DD covers how subsystems plug together, not what they compute internally (that's [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)).
 
-5. **AI agent deployment.** N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist are separate infrastructure (see AI_Agent_Architecture.md).
+5. **AI agent deployment.** N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist are separate infrastructure (see [AI Agents for Community Scaling](../Community/ai_agents.md)).
 
 ---
 
@@ -818,7 +826,7 @@ The Integration Maintainer is responsible for:
 
 **Who should fill this role:**
 
-- Currently Padraig is doing this de facto but it's not formalized or sustainable alongside his L4 Neural Circuit role
+- Currently the Neural Circuit L4 Maintainer is doing this de facto but it's not formalized or sustainable alongside their Neural Circuit role
 - Ideal candidate: Someone with strong DevOps/Docker experience who also understands the science
 - Alternative: An L3 contributor who can be mentored into this role
 - Mind-of-a-Worm AI can assist with routine tasks (dependency updates, CI triage) but cannot own architectural decisions
@@ -949,7 +957,7 @@ Next newcomer who runs the Docker image sees the improvement
 
 ## Open Questions (Require Founder Input)
 
-1. **Who is the L4 Integration Maintainer?** Padraig is the de facto maintainer but this should be formalized and ideally shared with someone else to reduce bus factor.
+1. **Who is the L4 Integration Maintainer?** The Neural Circuit L4 Maintainer is the de facto integration maintainer but this should be formalized and ideally shared with someone else to reduce bus factor.
 
 2. **GPU support priority:** Should we invest in fixing Docker GPU passthrough (issue #320) now, or wait for Phase 1 to be further along? GPU would make longer simulations practical.
 
@@ -1012,9 +1020,9 @@ The simulation stack is the **integration layer** — it consumes and routes out
 
 ### Repository & Packaging
 
-- Primary repository: `openworm/simulation-stack` `[TO BE CREATED]`
+- Primary repository: `openworm/OpenWorm`
 - Docker multi-stage build: orchestrator layer
-- `versions.lock` key: `simulation-stack`
+- `versions.lock` key: `openworm`
 
 ### Configuration
 
