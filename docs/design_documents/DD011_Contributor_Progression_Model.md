@@ -151,8 +151,8 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 | Subsystem | Design Documents | Current Senior Contributor (L4) | Primary Repository |
 |-----------|-----------------|---------------------|-------------------|
-| **Neural Circuit** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Padraig Gleeson | CElegansNeuroML, c302 |
-| **Body Physics** | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) | Andrey Palyanov | Sibernetic |
+| **Neural Circuit** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | TBD (Neural Circuit L4) | CElegansNeuroML, c302 |
+| **Body Physics** | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) | TBD (Body Physics L4) | Sibernetic |
 | **Muscle Models** | [DD002](DD002_Muscle_Model_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | TBD (propose from community) | c302, Sibernetic |
 | **Data Integration** | [DD008](DD008_Data_Integration_Pipeline.md) | TBD | OWMeta, ConnectomeToolbox |
 | **Validation** | [DD010](DD010_Validation_Framework.md) | TBD | open-worm-analysis-toolbox |
@@ -387,8 +387,8 @@ Update openworm.org/people.html to include:
 
 | Current Senior Contributor | Proposed Level | Rationale |
 |---------------------------|---------------|-----------|
-| Padraig Gleeson | L4 Senior Contributor (Neural Circuit) | c302 lead, Design Document author |
-| Andrey Palyanov | L4 Senior Contributor (Body Physics) | Sibernetic lead |
+| Neural Circuit lead | L4 Senior Contributor (Neural Circuit) | c302 lead, Design Document author |
+| Body Physics lead | L4 Senior Contributor (Body Physics) | Sibernetic lead |
 | Matteo Cantarelli | L4 Senior Contributor (Visualization) | Geppetto, Worm Browser |
 | Others | L3 Contributor | Active code contributors |
 
@@ -592,7 +592,7 @@ BadgeList for public-facing profiles (social layer). GitHub registry as source o
 
 **Immediate next steps:**
 
-1. Contact hello@badgelist.com for an API token (Stephen owns the group as @slarson)
+1. Contact hello@badgelist.com for an API token (the Project Lead owns the group)
 2. Create the new DD-aligned badges via `POST /badges`
 3. Wire Mind-of-a-Worm to call `POST /badges/{badge_id}/endorsements` on PR merge
 4. Migrate existing badge names (see Migration table below) — create new badges, bulk-award to existing holders

@@ -36,7 +36,6 @@ AI agents (Mind-of-a-Worm and others) participate in OpenWorm as contributors wi
 - AI review checklist templates for Mind-of-a-Worm pre-review
 - DD compliance checking rules for automated review
 - `openworm/ai-contributor-registry` repository with agent YAML schema
-- `openworm/ai-generated-code` sandbox repository
 
 ## How to Visualize
 
@@ -70,7 +69,7 @@ This DD defines:
 
 1. **Discovers** OpenWorm via public documentation
 2. **Registers** as an autonomous contributor (proves capability, declares sponsor)
-3. **Reads** Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD014](DD014_Dynamic_Visualization_Architecture.md) (ingests the project's architecture)
+3. **Reads** Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md) (plus [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
 4. **Claims** an AI-workable issue (auto-generated from DD Integration Contracts)
 5. **Writes code** (implements the spec, runs tests locally)
 6. **Submits a PR** (AI-authored, with full traceability)
@@ -184,7 +183,7 @@ An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm ch
 
 ### 2.1 The Problem
 
-Design Documents ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD014](DD014_Dynamic_Visualization_Architecture.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
+Design Documents ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md), plus [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
 
 **Example:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration) specifies:
 
@@ -289,7 +288,7 @@ Parse the DD's **Integration Contract** section:
 1. **Issue created** (via DD Issue Generator or manually by maintainer)
 2. **Issue tagged** with `ai-workable` or `human-expert`
 3. **Agent discovers issue** (via GitHub API or Mind-of-a-Worm notification)
-4. **Agent claims issue** (comments: "Claiming this issue. ETA: 2 days. Sponsor: @slarson")
+4. **Agent claims issue** (comments: "Claiming this issue. ETA: 2 days. Sponsor: @project-lead")
 5. **Mind-of-a-Worm verifies claim** (checks agent's level vs. issue difficulty, rejects if mismatch)
 6. **Agent works** (clones repo, implements, runs tests locally)
 7. **Agent submits PR** (references issue, includes test results)
@@ -388,30 +387,41 @@ by watching the backward locomotion sequence.
 
 ### 4.1 What Goes Where
 
-| Repository | Purpose | Contributors |
-|-----------|---------|-------------|
-| **openworm/openworm** | Main simulation stack (Docker, master_openworm.py, docs) | Humans + AI (L1+) |
-| **openworm/c302** | Neural circuit models | Humans + AI (L2+) |
-| **openworm/Sibernetic** | Body physics engine | Humans + AI (L2+) |
-| **openworm/owmeta** | Knowledge graph | Humans only (L3+) |
-| **openworm/Worm3DViewer** | Visualization viewer | Humans + AI (L2+) |
-| **openworm/ai-contributor-registry** | AI agent registration (new) | AI agents (self-register), Humans (approve) |
-| **openworm/ai-generated-code** | Sandbox for AI-written code (new) | AI agents only (no merge to main repos) |
+| Repository | Purpose | DD(s) | Contributors |
+|-----------|---------|-------|-------------|
+| **openworm/openworm** | Main simulation stack (Docker, master_openworm.py, docs) | [DD013](DD013_Simulation_Stack_Architecture.md) | Humans + AI (L1+) |
+| **openworm/c302** | Neural circuit models, cell types | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Humans + AI (L2+) |
+| **openworm/Sibernetic** | Body physics engine | [DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) | Humans + AI (L2+) |
+| **openworm/owmeta** | Knowledge graph | [DD008](DD008_Data_Integration_Pipeline.md) | Humans only (L3+) |
+| **openworm/Worm3DViewer** | Visualization viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Humans + AI (L2+) |
+| **openworm/ConnectomeToolbox** | `cect` — connectome data access | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Humans + AI (L2+) |
+| **openworm/open-worm-analysis-toolbox** | Movement analysis, WCON | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD010](DD010_Validation_Framework.md) | Humans + AI (L2+) |
+| **openworm/tracker-commons** | WCON standard | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Humans + AI (L1+) |
+| **openworm/Blender2NeuroML** | Anatomical mesh pipeline | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Humans + AI (L2+) |
+| **openworm/CE_locomotion** | Locomotion reference model | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Humans + AI (L2+) |
+| **openworm/NemaNode** | Interactive connectome browser | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Humans + AI (L1+) |
+| **openworm/openworm.ai** | LLM/AI infrastructure | [DD015](DD015_AI_Contributor_Model.md) | Humans + AI (L2+) |
+| **openworm/openworm_docs** | Documentation site | All DDs | Humans + AI (L1+) |
+| **openworm/openworm-ml** (new) | ML models (foundation, surrogate) | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Humans + AI (L2+) |
+| **openworm/validation-data** (new) | Validation datasets | [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) | Humans + AI (L1+) |
+| **openworm/ai-contributor-registry** (new) | AI agent registration | [DD015](DD015_AI_Contributor_Model.md) | AI agents (self-register), Humans (approve) |
 
-**New Repo: `openworm/ai-generated-code`**
+**AI Agent Git Workflow (Standard GitHub Fork/PR)**
 
-**Purpose:** A **sandbox repo** where AI agents can experiment, generate code, and test implementations **before** opening PRs to main repos.
+AI agents use the same fork/PR workflow as human contributors:
 
-**Workflow:**
+1. AI agent claims issue in target repo (e.g., `openworm/c302#106`)
+2. AI agent's **sponsor forks** the target repo to their GitHub account (e.g., `slarson/c302`)
+3. AI agent creates a feature branch in the fork (e.g., `ai/agent-001/issue-106`)
+4. AI agent works on the branch (full autonomy, runs tests locally via Docker)
+5. AI agent opens PR from fork → upstream (e.g., `slarson/c302:ai/agent-001/issue-106` → `openworm/c302:main`)
+6. Mind-of-a-Worm pre-reviews, human L3+ approves, code merges
 
-1. AI agent claims issue in main repo (e.g., `openworm/c302`)
-2. AI agent forks to `ai-generated-code/<agent-id>/<issue-number>/`
-3. AI agent works in sandbox (full autonomy)
-4. AI agent runs tests, validates against DD
-5. AI agent opens PR from sandbox → main repo
-6. Mind-of-a-Worm reviews, human approves, code merges to main
+**Branch naming convention:** `ai/<agent-id>/<issue-number>` (e.g., `ai/claude-code-slarson-001/issue-106`)
 
-**Why:** Prevents AI agents from cluttering main repos with failed experiments. Sandbox is ephemeral (auto-deleted after 90 days if unused).
+**Why no sandbox repo:** Standard fork/PR is how GitHub works. Agents need to fork the actual target repo to create valid PRs. A separate sandbox repo can't PR into existing repos — the git histories don't match.
+
+**Sponsor's fork as workspace:** The sponsor's GitHub account provides the namespace. The sponsor can see all branches their agent creates, review work in progress, and delete stale branches. Forks are ephemeral — GitHub auto-deletes forks with no unique commits after a period of inactivity.
 
 ---
 
@@ -419,7 +429,7 @@ by watching the backward locomotion sequence.
 
 **Human PR:** `Fix #123: Add muscle activation export to OME-Zarr`
 
-**AI PR:** `[AI-PR] Fix #123: Add muscle activation export to OME-Zarr (Agent: claude-code-slarson-001, Sponsor: @slarson)`
+**AI PR:** `[AI-PR] Fix #123: Add muscle activation export to OME-Zarr (Agent: claude-code-agent-001, Sponsor: @project-lead)`
 
 **Parsing Rule:** PRs starting with `[AI-PR]` trigger AI-specific review workflow (Mind-of-a-Worm feedback loop, sponsor notification).
 
@@ -478,7 +488,7 @@ by watching the backward locomotion sequence.
     - Mind-of-a-Worm approves: "Claim approved. Read [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1. Follow openworm.yml schema in [DD013](DD013_Simulation_Stack_Architecture.md)."
 
 5. **Implementation:**
-    - Agent forks `openworm/openworm` to `ai-generated-code/agent-claude-code-user123-001/issue-106/`
+    - Agent's sponsor forks `openworm/openworm` to `user123/openworm`. Agent creates branch `ai/claude-code-user123-001/issue-106` in the fork.
     - Agent reads [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (lines 300-350, config section)
     - Agent edits `openworm.yml`, adds:
      ```yaml
@@ -529,7 +539,7 @@ by watching the backward locomotion sequence.
     - Mind-of-a-Worm comments: "Pre-review passed. Recommended for human review. @padraig (c302 maintainer) please review."
 
 8. **Human Review:**
-    - Padraig reviews PR, approves: "LGTM. Nice first contribution from an AI agent. Merging."
+    - The subsystem maintainer reviews PR, approves: "LGTM. Nice first contribution from an AI agent. Merging."
     - PR merged → Issue #106 closed
     - Agent's contribution count increments: `contributions: [106]`
 
@@ -747,7 +757,7 @@ Last updated: 2026-02-18T14:30:00Z
   - [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) config follows [DD013](DD013_Simulation_Stack_Architecture.md) schema pattern (line 45)
   - Always check [DD013](DD013_Simulation_Stack_Architecture.md) before adding new config sections
 - **Human feedback:**
-  - Padraig: "Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)"
+  - Subsystem maintainer: "Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)"
 - **Next time:** Read related papers before choosing parameter values
 
 ### 2026-02-18: Issue #107 - Expand peptide types to all 40
@@ -822,7 +832,7 @@ Last updated: 2026-02-18T14:30:00Z
 - [ ] Write `AI_AGENT_ONBOARDING.md` (how AI agents join) ✅
 - [ ] Create `scripts/dd_issue_generator.py` (DD → issues) ✅
 - [ ] Set up Slack #ai-contributors channel
-- [ ] Create `openworm/ai-generated-code` sandbox repo
+- [ ] Verify GitHub fork/PR workflow documented in `AI_AGENT_ONBOARDING.md`
 - [ ] Update GitHub issue templates (add `ai-workable` label)
 - [ ] Create GitHub App: Mind-of-a-Worm
 - [ ] Deploy OpenClaw backend (Flask/FastAPI server)
@@ -838,7 +848,7 @@ Last updated: 2026-02-18T14:30:00Z
 
 ### Phase 3: Issue Generation (Week 5-6)
 
-- [ ] Run `dd_issue_generator.py` on [DD001](DD001_Neural_Circuit_Architecture.md)-[DD010](DD010_Validation_Framework.md)
+- [ ] Run `dd_issue_generator.py` on [DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md) (plus [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))
 - [ ] Review generated issues for quality
 - [ ] Tag all issues with `ai-workable` or `human-expert`
 - [ ] Publish issue backlog to GitHub
@@ -873,7 +883,7 @@ Last updated: 2026-02-18T14:30:00Z
 **Mitigations:**
 
 1. **Human sponsor accountability** — Every agent has a traceable human sponsor who can be banned
-2. **Sandbox execution** — AI-generated code runs in `ai-generated-code` repo first, never has elevated permissions
+2. **Fork isolation** — AI-generated code runs in sponsor's fork with standard permissions; agents cannot push directly to upstream repos — only submit PRs
 3. **Mind-of-a-Worm pre-review** — Catches obvious code smells before human review
 4. **Human final gate** — No AI can merge code; L3+ human must approve
 5. **Rate limiting** — Max 5 PRs/day per agent, max 10 issue claims/day
@@ -990,10 +1000,22 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | DD | How AI Contributor Model Enhances It |
 |----|-------------------------------------|
-| **[DD011](DD011_Contributor_Progression_Model.md)** | Extends L0-L5 progression to AI agents (L3 ceiling); badge system ([DD011](DD011_Contributor_Progression_Model.md) §Badge & Recognition System) applies to both AI agents and human sponsors, with teach-back badges unique to sponsors |
+| **[DD001](DD001_Neural_Circuit_Architecture.md)** | AI agents implement neural circuit components (gap junctions, synapses) per spec |
+| **[DD003](DD003_Body_Physics_Architecture.md)** | AI agents contribute body physics implementations in Sibernetic |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | CeNGEN data processing, neuron class exports — highly AI-workable |
+| **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)** | Peptide interaction implementation, GPCR modulation — used as primary example throughout this DD |
+| **[DD007](DD007_Pharyngeal_Nervous_System_Architecture.md), [DD009](DD009_Reproductive_System_Architecture.md), [DD018](DD018_Excretory_System_Architecture.md)** | Organ system implementations — well-specified tasks for AI agents |
+| **[DD010](DD010_Validation_Framework.md)** | AI-generated code must pass all validation tiers; AI agents run validation suites |
+| **[DD011](DD011_Contributor_Progression_Model.md)** | Extends L0-L5 progression to AI agents (L3 ceiling); badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors |
 | **[DD012](DD012_Design_Document_RFC_Process.md)** | AI agents cannot propose RFCs (no DD authorship), but can implement approved RFCs |
 | **[DD013](DD013_Simulation_Stack_Architecture.md)** | AI agents must comply with Integration Contracts; Mind-of-a-Worm enforces this |
-| **[DD014](DD014_Dynamic_Visualization_Architecture.md)** | AI agents can contribute to visualization (e.g., implement OME-Zarr exporters) |
+| **[DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)** | AI agents can contribute visualization components (OME-Zarr exporters, mesh pipelines) |
+| **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)** | ML model training and surrogate model implementation — AI-native work |
+| **[DD019](DD019_Chemosensory_System_Architecture.md), [DD022](DD022_Thermosensory_Circuit_Architecture.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)** | Sensory system implementations — well-specified tasks for AI agents |
+| **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** | Connectome data access tooling — Python packaging, API work |
+| **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | Movement analysis toolbox — Python packaging, test writing, very AI-workable |
+| **[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)** | Validation data digitization and curation — data processing tasks |
+| **[DD025](DD025_Protein_Foundation_Model_Pipeline.md)** | Foundation model pipeline — ML implementation, training infrastructure |
 | **AI Agent Architecture** | Mind-of-a-Worm/N2-Whisperer now handle AI-to-AI interactions, not just AI-to-human |
 
 ---
@@ -1058,7 +1080,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | Input | Source | Format |
 |-------|--------|--------|
-| Design Documents (DD001-DD024) | `docs/design_documents/` | Markdown |
+| Design Documents (DD001-DD025, plus DD014.1, DD014.2) | `docs/design_documents/` | Markdown |
 | Contributor progression rules | [DD011](DD011_Contributor_Progression_Model.md) | Policy document |
 | Validation criteria | [DD010](DD010_Validation_Framework.md) | Test suites |
 | PR diffs and issue data | GitHub API | JSON |

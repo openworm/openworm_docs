@@ -69,7 +69,7 @@ The ConnectomeToolbox (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for 
 | **Milestone** | Connectome Data Access Policy |
 | **Branch convention** | `dd020/description` (e.g., `dd020/pin-cook2019-default`) |
 | **Example PR title** | `DD020: Pin cect 0.2.7 in versions.lock, update openworm.yml` |
-| **De facto maintainer** | Padraig Gleeson (p.gleeson@ucl.ac.uk) |
+| **De facto maintainer** | Neural Circuit L4 Maintainer |
 | **PyPI** | https://pypi.org/project/cect/ |
 
 ---
@@ -193,7 +193,7 @@ docker compose run shell python -c "import cect; print(cect.__version__)"
 
 When a new connectome dataset is published (e.g., a future revision or new species):
 
-1. **Padraig adds a reader** to ConnectomeToolbox (he typically does this within days of publication)
+1. **The ConnectomeToolbox maintainer adds a reader** to ConnectomeToolbox (typically within days of publication)
 2. **Bump `cect` version** in `versions.lock` after reviewing the changelog
 3. **Run regression tests** — ensure existing simulations produce equivalent results with the new version
 4. **Do NOT change the default dataset** without an RFC ([DD012](DD012_Design_Document_RFC_Process.md) process). Changing from [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm to a new default affects all consuming DDs
@@ -497,7 +497,7 @@ The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates
 
 **Rejected because:**
 
-- `cect` already exists, is actively maintained by Padraig, and is approaching preprint publication
+- `cect` already exists, is actively maintained by the ConnectomeToolbox maintainer, and is approaching preprint publication
 - Duplicating effort; `cect` has ~4 years of development and 30+ dataset readers
 - OpenWorm should contribute to `cect`, not compete with it
 
@@ -512,7 +512,7 @@ The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates
 - The unified reader's connection counts and topology may change as it evolves
 - Use for forward-looking development, not production simulations
 
-**When to reconsider:** When OpenWormUnifiedReader stabilizes and Padraig removes the WIP designation.
+**When to reconsider:** When OpenWormUnifiedReader stabilizes and the ConnectomeToolbox maintainer removes the WIP designation.
 
 ---
 
@@ -574,14 +574,14 @@ The *C. elegans* connectome — the complete wiring diagram of the nervous syste
 | 2024 | Wang et al. | Neurotransmitter atlas (16 systems, CRISPR/Cas9 reporters) | `Wang2024HermReader`, `Wang2024MaleReader` |
 | 2024 | Yim et al. | Updated connectivity analysis | `Yim2024DataReader` |
 
-Padraig Gleeson created the ConnectomeToolbox (`cect`) to provide unified access to all these datasets through a consistent Python API. As of v0.2.7 (Feb 2026), it includes 30+ dataset readers, cell classification, neurotransmitter identity, bilateral symmetry analysis, and multiple visualization modes.
+The ConnectomeToolbox (`cect`) was created to provide unified access to all these datasets through a consistent Python API. As of v0.2.7 (Feb 2026), it includes 30+ dataset readers, cell classification, neurotransmitter identity, bilateral symmetry analysis, and multiple visualization modes.
 
 ### Recent Activity (Feb 2026)
 
 - **Feb 10:** Bilateral symmetry analysis notebook added
 - **Feb 10:** OpenWormUnifiedReader switched to Wang2024Reader base
 - **Feb 11:** Electrical connections added to OpenWormUnifiedReader
-- **Feb 12 meeting:** Padraig reported the preprint is "nearly finished"
+- **Feb 12 meeting:** The ConnectomeToolbox maintainer reported the preprint is "nearly finished"
 - **Feb 13:** Merge of latest updates to main branch
 
 ### Why This DD Is Needed Now
@@ -604,7 +604,7 @@ ConnectomeToolbox is already referenced as a dependency in 9 existing DDs ([DD00
 | **Architecture** | Direct Python API | RDF semantic graph |
 | **Query style** | `get_instance()` → `ConnectomeDataset` | `connect("openworm_data")` → SPARQL-like |
 | **Data scope** | Connectome topology only | Connectome + CeNGEN + WormAtlas + lineage + ... |
-| **Maintainer** | Padraig Gleeson (active) | OWMeta team (dormant since Jul 2024) |
+| **Maintainer** | ConnectomeToolbox maintainer (active) | OWMeta team (dormant since Jul 2024) |
 | **Current status** | v0.2.7, 30+ datasets, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 
@@ -759,7 +759,7 @@ print('[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) full validati
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Published connectome datasets (external) | None | If Cook et al. publish corrections, `cect` readers must be updated by Padraig |
+| Published connectome datasets (external) | None | If Cook et al. publish corrections, `cect` readers must be updated by the ConnectomeToolbox maintainer |
 | `cect` Python package (external) | None | If `cect` API changes, all consuming DDs must update imports |
 | [DD013](DD013_Simulation_Stack_Architecture.md) config system | [DD013](DD013_Simulation_Stack_Architecture.md) | If `openworm.yml` schema changes, `data.connectome` keys must be updated |
 

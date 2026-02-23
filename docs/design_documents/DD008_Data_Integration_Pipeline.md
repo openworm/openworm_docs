@@ -416,7 +416,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 | **Architecture** | Direct Python API | RDF semantic graph |
 | **Query style** | `get_instance()` → `ConnectomeDataset` | `connect("openworm_data")` → SPARQL-like |
 | **Data scope** | Connectome topology only (30+ datasets) | Connectome + CeNGEN + WormAtlas + lineage + anatomy |
-| **Maintainer** | Padraig Gleeson (active, commits within days) | OWMeta team (dormant since Jul 2024) |
+| **Maintainer** | Active maintainer (commits within days) | OWMeta team (dormant since Jul 2024) |
 | **Current status** | v0.2.7, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 

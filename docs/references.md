@@ -192,6 +192,17 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 
 ---
 
+## Reservoir Computing & Network Computation
+
+| Citation | Journal | Year | Description |
+|----------|---------|------|-------------|
+| [Yan et al. 2024](https://doi.org/10.1038/s41467-024-49498-x) | Nat Commun 15:5765 | 2024 | Reservoir computing in biological neural networks — primary motivation for DD026. [DD026](design_documents/DD026_Reservoir_Computing_Validation.md) |
+| Jaeger 2001 | GMD Report 148 | 2001 | The "echo state" approach to analysing and training recurrent neural networks — original echo state network paper defining ESP and RC framework. [DD026](design_documents/DD026_Reservoir_Computing_Validation.md) |
+| [Maass et al. 2002](https://doi.org/10.1162/089976602760407955) | Neural Computation 14:2531-2560 | 2002 | Real-time computing without stable states — liquid state machines (RC for biological spiking networks). [DD026](design_documents/DD026_Reservoir_Computing_Validation.md) |
+| [Lukoševičius & Jaeger 2009](https://doi.org/10.1016/j.cosrev.2009.03.005) | Computer Science Review 3:127-149 | 2009 | Reservoir computing approaches to recurrent neural network training — comprehensive RC review (memory capacity, separation property). [DD026](design_documents/DD026_Reservoir_Computing_Validation.md) |
+
+---
+
 ## Computational Methods & Machine Learning
 
 | Citation | Journal | Year | Description |

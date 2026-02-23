@@ -68,7 +68,7 @@ WormSim's frontend has been dormant since December 2015. The underlying Geppetto
 
 ### Worm3DViewer (2025): A Starting Point
 
-Padraig Gleeson created `openworm/Worm3DViewer` (v0.0.8, June-September 2025) as a prototype that composites three data sources into a single 3D scene:
+The Neural Circuit L4 Maintainer created `openworm/Worm3DViewer` (v0.0.8, June-September 2025) as a prototype that composites three data sources into a single 3D scene:
 
 | Data Source | What It Shows | Loader |
 |-------------|--------------|--------|
@@ -700,4 +700,4 @@ Interactive web-based map of neural connections (formerly nemanode.org). May con
 2. Implement OME-Zarr export in `master_openworm.py`
 3. Implement surface reconstruction pipeline
 4. Identify / recruit Visualization L4 Maintainer
-5. Coordinate with Padraig on Worm3DViewer evolution roadmap
+5. Coordinate with Neural Circuit L4 Maintainer on Worm3DViewer evolution roadmap

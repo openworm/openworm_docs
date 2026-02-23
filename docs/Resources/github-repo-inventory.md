@@ -26,8 +26,8 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 | [OpenWorm](https://github.com/openworm/OpenWorm) | 2026-02-09 | 2,943 | **Active** — Meta-repo | [DD013](../design_documents/DD013_Simulation_Stack_Architecture.md) |
 | [c302](https://github.com/openworm/c302) | 2026-02-18 | 135 | **Active** | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](../design_documents/DD002_Muscle_Model_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)–[DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md), [DD018](../design_documents/DD018_Egg_Laying_System_Architecture.md)–[DD019](../design_documents/DD019_Closed_Loop_Touch_Response.md) |
 | [sibernetic](https://github.com/openworm/sibernetic) | 2026-02-13 | 384 | **Active** | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (coupling), [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD019](../design_documents/DD019_Closed_Loop_Touch_Response.md) |
-| [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | 2026-02-19 | 4 | **Active** (Padraig maintains) | [DD020](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) |
-| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (Padraig prototype) | [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md), [DD014.2](../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) |
+| [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | 2026-02-19 | 4 | **Active** (Neural Circuit L4 Maintainer) | [DD020](../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) |
+| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (visualization prototype) | [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md), [DD014.2](../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) |
 
 **All 5 are essential.** Changes to these repos affect multiple DDs.
 
@@ -69,7 +69,7 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
-| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (Padraig) | [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) Phase 1 (Trame viewer evolution) |
+| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (Neural Circuit L4 Maintainer) | [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) Phase 1 (Trame viewer evolution) |
 | [wormbrowser](https://github.com/openworm/wormbrowser) | 2026-02-13 | 49 | **Active** | [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) (historical 3D browser, still maintained) |
 | [openwormbrowser-ios](https://github.com/openworm/openwormbrowser-ios) | 2026-01-20 | 20 | **Active** | Mobile version of worm browser |
 | [WCONViewer](https://github.com/openworm/WCONViewer) | 2025-12-17 | 0 | **Maintained** | [DD021](../design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON visualization tool) |

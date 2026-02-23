@@ -92,6 +92,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
+| [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions |
 | [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
 
 ### Phase 3: Organ Systems ⚠️
@@ -125,7 +126,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in this [openworm_docs repository](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents).
-    **Total:** 26 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+    **Total:** 27 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD026](DD026_Reservoir_Computing_Validation.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ### By Topic
 
@@ -145,7 +146,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 [DD019](DD019_Closed_Loop_Touch_Response.md) (touch/MEC-4), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (environment), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception)
 
 **Data & Validation:**
-[DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (4-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (validation data acquisition)
+[DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (4-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (validation data acquisition), [DD026](DD026_Reservoir_Computing_Validation.md) (reservoir computing validation)
 
 **Infrastructure:**
 [DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
@@ -154,7 +155,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 [DD011](DD011_Contributor_Progression_Model.md) (contributor progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC process), [DD015](DD015_AI_Contributor_Model.md) (AI contributors)
 
 **Hybrid/Advanced:**
-[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model channel kinetics)
+[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model channel kinetics), [DD026](DD026_Reservoir_Computing_Validation.md) (reservoir computing validation)
 
 ---
 
@@ -201,6 +202,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 - **Movement Validation:** [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (analysis toolbox revival, WCON 1.0, 5 kinematic metrics)
 - **Validation Framework:** [DD010](DD010_Validation_Framework.md) (4 tiers: electrophysiology, functional connectivity r > 0.5, behavioral ±15%, causal/interventional)
 - **Validation Data:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (acquire, format, version-control all experimental datasets)
+- **Reservoir Computing:** [DD026](DD026_Reservoir_Computing_Validation.md) (tests whether the 302-neuron connectome functions as a reservoir computer — 5 RC properties × 4 neuron partitions, falsifiable predictions)
 
 ### Infrastructure & Visualization
 
@@ -219,6 +221,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 - **Mechanistic-ML:** [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (differentiable simulation, SPH surrogate, learned sensory transduction)
 - **Foundation Model Kinetics:** [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (protein sequence → ion channel HH parameters, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+- **Reservoir Computing:** [DD026](DD026_Reservoir_Computing_Validation.md) (tests RC framing of the connectome — 5 falsifiable predictions across 4 neuron partitions, either confirms or rejects the framework)
 
 ---
 
