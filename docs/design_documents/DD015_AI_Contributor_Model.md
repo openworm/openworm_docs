@@ -324,6 +324,40 @@ Issues that produce scripts or data artifacts consumed by the simulation pipelin
 
 **Result:** As DDs evolve (via [DD012](DD012_Design_Document_RFC_Process.md) RFC process), the issue backlog stays synchronized. Old issues auto-close with a comment: "Superseded by #XYZ ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md) v1.1)."
 
+### 2.6 Documentation Destination Policy
+
+Documentation issues must specify **where** the documentation lives — not just what it contains. The DD Issue Generator should assign a **Documentation Tier** based on the scope and audience of each documentation task.
+
+**Three tiers:**
+
+| Tier | Location | When to Use | Audience |
+|------|----------|-------------|----------|
+| **Repo-internal** | Target repo's `docs/`, `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md` | Single-repo scope, code-adjacent content | Developers working in that repo |
+| **Docs site** | `openworm/openworm_docs` → [docs.openworm.org](https://docs.openworm.org/) | Cross-repo scope, getting-started guides, tutorials, conceptual overviews | Contributors and newcomers across repos |
+| **BadgeList-aligned** | Augment existing [BadgeList](https://badgelist.com/openworm) badge descriptions + link to fuller docs | Onboarding/progression content where badges already exist | L0–L1 onboarding audience |
+
+**Decision rules:**
+
+1. **References only one repo's code** → **repo-internal** (e.g., `docs/architecture.md` in `openworm/Sibernetic`)
+2. **References 2+ repos or serves as a getting-started/contributor guide** → **docs site** (e.g., muscle model guide spanning c302, muscle_model, and CE_locomotion repos)
+3. **BadgeList badge already covers the topic** → **augment the badge**, don't create from scratch. Reference the existing badge progression and link to fuller docs on the docs site or in the repo.
+4. **`CONTRIBUTING.md` and `CHANGELOG.md`** → always **repo-internal** (standard convention; every repo should have its own)
+5. **Notebooks** → live in the repo where they run (typically `openworm/OpenWorm` for simulation notebooks)
+
+**BadgeList integration note:** OpenWorm's [BadgeList](https://badgelist.com/openworm) already has 20 badges with 162 registered users ([DD011](DD011_Contributor_Progression_Model.md)). Several badges serve as de facto getting-started guides — for example, the muscle model badge progression (Muscle Model Explorer → Muscle Model Builder → Muscle Model Hacker) already guides contributors through a structured learning path. Documentation issues that overlap with existing badge topics should **augment and link to** the badge rather than duplicating its content. The issue's **Existing Code to Reuse** field should list the relevant BadgeList badge(s) as existing resources.
+
+**Required issue field for documentation tasks:**
+
+```markdown
+- **Documentation Tier:** [Repo-internal | Docs site | BadgeList-aligned] — [brief justification]
+```
+
+**Example:**
+
+```markdown
+- **Documentation Tier:** Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
+```
+
 ---
 
 ## 3. AI-Human Coexistence Model

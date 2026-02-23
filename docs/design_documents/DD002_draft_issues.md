@@ -519,33 +519,39 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 
 ---
 
-### Issue 16: Create muscle model contributor guide
+### Issue 16: Augment and consolidate muscle model contributor guide
 
-- **Title:** `[DD002] Create muscle model contributor guide for c302 developers`
+- **Title:** `[DD002] Augment existing BadgeList muscle model progression into a comprehensive contributor guide`
 - **Labels:** `DD002`, `ai-workable`, `L1`
-- **Target Repo:** `openworm/c302`
+- **Target Repo:** `openworm/openworm_docs`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD002 — Quality Criteria](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#quality-criteria), [DD002 — Testing Procedure](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#testing-procedure), and [DD002 — Boundaries](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#boundaries-explicitly-out-of-scope)
+- **Documentation Tier:** Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion repos; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
 - **Existing Code to Reuse:**
-    - `openworm/c302` → `c302/c302_Muscles.py`, `c302/c302_MuscleTest.py`, `c302/c302_IClampMuscle.py`, `c302/c302_MusclesSine.py` — document these as the "getting started" workflow; show contributors the progression from single-muscle test → all-muscle test → oscillatory stimulation (reuse strategy: **document as resources**)
+    - **[BadgeList muscle model badges](https://badgelist.com/openworm)** — Three existing badges form a de facto getting-started progression: **Muscle Model Explorer** (9 earners — explore the muscle model), **Muscle Model Builder** (2 earners — build it), **Muscle Model Hacker** (12 earners — hack/extend it). These map to [DD011](DD011_Contributor_Progression_Model.md) skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". **Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression** (reuse strategy: **augment**)
+    - `openworm/c302` → `c302/c302_Muscles.py`, `c302/c302_MuscleTest.py`, `c302/c302_IClampMuscle.py`, `c302/c302_MusclesSine.py` — document these as the hands-on workflow; show contributors the progression from single-muscle test → all-muscle test → oscillatory stimulation (reuse strategy: **document as resources**)
     - `openworm/muscle_model` repo — document as the biophysical reference implementation for Boyle-Cohen muscle (reuse strategy: **document as resource**)
     - `openworm/c302` → `c302/parameters_C.py` through `parameters_D.py` — document the parameter level system (A/B/C/D) and when to use each (reuse strategy: **document as resource**)
-    - The contributor guide should **map all existing code resources** so contributors know what's already built before starting new work
+    - `openworm/CE_locomotion` → locomotion model with muscle actuation (reuse strategy: **document as resource**)
+    - The contributor guide should **map all existing code resources across repos** so contributors know what's already built before starting new work
+- **Approach:** Augment — BadgeList already provides the onboarding funnel; this guide adds the technical depth that badges can't contain
 - **Depends On:** None
 - **Files to Modify:**
-    - `docs/muscle_model_guide.md` (new — in c302 repo)
+    - `docs/Resources/muscle_model_guide.md` (new — on docs.openworm.org, not in a single repo, because it spans c302, muscle_model, and CE_locomotion)
 - **Test Commands:**
-    - N/A (documentation task)
+    - `python3.13 -m mkdocs build` (verify page renders correctly on docs site)
 - **Acceptance Criteria:**
+    - [ ] Opens with link to BadgeList muscle model badge progression and frames the guide as the "deep dive" companion to the badges
     - [ ] Overview: what the muscle model does, what it produces, who uses its output
-    - [ ] File map: `c302_Muscles.py` (templates), `muscles.csv` (cell list), `sibernetic_c302.py` (coupling)
-    - [ ] Existing code inventory: catalog all muscle-related scripts in c302, muscle_model, and CE_locomotion repos
+    - [ ] Cross-repo file map: c302 muscle scripts, muscle_model repo, CE_locomotion body model, Sibernetic coupling
+    - [ ] Existing code inventory: catalog all muscle-related scripts across c302, muscle_model, CE_locomotion, and Sibernetic repos
     - [ ] Contributor workflow: generate muscle network → validate NeuroML → run simulation → check outputs
     - [ ] Quality criteria: 5 rules from DD002 (calcium interface, movement validation, NeuroML 2, units, muscle-neuron distinction)
     - [ ] Common mistakes: copying neuron parameters to muscles, changing calcium variable name without updating `sibernetic_c302.py`
+    - [ ] Maps badge progression to code: "Muscle Model Explorer" → run `c302_MuscleTest.py`; "Builder" → modify parameters; "Hacker" → add new muscle types or modify coupling
     - [ ] References to DD002 for specification, DD003 for body physics coupling, DD014 for visualization
-    - [ ] Aimed at L2 contributors (familiar with Python but new to muscle physiology)
-- **Sponsor Summary Hint:** A "getting started" guide for anyone wanting to improve the muscle model. Explains which files to edit, what tests to run, and what mistakes to avoid (like accidentally copying neuron parameters to muscles — which would make muscles twitch like neurons instead of contracting smoothly). Crucially, this guide catalogs all existing code across repos so contributors reuse what's already built. DD002 is the specification; this is the practical "how to contribute" companion.
+    - [ ] Aimed at L1–L2 contributors (aligns with BadgeList skill badge level)
+- **Sponsor Summary Hint:** BadgeList already has a muscle model getting-started progression (Explorer → Builder → Hacker) with 23 total earners. This guide doesn't replace those badges — it augments them with the technical depth that a badge description can't contain. Where to find the code across 4 repos, which files to edit, what tests to run, what mistakes to avoid. The badges are the curriculum; this guide is the textbook. Lives on docs.openworm.org because it spans multiple repos — you can't put a cross-repo guide inside just one repo.
 
 ---
 
