@@ -6,13 +6,15 @@
 
 **Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
 
-**Totals:** 25 issues (ai-workable: 14 / human-expert: 11 | L1: 6, L2: 12, L3: 7)
+**Totals:** 23 issues (ai-workable: 12 / human-expert: 11 | L1: 5, L2: 11, L3: 7)
+
+**Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD021 owns. They have been moved to [DD021 Draft Issues](DD021_draft_issues.md) (Issues 1-2) where they belong as Phase A validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
 
 ---
 
 ## Phase 1: Validation Infrastructure
 
-Target: Scripts and baselines needed to measure neural circuit quality and detect regressions.
+Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by [DD021](DD021_draft_issues.md).
 
 ---
 
@@ -86,69 +88,7 @@ Target: Scripts and baselines needed to measure neural circuit quality and detec
 
 ---
 
-### Issue 3: Wrap OWAT's statistics engine as `scripts/check_regression.py`
-
-- **Title:** `[DD001] Wrap open-worm-analysis-toolbox statistics engine into check_regression.py — validation regression detector`
-- **Labels:** `DD001`, `ai-workable`, `L1`
-- **Target Repo:** `openworm/c302`
-- **Required Capabilities:** python
-- **DD Section to Read:** [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test) (Step 5) and [DD001 — Quality Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#quality-criteria) (criterion 5)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`open-worm-analysis-toolbox/statistics/statistics_manager.py`](https://github.com/openworm/open-worm-analysis-toolbox) — **Already computes** Wilcoxon rank-sum and Student's t-test across **726 kinematic features** with FDR correction (q-values). Includes `histogram_manager.py` for feature distribution comparison.
-    - [`open-worm-analysis-toolbox/features/`](https://github.com/openworm/open-worm-analysis-toolbox) — Locomotion features including speed, wavelength, frequency, amplitude, crawling/swimming classification — all 5 key metrics DD001 needs are already computed.
-    - `c302/runAndPlot.py` — Generates comparison images across all parameter sets (visual regression checking)
-- **Approach:** **Wrap** OWAT's `StatisticsManager` with a pass/fail gate. Map the 5 DD001 key metrics to the corresponding OWAT feature names, add threshold comparison against baseline, return exit code.
-- **DD013 Pipeline Role:** Validation gate. Runs as final pipeline stage in `master_openworm.py`. Non-zero exit code blocks the run as failed.
-- **Files to Modify:**
-    - `scripts/check_regression.py` (new — thin wrapper around OWAT)
-    - `tests/test_check_regression.py` (new)
-    - `baseline/validation_baseline.json` (new — baseline scores)
-- **Test Commands:**
-    - `python3 scripts/check_regression.py validation_report.json baseline/validation_baseline.json`
-    - `pytest tests/test_check_regression.py`
-- **Acceptance Criteria:**
-    - [ ] Uses `open-worm-analysis-toolbox` `StatisticsManager` as the comparison engine — does NOT reimplement feature comparison
-    - [ ] Reads a validation report JSON (output from OWAT) and a baseline JSON
-    - [ ] Compares 5 key metrics: speed, wavelength, frequency, amplitude, crawling/swimming classification
-    - [ ] Flags REGRESSION if any metric degrades >15% from baseline
-    - [ ] Prints per-metric comparison table (current vs. baseline vs. threshold)
-    - [ ] Returns exit code 0 if no regression, non-zero if regression detected
-    - [ ] Unit tests with synthetic reports (passing, regressing, improving)
-- **Sponsor Summary Hint:** A guard-rail script built on the existing Schafer lab analysis toolbox — which already compares 726 kinematic features using statistical tests. This wraps that engine with a simple pass/fail gate for CI: does the worm still move like a real worm? If not, the change is flagged.
-
----
-
-### Issue 4: Generate Schafer lab kinematic baseline using OWAT
-
-- **Title:** `[DD001] Generate kinematic baseline metrics from Schafer lab N2 WCON data using open-worm-analysis-toolbox`
-- **Labels:** `DD001`, `ai-workable`, `L2`
-- **Target Repo:** `openworm/c302`
-- **Required Capabilities:** python, worm-biology
-- **DD Section to Read:** [DD001 — Goal & Success Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#goal-success-criteria) (±15% of Schafer lab) and [DD010](https://docs.openworm.org/design_documents/DD010_Validation_Framework/) (Tier 3)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) — **IS the Python port of the Schafer lab's Worm Analysis Toolbox.** `WormFeatures` class computes all 726 Schafer features including the 5 key metrics DD001 needs. Has WCON loading (`examples/WCON demo.py`), `NormalizedWorm` class for 49-point skeleton, and validation against original MATLAB toolbox (`documentation/Schafer_validation/`).
-    - [`open-worm-analysis-toolbox/examples/generate_stats.py`](https://github.com/openworm/open-worm-analysis-toolbox) — Example script for statistical comparison
-- **Approach:** **Use the existing library** — load Schafer N2 WCON data through OWAT, extract the 5 key metrics from its 726-feature output, save as baseline JSON. The feature computation is already implemented; this issue is data extraction and formatting, not algorithm development.
-- **Files to Modify:**
-    - `baseline/schafer_baseline_metrics.json` (new)
-    - `scripts/generate_baseline.py` (new — thin script calling OWAT)
-- **Test Commands:**
-    - `python3 scripts/generate_baseline.py --input schafer_n2_data/ --output baseline/schafer_baseline_metrics.json`
-- **Acceptance Criteria:**
-    - [ ] Uses `open-worm-analysis-toolbox` `WormFeatures` to compute kinematics — does NOT reimplement feature extraction
-    - [ ] Downloads or locates Schafer lab N2 wild-type WCON data (from open-worm-analysis-toolbox or Zenodo)
-    - [ ] Extracts 5 key metrics via OWAT: forward speed, body wavelength, undulation frequency, body amplitude, crawling/swimming gait classification
-    - [ ] Saves metrics with mean ± std to JSON file
-    - [ ] Documents data provenance (which dataset, which animals, which conditions)
-    - [ ] ±15% thresholds computed and stored alongside baseline values
-    - [ ] Baseline committed to repo as reference for `check_regression.py`
-- **Sponsor Summary Hint:** The Schafer lab analysis toolbox — already ported to Python by OpenWorm — computes 726 movement features from real worm tracking data. This issue runs it on wild-type N2 recordings to extract the 5 key metrics our simulation must match. The toolbox does the heavy lifting; this issue extracts and formats the answer key.
-
----
-
-### Issue 5: Audit c302 simulation output files and document format
+### Issue 3: Audit c302 simulation output files and document format
 
 - **Title:** `[DD001] Audit and document c302/NEURON simulation output file formats`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -183,14 +123,14 @@ Target: OME-Zarr export and coupling interface documentation.
 
 ---
 
-### Issue 6: Implement OME-Zarr export for neural voltage and calcium data
+### Issue 4: Implement OME-Zarr export for neural voltage and calcium data
 
 - **Title:** `[DD001] Implement OME-Zarr export for neural/voltage, neural/calcium, neural/positions`
 - **Labels:** `DD001`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD001 — Deliverables](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#deliverables) (OME-Zarr rows) and [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) (OME-Zarr schema)
-- **Depends On:** Issue 5 (output format documentation)
+- **Depends On:** Issue 3 (output format documentation)
 - **DD013 Pipeline Role:** Neural-stage post-processing. Produces Zarr store artifact for DD014 visualization stage. Output path from `openworm.yml`.
 - **Files to Modify:**
     - `scripts/export_zarr.py` (new)
@@ -209,14 +149,14 @@ Target: OME-Zarr export and coupling interface documentation.
 
 ---
 
-### Issue 7: Document `sibernetic_c302.py` coupling bridge
+### Issue 5: Document `sibernetic_c302.py` coupling bridge
 
 - **Title:** `[DD001] Document sibernetic_c302.py coupling bridge interface (DD001→DD002→DD003)`
 - **Labels:** `DD001`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, docs
 - **DD Section to Read:** [DD001 — Coupling Bridge Ownership](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#coupling-bridge-ownership) and [DD001 — Integration Contract — Coupling Dependencies](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#coupling-dependencies)
-- **Depends On:** Issue 5 (output format audit)
+- **Depends On:** Issue 3 (output format audit)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/sibernetic_c302.py`](https://github.com/openworm/sibernetic) — The coupling bridge already exists as a ~100+ line argparse-driven script that runs Sibernetic controlled by c302 via NEURON, with configurable duration, timestep, device, and configuration.
     - [`openworm/OpenWorm/master_openworm.py`](https://github.com/openworm/OpenWorm) — Docker orchestration of c302 + Sibernetic showing how the coupling bridge is invoked in the DD013 pipeline.
@@ -243,7 +183,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 8: Survey existing ion channel implementations across all OpenWorm repos
+### Issue 6: Survey existing ion channel implementations across all OpenWorm repos
 
 - **Title:** `[DD001] Survey existing NeuroML2 and NMODL ion channel implementations across all OpenWorm and related repos`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -275,14 +215,14 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 9: Validate and adopt EGL-19 (Cav1 L-type) NeuroML2 channel into c302
+### Issue 7: Validate and adopt EGL-19 (Cav1 L-type) NeuroML2 channel into c302
 
 - **Title:** `[DD001] Validate and adopt existing EGL-19 (Cav1 L-type Ca²⁺) NeuroML2 channel into c302 channel library`
 - **Labels:** `DD001`, `human-expert`, `L2`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (EGL-19 row, HIGH priority)
-- **Depends On:** Issue 8 (survey)
+- **Depends On:** Issue 6 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_egl19.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **EGL-19 already exists in validated NeuroML2.** Part of the AWCon 16-channel model. Validated against XPP original.
     - [`NicolettiEtAl2024_MN_IN/NeuroML/egl19.channel.nml`](https://github.com/openworm/NicolettiEtAl2024_MN_IN) — Another NeuroML2 version (AIY subset conversion)
@@ -309,14 +249,14 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 10: Validate and adopt SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302
+### Issue 8: Validate and adopt SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302
 
 - **Title:** `[DD001] Validate and adopt existing SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302 channel library`
 - **Labels:** `DD001`, `human-expert`, `L2`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (SLO-1 row, HIGH priority)
-- **Depends On:** Issue 8 (survey)
+- **Depends On:** Issue 6 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_slo1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **SLO-1 already exists in validated NeuroML2.** Calcium-dependent gating modeled. Part of AWCon model.
     - [`NicolettiEtAl2024_MN_IN/slo1egl19.mod`, `slo1unc2.mod`, `slo1iso.mod`](https://github.com/openworm/NicolettiEtAl2024_MN_IN) — Three SLO-1 variants coupled to different calcium sources (EGL-19, UNC-2, isolated)
@@ -339,14 +279,14 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 11: Validate and adopt KVS-1 and EGL-36 NeuroML2 channels into c302
+### Issue 9: Validate and adopt KVS-1 and EGL-36 NeuroML2 channels into c302
 
 - **Title:** `[DD001] Validate and adopt existing KVS-1 (Kv Shaker) and EGL-36 (ERG) NeuroML2 channels into c302 library`
 - **Labels:** `DD001`, `human-expert`, `L2`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (KVS-1 and EGL-36 rows, HIGH priority)
-- **Depends On:** Issue 8 (survey)
+- **Depends On:** Issue 6 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_kvs1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **KVS-1 already exists in validated NeuroML2** (AWCon model)
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/RMD_egl36.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **EGL-36 already exists in validated NeuroML2** (RMD model)
@@ -373,14 +313,14 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 12: Adopt or convert remaining MEDIUM-priority channels into c302
+### Issue 10: Adopt or convert remaining MEDIUM-priority channels into c302
 
 - **Title:** `[DD001] Adopt existing NeuroML2 or convert NMODL for MEDIUM-priority channels (CCA-1, EGL-2, KQT-3, SLO-2, KCNL, IRK, NCA)`
 - **Labels:** `DD001`, `human-expert`, `L3`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (MEDIUM priority rows)
-- **Depends On:** Issues 9-11 (HIGH priority channels establish the adoption/validation workflow)
+- **Depends On:** Issues 7-9 (HIGH priority channels establish the adoption/validation workflow)
 - **Existing Code to Reuse:**
     - **Already in NeuroML2 (NicolettiEtAl2019):** CCA-1 (`AWCon_cca.channel.nml`), EGL-2 (`AWCon_egl2.channel.nml`), KQT-3 (`AWCon_kqt3.channel.nml`), SLO-2 (`AWCon_slo2.channel.nml`), SK/KCNL (`AWCon_sk.channel.nml`), IRK/KIR (`AWCon_kir.channel.nml`), NCA (`AWCon_nca.channel.nml`) — **ALL 7 channels already exist in validated NeuroML2**
     - **NMODL references (NicolettiEtAl2024):** `cca1.mod`, `egl2.mod`, `kqt3.mod`, `slo2egl19.mod`/`slo2unc2.mod`/`slo2iso.mod`, `kcnl.mod`, `irk.mod`, `nca.mod`
@@ -400,7 +340,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
     - `for f in channel_models/*.nml; do jnml -validate $f; done`
     - `pytest tests/test_medium_channels.py`
 - **Acceptance Criteria:**
-    - [ ] All 7 channels adopted from existing NicolettiEtAl2019 NeuroML2 — conversion from NMODL only if no NeuroML2 version exists after Issue 8 survey
+    - [ ] All 7 channels adopted from existing NicolettiEtAl2019 NeuroML2 — conversion from NMODL only if no NeuroML2 version exists after Issue 6 survey
     - [ ] Each passes `jnml -validate`
     - [ ] I-V curves match NMODL references within ±5%
     - [ ] Parameters reconciled against NicolettiEtAl2024 and ChannelWorm2 where applicable; discrepancies documented
@@ -410,14 +350,14 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-### Issue 13: Create channel library test suite with voltage-clamp protocols
+### Issue 11: Create channel library test suite with voltage-clamp protocols
 
 - **Title:** `[DD001] Create comprehensive channel library test suite with standard voltage-clamp protocols`
 - **Labels:** `DD001`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) and [DD001 — Quality Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#quality-criteria) (criterion 3: biophysical units)
-- **Depends On:** Issues 9-12 (channel adoptions)
+- **Depends On:** Issues 7-10 (channel adoptions)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2024_MN_IN/*_vclamp.py`](https://github.com/openworm/NicolettiEtAl2024_MN_IN) — Voltage-clamp simulation scripts already exist for VA5, VB6, VD5 neurons. Includes conductance unit conversion utilities (`g_to_Scm2.py`, `g_to_nS.py`).
     - [`BAAIWorm/eworm/ion_channel_tune/`](https://github.com/Jessie940611/BAAIWorm) — Channel validation scripts with result PNG plots for each channel against published I-V curves
@@ -447,7 +387,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 ---
 
-### Issue 14: Consolidate existing neurotransmitter data into synapse polarity constraints
+### Issue 12: Consolidate existing neurotransmitter data into synapse polarity constraints
 
 - **Title:** `[DD001] Consolidate existing neurotransmitter identity data from c302, wormneuroatlas, and Wang et al. 2024 into validated synapse polarity constraints`
 - **Labels:** `DD001`, `human-expert`, `L2`
@@ -480,7 +420,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 ---
 
-### Issue 15: Add `neural.synapse_optimization` config toggle
+### Issue 13: Add `neural.synapse_optimization` config toggle
 
 - **Title:** `[DD001] Add neural.synapse_optimization config toggle to openworm.yml`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -504,7 +444,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 ---
 
-### Issue 16: Create thin adapter for Randi 2023 functional connectivity via wormneuroatlas
+### Issue 14: Create thin adapter for Randi 2023 functional connectivity via wormneuroatlas
 
 - **Title:** `[DD001] Create adapter for Randi 2023 functional connectivity matrix using wormneuroatlas API`
 - **Labels:** `DD001`, `ai-workable`, `L2`
@@ -539,14 +479,14 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ---
 
-### Issue 17: Evaluate and refine existing NeuroML2 morphologies for Level D neurons
+### Issue 15: Evaluate and refine existing NeuroML2 morphologies for Level D neurons
 
 - **Title:** `[DD001] Evaluate existing CElegansNeuroML morphologies for AWC, AIY, AVA, RIM, VD5 and refine for Level D`
 - **Labels:** `DD001`, `human-expert`, `L3`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroanatomy
 - **DD Section to Read:** [DD001 — Level D Multicompartmental](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, step 2)
-- **Depends On:** Issue 8 (channel survey, which also catalogs morphology sources)
+- **Depends On:** Issue 6 (channel survey, which also catalogs morphology sources)
 - **Existing Code to Reuse:**
     - [`CElegansNeuroML/CElegans/generatedNeuroML2/`](https://github.com/openworm/CElegansNeuroML) — **All 302 neurons already exist as multicompartmental NeuroML2 cells** with realistic 3D morphology (derived from VirtualWorm Blender files). Includes `AWCL.cell.nml`, `AWCR.cell.nml`, `AIYL.cell.nml`, `AIYR.cell.nml`, `AVAL.cell.nml`, `AVAR.cell.nml`, `RIML.cell.nml`, `RIMR.cell.nml`, `VD5.cell.nml` — all 5 target neurons.
     - [`BAAIWorm/eworm/components/model/`](https://github.com/Jessie940611/BAAIWorm) — HOC files for every neuron with multi-compartment morphology and biophysical parameters. Includes per-neuron conductance JSONs specifying which channels are expressed where.
@@ -572,14 +512,14 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ---
 
-### Issue 18: Integrate existing components into AWC Level D proof-of-concept
+### Issue 16: Integrate existing components into AWC Level D proof-of-concept
 
 - **Title:** `[DD001] Integrate existing Nicoletti AWCon channels + CElegansNeuroML morphology into c302 Level D AWC proof-of-concept`
 - **Labels:** `DD001`, `human-expert`, `L3`
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD001 — Level D Multicompartmental](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, steps 3-4) and Reference 16 (Nicoletti et al. 2019 AWCon model)
-- **Depends On:** Issue 17 (AWC morphology evaluation), Issues 9-12 (adopted channel library)
+- **Depends On:** Issue 15 (AWC morphology evaluation), Issues 7-10 (adopted channel library)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon.cell.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **Complete AWCon single-compartment model with ALL 16 channels in NeuroML2**, validated against XPP original. Includes `CaDynamics.nml` for calcium concentration dynamics and `GenerateNeuroML.py` for programmatic cell generation.
     - [`CElegansNeuroML/CElegans/generatedNeuroML2/AWCL.cell.nml`](https://github.com/openworm/CElegansNeuroML) — AWC multicompartmental morphology
@@ -595,7 +535,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
     - `pytest tests/test_awc_multicomp.py`
 - **Acceptance Criteria:**
     - [ ] AWC multicompartmental model built by combining existing NicolettiEtAl2019 channels with existing CElegansNeuroML morphology — not reimplemented
-    - [ ] Per-segment channel densities assigned from adopted channel library (Issues 9-12), guided by BAAIWorm conductance data
+    - [ ] Per-segment channel densities assigned from adopted channel library (Issues 7-10), guided by BAAIWorm conductance data
     - [ ] Passive parameters (axial resistance, membrane capacitance) fitted to match AWC electrophysiology
     - [ ] Reproduces published AWC responses (Nicoletti et al. 2019) within ±15%
     - [ ] Simulates in NEURON via pyNeuroML export
@@ -611,7 +551,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 19: Create c302 architecture overview for contributors
+### Issue 17: Create c302 architecture overview for contributors
 
 - **Title:** `[DD001] Create c302 architecture overview documentation for contributors`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -635,7 +575,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 20: Create c302 CONTRIBUTING.md
+### Issue 18: Create c302 CONTRIBUTING.md
 
 - **Title:** `[DD001] Create CONTRIBUTING.md with neural circuit development workflow`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -660,7 +600,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 21: Document c302 level comparison with runnable examples
+### Issue 19: Document c302 level comparison with runnable examples
 
 - **Title:** `[DD001] Document c302 levels A-D with runnable comparison examples`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -690,7 +630,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 22: Create Jupyter notebook: explore the neural circuit
+### Issue 20: Create Jupyter notebook: explore the neural circuit
 
 - **Title:** `[DD001] Create Jupyter notebook for interactive neural circuit exploration`
 - **Labels:** `DD001`, `ai-workable`, `L2`
@@ -716,7 +656,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 23: Audit existing c302 test suite and document coverage
+### Issue 21: Audit existing c302 test suite and document coverage
 
 - **Title:** `[DD001] Audit existing c302 test suite and document test coverage`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -752,7 +692,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 24: Add `neural.spatial_synapses` config toggle for Level D
+### Issue 22: Add `neural.spatial_synapses` config toggle for Level D
 
 - **Title:** `[DD001] Add neural.spatial_synapses config toggle for spatially resolved synapse placement`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -773,7 +713,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-### Issue 25: Create c302 changelog documenting framework evolution
+### Issue 23: Create c302 changelog documenting framework evolution
 
 - **Title:** `[DD001] Create annotated changelog documenting c302's evolution`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -800,47 +740,61 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 25 |
-| **ai-workable** | 14 |
+| **Total Issues** | 23 |
+| **ai-workable** | 12 |
 | **human-expert** | 11 |
-| **L1** | 6 |
-| **L2** | 12 |
+| **L1** | 5 |
+| **L2** | 11 |
 | **L3** | 7 |
 
 | Phase | Issues | Target |
 |-------|--------|--------|
-| **1: Validation Infrastructure** | 1–5 | Trajectory tools (ported from existing), baselines (via OWAT), output audit |
-| **2: Data Pipeline & Integration** | 6–7 | OME-Zarr export, coupling bridge documentation |
-| **3: Ion Channel Library** | 8–13 | Survey + adopt/validate 14 channels from existing NeuroML2 and NMODL |
-| **4: Synaptic Optimization** | 14–16 | Consolidate neurotransmitter data, weight fitting prep |
-| **5: Level D Development** | 17–18 | Evaluate existing morphologies, integrate AWC proof-of-concept |
-| **6: Documentation** | 19–23 | Architecture docs, contributing guide, notebooks |
-| **Infrastructure** | 24–25 | Config toggles, changelog |
+| **1: Validation Infrastructure** | 1–3 | Trajectory tools (ported from existing C++), output format audit. Kinematic regression detection moved to [DD021](DD021_draft_issues.md). |
+| **2: Data Pipeline & Integration** | 4–5 | OME-Zarr export, coupling bridge documentation |
+| **3: Ion Channel Library** | 6–11 | Survey + adopt/validate 14 channels from existing NeuroML2 and NMODL |
+| **4: Synaptic Optimization** | 12–14 | Consolidate neurotransmitter data, weight fitting prep |
+| **5: Level D Development** | 15–16 | Evaluate existing morphologies, integrate AWC proof-of-concept |
+| **6: Documentation** | 17–21 | Architecture docs, contributing guide, notebooks |
+| **Infrastructure** | 22–23 | Config toggles, changelog |
+
+### Cross-References
+
+| Related DD | Relationship |
+|------------|-------------|
+| **[DD021](DD021_draft_issues.md) (Movement Toolbox)** | **Kinematic validation scripts moved there** — DD021 Issues 1-2 (`check_regression.py`, Schafer baseline) were originally DD001 Issues 3-4. DD001 is a consumer of DD021's validation pipeline. |
+| DD002 (Muscle Model) | Issues 4, 5 (coupling bridge documentation) |
+| DD003 (Body Physics) | Issue 2 (extract_trajectory.py) |
+| DD010 (Validation Framework) | Issues 1, 2 produce WCON consumed by DD010 Tier 3 |
+| DD013 (Simulation Stack) | Issues 13, 22 (config toggles depend on openworm.yml schema) |
+| DD014 (Dynamic Visualization) | Issue 4 (OME-Zarr export for viewer) |
+| DD017 (Hybrid ML) | Issue 13 (synapse optimization toggle, actual optimization via DD017) |
+| DD020 (Connectome Data Access) | Issue 12 (neurotransmitter data consolidation) |
 
 ### Dependency Graph (Critical Path)
 
 ```
-Issue 5 (output format audit)
-  ├→ Issue 6 (OME-Zarr export)
-  └→ Issue 7 (coupling bridge docs)
+Issue 3 (output format audit)
+  ├→ Issue 4 (OME-Zarr export)
+  └→ Issue 5 (coupling bridge docs)
 
 Issue 1 (boyle_berri_cohen_trajectory.py — port existing C++) — independent, fast path
 Issue 2 (extract_trajectory.py — adapt Sibernetic generate_wcon.py) — depends on DD003
-  ├→ [both Issue 1 and Issue 2 produce WCON; either feeds downstream]
-  └→ Issue 4 (Schafer baseline via OWAT) → Issue 3 (check_regression.py wrapping OWAT)
+  ├→ [both Issue 1 and Issue 2 produce WCON for DD021 regression checking]
 
-Issue 8 (channel survey across ALL repos — reconciliation matrix)
-  ├→ Issue 9 (adopt EGL-19 from NicolettiEtAl2019)   ─┐
-  ├→ Issue 10 (adopt SLO-1 from NicolettiEtAl2019)    ├→ Issue 12 (adopt MEDIUM channels)
-  └→ Issue 11 (adopt KVS-1, EGL-36)                   ─┘    └→ Issue 13 (channel test suite)
-  └→ Issue 17 (evaluate existing morphologies)
-       └→ Issue 18 (AWC Level D integration — channels + morphology + framework)
+Issue 6 (channel survey across ALL repos — reconciliation matrix)
+  ├→ Issue 7 (adopt EGL-19 from NicolettiEtAl2019)   ─┐
+  ├→ Issue 8 (adopt SLO-1 from NicolettiEtAl2019)     ├→ Issue 10 (adopt MEDIUM channels)
+  └→ Issue 9 (adopt KVS-1, EGL-36)                    ─┘    └→ Issue 11 (channel test suite)
+  └→ Issue 15 (evaluate existing morphologies)
+       └→ Issue 16 (AWC Level D integration — channels + morphology + framework)
 
-Issue 14 (consolidate neurotransmitter constraints) — independent
-Issue 15 (synapse_optimization config) — depends on DD013 Issue 1
-Issue 16 (Randi 2023 adapter via wormneuroatlas) — independent
+Issue 12 (consolidate neurotransmitter constraints) — independent
+Issue 13 (synapse_optimization config) — depends on DD013 Issue 1
+Issue 14 (Randi 2023 adapter via wormneuroatlas) — independent
 
-Issue 24 (spatial_synapses config) — depends on DD013 Issue 1
+Issue 22 (spatial_synapses config) — depends on DD013 Issue 1
 
-Issues 19, 20, 21, 22, 23, 25 (docs/infra) — independent
+Issues 17, 18, 19, 20, 21, 23 (docs/infra) — independent
+
+Kinematic validation (check_regression.py, Schafer baseline) → see DD021 Issues 1-2
 ```

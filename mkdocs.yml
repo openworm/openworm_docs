@@ -32,6 +32,7 @@ nav:
           - DD013 Simulation Stack: design_documents/DD013_Simulation_Stack_Architecture.md
           - DD013 Draft Issues: design_documents/DD013_draft_issues.md
           - DD021 Movement Toolbox: design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md
+          - DD021 Draft Issues: design_documents/DD021_draft_issues.md
           - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
           - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
       - "Phase 1 — Cell-Type Specialization":

@@ -4,9 +4,9 @@
 
 **Generated from:** [DD003: Body Physics Engine Architecture](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#23-reuse-first-methodology), [DD015 §2.4 — DD013 Simulation Stack Integration](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#24-dd013-simulation-stack-integration)
 
-**Totals:** 22 issues (ai-workable: 14 / human-expert: 8 | L1: 8, L2: 9, L3: 5)
+**Totals:** 21 issues (ai-workable: 14 / human-expert: 7 | L1: 8, L2: 8, L3: 5)
 
 **Note:** Backend stabilization Issues 40–44 in [DD013_draft_issues](DD013_draft_issues.md) are also labeled `DD003` and are cross-referenced here but not duplicated.
 
@@ -26,6 +26,11 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 — How to Build & Test](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#how-to-build-test) (Step 3) and [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 1)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test already exists; validates that total system energy (kinetic + potential) remains bounded across timesteps. Reuse its energy-bounding logic as a stability criterion alongside NaN/escape detection.
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations that run Sibernetic with different parameters; reference for how tests are invoked.
+- **Approach:** Extend — build on the energy conservation logic in `owPhysicTest.cpp` and add NaN/escape/velocity checks as a Python wrapper.
+- **DD013 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed. Output path configured via `openworm.yml`.
 - **Files to Modify:**
     - `scripts/check_stability.py` (new)
     - `tests/test_check_stability.py` (new)
@@ -41,7 +46,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
     - [ ] Prints PASS/FAIL with diagnostic details (which particles, which timestep, what went wrong)
     - [ ] Returns exit code 0 on pass, non-zero on fail
     - [ ] Unit tests with synthetic data (clean data → PASS, NaN-injected data → FAIL, escaped particle → FAIL)
-- **Sponsor Summary Hint:** The basic health check for any SPH simulation — did the physics blow up? NaN values mean the computation diverged (division by zero, impossible forces). Escaped particles mean the simulation lost containment. This script is listed as a DD003 deliverable but was never created.
+- **Sponsor Summary Hint:** The basic health check for any SPH simulation — did the physics blow up? NaN values mean the computation diverged (division by zero, impossible forces). Escaped particles mean the simulation lost containment. This script is listed as a DD003 deliverable but was never created. The existing `owPhysicTest.cpp` already checks energy conservation — this extends that logic into a comprehensive Python stability checker.
 
 ---
 
@@ -53,6 +58,11 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 — How to Build & Test](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#how-to-build-test) (Step 4) and [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 2)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Defines rest density ρ₀ and other physical constants with extensive inline documentation. Reference for expected density values and particle type classifications.
+    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The PCISPH pressure solver that enforces incompressibility; reference for understanding what the script validates.
+- **Approach:** Create — no existing incompressibility validation script exists, but `owPhysicsConstant.h` provides all physical constants needed.
+- **DD013 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed.
 - **Files to Modify:**
     - `scripts/validate_incompressibility.py` (new)
     - `tests/test_validate_incompressibility.py` (new)
@@ -72,32 +82,35 @@ Target: Scripts and test configurations needed to measure simulation quality and
 
 ---
 
-### Issue 3: Create standard test configuration files
+### Issue 3: Document and extend standard test configuration directories
 
-- **Title:** `[DD003] Create standard .ini test configurations for drop, elastic, muscle, and worm crawl tests`
+- **Title:** `[DD003] Document existing binary test configurations and create missing scenario directories`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** physics
 - **DD Section to Read:** [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 4) and [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#cross-backend-parity-requirements)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — **12+ binary configuration directories** already exist, including `worm_crawl_*`, `worm_no_water_*`, and demo configurations. Sibernetic uses binary configuration directories (containing particle position/velocity/type buffers), NOT `.ini` text files. Each directory contains binary blobs that initialize particle state.
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations that exercise different scenarios (drop test, crawl, etc.) with specific command-line flags.
+- **Approach:** Adapt — document the existing binary configuration directories and `run_all_tests.sh` scenarios, then create any missing test scenario directories (e.g., isolated elastic deformation, single-quadrant muscle activation) using the existing configurations as templates.
 - **Files to Modify:**
-    - `configurations/test_drop.ini` (new)
-    - `configurations/test_elastic_deformation.ini` (new)
-    - `configurations/test_muscle_contraction.ini` (new)
-    - `configurations/test_worm_crawl.ini` (new)
-    - `configurations/README.md` (new — explains each config)
+    - `configuration/test_elastic_deformation/` (new — binary config directory, generated from existing worm config with liquid particles removed)
+    - `configuration/test_muscle_single_quadrant/` (new — binary config directory, generated from existing worm config)
+    - `configuration/README.md` (new — documents all configs including existing ones)
 - **Test Commands:**
-    - `./build/Sibernetic -config configurations/test_drop.ini -timestep 0.00002 -duration 1.0`
-    - `./build/Sibernetic -config configurations/test_elastic_deformation.ini -timestep 0.00002 -duration 3.0`
+    - `./build/Sibernetic -f configuration/worm_crawl_demo`
+    - `./build/Sibernetic -f configuration/test_elastic_deformation`
+    - `bash run_all_tests.sh`
 - **Acceptance Criteria:**
-    - [ ] `test_drop.ini`: Sphere of ~5,000 liquid particles under gravity (no elastic, no muscle). Should settle and spread.
-    - [ ] `test_elastic_deformation.ini`: Elastic body suspended under gravity (no liquid). Should sag measurably.
-    - [ ] `test_muscle_contraction.ini`: Full worm body with single quadrant (e.g., MDR) activated at constant force. Should bend.
-    - [ ] `test_worm_crawl.ini`: Standard worm configuration at half resolution (~50K particles), 15ms coupled simulation.
-    - [ ] Each config has comments explaining what it tests and expected behavior
-    - [ ] `README.md` documents all configs and when to use each
+    - [ ] `README.md` documents ALL existing configuration directories (12+), including what each tests and expected behavior
+    - [ ] `README.md` documents the binary configuration format (position/velocity/type buffers per directory)
+    - [ ] `test_elastic_deformation/`: Elastic body suspended under gravity (no liquid). Should sag measurably.
+    - [ ] `test_muscle_single_quadrant/`: Full worm body with single quadrant (e.g., MDR) activated at constant force. Should bend.
+    - [ ] Each new config directory is generated programmatically from existing configs (document the generation script)
     - [ ] All configs run without crash on the OpenCL backend
-- **Sponsor Summary Hint:** Standard test configurations are the physical experiments of our simulation — like a lab protocol. Drop test (does fluid fall?), elastic test (does skin stretch?), muscle test (does activation bend?), crawl test (does the worm move?). Every backend must pass these same tests to be considered valid.
+    - [ ] `run_all_tests.sh` updated to include new test scenarios
+- **Sponsor Summary Hint:** Sibernetic already has 12+ binary configuration directories and 5 test scenarios in `run_all_tests.sh`. This issue documents what already exists, fills in missing test scenarios (isolated elastic test, single-quadrant muscle test), and creates a README so contributors know which configuration to use for which purpose. Note: Sibernetic uses binary configuration directories, not `.ini` text files.
 
 ---
 
@@ -109,6 +122,10 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#cross-backend-parity-requirements)
 - **Depends On:** Issue 3 (test configs), DD013 Issue 41 (parity test script)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing binary configuration directories provide the test scenarios to run.
+    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test provides a reference for what metrics to capture (energy, position bounds).
+- **Approach:** Create — no baseline metrics infrastructure exists, but test configs and energy test provide the foundation.
 - **Files to Modify:**
     - `tests/baseline/drop_test_opencl.json` (new)
     - `tests/baseline/elastic_deformation_opencl.json` (new)
@@ -118,7 +135,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Test Commands:**
     - `python3 scripts/backend_parity_test.py --backend opencl --save-baseline tests/baseline/`
 - **Acceptance Criteria:**
-    - [ ] Run all 4 test scenarios on OpenCL backend
+    - [ ] Run all 4 test scenarios on OpenCL backend using existing binary configuration directories
     - [ ] Save numeric metrics to JSON files (position means, velocity statistics, density stats, curvature)
     - [ ] Each baseline file includes metadata: Sibernetic version, commit hash, OpenCL platform, run date
     - [ ] Metrics are deterministic to ±0.1% across repeated runs on same hardware
@@ -136,6 +153,11 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 3, 5) and [DD003 — SPH Kernel Functions](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#sph-kernel-functions)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file containing all SPH kernel function implementations (Wpoly6, ∇Wspiky, ∇²Wviscosity, elastic bond forces, PCISPH). These are the reference implementations that PyTorch tests must match.
+    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test showing how to validate physics output programmatically.
+- **Approach:** Create — no PyTorch kernel tests exist. Use `sphFluid.cl` as the reference specification for expected outputs.
+- **Note:** The PyTorch backend does not exist on Sibernetic's main branch. This issue targets a feature branch or requires the PyTorch backend to be merged first.
 - **Files to Modify:**
     - `tests/test_pytorch_kernels.py` (new)
 - **Test Commands:**
@@ -161,6 +183,11 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 3, 5) and [DD003 — SPH Kernel Functions](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#sph-kernel-functions)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file containing all SPH kernel function implementations. Reference for expected outputs.
+    - [`openworm/sibernetic/src/sphFluid_crawling.cl`](https://github.com/openworm/sibernetic) — Crawling-specific kernel variant with agar gel interactions. May have additional kernel functions not in the standard version.
+- **Approach:** Create — no Taichi kernel tests exist. Use `sphFluid.cl` and `sphFluid_crawling.cl` as the reference specifications.
+- **Note:** The Taichi backend does not exist on Sibernetic's main branch. This issue targets a feature branch or requires the Taichi backend to be merged first.
 - **Files to Modify:**
     - `tests/test_taichi_kernels.py` (new)
 - **Test Commands:**
@@ -199,6 +226,10 @@ The issues below supplement that sequence with DD003-specific work.
 - **Required Capabilities:** opencl, physics, sph
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#the-result-quality-gap) and [DD003 — Implementation References](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#implementation-references)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file. THIS is the primary subject of this documentation issue.
+    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive inline documentation of physical constants, particle types, and simulation parameters. Use as companion reference when documenting kernels.
+- **Approach:** Create — no kernel architecture documentation exists, but the source files themselves contain significant inline comments.
 - **Files to Modify:**
     - `docs/opencl_kernel_architecture.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -224,8 +255,13 @@ The issues below supplement that sequence with DD003-specific work.
 - **Required Capabilities:** ci-cd, python
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#stabilization-sequence) (step 6)
 - **Depends On:** Issue 5 (PyTorch kernel tests)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing bash test configurations. These should be integrated into the CI workflow alongside PyTorch tests.
+- **Approach:** Create — Sibernetic currently has NO CI infrastructure at all (no `.github/workflows/` directory on main branch). This issue creates CI from scratch, starting with PyTorch since it's the easiest backend to test without GPU hardware.
+- **DD013 Pipeline Role:** Body-stage CI gate. CI must pass before merging PRs to Sibernetic. Integrates with DD013's `docker compose run quick-test` workflow.
+- **Note:** Sibernetic currently has NO CI at all — no GitHub Actions workflows exist on the main branch. This issue creates the first CI workflow.
 - **Files to Modify:**
-    - `.github/workflows/ci.yml` (modify or create)
+    - `.github/workflows/ci.yml` (new — first CI workflow for Sibernetic)
 - **Test Commands:**
     - Push to branch and verify CI runs PyTorch tests
 - **Acceptance Criteria:**
@@ -235,7 +271,7 @@ The issues below supplement that sequence with DD003-specific work.
     - [ ] Runs `check_stability.py` on PyTorch output
     - [ ] CI passes on ubuntu-latest without GPU
     - [ ] Total CI time increase <5 minutes
-- **Sponsor Summary Hint:** PyTorch is the easiest backend to test in CI — it's pure Python and runs on CPU. Adding it to CI means every code change is tested against two backends (OpenCL + PyTorch) automatically, catching cross-backend regressions before they land.
+- **Sponsor Summary Hint:** PyTorch is the easiest backend to test in CI — it's pure Python and runs on CPU. Adding it to CI means every code change is tested against two backends (OpenCL + PyTorch) automatically, catching cross-backend regressions before they land. Note: Sibernetic currently has NO CI at all — this creates it from scratch.
 
 ---
 
@@ -247,6 +283,9 @@ The issues below supplement that sequence with DD003-specific work.
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 — Physical Parameters](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#physical-parameters)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive header file with inline documentation of every physical constant. THIS is the primary file to audit — it documents parameters, their units, and their physical meaning.
+- **Approach:** Create — no parameter audit exists, but `owPhysicsConstant.h` is well-documented and provides the code-side values to compare against DD003.
 - **Files to Modify:**
     - None (research issue — output is a summary posted on the issue)
 - **Test Commands:**
@@ -258,7 +297,7 @@ The issues below supplement that sequence with DD003-specific work.
     - [ ] Check all three backends (OpenCL, PyTorch, Taichi) use the same parameter values
     - [ ] Post findings as issue comment with a comparison table
     - [ ] If discrepancies found, file follow-up issues for fixes
-- **Sponsor Summary Hint:** DD003 specifies exact physical parameters (rest density 1000 kg/m³, viscosity 4e-6 Pa·s, etc.) but does the code actually use these values? And do all three backends use the same values? Parameter drift is a silent source of cross-backend divergence. This audit finds any mismatches.
+- **Sponsor Summary Hint:** DD003 specifies exact physical parameters (rest density 1000 kg/m³, viscosity 4e-6 Pa·s, etc.) but does the code actually use these values? And do all three backends use the same values? Parameter drift is a silent source of cross-backend divergence. This audit finds any mismatches. The good news: `owPhysicsConstant.h` has extensive inline documentation, making the audit tractable.
 
 ---
 
@@ -270,12 +309,15 @@ The issues below supplement that sequence with DD003-specific work.
 - **Required Capabilities:** python, benchmarking
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#stabilization-sequence) (step 7)
 - **Depends On:** DD013 Issue 42 (Taichi coordinate fix — must work before meaningful benchmarks)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations that can serve as benchmark scenarios.
+- **Approach:** Create — no benchmark infrastructure exists. Use `run_all_tests.sh` scenarios and existing binary configuration directories as benchmark inputs.
 - **Files to Modify:**
     - `scripts/benchmark_backends.py` (new)
     - `docs/benchmark_results.md` (new — in Sibernetic repo)
 - **Test Commands:**
-    - `python3 scripts/benchmark_backends.py --backend opencl --config configurations/test_worm_crawl.ini`
-    - `python3 scripts/benchmark_backends.py --all --config configurations/test_worm_crawl.ini`
+    - `python3 scripts/benchmark_backends.py --backend opencl --config configuration/worm_crawl_demo`
+    - `python3 scripts/benchmark_backends.py --all --config configuration/worm_crawl_demo`
 - **Acceptance Criteria:**
     - [ ] Benchmark script runs the same configuration on each available backend
     - [ ] Measures: wall-clock time per timestep, total sim time, memory usage, particle throughput
@@ -302,6 +344,11 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD003 — Deliverables](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#deliverables) (OME-Zarr rows) and [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) (OME-Zarr schema)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export already exists for particle data visualization. Reference for how particle data is extracted and formatted for external tools.
+    - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — Shows how to read Sibernetic output files from Python. Reference for I/O patterns.
+- **Approach:** Create — no OME-Zarr export exists. Use `owVtkExport.h` and `generate_wcon.py` as references for how particle data is accessed.
+- **DD013 Pipeline Role:** Body-stage post-processing. Runs after Sibernetic simulation completes. Produces Zarr store artifact at path configured via `openworm.yml` for DD014 visualization stage.
 - **Files to Modify:**
     - `scripts/export_zarr.py` (new)
 - **Test Commands:**
@@ -315,7 +362,7 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
     - [ ] Zarr store readable by DD014 viewer
     - [ ] Handles typical simulation sizes (~100K particles × ~500 frames) without OOM
     - [ ] Includes OME-Zarr metadata (axes labels, units)
-- **Sponsor Summary Hint:** OME-Zarr is the universal data format connecting simulation to visualization. This script converts Sibernetic's raw binary output into a structured Zarr store that the DD014 3D viewer can read. It's the bridge between physics engine and interactive visualization.
+- **Sponsor Summary Hint:** OME-Zarr is the universal data format connecting simulation to visualization. This script converts Sibernetic's raw binary output into a structured Zarr store that the DD014 3D viewer can read. It's the bridge between physics engine and interactive visualization. The existing `owVtkExport.h` shows how particle data is already extracted for VTK — this creates the OME-Zarr equivalent.
 
 ---
 
@@ -327,6 +374,11 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 - **Required Capabilities:** python, 3d-geometry
 - **DD Section to Read:** [DD003 — Deliverables](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#deliverables) (surface mesh row) and [DD003 — How to Visualize](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#how-to-visualize) (surface mesh description)
 - **Depends On:** Issue 11 (OME-Zarr export)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export for particle visualization. Can serve as the input reader for surface reconstruction.
+    - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation). Different purpose (animation skeleton vs. surface mesh) but related geometry processing on the same particle data.
+- **Approach:** Extend — build on `owVtkExport.h` for particle data access and reference `skeletonExtraction` for geometry processing patterns on Sibernetic output.
+- **DD013 Pipeline Role:** Body-stage post-processing. Runs after OME-Zarr export. Adds `geometry/body_surface/` group to the Zarr store for DD014 viewer.
 - **Files to Modify:**
     - `scripts/reconstruct_surface.py` (new)
 - **Test Commands:**
@@ -340,35 +392,11 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
     - [ ] Per-frame reconstruction (each timestep gets its own mesh)
     - [ ] Surface is watertight (no holes) and smooth (Laplacian smoothing pass)
     - [ ] Reasonable performance (<1s per frame for 100K particles)
-- **Sponsor Summary Hint:** The raw simulation produces a cloud of 100,000 points. This script turns that cloud into a smooth, solid worm shape using marching cubes — the same algorithm used in medical imaging to reconstruct organs from CT scans. The result is what you see in the 3D viewer: a recognizable worm body, not a spray of dots.
+- **Sponsor Summary Hint:** The raw simulation produces a cloud of 100,000 points. This script turns that cloud into a smooth, solid worm shape using marching cubes — the same algorithm used in medical imaging to reconstruct organs from CT scans. The result is what you see in the 3D viewer: a recognizable worm body, not a spray of dots. The existing `owVtkExport.h` and `skeletonExtraction` repo provide reference implementations for working with Sibernetic's particle data.
 
 ---
 
-### Issue 13: Implement WCON trajectory export from SPH output
-
-- **Title:** `[DD003] Implement WCON trajectory export from Sibernetic particle output`
-- **Labels:** `DD003`, `human-expert`, `L2`
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 — Deliverables](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#deliverables) (WCON row) and [DD021](https://docs.openworm.org/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/) (WCON 1.0 spec)
-- **Depends On:** None
-- **Files to Modify:**
-    - `scripts/export_wcon.py` (new)
-- **Test Commands:**
-    - `python3 scripts/export_wcon.py output.dat --output output/simulation.wcon`
-    - `python3 -c "import json; d = json.load(open('output/simulation.wcon')); print(d['units'], len(d['data']))"`
-- **Acceptance Criteria:**
-    - [ ] Reads Sibernetic particle output and extracts worm centerline (skeleton)
-    - [ ] Computes 49-point skeleton from elastic particle positions (anterior→posterior)
-    - [ ] Exports WCON 1.0 format with: `units`, `data` (per-frame x/y arrays), `metadata` (Sibernetic version, config)
-    - [ ] Skeleton extraction uses PCA or axis-aligned method to find body midline
-    - [ ] Output validates against WCON schema (JSON Schema validation)
-    - [ ] Compatible with `open-worm-analysis-toolbox` for DD010 Tier 3 validation
-- **Sponsor Summary Hint:** WCON (Worm Common Open format) is the standard for sharing worm movement data. To compare our simulation against real worms (DD010 Tier 3 validation), we need to extract the virtual worm's movement trajectory in WCON format. This requires finding the centerline of the worm body from 100,000 SPH particles — essentially asking "where is the worm's spine?"
-
----
-
-### Issue 14: Implement configurable output frequency via `openworm.yml`
+### Issue 13: Implement configurable output frequency via `openworm.yml`
 
 - **Title:** `[DD003] Implement configurable output frequency from openworm.yml simulation.output_interval`
 - **Labels:** `DD003`, `ai-workable`, `L2`
@@ -376,11 +404,15 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 - **Required Capabilities:** python, c++
 - **DD Section to Read:** [DD003 — Integration Contract — Configuration](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#configuration) and [DD013 §1](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml) (`simulation.output_interval`)
 - **Depends On:** DD013 Issue 9 (config loading in master_openworm.py)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/owPhysicsFluidSimulator.cpp`](https://github.com/openworm/sibernetic) — Contains the output writing logic. The output frequency is controlled here — this is the file to modify.
+- **Approach:** Create — no configurable output frequency exists. Modify the output loop in `owPhysicsFluidSimulator.cpp` to respect an interval parameter.
+- **DD013 Pipeline Role:** Body-stage configuration. `master_openworm.py` passes `simulation.output_interval` from `openworm.yml` to Sibernetic via command-line argument.
 - **Files to Modify:**
     - `src/owPhysicsFluidSimulator.cpp` (output frequency)
     - Sibernetic command-line argument parsing
 - **Test Commands:**
-    - `./build/Sibernetic -config test.ini -output_interval 100`
+    - `./build/Sibernetic -f configuration/worm_crawl_demo -output_interval 100`
     - `ls output/ | wc -l` (verify expected number of output files)
 - **Acceptance Criteria:**
     - [ ] Sibernetic accepts `--output_interval N` command-line argument
@@ -398,33 +430,43 @@ Target: New backend options, environmental support, and integration improvements
 
 ---
 
-### Issue 15: Evaluate FEM Projective Dynamics backend feasibility
+### Issue 14: Evaluate FEM Projective Dynamics backend feasibility
 
-- **Title:** `[DD003] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm)`
+- **Title:** `[DD003] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm / Metaworm)`
 - **Labels:** `DD003`, `human-expert`, `L3`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** physics, c++, cuda
 - **DD Section to Read:** [DD003 — Alternatives Considered — FEM](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#1-finite-element-method-fem) (Update 2026-02 section)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`Jessie940611/BAAIWorm/Metaworm/sim/fem/`](https://github.com/Jessie940611/BAAIWorm) — **Complete FEM Projective Dynamics implementation.** Directory structure includes:
+        - `FEMSolver.cpp` / `FEMSolver.h` — Core FEM solver with Projective Dynamics iteration
+        - `Constraint.cpp` / `Constraint.h` — Strain, volume, and attachment constraints
+        - `Muscle.cpp` / `Muscle.h` — 96-muscle actuator model with per-muscle activation input
+        - `World.cpp` / `World.h` — Scene management, collision handling, time integration
+    - [`Jessie940611/BAAIWorm/Metaworm/data/worm_mesh_4.obj`](https://github.com/Jessie940611/BAAIWorm) — Worm body mesh: 984 vertices, 3,341 tetrahedrons. Ready-to-use FEM mesh.
+    - [`Jessie940611/BAAIWorm/Metaworm/sim/`](https://github.com/Jessie940611/BAAIWorm) — Build system, CUDA/OptiX rendering pipeline, Python bindings via `pybind11`.
+- **Approach:** Evaluate — comprehensive feasibility study of the BAAIWorm/Metaworm FEM implementation for integration as an alternative Sibernetic backend.
 - **Files to Modify:**
     - None (research issue — output is a feasibility report)
 - **Test Commands:**
     - N/A (research task)
 - **Acceptance Criteria:**
-    - [ ] Clone and inspect BAAIWorm repo (github.com/Jessie940611/BAAIWorm)
-    - [ ] Document: build requirements (CUDA version, OptiX, compiler)
-    - [ ] Document: mesh format and resolution (984 vertices, 3,341 tetrahedrons)
-    - [ ] Document: muscle actuator interface (96 actuators — compatible with DD002?)
-    - [ ] Document: performance benchmarks (claimed 30 FPS — verify)
-    - [ ] Document: physics fidelity (surface hydrodynamics only — no internal fluid)
+    - [ ] Clone and build BAAIWorm/Metaworm FEM solver (`sim/fem/`)
+    - [ ] Document: build requirements — CUDA version (tested: 11.x), OptiX 7.x for rendering, C++17 compiler
+    - [ ] Document: mesh format — `data/worm_mesh_4.obj` (984 vertices, 3,341 tetrahedrons)
+    - [ ] Document: muscle actuator interface — `Muscle.cpp` implements 96 actuators; verify mapping compatibility with DD002's 96-muscle activation array
+    - [ ] Document: constraint system — `Constraint.cpp` implements strain limits, volume preservation, and attachment constraints
+    - [ ] Document: performance benchmarks (claimed 30 FPS — verify on available hardware)
+    - [ ] Document: physics fidelity — surface hydrodynamics only (no internal fluid simulation, unlike SPH)
     - [ ] Assess: effort to wrap as `body.backend: "fem-projective"` in OpenWorm stack
-    - [ ] Assess: CUDA/OptiX dependency — can it run on Apple Silicon? CI?
+    - [ ] Assess: CUDA/OptiX dependency — can it run on Apple Silicon? CI? (likely no — CUDA required)
     - [ ] Post feasibility report as issue comment with go/no-go recommendation
-- **Sponsor Summary Hint:** Zhao et al. (2024) demonstrated a worm body simulation running at 30 FPS using Projective Dynamics FEM — orders of magnitude faster than our SPH approach. Their code (BAAIWorm) is open source. This feasibility study determines whether we can add it as a "fast mode" backend for rapid iteration and CI testing, complementing the biophysically richer SPH approach.
+- **Sponsor Summary Hint:** Zhao et al. (2024) demonstrated a worm body simulation running at 30 FPS using Projective Dynamics FEM — orders of magnitude faster than our SPH approach. Their code (BAAIWorm/Metaworm) is open source with a complete implementation: FEM solver, 984-vertex mesh, 96-muscle actuator, and constraint system all in `sim/fem/`. This feasibility study determines whether we can add it as a "fast mode" backend for rapid iteration and CI testing.
 
 ---
 
-### Issue 16: Create Sibernetic Python bindings for direct API access
+### Issue 15: Create Sibernetic Python bindings for direct API access
 
 - **Title:** `[DD003] Create Python bindings for Sibernetic C++ library`
 - **Labels:** `DD003`, `human-expert`, `L3`
@@ -432,10 +474,14 @@ Target: New backend options, environmental support, and integration improvements
 - **Required Capabilities:** python, c++, pybind11
 - **DD Section to Read:** [DD003 — Integration Contract](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#integration-contract) (coupling dependencies)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/owSignalSimulator.cpp`](https://github.com/openworm/sibernetic) — Already contains a CPython API integration layer using direct `PyObject` calls to interface with NEURON/c302. This demonstrates that C++↔Python interop already exists in the codebase — the question is whether to formalize it with pybind11 or extend the existing CPython approach.
+- **Approach:** Extend — build on the existing CPython API calls in `owSignalSimulator.cpp`. Two viable paths: (a) formalize with pybind11 for a clean public API, (b) extend the existing CPython embedding for backward compatibility.
+- **Note:** Sibernetic uses a Makefile build system, not CMake. Adding pybind11 would require either CMake migration or Makefile-based pybind11 integration.
 - **Files to Modify:**
     - `python/sibernetic_bindings.cpp` (new — pybind11 wrapper)
     - `python/sibernetic/__init__.py` (new — Python package)
-    - `CMakeLists.txt` (add pybind11 target)
+    - `CMakeLists.txt` or `Makefile` (add pybind11 target)
     - `setup.py` or `pyproject.toml` (new — pip installable)
 - **Test Commands:**
     - `pip install -e .`
@@ -448,11 +494,11 @@ Target: New backend options, environmental support, and integration improvements
     - [ ] Works with OpenCL backend (C++ core + Python wrapper)
     - [ ] Enables `sibernetic_c302.py` to call Sibernetic directly instead of via subprocess
     - [ ] Pybind11 wraps the existing C++ API, no algorithmic changes needed
-- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O — muscle forces written to a file, particle positions read from a file. Python bindings would allow direct function calls between them, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. This is how modern scientific Python packages (NumPy, SciPy) wrap C/Fortran backends.
+- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O. Python bindings would allow direct function calls, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. The existing `owSignalSimulator.cpp` already has CPython API calls — this formalizes that into a proper Python package.
 
 ---
 
-### Issue 17: Add gel/agar environment configuration support
+### Issue 16: Add gel/agar environment configuration support
 
 - **Title:** `[DD003] Verify and document gel/agar environment support in openworm.yml`
 - **Labels:** `DD003`, `ai-workable`, `L1`
@@ -460,18 +506,23 @@ Target: New backend options, environmental support, and integration improvements
 - **Required Capabilities:** physics
 - **DD Section to Read:** [DD003 — Boundaries](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#boundaries-explicitly-out-of-scope) (item 3: gel simulation) and Palyanov et al. 2018 (Section 2c, agar gel)
 - **Depends On:** DD013 Issue 1 (openworm.yml config schema)
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/configuration/worm_crawl_*`](https://github.com/openworm/sibernetic) — Existing crawl configuration directories that may already include gel/agar environment settings.
+    - [`openworm/sibernetic/src/sphFluid_crawling.cl`](https://github.com/openworm/sibernetic) — Crawling-specific OpenCL kernel with agar gel particle interactions. This kernel variant handles the gel environment physics.
+- **Approach:** Wrap — gel mode already exists in the codebase (`sphFluid_crawling.cl` + `worm_crawl_*` configs). This issue verifies it works, documents it, and wraps it with an `openworm.yml` config option.
+- **DD013 Pipeline Role:** Body-stage configuration. `body.environment` in `openworm.yml` selects between liquid (swimming) and gel (crawling) modes.
 - **Files to Modify:**
-    - `configurations/worm_crawl_gel.ini` (new or verify existing)
+    - `configuration/README.md` (update — document gel vs. liquid configs)
     - Documentation update in DD003 (if gel support is confirmed working)
 - **Test Commands:**
-    - `./build/Sibernetic -config configurations/worm_crawl_gel.ini -timestep 0.00002 -duration 1.0`
+    - `./build/Sibernetic -f configuration/worm_crawl_demo`
 - **Acceptance Criteria:**
-    - [ ] Verify Sibernetic's agar gel mode works with current codebase (elastic matter cubes in 3D grid)
-    - [ ] Create or locate gel-mode `.ini` configuration file
+    - [ ] Verify Sibernetic's agar gel mode works with current codebase (elastic matter cubes in 3D grid, using `sphFluid_crawling.cl`)
+    - [ ] Verify the existing `worm_crawl_*` configuration directories provide gel environment
     - [ ] Run gel simulation and verify worm produces crawling-like (not swimming) gait
-    - [ ] Document environment options in DD003: liquid (swimming) vs. gel (crawling)
+    - [ ] Document environment options in DD003: liquid (swimming, `sphFluid.cl`) vs. gel (crawling, `sphFluid_crawling.cl`)
     - [ ] Propose `body.environment: "liquid" | "gel"` config option for `openworm.yml`
-- **Sponsor Summary Hint:** Real worms behave differently on solid surfaces (crawling) vs. in liquid (swimming). Sibernetic supports both via different environments — liquid for swimming and agar gel for crawling. This issue verifies the gel mode still works and makes it configurable via the `openworm.yml` system so contributors can easily switch between environments.
+- **Sponsor Summary Hint:** Real worms behave differently on solid surfaces (crawling) vs. in liquid (swimming). Sibernetic already supports both via `sphFluid.cl` (liquid) and `sphFluid_crawling.cl` (gel), with corresponding `worm_crawl_*` configuration directories. This issue verifies gel mode still works and makes it configurable via `openworm.yml`.
 
 ---
 
@@ -481,7 +532,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 18: Create Sibernetic architecture overview documentation
+### Issue 17: Create Sibernetic architecture overview documentation
 
 - **Title:** `[DD003] Create Sibernetic architecture overview for contributors`
 - **Labels:** `DD003`, `ai-workable`, `L1`
@@ -489,6 +540,10 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD003 — Technical Approach](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#technical-approach) and [DD003 — Implementation References](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#implementation-references)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/README.md`](https://github.com/openworm/sibernetic) — 17.5KB README with build instructions, usage examples, and project overview. Start from this as the foundation and expand into a structured architecture document.
+    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive inline documentation of simulation parameters and physics constants. Source material for the architecture overview.
+- **Approach:** Extend — the 17.5KB README and well-documented `owPhysicsConstant.h` provide substantial content to build on.
 - **Files to Modify:**
     - `docs/architecture.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -501,11 +556,11 @@ Target: Comprehensive documentation enabling new contributors to understand and 
     - [ ] Backend comparison: when to use OpenCL vs. PyTorch vs. Taichi
     - [ ] References to DD003 for specification details
     - [ ] Aimed at L2 contributors (familiar with physics but new to codebase)
-- **Sponsor Summary Hint:** New contributors need a map before they can navigate. This document explains what each file does, how data flows through the simulation, and what happens in a single timestep. DD003 is the specification (what should happen); this is the implementation guide (where the code lives and how it works).
+- **Sponsor Summary Hint:** New contributors need a map before they can navigate. This document explains what each file does, how data flows through the simulation, and what happens in a single timestep. DD003 is the specification (what should happen); this is the implementation guide (where the code lives and how it works). The existing 17.5KB README and well-documented `owPhysicsConstant.h` provide a strong foundation.
 
 ---
 
-### Issue 19: Document muscle cell mapping (96 units to particle indices)
+### Issue 18: Document muscle cell mapping (96 units to particle indices)
 
 - **Title:** `[DD003] Document muscle cell mapping from 96 units to elastic particle indices`
 - **Labels:** `DD003`, `ai-workable`, `L2`
@@ -513,6 +568,10 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** docs, physics
 - **DD Section to Read:** [DD003 — Muscle Actuation](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#muscle-actuation-force-injection) and Palyanov et al. 2018 (Section 2b)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/src/main_sim.py`](https://github.com/openworm/sibernetic) — Python simulation entry point that documents the 96-element muscle array format: `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]`.
+    - [`openworm/sibernetic/src/owConfigProperty.cpp`](https://github.com/openworm/sibernetic) — Configuration loading code that maps muscle indices to elastic particle subsets.
+- **Approach:** Create — no muscle mapping documentation exists, but the code in `main_sim.py` and `owConfigProperty.cpp` contains the mapping.
 - **Files to Modify:**
     - `docs/muscle_mapping.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -528,7 +587,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 20: Create Sibernetic CONTRIBUTING.md with backend development guide
+### Issue 19: Create Sibernetic CONTRIBUTING.md with backend development guide
 
 - **Title:** `[DD003] Create CONTRIBUTING.md with backend development workflow and standards`
 - **Labels:** `DD003`, `ai-workable`, `L1`
@@ -536,6 +595,10 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD003 — Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) and [DD003 — How to Build & Test](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#how-to-build-test)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations. Document these as the standard test suite in the contributing guide.
+    - [`openworm/sibernetic/README.md`](https://github.com/openworm/sibernetic) — 17.5KB README with build instructions. Reference for build workflow.
+- **Approach:** Create — no CONTRIBUTING.md exists. Use `run_all_tests.sh` and README as foundation.
 - **Files to Modify:**
     - `CONTRIBUTING.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -553,7 +616,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 21: Create Sibernetic changelog from git history
+### Issue 20: Create Sibernetic changelog from git history
 
 - **Title:** `[DD003] Create annotated changelog documenting Sibernetic's evolution`
 - **Labels:** `DD003`, `ai-workable`, `L1`
@@ -561,6 +624,9 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** git, docs
 - **DD Section to Read:** [DD003 — Validated Kinematic Outputs](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#validated-kinematic-outputs-palyanov-et-al-2018)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - Git history of `openworm/sibernetic` — the primary source material for this changelog.
+- **Approach:** Create — no changelog exists. Mine the git history.
 - **Files to Modify:**
     - `CHANGELOG.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -576,7 +642,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 22: Verify and document Sibernetic's existing test suite
+### Issue 21: Verify and document Sibernetic's existing test suite
 
 - **Title:** `[DD003] Audit existing Sibernetic test suite and document test coverage`
 - **Labels:** `DD003`, `ai-workable`, `L1`
@@ -584,6 +650,11 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** python, testing
 - **DD Section to Read:** [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria) (criterion 3: unit tests)
 - **Depends On:** None
+- **Existing Code to Reuse:**
+    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations. THIS is the existing test suite to audit.
+    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test.
+    - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — WCON generation with schema validation (has its own test data).
+- **Approach:** Create — no test coverage documentation exists. Run and catalog all existing tests.
 - **Files to Modify:**
     - `docs/test_coverage.md` (new — in Sibernetic repo)
 - **Test Commands:**
@@ -604,20 +675,20 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 22 |
+| **Total Issues** | 21 |
 | **ai-workable** | 14 |
-| **human-expert** | 8 |
+| **human-expert** | 7 |
 | **L1** | 8 |
-| **L2** | 9 |
+| **L2** | 8 |
 | **L3** | 5 |
 
 | Phase | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Infrastructure** | 1–6 | Scripts and test configs to measure quality |
 | **2: Backend Stabilization** | 7–10 | Support the DD013 Issues 40–44 stabilization sequence |
-| **3: Output Pipeline** | 11–14 | OME-Zarr, WCON, surface mesh, configurable output |
-| **4: Advanced Features** | 15–17 | FEM evaluation, Python bindings, gel environment |
-| **5: Documentation** | 18–22 | Architecture docs, muscle mapping, contributing guide |
+| **3: Output Pipeline** | 11–13 | OME-Zarr, surface mesh, configurable output |
+| **4: Advanced Features** | 14–16 | FEM evaluation, Python bindings, gel environment |
+| **5: Documentation** | 17–21 | Architecture docs, muscle mapping, contributing guide |
 
 ### Cross-Reference: DD013 Backend Stabilization Issues (also labeled DD003)
 
@@ -629,7 +700,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 | 43 | Audit PyTorch/Taichi result quality gap | `DD003`, `human-expert` | L3 |
 | 44 | Graduate backends to Stable/Production | `DD003`, `ai-workable` | L2 |
 
-**Combined DD003 total (this doc + DD013):** 27 issues
+**Combined DD003 total (this doc + DD013):** 26 issues
 
 ### Dependency Graph (Critical Path)
 
@@ -651,11 +722,10 @@ Issue 6 (Taichi kernel tests)  ├→ Issue 8 (PyTorch CI)
 Issue 7 (OpenCL docs) ─────────┘→ DD013 Issue 43 (quality gap audit)
 
 Issue 11 (OME-Zarr export) → Issue 12 (surface mesh)
-Issue 13 (WCON export) — independent
-Issue 14 (output frequency) — depends on DD013 Issue 9
-Issue 15 (FEM evaluation) — independent
-Issue 16 (Python bindings) — independent
-Issue 17 (gel environment) — depends on DD013 Issue 1
+Issue 13 (output frequency) — depends on DD013 Issue 9
+Issue 14 (FEM evaluation) — independent
+Issue 15 (Python bindings) — independent
+Issue 16 (gel environment) — depends on DD013 Issue 1
 
-Issues 9, 18–22 (audits/docs) — independent
+Issues 9, 17–21 (audits/docs) — independent
 ```

@@ -661,7 +661,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 | DD013 (Simulation Stack) | Issues 6, 10 (config schema and propagation) |
 | DD014 (Dynamic Visualization) | Issue 5 (OME-Zarr export for viewer) |
 | DD020 (Connectome Data Access) | Issue 8 (cect API for NMJ validation) |
-| DD003 Draft Issues (Issue 19) | Issue 17 (complementary: c302-side NMJ mapping vs. Sibernetic-side particle mapping) |
+| DD003 Draft Issues (Issue 18) | Issue 17 (complementary: c302-side NMJ mapping vs. Sibernetic-side particle mapping) |
 
 ### Dependency Graph
 
