@@ -123,7 +123,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#cross-backend-parity-requirements)
-- **Depends On:** Issue 3 (test configs), DD013 Issue 41 (parity test script)
+- **Depends On:** Issue 3 (test configs), DD013 Issue 39 (parity test script)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing binary configuration directories provide the test scenarios to run.
     - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test provides a reference for what metrics to capture (energy, position bounds).
@@ -208,13 +208,14 @@ Target: Scripts and test configurations needed to measure simulation quality and
 
 Target: PyTorch and Taichi backends produce results matching OpenCL within ±5%.
 
-**Note:** The core backend stabilization issues are tracked in [DD013_draft_issues.md](DD013_draft_issues.md) as Issues 40–44 (labeled `DD003`). They cover:
+**Note:** The core backend stabilization issues are tracked in [DD013_draft_issues.md](DD013_draft_issues.md) as Issues 39–42 (labeled `DD003`). They cover:
 
-- **DD013 Issue 40:** Create stability validation scripts → equivalent to Issues 1–2 above
-- **DD013 Issue 41:** Create cross-backend parity test suite
-- **DD013 Issue 42:** Fix Taichi elastic coordinate-space bug
-- **DD013 Issue 43:** Audit and fix PyTorch/Taichi result quality gap
-- **DD013 Issue 44:** Graduate backends to Stable/Production
+- **DD013 Issue 39:** Create cross-backend parity test suite
+- **DD013 Issue 40:** Fix Taichi elastic coordinate-space bug
+- **DD013 Issue 41:** Audit and fix PyTorch/Taichi result quality gap
+- **DD013 Issue 42:** Graduate backends to Stable/Production
+
+Stability validation scripts (`check_stability.py`, `validate_incompressibility.py`) are DD003 Issues 1–2 above.
 
 The issues below supplement that sequence with DD003-specific work.
 
@@ -245,7 +246,7 @@ The issues below supplement that sequence with DD003-specific work.
     - [ ] Documents neighbor search data structures
     - [ ] Identifies any undocumented heuristics, magic numbers, or non-standard modifications to PCISPH
     - [ ] Provides a "function call graph" showing the order of kernel invocations per timestep
-- **Sponsor Summary Hint:** The OpenCL kernel file is the 64KB brain of the physics engine — the actual GPU code that moves 100,000 particles. Nobody has documented what it does at the code level. Before we can audit why PyTorch/Taichi produce different results (DD013 Issue 43), we need to understand what the reference implementation actually computes. This is like creating an annotated blueprint before renovating a building.
+- **Sponsor Summary Hint:** The OpenCL kernel file is the 64KB brain of the physics engine — the actual GPU code that moves 100,000 particles. Nobody has documented what it does at the code level. Before we can audit why PyTorch/Taichi produce different results (DD013 Issue 41), we need to understand what the reference implementation actually computes. This is like creating an annotated blueprint before renovating a building.
 
 ---
 
@@ -310,7 +311,7 @@ The issues below supplement that sequence with DD003-specific work.
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, benchmarking
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#stabilization-sequence) (step 7)
-- **Depends On:** DD013 Issue 42 (Taichi coordinate fix — must work before meaningful benchmarks)
+- **Depends On:** DD013 Issue 40 (Taichi coordinate fix — must work before meaningful benchmarks)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations that can serve as benchmark scenarios.
 - **Approach:** Create — no benchmark infrastructure exists. Use `run_all_tests.sh` scenarios and existing binary configuration directories as benchmark inputs.
@@ -687,7 +688,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 | Group | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Infrastructure** | 1–6 | Scripts and test configs to measure quality |
-| **2: Backend Stabilization** | 7–10 | Support the DD013 Issues 40–44 stabilization sequence |
+| **2: Backend Stabilization** | 7–10 | Support the DD013 Issues 39–42 stabilization sequence |
 | **3: Output Pipeline** | 11–13 | OME-Zarr, surface mesh, configurable output |
 | **4: Advanced Features** | 14–16 | FEM evaluation, Python bindings, gel environment |
 | **5: Documentation** | 17–21 | Architecture docs, muscle mapping, contributing guide |
@@ -696,32 +697,30 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 | DD013 Issue | Title | Label | Level |
 |-------------|-------|-------|-------|
-| 40 | Create stability validation scripts | `DD003`, `ai-workable` | L1 |
-| 41 | Create cross-backend parity test suite | `DD003`, `ai-workable` | L2 |
-| 42 | Fix Taichi elastic coordinate-space bug | `DD003`, `human-expert` | L2 |
-| 43 | Audit PyTorch/Taichi result quality gap | `DD003`, `human-expert` | L3 |
-| 44 | Graduate backends to Stable/Production | `DD003`, `ai-workable` | L2 |
+| 39 | Create cross-backend parity test suite | `DD003`, `ai-workable` | L2 |
+| 40 | Fix Taichi elastic coordinate-space bug | `DD003`, `human-expert` | L2 |
+| 41 | Audit PyTorch/Taichi result quality gap | `DD003`, `human-expert` | L3 |
+| 42 | Graduate backends to Stable/Production | `DD003`, `ai-workable` | L2 |
 
-**Combined DD003 total (this doc + DD013):** 26 issues
+**Combined DD003 total (this doc + DD013):** 25 issues
 
 ### Dependency Graph (Critical Path)
 
 ```
 Issue 1 (check_stability.py) ─┐
 Issue 2 (incompressibility.py)─┤
-                               ├→ DD013 Issue 40 (validation scripts — superset)
 Issue 3 (test configs) ────────┤
                                ├→ Issue 4 (OpenCL baseline)
-                               │     └→ DD013 Issue 41 (parity test suite)
-                               │           ├→ DD013 Issue 42 (Taichi coordinate fix)
-                               │           │     └→ DD013 Issue 43 (quality gap audit)
-                               │           │           └→ DD013 Issue 44 (graduate backends)
+                               │     └→ DD013 Issue 39 (parity test suite)
+                               │           ├→ DD013 Issue 40 (Taichi coordinate fix)
+                               │           │     └→ DD013 Issue 41 (quality gap audit)
+                               │           │           └→ DD013 Issue 42 (graduate backends)
                                │           └→ Issue 10 (benchmarks)
                                │
 Issue 5 (PyTorch kernel tests) ┤
 Issue 6 (Taichi kernel tests)  ├→ Issue 8 (PyTorch CI)
                                │
-Issue 7 (OpenCL docs) ─────────┘→ DD013 Issue 43 (quality gap audit)
+Issue 7 (OpenCL docs) ─────────┘→ DD013 Issue 41 (quality gap audit)
 
 Issue 11 (OME-Zarr export) → Issue 12 (surface mesh)
 Issue 13 (output frequency) — depends on DD013 Issue 9

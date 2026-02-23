@@ -6,7 +6,7 @@
 
 **Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
 
-**Totals:** 44 issues (ai-workable: 33 / human-expert: 11 | L1: 19, L2: 15, L3: 9)
+**Totals:** 42 issues (ai-workable: 31 / human-expert: 11 | L1: 17, L2: 15, L3: 9)
 
 ---
 
@@ -567,30 +567,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 
 ---
 
-### Issue 24: Notebook: `01_explore_connectome.ipynb`
-
-- **Title:** `[DD013] Create starter notebook 01_explore_connectome.ipynb`
-- **Labels:** `DD013`, `ai-workable`, `L1`
-- **Target Repo:** `openworm/OpenWorm`
-- **Required Capabilities:** python
-- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347) and [DD020](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/) (ConnectomeToolbox/cect)
-- **Depends On:** Issue 23
-- **Files to Modify:**
-    - `notebooks/01_explore_connectome.ipynb` (new)
-- **Test Commands:**
-    - `jupyter nbconvert --execute notebooks/01_explore_connectome.ipynb`
-- **Acceptance Criteria:**
-    - [ ] Loads connectome data via `cect` (ConnectomeToolbox)
-    - [ ] Lists all 302 neuron names with classification (sensory, inter, motor)
-    - [ ] Shows connection counts (chemical synapses, gap junctions)
-    - [ ] Visualizes a subgraph (e.g., touch response circuit)
-    - [ ] Runs to completion without errors
-    - [ ] Includes markdown explanations accessible to newcomers
-- **Sponsor Summary Hint:** A guided tour of the worm's nervous system. The notebook loads the connectome (the wiring diagram of all 302 neurons and their ~7,000 connections) and lets newcomers explore it interactively. It's the first thing a new contributor sees — like a map of the territory before diving into code.
-
----
-
-### Issue 25: Notebook: `02_run_c302_network.ipynb`
+### Issue 24: Notebook: `02_run_c302_network.ipynb`
 
 - **Title:** `[DD013] Create starter notebook 02_run_c302_network.ipynb`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -598,21 +575,27 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347) and [DD001](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/) (c302 framework)
 - **Depends On:** Issue 23
+- **Existing Code to Reuse:**
+    - `c302/examples/test/Comparison.ipynb` — Existing Jupyter notebook comparing c302 configurations (starting point)
 - **Files to Modify:**
     - `notebooks/02_run_c302_network.ipynb` (new)
 - **Test Commands:**
     - `jupyter nbconvert --execute notebooks/02_run_c302_network.ipynb`
 - **Acceptance Criteria:**
-    - [ ] Generates a c302 neural circuit (Level C1 or C2)
+    - [ ] Generates a c302 Level C1 network for the forward locomotion reference (FW)
+    - [ ] Lists all 302 neurons with their classification (sensory, inter, motor)
     - [ ] Runs a short NEURON simulation (5ms)
-    - [ ] Plots membrane potentials for selected neurons
+    - [ ] Plots membrane potentials for selected neurons (AVBL, DB1, VB1, DD1, VD1)
+    - [ ] Plots muscle calcium traces showing alternating dorsoventral activation
+    - [ ] Visualizes the forward locomotion subcircuit (AVB → B-type → muscles, cross-inhibition)
     - [ ] Explains c302 levels (A, B, C, C1, C2, D) in markdown cells
+    - [ ] Includes markdown explaining the circuit biology at undergraduate level
     - [ ] Runs to completion without errors
-- **Sponsor Summary Hint:** This notebook simulates the worm's neural circuit in isolation. c302 is the framework that translates connectome data into a runnable neural network. Different "levels" add more biological detail — from simple connectivity (Level A) to full channel dynamics (Level D). Running it shows actual neuron firing patterns.
+- **Sponsor Summary Hint:** An interactive guided tour of the virtual worm's brain. You generate the 302-neuron circuit, zoom into the forward locomotion pathway, and watch how command neurons (AVB) activate motor neurons (DB, VB) that drive muscles — while inhibitory neurons (DD, VD) create the alternating dorsal/ventral pattern needed for undulatory crawling. Different c302 "levels" add more biological detail — from simple connectivity (Level A) to full channel dynamics (Level D).
 
 ---
 
-### Issue 26: Notebook: `03_analyze_output.ipynb`
+### Issue 25: Notebook: `03_analyze_output.ipynb`
 
 - **Title:** `[DD013] Create starter notebook 03_analyze_output.ipynb`
 - **Labels:** `DD013`, `ai-workable`, `L1`
@@ -635,7 +618,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 
 ---
 
-### Issue 27: Notebook: `04_validate_against_data.ipynb`
+### Issue 26: Notebook: `04_validate_against_data.ipynb`
 
 - **Title:** `[DD013] Create starter notebook 04_validate_against_data.ipynb`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -664,7 +647,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 28: DD005 cell-type specialization hooks
+### Issue 27: DD005 cell-type specialization hooks
 
 - **Title:** `[DD013] Add DD005 cell-type specialization config hooks and subsystem init`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -686,7 +669,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 29: DD004 mechanical cell identity
+### Issue 28: DD004 mechanical cell identity
 
 - **Title:** `[DD013] Add DD004 mechanical cell identity integration for Sibernetic particles`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -708,7 +691,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 30: DD006 neuropeptide integration
+### Issue 29: DD006 neuropeptide integration
 
 - **Title:** `[DD013] Add DD006 neuropeptide modulation coupling to simulation loop`
 - **Labels:** `DD013`, `human-expert`, `L3`
@@ -733,7 +716,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 31: DD007 pharynx model integration
+### Issue 30: DD007 pharynx model integration
 
 - **Title:** `[DD013] Add DD007 pharyngeal nervous system integration to simulation stack`
 - **Labels:** `DD013`, `human-expert`, `L3`
@@ -762,7 +745,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-### Issue 32: DD009 intestine model integration
+### Issue 31: DD009 intestine model integration
 
 - **Title:** `[DD013] Add DD009 intestinal oscillator model integration to simulation stack`
 - **Labels:** `DD013`, `human-expert`, `L3`
@@ -796,7 +779,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 33: Write getting-started guide
+### Issue 32: Write getting-started guide
 
 - **Title:** `[DD013] Write getting-started guide for new contributors`
 - **Labels:** `DD013`, `ai-workable`, `L1`
@@ -820,7 +803,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 34: MyBinder.org integration
+### Issue 33: MyBinder.org integration
 
 - **Title:** `[DD013] Configure MyBinder.org for zero-install browser-based simulation demo`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -836,14 +819,14 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Acceptance Criteria:**
     - [ ] MyBinder configuration in `binder/` directory
     - [ ] Launches JupyterLab with starter notebooks pre-loaded
-    - [ ] Can run `01_explore_connectome.ipynb` within Binder resource limits
+    - [ ] Can run `02_run_c302_network.ipynb` within Binder resource limits
     - [ ] README.md has "Launch on Binder" badge
     - [ ] Binder environment includes c302, cect, matplotlib, numpy
 - **Sponsor Summary Hint:** MyBinder lets anyone experience the simulation in their browser with zero installation — just click a badge in the README. It's how we lower the barrier to entry from "install Docker + clone repo" to "click a link." Perfect for curious scientists, students, and potential contributors who want to explore before committing.
 
 ---
 
-### Issue 35: Automate Docker Hub publishing
+### Issue 34: Automate Docker Hub publishing
 
 - **Title:** `[DD013] Create GitHub Actions workflow for automated Docker Hub image publishing`
 - **Labels:** `DD013`, `ai-workable`, `L2`
@@ -866,14 +849,14 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 36: Update N2-Whisperer orientation tasks
+### Issue 35: Update N2-Whisperer orientation tasks
 
 - **Title:** `[DD013] Update N2-Whisperer orientation tasks for new simulation stack`
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD013 Phase D](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#phase-d-polish-and-onboarding-weeks-17-20) and [DD011](https://docs.openworm.org/design_documents/DD011_Contributor_Progression_Model/) (L0→L1 orientation tasks)
-- **Depends On:** Issue 33
+- **Depends On:** Issue 32
 - **Files to Modify:**
     - `n2_whisperer_orientation_tasks.md` (update references to new Docker workflow)
 - **Test Commands:**
@@ -892,7 +875,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 37: Survey `sibernetic_config_gen` for reuse
+### Issue 36: Survey `sibernetic_config_gen` for reuse
 
 - **Title:** `[DD013] Survey sibernetic_config_gen repo for reusable particle config generation code`
 - **Labels:** `DD013`, `ai-workable`, `L1`
@@ -916,7 +899,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 38: Survey `skeletonExtraction` for reuse
+### Issue 37: Survey `skeletonExtraction` for reuse
 
 - **Title:** `[DD013] Survey skeletonExtraction repo for reusable skeleton export code`
 - **Labels:** `DD013`, `ai-workable`, `L1`
@@ -940,7 +923,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-### Issue 39: Survey `sibernetic_NEURON` for reuse
+### Issue 38: Survey `sibernetic_NEURON` for reuse
 
 - **Title:** `[DD013] Survey sibernetic_NEURON repo for Sibernetic-NEURON interface patterns`
 - **Labels:** `DD013`, `ai-workable`, `L1`
@@ -969,38 +952,14 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ---
 
-### Issue 40: Create stability validation scripts
-
-- **Title:** `[DD003] Create stability validation scripts (check_stability.py, validate_incompressibility.py)`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python
-- **DD Section to Read:** [DD003 — How to Build & Test](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#how-to-build-test) (Steps 3-4) and [DD003 Quality Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#quality-criteria)
-- **Depends On:** None
-- **Files to Modify:**
-    - `scripts/check_stability.py` (new)
-    - `scripts/validate_incompressibility.py` (new)
-- **Test Commands:**
-    - `python3 scripts/check_stability.py output.dat`
-    - `python3 scripts/validate_incompressibility.py output.dat --max_deviation 0.01`
-- **Acceptance Criteria:**
-    - [ ] `check_stability.py` reads simulation output and verifies: no NaN values, no particle positions outside bounding box, no velocity divergence over 10s
-    - [ ] `validate_incompressibility.py` reads simulation output and verifies: density deviation <1% for liquid particles after PCISPH convergence
-    - [ ] Both scripts print PASS/FAIL with diagnostic details on failure
-    - [ ] Both scripts return exit code 0 on pass, non-zero on fail
-    - [ ] Scripts run successfully on OpenCL output data
-- **Sponsor Summary Hint:** These two scripts are the basic health checks for any Sibernetic simulation: did the physics explode? (check_stability) and did the fluid stay incompressible? (validate_incompressibility). They're listed as DD003 deliverables but were never implemented. Every backend must pass these before any further validation.
-
----
-
-### Issue 41: Create cross-backend parity test suite
+### Issue 39: Create cross-backend parity test suite
 
 - **Title:** `[DD003] Create cross-backend parity test suite against OpenCL baseline`
 - **Labels:** `DD003`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#cross-backend-parity-requirements)
-- **Depends On:** Issue 40
+- **Depends On:** DD003 Issues 1–2 (stability validation scripts)
 - **Files to Modify:**
     - `scripts/backend_parity_test.py` (new)
     - `tests/baseline/` (new — OpenCL baseline metric files)
@@ -1018,14 +977,14 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ---
 
-### Issue 42: Fix Taichi elastic coordinate-space bug
+### Issue 40: Fix Taichi elastic coordinate-space bug
 
 - **Title:** `[DD003] Fix Taichi elastic coordinate-space bug`
 - **Labels:** `DD003`, `human-expert`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Taichi Coordinate-Space Bug](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#the-taichi-coordinate-space-bug)
-- **Depends On:** Issue 41
+- **Depends On:** Issue 39
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (elastic force calculation)
     - `taichi_backend/sph_cuda.py` (elastic force calculation, if separate)
@@ -1043,14 +1002,14 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ---
 
-### Issue 43: Audit and fix PyTorch/Taichi result quality gap vs OpenCL
+### Issue 41: Audit and fix PyTorch/Taichi result quality gap vs OpenCL
 
 - **Title:** `[DD003] Audit and fix PyTorch/Taichi result quality gap vs OpenCL`
 - **Labels:** `DD003`, `human-expert`, `L3`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics, sph
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#the-result-quality-gap)
-- **Depends On:** Issue 41, Issue 42
+- **Depends On:** Issue 39, Issue 40
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (kernel implementations)
     - `pytorch_solver.py` (kernel implementations)
@@ -1068,14 +1027,14 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ---
 
-### Issue 44: Graduate backends to Stable/Production and add to Dockerfile
+### Issue 42: Graduate backends to Stable/Production and add to Dockerfile
 
 - **Title:** `[DD003] Graduate backends to Stable/Production and add to Dockerfile`
 - **Labels:** `DD003`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic` + `openworm/OpenWorm`
 - **Required Capabilities:** docker, ci-cd
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Backend Graduation Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#backend-graduation-criteria)
-- **Depends On:** Issue 43
+- **Depends On:** Issue 41
 - **Files to Modify:**
     - `Dockerfile` (body stage — add `pip install taichi torch` conditional)
     - `.github/workflows/integration.yml` (add backend-specific CI gates)
@@ -1099,22 +1058,22 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 44 |
-| **ai-workable** | 33 |
+| **Total Issues** | 42 |
+| **ai-workable** | 31 |
 | **human-expert** | 11 |
-| **L1** | 19 |
+| **L1** | 17 |
 | **L2** | 15 |
 | **L3** | 9 |
-| **DD003 label** | 5 |
+| **DD003 label** | 4 |
 
 | Phase | Issues | Target |
 |-------|--------|--------|
 | **A: Foundation** | 1–17 | `docker compose run quick-test` works |
-| **B: Validation** | 18–27 | PRs auto-validated, JupyterLab available |
-| **C: Subsystem Expansion** | 28–32 | New organs plug in via config toggles |
-| **D: Polish & Onboarding** | 33–36 | Clone-to-simulation in <30 min |
-| **Infrastructure** | 37–39 | Dormant repo surveys for reuse |
-| **Backend Stabilization** | 40–44 | PyTorch/Taichi match OpenCL result quality |
+| **B: Validation** | 18–26 | PRs auto-validated, JupyterLab available |
+| **C: Subsystem Expansion** | 27–31 | New organs plug in via config toggles |
+| **D: Polish & Onboarding** | 32–35 | Clone-to-simulation in <30 min |
+| **Infrastructure** | 36–38 | Dormant repo surveys for reuse |
+| **Backend Stabilization** | 39–42 | PyTorch/Taichi match OpenCL result quality |
 
 ### Dependency Graph (Critical Path)
 
@@ -1125,28 +1084,28 @@ Issue 1 (config schema)
   │    ├→ Issue 5 (viewer service)
   │    ├→ Issue 6 (neural-dev service)
   │    ├→ Issue 12 (quick-test.sh) → Issue 14 (CI Gate 2)
-  │    ├→ Issue 23 (JupyterLab) → Issues 24-27 (notebooks)
-  │    │                         → Issue 34 (MyBinder)
-  │    └→ Issue 33 (getting-started) → Issue 36 (N2-Whisperer update)
+  │    ├→ Issue 23 (JupyterLab) → Issues 24-26 (notebooks)
+  │    │                         → Issue 33 (MyBinder)
+  │    └→ Issue 32 (getting-started) → Issue 35 (N2-Whisperer update)
   ├→ Issue 13 (CI Gate 1) → Issue 14 (CI Gate 2)
   ├→ Issue 17 (apt pin + venv)
   └→ Issue 9 (config loading)
        → Issue 10 (subsystem init) → Issue 11 (coupled loop)
             ├→ Issue 18 (output gen) → Issue 19 (OME-Zarr)
             │    └→ Issue 20 (validation) → Issue 21 (CI Gate 3) → Issue 22 (CI Gate 4)
-            │                              → Issue 29 (DD004 cell identity)
-            ├→ Issue 28 (DD005 cell-type specialization)
-            ├→ Issue 30 (DD006 neuropeptides)
-            ├→ Issue 31 (DD007 pharynx)
-            └→ Issue 32 (DD009 intestine)
+            │                              → Issue 28 (DD004 cell identity)
+            ├→ Issue 27 (DD005 cell-type specialization)
+            ├→ Issue 29 (DD006 neuropeptides)
+            ├→ Issue 30 (DD007 pharynx)
+            └→ Issue 31 (DD009 intestine)
 
 Issue 7 (versions.lock) → Issue 8 (build.sh)
 
 Issues 15, 16 (bug fixes) — independent
-Issues 35 (Docker Hub) — independent
-Issues 37, 38, 39 (surveys) — independent
+Issues 34 (Docker Hub) — independent
+Issues 36, 37, 38 (surveys) — independent
 
-Issue 40 (stability scripts) → Issue 41 (parity test suite)
-  → Issue 42 (Taichi coordinate bug) → Issue 43 (quality gap audit)
-    → Issue 44 (graduate backends + Dockerfile)
+DD003 Issues 1-2 (stability scripts) → Issue 39 (parity test suite)
+  → Issue 40 (Taichi coordinate bug) → Issue 41 (quality gap audit)
+    → Issue 42 (graduate backends + Dockerfile)
 ```

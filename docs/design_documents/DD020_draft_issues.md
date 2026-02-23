@@ -496,6 +496,7 @@ Target: New contributors can explore connectome data interactively and understan
     - [ ] Demonstrates all 9 canonical query patterns from DD020
     - [ ] Visualizes connectivity matrix using `cds.to_plotly_matrix_fig()`
     - [ ] Visualizes network graph using `cds.to_plotly_graph_fig()`
+    - [ ] Demonstrates subgraph extraction (e.g., touch response circuit — sensory → interneuron → motor pathway)
     - [ ] Shows cell classification breakdown (sensory, inter, motor neuron counts)
     - [ ] Demonstrates bilateral symmetry analysis
     - [ ] Shows pharyngeal view filter
@@ -664,7 +665,6 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 | DD013 Issue 3 | Multi-stage Dockerfile | DD020 Issue 4 adds cect to neural stage |
 | DD013 Issue 7 | Create versions.lock | DD020 Issue 1 adds cect entry |
 | DD013 Issue 13 | CI Gate 1 | DD020 Issue 6 adds connectome test step |
-| DD013 Issue 24 | Explore connectome notebook | DD020 Issue 18 provides DD020-specific exploration |
 | DD003 Issue 13 | WCON trajectory export | Uses cect cell classification for neuron identification |
 
 ### Dependency Graph (Critical Path)
