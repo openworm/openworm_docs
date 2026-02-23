@@ -10,9 +10,11 @@
 
 **Note:** DD002's `GenericMuscleCell` template and `sibernetic_c302.py` coupling script are already implemented. These issues cover missing validation scripts, output pipeline, bug fixes, documentation, and research for future muscle-type differentiation. Significant working code already exists across multiple OpenWorm repos (`c302`, `muscle_model`, `sibernetic`, `CE_locomotion`) that can be directly imported, adapted, or used as templates — each issue below includes an **"Existing Code to Reuse"** section pointing contributors to the right starting point rather than writing from scratch. Where applicable, **"DD013 Stack Notes"** describe how each script integrates into the DD013 simulation stack (Docker containers, `docker compose run`, CI gates).
 
+**Roadmap Context:** The "Groups" below organize issues thematically within this DD — they are **not** the same as the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) phases (Phase 0/A/1/2/3/4). DD002 is a **Phase 0** DD (existing, working). Groups 1–3 primarily support Roadmap Phase A (infrastructure and bug fixes). Group 4 (research) feeds Roadmap Phase 1 (cell-type specialization via DD005). Group 5 (docs) can be addressed at any roadmap phase.
+
 ---
 
-## Phase 1: Validation Scripts
+## Group 1: Validation Scripts
 
 Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit tests and parameter auditing.
 
@@ -150,7 +152,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
 
 ---
 
-## Phase 2: Output Pipeline & Integration
+## Group 2: Output Pipeline & Integration
 
 Target: OME-Zarr export, config validation, and integration testing for DD002's interfaces with DD001 and DD003.
 
@@ -283,7 +285,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 
 ---
 
-## Phase 3: Bug Fixes & Improvements
+## Group 3: Bug Fixes & Improvements
 
 Target: Fix known issues and improve muscle model configurability.
 
@@ -414,7 +416,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 ---
 
-## Phase 4: Research & Advanced Features
+## Group 4: Research & Advanced Features
 
 Target: Investigate muscle-type differentiation, multi-compartment modeling, and alternative mechanical models for future phases.
 
@@ -511,7 +513,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 
 ---
 
-## Phase 5: Documentation & Maintenance
+## Group 5: Documentation & Maintenance
 
 Target: Comprehensive documentation enabling contributors to understand and modify the muscle model.
 
@@ -622,7 +624,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 | **L2** | 6 |
 | **L3** | 3 |
 
-| Phase | Issues | Target |
+| Group | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Scripts** | 1–4 | Adapt existing scripts into validation tools, unit tests, parameter audit |
 | **2: Output Pipeline & Integration** | 5–8 | OME-Zarr export, config validation, interface testing |

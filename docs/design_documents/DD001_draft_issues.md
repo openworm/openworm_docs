@@ -10,9 +10,11 @@
 
 **Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD021 owns. They have been moved to [DD021 Draft Issues](DD021_draft_issues.md) (Issues 1-2) where they belong as Phase A validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
 
+**Roadmap Context:** The "Groups" below organize issues thematically within this DD — they are **not** the same as the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) phases (Phase 0/A/1/2/3/4). DD001 is a **Phase 0** DD (existing, working). Groups 1–2 primarily support Roadmap Phase A (infrastructure). Group 3 (ion channels) feeds Roadmap Phase 1 (cell-type specialization via DD005). Groups 4–5 (synaptic optimization, Level D) align with Roadmap Phase 2. Group 6 and Infrastructure issues can be addressed at any roadmap phase.
+
 ---
 
-## Phase 1: Validation Infrastructure
+## Group 1: Validation Infrastructure
 
 Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by [DD021](DD021_draft_issues.md).
 
@@ -62,7 +64,6 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test) (Step 3b) and [DD001 — Deliverables](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#deliverables) (WCON row)
 - **Depends On:** DD003 (Sibernetic must produce particle output)
-- **Cross-reference:** Same tool as DD003 Issue 13; this issue captures the DD001 validation chain dependency
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — ~300 lines of **working Python** that reads `worm_motion_log.txt` from Sibernetic, generates WCON JSON, validates against `wcon_schema.json`, and computes speed/curvature. Also includes `wcon/__init__.py`, `wcon/wcon_schema.json`, and test WCON files.
     - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation, not 2D midline — different purpose but the centerline concept is related)
@@ -117,7 +118,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 
 ---
 
-## Phase 2: Data Pipeline & Integration
+## Group 2: Data Pipeline & Integration
 
 Target: OME-Zarr export and coupling interface documentation.
 
@@ -177,7 +178,7 @@ Target: OME-Zarr export and coupling interface documentation.
 
 ---
 
-## Phase 3: Extended Ion Channel Library
+## Group 3: Extended Ion Channel Library
 
 Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, leveraging existing NeuroML2 models from Nicoletti et al. and NMODL files from BAAIWorm.
 
@@ -381,7 +382,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 ---
 
-## Phase 4: Synaptic Optimization
+## Group 4: Synaptic Optimization
 
 Target: Per-synapse conductance optimization using differentiable simulation and neurotransmitter identity constraints.
 
@@ -473,7 +474,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 ---
 
-## Phase 5: Level D Multicompartmental Development
+## Group 5: Level D Multicompartmental Development
 
 Target: Multicompartmental neuron models for neurons where single-compartment approximation is insufficient.
 
@@ -545,7 +546,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ---
 
-## Phase 6: Documentation & Contributor Support
+## Group 6: Documentation & Contributor Support
 
 Target: Enable new contributors to understand and modify the neural circuit model.
 
@@ -688,7 +689,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-## Infrastructure (Cross-Phase)
+## Infrastructure (Cross-Group)
 
 ---
 
@@ -747,7 +748,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 | **L2** | 11 |
 | **L3** | 7 |
 
-| Phase | Issues | Target |
+| Group | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Infrastructure** | 1–3 | Trajectory tools (ported from existing C++), output format audit. Kinematic regression detection moved to [DD021](DD021_draft_issues.md). |
 | **2: Data Pipeline & Integration** | 4–5 | OME-Zarr export, coupling bridge documentation |

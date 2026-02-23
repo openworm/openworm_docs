@@ -10,9 +10,11 @@
 
 **Note:** Backend stabilization Issues 40–44 in [DD013_draft_issues](DD013_draft_issues.md) are also labeled `DD003` and are cross-referenced here but not duplicated.
 
+**Roadmap Context:** The "Groups" below organize issues thematically within this DD — they are **not** the same as the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) phases (Phase 0/A/1/2/3/4). DD003 is a **Phase 0** DD (existing, working). Its draft issues primarily support Roadmap Phase A (infrastructure bootstrap) and Phase 1 (cell-type specialization), with some research items (Group 4) relevant to later phases.
+
 ---
 
-## Phase 1: Validation Infrastructure
+## Group 1: Validation Infrastructure
 
 Target: Scripts and test configurations needed to measure simulation quality and compare backends.
 
@@ -202,7 +204,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
 
 ---
 
-## Phase 2: Backend Stabilization
+## Group 2: Backend Stabilization
 
 Target: PyTorch and Taichi backends produce results matching OpenCL within ±5%.
 
@@ -330,7 +332,7 @@ The issues below supplement that sequence with DD003-specific work.
 
 ---
 
-## Phase 3: Output Pipeline & Visualization
+## Group 3: Output Pipeline & Visualization
 
 Target: Sibernetic produces output in formats needed by DD010 (validation), DD013 (simulation stack), DD014 (viewer), and DD021 (movement analysis).
 
@@ -424,7 +426,7 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 
 ---
 
-## Phase 4: Advanced Features
+## Group 4: Advanced Features
 
 Target: New backend options, environmental support, and integration improvements.
 
@@ -526,7 +528,7 @@ Target: New backend options, environmental support, and integration improvements
 
 ---
 
-## Phase 5: Documentation & Maintenance
+## Group 5: Documentation & Maintenance
 
 Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic.
 
@@ -682,7 +684,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 | **L2** | 8 |
 | **L3** | 5 |
 
-| Phase | Issues | Target |
+| Group | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Infrastructure** | 1–6 | Scripts and test configs to measure quality |
 | **2: Backend Stabilization** | 7–10 | Support the DD013 Issues 40–44 stabilization sequence |

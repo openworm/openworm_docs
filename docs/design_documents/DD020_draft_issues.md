@@ -8,9 +8,11 @@
 
 **Totals:** 23 issues (ai-workable: 18 / human-expert: 5 | L1: 10, L2: 10, L3: 3)
 
+**Roadmap Context:** The "Groups" below organize issues thematically within this DD — they are **not** the same as the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) phases (Phase 0/A/1/2/3/4). DD020 is a **Phase 0** DD (existing, working). Groups 1–2 primarily support Roadmap Phase A (infrastructure bootstrap, Docker and CI). Groups 3–4 feed Roadmap Phase 1+ (consumer DDs need connectome loaders as they're implemented). Groups 5–6 (docs, research) can be addressed at any roadmap phase.
+
 ---
 
-## Phase 1: Build Integration
+## Group 1: Build Integration
 
 Target: `cect` is pinned, configured, cached, and installable inside the DD013 Docker stack.
 
@@ -141,7 +143,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 ---
 
-## Phase 2: CI & Quality Gates
+## Group 2: CI & Quality Gates
 
 Target: Every PR is automatically checked for correct connectome data access.
 
@@ -253,7 +255,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 ---
 
-## Phase 3: Consumer DD Integration
+## Group 3: Consumer DD Integration
 
 Target: Canonical data loaders exist for each consuming DD's connectome access pattern.
 
@@ -361,7 +363,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 ---
 
-## Phase 4: Multi-Dataset Validation
+## Group 4: Multi-Dataset Validation
 
 Target: Infrastructure for comparing simulations across multiple connectome datasets.
 
@@ -471,7 +473,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 
 ---
 
-## Phase 5: Documentation & Notebooks
+## Group 5: Documentation & Notebooks
 
 Target: New contributors can explore connectome data interactively and understand DD020's API patterns.
 
@@ -554,7 +556,7 @@ Target: New contributors can explore connectome data interactively and understan
 
 ---
 
-## Phase 6: Future Work & Evaluation
+## Group 6: Future Work & Evaluation
 
 Target: Research tasks to evaluate upcoming data sources and prepare for future cect evolution.
 
@@ -645,7 +647,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 | **L2** | 10 |
 | **L3** | 3 |
 
-| Phase | Issues | Target |
+| Group | Issues | Target |
 |-------|--------|--------|
 | **1: Build Integration** | 1–5 | cect pinned, configured, cached in Docker |
 | **2: CI & Quality Gates** | 6–9 | Automated compliance and version checking |
