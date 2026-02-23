@@ -10,39 +10,6 @@
 
 ---
 
-### Reuse-First Philosophy
-
-The OpenWorm GitHub organization contains 109 repositories with substantial working code. **These issues are designed around reuse, not reinvention.** Before writing anything new, contributors should:
-
-1. Check the **Existing Code to Reuse** field on each issue for working implementations
-2. Follow the **Approach** field — preference order: **wrap → port → adapt → integrate → extend → create**
-3. Only write new code when no existing implementation can be adapted
-4. When porting C++ to Python, treat the C++ as the reference specification — match its behavior, not reimagine it
-
-### DD013 Simulation Stack Integration
-
-Issues that produce scripts or data artifacts consumed by the simulation pipeline must integrate with [DD013](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/):
-
-- Scripts must be callable from `master_openworm.py` (not just standalone CLI)
-- Output paths configured via `openworm.yml`, not hardcoded
-- Docker stage placement: neural-stage scripts in `openworm/c302`, body-stage scripts in `openworm/Sibernetic`
-- Artifacts (WCON, Zarr, JSON) produced at well-known paths for downstream consumers
-
-### Eliminated Issues (Already Implemented)
-
-Four originally planned issues were eliminated because the work already exists in c302's CI and codebase:
-
-| Original Issue | What Already Exists | Where |
-|---------------|---------------------|-------|
-| NeuroML validation CI gate | `ci.yml` runs OMV + `jNeuroML_validate`; `test.sh` runs `pynml -validate` on all generated NML | c302 `.github/workflows/ci.yml`, `test.sh` |
-| Connectome dataset switching verification | 7 data readers (White 1986, Witvliet 2020, Cook 2019, etc.) all tested in CI across Python 3.10/3.13 | c302 `SpreadsheetDataReader.py`, `UpdatedSpreadsheetDataReader*.py`, `White_*.py` |
-| Level A–D generation verification | `test.sh` generates and validates all 9 parameter sets × 8 configs; CI runs on Ubuntu + macOS | c302 `test.sh`, `examples/*.omt` |
-| wormneuroatlas integration verification | `WormNeuroAtlas` in `setup.py` deps; `test_WNA.py` tests gap junctions, chemical synapses, neurotransmitter sign | c302 `examples/test/test_WNA.py` |
-
-These represent **existing DD001 implementation progress** — the roadmap is further along than previously documented.
-
----
-
 ## Phase 1: Validation Infrastructure
 
 Target: Scripts and baselines needed to measure neural circuit quality and detect regressions.
