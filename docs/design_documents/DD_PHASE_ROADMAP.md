@@ -86,6 +86,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - No automated validation (Tier 3 toolbox is broken)
 - Video pipeline has memory leak (OOMs >2s simulations)
 - PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)
+- Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see [DD001](DD001_Neural_Circuit_Architecture.md) Issue 1)
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
@@ -204,6 +205,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - ✅ `jnml -validate` passes for each cell type
 - ✅ Tier 2 validation: correlation with [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) improves ≥20% vs. generic baseline
 - ✅ Tier 3 validation: kinematic metrics remain within ±15% (no regression)
+- ✅ Boyle-Cohen 2D fast trajectory tool screens kinematic impact of [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance parameter changes in <30 seconds (no GPU needed)
 - ✅ Trame viewer launches via `docker compose up viewer`, shows time-animated worm at localhost:8501
 - ✅ OME-Zarr export complete: `neural/`, `muscle/`, `body/` groups all populated
 
@@ -314,7 +316,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 2. **Intestinal network** (`LEMS_IntestineOscillator.xml`) — 20 cells with IP3R, gap-junction-coupled
 3. **Egg-laying network** (`LEMS_c302_EggLaying.xml`) — HSN, VC, vulval/uterine muscles, serotonin/ACh/tyramine synapses
 4. **Differentiable worm** (`openworm-ml/differentiable/`) — PyTorch ODE solver, full [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) chain
-5. **SPH surrogate** (`openworm-ml/surrogate/`) — FNO trained on 500+ SPH runs, <5% trajectory error, 1000× faster
+5. **SPH surrogate** (`openworm-ml/surrogate/`) — FNO trained on 500+ SPH runs (supplemented by 2D rod-spring model trajectories at orders of magnitude higher throughput), <5% trajectory error, 1000× faster
 6. **Auto-fitted parameters** — Gradient descent on [DD010](DD010_Validation_Framework.md) validation loss, per-neuron-class conductances
 
 **Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"** *(Target: Month 12, March 2027)*

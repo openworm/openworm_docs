@@ -90,27 +90,31 @@ jnml -validate c302/examples/generated/LEMS_c302_C1_Muscles.xml
 # Step 2: Run simulation
 jnml LEMS_c302_C1_Muscles.xml -nogui
 
-# Step 3: Extract movement trajectory
-python scripts/extract_trajectory.py
-# [TO BE CREATED] if not present — GitHub issue: openworm/c302#TBD
+# Step 3a: Fast trajectory screening (Boyle-Cohen 2D model, seconds, no GPU)
+python scripts/boyle_berri_cohen_trajectory.py
+# [TO BE CREATED] — Boyle, Berri & Cohen 2012 rod-spring model
 
-# Step 4: Compare to Schafer lab data
+# Step 3b: Full-fidelity trajectory (requires Sibernetic SPH output)
+python scripts/extract_trajectory.py
+# [TO BE CREATED] — extracts centerline from ~100K SPH particles
+
+# Step 5: Compare to Schafer lab data
 python open-worm-analysis-toolbox/compare_kinematics.py \
     --simulated trajectory_simulated.wcon \
     --real schafer_baseline.wcon \
     --output validation_report.json
 # [TO BE CREATED] if not present — GitHub issue: openworm/c302#TBD
 
-# Step 5: Check that validation score has not degraded
+# Step 6: Check that validation score has not degraded
 python scripts/check_regression.py validation_report.json baseline_score.json
 # [TO BE CREATED] if not present — GitHub issue: openworm/c302#TBD
 
-# Step 6: Quick coupled simulation (must pass before PR submission)
+# Step 7: Quick coupled simulation (must pass before PR submission)
 docker compose run quick-test
 # Green light: output/*.wcon file exists (worm moved)
 # Green light: output/*.png shows non-flat voltage traces for neurons AND muscles
 
-# Step 7: Full validation (must pass before merge to main)
+# Step 8: Full validation (must pass before merge to main)
 docker compose run validate
 # Green light: Tier 2 functional connectivity r > 0.5
 # Green light: Tier 3 kinematic metrics within ±15% of baseline
@@ -120,6 +124,7 @@ docker compose run validate
 
 | Script | Status | Tracking |
 |--------|--------|----------|
+| `scripts/boyle_berri_cohen_trajectory.py` | `[TO BE CREATED]` if not present | openworm/c302#TBD |
 | `scripts/extract_trajectory.py` | `[TO BE CREATED]` if not present | openworm/c302#TBD |
 | `open-worm-analysis-toolbox/compare_kinematics.py` | `[TO BE CREATED]` if not present | openworm/c302#TBD |
 | `scripts/check_regression.py` | `[TO BE CREATED]` if not present | openworm/c302#TBD |
@@ -355,16 +360,19 @@ jnml -validate c302/examples/generated/LEMS_c302_C1_Muscles.xml
 # 2. Run simulation
 jnml LEMS_c302_C1_Muscles.xml -nogui
 
-# 3. Extract movement trajectory
+# 3a. Fast trajectory screening (Boyle-Cohen 2D model)
+python scripts/boyle_berri_cohen_trajectory.py
+
+# 3b. Full-fidelity trajectory (Sibernetic SPH)
 python scripts/extract_trajectory.py
 
-# 4. Compare to Schafer lab data
+# 5. Compare to Schafer lab data
 python open-worm-analysis-toolbox/compare_kinematics.py \
     --simulated trajectory_simulated.wcon \
     --real schafer_baseline.wcon \
     --output validation_report.json
 
-# 5. Check that validation score has not degraded
+# 6. Check that validation score has not degraded
 python scripts/check_regression.py validation_report.json baseline_score.json
 ```
 

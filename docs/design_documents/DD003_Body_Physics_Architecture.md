@@ -298,6 +298,19 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 - Not suited for quantitative biophysical validation
 - OpenWorm prioritizes biological accuracy over simulation speed
 
+### 5. Boyle-Berri-Cohen 2D Rod-Spring Model
+
+**Advantages:** Extremely fast (~seconds on single CPU), published and validated ([Boyle, Berri & Cohen 2012](https://doi.org/10.3389/fncom.2012.00010)), already implemented in three OpenWorm repos ([CE_locomotion](https://github.com/openworm/CE_locomotion), [Worm2D](https://github.com/openworm/Worm2D), [CelegansNeuromechanicalGaitModulation](https://github.com/openworm/CelegansNeuromechanicalGaitModulation)), ~150 state variables, produces WCON output directly, has c302 integration and proprioception support.
+
+**Not a replacement for Sibernetic because:**
+
+- 2D only — no dorsal-ventral body mechanics, omega turns, or body roll
+- No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes
+- No internal body volume — cannot support [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organs
+- No fluid-structure interaction — [DD019](DD019_Closed_Loop_Touch_Response.md) touch mechanotransduction requires 3D particle strain
+
+**Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
+
 ---
 
 ## Quality Criteria
