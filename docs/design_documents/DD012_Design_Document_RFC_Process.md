@@ -80,12 +80,33 @@ and the single most important success metric.
 - Example PR title
 
 ## How to Build & Test                            ← REQUIRED
-- Prerequisites (Docker, packages, data downloads)
-- Step-by-step commands (copy-pasteable)
+
+### Prerequisites
+- Docker with `docker compose`, OR list every native
+  tool with versions (language runtime, compiler, SDK)
+
+### Getting Started (Environment Setup)       ← REQUIRED
+- Which repositories to clone (full `git clone` URLs)
+- **Path A — Docker (recommended for newcomers):**
+  `docker compose build`, then which Step to skip to
+- **Path B — Native:** exact `pip install` / `apt install`
+  / `brew install` commands for all dependencies
+- If this DD shares a repo with another DD (e.g., DD002
+  shares c302 with DD001), say so and cross-reference
+  the other DD's setup
+- Platform-specific notes if applicable (e.g., OpenCL
+  availability, macOS vs Linux differences)
+
+### Step-by-step
+- Copy-pasteable commands numbered Step 1, 2, ...
 - Expected output at each step
-- Green light criteria (what "success" looks like)
-- Scripts that don't exist yet: mark [TO BE CREATED]
-  with a GitHub issue link
+- Clearly label which steps are native-path vs Docker-path
+
+### Green light criteria
+- What "success" looks like (quantitative where possible)
+
+### Scripts that don't exist yet
+- Mark [TO BE CREATED] with a GitHub issue link
 
 ## How to Visualize                               ← REQUIRED
 - Which [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer displays this work
@@ -278,9 +299,11 @@ When a DD is created, approved, or changes phase assignment:
 
 9. **Runnable Commands:** Build & Test section must contain commands that a contributor can copy-paste. Scripts referenced must either exist or be marked `[TO BE CREATED]` with a GitHub issue link.
 
-10. **Visualizable:** Must describe what the work looks like in the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
+10. **Complete Setup Path:** The "Getting Started" sub-section must take a newcomer from a blank machine to a working environment. This means: repository clone URLs, dependency installation commands, and a clear Docker-vs-native fork. A contributor should never have to guess which repo to clone or which packages to install. If the DD shares a repo with another DD, cross-reference that DD's setup rather than duplicating instructions.
 
-11. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD014 spans Phase 1-4), the header should reference the earliest phase and note the span.
+11. **Visualizable:** Must describe what the work looks like in the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
+
+12. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD014 spans Phase 1-4), the header should reference the earliest phase and note the span.
 
 ### Bad Design Document Anti-Patterns
 
@@ -293,6 +316,7 @@ When a DD is created, approved, or changes phase assignment:
 7. **Phantom scripts:** Commands reference scripts that don't exist and have no issue tracking their creation.
 8. **Disconnected from viewer:** No description of how work appears in the visualization layer. Contributors can't see what they're building.
 9. **No repo guidance:** Contributor can't determine which repo to clone, where to file issues, or what to name their branch.
+10. **Missing setup context:** Build commands start with `cd some_repo/` but never say how to get that repo. No clone URLs, no pip install commands, no Docker-vs-native guidance. A newcomer hits Step 1 and immediately gets stuck.
 
 ---
 
