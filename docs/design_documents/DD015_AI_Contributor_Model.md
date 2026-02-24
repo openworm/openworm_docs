@@ -254,6 +254,10 @@ Parse the DD's **Integration Contract** section:
 - `human-expert` — Requires L3+ human (judgment, experimental validation, design decisions)
 - `L1`, `L2`, `L3` — Difficulty level (from [DD011](DD011_Contributor_Progression_Model.md) task difficulty scale)
 
+**Required per-issue field:**
+
+- **Roadmap Phase:** Phase X — derived from DD's phase assignment in `DD_PHASE_ROADMAP.md`; issues from Phase 0 DDs may target Phase A or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: `## Group N: Name (Phase X)`.
+
 **Automation:** `dd_issue_generator.py` runs:
 
 1. On demand (maintainer runs script when a DD is approved)
@@ -321,6 +325,17 @@ Issues that produce scripts or data artifacts consumed by the simulation pipelin
 # Regenerate issues when DD is updated (creates new issues, marks old ones as superseded)
 ./scripts/dd_issue_generator.py --dd [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) --version 1.1 --supersede-old
 ```
+
+**Phase Consistency Rule:** When regenerating issues for an updated DD:
+
+1. Read the DD's `> **Phase:**` header
+2. Cross-reference with `DD_PHASE_ROADMAP.md` to confirm the phase is current
+3. If mismatch detected: flag to Integration L4 before generating issues
+4. Assign `- **Roadmap Phase:**` to each issue based on:
+   - The DD's home phase (for core functionality)
+   - The consuming DD's phase (for integration/loader issues that serve later-phase DDs)
+   - "Any" for documentation and maintenance issues
+5. Group headers in the draft issues file must include the phase in parentheses: `## Group N: Name (Phase X)`
 
 **Result:** As DDs evolve (via [DD012](DD012_Design_Document_RFC_Process.md) RFC process), the issue backlog stays synchronized. Old issues auto-close with a comment: "Superseded by #XYZ ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md) v1.1)."
 
@@ -882,6 +897,13 @@ Last updated: 2026-02-18T14:30:00Z
 - Pre-review checks: DD compliance, tests, YAML validity
 - Max 3 feedback iterations before escalation to human
 - Response time: Usually <10 minutes
+
+### Phase Drift Detection
+Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files in `docs/design_documents/`:
+
+- If a DD's `> **Phase:**` line is modified: verify `DD_PHASE_ROADMAP.md` and `INTEGRATION_MAP.md` are also updated in the same PR (or a linked PR)
+- If `DD_PHASE_ROADMAP.md` adds/moves a DD: verify the DD file's header matches
+- If a draft issues file is regenerated: verify `- **Roadmap Phase:**` tags match current `DD_PHASE_ROADMAP.md`
 ```
 
 ### 9.3 Auto-Update Mechanism

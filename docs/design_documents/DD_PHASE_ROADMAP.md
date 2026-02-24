@@ -88,6 +88,36 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)
 - Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see [DD001](DD001_Neural_Circuit_Architecture.md) Issue 1)
 
+**Phase 0 → Phase A Gap Map:**
+
+| What's Missing (Phase 0) | Addressed By | Specific Issues |
+|---------------------------|-------------|-----------------|
+| No config system (params hardcoded) | DD013 Issue 1 (openworm.yml schema) | DD013 draft issues §Group 1 |
+| No docker-compose | DD013 Issues 2-4 (Dockerfile, compose, CI) | DD013 draft issues §Group 1 |
+| No dependency pinning | DD013 Issue 7 (versions.lock) | DD013 draft issues §Group 2 |
+| No automated validation | DD021 Issues 1-2 (toolbox revival) | DD021 draft issues §Group 1 |
+| Video pipeline memory leak | DD013 Issue 5 (video pipeline fix) | DD013 draft issues §Group 1 |
+| Backends don't match OpenCL | DD003 Issues 5-7 + DD013 Issues 39-42 | DD003 draft issues §Group 2 |
+| Missing validation scripts (10 total) | DD001 Issues 1-3, DD002 Issues 1-2, DD003 Issues 1-3 | See table below |
+| cect not pinned/cached in Docker | DD020 Issues 1-5 (build integration) | DD020 draft issues §Group 1 |
+| Fast trajectory screening tool | DD001 Issue 1 (boyle_berri_cohen_trajectory.py) | DD001 draft issues §Group 1 |
+
+**Missing Validation Scripts Inventory:**
+
+| Script | DD | Phase A Issue | Target Repo |
+|--------|----|---------------|-------------|
+| `boyle_berri_cohen_trajectory.py` | DD001 | DD001 Issue 1 | openworm/c302 |
+| `extract_trajectory.py` | DD001 | DD001 Issue 2 | openworm/sibernetic |
+| `compare_kinematics.py` | DD001 | Moved to DD021 Issue 1 | openworm/open-worm-analysis-toolbox |
+| `check_regression.py` | DD001 | Moved to DD021 Issue 2 | openworm/open-worm-analysis-toolbox |
+| `plot_muscle_activation.py` | DD002 | DD002 Issue 1 | openworm/c302 |
+| `validate_muscle_calcium.py` | DD002 | DD002 Issue 2 | openworm/c302 |
+| `check_stability.py` | DD003 | DD003 Issue 1 | openworm/sibernetic |
+| `validate_incompressibility.py` | DD003 | DD003 Issue 2 | openworm/sibernetic |
+| `backend_parity_test.py` | DD003 | DD003 Issue 5 | openworm/sibernetic |
+
+**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 21, DD002: 18, DD003: 21, DD020: 23). Of these, ~35 are Phase A infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
+
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
 - **What you run:** `python master_openworm.py` — coupled c302 + Sibernetic simulation, 15ms of worm locomotion

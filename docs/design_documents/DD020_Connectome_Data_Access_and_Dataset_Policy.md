@@ -1,6 +1,6 @@
 # DD020: Connectome Data Access and Dataset Policy
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1: Core Neural Platform](DD_PHASE_ROADMAP.md#phase-1-core-neural-platform-months-1-6) | **Layer:** Data Infrastructure
+> **Phase:** [Phase 0: Existing Foundation](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) | **Layer:** Data Infrastructure
 
 ## TL;DR
 
@@ -846,8 +846,8 @@ Interactive connectome map. Evaluate as cross-validation data source and potenti
 
 ---
 
-- **Approved by:** Pending (Dataset Policy)
-- **Implementation Status:** Proposed
+- **Approved by:** OpenWorm Steering
+- **Implementation Status:** Complete (cect v0.2.7 on PyPI; dataset policy ratified)
 - **Next Actions:**
 
 1. Pin `cect==0.2.7` in `versions.lock`

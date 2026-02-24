@@ -57,6 +57,8 @@ Every Design Document follows this structure. **Lead with impact, end with backg
 - **Supersedes:** DD### (if applicable)
 - **Related:** DD### (cross-references)
 
+> **Phase:** [Phase X](DD_PHASE_ROADMAP.md#phase-x-...) | **Layer:** [layer name]
+
 ## TL;DR                                         ← REQUIRED
 2-3 sentences. What this DD does, why it matters,
 and the single most important success metric.
@@ -196,6 +198,25 @@ Variable name, Format, Units, Timestep (if applicable).
 - Implementation PRs reference the DD number
 - Mind-of-a-Worm checks that implementation PRs comply with the DD
 
+**Step 6: Phase Synchronization**
+
+When a DD is created, approved, or changes phase assignment:
+
+1. **DD Author** sets the `> **Phase:**` line in the DD header to match the Phase Roadmap
+2. **Integration L4** (or Founder) updates `DD_PHASE_ROADMAP.md`:
+   - Add or update the DD in the correct phase's Scope table
+   - Update cumulative metrics if cell counts change
+3. **Integration L4** updates `INTEGRATION_MAP.md`:
+   - Update the Phase Legend table
+   - Update coupling chain phase annotations if data flow changes
+4. **DD Issue Generator** (DD015 §2.2) regenerates issues with `- **Roadmap Phase:**` tags matching the new phase
+5. **Mind-of-a-Worm** checks phase consistency on every PR that modifies a DD:
+   - DD header `> **Phase:**` matches DD_PHASE_ROADMAP.md entry
+   - Issue draft `Roadmap Phase` tags are consistent with DD phase
+   - Integration Map Phase Legend is current
+
+**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD020 bug discovered in Feb 2026: DD020 was Phase 0 in the roadmap but said Phase 1 in its own header.
+
 ### When to Write a Design Document vs. Just Opening a PR
 
 **Write a DD if:**
@@ -258,6 +279,8 @@ Variable name, Format, Units, Timestep (if applicable).
 9. **Runnable Commands:** Build & Test section must contain commands that a contributor can copy-paste. Scripts referenced must either exist or be marked `[TO BE CREATED]` with a GitHub issue link.
 
 10. **Visualizable:** Must describe what the work looks like in the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
+
+11. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD014 spans Phase 1-4), the header should reference the earliest phase and note the span.
 
 ### Bad Design Document Anti-Patterns
 

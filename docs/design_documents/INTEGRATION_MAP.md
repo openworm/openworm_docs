@@ -235,6 +235,22 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | [DD014](DD014_Dynamic_Visualization_Architecture.md) (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Visualization L4) |
 | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox) | 1 DD | [DD010](DD010_Validation_Framework.md) (Tier 3 only) | 🟡 **BLOCKING** (for validation) | TBD (Validation L4) — **VACANT** |
 
+### Phase Legend
+
+| DD | Roadmap Phase | Status |
+|----|--------------|--------|
+| DD001 (Neural Circuit) | Phase 0 | Accepted |
+| DD002 (Muscle) | Phase 0 | Accepted |
+| DD003 (Body Physics) | Phase 0 | Accepted |
+| DD020 (Connectome) | Phase 0 | Accepted |
+| DD013 (Simulation Stack) | Phase A | Proposed |
+| DD021 (Movement Toolbox) | Phase A | Blocked |
+| DD005 (Cell-Type Specialization) | Phase 1 | Proposed |
+| DD010 (Validation Framework) | Phase 1 | Proposed |
+| DD014 (Visualization) | Phase 1-4 | Proposed |
+| DD025 (Foundation Models) | Phase A | Proposed |
+| DD017 (Hybrid ML) | Phase 3 | Proposed |
+
 **Key Insight:**
 
 - **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 12 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, OME-Zarr schema) affects almost everything.
@@ -259,6 +275,8 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 - WCON exporter in `master_openworm.py` handles [DD003](DD003_Body_Physics_Architecture.md)→[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 - Validation scripts handle [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)→[DD010](DD010_Validation_Framework.md)
 
+**Phase Status:** The core loop (DD001→DD002→DD003→DD021→DD010) is the only coupling chain that is **fully working today** (Phase 0). All other chains (Cell-Type, Closed-Loop, Visualization, Foundation Models) are Phase 1+.
+
 **Two trajectory generation paths (both produce WCON 1.0):**
 
 | Path | Tool | Physics | Speed | Use Case |
@@ -267,6 +285,8 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | **Sibernetic full path** | `sibernetic_c302.py` → Sibernetic → `wcon/generate_wcon.py` (existing) or `extract_trajectory.py` (DD001 Issue 2) | 3D SPH, ~100K particles | Minutes-hours (GPU) | Publication validation, 3D analysis, DD019 strain |
 
 Both paths feed identically into [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) → [DD010](DD010_Validation_Framework.md). The 2D fast path wraps the Boyle, Berri & Cohen (2012) published rod-spring model, already implemented in `openworm/CE_locomotion`, `openworm/Worm2D`, and `openworm/CelegansNeuromechanicalGaitModulation`.
+
+**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A deliverable (DD001 Issue 1).
 
 **2D model limitations:** 2D only. Cannot replace Sibernetic for [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD019](DD019_Closed_Loop_Touch_Response.md) (3D cuticle strain), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organ systems.
 
