@@ -76,6 +76,37 @@ The muscle model uses [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, [pyNeuroML](https://github.com/NeuroML/pyNeuroML), [jnml](https://github.com/NeuroML/jNeuroML), [NEURON](https://www.neuron.yale.edu) 8.2.6
 
+### Getting Started (Environment Setup)
+
+The muscle model lives in the same c302 repository as the neural circuit ([DD001](DD001_Neural_Circuit_Architecture.md)). If you already set up DD001, you're ready — skip to Step 1 below.
+
+**Clone the repositories:**
+
+```bash
+git clone https://github.com/openworm/c302.git
+git clone https://github.com/openworm/sibernetic.git        # for coupled simulation
+git clone https://github.com/openworm/OpenWorm.git           # for docker compose
+```
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to Step 6 below (`docker compose run quick-test`).
+
+**Path B — Native Python:**
+
+```bash
+cd c302
+pip install -e .                     # installs c302 + dependencies
+pip install pyneuroml neuron         # NeuroML tools + NEURON simulator
+```
+
+You also need [jNeuroML](https://github.com/NeuroML/jNeuroML) (`jnml`) on your PATH (requires Java). Steps 1–5 below use the native path. Steps 6–7 use Docker.
+
 ### Step-by-step
 
 ```bash

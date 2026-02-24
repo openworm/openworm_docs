@@ -81,6 +81,36 @@
 - OR: [OpenCL](https://www.khronos.org/opencl/) SDK (AMD or Intel), CMake, C++ compiler
 - Optional: `pip install taichi` for [Taichi](https://www.taichi-lang.org/) Metal/CUDA backends
 
+### Getting Started (Environment Setup)
+
+There are two paths: **Docker** (recommended — avoids OpenCL SDK setup) and **native C++ build** (for Sibernetic development).
+
+**Clone the repositories:**
+
+```bash
+git clone https://github.com/openworm/sibernetic.git
+git clone https://github.com/openworm/OpenWorm.git           # for docker compose
+```
+
+**Path A — Docker (recommended):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to Step 5 below (`docker compose run quick-test`). This is the easiest way to get a working simulation — the Docker image includes OpenCL, CMake, and all dependencies.
+
+**Path B — Native C++ build:**
+
+Requires an OpenCL SDK on your system:
+
+- **Linux (AMD/Intel):** Install your GPU vendor's OpenCL runtime, plus `cmake` and a C++ compiler (`apt install cmake g++ ocl-icd-opencl-dev` on Ubuntu/Debian)
+- **macOS:** OpenCL is deprecated but still available on Intel Macs. Apple Silicon does not support OpenCL natively — use the Taichi Metal backend instead (`pip install taichi`)
+- **Windows:** Install your GPU vendor's OpenCL SDK (AMD APP SDK or Intel OpenCL Runtime)
+
+Steps 1–4 below use the native build path. Steps 5–6 use Docker.
+
 ### Step-by-step
 
 ```bash

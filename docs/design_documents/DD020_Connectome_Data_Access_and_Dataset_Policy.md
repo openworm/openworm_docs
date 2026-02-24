@@ -81,6 +81,26 @@ The [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) (`cect`, 
 - Python 3.8+ (tested on 3.8-3.12)
 - pip
 
+### Getting Started (Environment Setup)
+
+**To use `cect` (most contributors):** Install from PyPI — no repository clone needed.
+
+```bash
+pip install cect==0.2.7
+```
+
+Then follow the verification steps below.
+
+**To develop `cect` itself (adding dataset readers, fixing bugs):**
+
+```bash
+git clone https://github.com/openworm/ConnectomeToolbox.git
+cd ConnectomeToolbox
+pip install -e .                     # editable install for development
+pip install pytest                   # for running tests
+pytest                               # verify all tests pass
+```
+
 ### Step-by-step
 
 ```bash
