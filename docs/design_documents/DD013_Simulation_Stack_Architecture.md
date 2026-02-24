@@ -853,54 +853,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 ## Implementation Roadmap
 
-### Phase A: Foundation (Weeks 1-4)
-
-| Task | Owner | Effort | Dependency |
-|------|-------|--------|------------|
-| Create `openworm.yml` config schema | Integration Maintainer | 8 hrs | None |
-| Refactor `master_openworm.py` to read config | Integration Maintainer | 16 hrs | Config schema |
-| Multi-stage Dockerfile | Integration Maintainer | 8 hrs | None |
-| `docker-compose.yml` with quick-test, simulation, shell | Integration Maintainer | 4 hrs | Multi-stage Dockerfile |
-| `versions.lock` with current pinned commits | Integration Maintainer | 2 hrs | None |
-| Fix video pipeline (decouple from simulation) | Sibernetic L4 | 16 hrs | None |
-| Basic CI (build + smoke test) | Integration Maintainer | 4 hrs | docker-compose |
-
-**Deliverable:** Contributors can `docker compose run quick-test` with their branch.
-
-### Phase B: Validation Integration (Weeks 5-8)
-
-| Task | Owner | Effort | Dependency |
-|------|-------|--------|------------|
-| Implement Step 5 (validation) in master_openworm.py | Validation L4 | 16 hrs | Phase A |
-| Ingest [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity data | Data L4 | 8 hrs | None |
-| Tier 2 validation in CI (blocking) | Integration Maintainer | 8 hrs | Validation implementation |
-| Tier 3 validation in CI (blocking for main) | Integration Maintainer | 8 hrs | Validation implementation |
-| JupyterLab service + starter notebooks | Community contributor | 16 hrs | Phase A |
-
-**Deliverable:** PRs to main are automatically validated. JupyterLab available for exploration.
-
-### Phase C: Subsystem Expansion (Weeks 9-16)
-
-| Task | Owner | Effort | Dependency |
-|------|-------|--------|------------|
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) cell-type specialization hooks in config | Neural L4 | 8 hrs | Phase A |
-| [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx model repo + integration | Muscle L4 | 16 hrs | Phase A |
-| [DD009](DD009_Intestinal_Oscillator_Model.md) intestine model repo + integration | Muscle L4 | 16 hrs | Phase A |
-| [DD004](DD004_Mechanical_Cell_Identity.md) mechanical cell identity integration | Body Physics L4 | 12 hrs | Phase A |
-| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) neuropeptide integration | Neural L4 | 16 hrs | Phase B (needs validation) |
-
-**Deliverable:** New subsystems plug into the stack via config toggles.
-
-### Phase D: Polish and Onboarding (Weeks 17-20)
-
-| Task | Owner | Effort | Dependency |
-|------|-------|--------|------------|
-| Getting-started guide (new contributor docs) | Integration Maintainer + N2-Whisperer | 8 hrs | Phase B |
-| MyBinder.org integration (zero-install demo) | Community contributor | 8 hrs | JupyterLab |
-| Automated Docker Hub publishing on release | Integration Maintainer | 4 hrs | Phase A |
-| Update N2-Whisperer orientation tasks for new stack | N2-Whisperer knowledge base | 4 hrs | Phase B |
-
-**Deliverable:** A newcomer can experience the full simulation in a browser via MyBinder, then progress to local Docker for development.
+For the granular task breakdown of DD013 implementation, see the [DD013 Draft Issues](DD013_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD013 is assigned to **Phase A: Infrastructure Bootstrap (Weeks 1–4)**.
 
 ---
 
