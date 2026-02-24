@@ -30,15 +30,12 @@ Drawing on the "Megachurch" model described in Open Source Security (January 202
 
 ```
                 ┌─────────────────────────┐
-                │    Ring 3: Inner         │
-                │    Sanctum               │
+                │    Ring 1: Open          │
+                │    Courtyard             │
                 │                          │
-                │  Founder writes Design   │
-                │  Documents. Reviews      │
-                │  Mad-Worm-Scientist      │
-                │  daily digest. Mentors   │
-                │  subsystem maintainers   │
-                │  only.                   │
+                │  N2-Whisperer answers    │
+                │  questions & orients     │
+                │  newcomers.              │
                 │                          │
                 │   ┌─────────────────┐    │
                 │   │  Ring 2:        │    │
@@ -50,14 +47,13 @@ Drawing on the "Megachurch" model described in Open Source Security (January 202
                 │   │  tracks growth  │    │
                 │   │                 │    │
                 │   │  ┌───────────┐  │    │
-                │   │  │ Ring 1:   │  │    │
-                │   │  │ Open      │  │    │
-                │   │  │ Courtyard │  │    │
+                │   │  │ Ring 3:   │  │    │
+                │   │  │ Inner     │  │    │
+                │   │  │ Sanctum   │  │    │
                 │   │  │           │  │    │
-                │   │  │N2-Whisperer│ │    │
-                │   │  │ answers   │  │    │
-                │   │  │ questions │  │    │
-                │   │  │ & orients │  │    │
+                │   │  │ Founder + │  │    │
+                │   │  │ Mad-Worm- │  │    │
+                │   │  │ Scientist │  │    │
                 │   │  └───────────┘  │    │
                 │   └─────────────────┘    │
                 └─────────────────────────┘
