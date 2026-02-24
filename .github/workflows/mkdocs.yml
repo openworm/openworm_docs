@@ -27,7 +27,7 @@ jobs:
         timeout_minutes: 15
         command: |
           sudo apt-get update
-          sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+          sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex libcairo2-dev pkg-config
 
     - name: Set up Python install env
       run: |
