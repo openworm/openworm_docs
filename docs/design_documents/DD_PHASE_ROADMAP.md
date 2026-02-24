@@ -213,7 +213,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Key Deliverables:**
 
-1. **128 cell-type NeuroML files** (`cells/AVALCell.cell.nml`, etc.) — CeNGEN expression → conductance densities
+1. **128 cell-type NeuroML files** (`cells/AVALCell.cell.nml`, etc.) — CeNGEN expression → conductance densities. The current 4 generic channels (leak, K_slow, K_fast, Ca_boyle) borrowed from muscle electrophysiology (Boyle & Cohen 2008) expand to 14+ neuron-class-specific channels. Existing NeuroML2 models from Nicoletti et al. (2019) and NMODL files from BAAIWorm (Zhao et al. 2024) provide 31 channels as a head start. Channel assignment uses CeNGEN single-cell transcriptomics rather than functional grouping — more biologically grounded because two neurons in the same functional group may express different channel complements. See [DD005 Draft Issues](DD005_draft_issues.md) for the channel survey, adoption, and validation tasks.
 2. **Calibration parameters CSV** (`data/expression_to_conductance_calibration.csv`) — Fit from ~20 neurons with electrophysiology
 3. **Differentiated c302 network** (`LEMS_c302_C1_Differentiated.xml`) — Generated via `python CElegans.py C1Differentiated`
 4. **OME-Zarr export pipeline** ([DD014](DD014_Dynamic_Visualization_Architecture.md)) — `master_openworm.py` Step 4b writes `output/openworm.zarr/` with neural/, muscle/, body/ groups
@@ -271,7 +271,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
 | [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes) |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
-| **[DD027](DD027_Multicompartmental_Neuron_Models.md)** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
+| **[DD027](DD027_Multicompartmental_Neuron_Models.md)** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology. Includes spatially resolved synapse placement using Witvliet 2021 EM centroid distances. Stage 1 proof-of-concept; Stage 2 (all 302 neurons) is Phase 4-5. |
 
 **Key Deliverables:**
 
@@ -348,6 +348,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 4. **Differentiable worm** (`openworm-ml/differentiable/`) — PyTorch ODE solver, full [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) chain
 5. **SPH surrogate** (`openworm-ml/surrogate/`) — FNO trained on 500+ SPH runs (supplemented by 2D rod-spring model trajectories at orders of magnitude higher throughput), <5% trajectory error, 1000× faster
 6. **Auto-fitted parameters** — Gradient descent on [DD010](DD010_Validation_Framework.md) validation loss, per-neuron-class conductances
+7. **Per-synapse weight optimization** ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1) — Replaces the uniform baseline `g_syn = 0.09 nS` with per-synapse conductances fitted via gradient descent against whole-brain functional connectivity data, following Zhao et al. (2024). Extended with neurotransmitter identity constraints from Wang et al. (2024) and full 302-neuron optimization. Config: `neural.synapse_optimization: true/false`. See [DD017 Draft Issues](DD017_draft_issues.md).
 
 **Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"** *(Target: Month 12, March 2027)*
 

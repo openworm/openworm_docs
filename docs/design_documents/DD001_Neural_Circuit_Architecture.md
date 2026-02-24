@@ -217,11 +217,7 @@ C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 
 **Ion channels (derived from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle model):**
 
-> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) will replace these generic parameters with neuron-class-specific conductances derived from CeNGEN expression data and the ChannelWorm ion channel database.
-
-### Protein Foundation Model Pathway for Channel Kinetics
-
-The ~4 generic channels above are a starting point. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) replaces them with cell-type-specific conductances from CeNGEN transcriptomics. A complementary approach uses protein foundation models to predict channel kinetics directly from sequence — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics) for the full pipeline specification and the [Phase Roadmap](DD_PHASE_ROADMAP.md) for timeline.
+> **Note:** Neuron channel kinetics are currently borrowed from the Boyle & Cohen 2008 *muscle* model because direct neuronal electrophysiology data was scarce at the time of initial implementation. This is a known approximation. A second muscle model (Johnson & Mailler 2015) with one K⁺ and one Ca²⁺ channel has also been incorporated into c302. Both are based on Jospin et al.'s characterization of K⁺ and Ca²⁺ currents in body wall muscle. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) for the cell-type specialization strategy that addresses this.
 
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
@@ -285,21 +281,13 @@ The c302 paper demonstrated a working forward locomotion circuit (Figure 3) that
 
 This circuit produced alternating dorsoventral muscle activation waves propagating from head to tail — the pattern required for forward crawling. The result validates the c302 Level C1 framework as capable of producing locomotion-relevant network dynamics.
 
-### Synaptic Weight and Polarity Optimization
+### Known Approximations
 
-The uniform `g_syn = 0.09 nS` used above is a baseline placeholder for the undifferentiated model. Per-synapse conductance optimization using gradient descent against whole-brain functional connectivity (Zhao et al. 2024) is specified in [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework, Component 1). OpenWorm extends their approach with neurotransmitter identity constraints (Wang et al. 2024) and full 302-neuron optimization. See [DD017 Draft Issues](DD017_draft_issues.md) for implementation tasks.
+The current Level C1 model has three known approximations:
 
-**Configuration:** `neural.synapse_optimization: true/false` in `openworm.yml`. Phase 1-2 (requires [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend).
-
-### Extended Ion Channel Library (Phase 1-2)
-
-The current 4-channel model (leak, K_slow, K_fast, Ca_boyle) is derived from muscle electrophysiology (Boyle & Cohen 2008) and does not capture the diversity of neuronal ion channel kinetics. Expanding to 14+ neuron-class-specific channels is a Phase 1 deliverable driven by [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization). Existing NeuroML2 channel models from Nicoletti et al. (2019) and NMODL files from BAAIWorm (Zhao et al. 2024) provide a head start — 31 channels already exist in validated NeuroML2 format. See [DD005 Draft Issues](DD005_draft_issues.md) for the channel survey, adoption, and validation tasks.
-
-**OpenWorm extends beyond Zhao et al.:** We assign channels to neuron classes via CeNGEN single-cell transcriptomics ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)), not just by functional group membership. This is more biologically grounded — two neurons in the same functional group (e.g., interneurons) may express very different channel complements based on their transcriptomic profiles.
-
-### Spatially Resolved Synapse Placement (Phase 2, with Level D)
-
-Spatially resolved synapse placement along neurites is specified in [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models). Applies only when `neural.level: D` and `neural.spatial_synapses: true`.
+- **Uniform channel kinetics:** All 302 neurons share 4 channels borrowed from the muscle model (Boyle & Cohen 2008). See [DD005](DD005_Cell_Type_Differentiation_Strategy.md).
+- **Uniform synaptic weights:** All chemical synapses use `g_syn = 0.09 nS`. See [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md).
+- **Single compartment:** All neurons are modeled as isopotential spheres. See [DD027](DD027_Multicompartmental_Neuron_Models.md).
 
 ---
 
@@ -454,40 +442,28 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
    *Causal loop philosophy.*
 
 6. **[Hendricks M, Ha H, Maffey N, Zhang Y (2012)](https://doi.org/10.1038/nature11081).** "Compartmentalized calcium dynamics in a *C. elegans* interneuron encode head movement." *Nature* 487:99-103.
-   *Evidence for spatially compartmentalized signaling within individual neurons — motivates multicompartmental Level D.*
+   *Evidence for spatially compartmentalized signaling within individual neurons.*
 
 7. **[Liu Q, Kidd PB, Dobosiewicz M, Bhatt R (2018)](https://doi.org/10.1016/j.cell.2018.08.018).** "*C. elegans* AWA olfactory neurons fire calcium-mediated all-or-none action potentials." *Cell* 175:57-70.e17.
-   *Evidence that some C. elegans neurons use action potentials, not just graded signaling — motivates neuron-class-specific model complexity.*
+   *Evidence that some C. elegans neurons use action potentials, not just graded signaling.*
 
 8. **[Cannon RC, Gleeson P, Crook S, et al. (2014)](https://doi.org/10.3389/fninf.2014.00079).** "LEMS: a language for expressing complex biological models in concise and hierarchical form and its use in underpinning NeuroML 2." *Front Neuroinform* 8:79.
-   *LEMS/NeuroML 2 specification — supports multicompartmental morphologies natively.*
+   *LEMS/NeuroML 2 specification.*
 
-9. **[Linka K, Pierre SRS, Kuhl E (2023)](https://doi.org/10.1016/j.actbio.2023.01.055).** "Automated model discovery for human brain using Constitutive Artificial Neural Networks." *Acta Biomater*.
-   *RNN-based approach for inferring biophysical parameters from experimental recordings — applicable to cable equation fitting.*
+9. **[Haspel G et al. (2023)](https://arxiv.org/abs/2308.06578).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
+   *White paper arguing for observational and perturbational completeness in C. elegans neuroscience.*
 
-10. **Alon S et al. (2021).** "Expansion sequencing: spatially precise in situ transcriptomics in intact biological systems." *Science* 371.
-    *In-situ sequencing at subcellular resolution — future data source for spatially resolved channel densities in Level D models.*
+10. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990.
+    *MetaWorm: 136 multicompartmental neurons with 14 ion channel classes, gradient-descent-optimized synaptic weights, FEM body, closed-loop chemotaxis. Open-source: [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm) (Apache 2.0). Key benchmark for comparison with OpenWorm.*
 
-11. **[Shaib AH et al. (2023)](https://doi.org/10.1038/s41587-024-02431-9).** "*C. elegans*-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
-    *Future data source for synapse-level molecular identity and subcellular protein localization.*
+11. **Kato S, Kaplan HS, Schrödel T, et al. (2015).** "Global brain dynamics embed the motor command sequence of *Caenorhabditis elegans*." *Cell* 163:656-669.
+    *PCA of whole-brain dynamics shows forward/backward neuron groups separate on PC1.*
 
-12. **[Haspel G et al. (2023)](https://arxiv.org/abs/2308.06578).** "To reverse engineer an entire nervous system." *arXiv* [q-bio.NC] 2308.06578.
-    *White paper arguing for observational and perturbational completeness in C. elegans neuroscience — conceptual alignment with OpenWorm's whole-organism approach.*
+12. **Wang Z, Bhatt D, et al. (2024).** "Neurotransmitter classification from electron microscopy images at synaptic sites in *C. elegans*." *eLife* 13:RP95402.
+    *Experimentally determined neurotransmitter identities for all connectome synapses.*
 
-13. **Zhao M, Wang N, Jiang X, et al. (2024).** "An integrative data-driven model simulating *C. elegans* brain, body and environment interactions." *Nature Computational Science* 4(12):978-990.
-    *MetaWorm: 136 multicompartmental neurons with 14 ion channel classes, gradient-descent-optimized synaptic weights (MSE 0.076 vs experiment), FEM body at 30 FPS, closed-loop chemotaxis. Open-source: [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm) (Apache 2.0). Key benchmark for OpenWorm — we extend beyond MetaWorm with 302 neurons, organ systems, neuropeptidergic signaling, and NeuroML standard format.*
-
-14. **Kato S, Kaplan HS, Schrödel T, et al. (2015).** "Global brain dynamics embed the motor command sequence of *Caenorhabditis elegans*." *Cell* 163:656-669.
-    *PCA of whole-brain dynamics shows forward/backward neuron groups separate on PC1 — validation target for synapse optimization.*
-
-15. **Wang Z, Bhatt D, et al. (2024).** "Neurotransmitter classification from electron microscopy images at synaptic sites in *C. elegans*." *eLife* 13:RP95402.
-    *Experimentally determined neurotransmitter identities for all connectome synapses — constrains synapse polarity optimization.*
-
-16. **Nicoletti M et al. (2019).** "Biophysical modeling of *C. elegans* neurons: Single ion currents and whole-cell dynamics of AWCon and RMD." *PLoS ONE* 14:e0218738.
-    *Multicompartmental AWC model with multiple ion channel types — precedent for Level D single-neuron models.*
-
-17. **Bargmann CI, Marder E (2013).** "From the connectome to brain function." *Nature Methods* 10:483-490.
-    *Argument that connection topology alone is insufficient — connection properties including spatial location and strength matter for understanding circuit function.*
+13. **Bargmann CI, Marder E (2013).** "From the connectome to brain function." *Nature Methods* 10:483-490.
+    *Argument that connection topology alone is insufficient — connection properties matter for understanding circuit function.*
 
 18. **Johnson C, Mailler R (2015).** "Modeling action potentials of body wall muscles in *C. elegans*: a biologically founded computational approach." *7th Int. Conf. Bioinformat. Comput. Biol.*
     *Second muscle model incorporated into c302 (one K⁺ + one Ca²⁺ channel). Based on Jospin et al. electrophysiology. See [openworm/JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel).*
@@ -510,9 +486,7 @@ Do NOT modify Level C1 unless a critical bug is found.
 
 ### Level D: Multicompartmental Cable Equation Models
 
-Multicompartmental neuron models for neurons where single-compartment approximation is insufficient (e.g., RIA compartmentalized calcium, AWA action potentials) are specified in [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models). Stage 1 (Phase 2): 5 representative neurons (AWC, AIY, AVA, RIM, VD5). Stage 2 (Phase 4-5): all 302 neurons. See [DD027 Draft Issues](DD027_draft_issues.md) for implementation tasks.
-
-**Validation:** Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers.
+For neurons where single-compartment approximation is insufficient, Level D multicompartmental models are specified in [DD027](DD027_Multicompartmental_Neuron_Models.md). Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers.
 
 ---
 
