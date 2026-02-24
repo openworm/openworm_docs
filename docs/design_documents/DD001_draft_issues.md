@@ -2,9 +2,9 @@
 
 **Epic:** DD001 — Neural Circuit Architecture and Multi-Level Framework
 
-**Generated from:** [DD001: Neural Circuit Architecture](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/)
+**Generated from:** [DD001: Neural Circuit Architecture](DD001_Neural_Circuit_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 21 issues (ai-workable: 10 / human-expert: 11 | L1: 5, L2: 9, L3: 7)
 
@@ -37,7 +37,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, physics
-- **DD Section to Read:** [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test) (Step 3a) and [DD001 — Deliverables](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#deliverables) (WCON row)
+- **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 3a) and [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (WCON row)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`openworm/CelegansNeuromechanicalGaitModulation/WormSim/Model/worm.cc`](https://github.com/openworm/CelegansNeuromechanicalGaitModulation) — Complete C++ Boyle-Cohen model (48 segments, Sundials IDA solver) with bistable neural circuit, muscle model, stretch receptors, and obstacle avoidance. **Also includes `generate_wcon.py` that already converts simulation CSV output to WCON 1.0 format**, plus `WormView.py` and `WormPlot.py` visualization tools.
@@ -74,7 +74,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test) (Step 3b) and [DD001 — Deliverables](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#deliverables) (WCON row)
+- **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 3b) and [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (WCON row)
 - **Depends On:** DD003 (Sibernetic must produce particle output)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — ~300 lines of **working Python** that reads `worm_motion_log.txt` from Sibernetic, generates WCON JSON, validates against `wcon_schema.json`, and computes speed/curvature. Also includes `wcon/__init__.py`, `wcon/wcon_schema.json`, and test WCON files.
@@ -108,7 +108,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD001 — Integration Contract — Outputs](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#inputs--outputs) and [DD001 — Coupling Bridge Ownership](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#coupling-bridge-ownership)
+- **DD Section to Read:** [DD001 — Integration Contract — Outputs](DD001_Neural_Circuit_Architecture.md#inputs--outputs) and [DD001 — Coupling Bridge Ownership](DD001_Neural_Circuit_Architecture.md#coupling-bridge-ownership)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - `c302/runAndPlot.py` — Already generates summary images and HTML pages across all configs; shows which output files are produced
@@ -144,7 +144,7 @@ Target: OME-Zarr export and coupling interface documentation.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD001 — Deliverables](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#deliverables) (OME-Zarr rows) and [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) (OME-Zarr schema)
+- **DD Section to Read:** [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (OME-Zarr rows) and [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
 - **Depends On:** Issue 3 (output format documentation)
 - **DD013 Pipeline Role:** Neural-stage post-processing. Produces Zarr store artifact for DD014 visualization stage. Output path from `openworm.yml`.
 - **Files to Modify:**
@@ -177,7 +177,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (code reuse plan)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (code reuse plan)
 - **Depends On:** None
 - **Existing Code to Reuse (THIS IS THE CODE TO SURVEY):**
     - [`openworm/NicolettiEtAl2019_NeuronModels/NeuroML2/`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **31 ion channels already in NeuroML2**: AWCon (16 channels: shal, kvs1, shak, kqt3, egl2, kir, unc2, egl19, cca, bk, slo1, bk2, slo2, sk, nca, leak) and RMD (15 channels: bk, bk2, cca, egl19, egl36, kir, leak, nca, shak, shal, sk, slo1, slo2, unc2). Includes `GenerateNeuroML.py` and Ca dynamics model. **Validated against original XPP models.**
@@ -210,7 +210,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (EGL-19 row, HIGH priority)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (EGL-19 row, HIGH priority)
 - **Depends On:** Issue 5 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_egl19.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **EGL-19 already exists in validated NeuroML2.** Part of the AWCon 16-channel model. Validated against XPP original.
@@ -245,7 +245,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (SLO-1 row, HIGH priority)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (SLO-1 row, HIGH priority)
 - **Depends On:** Issue 5 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_slo1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **SLO-1 already exists in validated NeuroML2.** Calcium-dependent gating modeled. Part of AWCon model.
@@ -276,7 +276,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (KVS-1 and EGL-36 rows, HIGH priority)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (KVS-1 and EGL-36 rows, HIGH priority)
 - **Depends On:** Issue 5 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_kvs1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **KVS-1 already exists in validated NeuroML2** (AWCon model)
@@ -311,7 +311,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) (MEDIUM priority rows)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (MEDIUM priority rows)
 - **Depends On:** Issues 7-9 (HIGH priority channels establish the adoption/validation workflow)
 - **Existing Code to Reuse:**
     - **Already in NeuroML2 (NicolettiEtAl2019):** CCA-1 (`AWCon_cca.channel.nml`), EGL-2 (`AWCon_egl2.channel.nml`), KQT-3 (`AWCon_kqt3.channel.nml`), SLO-2 (`AWCon_slo2.channel.nml`), SK/KCNL (`AWCon_sk.channel.nml`), IRK/KIR (`AWCon_kir.channel.nml`), NCA (`AWCon_nca.channel.nml`) — **ALL 7 channels already exist in validated NeuroML2**
@@ -349,7 +349,7 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 - **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD001 — Extended Ion Channel Library](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2) and [DD001 — Quality Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#quality-criteria) (criterion 3: biophysical units)
+- **DD Section to Read:** [DD001 — Extended Ion Channel Library](DD001_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) and [DD001 — Quality Criteria](DD001_Neural_Circuit_Architecture.md#quality-criteria) (criterion 3: biophysical units)
 - **Depends On:** Issues 6-9 (channel adoptions)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2024_MN_IN/*_vclamp.py`](https://github.com/openworm/NicolettiEtAl2024_MN_IN) — Voltage-clamp simulation scripts already exist for VA5, VB6, VD5 neurons. Includes conductance unit conversion utilities (`g_to_Scm2.py`, `g_to_nS.py`).
@@ -387,7 +387,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints)
+- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`c302/data/GABA.py`](https://github.com/openworm/c302) — GABAergic neuron identity vector (binary, 279 neurons). Already used in c302 network generation.
@@ -421,7 +421,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#synaptic-weight-and-polarity-optimization) (Configuration section)
+- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (Configuration section)
 - **Depends On:** DD013 Issue 1 (openworm.yml schema)
 - **Files to Modify:**
     - `openworm.yml` (add `neural.synapse_optimization: false`)
@@ -446,7 +446,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and Reference 14 (Kato et al. 2015 PCA validation)
+- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and Reference 14 (Kato et al. 2015 PCA validation)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`wormneuroatlas`](https://github.com/openworm/wormneuroatlas) — **The Randi 2023 signal propagation atlas is already included** as `funatlas.h5` with a clean Python API: `NeuroAtlas.get_signal_propagation_atlas(strain="wt")`. Supports WT and unc-31 strains. Handles neuron ID conventions and bilateral/dorsoventral merging.
@@ -482,7 +482,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroanatomy
-- **DD Section to Read:** [DD001 — Level D Multicompartmental](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, step 2)
+- **DD Section to Read:** [DD001 — Level D Multicompartmental](DD001_Neural_Circuit_Architecture.md#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, step 2)
 - **Depends On:** Issue 5 (channel survey, which also catalogs morphology sources)
 - **Existing Code to Reuse:**
     - [`CElegansNeuroML/CElegans/generatedNeuroML2/`](https://github.com/openworm/CElegansNeuroML) — **All 302 neurons already exist as multicompartmental NeuroML2 cells** with realistic 3D morphology (derived from VirtualWorm Blender files). Includes `AWCL.cell.nml`, `AWCR.cell.nml`, `AIYL.cell.nml`, `AIYR.cell.nml`, `AVAL.cell.nml`, `AVAR.cell.nml`, `RIML.cell.nml`, `RIMR.cell.nml`, `VD5.cell.nml` — all 5 target neurons.
@@ -516,7 +516,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD001 — Level D Multicompartmental](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, steps 3-4) and Reference 16 (Nicoletti et al. 2019 AWCon model)
+- **DD Section to Read:** [DD001 — Level D Multicompartmental](DD001_Neural_Circuit_Architecture.md#level-d-multicompartmental-cable-equation-models-expanded-roadmap) (Stage 1, steps 3-4) and Reference 16 (Nicoletti et al. 2019 AWCon model)
 - **Depends On:** Issue 14 (AWC morphology evaluation), Issues 6-9 (adopted channel library)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon.cell.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **Complete AWCon single-compartment model with ALL 16 channels in NeuroML2**, validated against XPP original. Includes `CaDynamics.nml` for calcium concentration dynamics and `GenerateNeuroML.py` for programmatic cell generation.
@@ -556,7 +556,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD001 — Technical Approach](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#technical-approach) and [DD001 — Implementation References](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#implementation-references)
+- **DD Section to Read:** [DD001 — Technical Approach](DD001_Neural_Circuit_Architecture.md#technical-approach) and [DD001 — Implementation References](DD001_Neural_Circuit_Architecture.md#implementation-references)
 - **Depends On:** None
 - **Files to Modify:**
     - `docs/architecture.md` (new — in c302 repo)
@@ -581,7 +581,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD001 — Quality Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#quality-criteria) and [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test)
+- **DD Section to Read:** [DD001 — Quality Criteria](DD001_Neural_Circuit_Architecture.md#quality-criteria) and [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test)
 - **Depends On:** None
 - **Files to Modify:**
     - `CONTRIBUTING.md` (new — in c302 repo)
@@ -607,7 +607,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, docs
-- **DD Section to Read:** [DD001 — Architecture Levels](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#architecture-levels)
+- **DD Section to Read:** [DD001 — Architecture Levels](DD001_Neural_Circuit_Architecture.md#architecture-levels)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - `c302/runAndPlot.py -all` — Already generates comparison images across all levels/configs with HTML summary
@@ -638,7 +638,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD001 — Quality Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#quality-criteria) (criterion 3)
+- **DD Section to Read:** [DD001 — Quality Criteria](DD001_Neural_Circuit_Architecture.md#quality-criteria) (criterion 3)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - `c302/test.sh` — **~150+ line shell script** running ALL readers, ALL generators, ALL validators, ALL simulators. This IS the test suite — it just needs documentation.
@@ -675,7 +675,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD001 — Spatially Resolved Synapse Placement](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#spatially-resolved-synapse-placement-phase-2-with-level-d)
+- **DD Section to Read:** [DD001 — Spatially Resolved Synapse Placement](DD001_Neural_Circuit_Architecture.md#spatially-resolved-synapse-placement-phase-2-with-level-d)
 - **Depends On:** DD013 Issue 1 (openworm.yml schema)
 - **Files to Modify:**
     - `openworm.yml` (add `neural.spatial_synapses: false`)
@@ -697,7 +697,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** git, docs
-- **DD Section to Read:** [DD001 — References](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#references) (Gleeson et al. 2018) and [DD001 — Architecture Levels](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#architecture-levels)
+- **DD Section to Read:** [DD001 — References](DD001_Neural_Circuit_Architecture.md#references) (Gleeson et al. 2018) and [DD001 — Architecture Levels](DD001_Neural_Circuit_Architecture.md#architecture-levels)
 - **Depends On:** None
 - **Files to Modify:**
     - `CHANGELOG.md` (new — in c302 repo)

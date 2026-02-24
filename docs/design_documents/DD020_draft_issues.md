@@ -2,9 +2,9 @@
 
 **Epic:** DD020 — Connectome Data Access and Dataset Policy
 
-**Generated from:** [DD020: Connectome Data Access and Dataset Policy](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/)
+**Generated from:** [DD020: Connectome Data Access and Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 23 issues (ai-workable: 18 / human-expert: 5 | L1: 10, L2: 10, L3: 3)
 
@@ -34,7 +34,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
-- **DD Section to Read:** [DD020 — Version Pinning & Update Procedure](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#version-pinning-update-procedure) and [DD013 §4 — Dependency Pinning](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#4-dependency-pinning-versionslock)
+- **DD Section to Read:** [DD020 — Version Pinning & Update Procedure](DD020_Connectome_Data_Access_and_Dataset_Policy.md#version-pinning-update-procedure) and [DD013 §4 — Dependency Pinning](DD013_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock)
 - **Depends On:** DD013 Issue 7 (versions.lock file)
 - **Files to Modify:**
     - `versions.lock` (add `cect` entry)
@@ -57,7 +57,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
-- **DD Section to Read:** [DD020 — Configuration](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#configuration) (openworm.yml section)
+- **DD Section to Read:** [DD020 — Configuration](DD020_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (openworm.yml section)
 - **Depends On:** DD013 Issue 1 (openworm.yml config schema)
 - **Files to Modify:**
     - `openworm.yml` (add `data.connectome` section)
@@ -84,7 +84,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Configuration](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#configuration) (config keys table) and [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria)
+- **DD Section to Read:** [DD020 — Configuration](DD020_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (config keys table) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
 - **Depends On:** Issue 2, DD013 Issue 2 (validate_config.py)
 - **Files to Modify:**
     - `scripts/validate_config.py` (add connectome validation rules)
@@ -112,7 +112,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD020 — Repository & Packaging](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#repository-packaging) (Docker stage, build dependencies)
+- **DD Section to Read:** [DD020 — Repository & Packaging](DD020_Connectome_Data_Access_and_Dataset_Policy.md#repository-packaging) (Docker stage, build dependencies)
 - **Depends On:** Issue 1, DD013 Issue 3 (multi-stage Dockerfile)
 - **Files to Modify:**
     - `Dockerfile` (neural stage — add `pip install cect==$CECT_VERSION`)
@@ -138,7 +138,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, docker
-- **DD Section to Read:** [DD020 — Dataset Selection Rules](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#dataset-selection-rules) (rule 4: `from_cache=True` in CI) and [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria) (criterion 6)
+- **DD Section to Read:** [DD020 — Dataset Selection Rules](DD020_Connectome_Data_Access_and_Dataset_Policy.md#dataset-selection-rules) (rule 4: `from_cache=True` in CI) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 6)
 - **Depends On:** Issue 4
 - **Files to Modify:**
     - `Dockerfile` (neural stage — add cache generation step)
@@ -170,7 +170,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd, python
-- **DD Section to Read:** [DD020 — How to Test](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#how-to-test-contributor-workflow) (quick test and full validation scripts)
+- **DD Section to Read:** [DD020 — How to Test](DD020_Connectome_Data_Access_and_Dataset_Policy.md#how-to-test-contributor-workflow) (quick test and full validation scripts)
 - **Depends On:** Issue 4, DD013 Issue 13 (CI Gate 1)
 - **Files to Modify:**
     - `scripts/test_connectome.py` (new — DD020 CI test)
@@ -199,7 +199,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
-- **DD Section to Read:** [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria) (criterion 1: API-only access) and [DD020 — Goal & Success Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#goal-success-criteria)
+- **DD Section to Read:** [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 1: API-only access) and [DD020 — Goal & Success Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#goal-success-criteria)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary posted on the issue)
@@ -225,7 +225,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria) (all 6 criteria) and [DD020 — API Contract for Consumers](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#api-contract-for-consumers)
+- **DD Section to Read:** [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (all 6 criteria) and [DD020 — API Contract for Consumers](DD020_Connectome_Data_Access_and_Dataset_Policy.md#api-contract-for-consumers)
 - **Depends On:** Issue 7 (audit findings)
 - **Files to Modify:**
     - `scripts/check_connectome_compliance.py` (new)
@@ -254,7 +254,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Update Procedure](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#update-procedure) (6-step process)
+- **DD Section to Read:** [DD020 — Update Procedure](DD020_Connectome_Data_Access_and_Dataset_Policy.md#update-procedure) (6-step process)
 - **Depends On:** Issue 6 (CI test)
 - **Files to Modify:**
     - `scripts/update_cect_version.py` (new)
@@ -286,7 +286,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD020 — Canonical Query Patterns](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns) (Patterns 1, 2, 5, 6) and [DD001 Integration Contract](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/)
+- **DD Section to Read:** [DD020 — Canonical Query Patterns](DD020_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 1, 2, 5, 6) and [DD001 Integration Contract](DD001_Neural_Circuit_Architecture.md)
 - **Depends On:** Issue 4 (cect in Docker)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (new — canonical loader wrapping cect)
@@ -314,7 +314,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Canonical Query Patterns](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns) (Pattern 3: neuron-to-muscle) and [DD002 Integration Contract](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/)
+- **DD Section to Read:** [DD020 — Canonical Query Patterns](DD020_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 3: neuron-to-muscle) and [DD002 Integration Contract](DD002_Muscle_Model_Architecture.md)
 - **Depends On:** Issue 10 (connectome loader)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (add `load_neuron_to_muscle_conns()` function)
@@ -340,7 +340,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Canonical Query Patterns](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns) (Pattern 4: pharyngeal view) and [DD007 Integration Contract](https://docs.openworm.org/design_documents/DD007_Pharyngeal_System_Architecture/)
+- **DD Section to Read:** [DD020 — Canonical Query Patterns](DD020_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 4: pharyngeal view) and [DD007 Integration Contract](DD007_Pharyngeal_System_Architecture.md)
 - **Depends On:** Issue 10 (connectome loader)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (add `load_pharyngeal_connectome()` function)
@@ -365,7 +365,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Canonical Query Patterns](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns) (Patterns 8 and 9) and [DD006 Integration Contract](https://docs.openworm.org/design_documents/DD006_Neuropeptidergic_Connectome_Integration/)
+- **DD Section to Read:** [DD020 — Canonical Query Patterns](DD020_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 8 and 9) and [DD006 Integration Contract](DD006_Neuropeptidergic_Connectome_Integration.md)
 - **Depends On:** Issue 10 (connectome loader)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (add `load_neuropeptide_network()` and `load_neurotransmitter_identity()`)
@@ -398,7 +398,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Multi-Dataset Validation](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation) (validation protocol table)
+- **DD Section to Read:** [DD020 — Multi-Dataset Validation](DD020_Connectome_Data_Access_and_Dataset_Policy.md#multi-dataset-validation) (validation protocol table)
 - **Depends On:** Issue 5 (cached datasets)
 - **Files to Modify:**
     - `scripts/cross_validate_connectome.py` (new)
@@ -426,7 +426,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD020 — Bilateral Symmetry as a Validation Metric](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#bilateral-symmetry-as-a-validation-metric)
+- **DD Section to Read:** [DD020 — Bilateral Symmetry as a Validation Metric](DD020_Connectome_Data_Access_and_Dataset_Policy.md#bilateral-symmetry-as-a-validation-metric)
 - **Depends On:** Issue 5 (cached datasets)
 - **Files to Modify:**
     - `scripts/validate_symmetry.py` (new)
@@ -454,7 +454,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml, physics
-- **DD Section to Read:** [DD020 — Multi-Dataset Validation](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation) (sensitivity analysis row)
+- **DD Section to Read:** [DD020 — Multi-Dataset Validation](DD020_Connectome_Data_Access_and_Dataset_Policy.md#multi-dataset-validation) (sensitivity analysis row)
 - **Depends On:** Issue 14 (cross-validation script), DD013 Issue 11 (coupled sim loop)
 - **Files to Modify:**
     - `scripts/connectome_sensitivity.py` (new)
@@ -480,7 +480,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/ConnectomeToolbox`
 - **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD020 — Update Procedure](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#update-procedure) (breaking change policy) and [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria)
+- **DD Section to Read:** [DD020 — Update Procedure](DD020_Connectome_Data_Access_and_Dataset_Policy.md#update-procedure) (breaking change policy) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
 - **Depends On:** Issue 5 (cached datasets)
 - **Files to Modify:**
     - `tests/test_dataset_regression.py` (new — in ConnectomeToolbox repo)
@@ -512,7 +512,7 @@ Target: New contributors can explore connectome data interactively and understan
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, jupyter
-- **DD Section to Read:** [DD020 — How to Visualize](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#how-to-visualize) and [DD020 — Canonical Query Patterns](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns) (all 9 patterns)
+- **DD Section to Read:** [DD020 — How to Visualize](DD020_Connectome_Data_Access_and_Dataset_Policy.md#how-to-visualize) and [DD020 — Canonical Query Patterns](DD020_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (all 9 patterns)
 - **Depends On:** DD013 Issue 23 (JupyterLab service)
 - **Files to Modify:**
     - `notebooks/05_explore_connectome_datasets.ipynb` (new)
@@ -540,7 +540,7 @@ Target: New contributors can explore connectome data interactively and understan
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, jupyter
-- **DD Section to Read:** [DD020 — Multi-Dataset Validation](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation) and [DD020 — Developmental Connectome Support](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#developmental-connectome-support)
+- **DD Section to Read:** [DD020 — Multi-Dataset Validation](DD020_Connectome_Data_Access_and_Dataset_Policy.md#multi-dataset-validation) and [DD020 — Developmental Connectome Support](DD020_Connectome_Data_Access_and_Dataset_Policy.md#developmental-connectome-support)
 - **Depends On:** Issue 18 (exploration notebook), Issue 14 (cross-validation script)
 - **Files to Modify:**
     - `notebooks/06_compare_connectome_datasets.ipynb` (new)
@@ -567,7 +567,7 @@ Target: New contributors can explore connectome data interactively and understan
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/openworm_docs`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD020 — API Contract for Consumers](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#api-contract-for-consumers) and [DD020 — Quality Criteria](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria)
+- **DD Section to Read:** [DD020 — API Contract for Consumers](DD020_Connectome_Data_Access_and_Dataset_Policy.md#api-contract-for-consumers) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
 - **Depends On:** None
 - **Files to Modify:**
     - `docs/Resources/cect_usage_guide.md` (new — in openworm_docs repo)
@@ -599,7 +599,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 - **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
-- **DD Section to Read:** [DD020 — Existing Code Resources](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#existing-code-resources) (wormneuroatlas section)
+- **DD Section to Read:** [DD020 — Existing Code Resources](DD020_Connectome_Data_Access_and_Dataset_Policy.md#existing-code-resources) (wormneuroatlas section)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary posted on the issue)
@@ -624,7 +624,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 - **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroscience
-- **DD Section to Read:** [DD020 — Per-Synapse Spatial Position Data](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#per-synapse-spatial-position-data) and [DD020 — Existing Code Resources](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#existing-code-resources) (NemaNode section)
+- **DD Section to Read:** [DD020 — Per-Synapse Spatial Position Data](DD020_Connectome_Data_Access_and_Dataset_Policy.md#per-synapse-spatial-position-data) and [DD020 — Existing Code Resources](DD020_Connectome_Data_Access_and_Dataset_Policy.md#existing-code-resources) (NemaNode section)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary posted on the issue)
@@ -650,7 +650,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 - **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/ConnectomeToolbox`
 - **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD020 — Known Issues](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#known-issues-and-future-work) (Issue 1: OpenWormUnifiedReader is WIP) and [DD020 — Alternatives Considered](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/#5-default-to-openwormunifiedreader-instead-of-cook2019herm) (alternative 5)
+- **DD Section to Read:** [DD020 — Known Issues](DD020_Connectome_Data_Access_and_Dataset_Policy.md#known-issues-and-future-work) (Issue 1: OpenWormUnifiedReader is WIP) and [DD020 — Alternatives Considered](DD020_Connectome_Data_Access_and_Dataset_Policy.md#5-default-to-openwormunifiedreader-instead-of-cook2019herm) (alternative 5)
 - **Depends On:** None
 - **Files to Modify:**
     - `tests/test_unified_reader_stability.py` (new — in ConnectomeToolbox repo)

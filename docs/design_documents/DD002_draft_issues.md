@@ -2,9 +2,9 @@
 
 **Epic:** DD002 — Muscle Model Architecture and Calcium-Force Coupling
 
-**Generated from:** [DD002: Muscle Model Architecture](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/)
+**Generated from:** [DD002: Muscle Model Architecture](DD002_Muscle_Model_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)
 
@@ -35,7 +35,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, matplotlib
-- **DD Section to Read:** [DD002 — How to Build & Test](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#how-to-build-test) (Step 4) and [DD002 — How to Visualize](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#how-to-visualize)
+- **DD Section to Read:** [DD002 — How to Build & Test](DD002_Muscle_Model_Architecture.md#how-to-build-test) (Step 4) and [DD002 — How to Visualize](DD002_Muscle_Model_Architecture.md#how-to-visualize)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/c302_MuscleTest.py` — already stimulates all 96 muscles and plots calcium dynamics; **extract** the plotting logic into a standalone script that reads `.dat` files instead of running inline (reuse strategy: **adapt**)
     - `openworm/c302` → `c302/c302_Muscles.py` — shows data generation pattern and `.dat` output format (reuse strategy: **reference**)
@@ -69,7 +69,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, numpy
-- **DD Section to Read:** [DD002 — How to Build & Test](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#how-to-build-test) (Step 5) and [DD002 — Green Light Criteria](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#green-light-criteria)
+- **DD Section to Read:** [DD002 — How to Build & Test](DD002_Muscle_Model_Architecture.md#how-to-build-test) (Step 5) and [DD002 — Green Light Criteria](DD002_Muscle_Model_Architecture.md#green-light-criteria)
 - **Existing Code to Reuse:**
     - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py` — already validates calcium dynamics against the published Boyle-Cohen model; **adapt** its validation logic for this script (reuse strategy: **adapt**)
     - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/input_vars.py` — published parameter values for comparison targets (reuse strategy: **reference**)
@@ -104,7 +104,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD002 — Quality Criteria](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#quality-criteria) (criteria 3-5) and [DD002 — Implementation References — Muscle Cell Template](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#muscle-cell-template)
+- **DD Section to Read:** [DD002 — Quality Criteria](DD002_Muscle_Model_Architecture.md#quality-criteria) (criteria 3-5) and [DD002 — Implementation References — Muscle Cell Template](DD002_Muscle_Model_Architecture.md#muscle-cell-template)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/c302_IClampMuscle.py` — already tests a single muscle (MDR01) with current clamp injection; **convert** to pytest assertions (reuse strategy: **adapt**)
     - `openworm/c302` → `c302/c302_MuscleTest.py` — already validates all muscles with calcium dynamics; **convert** to pytest assertions (reuse strategy: **adapt**)
@@ -137,7 +137,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD002 — Technical Approach — Muscle Cells](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons) and [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)
+- **DD Section to Read:** [DD002 — Technical Approach — Muscle Cells](DD002_Muscle_Model_Architecture.md#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons) and [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)
 - **Existing Code to Reuse:**
     - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py` — **THIS IS THE AUDIT TOOL**. Already compares NeuroML values against Boyle & Cohen 2008 equations; **extend** to output a full comparison table (reuse strategy: **adapt**)
     - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/input_vars.py` — published Boyle-Cohen parameter values as Python constants (reuse strategy: **reference**)
@@ -177,7 +177,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, zarr
-- **DD Section to Read:** [DD002 — Deliverables](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#deliverables) (OME-Zarr rows) and [DD014 — OME-Zarr Schema](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/)
+- **DD Section to Read:** [DD002 — Deliverables](DD002_Muscle_Model_Architecture.md#deliverables) (OME-Zarr rows) and [DD014 — OME-Zarr Schema](DD014_Dynamic_Visualization_Architecture.md)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `src/main_sim.py` — documents the 96-element muscle array format: `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]` (reuse strategy: **reference**)
     - `c302.__init__.get_muscle_names()` — canonical muscle ordering for array indices (reuse strategy: **import directly**)
@@ -211,7 +211,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD002 — Integration Contract — Configuration](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#configuration) and [DD013 §1](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Existing Code to Reuse:**
     - `openworm/OpenWorm` → `.openworm.yml` — current minimal config file to validate against (reuse strategy: **reference**)
     - DD013 specifies the full `openworm.yml` schema (see DD013 §1) — use this as the validation spec (reuse strategy: **reference**)
@@ -244,7 +244,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, docker
-- **DD Section to Read:** [DD002 — Integration Contract — Outputs](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#inputs--outputs) and [DD002 — Coupling Bridge Ownership](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#coupling-bridge-ownership)
+- **DD Section to Read:** [DD002 — Integration Contract — Outputs](DD002_Muscle_Model_Architecture.md#inputs--outputs) and [DD002 — Coupling Bridge Ownership](DD002_Muscle_Model_Architecture.md#coupling-bridge-ownership)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to test**. This IS the coupling bridge between c302/NEURON and Sibernetic (reuse strategy: **reference — test target**)
     - `openworm/sibernetic` → `src/main_sim.py` → `C302NRNSimulation` class — live NEURON integration mode that extracts `cai` (calcium) from soma; documents the coupling data flow (reuse strategy: **reference**)
@@ -277,7 +277,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience, connectomics
-- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling) and [DD020](https://docs.openworm.org/design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/) (cect API)
+- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](DD002_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (cect API)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/c302_TargetMuscle.py` — already queries which neurons synapse onto a given muscle; **extend** to iterate over all muscles and produce a systematic comparison (reuse strategy: **adapt**)
     - `openworm/CE_locomotion` → `NervousSystem.cpp` — NMJ weight constants per motor neuron class: `NMJ_DA`, `NMJ_DB`, `NMJ_DD`, `NMJ_VA`, `NMJ_VB`, `NMJ_VD` (reuse strategy: **reference**)
@@ -314,7 +314,7 @@ Target: Fix known issues and improve muscle model configurability.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD002 — Known Issues — Issue 3: MVL24](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#issue-3-mvl24-muscle-does-not-exist)
+- **DD Section to Read:** [DD002 — Known Issues — Issue 3: MVL24](DD002_Muscle_Model_Architecture.md#issue-3-mvl24-muscle-does-not-exist)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/__init__.py` → `get_muscle_names()` — returns all 96 muscle names; **this function must be patched** to return 95 (excluding MVL24) (reuse strategy: **modify in place**)
     - `openworm/c302` → `c302/c302_Muscles.py` — muscle generation loop that creates MVL24; must be updated to skip it (reuse strategy: **modify in place**)
@@ -350,7 +350,7 @@ Target: Fix known issues and improve muscle model configurability.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD002 — Integration Contract — Configuration](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#configuration) and [DD013 §1](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to modify**. Currently hardcodes `max_force` and `max_ca`; replace hardcoded values with config loading (reuse strategy: **modify in place**)
     - `openworm/sibernetic` → `src/main_sim.py` — 4e-7 hardcoded at the Ca²⁺ scaling line; must also read from config (reuse strategy: **modify in place**)
@@ -383,7 +383,7 @@ Target: Fix known issues and improve muscle model configurability.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD002 — Calcium-to-Force Coupling](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#calcium-to-force-coupling-the-bridge-to-sibernetic)
+- **DD Section to Read:** [DD002 — Calcium-to-Force Coupling](DD002_Muscle_Model_Architecture.md#calcium-to-force-coupling-the-bridge-to-sibernetic)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `src/main_sim.py` — the actual activation formula implementation to test; locate the `min(1.0, ca / max_ca)` line (reuse strategy: **reference — test target**)
     - `openworm/sibernetic` → `sibernetic_c302.py` — where the formula is applied in production (reuse strategy: **reference — test target**)
@@ -413,7 +413,7 @@ Target: Fix known issues and improve muscle model configurability.
 - **Roadmap Phase:** Phase A
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience
-- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling) and [DD001 — Integration Contract](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/)
+- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](DD002_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD001 — Integration Contract](DD001_Neural_Circuit_Architecture.md)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/parameters_C.py` → `neuron_to_muscle_chem_exc_syn_gbase`, `neuron_to_muscle_chem_inh_syn_gbase` — the actual synapse conductance values used in the simulation (reuse strategy: **reference**)
     - `openworm/c302` → `c302/c302_TargetMuscle.py` — queries NMJ connections for a given muscle; use to enumerate all connections (reuse strategy: **adapt**)
@@ -449,7 +449,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, bioinformatics, neuroscience
-- **DD Section to Read:** [DD002 — Migration Path — Muscle-Type Diversity](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#if-muscle-type-diversity-is-required-phase-3) and [DD005](https://docs.openworm.org/design_documents/DD005_Cell_Type_Differentiation_Strategy/) (Cell-Type Specialization)
+- **DD Section to Read:** [DD002 — Migration Path — Muscle-Type Diversity](DD002_Muscle_Model_Architecture.md#if-muscle-type-diversity-is-required-phase-3) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization)
 - **Existing Code to Reuse:**
     - `openworm/wormneuroatlas` repo — Python package for accessing CeNGEN single-cell RNA-seq data; use as the primary data access interface (reuse strategy: **import directly**)
     - `openworm/c302` → `c302/parameters_D.py` — current channel→gene mapping (which genes map to which model channels); use as the mapping to validate against (reuse strategy: **reference**)
@@ -480,7 +480,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroscience, computational-modeling
-- **DD Section to Read:** [DD002 — Known Issues — Issue 1: Single Muscle Compartment](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#issue-1-single-muscle-compartment)
+- **DD Section to Read:** [DD002 — Known Issues — Issue 1: Single Muscle Compartment](DD002_Muscle_Model_Architecture.md#issue-1-single-muscle-compartment)
 - **Existing Code to Reuse:**
     - `openworm/muscle_model` → `NeuroML2/SingleCompMuscle.cell.nml` — **starting point**: the complete single-compartment muscle cell with 4 channels and morphology; extend to multi-compartment (reuse strategy: **adapt**)
     - `openworm/c302` → `c302/custom_muscle_components.xml` — channel definitions (k_fast_muscle, k_slow_muscle, ca_boyle_muscle) to include in multi-compartment version (reuse strategy: **import/include**)
@@ -512,7 +512,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** physics, biomechanics, neuroscience
-- **DD Section to Read:** [DD002 — Alternatives Considered — Hill-Type Muscle Model](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#1-hill-type-muscle-model-with-crossbridge-dynamics) and [DD002 — Migration Path](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#migration-path)
+- **DD Section to Read:** [DD002 — Alternatives Considered — Hill-Type Muscle Model](DD002_Muscle_Model_Architecture.md#1-hill-type-muscle-model-with-crossbridge-dynamics) and [DD002 — Migration Path](DD002_Muscle_Model_Architecture.md#migration-path)
 - **Existing Code to Reuse:**
     - `openworm/JohnsonMailler_MuscleModel` — **THE alternative muscle model** to evaluate. Has different Ca²⁺ dynamics (EGL_19/L-type Ca²⁺, SHK_1/K⁺) from Boyle-Cohen; compare channel repertoire and dynamics (reuse strategy: **reference**)
     - `openworm/muscle_model` → `BoyleCohen2008/` — baseline Boyle-Cohen model to compare against (reuse strategy: **reference**)
@@ -549,7 +549,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/openworm_docs`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD002 — Quality Criteria](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#quality-criteria), [DD002 — Testing Procedure](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#testing-procedure), and [DD002 — Boundaries](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#boundaries-explicitly-out-of-scope)
+- **DD Section to Read:** [DD002 — Quality Criteria](DD002_Muscle_Model_Architecture.md#quality-criteria), [DD002 — Testing Procedure](DD002_Muscle_Model_Architecture.md#testing-procedure), and [DD002 — Boundaries](DD002_Muscle_Model_Architecture.md#boundaries-explicitly-out-of-scope)
 - **Documentation Tier:** Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion repos; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
 - **Existing Code to Reuse:**
     - **[BadgeList muscle model badges](https://badgelist.com/openworm)** — Three existing badges form a de facto getting-started progression: **Muscle Model Explorer** (9 earners — explore the muscle model), **Muscle Model Builder** (2 earners — build it), **Muscle Model Hacker** (12 earners — hack/extend it). These map to [DD011](DD011_Contributor_Progression_Model.md) skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". **Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression** (reuse strategy: **augment**)
@@ -586,7 +586,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD002 — Context & Background](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#context-background), [DD002 — Muscle List](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#muscle-list-95-cells), and [DD002 — Neural-to-Muscle Coupling](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling)
+- **DD Section to Read:** [DD002 — Context & Background](DD002_Muscle_Model_Architecture.md#context-background), [DD002 — Muscle List](DD002_Muscle_Model_Architecture.md#muscle-list-95-cells), and [DD002 — Neural-to-Muscle Coupling](DD002_Muscle_Model_Architecture.md#neural-to-muscle-coupling)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/__init__.py` → `get_muscle_names()` — canonical naming convention (MDR01-24, MVR01-24, MVL01-23, MDL01-24); document this as the authoritative source (reuse strategy: **document as resource**)
     - `openworm/sibernetic` → `src/main_sim.py` — 96-element array layout `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]`; document the index mapping (reuse strategy: **document as resource**)
@@ -618,7 +618,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 - **Roadmap Phase:** Any
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, docs
-- **DD Section to Read:** [DD002 — Coupling to Sibernetic](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#coupling-to-sibernetic) and [DD002 — Coupling Bridge Ownership](https://docs.openworm.org/design_documents/DD002_Muscle_Model_Architecture/#coupling-bridge-ownership)
+- **DD Section to Read:** [DD002 — Coupling to Sibernetic](DD002_Muscle_Model_Architecture.md#coupling-to-sibernetic) and [DD002 — Coupling Bridge Ownership](DD002_Muscle_Model_Architecture.md#coupling-bridge-ownership)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to document** (8.6 KB); the entire coupling bridge between c302/NEURON and Sibernetic (reuse strategy: **document as primary subject**)
     - `openworm/sibernetic` → `src/main_sim.py` — coupling modes (synthetic waves, file-based, live NEURON) and data flow (17.9 KB); documents three different ways coupling can work (reuse strategy: **document as primary subject**)

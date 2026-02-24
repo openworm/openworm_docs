@@ -2,9 +2,9 @@
 
 **Epic:** DD013 — Simulation Stack Architecture
 
-**Generated from:** [DD013: Simulation Stack Architecture](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/)
+**Generated from:** [DD013: Simulation Stack Architecture](DD013_Simulation_Stack_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 42 issues (ai-workable: 31 / human-expert: 11 | L1: 17, L2: 15, L3: 9)
 
@@ -22,7 +22,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD013 §1 — Simulation Configuration System](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD013 §1 — Simulation Configuration System](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Depends On:** None
 - **Files to Modify:**
     - `openworm.yml` (new file — root of repo)
@@ -46,7 +46,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD013 §1 — Simulation Configuration System](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD013 §1 — Simulation Configuration System](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Depends On:** Issue 1
 - **Files to Modify:**
     - `scripts/validate_config.py` (new)
@@ -70,7 +70,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 §2 — Multi-Stage Docker Build](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#2-multi-stage-docker-build-layered-images)
+- **DD Section to Read:** [DD013 §2 — Multi-Stage Docker Build](DD013_Simulation_Stack_Architecture.md#2-multi-stage-docker-build-layered-images)
 - **Depends On:** Issue 1
 - **Files to Modify:**
     - `Dockerfile` (replace existing monolithic Dockerfile)
@@ -97,7 +97,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 §3 — Docker Compose for Composable Execution](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#3-docker-compose-for-composable-execution)
+- **DD Section to Read:** [DD013 §3 — Docker Compose for Composable Execution](DD013_Simulation_Stack_Architecture.md#3-docker-compose-for-composable-execution)
 - **Depends On:** Issue 3
 - **Files to Modify:**
     - `docker-compose.yml` (new file)
@@ -122,7 +122,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 §3 — Docker Compose](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#3-docker-compose-for-composable-execution) (viewer service block) and [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/)
+- **DD Section to Read:** [DD013 §3 — Docker Compose](DD013_Simulation_Stack_Architecture.md#3-docker-compose-for-composable-execution) (viewer service block) and [DD014](DD014_Dynamic_Visualization_Architecture.md)
 - **Depends On:** Issue 4
 - **Files to Modify:**
     - `docker-compose.yml` (add `viewer` service)
@@ -134,7 +134,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
     - [ ] `depends_on: simulation` with `service_completed_successfully` condition
     - [ ] Mounts `./output` volume for reading OME-Zarr data
     - [ ] Runs `viewer/app.py` pointing at `output/openworm.zarr`
-- **Sponsor Summary Hint:** The viewer service launches a 3D visualization of the simulation output (body shape, neural activity, muscle forces) in a web browser. It reads the OME-Zarr data bus — the universal data format that all subsystems write to. See [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/).
+- **Sponsor Summary Hint:** The viewer service launches a 3D visualization of the simulation output (body shape, neural activity, muscle forces) in a web browser. It reads the OME-Zarr data bus — the universal data format that all subsystems write to. See [DD014](DD014_Dynamic_Visualization_Architecture.md).
 
 ---
 
@@ -144,7 +144,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 §3 — Docker Compose](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#3-docker-compose-for-composable-execution) (neural-dev service block)
+- **DD Section to Read:** [DD013 §3 — Docker Compose](DD013_Simulation_Stack_Architecture.md#3-docker-compose-for-composable-execution) (neural-dev service block)
 - **Depends On:** Issue 4
 - **Files to Modify:**
     - `docker-compose.yml` (add `neural-dev` service)
@@ -155,7 +155,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
     - [ ] Runs c302 network generation (`generate('C1', 'FW')`)
     - [ ] Mounts `./output` volume
     - [ ] No body physics dependencies required
-- **Sponsor Summary Hint:** This lets neural circuit developers test their changes without building the body physics engine (Sibernetic). It's like testing the worm's brain in isolation — faster iteration for anyone working on [DD001](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/) neural architecture.
+- **Sponsor Summary Hint:** This lets neural circuit developers test their changes without building the body physics engine (Sibernetic). It's like testing the worm's brain in isolation — faster iteration for anyone working on [DD001](DD001_Neural_Circuit_Architecture.md) neural architecture.
 
 ---
 
@@ -165,7 +165,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** git, yaml
-- **DD Section to Read:** [DD013 §4 — Dependency Pinning](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#4-dependency-pinning-versionslock)
+- **DD Section to Read:** [DD013 §4 — Dependency Pinning](DD013_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock)
 - **Depends On:** None
 - **Files to Modify:**
     - `versions.lock` (new file — root of repo)
@@ -188,7 +188,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, docker
-- **DD Section to Read:** [DD013 §4 — Dependency Pinning](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#4-dependency-pinning-versionslock) (build script section)
+- **DD Section to Read:** [DD013 §4 — Dependency Pinning](DD013_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock) (build script section)
 - **Depends On:** Issue 7
 - **Files to Modify:**
     - `build.sh` (replace existing)
@@ -212,7 +212,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 1) and [DD013 §1 — Config System](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 1) and [DD013 §1 — Config System](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Depends On:** Issue 1
 - **Files to Modify:**
     - `master_openworm.py`
@@ -236,7 +236,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 2) and [DD001](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/) (c302 network generation)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 2) and [DD001](DD001_Neural_Circuit_Architecture.md) (c302 network generation)
 - **Depends On:** Issue 9
 - **Files to Modify:**
     - `master_openworm.py`
@@ -260,7 +260,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 3)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 3)
 - **Depends On:** Issue 10
 - **Files to Modify:**
     - `master_openworm.py`
@@ -284,7 +284,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker, testing
-- **DD Section to Read:** [DD013 §3 — Docker Compose](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#3-docker-compose-for-composable-execution) and [DD013 Quality Criteria](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#quality-criteria) (criterion 2: <5 min)
+- **DD Section to Read:** [DD013 §3 — Docker Compose](DD013_Simulation_Stack_Architecture.md#3-docker-compose-for-composable-execution) and [DD013 Quality Criteria](DD013_Simulation_Stack_Architecture.md#quality-criteria) (criterion 2: <5 min)
 - **Depends On:** Issue 4
 - **Files to Modify:**
     - `scripts/quick-test.sh` (new)
@@ -308,7 +308,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd
-- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#6-cicd-pipeline-automated-quality-gates) (Gate 1)
+- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](DD013_Simulation_Stack_Architecture.md#6-cicd-pipeline-automated-quality-gates) (Gate 1)
 - **Depends On:** Issue 3
 - **Files to Modify:**
     - `.github/workflows/integration.yml` (new)
@@ -330,7 +330,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd
-- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#6-cicd-pipeline-automated-quality-gates) (Gate 2)
+- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](DD013_Simulation_Stack_Architecture.md#6-cicd-pipeline-automated-quality-gates) (Gate 2)
 - **Depends On:** Issue 12, Issue 13
 - **Files to Modify:**
     - `.github/workflows/integration.yml` (add `smoke-test` job)
@@ -352,7 +352,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, docker
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (video pipeline fix options) and [DD013 Context — Known Issues](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#known-critical-issues)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (video pipeline fix options) and [DD013 Context — Known Issues](DD013_Simulation_Stack_Architecture.md#known-critical-issues)
 - **Depends On:** None
 - **Files to Modify:**
     - `master_openworm.py` (video recording section)
@@ -376,7 +376,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 Context — Known Issues](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#known-critical-issues), [DD013 Open Questions](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#open-questions-require-founder-input) (question 2), and [DD003 Backend Stabilization Roadmap](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#backend-stabilization-roadmap)
+- **DD Section to Read:** [DD013 Context — Known Issues](DD013_Simulation_Stack_Architecture.md#known-critical-issues), [DD013 Open Questions](DD013_Simulation_Stack_Architecture.md#open-questions-require-founder-input) (question 2), and [DD003 Backend Stabilization Roadmap](DD003_Body_Physics_Architecture.md#backend-stabilization-roadmap)
 - **Depends On:** None
 - **Files to Modify:**
     - `Dockerfile` (OpenCL/GPU layers + conditional Taichi/PyTorch installation)
@@ -403,7 +403,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 Context — Known Issues](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#known-critical-issues) (dependency pinning, virtualenv rows) and [DD013 §4 — Dependency Pinning](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#4-dependency-pinning-versionslock)
+- **DD Section to Read:** [DD013 Context — Known Issues](DD013_Simulation_Stack_Architecture.md#known-critical-issues) (dependency pinning, virtualenv rows) and [DD013 §4 — Dependency Pinning](DD013_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock)
 - **Depends On:** Issue 3
 - **Files to Modify:**
     - `Dockerfile` (base stage)
@@ -431,7 +431,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4)
 - **Depends On:** Issue 11
 - **Files to Modify:**
     - `master_openworm.py` (Step 4 implementation)
@@ -456,7 +456,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4b) and [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) (OME-Zarr schema)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4b) and [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
 - **Depends On:** Issue 18
 - **Files to Modify:**
     - `master_openworm.py` (Step 4b implementation)
@@ -468,8 +468,8 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
     - [ ] Writes at `visualization.export_interval` frequency
     - [ ] Runs marching cubes surface reconstruction if `visualization.surface_reconstruction: true`
     - [ ] Only runs if `visualization.enabled: true`
-    - [ ] Zarr file readable by [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) viewer
-- **Sponsor Summary Hint:** OME-Zarr is the universal data bus for the whole simulation — every subsystem writes its state to a shared Zarr store. The [DD014](https://docs.openworm.org/design_documents/DD014_Dynamic_Visualization_Architecture/) viewer reads this to render 3D visualizations. It's like a shared whiteboard where each organ writes its current state, and the viewer reads all of them at once.
+    - [ ] Zarr file readable by [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer
+- **Sponsor Summary Hint:** OME-Zarr is the universal data bus for the whole simulation — every subsystem writes its state to a shared Zarr store. The [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer reads this to render 3D visualizations. It's like a shared whiteboard where each organ writes its current state, and the viewer reads all of them at once.
 
 ---
 
@@ -479,7 +479,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `human-expert`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 5) and [DD010](https://docs.openworm.org/design_documents/DD010_Validation_Framework/)
+- **DD Section to Read:** [DD013 §5 — Enhanced master_openworm.py](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 5) and [DD010](DD010_Validation_Framework.md)
 - **Depends On:** Issue 18
 - **Files to Modify:**
     - `master_openworm.py` (Step 5 implementation)
@@ -504,7 +504,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd
-- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#6-cicd-pipeline-automated-quality-gates) (Gate 3)
+- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](DD013_Simulation_Stack_Architecture.md#6-cicd-pipeline-automated-quality-gates) (Gate 3)
 - **Depends On:** Issue 14, Issue 20
 - **Files to Modify:**
     - `.github/workflows/integration.yml` (add `tier2-validation` job)
@@ -527,7 +527,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd
-- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#6-cicd-pipeline-automated-quality-gates) (Gate 4)
+- **DD Section to Read:** [DD013 §6 — CI/CD Pipeline](DD013_Simulation_Stack_Architecture.md#6-cicd-pipeline-automated-quality-gates) (Gate 4)
 - **Depends On:** Issue 21
 - **Files to Modify:**
     - `.github/workflows/integration.yml` (add `tier3-validation` job)
@@ -550,7 +550,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347)
+- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](DD013_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347)
 - **Depends On:** Issue 4
 - **Files to Modify:**
     - `docker-compose.yml` (add `jupyter` service)
@@ -563,7 +563,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
     - [ ] Mounts `./output` and `./notebooks` directories
     - [ ] No authentication token (empty token for local use)
     - [ ] JupyterLab accessible at `http://localhost:8888`
-- **Sponsor Summary Hint:** JupyterLab gives newcomers an interactive notebook environment inside the simulation container. They can explore the connectome, run simulations, and visualize results — all in a web browser. This directly supports [DD011](https://docs.openworm.org/design_documents/DD011_Contributor_Progression_Model/) L0→L1 onboarding.
+- **Sponsor Summary Hint:** JupyterLab gives newcomers an interactive notebook environment inside the simulation container. They can explore the connectome, run simulations, and visualize results — all in a web browser. This directly supports [DD011](DD011_Contributor_Progression_Model.md) L0→L1 onboarding.
 
 ---
 
@@ -573,7 +573,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347) and [DD001](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/) (c302 framework)
+- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](DD013_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347) and [DD001](DD001_Neural_Circuit_Architecture.md) (c302 framework)
 - **Depends On:** Issue 23
 - **Existing Code to Reuse:**
     - `c302/examples/test/Comparison.ipynb` — Existing Jupyter notebook comparing c302 configurations (starting point)
@@ -601,7 +601,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347)
+- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](DD013_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347)
 - **Depends On:** Issue 23
 - **Files to Modify:**
     - `notebooks/03_analyze_output.ipynb` (new)
@@ -624,7 +624,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#9-jupyterlab-interface-issue-347) and [DD010](https://docs.openworm.org/design_documents/DD010_Validation_Framework/)
+- **DD Section to Read:** [DD013 §9 — JupyterLab Interface](DD013_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347) and [DD010](DD010_Validation_Framework.md)
 - **Depends On:** Issue 23
 - **Files to Modify:**
     - `notebooks/04_validate_against_data.ipynb` (new)
@@ -637,7 +637,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
     - [ ] Computes and displays validation metrics (correlation, error)
     - [ ] Explains what "good" and "bad" validation looks like
     - [ ] Runs to completion (requires output from a prior simulation run)
-- **Sponsor Summary Hint:** This notebook compares the virtual worm to the real worm. Does the simulated AVAL neuron fire at the right voltage? Does the virtual worm crawl at the right speed? Validation is how we know the simulation is doing science, not just computing. See [DD010](https://docs.openworm.org/design_documents/DD010_Validation_Framework/).
+- **Sponsor Summary Hint:** This notebook compares the virtual worm to the real worm. Does the simulated AVAL neuron fire at the right voltage? Does the virtual worm crawl at the right speed? Validation is how we know the simulation is doing science, not just computing. See [DD010](DD010_Validation_Framework.md).
 
 ---
 
@@ -653,7 +653,7 @@ Target: New subsystems plug into the stack via config toggles.
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD005](https://docs.openworm.org/design_documents/DD005_Cell_Type_Differentiation_Strategy/) (Integration Contract) and [DD013 §1](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml) (`neural.differentiated` config)
+- **DD Section to Read:** [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Integration Contract) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml) (`neural.differentiated` config)
 - **Depends On:** Issue 9
 - **Files to Modify:**
     - `openworm.yml` (verify `neural.differentiated` flag exists)
@@ -665,7 +665,7 @@ Target: New subsystems plug into the stack via config toggles.
     - [ ] `neural.differentiated: false` uses current behavior (302 identical neurons)
     - [ ] Placeholder integration code in `master_openworm.py` with clear TODO markers for DD005 implementation
     - [ ] Config documented with reference to DD005
-- **Sponsor Summary Hint:** In reality, the worm's 302 neurons aren't identical — they come in 128 distinct types with different gene expression profiles (from the CeNGEN atlas). [DD005](https://docs.openworm.org/design_documents/DD005_Cell_Type_Differentiation_Strategy/) defines how to differentiate them. This issue adds the config toggle and initialization hook so the simulation can switch between "all neurons identical" and "128 types" mode.
+- **Sponsor Summary Hint:** In reality, the worm's 302 neurons aren't identical — they come in 128 distinct types with different gene expression profiles (from the CeNGEN atlas). [DD005](DD005_Cell_Type_Differentiation_Strategy.md) defines how to differentiate them. This issue adds the config toggle and initialization hook so the simulation can switch between "all neurons identical" and "128 types" mode.
 
 ---
 
@@ -675,7 +675,7 @@ Target: New subsystems plug into the stack via config toggles.
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD004](https://docs.openworm.org/design_documents/DD004_Mechanical_Cell_Identity/) (Integration Contract) and [DD013 §5](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4b, `body/cell_ids` in OME-Zarr)
+- **DD Section to Read:** [DD004](DD004_Mechanical_Cell_Identity.md) (Integration Contract) and [DD013 §5](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 4b, `body/cell_ids` in OME-Zarr)
 - **Depends On:** Issue 19
 - **Files to Modify:**
     - Sibernetic particle output code (add cell ID tags)
@@ -687,7 +687,7 @@ Target: New subsystems plug into the stack via config toggles.
     - [ ] `body.cell_identity: true` config flag activates tagging
     - [ ] Cell IDs exported to `body/cell_ids` array in OME-Zarr
     - [ ] Viewer can color-code particles by cell type
-- **Sponsor Summary Hint:** The worm's body isn't homogeneous — it has muscles, skin (hypodermis), a tough outer layer (cuticle), and internal organs, each with different mechanical properties. [DD004](https://docs.openworm.org/design_documents/DD004_Mechanical_Cell_Identity/) tags each simulated particle with its cell type. This issue wires that into the OME-Zarr data bus so the viewer can display cells in different colors.
+- **Sponsor Summary Hint:** The worm's body isn't homogeneous — it has muscles, skin (hypodermis), a tough outer layer (cuticle), and internal organs, each with different mechanical properties. [DD004](DD004_Mechanical_Cell_Identity.md) tags each simulated particle with its cell type. This issue wires that into the OME-Zarr data bus so the viewer can display cells in different colors.
 
 ---
 
@@ -697,7 +697,7 @@ Target: New subsystems plug into the stack via config toggles.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD006](https://docs.openworm.org/design_documents/DD006_Neuropeptidergic_Connectome_Integration/) (Integration Contract) and [DD013 §5](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 3, coupling)
+- **DD Section to Read:** [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Integration Contract) and [DD013 §5](DD013_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 3, coupling)
 - **Depends On:** Issue 11
 - **Files to Modify:**
     - `master_openworm.py` (neuropeptide coupling in simulation loop)
@@ -709,10 +709,10 @@ Target: New subsystems plug into the stack via config toggles.
 - **Acceptance Criteria:**
     - [ ] Neuropeptide modulation runs in the coupled simulation loop when `neural.neuropeptides: true`
     - [ ] Peptide concentration fields computed and exchanged with neural subsystem each coupling step
-    - [ ] GPCR modulation affects synaptic weights per [DD006](https://docs.openworm.org/design_documents/DD006_Neuropeptidergic_Connectome_Integration/) equations
+    - [ ] GPCR modulation affects synaptic weights per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) equations
     - [ ] `neuropeptides/concentrations` exported to OME-Zarr
     - [ ] Simulation still runs correctly when `neural.neuropeptides: false`
-- **Sponsor Summary Hint:** Beyond fast electrical synapses, worm neurons also communicate via neuropeptides — small signaling molecules that diffuse between cells and modulate behavior over longer timescales. [DD006](https://docs.openworm.org/design_documents/DD006_Neuropeptidergic_Connectome_Integration/) defines 31,479 peptide-receptor interactions. This issue integrates that slow signaling layer into the simulation loop alongside the fast neural circuit.
+- **Sponsor Summary Hint:** Beyond fast electrical synapses, worm neurons also communicate via neuropeptides — small signaling molecules that diffuse between cells and modulate behavior over longer timescales. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) defines 31,479 peptide-receptor interactions. This issue integrates that slow signaling layer into the simulation loop alongside the fast neural circuit.
 
 ---
 
@@ -722,7 +722,7 @@ Target: New subsystems plug into the stack via config toggles.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** New pharynx repo + `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD007](https://docs.openworm.org/design_documents/DD007_Pharyngeal_Nervous_System_Architecture/) (Integration Contract) and [DD013 §7](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#7-contributor-development-workflow) (adding new subsystem workflow)
+- **DD Section to Read:** [DD007](DD007_Pharyngeal_Nervous_System_Architecture.md) (Integration Contract) and [DD013 §7](DD013_Simulation_Stack_Architecture.md#7-contributor-development-workflow) (adding new subsystem workflow)
 - **Depends On:** Issue 11
 - **Files to Modify:**
     - New repo: pharynx model code
@@ -741,7 +741,7 @@ Target: New subsystems plug into the stack via config toggles.
     - [ ] Pharynx neural activity coupled to main nervous system via RIP interneurons
     - [ ] Pumping events exported to `pharynx/pumping_state` in OME-Zarr
     - [ ] `pharynx.pumping_frequency_target` used for validation
-- **Sponsor Summary Hint:** The pharynx is the worm's feeding organ — a muscular pump with its own 20-neuron nervous system that operates semi-independently from the rest of the body. It pumps bacteria at ~3.5 Hz. [DD007](https://docs.openworm.org/design_documents/DD007_Pharyngeal_Nervous_System_Architecture/) specifies its architecture. This issue creates the repo, builds the Docker stage, and wires it into the simulation loop.
+- **Sponsor Summary Hint:** The pharynx is the worm's feeding organ — a muscular pump with its own 20-neuron nervous system that operates semi-independently from the rest of the body. It pumps bacteria at ~3.5 Hz. [DD007](DD007_Pharyngeal_Nervous_System_Architecture.md) specifies its architecture. This issue creates the repo, builds the Docker stage, and wires it into the simulation loop.
 
 ---
 
@@ -751,7 +751,7 @@ Target: New subsystems plug into the stack via config toggles.
 - **Labels:** `DD013`, `human-expert`, `L3`
 - **Target Repo:** New intestine repo + `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD009](https://docs.openworm.org/design_documents/DD009_Intestinal_Oscillator_Model/) (Integration Contract) and [DD013 §7](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#7-contributor-development-workflow) (adding new subsystem workflow)
+- **DD Section to Read:** [DD009](DD009_Intestinal_Oscillator_Model.md) (Integration Contract) and [DD013 §7](DD013_Simulation_Stack_Architecture.md#7-contributor-development-workflow) (adding new subsystem workflow)
 - **Depends On:** Issue 11
 - **Files to Modify:**
     - New repo: intestine model code
@@ -769,7 +769,7 @@ Target: New subsystems plug into the stack via config toggles.
     - [ ] Calcium wave propagation across 20 intestinal cells
     - [ ] `intestine/calcium` and `intestine/defecation_events` exported to OME-Zarr
     - [ ] `intestine.oscillator_period_target` used for validation
-- **Sponsor Summary Hint:** The worm's intestine generates rhythmic calcium waves (~50-second period) that drive the defecation motor program — one of the most regular biological clocks in nature. [DD009](https://docs.openworm.org/design_documents/DD009_Intestinal_Oscillator_Model/) specifies the 20-cell oscillator model. This issue creates the repo, Docker stage, and simulation coupling.
+- **Sponsor Summary Hint:** The worm's intestine generates rhythmic calcium waves (~50-second period) that drive the defecation motor program — one of the most regular biological clocks in nature. [DD009](DD009_Intestinal_Oscillator_Model.md) specifies the 20-cell oscillator model. This issue creates the repo, Docker stage, and simulation coupling.
 
 ---
 
@@ -785,7 +785,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD013 §7 — Contributor Development Workflow](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#7-contributor-development-workflow) and [DD013 Quality Criteria](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#quality-criteria) (criterion 8: clone-to-simulation in <30 min)
+- **DD Section to Read:** [DD013 §7 — Contributor Development Workflow](DD013_Simulation_Stack_Architecture.md#7-contributor-development-workflow) and [DD013 Quality Criteria](DD013_Simulation_Stack_Architecture.md#quality-criteria) (criterion 8: clone-to-simulation in <30 min)
 - **Depends On:** Issue 4, Issue 12
 - **Files to Modify:**
     - `GETTING_STARTED.md` (new)
@@ -809,7 +809,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD013 Phase D](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#phase-d-polish-and-onboarding-weeks-17-20) and [DD013 Open Questions](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#open-questions-require-founder-input) (question 3)
+- **DD Section to Read:** [DD013 Phase D](DD013_Simulation_Stack_Architecture.md#phase-d-polish-and-onboarding-weeks-17-20) and [DD013 Open Questions](DD013_Simulation_Stack_Architecture.md#open-questions-require-founder-input) (question 3)
 - **Depends On:** Issue 23
 - **Files to Modify:**
     - `binder/` directory (new — Binder config files: `Dockerfile`, `postBuild`, `start`)
@@ -832,7 +832,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd, docker
-- **DD Section to Read:** [DD013 §8 — Pre-Built Images](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#8-pre-built-images-on-docker-hub) and [DD013 Phase D](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#phase-d-polish-and-onboarding-weeks-17-20)
+- **DD Section to Read:** [DD013 §8 — Pre-Built Images](DD013_Simulation_Stack_Architecture.md#8-pre-built-images-on-docker-hub) and [DD013 Phase D](DD013_Simulation_Stack_Architecture.md#phase-d-polish-and-onboarding-weeks-17-20)
 - **Depends On:** None
 - **Files to Modify:**
     - `.github/workflows/publish.yml` (new)
@@ -855,7 +855,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD013 Phase D](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#phase-d-polish-and-onboarding-weeks-17-20) and [DD011](https://docs.openworm.org/design_documents/DD011_Contributor_Progression_Model/) (L0→L1 orientation tasks)
+- **DD Section to Read:** [DD013 Phase D](DD013_Simulation_Stack_Architecture.md#phase-d-polish-and-onboarding-weeks-17-20) and [DD011](DD011_Contributor_Progression_Model.md) (L0→L1 orientation tasks)
 - **Depends On:** Issue 32
 - **Files to Modify:**
     - `n2_whisperer_orientation_tasks.md` (update references to new Docker workflow)
@@ -881,7 +881,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
-- **DD Section to Read:** [DD013 Existing Code Resources](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#existing-code-resources) (sibernetic_config_gen section)
+- **DD Section to Read:** [DD013 Existing Code Resources](DD013_Simulation_Stack_Architecture.md#existing-code-resources) (sibernetic_config_gen section)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary comment on the issue)
@@ -905,7 +905,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
-- **DD Section to Read:** [DD013 Existing Code Resources](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#existing-code-resources) (skeletonExtraction section) and [DD021](https://docs.openworm.org/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/) (WCON export)
+- **DD Section to Read:** [DD013 Existing Code Resources](DD013_Simulation_Stack_Architecture.md#existing-code-resources) (skeletonExtraction section) and [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON export)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary comment on the issue)
@@ -919,7 +919,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
     - [ ] Document: Can the skeleton extraction algorithm be used for SPH → WCON export pipeline?
     - [ ] Estimate time savings if reused vs. rewriting
     - [ ] Post findings as issue comment
-- **Sponsor Summary Hint:** This 2016 repo extracts the worm's centerline (a 49-point skeleton) from the cloud of ~100,000 Sibernetic particles — like finding the backbone inside a blob. This skeleton is essential for converting simulation output to WCON format (the standard for worm movement data) which [DD021](https://docs.openworm.org/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/) needs for validation. Saves 15-25 hours if reusable.
+- **Sponsor Summary Hint:** This 2016 repo extracts the worm's centerline (a 49-point skeleton) from the cloud of ~100,000 Sibernetic particles — like finding the backbone inside a blob. This skeleton is essential for converting simulation output to WCON format (the standard for worm movement data) which [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) needs for validation. Saves 15-25 hours if reusable.
 
 ---
 
@@ -929,7 +929,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
-- **DD Section to Read:** [DD013 Existing Code Resources](https://docs.openworm.org/design_documents/DD013_Simulation_Stack_Architecture/#existing-code-resources) (sibernetic_NEURON section) and [DD019](https://docs.openworm.org/design_documents/DD019_Closed_Loop_Touch_Response/) (bidirectional coupling)
+- **DD Section to Read:** [DD013 Existing Code Resources](DD013_Simulation_Stack_Architecture.md#existing-code-resources) (sibernetic_NEURON section) and [DD019](DD019_Closed_Loop_Touch_Response.md) (bidirectional coupling)
 - **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a summary comment on the issue)
@@ -942,7 +942,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
     - [ ] Document: Are there bidirectional coupling patterns applicable to DD019 (closed-loop touch response)?
     - [ ] Document: Is any code directly reusable?
     - [ ] Post findings as issue comment
-- **Sponsor Summary Hint:** Before `sibernetic_c302.py` (the current coupling code), there was `sibernetic_NEURON` — an earlier attempt at connecting the body physics engine to the neural simulator. Reviewing it may reveal useful patterns for implementing bidirectional sensory feedback (touch → neural response → movement change) as specified in [DD019](https://docs.openworm.org/design_documents/DD019_Closed_Loop_Touch_Response/).
+- **Sponsor Summary Hint:** Before `sibernetic_c302.py` (the current coupling code), there was `sibernetic_NEURON` — an earlier attempt at connecting the body physics engine to the neural simulator. Reviewing it may reveal useful patterns for implementing bidirectional sensory feedback (touch → neural response → movement change) as specified in [DD019](DD019_Closed_Loop_Touch_Response.md).
 
 ---
 
@@ -958,7 +958,7 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 - **Labels:** `DD003`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#cross-backend-parity-requirements)
+- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements)
 - **Depends On:** DD003 Issues 1–2 (stability validation scripts)
 - **Files to Modify:**
     - `scripts/backend_parity_test.py` (new)
@@ -983,7 +983,7 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 - **Labels:** `DD003`, `human-expert`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Taichi Coordinate-Space Bug](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#the-taichi-coordinate-space-bug)
+- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Taichi Coordinate-Space Bug](DD003_Body_Physics_Architecture.md#the-taichi-coordinate-space-bug)
 - **Depends On:** Issue 39
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (elastic force calculation)
@@ -1008,7 +1008,7 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 - **Labels:** `DD003`, `human-expert`, `L3`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics, sph
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#the-result-quality-gap)
+- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](DD003_Body_Physics_Architecture.md#the-result-quality-gap)
 - **Depends On:** Issue 39, Issue 40
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (kernel implementations)
@@ -1033,7 +1033,7 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 - **Labels:** `DD003`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic` + `openworm/OpenWorm`
 - **Required Capabilities:** docker, ci-cd
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Backend Graduation Criteria](https://docs.openworm.org/design_documents/DD003_Body_Physics_Architecture/#backend-graduation-criteria)
+- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Backend Graduation Criteria](DD003_Body_Physics_Architecture.md#backend-graduation-criteria)
 - **Depends On:** Issue 41
 - **Files to Modify:**
     - `Dockerfile` (body stage — add `pip install taichi torch` conditional)

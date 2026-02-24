@@ -2,9 +2,9 @@
 
 **Epic:** DD021 — Movement Analysis Toolbox Revival and WCON Policy
 
-**Generated from:** [DD021: Movement Analysis Toolbox and WCON Policy](https://docs.openworm.org/design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/)
+**Generated from:** [DD021: Movement Analysis Toolbox and WCON Policy](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](https://docs.openworm.org/design_documents/DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 
@@ -26,7 +26,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 - **Labels:** `DD021`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/open-worm-analysis-toolbox`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD001 — How to Build & Test](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#how-to-build-test) (Step 5-6) and [DD010 — Tier 3](https://docs.openworm.org/design_documents/DD010_Validation_Framework/) (kinematic validation)
+- **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 5-6) and [DD010 — Tier 3](DD010_Validation_Framework.md) (kinematic validation)
 - **Existing Code to Reuse:**
     - [`open-worm-analysis-toolbox/statistics/statistics_manager.py`](https://github.com/openworm/open-worm-analysis-toolbox) — **Already computes** Wilcoxon rank-sum and Student's t-test across **726 kinematic features** with FDR correction (q-values). Includes `histogram_manager.py` for feature distribution comparison. (reuse strategy: **wrap**)
     - [`open-worm-analysis-toolbox/features/`](https://github.com/openworm/open-worm-analysis-toolbox) — Locomotion features including speed, wavelength, frequency, amplitude, crawling/swimming classification — all 5 key metrics needed for validation are already computed. (reuse strategy: **import directly**)
@@ -59,7 +59,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 - **Labels:** `DD021`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/open-worm-analysis-toolbox`
 - **Required Capabilities:** python, worm-biology
-- **DD Section to Read:** [DD001 — Goal & Success Criteria](https://docs.openworm.org/design_documents/DD001_Neural_Circuit_Architecture/#goal-success-criteria) (±15% of Schafer lab) and [DD010](https://docs.openworm.org/design_documents/DD010_Validation_Framework/) (Tier 3)
+- **DD Section to Read:** [DD001 — Goal & Success Criteria](DD001_Neural_Circuit_Architecture.md#goal-success-criteria) (±15% of Schafer lab) and [DD010](DD010_Validation_Framework.md) (Tier 3)
 - **Existing Code to Reuse:**
     - [`open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) — **IS the Python port of the Schafer lab's Worm Analysis Toolbox.** `WormFeatures` class computes all 726 Schafer features including the 5 key metrics needed. Has WCON loading (`examples/WCON demo.py`), `NormalizedWorm` class for 49-point skeleton, and validation against original MATLAB toolbox (`documentation/Schafer_validation/`). (reuse strategy: **import directly**)
     - [`open-worm-analysis-toolbox/examples/generate_stats.py`](https://github.com/openworm/open-worm-analysis-toolbox) — Example script for statistical comparison (reuse strategy: **adapt**)
