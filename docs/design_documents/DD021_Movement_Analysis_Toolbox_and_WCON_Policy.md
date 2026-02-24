@@ -95,6 +95,33 @@ openworm/tracker-commons            (WCON spec — last pushed Apr 2025, 32 issu
 - pip
 - NumPy, SciPy, matplotlib, h5py (dependencies)
 
+### Getting Started (Environment Setup)
+
+**Path A — Docker (recommended):**
+
+```bash
+# From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)
+docker compose run validate
+# This runs the full validation suite including Tier 3 behavioral validation
+# Dependencies are pre-installed in the container
+```
+
+Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the containerized simulation stack.
+
+**Path B — Native:**
+
+```bash
+git clone https://github.com/openworm/open-worm-analysis-toolbox.git
+cd open-worm-analysis-toolbox
+pip install -e ".[dev]"  # includes WCON parsing, NumPy, SciPy
+```
+
+Additionally, for standalone WCON file format support:
+
+```bash
+pip install wcon  # WCON file format parser from tracker-commons
+```
+
 ### Step-by-step
 
 ```bash

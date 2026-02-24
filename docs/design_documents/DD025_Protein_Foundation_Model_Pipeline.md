@@ -72,10 +72,38 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 
 ## How to Build & Test
 
-**Prerequisites:** Python 3.10+, PyTorch, ESM library, internet access for model downloads.
+### Prerequisites
+
+- Python 3.10+, PyTorch, ESM library, internet access for model downloads
+- GPU recommended: CUDA (Linux) or MPS (macOS) for foundation model inference
+
+### Getting Started (Environment Setup)
+
+**Path A — Docker (recommended):**
 
 ```bash
-# Clone and set up
+# From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)
+docker compose build ml
+# Then skip to Step 3 below — dependencies are pre-installed in the container
+```
+
+Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
+
+**Path B — Native:**
+
+```bash
+git clone https://github.com/openworm/openworm-ml.git
+cd openworm-ml
+pip install -e ".[dev]"  # includes PyTorch, ESM/AlphaFold dependencies
+```
+
+!!! note "GPU Support"
+    PyTorch with CUDA (Linux) or MPS (macOS) is strongly recommended for foundation model inference. CPU-only mode works but is significantly slower for structure prediction and conformational sampling.
+
+### Step-by-step
+
+```bash
+# Clone and set up (if not done above)
 git clone https://github.com/openworm/openworm-ml.git
 cd openworm-ml/foundation_params
 

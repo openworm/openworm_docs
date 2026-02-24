@@ -77,6 +77,32 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 2](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install additional dependencies for the IP3/calcium oscillator ODE system:
+
+```bash
+# SciPy is needed for ODE integration of the Li-Rinzel IP3R model
+pip install scipy   # if not already installed
+```
+
+The intestinal oscillator model uses coupled ODEs (IP3 receptor dynamics, SERCA pump, ER calcium stores) solved via `scipy.integrate`. The standard pyNeuroML/jnml toolchain from DD001 handles the NeuroML/LEMS portions.
+
 ### Step-by-step
 
 ```bash

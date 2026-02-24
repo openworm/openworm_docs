@@ -76,6 +76,40 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 ## How to Build & Test
 
+### Getting Started (Environment Setup)
+
+This DD builds on **two repositories**: the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) for stretch receptor channel models on B-class motor neurons, and **Sibernetic** ([DD003](DD003_Body_Physics_Architecture.md)) for body curvature readout that feeds proprioceptive signals back to motor neurons.
+
+If you have already completed both [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow both setup guides first, then return here:
+
+1. [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
+2. [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+This builds both the `neural` and `body` Docker stages needed for bidirectional proprioceptive coupling. Then skip to step 2 below.
+
+**Path B — Native (for development):**
+
+Complete both [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup). No additional pip installs are required beyond what DD001 and DD003 provide. Verify that the B-class motor neuron stretch receptor channel model is present:
+
+```bash
+# Stretch receptor channel (curvature-gated cation conductance)
+ls c302/channel_models/stretch_receptor_chan.channel.nml
+# Body curvature readout module
+ls sibernetic/coupling/curvature_readout.py
+# Note: both files are [TO BE CREATED] — see Deliverables table
+```
+
+### Step-by-step
+
 1. **Prerequisites:** Neural circuit ([DD001](DD001_Neural_Circuit_Architecture.md)) and body physics ([DD003](DD003_Body_Physics_Architecture.md)) running in simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md))
 2. **Enable proprioceptive feedback:** Set `sensory.proprioception: true` in `openworm.yml` to activate the feedback channel between Sibernetic body curvature and B-class motor neurons
 3. **Run forward locomotion:** Execute simulation for 60 seconds with proprioception enabled

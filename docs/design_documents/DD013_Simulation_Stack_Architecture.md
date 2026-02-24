@@ -738,6 +738,136 @@ This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progressi
 
 ---
 
+## How to Build & Test
+
+### Prerequisites
+
+- Docker Engine 24+ and Docker Compose v2 (`docker compose` — note: no hyphen)
+- Git
+- 8 GB RAM minimum (16 GB recommended for full validation)
+- 10 GB disk space for Docker images
+- Optional: GPU with OpenCL support (for accelerated body physics)
+
+### Getting Started (Environment Setup)
+
+DD013 defines the Docker infrastructure that all other DDs depend on. This is the canonical guide for setting up the entire OpenWorm simulation environment. Other DDs cross-reference this section for their Docker setup paths.
+
+**Clone the meta-repo:**
+
+```bash
+git clone https://github.com/openworm/OpenWorm.git
+cd OpenWorm
+```
+
+**Path A — Docker (primary, recommended for all users):**
+
+```bash
+# Build all subsystem images (neural, body, validation, viewer)
+docker compose build
+
+# Run a quick smoke test (2 minutes, verifies everything works)
+docker compose run quick-test
+
+# Run a standard simulation (15ms default)
+docker compose run simulation
+
+# Run full validation suite (for PRs to main)
+docker compose run validate
+
+# Launch the visualization viewer (after simulation completes)
+docker compose up viewer
+# Opens at http://localhost:8501
+```
+
+**Building with a custom subsystem branch:**
+
+Contributors working on a specific subsystem (e.g., c302) can swap in their branch:
+
+```bash
+# Build with your fork's branch of c302
+docker compose build --build-arg C302_REF=my-feature-branch simulation
+
+# Test your changes against the full stack
+docker compose run quick-test
+```
+
+Similarly for Sibernetic: `--build-arg SIBERNETIC_REF=my-branch`.
+
+**Pre-built images (no build required):**
+
+```bash
+# Pull the latest release image from Docker Hub
+docker pull openworm/openworm:0.10.0
+docker run -v $(pwd)/output:/opt/openworm/output openworm/openworm:0.10.0
+
+# Or with docker compose
+docker compose pull simulation
+docker compose run simulation
+```
+
+**Path B — Native (individual subsystems only):**
+
+DD013 defines the Docker orchestration layer. Running the full integrated simulation natively is not supported — Docker is the integration surface. However, individual subsystems can be run natively per their own DDs:
+
+| Subsystem | DD | Native Setup |
+|-----------|-----|-------------|
+| Neural circuit (c302) | [DD001](DD001_Neural_Circuit_Architecture.md) | `pip install -e c302; pip install pyneuroml neuron` |
+| Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | CMake build with OpenCL SDK |
+| Validation tools | [DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `pip install -e open-worm-analysis-toolbox` |
+| Visualization viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) | `pip install trame pyvista zarr` |
+
+See each DD's own Getting Started section for native setup details.
+
+**Interactive shell (debugging):**
+
+```bash
+docker compose run shell
+# Drops into a bash shell inside the full simulation container
+# All subsystems are available at /opt/openworm/
+```
+
+### Step-by-step
+
+```bash
+# Step 1: Build the Docker images
+docker compose build
+# Expected: all stages build successfully (base, neural, body, validation, full, viewer)
+
+# Step 2: Run quick smoke test
+docker compose run quick-test
+# Expected: 10ms simulation completes, output/ contains PNGs and WCON file
+
+# Step 3: Verify outputs exist
+ls output/
+# Expected: *.png (plots), *.wcon (trajectory), openworm.zarr/ (OME-Zarr data)
+
+# Step 4: Run validation (for PRs)
+docker compose run validate
+# Expected: validation_report.json in output/ with tier pass/fail results
+
+# Step 5: Launch viewer
+docker compose up viewer
+# Expected: web app at http://localhost:8501 showing animated worm
+
+# Step 6: Test with custom configuration
+cp openworm.yml my_experiment.yml
+# Edit my_experiment.yml (e.g., change duration, enable/disable subsystems)
+docker compose run -e CONFIG=/opt/openworm/my_experiment.yml simulation
+```
+
+### Green Light Criteria
+
+| Check | Pass Condition |
+|-------|---------------|
+| Docker build | `docker compose build` completes without errors |
+| Smoke test | `docker compose run quick-test` exits 0, output files present |
+| Simulation | `docker compose run simulation` produces PNGs, WCON, and OME-Zarr output |
+| Validation | `docker compose run validate` produces `validation_report.json` |
+| Viewer | `docker compose up viewer` serves at localhost:8501 |
+| Custom config | Modified `openworm.yml` is respected by the simulation |
+
+---
+
 ## Quality Criteria
 
 ### For the Simulation Stack Itself

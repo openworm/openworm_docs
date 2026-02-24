@@ -257,6 +257,58 @@ These datasets are blocking for the two critical validation tiers (Tier 2 and Ti
 
 ## How to Build & Test
 
+### Prerequisites
+
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- OR: Python 3.10+, pip
+- For data acquisition scripts: `wormneuroatlas`, `connectometoolbox` (cect), `pandas`, `numpy`
+- For WCON validation: `tracker-commons` Python package (per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+
+### Getting Started (Environment Setup)
+
+There are two paths: **Docker** (recommended for verification) and **native Python** (for data acquisition and curation).
+
+**Clone the repository:**
+
+```bash
+git clone https://github.com/openworm/validation-data.git
+cd validation-data
+```
+
+**Path A — Docker (verification and CI):**
+
+Validation data is baked into the [DD013](DD013_Simulation_Stack_Architecture.md) Docker build at the `validation` stage. To verify all datasets:
+
+```bash
+# From the OpenWorm meta-repo:
+cd /path/to/OpenWorm
+docker compose run shell python scripts/verify_validation_data.py
+# Green light: all datasets present, all checksums match, all READMEs exist
+```
+
+The Docker build copies data from the `openworm/validation-data` repo into `/opt/openworm/validation/data/` and runs the verification script automatically. If any dataset is missing or has an incorrect checksum, the Docker build fails.
+
+**Path B — Native Python (data acquisition and curation):**
+
+```bash
+cd validation-data
+
+# Install verification and acquisition dependencies
+pip install numpy pandas scipy
+
+# Install data source APIs
+pip install wormneuroatlas          # Randi 2023 functional connectivity, CeNGEN expression
+pip install connectometoolbox       # cect — connectome data access (DD020)
+
+# Install WCON format tools (for behavioral kinematics data)
+pip install tracker-commons         # per DD021
+
+# Verify existing datasets
+python scripts/verify_validation_data.py
+```
+
+For acquiring new datasets, see the acquisition workflow below. Each dataset requires: data files, a `README.md` with provenance metadata, manifest entry, and SHA-256 checksum.
+
 ### Adding a New Dataset
 
 ```bash

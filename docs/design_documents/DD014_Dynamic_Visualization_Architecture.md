@@ -295,6 +295,119 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 ---
 
+## How to Build & Test
+
+### Prerequisites
+
+- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- OR: Python 3.10+, [PyVista](https://docs.pyvista.org/), [Trame](https://kitware.github.io/trame/), VTK
+- For Phase 3 (Three.js viewer): Node.js 18+, npm
+- A simulation output in OME-Zarr format (produced by [DD013](DD013_Simulation_Stack_Architecture.md) pipeline)
+
+### Getting Started (Environment Setup)
+
+There are two paths: **Docker** (recommended for newcomers) and **native Python** (for viewer development). The primary viewer target is the Phase 1 Trame viewer.
+
+**Clone the meta-repo:**
+
+```bash
+git clone https://github.com/openworm/OpenWorm.git
+cd OpenWorm
+```
+
+**Path A — Docker (recommended):**
+
+```bash
+# Build the viewer service (includes Trame, PyVista, Zarr dependencies)
+docker compose build viewer
+
+# Run a simulation first (produces OME-Zarr output)
+docker compose run simulation
+
+# Launch the viewer (serves at http://localhost:8501)
+docker compose up viewer
+```
+
+The viewer reads simulation output from `./output/openworm.zarr` and serves a web application with time-animated, multi-layer, interactive 3D visualization.
+
+**Path B — Native Python (for viewer development):**
+
+```bash
+# Install Trame + PyVista viewer dependencies
+pip install trame pyvista "trame-vtk>=2.0" "trame-vuetify>=2.0"
+
+# Install OME-Zarr data reading dependencies
+pip install zarr fsspec ome-zarr
+
+# Install surface reconstruction and mesh utilities
+pip install numpy scipy trimesh
+```
+
+You also need a simulation output directory containing `openworm.zarr`. Either run the Docker simulation (`docker compose run simulation`) or use sample data from the meta-repo.
+
+**Path C — Phase 3 Three.js Preview (future):**
+
+```bash
+# Once the Three.js viewer directory exists in the meta-repo:
+cd viewer/threejs
+npm install
+npm run dev    # Serves at http://localhost:5173
+```
+
+This path is not yet available. See Implementation Roadmap Stage 3 below.
+
+### Step-by-step
+
+```bash
+# Step 1: Generate simulation output (if not already present)
+docker compose run simulation
+# Expected: ./output/openworm.zarr/ directory with body/, neural/, muscle/ groups
+
+# Step 2: Launch the Trame viewer
+docker compose up viewer
+# Expected: web app at http://localhost:8501
+
+# Step 3: Verify viewer functionality
+# - Open http://localhost:8501 in a browser
+# - Verify smooth body surface is rendered (not just a particle cloud)
+# - Click time scrubber: animation should play forward
+# - Toggle layers: body_surface, muscles, neurons should each toggle independently
+# - Click a cell/neuron: inspector panel should show identity and state
+
+# Step 4: Run viewer smoke test (CI)
+docker compose run viewer python -c "
+from viewer.app import create_viewer
+v = create_viewer('/opt/openworm/output/openworm.zarr')
+print('Viewer initialized successfully')
+"
+# [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD
+# Expected: no import errors, viewer object created
+
+# Step 5: Verify OME-Zarr export format
+python -c "
+import zarr
+z = zarr.open('output/openworm.zarr', mode='r')
+for key in z.keys():
+    print(f'{key}: {list(z[key].keys()) if hasattr(z[key], \"keys\") else z[key].shape}')
+"
+# Expected: body/positions, body/types, neural/voltage, neural/calcium,
+#           muscle/activation, muscle/calcium groups present
+```
+
+### Green Light Criteria
+
+| Check | Pass Condition |
+|-------|---------------|
+| Viewer starts | `docker compose up viewer` serves at localhost:8501 without errors |
+| Body renders | Smooth worm surface visible (marching cubes reconstruction, not particle cloud) |
+| Time playback | Scrubber plays animation; body bends propagate |
+| Layer toggles | Each layer (body, muscles, neurons) can be shown/hidden independently |
+| Cell selection | Clicking a cell opens inspector with identity and state |
+| Performance | >15 FPS on a 2020-era laptop with integrated GPU |
+| OME-Zarr valid | All expected Zarr groups present with correct shapes |
+
+---
+
 ## Alternatives Considered
 
 ### 1. Keep Particle Cloud Rendering Only

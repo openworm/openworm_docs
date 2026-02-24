@@ -86,6 +86,39 @@ A simulation that produces movement but fails electrophysiology validation has *
 
 ## How to Build & Test
 
+### Getting Started (Environment Setup)
+
+The validation framework is cross-cutting — it spans multiple repositories depending on which validation tier you are working on.
+
+**All tiers — clone the meta-repo:**
+
+```bash
+git clone https://github.com/openworm/OpenWorm.git  # meta-repo with docker compose
+cd OpenWorm
+```
+
+**Per-tier additional repositories:**
+
+- **Tier 1 (single-cell electrophysiology):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
+- **Tier 2 (circuit-level functional connectivity):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
+- **Tier 3 (behavioral kinematics):** Also needs `open-worm-analysis-toolbox` — see [DD021 Getting Started](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md#getting-started-environment-setup) for setup
+
+**Path A — Docker (recommended):**
+
+```bash
+# From the OpenWorm meta-repo
+docker compose run validate  # runs all tiers automatically
+```
+
+**Path B — Native:**
+
+```bash
+# Install dependencies in each relevant repo
+pip install -e .  # in each repo needed for the tier(s) you are working on
+```
+
+### Step-by-step
+
 ```bash
 # Run the full validation suite (all enabled tiers)
 docker compose run validate

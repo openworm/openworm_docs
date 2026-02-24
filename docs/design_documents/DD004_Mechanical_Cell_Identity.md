@@ -75,6 +75,38 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 - OR: OpenCL SDK, CMake, C++ compiler (same as [DD003](DD003_Body_Physics_Architecture.md))
 - Cell boundary mesh data from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (included in Docker image or downloaded at build time)
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **Sibernetic** body physics framework ([DD003](DD003_Body_Physics_Architecture.md)). If you have already completed [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 2 (tagged simulation)](#step-by-step) below. The Docker image includes OpenCL, CMake, all Sibernetic dependencies, and the Witvliet cell boundary mesh data.
+
+**Path B — Native (for development):**
+
+Complete [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
+
+```bash
+# Download cell boundary meshes from Witvliet et al. 2021 EM reconstructions
+cd sibernetic
+scripts/download_cell_boundaries.sh   # [TO BE CREATED] — fetches OBJ/STL meshes into data/cell_boundaries/
+
+# Generate tagged particle file from cell boundaries + WBbt ontology
+python scripts/generate_tagged_particles.py \
+    --boundaries data/cell_boundaries/ \
+    --output data/particles_tagged.csv   # [TO BE CREATED]
+```
+
+**Neural identity mapping (optional):** If you also need neural cell identity (e.g., mapping motor neuron positions to muscle-tagged particles for [DD001](DD001_Neural_Circuit_Architecture.md)/[DD002](DD002_Muscle_Model_Architecture.md) coupling), complete [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up the c302 neural model and PyOpenWorm/OWMeta data layer.
+
 ### Step-by-step
 
 ```bash

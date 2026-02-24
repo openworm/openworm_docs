@@ -85,18 +85,56 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 ## How to Build & Test
 
-1. **Prerequisites:** Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD013](DD013_Simulation_Stack_Architecture.md))
-2. **Configure environment:** Set environment parameters in `openworm.yml` (temperature, chemical gradients)
+### Prerequisites
+
+- Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD013](DD013_Simulation_Stack_Architecture.md))
+- c302 neural model ([DD001](DD001_Neural_Circuit_Architecture.md)) for sensory neuron stimulus coupling
+- Stimulus configuration files (chemical gradient profiles, thermal profiles) — included in Docker image or generated at build time
+
+### Getting Started (Environment Setup)
+
+This DD builds on the **Sibernetic** body physics framework ([DD003](DD003_Body_Physics_Architecture.md)). If you have already completed [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step-by-step](#step-by-step) below. The Docker image includes Sibernetic, substrate models, and gradient field solvers.
+
+**Path B — Native (for development):**
+
+Complete [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
+
+```bash
+# Install Python dependencies for gradient field solvers
+cd sibernetic
+pip install -r requirements-env.txt   # numpy, scipy for diffusion/thermal solvers
+
+# Generate steady-state gradient fields for chemotaxis/thermotaxis assays
+python stimuli/chemical_gradient.py --output data/gradients/nacl_default.npy   # [TO BE CREATED]
+python stimuli/thermal_gradient.py --output data/gradients/thermal_default.npy # [TO BE CREATED]
+```
+
+**Sensory neuron coupling (required for closed-loop behavior):** Environmental stimuli must reach sensory neurons via the c302 neural model. Complete [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up c302 and PyOpenWorm/OWMeta, which provide the sensory neuron wiring (AWC for chemotaxis, AFD for thermotaxis, ALM/PLM for mechanosensation).
+
+### Step-by-step
+
+1. **Configure environment:** Set environment parameters in `openworm.yml` (temperature, chemical gradients)
    ```yaml
    environment:
      substrate: "agar"
      chemical_gradient: true
      food_particles: false
    ```
-3. **Run simulation:** `docker compose run quick-test --config chemotaxis` with stimulus delivery enabled
-4. **Verify stimulus delivery:** Confirm stimulus reaches sensory neurons at correct timing and magnitude
-5. **Green light:** Chemotaxis gradient produces measurable neural response in AWC neurons; CI index >0.5 on standard NaCl assay
-6. **Detailed test scripts:** `[TO BE CREATED]`
+2. **Run simulation:** `docker compose run quick-test --config chemotaxis` with stimulus delivery enabled
+3. **Verify stimulus delivery:** Confirm stimulus reaches sensory neurons at correct timing and magnitude
+4. **Green light:** Chemotaxis gradient produces measurable neural response in AWC neurons; CI index >0.5 on standard NaCl assay
+5. **Detailed test scripts:** `[TO BE CREATED]`
 
 ---
 

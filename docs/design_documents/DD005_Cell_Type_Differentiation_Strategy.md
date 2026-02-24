@@ -74,6 +74,40 @@ Each `.cell.nml` file includes metadata:
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy
 - **Recommended:** `pip install wormneuroatlas` (provides CeNGEN API + [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data, see reuse opportunities below)
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 2](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install additional dependencies:
+
+```bash
+# CeNGEN data access and Randi 2023 functional connectivity
+pip install wormneuroatlas
+
+# Cell-type annotation utilities
+pip install connectometoolbox
+```
+
+Download the CeNGEN single-cell RNA-seq dataset (fallback if `wormneuroatlas` API is unavailable):
+
+```bash
+# Manual download to c302/data/
+wget -O data/CeNGEN_L4_expression.csv "https://cengen.org/downloads/L4_expression_matrix.csv"
+```
+
 ### Step-by-step
 
 ```bash

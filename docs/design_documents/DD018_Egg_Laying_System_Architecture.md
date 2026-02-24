@@ -82,6 +82,33 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 1](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup). The egg-laying circuit (2 HSN + 6 VC neurons + 16 sex muscles) uses the same pyNeuroML/jnml toolchain. No additional pip installs are required beyond DD001 dependencies (pyNeuroML, jnml, pandas, numpy, scipy).
+
+Verify the egg-laying circuit configuration:
+
+```bash
+# Reproductive circuit files (28-cell sub-circuit)
+ls c302/egglaying/
+# Expected: VulvalMuscle2Cell.cell.nml, SerotoninSynapse.synapse.nml, etc. (when created)
+```
+
 ### Step-by-step
 
 ```bash

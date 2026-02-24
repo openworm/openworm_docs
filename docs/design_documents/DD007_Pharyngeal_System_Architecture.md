@@ -86,6 +86,33 @@ Each pharyngeal NeuroML file includes metadata:
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 2](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup). The pharyngeal sub-network uses the same pyNeuroML/jnml toolchain as the body neural circuit. No additional pip installs are required beyond DD001 dependencies.
+
+Verify the pharyngeal configuration files are present:
+
+```bash
+# Pharyngeal sub-network config (63-cell sub-circuit)
+ls c302/pharynx/
+# Expected: PharyngealMuscleCell.cell.nml, pumping_oscillator.py (when created)
+```
+
 ### Step-by-step
 
 ```bash

@@ -75,6 +75,33 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pip
 
+### Getting Started (Environment Setup)
+
+**Path A — Docker (recommended):**
+
+```bash
+# Cross-ref: DD013 Simulation Stack Architecture for full Docker setup
+docker compose build
+docker compose run shell python -c "import owmeta_core; print(owmeta_core.__version__)"
+# Then skip to Step 3 below — OWMeta packages are pre-installed in the container
+```
+
+Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the containerized simulation stack.
+
+**Path B — Native:**
+
+```bash
+git clone https://github.com/openworm/PyOpenWorm.git
+cd PyOpenWorm
+pip install -e .  # includes RDFLib, ZODB
+```
+
+Additionally, for connectome data access:
+
+```bash
+pip install connectometoolbox  # for connectome data access (see DD020)
+```
+
 ### Step-by-step
 
 ```bash

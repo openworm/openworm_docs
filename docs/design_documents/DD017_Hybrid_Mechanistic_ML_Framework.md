@@ -60,7 +60,43 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 
 ## How to Build & Test
 
-**Prerequisites:** Simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md)) running, training datasets from [DD010](DD010_Validation_Framework.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md).
+### Prerequisites
+
+- Simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md)) running
+- Training datasets from [DD010](DD010_Validation_Framework.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)
+
+### Getting Started (Environment Setup)
+
+This DD shares the `openworm-ml` repository with [DD025](DD025_Protein_Foundation_Model_Pipeline.md). Follow [DD025 Getting Started](DD025_Protein_Foundation_Model_Pipeline.md#getting-started-environment-setup) to clone the repo and install base dependencies.
+
+**Path A — Docker (recommended):**
+
+```bash
+# From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)
+docker compose build ml
+# Then use the docker compose run commands below for each component
+```
+
+Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
+
+**Path B — Native:**
+
+```bash
+git clone https://github.com/openworm/openworm-ml.git
+cd openworm-ml
+pip install -e ".[dev]"  # includes PyTorch, torchdiffeq, ESM dependencies
+```
+
+Additional dependency for differentiable ODE solvers:
+
+```bash
+pip install torchdiffeq  # ODE solver integration for differentiable simulation
+```
+
+!!! note "GPU Support"
+    PyTorch with GPU support (CUDA on Linux, MPS on macOS) is strongly recommended for differentiable simulation and neural surrogates. CPU-only mode works but training will be significantly slower.
+
+### Step-by-step
 
 1. **Differentiable backend:** `docker compose run ml-test` — verifies PyTorch ODE solver matches NEURON/jNML reference within +/-5%
 2. **Auto-fitting:** `docker compose run ml-autofit` — runs gradient descent against [DD010](DD010_Validation_Framework.md) validation targets

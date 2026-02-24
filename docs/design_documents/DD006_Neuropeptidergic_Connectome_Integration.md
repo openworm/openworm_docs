@@ -91,6 +91,41 @@ Each LEMS extension includes metadata:
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 - Ripoll-Sanchez Table S1 data (downloaded to `data/`)
 
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then skip to [Step 2](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install additional dependencies:
+
+```bash
+# ConnectomeToolbox provides the Ripoll-Sanchez 2023 neuropeptide dataset
+# as extrasynaptic connectivity (31,479 peptide-receptor interactions)
+pip install cect              # if not already installed via DD020
+pip install connectometoolbox # cell-type annotation utilities
+```
+
+Download the Ripoll-Sanchez neuropeptide interaction data (if not using `cect` API):
+
+```bash
+# Neuropeptide-receptor interaction table (Table S1 from Ripoll-Sanchez 2023)
+wget -O data/ripoll_sanchez_2023_table_s1.csv \
+  "https://doi.org/10.1016/j.neuron.2023.09.043"
+# Note: The cect package already includes this data — manual download is a fallback only
+```
+
 ### Step-by-step
 
 ```bash

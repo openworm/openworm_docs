@@ -82,6 +82,37 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6, Sibernetic (with OpenCL or Taichi backend)
 
+### Getting Started (Environment Setup)
+
+This DD builds on **two repositories**: the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) for the MEC-4 channel model and tap withdrawal circuit, and **Sibernetic** ([DD003](DD003_Body_Physics_Architecture.md)) for mechanotransduction coupling (body physics to sensory neurons).
+
+If you have already completed both [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+
+If starting fresh, follow both setup guides first, then return here:
+
+1. [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
+2. [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+This builds both the `neural` and `body` Docker stages. Then skip to [Step 1](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete both [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), then install additional dependencies:
+
+```bash
+# NEURON simulator (required for MEC-4 channel model and bidirectional coupling)
+pip install neuron==8.2.6
+```
+
+The closed-loop touch response requires **bidirectional coupling**: body physics (Sibernetic SPH particles) feed cuticle strain into sensory neurons (c302 MEC-4 channels), while neural output drives muscles back into the body simulation.
+
 ### Step-by-step
 
 ```bash

@@ -331,7 +331,56 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 
 ## How to Build & Test
 
-**Prerequisites:** Python 3.10+, NumPy, SciPy, scikit-learn, PyTorch (for MLP readout), matplotlib, `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)).
+### Prerequisites
+
+- Python 3.10+, NumPy, SciPy, scikit-learn, PyTorch (for MLP readout), matplotlib
+- `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) for connectome neuron classification
+- Simulation output from [DD001](DD001_Neural_Circuit_Architecture.md) (neural state HDF5) and [DD002](DD002_Muscle_Model_Architecture.md) (motor activation HDF5)
+
+### Getting Started (Environment Setup)
+
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) and also requires the **open-worm-analysis-toolbox** ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) for behavioral analysis of simulation output.
+
+If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you have the simulation infrastructure ready. DD026 is a **pure analysis** DD — it does not modify the simulation, only analyzes its output.
+
+If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to set up the simulation stack, then return here.
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build
+```
+
+Then run the simulation to produce HDF5 output, and proceed to [Step 1](#step-by-step) below.
+
+**Path B — Native (for development):**
+
+Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install the RC analysis dependencies:
+
+```bash
+# Core RC analysis dependencies
+pip install scikit-learn torch matplotlib
+
+# Connectome neuron classification (sensory/inter/motor partition definitions)
+pip install cect
+
+# Movement analysis toolbox for behavioral output analysis
+pip install open-worm-analysis-toolbox
+```
+
+Verify the analysis toolchain is available:
+
+```bash
+python -c "
+from sklearn.linear_model import RidgeCV
+from cect import Cook2019DataReader
+import torch
+print('RC analysis dependencies OK')
+"
+```
+
+### Step-by-step
 
 ```bash
 # Run after simulation has produced neural state data (DD001 HDF5 output)
