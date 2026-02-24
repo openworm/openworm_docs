@@ -10,7 +10,7 @@
 
 **OpenWorm Mission:** "Creating the world's first virtual organism in a computer, a *C. elegans* nematode." (openworm.org)
 
-**This Integration Map shows:** How 27 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
+**This Integration Map shows:** How 28 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
@@ -32,7 +32,7 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD026](DD026_Reservoir_Computing_Validation.md)
+- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD027](DD027_Multicompartmental_Neuron_Models.md)
 - **Last updated:** 2026-02-22
 
 ---
@@ -250,6 +250,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD014 (Visualization) | Phase 1-4 | Proposed |
 | DD025 (Foundation Models) | Phase A | Proposed |
 | DD017 (Hybrid ML) | Phase 3 | Proposed |
+| DD027 (Multicompartmental) | Phase 2 | Proposed |
 
 **Key Insight:**
 

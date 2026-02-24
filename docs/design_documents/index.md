@@ -93,7 +93,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
 | [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions |
-| [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
+| [DD027](DD027_Multicompartmental_Neuron_Models.md) | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
 
 ### Phase 3: Organ Systems ⚠️
 
@@ -126,12 +126,12 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in this [openworm_docs repository](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents).
-    **Total:** 27 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD026](DD026_Reservoir_Computing_Validation.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+    **Total:** 28 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD027](DD027_Multicompartmental_Neuron_Models.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ### By Topic
 
 **Neural Systems:**
-[DD001](DD001_Neural_Circuit_Architecture.md) (architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx neurons), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying HSN/VC), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch neurons)
+[DD001](DD001_Neural_Circuit_Architecture.md) (architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx neurons), [DD018](DD018_Egg_Laying_System_Architecture.md) (egg-laying HSN/VC), [DD019](DD019_Closed_Loop_Touch_Response.md) (touch neurons), [DD027](DD027_Multicompartmental_Neuron_Models.md) (multicompartmental)
 
 **Muscle Systems:**
 [DD002](DD002_Muscle_Model_Architecture.md) (body wall), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharyngeal), [DD018](DD018_Egg_Laying_System_Architecture.md) (reproductive)
@@ -169,6 +169,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 - **Pharynx:** [DD007](DD007_Pharyngeal_System_Architecture.md) (20 pharyngeal neurons, pumping circuit)
 - **Egg-Laying:** [DD018](DD018_Egg_Laying_System_Architecture.md) (2 HSN serotonergic command neurons, 6 VC cholinergic motor neurons)
 - **Touch:** [DD019](DD019_Closed_Loop_Touch_Response.md) (6 touch receptor neurons: ALM, AVM, PLM; tap withdrawal circuit, MEC-4 channel)
+- **Multicompartmental:** [DD027](DD027_Multicompartmental_Neuron_Models.md) (NeuroML2 multicompartmental cable-equation models; spatially resolved synapses)
 
 ### Muscle Systems
 

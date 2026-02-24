@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
+- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics), [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models)
 
 ---
 
@@ -221,13 +221,7 @@ C * dV/dt = I_leak + I_Kslow + I_Kfast + I_Ca + I_syn + I_gap + I_ext
 
 ### Protein Foundation Model Pathway for Channel Kinetics
 
-The ~4 generic channels above are a starting point. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) replaces them with cell-type-specific conductances from CeNGEN transcriptomics, but the mapping from transcript → conductance remains approximate. A complementary approach uses protein foundation models to predict channel kinetics directly from sequence:
-
-1. **Protein structure prediction:** [AlphaFold 3](https://github.com/google-deepmind/alphafold3) or [Boltz-2](https://github.com/jwohlwend/boltz) predict 3D structures of *C. elegans* ion channels (EGL-19, UNC-2, SHL-1, etc.) from amino acid sequence alone, including bound ions and lipids
-2. **Conformational dynamics:** [BioEmu-1](https://github.com/microsoft/BioEmu) (Microsoft) simulates ion channel conformational ensembles at 100,000x the speed of molecular dynamics, enabling prediction of gating transitions (open ↔ closed) from which V_half, slope factor, and tau can be extracted
-3. **Sequence embeddings:** [ESM Cambrian](https://github.com/evolutionaryscale/esm) protein language models encode channel sequences into representations that capture functional properties across homologous channel families, enabling transfer from well-characterized mammalian channels to *C. elegans* orthologs
-
-This pipeline is specified in detail in [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics). If successful, it would expand the number of neuron classes with predicted kinetics from ~7 (limited by patch-clamp data) to all 128 (limited only by sequence availability).
+The ~4 generic channels above are a starting point. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) replaces them with cell-type-specific conductances from CeNGEN transcriptomics. A complementary approach uses protein foundation models to predict channel kinetics directly from sequence — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics) for the full pipeline specification and the [Phase Roadmap](DD_PHASE_ROADMAP.md) for timeline.
 
 | Channel | Type | Neuron g_max | E_rev | Gating | Kinetics |
 |---------|------|-------------|-------|--------|----------|
@@ -293,59 +287,19 @@ This circuit produced alternating dorsoventral muscle activation waves propagati
 
 ### Synaptic Weight and Polarity Optimization
 
-The uniform `g_syn = 0.09 nS` used above is a baseline placeholder for the undifferentiated model. Zhao et al. (2024) demonstrated that per-synapse conductances and excitatory/inhibitory polarity assignments can be optimized via gradient descent to match the experimentally measured whole-brain functional connectivity matrix. Targeting the Pearson correlation matrix of 65 identified neurons from whole-brain calcium imaging, they achieved a mean squared error of 0.076 between simulated and experimental correlation maps — far better than hand-tuned uniform weights.
+The uniform `g_syn = 0.09 nS` used above is a baseline placeholder for the undifferentiated model. Per-synapse conductance optimization using gradient descent against whole-brain functional connectivity (Zhao et al. 2024) is specified in [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework, Component 1). OpenWorm extends their approach with neurotransmitter identity constraints (Wang et al. 2024) and full 302-neuron optimization. See [DD017 Draft Issues](DD017_draft_issues.md) for implementation tasks.
 
-OpenWorm will adopt this optimization approach using the differentiable simulation backend ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1), with two key improvements over the Zhao et al. approach:
-
-1. **Neurotransmitter identity constraints.** Rather than allowing the optimizer to freely assign excitatory/inhibitory polarities, we will constrain synapse signs using experimentally determined neurotransmitter identities. Wang et al. (2024) classified neurotransmitter usage for every neuron in the connectome from EM images — known glutamatergic, cholinergic, and GABAergic identities should not be overridden by the optimizer. This produces a biologically grounded optimization that explains *why* a synapse is excitatory or inhibitory, not just that it is.
-
-2. **Full 302-neuron optimization.** Zhao et al. optimized a 136-neuron locomotion subcircuit. OpenWorm will optimize the complete 302-neuron network, leveraging the full Randi et al. (2023) functional connectivity matrix (accessible via `wormneuroatlas`). This captures circuit interactions that the locomotion-only subcircuit cannot.
-
-**Validation:** After optimization, principal component analysis (PCA) of simulated membrane potential time series should show forward-locomotion neurons (AVB, PVC, VB, DB classes) and backward-locomotion neurons (AVA, AVD, VA, DA classes) separating on PC1, matching the low-dimensional dynamical structure observed in whole-brain calcium imaging (Kato et al. 2015).
-
-**Configuration:** `neural.synapse_optimization: true/false` in `openworm.yml`. When `false`, the baseline uniform `g_syn` is used (backward compatible). When `true`, per-synapse fitted values from the optimization are loaded.
-
-**Phase:** 1-2 (requires [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend as prerequisite).
+**Configuration:** `neural.synapse_optimization: true/false` in `openworm.yml`. Phase 1-2 (requires [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend).
 
 ### Extended Ion Channel Library (Phase 1-2)
 
-The current 4-channel model (leak, K_slow, K_fast, Ca_boyle) is derived from muscle electrophysiology (Boyle &amp; Cohen 2008) and does not capture the diversity of neuronal ion channel kinetics. Zhao et al. (2024) demonstrated that 14 ion channel classes, when combined in neuron-class-specific ratios, produce substantially better fits to published single-neuron electrophysiology. Their open-source NMODL channel files ([BAAIWorm `eworm/` directory](https://github.com/Jessie940611/BAAIWorm), Apache 2.0 license) can potentially be converted to NeuroML channel definitions using pyNeuroML's NMODL converter, saving significant development effort.
-
-**Target channel library (Phase 1-2):**
-
-| Channel | C. elegans Gene(s) | Family | Type | Priority | BAAIWorm NMODL? |
-|---------|-------------------|--------|------|----------|----------------|
-| Leak | generic | Passive | Leak | ✅ Exists | ✅ |
-| K_slow | shk-1 | Kv | Outward | ✅ Exists | ✅ SHK-1 |
-| K_fast | shl-1 | Kv | Outward | ✅ Exists | ✅ SHL-1 |
-| Ca_boyle | generic Ca²⁺ | Cav | Inward | ✅ Exists | ✅ UNC2 |
-| **Cav1 (L-type)** | egl-19 | Cav | Inward | HIGH | ✅ EGL19 |
-| **Cav3 (T-type)** | cca-1 | Cav | Inward | MEDIUM | ✅ CCA1 |
-| **Kv (Shaker)** | kvs-1 | Kv | Outward | HIGH | ✅ KVS-1 |
-| **Kv (EAG)** | egl-2 | Kv | Outward | MEDIUM | ✅ EGL-2 |
-| **Kv (KCNQ)** | kqt-3 | Kv | Outward | MEDIUM | ✅ KQT-3 |
-| **ERG** | egl-36 | Kv | Outward | HIGH | ✅ EGL-36 |
-| **BK (Ca²⁺-activated K⁺)** | slo-1 | KCa | Outward | HIGH | ✅ SLO1 |
-| **SK (Ca²⁺-activated K⁺)** | slo-2 | KCa | Outward | MEDIUM | ✅ SLO2 |
-| **SK (KCNL)** | kcnl-2 | KCa | Outward | MEDIUM | ✅ KCNL |
-| **IRK (inward rectifier)** | irk-1, irk-3 | Kir | Inward | MEDIUM | ✅ IRK1/3 |
-| **NCA (Na⁺ leak)** | nca-1, nca-2 | Na | Inward | MEDIUM | ✅ NCA |
-
-**Code reuse plan:** (1) Download BAAIWorm NMODL channel files from `eworm/` directory → (2) Convert to NeuroML using `pyNeuroML` NMODL→NeuroML converter → (3) Validate each channel with `jnml -validate` → (4) Integrate into c302 channel library at `channel_models/` → (5) Map each channel to CeNGEN genes for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) expression-based calibration.
+The current 4-channel model (leak, K_slow, K_fast, Ca_boyle) is derived from muscle electrophysiology (Boyle & Cohen 2008) and does not capture the diversity of neuronal ion channel kinetics. Expanding to 14+ neuron-class-specific channels is a Phase 1 deliverable driven by [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization). Existing NeuroML2 channel models from Nicoletti et al. (2019) and NMODL files from BAAIWorm (Zhao et al. 2024) provide a head start — 31 channels already exist in validated NeuroML2 format. See [DD005 Draft Issues](DD005_draft_issues.md) for the channel survey, adoption, and validation tasks.
 
 **OpenWorm extends beyond Zhao et al.:** We assign channels to neuron classes via CeNGEN single-cell transcriptomics ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)), not just by functional group membership. This is more biologically grounded — two neurons in the same functional group (e.g., interneurons) may express very different channel complements based on their transcriptomic profiles.
 
 ### Spatially Resolved Synapse Placement (Phase 2, with Level D)
 
-For the single-compartment models (Levels A-D, C1), synapses are abstract neuron-to-neuron connections with no spatial structure — all inputs sum at the single compartment. However, for multicompartmental neurons (Level D), the location of synapses along neurites matters because it determines signal propagation delays, spatial input integration, and the degree to which nearby synapses interact nonlinearly.
-
-Zhao et al. (2024) demonstrated a practical approach: for each connection in the Cook et al. (2019) adjacency matrix, assign a distance along the neurite drawn from an inverse Gaussian distribution fitted to experimental synapse centroid distance measurements from serial-section EM (Witvliet et al. 2021). Each synapse is then placed on the neurite segment closest to the assigned distance. This produces spatially realistic clustering of synapses along neurites, matching the biological organization observed in EM.
-
-OpenWorm will adopt this approach with one improvement: quantitative validation that the constructed distributions match the experimental distributions (as in Zhao et al. Fig. 4B-C), integrated into [DD010](DD010_Validation_Framework.md) Tier 1 as a non-blocking structural validation.
-
-**Applies only when:** `neural.level: D` and `neural.spatial_synapses: true`. For Level C1, synapse placement is irrelevant and this feature is disabled.
-
-**Data requirement:** Synapse centroid distances from Witvliet et al. 2021, to be acquired per [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline). See also [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for ConnectomeToolbox data access.
+Spatially resolved synapse placement along neurites is specified in [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models). Applies only when `neural.level: D` and `neural.spatial_synapses: true`.
 
 ---
 
@@ -554,36 +508,11 @@ If future research demonstrates that Level C1 graded synapses are insufficient (
 
 Do NOT modify Level C1 unless a critical bug is found.
 
-### Level D: Multicompartmental Cable Equation Models (Expanded Roadmap)
+### Level D: Multicompartmental Cable Equation Models
 
-Experimental evidence shows that single-compartment (isopotential) models are insufficient for a subset of *C. elegans* neurons. [Hendricks et al. (2012)](https://doi.org/10.1038/nature11081) demonstrated that calcium dynamics in the RIA interneuron are compartmentalized across distinct segments of the neurite, encoding head movement direction through spatially separated signals within a single cell. [Liu et al. (2018)](https://doi.org/10.1016/j.cell.2018.08.018) showed that AWA olfactory neurons fire calcium-mediated all-or-none action potentials — a fundamentally different signaling mode from the graded potentials assumed by Level C1. These findings indicate that model complexity must vary among neurons: some are well-described by the single-compartment approximation, while others require multicompartmental representations that capture signal propagation along neurites.
+Multicompartmental neuron models for neurons where single-compartment approximation is insufficient (e.g., RIA compartmentalized calcium, AWA action potentials) are specified in [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models). Stage 1 (Phase 2): 5 representative neurons (AWC, AIY, AVA, RIM, VD5). Stage 2 (Phase 4-5): all 302 neurons. See [DD027 Draft Issues](DD027_draft_issues.md) for implementation tasks.
 
-**NeuroML 2 natively supports multicompartmental morphologies.** The `<cell>` element can contain a `<morphology>` with multiple `<segment>` elements organized into `<segmentGroup>` definitions, with per-segment channel density assignments. This means Level D can be implemented within the existing NeuroML/LEMS framework without a new file format — the same `jnml -validate` pipeline applies, and the same NEURON simulator backend can execute multicompartmental cells alongside single-compartment ones in the same network simulation ([Cannon et al. 2014](https://doi.org/10.3389/fninf.2014.00079); [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)).
-
-**Feasibility demonstrated.** Zhao et al. (2024) showed that the "representative neuron" strategy makes multicompartmental modeling tractable at scale: build detailed models for a small set of representative neurons (one per functional group), fit them to published electrophysiology, then propagate fitted parameters to all neurons in the same functional class. Using this approach with 5 representative neurons (AWC, AIY, AVA, RIM, VD5), they produced 136 multicompartmental neurons whose I-V curves matched experimental recordings. Nicoletti et al. (2019) earlier demonstrated a similar multicompartmental approach for AWCon with multiple ion channel types. This establishes that Level D is achievable with current data — it does not require waiting for new experimental techniques.
-
-**Code reuse opportunity.** The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0 license) contains NMODL ion channel files and SWC neuron morphology reconstructions. These can be converted to NeuroML format using pyNeuroML's NMODL→NeuroML converter, providing a head start on the channel library expansion and morphological models.
-
-**Implementation pathway (two stages):**
-
-**Stage 1 (Phase 2 — Proof of Concept):**
-
-1. Select 5 representative neurons with published morphological reconstructions AND published electrophysiology: AWC (sensory), AIY (interneuron), AVA (command interneuron), RIM (interneuron), VD5 (motor neuron) — the same set validated by Zhao et al. (2024)
-2. Obtain morphologies from EM reconstructions (Witvliet et al. 2021; Cook et al. 2019) or from BAAIWorm SWC files; convert to NeuroML `<morphology>` elements with segments < 2 μm
-3. Assign per-segment channel densities from the Extended Channel Library (14 classes), guided by CeNGEN expression profiles ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and functional group membership
-4. Optimize passive parameters (axial resistance, membrane capacitance) and channel densities using automated fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend or NEURON's built-in optimizer) to match published I-V curves and current-clamp responses
-5. Propagate fitted parameters to all neurons in the same CeNGEN functional class, scaling channel densities by expression level ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
-
-**Stage 2 (Phase 4-5 — Scale to Full Circuit):**
-
-1. Extend to all 302 neurons using the representative-neuron approach
-2. Incorporate subcellular molecular data from expansion microscopy (Alon et al. 2021; [Shaib et al. 2023](https://doi.org/10.1038/s41587-024-02431-9)) as it becomes available
-3. Apply spatially resolved synapse placement (see section above)
-4. Infer parameters using data-constrained fitting methods including RNN-based approaches ([Linka et al. 2023](https://doi.org/10.1016/j.actbio.2023.01.055))
-
-**OpenWorm extends beyond Zhao et al.:** (a) We target all 302 neurons, not 136; (b) we use NeuroML standard format enabling multi-simulator support and community sharing; (c) we integrate with CeNGEN transcriptomics for principled parameter propagation rather than purely functional-group-based assignment; (d) our models include neuropeptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) and organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) that the locomotion-only circuit does not capture.
-
-**Validation:** Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers. Individual cell models should additionally reproduce published I-V curves and compartmentalized calcium dynamics where available (e.g., RIA spatial signals per [Hendricks et al. 2012](https://doi.org/10.1038/nature11081), AWC responses per Nicoletti et al. 2019).
+**Validation:** Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers.
 
 ---
 

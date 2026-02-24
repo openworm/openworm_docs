@@ -37,6 +37,7 @@ nav:
           - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
       - "Phase 1 — Cell-Type Specialization":
           - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
+          - DD005 Draft Issues: design_documents/DD005_draft_issues.md
           - DD010 Validation Framework: design_documents/DD010_Validation_Framework.md
           - DD014 Dynamic Visualization: design_documents/DD014_Dynamic_Visualization_Architecture.md
           - DD014.1 Visual Rendering: design_documents/DD014.1_Visual_Rendering_Specification.md
@@ -46,11 +47,14 @@ nav:
           - DD022 Environment: design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md
           - DD023 Proprioception: design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md
           - DD026 Reservoir Computing: design_documents/DD026_Reservoir_Computing_Validation.md
+          - DD027 Multicompartmental Neurons: design_documents/DD027_Multicompartmental_Neuron_Models.md
+          - DD027 Draft Issues: design_documents/DD027_draft_issues.md
       - "Phase 3 — Organ Systems":
           - DD007 Pharyngeal System: design_documents/DD007_Pharyngeal_System_Architecture.md
           - DD008 Data Integration: design_documents/DD008_Data_Integration_Pipeline.md
           - DD009 Intestinal Oscillator: design_documents/DD009_Intestinal_Oscillator_Model.md
           - DD017 Hybrid ML: design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md
+          - DD017 Draft Issues: design_documents/DD017_draft_issues.md
           - DD018 Egg-Laying: design_documents/DD018_Egg_Laying_System_Architecture.md
       - "Phase 4 — Complete Organism":
           - DD004 Mechanical Cell Identity: design_documents/DD004_Mechanical_Cell_Identity.md

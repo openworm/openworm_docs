@@ -116,7 +116,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | `validate_incompressibility.py` | DD003 | DD003 Issue 2 | openworm/sibernetic |
 | `backend_parity_test.py` | DD003 | DD003 Issue 5 | openworm/sibernetic |
 
-**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 21, DD002: 18, DD003: 21, DD020: 23). Of these, ~35 are Phase A infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
+**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 9, DD002: 18, DD003: 21, DD020: 23) plus relocated issues (DD005: 6, DD017: 3, DD027: 3). Of these, ~35 are Phase A infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
@@ -271,7 +271,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
 | [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes) |
 | **[DD014](DD014_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
-| **[DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
+| **[DD027](DD027_Multicompartmental_Neuron_Models.md)** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology |
 
 **Key Deliverables:**
 
@@ -312,7 +312,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - **Ripoll-Sanchez 2023 neuropeptide connectome** (31,479 interactions) — DD006 extrasynaptic wiring
 - **Touch neuron electrophysiology** (MEC-4 kinetics) — DD019 channel model validation
 - **Tap withdrawal behavioral data** (Chalfie 1985, Wicks 1996) — DD019 Tier 3 validation
-- **BAAIWorm NMODL + SWC data** — DD001 Level D Stage 1 multicompartmental neurons
+- **BAAIWorm NMODL + SWC data** — DD027 multicompartmental neurons
 - **Chemotaxis and thermotaxis behavioral data** — DD022 Tier 3 validation
 
 **Blocking Dependencies:**
@@ -321,7 +321,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - Ripoll-Sanchez data downloaded and ingested into ConnectomeToolbox/OWMeta
 - 3D cell positions extracted (for peptide distance-dependent attenuation)
 
-**Cumulative Metrics:** 403 cells (+6 touch neurons) | 128 neuron classes | **2** coupling loops (+body→sensory) | 0 organ systems | **1** modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +5 DDs (19 total)
+**Cumulative Metrics:** 403 cells (+6 touch neurons) | 128 neuron classes | **2** coupling loops (+body→sensory) | 0 organ systems | **1** modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +6 DDs (20 total)
 
 ---
 
@@ -382,7 +382,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - Organ-specific validation data curated (pharynx EPG, defecation period, egg-laying patterns)
 - GPU cluster access for SPH surrogate training (500+ long runs)
 
-**Cumulative Metrics:** 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | **3** organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (22 total)
+**Cumulative Metrics:** 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | **3** organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (23 total)
 
 ---
 
