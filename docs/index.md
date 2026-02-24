@@ -51,7 +51,7 @@ Navigating OpenWorm
 
 We've created this documentation to help orient you to the different locations on the web where OpenWorm material is found and where contributions can be made.
 
-The **[Design Documents](design_documents/)** provide the complete technical roadmap — 25 architectural specifications ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD023](design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **Start here** if you want to understand the engineering blueprint.
+The **[Design Documents](design_documents/)** provide the complete technical roadmap — 27 architectural specifications ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD026](design_documents/DD026_Reservoir_Computing_Validation.md), plus [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md) and [DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **Start here** if you want to understand the engineering blueprint.
 
 The [modeling approach page](modeling/) explains how we model at five scales simultaneously (molecular, channel, cellular, tissue, organism) and how the current architecture evolved from the CyberElegans prototype.
 

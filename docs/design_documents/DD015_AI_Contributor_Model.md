@@ -69,7 +69,7 @@ This DD defines:
 
 1. **Discovers** OpenWorm via public documentation
 2. **Registers** as an autonomous contributor (proves capability, declares sponsor)
-3. **Reads** Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD025](DD025_Protein_Foundation_Model_Pipeline.md) (plus [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
+3. **Reads** Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD026](DD026_Reservoir_Computing_Validation.md) (plus [DD014.1](DD014.1_Visual_Rendering_Specification.md) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
 4. **Claims** an AI-workable issue (auto-generated from DD Integration Contracts)
 5. **Writes code** (implements the spec, runs tests locally)
 6. **Submits a PR** (AI-authored, with full traceability)

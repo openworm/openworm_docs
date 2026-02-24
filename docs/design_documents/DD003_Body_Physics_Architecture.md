@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD002](DD002_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
+[PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD002](DD002_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
 
 ---
 
@@ -20,7 +20,7 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 |----------|--------|
 | **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
-| **What does this produce?** | Particle position time series (~100K SPH particles), WCON trajectory files, rendered body frames |
+| **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd003` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
@@ -52,7 +52,7 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 | Rendered frames / video | `output/frames/` | PNG (per-frame) | `frame_00001.png` |
 | Sibernetic binary (C++/OpenCL) | `build/Sibernetic` | Compiled executable | `./Sibernetic -config ...` |
 | Taichi backends | `taichi_backend/` | Python/Taichi scripts | `taichi_backend/sph_metal.py` |
-| Particle positions (viewer) | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | OME-Zarr | Per-particle (x, y, z) over all output timesteps |
+| Particle positions (viewer) | [OME-Zarr](https://ngff.openmicroscopy.org): `body/positions/`, shape (n_timesteps, n_particles, 3) | OME-Zarr | Per-particle (x, y, z) over all output timesteps |
 | Particle types (viewer) | OME-Zarr: `body/types/`, shape (n_particles,) | OME-Zarr | Enum: liquid/elastic/boundary |
 | Surface mesh (viewer) | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | OME-Zarr | Reconstructed smooth body surface per timestep |
 | Stability checker | `scripts/check_stability.py` | Python script | Verify no NaN, no particle escape, no divergence `[TO BE CREATED]` |
@@ -78,8 +78,8 @@ PCISPH SPH framework (Sibernetic) simulating the worm as ~100K particles — liq
 ### Prerequisites
 
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
-- OR: OpenCL SDK (AMD or Intel), CMake, C++ compiler
-- Optional: `pip install taichi` for Taichi Metal/CUDA backends
+- OR: [OpenCL](https://www.khronos.org/opencl/) SDK (AMD or Intel), CMake, C++ compiler
+- Optional: `pip install taichi` for [Taichi](https://www.taichi-lang.org/) Metal/CUDA backends
 
 ### Step-by-step
 
@@ -243,7 +243,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 
 ## Alternatives Considered
 
-### 1. Finite Element Method (FEM)
+### 1. [Finite Element Method](https://en.wikipedia.org/wiki/Finite_element_method) (FEM)
 
 **Advantages:** Higher accuracy for solid mechanics, well-established in biomechanics.
 
@@ -328,7 +328,7 @@ A contribution to Sibernetic MUST:
     - Elastic deformation: A suspended elastic body under gravity should sag
     - Muscle contraction: Activating one muscle quadrant should bend the body
 
-5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and PyTorch (CPU reference). Test on at least two backends.
+5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and [PyTorch](https://pytorch.org/) (CPU reference). Test on at least two backends.
 
 6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
 

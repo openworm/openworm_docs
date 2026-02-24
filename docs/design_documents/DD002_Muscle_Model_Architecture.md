@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling, bridging the neural voltage domain (mV, milliseconds) to the Sibernetic body physics domain (forces, mechanical strain). 95 body wall muscles in 4 quadrants convert intracellular calcium concentration to a linear activation coefficient [0, 1] consumed by Sibernetic. Success: forward speed and body bend amplitude within ±15% of Schafer lab experimental data.
+The muscle model uses [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) muscle cells with Ca²⁺-to-force coupling, bridging the neural voltage domain (mV, milliseconds) to the Sibernetic body physics domain (forces, mechanical strain). 95 body wall muscles in 4 quadrants convert intracellular calcium concentration to a linear activation coefficient [0, 1] consumed by Sibernetic. Success: forward speed and body bend amplitude within ±15% of Schafer lab experimental data.
 
 ---
 
@@ -20,7 +20,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 |----------|--------|
 | **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
-| **What does this produce?** | `GenericMuscleCell` NeuroML template (95 body wall muscles), muscle [Ca²⁺]→activation coupling via `sibernetic_c302.py` |
+| **What does this produce?** | `GenericMuscleCell` [NeuroML](https://www.neuroml.org) template (95 body wall muscles), muscle [Ca²⁺]→activation coupling via `sibernetic_c302.py` |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: forward speed and body bend amplitude within ±15% of baseline |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (muscle templates) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (coupling script) — issues labeled `dd002` |
 | **Config toggle** | `muscle.enabled: true` / `muscle.calcium_coupling: true` in `openworm.yml` |
@@ -51,7 +51,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 | Generic muscle cell template | `openworm/c302` — `c302/c302_Muscles.py` | Python → NeuroML 2 XML | `GenericMuscleCell` with 4 channels (muscle-specific densities) |
 | Muscle list (95 cells) | `CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv` | CSV | `muscle_id, quadrant, row_number, anterior_position, synaptic_partners` |
 | Coupling script | `openworm/sibernetic` — `sibernetic_c302.py` | Python | Reads muscle [Ca²⁺]ᵢ, writes activation to Sibernetic |
-| Muscle activation time series (viewer) | OME-Zarr: `muscle/activation/`, shape (n_timesteps, 95) | OME-Zarr | dimensionless [0, 1] per muscle per timestep |
+| Muscle activation time series (viewer) | [OME-Zarr](https://ngff.openmicroscopy.org): `muscle/activation/`, shape (n_timesteps, 95) | OME-Zarr | dimensionless [0, 1] per muscle per timestep |
 | Muscle calcium time series (viewer) | OME-Zarr: `muscle/calcium/`, shape (n_timesteps, 95) | OME-Zarr | mol/cm³ per muscle per timestep |
 
 ---
@@ -74,7 +74,7 @@ The muscle model uses Hodgkin-Huxley muscle cells with Ca²⁺-to-force coupling
 ### Prerequisites
 
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
-- OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6
+- OR: Python 3.10+, [pyNeuroML](https://github.com/NeuroML/pyNeuroML), [jnml](https://github.com/NeuroML/jNeuroML), [NEURON](https://www.neuron.yale.edu) 8.2.6
 
 ### Step-by-step
 
@@ -162,7 +162,7 @@ Muscles are modeled as single-compartment conductance-based cells using the **sa
 
 ### Calcium-to-Force Coupling (The Bridge to Sibernetic)
 
-Intracellular calcium concentration ([Ca²⁺]ᵢ) is the coupling variable between the electrophysiological model (NeuroML/NEURON) and the body physics model (Sibernetic/SPH).
+Intracellular calcium concentration ([Ca²⁺]ᵢ) is the coupling variable between the electrophysiological model (NeuroML/NEURON) and the body physics model (Sibernetic/[SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics)).
 
 **Calcium dynamics:**
 ```
@@ -190,7 +190,7 @@ This linear scaling is a **simplification**. Real muscle involves crossbridge dy
 
 ### Neural-to-Muscle Coupling
 
-Neurons communicate to muscles via **neuromuscular junctions (NMJs)** modeled as excitatory chemical synapses:
+Neurons communicate to muscles via **[neuromuscular junctions](https://en.wikipedia.org/wiki/Neuromuscular_junction) (NMJs)** modeled as excitatory chemical synapses:
 
 - Neuron releases synaptic current proportional to presynaptic voltage (graded release)
 - Muscle receives depolarizing current
@@ -225,7 +225,7 @@ Neurons communicate to muscles via **neuromuscular junctions (NMJs)** modeled as
 - Loses the voltage-to-calcium-to-force causal chain, making the model less interpretable
 - Cannot capture muscle dynamics like refractory periods, fatigue, or calcium-dependent force modulation
 
-### 3. FitzHugh-Nagumo Simplified Excitable Dynamics
+### 3. [FitzHugh-Nagumo](https://en.wikipedia.org/wiki/FitzHugh%E2%80%93Nagumo_model) Simplified Excitable Dynamics
 
 **Description:** Use a 2-variable reduced model (V, recovery variable) instead of full HH.
 

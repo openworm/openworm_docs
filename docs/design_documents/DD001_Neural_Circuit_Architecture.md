@@ -10,7 +10,7 @@
 
 ## TL;DR
 
-OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level Hodgkin-Huxley conductance-based framework (c302), with Level C1 (graded synapses) as the default. Graded synapses match worm biology — these neurons do not fire action potentials. Success: kinematic validation of emergent locomotion within ±15% of Schafer lab experimental data.
+OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model) conductance-based framework (c302), with Level C1 ([graded synapses](https://en.wikipedia.org/wiki/Graded_potential)) as the default. Graded synapses match worm biology — these neurons do not fire [action potentials](https://en.wikipedia.org/wiki/Action_potential). Success: kinematic validation of emergent locomotion within ±15% of Schafer lab experimental data.
 
 ---
 
@@ -20,8 +20,8 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 |----------|--------|
 | **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
-| **What does this produce?** | NeuroML network files: `LEMS_c302_C1_*.xml` with 302 neurons, 95 muscles, graded synapses, gap junctions |
-| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% of Schafer lab WCON data |
+| **What does this produce?** | [NeuroML](https://www.neuroml.org) network files: `LEMS_c302_C1_*.xml` with 302 neurons, 95 muscles, graded synapses, [gap junctions](https://en.wikipedia.org/wiki/Gap_junction) |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% of Schafer lab [WCON](https://github.com/openworm/tracker-commons) data |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd001` |
 | **Config toggle** | `neural.level: C1` / `neural.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge) |
@@ -39,7 +39,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 
 **Before:** No whole-nervous-system simulation — neurons modeled individually or not at all.
 
-**After:** 302 neurons in a single LEMS simulation with graded synaptic and gap junction coupling, producing emergent locomotion when coupled to muscle and body physics.
+**After:** 302 neurons in a single [LEMS](https://docs.neuroml.org/Userdocs/LEMS.html) simulation with graded synaptic and gap junction coupling, producing emergent locomotion when coupled to muscle and body physics.
 
 ---
 
@@ -56,7 +56,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 | Event-driven synapse definition | `synapse_models/EventDrivenSynapse.synapse.nml` | NeuroML 2 XML | Level C |
 | LEMS network files | `examples/generated/LEMS_c302_C1_*.xml` | LEMS XML | `LEMS_c302_C1_Muscles.xml` |
 | Connectome data | ConnectomeToolbox / `cect` package | Python API / CSV | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7), [Witvliet2021](https://doi.org/10.1038/s41586-021-03778-8), [Varshney2011](https://doi.org/10.1371/journal.pcbi.1001066) |
-| Neuron voltage time series (viewer) | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | OME-Zarr | mV per neuron per timestep |
+| Neuron voltage time series (viewer) | [OME-Zarr](https://ngff.openmicroscopy.org): `neural/voltage/`, shape (n_timesteps, 302) | OME-Zarr | mV per neuron per timestep |
 | Neuron calcium time series (viewer) | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | OME-Zarr | mol/cm³ per neuron per timestep |
 | Neuron 3D positions (viewer) | OME-Zarr: `neural/positions/`, shape (302, 3) | OME-Zarr | µm static coordinates |
 
@@ -79,7 +79,39 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level H
 ### Prerequisites
 
 - Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
-- OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6, ConnectomeToolbox/`cect`
+- OR: Python 3.10+, [pyNeuroML](https://github.com/NeuroML/pyNeuroML), [jnml](https://github.com/NeuroML/jNeuroML), [NEURON](https://www.neuron.yale.edu) 8.2.6, [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox)/`cect`
+
+### Getting Started (Environment Setup)
+
+There are two paths: **Docker** (simpler, recommended for newcomers) and **native Python** (for development).
+
+**Clone the repositories:**
+
+```bash
+git clone https://github.com/openworm/c302.git
+git clone https://github.com/openworm/sibernetic.git        # for coupled simulation
+git clone https://github.com/openworm/OpenWorm.git           # for docker compose
+```
+
+**Path A — Docker (recommended for newcomers):**
+
+```bash
+cd OpenWorm
+docker compose build                 # builds all subsystems
+```
+
+Then skip to Step 7 below (`docker compose run quick-test`).
+
+**Path B — Native Python:**
+
+```bash
+cd c302
+pip install -e .                     # installs c302 + dependencies
+pip install pyneuroml neuron         # NeuroML tools + NEURON simulator
+pip install connectometoolbox        # cect for connectome data
+```
+
+You also need [jNeuroML](https://github.com/NeuroML/jNeuroML) (`jnml`) on your PATH (requires Java). Steps 1–6 below use this native path. Steps 7–8 use Docker.
 
 ### Step-by-step
 
@@ -160,7 +192,7 @@ OpenWorm implements a **multi-level framework (c302)** offering increasing bioph
 
 | Level | Name | Cell Type | Biological Realism | Use Case |
 |-------|------|-----------|-------------------|----------|
-| **A** | Integrate-and-Fire | IafCell (NeuroML) | Low (inappropriate for *C. elegans*) | Topology testing only |
+| **A** | [Integrate-and-Fire](https://en.wikipedia.org/wiki/Biological_neuron_model#Leaky_integrate-and-fire) | IafCell (NeuroML) | Low (inappropriate for *C. elegans*) | Topology testing only |
 | **B** | Custom IAF + Activity | IafActivityCell | Low-Medium | Community-contributed extensions |
 | **C** | Hodgkin-Huxley Conductance-Based | GenericCell (4 channels) | Medium-High | Default working model |
 | **C1** | Graded Synapse HH | GenericCell + graded synapses | **High (recommended)** | Sibernetic coupling |

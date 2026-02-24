@@ -36,7 +36,7 @@
 - **This Roadmap delivers:** Not just anatomy (static 3D models exist), but **dynamic temporal behavior** — pumping, defecating, egg-laying, locomoting, responding to touch — emergent from coupled biophysical subsystems.
 
 - **The Principles say:** "soft and squishy... physics matters."
-- **This Roadmap delivers:** SPH body physics ([DD003](DD003_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD002](DD002_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
+- **This Roadmap delivers:** [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) body physics ([DD003](DD003_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD002](DD002_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
 
 ---
 
@@ -277,7 +277,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 1. **NeuroML peptide extensions** (`lems/PeptideReleaseDynamics.xml`, `lems/PeptideReceptorDynamics.xml`)
 2. **Neuropeptidergic adjacency CSV** (31,479 rows: source, target, peptide, receptor, distance, modulation_type)
-3. **MEC-4 channel model** (`channel_models/mec4_chan.channel.nml`) — Strain-gated DEG/ENaC channel
+3. **MEC-4 channel model** (`channel_models/mec4_chan.channel.nml`) — Strain-gated [DEG/ENaC](https://en.wikipedia.org/wiki/Degenerin) channel
 4. **Cuticle strain readout** (`sibernetic/coupling/strain_readout.py`) — SPH particles → local strain per touch neuron
 5. **Bidirectional coupling** (`sibernetic_c302_closedloop.py`) — Extends existing forward coupling with body→sensory reverse path
 6. **Tap stimulus** (`sibernetic/stimuli/tap_stimulus.py`) — Boundary particle displacement, configurable position
@@ -453,7 +453,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Anticipated Scope:**
 
-- Detailed GPCR cascades (Gq/Gs/Gi → PLC/adenylyl cyclase → IP3/cAMP → PKA/PKC)
+- Detailed [GPCR](https://en.wikipedia.org/wiki/G_protein-coupled_receptor) cascades (Gq/Gs/Gi → PLC/adenylyl cyclase → IP3/cAMP → PKA/PKC)
 - Second messenger dynamics (IP3, DAG, cAMP, cGMP)
 - Channel phosphorylation and trafficking
 - Non-neuronal peptide signaling (intestine, hypodermis, gonad)
