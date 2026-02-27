@@ -57,15 +57,17 @@ skinparam PackageFontSize 13
 skinparam ComponentFontSize 11
 skinparam NoteFontSize 10
 skinparam Padding 4
+skinparam nodesep 20
+skinparam ranksep 40
 left to right direction
 
-' === EXTERNAL DATA ===
+' === EXTERNAL DATA (leftmost) ===
 package "External Data" as extdata #E6F3FF {
   component "Connectomes\n(Cook, Witvliet,\nWang, Ripoll-Sanchez)" as ext_conn #87CEEB
   component "CeNGEN\nExpression Atlas" as ext_cen #87CEEB
   component "Behavioral Data\n(Schafer, Raizen)" as ext_beh #87CEEB
   component "Virtual Worm\nMeshes (688)" as ext_vw #87CEEB
-  component "bio.rodeo\nFoundation Models\n(AlphaFold 3, BioEmu-1,\nBoltz-2, ESM Cambrian)" as ext_bio #87CEEB
+  component "Foundation Models\n(AlphaFold 3, BioEmu-1,\nBoltz-2, ESM Cambrian)" as ext_bio #87CEEB
   component "WormBase\nChannel Sequences" as ext_wb #87CEEB
 }
 
@@ -75,6 +77,19 @@ package "Data Access" as databox #F0F8FF {
   component "DD008\nOWMeta" as DD008 #FFB6C1
 }
 
+' === ML & FOUNDATION (feeds into Neural Extensions and Core) ===
+package "ML & Foundation" as mlbox #E8D5E8 {
+  component "DD025\nProtein FM\nPipeline" as DD025 #FFE4B5
+  component "DD017\nHybrid ML\n(1000x speedup)" as DD017 #FFE4B5
+}
+
+' === NEURAL EXTENSIONS (feeds into Core) ===
+package "Neural Extensions" as neurext #F3E5F5 {
+  component "DD005\n128 Neuron\nClasses" as DD005 #FFE4B5
+  component "DD006\nNeuropeptides\n(31K interactions)" as DD006 #FFE4B5
+  component "DD027\nMulticompartmental\nNeurons" as DD027 #FFE4B5
+}
+
 ' === CORE CHAIN (the spine) ===
 package "Core Simulation Chain" as core #E8F5E9 {
   component "DD001\n302 Neurons\n(HH, graded syn)" as DD001 #90EE90
@@ -82,12 +97,7 @@ package "Core Simulation Chain" as core #E8F5E9 {
   component "DD003\nBody Physics\n(SPH ~100K)" as DD003 #90EE90
 }
 
-' === EXTENSIONS ===
-package "Neural Extensions" as neurext #F3E5F5 {
-  component "DD005\n128 Neuron\nClasses" as DD005 #FFE4B5
-  component "DD006\nNeuropeptides\n(31K interactions)" as DD006 #FFE4B5
-}
-
+' === SENSORY & MOTOR ===
 package "Sensory & Motor" as sensory #FFF3E0 {
   component "DD019\nTouch Response\n(closed-loop)" as DD019 #FFE4B5
   component "DD022\nEnvironment\n(gradients)" as DD022 #FFE4B5
@@ -106,13 +116,6 @@ package "Whole Organism" as whole #FFEBEE {
   component "DD004\n959 Cell IDs\n(mechanical)" as DD004 #FFE4B5
 }
 
-' === INFRASTRUCTURE ===
-package "Infrastructure" as infra #FFF9C4 {
-  component "DD013\nDocker Stack\n(orchestrator)" as DD013 #FFE4B5
-  component "DD017\nHybrid ML\n(1000x speedup)" as DD017 #FFE4B5
-  component "DD025\nProtein FM\nPipeline" as DD025 #FFE4B5
-}
-
 ' === VALIDATION ===
 package "Validation" as valbox #FFF5E6 {
   component "DD010\n4-Tier\nValidation" as DD010 #FFE4B5
@@ -128,38 +131,62 @@ package "Visualization (WormSim 2.0)" as visbox #E8EAF6 {
   component "DD014.2\nMesh Deform" as DD0142 #FFE4B5
 }
 
+' === INFRASTRUCTURE ===
+package "Infrastructure" as infra #FFF9C4 {
+  component "DD013\nDocker Stack\n(orchestrator)" as DD013 #FFE4B5
+  component "DD028\nMetrics\nDashboard" as DD028 #FFE4B5
+}
+
 ' === GOVERNANCE ===
 package "Governance" as gov #F5F5F5 {
   component "DD011 Contributors\nDD012 RFC Process\nDD015 AI Agents" as GOV #E0E0E0
 }
 
-' === EDGES: Major data flows only ===
+' === EDGES ===
 
 ' External -> Data Access
 ext_conn --> DD020
 ext_cen --> DD020
+ext_beh --> DD024 : raw\nexperimental\ndata
 ext_beh --> DD021
 
-' Data Access -> Core
+' External -> ML & Foundation
+ext_bio --> DD025 : model\nweights
+ext_bio --> DD017 : model\nweights
+ext_wb --> DD025 : channel\nsequences
+
+' Data Access -> Core / Neural Extensions
 DD020 --> DD001 : connectome\ntopology
 DD020 --> DD005 : neuron classes
+
+' ML -> Neural Extensions / Core (FORWARD in this layout)
+DD025 --> DD005 : kinetics\npriors
+DD025 --> DD001 : per-class\nHH params
+DD017 --> DD001 : fitted\nparams
+DD017 --> DD006 : binding\naffinities
+
+' Neural Extensions -> Core (FORWARD in this layout)
+DD005 --> DD001 : 128 cell\ntemplates
+DD006 --> DD001 : conductance\nmodulation
+
+' DD027 Multicompartmental (refines DD001 neurons)
+DD005 --> DD027 : per-class\nconductances
+DD027 --> DD001 : Level D\ncells
 
 ' Core chain (THE SPINE)
 DD001 -[#008000,bold]-> DD002 : voltage/Ca\n(NMJ)
 DD002 -[#008000,bold]-> DD003 : muscle\nactivation
 
-' Neural extensions <-> Core
-DD005 --> DD001 : 128 cell\ntemplates
-DD006 --> DD001 : conductance\nmodulation
-
-' Sensory <-> Core (CLOSED LOOP)
+' Core -> Sensory & Motor
 DD003 -[#CC0000,bold]-> DD019 : SPH strain
-DD019 -[#CC0000,bold]-> DD001 : MEC-4\ncurrent
 DD022 --> DD019 : stimuli
 DD003 --> DD023 : curvature
+
+' Sensory feedback -> Core (BACKWARD — only 2 remaining)
+DD019 -[#CC0000,bold]-> DD001 : MEC-4\ncurrent
 DD023 --> DD001 : stretch\ncurrent
 
-' Organs <- Core
+' Core -> Organs
 DD001 --> DD007 : pharyngeal\ncircuit
 DD001 --> DD018 : HSN/VC
 DD006 --> DD018 : serotonin
@@ -184,14 +211,13 @@ DD002 --> DD026 : motor\nactivation
 DD020 --> DD026 : neuron\nclassification
 DD026 -[#0000CC]-> DD010 : RC metrics\n(advisory)
 
-' ML & Foundation Models
-ext_bio --> DD025 : model\nweights
-ext_bio --> DD017 : model\nweights
-ext_wb --> DD025 : channel\nsequences
-DD025 --> DD005 : kinetics\npriors
-DD025 --> DD001 : per-class\nHH params
-DD017 --> DD001 : fitted\nparams
-DD017 --> DD006 : binding\naffinities
+' Dashboard (read-only consumer)
+DD013 --> DD028 : CI status
+DD010 --> DD028 : validation\nscores
+GOV --> DD028 : badge/contributor\ndata
+
+' Hidden edge for layout: position Infrastructure near right side
+DD003 -[hidden]-> DD013
 
 legend bottom left
   |= Color |= Meaning |
@@ -243,22 +269,27 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD002 (Muscle) | Phase 0 | Accepted |
 | DD003 (Body Physics) | Phase 0 | Accepted |
 | DD020 (Connectome) | Phase 0 | Accepted |
+| DD008 (Data Integration) | Phase A | Blocked |
+| DD011 (Contributor Progression) | Phase A | Proposed |
+| DD012 (RFC Process) | Phase A | Proposed |
 | DD013 (Simulation Stack) | Phase A | Proposed |
+| DD015 (AI Contributor Model) | Phase A | Proposed |
 | DD021 (Movement Toolbox) | Phase A | Blocked |
+| DD024 (Validation Data) | Phase A | Proposed |
+| DD025 (Foundation Models) | Phase A | Proposed |
+| DD028 (Project Metrics Dashboard) | Phase A | Proposed |
 | DD005 (Cell-Type Specialization) | Phase 1 | Proposed |
 | DD010 (Validation Framework) | Phase 1 | Proposed |
 | DD014 (Visualization) | Phase 1-4 | Proposed |
-| DD025 (Foundation Models) | Phase A | Proposed |
 | DD017 (Hybrid ML) | Phase 3 | Proposed |
 | DD027 (Multicompartmental) | Phase 2 | Proposed |
-| DD028 (Project Metrics Dashboard) | Phase A | Proposed |
 
 **Key Insight:**
 
 - **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 12 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, [OME-Zarr](https://ngff.openmicroscopy.org) schema) affects almost everything.
 - **[DD013](DD013_Simulation_Stack_Architecture.md) and [DD014](DD014_Dynamic_Visualization_Architecture.md) are pure consumers** — They orchestrate/visualize but don't produce data that other DDs depend on. This is correct (leaf nodes in the dependency graph).
 - **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) is the foundational data layer** — 9 DDs pull connectome data from it. If `cect` API changes or default dataset switches, widespread updates needed.
-- **[DD025](DD025_Protein_Foundation_Model_Pipeline.md) and [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) are ML feeders** — They consume external foundation models ([bio.rodeo](https://bio.rodeo/models)) and produce predicted parameters for the mechanistic core. DD025 feeds DD001/DD005 (channel kinetics); DD017 feeds DD001 (fitted params) and DD006 (binding affinities).
+- **[DD025](DD025_Protein_Foundation_Model_Pipeline.md) and [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) are ML feeders** — They consume external foundation models (AlphaFold 3, BioEmu-1, Boltz-2, ESM Cambrian) and produce predicted parameters for the mechanistic core. DD025 feeds DD001/DD005 (channel kinetics); DD017 feeds DD001 (fitted params) and DD006 (binding affinities).
 
 ---
 
@@ -356,14 +387,14 @@ Closed-loop coupling can cause **oscillatory instability** if:
 
 ---
 
-### Chain 5: Foundation Models → Mechanistic Parameters (bio.rodeo Pipeline)
+### Chain 5: Foundation Models → Mechanistic Parameters
 
 **New in v1.1** — external protein foundation models predict parameters for the mechanistic core:
 
 ```
 WormBase sequences ──→ DD025 (Protein FM Pipeline) ──→ DD005 (kinetics priors)
                           │                                    │
-bio.rodeo models ─────────┤                              DD001 (per-class HH params)
+Foundation models ─────────┤                              DD001 (per-class HH params)
 (AlphaFold 3, BioEmu-1,  │
  Boltz-2, ESM Cambrian)  └──→ DD017 (Hybrid ML Framework)
                                     │
@@ -480,7 +511,7 @@ bio.rodeo models ─────────┤                              DD0
 | **`boyle_berri_cohen_trajectory.py`** | `openworm/c302/scripts/` (to be created) | Reads c302 muscle calcium, runs Boyle-Cohen 2D rod-spring model, outputs WCON trajectory | [DD001](DD001_Neural_Circuit_Architecture.md)/[DD002](DD002_Muscle_Model_Architecture.md) | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD010](DD010_Validation_Framework.md) | Neural Circuit L4 Maintainer |
 | **c302 network generation** | `openworm/c302` (`CElegans.py`) | Reads connectome via `cect`, generates NeuroML | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit L4 Maintainer |
 | **Strain readout module** | `openworm/sibernetic/coupling/strain_readout.py` (to be created) | Computes local strain from particle displacements | [DD003](DD003_Body_Physics_Architecture.md) | [DD019](DD019_Closed_Loop_Touch_Response.md) | Body Physics L4 + Integration L4 |
-| **`predict_kinetics.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Predicts HH kinetic parameters from ion channel sequences via AlphaFold 3 + BioEmu-1 + ESM Cambrian | External (bio.rodeo models, WormBase) | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | ML L4 (TBD) |
+| **`predict_kinetics.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Predicts HH kinetic parameters from ion channel sequences via AlphaFold 3 + BioEmu-1 + ESM Cambrian | External (foundation models, WormBase) | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | ML L4 (TBD) |
 | **`generate_dd005_priors.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Combines DD025 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | ML L4 (TBD) + Neural L4 |
 
 **Critical observation:**
@@ -546,7 +577,7 @@ bio.rodeo models ─────────┤                              DD0
 2. **Version-pin model weights** — record exact model versions (checksums) used for each set of predictions in `foundation_params/models/VERSIONS.md`
 3. **Revalidate on model updates** — when a new foundation model version is released, re-run cross-validation ([DD025](DD025_Protein_Foundation_Model_Pipeline.md) Step 4) and compare error rates against previous version
 4. **Coordinate with Neural L4** when predicted parameters change — any shift in per-class HH parameters requires [DD010](DD010_Validation_Framework.md) Tier 2 revalidation
-5. **Track bio.rodeo ecosystem** — monitor [bio.rodeo/models](https://bio.rodeo/models) for new models that could improve predictions (e.g., protein dynamics models, binding affinity predictors)
+5. **Track foundation model ecosystem** — monitor new releases of AlphaFold, ESM, Boltz, BioEmu and similar models that could improve predictions (e.g., protein dynamics models, binding affinity predictors)
 
 ---
 

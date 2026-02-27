@@ -669,7 +669,7 @@ mRNA levels ≠ protein levels ≠ surface channel density. The calibration impl
 
 ### Opportunity: Biological Foundation Models for Gap-Filling
 
-Three categories of foundation models from the broader computational biology ecosystem ([bio.rodeo](https://bio.rodeo/models)) could address the data gaps above:
+Three categories of foundation models from the broader computational biology ecosystem could address the data gaps above:
 
 #### Single-Cell Foundation Models (Cross-Species Transfer)
 

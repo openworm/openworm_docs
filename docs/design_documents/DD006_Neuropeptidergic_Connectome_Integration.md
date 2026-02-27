@@ -249,7 +249,7 @@ Where:
 
 The receptor kinetics above (k_on, k_off, delta_g) currently use uniform default values across all 31,479 peptide-receptor interactions. This is a significant simplification — in reality, binding affinities vary by orders of magnitude across neuropeptide-receptor pairs, and these differences are functionally important (a high-affinity pair activates at picomolar concentrations; a low-affinity pair requires nanomolar).
 
-Protein foundation models from the computational biology ecosystem ([bio.rodeo](https://bio.rodeo/models)) can predict differentiated binding parameters:
+Protein foundation models from the computational biology ecosystem can predict differentiated binding parameters:
 
 - **[Boltz-2](https://github.com/jwohlwend/boltz)** (MIT/Recursion): Jointly predicts protein complex structure AND small-molecule binding affinity, approaching FEP+ (free energy perturbation) accuracy on a single GPU. For each neuropeptide-GPCR pair, Boltz-2 can predict the binding free energy (ΔG_bind), from which k_on/k_off ratios (K_d = k_off/k_on = exp(ΔG_bind/RT)) can be estimated
 - **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** (DeepMind): Predicts peptide-receptor complex structures with atomic accuracy, including binding pose and interface contacts. The predicted binding interface area and contact density correlate with binding affinity

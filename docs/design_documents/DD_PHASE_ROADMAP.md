@@ -160,6 +160,10 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 7. **OWMeta data bundles** ([DD008](DD008_Data_Integration_Pipeline.md)) — Unified Python API for connectome, CeNGEN, cell positions, neuropeptide data; WBbt ID normalization across all datasets
 8. **AI contributor workflow** ([DD015](DD015_AI_Contributor_Model.md)) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates
 9. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
+10. **Project metrics dashboard** ([DD028](DD028_Project_Metrics_Dashboard.md)) — Static-site dashboard (GitHub Pages) with 4 panels: validation scores (Tier 2/3 trend), contributor activity (BadgeList + GitHub), CI health (pass/fail across repos), phase progress (DD status parsing). Auto-updates on every CI run via GitHub Actions.
+11. **DD RFC process and template** ([DD012](DD012_Design_Document_RFC_Process.md)) — Documented review lifecycle (Proposed → Accepted → Superseded), DD template with required sections (Integration Contract, Getting Started, Deliverables), GitHub PR-based review workflow
+12. **Contributor progression structure** ([DD011](DD011_Contributor_Progression_Model.md)) — L0–L4 level definitions with explicit advancement criteria, badge taxonomy (6 categories), BadgeList API integration, GitHub team/permission configuration, onboarding checklist
+13. **Validation data repository** ([DD024](DD024_Validation_Data_Acquisition_Pipeline.md)) — `openworm/validation-data` repo with `manifest.json` mapping datasets to DDs and validation tiers, `verify_validation_data.py` script, digitized baseline datasets (Schafer kinematics WCON, Randi 2023 correlation matrix)
 
 **Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 4, late March 2026)*
 
@@ -178,6 +182,10 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - ✅ OWMeta installs, `connect("openworm_data")` returns 302 neurons with WBbt IDs ([DD008](DD008_Data_Integration_Pipeline.md))
 - ✅ DD025 cross-validation: predicted kinetics within <30% relative error of measured values for known channels ([DD025](DD025_Protein_Foundation_Model_Pipeline.md))
 - ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
+- ✅ DD template exists with all required sections; at least one DD has completed the RFC review lifecycle ([DD012](DD012_Design_Document_RFC_Process.md))
+- ✅ L0–L4 levels documented, BadgeList group configured with 6 badge categories, GitHub teams match level permissions ([DD011](DD011_Contributor_Progression_Model.md))
+- ✅ `openworm/validation-data` repo exists, `manifest.json` covers Tier 2 + Tier 3 datasets, `verify_validation_data.py` passes ([DD024](DD024_Validation_Data_Acquisition_Pipeline.md))
+- ✅ Dashboard deployed to GitHub Pages, all 4 panels render, data auto-updates on CI run ([DD028](DD028_Project_Metrics_Dashboard.md))
 
 **Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase A datasets:
 
@@ -466,7 +474,7 @@ Current phenomenological models ([DD006](DD006_Neuropeptidergic_Connectome_Integ
 
 **Milestone (Projected):** **"Molecular-Level Intracellular Dynamics"**
 
-**Foundation Model Opportunities ([bio.rodeo](https://bio.rodeo/models))**
+**Foundation Model Opportunities**
 
 Phase 5's biggest blocker is the lack of *C. elegans*-specific biochemical rate constants — most GPCR cascade kinetics come from mammalian systems. Protein foundation models can bridge this gap by predicting binding affinities, conformational dynamics, and pathway structure from sequence rather than requiring per-species experimental measurement:
 
