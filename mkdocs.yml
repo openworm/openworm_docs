@@ -35,6 +35,7 @@ nav:
           - DD021 Draft Issues: design_documents/DD021_draft_issues.md
           - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
           - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
+          - DD028 Project Metrics Dashboard: design_documents/DD028_Project_Metrics_Dashboard.md
       - "Phase 1 — Cell-Type Specialization":
           - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD005 Draft Issues: design_documents/DD005_draft_issues.md

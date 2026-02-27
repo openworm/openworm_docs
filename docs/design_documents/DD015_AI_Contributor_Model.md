@@ -1183,7 +1183,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | Input | Source | Format |
 |-------|--------|--------|
-| Design Documents (DD001-DD027, plus DD014.1, DD014.2) | `docs/design_documents/` | Markdown |
+| Design Documents (DD001-DD028, plus DD014.1, DD014.2) | `docs/design_documents/` | Markdown |
 | Contributor progression rules | [DD011](DD011_Contributor_Progression_Model.md) | Policy document |
 | Validation criteria | [DD010](DD010_Validation_Framework.md) | Test suites |
 | PR diffs and issue data | GitHub API | JSON |

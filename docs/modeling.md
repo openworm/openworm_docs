@@ -5,7 +5,7 @@ OpenWorm Modeling Approach
 
 Our main goal is to build the world's first virtual organism — an *in silico* implementation of a living creature — for the purpose of achieving an understanding of the events and mechanisms of living cells.
 
-**This is now formalized in 28 Design Documents ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD027](design_documents/DD027_Multicompartmental_Neuron_Models.md), plus [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md) and [DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))** that specify every subsystem from ion channels to organism behavior, validated against experimental data.
+**This is now formalized in 29 Design Documents ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD028](design_documents/DD028_Project_Metrics_Dashboard.md), plus [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md) and [DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))** that specify every subsystem from ion channels to organism behavior, validated against experimental data.
 
 ---
 

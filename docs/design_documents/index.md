@@ -67,6 +67,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 | [DD012](DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
 | [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
 | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Foundation Model Channel Kinetics | Predicted ion channel kinetics from sequence (parallel, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
+| [DD028](DD028_Project_Metrics_Dashboard.md) | Project Metrics Dashboard | Validation scores, contributor activity, CI health, phase progress |
 
 ### Phase 1: Cell-Type Specialization ⚠️
 
@@ -126,7 +127,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in this [openworm_docs repository](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents).
-    **Total:** 28 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD027](DD027_Multicompartmental_Neuron_Models.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+    **Total:** 29 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD028](DD028_Project_Metrics_Dashboard.md) + [DD014.1](DD014.1_Visual_Rendering_Specification.md)/[DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 was merged into [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ### By Topic
 
@@ -149,7 +150,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta), [DD010](DD010_Validation_Framework.md) (4-tier validation), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (connectome/cect), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (movement toolbox), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (validation data acquisition), [DD026](DD026_Reservoir_Computing_Validation.md) (reservoir computing validation)
 
 **Infrastructure:**
-[DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation)
+[DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD028](DD028_Project_Metrics_Dashboard.md) (project metrics dashboard)
 
 **Governance:**
 [DD011](DD011_Contributor_Progression_Model.md) (contributor progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC process), [DD015](DD015_AI_Contributor_Model.md) (AI contributors)
