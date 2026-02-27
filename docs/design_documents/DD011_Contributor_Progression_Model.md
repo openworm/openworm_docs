@@ -36,6 +36,7 @@ OpenWorm uses a five-level contributor progression (L0 Observer through L5 Found
 - Badge definitions — full DD011 badge taxonomy created in BadgeList via API
 - Onboarding checklist template — orientation task checklist for N2-Whisperer to assign new contributors
 - Updated openworm.org/people.html — contributor page restructured by level
+- `reactivation-campaign-plan.md` — structured plan for re-engaging 940 dormant contributor applicants with personalized "Choose Your Level" onboarding
 
 ## Repository & Issues
 
@@ -165,6 +166,25 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 ## Progression Criteria (How to Earn Each Level)
 
+### Fast-Track Assessment (Choose Your Level)
+
+Not every new contributor is a beginner. OpenWorm's contributor application archive (940 applicants, 2013-2026) already captures education level, programming languages, and biology experience — the same dimensions that determine starting level. The Fast-Track Assessment uses this data (or a new self-assessment) to place experienced contributors at the right level immediately.
+
+**How it works:**
+
+1. **Self-assessment form:** New contributors answer 5 questions covering programming experience, biology background, C. elegans familiarity, modeling experience, and open-source contribution history. These map directly to the existing contributor application fields.
+
+2. **Skip rules for orientation badges:**
+   - Can already explain Hodgkin-Huxley dynamics → waive "Neuron Modeling Foundations" badge; demonstrate via brief explanation to Mind-of-a-Worm instead of completing the tutorial
+   - Has published C. elegans research → fast-track to L1 with brief verification (confirm familiarity with OpenWorm's simulation approach)
+   - Has 5+ merged PRs in any open-source neuroscience project → credit toward L1→L2 "First Issue Resolved" + "GitHub Proficient" badges
+
+3. **Retroactive placement for archived applicants:** The 940 archived applications already contain the assessment data. When the reactivation campaign (see Migration Path) contacts these applicants, their declared skills are pre-matched to a starting level and suggested first tasks.
+
+4. **Administration:** N2-Whisperer administers the assessment via Slack conversation. For applicants with clear qualifications, placement is immediate. For borderline cases, N2-Whisperer suggests one verification task (not the full orientation sequence).
+
+**Key principle:** Don't gate experienced people behind tutorials they don't need. Verification replaces completion for those who already have the knowledge. A postdoc who has modeled ion channels for 5 years should not be required to complete the Hodgkin-Huxley tutorial — they should demonstrate their knowledge and move on to meaningful contribution.
+
 ### L0 → L1 (Orientation Tasks)
 
 Earn **3 of 4 orientation badges** (assigned by N2-Whisperer based on background):
@@ -194,6 +214,16 @@ Submit at least **5 merged contributions** that:
 - Test coverage (contributions include tests or improve existing tests)
 - Documentation (docstrings, inline comments where needed)
 - Communication quality (clear PR descriptions, responsive to review feedback)
+
+**DD024 data digitization as a contribution pathway:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) identifies approximately 18 hours of data digitization work for Phase A — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:
+
+- Schafer lab N2 baseline kinematics (WCON format conversion)
+- Thomas 1990 defecation cycle timing data
+- Raizen 1994 pharyngeal EPG trace digitization
+- O'Hagan 2005 MEC-4 channel current kinetics
+- Chalfie 1985 touch response latency measurements
+
+Each digitization task produces a validation dataset that directly feeds [DD010](DD010_Validation_Framework.md) Tier 2/3 gates — so L1 contributors immediately see their work used in simulation validation. N2-Whisperer can assign these as "Data Digitizer" tasks with clear instructions, expected output format, and the paper section to digitize.
 
 **Typical timeline:** 1-3 months of sustained engagement.
 
@@ -359,14 +389,15 @@ Mind-of-a-Worm maintains a **contributor database**:
 
 Update openworm.org/people.html to include:
 
-**Current structure:**
+**Current people.html structure** (to be preserved and evolved):
 
-- Board of Directors
-- Scientific Advisory Board
-- Operations Team
-- OpenWorm Fellows
-- Senior Contributors (~15 people)
-- Contributors (~100+)
+- Board of Directors (7) → maps to L5
+- Scientific Advisory Panel (3) → maps to L5/Advisory
+- Operations Team (2) → maps to L5
+- OpenWorm Fellows (1) → maps to L4
+- Senior Contributors (16) → maps to L3-L4
+- Contributors (~100+ dynamic JS array) → maps to L1-L2
+- Emeritus Board Members (4) → Emeritus
 
 **Proposed structure (add levels):**
 
@@ -376,6 +407,16 @@ Update openworm.org/people.html to include:
 - Junior Contributors (L2)
 - Apprentices (L1)
 - Emeritus (inactive L3+)
+
+**Visible progression enhancements:**
+
+1. **Level count badges:** Each level section header shows the count (e.g., "L3 Contributors (7)") so visitors can see the community's shape at a glance
+2. **Recent Achievements sidebar:** Display the last 10 badges earned across the community — creates a sense of activity and momentum even for first-time visitors
+3. **Individual progress view:** Link each contributor's name to their BadgeList profile, showing earned badges, current level, and progression toward next level
+4. **"Join at Your Level" CTA:** Prominent button linking to the Choose Your Level self-assessment (see Fast-Track Assessment section), placed at the top of the page alongside the existing "How to join" information
+5. **Activity metrics:** Reference [DD028](DD028_Project_Metrics_Dashboard.md) as the data source for contributor activity metrics (PRs merged, badges earned, active days in last 30 days) displayed per contributor or per level
+
+**Technical note:** The existing `rowify()` JS templating function on people.html generates contributor cards from a static array. This can be extended to pull level and badge data from Mind-of-a-Worm's contributor database via a REST API endpoint, or from a static JSON file generated by CI (simpler, no runtime dependency). The JSON approach is recommended for Phase 1: a GitHub Action runs nightly, queries Mind-of-a-Worm's contributor database, writes `contributors.json`, and deploys to openworm.org alongside the page.
 
 ---
 
@@ -399,7 +440,37 @@ Update openworm.org/people.html to include:
 
 **New contributors:** Start at L0, progress via the documented criteria.
 
-**Reactivation Opportunity:** The contributor application form (archived at `archive/OpenWorm_Contributor_Application.xlsx`) contains 940 email addresses (2013-2026), including 391 signups during 2019-2025 when no active recruitment occurred. With the contributor model, badge system, and AI agent infrastructure in place, a personalized reactivation email campaign could convert a meaningful fraction — even 5% = 47 active contributors, more than OpenWorm has ever had at once. Each email can be matched to the applicant's declared skills (e.g., Python → DD-derived GitHub issues) and education level (→ `explain_level` for AI agent teach-back). The 340 applicants who checked "no biology experience" are no longer disqualified — they're the ideal audience for AI-bridged contribution with teach-back education.
+### Reactivation Campaign
+
+The contributor application form (archived at `archive/OpenWorm_Contributor_Application.xlsx`) represents OpenWorm's largest untapped resource: 940 people who already raised their hand to contribute.
+
+**Target population:**
+
+- **940 total email addresses** from contributor applications (2013-2026)
+- **391 signups during the dormant period** (2019-2025) when no active recruitment or onboarding occurred — these people signed up despite receiving no response
+- **79 BadgeList "Simulation Stack Apprentice" earners** — already demonstrated hands-on engagement
+- **340 applicants with "no biology experience"** — previously a barrier, now an asset (see below)
+
+**Personalization strategy:** Each reactivation email is matched to the applicant's declared skills:
+
+- Programming languages (Python, C++, Java, etc.) → matched to specific DD-derived GitHub issues at their level
+- Education level → mapped to `explain_level` for AI agent teach-back ([DD015](DD015_AI_Contributor_Model.md))
+- Biology experience → determines starting orientation (fast-track vs. full)
+- Interests (modeling, data, visualization, etc.) → matched to subsystem and suggested first task
+
+**Fast-track badge credit:** The 79 "Simulation Stack Apprentice" earners are instant L1 candidates — they've already completed the equivalent of the "Simulation Runner" orientation badge. Their reactivation email acknowledges this: "You already earned Simulation Runner in [year]. You're [badge] away from L1."
+
+**"Choose Your Level" link:** Every reactivation email includes the self-assessment (see Fast-Track Assessment section) so returnees skip orientation they don't need. A postdoc who signed up in 2018 shouldn't be asked to install Docker again.
+
+**340 "no biology experience" applicants:** No longer disqualified. These contributors are the ideal audience for AI-bridged contribution with teach-back education ([DD015](DD015_AI_Contributor_Model.md)). Their AI agents handle the biology; they learn through the Sponsor Summary mechanism. The "I Understand Neurons" teach-back badge path is designed for exactly this population.
+
+**Success metric:** 5% conversion = 47 active contributors — more than OpenWorm has ever had simultaneously active. Even 2% = 19, which would double the current active contributor count.
+
+**Phased rollout:**
+
+- **Wave 1:** 79 BadgeList earners + 16 current Senior Contributors (known warm contacts, highest expected conversion)
+- **Wave 2:** 391 dormant-period signups (2019-2025) — signed up recently despite no response, likely still interested
+- **Wave 3:** Remaining archive (pre-2019 signups) — lower expected conversion but still worth reaching
 
 ---
 
@@ -423,10 +494,12 @@ Earned by completing onboarding milestones. Assigned and verified by N2-Whispere
 |-------|----------|--------------|---------------------|
 | **Connected** | Join Slack, GitHub, subscribe to mailing list | N2-Whisperer confirms channel presence | "Plugged In" (15 earners) |
 | **Simulation Runner** | Install Docker, run simulation stack, post output | Screenshot with version number | "Simulation Stack Apprentice" (79 earners) |
-| **Explorer** | Navigate Worm Browser, identify 5 neurons, describe functions | N2-Whisperer evaluates response | — |
+| **Explorer** | Navigate the OpenWorm viewer ([DD014](DD014_Dynamic_Visualization_Architecture.md) Stage 1 Trame viewer or legacy Worm Browser), identify 5 neurons, describe their function and one connection | N2-Whisperer evaluates response | — |
 | **Paper Reader** | Read [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), summarize in 3 bullets | N2-Whisperer evaluates summary | — |
 
 **L0 → L1 requirement:** Earn 3 of 4 orientation badges.
+
+**The viewer as engagement hook:** The [DD014](DD014_Dynamic_Visualization_Architecture.md) WormSim viewer is the project's primary engagement hook — the visual, interactive "front door" that draws newcomers in. Stage 1 (post-hoc Trame viewer with cell selection and time scrubbing) should be the first thing a new contributor sees. The Explorer badge is deliberately designed to require interacting with it, ensuring every new contributor experiences the simulation visually before diving into code or data.
 
 #### 2. Skill Badges (L1 → L2)
 
@@ -637,6 +710,46 @@ For human sponsors of AI agents: teach-back badges accumulate alongside (or inst
 
 ---
 
+## Engagement Loop
+
+Badges and levels only drive sustained participation if they're wired into an active feedback loop. This section defines the engagement mechanics that turn badge progression into a self-reinforcing cycle of contribution, recognition, and next-action prompting.
+
+### Trigger-Action-Channel Map
+
+| Trigger | Action | Channel |
+|---------|--------|---------|
+| Badge earned | Congratulations message + "Next challenge" suggestion | Slack DM + email |
+| PR merged | Progress update toward next badge/level | Slack DM |
+| Inactive >2 weeks | Gentle nudge with suggested "easy wins" matching their skills | Email |
+| Level-up (L0→L1, L1→L2, etc.) | Public announcement + contributor page update | Slack #general + openworm.org |
+| Monthly | "State of the Worm" digest showing collective progress | Email newsletter |
+
+### Engagement Loop Components
+
+**Immediate recognition:** When a badge is earned, the contributor receives an instant notification explaining what they unlocked (new permissions, new subsystem access, new badge categories available). Recognition is specific: "You earned Data Wrangler — you can now contribute to DD008 data pipeline tasks" rather than generic congratulations.
+
+**Next action prompt:** Every notification includes one concrete next step. Badge earned → "Here's a GitHub issue at your level." Level up → "Here are 3 issues in your new subsystem scope." PR merged → "You're 2 PRs away from your next domain badge." The contributor never has to wonder "what should I do next?"
+
+**Weekly contributor digest:** Active contributors (at least 1 activity in the past 7 days) receive a weekly summary showing their progress toward the next badge/level, nearby milestones ("1 more PR for Tenacious badge"), and a highlight of what the community accomplished that week.
+
+**Monthly "State of the Worm" newsletter:** Community-wide progress report sent to all contributors (active and inactive). Content includes:
+
+- Collective metrics: PRs merged, badges earned, new contributors onboarded
+- Phase progress: which DD milestones were hit, what's next
+- Contributor spotlights: celebrate recent level-ups and notable contributions
+- "Join back in" CTA: link to open issues tagged by difficulty level
+- Data sourced from [DD028](DD028_Project_Metrics_Dashboard.md) dashboard metrics
+
+**Re-engagement nudge:** Contributors inactive for >2 weeks receive a personalized email with 2-3 open GitHub issues matched to their declared skills and current level. The tone is invitational, not guilt-inducing: "We noticed you haven't been around — here are some things that could use your expertise." If no response after 2 nudges (spaced 2 weeks apart), the contributor moves to quarterly digest frequency.
+
+### Notification Responsibilities
+
+- **Mind-of-a-Worm** generates all engagement notifications (badge earned, level up, next challenge, re-engagement nudges, weekly digest)
+- **N2-Whisperer** delivers onboarding-specific messages (orientation badge prompts, Choose Your Level assessment, first-week check-ins)
+- **"State of the Worm" newsletter** content is generated from [DD028](DD028_Project_Metrics_Dashboard.md) metrics data, formatted by Mind-of-a-Worm, and distributed via email
+
+---
+
 ## Known Issues
 
 ### Issue 1: Contributor Churn
@@ -671,8 +784,11 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 ### How This DD Interfaces with Other DDs
 
 - **DD012 (RFC Process):** Contributor levels determine who can propose, review, and approve Design Documents
-- **DD015 (AI Contributor Model):** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
 - **DD013 (Simulation Stack):** Subsystem ownership map determines merge permissions per repository
+- **DD014 (Dynamic Visualization Architecture):** The WormSim viewer serves as the primary engagement hook for the Explorer orientation badge; contributor community data can surface in the viewer's community panel
+- **DD015 (AI Contributor Model):** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
+- **DD024 (Validation Data Acquisition Pipeline):** Provides structured data digitization tasks suitable for L1 contributor onboarding; digitized datasets feed into [DD010](DD010_Validation_Framework.md) validation gates
+- **DD028 (Project Metrics Dashboard):** Mind-of-a-Worm contributor metrics (badge counts by category, level distribution, active contributor count, onboarding conversion rates) feed into DD028's contributor panel; "State of the Worm" newsletter content is generated from DD028 dashboard data
 
 ### Configuration
 
@@ -680,6 +796,9 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 - Repository branch protection rules enforce level-based merge permissions
 - Mind-of-a-Worm contributor database tracks level, badges, and subsystem assignments
 - BadgeList API integration awards badges on GitHub events (PR merge, orientation completion)
+- Mind-of-a-Worm generates engagement notifications (badge earned, level up, next challenge, re-engagement nudges) via Slack and email
+- "State of the Worm" monthly newsletter uses [DD028](DD028_Project_Metrics_Dashboard.md) metrics data
+- Reactivation campaign emails use contributor application archive data matched to DD-derived issues
 
 ---
 
