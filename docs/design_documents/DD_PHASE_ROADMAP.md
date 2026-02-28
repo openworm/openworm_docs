@@ -54,9 +54,9 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 ---
 
-## Phase 0: Existing Foundation (Accepted, Working)
+## Phase 0: Core Architecture (Functional, Stabilizing)
 
-**Status:** ✅ **Complete** (but needs containerization work per Phase A1)
+**Status:** ✅ **Functional** — core simulation runs; 83 stabilization issues tracked across DD001-DD003/DD020 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)
 
 **Phase Rationale:** These DDs describe **already-implemented** subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and `cect` provides 30+ connectome datasets. They form the working foundation everything else builds on.
 
@@ -651,7 +651,7 @@ Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_In
 
 | Phase | Duration | Calendar (if start March 2026) | Cumulative Cells | Cumulative DD Implementation |
 |-------|----------|-------------------------------|------------------|------------------------------|
-| Phase 0 | Complete | Already done | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
+| Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
 | Phase A1 | 2 weeks | Mar 2026 (Wks 1-2) | (no change) | +5 DDs ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) |
 | Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +4 DDs ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (specialized, not added) | +3 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD014.1](DD014.1_Visual_Rendering_Specification.md)) |

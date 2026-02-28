@@ -43,13 +43,13 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 ## Phase Overview
 
-OpenWorm's roadmap takes the project from today's 302 generic neurons to a complete 959-cell digital organism over ~18 months. The journey is organized into phases that manage scientific risk, build infrastructure first, and validate early. Phase 0 (already complete) proved that coupled neural-muscle-body simulation works. Phases A1 and A2 lay the infrastructure and governance foundation. Phases 1-4 progressively add biological complexity — from cell-type specialization through organ systems to the complete organism.
+OpenWorm's roadmap takes the project from today's 302 generic neurons to a complete 959-cell digital organism over ~18 months. The journey is organized into phases that manage scientific risk, build infrastructure first, and validate early. Phase 0 established the core architecture — coupled neural-muscle-body simulation runs and produces movement, though stabilization work remains (see Phase A1). Phases A1 and A2 lay the infrastructure and governance foundation. Phases 1-4 progressively add biological complexity — from cell-type specialization through organ systems to the complete organism.
 
 The key insight behind this phasing: **validate the hardest science early**. Phase 1's expression→conductance mapping is the highest-risk step. If it fails, we discover it in month 3 (not month 12). Each subsequent phase builds on validated foundations, not assumptions.
 
 | Phase | Name | Duration | What It Delivers | Key DDs | Cells |
 |-------|------|----------|-----------------|---------|-------|
-| 0 | Core Architecture | Done | Neural circuit + muscle + body + connectome data | 4 | 302 neurons + 95 muscles |
+| 0 | Core Architecture | Functional | Neural circuit + muscle + body + connectome data — simulation runs, 83 stabilization issues tracked | 4 | 302 neurons + 95 muscles |
 | A1 | Core Infrastructure | Wks 1-2 | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
 | A2 | Governance & Derisking | Wks 3-4 | L0-L5 contributor levels + badge taxonomy ([DD011](DD011_Contributor_Progression_Model.md)), DD proposal/review process ([DD012](DD012_Design_Document_RFC_Process.md)), AI agent registration + task pipeline ([DD015](DD015_AI_Contributor_Model.md)), ion channel kinetics predictions derisking Phase 1 ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) | 4 | — |
 | 1 | Cell-Type Specialization | Mo 1-3 | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
@@ -59,7 +59,7 @@ The key insight behind this phasing: **validate the hardest science early**. Pha
 
 ### Why This Order?
 
-- **Phase 0:** Already done — the foundation. 302 neurons, 95 muscles, SPH body physics, connectome data.
+- **Phase 0:** The foundation is functional — coupled simulation runs and produces movement with 302 neurons, 95 muscles, and SPH body physics. 83 stabilization issues remain (containerization, validation scripts, dependency pinning), most addressed by Phase A1.
 - **Phase A1:** Can't build/test/validate without containerization ([DD013](DD013_Simulation_Stack_Architecture.md)), data access ([DD008](DD008_Data_Integration_Pipeline.md)), and validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)). These block everything.
 - **Phase A2:** Doesn't block modeling but enables governance at scale and derisks Phase 1 calibration via foundation model cross-validation ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)). Runs in parallel with A1.
 - **Phase 1:** Highest scientific risk (expression→conductance mapping) — test early, fail fast. If it works, we have 128 distinct neuron classes. If it fails, DD025 predictions are the fallback.
