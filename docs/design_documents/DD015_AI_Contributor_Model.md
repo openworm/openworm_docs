@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** Governance | **Layer:** AI Contributor Model
+> **Phase:** [Phase A2: Governance & Derisking](DD_PHASE_ROADMAP.md#phase-a2-governance-derisking-weeks-3-4) | **Layer:** AI Contributor Model
 
 ## TL;DR
 
@@ -256,7 +256,7 @@ Parse the DD's **Integration Contract** section:
 
 **Required per-issue field:**
 
-- **Roadmap Phase:** Phase X — derived from DD's phase assignment in `DD_PHASE_ROADMAP.md`; issues from Phase 0 DDs may target Phase A or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: `## Group N: Name (Phase X)`.
+- **Roadmap Phase:** Phase X — derived from DD's phase assignment in `DD_PHASE_ROADMAP.md`; issues from Phase 0 DDs may target Phase A1/A2 or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: `## Group N: Name (Phase X)`.
 
 **Automation:** `dd_issue_generator.py` runs:
 

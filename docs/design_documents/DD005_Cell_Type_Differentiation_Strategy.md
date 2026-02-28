@@ -323,7 +323,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 **Promoted to parallel track — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md).**
 
-Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD025 runs cross-validation during Phase A and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
+Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD025 runs cross-validation during Phase A2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
 
 **Relationship to DD005:** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
 
@@ -686,7 +686,7 @@ The calibration training set (Issue 1 above) is limited to ~20 neuron types with
 - **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** / **[Boltz-2](https://github.com/jwohlwend/boltz)**: Predict 3D structures of all *C. elegans* ion channels from sequence, including ion coordination sites that determine selectivity and gating
 - **[BioEmu-1](https://github.com/microsoft/BioEmu)** (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone
 
-This pipeline is now specified as a standalone Design Document: [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
+This pipeline is now specified as a standalone Design Document: [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
 
 **Validation step:** For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.
 

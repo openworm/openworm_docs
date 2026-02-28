@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Governance
+> **Phase:** [Phase A2: Governance & Derisking](DD_PHASE_ROADMAP.md#phase-a2-governance-derisking-weeks-3-4) | **Layer:** Governance
 
 ## TL;DR
 
@@ -215,7 +215,7 @@ Submit at least **5 merged contributions** that:
 - Documentation (docstrings, inline comments where needed)
 - Communication quality (clear PR descriptions, responsive to review feedback)
 
-**DD024 data digitization as a contribution pathway:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) identifies approximately 18 hours of data digitization work for Phase A — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:
+**DD024 data digitization as a contribution pathway:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) identifies approximately 18 hours of data digitization work for Phase A1 — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:
 
 - Schafer lab N2 baseline kinematics (WCON format conversion)
 - Thomas 1990 defecation cycle timing data

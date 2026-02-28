@@ -26,16 +26,19 @@ nav:
           - DD003 Draft Issues: design_documents/DD003_draft_issues.md
           - DD020 Connectome Data Access: design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md
           - DD020 Draft Issues: design_documents/DD020_draft_issues.md
-      - "Infrastructure Bootstrap":
-          - DD011 Contributor Progression: design_documents/DD011_Contributor_Progression_Model.md
-          - DD012 RFC Process: design_documents/DD012_Design_Document_RFC_Process.md
+      - "Phase A1 — Core Infrastructure":
+          - DD008 Data Integration: design_documents/DD008_Data_Integration_Pipeline.md
           - DD013 Simulation Stack: design_documents/DD013_Simulation_Stack_Architecture.md
           - DD013 Draft Issues: design_documents/DD013_draft_issues.md
           - DD021 Movement Toolbox: design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md
           - DD021 Draft Issues: design_documents/DD021_draft_issues.md
           - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
-          - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
           - DD028 Project Metrics Dashboard: design_documents/DD028_Project_Metrics_Dashboard.md
+      - "Phase A2 — Governance & Derisking":
+          - DD011 Contributor Progression: design_documents/DD011_Contributor_Progression_Model.md
+          - DD012 RFC Process: design_documents/DD012_Design_Document_RFC_Process.md
+          - DD015 AI Contributor Model: design_documents/DD015_AI_Contributor_Model.md
+          - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
       - "Phase 1 — Cell-Type Specialization":
           - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD005 Draft Issues: design_documents/DD005_draft_issues.md
@@ -52,7 +55,6 @@ nav:
           - DD027 Draft Issues: design_documents/DD027_draft_issues.md
       - "Phase 3 — Organ Systems":
           - DD007 Pharyngeal System: design_documents/DD007_Pharyngeal_System_Architecture.md
-          - DD008 Data Integration: design_documents/DD008_Data_Integration_Pipeline.md
           - DD009 Intestinal Oscillator: design_documents/DD009_Intestinal_Oscillator_Model.md
           - DD017 Hybrid ML: design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md
           - DD017 Draft Issues: design_documents/DD017_draft_issues.md
@@ -60,8 +62,6 @@ nav:
       - "Phase 4 — Complete Organism":
           - DD004 Mechanical Cell Identity: design_documents/DD004_Mechanical_Cell_Identity.md
           - DD014.2 Mesh Deformation: design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md
-      - "Governance":
-          - DD015 AI Contributor Model: design_documents/DD015_AI_Contributor_Model.md
   - How It Works:
       - Modeling Approach: modeling.md
       - Validation Framework: validation.md

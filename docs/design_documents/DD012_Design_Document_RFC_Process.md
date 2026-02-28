@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Governance
+> **Phase:** [Phase A2: Governance & Derisking](DD_PHASE_ROADMAP.md#phase-a2-governance-derisking-weeks-3-4) | **Layer:** Governance
 
 ## Context
 
@@ -236,7 +236,7 @@ When a DD is created, approved, or changes phase assignment:
    - Issue draft `Roadmap Phase` tags are consistent with DD phase
    - Integration Map Phase Legend is current
 
-**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD020 bug discovered in Feb 2026: DD020 was Phase 0 in the roadmap but said Phase 1 in its own header.
+**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A1) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD020 bug discovered in Feb 2026: DD020 was Phase 0 in the roadmap but said Phase 1 in its own header.
 
 ### When to Write a Design Document vs. Just Opening a PR
 

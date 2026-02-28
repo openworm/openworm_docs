@@ -42,7 +42,7 @@
 
 ## Overview
 
-OpenWorm's path from 302 generic neurons to 959 specialized cells is organized into **7 implementation phases** over ~18-24 months. Each phase has:
+OpenWorm's path from 302 generic neurons to 959 specialized cells is organized into **8 implementation phases** over ~18-24 months. Each phase has:
 
 1. **Clear scope** (which DDs belong to it)
 2. **Visible milestone** (what we can announce when complete)
@@ -56,7 +56,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 ## Phase 0: Existing Foundation (Accepted, Working)
 
-**Status:** ✅ **Complete** (but needs containerization work per Phase A)
+**Status:** ✅ **Complete** (but needs containerization work per Phase A1)
 
 **Phase Rationale:** These DDs describe **already-implemented** subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and `cect` provides 30+ connectome datasets. They form the working foundation everything else builds on.
 
@@ -78,7 +78,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - 15ms simulations produce movement (validated against Schafer lab kinematics)
 - ConnectomeToolbox provides [Cook2019](https://doi.org/10.1038/s41586-019-1352-7), Witvliet, Randi, Ripoll-Sanchez data
 
-**What's Missing (addressed in Phase A):**
+**What's Missing (addressed in Phase A1):**
 
 - No config system (parameters hardcoded in `master_openworm.py`)
 - No docker-compose (raw shell scripts)
@@ -88,7 +88,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)
 - Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see [DD001](DD001_Neural_Circuit_Architecture.md) Issue 1)
 
-**Phase 0 → Phase A Gap Map:**
+**Phase 0 → Phase A1 Gap Map:**
 
 | What's Missing (Phase 0) | Addressed By | Specific Issues |
 |---------------------------|-------------|-----------------|
@@ -104,7 +104,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Missing Validation Scripts Inventory:**
 
-| Script | DD | Phase A Issue | Target Repo |
+| Script | DD | Phase A1 Issue | Target Repo |
 |--------|----|---------------|-------------|
 | `boyle_berri_cohen_trajectory.py` | DD001 | DD001 Issue 1 | openworm/c302 |
 | `extract_trajectory.py` | DD001 | DD001 Issue 2 | openworm/sibernetic |
@@ -116,7 +116,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | `validate_incompressibility.py` | DD003 | DD003 Issue 2 | openworm/sibernetic |
 | `backend_parity_test.py` | DD003 | DD003 Issue 5 | openworm/sibernetic |
 
-**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 9, DD002: 18, DD003: 21, DD020: 23) plus relocated issues (DD005: 6, DD017: 3, DD027: 3). Of these, ~35 are Phase A infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
+**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 9, DD002: 18, DD003: 21, DD020: 23) plus relocated issues (DD005: 6, DD017: 3, DD027: 3). Of these, ~35 are Phase A1 infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
@@ -129,11 +129,11 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 ---
 
-## Phase A: Infrastructure Bootstrap (Weeks 1-4)
+## Phase A1: Core Infrastructure (Weeks 1-2)
 
 **Status:** ⚠️ **Proposed** — Must complete before modeling phases proceed
 
-**Phase Rationale:** Phase A DDs either (a) provide infrastructure that **all** later phases depend on, or (b) have zero infrastructure dependencies and can run in parallel. Without Docker/CI ([DD013](DD013_Simulation_Stack_Architecture.md)), unified data access ([DD008](DD008_Data_Integration_Pipeline.md)), and working validation ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), contributors can't build, test, or validate. [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) starts validation data digitization immediately. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) has zero infrastructure dependencies and derisks Phase 1's uncertain expression→conductance mapping — BioEmu-1 (100,000x MD speed) made this feasible, and inputs (WormBase sequences, literature kinetics) are available today.
+**Phase Rationale:** These five DDs have the highest downstream dependency count. [DD013](DD013_Simulation_Stack_Architecture.md) is the orchestrator — literally nothing runs without it. [DD008](DD008_Data_Integration_Pipeline.md) provides the unified data layer that Phase 1 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) query. [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) enables Tier 3 behavioral validation. [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) provides the ground truth data. [DD028](DD028_Project_Metrics_Dashboard.md) gives CI/validation visibility — can't manage what you can't measure. Together they answer: can a contributor build the stack, access data, and validate results?
 
 **Scope:**
 
@@ -142,12 +142,8 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | **[DD013](DD013_Simulation_Stack_Architecture.md)** | Simulation Stack Architecture | Integration L4 (TBD) | ~40 hours | **CRITICAL** — All phases need this |
 | **[DD008](DD008_Data_Integration_Pipeline.md)** | Data Integration Pipeline (OWMeta) | Data L4 (TBD) | ~30 hours | **Data layer** — Phase 1+ datasets need unified access |
 | **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | Movement Toolbox Revival | Validation L4 (TBD) | ~33 hours | **Tier 3 validation** |
-| [DD012](DD012_Design_Document_RFC_Process.md) | Design Document RFC Process | Founder | ~8 hours | Governance |
-| [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression Model | Founder | ~8 hours | Governance |
-| [DD015](DD015_AI_Contributor_Model.md) | AI-Native Contributor Model | Founder | ~12 hours | Governance (AI agent workflow) |
 | **[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)** | Validation Data Acquisition Pipeline | Validation L4 (TBD) | ~18 hours | All validation tiers — data must exist before validation can run |
-| **[DD025](DD025_Protein_Foundation_Model_Pipeline.md)** | Foundation Model Channel Kinetics | ML/Structural Bio (TBD) | ~20 hours | Parallel (derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
-| [DD028](DD028_Project_Metrics_Dashboard.md) | Project Metrics Dashboard | Integration L4 (TBD) | ~12 hours | Governance (real-time project health) |
+| [DD028](DD028_Project_Metrics_Dashboard.md) | Project Metrics Dashboard | Integration L4 (TBD) | ~12 hours | CI/validation visibility |
 
 **Key Deliverables:**
 
@@ -158,14 +154,10 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 5. **Revived analysis toolbox** ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) — Python 3.12 compatible, 5 metrics extractable, WCON parser works
 6. **Contributor workflow** ([DD013](DD013_Simulation_Stack_Architecture.md)) — Fork subsystem → build with custom branch → quick-test → validate → PR
 7. **OWMeta data bundles** ([DD008](DD008_Data_Integration_Pipeline.md)) — Unified Python API for connectome, CeNGEN, cell positions, neuropeptide data; WBbt ID normalization across all datasets
-8. **AI contributor workflow** ([DD015](DD015_AI_Contributor_Model.md)) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates
-9. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
-10. **Project metrics dashboard** ([DD028](DD028_Project_Metrics_Dashboard.md)) — Static-site dashboard (GitHub Pages) with 4 panels: validation scores (Tier 2/3 trend), contributor activity (BadgeList + GitHub), CI health (pass/fail across repos), phase progress (DD status parsing). Auto-updates on every CI run via GitHub Actions.
-11. **DD RFC process and template** ([DD012](DD012_Design_Document_RFC_Process.md)) — Documented review lifecycle (Proposed → Accepted → Superseded), DD template with required sections (Integration Contract, Getting Started, Deliverables), GitHub PR-based review workflow
-12. **Contributor progression structure** ([DD011](DD011_Contributor_Progression_Model.md)) — L0–L4 level definitions with explicit advancement criteria, badge taxonomy (6 categories), BadgeList API integration, GitHub team/permission configuration, onboarding checklist
-13. **Validation data repository** ([DD024](DD024_Validation_Data_Acquisition_Pipeline.md)) — `openworm/validation-data` repo with `manifest.json` mapping datasets to DDs and validation tiers, `verify_validation_data.py` script, digitized baseline datasets (Schafer kinematics WCON, Randi 2023 correlation matrix)
+8. **Project metrics dashboard** ([DD028](DD028_Project_Metrics_Dashboard.md)) — Static-site dashboard (GitHub Pages) with 4 panels: validation scores (Tier 2/3 trend), contributor activity (BadgeList + GitHub), CI health (pass/fail across repos), phase progress (DD status parsing). Auto-updates on every CI run via GitHub Actions.
+9. **Validation data repository** ([DD024](DD024_Validation_Data_Acquisition_Pipeline.md)) — `openworm/validation-data` repo with `manifest.json` mapping datasets to DDs and validation tiers, `verify_validation_data.py` script, digitized baseline datasets (Schafer kinematics WCON, Randi 2023 correlation matrix)
 
-**Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 4, late March 2026)*
+**Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 2, mid March 2026)*
 
 - **What you run:** `docker compose run quick-test` (completes in <5 min) — builds the full simulation stack, runs a short simulation, checks for crashes
 - **What you see:** Terminal output showing build → simulate → validate pipeline. JSON report with pass/fail on each metric. Video of worm locomotion (no more OOM at >2s).
@@ -180,19 +172,14 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - ✅ Video pipeline memory leak fixed (can run >2s without OOM)
 - ✅ Analysis toolbox installs on Python 3.12, extracts 5 metrics from sample WCON file
 - ✅ OWMeta installs, `connect("openworm_data")` returns 302 neurons with WBbt IDs ([DD008](DD008_Data_Integration_Pipeline.md))
-- ✅ DD025 cross-validation: predicted kinetics within <30% relative error of measured values for known channels ([DD025](DD025_Protein_Foundation_Model_Pipeline.md))
-- ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
-- ✅ DD template exists with all required sections; at least one DD has completed the RFC review lifecycle ([DD012](DD012_Design_Document_RFC_Process.md))
-- ✅ L0–L4 levels documented, BadgeList group configured with 6 badge categories, GitHub teams match level permissions ([DD011](DD011_Contributor_Progression_Model.md))
 - ✅ `openworm/validation-data` repo exists, `manifest.json` covers Tier 2 + Tier 3 datasets, `verify_validation_data.py` passes ([DD024](DD024_Validation_Data_Acquisition_Pipeline.md))
 - ✅ Dashboard deployed to GitHub Pages, all 4 panels render, data auto-updates on CI run ([DD028](DD028_Project_Metrics_Dashboard.md))
 
-**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase A datasets:
+**Datasets Needed:** See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) for the complete inventory. Key Phase A1 datasets:
 
 - **Schafer lab N2 baseline kinematics** (WCON format) — Tier 3 validation baseline
 - **Randi 2023 functional connectivity** (302×302 correlation matrix) — Tier 2 validation
 - **Validation data for digitization** — Thomas 1990, Raizen 1994, O'Hagan 2005, Chalfie 1985
-- **DD025 inputs** — Ion channel sequences (WormBase) + known kinetics (~50-100 channels)
 
 **Blocking Dependencies:**
 
@@ -200,15 +187,61 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - Recruit Data L4 Maintainer (owns [DD008](DD008_Data_Integration_Pipeline.md) OWMeta revival)
 - Recruit Validation L4 Maintainer (owns [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival)
 
-**Cumulative Metrics:** 397 cells (unchanged — infrastructure phase) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +8 DDs (12 total)
+**Cumulative Metrics:** 397 cells (unchanged — infrastructure phase) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +5 DDs (9 total)
+
+---
+
+## Phase A2: Governance & Derisking (Weeks 3-4)
+
+**Status:** ⚠️ **Proposed** — Can proceed in parallel with Phase A1
+
+**Phase Rationale:** These DDs enable governance at scale and derisk Phase 1 science. They don't block contributor workflow but make it sustainable. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) runs foundation model cross-validation in parallel with A1, providing priors that accelerate [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration. [DD011](DD011_Contributor_Progression_Model.md)/[DD012](DD012_Design_Document_RFC_Process.md)/[DD015](DD015_AI_Contributor_Model.md) formalize roles, processes, and AI agent workflows. None of these block modeling work, but all of them enable the project to scale beyond a handful of contributors.
+
+**Scope:**
+
+| DD | Title | Owner | Effort | Purpose |
+|----|-------|-------|--------|---------|
+| [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression Model | Founder | ~8 hours | Governance — formalizes contributor advancement (L0-L5) |
+| [DD012](DD012_Design_Document_RFC_Process.md) | Design Document RFC Process | Founder | ~8 hours | Governance — formalizes DD review/approval |
+| [DD015](DD015_AI_Contributor_Model.md) | AI-Native Contributor Model | Founder | ~12 hours | Governance — AI agent registration and task pipeline |
+| **[DD025](DD025_Protein_Foundation_Model_Pipeline.md)** | Foundation Model Channel Kinetics | ML/Structural Bio (TBD) | ~20 hours | Derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Phase 1 calibration |
+
+**Key Deliverables:**
+
+1. **AI contributor workflow** ([DD015](DD015_AI_Contributor_Model.md)) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates
+2. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
+3. **DD RFC process and template** ([DD012](DD012_Design_Document_RFC_Process.md)) — Documented review lifecycle (Proposed → Accepted → Superseded), DD template with required sections (Integration Contract, Getting Started, Deliverables), GitHub PR-based review workflow
+4. **Contributor progression structure** ([DD011](DD011_Contributor_Progression_Model.md)) — L0–L4 level definitions with explicit advancement criteria, badge taxonomy (6 categories), BadgeList API integration, GitHub team/permission configuration, onboarding checklist
+
+**Milestone:** 🎉 **"Governance Framework and Foundation Model Cross-Validation"** *(Target: Week 4, late March 2026)*
+
+- **What you see:** Contributor levels documented and enforced via GitHub teams. DD review process operational. AI agents registered and generating issues from DD Integration Contracts. Foundation model cross-validation complete — `channel_kinetics_predictions.csv` ready for Phase 1 integration.
+- **Key result:** If [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s naive expression→conductance mapping fails in Phase 1, structure-based predictions from DD025 are ready immediately as a fallback.
+
+**Success Criteria:**
+
+- ✅ DD025 cross-validation: predicted kinetics within <30% relative error of measured values for known channels ([DD025](DD025_Protein_Foundation_Model_Pipeline.md))
+- ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
+- ✅ DD template exists with all required sections; at least one DD has completed the RFC review lifecycle ([DD012](DD012_Design_Document_RFC_Process.md))
+- ✅ L0–L4 levels documented, BadgeList group configured with 6 badge categories, GitHub teams match level permissions ([DD011](DD011_Contributor_Progression_Model.md))
+
+**Datasets Needed:**
+
+- **DD025 inputs** — Ion channel sequences (WormBase) + known kinetics (~50-100 channels)
+
+**Blocking Dependencies:**
+
+- None — Phase A2 has no infrastructure dependencies and can proceed in parallel with Phase A1
+
+**Cumulative Metrics:** 397 cells (unchanged) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +4 DDs (13 total, including Phase A1)
 
 ---
 
 ## Phase 1: Cell-Type Specialization (Months 1-3)
 
-**Status:** ⚠️ **Ready to Start** (after Phase A complete)
+**Status:** ⚠️ **Ready to Start** (after Phase A1 complete)
 
-**Phase Rationale:** Phase 1 is the first *modeling* phase — it specializes the 302 identical neurons into 128 biologically distinct classes. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) is here because it needs CeNGEN data via [DD008](DD008_Data_Integration_Pipeline.md) and validation tools from [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (both Phase A), and because its scientific risk is highest — if expression→conductance mapping fails, better to discover it early. [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md) establish visual infrastructure because months of work with no visual feedback kills contributor engagement. [DD010](DD010_Validation_Framework.md) Tier 2 activates the functional connectivity gate (r > 0.5) so Phase 2 doesn't build on a broken foundation. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) integration feeds foundation model predictions into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration while it's actively running.
+**Phase Rationale:** Phase 1 is the first *modeling* phase — it specializes the 302 identical neurons into 128 biologically distinct classes. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) is here because it needs CeNGEN data via [DD008](DD008_Data_Integration_Pipeline.md) and validation tools from [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (both Phase A1), and because its scientific risk is highest — if expression→conductance mapping fails, better to discover it early. [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md) establish visual infrastructure because months of work with no visual feedback kills contributor engagement. [DD010](DD010_Validation_Framework.md) Tier 2 activates the functional connectivity gate (r > 0.5) so Phase 2 doesn't build on a broken foundation. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Phase A2) integration feeds foundation model predictions into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration while it's actively running.
 
 **Scope:**
 
@@ -256,7 +289,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Blocking Dependencies:**
 
-- Phase A complete ([DD013](DD013_Simulation_Stack_Architecture.md) Docker stack, [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox working)
+- Phase A1 complete ([DD013](DD013_Simulation_Stack_Architecture.md) Docker stack, [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox working)
 - CeNGEN data downloaded and validated
 - Electrophysiology training set curated (20 neurons with measured conductances)
 
@@ -594,23 +627,23 @@ Each dataset is tagged with its phase, consumer DD, acquisition method, and stat
 
 **Critical Path (must be done in order):**
 ```
-Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) → Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md)) → Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) → Phase 3 ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
+Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) → Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md)) → Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) → Phase 3 ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
 ```
 
 **Parallelizable:**
 
+- Phase A2 ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) can proceed in parallel with Phase A1 (no infrastructure dependencies)
 - Phase 1 [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md) (viewer + rendering spec) can proceed alongside [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization)
 - Phase 2 [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (environment) and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception) can proceed in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) and [DD019](DD019_Closed_Loop_Touch_Response.md)
 - Phase 3 organ DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) can be implemented in any order or in parallel
 - Phase 4 [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity) and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation) can proceed in either order
-- Phase A [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model kinetics) can proceed in parallel with all other Phase A work (no infrastructure dependencies)
 
 **What Blocks Everything:**
 
 - **Integration Maintainer recruitment** — Without this, [DD013](DD013_Simulation_Stack_Architecture.md) doesn't get implemented
 - **Data Maintainer recruitment** — Without this, [DD008](DD008_Data_Integration_Pipeline.md) OWMeta doesn't get revived and Phase 1+ datasets lack unified access
 - **Validation Maintainer recruitment** — Without this, [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) doesn't get revived
-- **Phase A completion** — Without config system, data layer, and automated validation, contributor workflow doesn't work
+- **Phase A1 completion** — Without config system, data layer, and automated validation, contributor workflow doesn't work
 
 ---
 
@@ -619,7 +652,8 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 | Phase | Duration | Calendar (if start March 2026) | Cumulative Cells | Cumulative DD Implementation |
 |-------|----------|-------------------------------|------------------|------------------------------|
 | Phase 0 | Complete | Already done | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
-| Phase A | 4 weeks | Mar 2026 | (no change) | +8 DDs ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) |
+| Phase A1 | 2 weeks | Mar 2026 (Wks 1-2) | (no change) | +5 DDs ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) |
+| Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +4 DDs ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (specialized, not added) | +3 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD014.1](DD014.1_Visual_Rendering_Specification.md)) |
 | Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +5 DDs ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md), [DD026](DD026_Reservoir_Computing_Validation.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2) |
 | Phase 3 | 6 months | Oct 2026-Mar 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) |
@@ -632,8 +666,8 @@ Phase A ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Int
 
 ## Frequently Asked Questions
 
-**Q: Why is Phase A first if it's infrastructure, not science?**
-A: Without the config system ([DD013](DD013_Simulation_Stack_Architecture.md)) and automated validation ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), contributors can't test their work efficiently. Better to invest 4 weeks in infrastructure that enables the next 18 months of science, than to implement science DDs without the tools to validate them.
+**Q: Why is Phase A1 first if it's infrastructure, not science?**
+A: Without the config system ([DD013](DD013_Simulation_Stack_Architecture.md)) and automated validation ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), contributors can't test their work efficiently. Better to invest 2 weeks in infrastructure that enables the next 18 months of science, than to implement science DDs without the tools to validate them. Phase A2 (governance, derisking) runs in parallel and doesn't block modeling.
 
 **Q: Can Phase 3 organ DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) be implemented in parallel?**
 A: Yes — they're semi-independent subsystems. Different contributors can work on pharynx, intestine, and egg-laying simultaneously. [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (hybrid ML) can also proceed in parallel.
@@ -652,11 +686,14 @@ A: After each major milestone:
 - Phase 3: "Multi-Organ, Multi-Timescale C. elegans Simulation" (target: *Nature Communications* or *Cell Systems*)
 - Phase 4: "Complete 959-Cell Digital Organism" (target: **Nature** or **Science**)
 
-**Q: Why is DD025 (foundation model kinetics) in Phase A, not Phase 3 with the rest of DD017?**
-A: Component 3 derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain transcript→conductance mapping. BioEmu-1 (100,000x MD speed) invalidated the original "computationally expensive" rejection. The inputs (WormBase sequences, literature kinetics) are available now with no infrastructure dependencies. Cross-validation in Phase A provides a safety net: if [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s naive mapping fails in Phase 1, structure-based predictions are ready immediately.
+**Q: Why is DD025 (foundation model kinetics) in Phase A2, not Phase 3 with the rest of DD017?**
+A: Component 3 derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain transcript→conductance mapping. BioEmu-1 (100,000x MD speed) invalidated the original "computationally expensive" rejection. The inputs (WormBase sequences, literature kinetics) are available now with no infrastructure dependencies. Cross-validation in Phase A2 provides a safety net: if [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s naive mapping fails in Phase 1, structure-based predictions are ready immediately.
+
+**Q: What's the difference between Phase A1 and Phase A2?**
+A: Phase A1 (Core Infrastructure) contains the 5 DDs that **block all subsequent modeling work** — containerization, data access, validation toolbox, baseline datasets, and project dashboard. Without them, no contributor can build, test, or validate. Phase A2 (Governance & Derisking) contains 4 DDs that **enable scaling and derisk Phase 1** — contributor progression, RFC process, AI agent workflow, and foundation model kinetics. A2 can run entirely in parallel with A1 and doesn't block Phase 1.
 
 ---
 
 - **Approved by:** Pending (awaiting founder review)
 - **Maintained by:** Integration L4 Maintainer (when appointed)
-- **Next Review:** After Phase A completion (reassess timeline based on actual progress)
+- **Next Review:** After Phase A1 completion (reassess timeline based on actual progress)

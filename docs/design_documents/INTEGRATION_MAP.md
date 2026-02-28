@@ -255,7 +255,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | **[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome) | **9 DDs** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
 | [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) | 5 DDs | [DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md) | 🟡 Moderate | TBD (Muscle L4) |
 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) | 6 DDs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md), [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | 🟡 Moderate (Phase 1+) | Neural Circuit L4 Maintainer |
-| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Models) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (per-class HH params), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (kinetics priors) | 🟡 Moderate (Phase A+) | TBD (ML L4) |
+| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Models) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (per-class HH params), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
 | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (fitted params), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
 | [DD013](DD013_Simulation_Stack_Architecture.md) (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Integration L4) — **VACANT** |
 | [DD014](DD014_Dynamic_Visualization_Architecture.md) (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Visualization L4) |
@@ -269,15 +269,15 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD002 (Muscle) | Phase 0 | Accepted |
 | DD003 (Body Physics) | Phase 0 | Accepted |
 | DD020 (Connectome) | Phase 0 | Accepted |
-| DD008 (Data Integration) | Phase A | Blocked |
-| DD011 (Contributor Progression) | Phase A | Proposed |
-| DD012 (RFC Process) | Phase A | Proposed |
-| DD013 (Simulation Stack) | Phase A | Proposed |
-| DD015 (AI Contributor Model) | Phase A | Proposed |
-| DD021 (Movement Toolbox) | Phase A | Blocked |
-| DD024 (Validation Data) | Phase A | Proposed |
-| DD025 (Foundation Models) | Phase A | Proposed |
-| DD028 (Project Metrics Dashboard) | Phase A | Proposed |
+| DD008 (Data Integration) | Phase A1 | Blocked |
+| DD013 (Simulation Stack) | Phase A1 | Proposed |
+| DD021 (Movement Toolbox) | Phase A1 | Blocked |
+| DD024 (Validation Data) | Phase A1 | Proposed |
+| DD028 (Project Metrics Dashboard) | Phase A1 | Proposed |
+| DD011 (Contributor Progression) | Phase A2 | Proposed |
+| DD012 (RFC Process) | Phase A2 | Proposed |
+| DD015 (AI Contributor Model) | Phase A2 | Proposed |
+| DD025 (Foundation Models) | Phase A2 | Proposed |
 | DD005 (Cell-Type Specialization) | Phase 1 | Proposed |
 | DD010 (Validation Framework) | Phase 1 | Proposed |
 | DD014 (Visualization) | Phase 1-4 | Proposed |
@@ -319,7 +319,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 Both paths feed identically into [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) → [DD010](DD010_Validation_Framework.md). The 2D fast path wraps the Boyle, Berri & Cohen (2012) published rod-spring model, already implemented in `openworm/CE_locomotion`, `openworm/Worm2D`, and `openworm/CelegansNeuromechanicalGaitModulation`.
 
-**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A deliverable (DD001 Issue 1).
+**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A1 deliverable (DD001 Issue 1).
 
 **2D model limitations:** 2D only. Cannot replace Sibernetic for [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD019](DD019_Closed_Loop_Touch_Response.md) (3D cuticle strain), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organ systems.
 
@@ -694,4 +694,4 @@ docker compose run test-dd019  # Only validates [DD019](DD019_Closed_Loop_Touch_
 
 - **Approved by:** Pending (awaiting founder review)
 - **Maintained by:** Integration L4 Maintainer (when appointed)
-- **Next Update:** After Phase A (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation and [DD025](DD025_Protein_Foundation_Model_Pipeline.md) cross-validation results)
+- **Next Update:** After Phase A1 (reassess coupling graph based on actual [DD013](DD013_Simulation_Stack_Architecture.md) implementation and [DD025](DD025_Protein_Foundation_Model_Pipeline.md) cross-validation results)

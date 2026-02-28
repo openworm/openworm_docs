@@ -41,85 +41,33 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 ---
 
-## Implementation Roadmap (By Phase)
+## Phase Overview
 
-### Phase 0: Existing Foundation ✅
+OpenWorm's roadmap takes the project from today's 302 generic neurons to a complete 959-cell digital organism over ~18 months. The journey is organized into phases that manage scientific risk, build infrastructure first, and validate early. Phase 0 (already complete) proved that coupled neural-muscle-body simulation works. Phases A1 and A2 lay the infrastructure and governance foundation. Phases 1-4 progressively add biological complexity — from cell-type specialization through organ systems to the complete organism.
 
-**Milestone:** "First Whole-Nervous-System Simulation" (already achieved)
+The key insight behind this phasing: **validate the hardest science early**. Phase 1's expression→conductance mapping is the highest-risk step. If it fails, we discover it in month 3 (not month 12). Each subsequent phase builds on validated foundations, not assumptions.
 
-| DD | Title | Status | What It Does |
-|----|-------|--------|--------------|
-| [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ Accepted | 302 neurons, HH Level C1, graded synapses |
-| [DD002](DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ Accepted | 95 muscles, Ca²⁺→force coupling |
-| [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Accepted | Sibernetic SPH, ~100K particles |
-| [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ Accepted | cect API, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) default |
+| Phase | Name | Duration | What It Delivers | Key DDs | Cells |
+|-------|------|----------|-----------------|---------|-------|
+| 0 | Core Architecture | Done | Neural circuit + muscle + body + connectome data | 4 | 302 neurons + 95 muscles |
+| A1 | Core Infrastructure | Wks 1-2 | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
+| A2 | Governance & Derisking | Wks 3-4 | L0-L5 contributor levels + badge taxonomy ([DD011](DD011_Contributor_Progression_Model.md)), DD proposal/review process ([DD012](DD012_Design_Document_RFC_Process.md)), AI agent registration + task pipeline ([DD015](DD015_AI_Contributor_Model.md)), ion channel kinetics predictions derisking Phase 1 ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) | 4 | — |
+| 1 | Cell-Type Specialization | Mo 1-3 | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
+| 2 | Modulation + Closed-Loop | Mo 4-6 | Neuropeptides, touch response, proprioception | 6 | +sensory loop |
+| 3 | Organ Systems | Mo 7-12 | Pharynx, intestine, egg-laying, ML hybrid | 4 | +3 organs |
+| 4 | Complete Organism | Mo 13-18 | 959 mechanically distinct cells, web viewer | 3 | 959 cells |
 
-### Infrastructure Bootstrap ⚠️
+### Why This Order?
 
-- **Milestone:** "Containerized Stack with Automated Validation"
-- **Duration:** 4 weeks
-- **Status:** Proposed — must complete before modeling phases
+- **Phase 0:** Already done — the foundation. 302 neurons, 95 muscles, SPH body physics, connectome data.
+- **Phase A1:** Can't build/test/validate without containerization ([DD013](DD013_Simulation_Stack_Architecture.md)), data access ([DD008](DD008_Data_Integration_Pipeline.md)), and validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)). These block everything.
+- **Phase A2:** Doesn't block modeling but enables governance at scale and derisks Phase 1 calibration via foundation model cross-validation ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)). Runs in parallel with A1.
+- **Phase 1:** Highest scientific risk (expression→conductance mapping) — test early, fail fast. If it works, we have 128 distinct neuron classes. If it fails, DD025 predictions are the fallback.
+- **Phase 2:** Closes the sensory loop — the worm can now respond to stimuli (touch, chemicals, temperature) and modulate behavior via neuropeptides.
+- **Phase 3:** Adds organ systems (pharynx, intestine, egg-laying) that need the closed-loop substrate from Phase 2.
+- **Phase 4:** Completes the organism — 959 mechanically distinct cells + public web viewer at wormsim.openworm.org.
 
-| DD | Title | What It Delivers |
-|----|-------|------------------|
-| [DD013](DD013_Simulation_Stack_Architecture.md) | Simulation Stack | Docker, CI/CD, openworm.yml config |
-| [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Movement Toolbox Revival | Tier 3 validation (8 tasks, 33 hours) |
-| [DD012](DD012_Design_Document_RFC_Process.md) | RFC Process | DD template, governance |
-| [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression | Observer to Senior Contributor (L0-L5) |
-| [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Foundation Model Channel Kinetics | Predicted ion channel kinetics from sequence (parallel, derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)) |
-| [DD028](DD028_Project_Metrics_Dashboard.md) | Project Metrics Dashboard | Validation scores, contributor activity, CI health, phase progress |
-
-### Phase 1: Cell-Type Specialization ⚠️
-
-- **Milestone:** "Biologically Distinct Neurons"
-- **Duration:** 3 months
-- **Key:** 128 neuron classes from CeNGEN, functional connectivity improves ≥20%
-
-| DD | Title | What Changes |
-|----|-------|--------------|
-| [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Cell-Type Specialization | 128 distinct neuron classes (not 302 identical) |
-| [DD014 Phase 1](DD014_Dynamic_Visualization_Architecture.md) | Trame Viewer | OME-Zarr export, organism + tissue scales |
-| [DD010 Tier 2](DD010_Validation_Framework.md) | Functional Connectivity | Validate vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) (r > 0.5) |
-
-### Phase 2: Slow Modulation + Closed-Loop ⚠️
-
-- **Milestone:** "The Worm Can Feel and Modulate"
-- **Duration:** 3 months
-- **Key:** 31,479 neuropeptide connections + bidirectional touch response
-
-| DD | Title | What Adds |
-|----|-------|-----------|
-| [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Neuropeptides | GPCR modulation, seconds timescale |
-| [DD019](DD019_Closed_Loop_Touch_Response.md) | Touch Response | MEC-4 channel, tap withdrawal |
-| [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Environment | Gradients, substrates, stimuli |
-| [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioception | Stretch receptors, motor coordination |
-| [DD026](DD026_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions |
-| [DD027](DD027_Multicompartmental_Neuron_Models.md) | Multicompartmental Neurons (PoC) | 5 representative neurons, 14 ion channel classes, EM morphologies |
-
-### Phase 3: Organ Systems ⚠️
-
-- **Milestone:** "Multi-Organ Digital Organism"
-- **Duration:** 6 months
-- **Key:** Pharynx, intestine, egg-laying, ML acceleration
-
-| DD | Title | What Adds |
-|----|-------|-----------|
-| [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal System | 63 cells, 3-4 Hz pumping |
-| [DD009](DD009_Intestinal_Oscillator_Model.md) | Intestinal Oscillator | 20 cells, 50s defecation |
-| [DD018](DD018_Egg_Laying_System_Architecture.md) | Egg-Laying System | 28-cell circuit, two-state |
-| [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid ML | Differentiable sim, 1000× speedup (Component 3 extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
-
-### Phase 4: Complete Organism ⚠️
-
-- **Milestone:** "959-Cell Photorealistic Whole Organism"
-- **Duration:** 6 months
-- **Key:** All somatic cells, mesh deformation, public web viewer
-
-| DD | Title | What Adds |
-|----|-------|-----------|
-| [DD004](DD004_Mechanical_Cell_Identity.md) | Mechanical Cell Identity | 959 cells with cell-type mechanics |
-| [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Mesh Deformation | GPU skinning, photorealistic |
-| [DD014 Phase 3](DD014_Dynamic_Visualization_Architecture.md) | WormSim 2.0 | Molecular scale, wormsim.openworm.org |
+For detailed milestones, success criteria, datasets, and blocking dependencies, see the **[Phase Roadmap](DD_PHASE_ROADMAP.md)**.
 
 ---
 

@@ -8,22 +8,22 @@
 
 **Totals:** 9 issues (ai-workable: 6 / human-expert: 3 | L1: 5, L2: 3, L3: 1)
 
-**Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD021 owns. They have been moved to [DD021 Draft Issues](DD021_draft_issues.md) (Issues 1-2) where they belong as Phase A validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
+**Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD021 owns. They have been moved to [DD021 Draft Issues](DD021_draft_issues.md) (Issues 1-2) where they belong as Phase A1 validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
 
 **Roadmap Context:** DD001 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Validation Infrastructure (Issues 1-3) | **Phase A** | Trajectory extraction tools for automated validation pipeline |
-| 2. Data Pipeline (Issue 4) | **Phase A** | OME-Zarr export for DD014 viewer |
+| 1. Validation Infrastructure (Issues 1-3) | **Phase A1** | Trajectory extraction tools for automated validation pipeline |
+| 2. Data Pipeline (Issue 4) | **Phase A1** | OME-Zarr export for DD014 viewer |
 | 3. Documentation (Issues 5-8) | **Any** | Can be addressed independently |
-| Infrastructure (Issue 9-10) | **Phase A** | Changelog |
+| Infrastructure (Issue 9-10) | **Phase A1** | Changelog |
 
 **Issues relocated to other DDs:** Ion Channel Library (6 issues) → [DD005 Draft Issues](DD005_draft_issues.md); Synaptic Optimization (3 issues) → [DD017 Draft Issues](DD017_draft_issues.md); Level D Multicompartmental (2 issues) + spatial synapses config → [DD027 Draft Issues](DD027_draft_issues.md).
 
 ---
 
-## Group 1: Validation Infrastructure (Phase A)
+## Group 1: Validation Infrastructure (Phase A1)
 
 Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by [DD021](DD021_draft_issues.md).
 
@@ -33,7 +33,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 
 - **Title:** `[DD001] Port Boyle-Cohen 2D body model into boyle_berri_cohen_trajectory.py — fast trajectory screening tool`
 - **Labels:** `DD001`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, physics
 - **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 3a) and [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (WCON row)
@@ -70,7 +70,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 
 - **Title:** `[DD001] Adapt Sibernetic's existing WCON generator into extract_trajectory.py — full-fidelity trajectory extraction`
 - **Labels:** `DD001`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 3b) and [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (WCON row)
@@ -104,7 +104,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 
 - **Title:** `[DD001] Audit and document c302/NEURON simulation output file formats`
 - **Labels:** `DD001`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD001 — Integration Contract — Outputs](DD001_Neural_Circuit_Architecture.md#inputs--outputs) and [DD001 — Coupling Bridge Ownership](DD001_Neural_Circuit_Architecture.md#coupling-bridge-ownership)
@@ -130,7 +130,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
 
 ---
 
-## Group 2: Data Pipeline & Integration (Phase A)
+## Group 2: Data Pipeline & Integration (Phase A1)
 
 Target: OME-Zarr export and coupling interface documentation.
 
@@ -140,7 +140,7 @@ Target: OME-Zarr export and coupling interface documentation.
 
 - **Title:** `[DD001] Implement OME-Zarr export for neural/voltage, neural/calcium, neural/positions`
 - **Labels:** `DD001`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (OME-Zarr rows) and [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
@@ -300,7 +300,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 ---
 
-## Group 4: Infrastructure (Phase A)
+## Group 4: Infrastructure (Phase A1)
 
 ---
 
@@ -308,7 +308,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 - **Title:** `[DD001] Create annotated changelog documenting c302's evolution`
 - **Labels:** `DD001`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** git, docs
 - **DD Section to Read:** [DD001 — References](DD001_Neural_Circuit_Architecture.md#references) (Gleeson et al. 2018) and [DD001 — Architecture Levels](DD001_Neural_Circuit_Architecture.md#architecture-levels)

@@ -628,7 +628,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A |
+| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A1 |
 | Port Worm3DViewer from Streamlit to Trame | Visualization L4 | 24 hrs | None |
 | Implement time scrubbing (slider + play/pause) | Visualization L4 | 8 hrs | Trame port |
 | Implement layer toggle system | Visualization L4 | 8 hrs | Trame port |
@@ -636,7 +636,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 | Add neuron voltage → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add muscle activation → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add cell click → inspector panel | Visualization L4 | 8 hrs | Trame port |
-| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A |
+| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A1 |
 | Add to CI (build + smoke test) | Integration Maintainer | 4 hrs | Docker stage |
 
 **Deliverable:** `docker compose up viewer` serves a web app with time-animated, multi-layer, interactive 3D worm at `localhost:8501`.
@@ -718,7 +718,7 @@ Green checkmarks appear on subsystems passing validation (locomotion speed withi
 
 | Phase | browser.openworm.org | wormsim.openworm.org | Docker viewer |
 |-------|---------------------|---------------------|---------------|
-| Phase A | WormBrowser (legacy, live) | Does not exist | — |
+| Phase A1 | WormBrowser (legacy, live) | Does not exist | — |
 | Phase 1 | **WormBrowser enhanced** — click neuron/cell → links to WormAtlas + WormBase | Does not exist | `docker compose up viewer` → Trame at localhost:8501 |
 | Phase 2 | WormBrowser enhanced (continues) | Three.js prototype (may lack some WormBrowser features) | Trame viewer continues |
 | Phase 3 | WormBrowser enhanced (continues) | Three.js with organ systems (approaching parity) | Trame viewer continues |

@@ -18,8 +18,8 @@ The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behav
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
-| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
+| **Phase** | [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
+| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
 | **What does this produce?** | Revived `open-worm-analysis-toolbox` package: installs on Python 3.12, extracts 5 kinematic features from WCON files, compares simulated vs. experimental worm movement, outputs pass/fail validation report |
 | **Success metric** | Toolbox installs cleanly; `NormalizedWorm.from_schafer_file()` + `WormFeatures()` produces speed, wavelength, frequency, amplitude, gait classification for Schafer N2 baseline data; Sibernetic WCON output parses without error |
 | **Repository** | [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) (primary) + [`openworm/tracker-commons`](https://github.com/openworm/tracker-commons) (WCON spec). Note: `openworm/movement_validation` is the **archived predecessor** — do not use. |
@@ -65,7 +65,7 @@ The `open-worm-analysis-toolbox` is OpenWorm's canonical tool for **Tier 3 behav
 | **WCON specification** | [`openworm/tracker-commons`](https://github.com/openworm/tracker-commons) |
 | **Archived predecessor** | [`openworm/movement_validation`](https://github.com/openworm/movement_validation) — **archived, do not use** |
 | **Issue label** | `dd021` |
-| **Milestone** | Toolbox Revival (Phase A) |
+| **Milestone** | Toolbox Revival (Phase A1) |
 | **Branch convention** | `dd021/description` (e.g., `dd021/python312-compat`) |
 | **Example PR title** | `DD021: Update dependencies for Python 3.12 compatibility` |
 | **De facto maintainer** | TBD — Validation L4 (currently unfilled) |
@@ -473,7 +473,7 @@ print(report)
 
 ### Revival Priority
 
-**This is a Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task.** Without a working analysis toolbox:
+**This is a Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task.** Without a working analysis toolbox:
 
 - [DD010](DD010_Validation_Framework.md) Tier 3 validation cannot run
 - [DD013](DD013_Simulation_Stack_Architecture.md) CI pipeline Steps 4-5 remain unimplemented
@@ -537,7 +537,7 @@ from tierpsy import ...  # (inspect their API)
 - **If it doesn't work but upstream tierpsy does:** Sync OpenWorm's fork with upstream
 - **If neither works:** Proceed with [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) analysis toolbox revival as planned
 
-**This evaluation is Phase A Week 1 priority** (before committing to 33-hour toolbox revival).
+**This evaluation is Phase A1 Week 1 priority** (before committing to 33-hour toolbox revival).
 
 ### Decision
 

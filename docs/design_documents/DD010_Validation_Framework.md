@@ -663,7 +663,7 @@ This repo is **dormant** (last commit Jan 2020). **[DD021](DD021_Movement_Analys
 - API contract for `NormalizedWorm` and `WormFeatures` classes
 - Relationship to Tierpsy Tracker (modern successor)
 
-**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
+**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
 
 Note: The archived predecessor repo `openworm/movement_validation` should not be used — it was superseded by the analysis toolbox.
 
@@ -873,7 +873,7 @@ Published HH parameter fits for motor neurons, interneurons, AWCon, and RMD. Exp
 
 **Next Actions:**
 
-1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
+1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A1 work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
 3. Add `wormneuroatlas` + `cect` to Docker validation stage — [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data is already accessible via API (no manual ingestion needed)
 4. After [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Implement Tier 2b (unc-31 comparison) validation script

@@ -296,4 +296,4 @@ A: [DD014](DD014_Dynamic_Visualization_Architecture.md) is the main visualizatio
 A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([DD015](DD015_AI_Contributor_Model.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

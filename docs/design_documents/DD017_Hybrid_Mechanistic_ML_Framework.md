@@ -12,7 +12,7 @@
 
 ## TL;DR
 
-When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A/Phase 1.
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
 
 ## Goal & Success Criteria
 
@@ -490,7 +490,7 @@ for activations, trajectories in training_data:
 
 **Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics).**
 
-Component 3 was promoted from DD017 Phase 3 to a standalone DD in Phase A/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
+Component 3 was promoted from DD017 Phase 3 to a standalone DD in Phase A2/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
 
 See [DD025](DD025_Protein_Foundation_Model_Pipeline.md) for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.
 
@@ -818,7 +818,7 @@ ml:
 
 ### Phase D: Foundation Model Pipeline
 
-**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and moved to Phase A/Phase 1.** See DD025 Implementation Roadmap for the detailed timeline (~20 hours Phase A, ~12 hours Phase 1).
+**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and moved to Phase A2/Phase 1.** See DD025 Implementation Roadmap for the detailed timeline (~20 hours Phase A2, ~12 hours Phase 1).
 
 ### Phase E: Sensory Transduction (Weeks 25-32)
 

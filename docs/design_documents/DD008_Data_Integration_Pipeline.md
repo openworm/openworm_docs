@@ -18,8 +18,8 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase A](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
-| **Layer** | Data Integration — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) |
+| **Phase** | [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
+| **Layer** | Data Integration — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
 | **What does this produce?** | Unified data access layer (OWMeta) for connectome, CeNGEN expression, cell positions, neuropeptide interactions — all via Python API |
 | **Success metric** | All downstream DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) — issues labeled `dd008` |

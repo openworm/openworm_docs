@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Infrastructure Bootstrap](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) | **Layer:** Integration
+> **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Integration
 
 ## TL;DR
 
@@ -983,7 +983,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 ## Implementation Roadmap
 
-For the granular task breakdown of DD013 implementation, see the [DD013 Draft Issues](DD013_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD013 is assigned to **Phase A: Infrastructure Bootstrap (Weeks 1–4)**.
+For the granular task breakdown of DD013 implementation, see the [DD013 Draft Issues](DD013_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD013 is assigned to **Phase A1: Core Infrastructure (Weeks 1–2)**.
 
 ---
 
@@ -1129,6 +1129,6 @@ The simulation stack is the **integration layer** — it consumes and routes out
 - **Next Actions:**
 
 1. Appoint or recruit L4 Integration Maintainer
-2. Begin Phase A (config system + multi-stage Docker)
+2. Begin Phase A1 (config system + multi-stage Docker)
 3. Fix the video pipeline memory leak (critical for any serious use)
 4. Set up CI with docker-compose-based test suite

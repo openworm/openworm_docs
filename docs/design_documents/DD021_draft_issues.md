@@ -8,13 +8,13 @@
 
 **Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 
-**Note:** These are the first two issues for DD021. DD021's full issue set (toolbox revival, Python 3.12 compat, WCON parser, etc.) will be generated in a future pass. These two issues were originally in DD001 but belong here because they are **validation infrastructure** — thin wrappers around the analysis toolbox that serve as CI gates in the DD013 simulation pipeline. They are consumed by all DDs that need kinematic validation (DD001, DD002, DD003, DD010), not specific to any one DD. They are Phase A deliverables required for the milestone: "Containerized Stack with Automated Validation."
+**Note:** These are the first two issues for DD021. DD021's full issue set (toolbox revival, Python 3.12 compat, WCON parser, etc.) will be generated in a future pass. These two issues were originally in DD001 but belong here because they are **validation infrastructure** — thin wrappers around the analysis toolbox that serve as CI gates in the DD013 simulation pipeline. They are consumed by all DDs that need kinematic validation (DD001, DD002, DD003, DD010), not specific to any one DD. They are Phase A1 deliverables required for the milestone: "Containerized Stack with Automated Validation."
 
 **Note on provenance:** These issues were moved from DD001 Draft Issues (originally Issues 3 and 4) because they wrap `open-worm-analysis-toolbox` functionality — which DD021 owns — and target `openworm/open-worm-analysis-toolbox`, not `openworm/c302`.
 
 ---
 
-## Phase A: Validation Infrastructure
+## Phase A1: Validation Infrastructure
 
 Target: Make the revived analysis toolbox usable as a CI gate — regression detection and baseline generation.
 
@@ -95,7 +95,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 
 | Phase | Issues | Target |
 |-------|--------|--------|
-| **Phase A: Validation Infrastructure** | 1–2 | CI regression gate (via OWAT) and Schafer lab baseline generation |
+| **Phase A1: Validation Infrastructure** | 1–2 | CI regression gate (via OWAT) and Schafer lab baseline generation |
 
 ### Cross-References
 

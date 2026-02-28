@@ -10,7 +10,7 @@
 
 ---
 
-## Phase A: Foundation (Weeks 1–4)
+## Phase A1: Foundation (Weeks 1–4)
 
 Target: Contributors can `docker compose run quick-test` with their branch.
 

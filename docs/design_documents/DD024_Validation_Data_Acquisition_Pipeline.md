@@ -1,6 +1,6 @@
 # DD024: Validation Data Acquisition Pipeline
 
-- **Status:** Proposed (Phase A — Infrastructure)
+- **Status:** Proposed (Phase A1 — Core Infrastructure)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-21
 - **Supersedes:** None
@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1: Core Neural Platform](DD_PHASE_ROADMAP.md#phase-1-core-neural-platform-months-1-6) | **Layer:** Data Infrastructure
+> **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Data Infrastructure
 
 ## Quick Action Reference
 
@@ -26,7 +26,7 @@
 
 ## TL;DR
 
-Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A infrastructure — without clean, versioned validation data, no validation tier can function. This DD also serves as the **canonical dataset inventory** for all phases, consolidating validation, implementation, and projected datasets in one place (see [Phase Roadmap](DD_PHASE_ROADMAP.md) for implementation timeline).
+Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A1 infrastructure — without clean, versioned validation data, no validation tier can function. This DD also serves as the **canonical dataset inventory** for all phases, consolidating validation, implementation, and projected datasets in one place (see [Phase Roadmap](DD_PHASE_ROADMAP.md) for implementation timeline).
 
 ---
 
@@ -59,7 +59,7 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 |------|-------|
 | **Repository** | `openworm/validation-data` (new — to be created) |
 | **Issue label** | `dd024` |
-| **Milestone** | Phase A: Infrastructure Bootstrap |
+| **Milestone** | Phase A1: Core Infrastructure |
 | **Branch convention** | `dd024/dataset-name` (e.g., `dd024/randi2023-functional-connectivity`) |
 
 ---
@@ -76,15 +76,15 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | AWC olfactory neuron recordings | Chalasani et al. 2007, *Nature* 450:63-70 | AWC | CSV: time, V, I, odor | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium | Phase 2+ |
 | RIA compartmentalized calcium | Hendricks et al. 2012, *Nature* 487:99-103 | RIA | CSV: time, Ca_proximal, Ca_distal | Supplement or digitize | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2 |
 | AWA calcium action potentials | Liu et al. 2018, *Cell* 175:57-70 | AWA | CSV: time, V, Ca | Supplement data | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2+ |
-| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A |
-| Pharyngeal muscle plateau potentials | Raizen & Avery 1994, *Neuron* 12:483-495 | pm3-pm8 | CSV: time, V (intracellular recording) | Digitize from paper figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A |
+| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A1 |
+| Pharyngeal muscle plateau potentials | Raizen & Avery 1994, *Neuron* 12:483-495 | pm3-pm8 | CSV: time, V (intracellular recording) | Digitize from paper figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A1 |
 | Electrophysiology training set (~20 neurons) | Goodman lab, Lockery lab, published papers | ~20 neuron classes | CSV: neuron_class, channel, measured_g, source_doi | Curate from multiple papers | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
 
 ### Tier 2: Functional Connectivity
 
 | Dataset | Source Publication | Scale | Format Needed | Acquisition Method | Consumer DD | Priority | Phase |
 |---------|-------------------|-------|---------------|-------------------|-------------|----------|-------|
-| Whole-brain functional connectivity (wild-type) | Randi et al. 2023, *Nature* 623:406-414 | 302x302 correlation matrix | NumPy `.npy` | **Already available via `wormneuroatlas` API** — extract and cache locally | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A |
+| Whole-brain functional connectivity (wild-type) | Randi et al. 2023, *Nature* 623:406-414 | 302x302 correlation matrix | NumPy `.npy` | **Already available via `wormneuroatlas` API** — extract and cache locally | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A1 |
 | Whole-brain functional connectivity (unc-31 mutant) | Randi et al. 2023 (same paper, supplemental) | 302x302 | NumPy `.npy` | Via `wormneuroatlas` API (`strain="unc31"`) | [DD010](DD010_Validation_Framework.md) (Tier 4) | High | Phase 1 |
 | Signal propagation atlas | Randi et al. 2023 | Directed functional connectivity | NumPy `.npy` | Via `wormneuroatlas` API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
 | Whole-brain activity during behavioral states | Atanas et al. 2022, *bioRxiv* | Time series per neuron during dwelling/roaming | HDF5 or CSV | Download from supplement / request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 2+ |
@@ -93,13 +93,13 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 
 | Dataset | Source Publication | Content | Format Needed | Acquisition Method | Consumer DD | Priority | Phase |
 |---------|-------------------|---------|---------------|-------------------|-------------|----------|-------|
-| N2 wild-type locomotion baseline | Schafer lab / Yemini et al. 2013, *Nat Methods* 10:877-879 | Speed, wavelength, frequency, amplitude | WCON (Worm Tracker Commons) | Download from [wormbase.org/tools/tracker](https://www.wormbase.org/) or Open Worm Movement Database | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A |
+| N2 wild-type locomotion baseline | Schafer lab / Yemini et al. 2013, *Nat Methods* 10:877-879 | Speed, wavelength, frequency, amplitude | WCON (Worm Tracker Commons) | Download from [wormbase.org/tools/tracker](https://www.wormbase.org/) or Open Worm Movement Database | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD010](DD010_Validation_Framework.md) | **Critical** | Phase A1 |
 | unc-2 (Cav2) mutant locomotion | Schafer lab | Reduced speed, altered gait | WCON | Same source as above | [DD010](DD010_Validation_Framework.md) (Tier 4) | High | Phase 1 |
-| N2 behavioral phenotype statistics | Yemini et al. 2013 | Population means, CVs for ~700 features | CSV from supplement | Download supplementary data | [DD010](DD010_Validation_Framework.md) (±15% threshold grounding) | High | Phase A |
-| Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High | Phase A |
-| Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A |
+| N2 behavioral phenotype statistics | Yemini et al. 2013 | Population means, CVs for ~700 features | CSV from supplement | Download supplementary data | [DD010](DD010_Validation_Framework.md) (±15% threshold grounding) | High | Phase A1 |
+| Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High | Phase A1 |
+| Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A1 |
 | Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD018](DD018_Egg_Laying_System_Architecture.md) | Medium | Phase 3 |
-| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A |
+| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A1 |
 | Foraging behavior decomposition | Flavell et al. 2020, *Genetics* 216:315-332 | Dwelling/roaming state durations, transition rates | CSV: state, duration, transition_probability | Digitize from paper or request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Medium | Phase 2 |
 | Chemotaxis behavioral data | Iino & Yoshida 2009, Bargmann & Horvitz 1991 | Chemotaxis assay | CSV: chemotaxis index, trajectory data | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
 | Thermotaxis behavioral data | Hedgecock & Russell 1975, Mori & Ohshima 1995 | Thermotaxis assay | CSV: isothermal tracking, cultivation temp preference | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
@@ -141,8 +141,8 @@ These datasets are inputs to model building (not validation). They are included 
 | **Virtual Worm Blender meshes** | Blender2NeuroML repo (Grove & Sternberg 2012) | 688 anatomical meshes, ~1.6M vertices | .blend file | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Available (Virtual_Worm_February_2012.blend) | Phase 4 |
 | **Witvliet 2021 cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions per cell | OBJ or STL per cell | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs extraction/conversion from EM data | Phase 4 |
 | **Cell-type mechanical properties** | Literature review (biomechanics) | Elasticity, adhesion per tissue type | CSV: cell_type, elasticity_mult, adhesion_strength | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs curation from biomechanics literature | Phase 4 |
-| **Ion channels with known kinetics** | PDB + electrophysiology literature | ~50-100 channels with measured HH parameters | CSV: channel, structure, V_half, k, tau | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Needs curation | Phase A |
-| **C. elegans ion channel sequences** | WormBase | All C. elegans ion channel protein sequences | FASTA | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Available | Phase A |
+| **Ion channels with known kinetics** | PDB + electrophysiology literature | ~50-100 channels with measured HH parameters | CSV: channel, structure, V_half, k, tau | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Needs curation | Phase A2 |
+| **C. elegans ion channel sequences** | WormBase | All C. elegans ion channel protein sequences | FASTA | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Available | Phase A2 |
 | **SPH simulation training set** | Generate from Sibernetic | 500+ runs: muscle activation to trajectory pairs | HDF5 | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (surrogate) | Generate in Phase 3 (~2,500 GPU-hours) | Phase 3 |
 | **Sensory neuron calcium imaging** | Suzuki 2003/2008, Chalasani 2007 | Stimulus to Ca response curves | CSV | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory) | Extract from papers | Phase 3 |
 
@@ -222,7 +222,7 @@ A root `checksums.sha256` file records the SHA-256 hash of every data file. The 
 
 Acquisition priorities align with the [Phase Roadmap](DD_PHASE_ROADMAP.md) implementation schedule. Datasets are prioritized within each phase by blocking impact.
 
-### Phase A (Weeks 1-4) — Must Have
+### Phase A1 (Weeks 1-4) — Must Have
 
 These datasets are blocking for the two critical validation tiers (Tier 2 and Tier 3):
 
@@ -496,7 +496,7 @@ validation:
 - **Next Actions:**
 
 1. Create `openworm/validation-data` GitHub repository
-2. Acquire Phase A datasets (7 datasets, ~18 hours)
+2. Acquire Phase A1 datasets (7 datasets, ~18 hours)
 3. Write `verify_validation_data.py` script
 4. Integrate into [DD013](DD013_Simulation_Stack_Architecture.md) Docker build
 5. Announce in next board sync for contributor help with digitization tasks

@@ -1,6 +1,6 @@
 # DD025: Protein Foundation Model Pipeline for Ion Channel Kinetics
 
-- **Status:** Proposed (Phase A / Phase 1)
+- **Status:** Proposed (Phase A2 / Phase 1)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-22
 - **Supersedes:** None (extracted from [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3)
@@ -8,11 +8,11 @@
 
 ---
 
-> **Phase:** [Phase A](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) (cross-validation) / [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (integration) | **Layer:** ML/Structural Biology
+> **Phase:** [Phase A2: Governance & Derisking](DD_PHASE_ROADMAP.md#phase-a2-governance-derisking-weeks-3-4) (cross-validation) / [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-specialization-months-1-3) (integration) | **Layer:** ML/Structural Biology
 
 ## TL;DR
 
-Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid sequences using protein foundation models (AlphaFold 3, BioEmu-1, ESM Cambrian). This expands the calibration set for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) from ~20 neurons (limited by patch-clamp electrophysiology) toward all 128 neuron classes (limited only by sequence availability). Cross-validation against known channels begins in Phase A; predictions feed into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration as structure-informed priors in Phase 1.
+Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid sequences using protein foundation models (AlphaFold 3, BioEmu-1, ESM Cambrian). This expands the calibration set for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) from ~20 neurons (limited by patch-clamp electrophysiology) toward all 128 neuron classes (limited only by sequence availability). Cross-validation against known channels begins in Phase A2; predictions feed into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration as structure-informed priors in Phase 1.
 
 ---
 
@@ -22,7 +22,7 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 
 | Criterion | Target | Phase | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|-------|------------|
-| **Primary:** Cross-validation on known channels | < 30% relative error on HH parameters (V_half, slope, tau) | Phase A | Tier 1 (non-blocking) |
+| **Primary:** Cross-validation on known channels | < 30% relative error on HH parameters (V_half, slope, tau) | Phase A2 | Tier 1 (non-blocking) |
 | **Secondary:** End-to-end simulation improvement | Predicted parameters inserted into simulation do not degrade [DD010](DD010_Validation_Framework.md) Tier 2 or Tier 3 scores below acceptance thresholds | Phase 1 | Tier 2/3 (blocking) |
 | **Tertiary:** Coverage expansion | Predictions available for ≥80% of ion channel genes expressed in CeNGEN | Phase 1 | Non-blocking |
 
@@ -36,9 +36,9 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 
 | Artifact | Path | Format | Phase |
 |----------|------|--------|-------|
-| Channel kinetics predictions | `foundation_params/output/channel_kinetics_predictions.csv` | CSV (channel, V_half_m, k_m, tau_m, V_half_h, k_h, tau_h, g_max_scale, E_rev, confidence) | Phase A |
-| Cross-validation report | `foundation_params/output/cross_validation_report.json` | JSON (per-channel predicted vs. measured, error metrics) | Phase A |
-| Foundation model inference scripts | `foundation_params/scripts/` | Python | Phase A |
+| Channel kinetics predictions | `foundation_params/output/channel_kinetics_predictions.csv` | CSV (channel, V_half_m, k_m, tau_m, V_half_h, k_h, tau_h, g_max_scale, E_rev, confidence) | Phase A2 |
+| Cross-validation report | `foundation_params/output/cross_validation_report.json` | JSON (per-channel predicted vs. measured, error metrics) | Phase A2 |
+| Foundation model inference scripts | `foundation_params/scripts/` | Python | Phase A2 |
 | Per-neuron-class HH parameters | `foundation_params/output/per_class_hh_params.csv` | CSV (128 neuron classes × channel parameters) | Phase 1 |
 | Integration adapter for DD005 | `foundation_params/scripts/generate_dd005_priors.py` | Python | Phase 1 |
 
@@ -51,7 +51,7 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 | **Repository** | `openworm/openworm-ml` (new repo, shared with [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) `[TO BE CREATED]` |
 | **Subdirectory** | `foundation_params/` |
 | **Issue label** | `dd025` |
-| **Milestone** | Phase A — Foundation Model Channel Kinetics |
+| **Milestone** | Phase A2 — Foundation Model Channel Kinetics |
 | **Example PR title** | `DD025: cross-validation of BioEmu-1 kinetics predictions on 50 channels` |
 
 ---
@@ -60,7 +60,7 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase A](DD_PHASE_ROADMAP.md#phase-a-infrastructure-bootstrap-weeks-1-4) (cross-validation), [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (integration) |
+| **Phase** | [Phase A2](DD_PHASE_ROADMAP.md#phase-a2-governance-derisking-weeks-3-4) (cross-validation), [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-specialization-months-1-3) (integration) |
 | **Layer** | ML/Structural Biology — parallel track derisking [DD005](DD005_Cell_Type_Differentiation_Strategy.md) |
 | **What does this produce?** | Predicted HH kinetic parameters for *C. elegans* ion channels from protein sequence + structure |
 | **Success metric** | Cross-validation <30% relative error on known channels; end-to-end [DD010](DD010_Validation_Framework.md) Tier 2 scores not degraded |
@@ -142,10 +142,10 @@ python scripts/generate_dd005_priors.py \
 
 | Script | Status | Phase |
 |--------|--------|-------|
-| `scripts/fetch_channel_sequences.py` | `[TO BE CREATED]` | Phase A |
-| `scripts/predict_structures.py` | `[TO BE CREATED]` | Phase A |
-| `scripts/predict_kinetics.py` | `[TO BE CREATED]` | Phase A |
-| `scripts/run_cross_validation.py` | `[TO BE CREATED]` | Phase A |
+| `scripts/fetch_channel_sequences.py` | `[TO BE CREATED]` | Phase A2 |
+| `scripts/predict_structures.py` | `[TO BE CREATED]` | Phase A2 |
+| `scripts/predict_kinetics.py` | `[TO BE CREATED]` | Phase A2 |
+| `scripts/run_cross_validation.py` | `[TO BE CREATED]` | Phase A2 |
 | `scripts/generate_dd005_priors.py` | `[TO BE CREATED]` | Phase 1 |
 
 ---
@@ -190,9 +190,9 @@ Step 4: Feed into DD001/DD005 HH ODEs
 
 [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Alternative #1 originally rejected this approach because molecular dynamics was "computationally expensive (days-weeks per channel)." [BioEmu-1](https://github.com/microsoft/BioEmu) (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels.
 
-### Why Phase A (Not Phase 3)
+### Why Phase A2 (Not Phase 3)
 
-This pipeline was originally specified as [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 in Phase 3 (months 7-12). It belongs in Phase A because:
+This pipeline was originally specified as [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 in Phase 3 (months 7-12). It belongs in Phase A2 because:
 
 1. **Derisks DD005:** If [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s power-law expression→conductance scaling fails for certain neuron classes, DD025 predictions are ready immediately as a fallback
 2. **No infrastructure dependencies:** Inputs (WormBase sequences, literature kinetics) are available today. No Docker stack, no simulation infrastructure needed
@@ -276,7 +276,7 @@ This pipeline creates a direct dependency on CZI's ESM and DeepMind's AlphaFold.
 
 Predicted parameters are validated in two ways:
 
-1. **Cross-validation on known channels (Phase A):** Leave-one-out cross-validation on ~50-100 channels with known kinetics. Train on 80%, predict on 20%, compare predicted vs. measured HH parameters. Target: <30% relative error.
+1. **Cross-validation on known channels (Phase A2):** Leave-one-out cross-validation on ~50-100 channels with known kinetics. Train on 80%, predict on 20%, compare predicted vs. measured HH parameters. Target: <30% relative error.
 
 2. **End-to-end validation (Phase 1):** Insert predicted per-neuron-class parameters into the full simulation. Run [DD010](DD010_Validation_Framework.md) validation. If Tier 2 functional connectivity is not degraded below acceptance thresholds, the pipeline is adding value.
 
@@ -336,7 +336,7 @@ ml:
 
 ## Implementation Roadmap
 
-### Phase A: Cross-Validation (~20 hours)
+### Phase A2: Cross-Validation (~20 hours)
 
 1. **Curate training data:** Collect ~50-100 channels with both known structure (PDB) and known HH kinetics (electrophysiology literature)
 2. **Set up inference pipeline:** ESM embeddings + BioEmu-1 conformational sampling for *C. elegans* channel sequences

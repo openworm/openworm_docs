@@ -12,8 +12,8 @@
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Build Integration (Issues 1-5) | **Phase A** | Pin cect in DD013 Docker stack |
-| 2. CI & Quality Gates (Issues 6-9) | **Phase A** | Automated regression detection |
+| 1. Build Integration (Issues 1-5) | **Phase A1** | Pin cect in DD013 Docker stack |
+| 2. CI & Quality Gates (Issues 6-9) | **Phase A1** | Automated regression detection |
 | 3. Connectome Loaders (Issues 10-14) | **Phase 1+** | Built as consuming DDs are implemented |
 | 4. API & Utilities (Issues 15-18) | **Phase 1+** | Bilateral symmetry, cell type classifier |
 | 5. Documentation (Issues 19-21) | **Any** | Can be addressed independently |
@@ -21,7 +21,7 @@
 
 ---
 
-## Group 1: Build Integration (Phase A)
+## Group 1: Build Integration (Phase A1)
 
 Target: `cect` is pinned, configured, cached, and installable inside the DD013 Docker stack.
 
@@ -31,7 +31,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 - **Title:** `[DD020] Pin cect==0.2.7 in versions.lock`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
 - **DD Section to Read:** [DD020 — Version Pinning & Update Procedure](DD020_Connectome_Data_Access_and_Dataset_Policy.md#version-pinning-update-procedure) and [DD013 §4 — Dependency Pinning](DD013_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock)
@@ -54,7 +54,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 - **Title:** `[DD020] Add data.connectome configuration section to openworm.yml`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
 - **DD Section to Read:** [DD020 — Configuration](DD020_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (openworm.yml section)
@@ -81,7 +81,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 - **Title:** `[DD020] Add connectome config validation to validate_config.py`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD020 — Configuration](DD020_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (config keys table) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
@@ -109,7 +109,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 - **Title:** `[DD020] Install cect at pinned version in Docker neural stage`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
 - **DD Section to Read:** [DD020 — Repository & Packaging](DD020_Connectome_Data_Access_and_Dataset_Policy.md#repository-packaging) (Docker stage, build dependencies)
@@ -135,7 +135,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 - **Title:** `[DD020] Pre-generate and cache cect dataset JSON files in Docker image`
 - **Labels:** `DD020`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, docker
 - **DD Section to Read:** [DD020 — Dataset Selection Rules](DD020_Connectome_Data_Access_and_Dataset_Policy.md#dataset-selection-rules) (rule 4: `from_cache=True` in CI) and [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 6)
@@ -157,7 +157,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD013 D
 
 ---
 
-## Group 2: CI & Quality Gates (Phase A)
+## Group 2: CI & Quality Gates (Phase A1)
 
 Target: Every PR is automatically checked for correct connectome data access.
 
@@ -167,7 +167,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD020] Create CI gate: verify cect version and default dataset load`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd, python
 - **DD Section to Read:** [DD020 — How to Test](DD020_Connectome_Data_Access_and_Dataset_Policy.md#how-to-test-contributor-workflow) (quick test and full validation scripts)
@@ -196,7 +196,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD020] Audit all 9 consuming DDs for raw connectome file parsing`
 - **Labels:** `DD020`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
 - **DD Section to Read:** [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 1: API-only access) and [DD020 — Goal & Success Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#goal-success-criteria)
@@ -222,7 +222,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD020] Create connectome API compliance checker for CI`
 - **Labels:** `DD020`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD020 — Quality Criteria](DD020_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (all 6 criteria) and [DD020 — API Contract for Consumers](DD020_Connectome_Data_Access_and_Dataset_Policy.md#api-contract-for-consumers)
@@ -251,7 +251,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD020] Create cect version update and regression test script`
 - **Labels:** `DD020`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD020 — Update Procedure](DD020_Connectome_Data_Access_and_Dataset_Policy.md#update-procedure) (6-step process)

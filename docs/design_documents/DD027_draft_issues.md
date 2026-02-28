@@ -13,7 +13,7 @@
 | Group | Phase | Rationale |
 |-------|-------|-----------|
 | 1. Level D Multicompartmental (Issues 1-2) | **Phase 2** | Proof-of-concept requires EM morphologies + Nicoletti channels |
-| 2. Infrastructure (Issue 3) | **Phase A** | Config toggle depends on DD013 openworm.yml |
+| 2. Infrastructure (Issue 3) | **Phase A1** | Config toggle depends on DD013 openworm.yml |
 
 ---
 
@@ -91,7 +91,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ---
 
-## Group 2: Infrastructure (Phase A)
+## Group 2: Infrastructure (Phase A1)
 
 ---
 
@@ -99,7 +99,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 - **Title:** `[DD027] Add neural.spatial_synapses config toggle for spatially resolved synapse placement`
 - **Labels:** `DD027`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A
+- **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
 - **DD Section to Read:** [DD027 — Spatially Resolved Synapse Placement](DD027_Multicompartmental_Neuron_Models.md#spatially-resolved-synapse-placement)
