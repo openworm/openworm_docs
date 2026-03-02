@@ -4,12 +4,18 @@ on:
     branches: [ master, development ]
   pull_request:
     branches: [ master, development ]
+    types: [ opened, synchronize, reopened, closed ]
+
+permissions:
+  contents: write
+  pull-requests: write
 
 env:
   REPO_METADATA_SHAS: repo-metadata-shas.txt
 
 jobs:
   build:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -21,7 +27,7 @@ jobs:
         timeout_minutes: 15
         command: |
           sudo apt-get update
-          sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex
+          sudo apt-get install -yqq build-essential libxml2-dev zlib1g-dev bison flex libcairo2-dev pkg-config
 
     - name: Set up Python install env
       run: |
@@ -50,6 +56,68 @@ jobs:
           make check
           export GITHUB_TOKEN=${{ github.token }}
           make build
+
+    - name: Deploy branch preview
+      if: github.event_name == 'pull_request'
+      run: |
+        BRANCH_NAME="${{ github.head_ref }}"
+        SAFE_BRANCH=$(echo "$BRANCH_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
+
+        . venv/bin/activate
+
+        # Build with site_url set so navigation works in subdirectory
+        cat > mkdocs-preview.yml << EOF
+        INHERIT: mkdocs.yml
+        site_url: https://docs.openworm.org/preview/$SAFE_BRANCH/
+        EOF
+        python -m mkdocs build -f mkdocs-preview.yml --site-dir /tmp/site_preview
+
+        # Push to gh-pages under preview/<branch>/
+        git fetch origin gh-pages:gh-pages
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git checkout gh-pages
+
+        mkdir -p preview/$SAFE_BRANCH
+        rm -rf preview/$SAFE_BRANCH/*
+        cp -r /tmp/site_preview/* preview/$SAFE_BRANCH/
+
+        git add preview/$SAFE_BRANCH
+        git commit -m "Deploy preview: $BRANCH_NAME @ ${GITHUB_SHA::7} [ci skip]" || echo "No changes to commit"
+        git remote set-url origin https://${{ github.token }}@github.com/${{ github.repository_owner }}/openworm_docs.git
+        git push origin gh-pages
+
+    - name: Comment preview URL on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const branch = '${{ github.head_ref }}'.replace(/[^a-zA-Z0-9-]/g, '-');
+          const url = `https://docs.openworm.org/preview/${branch}/`;
+          const marker = '<!-- preview-url -->';
+          const body = `${marker}\n**Preview:** ${url}`;
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          const existing = comments.find(c => c.body.includes(marker));
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+          }
 
     - name: Archive production artifacts
       if: github.ref == 'refs/heads/master'
@@ -86,4 +154,27 @@ jobs:
             git commit --amend -m "Deploy master@$SHA [ci skip]"
             git remote set-url origin https://${{ github.token }}@github.com/${{ github.repository_owner }}/openworm_docs.git
             git push -f origin gh-pages
+        fi
+
+  cleanup-preview:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Remove preview from gh-pages
+      run: |
+        BRANCH_NAME="${{ github.head_ref }}"
+        SAFE_BRANCH=$(echo "$BRANCH_NAME" | sed 's/[^a-zA-Z0-9-]/-/g')
+
+        git fetch origin gh-pages:gh-pages
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git checkout gh-pages
+
+        if [ -d "preview/$SAFE_BRANCH" ]; then
+          rm -rf preview/$SAFE_BRANCH
+          git add -A preview/
+          git commit -m "Remove preview: $BRANCH_NAME [ci skip]"
+          git remote set-url origin https://${{ github.token }}@github.com/${{ github.repository_owner }}/openworm_docs.git
+          git push origin gh-pages
         fi
