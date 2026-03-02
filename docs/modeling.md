@@ -55,7 +55,7 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 
 In turn, the activity of the muscles are being driven by the activity of neurons within the body.
 
-![image](http://i.imgur.com/KSWjCaW.jpg)
+![image](../../images/sibernetic.jpg)
 
 More detailed information is available on the [Sibernetic](https://openworm.org/sibernetic/) project page.
 

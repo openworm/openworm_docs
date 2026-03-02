@@ -47,11 +47,11 @@ Opening a New Issue
 
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 
-![image](http://i.imgur.com/Rh1uvmn.png)
+![image](../../images/gh_issue1.png)
 
 Next, click on the New Image button in the upper right corner of the screen.
 
-![image](http://i.imgur.com/fvEQOJQ.png)
+![image](../../images/gh_issue2.png)
 
 This will open the interface to create a new issue. You will need to add the following information:
 
@@ -61,7 +61,7 @@ This will open the interface to create a new issue. You will need to add the fol
 -   Add a milestone if appropriate
 -   Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
-![image](http://i.imgur.com/ozkZFsh.png)
+![image](../../images/gh_issue3.png)
 
 Finally, click on Submit New Issue.
 
