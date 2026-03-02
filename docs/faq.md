@@ -100,7 +100,7 @@ There have been [other modeling efforts in _C. elegans_ and their subsystems](ht
 
 There are a [number of neuronal simulators in use](http://software.incf.org/software/?getTopics=Computational%20neuroscience&b_start:int=0), and we have done considerable amount of work on top of one in particular, the [NEURON simulation environment](http://www.scholarpedia.org/article/Neuron_simulation_environment).
 
-There are a wide variety of ways to simulate neurons, as shown in [figure two](http://i.imgur.com/aRGyCP3.png) of [Izhikevich 2004](http://www.ncbi.nlm.nih.gov/pubmed/15484883).
+There are a wide variety of ways to simulate neurons, as shown in figure 2 of [Izhikevich 2004](http://www.ncbi.nlm.nih.gov/pubmed/15484883).
 
 ### What does a neuronal simulator do?
 
