@@ -7,9 +7,9 @@ Previous accomplishments
 ------------------------
 
 -   [Past Journal clubs](https://www.youtube.com/watch?v=JHSqkZ2sFDA&list=PL8ACJC0fGE7D-EkkR7EFgQESpHONC_kcI)
--   [Media attention](http://www.openworm.org/media.html)
--   [Attracting contributors](http://www.openworm.org/people.html)
--   [Attracting supporters](http://www.openworm.org/supporters.html)
+-   [Media attention](https://www.openworm.org/media.html)
+-   [Attracting contributors](https://www.openworm.org/people.html)
+-   [Attracting supporters](https://www.openworm.org/supporters.html)
 -   [Successful crowdfunding](https://www.kickstarter.com/projects/openworm/openworm-a-digital-organism-in-your-browser)
 
 
@@ -48,3 +48,19 @@ Associated Repositories
 </tr>
 </tbody>
 </table>
+
+---
+
+## Related Design Documents
+
+- **[DD011: Contributor Progression Model](../design_documents/DD011_Contributor_Progression_Model.md)** — The L0-L5 contributor progression framework (Observer → Senior Contributor)
+- **[DD012: RFC Process](../design_documents/DD012_Design_Document_RFC_Process.md)** — How Design Documents are proposed, reviewed, and accepted
+- **[DD015: AI Contributor Model](../design_documents/DD015_AI_Contributor_Model.md)** — How AI contributors participate in the project
+
+---
+
+## Continue Reading
+
+- **[Community Overview](../community.md)** — How to get involved with OpenWorm
+- **[GitHub Workflow](../Community/github.md)** — Contributing to Design Document implementation
+- **[Design Documents](../design_documents/index.md)** — The complete technical roadmap

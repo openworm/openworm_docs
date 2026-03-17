@@ -6,23 +6,23 @@ What follows is a history of _C. elegans_ research, of the OpenWorm Project, as 
 Historical Milestones
 ---------------------
 
-1900: _C. elegans_ was [first described](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by **Émile Maupas**, who isolated it from soil in Algeria.
+1900: _C. elegans_ was [first described](https://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) by **Émile Maupas**, who isolated it from soil in Algeria.
 
-1963: **Sydney Brenner**, at MRC Laboratory in Cambridge, [**proposed using _C. elegans_ as a model organism**](http://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) for scientific study. He won a Nobel prize for this work in 2002.
+1963: **Sydney Brenner**, at MRC Laboratory in Cambridge, [**proposed using _C. elegans_ as a model organism**](https://en.wikipedia.org/wiki/History_of_research_on_Caenorhabditis_elegans) for scientific study. He won a Nobel prize for this work in 2002.
 
 1986: After thirteen years of work, **John White**, also at MRC Laboratory in Cambridge, [publishes the full _C. elegans_ connectome](https://wormatlas.org/MoW_built0.92/MoW.html).
 
 1999: _C. elegans_ becomes the first animal [to have its genome completely sequenced](https://www.sanger.ac.uk/data/worm-genome/#:~:text=Caenorhabditis%20genome%20sequencing-,C.,legacies%20of%20the%20institute%20itself.). Humans follow in 2002.
 
-1999: **Ferree and Lockery** publish a [neural network model of chemotaxis in _C. elegans_](http://www.ncbi.nlm.nih.gov/pubmed/10406137)
+1999: **Ferree and Lockery** publish a [neural network model of chemotaxis in _C. elegans_](https://www.ncbi.nlm.nih.gov/pubmed/10406137)
 
-2000: [**WormBase**](http://www.wormbase.org/about#0--10) is [founded](http://nar.oxfordjournals.org/content/38/suppl_1/D463.abstract) by Paul Sternberg of CalTech and Richard Durbin, among others. It aggregates information known about _C. elegans_ into one place.
+2000: [**WormBase**](https://www.wormbase.org/about#0--10) is [founded](https://nar.oxfordjournals.org/content/38/suppl_1/D463.abstract) by Paul Sternberg of CalTech and Richard Durbin, among others. It aggregates information known about _C. elegans_ into one place.
 
-2002: **David Harel** proposes complete modeling of the _C. elegans_ as a [grand challenge in computing](http://dx.doi.org/10.1007/978-3-540-24622-0_26).
+2002: **David Harel** proposes complete modeling of the _C. elegans_ as a [grand challenge in computing](https://dx.doi.org/10.1007/978-3-540-24622-0_26).
 
-2009: **Boyle & Cohen** publish an [integrated 2D computer model of _C. elegans_ locomotion](http://etheses.whiterose.ac.uk/1377/)
+2009: **Boyle & Cohen** publish an [integrated 2D computer model of _C. elegans_ locomotion](https://etheses.whiterose.ac.uk/1377/)
 
-18 May 2014: [A team from MIT develops a technique to **view all _C. elegans_ neurons at once**](http://www.nature.com/nmeth/journal/v11/n7/full/nmeth.2964.html), which may fill in a remaining data gap.
+18 May 2014: [A team from MIT develops a technique to **view all _C. elegans_ neurons at once**](https://www.nature.com/nmeth/journal/v11/n7/full/nmeth.2964.html), which may fill in a remaining data gap.
 
 OpenWorm
 --------
@@ -37,7 +37,7 @@ June 2008: First CyberElegans publication: Palyanov A.Yu., Dibert A.A., Computer
 
 Jan 2010: Sergey Khayrulin joins Andrey on the CyberElegans project.
 
-1 Jan 2010: In [the tweet heard 'round the world](https://x.com/John_Idol/status/7279117575), co-founder [Giovanni Idili](http://twitter.com/john_idol) **proposes what would later be called the OpenWorm project** to co-founder Stephen Larson (PhD student at UCSD) at the [Whole Brain Catalog](http://twitter.com/BrainCatalog):
+1 Jan 2010: In [the tweet heard 'round the world](https://x.com/John_Idol/status/7279117575), co-founder [Giovanni Idili](https://twitter.com/john_idol) **proposes what would later be called the OpenWorm project** to co-founder Stephen Larson (PhD student at UCSD) at the [Whole Brain Catalog](https://twitter.com/BrainCatalog):
 
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/BrainCatalog">@BrainCatalog</a> new year&#39;s resolution: simulate the whole <em>C. elegans</em> brain (302 neurons)!</p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/7279117575">January 1, 2010</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -52,7 +52,7 @@ Early Jan 2011: Stephen Larson puts out a call for volunteers through Whole Brai
 <blockquote class="twitter-tweet" lang="en"><p>WOW, this <em>C. elegans</em> simulation looks pretty impressive --&gt; http://goo.gl/SS96B cc: <a href="https://twitter.com/BrainCatalog">@BrainCatalog</a>, <a href="https://twitter.com/tarelli">@tarelli</a></p>&mdash; Giovanni Idili (@John_Idol) <a href="https://twitter.com/John_Idol/status/29603680760111104">January 24, 2011</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-4 September 2011: [Article](http://www.openworm.org/publications.html): Managing Complexity in Multi-Algorithm, Multi-Scale Biological Simulations: An Integrated Software Engineering and Neuroinformatics Approach.
+4 September 2011: [Article](https://www.openworm.org/publications.html): Managing Complexity in Multi-Algorithm, Multi-Scale Biological Simulations: An Integrated Software Engineering and Neuroinformatics Approach.
 
 September 2011: [OpenWorm Release 1](../releases/)
 
@@ -60,7 +60,7 @@ December 2011: [OpenWorm's Blog is initiated](https://openworm.tumblr.com/)
 
 April 2012: [OpenWorm Release 2](../releases/)
 
-August 2012: [Article](http://www.openworm.org/publications.html): Towards a virtual _C. elegans_: A framework for simulation and visualization of the neuromuscular system in a 3D physical environment.
+August 2012: [Article](https://www.openworm.org/publications.html): Towards a virtual _C. elegans_: A framework for simulation and visualization of the neuromuscular system in a 3D physical environment.
 
 November 2012: [OpenWorm Release 3](../releases/)
 
@@ -69,17 +69,17 @@ November 2012: [OpenWorm Release 3](../releases/)
 July 2013:
 
 -   [**First OpenWorm Conference**](https://openworm.tumblr.com/post/57193347335/community-updates-from-openworm-in-paris), in Paris.
--   [Article](http://www.openworm.org/publications.html): Integration of predictive-corrective incompressible SPH and Hodgkin-Huxley based models in the OpenWorm in silico model of _C. elegans_.
--   [Article](http://www.openworm.org/publications.html): Beyond the connectome hairball: Rational visualizations and analysis of the _C. elegans_ connectome as a network graph using hive plots.
+-   [Article](https://www.openworm.org/publications.html): Integration of predictive-corrective incompressible SPH and Hodgkin-Huxley based models in the OpenWorm in silico model of _C. elegans_.
+-   [Article](https://www.openworm.org/publications.html): Beyond the connectome hairball: Rational visualizations and analysis of the _C. elegans_ connectome as a network graph using hive plots.
 -   [OpenWorm Release 4](../releases/)
 
 January 2014: [OpenWorm Release 5](../releases/)
 
 19 May 2014: OpenWorm raises 121,000 USD [via Kickstarter](https://www.kickstarter.com/projects/openworm/openworm-a-digital-organism-in-your-browser)
 
-24 May 2014: [OpenWorm article in The Economist](http://www.economist.com/news/science-and-technology/21602661-crowd-funded-project-aims-build-worlds-first-simulated-organism-computer)
+24 May 2014: [OpenWorm article in The Economist](https://www.economist.com/news/science-and-technology/21602661-crowd-funded-project-aims-build-worlds-first-simulated-organism-computer)
 
-Summer 2014: Two OpenWorm volunteers are sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
+Summer 2014: Two OpenWorm volunteers are sponsored by the Google Summer of Code program via the [INCF](https://incf.org).
 
 3 November 2014: [Article](https://www.frontiersin.org/journals/computational-neuroscience/articles/10.3389/fncom.2014.00137/full): OpenWorm: an open-science approach to modeling Caenorhabditis elegans
 
@@ -87,7 +87,7 @@ Summer 2014: Two OpenWorm volunteers are sponsored by the Google Summer of Code 
 
 April 2015: Amazon Web Services donates credits to the OpenWorm project.
 
-Summer 2015: One OpenWorm volunteer is sponsored by the Google Summer of Code program via the [INCF](http://incf.org).
+Summer 2015: One OpenWorm volunteer is sponsored by the Google Summer of Code program via the [INCF](https://incf.org).
 
 18 July 2015: [Article](https://bmcneurosci.biomedcentral.com/articles/10.1186/1471-2202-16-S1-P141): The OpenWorm Project: currently available resources and future plans
 
@@ -129,18 +129,45 @@ Detailed [spreadsheet](https://docs.google.com/spreadsheets/d/1NclOVMRIqY\_hn-aL
 
 ~1997: **NemaSys at University of Oregon** A full model was planned, including body, every neuron, every synapse, and complete set of sensory modalities. Four papers were released in 1997-1998 on pieces of the model, but its ultimate ambition was not finished. [Webpage link](http://www.csi.uoregon.edu/projects/celegans/)
 
-~1998 **Perfect _C. elegans_ Project in Tokyo** They released an [initial report](http://www.mitpressjournals.org/doi/abs/10.1162/106454698568495\#.VDrtDfldV8E), but no more.
+~1998 **Perfect _C. elegans_ Project in Tokyo** They released an [initial report](https://www.mitpressjournals.org/doi/abs/10.1162/106454698568495\#.VDrtDfldV8E), but no more.
 
 ~2004 **Virtual _C. elegans_ project at Hiroshima University, Japan** The aim was to build a worm emulation, simulate poking it on the head, and have it back away from the poke. This was achieved, but not in a biologically realistic way. They simulated the nematode neurons, but the connection weights were unknown. Instead of getting this information experimentally, a machine learning algorithm was used to generate weights. Papers:
 
--   [A Dynamic Body Model of _C. elegans_ with Neural Oscillators](http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_152.pdf)
--   [A Model of Motor Control of _C. elegans_ with Neuronal Circuits](http://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf)
+-   [A Dynamic Body Model of _C. elegans_ with Neural Oscillators](https://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_152.pdf)
+-   [A Model of Motor Control of _C. elegans_ with Neuronal Circuits](https://www.bsys.hiroshima-u.ac.jp/pub/pdf/J/J_153.pdf)
 
 2009 **Jordan Boyle, Netta Cohen at University of Leeds, UK** [_C. elegans_ locomotion: an integrated approach](https://etheses.whiterose.ac.uk/1377/)
 
 2010 **Mailler at Tulsa, USA** [A Biologically Accurate 3D Model of the Locomotion of Caenorhabditis Elegans](https://www.researchgate.net/publication/228374526_A_Biologically_Accurate_3D_Model_of_the_Locomotion_of_Caenorhabditis_Elegans).
 
-September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/) ([David Dalrymple](http://syntheticneurobiology.org/people/display/144/26))**. The aim was to use optogenetics to record the firing dynamics of the _C. elegans_ neurons and then replicate it in a simulation. [He delivered a lecture on the project in November 2011](http://www.youtube.com/watch?v=xW77lANeJas). As of June 2014 [he works for Twitter](https://www.linkedin.com/profile/view?id=66199655) so the project may now be defunct.
+September 2011 - October 2013 **[Project Nemaload](http://nemaload.davidad.org/) ([David Dalrymple](https://syntheticneurobiology.org/people/display/144/26))**. The aim was to use optogenetics to record the firing dynamics of the _C. elegans_ neurons and then replicate it in a simulation. [He delivered a lecture on the project in November 2011](https://www.youtube.com/watch?v=xW77lANeJas). As of June 2014 [he works for Twitter](https://www.linkedin.com/profile/view?id=66199655) so the project may now be defunct.
+
+2024 **[MetaWorm](https://doi.org/10.1038/s43588-024-00738-w) ([Zhao et al.](https://github.com/Jessie940611/BAAIWorm), Beijing Academy of Artificial Intelligence)**. The first integrative data-driven model to achieve closed-loop brain-body-environment simulation of _C. elegans_, published in _Nature Computational Science_ (4:978-990). Their model used 136 multicompartmental neurons with 14 ion channel classes, a Projective Dynamics FEM body at 30 FPS, and gradient-descent optimization of synaptic weights against whole-brain calcium imaging data. OpenWorm's [Design Documents](design_documents/index.md) incorporate lessons from MetaWorm while extending the scope: 302 neurons (not 136), neuropeptidergic signaling ([DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)), organ systems ([DD007](design_documents/DD007_Pharyngeal_System_Architecture.md), [DD009](design_documents/DD009_Intestinal_Oscillator_Model.md), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md)), all 959 somatic cells ([DD004](design_documents/DD004_Mechanical_Cell_Identity.md)), internal fluid dynamics via SPH ([DD003](design_documents/DD003_Body_Physics_Architecture.md)), NeuroML standard format ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), and a formal 4-tier validation framework with automated CI ([DD010](design_documents/DD010_Validation_Framework.md), [DD013](design_documents/DD013_Simulation_Stack_Architecture.md)). Open-source code available ([Apache 2.0](https://github.com/Jessie940611/BAAIWorm)) with reusable NMODL ion channel files and neuron morphology data.
+
+The Design Document Era (2026-present)
+--------------------------------------
+
+Building on over a decade of prototyping and publishing, the project entered a new phase in 2026 with the creation of **Design Documents (DDs)** — formal architectural specifications that convert lessons from prototypes into validated engineering blueprints.
+
+Key developments:
+
+- **29 Design Documents** written ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD028](design_documents/DD028_Project_Metrics_Dashboard.md) + [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md)/[DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md); DD016 merged into DD005), covering every subsystem from ion channels to organ systems
+- **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)) established: single-cell electrophysiology, circuit-level functional connectivity, and whole-organism behavioral kinematics
+- **Phase roadmap** defined: from the existing 302-neuron foundation (Phase 0) through cell-type specialization, slow modulation, organ systems, to a complete 959-cell organism (Phase 4)
+- **Contributor progression model** ([DD011](design_documents/DD011_Contributor_Progression_Model.md)) formalized for scaling the community
+
+The shift from "cool demo" to "validated engineering blueprint" is what distinguishes the current approach from the prototyping era. See [Archived Projects](archived_projects.md) for how early prototypes like CyberElegans and Geppetto evolved into current Design Documents.
+
+---
+
+## Continue Reading
+
+- **[Design Documents](design_documents/index.md)** — The complete roadmap and all 29 DDs
+- **[Archived Projects](archived_projects.md)** — How early prototypes became formal specifications
+- **[Releases](releases.md)** — Past release milestones
+- **[Background](background.md)** — The scientific concepts behind the project
+
+---
 
 Acknowledgements
 ----------------

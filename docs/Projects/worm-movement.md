@@ -1,6 +1,9 @@
 Movement Analysis
 ===================
 
+!!! info "Governed by DD010 + DD021"
+    Movement analysis is the Tier 3 (behavioral) validation layer, specified by [DD010: Validation Framework](../design_documents/DD010_Validation_Framework.md). The analysis toolbox revival is tracked by [DD021: Movement Analysis Toolbox](../design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md).
+
 In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement analysis team is working with an existing database of worm movement to make the critical comparisons.
 
 The main goal of the Movement Analysis team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
@@ -67,3 +70,12 @@ Associated Repositories
 - [https://github.com/Behavioural-Genomics/tracking](https://github.com/Behavioural-Genomics/tracking) (Closed)
 - [https://github.com/ver228/Multiworm_Tracking](https://github.com/ver228/Multiworm_Tracking) (Avelino Javer's work)
 - [https://github.com/KezhiLi/Tracking_Hypo](https://github.com/KezhiLi/Tracking_Hypo)   (Kezhi Li's work; the computer vision code)
+
+---
+
+## Continue Reading
+
+- **[Validation Framework](../validation.md)** — The 3-tier validation strategy (movement is Tier 3)
+- **[DD021: Movement Analysis Toolbox](../design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** — The toolbox revival plan and WCON policy
+- **[DD010: Validation Framework](../design_documents/DD010_Validation_Framework.md)** — Full specification of all validation tiers
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

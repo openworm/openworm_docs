@@ -3,6 +3,9 @@ Current releases
 
 The recent and planned releases for the Docker image which contains the assembled OpenWorm software stack can be found at the [OpenWorm Milestones](https://github.com/openworm/OpenWorm/milestones).
 
+!!! note "Current Approach"
+    The simulation stack is now containerized via Docker, as specified in [DD013: Simulation Stack Architecture](design_documents/DD013_Simulation_Stack_Architecture.md). The Docker image bundles [Sibernetic](Projects/sibernetic.md) (body physics), [c302](Projects/c302.md) (neural network), and validation tooling into a single reproducible environment. See the [Docker simulation stack](Projects/docker.md) page for setup instructions.
+
 **An overview of the core repositories in the project, along with the current status of automated testing, can be found [here](https://github.com/openworm/.github/blob/main/testsheet/README.md).**
 
 
@@ -87,7 +90,7 @@ This release, among many acheivements, we accomplished the following:
 
 [Detailed release notes from this release can be found online](https://docs.google.com/a/metacell.us/document/d/1cg1YnKI92tN9HZeXachTfpRlKP10OuJhXlRBabeTnuI/pub)
 
-Our second release pointed us in a good direction for the future, and provided some [exciting products](http://browser.openworm.org). In release 3, we worked to develop additional products that are more easily used by the outside world.
+Our second release pointed us in a good direction for the future, and provided some [exciting products](https://browser.openworm.org). In release 3, we worked to develop additional products that are more easily used by the outside world.
 
 ### EPIC-1: As a user, I want to be able to mark synapses and have them integrated into the model
 
@@ -95,7 +98,7 @@ The user will be able to contribute to a shared knowledge space of the positions
 
 ### EPIC-2: As a developer, I want to launch the simulation engine on Amazon AWS
 
-This could be implemented with an auto-configuration system like [Fabric](http://docs.fabfile.org/en/1.8/) that automatically launches AWS instances and runs an installation script on it. This way we can control what OS / drivers are used on the target system.
+This could be implemented with an auto-configuration system like [Fabric](https://docs.fabfile.org/en/1.8/) that automatically launches AWS instances and runs an installation script on it. This way we can control what OS / drivers are used on the target system.
 
 ### EPIC-3: As a user, I want to be able to see the body of the worm moving and changing color, driven by activity of the simulation engine (Simplified Worm)
 
@@ -113,7 +116,7 @@ This is important because we want to build cells which are conductance based mod
 
 This should enable the parameters of the muscle cell to be tuned with respect to real data.
 
-EPIC-7: As a user, I want to see a WebGL visualization of [Smoothed Particle Hydrodynamics](http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) -----------------------------------------------------------------------------------------We want to be able to run the Smoothed Particle Hydrodynamics demos so we can see them through the browser.
+EPIC-7: As a user, I want to see a WebGL visualization of [Smoothed Particle Hydrodynamics](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) -----------------------------------------------------------------------------------------We want to be able to run the Smoothed Particle Hydrodynamics demos so we can see them through the browser.
 
 ### Presentation update
 
@@ -168,22 +171,22 @@ We have set a completed a successful release 1 in September. It included the fol
 
 -   Multi-algorithm simulation engine
 -   Create a generic architecture for combining algorithms operating at different time scales on different models
--   Create [conductance-based simulator](http://www.scholarpedia.org/article/Conductance-based_models) using [OpenCL](http://en.wikipedia.org/wiki/OpenCL)
--   Create a [smoothed particle hydrodynamics (SPH)](http://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) simulator
+-   Create [conductance-based simulator](https://www.scholarpedia.org/article/Conductance-based_models) using [OpenCL](https://en.wikipedia.org/wiki/OpenCL)
+-   Create a [smoothed particle hydrodynamics (SPH)](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) simulator
 -   Use the simulation engine architecture to combine these two algorithms to prove its generality and ability to cross algorithmic domains
 -   Neuron database
--   Use the [Virtual Worm](http://caltech.wormbase.org/virtualworm/) Blender files to create a NeuroML compartmental description of the 302 neurons
--   Combine knowledge about the [synaptic structure of the neuronal network](http://www.wormatlas.org/neuronalwiring.html) with the compartmental description
+-   Use the [Virtual Worm](https://caltech.wormbase.org/virtualworm/) Blender files to create a NeuroML compartmental description of the 302 neurons
+-   Combine knowledge about the [synaptic structure of the neuronal network](https://www.wormatlas.org/neuronalwiring.html) with the compartmental description
 -   Combine knowledge about the ion channel structure of the neuronal network with the compartmental description
 -   Worm browser
--   Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the [Google Body Browser](http://www.zygotebody.com/)
+-   Build a 3D interactive visualization of the Virtual Worm Blender files, akin to the [Google Body Browser](https://www.zygotebody.com/)
 
 ### Simulation Engine
 
 -   As a developer, I would like a simulation engine prototype that provides a design proof of concept
 -   As a developer, I want an alpha kernel for neuronal simulation for the prototype.
 -   As a developer, I want a first draft of a simulation engine design
--   As a product manager, I want to see a working prototype of the SPH algorithm working with the existing [CyberElegans](http://www.youtube.com/watch?v=Ek49JSAiKjY) code
+-   As a product manager, I want to see a working prototype of the SPH algorithm working with the existing [CyberElegans](https://www.youtube.com/watch?v=Ek49JSAiKjY) code
 -   As a product manager, I want a initial test implementation example of the SPH algorithm implemented as a solver
 -   As a developer, I want a simple test harness to function as client for the simulation engine prototype to ensure everything is working.
 -   As a developer, I would like to have a prototype of a solver service, using the HH OpenCL alpha kernel.
@@ -202,3 +205,12 @@ We have set a completed a successful release 1 in September. It included the fol
 -   As a developer, I want to have the 3D models of the worm prepared in a suitable format so they can be visualized in the Web Browser
 -   As a user, I want to use a slider to smoothly make systems in the worm transparent
 -   A more complete document describing our plans for release 2 is available.
+
+---
+
+## Continue Reading
+
+- **[Full History](fullhistory.md)** — Complete timeline from 1900 to the Design Document era
+- **[Archived Projects](archived_projects.md)** — How early prototypes evolved into current specifications
+- **[Design Documents](design_documents/index.md)** — The current technical roadmap
+- **[Docker simulation stack](Projects/docker.md)** — Running the current simulation

@@ -1,77 +1,113 @@
 ## OpenWorm Projects
 
-The OpenWorm project is currently laid out into the major areas shown below:
+## Projects and Design Documents
 
-###  Currently active projects
+OpenWorm's projects are now **formally specified in [Design Documents](design_documents/) (DDs)**. Each repository implements one or more DDs:
 
--   [Neuromechanical modeling with Sibernetic](../Projects/sibernetic/)
--   [c302 multiscale modelling framework](../Projects/c302/)
--   [OpenWorm Browser](../Projects/browser/)
--   [DevoWorm project](../Projects/DevoWorm/)
--   [Docker simulation stack](../Projects/docker/)
--   [Community outreach](../Projects/community-proj/)
+| Repository | Design Documents | Status | Role |
+|------------|------------------|--------|------|
+| [c302](Projects/c302/) | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md)-[DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) | Active | Neural circuit, muscle models, organ systems |
+| [Sibernetic](Projects/sibernetic/) | [DD003](design_documents/DD003_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | Active | Body physics, SPH engine |
+| [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Active | Connectome data access (cect API) |
+| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) | Active | Visualization (Trame evolution) |
+| [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | [DD010](design_documents/DD010_Validation_Framework.md), [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Revival needed | Tier 3 behavioral validation |
+| [OpenWorm (meta-repo)](Projects/docker/) | [DD013](design_documents/DD013_Simulation_Stack_Architecture.md) | Proposed | Integration, Docker stack |
+| [DevoWorm](Projects/DevoWorm/) | [Phase 6](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Active | Developmental dynamics, morphogenesis |
+| [Geppetto](Projects/geppetto/) | [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) (historical) | Dormant | Web platform (superseded by Trame) |
 
-###  Projects still maintained, less active
+**See [Integration Map](design_documents/INTEGRATION_MAP.md)** for the complete dependency graph.
 
--   [Data collection and representation](../Projects/datarep/)
--   [Movement analysis](../Projects/worm-movement/)
--   [Geppetto Simulation Engine](../Projects/geppetto/)
--   [Optimization engine](../Projects/optimization/)
--   [Muscle-Neuron integration](../Projects/muscle-neuron-integration/)
--   [_C. elegans_ robots](../Projects/c-elegans-robot/)
+---
 
-<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://www.lucidchart.com/documents/embeddedchart/832c1c53-2840-421f-9546-01499bb9c753" id="pf3oYI3Y1wfX"></iframe></div>
+### Currently active projects
+
+-   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD003](design_documents/DD003_Body_Physics_Architecture.md)** (Body Physics) + **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (Mechanical Cell Identity)
+-   [c302 multiscale modelling framework](Projects/c302/) — implements **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (Neural Circuit) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (Muscle Model) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)**
+-   [OpenWorm Browser](Projects/browser/)
+-   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 6](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)**, connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)**
+-   [Docker simulation stack](Projects/docker/) — implements **[DD013](design_documents/DD013_Simulation_Stack_Architecture.md)** (Simulation Stack)
+-   [Community outreach](Projects/community-proj/)
+
+### Projects still maintained, less active
+
+-   [Data collection and representation](Projects/datarep/) — relates to **[DD008](design_documents/DD008_Data_Integration_Pipeline.md)** (Data Integration) + **[DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome Access)
+-   [Movement analysis](Projects/worm-movement/) — implements **[DD010](design_documents/DD010_Validation_Framework.md)** (Validation) + **[DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** (Movement Toolbox)
+-   [Geppetto Simulation Engine](Projects/geppetto/) — historical; superseded by **[DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md)** (Dynamic Visualization)
+-   [Optimization engine](Projects/optimization/) — relates to **[DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)** (Hybrid Mechanistic-ML)
+-   [Muscle-Neuron integration](Projects/muscle-neuron-integration/) — formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)**
+-   [_C. elegans_ robots](Projects/c-elegans-robot/)
+
+---
 
 **NeuroMechanical Modeling - Sibernetic**
 
-While our ultimate goal is to simulate every cell in _C. elegans_, we are starting out by building a model of its body, its nervous system, and its environment. [Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
+Sibernetic implements **[DD003 (Body Physics Architecture)](design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics including the PCISPH algorithm, ~100K particles, and fluid-structure interaction. See [DD003](design_documents/DD003_Body_Physics_Architecture.md) for the complete spec including particle types, validation criteria, and integration contract.
 
-To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they contract, they exert forces on the surrounding fluid, propelling the body forward via undulutory thrust. In this model, the neural system is not considered and patterns of muscle contraction are explicitly defined.
+[Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs.
 
-More detailed information is available on the [Sibernetic project page](../Projects/sibernetic/).
+To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they contract, they exert forces on the surrounding fluid, propelling the body forward via undulatory thrust.
 
-**Geppetto Simulation Engine**
+More detailed information is available on the [Sibernetic project page](Projects/sibernetic/).
 
-In order to allow the world to play with the model easily, we are engineering [Geppetto](http://geppetto.org), an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser. You can read about architectural concepts and learn more about the different plug-in bundles we are working on.
+**c302 Neural Modeling Framework**
 
-More detailed information is available on the [Geppetto project page](../Projects/geppetto/).
+c302 implements **[DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (egg-laying), and [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (touch response).
 
-**Movement analysis**
+c302 generates NeuroML2 networks at multiple levels of biophysical detail (Levels A-D), with **Level C1 (HH + graded synapses)** as the recommended default for coupling with Sibernetic.
 
-In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement validation project is working with an existing database of worm movement to make the critical comparisons.
+More detailed information is available on the [c302 project page](Projects/c302/).
 
-The Movement Analysis Team maintains the test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm.
+**Visualization**
 
-More detailed information is available on the [Movement analysis project page](../Projects/worm-movement/).
+The visualization platform is evolving per **[DD014 (Dynamic Visualization Architecture)](design_documents/DD014_Dynamic_Visualization_Architecture.md)**:
 
-**Optimization engine**
+- **Phase 1:** Trame viewer (PyVista + live server)
+- **Phase 2:** Interactive layers with validation overlays
+- **Phase 3:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
 
-The Optimization engine uses optimization techniques like genetic algorithms to help fill gaps in our knowledge of the electrophysiology of _C. elegans_ muscle cells and neurons.
+[Geppetto](Projects/geppetto/) served this role historically (2014-2020) and is preserved as [archival reference](archived_projects/).
 
-More detailed information is available on the [Optimization project page](../Projects/optimization/).
+**Movement Analysis and Validation**
+
+The Movement Analysis project implements **[DD010 (Validation Framework)](design_documents/DD010_Validation_Framework.md)** — the 3-tier validation system that ensures our simulation matches real worm behavior. The analysis toolbox is being revived per **[DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)**.
+
+More detailed information is available on the [Movement analysis project page](Projects/worm-movement/) and the [Validation page](validation/).
+
+**Optimization and Parameter Fitting**
+
+Now formalized in **[DD017 (Hybrid Mechanistic-ML Framework)](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)** — differentiable simulation with gradient descent, neural surrogates for 1000x speedup, and foundation model predictions for channel kinetics.
+
+More detailed information is available on the [Optimization project page](Projects/optimization/).
 
 **Data Collection and Representation**
 
-A lot of data about _C. elegans_ is integrated into the model. In this project, we work on what forms we should put these data in to best leverage them for building the model.
+Formalized in **[DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md)** and **[DD020 (Connectome Data Access)](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)** — the ConnectomeToolbox (cect) is the canonical API for connectome data.
 
-More detailed information is available on the [Data representation project page](../Projects/datarep/).
+More detailed information is available on the [Data representation project page](Projects/datarep/).
+
+**DevoWorm — Developmental Modeling**
+
+The [DevoWorm project](Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) focuses on developmental dynamics, digital morphogenesis, and developmental plasticity in *C. elegans*. DevoWorm's embryogenetic connectome analysis, differentiation trees, and CompuCell3D morphogenesis models form the foundation for **[Phase 6 (Developmental Modeling)](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)** of the simulation roadmap — the "Worm That Grows" milestone. DevoWorm's work also connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (cell identity during body growth) and **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (temporal dynamics of cell-type specification).
+
+More detailed information is available on the [DevoWorm project page](Projects/DevoWorm/).
 
 **Community Outreach**
 
-The effort to build the OpenWorm open science community is always ongoing.
+The effort to build the OpenWorm open science community is always ongoing. See the [contributor progression model ([DD011](design_documents/DD011_Contributor_Progression_Model.md))](design_documents/DD011_Contributor_Progression_Model.md) for the L0-L5 path.
 
-More detailed information is available on the [Community project page](../Projects/community-proj/).
+More detailed information is available on the [Community project page](Projects/community-proj/).
 
 **Muscle-Neuron Integration**
 
-The goal of this project is to underpin our muscle and neuron models with biological data. This will be accomplished by creating biologically-realistic ion channel models from experimental data, which will then give rise to neural dynamics.
+Now formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (neural) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
 
-More detailed information is available on the [Muscle-Neuron integration project page](../Projects/muscle-neuron-integration/).
+More detailed information is available on the [Muscle-Neuron integration project page](Projects/muscle-neuron-integration/).
 
 **_C. elegans_ robot**
 
 The goal of this project is twofold:
+
 1. To build a robot that simulates sensory-motor functions of a _C. elegans_ nematode worm, including foraging for food.
 2. To specify parts and instructions that will help anyone to build the robot.
 
-More detailed information is available on the [_C. elegans_ robot project page](../Projects/c-elegans-robot/).
+More detailed information is available on the [_C. elegans_ robot project page](Projects/c-elegans-robot/).

@@ -1,65 +1,72 @@
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
-While our ultimate goal is to simulate every cell in the c. Elegans, we are starting out by building a model of its body, its nervous system, and its environment. [Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs. This algorithm has been initially worked out in C++ (with OpenGL visualization).
+Sibernetic implements **[DD003 (Body Physics Architecture)](../design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics.
+
+## What It Does
+
+Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydrodynamics (SPH):
+
+| Particle Type | Count | Role | DD Reference |
+|---------------|-------|------|--------------|
+| Liquid | ~50K | Surrounding fluid medium | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
+| Elastic | ~30K | Body wall, muscles, cuticle | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
+| Boundary | ~20K | Substrate surface | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md) |
+
+**Key algorithm:** PCISPH (Predictive-Corrective Incompressible SPH) pressure solver, implemented in C++ with GPU acceleration (OpenCL).
+
+## Current Status (Phase 0)
+
+**Accepted and working:**
+
+- 3D body model with fluid-structure interaction
+- Muscle activation produces emergent undulatory locomotion
+- Validated against Schafer lab kinematics ([DD010](../design_documents/DD010_Validation_Framework.md) Tier 3: speed, wavelength, frequency within +/-15%)
 
 To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
-Previous accomplishments
-------------------------
+## Roadmap
+
+**Phase 1-2 ([DD004](../design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
+
+- Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
+- Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
+
+**Phase 2 ([DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
+
+- Substrate types (agar, liquid, soil)
+- Chemical/thermal gradients
+- Food particles and obstacles
+
+**Phase 4 ([DD014.2](../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
+
+- GPU skinning from SPH particles to Virtual Worm anatomical meshes
+- Photorealistic rendering
+
+## Previous accomplishments
 
 -   Physics tests
 -   Initial worm crawling
+-   Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382)
 
-Current roadmap
----------------
-
-### [Electrofluid Paper](https://github.com/openworm/OpenWorm/issues?milestone=17&state=closed)
-
-We are writing a manuscript focusing on the work we have to implement SPH in the project and apply it to muscle cells and the worm body. [@vellamike](https://github.com/vellamike), [@a-palyanov](https://github.com/a-palyanov) and [@skhayrulin](https://github.com/skhayrulin) are taking the lead on this.
-
-The proposal is to do this after the Sibernetic proof of concept worm wiggling, both of which have since been completed.
-
-Issues list
------------
+## Issues list
 
 All issues related to the [Sibernetic code base](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=sibernetic&page=1&sort=comments&state=open) can be found on GitHub.
 
-Associated Repositories
------------------------
+## Associated Repositories
 
-<table>
-<colgroup>
-<col width="45%" />
-<col width="50%" />
-<col width="4%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Repository</th>
-<th align="left">Description</th>
-<th align="left">Language</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/Smoothed-Particle-Hydrodynamics">Smoothed-Particle-Hydrodynamics</a></td>
-<td align="left"><dl>
-<dt>The Sibernetic code base containing the 2014 version of the worm body model,</dt>
-<dd><p>a C++ implementation of the Smoothed Particle Hydrodynamics algorithm customised for the OpenWorm project.</p>
-</dd>
-</dl></td>
-<td align="left">C++</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/openworm/ConfigurationGenerator">ConfigurationGenerator</a></td>
-<td align="left">Generation start scene configuration for PCI SPH solver</td>
-<td align="left">JavaScript</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/openworm/CyberElegans">CyberElegans</a></td>
-<td align="left">Circa 2010 Neuromechanical model of C. Elegans</td>
-<td align="left">C++</td>
-</tr>
-</tbody>
-</table>
+| Repository | Description | Language |
+|------------|-------------|----------|
+| [Smoothed-Particle-Hydrodynamics](https://github.com/openworm/Smoothed-Particle-Hydrodynamics) | The Sibernetic code base — C++ implementation of SPH customised for OpenWorm | C++ |
+| [ConfigurationGenerator](https://github.com/openworm/ConfigurationGenerator) | Generation of start scene configuration for PCISPH solver | JavaScript |
+| [CyberElegans](https://github.com/openworm/CyberElegans) | Circa 2010 neuromechanical prototype ([archived](../archived_projects.md#cyberelegans-2010-2014)) | C++ |
+
+---
+
+## Continue Reading
+
+- **[DD003: Body Physics Architecture](../design_documents/DD003_Body_Physics_Architecture.md)** — The governing specification for Sibernetic
+- **[c302](c302.md)** — The neural network framework that drives Sibernetic
+- **[Docker simulation stack](docker.md)** — Running the complete simulation
+- **[Validation Framework](../validation.md)** — How body physics outputs are validated
+- **[Projects Overview](../projects.md)** — All active projects and their governing DDs

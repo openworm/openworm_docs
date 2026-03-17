@@ -1,7 +1,10 @@
+!!! warning "Historical Content"
+    This page describes an older approach to running OpenWorm simulations. For the current simulation architecture, see [DD013 (Simulation Stack)](../design_documents/DD013_Simulation_Stack_Architecture.md).
+
 Running the NeuroML connectome in NeuroConstruct
 ================================================
 
-The NeuroML conversion of the [Virtual Worm Blender files](http://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](http://www.neuroConstruct.org) project.
+The NeuroML conversion of the [Virtual Worm Blender files](https://caltech.wormbase.org/virtualworm/) has been imported into a [neuroConstruct](https://www.neuroConstruct.org) project.
 
 This page provides instructions for obtaining the latest version of neuroConstruct, getting the latest CElegans project and generating/visualising the cells and connections.
 
@@ -39,12 +42,12 @@ The image below shows the generated full network.
 Executing the network in NEURON simulation environment.
 -------------------------------------------------------
 
-[Install the NEURON simulation environment](http://www.neuron.yale.edu/neuron/download) and set the path to NEURON's bin directory containing nrniv within neuroConstruct's menu (Settings-\>General Preferences and Project Defaults). After generating cell positions (easiest to do this with the PharyngealNeurons\_inputs configuration), go to the export tab, the NEURON subtab, and press 'create hoc simulation'. Once this is completed the button will stop being greyed out and the 'Run simulation' button will be available. Clicking this should kick off the simulation run. Once this is completed, the output from the simulation should tell you that results are available in a directory named 'Sim\_XX' where XX will be a number. Go back to the Visualisation tab and click 'View Prev Sims in 3D..." Click on the box with the 'Sim\_XX' name that applies to the simulation run you did and press 'Load Simulation' at the bottom. Then at the bottom of the Visualisation screen click 'Replay' and the 'Replay simulation'. For PharyngealNeurons\_inputs, the color changes will be subtle, but they will be happening.
+[Install the NEURON simulation environment](https://www.neuron.yale.edu/neuron/download) and set the path to NEURON's bin directory containing nrniv within neuroConstruct's menu (Settings-\>General Preferences and Project Defaults). After generating cell positions (easiest to do this with the PharyngealNeurons\_inputs configuration), go to the export tab, the NEURON subtab, and press 'create hoc simulation'. Once this is completed the button will stop being greyed out and the 'Run simulation' button will be available. Clicking this should kick off the simulation run. Once this is completed, the output from the simulation should tell you that results are available in a directory named 'Sim\_XX' where XX will be a number. Go back to the Visualisation tab and click 'View Prev Sims in 3D..." Click on the box with the 'Sim\_XX' name that applies to the simulation run you did and press 'Load Simulation' at the bottom. Then at the bottom of the Visualisation screen click 'Replay' and the 'Replay simulation'. For PharyngealNeurons\_inputs, the color changes will be subtle, but they will be happening.
 
 Check the project
 -----------------
 
-In addition to being able to generate and view the project through the main GUI, a number of Python scripts are provided to test the configuration of the project. These scripts access functionality in the Java implementation of neuroConstruct by using [Jython](http://www.jython.org). More details on the Python interface to neuroConstruct can be found [here](http://www.neuroconstruct.org/docs/python.html).
+In addition to being able to generate and view the project through the main GUI, a number of Python scripts are provided to test the configuration of the project. These scripts access functionality in the Java implementation of neuroConstruct by using [Jython](https://www.jython.org). More details on the Python interface to neuroConstruct can be found [here](https://www.neuroconstruct.org/docs/python.html).
 
 A script to test various aspects of the project is *CheckProject.py*. Running this generates a number of the Simulation Configurations in succession and checks that the expected numbers of cells and connections are created:
 

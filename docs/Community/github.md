@@ -10,7 +10,7 @@ This page contains a list of repositories maintained by the OpenWorm project on 
 Repositories
 ------------
 
-View the full current list [repositories](../Community/repositories/) of repositories on GitHub.
+View the full current list of [OpenWorm repositories on GitHub](https://github.com/openworm).
 
 Accessing GitHub
 ----------------
@@ -93,10 +93,41 @@ Creating or Adding New Repositories
 
 Already existing repositories can be transferred into the OpenWorm GitHub organization via the ["transfer" mechanism provided by GitHub](https://help.github.com/articles/how-to-transfer-a-repository). New repositories [can be created](https://help.github.com/articles/create-a-repo) under the OpenWorm GitHub organization by request.
 
+Contributing to Design Document Implementation
+-----------------------------------------------
+
+**[Design Documents](../design_documents/) specify what to build.** GitHub issues (generated from DD Integration Contracts) specify the work breakdown.
+
+### DD Contribution Workflow
+
+1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), visualization -> [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md), etc.)
+2. **Read the DD** — understand the goal, deliverables, and quality criteria
+3. **Read "How to Build & Test" section** — copy-pasteable commands to get started
+4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md))
+5. **Claim an issue** — comment: "I'll work on this, ETA: X days"
+6. **Implement according to DD spec** — Quality Criteria define acceptance
+7. **Run tests:** `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge)
+8. **Open PR** referencing the DD and issue
+9. **Mind-of-a-Worm pre-review** — AI checks DD compliance automatically
+10. **Human L3+ review** — Final approval gate
+
+### Contributor Levels
+
+See **[DD011 (Contributor Progression)](../design_documents/DD011_Contributor_Progression_Model.md)** for the L0 to L5 path:
+
+| Level | Role | Can Do |
+|-------|------|--------|
+| L0 | Observer | Read DDs, watch meetings, join Slack |
+| L1 | Apprentice | Doc fixes, test improvements (3 orientation tasks) |
+| L2 | Junior Contributor | Open PRs to designated subsystems |
+| L3 | Contributor | Review/merge L1-L2 PRs, GitHub commit access |
+| L4 | Senior Contributor | Architectural decisions, write Design Documents |
+| L5 | Founder / Steering | Set direction, approve DDs, resolve conflicts |
+
 Licenses on repositories
 ------------------------
 
-In historical practice, OpenWorm members have chosen to use the [MIT open source license](http://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](http://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
+In historical practice, OpenWorm members have chosen to use the [MIT open source license](https://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](https://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
 
 An example of using the MIT license for OpenWorm code follows:
 

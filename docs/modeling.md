@@ -1,125 +1,202 @@
 OpenWorm Modeling Approach
 ==========================
 
-Our main goal is to build the world's first virtual organism-- an *in silico* implementation of a living creature-- for the purpose of achieving an understanding of the events and mechanisms of living cells. Our secondary goal is to enable, via simulation, unprecedented in silico experiments of living cells to power the next generation of advanced systems biology analysis, synthetic biology, computational drug discovery and dynamic disease modeling.
+## Mission
 
-In order to achieve these goals, we first began with an informal cartoon representation of a breakdown of cell types and various biological processes that the worm has. Here is a representation of a small subset of those processes, where arrows show the causal relationship between processes and cell types:
+Our main goal is to build the world's first virtual organism — an *in silico* implementation of a living creature — for the purpose of achieving an understanding of the events and mechanisms of living cells.
 
-![Complex causation loop](https://docs.google.com/drawings/d/1VwzSDl_a_YCqOkO4tqrG8FzB0B5A50FWgO0qdkBpNB4/pub?w=401&h=312)
+**This is now formalized in 29 Design Documents ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD028](design_documents/DD028_Project_Metrics_Dashboard.md), plus [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md) and [DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md))** that specify every subsystem from ion channels to organism behavior, validated against experimental data.
 
-This picture is purposefully drawn with an underlying loop of causal relationships, and is partially inspired by the work of [Robert Rosen](http://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650). The decision to focus on any one loop is arbitrary. Many different loops of causal relationships could be plucked out of the processes that underly the worm. However, focusing on first dealing with the loop that deals with behavior in the environment and through the nervous system has several advantages as a starting point:
+---
 
--   Crawling behavior of worms is relatively easy to measure
--   The 302 neurons responsible for the behavior are well mapped
--   Enables the study of the nervous system as a real time control system for a body
--   Provides the model with a minimum core to which other biological processes and cell types can be added.
+## From Prototype to Production (2011-2026)
 
-Having chosen one loop to focus on first, we can now re-define the problem as how to construct an acceptable neuromechanical model. There have been other attempts to do this in the past and there are some groups currently working on the problem using different approaches (e.g. [Cohen](http://wormlab.eu/author/netta-cohen/), [Lockery](https://www.lockerylab.org/), [Si Elegans](http://www.si-elegans.eu/)).
+### The Early Vision (2011-2014): CyberElegans Prototype
 
-Our approach involves building a 3D mechanical model of the worm body and nervous system, tuning the model using model optimization techniques, validating the model using real data, and ensuring the model is reproducible by other labs by exposing it through a web-based simulation engine.
+When OpenWorm started, we built a prototype ([CyberElegans](https://github.com/openworm/CyberElegans), 2014) demonstrating the core idea: simulate neurons, muscles, and body physics in a coupled loop to produce emergent locomotion.
 
-Closing the loop with neuromechanical modeling
-==============================================
+[Watch the CyberElegans prototype](https://www.youtube.com/watch?v=3uV3yTmUlgo)
 
-While our ultimate goal is to simulate every cell in the _C. elegans_, we are starting out by building a model of its body and environment, its nervous system, and its muscle cells.
+This prototype proved the concept worked. But it was:
 
-To get a quick idea of what this looks like, check out the [CyberElegans prototype](http://www.youtube.com/embed/3uV3yTmUlgo). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Similar to the CyberElegans model, its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+- Not validated against experimental data
+- Hardcoded parameters (not tunable)
+- 302 identical neurons (not biologically differentiated)
+- No organ systems (pharynx, intestine, reproductive)
 
-These steps are outlined in blue text of the figure below:
+### The Current Architecture (2018-2026): Design Document Era
 
-![Greatly oversimplified causation loop](https://docs.google.com/drawings/d/1a_9zEANb4coI9xRv2fFu_-Ul9SOnhH_cVHHJgpCNo5I/pub?w=401&h=312)
+**Today, OpenWorm is built on formal Design Documents** that specify:
 
-Our end goal for the first version is to complete the entire loop. We believe that this is the most meaningful place to begin because it enables us to study the relationship between a nervous system, the body it is controlling, and the environment that body has to navigate. We also believe this is a novel development because there are no existing computational models of any nervous systems that complete this loop. For an excellent review of the current state of research on this topic, check out [Cohen & Sanders, 2014](https://www.dropbox.com/s/6a76de0jpjm0ze0/Nematode%20locomotion%20dissecting%20the%20neuronal%E2%80%93environmental%20loop%20-%20Cohen%2C%20Sanders%20-%202014.pdf)
+- **[DD001: Neural Circuit](design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
+- **[DD002: Muscle Model](design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters
+- **[DD003: Body Physics](design_documents/DD003_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
 
-When we first started, our team in Novosibirsk had produced an awesome prototype. We recently published [an article](http://iospress.metapress.com/content/p61284485326g608/?p=5e3b5e96ad274eb5af0001971360de3e&pi=4) about it. If you watch [the movie that goes along with the prototype](http://www.youtube.com/watch?v=3uV3yTmUlgo), you can see the basic components of the loop above in action:
+**These three DDs (the "core chain") are WORKING and VALIDATED:**
 
-![CyberElegans with muscle cells](https://docs.google.com/drawings/d/142NbGecjnWuq6RxWgqREhKOXJ8oDo55wVvBuKQPyKCg/pub?w=430&h=297)
+- 15ms simulations produce emergent locomotion
+- Validated against Schafer lab kinematics (speed, wavelength, frequency within +/-15%)
+- Published: [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379)
 
-Here muscle cells cause the motion of the body of the worm along the surface of its environment.
+[Watch the current simulation](https://www.youtube.com/watch?v=SaovWiZJUWY)
 
-![Inside the CyberElegans model](https://docs.google.com/drawings/d/1fO_gQI_febpu4iHd1_UDrMNQ_eqvHgJynMqho7UC6gw/pub?w=460&h=327)
+---
 
-Inside the worm, motor neurons are responsible for activating the muscles, which then makes the worms move. The blue portions of the loop diagram above are those aspects that are covered by the initial prototype. We are now in the process of both adding in the missing portions of the loop, as well as making the existing portions more biologically realistic, and making the software platform they are operating on more scalable.
+## The Multi-Scale Architecture
 
-Components
-==========
+OpenWorm doesn't model at one scale — it models at **five scales simultaneously**, coupled together:
 
-In order to accomplish this vision, we have to describe the different pieces of the loop separately in order to understand how to model them effectively. This consists of modeling the body within an environment, the neurons, and the muscle cells.
+| Scale | Time | Space | Design Documents | Validation |
+|-------|------|-------|------------------|------------|
+| **Molecular** | Microseconds | Angstroms | [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) (foundation models to params) | Protein structures (AlphaFold) |
+| **Channel** | Milliseconds | Nanometers | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (HH channels), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN to conductances) | Patch clamp electrophysiology |
+| **Cellular** | Milliseconds-seconds | Micrometers | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (neurons), [DD002](design_documents/DD002_Muscle_Model_Architecture.md) (muscles), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organs) | Calcium imaging, EMG |
+| **Tissue** | Seconds | Hundreds of um | [DD003](design_documents/DD003_Body_Physics_Architecture.md) (body physics), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) (cell identity) | Kinematics, organ function |
+| **Organism** | Seconds-minutes | Millimeters | [DD010](design_documents/DD010_Validation_Framework.md) (behavioral validation), [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (closed-loop) | Behavioral assays |
 
-Body and environment
---------------------
+**This is what makes OpenWorm unique** compared to other computational biology projects:
 
-One of the aspects of making the model more biologically realistic has been to incorporate a [3d model of the anatomy](http://browser.openworm.org/) of the worm into the simulation.
+- Virtual Cell projects (CZI, Arc) focus on single-cell molecular scale
+- Connectome projects focus on neural wiring
+- OpenWorm is the **only project** coupling all 5 scales into a single whole-organism simulation
 
-To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
+---
 
-In turn, the activity of the muscles are being driven by the activity of neurons within the body.
+## The Causal Loop (Bottom-Up + Validated)
 
 ![image](../../images/sibernetic.jpg)
 
-More detailed information is available on the [Sibernetic](https://openworm.org/sibernetic/) project page.
+Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
 
-Having a virtual body now allows us to try out many different ways to control it using signals that could arise from neurons. Separately, we have been doing work to create a realistic model of the worm's neurons.
+<object data="../images/causal_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">OpenWorm Sensorimotor Causal Loop — click any DD to navigate</object>
 
-Neurons
--------
+**[DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (Closed-Loop Touch Response)** closes this loop — the worm can sense its environment (cuticle strain to MEC-4 channels to neural response to motor pattern to movement).
 
-![Neurons in WormBrowser](https://docs.google.com/drawings/d/1GIwzQRvmDtprPBLSGjJhuEHqYqEcKaHLyKK0s80a3lM/pub?w=391&h=224)
+---
 
-This is a much more faithful representation of the neurons and their positions within the worm's body.
+## Components (Now Fully Specified)
 
-Our computational strategy to model the nervous system involves first reusing the [_C. elegans_ connectome](http://dx.plos.org/10.1371/journal.pcbi.1001066) and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the NeuroML standard ([Gleeson et al., 2010](http://dx.plos.org/10.1371/journal.pcbi.1000815)) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the “spatial connectome” into the NEURON simulator ([Hines & Carnevale 1997](http://www.ncbi.nlm.nih.gov/pubmed/9248061)) to perform *in silico* experiments.
+### Body and Environment
 
-To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
+**Historical (2014):** CyberElegans prototype demonstrated SPH body physics
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/datarep/#neuroml-connectome).
+**Current Specifications:**
 
-These neurons must eventually send signals to muscle cells.
+- **[DD003](design_documents/DD003_Body_Physics_Architecture.md) (Body Physics):** PCISPH algorithm, ~100K particles (liquid, elastic, boundary), validated
+- **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity):** Per-particle cell IDs, 959 somatic cells, cell-type-specific elasticity
+- **[DD022](design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment):** Substrates (agar, liquid, soil), chemical/thermal gradients, food particles
 
-Muscle cells
-------------
+**Implementation:** [Sibernetic repository](Projects/sibernetic/)
 
-![Muscle cells in _C. elegans_](https://docs.google.com/drawings/d/1ayyyu6dv0S4-750j-WRYVBEaziZr3g3V1-UIadAfHck/pub?w=391&h=224)
+### Neurons
 
-We have started our process of modeling muscle cells by choosing a specific muscle cell to target:
+**Historical:** 302-neuron NeuroML connectome (all neurons identical)
 
-![Muscle cell highlighted](https://docs.google.com/drawings/d/1ZzCS0IXTb-n3GgaNLp98HS9X8ngHLtkcnildAYshuME/pub?w=535&h=289)
+**Current Specifications:**
 
-More information about working with the data within it and other data entities can be found on the [data representation project page](../Projects/muscle-neuron-integration/).
+- **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (Neural Circuit):** Multi-level HH framework (Levels A-D), graded synapses (Level C1 default)
+- **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization):** 128 distinct neuron classes from CeNGEN single-cell transcriptomics
+- **[DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides):** 31,479 peptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)), slow modulation
+- **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 20 pharyngeal neurons (semi-autonomous pumping circuit)
+- **[DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (Egg-Laying):** 2 HSN serotonergic + 6 VC cholinergic neurons (two-state pattern)
+- **[DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) (Touch):** 6 touch receptor neurons (MEC-4 mechanotransduction)
+- **[DD023](design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (Proprioception):** B-class motor neuron stretch receptors
 
-Once the body, neurons, and muscles are represented, we still have a lot of free parameters that we don't know. That's what leads us to the need to tune the model.
+**Implementation:** [c302 repository](Projects/c302/)
 
-Tuning
-======
+### Muscle Cells
 
-The way we make the model biophysically realistic is to use sophisticated mathematics to drive the simulation that keep it more closely tied to real biology. This is important because we want the model to be able to inform real biological experiments and more coarse-grained, simplified mathematics falls short in many cases.
+**Historical:** Generic muscle model
 
-Specifically for this loop, we have found that two systems of equations will cover both aspects of the loop, broadly speaking:
+**Current Specifications:**
 
-![Simple loop overlaid with solvers](https://docs.google.com/drawings/d/1xL9NY-QcIeIfKXd-lN_x15fUGLM9vEL_sZzCLDvcT3Q/pub?w=401&h=312)
+- **[DD002](design_documents/DD002_Muscle_Model_Architecture.md) (Body Wall):** 95 muscles, HH conductances 10-1000x smaller than neurons
+- **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharyngeal):** 20 pharyngeal muscles, plateau potentials, gap-junction-synchronized
+- **[DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (Reproductive):** 16 sex muscles (8 vulval, 8 uterine), EGL-19/UNC-103 channels
 
-As you can see, where the two sets of equations overlap is with the activation of muscle cells. As a result, we have taken steps to use the muscle cell as a pilot of our more biologically realistic modeling, as well as our software integration of different set of equations assembled into an algorithmic "solver".
+**Implementation:** [c302 repository](Projects/c302/) + [muscle_model repository](https://github.com/openworm/muscle_model)
 
-These two algorithms, Hodgkin-Huxley and SPH, require parameters to be set in order for them to function properly, and therefore create some “known unknows” or “free parameters” we must define in order for the algorithm to function at all. For Hodgkin-Huxley we must define the ion channel species and set their conductance parameters. For SPH, we must define mass and the forces that one set of particles exert on another, which in turn means defining the mass of muscles and how much they pull. The conventional wisdom on modeling is to minimize the number of free parameters as much as possible, but we know there will be a vast parameter space associated with the model.
+### Organs (New!)
 
-To deal with the space of free parameters, two strategies are employed. First, by using parameters that are based on actual physical processes, many different means can be used to provide sensible estimates. For example, we can estimate the volume and mass of a muscle cell based on figures that have been created in the scientific literature that show its basic dimensions, and some educated guesses about the weight of muscle tissue. Secondly, to go beyond educated estimates into more detailed measurements, we can employ model optimization techniques. Briefly stated, these computational techniques enable a rational way to generate multiple models with differing parameters and choose those sets of parameters that best pass a series of tests. For example, the conductances of motor neurons can be set by what keeps the activity those neurons within the boundaries of an appropriate dynamic range, given calcium trace recordings data of those neurons as constraints.
+**Added in Phase 3:**
 
-If you'd be interested to help with tuning the model, please check out the [Optimization project page](../Projects/optimization/).
+- **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 63-cell semi-autonomous organ, 3-4 Hz pumping
+- **[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (Intestine):** 20-cell IP3/Ca oscillator, 50s defecation motor program
+- **[DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) (Egg-Laying):** 28-cell reproductive circuit
 
-Validation
-==========
+These weren't in the original vision but are now formalized with quantitative validation targets.
 
-In order to know that we are making meaningful scientific progress, we need to validate the model using information from real worms. The movement validation project is working with an existing database of worm movement to make the critical comparisons.
+---
 
-The main goal of the Movement Validation team is to finish a test pipeline so the OpenWorm project can run a behavioural phenotyping of its virtual worm, using the same statistical tests the Schafer lab used on their real worm data.
+## Validation (Now 3-Tier Framework)
 
-More detailed information is available on the [movement validation project page](../Projects/worm-movement/).
+**Historical:** "Movement validation project" (vague)
 
-Reproducibility
-===============
+**Current Specification: [DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)**
 
-In order to allow the world to play with the model easily, we are engineering [Geppetto](http://geppetto.org), an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser. You can read about architectural concepts and learn more about the different plug-in bundles we are working on.
+| Tier | What | Validation Data | Blocking? |
+|------|------|----------------|-----------|
+| **Tier 1** | Single-cell electrophysiology | Goodman lab patch clamp | No (warning) |
+| **Tier 2** | Circuit functional connectivity | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain imaging | **YES** (r > 0.5) |
+| **Tier 3** | Behavioral kinematics | Schafer lab WCON database | **YES** (+/-15%) |
 
-![image](http://www.geppetto.org/images/cn2.png)
+**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) (being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 
-The [project page for Geppetto](../Projects/geppetto/) has information about getting involved in its development with OpenWorm.
+More details available on the [Validation page](validation/).
+
+---
+
+## Tuning and Optimization
+
+**Historical:** "Use genetic algorithms to search parameter space"
+
+**Current Specification: [DD017: Hybrid Mechanistic-ML Framework](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md)**
+
+4 components:
+
+1. **Differentiable simulation backend** — PyTorch ODE solver, gradient descent auto-fitting
+2. **Neural surrogate for SPH** — FNO learns muscle-to-movement mapping, 1000x speedup
+3. **Foundation model to ODE parameters** — ESM3/AlphaFold predict channel kinetics from gene sequences
+4. **Learned sensory transduction** — RNN learns stimulus-to-neuron response (chemotaxis, thermotaxis)
+
+**The mechanistic core ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-003 HH+SPH equations) is preserved.** ML operates at boundaries (parameter fitting, acceleration, sensory front-end), never replacing causal interpretability.
+
+---
+
+## Reproducibility (Platform Evolution)
+
+**Historical:** [Geppetto](https://geppetto.org) (2014-2020) — Java-based web platform for multi-algorithm simulation
+
+**Current Specification: [DD014: Dynamic Visualization](design_documents/DD014_Dynamic_Visualization_Architecture.md)**
+
+- **Phase 1:** Trame viewer (PyVista + live server, organism + tissue scales)
+- **Phase 2:** Interactive layers (neuropeptides, organs, validation overlay)
+- **Phase 3:** Three.js + WebGPU static site, molecular scale, wormsim.openworm.org (WormSim 2.0)
+
+**Why the evolution from Geppetto?** [DD014](design_documents/DD014_Dynamic_Visualization_Architecture.md) Alternatives Considered: Geppetto is Java-based, requires per-client server processes, not updated for WebGPU. Trame is lighter, Python-native (matches contributor skillset), actively maintained.
+
+Geppetto is preserved as [historical documentation](archived_projects/) and in the [GitHub repository](https://github.com/openworm/geppetto).
+
+---
+
+## Integration (Now Formal Architecture)
+
+**Historical:** "Multi-algorithm integration" concept (no formal spec)
+
+**Current Specification: [DD013: Simulation Stack](design_documents/DD013_Simulation_Stack_Architecture.md)**
+
+- openworm.yml config system (single source of truth)
+- Multi-stage Docker build (neural, body, validation, viewer stages)
+- docker-compose.yml (quick-test, simulation, validate services)
+- versions.lock (pin exact commits for reproducibility)
+- Integration Maintainer role (coordinates coupling between DDs)
+
+**Each DD's Integration Contract** specifies exactly what it consumes and produces, ensuring composability.
+
+---
+
+## What's Next
+
+The path from today's 302-neuron simulation to the complete 959-cell organism is organized into 4 implementation phases over ~18 months, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase timeline with milestones and Design Document assignments.
+
+**Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation).
