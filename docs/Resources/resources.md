@@ -24,7 +24,7 @@ More information on running Geppetto is [available online](https://geppetto.org)
 
 Sibernetic is the code base that currently implements the crawling model using Smoothed Particle Hydrodynamics (SPH). Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella, specified by [DD003: Body Physics Architecture](../design_documents/DD003_Body_Physics_Architecture.md).
 
-![image](https://i.imgur.com/KSWjCaW.jpg)
+![image](../../images/sibernetic.jpg)
 
 More information on running Sibernetic is [available online](https://openworm.org/sibernetic/).
 
@@ -34,7 +34,7 @@ More information on running Sibernetic is [available online](https://openworm.or
 
 To start getting some practical experience playing with dynamics that come from the connectome, we have simplified it into a project called the 'connectome engine' and integrated its dynamics into a Lego Mindstorms EV3 robot. You can [see a movie of this in action](https://www.youtube.com/watch?v=D8ogHHwqrkI).
 
-![image](https://i.imgur.com/OG7sOAD.jpg)
+![image](../../images/robot.jpg)
 
 More information is available at [http://www.connectomeengine.com/]
 

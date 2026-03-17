@@ -64,6 +64,8 @@ OpenWorm doesn't model at one scale — it models at **five scales simultaneousl
 
 ## The Causal Loop (Bottom-Up + Validated)
 
+![image](../../images/sibernetic.jpg)
+
 Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
 
 <object data="../images/causal_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">OpenWorm Sensorimotor Causal Loop — click any DD to navigate</object>

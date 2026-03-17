@@ -123,6 +123,8 @@ There have been [other modeling efforts in _C. elegans_ and their subsystems](ht
 
 Our neural models are specified in [DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
 
+There are a wide variety of ways to simulate neurons, as shown in figure 2 of [Izhikevich 2004](http://www.ncbi.nlm.nih.gov/pubmed/15484883).
+
 | Level | Cell Type | Synapses | Use Case |
 |-------|-----------|----------|----------|
 | A | Integrate-and-Fire | Event-driven | Topology testing |
