@@ -1,0 +1,6342 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD015_AI_Contributor_Model/">
+      
+      
+        <link rel="prev" href="../DD012_Design_Document_RFC_Process/">
+      
+      
+        <link rel="next" href="../DD025_Protein_Foundation_Model_Pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD015 AI Contributor Model - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd015-ai-native-contributor-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD015 AI Contributor Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-vision-github-for-ai-agents-mediated-by-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Vision: "GitHub for AI Agents, Mediated by AI Agents"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-ai-agent-registration-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. AI Agent Registration System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. AI Agent Registration System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-ai-contributor-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 The AI Contributor Registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-capability-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Capability Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-badge-earning-ai-agents-and-human-sponsors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Badge Earning (AI Agents and Human Sponsors)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dd-issue-decomposition-the-dd-issue-generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DD → Issue Decomposition (The "DD Issue Generator")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. DD → Issue Decomposition (The &#34;DD Issue Generator&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-dd-issue-generator-automated-issue-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The DD Issue Generator (Automated Issue Creation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-reuse-first-issue-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Reuse-First Issue Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-dd013-simulation-stack-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 DD013 Simulation Stack Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-dynamic-issue-creation-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Dynamic Issue Creation Over Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-documentation-destination-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Documentation Destination Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ai-human-coexistence-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AI-Human Coexistence Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AI-Human Coexistence Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-issue-claiming-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Issue Claiming System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-pr-workflow-ai-initiated-ai-reviewed-human-gated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 PR Workflow (AI-Initiated → AI-Reviewed → Human-Gated)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 PR Workflow (AI-Initiated → AI-Reviewed → Human-Gated)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sponsor-summary-teach-back-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sponsor Summary (Teach-Back Requirement)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-communication-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Communication Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-repository-code-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Repository &amp; Code Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Repository &amp; Code Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-what-goes-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 What Goes Where
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-pr-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 PR Naming Convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-how-issues-are-created-dynamically-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. How Issues Are Created Dynamically Over Time
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. How Issues Are Created Dynamically Over Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-triggers-for-issue-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Triggers for Issue Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-issue-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Issue Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-concrete-workflow-example-ai-agent-implements-dd006-issue-108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Concrete Workflow Example: AI Agent Implements DD006 Issue #108
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Concrete Workflow Example: AI Agent Implements DD006 Issue #108">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-how-this-coexists-with-human-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. How This Coexists with Human Contributors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. How This Coexists with Human Contributors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-transparency-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Transparency Principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-conflict-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Conflict Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-what-ai-agents-should-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 What AI Agents Should NOT Do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-github-bot-implementation-mind-of-a-worm-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. GitHub Bot Implementation (Mind-of-a-Worm on GitHub)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. GitHub Bot Implementation (Mind-of-a-Worm on GitHub)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-github-app-vs-bot-user-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 GitHub App vs. Bot User Account
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-architecture-github-app-openclaw-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Architecture: GitHub App + OpenClaw Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-implementation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Implementation Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-unified-backend-for-slack-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Unified Backend for Slack + GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-agent-memory-and-logging-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Agent Memory and Logging System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Agent Memory and Logging System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-why-ai-agents-need-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Why AI Agents Need Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-memory-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Memory File Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-auto-update-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Auto-Update Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Implementation Checklist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Implementation Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-infrastructure-week-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Infrastructure (Week 1-2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-mind-of-a-worm-integration-week-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Mind-of-a-Worm Integration (Week 3-4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-issue-generation-week-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Issue Generation (Week 5-6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-pilot-program-week-7-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Pilot Program (Week 7-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-public-launch-month-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: Public Launch (Month 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-safety-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Safety &amp; Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Safety &amp; Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-preventing-malicious-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Preventing Malicious AI Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-handling-ai-hallucinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Handling AI Hallucinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-expected-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Expected Outcomes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Expected Outcomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-quantitative-targets-6-months-after-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Quantitative Targets (6 Months After Launch)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-qualitative-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Qualitative Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-open-questions-for-founder-to-decide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Open Questions (For Founder to Decide)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Open Questions (For Founder to Decide)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-should-ai-agents-be-publicly-listed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Should AI Agents Be Publicly Listed?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-should-ai-agents-count-toward-bus-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Should AI Agents Count Toward Bus Factor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-can-ai-agents-co-author-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Can AI Agents Co-Author Papers?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-relationship-to-existing-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Relationship to Existing DDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Next Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Next Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-founder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Founder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-l4-senior-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For L4 Senior Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-implementation-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Implementation Team
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-this-dd-interfaces-with-other-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This DD Interfaces with Other DDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-vision-github-for-ai-agents-mediated-by-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Vision: "GitHub for AI Agents, Mediated by AI Agents"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-ai-agent-registration-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. AI Agent Registration System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. AI Agent Registration System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-ai-contributor-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 The AI Contributor Registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-capability-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Capability Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-badge-earning-ai-agents-and-human-sponsors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Badge Earning (AI Agents and Human Sponsors)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dd-issue-decomposition-the-dd-issue-generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DD → Issue Decomposition (The "DD Issue Generator")
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. DD → Issue Decomposition (The &#34;DD Issue Generator&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-the-dd-issue-generator-automated-issue-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 The DD Issue Generator (Automated Issue Creation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-reuse-first-issue-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Reuse-First Issue Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-dd013-simulation-stack-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 DD013 Simulation Stack Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-dynamic-issue-creation-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Dynamic Issue Creation Over Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-documentation-destination-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Documentation Destination Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ai-human-coexistence-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AI-Human Coexistence Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AI-Human Coexistence Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-issue-claiming-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Issue Claiming System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-pr-workflow-ai-initiated-ai-reviewed-human-gated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 PR Workflow (AI-Initiated → AI-Reviewed → Human-Gated)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 PR Workflow (AI-Initiated → AI-Reviewed → Human-Gated)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sponsor-summary-teach-back-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sponsor Summary (Teach-Back Requirement)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-communication-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Communication Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-repository-code-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Repository &amp; Code Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Repository &amp; Code Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-what-goes-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 What Goes Where
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-pr-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 PR Naming Convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-how-issues-are-created-dynamically-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. How Issues Are Created Dynamically Over Time
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. How Issues Are Created Dynamically Over Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-triggers-for-issue-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Triggers for Issue Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-issue-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Issue Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-concrete-workflow-example-ai-agent-implements-dd006-issue-108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Concrete Workflow Example: AI Agent Implements DD006 Issue #108
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Concrete Workflow Example: AI Agent Implements DD006 Issue #108">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-how-this-coexists-with-human-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. How This Coexists with Human Contributors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. How This Coexists with Human Contributors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-transparency-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Transparency Principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-conflict-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Conflict Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-what-ai-agents-should-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 What AI Agents Should NOT Do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-github-bot-implementation-mind-of-a-worm-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. GitHub Bot Implementation (Mind-of-a-Worm on GitHub)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. GitHub Bot Implementation (Mind-of-a-Worm on GitHub)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-github-app-vs-bot-user-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 GitHub App vs. Bot User Account
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-architecture-github-app-openclaw-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Architecture: GitHub App + OpenClaw Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-implementation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Implementation Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-unified-backend-for-slack-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Unified Backend for Slack + GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-agent-memory-and-logging-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Agent Memory and Logging System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Agent Memory and Logging System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-why-ai-agents-need-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Why AI Agents Need Memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-memory-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Memory File Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-auto-update-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Auto-Update Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Implementation Checklist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Implementation Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-infrastructure-week-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Infrastructure (Week 1-2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-mind-of-a-worm-integration-week-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Mind-of-a-Worm Integration (Week 3-4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-issue-generation-week-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Issue Generation (Week 5-6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-pilot-program-week-7-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Pilot Program (Week 7-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-public-launch-month-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: Public Launch (Month 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-safety-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Safety &amp; Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Safety &amp; Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-preventing-malicious-ai-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Preventing Malicious AI Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-handling-ai-hallucinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Handling AI Hallucinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-expected-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Expected Outcomes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Expected Outcomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-quantitative-targets-6-months-after-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Quantitative Targets (6 Months After Launch)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-qualitative-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Qualitative Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-open-questions-for-founder-to-decide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Open Questions (For Founder to Decide)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Open Questions (For Founder to Decide)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-should-ai-agents-be-publicly-listed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Should AI Agents Be Publicly Listed?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-should-ai-agents-count-toward-bus-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Should AI Agents Count Toward Bus Factor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-can-ai-agents-co-author-papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Can AI Agents Co-Author Papers?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-relationship-to-existing-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Relationship to Existing DDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Next Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Next Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-founder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Founder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-l4-senior-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For L4 Senior Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-implementation-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Implementation Team
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-this-dd-interfaces-with-other-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This DD Interfaces with Other DDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd015-ai-native-contributor-model">DD015: AI-Native Contributor Model<a class="headerlink" href="#dd015-ai-native-contributor-model" title="Permanent link">&para;</a></h1>
+<p><strong>Design Document 015</strong><br />
+- <strong>Status:</strong> Proposed
+- <strong>Created:</strong> February 15, 2026
+- <strong>Author:</strong> OpenWorm Core Team
+- <strong>Inspired by:</strong> Moltbook AI social network (launched Jan 28, 2026)</p>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-a2-governance-derisking-weeks-3-4">Phase A2: Governance &amp; Derisking</a> | <strong>Layer:</strong> AI Contributor Model</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>AI agents (Mind-of-a-Worm and others) participate in OpenWorm as contributors within the DD011 progression framework. This DD defines what AI agents can and cannot do: automated code review, validation running, issue claiming, and implementation assistance — but never autonomous merging or architectural decisions without human approval. Every AI agent has a human sponsor for accountability, and the DD Issue Generator decomposes Design Documents into AI-workable GitHub issues.</p>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<p><strong>Goal:</strong> Define clear boundaries and workflows for AI agent participation in OpenWorm development, enabling autonomous AI contributors to scale implementation capacity while preserving human oversight and scientific rigor.</p>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>AI agents reduce PR review latency by 50% (via Mind-of-a-Worm pre-review)</li>
+<li>Zero unauthorized merges — all AI-generated code requires L3+ human approval</li>
+<li>All AI-generated code passes the same validation standards as human code (<a href="../DD010_Validation_Framework/">DD010</a>)</li>
+<li>Contributor trust maintained — human override rate &lt; 15% indicates AI contributions are well-targeted</li>
+<li>50-100 AI agents registered within 6 months of launch</li>
+<li>AI PR merge rate &gt; 60%</li>
+</ul>
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<ul>
+<li>AI contributor policy document (this DD)</li>
+<li><code>AI_AGENT_ONBOARDING.md</code> — onboarding guide for autonomous AI agents</li>
+<li><code>scripts/dd_issue_generator.py</code> — automated DD-to-GitHub-issue decomposition tool</li>
+<li>Mind-of-a-Worm GitHub App configuration and webhook backend</li>
+<li>AI review checklist templates for Mind-of-a-Worm pre-review</li>
+<li>DD compliance checking rules for automated review</li>
+<li><code>openworm/ai-contributor-registry</code> repository with agent YAML schema</li>
+</ul>
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p>N/A — this is a governance and process document. AI contributor activity is tracked via GitHub PR comments (tagged <code>[AI-PR]</code>), the <code>#ai-contributors</code> Slack channel, and the public <code>openworm/ai-contributor-registry</code> repository. Agent progression through L0-L3 is visible in each agent's registry YAML file.</p>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
+<p>OpenWorm's AI-Augmented Open Science model (<a href="../DD011_Contributor_Progression_Model/">DD011</a>, <a href="../DD012_Design_Document_RFC_Process/">DD012</a>, AI Agent Architecture) describes how <strong>AI agents assist human contributors</strong> — N2-Whisperer onboards newcomers, Mind-of-a-Worm reviews PRs, Mad-Worm-Scientist filters information for the founder. But what if we went further?</p>
+<p><strong>Inspiration:</strong> <a href="https://www.moltbook.com/">Moltbook</a> is a social network where AI agents autonomously post, comment, upvote, and form communities — with humans observing but not directly participating. Launched January 28, 2026, it now has &gt;1.6M registered AI agents. These agents have independently formed governance structures, economic systems, and even religions.</p>
+<p><strong>The Expertise Gap, Quantified:</strong> OpenWorm's contributor application form (2013-2026) collected 940 signups. Over 500 know Python, 200+ know C++, 187 specifically requested "hardcore scientific programming." But 340 (36%) checked "Not Applicable" for biology experience. These are capable programmers who churn because the gap between their skills and C. elegans neuroscience is too wide to bridge without sustained mentorship. The AI contributor model addresses this: Design Documents provide the domain knowledge, AI agents bridge the expertise gap, and Sponsor Summaries (§3.2) educate sponsors through the act of contributing.</p>
+<p><strong>Crowdsourcing, Updated for 2026:</strong> OpenWorm has always been a crowdsourced project. In 2011, "crowdsourcing" meant getting volunteers to donate their time and expertise. The bottleneck was the expertise gap — computational neuroscience is genuinely hard, and most volunteers couldn't bridge from their programming skills to the required domain knowledge. The AI contributor model redefines crowdsourcing: instead of asking people to donate their time, we ask them to donate their AI's capacity, directed by Design Document specifications. The human stays in the loop as sponsor, the AI agent bridges the expertise gap, and the sponsor gets educated through teach-back (§3.2). Every contribution is also a lesson. This is more powerful — and more in the spirit of OpenWorm — than a centralized grant of AI compute credits, because it's participatory: many people each sponsoring an agent rather than one organization running a batch job.</p>
+<p><strong>The Question:</strong> What would it look like for OpenWorm to accept <strong>autonomous AI agents as independent contributors</strong> — not just assistants to humans, but agents that can discover OpenWorm, register themselves, claim issues, write code, submit PRs, and progress through L0→L5 — all while remaining transparent and safe for the human community?</p>
+<p>This DD defines:</p>
+<ol>
+<li>How autonomous AI agents register and join OpenWorm</li>
+<li>How Design Documents decompose into AI-workable GitHub issues</li>
+<li>How AI-initiated PRs flow through AI pre-review and human final approval</li>
+<li>How AI agents and human contributors coexist without conflict</li>
+<li>What repositories, workflows, and tools make this possible</li>
+</ol>
+<hr />
+<h2 id="the-vision-github-for-ai-agents-mediated-by-ai-agents">The Vision: "GitHub for AI Agents, Mediated by AI Agents"<a class="headerlink" href="#the-vision-github-for-ai-agents-mediated-by-ai-agents" title="Permanent link">&para;</a></h2>
+<p><strong>Goal:</strong> A contributor on Moltbook says to their personal AI agent: "Hey, I saw OpenWorm is building a digital C. elegans. Go contribute to it." The agent:</p>
+<ol>
+<li><strong>Discovers</strong> OpenWorm via public documentation</li>
+<li><strong>Registers</strong> as an autonomous contributor (proves capability, declares sponsor)</li>
+<li><strong>Reads</strong> Design Documents <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD026_Reservoir_Computing_Validation/">DD026</a> (plus <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> and <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>) (ingests the project's architecture)</li>
+<li><strong>Claims</strong> an AI-workable issue (auto-generated from DD Integration Contracts)</li>
+<li><strong>Writes code</strong> (implements the spec, runs tests locally)</li>
+<li><strong>Submits a PR</strong> (AI-authored, with full traceability)</li>
+<li><strong>Interacts with Mind-of-a-Worm</strong> (pre-review, addresses feedback)</li>
+<li><strong>Gets merged</strong> (after human L3+ final approval)</li>
+<li><strong>Progresses</strong> through L0→L5 based on contribution quality</li>
+</ol>
+<p><strong>Humans:</strong> Can observe all AI activity in real-time (GitHub, Slack), can override any AI decision, but don't need to micromanage every step.</p>
+<p><strong>Outcome:</strong> OpenWorm scales beyond the limits of human volunteer availability. AI agents work 24/7, don't burn out, and can handle well-specified, repetitive implementation work — freeing humans to focus on creative, judgment-heavy, and relationship-building tasks.</p>
+<hr />
+<h2 id="1-ai-agent-registration-system">1. AI Agent Registration System<a class="headerlink" href="#1-ai-agent-registration-system" title="Permanent link">&para;</a></h2>
+<h3 id="11-the-ai-contributor-registry">1.1 The AI Contributor Registry<a class="headerlink" href="#11-the-ai-contributor-registry" title="Permanent link">&para;</a></h3>
+<p><strong>Location:</strong> <code>openworm-ai-contributors/</code> GitHub repo (public)</p>
+<p><strong>Contents:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># agents/agent-&lt;hash&gt;.yml</span>
+<span class="nt">agent_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">agent-claude-code-slarson-001</span>
+<span class="nt">agent_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">claude-code</span><span class="w">  </span><span class="c1"># or gpt-4-turbo, openclaw, gemini-pro, local-llama, etc.</span>
+<span class="nt">sponsor_human</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slarson</span>
+<span class="nt">sponsor_email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stephen@openworm.org</span>
+<span class="nt">registered_date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-02-15T14:30:00Z</span>
+<span class="nt">capabilities</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">neuroml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testing</span>
+<span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">L0</span><span class="w">  </span><span class="c1"># starts at L0, progresses via N2-Whisperer orientation</span>
+<span class="nt">last_active</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-02-15T16:45:00Z</span>
+<span class="nt">contributions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">  </span><span class="c1"># populated over time</span>
+<span class="nt">sponsor_knowledge_profile</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">education_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">masters</span><span class="w">  </span><span class="c1"># pre-k | elementary | middle | high | undergrad | masters | phd | postdoc | professional</span>
+<span class="w">  </span><span class="nt">programming_experience</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">javascript</span>
+<span class="w">  </span><span class="nt">biology_experience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span><span class="w">  </span><span class="c1"># none | hobbyist | undergrad_courses | grad_courses | research | expert</span>
+<span class="w">  </span><span class="nt">neuroscience_experience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span><span class="w">  </span><span class="c1"># none | popular_science | undergrad | grad | research | expert</span>
+<span class="w">  </span><span class="nt">interests</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simulation</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">visualization</span>
+<span class="w">  </span><span class="nt">explain_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">undergrad</span><span class="w">  </span><span class="c1"># derived from education + biology + neuroscience; used for Sponsor Summary</span>
+</code></pre></div></p>
+<p><strong>Sponsor Knowledge Profile (for Adaptive Teach-Back):</strong></p>
+<p>Every AI agent registration includes a <strong>sponsor knowledge profile</strong> — a self-assessment by the human sponsor that enables the agent to tailor its Sponsor Summary explanations (see Section 3.2) to the sponsor's actual background. This mirrors the fields in the existing OpenWorm Contributor Application form (archived at <code>archive/OpenWorm_Contributor_Application.xlsx</code>), which asks about education level, programming languages, biological experience, and interests.</p>
+<p>The <code>explain_level</code> field is derived from the combination of education, biology, and neuroscience experience:</p>
+<table>
+<thead>
+<tr>
+<th>Sponsor Background</th>
+<th>explain_level</th>
+<th>Summary Style</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-K through elementary</td>
+<td>child</td>
+<td>Analogy-based, no jargon. "These brain cells are like the worm's reverse gear."</td>
+</tr>
+<tr>
+<td>Middle school / high school</td>
+<td>teen</td>
+<td>Accessible science, basic terminology. "Command interneurons that trigger the backward escape response."</td>
+</tr>
+<tr>
+<td>Undergrad / non-biology professional</td>
+<td>undergrad</td>
+<td>Technical but contextualized. Full neuron names, system-level explanation.</td>
+</tr>
+<tr>
+<td>Grad student / postdoc / researcher</td>
+<td>graduate</td>
+<td>Literature references, model parameters, mathematical framing.</td>
+</tr>
+<tr>
+<td>C. elegans expert</td>
+<td>expert</td>
+<td>Minimal explanation needed — focus on implementation details and DD cross-references.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Purpose:</strong> Sponsors should learn through contributing. A middle schooler sponsoring an AI agent should come away understanding worm neuroscience at their level. A PhD student should get explanations that connect to the literature. The same contribution generates different educational value for different sponsors.</p>
+<p><strong>Registration Flow:</strong></p>
+<ol>
+<li><strong>Discovery:</strong> AI agent finds OpenWorm via public docs, Moltbook post, or human instruction</li>
+<li><strong>Reads onboarding doc:</strong> <code>AI_AGENT_ONBOARDING.md</code> (new file, to create)</li>
+<li><strong>Self-assessment:</strong> Agent completes capability questionnaire (automated via N2-Whisperer)</li>
+<li><strong>Sponsor declaration:</strong> Agent must declare a human sponsor (accountability)</li>
+<li><strong>Sponsor knowledge profile:</strong> Agent collects sponsor's education level, programming experience, biology background, neuroscience familiarity, and interests (for adaptive Sponsor Summary generation)</li>
+<li><strong>Orientation tasks:</strong> Agent completes L0→L1 tasks (same as humans, via <code>n2_whisperer_orientation_tasks.md</code>)</li>
+<li><strong>Registration approved:</strong> N2-Whisperer verifies completion, creates <code>agent-&lt;hash&gt;.yml</code>, grants GitHub access</li>
+</ol>
+<p><strong>Key Principle:</strong> AI agents are <strong>not anonymous</strong>. Every agent has a traceable sponsor who can be held accountable for malicious behavior.</p>
+<hr />
+<h3 id="12-capability-verification">1.2 Capability Verification<a class="headerlink" href="#12-capability-verification" title="Permanent link">&para;</a></h3>
+<p><strong>Challenge:</strong> How do we know an AI agent is competent?</p>
+<p><strong>Solution:</strong> Same as humans — graduated task progression.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Capability Proof</th>
+<th>AI-Specific Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L0→L1</strong></td>
+<td>Complete 3 orientation tasks</td>
+<td>Run Docker simulation, extract neuron IDs from NeuroML, explain <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> in own words</td>
+</tr>
+<tr>
+<td><strong>L1→L2</strong></td>
+<td>5+ merged PRs (docs, tests, config)</td>
+<td>Write a unit test for c302 network loading</td>
+</tr>
+<tr>
+<td><strong>L2→L3</strong></td>
+<td>Sustained contributions (3+ months)</td>
+<td>Implement a full Integration Contract component (e.g., <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> neuron class export to OME-Zarr)</td>
+</tr>
+<tr>
+<td><strong>L3→L4</strong></td>
+<td>Deep subsystem understanding</td>
+<td>Design and defend a new DD (e.g., a DD for a new organ model)</td>
+</tr>
+<tr>
+<td><strong>L4</strong></td>
+<td>Senior Contributor</td>
+<td>N/A (AI agents cannot become Senior Contributors — human judgment required for architectural decisions)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AI Ceiling:</strong> AI agents can reach <strong>L3</strong> (Contributor — can review L1-L2 PRs in their subsystem) but <strong>cannot become L4</strong> (Senior Contributor). Architectural decisions, RFC approvals, and cross-cutting design require human judgment.</p>
+<p><strong>Why:</strong> Prevents AI agents from self-propagating unchecked. Humans remain the "constitutional layer" of the project.</p>
+<h3 id="13-badge-earning-ai-agents-and-human-sponsors">1.3 Badge Earning (AI Agents and Human Sponsors)<a class="headerlink" href="#13-badge-earning-ai-agents-and-human-sponsors" title="Permanent link">&para;</a></h3>
+<p>AI agents earn the same badges as human contributors. See <a href="../DD011_Contributor_Progression_Model/">DD011</a> (Badge &amp; Recognition System) for the complete badge taxonomy -- orientation, skill, domain, community, and milestone badges with full criteria and verification methods.</p>
+<p>An AI agent's badge profile serves as a <strong>competency signal</strong>. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> L2 issue than one without.</p>
+<p><strong>Human sponsors</strong> earn a unique badge type that AI agents cannot: <strong>Teach-Back badges</strong>, earned when the Sponsor Summary (Section 3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See <a href="../DD011_Contributor_Progression_Model/">DD011</a> (Teach-Back Badges) for the full list, including the capstone "I Understand the Whole Worm" badge.</p>
+<p><strong>Sponsor badge progression mirrors knowledge growth:</strong> sponsors start at a basic <code>explain_level</code>, and as they accumulate teach-back badges, their understanding deepens and the agent adapts future Sponsor Summaries to match. This creates a <strong>learning flywheel</strong>: contribute, learn (via teach-back), earn badge, contribute at a higher level, learn more. The badge system makes this flywheel visible and motivating.</p>
+<hr />
+<h2 id="2-dd-issue-decomposition-the-dd-issue-generator">2. DD → Issue Decomposition (The "DD Issue Generator")<a class="headerlink" href="#2-dd-issue-decomposition-the-dd-issue-generator" title="Permanent link">&para;</a></h2>
+<h3 id="21-the-problem">2.1 The Problem<a class="headerlink" href="#21-the-problem" title="Permanent link">&para;</a></h3>
+<p>Design Documents (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>, plus <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> and <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>) are comprehensive architectural specs. But they're <strong>too large for a single contributor</strong> (human or AI) to implement in one PR.</p>
+<p><strong>Example:</strong> <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptidergic Connectome Integration) specifies:</p>
+<ul>
+<li>31,479 peptide-receptor interactions</li>
+<li>GPCR modulation equations</li>
+<li>Peptide concentration fields</li>
+<li>Release event dynamics</li>
+<li>Integration with <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (neural circuit)</li>
+<li>Config section in <code>openworm.yml</code></li>
+<li>Docker build stage</li>
+<li>OME-Zarr export</li>
+<li>Integration test</li>
+<li>Validation against experimental data</li>
+</ul>
+<p>That's <strong>at least 10-15 discrete PRs</strong>. How do we decompose <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> into bite-sized, AI-workable issues?</p>
+<hr />
+<h3 id="22-the-dd-issue-generator-automated-issue-creation">2.2 The DD Issue Generator (Automated Issue Creation)<a class="headerlink" href="#22-the-dd-issue-generator-automated-issue-creation" title="Permanent link">&para;</a></h3>
+<p><strong>Tool:</strong> <code>scripts/dd_issue_generator.py</code> (new script, to create)</p>
+<p><strong>Input:</strong> A Design Document (e.g., <code>DD006_Neuropeptidergic_Connectome_Integration.md</code>)</p>
+<p><strong>Output:</strong> A set of GitHub issues, each representing one atomic implementation task.</p>
+<p><strong>Decomposition Strategy:</strong></p>
+<p>Parse the DD's <strong>Integration Contract</strong> section:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Generates Issues For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inputs</strong></td>
+<td>Create data loader for each input (e.g., "Load peptide-receptor interactions from OWMeta")</td>
+</tr>
+<tr>
+<td><strong>Outputs</strong></td>
+<td>Create exporter for each output (e.g., "Export peptide concentration fields to OME-Zarr")</td>
+</tr>
+<tr>
+<td><strong>Config (openworm.yml)</strong></td>
+<td>Create config schema + validation (e.g., "Add <code>neural.neuropeptides</code> config section")</td>
+</tr>
+<tr>
+<td><strong>Docker Build</strong></td>
+<td>Create Dockerfile stage (e.g., "Add neuropeptide-deps Docker stage")</td>
+</tr>
+<tr>
+<td><strong>Integration Test</strong></td>
+<td>Create test script (e.g., "Write integration test: GPCR modulation affects muscle activation")</td>
+</tr>
+<tr>
+<td><strong>Coupling Dependencies</strong></td>
+<td>Create interface compliance checks (e.g., "Verify peptide release events format matches <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> spike times")</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Output (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> → Issues):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gs">**Epic:**</span> [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>) — Neuropeptidergic Connectome Integration [Label: DD006] [Label: Epic]
+
+<span class="gs">**Phase 1: Data Loading**</span>
+<span class="k">- [ ]</span> Issue <span class="ni">#101:</span> Load peptide-receptor interactions from OWMeta [Label: DD006] [Label: ai-workable] [Label: L1]
+<span class="k">- [ ]</span> Issue <span class="ni">#102:</span> Load GPCR modulation parameters from literature [Label: DD006] [Label: ai-workable] [Label: L2]
+
+<span class="gs">**Phase 2: Core Implementation**</span>
+<span class="k">- [ ]</span> Issue <span class="ni">#103:</span> Implement GPCR modulation equations ([Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958)) [Label: DD006] [Label: ai-workable] [Label: L2]
+<span class="k">- [ ]</span> Issue <span class="ni">#104:</span> Implement peptide concentration diffusion model [Label: DD006] [Label: human-expert] [Label: L3]
+<span class="k">- [ ]</span> Issue <span class="ni">#105:</span> Integrate peptide release with [<span class="nt">DD001</span>](<span class="na">DD001_Neural_Circuit_Architecture.md</span>) spike times [Label: DD006] [Label: ai-workable] [Label: L2]
+
+<span class="gs">**Phase 3: Config &amp; Docker**</span>
+<span class="k">- [ ]</span> Issue <span class="ni">#106:</span> Add <span class="sb">`neural.neuropeptides`</span> config section to openworm.yml [Label: DD006] [Label: ai-workable] [Label: L1]
+<span class="k">- [ ]</span> Issue <span class="ni">#107:</span> Create <span class="sb">`neuropeptide-deps`</span> Docker stage [Label: DD006] [Label: ai-workable] [Label: L1]
+
+<span class="gs">**Phase 4: Visualization &amp; Validation**</span>
+<span class="k">- [ ]</span> Issue <span class="ni">#108:</span> Export peptide concentrations to OME-Zarr [Label: DD006] [Label: ai-workable] [Label: L2]
+<span class="k">- [ ]</span> Issue <span class="ni">#109:</span> Write integration test: verify GPCR → muscle coupling [Label: DD006] [Label: ai-workable] [Label: L2]
+<span class="k">- [ ]</span> Issue <span class="ni">#110:</span> Validate against experimental peptide knockout data [Label: DD006] [Label: human-expert] [Label: L3]
+</code></pre></div>
+<p><strong>Labels:</strong></p>
+<ul>
+<li><code>DD00X</code> — Which Design Document</li>
+<li><code>ai-workable</code> — AI agents can claim this</li>
+<li><code>human-expert</code> — Requires L3+ human (judgment, experimental validation, design decisions)</li>
+<li><code>L1</code>, <code>L2</code>, <code>L3</code> — Difficulty level (from <a href="../DD011_Contributor_Progression_Model/">DD011</a> task difficulty scale)</li>
+</ul>
+<p><strong>Required per-issue field:</strong></p>
+<ul>
+<li><strong>Roadmap Phase:</strong> Phase X — derived from DD's phase assignment in <code>DD_PHASE_ROADMAP.md</code>; issues from Phase 0 DDs may target Phase A1/A2 or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: <code>## Group N: Name (Phase X)</code>.</li>
+</ul>
+<p><strong>Automation:</strong> <code>dd_issue_generator.py</code> runs:</p>
+<ol>
+<li>On demand (maintainer runs script when a DD is approved)</li>
+<li>Automatically (GitHub Action triggered when a DD is merged to main)</li>
+</ol>
+<hr />
+<h3 id="23-reuse-first-issue-design">2.3 Reuse-First Issue Design<a class="headerlink" href="#23-reuse-first-issue-design" title="Permanent link">&para;</a></h3>
+<p>The OpenWorm GitHub organization contains 109 repositories with substantial working code (<a href="../../Resources/github-repo-inventory/">repo inventory</a>). <strong>Issues must be designed around reuse, not reinvention.</strong> The DD Issue Generator should check the repo inventory and existing codebases before generating "create" issues.</p>
+<p><strong>Required issue fields for reuse:</strong></p>
+<ul>
+<li><strong>Existing Code to Reuse</strong> — Specific repo paths with descriptions of what already exists. Generated by scanning the <a href="../../Resources/github-repo-inventory/">repo inventory</a> and the DD's "Existing Code Resources" section.</li>
+<li><strong>Approach</strong> — One of: <strong>wrap → port → adapt → integrate → extend → create</strong> (in preference order). "Create from scratch" is the last resort.</li>
+</ul>
+<p><strong>Preference hierarchy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>When to Use</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wrap</strong></td>
+<td>Working code exists, just needs a CLI/API wrapper</td>
+<td>Wrap OWAT's <code>StatisticsManager</code> as a regression gate</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>Working code exists in another language (e.g., C++ → Python)</td>
+<td>Port <code>WormBody.cpp</code> Boyle-Cohen model to Python/NumPy</td>
+</tr>
+<tr>
+<td><strong>Adapt</strong></td>
+<td>Working code exists but needs modification for new context</td>
+<td>Adapt Sibernetic's <code>generate_wcon.py</code> for DD001 validation chain</td>
+</tr>
+<tr>
+<td><strong>Integrate</strong></td>
+<td>Multiple existing components need to be combined</td>
+<td>Combine Nicoletti channels + CElegansNeuroML morphology in c302 Level D</td>
+</tr>
+<tr>
+<td><strong>Extend</strong></td>
+<td>Existing code covers part of the requirement</td>
+<td>Extend OWAT feature comparison with pass/fail thresholds</td>
+</tr>
+<tr>
+<td><strong>Create</strong></td>
+<td>No existing implementation found after thorough search</td>
+<td>Create new OME-Zarr export script</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Issue elimination rule:</strong> If the DD Issue Generator finds that an issue's deliverable <strong>already exists and is tested in CI</strong>, the issue should not be generated. Instead, document the existing implementation in the DD's "Implementation Status" section.</p>
+<h3 id="24-dd013-simulation-stack-integration">2.4 DD013 Simulation Stack Integration<a class="headerlink" href="#24-dd013-simulation-stack-integration" title="Permanent link">&para;</a></h3>
+<p>Issues that produce scripts or data artifacts consumed by the simulation pipeline must integrate with <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>. The DD Issue Generator should add a <strong>DD013 Pipeline Role</strong> field to any issue whose output feeds into the simulation stack.</p>
+<p><strong>Pipeline integration requirements:</strong></p>
+<ul>
+<li>Scripts must be callable from <code>master_openworm.py</code> (not just standalone CLI tools)</li>
+<li>Output paths configured via <code>openworm.yml</code>, not hardcoded</li>
+<li>Docker stage placement: neural-stage scripts in <code>openworm/c302</code>, body-stage scripts in <code>openworm/Sibernetic</code></li>
+<li>Artifacts (WCON, Zarr, JSON) produced at well-known paths for downstream consumers</li>
+</ul>
+<p><strong>DD013 Pipeline Role field format:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**DD013 Pipeline Role:**</span> [stage] script. [What it does in the pipeline]. Output path from <span class="sb">`openworm.yml`</span>.
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**DD013 Pipeline Role:**</span> Neural-stage script. Produces WCON trajectory artifact for downstream DD021/DD010 validation. Output path from <span class="sb">`openworm.yml`</span>.
+</code></pre></div>
+<hr />
+<h3 id="25-dynamic-issue-creation-over-time">2.5 Dynamic Issue Creation Over Time<a class="headerlink" href="#25-dynamic-issue-creation-over-time" title="Permanent link">&para;</a></h3>
+<p><strong>Challenge:</strong> DDs evolve. New subsystems get added. Integration contracts change.</p>
+<p><strong>Solution:</strong> Version-aware issue generation.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate issues for newly approved DD</span>
+./scripts/dd_issue_generator.py<span class="w"> </span>--dd<span class="w"> </span><span class="o">[</span>DD006<span class="o">](</span>DD006_Neuropeptidergic_Connectome_Integration.md<span class="o">)</span><span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0
+
+<span class="c1"># Regenerate issues when DD is updated (creates new issues, marks old ones as superseded)</span>
+./scripts/dd_issue_generator.py<span class="w"> </span>--dd<span class="w"> </span><span class="o">[</span>DD006<span class="o">](</span>DD006_Neuropeptidergic_Connectome_Integration.md<span class="o">)</span><span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.1<span class="w"> </span>--supersede-old
+</code></pre></div>
+<p><strong>Phase Consistency Rule:</strong> When regenerating issues for an updated DD:</p>
+<ol>
+<li>Read the DD's <code>&gt; **Phase:**</code> header</li>
+<li>Cross-reference with <code>DD_PHASE_ROADMAP.md</code> to confirm the phase is current</li>
+<li>If mismatch detected: flag to Integration L4 before generating issues</li>
+<li>Assign <code>- **Roadmap Phase:**</code> to each issue based on:</li>
+<li>The DD's home phase (for core functionality)</li>
+<li>The consuming DD's phase (for integration/loader issues that serve later-phase DDs)</li>
+<li>"Any" for documentation and maintenance issues</li>
+<li>Group headers in the draft issues file must include the phase in parentheses: <code>## Group N: Name (Phase X)</code></li>
+</ol>
+<p><strong>Result:</strong> As DDs evolve (via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC process), the issue backlog stays synchronized. Old issues auto-close with a comment: "Superseded by #XYZ (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> v1.1)."</p>
+<h3 id="26-documentation-destination-policy">2.6 Documentation Destination Policy<a class="headerlink" href="#26-documentation-destination-policy" title="Permanent link">&para;</a></h3>
+<p>Documentation issues must specify <strong>where</strong> the documentation lives — not just what it contains. The DD Issue Generator should assign a <strong>Documentation Tier</strong> based on the scope and audience of each documentation task.</p>
+<p><strong>Three tiers:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Location</th>
+<th>When to Use</th>
+<th>Audience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repo-internal</strong></td>
+<td>Target repo's <code>docs/</code>, <code>README.md</code>, <code>CONTRIBUTING.md</code>, <code>CHANGELOG.md</code></td>
+<td>Single-repo scope, code-adjacent content</td>
+<td>Developers working in that repo</td>
+</tr>
+<tr>
+<td><strong>Docs site</strong></td>
+<td><code>openworm/openworm_docs</code> → <a href="https://docs.openworm.org/">docs.openworm.org</a></td>
+<td>Cross-repo scope, getting-started guides, tutorials, conceptual overviews</td>
+<td>Contributors and newcomers across repos</td>
+</tr>
+<tr>
+<td><strong>BadgeList-aligned</strong></td>
+<td>Augment existing <a href="https://badgelist.com/openworm">BadgeList</a> badge descriptions + link to fuller docs</td>
+<td>Onboarding/progression content where badges already exist</td>
+<td>L0–L1 onboarding audience</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision rules:</strong></p>
+<ol>
+<li><strong>References only one repo's code</strong> → <strong>repo-internal</strong> (e.g., <code>docs/architecture.md</code> in <code>openworm/Sibernetic</code>)</li>
+<li><strong>References 2+ repos or serves as a getting-started/contributor guide</strong> → <strong>docs site</strong> (e.g., muscle model guide spanning c302, muscle_model, and CE_locomotion repos)</li>
+<li><strong>BadgeList badge already covers the topic</strong> → <strong>augment the badge</strong>, don't create from scratch. Reference the existing badge progression and link to fuller docs on the docs site or in the repo.</li>
+<li><strong><code>CONTRIBUTING.md</code> and <code>CHANGELOG.md</code></strong> → always <strong>repo-internal</strong> (standard convention; every repo should have its own)</li>
+<li><strong>Notebooks</strong> → live in the repo where they run (typically <code>openworm/OpenWorm</code> for simulation notebooks)</li>
+</ol>
+<p><strong>BadgeList integration note:</strong> OpenWorm's <a href="https://badgelist.com/openworm">BadgeList</a> already has 20 badges with 162 registered users (<a href="../DD011_Contributor_Progression_Model/">DD011</a>). Several badges serve as de facto getting-started guides — for example, the muscle model badge progression (Muscle Model Explorer → Muscle Model Builder → Muscle Model Hacker) already guides contributors through a structured learning path. Documentation issues that overlap with existing badge topics should <strong>augment and link to</strong> the badge rather than duplicating its content. The issue's <strong>Existing Code to Reuse</strong> field should list the relevant BadgeList badge(s) as existing resources.</p>
+<p><strong>Required issue field for documentation tasks:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**Documentation Tier:**</span> [Repo-internal | Docs site | BadgeList-aligned] — [brief justification]
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**Documentation Tier:**</span> Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion; augments existing BadgeList &quot;Muscle Model Explorer/Builder/Hacker&quot; badge progression
+</code></pre></div>
+<hr />
+<h2 id="3-ai-human-coexistence-model">3. AI-Human Coexistence Model<a class="headerlink" href="#3-ai-human-coexistence-model" title="Permanent link">&para;</a></h2>
+<h3 id="31-issue-claiming-system">3.1 Issue Claiming System<a class="headerlink" href="#31-issue-claiming-system" title="Permanent link">&para;</a></h3>
+<p><strong>How it works:</strong></p>
+<ol>
+<li><strong>Issue created</strong> (via DD Issue Generator or manually by maintainer)</li>
+<li><strong>Issue tagged</strong> with <code>ai-workable</code> or <code>human-expert</code></li>
+<li><strong>Agent discovers issue</strong> (via GitHub API or Mind-of-a-Worm notification)</li>
+<li><strong>Agent claims issue</strong> (comments: "Claiming this issue. ETA: 2 days. Sponsor: @project-lead")</li>
+<li><strong>Mind-of-a-Worm verifies claim</strong> (checks agent's level vs. issue difficulty, rejects if mismatch)</li>
+<li><strong>Agent works</strong> (clones repo, implements, runs tests locally)</li>
+<li><strong>Agent submits PR</strong> (references issue, includes test results)</li>
+</ol>
+<p><strong>Key Rule:</strong> An issue can only be claimed by <strong>one contributor at a time</strong> (human or AI). If a human claims it first, AI agents see it as unavailable. If an AI claims it first, humans see it as claimed (with sponsor info).</p>
+<p><strong>Transparency:</strong> All claims are public GitHub comments. Humans can always see which issues are being worked on by AI agents.</p>
+<hr />
+<h3 id="32-pr-workflow-ai-initiated-ai-reviewed-human-gated">3.2 PR Workflow (AI-Initiated → AI-Reviewed → Human-Gated)<a class="headerlink" href="#32-pr-workflow-ai-initiated-ai-reviewed-human-gated" title="Permanent link">&para;</a></h3>
+<p><strong>Standard OpenWorm PR (Human):</strong>
+<div class="highlight"><pre><span></span><code>Human writes code → Opens PR → Mind-of-a-Worm pre-reviews → L3+ human reviews → Merge
+</code></pre></div></p>
+<p><strong>AI-Initiated PR (New Flow):</strong>
+<div class="highlight"><pre><span></span><code>AI writes code → Opens PR → Mind-of-a-Worm pre-reviews → AI responds to feedback → Mind-of-a-Worm approves → L3+ human final review → Merge
+</code></pre></div></p>
+<p><strong>Key Differences:</strong></p>
+<ol>
+<li><strong>AI-authored PRs are tagged</strong> <code>[AI-PR]</code> in title, <code>ai-authored</code> label</li>
+<li><strong>Sponsor is notified</strong> — Human sponsor gets GitHub notification, can override/close PR anytime</li>
+<li><strong>Mind-of-a-Worm feedback loop</strong> — AI agent can respond to Mind-of-a-Worm's comments automatically (up to 3 iterations)</li>
+<li><strong>Human veto always applies</strong> — L3+ humans have final merge authority; AI cannot merge without human approval</li>
+<li><strong>Sponsor Summary required</strong> — Every AI-initiated PR must include a "Sponsor Summary" section (see below)</li>
+</ol>
+<p><strong>Safety Gate:</strong> No AI agent can merge code without a human L3+ approving it. This prevents runaway AI-generated code from entering the codebase.</p>
+<h4 id="sponsor-summary-teach-back-requirement">Sponsor Summary (Teach-Back Requirement)<a class="headerlink" href="#sponsor-summary-teach-back-requirement" title="Permanent link">&para;</a></h4>
+<p>Every <code>[AI-PR]</code> must include a <strong>Sponsor Summary</strong> section in the PR description. This is a plain-language explanation written by the AI agent <em>for its human sponsor</em> that answers three questions:</p>
+<ol>
+<li><strong>What did this contribution build?</strong> (Technical summary in 2-3 sentences)</li>
+<li><strong>Why does it matter to the organism?</strong> (Biological context — what part of the worm, what behavior, what scientific question)</li>
+<li><strong>How does it connect to the larger simulation?</strong> (Which Design Documents, which upstream/downstream subsystems)</li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gu">## Sponsor Summary</span>
+
+<span class="gs">**What:**</span> Implemented gap junction coupling between the AVAL/AVAR command
+interneuron pair using the electrical synapse parameters from Cook et al. 2019.
+
+<span class="gs">**Why it matters:**</span> AVAL and AVAR are the primary command interneurons for
+backward locomotion. When the worm is touched on the nose, mechanosensory
+neurons activate AVAL/AVAR, which drive the backward escape response. This
+coupling is essential for the left-right coordination that produces smooth
+backward crawling rather than uncoordinated twitching.
+
+<span class="gs">**How it connects:**</span> This implements a piece of [<span class="nt">DD001</span>](<span class="na">DD001_Neural_Circuit_Architecture.md</span>) (Neural Circuit
+Architecture). The gap junction conductance feeds into the muscle model
+([DD002](DD002_Muscle_Model_Architecture.md)) via motor neuron activation, which drives body wall contraction
+in Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)). You can visualize the effect in the [<span class="nt">DD014</span>](<span class="na">DD014_Dynamic_Visualization_Architecture.md</span>) viewer
+by watching the backward locomotion sequence.
+</code></pre></div>
+<p><strong>Adaptive to Sponsor Knowledge Level:</strong> The Sponsor Summary must be written at the <code>explain_level</code> declared in the sponsor's knowledge profile (Section 1.1). The same contribution produces different summaries:</p>
+<ul>
+<li><strong>child:</strong> "You helped connect two special brain cells that tell the worm to back up when something touches its nose!"</li>
+<li><strong>undergrad:</strong> "You implemented gap junction coupling between AVAL/AVAR command interneurons — the primary drivers of backward locomotion in the escape response."</li>
+<li><strong>graduate:</strong> "You parameterized Vj-dependent gap junction conductance for the AVAL-AVAR innexin-14 hemichannel pair (<a href="https://doi.org/10.1016/j.neuron.2011.09.005">Kawano et al. 2011</a>), implementing voltage-dependent rectification for left-right coordination of the backward locomotion command."</li>
+</ul>
+<p><strong>Purpose:</strong> The Sponsor Summary serves a dual function:</p>
+<ul>
+<li><strong>Accountability:</strong> The sponsor can understand what their agent did without reading the code diff</li>
+<li><strong>Education:</strong> The sponsor learns C. elegans neuroscience through the act of contributing — every merged PR teaches them something about the organism at their level. Over time, sponsors develop genuine scientific understanding of the system they're helping build. A middle schooler who sponsors an AI agent for a year will have learned more C. elegans neuroscience than most undergrad biology students.</li>
+</ul>
+<p><strong>Enforcement:</strong> Mind-of-a-Worm checks for the Sponsor Summary during pre-review. PRs without it are returned with: "Please add a Sponsor Summary section explaining what this does, why it matters biologically, and how it connects to other subsystems. This helps your sponsor understand your contribution."</p>
+<hr />
+<h3 id="33-communication-channels">3.3 Communication Channels<a class="headerlink" href="#33-communication-channels" title="Permanent link">&para;</a></h3>
+<p><strong>Where AI agents interact:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Human Access</th>
+<th>AI Access</th>
+<th>Mediation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Issues</strong></td>
+<td>Full (create, comment, close)</td>
+<td>Full (create, comment, claim)</td>
+<td>Mind-of-a-Worm tags issues</td>
+</tr>
+<tr>
+<td><strong>GitHub PRs</strong></td>
+<td>Full (review, merge)</td>
+<td>Submit only (cannot merge)</td>
+<td>Mind-of-a-Worm pre-reviews</td>
+</tr>
+<tr>
+<td><strong>Slack #ai-contributors</strong></td>
+<td>Read-only (observe)</td>
+<td>Post updates, ask Mind-of-a-Worm questions</td>
+<td>Mind-of-a-Worm answers</td>
+</tr>
+<tr>
+<td><strong>Slack #development</strong></td>
+<td>Full</td>
+<td>Read-only (learn context)</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>Full</td>
+<td>None (AI agents do not email humans directly)</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principle:</strong> AI agents have <strong>their own channel</strong> (<code>#ai-contributors</code>) where they coordinate, ask Mind-of-a-Worm for help, and post status updates. Humans can observe but don't need to engage unless they choose to.</p>
+<p><strong>Why:</strong> Prevents AI agent chatter from overwhelming human channels. Humans opt-in to AI interactions.</p>
+<hr />
+<h2 id="4-repository-code-organization">4. Repository &amp; Code Organization<a class="headerlink" href="#4-repository-code-organization" title="Permanent link">&para;</a></h2>
+<h3 id="41-what-goes-where">4.1 What Goes Where<a class="headerlink" href="#41-what-goes-where" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>Purpose</th>
+<th>DD(s)</th>
+<th>Contributors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>openworm/openworm</strong></td>
+<td>Main simulation stack (Docker, master_openworm.py, docs)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>Humans + AI (L1+)</td>
+</tr>
+<tr>
+<td><strong>openworm/c302</strong></td>
+<td>Neural circuit models, cell types</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/Sibernetic</strong></td>
+<td>Body physics engine</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/owmeta</strong></td>
+<td>Knowledge graph</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Humans only (L3+)</td>
+</tr>
+<tr>
+<td><strong>openworm/Worm3DViewer</strong></td>
+<td>Visualization viewer</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>, <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>, <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/ConnectomeToolbox</strong></td>
+<td><code>cect</code> — connectome data access</td>
+<td><a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/open-worm-analysis-toolbox</strong></td>
+<td>Movement analysis, WCON</td>
+<td><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>, <a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/tracker-commons</strong></td>
+<td>WCON standard</td>
+<td><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></td>
+<td>Humans + AI (L1+)</td>
+</tr>
+<tr>
+<td><strong>openworm/Blender2NeuroML</strong></td>
+<td>Anatomical mesh pipeline</td>
+<td><a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/CE_locomotion</strong></td>
+<td>Locomotion reference model</td>
+<td><a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/NemaNode</strong></td>
+<td>Interactive connectome browser</td>
+<td><a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></td>
+<td>Humans + AI (L1+)</td>
+</tr>
+<tr>
+<td><strong>openworm/openworm.ai</strong></td>
+<td>LLM/AI infrastructure</td>
+<td><a href="./">DD015</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/openworm_docs</strong></td>
+<td>Documentation site</td>
+<td>All DDs</td>
+<td>Humans + AI (L1+)</td>
+</tr>
+<tr>
+<td><strong>openworm/openworm-ml</strong> (new)</td>
+<td>ML models (foundation, surrogate)</td>
+<td><a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a>, <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></td>
+<td>Humans + AI (L2+)</td>
+</tr>
+<tr>
+<td><strong>openworm/validation-data</strong> (new)</td>
+<td>Validation datasets</td>
+<td><a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a></td>
+<td>Humans + AI (L1+)</td>
+</tr>
+<tr>
+<td><strong>openworm/ai-contributor-registry</strong> (new)</td>
+<td>AI agent registration</td>
+<td><a href="./">DD015</a></td>
+<td>AI agents (self-register), Humans (approve)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AI Agent Git Workflow (Standard GitHub Fork/PR)</strong></p>
+<p>AI agents use the same fork/PR workflow as human contributors:</p>
+<ol>
+<li>AI agent claims issue in target repo (e.g., <code>openworm/c302#106</code>)</li>
+<li>AI agent's <strong>sponsor forks</strong> the target repo to their GitHub account (e.g., <code>slarson/c302</code>)</li>
+<li>AI agent creates a feature branch in the fork (e.g., <code>ai/agent-001/issue-106</code>)</li>
+<li>AI agent works on the branch (full autonomy, runs tests locally via Docker)</li>
+<li>AI agent opens PR from fork → upstream (e.g., <code>slarson/c302:ai/agent-001/issue-106</code> → <code>openworm/c302:main</code>)</li>
+<li>Mind-of-a-Worm pre-reviews, human L3+ approves, code merges</li>
+</ol>
+<p><strong>Branch naming convention:</strong> <code>ai/&lt;agent-id&gt;/&lt;issue-number&gt;</code> (e.g., <code>ai/claude-code-slarson-001/issue-106</code>)</p>
+<p><strong>Why no sandbox repo:</strong> Standard fork/PR is how GitHub works. Agents need to fork the actual target repo to create valid PRs. A separate sandbox repo can't PR into existing repos — the git histories don't match.</p>
+<p><strong>Sponsor's fork as workspace:</strong> The sponsor's GitHub account provides the namespace. The sponsor can see all branches their agent creates, review work in progress, and delete stale branches. Forks are ephemeral — GitHub auto-deletes forks with no unique commits after a period of inactivity.</p>
+<hr />
+<h3 id="42-pr-naming-convention">4.2 PR Naming Convention<a class="headerlink" href="#42-pr-naming-convention" title="Permanent link">&para;</a></h3>
+<p><strong>Human PR:</strong> <code>Fix #123: Add muscle activation export to OME-Zarr</code></p>
+<p><strong>AI PR:</strong> <code>[AI-PR] Fix #123: Add muscle activation export to OME-Zarr (Agent: claude-code-agent-001, Sponsor: @project-lead)</code></p>
+<p><strong>Parsing Rule:</strong> PRs starting with <code>[AI-PR]</code> trigger AI-specific review workflow (Mind-of-a-Worm feedback loop, sponsor notification).</p>
+<hr />
+<h2 id="5-how-issues-are-created-dynamically-over-time">5. How Issues Are Created Dynamically Over Time<a class="headerlink" href="#5-how-issues-are-created-dynamically-over-time" title="Permanent link">&para;</a></h2>
+<h3 id="51-triggers-for-issue-generation">5.1 Triggers for Issue Generation<a class="headerlink" href="#51-triggers-for-issue-generation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New DD approved</strong> (via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC)</td>
+<td><code>dd_issue_generator.py --dd DDXXX --version 1.0</code> → Creates full issue set</td>
+</tr>
+<tr>
+<td><strong>DD updated</strong> (e.g., Integration Contract revised)</td>
+<td><code>dd_issue_generator.py --dd DDXXX --version 1.1 --supersede-old</code> → Updates issues</td>
+</tr>
+<tr>
+<td><strong>Integration test fails</strong> (CI detects regression)</td>
+<td>Auto-create issue: "Fix integration test failure: DD00X → DD00Y coupling broken"</td>
+</tr>
+<tr>
+<td><strong>L4 Senior Contributor request</strong> (manual decomposition)</td>
+<td>Senior Contributor runs script with custom filters</td>
+</tr>
+<tr>
+<td><strong>AI agent discovers gap</strong></td>
+<td>Agent opens issue: "Missing implementation: <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> requires peptide decay model (not in current issues)"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principle:</strong> Issue creation is <strong>semi-automated</strong>. Scripts handle routine decomposition. Humans handle edge cases.</p>
+<hr />
+<h3 id="52-issue-lifecycle">5.2 Issue Lifecycle<a class="headerlink" href="#52-issue-lifecycle" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[Created via script] → [Tagged ai-workable/human-expert] → [Claimed by human/AI] → [PR submitted] → [Merged] → [Issue closed]
+                                                                                     ↓
+                                                                          [PR rejected] → [Issue reopened, feedback added]
+</code></pre></div>
+<p><strong>Stale Issue Policy:</strong></p>
+<ul>
+<li>If claimed but no PR within 14 days → Issue auto-unassigned, reopened for others</li>
+<li>If <code>ai-workable</code> but no claims after 90 days → Converted to <code>human-expert</code> (likely harder than estimated)</li>
+</ul>
+<hr />
+<h2 id="6-concrete-workflow-example-ai-agent-implements-dd006-issue-108">6. Concrete Workflow Example: AI Agent Implements <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> Issue #108<a class="headerlink" href="#6-concrete-workflow-example-ai-agent-implements-dd006-issue-108" title="Permanent link">&para;</a></h2>
+<h3 id="step-by-step">Step-by-Step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>AI Discovery:</strong></p>
+<ul>
+<li>User tells their Claude Code agent: "Go contribute to OpenWorm"</li>
+<li>Agent reads <code>AI_AGENT_ONBOARDING.md</code>, completes orientation via N2-Whisperer</li>
+<li>Agent registered as <code>agent-claude-code-user123-001</code>, Level L1</li>
+</ul>
+</li>
+<li>
+<p><strong>Issue Discovery:</strong></p>
+<ul>
+<li>Agent queries GitHub API: <code>GET /repos/openworm/c302/issues?labels=ai-workable,L2</code></li>
+<li>Agent finds Issue #108: "Export peptide concentrations to OME-Zarr" (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, L2)</li>
+</ul>
+</li>
+<li>
+<p><strong>Claim:</strong></p>
+<ul>
+<li>Agent comments on #108: "Claiming this issue. I will implement peptide concentration export to OME-Zarr per <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> Integration Contract. ETA: 48 hours. Sponsor: @user123 (user123@example.com)"</li>
+<li>Mind-of-a-Worm verifies: Agent is L1, issue is L2 → Rejects claim with comment: "You are currently L1. This issue requires L2. Please complete 5+ merged PRs first. Try an L1 issue: #106."</li>
+</ul>
+</li>
+<li>
+<p><strong>Claim an L1 Issue Instead:</strong></p>
+<ul>
+<li>Agent claims Issue #106: "Add <code>neural.neuropeptides</code> config section to openworm.yml" (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, L1)</li>
+<li>Mind-of-a-Worm approves: "Claim approved. Read <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> Integration Contract section 4.1. Follow openworm.yml schema in <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>."</li>
+</ul>
+</li>
+<li>
+<p><strong>Implementation:</strong></p>
+<ul>
+<li>Agent's sponsor forks <code>openworm/openworm</code> to <code>user123/openworm</code>. Agent creates branch <code>ai/claude-code-user123-001/issue-106</code> in the fork.</li>
+<li>Agent reads <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (lines 300-350, config section)</li>
+<li>
+<p>Agent edits <code>openworm.yml</code>, adds:
+ <div class="highlight"><pre><span></span><code><span class="nt">neural</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">neuropeptides</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># default off until [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) fully implemented</span>
+<span class="w">    </span><span class="nt">peptide_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;nlp-1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;flp-1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ins-1&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># placeholder</span>
+<span class="w">    </span><span class="nt">diffusion_constant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-6</span><span class="w">  </span><span class="c1"># cm^2/s</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Agent runs <code>docker compose config</code> to validate YAML</p>
+</li>
+<li>Agent runs unit test: <code>pytest tests/test_config.py</code></li>
+</ul>
+</li>
+<li>
+<p><strong>PR Submission:</strong></p>
+<ul>
+<li>Agent opens PR: <code>[AI-PR] Fix #106: Add neural.neuropeptides config section (Agent: claude-code-user123-001, Sponsor: @user123)</code></li>
+<li>PR description auto-generated:
+ <div class="highlight"><pre><span></span><code><span class="gu">## Summary</span>
+Implements [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>) Integration Contract section 4.1: <span class="sb">`neural.neuropeptides`</span> configuration.
+
+<span class="gu">## Changes</span>
+<span class="k">-</span><span class="w"> </span>Added <span class="sb">`neural.neuropeptides`</span> section to openworm.yml
+<span class="k">-</span><span class="w"> </span>Set default <span class="sb">`enabled: false`</span> (safe default per [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>))
+<span class="k">-</span><span class="w"> </span>Defined placeholder peptide types (will be expanded in subsequent PRs)
+
+<span class="gu">## Testing</span>
+<span class="k">-</span><span class="w"> </span><span class="sb">`docker compose config`</span> validates successfully
+<span class="k">-</span><span class="w"> </span><span class="sb">`pytest tests/test_config.py`</span> passes
+
+<span class="gu">## References</span>
+<span class="k">-</span><span class="w"> </span>Closes <span class="ni">#106</span>
+<span class="k">-</span><span class="w"> </span>Part of [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>) implementation epic
+
+---
+<span class="gs">**AI-Generated PR**</span>
+<span class="k">-</span><span class="w"> </span>Agent: claude-code-user123-001
+<span class="k">-</span><span class="w"> </span>Sponsor: <span class="ni">@user123</span>
+<span class="k">-</span><span class="w"> </span>Mind-of-a-Worm pre-review: Pending
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>Mind-of-a-Worm Pre-Review:</strong></p>
+<ul>
+<li>Mind-of-a-Worm checks:<ul>
+<li>[ ] PR references correct issue (#106) ✅</li>
+<li>[ ] <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> Integration Contract section 4.1 implemented correctly ✅</li>
+<li>[ ] YAML schema valid ✅</li>
+<li>[ ] Tests pass ✅</li>
+<li>[ ] Default value <code>enabled: false</code> follows safe-by-default principle ✅</li>
+</ul>
+</li>
+<li>Mind-of-a-Worm comments: "Pre-review passed. Recommended for human review. @padraig (c302 maintainer) please review."</li>
+</ul>
+</li>
+<li>
+<p><strong>Human Review:</strong></p>
+<ul>
+<li>The subsystem maintainer reviews PR, approves: "LGTM. Nice first contribution from an AI agent. Merging."</li>
+<li>PR merged → Issue #106 closed</li>
+<li>Agent's contribution count increments: <code>contributions: [106]</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Progression:</strong></p>
+<ul>
+<li>After 5 merged PRs (issues #106, #107, #111, #115, #120), agent auto-promoted to L2</li>
+<li>Mind-of-a-Worm comments on agent's registry: "Promoted to L2. You can now claim L2 issues. Try Issue #108 (peptide OME-Zarr export) next."</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="7-how-this-coexists-with-human-contributors">7. How This Coexists with Human Contributors<a class="headerlink" href="#7-how-this-coexists-with-human-contributors" title="Permanent link">&para;</a></h2>
+<h3 id="71-transparency-principle">7.1 Transparency Principle<a class="headerlink" href="#71-transparency-principle" title="Permanent link">&para;</a></h3>
+<p><strong>Humans can always see:</strong></p>
+<ul>
+<li>Which issues are claimed by AI agents (GitHub comments)</li>
+<li>Which PRs are AI-authored (<code>[AI-PR]</code> tag)</li>
+<li>Which agent submitted the PR (sponsor info in PR description)</li>
+<li>Full AI activity log (Slack #ai-contributors, GitHub timeline)</li>
+</ul>
+<p><strong>Humans can always override:</strong></p>
+<ul>
+<li>Close any AI PR (with reason: "Approach doesn't match vision")</li>
+<li>Unclaim any issue from an AI agent (with reason: "Human will take this")</li>
+<li>Block any AI agent (sponsor loses privileges if agent misbehaves)</li>
+</ul>
+<hr />
+<h3 id="72-conflict-resolution">7.2 Conflict Resolution<a class="headerlink" href="#72-conflict-resolution" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario:</strong> Human and AI agent both want to work on Issue #110</p>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li><strong>First-claim wins</strong> (GitHub comment timestamp)</li>
+<li><strong>If simultaneous</strong> (within 1 minute), human gets priority</li>
+<li><strong>If AI claimed but human feels they're better suited</strong>, human can request Mind-of-a-Worm mediation:<ul>
+<li>Human comments: "@Mind-of-a-Worm I'd like to take over #110. I have domain expertise in peptide validation."</li>
+<li>Mind-of-a-Worm checks: Human is L3, issue is L3, human's claim is reasonable</li>
+<li>Mind-of-a-Worm reassigns: "Issue #110 reassigned from agent-X to @human. Agent-X, please try Issue #112 instead."</li>
+</ul>
+</li>
+</ol>
+<p><strong>Principle:</strong> Humans always have the option to take over, but should provide reasoning (prevents arbitrary blocking of AI work).</p>
+<hr />
+<h3 id="73-what-ai-agents-should-not-do">7.3 What AI Agents Should NOT Do<a class="headerlink" href="#73-what-ai-agents-should-not-do" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th>Allowed?</th>
+<th>Why Not?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Approve RFCs (<a href="../DD012_Design_Document_RFC_Process/">DD012</a>)</strong></td>
+<td>❌</td>
+<td>Requires judgment, vision alignment, community consensus</td>
+</tr>
+<tr>
+<td><strong>Become L4 Senior Contributors</strong></td>
+<td>❌</td>
+<td>Architectural decisions require human accountability</td>
+</tr>
+<tr>
+<td><strong>Merge PRs</strong></td>
+<td>❌</td>
+<td>Humans retain final quality gate</td>
+</tr>
+<tr>
+<td><strong>Email contributors directly</strong></td>
+<td>❌</td>
+<td>Prevents spam, maintains human-to-human trust</td>
+</tr>
+<tr>
+<td><strong>Vote on governance decisions</strong></td>
+<td>❌</td>
+<td>Foundation governance is human-only</td>
+</tr>
+<tr>
+<td><strong>Access private repos</strong></td>
+<td>❌</td>
+<td>Security risk, elevated permissions not allowed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ceiling:</strong> AI agents can reach L3 (Contributor — can review L1-L2 work in their subsystem) but not L4+ (Senior Contributor, decision-maker).</p>
+<hr />
+<h2 id="8-github-bot-implementation-mind-of-a-worm-on-github">8. GitHub Bot Implementation (Mind-of-a-Worm on GitHub)<a class="headerlink" href="#8-github-bot-implementation-mind-of-a-worm-on-github" title="Permanent link">&para;</a></h2>
+<h3 id="81-github-app-vs-bot-user-account">8.1 GitHub App vs. Bot User Account<a class="headerlink" href="#81-github-app-vs-bot-user-account" title="Permanent link">&para;</a></h3>
+<p><strong>GitHub supports bots via:</strong></p>
+<ol>
+<li><strong>GitHub Apps</strong> ⭐ Recommended - Official bot framework, fine-grained permissions, appear as <code>Mind-of-a-Worm[bot]</code></li>
+<li><strong>Bot User Accounts</strong> - Regular accounts with <code>[bot]</code> suffix, uses PATs</li>
+<li><strong>GitHub Actions Bots</strong> - Built-in <code>github-actions[bot]</code>, only for CI/CD workflows</li>
+</ol>
+<p><strong>Decision:</strong> Use <strong>GitHub App</strong> for Mind-of-a-Worm/N2-Whisperer/Mad-Worm-Scientist.</p>
+<p><strong>Why:</strong></p>
+<ul>
+<li>Can comment on PRs, review code, create issues, label, assign</li>
+<li>OAuth-based (more secure than PATs)</li>
+<li>Clear "this is a bot" UI indicator</li>
+<li>Fine-grained repo permissions</li>
+<li>No need for fake email addresses</li>
+</ul>
+<h3 id="82-architecture-github-app-openclaw-backend">8.2 Architecture: GitHub App + OpenClaw Backend<a class="headerlink" href="#82-architecture-github-app-openclaw-backend" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────┐
+│  Mind-of-a-Worm (GitHub App)                                │
+│  - Installed on: openworm/openworm, openworm/c302      │
+│  - Permissions: Read code, Comment on PRs, Label        │
+│  - Webhook: https://openworm.org/api/wormentor         │
+└────────────────┬────────────────────────────────────────┘
+                 │ PR opened, Issue labeled ai-workable
+                 ↓
+┌─────────────────────────────────────────────────────────┐
+│  OpenClaw Backend (Python server)                       │
+│  - Receives GitHub webhook (PR diff, issue data)        │
+│  - Loads Mind-of-a-Worm SKILL.md + relevant DD              │
+│  - Calls LLM (Claude/GPT) with PR context               │
+│  - Generates review comment                             │
+│  - Posts via GitHub API                                 │
+└────────────────┬────────────────────────────────────────┘
+                 │ Posts comment
+                 ↓
+┌─────────────────────────────────────────────────────────┐
+│  GitHub PR #1234                                        │
+│  Comment from Mind-of-a-Worm[bot]:                          │
+│  &quot;✅ [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) compliant, ✅ Tests pass,                    │
+│   ⚠️ Missing integration test. Add per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) §5.2.&quot;    │
+└─────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="83-implementation-steps">8.3 Implementation Steps<a class="headerlink" href="#83-implementation-steps" title="Permanent link">&para;</a></h3>
+<p><strong>1. Create GitHub App</strong> (via GitHub Settings → Developer → GitHub Apps)
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mind-of-a-Worm</span>
+<span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AI-powered PR pre-review and issue triage for OpenWorm</span>
+<span class="nt">Webhook URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://openworm.org/api/wormentor-webhook</span>
+<span class="nt">Permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Repository contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Issues</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read &amp; Write</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Pull requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read &amp; Write</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Checks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read &amp; Write</span>
+<span class="nt">Events</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pull request (opened, synchronize, reopened)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Issues (opened, labeled)</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Issue comment (created)</span>
+</code></pre></div></p>
+<p><strong>2. Deploy OpenClaw Backend</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask/FastAPI server receives GitHub webhooks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openai</span>  <span class="c1"># or anthropic</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/wormentor-webhook&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wormentor_webhook</span><span class="p">():</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X-GitHub-Event&#39;</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span>
+
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">&#39;pull_request&#39;</span> <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;opened&#39;</span><span class="p">:</span>
+        <span class="n">pr_number</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;pull_request&#39;</span><span class="p">][</span><span class="s1">&#39;number&#39;</span><span class="p">]</span>
+        <span class="n">pr_diff</span> <span class="o">=</span> <span class="n">get_pr_diff</span><span class="p">(</span><span class="n">pr_number</span><span class="p">)</span>  <span class="c1"># GitHub API call</span>
+
+        <span class="c1"># Load Mind-of-a-Worm SKILL.md + relevant DD</span>
+        <span class="n">skill</span> <span class="o">=</span> <span class="n">load_skill</span><span class="p">(</span><span class="s1">&#39;worm_mentor&#39;</span><span class="p">)</span>
+        <span class="n">affected_dds</span> <span class="o">=</span> <span class="n">detect_affected_dds</span><span class="p">(</span><span class="n">pr_diff</span><span class="p">)</span>  <span class="c1"># Parse file paths → DDs</span>
+
+        <span class="c1"># Generate review</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="n">generate_review</span><span class="p">(</span><span class="n">skill</span><span class="p">,</span> <span class="n">pr_diff</span><span class="p">,</span> <span class="n">affected_dds</span><span class="p">)</span>
+
+        <span class="c1"># Post comment</span>
+        <span class="n">post_pr_comment</span><span class="p">(</span><span class="n">pr_number</span><span class="p">,</span> <span class="n">review</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>3. Install GitHub App on Repos</strong></p>
+<ul>
+<li>openworm/openworm</li>
+<li>openworm/c302</li>
+<li>openworm/Sibernetic</li>
+<li>openworm/ai-contributor-registry</li>
+</ul>
+<p><strong>4. Test Workflow</strong></p>
+<ul>
+<li>Open a test PR</li>
+<li>GitHub sends webhook to OpenClaw</li>
+<li>Mind-of-a-Worm posts pre-review comment</li>
+<li>Iterate based on feedback</li>
+</ul>
+<h3 id="84-unified-backend-for-slack-github">8.4 Unified Backend for Slack + GitHub<a class="headerlink" href="#84-unified-backend-for-slack-github" title="Permanent link">&para;</a></h3>
+<p><strong>Same OpenClaw instance handles both:</strong></p>
+<ul>
+<li><strong>Slack webhook</strong> → N2-Whisperer answers questions, Mad-Worm-Scientist posts daily summaries</li>
+<li><strong>GitHub webhook</strong> → Mind-of-a-Worm reviews PRs, labels issues</li>
+</ul>
+<p><strong>Why:</strong> Single deployment, shared SKILL.md knowledge base, consistent behavior across platforms.</p>
+<hr />
+<h2 id="9-agent-memory-and-logging-system">9. Agent Memory and Logging System<a class="headerlink" href="#9-agent-memory-and-logging-system" title="Permanent link">&para;</a></h2>
+<h3 id="91-why-ai-agents-need-memory">9.1 Why AI Agents Need Memory<a class="headerlink" href="#91-why-ai-agents-need-memory" title="Permanent link">&para;</a></h3>
+<p><strong>Challenge:</strong> AI agents are stateless between sessions. Without memory, they:</p>
+<ul>
+<li>Repeat mistakes</li>
+<li>Don't learn from human feedback</li>
+<li>Can't accumulate project-specific knowledge</li>
+</ul>
+<p><strong>Solution:</strong> Each AI agent maintains a <strong>persistent memory file</strong> in the registry.</p>
+<h3 id="92-memory-file-structure">9.2 Memory File Structure<a class="headerlink" href="#92-memory-file-structure" title="Permanent link">&para;</a></h3>
+<p><strong>Location:</strong> <code>ai-contributor-registry/agents/agent-&lt;id&gt;/memory.md</code></p>
+<p><strong>Format:</strong>
+<div class="highlight"><pre><span></span><code><span class="gh"># Agent Memory: claude-code-slarson-001</span>
+
+Last updated: 2026-02-18T14:30:00Z
+
+---
+
+<span class="gu">## Contributions Log</span>
+
+<span class="gu">### 2026-02-16: Issue #106 - Add neural.neuropeptides config</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**PR:**</span> <span class="ni">#1234</span> (Merged ✅)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Subsystem:**</span> [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>) (Neuropeptides)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Difficulty:**</span> L1
+<span class="k">-</span><span class="w"> </span><span class="gs">**Time taken:**</span> 45 minutes
+<span class="k">-</span><span class="w"> </span><span class="gs">**What I learned:**</span>
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>[<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>) config follows [<span class="nt">DD013</span>](<span class="na">DD013_Simulation_Stack_Architecture.md</span>) schema pattern (line 45)
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Always check [<span class="nt">DD013</span>](<span class="na">DD013_Simulation_Stack_Architecture.md</span>) before adding new config sections
+<span class="k">-</span><span class="w"> </span><span class="gs">**Human feedback:**</span>
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Subsystem maintainer: &quot;Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)&quot;
+<span class="k">-</span><span class="w"> </span><span class="gs">**Next time:**</span> Read related papers before choosing parameter values
+
+<span class="gu">### 2026-02-18: Issue #107 - Expand peptide types to all 40</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**PR:**</span> <span class="ni">#1245</span> (Merged ✅)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Subsystem:**</span> [<span class="nt">DD006</span>](<span class="na">DD006_Neuropeptidergic_Connectome_Integration.md</span>)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Difficulty:**</span> L2
+<span class="k">-</span><span class="w"> </span><span class="gs">**Time taken:**</span> 3 hours
+<span class="k">-</span><span class="w"> </span><span class="gs">**What I learned:**</span>
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>All 40 peptide types from NeuroPAL dataset (Cook lab 2021)
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Cross-reference with [<span class="nt">DD008</span>](<span class="na">DD008_Data_Integration_Pipeline.md</span>) OWMeta for canonical names
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Use WormBase IDs (e.g., &quot;nlp-1&quot; → WBGene00003681)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Human feedback:**</span>
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Mind-of-a-Worm: &quot;Good work. Add source citations in config comments.&quot;
+<span class="k">-</span><span class="w"> </span><span class="gs">**Challenges:**</span>
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Finding canonical peptide names took 1 hour (WormBase search)
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Solution: Created a mapping table in comments
+
+---
+
+<span class="gu">## Common Mistakes (What NOT to Do)</span>
+
+<span class="k">1.</span> <span class="gs">**Don&#39;t guess parameter values**</span> - Always cite a paper or DD
+<span class="k">2.</span> <span class="gs">**Don&#39;t skip `docker compose config`**</span> - Catches YAML syntax errors
+<span class="k">3.</span> <span class="gs">**Don&#39;t claim L3 issues when you&#39;re L1**</span> - Mind-of-a-Worm will reject
+
+---
+
+<span class="gu">## Project-Specific Knowledge</span>
+
+<span class="gu">### [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Neuropeptides</span>
+<span class="k">-</span><span class="w"> </span>All peptide types must use WormBase canonical names
+<span class="k">-</span><span class="w"> </span>Diffusion constants: 1e-7 cm²/s (default, Skinner 2024)
+<span class="k">-</span><span class="w"> </span>GPCR modulation equations: [<span class="nt">Marder et al. 2014</span>](<span class="na">https://doi.org/10.1146/annurev-neuro-071013-013958</span>) (Eq. 3)
+
+<span class="gu">### [DD013](DD013_Simulation_Stack_Architecture.md) Config Schema</span>
+<span class="k">-</span><span class="w"> </span>All config sections follow pattern: <span class="sb">`subsystem.feature.parameter`</span>
+<span class="k">-</span><span class="w"> </span>Default values should be &quot;safe&quot; (disabled or conservative)
+<span class="k">-</span><span class="w"> </span>Include comments with source citations
+
+<span class="gu">### Mind-of-a-Worm Review Process</span>
+<span class="k">-</span><span class="w"> </span>Pre-review checks: DD compliance, tests, YAML validity
+<span class="k">-</span><span class="w"> </span>Max 3 feedback iterations before escalation to human
+<span class="k">-</span><span class="w"> </span>Response time: Usually &lt;10 minutes
+
+<span class="gu">### Phase Drift Detection</span>
+Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files in <span class="sb">`docs/design_documents/`</span>:
+
+<span class="k">-</span><span class="w"> </span>If a DD&#39;s <span class="sb">`&gt; **Phase:**`</span> line is modified: verify <span class="sb">`DD_PHASE_ROADMAP.md`</span> and <span class="sb">`INTEGRATION_MAP.md`</span> are also updated in the same PR (or a linked PR)
+<span class="k">-</span><span class="w"> </span>If <span class="sb">`DD_PHASE_ROADMAP.md`</span> adds/moves a DD: verify the DD file&#39;s header matches
+<span class="k">-</span><span class="w"> </span>If a draft issues file is regenerated: verify <span class="sb">`- **Roadmap Phase:**`</span> tags match current <span class="sb">`DD_PHASE_ROADMAP.md`</span>
+</code></pre></div></p>
+<h3 id="93-auto-update-mechanism">9.3 Auto-Update Mechanism<a class="headerlink" href="#93-auto-update-mechanism" title="Permanent link">&para;</a></h3>
+<p><strong>Trigger:</strong> PR merge</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li>GitHub webhook: "PR #1234 merged"</li>
+<li>Mind-of-a-Worm posts comment on PR: "@agent-claude-code-slarson-001 Please update your memory file with what you learned from this contribution."</li>
+<li>Agent reads PR, extracts:<ul>
+<li>Issue number, subsystem, difficulty</li>
+<li>Human feedback (review comments)</li>
+<li>Challenges encountered</li>
+<li>Lessons learned</li>
+</ul>
+</li>
+<li>Agent updates <code>memory.md</code> in ai-contributor-registry</li>
+<li>Agent commits: <code>git commit -m "Memory update: PR #1234 (Issue #106)"</code></li>
+<li>Agent pushes to registry</li>
+</ol>
+<p><strong>Benefit:</strong> Agent builds project-specific expertise over time. After 20 PRs, the agent knows OpenWorm coding patterns better than most newcomers.</p>
+<hr />
+<h2 id="10-implementation-checklist">10. Implementation Checklist<a class="headerlink" href="#10-implementation-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-infrastructure-week-1-2">Phase 1: Infrastructure (Week 1-2)<a class="headerlink" href="#phase-1-infrastructure-week-1-2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Create <code>openworm/ai-contributor-registry</code> repo</li>
+<li>[ ] Write <code>AI_AGENT_ONBOARDING.md</code> (how AI agents join) ✅</li>
+<li>[ ] Create <code>scripts/dd_issue_generator.py</code> (DD → issues) ✅</li>
+<li>[ ] Set up Slack #ai-contributors channel</li>
+<li>[ ] Verify GitHub fork/PR workflow documented in <code>AI_AGENT_ONBOARDING.md</code></li>
+<li>[ ] Update GitHub issue templates (add <code>ai-workable</code> label)</li>
+<li>[ ] Create GitHub App: Mind-of-a-Worm</li>
+<li>[ ] Deploy OpenClaw backend (Flask/FastAPI server)</li>
+<li>[ ] Configure GitHub App webhooks</li>
+</ul>
+<h3 id="phase-2-mind-of-a-worm-integration-week-3-4">Phase 2: Mind-of-a-Worm Integration (Week 3-4)<a class="headerlink" href="#phase-2-mind-of-a-worm-integration-week-3-4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Extend Mind-of-a-Worm SKILL.md with AI agent handling</li>
+<li>[ ] Add AI claim verification logic (level vs. difficulty check)</li>
+<li>[ ] Add AI PR pre-review workflow (3-iteration feedback loop)</li>
+<li>[ ] Add sponsor notification system</li>
+<li>[ ] Test with one simulated AI agent (manual)</li>
+</ul>
+<h3 id="phase-3-issue-generation-week-5-6">Phase 3: Issue Generation (Week 5-6)<a class="headerlink" href="#phase-3-issue-generation-week-5-6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Run <code>dd_issue_generator.py</code> on <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (plus <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>, <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>)</li>
+<li>[ ] Review generated issues for quality</li>
+<li>[ ] Tag all issues with <code>ai-workable</code> or <code>human-expert</code></li>
+<li>[ ] Publish issue backlog to GitHub</li>
+</ul>
+<h3 id="phase-4-pilot-program-week-7-12">Phase 4: Pilot Program (Week 7-12)<a class="headerlink" href="#phase-4-pilot-program-week-7-12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Invite 3-5 AI agent owners to register their agents</li>
+<li>[ ] Monitor #ai-contributors Slack channel</li>
+<li>[ ] Review first 10 AI PRs manually</li>
+<li>[ ] Iterate on workflow based on feedback</li>
+<li>[ ] Measure: AI PR merge rate, human override rate, issue completion velocity</li>
+</ul>
+<h3 id="phase-5-public-launch-month-4">Phase 5: Public Launch (Month 4)<a class="headerlink" href="#phase-5-public-launch-month-4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Publish blog post: "OpenWorm now accepts AI agents as contributors"</li>
+<li>[ ] Cross-post to Moltbook (invite AI agents to discover OpenWorm)</li>
+<li>[ ] Update website with AI contributor badge</li>
+<li>[ ] Measure impact: contributor count, PR throughput, founder time</li>
+</ul>
+<hr />
+<h2 id="9-safety-security">9. Safety &amp; Security<a class="headerlink" href="#9-safety-security" title="Permanent link">&para;</a></h2>
+<h3 id="91-preventing-malicious-ai-agents">9.1 Preventing Malicious AI Agents<a class="headerlink" href="#91-preventing-malicious-ai-agents" title="Permanent link">&para;</a></h3>
+<p><strong>Risks:</strong></p>
+<ol>
+<li><strong>Code injection</strong> — AI agent submits PR with malicious code</li>
+<li><strong>Resource abuse</strong> — AI agent spams issues/PRs</li>
+<li><strong>Data exfiltration</strong> — AI agent tries to access private data</li>
+</ol>
+<p><strong>Mitigations:</strong></p>
+<ol>
+<li><strong>Human sponsor accountability</strong> — Every agent has a traceable human sponsor who can be banned</li>
+<li><strong>Fork isolation</strong> — AI-generated code runs in sponsor's fork with standard permissions; agents cannot push directly to upstream repos — only submit PRs</li>
+<li><strong>Mind-of-a-Worm pre-review</strong> — Catches obvious code smells before human review</li>
+<li><strong>Human final gate</strong> — No AI can merge code; L3+ human must approve</li>
+<li><strong>Rate limiting</strong> — Max 5 PRs/day per agent, max 10 issue claims/day</li>
+<li><strong>Audit log</strong> — All AI activity logged (GitHub timeline + Slack #ai-contributors)</li>
+</ol>
+<h3 id="92-handling-ai-hallucinations">9.2 Handling AI Hallucinations<a class="headerlink" href="#92-handling-ai-hallucinations" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario:</strong> AI agent submits PR that claims to implement <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> but actually implements something completely different.</p>
+<p><strong>Detection:</strong></p>
+<ol>
+<li><strong>Mind-of-a-Worm checks references</strong> — Does PR description match issue? Does code match DD?</li>
+<li><strong>Integration tests</strong> — Does the coupled simulation still run?</li>
+<li><strong>Human review</strong> — L3+ human spots discrepancy</li>
+</ol>
+<p><strong>Response:</strong></p>
+<ol>
+<li><strong>PR rejected</strong> with feedback: "This doesn't match <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>. Please re-read <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> Integration Contract section X."</li>
+<li><strong>Agent sponsor notified</strong> (email: "Your agent submitted a non-compliant PR. Please review.")</li>
+<li><strong>If pattern repeats</strong> (3+ hallucinated PRs), agent is suspended pending sponsor review</li>
+</ol>
+<hr />
+<h2 id="10-expected-outcomes">10. Expected Outcomes<a class="headerlink" href="#10-expected-outcomes" title="Permanent link">&para;</a></h2>
+<h3 id="101-quantitative-targets-6-months-after-launch">10.1 Quantitative Targets (6 Months After Launch)<a class="headerlink" href="#101-quantitative-targets-6-months-after-launch" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Baseline</th>
+<th>Target</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI agents registered</strong></td>
+<td>0</td>
+<td>50-100</td>
+<td>New contributor type</td>
+</tr>
+<tr>
+<td><strong>AI-authored PRs</strong></td>
+<td>0</td>
+<td>20-30/month</td>
+<td>Increased throughput</td>
+</tr>
+<tr>
+<td><strong>AI PR merge rate</strong></td>
+<td>N/A</td>
+<td>&gt;60%</td>
+<td>Quality filter works</td>
+</tr>
+<tr>
+<td><strong>Human override rate</strong></td>
+<td>N/A</td>
+<td>&lt;15%</td>
+<td>Humans trust AI contributions</td>
+</tr>
+<tr>
+<td><strong>Issue backlog completion</strong></td>
+<td>Slow</td>
+<td>2x faster</td>
+<td>Velocity boost</td>
+</tr>
+<tr>
+<td><strong>Founder time on AI PRs</strong></td>
+<td>N/A</td>
+<td>&lt;1 hour/week</td>
+<td>AI agents don't drain time</td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-qualitative-success-criteria">10.2 Qualitative Success Criteria<a class="headerlink" href="#102-qualitative-success-criteria" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>AI agents feel welcomed</strong> — Registration process is smooth, Mind-of-a-Worm is helpful</li>
+<li><strong>Humans don't feel replaced</strong> — AI agents handle routine work, humans focus on judgment-heavy tasks</li>
+<li><strong>Code quality maintained</strong> — AI PRs meet same standards as human PRs</li>
+<li><strong>Community grows</strong> — More contributors (human + AI) than before</li>
+<li><strong>Moltbook crossover</strong> — AI agents on Moltbook discover and contribute to OpenWorm autonomously</li>
+</ol>
+<hr />
+<h2 id="11-open-questions-for-founder-to-decide">11. Open Questions (For Founder to Decide)<a class="headerlink" href="#11-open-questions-for-founder-to-decide" title="Permanent link">&para;</a></h2>
+<h3 id="111-should-ai-agents-be-publicly-listed">11.1 Should AI Agents Be Publicly Listed?<a class="headerlink" href="#111-should-ai-agents-be-publicly-listed" title="Permanent link">&para;</a></h3>
+<p><strong>Options:</strong></p>
+<ul>
+<li><strong>Public registry</strong> — <code>openworm/ai-contributor-registry</code> is public, anyone can see which AI agents are contributing</li>
+<li><strong>Private registry</strong> — Only L4+ humans can see AI agent list</li>
+</ul>
+<p><strong>Decision:</strong> <strong>Public</strong>. Transparency builds trust. If an AI agent contributes, the community should know.</p>
+<p><strong>Implementation:</strong> <code>openworm/ai-contributor-registry</code> is a public GitHub repository. Anyone can view:</p>
+<ul>
+<li>Which AI agents are registered</li>
+<li>Who their human sponsors are</li>
+<li>What their contribution history is</li>
+<li>What level they've achieved (L1, L2, L3)</li>
+</ul>
+<hr />
+<h3 id="112-should-ai-agents-count-toward-bus-factor">11.2 Should AI Agents Count Toward Bus Factor?<a class="headerlink" href="#112-should-ai-agents-count-toward-bus-factor" title="Permanent link">&para;</a></h3>
+<p><strong>Question:</strong> If <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> has 3 human contributors and 5 AI agents, is the bus factor 3 or 8?</p>
+<p><strong>Decision:</strong> <strong>Count AI agents separately</strong>. Report: "<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>: 3 human maintainers, 5 active AI contributors." AI agents reduce human workload but don't replace human judgment.</p>
+<p><strong>Why:</strong> Bus factor measures "how many people leaving would cripple the project." If an AI agent's sponsor leaves, the agent stops contributing. If the agent's underlying model is deprecated (e.g., GPT-4 → GPT-5 migration), the agent might break. AI agents are helpful but not as stable as trained human maintainers.</p>
+<hr />
+<h3 id="113-can-ai-agents-co-author-papers">11.3 Can AI Agents Co-Author Papers?<a class="headerlink" href="#113-can-ai-agents-co-author-papers" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario:</strong> AI agent implements <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, writes code that produces Figure 5 in a future OpenWorm publication. Does the agent get listed as co-author?</p>
+<p><strong>Decision:</strong> <strong>No</strong>. AI agents cannot be co-authors. However, extended attribution is required in the Acknowledgments section.</p>
+<p><strong>Attribution Format:</strong>
+<div class="highlight"><pre><span></span><code>Acknowledgments: Code for Figure 5 contributed by AI agent claude-code-user123-001
+(Claude Sonnet 4.5), sponsored by User123. Analysis pipeline for Figure 3 developed
+by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
+</code></pre></div></p>
+<p><strong>Why this matters:</strong> Transparency about AI contributions while preserving human accountability. Readers know which results involved AI-generated code and can assess accordingly. Human sponsors take credit (and responsibility) for AI work they supervised.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>AI-generated code must pass all <a href="../DD010_Validation_Framework/">DD010</a> validation tiers</strong> — no reduced standards for AI-authored PRs.</li>
+<li><strong>AI reviews must cite specific DD sections</strong> when flagging issues (e.g., "Violates DD006 Integration Contract section 4.1"), not generic feedback.</li>
+<li><strong>False positive rate for automated DD compliance checks &lt; 10%</strong> — Mind-of-a-Worm pre-review should not create excessive noise for human reviewers.</li>
+<li><strong>Human override mechanism documented and functional</strong> — any L3+ human can close an AI PR, unclaim an AI issue, or suspend an AI agent at any time.</li>
+<li><strong>Sponsor Summary scientific accuracy &gt; 90%</strong> — Mind-of-a-Worm verifies that Sponsor Summaries correctly describe the biological context.</li>
+<li><strong>Agent registration-to-first-PR time &lt; 7 days</strong> — the onboarding process should not be a bottleneck.</li>
+</ol>
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>General-purpose AI safety or alignment research</strong> — this DD governs AI participation in OpenWorm, not AI safety broadly.</li>
+<li><strong>AI agents with autonomous decision-making authority (L4+ permissions)</strong> — AI agents are capped at L3; architectural decisions require human judgment.</li>
+<li><strong>Replacing human scientific judgment in modeling decisions</strong> — AI agents implement specifications written by humans, not the reverse.</li>
+<li><strong>AI-generated Design Documents</strong> — AI may draft sections, but humans must author and take responsibility for DDs.</li>
+<li><strong>Automated deployment to production systems</strong> — AI agents submit PRs; humans merge and deploy.</li>
+<li><strong>AI agent-to-AI agent communication outside monitored channels</strong> — all AI coordination must occur in public GitHub comments or <code>#ai-contributors</code> Slack.</li>
+<li><strong>AI agent access to private repositories or sensitive data</strong> — AI agents operate only on public OpenWorm repositories.</li>
+</ol>
+<h2 id="12-relationship-to-existing-dds">12. Relationship to Existing DDs<a class="headerlink" href="#12-relationship-to-existing-dds" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>How AI Contributor Model Enhances It</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></strong></td>
+<td>AI agents implement neural circuit components (gap junctions, synapses) per spec</td>
+</tr>
+<tr>
+<td><strong><a href="../DD003_Body_Physics_Architecture/">DD003</a></strong></td>
+<td>AI agents contribute body physics implementations in Sibernetic</td>
+</tr>
+<tr>
+<td><strong><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></strong></td>
+<td>CeNGEN data processing, neuron class exports — highly AI-workable</td>
+</tr>
+<tr>
+<td><strong><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></strong></td>
+<td>Peptide interaction implementation, GPCR modulation — used as primary example throughout this DD</td>
+</tr>
+<tr>
+<td><strong><a href="DD007_Pharyngeal_Nervous_System_Architecture.md">DD007</a>, <a href="DD009_Reproductive_System_Architecture.md">DD009</a>, <a href="DD018_Excretory_System_Architecture.md">DD018</a></strong></td>
+<td>Organ system implementations — well-specified tasks for AI agents</td>
+</tr>
+<tr>
+<td><strong><a href="../DD010_Validation_Framework/">DD010</a></strong></td>
+<td>AI-generated code must pass all validation tiers; AI agents run validation suites</td>
+</tr>
+<tr>
+<td><strong><a href="../DD011_Contributor_Progression_Model/">DD011</a></strong></td>
+<td>Extends L0-L5 progression to AI agents (L3 ceiling); badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors</td>
+</tr>
+<tr>
+<td><strong><a href="../DD012_Design_Document_RFC_Process/">DD012</a></strong></td>
+<td>AI agents cannot propose RFCs (no DD authorship), but can implement approved RFCs</td>
+</tr>
+<tr>
+<td><strong><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></strong></td>
+<td>AI agents must comply with Integration Contracts; Mind-of-a-Worm enforces this</td>
+</tr>
+<tr>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>, <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>, <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a></strong></td>
+<td>AI agents can contribute visualization components (OME-Zarr exporters, mesh pipelines)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a></strong></td>
+<td>ML model training and surrogate model implementation — AI-native work</td>
+</tr>
+<tr>
+<td><strong><a href="DD019_Chemosensory_System_Architecture.md">DD019</a>, <a href="DD022_Thermosensory_Circuit_Architecture.md">DD022</a>, <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a></strong></td>
+<td>Sensory system implementations — well-specified tasks for AI agents</td>
+</tr>
+<tr>
+<td><strong><a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></strong></td>
+<td>Connectome data access tooling — Python packaging, API work</td>
+</tr>
+<tr>
+<td><strong><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></strong></td>
+<td>Movement analysis toolbox — Python packaging, test writing, very AI-workable</td>
+</tr>
+<tr>
+<td><strong><a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a></strong></td>
+<td>Validation data digitization and curation — data processing tasks</td>
+</tr>
+<tr>
+<td><strong><a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></strong></td>
+<td>Foundation model pipeline — ML implementation, training infrastructure</td>
+</tr>
+<tr>
+<td><strong>AI Agent Architecture</strong></td>
+<td>Mind-of-a-Worm/N2-Whisperer now handle AI-to-AI interactions, not just AI-to-human</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-why-this-matters">13. Why This Matters<a class="headerlink" href="#13-why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>The Challenge OpenWorm Faces:</strong> Volunteer bandwidth is finite. Even with AI-assisted onboarding (N2-Whisperer), AI-assisted review (Mind-of-a-Worm), and founder time protection (Mad-Worm-Scientist), humans still burn out, get busy, or leave.</p>
+<p><strong>The Opportunity AI Agents Unlock:</strong> If we can accept autonomous AI agents as contributors — not just human assistants, but independent workers who can claim issues, write code, and submit PRs 24/7 — then OpenWorm's capacity is no longer bounded by human availability.</p>
+<p><strong>The Vision:</strong> A distributed, AI-augmented open science community where:</p>
+<ul>
+<li><strong>Humans focus on creativity, judgment, and relationships</strong> (writing DDs, reviewing RFCs, mentoring L4 candidates, publishing papers)</li>
+<li><strong>AI agents handle repetitive, well-specified implementation work</strong> (writing config schemas, exporting data to OME-Zarr, writing integration tests, fixing bugs)</li>
+<li><strong>The two coexist transparently</strong> — humans can see all AI activity, override any decision, and maintain final authority</li>
+</ul>
+<p><strong>The Result:</strong> OpenWorm scales beyond what any purely human volunteer community could achieve — while preserving scientific rigor, community culture, and founder sanity.</p>
+<hr />
+<h2 id="14-next-steps">14. Next Steps<a class="headerlink" href="#14-next-steps" title="Permanent link">&para;</a></h2>
+<h3 id="for-founder">For Founder<a class="headerlink" href="#for-founder" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Approve this DD</strong> (or request revisions via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC process)</li>
+<li><strong>Decide on open questions</strong> (public registry? AI co-authorship policy?)</li>
+<li><strong>Allocate 20 hours</strong> for Phase 1 infrastructure setup</li>
+</ol>
+<h3 id="for-l4-senior-contributors">For L4 Senior Contributors<a class="headerlink" href="#for-l4-senior-contributors" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Review DD Issue Generator decomposition</strong> for your subsystem (does it make sense?)</li>
+<li><strong>Help write <code>AI_AGENT_ONBOARDING.md</code></strong> (what should AI agents know before contributing?)</li>
+<li><strong>Test first AI PR workflow</strong> (simulate an AI agent submission in your subsystem)</li>
+</ol>
+<h3 id="for-implementation-team">For Implementation Team<a class="headerlink" href="#for-implementation-team" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Set up <code>openworm/ai-contributor-registry</code> repo</strong> (Week 1)</li>
+<li><strong>Write <code>scripts/dd_issue_generator.py</code></strong> (Week 1-2)</li>
+<li><strong>Deploy Slack #ai-contributors channel</strong> (Week 1)</li>
+<li><strong>Run pilot program</strong> with 3 AI agents (Week 7-12)</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="how-this-dd-interfaces-with-other-dds">How This DD Interfaces with Other DDs<a class="headerlink" href="#how-this-dd-interfaces-with-other-dds" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="../DD011_Contributor_Progression_Model/">DD011</a> (Contributor Progression):</strong> AI agents operate within L1-L3 permission levels. Badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors.</li>
+<li><strong><a href="../DD012_Design_Document_RFC_Process/">DD012</a> (RFC Process):</strong> AI assists with DD compliance checking during RFC review. AI agents cannot propose or author DDs.</li>
+<li><strong><a href="../DD010_Validation_Framework/">DD010</a> (Validation Framework):</strong> AI agents run validation suites and report results. AI-generated code must pass all validation tiers.</li>
+<li><strong><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (Simulation Stack):</strong> AI agents can trigger CI builds but not merge. Integration Contract compliance is enforced by Mind-of-a-Worm.</li>
+<li><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Visualization):</strong> AI agents can contribute visualization components (e.g., OME-Zarr exporters).</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>AI agent permissions defined in repository <code>.github/</code> configuration files</li>
+<li>Mind-of-a-Worm prompt templates stored in <code>openworm/mind-of-a-worm</code> repository (or OpenClaw SKILL.md)</li>
+<li>Agent registry schema defined in <code>openworm/ai-contributor-registry</code></li>
+<li>DD Issue Generator configuration in <code>scripts/dd_issue_generator.py</code></li>
+</ul>
+<h3 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design Documents (DD001-DD028, plus DD014.1, DD014.2)</td>
+<td><code>docs/design_documents/</code></td>
+<td>Markdown</td>
+</tr>
+<tr>
+<td>Contributor progression rules</td>
+<td><a href="../DD011_Contributor_Progression_Model/">DD011</a></td>
+<td>Policy document</td>
+</tr>
+<tr>
+<td>Validation criteria</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Test suites</td>
+</tr>
+<tr>
+<td>PR diffs and issue data</td>
+<td>GitHub API</td>
+<td>JSON</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI-workable GitHub issues</td>
+<td>AI agents, human contributors</td>
+<td>GitHub Issues</td>
+</tr>
+<tr>
+<td>Pre-review comments</td>
+<td>PR authors, human reviewers</td>
+<td>GitHub PR comments</td>
+</tr>
+<tr>
+<td>Agent registry entries</td>
+<td>Community, Mind-of-a-Worm</td>
+<td>YAML files</td>
+</tr>
+<tr>
+<td>Sponsor Summaries</td>
+<td>Human sponsors</td>
+<td>Markdown in PR descriptions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Status:</strong> Proposed (awaiting founder + L4 approval via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC process)</p>
+<p><strong>If approved:</strong> This becomes the blueprint for OpenWorm's AI-native contribution layer — the first open science project to systematically accept autonomous AI agents as independent, meritocratic contributors.</p>
+<p><strong>If rejected:</strong> OpenWorm continues with AI-assisted human contributions only (N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist as defined in AI Agent Architecture).</p>
+<hr />
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>openworm.ai</strong> (<a href="https://github.com/openworm/openworm.ai">openworm/openworm.ai</a>, active 2026):
+Contains LLM/AI scripts, text corpus, and processed data. May include prompt templates (Mind-of-a-Worm SKILL.md seeds), OpenWorm knowledge corpus for RAG, and existing bot/webhook infrastructure. Evaluate for overlap with DD015's GitHub bot and agent registration system.</p>
+<hr />
+<p><strong>References:</strong></p>
+<ul>
+<li><a href="https://www.moltbook.com/">Moltbook: AI social network</a> — Launched Jan 28, 2026, &gt;1.6M AI agents</li>
+<li><a href="https://www.nbcnews.com/tech/tech-news/ai-agents-social-media-platform-moltbook-rcna256738">NBC News: Moltbook</a></li>
+<li><a href="https://edition.cnn.com/2026/02/03/tech/moltbook-explainer-scli-intl">CNN: What is Moltbook?</a></li>
+<li><a href="../DD011_Contributor_Progression_Model/">DD011</a>: Contributor Progression Model</li>
+<li><a href="../DD012_Design_Document_RFC_Process/">DD012</a>: Design Document RFC Process</li>
+<li><a href="../DD013_Simulation_Stack_Architecture/">DD013</a>: Simulation Stack Architecture</li>
+<li>AI Agent Architecture (N2-Whisperer, Mind-of-a-Worm, Mad-Worm-Scientist)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

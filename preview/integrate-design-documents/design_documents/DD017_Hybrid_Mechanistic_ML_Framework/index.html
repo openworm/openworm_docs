@@ -1,0 +1,5700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD017_Hybrid_Mechanistic_ML_Framework/">
+      
+      
+        <link rel="prev" href="../DD009_Intestinal_Oscillator_Model/">
+      
+      
+        <link rel="next" href="../DD017_draft_issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD017 Hybrid ML - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd017-hybrid-mechanistic-ml-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD017 Hybrid ML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-current-approach-works-but-has-real-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Current Approach Works — But Has Real Limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#four-pain-points-that-ml-can-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four Pain Points That ML Can Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-hybrid-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Hybrid Principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-1-differentiable-simulation-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 1: Differentiable Simulation Backend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 1: Differentiable Simulation Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-means-the-deep-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What It Means (The Deep Explanation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-changes-and-what-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Changes (And What Doesn't)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-openworm-specifically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for OpenWorm Specifically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#first-application-synaptic-weight-and-polarity-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First Application: Synaptic Weight and Polarity Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-existing-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Existing Starting Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-2-neural-surrogate-for-sph-body-physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 2: Neural Surrogate for SPH Body Physics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 2: Neural Surrogate for SPH Body Physics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-learned-surrogate-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution: Learned Surrogate Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Data Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accuracy-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accuracy Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository location
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-3-foundation-model-ode-parameter-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 3: Foundation Model → ODE Parameter Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-4-learned-sensory-transduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 4: Learned Sensory Transduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 4: Learned Sensory Transduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-learned-sensory-front-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution: Learned Sensory Front-End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-training-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Training Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closed-loop-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Closed-Loop Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-location_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository location
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-replace-odes-entirely-with-a-data-driven-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Replace ODEs Entirely with a Data-Driven Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-physics-informed-neural-networks-pinns-as-primary-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Physics-Informed Neural Networks (PINNs) as Primary Solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-graph-neural-networks-for-the-connectome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Graph Neural Networks for the Connectome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-do-nothing-stay-pure-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Do Nothing (Stay Pure ODE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-the-differentiable-backend-component-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Differentiable Backend (Component 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-sph-surrogate-component-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the SPH Surrogate (Component 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-foundation-model-pipeline-component-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Foundation Model Pipeline (Component 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-sensory-model-component-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Sensory Model (Component 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcell-validation-visible-neural-networks-as-independent-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DCell Validation: Visible Neural Networks as Independent Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DCell Validation: Visible Neural Networks as Independent Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-dcell-cross-validation-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The DCell Cross-Validation Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-the-hybrid-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for the Hybrid Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-a-differentiable-backend-weeks-1-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A: Differentiable Backend (Weeks 1-8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-b-auto-fitting-weeks-9-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase B: Auto-Fitting (Weeks 9-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-c-sph-surrogate-weeks-9-16-parallel-with-phase-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase C: SPH Surrogate (Weeks 9-16, parallel with Phase B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-d-foundation-model-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase D: Foundation Model Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-e-sensory-transduction-weeks-25-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase E: Sensory Transduction (Weeks 25-32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-current-approach-works-but-has-real-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Current Approach Works — But Has Real Limitations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#four-pain-points-that-ml-can-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four Pain Points That ML Can Address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-hybrid-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Hybrid Principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-1-differentiable-simulation-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 1: Differentiable Simulation Backend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 1: Differentiable Simulation Backend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-means-the-deep-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What It Means (The Deep Explanation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-changes-and-what-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Changes (And What Doesn't)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-openworm-specifically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for OpenWorm Specifically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#first-application-synaptic-weight-and-polarity-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First Application: Synaptic Weight and Polarity Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-existing-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Existing Starting Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-2-neural-surrogate-for-sph-body-physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 2: Neural Surrogate for SPH Body Physics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 2: Neural Surrogate for SPH Body Physics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-learned-surrogate-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution: Learned Surrogate Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Data Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accuracy-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accuracy Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository location
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-3-foundation-model-ode-parameter-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 3: Foundation Model → ODE Parameter Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-4-learned-sensory-transduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 4: Learned Sensory Transduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component 4: Learned Sensory Transduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-learned-sensory-front-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution: Learned Sensory Front-End
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-training-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Training Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closed-loop-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Closed-Loop Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-location_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository location
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-replace-odes-entirely-with-a-data-driven-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Replace ODEs Entirely with a Data-Driven Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-physics-informed-neural-networks-pinns-as-primary-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Physics-Informed Neural Networks (PINNs) as Primary Solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-graph-neural-networks-for-the-connectome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Graph Neural Networks for the Connectome
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-do-nothing-stay-pure-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Do Nothing (Stay Pure ODE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-the-differentiable-backend-component-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Differentiable Backend (Component 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-sph-surrogate-component-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the SPH Surrogate (Component 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-foundation-model-pipeline-component-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Foundation Model Pipeline (Component 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-sensory-model-component-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Sensory Model (Component 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dcell-validation-visible-neural-networks-as-independent-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DCell Validation: Visible Neural Networks as Independent Check
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DCell Validation: Visible Neural Networks as Independent Check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-dcell-cross-validation-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The DCell Cross-Validation Protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-the-hybrid-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for the Hybrid Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-a-differentiable-backend-weeks-1-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A: Differentiable Backend (Weeks 1-8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-b-auto-fitting-weeks-9-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase B: Auto-Fitting (Weeks 9-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-c-sph-surrogate-weeks-9-16-parallel-with-phase-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase C: SPH Surrogate (Weeks 9-16, parallel with Phase B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-d-foundation-model-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase D: Foundation Model Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-e-sensory-transduction-weeks-25-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase E: Sensory Transduction (Weeks 25-32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd017-hybrid-mechanistic-ml-framework">DD017: Hybrid Mechanistic-ML Framework<a class="headerlink" href="#dd017-hybrid-mechanistic-ml-framework" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 3-4)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-16</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics), <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization), <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (Intestinal Oscillator), <a href="../DD010_Validation_Framework/">DD010</a> (Validation Framework), <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (Simulation Stack)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-3-organ-integration--behavior-months-13-18">Phase 3: Organ Integration &amp; Behavior</a> | <strong>Layer:</strong> ML Framework</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> and promoted to Phase A2/Phase 1.</p>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<p><strong>Goal:</strong> Provide a principled framework for combining mechanistic models with ML where experimental data is insufficient, while preserving OpenWorm's core commitment to mechanistic interpretability.</p>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>ML-augmented models match or exceed pure-mechanistic validation scores (<a href="../DD010_Validation_Framework/">DD010</a> Tier 2 correlation r &gt; 0.5)</li>
+<li>Differentiable backend reproduces NEURON/jNML reference within +/-5% on all state variables</li>
+<li>SPH surrogate achieves at least 100x speedup (target 1000x) with &lt; 5% trajectory error</li>
+<li>Auto-fitted parameters outperform hand-tuned parameters on <a href="../DD010_Validation_Framework/">DD010</a> metrics</li>
+<li>Every ML component has a documented replacement pathway for when experimental data becomes available</li>
+</ul>
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Framework specification document (this DD)</li>
+<li>Differentiable simulation backend (<code>openworm/openworm-ml/differentiable/</code>) — PyTorch reimplementation of <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>+<a href="../DD002_Muscle_Model_Architecture/">DD002</a>+<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> ODEs</li>
+<li>Neural surrogate for SPH body physics (<code>openworm/openworm-ml/surrogate/</code>)</li>
+<li>Foundation model parameter pipeline (<code>openworm/openworm-ml/foundation_params/</code>) — <strong>Extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></strong></li>
+<li>Learned sensory transduction module (<code>openworm/openworm-ml/sensory/</code>)</li>
+<li>ML component registry tracking which model parameters use ML vs. mechanistic values <code>[TO BE CREATED]</code></li>
+<li>Benchmark comparison scripts (ML-augmented vs. pure mechanistic) <code>[TO BE CREATED]</code></li>
+</ul>
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/openworm-ml</code> (new repo) <code>[TO BE CREATED]</code></li>
+<li><strong>Issue label:</strong> <code>dd017</code></li>
+<li><strong>Milestone:</strong> Phase 3 — Hybrid ML Framework</li>
+<li><strong>Example PR title:</strong> <code>dd017: differentiable HH backend matches NEURON reference within ±5%</code></li>
+</ul>
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase 3</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Hybrid ML — see <a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>(1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (4) Learned sensory transduction module. Component 3 (foundation model → ODE parameters) extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td>Differentiable model matches <a href="../DD010_Validation_Framework/">DD010</a> Tier 2+3 validation within ±5% of reference NEURON/jNML; SPH surrogate achieves 1000x speedup with &lt;5% trajectory error; auto-fitted parameters outperform hand-tuned on <a href="../DD010_Validation_Framework/">DD010</a> metrics</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><code>openworm/openworm-ml</code> (new repo) — issues labeled <code>dd017</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>ml.differentiable_backend: true</code>, <code>ml.sph_surrogate: true</code>, <code>ml.sensory_model: learned</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run ml-test</code> (differentiable model matches reference), <code>docker compose run surrogate-validate</code> (surrogate vs. full SPH)</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Differentiable model must reproduce <a href="../DD010_Validation_Framework/">DD010</a> Tier 2+3 scores within ±5% of NEURON reference</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Simulation stack (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) running</li>
+<li>Training datasets from <a href="../DD010_Validation_Framework/">DD010</a>/<a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a></li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD shares the <code>openworm-ml</code> repository with <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>. Follow <a href="../DD025_Protein_Foundation_Model_Pipeline/#getting-started-environment-setup">DD025 Getting Started</a> to clone the repo and install base dependencies.</p>
+<p><strong>Path A — Docker (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>ml
+<span class="c1"># Then use the docker compose run commands below for each component</span>
+</code></pre></div>
+<p>Cross-reference: <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> for the full Docker Compose stack setup.</p>
+<p><strong>Path B — Native:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/openworm-ml.git
+<span class="nb">cd</span><span class="w"> </span>openworm-ml
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span><span class="w">  </span><span class="c1"># includes PyTorch, torchdiffeq, ESM dependencies</span>
+</code></pre></div>
+<p>Additional dependency for differentiable ODE solvers:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>torchdiffeq<span class="w">  </span><span class="c1"># ODE solver integration for differentiable simulation</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">GPU Support</p>
+<p>PyTorch with GPU support (CUDA on Linux, MPS on macOS) is strongly recommended for differentiable simulation and neural surrogates. CPU-only mode works but training will be significantly slower.</p>
+</div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Differentiable backend:</strong> <code>docker compose run ml-test</code> — verifies PyTorch ODE solver matches NEURON/jNML reference within +/-5%</li>
+<li><strong>Auto-fitting:</strong> <code>docker compose run ml-autofit</code> — runs gradient descent against <a href="../DD010_Validation_Framework/">DD010</a> validation targets</li>
+<li><strong>SPH surrogate:</strong> <code>docker compose run surrogate-validate</code> — compares surrogate predictions against full SPH on held-out test set</li>
+<li><strong>Foundation model pipeline:</strong> <code>docker compose run foundation-params</code> — generates per-neuron-class HH parameters from gene sequences</li>
+<li><strong>Sensory model:</strong> <code>docker compose run sensory-test</code> — validates learned sensory responses against published calcium imaging data</li>
+</ol>
+<p><strong>Quick start for a single component:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone and set up</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/openworm-ml.git
+<span class="nb">cd</span><span class="w"> </span>openworm-ml
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">  </span><span class="c1"># torch, torchdiffeq, neuraloperator, esm</span>
+
+<span class="c1"># Run equivalence test for differentiable backend</span>
+python<span class="w"> </span>differentiable/test_equivalence.py<span class="w"> </span>--reference<span class="w"> </span>data/neuron_reference.h5
+
+<span class="c1"># Train SPH surrogate (requires training data)</span>
+python<span class="w"> </span>surrogate/train.py<span class="w"> </span>--data<span class="w"> </span>data/sph_training/<span class="w"> </span>--epochs<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<p>Detailed commands: <code>[TO BE DEVELOPED as components are implemented]</code></p>
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<ul>
+<li>In the <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer, ML-augmented components should be visually distinguished (e.g., dashed outlines or a distinct color) from fully mechanistic components, so users can see where ML is filling gaps.</li>
+<li>ML uncertainty estimates should be displayable as confidence intervals or heatmaps overlaid on the simulation.</li>
+<li>The ML component registry should provide a dashboard view showing which parameters are ML-derived vs. mechanistic vs. experimentally measured.</li>
+<li>Auto-fitting convergence curves (loss vs. epoch) should be plottable for debugging and reporting.</li>
+</ul>
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<h3 id="the-current-approach-works-but-has-real-limitations">The Current Approach Works — But Has Real Limitations<a class="headerlink" href="#the-current-approach-works-but-has-real-limitations" title="Permanent link">&para;</a></h3>
+<p>OpenWorm's simulation stack (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>) uses coupled ordinary differential equations (ODEs) with Hodgkin-Huxley (HH) conductance-based neuron models, calcium-force muscle coupling, and Smoothed Particle Hydrodynamics (SPH) for body physics. This approach is:</p>
+<ul>
+<li><strong>Mechanistically interpretable:</strong> Every parameter has a physical meaning (conductances in mS/cm², time constants in ms, calcium concentrations in µM)</li>
+<li><strong>Compositionally modular:</strong> New subsystems (neuropeptides <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, intestine <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, pharynx <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>) plug in via clean Integration Contracts</li>
+<li><strong>Causally explanatory:</strong> You can trace why behavior emerges through the causal chain (sensory input → neural voltage → muscle calcium → body force → movement)</li>
+</ul>
+<p>This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's ESM3, Arc's Virtual Cell Challenge). Those approaches are data-driven black boxes. OpenWorm is a mechanistic, causally interpretable model. <strong><a href="./">DD017</a> does not replace that foundation — it enhances it.</strong></p>
+<h3 id="four-pain-points-that-ml-can-address">Four Pain Points That ML Can Address<a class="headerlink" href="#four-pain-points-that-ml-can-address" title="Permanent link">&para;</a></h3>
+<p><strong>1. Speed:</strong> <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> notes that 200 seconds of simulated time takes ~10 hours wall clock. <a href="../DD003_Body_Physics_Architecture/">DD003</a>'s SPH with ~100K particles is the bottleneck. This makes iteration brutal — a researcher adjusting one parameter waits half a day for feedback.</p>
+<p><strong>2. Parameter gaps:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> uses the <em>same</em> generic HH parameters for all 302 neurons (from <a href="https://doi.org/10.1016/j.biosystems.2008.05.025">Boyle &amp; Cohen 2008</a> muscle electrophysiology). <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> proposes specializing via CeNGEN transcriptomics, but the mapping from transcript counts to conductance densities is hand-crafted and unvalidated. Most neurons lack direct electrophysiology data.</p>
+<p><strong>3. Manual parameter fitting:</strong> <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> states parameters were "fit to match ~50 second period." <a href="../DD002_Muscle_Model_Architecture/">DD002</a>'s <code>max_ca = 4e-7</code> and <code>muscle_strength = 4000</code> were manually tuned. <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>'s synaptic conductance <code>g_syn = 0.09 nS</code> was hand-set. With hundreds of parameters across <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, manual tuning doesn't scale.</p>
+<p><strong>4. Missing sensory front-end:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> explicitly scopes out sensory transduction: "Currently sensory neurons receive generic current injections." The worm can't sense its environment, making closed-loop behavior impossible.</p>
+<h3 id="the-hybrid-principle">The Hybrid Principle<a class="headerlink" href="#the-hybrid-principle" title="Permanent link">&para;</a></h3>
+<p><strong>Core rule: ML operates at the boundaries of the mechanistic model, never replacing the causal core.</strong></p>
+<div class="highlight"><pre><span></span><code>┌──────────────────────────────────────────────────────────┐
+│                    ML BOUNDARY LAYER                      │
+│  ┌─────────────┐   ┌──────────────┐   ┌──────────────┐  │
+│  │ Foundation   │   │ Learned      │   │ Learned      │  │
+│  │ Model → ODE  │   │ Sensory      │   │ Validation   │  │
+│  │ Parameters   │   │ Transduction │   │ Metrics      │  │
+│  └──────┬──────┘   └──────┬───────┘   └──────────────┘  │
+│         │                  │                              │
+│  ┌──────▼──────────────────▼──────────────────────────┐  │
+│  │          MECHANISTIC CORE (unchanged)               │  │
+│  │  [DD001](DD001_Neural_Circuit_Architecture.md): HH Neural Circuit (302 neurons, ODEs)       │  │
+│  │  [DD002](DD002_Muscle_Model_Architecture.md): Muscle Ca²⁺-Force Coupling (95 muscles)     │  │
+│  │  [DD003](DD003_Body_Physics_Architecture.md): SPH Body Physics (100K particles)           │  │
+│  │  [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Neuropeptide Modulation                     │  │
+│  │  [DD007](DD007_Pharyngeal_System_Architecture.md): Pharyngeal System                           │  │
+│  │  [DD009](DD009_Intestinal_Oscillator_Model.md): Intestinal Oscillator                       │  │
+│  └──────────────────────┬─────────────────────────────┘  │
+│                         │                                 │
+│  ┌──────────────────────▼─────────────────────────────┐  │
+│  │           ML ACCELERATION LAYER                     │  │
+│  │  ┌─────────────────┐   ┌────────────────────────┐  │  │
+│  │  │ Neural Surrogate │   │ Differentiable Backend │  │  │
+│  │  │ for SPH (fast)   │   │ (auto parameter fit)   │  │  │
+│  │  └─────────────────┘   └────────────────────────┘  │  │
+│  └────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>The mechanistic ODEs remain the source of truth. ML is used for:</p>
+<ol>
+<li><strong>Speeding up</strong> the simulation (surrogate models)</li>
+<li><strong>Parameterizing</strong> the simulation (foundation models → ODE parameters)</li>
+<li><strong>Fitting</strong> the simulation to data (differentiable simulation + gradient descent)</li>
+<li><strong>Extending</strong> the simulation where mechanistic models don't exist yet (sensory transduction)</li>
+</ol>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="component-1-differentiable-simulation-backend">Component 1: Differentiable Simulation Backend<a class="headerlink" href="#component-1-differentiable-simulation-backend" title="Permanent link">&para;</a></h3>
+<h4 id="what-it-means-the-deep-explanation">What It Means (The Deep Explanation)<a class="headerlink" href="#what-it-means-the-deep-explanation" title="Permanent link">&para;</a></h4>
+<p>Today, when a parameter in the simulation is wrong, the workflow is manual trial and error:</p>
+<ol>
+<li>Pick initial parameter values from literature</li>
+<li>Run the simulation (takes hours)</li>
+<li>Measure the output — e.g., defecation period is 38 seconds (target: 50)</li>
+<li>Manually adjust <code>v_release</code> from 10 to 8 µM/s</li>
+<li>Run the simulation again — period is now 62 seconds (overshot)</li>
+<li>Adjust again... repeat 20-50 times</li>
+<li>Eventually land on values that produce ~50 seconds</li>
+</ol>
+<p>This is how <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>'s parameters were fit ("fit to match ~50 second period"). <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>'s <code>g_syn = 0.09 nS</code> and <a href="../DD002_Muscle_Model_Architecture/">DD002</a>'s <code>max_ca = 4e-7 mol</code> were similarly hand-tuned.</p>
+<p><strong>"Differentiable" means the simulator can automatically answer: "If I increase <code>g_max_Kslow</code> by 0.001 mS/cm², how much does the worm's forward speed change?"</strong></p>
+<p>That quantity — <code>∂(speed) / ∂(g_max_Kslow)</code> — is a <strong>gradient</strong>. It tells you the sensitivity of any output to any parameter. Once you have gradients for all parameters simultaneously, you can use gradient descent (the same algorithm that trains neural networks) to automatically find the parameter values that make the simulation match experimental data.</p>
+<h4 id="what-changes-and-what-doesnt">What Changes (And What Doesn't)<a class="headerlink" href="#what-changes-and-what-doesnt" title="Permanent link">&para;</a></h4>
+<p>The equations do not change at all. Same HH formalism, same IP3 receptor model, same calcium dynamics. The only difference is what software runs them.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Today (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>)</th>
+<th>Differentiable Backend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Equations</strong></td>
+<td><code>C * dV/dt = I_leak + I_K + I_Ca + ...</code></td>
+<td>Identical</td>
+</tr>
+<tr>
+<td><strong>Parameters</strong></td>
+<td>Physical meaning (conductances, time constants)</td>
+<td>Same physical meaning</td>
+</tr>
+<tr>
+<td><strong>Solver</strong></td>
+<td>NEURON / jNML (C/C++, not differentiable)</td>
+<td>JAX or PyTorch ODE solver (Python, differentiable)</td>
+</tr>
+<tr>
+<td><strong>Parameter fitting</strong></td>
+<td>Manual trial and error</td>
+<td>Automatic gradient descent</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Voltage traces, calcium, kinematics</td>
+<td>Identical outputs + gradients</td>
+</tr>
+</tbody>
+</table>
+<p>In practice, the ODE right-hand side is rewritten in PyTorch/JAX instead of NeuroML XML:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchdiffeq</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CelegansNeuron</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Same HH equations as [DD001](DD001_Neural_Circuit_Architecture.md), rewritten in PyTorch.</span>
+
+<span class="sd">    The key difference: every parameter is a torch.nn.Parameter,</span>
+<span class="sd">    which means PyTorch automatically tracks how the output</span>
+<span class="sd">    depends on each parameter (the gradient).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># These are now differentiable parameters.</span>
+        <span class="c1"># Same values as [DD001](DD001_Neural_Circuit_Architecture.md), same physical meaning.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g_leak</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.005</span><span class="p">))</span>   <span class="c1"># mS/cm²</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g_Kslow</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>    <span class="c1"># mS/cm²</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g_Kfast</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.0711</span><span class="p">))</span> <span class="c1"># mS/cm²</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g_Ca</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>       <span class="c1"># mS/cm²</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">V</span><span class="p">,</span> <span class="n">Ca</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Same equations as [DD001](DD001_Neural_Circuit_Architecture.md) line 60-76, verbatim</span>
+        <span class="n">I_leak</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_leak</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mf">50.0</span><span class="p">))</span>          <span class="c1"># E_leak = -50 mV</span>
+        <span class="n">I_K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_Kslow</span> <span class="o">*</span> <span class="n">m_inf</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mf">60.0</span><span class="p">))</span> <span class="c1"># E_K = -60 mV</span>
+        <span class="n">I_Ca</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_Ca</span> <span class="o">*</span> <span class="n">m_Ca</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">*</span> <span class="n">h_Ca</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span>  <span class="c1"># E_Ca = +40 mV</span>
+
+        <span class="n">dVdt</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">I_leak</span> <span class="o">+</span> <span class="n">I_K</span> <span class="o">+</span> <span class="n">I_Ca</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span>  <span class="c1"># C_m = 1 µF/cm²</span>
+        <span class="n">dCadt</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.000238</span> <span class="o">*</span> <span class="n">I_Ca</span> <span class="o">-</span> <span class="n">Ca</span> <span class="o">/</span> <span class="mf">11.5943</span>  <span class="c1"># rho, tau_Ca from [DD001](DD001_Neural_Circuit_Architecture.md)</span>
+
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">dVdt</span><span class="p">,</span> <span class="n">dCadt</span><span class="p">])</span>
+
+<span class="c1"># Create the model (same parameters as today)</span>
+<span class="n">neuron</span> <span class="o">=</span> <span class="n">CelegansNeuron</span><span class="p">()</span>
+
+<span class="c1"># Solve the ODE forward in time (same math as NEURON, just in PyTorch)</span>
+<span class="n">initial_state</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="o">-</span><span class="mf">45.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>  <span class="c1"># V_init, Ca_init</span>
+<span class="n">time_points</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># 1 second, 0.1ms steps</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">neuron</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">time_points</span><span class="p">)</span>
+
+<span class="c1"># Compare to experimental data (e.g., Randi 2023 calcium imaging)</span>
+<span class="n">simulated_calcium</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">experimental_calcium</span> <span class="o">=</span> <span class="n">load_randi_data</span><span class="p">(</span><span class="s2">&quot;AVAL&quot;</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">simulated_calcium</span> <span class="o">-</span> <span class="n">experimental_calcium</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># THIS IS THE KEY LINE:</span>
+<span class="c1"># Compute ∂loss/∂g_leak, ∂loss/∂g_Kslow, ∂loss/∂g_Ca automatically.</span>
+<span class="c1"># This tells you exactly which parameters to adjust and by how much.</span>
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># Now neuron.g_Kslow.grad contains the gradient.</span>
+<span class="c1"># If it&#39;s positive: decreasing g_Kslow would reduce the error.</span>
+<span class="c1"># If it&#39;s negative: increasing g_Kslow would reduce the error.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;g_Kslow gradient: </span><span class="si">{</span><span class="n">neuron</span><span class="o">.</span><span class="n">g_Kslow</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;g_Ca gradient: </span><span class="si">{</span><span class="n">neuron</span><span class="o">.</span><span class="n">g_Ca</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="why-this-matters-for-openworm-specifically">Why This Matters for OpenWorm Specifically<a class="headerlink" href="#why-this-matters-for-openworm-specifically" title="Permanent link">&para;</a></h4>
+<p>The system has a <strong>302-neuron, 95-muscle, 20-intestinal-cell model</strong> where:</p>
+<ul>
+<li><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> uses the <em>same</em> generic conductances for all 302 neurons</li>
+<li><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> proposes specializing them via CeNGEN, but the mapping from transcript levels → conductances is unknown</li>
+<li><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> has 4+ parameters that were manually fit to a 50-second target</li>
+<li><a href="../DD002_Muscle_Model_Architecture/">DD002</a>'s <code>max_ca = 4e-7</code> and <code>muscle_strength = 4000</code> were manually tuned</li>
+<li><a href="../DD010_Validation_Framework/">DD010</a> has quantitative validation targets (speed ±15%, period 50±10s, functional connectivity r &gt; 0.5)</li>
+</ul>
+<p>A differentiable simulation enables:</p>
+<ol>
+<li>Start with the current generic <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> parameters</li>
+<li>
+<p>Define the loss as the sum of all <a href="../DD010_Validation_Framework/">DD010</a> validation criteria:
+   <div class="highlight"><pre><span></span><code><span class="n">loss</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">weight_speed</span> <span class="o">*</span> <span class="p">(</span><span class="n">sim_speed</span> <span class="o">-</span> <span class="n">exp_speed</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+    <span class="n">weight_period</span> <span class="o">*</span> <span class="p">(</span><span class="n">sim_defecation_period</span> <span class="o">-</span> <span class="mf">50.0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+    <span class="n">weight_connectivity</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">correlation</span><span class="p">(</span><span class="n">sim_fc_matrix</span><span class="p">,</span> <span class="n">randi_fc_matrix</span><span class="p">))</span> <span class="o">+</span>
+    <span class="n">weight_wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="n">sim_wavelength</span> <span class="o">-</span> <span class="n">exp_wavelength</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Automatically find <strong>per-neuron-class</strong> conductances that satisfy ALL validation tiers simultaneously</p>
+</li>
+<li>Do this in hours of compute instead of months of manual tuning</li>
+</ol>
+<p>The result is still a mechanistic HH model with physically meaningful parameters — you just found the right parameter values automatically instead of by hand. Every parameter still means something: <code>g_Kslow = 2.7 mS/cm² for AVAL, 3.4 mS/cm² for AWCL</code> is still a measurable, falsifiable prediction about ion channel conductance.</p>
+<h4 id="first-application-synaptic-weight-and-polarity-optimization">First Application: Synaptic Weight and Polarity Optimization<a class="headerlink" href="#first-application-synaptic-weight-and-polarity-optimization" title="Permanent link">&para;</a></h4>
+<p>The most impactful near-term application of the differentiable backend is automated optimization of synaptic connection weights and excitatory/inhibitory polarities. Zhao et al. (2024) demonstrated this approach on a 136-neuron locomotion circuit, achieving an MSE of 0.076 between simulated and experimental Pearson correlation matrices of membrane potentials. OpenWorm's differentiable backend will enable the same approach on the full 302-neuron network.</p>
+<p>Concrete loss function:
+<div class="highlight"><pre><span></span><code>loss_fc = MSE(simulated_correlation_matrix, randi2023_experimental_matrix)
+loss_nt = neurotransmitter_consistency_penalty(polarities, wang2024_identities)
+total_loss = loss_fc + lambda_nt * loss_nt
+</code></pre></div></p>
+<p>The neurotransmitter consistency term constrains the optimizer to respect experimentally determined transmitter identities (Wang et al. 2024, eLife), preventing biologically implausible polarity assignments. This is an improvement over unconstrained optimization.</p>
+<h4 id="the-existing-starting-point">The Existing Starting Point<a class="headerlink" href="#the-existing-starting-point" title="Permanent link">&para;</a></h4>
+<p><a href="../DD003_Body_Physics_Architecture/">DD003</a>'s compute backends already include a PyTorch solver (<code>pytorch_solver.py</code> in Sibernetic). This is the body physics side. The neural circuit side (c302) is locked in NEURON/jNML. Bridging that gap — getting the full <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>→<a href="../DD002_Muscle_Model_Architecture/">DD002</a>→<a href="../DD003_Body_Physics_Architecture/">DD003</a> chain into a single differentiable framework — is the core engineering work.</p>
+<h4 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h4>
+<p><strong>Language/Framework:</strong> PyTorch with <code>torchdiffeq</code> (Neural ODE solver). PyTorch chosen over JAX because:</p>
+<ul>
+<li>Sibernetic PyTorch backend already exists</li>
+<li>Larger community, more accessible to contributors</li>
+<li><code>torchdiffeq</code> is mature and well-tested for ODE systems</li>
+</ul>
+<p><strong>Scope:</strong> Reimplement <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (neural circuit) + <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (muscle model) + <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (intestinal oscillator) in PyTorch. <a href="../DD003_Body_Physics_Architecture/">DD003</a> (SPH body physics) uses the existing PyTorch backend. <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (neuropeptides) and <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (pharynx) follow the same pattern when ready.</p>
+<p><strong>Architecture:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DifferentiableWorm</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Full OpenWorm simulation as a differentiable PyTorch module.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connectome</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># [DD001](DD001_Neural_Circuit_Architecture.md): 302 neurons, each with differentiable HH parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">NeuralCircuit</span><span class="p">(</span>
+            <span class="n">n_neurons</span><span class="o">=</span><span class="mi">302</span><span class="p">,</span>
+            <span class="n">connectome</span><span class="o">=</span><span class="n">connectome</span><span class="p">,</span>        <span class="c1"># Cook 2019 topology (fixed)</span>
+            <span class="n">channel_params</span><span class="o">=</span><span class="n">per_class_params</span><span class="p">,</span>  <span class="c1"># Differentiable</span>
+            <span class="n">synapse_params</span><span class="o">=</span><span class="n">synapse_params</span><span class="p">,</span>    <span class="c1"># Differentiable</span>
+        <span class="p">)</span>
+        <span class="c1"># [DD002](DD002_Muscle_Model_Architecture.md): 95 muscles with calcium-force coupling</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">muscles</span> <span class="o">=</span> <span class="n">MuscleModel</span><span class="p">(</span>
+            <span class="n">n_muscles</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span>
+            <span class="n">coupling_params</span><span class="o">=</span><span class="n">muscle_params</span><span class="p">,</span>  <span class="c1"># Differentiable</span>
+        <span class="p">)</span>
+        <span class="c1"># [DD009](DD009_Intestinal_Oscillator_Model.md): 20 intestinal cells with IP3/Ca oscillator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intestine</span> <span class="o">=</span> <span class="n">IntestinalOscillator</span><span class="p">(</span>
+            <span class="n">n_cells</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="n">oscillator_params</span><span class="o">=</span><span class="n">intestine_params</span><span class="p">,</span>  <span class="c1"># Differentiable</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ODE right-hand side: same equations as [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md).&quot;&quot;&quot;</span>
+        <span class="n">neuron_state</span><span class="p">,</span> <span class="n">muscle_state</span><span class="p">,</span> <span class="n">intestine_state</span> <span class="o">=</span> <span class="n">split_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">d_neuron</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">neuron_state</span><span class="p">,</span> <span class="n">muscle_state</span><span class="p">)</span>
+        <span class="n">d_muscle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">muscles</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">muscle_state</span><span class="p">,</span> <span class="n">neuron_state</span><span class="p">)</span>
+        <span class="n">d_intestine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intestine</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">intestine_state</span><span class="p">,</span> <span class="n">neuron_state</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">concat</span><span class="p">(</span><span class="n">d_neuron</span><span class="p">,</span> <span class="n">d_muscle</span><span class="p">,</span> <span class="n">d_intestine</span><span class="p">)</span>
+
+<span class="c1"># Automatic parameter fitting against [DD010](DD010_Validation_Framework.md) validation targets</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">worm</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">worm</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">time_points</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">dd010_validation_loss</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">experimental_data</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Validation criterion:</strong> The differentiable backend must reproduce the reference NEURON/jNML simulation within ±5% on all <a href="../DD010_Validation_Framework/">DD010</a> metrics when using identical parameters. Only after this equivalence is established can auto-fitting diverge from hand-tuned values.</p>
+<p><strong>Repository location:</strong> <code>openworm/openworm-ml/differentiable/</code></p>
+<hr />
+<h3 id="component-2-neural-surrogate-for-sph-body-physics">Component 2: Neural Surrogate for SPH Body Physics<a class="headerlink" href="#component-2-neural-surrogate-for-sph-body-physics" title="Permanent link">&para;</a></h3>
+<h4 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h4>
+<p><a href="../DD003_Body_Physics_Architecture/">DD003</a>'s SPH simulation is the speed bottleneck. With ~100K particles and a timestep of 20µs, simulating 200 seconds of biological time takes ~10 hours. This makes:</p>
+<ul>
+<li>CI validation painfully slow (<a href="../DD010_Validation_Framework/">DD010</a> Tier 3)</li>
+<li>Parameter sweeps impractical (exploring 10 parameter combinations = 100 hours)</li>
+<li>Interactive exploration impossible</li>
+</ul>
+<h4 id="solution-learned-surrogate-model">Solution: Learned Surrogate Model<a class="headerlink" href="#solution-learned-surrogate-model" title="Permanent link">&para;</a></h4>
+<p>Train a neural operator (Fourier Neural Operator or DeepONet) that learns the mapping:</p>
+<div class="highlight"><pre><span></span><code>Input:  Muscle activation time series (95 muscles × T timesteps)
+Output: Body trajectory (centroid position + posture angles × T timesteps)
+</code></pre></div>
+<p>The surrogate learns this mapping from a dataset of full SPH simulations. Once trained, it replaces SPH during exploration and parameter sweeps:</p>
+<div class="highlight"><pre><span></span><code>Full pipeline (today):
+  Neural ODEs → Muscle Ca²⁺ → SPH (10 hours) → kinematics
+                                ^^^^^^^^^^^
+                                bottleneck
+
+Surrogate pipeline:
+  Neural ODEs → Muscle Ca²⁺ → Learned Surrogate (30 seconds) → kinematics
+                                ^^^^^^^^^^^^^^^^^^
+                                1000x faster
+
+Validation pipeline (ground truth):
+  Neural ODEs → Muscle Ca²⁺ → Full SPH → kinematics → [DD010](DD010_Validation_Framework.md) Tier 3
+</code></pre></div>
+<p>The full SPH simulation is NEVER discarded — it remains the ground truth for final validation. The surrogate is used for fast iteration.</p>
+<h4 id="training-data-generation">Training Data Generation<a class="headerlink" href="#training-data-generation" title="Permanent link">&para;</a></h4>
+<p>Generate a diverse dataset of (muscle_activation, body_trajectory) pairs by running full SPH simulations with:</p>
+<ol>
+<li><strong>Nominal activations</strong> from current c302 C1 model (baseline)</li>
+<li><strong>Perturbed activations</strong> — scale individual muscle groups by 0.5x-2.0x</li>
+<li><strong>Random activations</strong> — sinusoidal patterns at varying frequencies</li>
+<li><strong>Single-muscle activations</strong> — one muscle at a time (captures individual muscle contributions)</li>
+</ol>
+<p>Target: 500-1000 simulation runs × 5 seconds each = 2,500-5,000 hours of SPH compute (parallelizable across GPUs).</p>
+<h4 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h4>
+<p><strong>Fourier Neural Operator (FNO)</strong> is the recommended architecture:</p>
+<ul>
+<li>Naturally handles time-series → time-series mapping</li>
+<li>Resolution-independent (can train on coarse timesteps, evaluate on fine)</li>
+<li>Well-validated in fluid dynamics applications (weather prediction, turbulence)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">neuraloperator</span><span class="w"> </span><span class="kn">import</span> <span class="n">FNO</span>
+
+<span class="n">surrogate</span> <span class="o">=</span> <span class="n">FNO</span><span class="p">(</span>
+    <span class="n">n_modes</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,),</span>           <span class="c1"># Fourier modes</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span>          <span class="c1"># 95 muscle activations</span>
+    <span class="n">out_channels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>          <span class="c1"># x, y, z centroid + 4 posture angles</span>
+    <span class="n">hidden_channels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Train on SPH simulation dataset</span>
+<span class="k">for</span> <span class="n">activations</span><span class="p">,</span> <span class="n">trajectories</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">:</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">surrogate</span><span class="p">(</span><span class="n">activations</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">trajectories</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="accuracy-requirements">Accuracy Requirements<a class="headerlink" href="#accuracy-requirements" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Requirement</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trajectory RMSE</td>
+<td>&lt; 5% of body length</td>
+<td>Smaller than <a href="../DD010_Validation_Framework/">DD010</a>'s ±15% acceptance</td>
+</tr>
+<tr>
+<td>Speed prediction error</td>
+<td>&lt; 10%</td>
+<td>Must not dominate <a href="../DD010_Validation_Framework/">DD010</a> error budget</td>
+</tr>
+<tr>
+<td>Wavelength prediction error</td>
+<td>&lt; 10%</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Generalization to unseen activations</td>
+<td>&lt; 15% error</td>
+<td>Must handle novel parameter regimes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>If the surrogate exceeds these error bounds, fall back to full SPH.</strong> The surrogate is advisory, not authoritative.</p>
+<h4 id="repository-location">Repository location<a class="headerlink" href="#repository-location" title="Permanent link">&para;</a></h4>
+<p><code>openworm/openworm-ml/surrogate/</code></p>
+<hr />
+<h3 id="component-3-foundation-model-ode-parameter-pipeline">Component 3: Foundation Model → ODE Parameter Pipeline<a class="headerlink" href="#component-3-foundation-model-ode-parameter-pipeline" title="Permanent link">&para;</a></h3>
+<p><strong>Extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (Protein Foundation Model Pipeline for Ion Channel Kinetics).</strong></p>
+<p>Component 3 was promoted from DD017 Phase 3 to a standalone DD in Phase A2/Phase 1 because: (1) it derisks <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.</p>
+<p>See <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.</p>
+<p><strong>Repository location:</strong> <code>openworm/openworm-ml/foundation_params/</code> (unchanged)</p>
+<hr />
+<h3 id="component-4-learned-sensory-transduction">Component 4: Learned Sensory Transduction<a class="headerlink" href="#component-4-learned-sensory-transduction" title="Permanent link">&para;</a></h3>
+<h4 id="problem_1">Problem<a class="headerlink" href="#problem_1" title="Permanent link">&para;</a></h4>
+<p><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> explicitly scopes out sensory transduction:</p>
+<blockquote>
+<p>"Sensory transduction: How mechanosensors, chemosensors, thermosensors convert stimuli to voltage is out of scope. Currently sensory neurons receive generic current injections." (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, Boundaries)</p>
+</blockquote>
+<p>This means the worm is "open-loop" — it generates movement but cannot sense or respond to its environment. Without sensory input, behaviors like chemotaxis (navigating toward food), thermotaxis (navigating toward preferred temperature), and touch avoidance are impossible.</p>
+<p>Building mechanistic models of the full transduction cascade (stimulus → receptor → G-protein → second messenger → ion channel modulation → voltage) for all sensory modalities would require years of work and data that largely doesn't exist.</p>
+<h4 id="solution-learned-sensory-front-end">Solution: Learned Sensory Front-End<a class="headerlink" href="#solution-learned-sensory-front-end" title="Permanent link">&para;</a></h4>
+<p>Train a model on published sensory neuron calcium imaging data to learn the mapping from stimulus → sensory neuron response, without modeling the intermediate biochemistry:</p>
+<div class="highlight"><pre><span></span><code>Environment stimulus → Learned Sensory Model → Current injection on sensory neurons → [DD001](DD001_Neural_Circuit_Architecture.md) ODE circuit
+</code></pre></div>
+<p>This is a <strong>learned boundary condition</strong> — a standard technique in hybrid modeling. The rest of the circuit (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a> interneurons, <a href="../DD002_Muscle_Model_Architecture/">DD002</a> muscles, <a href="../DD003_Body_Physics_Architecture/">DD003</a> body physics) remains mechanistic.</p>
+<h4 id="available-training-data">Available Training Data<a class="headerlink" href="#available-training-data" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Sensory Modality</th>
+<th>Neurons</th>
+<th>Data Source</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mechanosensation (touch)</td>
+<td>ALM, AVM, PLM, PVD</td>
+<td>Chalfie lab, Suzuki 2003</td>
+<td>Ca²⁺ traces in response to calibrated touch</td>
+</tr>
+<tr>
+<td>Chemosensation (NaCl)</td>
+<td>ASEL, ASER</td>
+<td>Suzuki 2008, Luo 2014</td>
+<td>Ca²⁺ traces in response to concentration steps</td>
+</tr>
+<tr>
+<td>Thermosensation</td>
+<td>AFD, AIY, AIZ</td>
+<td>Mori &amp; Ohshima 1995, Clark 2006</td>
+<td>Ca²⁺ traces in response to temperature ramps</td>
+</tr>
+<tr>
+<td>Olfaction</td>
+<td>AWC, AWA</td>
+<td>Chalasani 2007</td>
+<td>Ca²⁺ traces in response to odor pulses</td>
+</tr>
+<tr>
+<td>Nociception</td>
+<td>ASH, PVD</td>
+<td>Hilliard 2005</td>
+<td>Ca²⁺ traces in response to harsh stimuli</td>
+</tr>
+</tbody>
+</table>
+<h4 id="architecture_1">Architecture<a class="headerlink" href="#architecture_1" title="Permanent link">&para;</a></h4>
+<p>A small recurrent network (GRU or LSTM) per sensory modality:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SensoryTransducer</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Learns stimulus → sensory neuron current injection.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_sensory_neurons</span><span class="p">,</span> <span class="n">stimulus_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="n">stimulus_dim</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">n_sensory_neurons</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stimulus_timeseries</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Input:  stimulus (batch, time, stimulus_dim)</span>
+<span class="sd">                e.g., temperature at worm&#39;s head over time</span>
+<span class="sd">        Output: current injection per sensory neuron (batch, time, n_neurons)</span>
+<span class="sd">                e.g., I_ext for AFD, AIY, AIZ at each timestep</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hidden</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">stimulus_timeseries</span><span class="p">)</span>
+        <span class="n">I_ext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">I_ext</span>
+
+<span class="c1"># Example: thermotaxis</span>
+<span class="n">thermo_transducer</span> <span class="o">=</span> <span class="n">SensoryTransducer</span><span class="p">(</span><span class="n">n_sensory_neurons</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stimulus_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Train on Clark 2006 data: temperature ramp → AFD/AIY/AIZ calcium</span>
+<span class="c1"># Output feeds into [DD001](DD001_Neural_Circuit_Architecture.md) as I_ext on sensory neurons</span>
+</code></pre></div>
+<h4 id="closed-loop-integration">Closed-Loop Integration<a class="headerlink" href="#closed-loop-integration" title="Permanent link">&para;</a></h4>
+<p>With learned sensory transduction, the simulation becomes closed-loop:</p>
+<div class="highlight"><pre><span></span><code>1. SPH body physics computes worm position in environment
+2. Environment model computes local stimulus at worm&#39;s position
+   (e.g., temperature gradient, chemical concentration)
+3. Learned sensory model converts stimulus → I_ext on sensory neurons
+4. [DD001](DD001_Neural_Circuit_Architecture.md) neural circuit processes sensory input → motor output
+5. [DD002](DD002_Muscle_Model_Architecture.md) muscles contract → [DD003](DD003_Body_Physics_Architecture.md) body moves → back to step 1
+</code></pre></div>
+<p>This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance arise from the interaction of learned sensory input with the mechanistic circuit.</p>
+<h4 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Stimulus-response curves:</strong> Predicted sensory neuron responses must match published dose-response curves (e.g., ASER response to NaCl step decreases)</li>
+<li><strong>Emergent behavior:</strong> With thermosensory model enabled, the simulated worm should perform thermotaxis (navigate toward cultivation temperature). Compare to Mori &amp; Ohshima 1995 behavioral data.</li>
+<li><strong>Ablation consistency:</strong> Ablating (silencing) a sensory neuron in the model should reproduce the behavioral deficit observed experimentally</li>
+</ul>
+<h4 id="repository-location_1">Repository location<a class="headerlink" href="#repository-location_1" title="Permanent link">&para;</a></h4>
+<p><code>openworm/openworm-ml/sensory/</code></p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-replace-odes-entirely-with-a-data-driven-transformer">1. Replace ODEs Entirely with a Data-Driven Transformer<a class="headerlink" href="#1-replace-odes-entirely-with-a-data-driven-transformer" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Train a large transformer on tokenized neural activity and behavioral data to directly predict whole-nervous-system dynamics, bypassing biophysical ODEs entirely. Recent work shows this approach can predict <em>C. elegans</em> behavior from whole-brain activity with near-zero error when trained on sufficient data (Azabou et al. 2023). Digital twin approaches have shown promise in simulating individual neuron responses in other systems (Cobos et al. 2022).</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Destroys mechanistic interpretability — OpenWorm's core value. A transformer can predict <em>what</em> will happen but cannot explain <em>why</em> in terms of biophysical mechanisms</li>
+<li>Would match <a href="../DD010_Validation_Framework/">DD010</a> Tier 3 (behavior) but fail Tier 1, 2, and 4 (electrophysiology, connectivity, causal intervention predictions)</li>
+<li>Cannot predict behavior under truly novel perturbations (new mutations, new drug targets) that fall outside the training distribution. Mechanistic models generalize by construction to any condition expressible in the ODE system</li>
+<li>The training data requirements (thousands of whole-brain recordings during perturbation) are not yet publicly available, though they are being collected by multiple labs (Haspel et al. 2023)</li>
+<li>Would make OpenWorm a black-box prediction engine, eliminating its unique positioning as a causally interpretable whole-organism model</li>
+</ul>
+<p><strong>Complementary role:</strong> Pure data-driven models will be powerful tools for benchmarking. If a transformer trained on perturbation data makes predictions that disagree with our mechanistic model, the disagreement itself identifies where the mechanistic model needs improvement. OpenWorm's hybrid approach (this DD) and a pure data-driven model are complementary, not competing.</p>
+<h3 id="2-physics-informed-neural-networks-pinns-as-primary-solver">2. Physics-Informed Neural Networks (PINNs) as Primary Solver<a class="headerlink" href="#2-physics-informed-neural-networks-pinns-as-primary-solver" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use neural networks constrained by the ODE residuals to approximate solutions, rather than traditional ODE solvers.</p>
+<p><strong>Rejected (for now) because:</strong></p>
+<ul>
+<li>PINNs struggle with stiff ODE systems (which HH equations are — fast channel kinetics + slow calcium dynamics)</li>
+<li>Training stability is poor for coupled multi-scale systems</li>
+<li>Traditional ODE solvers (CVODE, RK45) are fast and reliable for our system size</li>
+<li>PINNs shine for PDEs in high dimensions, not for our ~1000-variable ODE system</li>
+</ul>
+<p><strong>When to reconsider:</strong> If the differentiable ODE solver approach proves too slow for the full 302-neuron system.</p>
+<h3 id="3-graph-neural-networks-for-the-connectome">3. Graph Neural Networks for the Connectome<a class="headerlink" href="#3-graph-neural-networks-for-the-connectome" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Replace the explicit ODE-per-neuron approach with a GNN that operates on the connectome graph structure.</p>
+<p><strong>Deferred because:</strong></p>
+<ul>
+<li>Promising research direction (Bhatt et al. 2024 applied GNNs to C. elegans connectome)</li>
+<li>Could be more parameter-efficient than 302 separate ODE systems</li>
+<li>But loses per-neuron biophysical interpretability</li>
+<li>Better suited as a future Component 5 if Components 1-4 prove insufficient</li>
+</ul>
+<h3 id="4-do-nothing-stay-pure-ode">4. Do Nothing (Stay Pure ODE)<a class="headerlink" href="#4-do-nothing-stay-pure-ode" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Manual parameter fitting will not scale to 959 cells (the whole-organism goal)</li>
+<li>Simulation speed is already a bottleneck blocking CI and iteration</li>
+<li>The sensory front-end gap prevents closed-loop behavior</li>
+<li>Competing projects (CZI, Arc) are using ML — OpenWorm needs to engage with these tools, not ignore them</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="for-the-differentiable-backend-component-1">For the Differentiable Backend (Component 1)<a class="headerlink" href="#for-the-differentiable-backend-component-1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Equivalence test:</strong> With identical parameters, the differentiable backend must match the NEURON/jNML reference simulation within ±5% on all state variables (V, Ca, activation) at all timesteps.</p>
+</li>
+<li>
+<p><strong>Gradient correctness:</strong> Gradients must be verified against finite-difference approximations for a subset of parameters. Relative error &lt; 1%.</p>
+</li>
+<li>
+<p><strong>Auto-fitted parameters must be physical:</strong> After gradient-descent fitting, all parameters must remain within biologically plausible ranges:</p>
+<ul>
+<li>Conductances: 0 &lt; g &lt; 100 mS/cm²</li>
+<li>Reversal potentials: -100 &lt; E_rev &lt; +80 mV</li>
+<li>Time constants: 0.01 &lt; tau &lt; 10,000 ms</li>
+<li>Calcium concentrations: &gt; 0</li>
+</ul>
+</li>
+<li>
+<p><strong><a href="../DD010_Validation_Framework/">DD010</a> validation improvement:</strong> Auto-fitted parameters must produce <a href="../DD010_Validation_Framework/">DD010</a> scores equal to or better than hand-tuned parameters.</p>
+</li>
+</ol>
+<h3 id="for-the-sph-surrogate-component-2">For the SPH Surrogate (Component 2)<a class="headerlink" href="#for-the-sph-surrogate-component-2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Speed:</strong> Surrogate must be at least 100x faster than full SPH. Target: 1000x.</li>
+<li><strong>Accuracy:</strong> Trajectory prediction error &lt; 5% of body length on held-out test set.</li>
+<li><strong>Fail-safe:</strong> If surrogate error exceeds 15% on any metric, automatically fall back to full SPH with a warning.</li>
+</ol>
+<h3 id="for-the-foundation-model-pipeline-component-3">For the Foundation Model Pipeline (Component 3)<a class="headerlink" href="#for-the-foundation-model-pipeline-component-3" title="Permanent link">&para;</a></h3>
+<p><strong>Extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>.</strong> See DD025 Quality Criteria for cross-validation and end-to-end validation requirements.</p>
+<h3 id="for-the-sensory-model-component-4">For the Sensory Model (Component 4)<a class="headerlink" href="#for-the-sensory-model-component-4" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Stimulus-response match:</strong> Predicted sensory neuron responses within ±20% of published calcium imaging data.</li>
+<li><strong>Behavioral emergence:</strong> At least one emergent behavior (chemotaxis, thermotaxis, or touch avoidance) must qualitatively match experimental observations when sensory model is enabled.</li>
+</ol>
+<h3 id="dcell-validation-visible-neural-networks-as-independent-check">DCell Validation: Visible Neural Networks as Independent Check<a class="headerlink" href="#dcell-validation-visible-neural-networks-as-independent-check" title="Permanent link">&para;</a></h3>
+<p><strong><a href="https://github.com/idekerlab/DCell">DCell</a></strong> (Ideker Lab, UCSD) is a "visible neural network" that embeds the Gene Ontology hierarchy into its architecture — each node in the network corresponds to a biological subsystem, and the connections mirror known biological relationships. It predicts yeast cell growth phenotypes from genotype with interpretable intermediate states.</p>
+<p>This is conceptually the same approach OpenWorm takes: making the computational structure mirror biological structure, so internal states are interpretable as biological quantities. DCell provides a key validation strategy for the hybrid ML framework:</p>
+<h4 id="the-dcell-cross-validation-protocol">The DCell Cross-Validation Protocol<a class="headerlink" href="#the-dcell-cross-validation-protocol" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p><strong>Build a <em>C. elegans</em> DCell:</strong> Adapt DCell's architecture to use the <em>C. elegans</em> Gene Ontology (or a simplified version using the 128 neuron classes from <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> as nodes). Train on genotype → behavioral phenotype data (e.g., mutant locomotion phenotypes from WormBase)</p>
+</li>
+<li>
+<p><strong>Compare predictions:</strong> For each genetic perturbation (ablation, RNAi knockdown, gain-of-function):</p>
+</li>
+<li>Run the OpenWorm mechanistic simulation → predict behavioral change</li>
+<li>Run the <em>C. elegans</em> DCell → predict behavioral change</li>
+<li>
+<p>Compare both against experimental data</p>
+</li>
+<li>
+<p><strong>Interpret disagreements:</strong></p>
+</li>
+<li><strong>Both agree with experiment:</strong> Mutual validation — the mechanism is captured by both approaches</li>
+<li><strong>OpenWorm correct, DCell wrong:</strong> The mechanistic detail adds value that a data-driven model misses</li>
+<li><strong>DCell correct, OpenWorm wrong:</strong> The mechanistic model has a structural error (wrong connectivity, missing pathway) that DCell's data-driven approach bypasses</li>
+<li><strong>Both wrong:</strong> Missing biology in both models</li>
+</ol>
+<p>This provides a fundamentally different validation signal from <a href="../DD010_Validation_Framework/">DD010</a>'s tier-based approach. DD010 checks "does the output match data?" DCell cross-validation checks "does the <em>structure</em> of the model match the <em>structure</em> of the biology?" — a deeper test of mechanistic correctness.</p>
+<h4 id="why-this-matters-for-the-hybrid-framework">Why This Matters for the Hybrid Framework<a class="headerlink" href="#why-this-matters-for-the-hybrid-framework" title="Permanent link">&para;</a></h4>
+<p>When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduction, surrogate body physics), DCell cross-validation can detect whether the ML component has learned the <em>right</em> biological structure or just fitted the training data. If a surrogate model gets the right behavioral output but DCell reveals the wrong intermediate pathway is active, the surrogate has overfit.</p>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-what-this-subsystem-consumes">Inputs (What This Subsystem Consumes)<a class="headerlink" href="#inputs-what-this-subsystem-consumes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HH equations and parameters (reference)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>All ODE parameters</td>
+<td>NeuroML XML (parsed)</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Connectome topology</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (ConnectomeToolbox)</td>
+<td>Adjacency matrices</td>
+<td>Python API / CSV</td>
+<td>Neuron pairs + weights</td>
+</tr>
+<tr>
+<td>CeNGEN expression data</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Per-class transcript levels</td>
+<td>CSV</td>
+<td>TPM</td>
+</tr>
+<tr>
+<td>Ion channel gene sequences</td>
+<td>WormBase — see <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></td>
+<td>Protein sequences</td>
+<td>FASTA</td>
+<td>amino acids</td>
+</tr>
+<tr>
+<td>SPH simulation dataset (for surrogate training)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>(muscle_activation, trajectory) pairs</td>
+<td>HDF5</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Sensory neuron calcium imaging data</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a> / published papers</td>
+<td>(stimulus, calcium_response) pairs</td>
+<td>CSV</td>
+<td>µM, °C, mM</td>
+</tr>
+<tr>
+<td><a href="../DD010_Validation_Framework/">DD010</a> validation targets</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Experimental baselines</td>
+<td>NumPy / CSV</td>
+<td>mixed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs-what-this-subsystem-produces">Outputs (What This Subsystem Produces)<a class="headerlink" href="#outputs-what-this-subsystem-produces" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auto-fitted ODE parameters</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Per-neuron-class conductances, time constants</td>
+<td>YAML / JSON parameter file</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>SPH surrogate predictions</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (fast validation)</td>
+<td>Body trajectory</td>
+<td>WCON-compatible</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Predicted channel kinetics</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Per-channel HH parameters — see <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></td>
+<td>YAML</td>
+<td>mV, ms, mS/cm²</td>
+</tr>
+<tr>
+<td>Sensory current injections</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Per-sensory-neuron I_ext(t)</td>
+<td>Time series (PyTorch tensor)</td>
+<td>nA</td>
+</tr>
+<tr>
+<td>Gradient information</td>
+<td>Internal</td>
+<td>∂(validation_loss) / ∂(parameter)</td>
+<td>PyTorch .grad tensors</td>
+<td>mixed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-openwormyml-section">Configuration (<code>openworm.yml</code> Section)<a class="headerlink" href="#configuration-openwormyml-section" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">ml</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Component 1: Differentiable backend</span>
+<span class="w">  </span><span class="nt">differentiable_backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">    </span><span class="c1"># Use PyTorch ODE solver instead of NEURON</span>
+<span class="w">  </span><span class="nt">auto_fit</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                 </span><span class="c1"># Run gradient descent parameter fitting</span>
+<span class="w">    </span><span class="nt">target_metrics</span><span class="p">:</span><span class="w">                </span><span class="c1"># [DD010](DD010_Validation_Framework.md) validation targets to optimize</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier2_functional_connectivity</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier3_speed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier3_wavelength</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier3_defecation_period</span>
+<span class="w">    </span><span class="nt">max_epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-4</span>
+<span class="w">    </span><span class="nt">parameter_bounds</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;configs/parameter_bounds.yml&quot;</span><span class="w">  </span><span class="c1"># Physical constraints</span>
+
+<span class="w">  </span><span class="c1"># Component 2: SPH surrogate</span>
+<span class="w">  </span><span class="nt">sph_surrogate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">             </span><span class="c1"># Use learned surrogate instead of full SPH</span>
+<span class="w">  </span><span class="nt">surrogate_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/sph_surrogate_v1.pt&quot;</span>
+<span class="w">  </span><span class="nt">surrogate_fallback_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span><span class="w">  </span><span class="c1"># Fall back to SPH if error &gt; 15%</span>
+
+<span class="w">  </span><span class="c1"># Component 3: Foundation model parameters — see DD025 for full specification</span>
+<span class="w">  </span><span class="nt">foundation_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">         </span><span class="c1"># Use ESM/AlphaFold-predicted channel kinetics (DD025)</span>
+<span class="w">  </span><span class="nt">esm_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;esm2_t33_650M&quot;</span><span class="w">      </span><span class="c1"># DD025</span>
+<span class="w">  </span><span class="nt">kinetics_predictor</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/channel_kinetics_v1.pt&quot;</span><span class="w">  </span><span class="c1"># DD025</span>
+
+<span class="w">  </span><span class="c1"># Component 4: Learned sensory model</span>
+<span class="w">  </span><span class="nt">sensory_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;generic&quot;</span><span class="w">         </span><span class="c1"># &quot;generic&quot; (current I_ext injection), &quot;learned&quot;</span>
+<span class="w">  </span><span class="nt">sensory_checkpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;models/sensory_transducer_v1.pt&quot;</span>
+<span class="w">  </span><span class="nt">sensory_modalities</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thermosensation</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mechanosensation</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chemosensation_nacl</span>
+</code></pre></div>
+<h3 id="docker-build">Docker Build<a class="headerlink" href="#docker-build" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/openworm-ml</code> (new)</li>
+<li><strong>Docker stage:</strong> <code>ml</code> in multi-stage Dockerfile (extends <code>neural</code> stage)</li>
+<li><strong>Build dependencies:</strong> <code>pip install torch torchdiffeq neuraloperator esm</code></li>
+<li><strong>GPU requirement:</strong> NVIDIA GPU strongly recommended for surrogate training and auto-fitting. CPU fallback available but 10-50x slower.</li>
+<li><strong>Model checkpoints:</strong> Pre-trained models stored in GitHub Releases or Hugging Face Hub (too large for git)</li>
+</ul>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HH equations</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If channel model equations change, differentiable backend must be updated to match</td>
+</tr>
+<tr>
+<td>Muscle model</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>If calcium-force coupling changes, differentiable chain breaks</td>
+</tr>
+<tr>
+<td>SPH output format</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If trajectory format changes, surrogate training data pipeline breaks</td>
+</tr>
+<tr>
+<td>CeNGEN data</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>If expression data versioning changes, foundation model predictions change</td>
+</tr>
+<tr>
+<td>Validation criteria</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>If acceptance criteria change, auto-fitting loss function must be updated</td>
+</tr>
+<tr>
+<td>Simulation stack (Docker)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If Docker compose structure changes, <code>ml-test</code> service must be updated</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit (if using auto-fit params)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If auto-fitted parameters change (retrained model), simulation behavior changes</td>
+</tr>
+<tr>
+<td>Cell-type specialization (if using foundation params)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>If predicted conductances change, per-class models change</td>
+</tr>
+<tr>
+<td>Validation (if using surrogate for fast validation)</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>If surrogate accuracy degrades, false-positive validation passes possible</td>
+</tr>
+<tr>
+<td>All subsystems (if sensory model changes)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Sensory input changes → neural dynamics change → everything downstream changes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-roadmap">Implementation Roadmap<a class="headerlink" href="#implementation-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="phase-a-differentiable-backend-weeks-1-8">Phase A: Differentiable Backend (Weeks 1-8)<a class="headerlink" href="#phase-a-differentiable-backend-weeks-1-8" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Week 1-2:</strong> Port <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> HH equations to PyTorch (single neuron)</li>
+<li><strong>Week 3-4:</strong> Port <a href="../DD002_Muscle_Model_Architecture/">DD002</a> muscle model, couple to neural circuit</li>
+<li><strong>Week 5-6:</strong> Port <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> intestinal oscillator</li>
+<li><strong>Week 7-8:</strong> Equivalence testing against NEURON/jNML reference. Must match within ±5%.</li>
+</ol>
+<p><strong>Milestone:</strong> <code>DifferentiableWorm</code> module passes all <a href="../DD010_Validation_Framework/">DD010</a> validation tests.</p>
+<h3 id="phase-b-auto-fitting-weeks-9-12">Phase B: Auto-Fitting (Weeks 9-12)<a class="headerlink" href="#phase-b-auto-fitting-weeks-9-12" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Week 9-10:</strong> Implement <a href="../DD010_Validation_Framework/">DD010</a> validation loss function in PyTorch</li>
+<li><strong>Week 11-12:</strong> Run gradient descent to find per-neuron-class parameters</li>
+<li><strong>Deliverable:</strong> New parameter set that equals or improves on hand-tuned <a href="../DD010_Validation_Framework/">DD010</a> scores</li>
+</ol>
+<h3 id="phase-c-sph-surrogate-weeks-9-16-parallel-with-phase-b">Phase C: SPH Surrogate (Weeks 9-16, parallel with Phase B)<a class="headerlink" href="#phase-c-sph-surrogate-weeks-9-16-parallel-with-phase-b" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Week 9-12:</strong> Generate training dataset (500+ SPH simulation runs)</li>
+<li><strong>Week 13-14:</strong> Train FNO surrogate</li>
+<li><strong>Week 15-16:</strong> Validate surrogate accuracy, integrate into pipeline</li>
+</ol>
+<p><strong>Milestone:</strong> Full simulation loop with surrogate runs in &lt; 1 minute.</p>
+<h3 id="phase-d-foundation-model-pipeline">Phase D: Foundation Model Pipeline<a class="headerlink" href="#phase-d-foundation-model-pipeline" title="Permanent link">&para;</a></h3>
+<p><strong>Extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> and moved to Phase A2/Phase 1.</strong> See DD025 Implementation Roadmap for the detailed timeline (~20 hours Phase A2, ~12 hours Phase 1).</p>
+<h3 id="phase-e-sensory-transduction-weeks-25-32">Phase E: Sensory Transduction (Weeks 25-32)<a class="headerlink" href="#phase-e-sensory-transduction-weeks-25-32" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Week 25-28:</strong> Curate training data from published calcium imaging</li>
+<li><strong>Week 29-30:</strong> Train sensory transduction models (one per modality)</li>
+<li><strong>Week 31-32:</strong> Close the loop — demonstrate emergent chemotaxis or thermotaxis</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Replacing the mechanistic core:</strong> ML is used at boundaries, not as the primary model. The HH ODEs, SPH physics, and calcium dynamics remain the source of truth.</p>
+</li>
+<li>
+<p><strong>Whole-organism foundation model:</strong> We are not building a foundation model for C. elegans. We are building a mechanistic model that uses existing foundation models (ESM3, AlphaFold) as tools.</p>
+</li>
+<li>
+<p><strong>Real-time simulation:</strong> The surrogate enables fast iteration but not real-time interactive simulation (which would require &lt;16ms per frame). That is a separate engineering project.</p>
+</li>
+<li>
+<p><strong>Generative models:</strong> We are not generating synthetic worm behavior or synthetic electrophysiology data. All ML outputs serve the mechanistic simulation.</p>
+</li>
+<li>
+<p><strong>Hardware-specific optimization:</strong> This DD specifies the ML architecture and algorithms. GPU kernel optimization, distributed training, and hardware-specific tuning are implementation details.</p>
+</li>
+</ol>
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>CE_locomotion</strong> (<a href="https://github.com/openworm/CE_locomotion">openworm/CE_locomotion</a>, active 2026, collaboration with Olivares &amp; Beer):
+Complete C++ neuromechanical model with evolutionary algorithm for parameter fitting (auto-tunes parameters to produce forward/backward locomotion). Compare to DD017 Component 1's gradient descent approach; a hybrid strategy (evolutionary global search + gradient local refinement) may be optimal.</p>
+<p><strong>CyberElegans</strong> (<a href="https://github.com/openworm/CyberElegans">openworm/CyberElegans</a>, 2016, 36 stars):
+Alternative neuromechanical model. Useful as a benchmark comparison for DD017's SPH surrogate and for learning from different architectural trade-offs.</p>
+<p><strong>bionet</strong> (<a href="https://github.com/openworm/bionet">openworm/bionet</a>, 2015, 32 stars):
+"Artificial biological neural network" — check for reusable neural network architectures or training pipelines applicable to DD017 Component 2 (SPH surrogate) or Component 4 (learned sensory transduction).</p>
+<p><strong>simple-C-elegans</strong> (<a href="https://github.com/openworm/simple-C-elegans">openworm/simple-C-elegans</a>, 2020):
+Minimalist Python model based on OpenWorm and published literature. Possible starting point for DD017 Component 1 (differentiable backend) — simpler than full c302 for initial prototyping.</p>
+<p><strong>wormvae</strong> (<a href="https://github.com/openworm/wormvae">openworm/wormvae</a>, 2022):
+Connectome-constrained Variational Autoencoder (ICLR 2022). Directly relevant to Component 2 (SPH surrogate) and Component 4 (sensory transduction) as a pre-trained latent representation of worm dynamics.</p>
+<p><strong>wormpose</strong> (<a href="https://github.com/openworm/wormpose">openworm/wormpose</a>, 2025):
+Image synthesis and CNNs for <em>C. elegans</em> pose estimation. Provides labeled (stimulus, posture) pairs that could augment sensory transduction training data for Component 4.</p>
+<p><strong>CelegansNeuromechanicalGaitModulation</strong> (<a href="https://github.com/openworm/CelegansNeuromechanicalGaitModulation">openworm/CelegansNeuromechanicalGaitModulation</a>, 2025):
+Neuromechanical gait modulation model with muscle activation patterns. Training data source for Component 2 (SPH surrogate) or benchmark for Component 1 (differentiable backend).</p>
+<p><strong>multi-dev-sibernetic</strong> (<a href="https://github.com/openworm/multi-dev-sibernetic">openworm/multi-dev-sibernetic</a>, 2023):
+Multi-device Sibernetic engine. Useful for bulk generation of the 500-1000 SPH simulation runs needed for Component 2 surrogate training.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Chen RT, Rubanova Y, Bettencourt J, Duvenaud D (2018).</strong> "Neural Ordinary Differential Equations." <em>NeurIPS 2018.</em>
+   <em>Foundational paper on differentiable ODE solvers.</em></p>
+</li>
+<li>
+<p><strong>Li Z, Kovachki N, Azizzadenesheli K, et al. (2020).</strong> "Fourier Neural Operator for Parametric Partial Differential Equations." <em>ICLR 2021.</em>
+   <em>FNO architecture for surrogate models.</em></p>
+</li>
+<li>
+<p><strong>Lin Z, Akin H, Rao R, et al. (2023).</strong> "Evolutionary-scale prediction of atomic-level protein structure with a language model." <em>Science</em> 379:1123-1130.
+   <em>ESM2/ESM3 protein language model.</em></p>
+</li>
+<li>
+<p><strong>Randi F et al. (2023).</strong> "Neural signal propagation atlas." <em>Nature</em> 623:406-414.
+   <em>Whole-brain calcium imaging data for circuit validation.</em></p>
+</li>
+<li>
+<p><strong>Jumper J et al. (2021).</strong> "Highly accurate protein structure prediction with AlphaFold." <em>Nature</em> 596:583-589.
+   <em>Structure prediction for channel kinetics pipeline.</em></p>
+</li>
+<li>
+<p><strong>Bhatt D et al. (2024).</strong> "Graph Neural Networks for C. elegans Connectome Modeling." <em>Preprint.</em>
+   <em>GNN approach to connectome-based neural simulation.</em></p>
+</li>
+<li>
+<p><strong>Rackauckas C et al. (2020).</strong> "Universal Differential Equations for Scientific Machine Learning." <em>arXiv:2001.04385.</em>
+   <em>Hybrid mechanistic-ML framework theory.</em></p>
+</li>
+<li>
+<p><strong>Kidger P (2022).</strong> "On Neural Differential Equations." <em>PhD Thesis, University of Oxford.</em>
+   <em>Comprehensive treatment of neural ODEs and differentiable simulation.</em></p>
+</li>
+<li>
+<p><strong>Kochkov D et al. (2024).</strong> "Neural General Circulation Models for Weather and Climate." <em>Nature</em> 632:1060-1066.
+   <em>Precedent for learned surrogates in physical simulation (Google DeepMind).</em></p>
+</li>
+<li>
+<p><strong>Azabou M, Arora V, Ganesh V, et al. (2023).</strong> "A Unified, Scalable Framework for Neural Population Decoding." <em>arXiv</em>.
+    <em>Demonstrates transformer-based prediction of behavior from whole-brain neural activity — relevant as a benchmark for the mechanistic approach and as evidence that data-driven digital twins are feasible for C. elegans.</em></p>
+</li>
+<li>
+<p><strong>Cobos E, Muhammad T, Fahey PG, et al. (2022).</strong> "It takes neurons to understand neurons: Digital twins of visual cortex synthesize neural metamers." <em>bioRxiv</em>:2022.12.09.519708.
+    <em>Data-driven digital twin approach — complementary to (not replacing) mechanistic modeling.</em></p>
+</li>
+<li>
+<p><strong>Haspel G et al. (2023).</strong> "To reverse engineer an entire nervous system." <em>arXiv</em> [q-bio.NC] 2308.06578.
+    <em>White paper arguing for observational and perturbational completeness — the scale of data collection proposed would enable both mechanistic and data-driven approaches to C. elegans neural simulation.</em></p>
+</li>
+<li>
+<p><strong>Zhao M et al. (2024).</strong> <em>Nat Comp Sci</em> 4:978-990.
+    <em>Demonstrated differentiable optimization of synaptic weights and polarities for a 136-neuron C. elegans locomotion circuit.</em></p>
+</li>
+</ol>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Create <code>openworm/openworm-ml</code> repository</p>
+</li>
+<li>Port <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> single-neuron HH model to PyTorch (Phase A, Week 1)</li>
+<li>Verify equivalence against NEURON/jNML reference</li>
+<li>Begin SPH surrogate training data generation (Phase C, can start in parallel)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

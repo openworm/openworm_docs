@@ -1,0 +1,3744 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/contributing_guide/">
+      
+      
+        <link rel="prev" href="../INTEGRATION_MAP/">
+      
+      
+        <link rel="next" href="../DD001_Neural_Circuit_Architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Contributing Guide - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contributing-to-design-documents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Contributing Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-design-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Use Design Documents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Use Design Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-reviewers-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Reviewers (L3+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-mind-of-a-worm-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Mind-of-a-Worm AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-document-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Document Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template &amp; Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-first-design-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Your First Design Document
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing Your First Design Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-check-mission-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Check Mission Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-check-if-a-dd-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Check if a DD Already Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Use the Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-check-integration-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Check Integration Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-open-rfc-pr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Open RFC PR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-respond-to-feedback-iterate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Respond to Feedback &amp; Iterate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-implementation-after-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Implementation (After Approval)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-excellent-design-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples of Excellent Design Documents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of Excellent Design Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dd005-cell-type-specialization-reference-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DD005 (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dd001-neural-circuit-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DD001 (Neural Circuit Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-patterns-what-not-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anti-Patterns (What NOT to Do)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequently-asked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-design-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Use Design Documents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Use Design Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-reviewers-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Reviewers (L3+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-mind-of-a-worm-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Mind-of-a-Worm AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-document-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Document Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template &amp; Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-first-design-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Your First Design Document
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing Your First Design Document">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-check-mission-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Check Mission Alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-check-if-a-dd-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Check if a DD Already Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Use the Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-check-integration-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Check Integration Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-open-rfc-pr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Open RFC PR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-respond-to-feedback-iterate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Respond to Feedback &amp; Iterate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-implementation-after-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Implementation (After Approval)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-excellent-design-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples of Excellent Design Documents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of Excellent Design Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dd005-cell-type-specialization-reference-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DD005 (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dd001-neural-circuit-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DD001 (Neural Circuit Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anti-patterns-what-not-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anti-Patterns (What NOT to Do)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequently-asked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="contributing-to-design-documents">Contributing to Design Documents<a class="headerlink" href="#contributing-to-design-documents" title="Permanent link">&para;</a></h1>
+<p>This guide covers how to use, write, review, and contribute to OpenWorm Design Documents. For the overview of all DDs and the implementation roadmap, see the <a href="../">Design Documents Overview</a>.</p>
+<hr />
+<h2 id="how-to-use-design-documents">How to Use Design Documents<a class="headerlink" href="#how-to-use-design-documents" title="Permanent link">&para;</a></h2>
+<h3 id="for-contributors">For Contributors<a class="headerlink" href="#for-contributors" title="Permanent link">&para;</a></h3>
+<p><strong>Before implementing a feature:</strong></p>
+<ol>
+<li>Check if a relevant DD exists (search this directory or ask in #development Slack)</li>
+<li>Read the DD's "Technical Approach" and "Quality Criteria" sections</li>
+<li>Check the DD's Integration Contract (what it consumes from other DDs, what it produces)</li>
+<li>Implement according to the DD's specifications</li>
+<li>Run the DD's validation procedure (<code>docker compose run quick-test</code>, <code>docker compose run validate</code>)</li>
+<li>Reference the DD number in your PR description (e.g., "Implements <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN calibration")</li>
+</ol>
+<p><strong>If you disagree with a DD:</strong></p>
+<ol>
+<li>Propose a new DD that supersedes it (follow <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC process)</li>
+<li>Do NOT silently deviate from an accepted DD without approval</li>
+</ol>
+<h3 id="for-reviewers-l3">For Reviewers (L3+)<a class="headerlink" href="#for-reviewers-l3" title="Permanent link">&para;</a></h3>
+<p><strong>When reviewing a PR:</strong></p>
+<ol>
+<li>Check which DDs are relevant (Mind-of-a-Worm will flag these automatically)</li>
+<li>Verify the PR aligns with DD specifications (check Quality Criteria section)</li>
+<li><strong>If PR modifies a coupling interface</strong> (changes output format, variable names, OME-Zarr schema):<ul>
+<li>Check the DD's "Depends On Me" table in Integration Contract</li>
+<li>Tag maintainers of consuming DDs for coordination</li>
+<li>Require integration test evidence (<code>docker compose run validate</code> output)</li>
+</ul>
+</li>
+<li>If the PR deviates from a DD, request justification or DD amendment via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC</li>
+</ol>
+<h3 id="for-mind-of-a-worm-ai">For Mind-of-a-Worm AI<a class="headerlink" href="#for-mind-of-a-worm-ai" title="Permanent link">&para;</a></h3>
+<p><strong>Automated compliance checking:</strong></p>
+<ul>
+<li>Parse PR files to identify affected subsystems (e.g., <code>c302/</code> → <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>)</li>
+<li>Retrieve relevant DDs and their Integration Contracts</li>
+<li>Check:</li>
+<li>✅ NeuroML validation (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>: <code>jnml -validate</code> must pass)</li>
+<li>✅ Unit compliance (<a href="../DD010_Validation_Framework/">DD010</a>: biophysical units correct)</li>
+<li>✅ Parameter ranges (conductances, voltages, time constants within DD-specified ranges)</li>
+<li>⚠️ Coupling interface changes (flag if output variables, file formats, or OME-Zarr schema modified)</li>
+<li>❌ Alternatives-considered violations (re-proposing explicitly rejected approaches)</li>
+<li>Post automated review comment with pass/warn/fail status per DD</li>
+<li>Tag relevant L4 maintainers for cross-subsystem coordination</li>
+</ul>
+<hr />
+<h2 id="design-document-lifecycle">Design Document Lifecycle<a class="headerlink" href="#design-document-lifecycle" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>┌─────────────┐
+│  Proposed   │ ← New DD opened as PR to openworm-admin
+└──────┬──────┘
+       │ Community discussion in PR comments, DD revised based on feedback
+       v
+┌─────────────┐
+│  Accepted   │ ← L4 maintainer (subsystem-specific) or L5 founder approves, PR merged
+└──────┬──────┘
+       │ Implementation proceeds (GitHub issues created, PRs reference DD)
+       │
+       ├─── Implementation complete, validation passes → Stable (no further changes unless bugs found)
+       │
+       ├─── New DD proposed that supersedes this one → Superseded (reference new DD number in header)
+       │
+       └─── Community testing reveals approach is wrong → Rejected (rare, but document why for future)
+</code></pre></div>
+<p><strong>Status definitions:</strong></p>
+<ul>
+<li>✅ <strong>Accepted:</strong> Binding specification. All implementations must comply. Can be amended via <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC.</li>
+<li>⚠️ <strong>Proposed:</strong> Under review or approved but not yet implemented. Not binding until marked Accepted.</li>
+<li>🔴 <strong>Blocked:</strong> Cannot proceed due to missing prerequisite (e.g., <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> blocked on toolbox dormancy).</li>
+<li>📦 <strong>Archived / Backburner:</strong> Deferred or superseded. Do not implement without reopening discussion.</li>
+<li><strong>Superseded:</strong> Replaced by a newer DD. Reference the superseding DD number.</li>
+<li><strong>Rejected:</strong> Explicitly not adopted. Alternatives Considered section documents why.</li>
+</ul>
+<hr />
+<h2 id="template-reference">Template &amp; Reference<a class="headerlink" href="#template-reference" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="../DD012_Design_Document_RFC_Process/">DD012</a>:</strong> Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build &amp; Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)</li>
+<li><strong><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>:</strong> <strong>Reference implementation</strong> — demonstrates the full expanded template with all sections filled. Use <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> as your model when writing a new DD.</li>
+<li><strong><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>:</strong> Example of Quick Action Reference table (7 key questions answered at the top)</li>
+</ul>
+<p>All science DDs (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a>-<a href="../DD019_Closed_Loop_Touch_Response/">DD019</a>) include a <strong>Quick Action Reference</strong> table answering:</p>
+<ol>
+<li>What does this produce?</li>
+<li>Success metric (which <a href="../DD010_Validation_Framework/">DD010</a> tier, quantitative threshold)</li>
+<li>Repository (GitHub link, issue label convention)</li>
+<li>Config toggle (openworm.yml keys)</li>
+<li>Build &amp; test (docker commands, green-light criteria)</li>
+<li>Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> layer, color mapping, what you should see)</li>
+<li>CI gate (what blocks merge)</li>
+</ol>
+<hr />
+<h2 id="writing-your-first-design-document">Writing Your First Design Document<a class="headerlink" href="#writing-your-first-design-document" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-check-mission-alignment">Step 1: Check Mission Alignment<a class="headerlink" href="#step-1-check-mission-alignment" title="Permanent link">&para;</a></h3>
+<p><strong>Before writing a DD, ask:</strong></p>
+<ul>
+<li>Does this advance the mission ("world's first virtual organism")?</li>
+<li>Does it maintain physical realism ("soft and squishy")?</li>
+<li>Is it experimentally validated (<a href="../DD010_Validation_Framework/">DD010</a> tiers)?</li>
+<li>Is it open source and causally interpretable?</li>
+</ul>
+<p><strong>If yes to all:</strong> Proceed. <strong>If no:</strong> Reconsider or clarify how it serves the mission.</p>
+<h3 id="step-2-check-if-a-dd-already-exists">Step 2: Check if a DD Already Exists<a class="headerlink" href="#step-2-check-if-a-dd-already-exists" title="Permanent link">&para;</a></h3>
+<p>Search this directory:
+<div class="highlight"><pre><span></span><code>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="w"> </span>design_documents/*.md
+</code></pre></div></p>
+<p>Check <a href="../INTEGRATION_MAP/">INTEGRATION_MAP.md</a> — your topic may be covered by an existing DD's Integration Contract.</p>
+<h3 id="step-3-use-the-template">Step 3: Use the Template<a class="headerlink" href="#step-3-use-the-template" title="Permanent link">&para;</a></h3>
+<p>Follow <a href="../DD012_Design_Document_RFC_Process/">DD012 (RFC Process)</a> template structure. Use <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 (Cell-Type Specialization)</a> as your reference implementation.</p>
+<p><strong>Required sections (from <a href="../DD012_Design_Document_RFC_Process/">DD012</a>):</strong></p>
+<ul>
+<li>TL;DR (2-3 sentences)</li>
+<li>Goal &amp; Success Criteria (which <a href="../DD010_Validation_Framework/">DD010</a> tier, quantitative threshold)</li>
+<li>Deliverables (exact files, paths, formats)</li>
+<li>Repository &amp; Issues (GitHub repo, issue label, branch convention)</li>
+<li>How to Build &amp; Test (copy-pasteable commands, green-light criteria)</li>
+<li>How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> layer, color mapping, what you should see)</li>
+<li>Technical Approach (equations, parameters, algorithms)</li>
+<li>Alternatives Considered (why other approaches were rejected)</li>
+<li>Quality Criteria (testable acceptance criteria)</li>
+<li>Boundaries (explicitly out of scope)</li>
+<li>Context &amp; Background (biological motivation, project history)</li>
+<li>References (papers, datasets, DOIs)</li>
+<li>Integration Contract (inputs/outputs, repository &amp; packaging, configuration, how to test, how to visualize, coupling dependencies)</li>
+</ul>
+<h3 id="step-4-check-integration-map">Step 4: Check Integration Map<a class="headerlink" href="#step-4-check-integration-map" title="Permanent link">&para;</a></h3>
+<p>Before finalizing your DD, check <a href="../INTEGRATION_MAP/">INTEGRATION_MAP.md</a>:</p>
+<ul>
+<li>Which DDs does yours depend on? (Add to "I Depend On" table)</li>
+<li>Which DDs will depend on yours? (Add to "Depends On Me" table)</li>
+<li>What data format do you consume/produce? (Document in Integration Contract)</li>
+<li>Who's the upstream/downstream maintainer? (Coordinate before merging)</li>
+</ul>
+<h3 id="step-5-open-rfc-pr">Step 5: Open RFC PR<a class="headerlink" href="#step-5-open-rfc-pr" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>openworm-admin/
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>rfc/dd0XX-your-topic
+<span class="c1"># (write DD0XX_Your_Topic.md)</span>
+git<span class="w"> </span>add<span class="w"> </span>design_documents/DD0XX_Your_Topic.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;RFC: DD0XX Your Topic&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>rfc/dd0XX-your-topic
+<span class="c1"># Open PR on GitHub, tag relevant L4 maintainers</span>
+</code></pre></div>
+<h3 id="step-6-respond-to-feedback-iterate">Step 6: Respond to Feedback &amp; Iterate<a class="headerlink" href="#step-6-respond-to-feedback-iterate" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Community discusses in PR comments</li>
+<li>You revise based on feedback</li>
+<li>Subsystem L4 maintainer facilitates discussion</li>
+<li>If fundamental disagreement: L5 founder arbitrates</li>
+</ul>
+<h3 id="step-7-implementation-after-approval">Step 7: Implementation (After Approval)<a class="headerlink" href="#step-7-implementation-after-approval" title="Permanent link">&para;</a></h3>
+<p>Once DD is approved and merged:</p>
+<ul>
+<li>DD status changes to "Accepted"</li>
+<li>Open implementation issues (or run <code>dd_issue_generator.py</code> to auto-generate from Integration Contract)</li>
+<li>Implementation PRs reference the DD number</li>
+<li>Mind-of-a-Worm checks implementation PRs for DD compliance</li>
+</ul>
+<hr />
+<h2 id="examples-of-excellent-design-documents">Examples of Excellent Design Documents<a class="headerlink" href="#examples-of-excellent-design-documents" title="Permanent link">&para;</a></h2>
+<h3 id="dd005-cell-type-specialization-reference-implementation"><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization) — REFERENCE IMPLEMENTATION<a class="headerlink" href="#dd005-cell-type-specialization-reference-implementation" title="Permanent link">&para;</a></h3>
+<p><strong>Why it's excellent:</strong></p>
+<ul>
+<li>✅ <strong>TL;DR at top</strong> — Reader knows what/why/success metric in 3 sentences</li>
+<li>✅ <strong>Mission-aligned</strong> — Uses CeNGEN (world's largest single-cell atlas for any organism) to create biologically distinct neurons</li>
+<li>✅ <strong>Goal &amp; Success Criteria</strong> — <a href="../DD010_Validation_Framework/">DD010</a> Tier 2, quantitative threshold (≥20% improvement in functional connectivity)</li>
+<li>✅ <strong>Deliverables</strong> — Exact files (128 <code>.cell.nml</code> files), paths, formats (NeuroML 2 XML)</li>
+<li>✅ <strong>Repository &amp; Issues</strong> — <code>openworm/c302</code>, issue label <code>dd005</code>, branch convention</li>
+<li>✅ <strong>How to Build &amp; Test</strong> — 8 copy-pasteable commands, green-light criteria, scripts marked <code>[TO BE CREATED]</code></li>
+<li>✅ <strong>How to Visualize</strong> — <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> neural/ layer, color-by-neuron-class mode</li>
+<li>✅ <strong>Technical Approach</strong> — 6-step pipeline with code examples</li>
+<li>✅ <strong>7 alternatives considered</strong> — All rejected with rationale</li>
+<li>✅ <strong>Integration Contract</strong> — Complete with all 5 required sub-sections</li>
+</ul>
+<h3 id="dd001-neural-circuit-architecture"><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit Architecture)<a class="headerlink" href="#dd001-neural-circuit-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Why it's excellent:</strong></p>
+<ul>
+<li>✅ <strong>Quick Action Reference</strong> — 7-question table at top answers contributor questions immediately</li>
+<li>✅ <strong>Clear decision</strong> — Level C1 graded synapses (not IAF, not spiking), biologically justified</li>
+<li>✅ <strong>Quantitative parameters</strong> — Table of conductances with exact values and units</li>
+<li>✅ <strong>Alternatives explained</strong> — IAF rejected, AlphaFold+MD rejected, multicompartmental deferred</li>
+<li>✅ <strong>Validation procedure</strong> — 5-step command sequence from <code>jnml -validate</code> to kinematic comparison</li>
+<li>✅ <strong>Migration path</strong> — If decision changes, add Level D (don't modify C1, backward compatibility sacred)</li>
+</ul>
+<hr />
+<h2 id="anti-patterns-what-not-to-do">Anti-Patterns (What NOT to Do)<a class="headerlink" href="#anti-patterns-what-not-to-do" title="Permanent link">&para;</a></h2>
+<p>From <a href="../DD012_Design_Document_RFC_Process/">DD012</a> Quality Criteria section:</p>
+<p><strong>❌ Too vague:</strong></p>
+<blockquote>
+<p>"We should use realistic channel models."</p>
+</blockquote>
+<p><em>What's realistic? Which channels? What parameters? Which papers?</em></p>
+<p><strong>❌ No alternatives:</strong></p>
+<blockquote>
+<p>"We decided to use SPH for body physics."</p>
+</blockquote>
+<p><em>Why not FEM? Why not mass-spring? Future contributors will re-propose without knowing they were already rejected.</em></p>
+<p><strong>❌ No validation:</strong></p>
+<blockquote>
+<p>"Implement IP3 receptor model."</p>
+</blockquote>
+<p><em>How do you know if it works? What's the acceptance test? Which <a href="../DD010_Validation_Framework/">DD010</a> tier?</em></p>
+<p><strong>❌ Scope creep:</strong></p>
+<blockquote>
+<p>"This DD covers neurons, muscles, intestine, hypodermis, and gonad."</p>
+</blockquote>
+<p><em>Too broad. Split into focused DDs (one per organ system).</em></p>
+<p><strong>❌ Buried punchline:</strong></p>
+<blockquote>
+<p>Validation goal appears at line 300 instead of the Goal section (line 30).</p>
+</blockquote>
+<p><em>Lead with WHY and WHAT (impact), end with HOW (background). <a href="../DD012_Design_Document_RFC_Process/">DD012</a> template enforces this.</em></p>
+<p><strong>❌ Phantom scripts:</strong></p>
+<blockquote>
+<p>Commands reference <code>validate_network.py</code> with no tracking, no <code>[TO BE CREATED]</code> marker.</p>
+</blockquote>
+<p><em>Mark all non-existent scripts <code>[TO BE CREATED]</code> with GitHub issue link or #TBD.</em></p>
+<p><strong>❌ Disconnected from viewer:</strong></p>
+<blockquote>
+<p>No "How to Visualize" section, no mention of <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> layers.</p>
+</blockquote>
+<p><em>Contributors can't see what they're building. Every science DD must specify its <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> visualization.</em></p>
+<p><strong>❌ No repo guidance:</strong></p>
+<blockquote>
+<p>Doesn't specify which GitHub repo, where to file issues, branch naming convention.</p>
+</blockquote>
+<p><em>Contributor doesn't know where to start. Repository &amp; Issues section is required.</em></p>
+<p><strong>❌ Consecutive bold-key lines without list markers:</strong></p>
+<blockquote>
+<div class="highlight"><pre><span></span><code>**Status:** Accepted
+**Author:** OpenWorm Core Team
+**Date:** 2026-02-14
+</code></pre></div>
+</blockquote>
+<p><em>Standard Markdown treats consecutive lines as a single paragraph — these will render as one run-together line. Always use list markers (<code>-</code>) for metadata blocks:</em></p>
+<blockquote>
+<div class="highlight"><pre><span></span><code>- **Status:** Accepted
+- **Author:** OpenWorm Core Team
+- **Date:** 2026-02-14
+</code></pre></div>
+</blockquote>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Do I need a DD to fix a typo?</strong>
+A: No. Trivial fixes (typos, dead link updates, comment improvements) do not require DDs.</p>
+<p><strong>Q: Do I need a DD to add a new neuron to the connectome?</strong>
+A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth (<a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>), not an architectural decision. Yes, if you are proposing a novel <em>modeling approach</em> for that neuron (e.g., multicompartmental morphology, new channel type).</p>
+<p><strong>Q: Can I modify an accepted DD?</strong>
+A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through <a href="../DD012_Design_Document_RFC_Process/">DD012</a> RFC process. L4 maintainer or founder approves amendments.</p>
+<p><strong>Q: What if my DD is rejected?</strong>
+A: The rejection itself is documented (DD status → Rejected, Alternatives Considered explains why). You (and future contributors) now know that approach was considered and why it doesn't serve the mission. This preserves institutional memory.</p>
+<p><strong>Q: How do DDs relate to the Scientific Advisory Board?</strong>
+A: DDs with major scientific implications (e.g., choosing what biological detail to model, which validation targets to prioritize) should be reviewed by SAB before final approval. L4 maintainers coordinate SAB review for their subsystem.</p>
+<p><strong>Q: What's the difference between <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>, <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>, and <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>?</strong>
+A: <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> is the main visualization architecture (data pipeline, viewer framework, phase roadmap). <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.</p>
+<p><strong>Q: Where are the GitHub issues for DD implementation?</strong>
+A: Not yet created. After DDs are approved, <code>dd_issue_generator.py</code> (<a href="../DD015_AI_Contributor_Model/">DD015</a>) will auto-generate GitHub issues from Integration Contract sections.</p>
+<p><strong>Q: Why are so many DDs "Proposed" instead of "Accepted"?</strong>
+A: Phase 0 DDs (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-003, <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

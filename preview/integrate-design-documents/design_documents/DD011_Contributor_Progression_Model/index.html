@@ -1,0 +1,5625 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD011_Contributor_Progression_Model/">
+      
+      
+        <link rel="prev" href="../DD028_Project_Metrics_Dashboard/">
+      
+      
+        <link rel="next" href="../DD012_Design_Document_RFC_Process/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD011 Contributor Progression - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd011-contributor-progression-model-the-graduated-access-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD011 Contributor Progression
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal &amp; Success Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#five-level-contributor-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Five-Level Contributor System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-specific-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level-Specific Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsystem-ownership-map-initial-l4-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsystem Ownership Map (Initial L4 Assignments)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progression-criteria-how-to-earn-each-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progression Criteria (How to Earn Each Level)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Progression Criteria (How to Earn Each Level)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast-track-assessment-choose-your-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Track Assessment (Choose Your Level)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l0-l1-orientation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L0 → L1 (Orientation Tasks)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l1-l2-prove-code-quality-earn-junior-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L1 → L2 (Prove Code Quality — earn Junior Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l2-l3-prove-subsystem-expertise-earn-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L2 → L3 (Prove Subsystem Expertise — earn Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l3-l4-prove-leadership-earn-senior-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L3 → L4 (Prove Leadership — earn Senior Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-flat-structure-everyone-equal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flat Structure (Everyone Equal)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strict-tenure-based-promotion-6-months-l2-12-months-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Strict Tenure-Based Promotion (6 months → L2, 12 months → L3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-elected-roles-democratic-voting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Elected Roles (Democratic Voting)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-no-formal-levels-keep-current-informal-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. No Formal Levels (Keep Current Informal Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracking-infrastructure-mind-of-a-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking Infrastructure (Mind-of-a-Worm)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-contributor-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Contributor Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-current-informal-roles-to-explicit-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Current Informal Roles to Explicit Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactivation-campaign" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reactivation Campaign
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#badge-recognition-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge &amp; Recognition System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge &amp; Recognition System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-badgelist-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background: BadgeList Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-orientation-badges-l0-l1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orientation Badges (L0 → L1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-skill-badges-l1-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Skill Badges (L1 → L2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-domain-badges-l2-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Domain Badges (L2 → L3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-teach-back-badges-human-sponsors-only-dd015" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Teach-Back Badges (Human Sponsors Only — DD015)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-community-badges-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Community Badges (All Levels)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-milestone-badges-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Milestone Badges (All Levels)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badge-infrastructure-from-badgelist-to-automated-issuance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge Infrastructure: From BadgeList to Automated Issuance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badgelist-api-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BadgeList API Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-badges-connect-to-contributor-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Badges Connect to Contributor Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-from-existing-badgelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration from Existing BadgeList
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engagement-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engagement Loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Engagement Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trigger-action-channel-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trigger-Action-Channel Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#engagement-loop-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engagement Loop Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notification-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-contributor-churn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Contributor Churn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-non-code-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Non-Code Contributions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-this-dd-interfaces-with-other-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This DD Interfaces with Other DDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal &amp; Success Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#five-level-contributor-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Five-Level Contributor System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-specific-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level-Specific Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsystem-ownership-map-initial-l4-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsystem Ownership Map (Initial L4 Assignments)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progression-criteria-how-to-earn-each-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progression Criteria (How to Earn Each Level)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Progression Criteria (How to Earn Each Level)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast-track-assessment-choose-your-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Track Assessment (Choose Your Level)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l0-l1-orientation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L0 → L1 (Orientation Tasks)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l1-l2-prove-code-quality-earn-junior-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L1 → L2 (Prove Code Quality — earn Junior Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l2-l3-prove-subsystem-expertise-earn-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L2 → L3 (Prove Subsystem Expertise — earn Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l3-l4-prove-leadership-earn-senior-contributor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L3 → L4 (Prove Leadership — earn Senior Contributor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-flat-structure-everyone-equal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flat Structure (Everyone Equal)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strict-tenure-based-promotion-6-months-l2-12-months-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Strict Tenure-Based Promotion (6 months → L2, 12 months → L3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-elected-roles-democratic-voting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Elected Roles (Democratic Voting)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-no-formal-levels-keep-current-informal-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. No Formal Levels (Keep Current Informal Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracking-infrastructure-mind-of-a-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking Infrastructure (Mind-of-a-Worm)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-contributor-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Contributor Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-current-informal-roles-to-explicit-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Current Informal Roles to Explicit Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactivation-campaign" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reactivation Campaign
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#badge-recognition-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge &amp; Recognition System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge &amp; Recognition System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background-badgelist-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background: BadgeList Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Badge Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-orientation-badges-l0-l1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orientation Badges (L0 → L1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-skill-badges-l1-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Skill Badges (L1 → L2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-domain-badges-l2-l3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Domain Badges (L2 → L3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-teach-back-badges-human-sponsors-only-dd015" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Teach-Back Badges (Human Sponsors Only — DD015)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-community-badges-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Community Badges (All Levels)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-milestone-badges-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Milestone Badges (All Levels)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badge-infrastructure-from-badgelist-to-automated-issuance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Badge Infrastructure: From BadgeList to Automated Issuance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#badgelist-api-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BadgeList API Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-badges-connect-to-contributor-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Badges Connect to Contributor Levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-from-existing-badgelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration from Existing BadgeList
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engagement-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engagement Loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Engagement Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trigger-action-channel-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trigger-Action-Channel Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#engagement-loop-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engagement Loop Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notification-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-contributor-churn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Contributor Churn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-non-code-contributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Non-Code Contributions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-this-dd-interfaces-with-other-dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This DD Interfaces with Other DDs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd011-contributor-progression-model-the-graduated-access-system">DD011: Contributor Progression Model (The Graduated Access System)<a class="headerlink" href="#dd011-contributor-progression-model-the-graduated-access-system" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Governance)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> Informal contributor model</li>
+<li><strong>Related:</strong> AI-Augmented Open Science Proposal</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-a2-governance-derisking-weeks-3-4">Phase A2: Governance &amp; Derisking</a> | <strong>Layer:</strong> Governance</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>OpenWorm uses a five-level contributor progression (L0 Observer through L5 Founder) with explicit criteria for advancement. Each level unlocks specific permissions (code review, merge authority, architectural decisions). This replaces informal trust-based access with transparent, documented governance. Badges earned through contributions make progression objective and visible.</p>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Transparent contributor advancement path</strong> — newcomers can see exactly how to progress from observer to leader</li>
+<li><strong>Reduced founder bottleneck</strong> — delegate mentoring, review, and merge authority to L3/L4 contributors</li>
+<li><strong>Clear subsystem ownership</strong> — every Design Document domain has an accountable Senior Contributor (L4)</li>
+</ol>
+<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li>At least 3 contributors at L3+ within 12 months of adoption</li>
+<li>All subsystems in the ownership map have assigned L4 maintainers (no "TBD" entries)</li>
+<li>Decision-making latency reduced: L3 contributors can merge PRs in their subsystem without founder review</li>
+<li>Mind-of-a-Worm contributor database operational and tracking progression automatically</li>
+</ul>
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>contributor-levels.md</code> — public documentation of all five levels, criteria, and permissions</li>
+<li>GitHub team and permission configuration — teams matching L1-L5 with appropriate repository access</li>
+<li>Badge definitions — full DD011 badge taxonomy created in BadgeList via API</li>
+<li>Onboarding checklist template — orientation task checklist for N2-Whisperer to assign new contributors</li>
+<li>Updated openworm.org/people.html — contributor page restructured by level</li>
+<li><code>reactivation-campaign-plan.md</code> — structured plan for re-engaging 940 dormant contributor applicants with personalized "Choose Your Level" onboarding</li>
+</ul>
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Primary repository:</strong> <code>openworm/openworm_docs</code> (governance documentation)</li>
+<li><strong>Administration:</strong> <code>openworm/openworm-admin</code> (GitHub team configuration, permission scripts)</li>
+<li><strong>Issue labels:</strong> <code>dd011</code>, <code>governance</code>, <code>contributor-progression</code></li>
+<li><strong>Tracking:</strong> Mind-of-a-Worm contributor database (see Implementation References section)</li>
+</ul>
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<p>N/A — this is a governance document, not a software component. To validate the contributor progression model:</p>
+<ol>
+<li>Review the contributor levels table against current community structure</li>
+<li>Verify GitHub team permissions match the five-level access model</li>
+<li>Test badge issuance via BadgeList API (see Badge Infrastructure section)</li>
+<li>Confirm Mind-of-a-Worm contributor database schema matches the examples in Implementation References</li>
+</ol>
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p>N/A — this is a governance document. Contributor progression is tracked via GitHub team membership and badge assignments, not simulation visualization. The public contributor page (openworm.org/people.html) displays contributors organized by level, and BadgeList profiles show earned badges.</p>
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>OpenWorm has operated with <strong>informal, organic leadership emergence</strong>: "experienced and enthusiastic volunteers often establish themselves as leaders without any prompting" (<a href="https://doi.org/10.1098/rstb.2017.0382">Sarma et al. 2018</a>). This has strengths (low bureaucracy, self-motivation) but creates problems:</p>
+<ul>
+<li>Newcomers don't know how to progress from observer to contributor to leader</li>
+<li>No clear criteria for when someone is "ready" for more responsibility</li>
+<li>Founder ends up mentoring everyone, which doesn't scale</li>
+<li>Quality control is ad-hoc (no systematic review process)</li>
+</ul>
+<p>The Apache Software Foundation's <strong>meritocratic contributor ladder</strong> (User → Contributor → Committer → PMC Member) is the gold standard. Linux kernel's <strong>maintainer tree</strong> provides the delegation model. Medical residency's <strong>graduated autonomy</strong> framework provides the competency-based progression logic.</p>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="five-level-contributor-system">Five-Level Contributor System<a class="headerlink" href="#five-level-contributor-system" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Title</th>
+<th>Access Rights</th>
+<th>Earned By</th>
+<th>Mentored By</th>
+<th>Estimated Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L0</strong></td>
+<td>Observer</td>
+<td>Read-only; public Slack, GitHub issues</td>
+<td>Signing up</td>
+<td>N2-Whisperer AI</td>
+<td>Immediate</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>Apprentice</td>
+<td>Submit doc fixes, test improvements</td>
+<td>3 orientation tasks via N2-Whisperer</td>
+<td>Mind-of-a-Worm AI</td>
+<td>1-2 weeks</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>Junior Contributor</td>
+<td>Open PRs to designated subsystems</td>
+<td>5+ merged contributions, Mind-of-a-Worm-approved</td>
+<td>Mind-of-a-Worm + L3 peers</td>
+<td>1-3 months</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>Contributor</td>
+<td>Review/merge L1-L2 PRs in subsystem; GitHub commit access</td>
+<td>Sustained quality over 3+ months; L4 nomination</td>
+<td>Senior Contributor (L4)</td>
+<td>3-6 months</td>
+</tr>
+<tr>
+<td><strong>L4</strong></td>
+<td>Senior Contributor</td>
+<td>Architectural decisions within subsystem scope; write Design Documents</td>
+<td>Deep subsystem expertise; founder approval</td>
+<td>Founder (L5)</td>
+<td>6-12 months</td>
+</tr>
+<tr>
+<td><strong>L5</strong></td>
+<td>Founder / Steering</td>
+<td>Set direction; approve Design Documents; resolve cross-cutting conflicts</td>
+<td>--</td>
+<td>Scientific Advisory Board</td>
+<td>--</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Naming note:</strong> "Contributor" and "Senior Contributor" are OpenWorm's historical terms. Junior Contributors (L2) have landed useful work and can open PRs. Contributors (L3) have earned review/merge trust through sustained quality. Senior Contributors (L4) are the most active and trusted people who own a subsystem's architecture and write Design Documents.</p>
+<h3 id="level-specific-responsibilities">Level-Specific Responsibilities<a class="headerlink" href="#level-specific-responsibilities" title="Permanent link">&para;</a></h3>
+<p><strong>L0 (Observer):</strong></p>
+<ul>
+<li>Can: Read all code/docs, ask questions in public Slack, attend public meetings</li>
+<li>Cannot: Open PRs, modify anything</li>
+<li>Progression: Complete 3 orientation tasks (see L1)</li>
+</ul>
+<p><strong>L1 (Apprentice):</strong></p>
+<ul>
+<li>Can: Submit documentation fixes, improve test coverage, triage GitHub issues</li>
+<li>Cannot: Modify core modeling code</li>
+<li>Progression: 5 merged contributions that pass Mind-of-a-Worm pre-review</li>
+<li>Typical contributions: Fix typos, add docstrings, improve README, label issues, update dependencies</li>
+</ul>
+<p><strong>L2 (Junior Contributor):</strong></p>
+<ul>
+<li>Can: Open PRs to designated "contributor-ready" subsystems (data pipelines, validation scripts, non-critical NeuroML extensions)</li>
+<li>Cannot: Modify core cell models (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD003_Body_Physics_Architecture/">DD003</a>), merge others' PRs</li>
+<li>Review process: Mind-of-a-Worm pre-review (subsystem + integration compliance) → L3/L4 human review → merge</li>
+<li><strong>Integration requirement:</strong> Must run <code>docker compose run quick-test</code> before submitting PRs and include results in PR description</li>
+<li>Progression: Sustained quality (error-free PRs, good communication, alignment with Design Documents <strong>including Integration Contracts</strong>) over 3+ months → L3 nomination</li>
+</ul>
+<p><strong>L3 (Contributor — with review access):</strong></p>
+<ul>
+<li>Can: Review and merge L1/L2 PRs in their subsystem, modify core models within Design Document boundaries</li>
+<li>Cannot: Change Design Documents, make cross-cutting architectural decisions</li>
+<li>Responsibilities:</li>
+<li>Mentor L1/L2 contributors in their subsystem</li>
+<li>Ensure PRs comply with relevant Design Documents <strong>including Integration Contract sections</strong> (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>)</li>
+<li><strong>When reviewing PRs that change a coupling interface, coordinate with Senior Contributors of consuming subsystems before merging</strong></li>
+<li>Run <code>docker compose run validate</code> for PRs that modify core model parameters</li>
+<li>Triage issues specific to their subsystem</li>
+<li>Maintain subsystem documentation</li>
+<li>Progression: Demonstrate deep expertise, propose Design Document improvements → L4 nomination by founder</li>
+</ul>
+<p><strong>L4 (Senior Contributor):</strong></p>
+<ul>
+<li>Can: Make architectural decisions within subsystem scope, write/amend Design Documents for their subsystem, represent subsystem in cross-cutting decisions</li>
+<li>Cannot: Make unilateral changes affecting other subsystems</li>
+<li>Responsibilities:</li>
+<li>Own a modeling domain (e.g., Neural Circuit, Body Physics, Data Integration, Validation, Integration Stack)</li>
+<li><strong>Own and maintain the Integration Contract section of their subsystem's DDs</strong></li>
+<li><strong>When their subsystem's output interface changes, update all consuming DDs' input specifications and coordinate with affected Senior Contributors</strong></li>
+<li>Grow L3 Contributors in their subsystem</li>
+<li>Write Design Documents encoding subsystem vision</li>
+<li>Review Mad-Worm-Scientist daily for subsystem-relevant items</li>
+<li><strong>Participate in cross-subsystem integration reviews when tagged by Mind-of-a-Worm</strong></li>
+<li>Progression: Invitation to Steering (rare)</li>
+</ul>
+<p><strong>L5 (Founder / Steering):</strong></p>
+<ul>
+<li>Responsibilities:</li>
+<li>Write cross-cutting Design Documents</li>
+<li>Approve/reject L3→L4 promotions</li>
+<li>Resolve conflicts between subsystems</li>
+<li>Set scientific direction with Scientific Advisory Board</li>
+<li>Review Mad-Worm-Scientist daily summary</li>
+<li>Final approval on major architectural changes</li>
+</ul>
+<hr />
+<h2 id="subsystem-ownership-map-initial-l4-assignments">Subsystem Ownership Map (Initial L4 Assignments)<a class="headerlink" href="#subsystem-ownership-map-initial-l4-assignments" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Design Documents</th>
+<th>Current Senior Contributor (L4)</th>
+<th>Primary Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neural Circuit</strong></td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>TBD (Neural Circuit L4)</td>
+<td>CElegansNeuroML, c302</td>
+</tr>
+<tr>
+<td><strong>Body Physics</strong></td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>TBD (Body Physics L4)</td>
+<td>Sibernetic</td>
+</tr>
+<tr>
+<td><strong>Muscle Models</strong></td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>TBD (propose from community)</td>
+<td>c302, Sibernetic</td>
+</tr>
+<tr>
+<td><strong>Data Integration</strong></td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>TBD</td>
+<td>OWMeta, ConnectomeToolbox</td>
+</tr>
+<tr>
+<td><strong>Validation</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>TBD</td>
+<td>open-worm-analysis-toolbox</td>
+</tr>
+<tr>
+<td><strong>Integration Stack</strong></td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>TBD — <strong>Critical hire</strong></td>
+<td>OpenWorm (meta-repo)</td>
+</tr>
+<tr>
+<td><strong>Visualization</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>TBD</td>
+<td>Worm3DViewer, Worm Browser</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical:</strong> At least one L4 Senior Contributor per subsystem. If a subsystem lacks an L4, the founder is the de-facto owner (unsustainable).</p>
+<hr />
+<h2 id="progression-criteria-how-to-earn-each-level">Progression Criteria (How to Earn Each Level)<a class="headerlink" href="#progression-criteria-how-to-earn-each-level" title="Permanent link">&para;</a></h2>
+<h3 id="fast-track-assessment-choose-your-level">Fast-Track Assessment (Choose Your Level)<a class="headerlink" href="#fast-track-assessment-choose-your-level" title="Permanent link">&para;</a></h3>
+<p>Not every new contributor is a beginner. OpenWorm's contributor application archive (940 applicants, 2013-2026) already captures education level, programming languages, and biology experience — the same dimensions that determine starting level. The Fast-Track Assessment uses this data (or a new self-assessment) to place experienced contributors at the right level immediately.</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>
+<p><strong>Self-assessment form:</strong> New contributors answer 5 questions covering programming experience, biology background, C. elegans familiarity, modeling experience, and open-source contribution history. These map directly to the existing contributor application fields.</p>
+</li>
+<li>
+<p><strong>Skip rules for orientation badges:</strong></p>
+</li>
+<li>Can already explain Hodgkin-Huxley dynamics → waive "Neuron Modeling Foundations" badge; demonstrate via brief explanation to Mind-of-a-Worm instead of completing the tutorial</li>
+<li>Has published C. elegans research → fast-track to L1 with brief verification (confirm familiarity with OpenWorm's simulation approach)</li>
+<li>
+<p>Has 5+ merged PRs in any open-source neuroscience project → credit toward L1→L2 "First Issue Resolved" + "GitHub Proficient" badges</p>
+</li>
+<li>
+<p><strong>Retroactive placement for archived applicants:</strong> The 940 archived applications already contain the assessment data. When the reactivation campaign (see Migration Path) contacts these applicants, their declared skills are pre-matched to a starting level and suggested first tasks.</p>
+</li>
+<li>
+<p><strong>Administration:</strong> N2-Whisperer administers the assessment via Slack conversation. For applicants with clear qualifications, placement is immediate. For borderline cases, N2-Whisperer suggests one verification task (not the full orientation sequence).</p>
+</li>
+</ol>
+<p><strong>Key principle:</strong> Don't gate experienced people behind tutorials they don't need. Verification replaces completion for those who already have the knowledge. A postdoc who has modeled ion channels for 5 years should not be required to complete the Hodgkin-Huxley tutorial — they should demonstrate their knowledge and move on to meaningful contribution.</p>
+<h3 id="l0-l1-orientation-tasks">L0 → L1 (Orientation Tasks)<a class="headerlink" href="#l0-l1-orientation-tasks" title="Permanent link">&para;</a></h3>
+<p>Earn <strong>3 of 4 orientation badges</strong> (assigned by N2-Whisperer based on background):</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Task</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Connected</strong></td>
+<td>Join Slack, GitHub, subscribe to mailing list</td>
+</tr>
+<tr>
+<td><strong>Simulation Runner</strong></td>
+<td>Install and run the OpenWorm Docker simulation stack, post screenshot</td>
+</tr>
+<tr>
+<td><strong>Explorer</strong></td>
+<td>Navigate the Worm Browser, identify 5 neurons and describe their function</td>
+</tr>
+<tr>
+<td><strong>Paper Reader</strong></td>
+<td>Read <a href="https://doi.org/10.1098/rstb.2017.0382">Sarma et al. 2018</a> overview paper, summarize in 3 bullet points</td>
+</tr>
+</tbody>
+</table>
+<p>See <strong>Badge &amp; Recognition System</strong> section for full badge details.</p>
+<p><strong>Evaluation:</strong> N2-Whisperer confirms completion via Slack interaction. Automated where possible (e.g., Docker screenshot includes version number). Badge awarded on verification.</p>
+<h3 id="l1-l2-prove-code-quality-earn-junior-contributor">L1 → L2 (Prove Code Quality — earn Junior Contributor)<a class="headerlink" href="#l1-l2-prove-code-quality-earn-junior-contributor" title="Permanent link">&para;</a></h3>
+<p>Submit at least <strong>5 merged contributions</strong> that:</p>
+<ul>
+<li>Pass Mind-of-a-Worm pre-review (Design Document compliance, test coverage, code style)</li>
+<li>Receive human approval from L3+ reviewer</li>
+<li>Span at least 2 different subsystems (proves breadth)</li>
+</ul>
+<p><strong>Quality markers Mind-of-a-Worm tracks:</strong></p>
+<ul>
+<li>Code style adherence (PEP-8 for Python, NeuroML schema compliance)</li>
+<li>Test coverage (contributions include tests or improve existing tests)</li>
+<li>Documentation (docstrings, inline comments where needed)</li>
+<li>Communication quality (clear PR descriptions, responsive to review feedback)</li>
+</ul>
+<p><strong>DD024 data digitization as a contribution pathway:</strong> <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> identifies approximately 18 hours of data digitization work for Phase A1 — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:</p>
+<ul>
+<li>Schafer lab N2 baseline kinematics (WCON format conversion)</li>
+<li>Thomas 1990 defecation cycle timing data</li>
+<li>Raizen 1994 pharyngeal EPG trace digitization</li>
+<li>O'Hagan 2005 MEC-4 channel current kinetics</li>
+<li>Chalfie 1985 touch response latency measurements</li>
+</ul>
+<p>Each digitization task produces a validation dataset that directly feeds <a href="../DD010_Validation_Framework/">DD010</a> Tier 2/3 gates — so L1 contributors immediately see their work used in simulation validation. N2-Whisperer can assign these as "Data Digitizer" tasks with clear instructions, expected output format, and the paper section to digitize.</p>
+<p><strong>Typical timeline:</strong> 1-3 months of sustained engagement.</p>
+<h3 id="l2-l3-prove-subsystem-expertise-earn-contributor">L2 → L3 (Prove Subsystem Expertise — earn Contributor)<a class="headerlink" href="#l2-l3-prove-subsystem-expertise-earn-contributor" title="Permanent link">&para;</a></h3>
+<p>Demonstrate:</p>
+<ol>
+<li><strong>Deep understanding</strong> of at least one subsystem (can explain design decisions, knows the codebase)</li>
+<li><strong>Sustained contribution</strong> over 3+ months in that subsystem</li>
+<li><strong>Review participation:</strong> Has reviewed others' PRs (even as L2, reviews are valuable)</li>
+<li><strong>Alignment with project values:</strong> Respectful communication, collaborative approach, open science ethos</li>
+</ol>
+<p><strong>Nomination process:</strong></p>
+<ul>
+<li>Current L4 Senior Contributor nominates to founder</li>
+<li>Founder reviews contributor history, consults Mind-of-a-Worm metrics</li>
+<li>Founder approves or requests more time</li>
+</ul>
+<p><strong>Commit access granted:</strong> L3+ gain direct push access to their subsystem repository.</p>
+<h3 id="l3-l4-prove-leadership-earn-senior-contributor">L3 → L4 (Prove Leadership — earn Senior Contributor)<a class="headerlink" href="#l3-l4-prove-leadership-earn-senior-contributor" title="Permanent link">&para;</a></h3>
+<p>Demonstrate:</p>
+<ol>
+<li><strong>Architectural thinking:</strong> Has proposed or written Design Documents</li>
+<li><strong>Mentorship:</strong> Has successfully mentored L1/L2 contributors</li>
+<li><strong>Subsystem ownership:</strong> Has become the go-to person for their domain</li>
+<li><strong>Cross-subsystem collaboration:</strong> Works effectively with other maintainers on integration issues</li>
+</ol>
+<p><strong>Nomination process:</strong></p>
+<ul>
+<li>Self-nomination or nomination by current L4/L5</li>
+<li>Founder reviews, consults Scientific Advisory Board for scientific roles</li>
+<li>Approval requires consensus (founder + at least one SAB member)</li>
+</ul>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-flat-structure-everyone-equal">1. Flat Structure (Everyone Equal)<a class="headerlink" href="#1-flat-structure-everyone-equal" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Scales poorly. No clear accountability. Difficult to delegate without explicit roles.</p>
+<h3 id="2-strict-tenure-based-promotion-6-months-l2-12-months-l3">2. Strict Tenure-Based Promotion (6 months → L2, 12 months → L3)<a class="headerlink" href="#2-strict-tenure-based-promotion-6-months-l2-12-months-l3" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Time served ≠ competence. Some contributors produce high-quality work in weeks; others never reach competence. Merit-based beats time-based.</p>
+<h3 id="3-elected-roles-democratic-voting">3. Elected Roles (Democratic Voting)<a class="headerlink" href="#3-elected-roles-democratic-voting" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected (for now):</strong> OpenWorm is small enough that founder + L4 Senior Contributors can evaluate contributors directly. Elections make sense for larger communities (Python, Rust) but add overhead here.</p>
+<p><strong>When to reconsider:</strong> If the community grows to &gt;50 active contributors, consider electing L4 Senior Contributors.</p>
+<h3 id="4-no-formal-levels-keep-current-informal-model">4. No Formal Levels (Keep Current Informal Model)<a class="headerlink" href="#4-no-formal-levels-keep-current-informal-model" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> The problem this DD solves is that the informal model doesn't scale. Making levels explicit sets expectations and enables AI-assisted progression tracking (Mind-of-a-Worm).</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Transparency:</strong> Contributor levels are public. Anyone can see their level and progression criteria.</p>
+</li>
+<li>
+<p><strong>Appeal Process:</strong> If a contributor believes they meet L→L+1 criteria but were not promoted, they can request review. Founder makes final decision.</p>
+</li>
+<li>
+<p><strong>Demotion (Rare):</strong> If an L3/L4 becomes inactive (no contribution for 6+ months), status reverts to L2. Not punitive; simply reflects activity. Can be re-earned.</p>
+</li>
+<li>
+<p><strong>Code of Conduct Enforcement:</strong> Violations result in immediate level reduction or removal regardless of technical contributions. Respectful collaboration is non-negotiable.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Compensation and payment structures</strong> — contributor progression is merit-based, not financially compensated</li>
+<li><strong>Legal contributor agreements (CLAs)</strong> — intellectual property and licensing are handled separately</li>
+<li><strong>Project-external community management</strong> — social media presence, marketing, and external communications</li>
+<li><strong>Social media governance</strong> — posting policies, brand guidelines, and platform management</li>
+<li><strong>Conflict resolution beyond technical disputes</strong> — interpersonal conflicts outside the scope of code review and architectural decisions are escalated to the Board of Directors</li>
+</ul>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="tracking-infrastructure-mind-of-a-worm">Tracking Infrastructure (Mind-of-a-Worm)<a class="headerlink" href="#tracking-infrastructure-mind-of-a-worm" title="Permanent link">&para;</a></h3>
+<p>Mind-of-a-Worm maintains a <strong>contributor database</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;contributor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github:username&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;contributor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;human&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subsystems&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;c302&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;validation&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;contributions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;pr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;subsystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c302&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merged&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-15&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;pr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">145</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;subsystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;validation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merged&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-01&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;reviews_given&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;badges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;connected&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;simulation_runner&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;explorer&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;skill&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;neuron_modeling_foundations&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;github_proficient&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;first_issue_resolved&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">&quot;community&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">&quot;milestone&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;first_pr&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;teach_back&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;last_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-10&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ready_for_promotion&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;promotion_blockers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;needs 2 more merged PRs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;needs 1 domain badge&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>For AI agent contributors</strong> (see <a href="../DD015_AI_Contributor_Model/">DD015</a>), the schema adds <code>sponsor_id</code> and <code>agent_type</code>:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;contributor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agent:claude-code-slarson-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;contributor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ai_agent&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;agent_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;claude-code&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;sponsor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github:slarson&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subsystems&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;c302&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;contributions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;pr&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;subsystem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openworm&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;merged&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-16&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;badges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;orientation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;connected&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;simulation_runner&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;paper_reader&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;skill&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;first_issue_resolved&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">&quot;milestone&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;first_pr&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;last_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-16&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ready_for_promotion&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;promotion_blockers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;needs 4 more merged PRs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;needs 2 skill badges&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>For human sponsors of AI agents</strong>, teach-back badges are tracked on the sponsor's own profile:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;contributor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github:slarson&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;contributor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;human&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;sponsored_agents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;agent:claude-code-slarson-001&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;badges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;teach_back&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;i_understand_neurons&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;i_understand_muscles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;i_understand_the_body&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;sponsor_domains_covered&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;explain_level_overrides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;[DD001](DD001_Neural_Circuit_Architecture.md)&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;graduate&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;[DD002](DD002_Muscle_Model_Architecture.md)&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;undergrad&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;[DD003](DD003_Body_Physics_Architecture.md)&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;undergrad&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Mind-of-a-Worm generates weekly reports:</strong></p>
+<ul>
+<li>Contributors ready for promotion (send to L4 Senior Contributors)</li>
+<li>Contributors fading (inactive &gt;1 month, send to Mad-Worm-Scientist)</li>
+<li>New contributors onboarding (L0→L1 conversions)</li>
+</ul>
+<h3 id="public-contributor-page">Public Contributor Page<a class="headerlink" href="#public-contributor-page" title="Permanent link">&para;</a></h3>
+<p>Update openworm.org/people.html to include:</p>
+<p><strong>Current people.html structure</strong> (to be preserved and evolved):</p>
+<ul>
+<li>Board of Directors (7) → maps to L5</li>
+<li>Scientific Advisory Panel (3) → maps to L5/Advisory</li>
+<li>Operations Team (2) → maps to L5</li>
+<li>OpenWorm Fellows (1) → maps to L4</li>
+<li>Senior Contributors (16) → maps to L3-L4</li>
+<li>Contributors (~100+ dynamic JS array) → maps to L1-L2</li>
+<li>Emeritus Board Members (4) → Emeritus</li>
+</ul>
+<p><strong>Proposed structure (add levels):</strong></p>
+<ul>
+<li>Board / Scientific Advisory (L5)</li>
+<li>Senior Contributors (L4) — <strong>NEW, explicit list with subsystem ownership</strong></li>
+<li>Contributors (L3) — <strong>NEW, explicit list</strong></li>
+<li>Junior Contributors (L2)</li>
+<li>Apprentices (L1)</li>
+<li>Emeritus (inactive L3+)</li>
+</ul>
+<p><strong>Visible progression enhancements:</strong></p>
+<ol>
+<li><strong>Level count badges:</strong> Each level section header shows the count (e.g., "L3 Contributors (7)") so visitors can see the community's shape at a glance</li>
+<li><strong>Recent Achievements sidebar:</strong> Display the last 10 badges earned across the community — creates a sense of activity and momentum even for first-time visitors</li>
+<li><strong>Individual progress view:</strong> Link each contributor's name to their BadgeList profile, showing earned badges, current level, and progression toward next level</li>
+<li><strong>"Join at Your Level" CTA:</strong> Prominent button linking to the Choose Your Level self-assessment (see Fast-Track Assessment section), placed at the top of the page alongside the existing "How to join" information</li>
+<li><strong>Activity metrics:</strong> Reference <a href="../DD028_Project_Metrics_Dashboard/">DD028</a> as the data source for contributor activity metrics (PRs merged, badges earned, active days in last 30 days) displayed per contributor or per level</li>
+</ol>
+<p><strong>Technical note:</strong> The existing <code>rowify()</code> JS templating function on people.html generates contributor cards from a static array. This can be extended to pull level and badge data from Mind-of-a-Worm's contributor database via a REST API endpoint, or from a static JSON file generated by CI (simpler, no runtime dependency). The JSON approach is recommended for Phase 1: a GitHub Action runs nightly, queries Mind-of-a-Worm's contributor database, writes <code>contributors.json</code>, and deploys to openworm.org alongside the page.</p>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="from-current-informal-roles-to-explicit-levels">From Current Informal Roles to Explicit Levels<a class="headerlink" href="#from-current-informal-roles-to-explicit-levels" title="Permanent link">&para;</a></h3>
+<p><strong>Do not demote anyone.</strong> Current "Senior Contributors" map to L3 or L4 based on their role:</p>
+<table>
+<thead>
+<tr>
+<th>Current Senior Contributor</th>
+<th>Proposed Level</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural Circuit lead</td>
+<td>L4 Senior Contributor (Neural Circuit)</td>
+<td>c302 lead, Design Document author</td>
+</tr>
+<tr>
+<td>Body Physics lead</td>
+<td>L4 Senior Contributor (Body Physics)</td>
+<td>Sibernetic lead</td>
+</tr>
+<tr>
+<td>Matteo Cantarelli</td>
+<td>L4 Senior Contributor (Visualization)</td>
+<td>Geppetto, Worm Browser</td>
+</tr>
+<tr>
+<td>Others</td>
+<td>L3 Contributor</td>
+<td>Active code contributors</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current Contributors (~100+):</strong> Retroactive assignment based on recent activity:</p>
+<ul>
+<li>Active in last 6 months → L2 (Junior Contributor)</li>
+<li>Inactive → L1 (can re-earn L2)</li>
+</ul>
+<p><strong>New contributors:</strong> Start at L0, progress via the documented criteria.</p>
+<h3 id="reactivation-campaign">Reactivation Campaign<a class="headerlink" href="#reactivation-campaign" title="Permanent link">&para;</a></h3>
+<p>The contributor application form (archived at <code>archive/OpenWorm_Contributor_Application.xlsx</code>) represents OpenWorm's largest untapped resource: 940 people who already raised their hand to contribute.</p>
+<p><strong>Target population:</strong></p>
+<ul>
+<li><strong>940 total email addresses</strong> from contributor applications (2013-2026)</li>
+<li><strong>391 signups during the dormant period</strong> (2019-2025) when no active recruitment or onboarding occurred — these people signed up despite receiving no response</li>
+<li><strong>79 BadgeList "Simulation Stack Apprentice" earners</strong> — already demonstrated hands-on engagement</li>
+<li><strong>340 applicants with "no biology experience"</strong> — previously a barrier, now an asset (see below)</li>
+</ul>
+<p><strong>Personalization strategy:</strong> Each reactivation email is matched to the applicant's declared skills:</p>
+<ul>
+<li>Programming languages (Python, C++, Java, etc.) → matched to specific DD-derived GitHub issues at their level</li>
+<li>Education level → mapped to <code>explain_level</code> for AI agent teach-back (<a href="../DD015_AI_Contributor_Model/">DD015</a>)</li>
+<li>Biology experience → determines starting orientation (fast-track vs. full)</li>
+<li>Interests (modeling, data, visualization, etc.) → matched to subsystem and suggested first task</li>
+</ul>
+<p><strong>Fast-track badge credit:</strong> The 79 "Simulation Stack Apprentice" earners are instant L1 candidates — they've already completed the equivalent of the "Simulation Runner" orientation badge. Their reactivation email acknowledges this: "You already earned Simulation Runner in [year]. You're [badge] away from L1."</p>
+<p><strong>"Choose Your Level" link:</strong> Every reactivation email includes the self-assessment (see Fast-Track Assessment section) so returnees skip orientation they don't need. A postdoc who signed up in 2018 shouldn't be asked to install Docker again.</p>
+<p><strong>340 "no biology experience" applicants:</strong> No longer disqualified. These contributors are the ideal audience for AI-bridged contribution with teach-back education (<a href="../DD015_AI_Contributor_Model/">DD015</a>). Their AI agents handle the biology; they learn through the Sponsor Summary mechanism. The "I Understand Neurons" teach-back badge path is designed for exactly this population.</p>
+<p><strong>Success metric:</strong> 5% conversion = 47 active contributors — more than OpenWorm has ever had simultaneously active. Even 2% = 19, which would double the current active contributor count.</p>
+<p><strong>Phased rollout:</strong></p>
+<ul>
+<li><strong>Wave 1:</strong> 79 BadgeList earners + 16 current Senior Contributors (known warm contacts, highest expected conversion)</li>
+<li><strong>Wave 2:</strong> 391 dormant-period signups (2019-2025) — signed up recently despite no response, likely still interested</li>
+<li><strong>Wave 3:</strong> Remaining archive (pre-2019 signups) — lower expected conversion but still worth reaching</li>
+</ul>
+<hr />
+<h2 id="badge-recognition-system">Badge &amp; Recognition System<a class="headerlink" href="#badge-recognition-system" title="Permanent link">&para;</a></h2>
+<h3 id="background-badgelist-infrastructure">Background: BadgeList Infrastructure<a class="headerlink" href="#background-badgelist-infrastructure" title="Permanent link">&para;</a></h3>
+<p>OpenWorm has operated a badge-based onboarding system since May 2016 via <a href="https://badgelist.com/openworm">BadgeList</a> — 162 registered users, 20 badges, 8 tags. The progression funnels work: 79 people earned "Simulation Stack Apprentice" (install Docker, run the sim) → 17 completed "Hodgkin-Huxley Tutorial Graduate" → 9 explored the muscle model → 2 built it → 12 hacked it. That's an organic L0→L2 funnel before any formal system existed.</p>
+<p>The badge system proposed here builds on that foundation, aligning badges with Design Documents, the contributor ladder, and the AI contributor model (<a href="../DD015_AI_Contributor_Model/">DD015</a>).</p>
+<h3 id="badge-types">Badge Types<a class="headerlink" href="#badge-types" title="Permanent link">&para;</a></h3>
+<p>Badges fall into six categories. Humans and AI agents earn badges from the same pool unless noted.</p>
+<h4 id="1-orientation-badges-l0-l1">1. Orientation Badges (L0 → L1)<a class="headerlink" href="#1-orientation-badges-l0-l1" title="Permanent link">&para;</a></h4>
+<p>Earned by completing onboarding milestones. Assigned and verified by N2-Whisperer.</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+<th>Verification</th>
+<th>BadgeList Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Connected</strong></td>
+<td>Join Slack, GitHub, subscribe to mailing list</td>
+<td>N2-Whisperer confirms channel presence</td>
+<td>"Plugged In" (15 earners)</td>
+</tr>
+<tr>
+<td><strong>Simulation Runner</strong></td>
+<td>Install Docker, run simulation stack, post output</td>
+<td>Screenshot with version number</td>
+<td>"Simulation Stack Apprentice" (79 earners)</td>
+</tr>
+<tr>
+<td><strong>Explorer</strong></td>
+<td>Navigate the OpenWorm viewer (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Stage 1 Trame viewer or legacy Worm Browser), identify 5 neurons, describe their function and one connection</td>
+<td>N2-Whisperer evaluates response</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Paper Reader</strong></td>
+<td>Read <a href="https://doi.org/10.1098/rstb.2017.0382">Sarma et al. 2018</a>, summarize in 3 bullets</td>
+<td>N2-Whisperer evaluates summary</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>L0 → L1 requirement:</strong> Earn 3 of 4 orientation badges.</p>
+<p><strong>The viewer as engagement hook:</strong> The <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> WormSim viewer is the project's primary engagement hook — the visual, interactive "front door" that draws newcomers in. Stage 1 (post-hoc Trame viewer with cell selection and time scrubbing) should be the first thing a new contributor sees. The Explorer badge is deliberately designed to require interacting with it, ensuring every new contributor experiences the simulation visually before diving into code or data.</p>
+<h4 id="2-skill-badges-l1-l2">2. Skill Badges (L1 → L2)<a class="headerlink" href="#2-skill-badges-l1-l2" title="Permanent link">&para;</a></h4>
+<p>Earned by demonstrating specific technical capabilities. Verified by Mind-of-a-Worm (automated) or L3+ reviewer (manual).</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+<th>DD Alignment</th>
+<th>BadgeList Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neuron Modeling Foundations</strong></td>
+<td>Complete Hodgkin-Huxley tutorial, explain action potential</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>"H-H Tutorial Graduate" (17 earners)</td>
+</tr>
+<tr>
+<td><strong>Muscle Model Understanding</strong></td>
+<td>Run muscle model, explain ion channel dynamics</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>"Muscle Model Explorer" (9 earners)</td>
+</tr>
+<tr>
+<td><strong>Body Physics Basics</strong></td>
+<td>Run Sibernetic, explain SPH approach</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Data Wrangler</strong></td>
+<td>Extract data from a paper using <a href="../DD008_Data_Integration_Pipeline/">DD008</a> pipeline</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>"Literature Mining I" (4 earners)</td>
+</tr>
+<tr>
+<td><strong>Movement Analyst</strong></td>
+<td>Run analysis toolbox on sample data, generate report</td>
+<td><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></td>
+<td>"Movement Database User" (3 earners)</td>
+</tr>
+<tr>
+<td><strong>GitHub Proficient</strong></td>
+<td>Submit clean PR with tests, respond to review</td>
+<td>General</td>
+<td>"GitHub Best Practices" (10 earners)</td>
+</tr>
+<tr>
+<td><strong>First Issue Resolved</strong></td>
+<td>First merged PR (any subsystem)</td>
+<td>General</td>
+<td>"Code Warrior" (9 earners)</td>
+</tr>
+<tr>
+<td><strong>Cell Biology Foundations</strong></td>
+<td>Complete worm development tutorial</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>"Worm Development I" (3 earners)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>L1 → L2 (Junior Contributor) requirement:</strong> Earn "First Issue Resolved" + 2 skill badges + 5 total merged PRs.</p>
+<h4 id="3-domain-badges-l2-l3">3. Domain Badges (L2 → L3)<a class="headerlink" href="#3-domain-badges-l2-l3" title="Permanent link">&para;</a></h4>
+<p>Earned by sustained contribution to a specific Design Document's domain. Tracked automatically by Mind-of-a-Worm based on merged PRs.</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+<th>DD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neural Circuit Contributor</strong></td>
+<td>5+ merged PRs in c302/CElegansNeuroML</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+</tr>
+<tr>
+<td><strong>Muscle Model Contributor</strong></td>
+<td>5+ merged PRs in muscle model code</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+</tr>
+<tr>
+<td><strong>Body Physics Contributor</strong></td>
+<td>5+ merged PRs in Sibernetic</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+</tr>
+<tr>
+<td><strong>Data Pipeline Contributor</strong></td>
+<td>5+ merged PRs in OWMeta/data tools</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+</tr>
+<tr>
+<td><strong>Validation Contributor</strong></td>
+<td>5+ merged PRs in analysis toolbox</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+</tr>
+<tr>
+<td><strong>Visualization Contributor</strong></td>
+<td>5+ merged PRs in Worm3DViewer/browser</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+</tr>
+<tr>
+<td><strong>Integration Contributor</strong></td>
+<td>5+ merged PRs in simulation stack glue</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+</tr>
+<tr>
+<td><strong>Neuropeptide Contributor</strong></td>
+<td>5+ merged PRs in neuropeptide subsystem</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+</tr>
+<tr>
+<td><strong>Pharyngeal Contributor</strong></td>
+<td>5+ merged PRs in pharyngeal system</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>L2 → L3 (Contributor) requirement:</strong> Earn at least 1 domain badge + sustained activity over 3+ months.</p>
+<h4 id="4-teach-back-badges-human-sponsors-only-dd015">4. Teach-Back Badges (Human Sponsors Only — <a href="../DD015_AI_Contributor_Model/">DD015</a>)<a class="headerlink" href="#4-teach-back-badges-human-sponsors-only-dd015" title="Permanent link">&para;</a></h4>
+<p>Unique to the AI contributor model. Earned when a human sponsor's AI agent lands a PR and the Sponsor Summary (see <a href="../DD015_AI_Contributor_Model/">DD015</a> §3.2) passes Mind-of-a-Worm's scientific accuracy review. These badges represent <strong>knowledge earned through contributing</strong> — the sponsor learns the science through their agent's explanations.</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+<th>Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I Understand Neurons</strong></td>
+<td>Sponsor Summary for a <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> contribution passes review</td>
+<td>Neural Circuit</td>
+</tr>
+<tr>
+<td><strong>I Understand Muscles</strong></td>
+<td>Sponsor Summary for a <a href="../DD002_Muscle_Model_Architecture/">DD002</a> contribution passes review</td>
+<td>Muscle Model</td>
+</tr>
+<tr>
+<td><strong>I Understand the Body</strong></td>
+<td>Sponsor Summary for a <a href="../DD003_Body_Physics_Architecture/">DD003</a> contribution passes review</td>
+<td>Body Physics</td>
+</tr>
+<tr>
+<td><strong>I Understand Peptides</strong></td>
+<td>Sponsor Summary for a <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> contribution passes review</td>
+<td>Neuropeptides</td>
+</tr>
+<tr>
+<td><strong>I Understand Validation</strong></td>
+<td>Sponsor Summary for a <a href="../DD010_Validation_Framework/">DD010</a> contribution passes review</td>
+<td>Validation</td>
+</tr>
+<tr>
+<td><strong>I Understand the Whole Worm</strong></td>
+<td>Earn teach-back badges in 5+ different domains</td>
+<td>Cross-domain</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How this works in practice:</strong></p>
+<ol>
+<li>A middle schooler sponsors an AI agent that implements a gap junction in <a href="../DD001_Neural_Circuit_Architecture/">DD001</a></li>
+<li>The agent writes a Sponsor Summary at <code>explain_level: child</code>: "You helped connect two brain cells that tell the worm to back up!"</li>
+<li>Mind-of-a-Worm verifies the summary is scientifically accurate at that level</li>
+<li>The sponsor earns <strong>"I Understand Neurons"</strong> badge</li>
+<li>Over time, as the sponsor accumulates teach-backs across domains, their <code>explain_level</code> naturally rises — the agent's explanations get more technical because the sponsor has been learning</li>
+<li>After teach-back badges in 5+ domains, the sponsor earns <strong>"I Understand the Whole Worm"</strong> — they've gained a genuine cross-disciplinary understanding of C. elegans through the act of contributing</li>
+</ol>
+<p><strong>Why this matters:</strong> The contribution IS the curriculum. Badges make the learning visible. A sponsor's badge profile becomes a credential: "I learned C. elegans neuroscience by contributing to OpenWorm."</p>
+<h4 id="5-community-badges-all-levels">5. Community Badges (All Levels)<a class="headerlink" href="#5-community-badges-all-levels" title="Permanent link">&para;</a></h4>
+<p>Earned through non-code contributions. Verified by Mind-of-a-Worm activity tracking or L3+ confirmation.</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+<th>BadgeList Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mentor</strong></td>
+<td>Helped 3+ newcomers reach L1 (confirmed by N2-Whisperer)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Reviewer</strong></td>
+<td>Reviewed 10+ PRs (any subsystem)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Event Organizer</strong></td>
+<td>Organized a hackathon or workshop</td>
+<td>"Hackathon I/II/III" (4/2/2)</td>
+</tr>
+<tr>
+<td><strong>Science Writer</strong></td>
+<td>Published blog post or documentation improvement</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Community Builder</strong></td>
+<td>Answered 25+ questions in Slack</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6-milestone-badges-all-levels">6. Milestone Badges (All Levels)<a class="headerlink" href="#6-milestone-badges-all-levels" title="Permanent link">&para;</a></h4>
+<p>Automatic celebration markers. AI agents and humans both earn these.</p>
+<table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First PR</strong></td>
+<td>First merged PR</td>
+</tr>
+<tr>
+<td><strong>Tenacious</strong></td>
+<td>10 merged PRs</td>
+</tr>
+<tr>
+<td><strong>Centurion</strong></td>
+<td>100 merged PRs</td>
+</tr>
+<tr>
+<td><strong>Year One</strong></td>
+<td>Active contributor for 1 year</td>
+</tr>
+<tr>
+<td><strong>Cross-Pollinator</strong></td>
+<td>Merged PRs in 3+ different subsystems</td>
+</tr>
+<tr>
+<td><strong>Integration Pioneer</strong></td>
+<td>Merged PR touching 2+ DD subsystems in a single change</td>
+</tr>
+</tbody>
+</table>
+<h3 id="badge-infrastructure-from-badgelist-to-automated-issuance">Badge Infrastructure: From BadgeList to Automated Issuance<a class="headerlink" href="#badge-infrastructure-from-badgelist-to-automated-issuance" title="Permanent link">&para;</a></h3>
+<p><strong>Current state (BadgeList):</strong> Manual. Someone reviews each badge claim, verifies completion, awards the badge. This works for onboarding (low volume) but doesn't scale to hundreds of AI agents landing PRs daily.</p>
+<p><strong>Target state:</strong> Automated badge issuance triggered by GitHub events, with Mind-of-a-Worm as the verification engine.</p>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Badge Type</th>
+<th>Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PR merged</td>
+<td>Contribution, Domain, Milestone</td>
+<td>Automatic (Mind-of-a-Worm counts PRs per subsystem)</td>
+</tr>
+<tr>
+<td>Orientation task completed</td>
+<td>Orientation</td>
+<td>N2-Whisperer confirms via Slack interaction</td>
+</tr>
+<tr>
+<td>Sponsor Summary passes review</td>
+<td>Teach-Back</td>
+<td>Mind-of-a-Worm checks scientific accuracy</td>
+</tr>
+<tr>
+<td>Slack activity threshold</td>
+<td>Community</td>
+<td>Mind-of-a-Worm tracks message counts</td>
+</tr>
+<tr>
+<td>L3+ reviewer tags</td>
+<td>Skill, Community</td>
+<td>Human confirmation via GitHub label</td>
+</tr>
+</tbody>
+</table>
+<h3 id="badgelist-api-assessment">BadgeList API Assessment<a class="headerlink" href="#badgelist-api-assessment" title="Permanent link">&para;</a></h3>
+<p>BadgeList (badgelist.com) provides a REST API (v1) at <code>https://badgelist.com/api/v1</code> that is <strong>sufficient for automated badge issuance.</strong></p>
+<p><strong>Key capabilities:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Endpoint</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Award badges programmatically</strong></td>
+<td><code>POST /badges/{badge_id}/endorsements</code></td>
+<td>The critical endpoint. Awards badges by email address. Up to 500 per batch. Auto-invites new users if they don't have accounts.</td>
+</tr>
+<tr>
+<td><strong>Create badges</strong></td>
+<td><code>POST /badges</code></td>
+<td>Can create new DD-aligned badges via API.</td>
+</tr>
+<tr>
+<td><strong>Query badges</strong></td>
+<td><code>GET /badges</code>, <code>GET /badges/{key}</code></td>
+<td>Read badge definitions, check which badges exist.</td>
+</tr>
+<tr>
+<td><strong>Query users</strong></td>
+<td><code>GET /groups/{group_key}/users</code>, <code>GET /users/{key}</code></td>
+<td>Look up users by ID, username, or email.</td>
+</tr>
+<tr>
+<td><strong>Query portfolios</strong></td>
+<td><code>GET /portfolios</code></td>
+<td>Check who has earned what.</td>
+</tr>
+<tr>
+<td><strong>Async batch operations</strong></td>
+<td>Pollers</td>
+<td>Batch awards return a 202 + poller ID for tracking completion.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Authentication:</strong> API Key token (passed as header or query param). Requires contacting hello@badgelist.com for a token.</p>
+<p><strong>What the endorsement endpoint does:</strong> When you call <code>POST /badges/{badge_id}/endorsements</code> with an email address, BadgeList handles all the edge cases:</p>
+<ul>
+<li><strong>New user:</strong> Invites them to create an account, stores the badge award pending signup</li>
+<li><strong>Existing user, not in group:</strong> Auto-adds them to the OpenWorm group, awards badge</li>
+<li><strong>Existing seeker:</strong> Awards badge immediately</li>
+<li><strong>Already holds badge:</strong> Adds endorsement to existing portfolio</li>
+</ul>
+<p><strong>What BadgeList does NOT provide (confirmed gaps):</strong></p>
+<ul>
+<li>No incoming webhooks (can't push events TO our systems — we must poll or fire-and-forget)</li>
+<li>No conditional/prerequisite logic (badge A requires badge B — must enforce in our code)</li>
+<li>No custom metadata on awards (can't attach PR number or DD reference to a badge award)</li>
+<li>No progression/leveling system (badges are flat — level logic must live in Mind-of-a-Worm)</li>
+</ul>
+<h3 id="implementation-options">Implementation Options<a class="headerlink" href="#implementation-options" title="Permanent link">&para;</a></h3>
+<p><strong>Option 1: BadgeList as primary (recommended for Phase 1)</strong></p>
+<p>Keep BadgeList as the badge platform. Mind-of-a-Worm calls the API to award badges on GitHub events.</p>
+<div class="highlight"><pre><span></span><code>GitHub PR merged → Mind-of-a-Worm webhook fires →
+  Check: does this earn a badge? (domain badge threshold, skill completion, etc.) →
+  If yes: POST /badges/{badge_id}/endorsements with contributor&#39;s email →
+  BadgeList awards badge, contributor sees it on their profile
+</code></pre></div>
+<ul>
+<li><strong>Pros:</strong> Already exists with 162 users. Social profiles, public badge display, no build cost. API handles all the hard parts (user creation, group management, badge display).</li>
+<li><strong>Cons:</strong> Third-party dependency. No custom metadata on awards. Prerequisite logic must live in our code. Limited to what BadgeList's UI can show.</li>
+<li><strong>Cost:</strong> Free tier (BadgeList is free for public groups).</li>
+</ul>
+<p><strong>Option 2: GitHub-native + contributor registry</strong></p>
+<p>Badges stored as YAML in <code>ai-contributor-registry/badges/</code>. Mind-of-a-Worm auto-commits badge awards. Displayed on openworm.org.</p>
+<ul>
+<li><strong>Pros:</strong> Full control. Custom metadata (PR links, DD references). No third-party dependency.</li>
+<li><strong>Cons:</strong> Must build display UI on openworm.org. Lose BadgeList's social features. Must migrate 162 existing users.</li>
+</ul>
+<p><strong>Option 3: Hybrid</strong></p>
+<p>BadgeList for public-facing profiles (social layer). GitHub registry as source of truth (data layer). Mind-of-a-Worm writes to both.</p>
+<ul>
+<li><strong>Pros:</strong> Best of both worlds.</li>
+<li><strong>Cons:</strong> Two systems to maintain. Sync complexity.</li>
+</ul>
+<p><strong>Recommendation:</strong> Start with <strong>Option 1 (BadgeList)</strong>. The API has everything we need for automated issuance, and 162 users already have profiles there. Mind-of-a-Worm enforces prerequisite logic and level thresholds — BadgeList just handles badge display and user management. If we outgrow BadgeList or need custom features (DD metadata, progression visualization), migrate to Option 2 or 3.</p>
+<p><strong>Immediate next steps:</strong></p>
+<ol>
+<li>Contact hello@badgelist.com for an API token (the Project Lead owns the group)</li>
+<li>Create the new DD-aligned badges via <code>POST /badges</code></li>
+<li>Wire Mind-of-a-Worm to call <code>POST /badges/{badge_id}/endorsements</code> on PR merge</li>
+<li>Migrate existing badge names (see Migration table below) — create new badges, bulk-award to existing holders</li>
+</ol>
+<h3 id="how-badges-connect-to-contributor-levels">How Badges Connect to Contributor Levels<a class="headerlink" href="#how-badges-connect-to-contributor-levels" title="Permanent link">&para;</a></h3>
+<p>Badges make level progression <strong>transparent and objective</strong>. Instead of subjective "L4 nominates to founder," the criteria become concrete:</p>
+<table>
+<thead>
+<tr>
+<th>Transition</th>
+<th>Title Earned</th>
+<th>Badge Requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L0 → L1</strong></td>
+<td>Apprentice</td>
+<td>3 of 4 orientation badges</td>
+</tr>
+<tr>
+<td><strong>L1 → L2</strong></td>
+<td>Junior Contributor</td>
+<td>"First Issue Resolved" + 2 skill badges + 5 merged PRs</td>
+</tr>
+<tr>
+<td><strong>L2 → L3</strong></td>
+<td>Contributor</td>
+<td>1+ domain badge + 3 months sustained activity + L4 nomination</td>
+</tr>
+<tr>
+<td><strong>L3 → L4</strong></td>
+<td>Senior Contributor</td>
+<td>2+ domain badges + "Mentor" badge + DD authorship + founder approval</td>
+</tr>
+</tbody>
+</table>
+<p>For AI agents (<a href="../DD015_AI_Contributor_Model/">DD015</a>): same badge requirements through L3. L4 remains human-only.</p>
+<p>For human sponsors of AI agents: teach-back badges accumulate alongside (or instead of) contribution badges. A sponsor who never writes code but sponsors 50 successful AI contributions and earns "I Understand the Whole Worm" has demonstrated genuine engagement. Their badge profile tells a story of learning through contributing.</p>
+<h3 id="migration-from-existing-badgelist">Migration from Existing BadgeList<a class="headerlink" href="#migration-from-existing-badgelist" title="Permanent link">&para;</a></h3>
+<p><strong>Principle:</strong> Honor existing earners. Never demote or remove a badge someone earned.</p>
+<table>
+<thead>
+<tr>
+<th>Existing Badge (162 users)</th>
+<th>Migration Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulation Stack Apprentice (79)</td>
+<td>→ "Simulation Runner" orientation badge. All 79 earners auto-credited.</td>
+</tr>
+<tr>
+<td>Plugged In (15)</td>
+<td>→ "Connected" orientation badge. All 15 auto-credited.</td>
+</tr>
+<tr>
+<td>Hodgkin-Huxley Tutorial Graduate (17)</td>
+<td>→ "Neuron Modeling Foundations" skill badge. All 17 auto-credited.</td>
+</tr>
+<tr>
+<td>Muscle Model Explorer (9)</td>
+<td>→ "Muscle Model Understanding" skill badge. All 9 auto-credited.</td>
+</tr>
+<tr>
+<td>Muscle Model Builder (2)</td>
+<td>→ "Muscle Model Understanding" + "First Issue Resolved". Auto-credited.</td>
+</tr>
+<tr>
+<td>Muscle Model Hacker (12)</td>
+<td>→ "Muscle Model Contributor" domain badge. All 12 auto-credited.</td>
+</tr>
+<tr>
+<td>Code Warrior (9)</td>
+<td>→ "First Issue Resolved" milestone badge. All 9 auto-credited.</td>
+</tr>
+<tr>
+<td>GitHub Best Practices (10)</td>
+<td>→ "GitHub Proficient" skill badge. All 10 auto-credited.</td>
+</tr>
+<tr>
+<td>Literature Mining I/II (4/0)</td>
+<td>→ "Data Wrangler" skill badge. 4 auto-credited.</td>
+</tr>
+<tr>
+<td>Movement Database User (3)</td>
+<td>→ "Movement Analyst" skill badge. 3 auto-credited.</td>
+</tr>
+<tr>
+<td>Worm Development I/II (3/2)</td>
+<td>→ "Cell Biology Foundations" skill badge. 3 auto-credited.</td>
+</tr>
+<tr>
+<td>Hackathon I/II/III (4/2/2)</td>
+<td>→ "Event Organizer" community badge. 4 auto-credited.</td>
+</tr>
+<tr>
+<td>WormWorx (2)</td>
+<td>→ Legacy badge (displayed but no new equivalent).</td>
+</tr>
+<tr>
+<td>Sprint for Internet Health (3)</td>
+<td>→ Legacy badge (displayed but no new equivalent).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result:</strong> Every existing BadgeList earner starts the new system with credit for what they already did. The 79 people who installed the simulation stack? They're already L0→L1 qualified.</p>
+<hr />
+<h2 id="engagement-loop">Engagement Loop<a class="headerlink" href="#engagement-loop" title="Permanent link">&para;</a></h2>
+<p>Badges and levels only drive sustained participation if they're wired into an active feedback loop. This section defines the engagement mechanics that turn badge progression into a self-reinforcing cycle of contribution, recognition, and next-action prompting.</p>
+<h3 id="trigger-action-channel-map">Trigger-Action-Channel Map<a class="headerlink" href="#trigger-action-channel-map" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Action</th>
+<th>Channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Badge earned</td>
+<td>Congratulations message + "Next challenge" suggestion</td>
+<td>Slack DM + email</td>
+</tr>
+<tr>
+<td>PR merged</td>
+<td>Progress update toward next badge/level</td>
+<td>Slack DM</td>
+</tr>
+<tr>
+<td>Inactive &gt;2 weeks</td>
+<td>Gentle nudge with suggested "easy wins" matching their skills</td>
+<td>Email</td>
+</tr>
+<tr>
+<td>Level-up (L0→L1, L1→L2, etc.)</td>
+<td>Public announcement + contributor page update</td>
+<td>Slack #general + openworm.org</td>
+</tr>
+<tr>
+<td>Monthly</td>
+<td>"State of the Worm" digest showing collective progress</td>
+<td>Email newsletter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="engagement-loop-components">Engagement Loop Components<a class="headerlink" href="#engagement-loop-components" title="Permanent link">&para;</a></h3>
+<p><strong>Immediate recognition:</strong> When a badge is earned, the contributor receives an instant notification explaining what they unlocked (new permissions, new subsystem access, new badge categories available). Recognition is specific: "You earned Data Wrangler — you can now contribute to DD008 data pipeline tasks" rather than generic congratulations.</p>
+<p><strong>Next action prompt:</strong> Every notification includes one concrete next step. Badge earned → "Here's a GitHub issue at your level." Level up → "Here are 3 issues in your new subsystem scope." PR merged → "You're 2 PRs away from your next domain badge." The contributor never has to wonder "what should I do next?"</p>
+<p><strong>Weekly contributor digest:</strong> Active contributors (at least 1 activity in the past 7 days) receive a weekly summary showing their progress toward the next badge/level, nearby milestones ("1 more PR for Tenacious badge"), and a highlight of what the community accomplished that week.</p>
+<p><strong>Monthly "State of the Worm" newsletter:</strong> Community-wide progress report sent to all contributors (active and inactive). Content includes:</p>
+<ul>
+<li>Collective metrics: PRs merged, badges earned, new contributors onboarded</li>
+<li>Phase progress: which DD milestones were hit, what's next</li>
+<li>Contributor spotlights: celebrate recent level-ups and notable contributions</li>
+<li>"Join back in" CTA: link to open issues tagged by difficulty level</li>
+<li>Data sourced from <a href="../DD028_Project_Metrics_Dashboard/">DD028</a> dashboard metrics</li>
+</ul>
+<p><strong>Re-engagement nudge:</strong> Contributors inactive for &gt;2 weeks receive a personalized email with 2-3 open GitHub issues matched to their declared skills and current level. The tone is invitational, not guilt-inducing: "We noticed you haven't been around — here are some things that could use your expertise." If no response after 2 nudges (spaced 2 weeks apart), the contributor moves to quarterly digest frequency.</p>
+<h3 id="notification-responsibilities">Notification Responsibilities<a class="headerlink" href="#notification-responsibilities" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mind-of-a-Worm</strong> generates all engagement notifications (badge earned, level up, next challenge, re-engagement nudges, weekly digest)</li>
+<li><strong>N2-Whisperer</strong> delivers onboarding-specific messages (orientation badge prompts, Choose Your Level assessment, first-week check-ins)</li>
+<li><strong>"State of the Worm" newsletter</strong> content is generated from <a href="../DD028_Project_Metrics_Dashboard/">DD028</a> metrics data, formatted by Mind-of-a-Worm, and distributed via email</li>
+</ul>
+<hr />
+<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-contributor-churn">Issue 1: Contributor Churn<a class="headerlink" href="#issue-1-contributor-churn" title="Permanent link">&para;</a></h3>
+<p>Many contributors are episodic (intense activity for weeks, then disappear). Level system must handle this gracefully.</p>
+<p><strong>Mitigation:</strong> Levels are <strong>not permanent</strong>. Inactivity → level reduction. Re-engagement → level restoration. No shame in cycling.</p>
+<h3 id="issue-2-non-code-contributions">Issue 2: Non-Code Contributions<a class="headerlink" href="#issue-2-non-code-contributions" title="Permanent link">&para;</a></h3>
+<p>Science writing, outreach, documentation, community building are valuable but not captured by "merged PRs."</p>
+<p><strong>Mitigation:</strong> L1→L2 criteria include:</p>
+<ul>
+<li>Technical writing (blog posts, documentation)</li>
+<li>Community support (answering Slack questions, mentoring newcomers)</li>
+<li>Scientific contribution (literature review, experimental validation)</li>
+</ul>
+<p>Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Apache Software Foundation Contributor Ladder:</strong> community.apache.org/contributor-ladder.html</li>
+<li><strong>Linux Kernel Maintainer Model:</strong> LWN.net/Articles/703005</li>
+<li><strong>Medical Residency Graduated Autonomy:</strong> PMC4675449</li>
+<li><strong><a href="https://doi.org/10.1098/rstb.2017.0382">Sarma et al. (2018)</a>.</strong> "OpenWorm: overview." <em>Phil Trans R Soc B</em> 373:20170382.</li>
+</ol>
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="how-this-dd-interfaces-with-other-dds">How This DD Interfaces with Other DDs<a class="headerlink" href="#how-this-dd-interfaces-with-other-dds" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>DD012 (RFC Process):</strong> Contributor levels determine who can propose, review, and approve Design Documents</li>
+<li><strong>DD013 (Simulation Stack):</strong> Subsystem ownership map determines merge permissions per repository</li>
+<li><strong>DD014 (Dynamic Visualization Architecture):</strong> The WormSim viewer serves as the primary engagement hook for the Explorer orientation badge; contributor community data can surface in the viewer's community panel</li>
+<li><strong>DD015 (AI Contributor Model):</strong> AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning</li>
+<li><strong>DD024 (Validation Data Acquisition Pipeline):</strong> Provides structured data digitization tasks suitable for L1 contributor onboarding; digitized datasets feed into <a href="../DD010_Validation_Framework/">DD010</a> validation gates</li>
+<li><strong>DD028 (Project Metrics Dashboard):</strong> Mind-of-a-Worm contributor metrics (badge counts by category, level distribution, active contributor count, onboarding conversion rates) feed into DD028's contributor panel; "State of the Worm" newsletter content is generated from DD028 dashboard data</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GitHub team structure mirrors the five contributor levels (L1-L5)</li>
+<li>Repository branch protection rules enforce level-based merge permissions</li>
+<li>Mind-of-a-Worm contributor database tracks level, badges, and subsystem assignments</li>
+<li>BadgeList API integration awards badges on GitHub events (PR merge, orientation completion)</li>
+<li>Mind-of-a-Worm generates engagement notifications (badge earned, level up, next challenge, re-engagement nudges) via Slack and email</li>
+<li>"State of the Worm" monthly newsletter uses <a href="../DD028_Project_Metrics_Dashboard/">DD028</a> metrics data</li>
+<li>Reactivation campaign emails use contributor application archive data matched to DD-derived issues</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (requires community discussion)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Map current contributors to proposed levels</p>
+</li>
+<li>Publish criteria on openworm.org</li>
+<li>Implement Mind-of-a-Worm tracking</li>
+<li>Announce transition plan to community</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5878 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD018_Egg_Laying_System_Architecture/">
+      
+      
+        <link rel="prev" href="../DD017_draft_issues/">
+      
+      
+        <link rel="next" href="../DD004_Mechanical_Cell_Identity/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD018 Egg-Laying - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd018-egg-laying-system-architecture-reproductive-behavioral-circuit" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD018 Egg-Laying
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuit-architecture-feed-forward-excitation-with-feedback-inhibition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Architecture: Feed-Forward Excitation with Feedback Inhibition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hsn-neuron-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSN Neuron Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vc-neuron-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VC Neuron Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulval-muscle-model-vm1-and-vm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulval Muscle Model (vm1 and vm2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uterine-muscle-model-um1-um2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uterine Muscle Model (um1, um2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uv1-neuroendocrine-feedback-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        uv1 Neuroendocrine Feedback Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-junction-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Junction Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serotonin-receptor-signaling-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serotonin Receptor Signaling Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locomotion-egg-laying-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locomotion-Egg-Laying Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egg-event-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Egg Event Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ignore-egg-laying-locomotion-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ignore Egg-Laying (Locomotion Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-abstract-state-machine-no-biophysical-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Abstract State Machine (No Biophysical Circuit)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-full-gaqdag-biochemical-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Full Gaq/DAG Biochemical Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-treat-vulval-muscles-as-identical-to-body-wall-muscles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Treat Vulval Muscles as Identical to Body Wall Muscles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-model-only-hsn-without-vc-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Only HSN Without VC Feedback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-wait-for-complete-vulval-muscle-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Wait for Complete Vulval Muscle Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-egg-laying-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Egg-Laying Model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wormatlas-egg-laying-apparatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WormAtlas Egg-Laying Apparatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectome-data-cook-et-al-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectome Data (Cook et al. 2019)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egg-laying-circuit-connectivity-from-cook-et-al-2019-and-white-et-al-1986" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Egg-Laying Circuit Connectivity (from Cook et al. 2019 and White et al. 1986)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sun-bhatt-2010-circuit-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sun &amp; Bhatt 2010 Circuit Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulval-muscle-channel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulval Muscle Channel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incremental-integration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Integration Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backward Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-vulval-muscle-electrophysiology-is-indirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Vulval Muscle Electrophysiology Is Indirect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-serotonin-receptor-signaling-is-simplified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Serotonin Receptor Signaling Is Simplified
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-egg-counter-is-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Egg Counter Is Abstract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-missing-modulatory-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Missing Modulatory Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Budget
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circuit-architecture-feed-forward-excitation-with-feedback-inhibition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Architecture: Feed-Forward Excitation with Feedback Inhibition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hsn-neuron-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSN Neuron Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vc-neuron-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VC Neuron Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulval-muscle-model-vm1-and-vm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulval Muscle Model (vm1 and vm2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uterine-muscle-model-um1-um2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uterine Muscle Model (um1, um2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uv1-neuroendocrine-feedback-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        uv1 Neuroendocrine Feedback Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-junction-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Junction Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serotonin-receptor-signaling-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serotonin Receptor Signaling Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locomotion-egg-laying-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locomotion-Egg-Laying Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egg-event-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Egg Event Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ignore-egg-laying-locomotion-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ignore Egg-Laying (Locomotion Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-abstract-state-machine-no-biophysical-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Abstract State Machine (No Biophysical Circuit)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-full-gaqdag-biochemical-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Full Gaq/DAG Biochemical Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-treat-vulval-muscles-as-identical-to-body-wall-muscles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Treat Vulval Muscles as Identical to Body Wall Muscles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-model-only-hsn-without-vc-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Only HSN Without VC Feedback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-wait-for-complete-vulval-muscle-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Wait for Complete Vulval Muscle Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-egg-laying-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Egg-Laying Model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wormatlas-egg-laying-apparatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WormAtlas Egg-Laying Apparatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connectome-data-cook-et-al-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectome Data (Cook et al. 2019)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#egg-laying-circuit-connectivity-from-cook-et-al-2019-and-white-et-al-1986" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Egg-Laying Circuit Connectivity (from Cook et al. 2019 and White et al. 1986)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sun-bhatt-2010-circuit-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sun &amp; Bhatt 2010 Circuit Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulval-muscle-channel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulval Muscle Channel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#incremental-integration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Integration Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backward Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-vulval-muscle-electrophysiology-is-indirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Vulval Muscle Electrophysiology Is Indirect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-serotonin-receptor-signaling-is-simplified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Serotonin Receptor Signaling Is Simplified
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-egg-counter-is-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Egg Counter Is Abstract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-missing-modulatory-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Missing Modulatory Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Budget
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd018-egg-laying-system-architecture-reproductive-behavioral-circuit">DD018: Egg-Laying System Architecture (Reproductive Behavioral Circuit)<a class="headerlink" href="#dd018-egg-laying-system-architecture-reproductive-behavioral-circuit" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 3)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-16</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity), <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization), <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptidergic Connectome)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Model the <em>C. elegans</em> egg-laying system as a 24-cell circuit comprising 2 serotonergic HSN command neurons, 6 cholinergic VC motor neurons, and 16 non-striated sex muscles (8 vulval + 8 uterine), with uv1 neuroendocrine feedback cells providing tyramine-mediated inhibition. The circuit produces a characteristic two-state behavioral pattern: ~20-minute inactive phases alternating with ~2-minute active bouts of 3-5 eggs each. Success: reproduce the two-state temporal pattern within quantitative bounds of <a href="https://doi.org/10.7554/eLife.21126">Collins et al. 2016</a> experimental data.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase 3</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Organ Systems — see <a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Egg-laying circuit: 2 HSN neurons + 6 VC neurons + 16 sex muscles (NeuroML), serotonergic/cholinergic signaling, two-state behavioral output</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: egg-laying bout interval 20 +/- 10 min, 3-5 eggs per bout; inactive/active two-state pattern reproduced</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a> (<code>c302_egglaying.py</code>, <code>egglaying/</code> module) — issues labeled <code>dd018</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>egglaying.enabled: true</code> / <code>egglaying.model: "circuit"</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> with <code>egglaying.enabled: true</code> (body still moves?), <code>scripts/measure_egglaying.py</code> (two-state pattern?)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>egglaying/muscle_activation/</code> layer — 16 sex muscles with contraction heatmap; <code>egglaying/circuit_state/</code> for active/inactive state timeline</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Two-state behavioral validation (Tier 3) blocks merge; backward compatibility with <code>egglaying.enabled: false</code> required</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Two-state temporal pattern</td>
+<td>Inactive state ~20 +/- 10 min; active state ~2 min; 3-5 eggs per bout</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Body locomotion preservation</td>
+<td>Within +/-15% of baseline kinematic metrics when egg-laying circuit enabled</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Serotonin-induced egg-laying</td>
+<td>Simulated exogenous serotonin produces sustained active state (pharmacological validation)</td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+<tr>
+<td><strong>Quaternary:</strong> Mutant phenotype reproduction</td>
+<td>egl-1 (no egg-laying), unc-103(lf) (hyperactive), egl-36(gf) (Egl) reproduced qualitatively</td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No egg-laying circuit. HSN and VC neurons exist in the connectome but have no sex-muscle targets. No vulval or uterine muscles modeled. No reproductive behavior.</p>
+<p><strong>After:</strong> A functional egg-laying circuit producing rhythmic two-state behavior. Serotonergic command neurons drive vulval muscle contraction via feed-forward excitation with tyraminergic feedback inhibition. Egg-laying events are visible as synchronized vulval muscle calcium transients in the <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/c302</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vulval muscle cell template (vm1)</td>
+<td><code>egglaying/VulvalMuscle1Cell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Non-striated HH with EGL-19, UNC-103, EGL-36 channels</td>
+</tr>
+<tr>
+<td>Vulval muscle cell template (vm2)</td>
+<td><code>egglaying/VulvalMuscle2Cell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Same channels + postsynaptic nAChR, SER-1 receptor</td>
+</tr>
+<tr>
+<td>Uterine muscle cell template (um)</td>
+<td><code>egglaying/UterineMuscleCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Simplified; gap-junction-coupled to vm2</td>
+</tr>
+<tr>
+<td>HSN neuron differentiated template</td>
+<td><code>cells/HSNCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Serotonergic; NLP-3 co-release (if <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> enabled)</td>
+</tr>
+<tr>
+<td>VC neuron differentiated template</td>
+<td><code>cells/VCCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Cholinergic; mechanosensitive</td>
+</tr>
+<tr>
+<td>uv1 neuroendocrine cell template</td>
+<td><code>egglaying/UV1Cell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Tyraminergic; releases NLP-7, FLP-11</td>
+</tr>
+<tr>
+<td>Egg-laying network generator</td>
+<td><code>c302_egglaying.py</code></td>
+<td>Python</td>
+<td>Generates circuit: 2 HSN + 6 VC + 16 sex muscles + 4 uv1</td>
+</tr>
+<tr>
+<td>Serotonergic synapse model</td>
+<td><code>egglaying/SerotoninSynapse.synapse.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Graded serotonin release -&gt; SER-1 GPCR -&gt; Gaq -&gt; DAG</td>
+</tr>
+<tr>
+<td>Tyramine inhibitory synapse model</td>
+<td><code>egglaying/TyramineSynapse.synapse.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>LGC-55 Cl- channel; EC50 = 12.1 uM</td>
+</tr>
+<tr>
+<td>Egg-laying state time series (viewer)</td>
+<td>OME-Zarr: <code>egglaying/circuit_state/</code></td>
+<td>Shape (n_timesteps, 1)</td>
+<td>Binary: 0 (inactive) / 1 (active)</td>
+</tr>
+<tr>
+<td>Vulval muscle activation (viewer)</td>
+<td>OME-Zarr: <code>egglaying/muscle_activation/</code></td>
+<td>Shape (n_timesteps, 16)</td>
+<td>Per-muscle [Ca2+] activation [0, 1]</td>
+</tr>
+<tr>
+<td>Egg event log (viewer)</td>
+<td>OME-Zarr: <code>egglaying/egg_events/</code></td>
+<td>Event timestamps</td>
+<td>Timestamp of each simulated egg-laying event</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd018</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 3: Organ Systems</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd018/description</code> (e.g., <code>dd018/hsn-serotonin-synapse</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD018: Add vulval muscle cell templates with EGL-19/UNC-103 channels</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on the <strong>c302</strong> neural circuit framework (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>). If you have already completed <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> first to clone the c302 repository and install dependencies, then return here.</p>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to <a href="#step-by-step">Step 1</a> below.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 native setup</a>. The egg-laying circuit (2 HSN + 6 VC neurons + 16 sex muscles) uses the same pyNeuroML/jnml toolchain. No additional pip installs are required beyond DD001 dependencies (pyNeuroML, jnml, pandas, numpy, scipy).</p>
+<p>Verify the egg-laying circuit configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reproductive circuit files (28-cell sub-circuit)</span>
+ls<span class="w"> </span>c302/egglaying/
+<span class="c1"># Expected: VulvalMuscle2Cell.cell.nml, SerotoninSynapse.synapse.nml, etc. (when created)</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Generate egg-laying circuit network</span>
+<span class="nb">cd</span><span class="w"> </span>c302/
+python<span class="w"> </span>c302_egglaying.py
+<span class="c1"># Expected output: LEMS_c302_EggLaying.xml with 28 cells</span>
+<span class="c1"># (2 HSN + 6 VC + 4 vm1 + 4 vm2 + 4 um1 + 4 um2 + 4 uv1)</span>
+
+<span class="c1"># Step 2: Validate NeuroML/LEMS files</span>
+jnml<span class="w"> </span>-validate<span class="w"> </span>egglaying/VulvalMuscle2Cell.cell.nml
+jnml<span class="w"> </span>-validate<span class="w"> </span>egglaying/SerotoninSynapse.synapse.nml
+jnml<span class="w"> </span>-validate<span class="w"> </span>LEMS_c302_EggLaying.xml
+<span class="c1"># Expected: all pass</span>
+
+<span class="c1"># Step 3: Quick test — egg-laying circuit only (isolated, no body)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with egglaying.enabled: true</span>
+<span class="c1"># Green light: simulation completes, no NaN values</span>
+<span class="c1"># Green light: vulval muscle Ca2+ transients observed</span>
+<span class="c1"># Green light: two-state pattern visible (inactive/active alternation)</span>
+
+<span class="c1"># Step 4: Run coupled simulation (egg-laying + locomotion)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>scripts/run_egglaying_coupled.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--duration<span class="w"> </span><span class="m">3600000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>egglaying_results/
+<span class="c1"># [TO BE CREATED] — 1 hour simulated time (3 full bouts expected)</span>
+
+<span class="c1"># Step 5: Measure egg-laying temporal pattern</span>
+python<span class="w"> </span>scripts/measure_egglaying.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input<span class="w"> </span>egglaying_results/muscle_activation.dat<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected_bout_interval<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected_eggs_per_bout<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tolerance_minutes<span class="w"> </span><span class="m">10</span>
+<span class="c1"># [TO BE CREATED]</span>
+
+<span class="c1"># Step 6: Validate backward compatibility</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with egglaying.enabled: false</span>
+<span class="c1"># Must produce identical output to pre-egg-laying baseline</span>
+
+<span class="c1"># Step 7: Pharmacological validation (exogenous serotonin)</span>
+python<span class="w"> </span>scripts/test_serotonin_response.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--serotonin_concentration<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected<span class="w"> </span>sustained_active_state
+<span class="c1"># [TO BE CREATED]</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c302_egglaying.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/run_egglaying_coupled.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/measure_egglaying.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/test_serotonin_response.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/test_mutant_phenotypes.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/plot_egglaying_raster.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="green-light-criteria">Green light criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Vulval muscle Ca2+ transients alternate between rare/low-amplitude (inactive) and rhythmic/high-amplitude (active)</li>
+<li>Inactive state duration: 10-30 minutes (mean ~20 min)</li>
+<li>Active state duration: 1-3 minutes (mean ~2 min)</li>
+<li>Eggs per active bout: 3-5</li>
+<li>Body locomotion not degraded (Tier 3 kinematics within +/-15%)</li>
+<li>No NaN values, no voltage explosions</li>
+</ul>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layers:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer 1</strong></td>
+<td><code>egglaying/muscle_activation/</code> — 16 sex muscles with [0, 1] activation heatmap</td>
+</tr>
+<tr>
+<td><strong>Layer 2</strong></td>
+<td><code>egglaying/circuit_state/</code> — Binary timeline showing inactive (blue) vs. active (red) states</td>
+</tr>
+<tr>
+<td><strong>Layer 3</strong></td>
+<td><code>egglaying/egg_events/</code> — Discrete markers at each egg-laying event timestamp</td>
+</tr>
+<tr>
+<td><strong>Color mapping</strong></td>
+<td>Muscles: warm colormap (blue=relaxed, red=contracted). Circuit state: blue/red binary. Egg events: yellow pulse markers.</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>Long blue (inactive) periods of ~20 min punctuated by short red (active) bursts of ~2 min. During active bursts, 8 vulval muscles contract synchronously 3-5 times with ~20 s intervals. HSN calcium trace shows sustained bursts during active state.</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Wild-type vs. egl-1 (no HSN → no active states) vs. unc-103(lf) (no inactive states → constant activity)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="circuit-architecture-feed-forward-excitation-with-feedback-inhibition">Circuit Architecture: Feed-Forward Excitation with Feedback Inhibition<a class="headerlink" href="#circuit-architecture-feed-forward-excitation-with-feedback-inhibition" title="Permanent link">&para;</a></h3>
+<p>The egg-laying circuit implements a three-component motif (Zhang et al. 2008):</p>
+<ol>
+<li><strong>HSN command neurons</strong> (2 cells: HSNL, HSNR) — serotonergic pacemakers that drive active states</li>
+<li><strong>VC motor neurons</strong> (6 cells: VC1-VC6) — cholinergic relay; VC4/VC5 are vulva-proximal and synapse on vm2</li>
+<li><strong>Vulval muscles</strong> (8 cells: 4 vm1 + 4 vm2) — effectors that contract to open the vulval slit</li>
+<li><strong>uv1 neuroendocrine cells</strong> (4 cells) — feedback inhibitors sensing egg passage</li>
+</ol>
+<p><strong>Circuit connectivity:</strong></p>
+<div class="highlight"><pre><span></span><code>                    ┌──────────────────────────────┐
+                    │         (tyramine inhibition)  │
+                    │                                │
+                    ▼                                │
+    HSN ─────────► VC4/VC5 ─────────► vm2 ─────► egg passage ──► uv1
+     │  (serotonin)  │   (ACh/nAChR)    ▲                          │
+     │               │                  │                          │
+     └───────────────┼──────────────────┘                          │
+     (direct NMJ     │   (gap junctions: vm1↔vm2, um↔vm2)         │
+      to vm2)        │                                              │
+                     └──────────────────────────────────────────────┘
+                           (VC inhibits HSN — feedback)
+</code></pre></div>
+<h3 id="hsn-neuron-model">HSN Neuron Model<a class="headerlink" href="#hsn-neuron-model" title="Permanent link">&para;</a></h3>
+<p>HSN neurons are serotonergic command neurons that act as the primary driver of egg-laying. They release both serotonin and NLP-3 neuropeptides.</p>
+<p><strong>HSN dynamics:</strong> HSN neurons generate sustained calcium bursts during active states. The burst-to-silence transition is driven by:</p>
+<ol>
+<li>Intrinsic HSN excitability (modulated by Gaq/EGL-30 signaling)</li>
+<li>Feedback inhibition from uv1 (tyramine via LGC-55 Cl- channel)</li>
+<li>Feedback inhibition from VC neurons (during active state)</li>
+</ol>
+<p><strong>HSN channel complement (from CeNGEN, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>):</strong></p>
+<ul>
+<li>Standard c302 HH channels (leak, K_slow, K_fast, Ca_boyle)</li>
+<li>Cell-type-specific conductance densities from CeNGEN expression</li>
+<li>Additional: serotonin vesicular release mechanism (Ca2+-dependent exocytosis)</li>
+</ul>
+<p><strong>Serotonin release model:</strong></p>
+<div class="highlight"><pre><span></span><code>d[5-HT]_released/dt = k_release * max(0, ([Ca2+]_HSN - ca_threshold)) - [5-HT]_released / tau_clearance
+</code></pre></div>
+<p>Where:</p>
+<ul>
+<li>k_release: serotonin release rate (Ca2+-dependent)</li>
+<li>ca_threshold: calcium threshold for vesicle fusion</li>
+<li>tau_clearance: serotonin reuptake/degradation time constant (~1-5 s)</li>
+</ul>
+<p><strong>NLP-3 neuropeptide co-release:</strong></p>
+<ul>
+<li>Dense core vesicle release, slower than small clear vesicle serotonin</li>
+<li>Either serotonin or NLP-3 alone provides partial drive; both required for full HSN function</li>
+<li>Modeled as <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> <code>&lt;peptideRelease&gt;</code> component if neuropeptides are enabled</li>
+</ul>
+<h3 id="vc-neuron-model">VC Neuron Model<a class="headerlink" href="#vc-neuron-model" title="Permanent link">&para;</a></h3>
+<p>VC neurons are cholinergic motor neurons with a dual role: they excite vm2 muscles AND provide feedback inhibition to HSN.</p>
+<p><strong>VC specialization:</strong></p>
+<ul>
+<li><strong>VC4, VC5</strong> (vulva-proximal): Make extensive chemical synapses onto vm2 muscles; synapse onto HSN</li>
+<li><strong>VC1-3, VC6</strong> (distant): Synapse onto ventral body wall muscles; mediate locomotion slowing during egg-laying</li>
+</ul>
+<p><strong>VC4/VC5 are mechanosensitive</strong> (Kopchock et al. 2021):</p>
+<ul>
+<li>Vulval muscle contraction activates VC4/VC5 mechanically</li>
+<li>This creates a positive feedback loop during active state: vm2 contraction -&gt; VC activation -&gt; more vm2 contraction</li>
+<li>Mechanosensory activation modeled as stretch-dependent current injection</li>
+</ul>
+<p><strong>Acetylcholine release from VC4/VC5 -&gt; vm2:</strong></p>
+<div class="highlight"><pre><span></span><code>ACh release -&gt; nAChR on vm2 -&gt; Na+ influx -&gt; local depolarization -&gt; EGL-19 activation -&gt; Ca2+ entry
+</code></pre></div>
+<h3 id="vulval-muscle-model-vm1-and-vm2">Vulval Muscle Model (vm1 and vm2)<a class="headerlink" href="#vulval-muscle-model-vm1-and-vm2" title="Permanent link">&para;</a></h3>
+<p>Vulval muscles are non-striated, excitable cells distinct from body wall muscles (<a href="../DD002_Muscle_Model_Architecture/">DD002</a>). They generate calcium-dependent potentials, not classical action potentials.</p>
+<p><strong>vm2 ion channels (the critical muscle):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Gene</th>
+<th>Type</th>
+<th>Conductance</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L-type Ca2+</td>
+<td><code>egl-19</code></td>
+<td>CaV1 voltage-gated</td>
+<td>~0.001 S/cm²</td>
+<td>Primary Ca2+ entry; depolarization-activated</td>
+</tr>
+<tr>
+<td>ERG K+</td>
+<td><code>unc-103</code></td>
+<td>Kir-family K+</td>
+<td>~0.0005 S/cm²</td>
+<td>Repolarization brake; maintains inactive state</td>
+</tr>
+<tr>
+<td>Shaw K+</td>
+<td><code>egl-36</code></td>
+<td>Kv3 (Shaw-type)</td>
+<td>~0.0003 S/cm²</td>
+<td>Regulates excitability threshold</td>
+</tr>
+<tr>
+<td>Leak</td>
+<td>(multiple)</td>
+<td>Background</td>
+<td>~5e-7 S/cm²</td>
+<td>Resting potential maintenance</td>
+</tr>
+<tr>
+<td>nAChR</td>
+<td>(nicotinic)</td>
+<td>Ligand-gated cation</td>
+<td>Synapse-dependent</td>
+<td>Postsynaptic ACh receptor from VC4/VC5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> vm2 conductance densities are approximate. EGL-19 and UNC-103 are the two most critical channels — EGL-19 drives calcium entry for contraction; UNC-103 (ERG K+) keeps the muscle subthreshold during the inactive state. The balance between these two channels is the primary determinant of the two-state pattern.</p>
+<p><strong>vm1 model:</strong></p>
+<ul>
+<li>Same channel types as vm2 but <strong>no direct synaptic input</strong></li>
+<li>Receives rhythmic excitation from VA/VB motor neurons via body wall muscle connections (ACh, every ~10 s during locomotion body bends)</li>
+<li>Gap-junction-coupled to vm2: calcium transients initiate in vm1 and propagate to vm2 (<a href="https://doi.org/10.1371/journal.pgen.1007896">Brewer et al. 2019</a>)</li>
+</ul>
+<p><strong>Calcium dynamics in vulval muscles:</strong></p>
+<div class="highlight"><pre><span></span><code>d[Ca2+]/dt = -rho * I_Ca_EGL19 - [Ca2+] / tau_Ca + J_IP3R
+
+Where:
+- I_Ca_EGL19 = EGL-19 L-type Ca2+ current (depolarization-activated)
+- tau_Ca = calcium clearance time constant (~20 ms)
+- J_IP3R = IP3 receptor-mediated ER release (ITR-1; secondary Ca2+ source)
+</code></pre></div>
+<p><strong>Two-state mechanism (key insight):</strong></p>
+<p>The two-state pattern emerges from the balance between EGL-19 (excitatory) and UNC-103 ERG (inhibitory) channels on vm2:</p>
+<ul>
+<li>
+<p><strong>Inactive state:</strong> UNC-103 ERG K+ channels keep vm2 membrane potential below the EGL-19 activation threshold. Body-bend-driven rhythmic depolarization from vm1 (via gap junctions) is subthreshold. Rare, low-amplitude Ca2+ transients.</p>
+</li>
+<li>
+<p><strong>Active state transition:</strong> HSN releases serotonin -&gt; SER-1 -&gt; Gaq (EGL-30) -&gt; Trio RhoGEF -&gt; DAG -&gt; increased EGL-19 open probability and/or decreased UNC-103 activity. Now each body-bend-driven depolarization triggers a full Ca2+ transient -&gt; muscle contraction -&gt; egg-laying event.</p>
+</li>
+<li>
+<p><strong>Active state termination:</strong> Egg passage through vulva -&gt; uv1 cells mechanosensing -&gt; tyramine release -&gt; LGC-55 Cl- channel on HSN -&gt; HSN inhibition -&gt; serotonin withdrawal -&gt; vm2 returns to subthreshold.</p>
+</li>
+</ul>
+<h3 id="uterine-muscle-model-um1-um2">Uterine Muscle Model (um1, um2)<a class="headerlink" href="#uterine-muscle-model-um1-um2" title="Permanent link">&para;</a></h3>
+<p>8 uterine muscles encircle the uterus and contract to squeeze eggs toward the vulva.</p>
+<ul>
+<li>Gap-junction-coupled to vm2 muscles</li>
+<li>Contraction is coordinated with vulval muscle opening</li>
+<li>Uterine stretch from accumulated eggs (2-3) provides a permissive mechanical signal for active state entry</li>
+</ul>
+<p><strong>Simplified model:</strong> Uterine muscles receive calcium spread from vm2 via gap junctions. No direct synaptic input modeled in Phase 3.</p>
+<h3 id="uv1-neuroendocrine-feedback-model">uv1 Neuroendocrine Feedback Model<a class="headerlink" href="#uv1-neuroendocrine-feedback-model" title="Permanent link">&para;</a></h3>
+<p>4 uv1 cells sit at the uterine-vulval junction and sense egg passage mechanically.</p>
+<p><strong>uv1 outputs:</strong></p>
+<ol>
+<li><strong>Tyramine</strong> → LGC-55 (Cl- channel, EC50 = 12.1 uM) on HSN → hyperpolarization → HSN silencing</li>
+<li><strong>NLP-7 neuropeptide</strong> → inhibits serotonin vesicular release from HSN (if <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> enabled)</li>
+<li><strong>FLP-11 neuropeptide</strong> → inhibits circuit activity (if <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> enabled)</li>
+</ol>
+<p><strong>uv1 mechanosensory activation:</strong></p>
+<div class="highlight"><pre><span></span><code>I_mechano = g_mechano * max(0, stretch - stretch_threshold)
+</code></pre></div>
+<p>Where stretch is computed from vulval muscle contraction state (vm2 activation). When an egg passes, stretch is maximal, activating uv1.</p>
+<h3 id="gap-junction-network">Gap Junction Network<a class="headerlink" href="#gap-junction-network" title="Permanent link">&para;</a></h3>
+<p>Gap junctions are critical for coordinating the 16 sex muscles into synchronized contraction:</p>
+<table>
+<thead>
+<tr>
+<th>Connection</th>
+<th>Innexin</th>
+<th>Conductance</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vm1 ↔ vm1</td>
+<td>inx-?</td>
+<td>~1.0 nS</td>
+<td>Synchronize vm1 cells</td>
+</tr>
+<tr>
+<td>vm2 ↔ vm2</td>
+<td>inx-?</td>
+<td>~1.0 nS</td>
+<td>Synchronize vm2 cells (X-pattern)</td>
+</tr>
+<tr>
+<td>vm1 ↔ vm2</td>
+<td>inx-?</td>
+<td>~0.5 nS</td>
+<td>Propagate Ca2+ from vm1 to vm2</td>
+</tr>
+<tr>
+<td>um ↔ vm2</td>
+<td>inx-?</td>
+<td>~0.3 nS</td>
+<td>Coordinate uterine squeeze with vulval opening</td>
+</tr>
+<tr>
+<td>HSN ↔ VC4/VC5</td>
+<td>inx-?</td>
+<td>~0.2 nS</td>
+<td>Electrical coupling between command and motor neurons</td>
+</tr>
+</tbody>
+</table>
+<h3 id="serotonin-receptor-signaling-cascade">Serotonin Receptor Signaling Cascade<a class="headerlink" href="#serotonin-receptor-signaling-cascade" title="Permanent link">&para;</a></h3>
+<p>The intracellular cascade from serotonin binding to muscle excitability change is critical for the two-state transition:</p>
+<div class="highlight"><pre><span></span><code>Serotonin (from HSN)
+   │
+   ▼
+SER-1 (Gaq-coupled GPCR on vm2)
+   │
+   ▼
+EGL-30 (Gaq) activation
+   │
+   ├──► Trio RhoGEF ──► DAG ──► increased EGL-19 open probability
+   │                             (and/or decreased UNC-103)
+   │
+   └──► PLCbeta (EGL-8) ──► IP3 ──► ITR-1 ──► ER Ca2+ release
+        [primarily in neurons]       [in muscles: secondary]
+</code></pre></div>
+<p><strong>Modeling approach:</strong> The full Gaq -&gt; Trio -&gt; DAG cascade is complex (10+ state variables). For Phase 3, use a <strong>phenomenological modulation model</strong>:</p>
+<div class="highlight"><pre><span></span><code>g_EGL19_effective = g_EGL19_baseline * (1 + serotonin_modulation)
+g_UNC103_effective = g_UNC103_baseline * (1 - serotonin_modulation * 0.3)
+
+Where:
+  serotonin_modulation = [5-HT]_at_vm2 / ([5-HT]_at_vm2 + K_d_SER1)
+  K_d_SER1 = ~1 uM (SER-1 binding affinity, estimated)
+</code></pre></div>
+<p>This captures the net effect: serotonin increases Ca2+ channel conductance and decreases K+ channel conductance, shifting vm2 from subthreshold to suprathreshold.</p>
+<h3 id="locomotion-egg-laying-coupling">Locomotion-Egg-Laying Coupling<a class="headerlink" href="#locomotion-egg-laying-coupling" title="Permanent link">&para;</a></h3>
+<p>Egg-laying is mechanically coupled to locomotion via body bends:</p>
+<ol>
+<li>VA/VB motor neurons drive body wall muscle contraction every ~10 s (body bend period)</li>
+<li>vm1 muscles are innervated by ventral cord motor neurons alongside body wall muscles</li>
+<li>Each body bend delivers a rhythmic depolarizing pulse to vm1 → gap junctions → vm2</li>
+<li>During inactive state: subthreshold. During active state: each pulse triggers egg-laying Ca2+ transient</li>
+</ol>
+<p><strong>Coupling variable:</strong> Body bend phase (from <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>/DD003 locomotion circuit) provides periodic current injection to vm1:</p>
+<div class="highlight"><pre><span></span><code>I_body_bend = A_bend * sin(2*pi*t / T_bend)
+
+Where:
+  A_bend = body-bend-driven current amplitude (~0.5 nA, same as NMJ drive)
+  T_bend = ~10 s (body bend period, from locomotion simulation)
+</code></pre></div>
+<h3 id="egg-event-model">Egg Event Model<a class="headerlink" href="#egg-event-model" title="Permanent link">&para;</a></h3>
+<p>An egg-laying event is triggered when:</p>
+<ol>
+<li>All 8 vulval muscles are synchronously contracted (vm1 + vm2 calcium above threshold)</li>
+<li>AND uterine muscles are contracted (squeeze)</li>
+<li>The egg counter increments; egg passage triggers uv1 feedback</li>
+</ol>
+<p><strong>Egg counter logic:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">vm_calcium</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">egg_threshold</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)):</span>
+    <span class="n">egg_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">trigger_uv1_feedback</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">egg_count</span> <span class="o">&gt;=</span> <span class="n">eggs_in_uterus</span><span class="p">:</span>
+        <span class="n">egg_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># uterus empty</span>
+</code></pre></div>
+<p>Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 10-15 eggs at steady state (wild type).</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-ignore-egg-laying-locomotion-only">1. Ignore Egg-Laying (Locomotion Only)<a class="headerlink" href="#1-ignore-egg-laying-locomotion-only" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Focus exclusively on locomotion and body wall muscle contraction; do not model the reproductive system.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Egg-laying is one of the most-studied <em>C. elegans</em> behaviors with rich quantitative data</li>
+<li>The circuit is small (28 cells) and well-characterized — ideal for whole-organism modeling</li>
+<li>HSN and VC neurons already exist in the <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> connectome; their primary function is egg-laying</li>
+<li>Egg-laying provides a distinct behavioral validation target (two-state pattern) orthogonal to locomotion</li>
+</ul>
+<h3 id="2-abstract-state-machine-no-biophysical-circuit">2. Abstract State Machine (No Biophysical Circuit)<a class="headerlink" href="#2-abstract-state-machine-no-biophysical-circuit" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Model egg-laying as a two-state Markov chain (inactive ↔ active) without biophysical neurons or muscles.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Throws away the mechanistic causal chain that OpenWorm aims to capture</li>
+<li>Cannot predict mutant phenotypes (egl-1, unc-103, etc.)</li>
+<li>Cannot respond to simulated pharmacology (exogenous serotonin)</li>
+<li>The Sun &amp; Bhatt 2010 circuit model already shows that biophysical modeling is feasible</li>
+</ul>
+<p><strong>When to reconsider:</strong> If computational cost is prohibitive; could use as a fast approximation for parameter sweeps.</p>
+<h3 id="3-full-gaqdag-biochemical-cascade">3. Full Gaq/DAG Biochemical Cascade<a class="headerlink" href="#3-full-gaqdag-biochemical-cascade" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Explicitly model the Gaq → PLCbeta / Trio RhoGEF → DAG → PKC → channel phosphorylation cascade with 15+ state variables per cell.</p>
+<p><strong>Rejected (for Phase 3) because:</strong></p>
+<ul>
+<li>Biochemical rate constants are largely unknown for <em>C. elegans</em> Gaq signaling in vulval muscles</li>
+<li>Phenomenological conductance modulation captures the net functional effect</li>
+<li>Phase 5 (intracellular signaling) is the appropriate place for detailed biochemical cascades</li>
+</ul>
+<p><strong>When to reconsider:</strong> Phase 5, when IP3/DAG/PKC cascades are added for non-neural cells.</p>
+<h3 id="4-treat-vulval-muscles-as-identical-to-body-wall-muscles">4. Treat Vulval Muscles as Identical to Body Wall Muscles<a class="headerlink" href="#4-treat-vulval-muscles-as-identical-to-body-wall-muscles" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use the same GenericMuscleCell (<a href="../DD002_Muscle_Model_Architecture/">DD002</a>) with Boyle &amp; Cohen parameters for vulval muscles.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Vulval muscles are non-striated; body wall muscles are obliquely striated</li>
+<li>Vulval muscles express distinct channel complement: EGL-19 (L-type Ca) dominates rather than ca_boyle, plus UNC-103 ERG K+ channel (absent in body wall)</li>
+<li>The two-state pattern requires the EGL-19/UNC-103 balance, which does not exist in the <a href="../DD002_Muscle_Model_Architecture/">DD002</a> GenericMuscleCell</li>
+<li>Calcium-to-force coupling is qualitatively different (vulval opening vs. body bending)</li>
+</ul>
+<h3 id="5-model-only-hsn-without-vc-feedback">5. Model Only HSN Without VC Feedback<a class="headerlink" href="#5-model-only-hsn-without-vc-feedback" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Simplify the circuit to HSN → vm2 only, omitting VC neurons and uv1 feedback.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>The two-state pattern emerges from the balance of excitation (HSN + VC) and inhibition (uv1)</li>
+<li>VC neurons provide the critical feedback inhibition that terminates active bouts</li>
+<li>HSN-only models produce continuous egg-laying, not the observed bursty pattern</li>
+<li>Zhang et al. 2008 demonstrated the feed-forward/feedback architecture is essential</li>
+</ul>
+<h3 id="6-wait-for-complete-vulval-muscle-electrophysiology">6. Wait for Complete Vulval Muscle Electrophysiology<a class="headerlink" href="#6-wait-for-complete-vulval-muscle-electrophysiology" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Do not model vulval muscles until direct patch-clamp recordings from vm1/vm2 are available.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Direct recordings from vulval muscles in vivo are extremely difficult (cells are embedded in tissue)</li>
+<li>Calcium imaging data (<a href="https://doi.org/10.7554/eLife.21126">Collins et al. 2016</a>, <a href="https://doi.org/10.1371/journal.pgen.1007896">Brewer et al. 2019</a>) provide quantitative constraints</li>
+<li>Genetic perturbation data (egl-19, unc-103, egl-36 alleles) constrain the channel model</li>
+<li>Model predictions can guide future experimental priorities</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="what-defines-a-valid-egg-laying-model">What Defines a Valid Egg-Laying Model?<a class="headerlink" href="#what-defines-a-valid-egg-laying-model" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Two-State Pattern:</strong> Vulval muscle calcium activity must alternate between inactive (~20 min) and active (~2 min) states. Continuous activity or continuous silence are both failures.</p>
+</li>
+<li>
+<p><strong>Bout Statistics:</strong> During active states, 3-5 egg-laying events must occur with ~20 s inter-event intervals.</p>
+</li>
+<li>
+<p><strong>Serotonin Dependence:</strong> Removing HSN serotonin release (simulating tph-1 mutation) must reduce or abolish active states.</p>
+</li>
+<li>
+<p><strong>ERG Channel Function:</strong> Setting UNC-103 conductance to zero (simulating unc-103 null) must produce hyperactive egg-laying (no or shortened inactive states).</p>
+</li>
+<li>
+<p><strong>EGL-19 Requirement:</strong> Reducing EGL-19 conductance must reduce Ca2+ transient amplitude and egg-laying frequency.</p>
+</li>
+<li>
+<p><strong>Feedback Inhibition:</strong> Removing uv1 tyramine release must produce prolonged active states with more eggs per bout.</p>
+</li>
+<li>
+<p><strong>Backward Compatibility:</strong> Simulations with <code>egglaying.enabled: false</code> must produce identical output to the pre-egg-laying baseline. HSN and VC neurons still participate in the general neural circuit (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>) but without sex muscle targets.</p>
+</li>
+<li>
+<p><strong>Locomotion Non-Interference:</strong> Adding the egg-laying circuit must not degrade Tier 3 kinematic metrics by more than 15%.</p>
+</li>
+</ol>
+<h3 id="validation-procedure">Validation Procedure<a class="headerlink" href="#validation-procedure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate egg-laying-enabled network</span>
+<span class="nb">cd</span><span class="w"> </span>c302/
+python<span class="w"> </span>c302_egglaying.py
+
+<span class="c1"># Run 1-hour simulation (expect ~3 bouts)</span>
+jnml<span class="w"> </span>LEMS_c302_EggLaying.xml<span class="w"> </span>-nogui<span class="w"> </span>-reportFile<span class="w"> </span>egglaying_report.txt
+
+<span class="c1"># Extract egg-laying temporal pattern</span>
+python<span class="w"> </span>scripts/measure_egglaying.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>LEMS_c302_EggLaying_muscles.dat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metrics<span class="w"> </span>bout_interval,eggs_per_bout,active_duration<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>egglaying_metrics.csv
+<span class="c1"># [TO BE CREATED]</span>
+
+<span class="c1"># Compare to Collins et al. 2016 experimental data</span>
+python<span class="w"> </span>scripts/validate_egglaying.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--simulated<span class="w"> </span>egglaying_metrics.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental<span class="w"> </span>data/collins2016_egg_laying_stats.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tolerance<span class="w"> </span><span class="m">0</span>.5
+<span class="c1"># [TO BE CREATED]</span>
+
+<span class="c1"># Pharmacological test: exogenous serotonin</span>
+python<span class="w"> </span>scripts/test_serotonin_response.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--serotonin_concentration<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--expected<span class="w"> </span>sustained_active_state
+<span class="c1"># [TO BE CREATED]</span>
+</code></pre></div>
+<p><strong>Success criteria:</strong></p>
+<ul>
+<li>Inactive state: 10-30 min (mean ~20 min)</li>
+<li>Active state: 1-3 min (mean ~2 min)</li>
+<li>Eggs per bout: 3-5</li>
+<li>Serotonin response: sustained active state</li>
+<li>unc-103 null: hyperactive (inactive state absent or &lt; 5 min)</li>
+<li>egl-1 (no HSN): no active states</li>
+</ul>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Oogenesis and fertilization:</strong> Oocyte maturation, sperm-oocyte interaction, and events in the spermatheca are not modeled. Eggs appear in the uterus at a fixed rate (~1 per 10 min per gonad arm).</p>
+</li>
+<li>
+<p><strong>Vulval morphogenesis:</strong> The development of the vulval epithelium (vulA-vulF toroids) is not modeled. The vulval structure is assumed to be fully formed (adult hermaphrodite).</p>
+</li>
+<li>
+<p><strong>Sex myoblast migration and differentiation:</strong> The postembryonic M lineage that produces the 16 sex muscles is not modeled. Sex muscles are assumed present at simulation start.</p>
+</li>
+<li>
+<p><strong>Male-specific mating circuit:</strong> The male has a different reproductive circuit (ray neurons, spicule muscles, etc.). This DD covers hermaphrodite egg-laying only.</p>
+</li>
+<li>
+<p><strong>Egg shell formation:</strong> The chitin/lipid/protein layers of the eggshell are not modeled.</p>
+</li>
+<li>
+<p><strong>Embryonic development in utero:</strong> Embryos are not simulated. Egg production is modeled as a fixed rate counter.</p>
+</li>
+<li>
+<p><strong>Food-dependent modulation:</strong> Egg-laying rate varies with food availability. This environmental coupling is future work.</p>
+</li>
+<li>
+<p><strong>Age-dependent changes:</strong> Egg-laying rate declines with age as sperm are depleted. Reproductive senescence is not modeled.</p>
+</li>
+<li>
+<p><strong>utse (uterine seam cell) mechanics:</strong> The "hymen" broken by the first egg is not modeled mechanically.</p>
+</li>
+<li>
+<p><strong>Detailed vulval opening mechanics:</strong> The <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> SPH model does not include vulval epithelial cells or the mechanical forces of vulval slit opening. Egg-laying is modeled as a circuit-level event, not a mechanical simulation of egg passage.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>The egg-laying system is one of the best-characterized neural circuits in <em>C. elegans</em>. The hermaphrodite lays approximately 300 eggs over its reproductive lifespan, producing them from two gonad arms at ~1 egg per 10 minutes each. Eggs accumulate in the uterus (10-15 at steady state) and are expelled through the vulva by coordinated contraction of 16 non-striated sex muscles.</p>
+<p>The behavioral pattern is remarkably stereotyped: ~20 minutes of inactivity followed by ~2-minute bouts of 3-5 egg-laying events, each separated by ~20 seconds. This two-state pattern was first characterized by Waggoner et al. (1998) and quantified in detail by Collins et al. (2016) using simultaneous calcium imaging of all circuit components.</p>
+<p>The circuit architecture is a textbook example of feed-forward excitation with feedback inhibition (Zhang et al. 2008): HSN serotonergic neurons excite both VC cholinergic neurons and vm2 muscles directly; VC4/VC5 provide additional excitation to vm2 but also inhibit HSN; uv1 neuroendocrine cells sense egg passage and release tyramine to inhibit HSN, terminating the active bout.</p>
+<p>Serotonin is the critical neuromodulator. HSN neurons release serotonin from their vulval presynaptic region, activating SER-1 (Gaq-coupled) receptors on vm2 muscles. The downstream Gaq → Trio RhoGEF → DAG cascade increases vulval muscle excitability by modulating the balance between EGL-19 (L-type Ca2+, excitatory) and UNC-103 (ERG K+, inhibitory) channels.</p>
+<p>The circuit is also the foundation for &gt;145 egg-laying defective (egl) mutants identified by Trent et al. (1983), making it one of the most genetically dissected behaviors in any organism.</p>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="wormatlas-egg-laying-apparatus">WormAtlas Egg-Laying Apparatus<a class="headerlink" href="#wormatlas-egg-laying-apparatus" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>https://www.wormatlas.org/hermaphrodite/egglaying%20apparatus/mainframe.htm
+</code></pre></div>
+<p>Detailed anatomical descriptions with electron micrographs of vulval muscles, HSN synapses, uv1 cells, and sex muscle arrangement.</p>
+<h3 id="connectome-data-cook-et-al-2019">Connectome Data (<a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a>)<a class="headerlink" href="#connectome-data-cook-et-al-2019" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>https://wormwiring.org/pages/adjacency.html
+</code></pre></div>
+<p>Quantitative adjacency matrices for HSN, VC, and sex muscle synaptic connections.</p>
+<h3 id="egg-laying-circuit-connectivity-from-cook-et-al-2019-and-white-et-al-1986">Egg-Laying Circuit Connectivity (from <a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a> and <a href="https://doi.org/10.1098/rstb.1986.0056">White et al. 1986</a>)<a class="headerlink" href="#egg-laying-circuit-connectivity-from-cook-et-al-2019-and-white-et-al-1986" title="Permanent link">&para;</a></h3>
+<p><strong>Chemical synapses (directed):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Target</th>
+<th>Neurotransmitter</th>
+<th>Weight (EM sections)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSNL</td>
+<td>vm2 (all 4)</td>
+<td>Serotonin</td>
+<td>~15-20 sections</td>
+</tr>
+<tr>
+<td>HSNR</td>
+<td>vm2 (all 4)</td>
+<td>Serotonin</td>
+<td>~15-20 sections</td>
+</tr>
+<tr>
+<td>HSNL</td>
+<td>VC4, VC5</td>
+<td>Serotonin</td>
+<td>~5-10 sections</td>
+</tr>
+<tr>
+<td>HSNR</td>
+<td>VC4, VC5</td>
+<td>Serotonin</td>
+<td>~5-10 sections</td>
+</tr>
+<tr>
+<td>VC4</td>
+<td>vm2 (all 4)</td>
+<td>Acetylcholine</td>
+<td>~10-15 sections</td>
+</tr>
+<tr>
+<td>VC5</td>
+<td>vm2 (all 4)</td>
+<td>Acetylcholine</td>
+<td>~10-15 sections</td>
+</tr>
+<tr>
+<td>VC4</td>
+<td>HSNL, HSNR</td>
+<td>(inhibitory)</td>
+<td>~3-5 sections</td>
+</tr>
+<tr>
+<td>VC5</td>
+<td>HSNL, HSNR</td>
+<td>(inhibitory)</td>
+<td>~3-5 sections</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gap junctions (undirected):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cell A</th>
+<th>Cell B</th>
+<th>Innexin</th>
+<th>Estimated g</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSNL</td>
+<td>VC4</td>
+<td>inx-?</td>
+<td>~0.2 nS</td>
+</tr>
+<tr>
+<td>HSNR</td>
+<td>VC5</td>
+<td>inx-?</td>
+<td>~0.2 nS</td>
+</tr>
+<tr>
+<td>vm1</td>
+<td>vm1</td>
+<td>inx-?</td>
+<td>~1.0 nS</td>
+</tr>
+<tr>
+<td>vm2</td>
+<td>vm2</td>
+<td>inx-?</td>
+<td>~1.0 nS</td>
+</tr>
+<tr>
+<td>vm1</td>
+<td>vm2</td>
+<td>inx-?</td>
+<td>~0.5 nS</td>
+</tr>
+<tr>
+<td>um</td>
+<td>vm2</td>
+<td>inx-?</td>
+<td>~0.3 nS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sun-bhatt-2010-circuit-model">Sun &amp; Bhatt 2010 Circuit Model<a class="headerlink" href="#sun-bhatt-2010-circuit-model" title="Permanent link">&para;</a></h3>
+<p>The first computational model of egg-laying temporal pattern generation (BMC Systems Biology 4:81):</p>
+<ul>
+<li>HSN modeled as a NOR gate (active only when both VC and uv1 are silent)</li>
+<li>VC modeled as "single egg counters" providing short-term inhibition after each egg event</li>
+<li>Successfully reproduces the clustered temporal pattern</li>
+<li>Our model extends this with biophysical (HH) rather than Boolean dynamics</li>
+</ul>
+<h3 id="vulval-muscle-channel-data">Vulval Muscle Channel Data<a class="headerlink" href="#vulval-muscle-channel-data" title="Permanent link">&para;</a></h3>
+<p><strong>EGL-19 (L-type Ca2+ channel):</strong></p>
+<ul>
+<li>Activation: V_half ~ -20 mV, slope ~ 7 mV</li>
+<li>Inactivation: V_half ~ -40 mV, slope ~ 5 mV (slow, tau ~ 100-500 ms)</li>
+<li>Permeation: primarily Ca2+ (P_Ca &gt;&gt; P_Na, P_K)</li>
+</ul>
+<p><strong>UNC-103 (ERG K+ channel):</strong></p>
+<ul>
+<li>Activation: V_half ~ -30 mV (shifted from mammalian hERG)</li>
+<li>Fast inactivation (C-type): tau ~ 50-100 ms</li>
+<li>Recovery from inactivation: tau ~ 200-500 ms</li>
+<li>ERG channels have characteristic resurgent current on repolarization</li>
+</ul>
+<p><strong>EGL-36 (Shaw K+ channel):</strong></p>
+<ul>
+<li>Fast-activating K+ channel</li>
+<li>egl-36(gf): shift activation to more negative voltages -&gt; hyperpolarized muscles -&gt; Egl</li>
+<li>egl-36(dn): reduced K+ current -&gt; hyperexcitable muscles -&gt; hyperactive egg-laying</li>
+</ul>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="incremental-integration-strategy">Incremental Integration Strategy<a class="headerlink" href="#incremental-integration-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Stage 1 (Circuit Only — Isolated):</strong></p>
+<ul>
+<li>Implement HSN + VC4/VC5 + vm2 circuit without coupling to body physics</li>
+<li>Validate two-state pattern in isolation</li>
+<li>~10 cells; fast simulation</li>
+</ul>
+<p><strong>Stage 2 (Circuit + Locomotion Coupling):</strong></p>
+<ul>
+<li>Couple vm1 to body-bend-driven rhythmic excitation from <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>/DD003 locomotion</li>
+<li>Validate that egg-laying does not degrade locomotion</li>
+<li>Validate that body bend coupling provides the ~10 s rhythmic drive</li>
+</ul>
+<p><strong>Stage 3 (Full Integration):</strong></p>
+<ul>
+<li>Add uterine muscles, uv1 feedback, gap junction network</li>
+<li>Validate full behavioral statistics</li>
+<li>Add mutant simulations (egl-1, unc-103, egl-36)</li>
+<li>Add pharmacological simulations (exogenous serotonin)</li>
+</ul>
+<h3 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
+<p>Models without egg-laying remain valid. The extension is <strong>additive</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Old config (still works)</span>
+<span class="nt">egglaying</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+
+<span class="c1"># New config</span>
+<span class="nt">egglaying</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;circuit&quot;</span>
+</code></pre></div>
+<p>HSN and VC neurons exist in the <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> connectome regardless of <code>egglaying.enabled</code>. When disabled, they participate in general neural dynamics but have no sex muscle targets. When enabled, the sex muscles are instantiated and connected.</p>
+<hr />
+<h2 id="known-issues-and-future-work">Known Issues and Future Work<a class="headerlink" href="#known-issues-and-future-work" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-vulval-muscle-electrophysiology-is-indirect">Issue 1: Vulval Muscle Electrophysiology Is Indirect<a class="headerlink" href="#issue-1-vulval-muscle-electrophysiology-is-indirect" title="Permanent link">&para;</a></h3>
+<p>No direct patch-clamp recordings from vm1/vm2 exist. Channel properties are inferred from:</p>
+<ul>
+<li>Genetic perturbation (egl-19, unc-103, egl-36 alleles)</li>
+<li>Calcium imaging (<a href="https://doi.org/10.7554/eLife.21126">Collins et al. 2016</a>, <a href="https://doi.org/10.1371/journal.pgen.1007896">Brewer et al. 2019</a>)</li>
+<li>Heterologous expression studies</li>
+</ul>
+<p><strong>Future work:</strong> If in vivo vulval muscle recordings become available, recalibrate conductance densities.</p>
+<h3 id="issue-2-serotonin-receptor-signaling-is-simplified">Issue 2: Serotonin Receptor Signaling Is Simplified<a class="headerlink" href="#issue-2-serotonin-receptor-signaling-is-simplified" title="Permanent link">&para;</a></h3>
+<p>The Gaq -&gt; DAG cascade is modeled as phenomenological conductance modulation, not biochemical dynamics. This may miss:</p>
+<ul>
+<li>Temporal dynamics of DAG accumulation/degradation</li>
+<li>Cross-talk between SER-1 and SER-7 pathways</li>
+<li>PKC-mediated phosphorylation of specific channels</li>
+</ul>
+<p><strong>Future work:</strong> Phase 5 intracellular signaling (DD to be written).</p>
+<h3 id="issue-3-egg-counter-is-abstract">Issue 3: Egg Counter Is Abstract<a class="headerlink" href="#issue-3-egg-counter-is-abstract" title="Permanent link">&para;</a></h3>
+<p>Eggs are not physically modeled as objects. The "egg in uterus" is a counter, not a mechanical entity. Egg passage through the vulva is an event, not a simulated mechanical process.</p>
+<p><strong>Future work:</strong> <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> mechanical cell identity could tag egg particles in Sibernetic for physical egg passage simulation.</p>
+<h3 id="issue-4-missing-modulatory-inputs">Issue 4: Missing Modulatory Inputs<a class="headerlink" href="#issue-4-missing-modulatory-inputs" title="Permanent link">&para;</a></h3>
+<p>Several known modulatory inputs are not included in Phase 3:</p>
+<ul>
+<li>PLM mechanosensory inhibition of HSN (posterior touch suppresses egg-laying)</li>
+<li>Food-dependent modulation (AWC, ASI chemosensory pathways)</li>
+<li>DVA/PVT stretch-sensitive modulation</li>
+<li>Full neuropeptide landscape (26 GPCRs mapped by Ravi et al. 2020)</li>
+</ul>
+<p><strong>Future work:</strong> Add sensory modulation as inputs from other DD subsystems.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Waggoner LE, Zhou GT, Schafer RW, Bhatt R (1998).</strong> "Control of alternative behavioral states by serotonin in <em>Caenorhabditis elegans</em>." <em>Neuron</em> 21:203-214.
+   <em>Two-state model of egg-laying behavior.</em></p>
+</li>
+<li>
+<p><strong>Zhang M, Chung SH, Bhatt R, et al. (2008).</strong> "A self-regulating feed-forward circuit controlling <em>C. elegans</em> egg-laying behavior." <em>Curr Biol</em> 18:1445-1455.
+   <em>Feed-forward excitation + feedback inhibition circuit motif.</em></p>
+</li>
+<li>
+<p><strong>Collins KM, Koelle MR (2013).</strong> "Postsynaptic ERG potassium channels limit muscle excitability to allow distinct egg-laying behavior states." <em>J Neurosci</em> 33:761-775.
+   <em>UNC-103 ERG channel in vm2; two-state mechanism.</em></p>
+</li>
+<li>
+<p><strong>Collins KM, Bode A, Bhatt R, et al. (2016).</strong> "Activity of the <em>C. elegans</em> egg-laying behavior circuit is controlled by competing activation and feedback inhibition." <em>eLife</em> 5:e21126.
+   <em>Comprehensive calcium imaging of all circuit components.</em></p>
+</li>
+<li>
+<p><strong>Brewer JC, Olson AC, Collins KM, Bhatt R (2019).</strong> "Serotonin and neuropeptides are both released by the HSN command neuron to initiate <em>C. elegans</em> egg laying." <em>PLoS Genet</em> 15:e1007896.
+   <em>NLP-3 co-transmission from HSN.</em></p>
+</li>
+<li>
+<p><strong>Kopchock RJ, Ravi B, Bode A, Collins KM (2021).</strong> "The sex-specific VC neurons are mechanically activated motor neurons that facilitate serotonin-induced egg laying in <em>C. elegans</em>." <em>J Neurosci</em> 41:3635-3650.
+   <em>VC mechanosensory function.</em></p>
+</li>
+<li>
+<p><strong>Trent C, Tsuing N, Bhatt R (1983).</strong> "Egg-laying defective mutants of the nematode <em>Caenorhabditis elegans</em>." <em>Genetics</em> 104:619-647.
+   <em>145 egl mutants, 4 pharmacological classes.</em></p>
+</li>
+<li>
+<p><strong>Cook SJ et al. (2019).</strong> "Whole-animal connectomes of both <em>Caenorhabditis elegans</em> sexes." <em>Nature</em> 571:63-71.
+   <em>Updated connectome including egg-laying circuit synapses.</em></p>
+</li>
+<li>
+<p><strong>Schafer WR (2006).</strong> "Egg-laying." <em>WormBook</em> (doi: 10.1895/wormbook.1.38.1).
+   <em>Comprehensive review.</em></p>
+</li>
+<li>
+<p><strong>Sun Q, Bhatt R (2010).</strong> "Bhatt lab computational model of egg-laying circuit temporal pattern generation." <em>BMC Systems Biology</em> 4:81.
+    <em>First circuit-level computational model; HSN as NOR gate.</em></p>
+</li>
+<li>
+<p><strong>Collins KM, Bhatt R (2022).</strong> "Serotonin signals through postsynaptic Gaq, Trio RhoGEF, and diacylglycerol to promote <em>C. elegans</em> egg-laying circuit activity and behavior." <em>Genetics</em> 221:iyac084.
+    <em>Gaq -&gt; Trio -&gt; DAG signaling cascade.</em></p>
+</li>
+<li>
+<p><strong>Ravi B, Singhal N, Bhatt R (2020).</strong> "Expression, function, and pharmacological analysis of all 26 neurotransmitter GPCRs as individual transgenes in <em>C. elegans</em>." <em>J Neurosci</em> 40:7475-7488.
+    <em>Comprehensive GPCR mapping in egg-laying circuit.</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSN neuron voltage/calcium</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> / <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (c302 neural circuit)</td>
+<td><code>V_HSN</code>, <code>ca_HSN</code></td>
+<td>NeuroML state variables</td>
+<td>mV, mol/cm³</td>
+</tr>
+<tr>
+<td>VC neuron voltage/calcium</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> / <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (c302 neural circuit)</td>
+<td><code>V_VC4</code>, <code>V_VC5</code></td>
+<td>NeuroML state variables</td>
+<td>mV, mol/cm³</td>
+</tr>
+<tr>
+<td>Body bend phase (locomotion coupling)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> / <a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Periodic motor neuron output on ventral cord</td>
+<td>NeuroML coupling</td>
+<td>nA (current injection to vm1)</td>
+</tr>
+<tr>
+<td>CeNGEN expression (HSN, VC classes)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Per-class conductance densities</td>
+<td>NeuroML <code>&lt;channelDensity&gt;</code></td>
+<td>S/cm²</td>
+</tr>
+<tr>
+<td>Neuropeptide modulation (if <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> enabled)</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>NLP-3 release from HSN; NLP-7/FLP-11 from uv1</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> <code>&lt;peptideRelease&gt;</code> components</td>
+<td>mol/cm³</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vulval muscle [Ca2+] per cell</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (visualization)</td>
+<td>Per-muscle calcium time series</td>
+<td>OME-Zarr: <code>egglaying/muscle_activation/</code>, shape (n_timesteps, 16)</td>
+<td>dimensionless [0, 1]</td>
+</tr>
+<tr>
+<td>Circuit state (active/inactive)</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (visualization)</td>
+<td>Binary state time series</td>
+<td>OME-Zarr: <code>egglaying/circuit_state/</code>, shape (n_timesteps, 1)</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Egg-laying event timestamps</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (validation)</td>
+<td>Event log</td>
+<td>OME-Zarr: <code>egglaying/egg_events/</code></td>
+<td>ms</td>
+</tr>
+<tr>
+<td>Egg-laying behavioral metrics</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (Tier 3 validation)</td>
+<td>bout_interval, eggs_per_bout, active_duration</td>
+<td>CSV output from measure_egglaying.py</td>
+<td>min, count, min</td>
+</tr>
+<tr>
+<td>Sex muscle particle forces (Option B, future)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> / <a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Per-particle force for vulval/uterine muscles</td>
+<td>Same format as <a href="../DD002_Muscle_Model_Architecture/">DD002</a> muscle activation</td>
+<td>dimensionless [0, 1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Primary repository:</strong> <code>openworm/c302</code> (same package, new module)</li>
+<li><strong>Docker stage:</strong> <code>neural</code> (same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> — sex muscles use NeuroML/LEMS)</li>
+<li><strong><code>versions.lock</code> key:</strong> <code>c302</code></li>
+<li><strong>Build dependencies:</strong> pyNeuroML (pip), numpy (pip)</li>
+<li><strong>No additional Docker changes</strong> for Phase 3 (circuit-only model)</li>
+</ul>
+<p><strong>Repository structure:</strong></p>
+<div class="highlight"><pre><span></span><code>c302/
+├── c302_egglaying.py              # NEW: Egg-laying network generation
+├── egglaying/
+│   ├── VulvalMuscle1Cell.cell.nml # vm1 HH model
+│   ├── VulvalMuscle2Cell.cell.nml # vm2 HH model (with nAChR, SER-1)
+│   ├── UterineMuscleCell.cell.nml # um model (gap-junction-coupled)
+│   ├── UV1Cell.cell.nml           # uv1 neuroendocrine cell
+│   ├── SerotoninSynapse.synapse.nml  # 5-HT -&gt; SER-1 -&gt; conductance modulation
+│   ├── TyramineSynapse.synapse.nml   # Tyramine -&gt; LGC-55 Cl- channel
+│   └── egglaying_coupling.py     # Coupling to locomotion body bends
+</code></pre></div>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p><strong><code>openworm.yml</code> section:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">egglaying</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                    </span><span class="c1"># Off by default until validated</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;circuit&quot;</span><span class="w">                  </span><span class="c1"># Only option for Phase 3</span>
+<span class="w">  </span><span class="nt">serotonin_modulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># Enable serotonergic conductance modulation on vm2</span>
+<span class="w">  </span><span class="nt">uv1_feedback</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">               </span><span class="c1"># Enable tyraminergic feedback from uv1</span>
+<span class="w">  </span><span class="nt">egg_production_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w">         </span><span class="c1"># eggs per minute per gonad arm</span>
+<span class="w">  </span><span class="nt">uterus_capacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span><span class="w">             </span><span class="c1"># max eggs in uterus</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>egglaying.enabled</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable egg-laying subsystem</td>
+</tr>
+<tr>
+<td><code>egglaying.model</code></td>
+<td><code>"circuit"</code></td>
+<td><code>"circuit"</code></td>
+<td>Egg-laying model type (only one for Phase 3)</td>
+</tr>
+<tr>
+<td><code>egglaying.serotonin_modulation</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable serotonin -&gt; Gaq -&gt; conductance modulation on vm2</td>
+</tr>
+<tr>
+<td><code>egglaying.uv1_feedback</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable uv1 tyraminergic feedback inhibition</td>
+</tr>
+<tr>
+<td><code>egglaying.egg_production_rate</code></td>
+<td><code>0.1</code></td>
+<td><code>0.05</code>-<code>0.2</code> eggs/min/arm</td>
+<td>Egg production rate per gonad arm</td>
+</tr>
+<tr>
+<td><code>egglaying.uterus_capacity</code></td>
+<td><code>15</code></td>
+<td><code>5</code>-<code>30</code></td>
+<td>Maximum eggs held in uterus before mechanical signal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+
+<span class="c1"># Step 1: Verify backward compatibility</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with egglaying.enabled: false</span>
+<span class="c1"># Must produce identical output to pre-egg-laying baseline</span>
+
+<span class="c1"># Step 2: Verify egg-laying-enabled simulation</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with egglaying.enabled: true</span>
+<span class="c1"># Verify: simulation completes without error</span>
+<span class="c1"># Verify: vulval muscle calcium output file exists</span>
+<span class="c1"># Verify: calcium values show two-state pattern (not flat, not continuous)</span>
+<span class="c1"># Verify: body still moves (locomotion not destroyed)</span>
+
+<span class="c1"># Full validation (nightly, not per-PR — 1 hour sim time)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>scripts/measure_egglaying.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--duration<span class="w"> </span><span class="m">3600000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected_bout_interval<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected_eggs_per_bout<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tolerance_minutes<span class="w"> </span><span class="m">10</span>
+<span class="c1"># Check: bout interval = 20 +/- 10 min</span>
+<span class="c1"># Check: eggs per bout = 3-5</span>
+<span class="c1"># Check: active state duration ~2 min</span>
+<span class="c1"># Check: &gt;=3 bouts observed</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>jnml -validate</code> passes for all egg-laying NeuroML/LEMS files</li>
+<li>[ ] <code>quick-test</code> passes with <code>egglaying.enabled: false</code> (backward compatibility)</li>
+<li>[ ] <code>quick-test</code> passes with <code>egglaying.enabled: true</code> (simulation completes)</li>
+<li>[ ] Vulval muscle calcium output shows two-state pattern</li>
+<li>[ ] Body locomotion kinematics within +/-15% of baseline</li>
+<li>[ ] No NaN values in any output variable</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>egglaying/muscle_activation/</code> (n_timesteps, 16)</td>
+<td>Sex muscle activation heatmap</td>
+<td>Warm colormap: 0.0 (blue) → 1.0 (red); 16 rows (4 vm1 + 4 vm2 + 4 um1 + 4 um2)</td>
+</tr>
+<tr>
+<td><code>egglaying/circuit_state/</code> (n_timesteps, 1)</td>
+<td>Active/inactive state timeline</td>
+<td>Binary: blue (inactive) / red (active)</td>
+</tr>
+<tr>
+<td><code>egglaying/egg_events/</code></td>
+<td>Egg-laying event markers</td>
+<td>Yellow pulse markers at each event timestamp</td>
+</tr>
+<tr>
+<td><code>egglaying/hsn_calcium/</code> (n_timesteps, 2)</td>
+<td>HSN neuron calcium traces</td>
+<td>Standard calcium colormap; sustained bursts during active state</td>
+</tr>
+</tbody>
+</table>
+<h3 id="compute-budget">Compute Budget<a class="headerlink" href="#compute-budget" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Without Egg-Laying</th>
+<th>With Egg-Laying</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Additional cells</td>
+<td>0</td>
+<td>28 (2 HSN + 6 VC + 16 muscles + 4 uv1)</td>
+<td>~9% more cells (28/302)</td>
+</tr>
+<tr>
+<td>State variables</td>
+<td>~1,800</td>
+<td>~2,100 (+300 for sex muscles and uv1)</td>
+<td>~17% increase</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>~500 MB</td>
+<td>~550 MB</td>
+<td>Negligible</td>
+</tr>
+<tr>
+<td>Simulation time (15 ms)</td>
+<td>~10 min</td>
+<td>~11 min</td>
+<td>~10% increase</td>
+</tr>
+<tr>
+<td><strong>Validation sim (1 hr)</strong></td>
+<td>N/A</td>
+<td>~40 hours wall time</td>
+<td><strong>Nightly build only</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The egg-laying circuit adds minimal computational cost to short simulations. However, validation requires ~1 hour of simulated time (3+ bouts at ~20 min intervals), which is expensive. Run validation as a nightly build, not per-PR.</p>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit (HSN, VC connectivity)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If HSN/VC synaptic weights change, egg-laying drive strength changes</td>
+</tr>
+<tr>
+<td>CeNGEN specialization (HSN, VC channel densities)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>If HSN/VC conductances change, circuit dynamics change</td>
+</tr>
+<tr>
+<td>Body bend locomotion (vm1 rhythmic drive)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> / <a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If body bend period changes, rhythmic vm1 excitation timing changes</td>
+</tr>
+<tr>
+<td>Neuropeptide signaling (NLP-3, NLP-7, FLP-11)</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>If peptide dynamics change, HSN co-transmission and uv1 feedback change</td>
+</tr>
+<tr>
+<td>Cell identity (future vulval muscle particles)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If vulval muscle cell_ids change, wrong particles contract</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation (egg-laying behavioral metrics)</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Egg-laying pattern is a Tier 3 validation target</td>
+</tr>
+<tr>
+<td>Body physics (future, if vulval muscles are SPH particles)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> / <a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If vm activation format changes, particle forces change</td>
+</tr>
+<tr>
+<td>Visualization (egg-laying layers)</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>If output format changes, viewer layers break</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (Phase 3)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Extract HSN and VC channel densities from CeNGEN (<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>)</p>
+</li>
+<li>Implement EGL-19 L-type Ca2+ channel model in NeuroML/LEMS</li>
+<li>Implement UNC-103 ERG K+ channel model in NeuroML/LEMS</li>
+<li>Create vm2 cell template with EGL-19/UNC-103 balance</li>
+<li>Implement serotonergic synapse (5-HT -&gt; SER-1 -&gt; conductance modulation)</li>
+<li>Validate two-state pattern in isolated circuit</li>
+<li>Couple to locomotion body bend drive</li>
+<li>Full behavioral validation against <a href="https://doi.org/10.7554/eLife.21126">Collins et al. 2016</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

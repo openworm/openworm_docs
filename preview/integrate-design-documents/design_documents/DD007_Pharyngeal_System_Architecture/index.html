@@ -1,0 +1,4605 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD007_Pharyngeal_System_Architecture/">
+      
+      
+        <link rel="prev" href="../DD027_draft_issues/">
+      
+      
+        <link rel="next" href="../DD009_Intestinal_Oscillator_Model/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD007 Pharyngeal System - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd007-pharyngeal-system-architecture-semi-autonomous-organ" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD007 Pharyngeal System
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-the-pharynx-as-a-separate-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model the Pharynx as a Separate Subsystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-neuron-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Neuron Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-muscle-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Muscle Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-pumping-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Pumping Mechanics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ignore-the-pharynx-focus-on-locomotion-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ignore the Pharynx (Focus on Locomotion Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-treat-pharyngeal-muscles-as-identical-to-body-wall-muscles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Treat Pharyngeal Muscles as Identical to Body Wall Muscles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fully-detailed-sph-pharynx-with-food-particle-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fully Detailed SPH Pharynx with Food Particle Transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-pharyngeal-muscle-models-neuron-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Pharyngeal Muscle Models (NEURON + Jupyter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanical-coupling-option-a-option-b-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mechanical Coupling (Option A -&gt; Option B Migration)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-the-pharynx-as-a-separate-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model the Pharynx as a Separate Subsystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-neuron-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Neuron Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-muscle-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Muscle Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharyngeal-pumping-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharyngeal Pumping Mechanics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ignore-the-pharynx-focus-on-locomotion-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ignore the Pharynx (Focus on Locomotion Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-treat-pharyngeal-muscles-as-identical-to-body-wall-muscles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Treat Pharyngeal Muscles as Identical to Body Wall Muscles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fully-detailed-sph-pharynx-with-food-particle-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fully Detailed SPH Pharynx with Food Particle Transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-pharyngeal-muscle-models-neuron-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Pharyngeal Muscle Models (NEURON + Jupyter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanical-coupling-option-a-option-b-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mechanical Coupling (Option A -&gt; Option B Migration)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd007-pharyngeal-system-architecture-semi-autonomous-organ">DD007: Pharyngeal System Architecture (Semi-Autonomous Organ)<a class="headerlink" href="#dd007-pharyngeal-system-architecture-semi-autonomous-organ" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 3)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (Intestinal Model)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level C1 Hodgkin-Huxley), 20 nonstriated muscles (plateau potentials), and a 1D pumping oscillator. The pharynx is functionally isolated from the body circuit. Success: pumping frequency 3-4 Hz, with body locomotion not degraded when the pharynx is enabled.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase 3</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Organ Systems — see <a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Pharyngeal network: 20 neurons + 20 muscles (NeuroML), 1D pumping oscillator module, pumping state time series</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: pumping frequency 3-4 Hz; body locomotion not degraded when pharynx enabled</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a> (<code>c302_pharynx.py</code>, <code>pharynx/</code> module) — issues labeled <code>dd007</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>pharynx.enabled: true</code> / <code>pharynx.model: "1d_oscillator"</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> with <code>pharynx.enabled: true</code> (body still moves?), <code>scripts/measure_pumping.py</code> (3-4 Hz?)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>pharynx/pumping_state/</code> layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Pumping frequency validation (Tier 3) blocks merge; backward compatibility with <code>pharynx.enabled: false</code> required</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Pumping frequency</td>
+<td>3-4 Hz (0.25-0.33 s period) under feeding conditions</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Body locomotion preservation</td>
+<td>Within +/-15% of baseline kinematic metrics when pharynx enabled</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Electropharyngeogram match</td>
+<td>Simulated pharyngeal muscle voltage qualitatively matches <a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a> EPG plateau potentials</td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No pharyngeal model. The 20 pharyngeal neurons and 20 pharyngeal muscles are absent from simulation. Pumping is not modeled.</p>
+<p><strong>After:</strong> A semi-autonomous pharyngeal subsystem producing 3-4 Hz pumping oscillations via coordinated contraction of corpus, isthmus, and terminal bulb sections. Functionally isolated from body circuit (except rare RIP -&gt; I2 connection).</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/c302</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pharyngeal muscle cell template</td>
+<td><code>pharynx/PharyngealMuscleCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>Nonstriated HH model with plateau potential kinetics</td>
+</tr>
+<tr>
+<td>Pharyngeal network generator</td>
+<td><code>c302_pharynx.py</code></td>
+<td>Python</td>
+<td>Generates 20 neurons + 20 muscles + connectivity</td>
+</tr>
+<tr>
+<td>1D pumping oscillator</td>
+<td><code>pharynx/pumping_oscillator.py</code></td>
+<td>Python</td>
+<td>3-section contraction/relaxation model</td>
+</tr>
+<tr>
+<td>Pharynx coupling module (future)</td>
+<td><code>pharynx/pharynx_coupling.py</code></td>
+<td>Python</td>
+<td>Option B SPH coupling <code>[TO BE CREATED — Phase 4+]</code></td>
+</tr>
+<tr>
+<td>Pumping state time series</td>
+<td>Output: <code>pharynx_pumping_state.dat</code></td>
+<td>Tab-separated</td>
+<td>Per-section contraction [0,1] over time</td>
+</tr>
+<tr>
+<td>Pumping state for viewer</td>
+<td>OME-Zarr: <code>pharynx/pumping_state/</code>, shape (n_timesteps, 3)</td>
+<td>OME-Zarr</td>
+<td>Continuous [0,1] per section</td>
+</tr>
+</tbody>
+</table>
+<p>Each pharyngeal NeuroML file includes metadata:
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;notes&gt;</span>
+<span class="w">  </span>Cell<span class="w"> </span>type:<span class="w"> </span>pharyngeal<span class="w"> </span>muscle<span class="w"> </span>(nonstriated)
+<span class="w">  </span>Electrophysiology<span class="w"> </span>reference:<span class="w"> </span>Raizen<span class="w"> </span><span class="err">&amp;</span><span class="w"> </span>Avery<span class="w"> </span>1994,<span class="w"> </span>Neuron<span class="w"> </span>12:483-495
+<span class="w">  </span>Key<span class="w"> </span>channels:<span class="w"> </span>eat-2<span class="w"> </span>(pharynx-specific<span class="w"> </span>Ca2+),<span class="w"> </span>egl-19<span class="w"> </span>(L-type<span class="w"> </span>Ca2+),<span class="w"> </span>unc-2<span class="w"> </span>(P/Q-type<span class="w"> </span>Ca2+)
+<span class="w">  </span>Gap<span class="w"> </span>junction<span class="w"> </span>innexins:<span class="w"> </span>inx-2,<span class="w"> </span>inx-3,<span class="w"> </span>inx-7
+<span class="w">  </span>Validation<span class="w"> </span>target:<span class="w"> </span>plateau<span class="w"> </span>potentials,<span class="w"> </span>~100<span class="w"> </span>ms<span class="w"> </span>duration
+<span class="nt">&lt;/notes&gt;</span>
+</code></pre></div></p>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd007</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 3: Pharyngeal System</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd007/description</code> (e.g., <code>dd007/pharyngeal-muscle-model</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD007: Add PharyngealMuscleCell with plateau potential kinetics</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on the <strong>c302</strong> neural circuit framework (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>). If you have already completed <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> first to clone the c302 repository and install dependencies, then return here.</p>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to <a href="#step-by-step">Step 2</a> below.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 native setup</a>. The pharyngeal sub-network uses the same pyNeuroML/jnml toolchain as the body neural circuit. No additional pip installs are required beyond DD001 dependencies.</p>
+<p>Verify the pharyngeal configuration files are present:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pharyngeal sub-network config (63-cell sub-circuit)</span>
+ls<span class="w"> </span>c302/pharynx/
+<span class="c1"># Expected: PharyngealMuscleCell.cell.nml, pumping_oscillator.py (when created)</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Generate pharyngeal network</span>
+python<span class="w"> </span>c302/c302_pharynx.py
+<span class="c1"># Expected output: LEMS_c302_pharynx.xml with 20 neurons + 20 muscles</span>
+
+<span class="c1"># Step 2: Quick validation — backward compatibility (must pass before PR)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">   </span><span class="c1"># with pharynx.enabled: false</span>
+<span class="c1"># Green light: identical output to pre-pharynx baseline</span>
+
+<span class="c1"># Step 3: Quick validation — pharynx enabled (must pass before PR)</span>
+<span class="c1"># (set pharynx.enabled: true in openworm.yml)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Green light: body still moves (pharynx must not destabilize simulation)</span>
+<span class="c1"># Green light: pharyngeal output file is generated</span>
+
+<span class="c1"># Step 4: Validate pumping frequency</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation<span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>scripts/measure_pumping.py
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+<span class="c1"># Green light: pumping rate is 3-4 Hz</span>
+
+<span class="c1"># Step 5: Full validation (must pass before merge)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Green light: Tier 3 pumping frequency 3-4 Hz</span>
+<span class="c1"># Green light: Tier 3 body kinematic metrics within +/-15%</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c302_pharynx.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>pharynx/PharyngealMuscleCell.cell.nml</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>pharynx/pumping_oscillator.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/measure_pumping.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> Pharyngeal pumping state as a 3-section contraction heatmap.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>pharynx/pumping_state/</code> — 3-section contraction animation</td>
+</tr>
+<tr>
+<td><strong>Color mapping</strong></td>
+<td>Per-section contraction heatmap: blue (0 = relaxed) to red (1 = fully contracted)</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>OME-Zarr: <code>pharynx/pumping_state/</code>, shape (n_timesteps, 3) — columns: corpus, isthmus, terminal bulb</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>Rhythmic contraction waves at 3-4 Hz. Corpus contracts first, isthmus follows, terminal bulb last — a peristaltic-like wave moving posterior. Relaxation in reverse order. Clear ~250-330 ms cycle period.</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Overlay pharyngeal pumping trace with body locomotion trace — the two should be independent (no phase-locking, no interference).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="model-the-pharynx-as-a-separate-subsystem">Model the Pharynx as a Separate Subsystem<a class="headerlink" href="#model-the-pharynx-as-a-separate-subsystem" title="Permanent link">&para;</a></h3>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li>Functional isolation allows independent modeling</li>
+<li>Pharyngeal muscle is <strong>nonstriated</strong> with distinct electrophysiology from body wall muscle</li>
+<li>Pumping behavior (3-4 Hz oscillation) is a clear validation target</li>
+<li>WormAtlas provides complete anatomical descriptions</li>
+</ul>
+<h3 id="pharyngeal-neuron-models">Pharyngeal Neuron Models<a class="headerlink" href="#pharyngeal-neuron-models" title="Permanent link">&para;</a></h3>
+<p>Use the <strong>same Level C1 framework</strong> (Hodgkin-Huxley conductance-based) as body neurons, but with pharynx-specific:</p>
+<ul>
+<li>Connectome topology (pharyngeal neuron -&gt; pharyngeal neuron connections only)</li>
+<li>Cell-type-specific specialization using CeNGEN expression (128 neuron classes include pharyngeal neurons)</li>
+</ul>
+<p><strong>Already partially implemented:</strong> c302 Level B includes pharyngeal neurons with integrate-and-fire dynamics. Phase 3 upgrades to Level C1 HH.</p>
+<h3 id="pharyngeal-muscle-models">Pharyngeal Muscle Models<a class="headerlink" href="#pharyngeal-muscle-models" title="Permanent link">&para;</a></h3>
+<p><strong>Key difference from body wall muscle:</strong> Pharyngeal muscles are <strong>nonstriated</strong>, electrically coupled via gap junctions, and pump synchronously.</p>
+<p><strong>Electrophysiology:</strong></p>
+<ul>
+<li>Raizen &amp; Avery (1994): pharyngeal muscles show <strong>plateau potentials</strong> (~100 ms duration) synchronized across the pharynx</li>
+<li>Eat-2 Ca2+ channel is pharynx-specific (egl-19 and unc-2 also expressed)</li>
+<li>Strong gap junction coupling (inx-2, inx-3, inx-7 innexins)</li>
+</ul>
+<p><strong>Modeling approach:</strong></p>
+<ul>
+<li>Same HH framework as body muscles (<a href="../DD002_Muscle_Model_Architecture/">DD002</a>) but with:</li>
+<li>Higher gap junction conductance (0.1-0.5 nS vs. 0.01 nS for neurons)</li>
+<li>Adjusted Ca2+ channel kinetics for plateau potentials</li>
+<li>Coupling to pharyngeal body mechanics (separate from main body SPH)</li>
+</ul>
+<h3 id="pharyngeal-pumping-mechanics">Pharyngeal Pumping Mechanics<a class="headerlink" href="#pharyngeal-pumping-mechanics" title="Permanent link">&para;</a></h3>
+<p><strong>Option A (Simplified):</strong> Model pharyngeal pumping as a <strong>1D oscillator</strong> with three sections (corpus, isthmus, terminal bulb) undergoing coordinated contraction/relaxation. Do not couple to full Sibernetic SPH.</p>
+<p><strong>Option B (Integrated):</strong> Create a <strong>separate SPH pharyngeal body</strong> with ~5,000 particles representing pharyngeal muscle, lumen, and marginal cells. Couple to the main body via mechanical attachment at the anterior.</p>
+<p><strong>Decision:</strong> Start with <strong>Option A</strong> (1D oscillator) for Phase 3. Upgrade to Option B if detailed pharyngeal-body mechanical coupling is needed (e.g., modeling egg-laying, which requires vulva-uterus-pharynx coordination).</p>
+<p><strong>Validation target:</strong> Reproduce the <strong>3-4 Hz pumping frequency</strong> observed in feeding worms.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-ignore-the-pharynx-focus-on-locomotion-only">1. Ignore the Pharynx (Focus on Locomotion Only)<a class="headerlink" href="#1-ignore-the-pharynx-focus-on-locomotion-only" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Pharyngeal pumping is one of the best-characterized behaviors. It provides an independent validation target. Omitting it leaves a major gap in whole-organism modeling.</p>
+<h3 id="2-treat-pharyngeal-muscles-as-identical-to-body-wall-muscles">2. Treat Pharyngeal Muscles as Identical to Body Wall Muscles<a class="headerlink" href="#2-treat-pharyngeal-muscles-as-identical-to-body-wall-muscles" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Pharyngeal muscle is functionally and structurally distinct (nonstriated, plateau potentials, gap-junction-synchronized). Biological accuracy requires separate parameterization.</p>
+<h3 id="3-fully-detailed-sph-pharynx-with-food-particle-transport">3. Fully Detailed SPH Pharynx with Food Particle Transport<a class="headerlink" href="#3-fully-detailed-sph-pharynx-with-food-particle-transport" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Model individual bacteria as SPH particles flowing through the pharyngeal lumen, grinder crushing bacteria, pharyngeal glands secreting enzymes.</p>
+<p><strong>Deferred (too complex for Phase 3):</strong> Start with muscle contraction dynamics and pumping frequency. Add lumen fluid flow and food transport if needed for validation.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Pumping Frequency:</strong> Simulated pumping rate must be 3-4 Hz (0.25-0.33 s period) under feeding conditions.</p>
+</li>
+<li>
+<p><strong>Electropharyngeogram Validation:</strong> If possible, compare simulated pharyngeal muscle voltage to Raizen &amp; Avery (1994) EPG recordings (plateau potentials, spike duration).</p>
+</li>
+<li>
+<p><strong>Anatomical Accuracy:</strong> All 63 pharyngeal cells included with correct spatial positions from WormAtlas.</p>
+</li>
+<li>
+<p><strong>Functional Isolation:</strong> Pharyngeal circuit operates independently from body circuit. No synapses between pharyngeal and body neurons (except RIP -&gt; I2, which is rare).</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Food particle transport:</strong> Individual bacteria moving through the pharyngeal lumen are not modeled. Phase 4+ work if mechanical food processing is needed.</p>
+</li>
+<li>
+<p><strong>Pharyngeal gland secretion:</strong> The 4 gland cells (g1, g2L, g2R, gl) secrete digestive enzymes. Not modeled in Phase 3.</p>
+</li>
+<li>
+<p><strong>Grinder mechanics:</strong> The terminal bulb grinder crushes bacteria. Not modeled until Option B SPH pharynx is implemented.</p>
+</li>
+<li>
+<p><strong>Pharynx-intestine coupling:</strong> Food transfer from pharynx to intestine is the interface with <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>. Only the pumping state output is provided; actual material flow is future work.</p>
+</li>
+<li>
+<p><strong>Egg-laying coordination:</strong> Vulva-uterus-pharynx coordination requires Option B (SPH pharynx) and is Phase 4+ work.</p>
+</li>
+<li>
+<p><strong>Pharyngeal epithelial and marginal cells:</strong> The 9 epithelial and 9 marginal cells provide structural support. They are included in cell count but not actively modeled in Phase 3.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>The pharynx is a <strong>semi-autonomous neuromuscular organ</strong> comprising 63 cells:</p>
+<ul>
+<li><strong>20 pharyngeal neurons</strong> (M1-M5, I1-I6, MC, MI, NSM, RIP)</li>
+<li><strong>20 pharyngeal muscles</strong> (pm1-pm8 in corpus, pm3-pm5 in isthmus, pm6-pm8 in terminal bulb)</li>
+<li><strong>9 epithelial cells</strong> (e1-e3 per section)</li>
+<li><strong>9 marginal cells</strong> (mc1-mc3 per section)</li>
+<li><strong>4 gland cells</strong> (g1, g2L, g2R, gl)</li>
+<li><strong>1 valve cell (vpi1)</strong></li>
+</ul>
+<p>The pharynx pumps bacterial food from the mouth to the intestine at <strong>~3-4 Hz</strong> during feeding, with distinct electrophysiological dynamics (<a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a> electropharyngeogram recordings). It is functionally isolated from the body circuit — pharyngeal neurons do not synapse onto body neurons and vice versa (with rare exceptions: RIP -&gt; I2).</p>
+<hr />
+<h2 id="code-reuse-opportunities">Code Reuse Opportunities<a class="headerlink" href="#code-reuse-opportunities" title="Permanent link">&para;</a></h2>
+<h3 id="existing-pharyngeal-muscle-models-neuron-jupyter">Existing Pharyngeal Muscle Models (NEURON + Jupyter)<a class="headerlink" href="#existing-pharyngeal-muscle-models-neuron-jupyter" title="Permanent link">&para;</a></h3>
+<p><strong>Repository 1:</strong> <code>openworm/pharyngeal_muscle_model</code> (pushed 2017-01-19, dormant but complete)</p>
+<p>Contains a <strong>NEURON implementation of pm3 pharyngeal muscle</strong> with:</p>
+<ul>
+<li>EAT-2, EGL-19, UNC-2 Ca²⁺ channels (exactly <a href="./">DD007</a>'s target channels)</li>
+<li>Ca²⁺ slow action potential (plateau potentials, ~100ms duration)</li>
+<li>Output matches <a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a> EPG recordings (<a href="./">DD007</a>'s validation target)</li>
+</ul>
+<p><strong>Reuse Plan:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test existing NEURON model</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/pharyngeal_muscle_model.git
+<span class="nb">cd</span><span class="w"> </span>pharyngeal_muscle_model/pm3<span class="se">\ </span>muscle<span class="se">\ </span>+<span class="se">\ </span>small<span class="se">\ </span>current/
+nrngui<span class="w"> </span>_run.hoc
+<span class="c1"># Verify: Plateau potentials in output, ~100ms duration</span>
+</code></pre></div></p>
+<p><strong>Integration:</strong></p>
+<ol>
+<li>Convert NMODL → NeuroML2 using pyNeuroML OR</li>
+<li>Use NEURON model directly, couple via <code>sibernetic_NEURON</code> interface</li>
+</ol>
+<p><strong>Estimated Time Savings:</strong> 20-30 hours (pharyngeal muscle dynamics already validated)</p>
+<p><strong>Repository 2:</strong> <code>openworm/PlateauNoiseModel</code> (pushed 2025-01-30, recently active)</p>
+<p>Jupyter notebook with pharyngeal muscle plateau model (Kenngott et al. 2025).</p>
+<ul>
+<li>Use for cross-validation of <a href="./">DD007</a> muscle model</li>
+<li>Plotting code for EPG-style output</li>
+</ul>
+<p><strong>Next Actions:</strong></p>
+<ul>
+<li>[ ] Test pharyngeal_muscle_model on modern NEURON (version compatibility?)</li>
+<li>[ ] Extract channel kinetics (eat-2, egl-19, unc-2 conductances)</li>
+<li>[ ] Compare to PlateauNoiseModel (two independent implementations → cross-validate)</li>
+<li>[ ] Convert to NeuroML2 for <a href="./">DD007</a>'s <code>PharyngealMuscleCell.cell.nml</code></li>
+</ul>
+<hr />
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>pharyngeal_muscle_model</strong> (<a href="https://github.com/openworm/pharyngeal_muscle_model">openworm/pharyngeal_muscle_model</a>, 2017, dormant but complete):
+Contains a NEURON implementation of pm3 pharyngeal muscle with EAT-2, EGL-19, UNC-2 Ca2+ channels — exactly the channels DD007 needs. Produces Ca2+ slow action potentials (plateau potentials, ~100ms duration) matching Raizen &amp; Avery 1994 EPG recordings. Can be converted to NeuroML2 via pyNeuroML or used directly via NEURON. <strong>Estimated time savings: 20-30 hours.</strong></p>
+<p><strong>PlateauNoiseModel</strong> (<a href="https://github.com/openworm/PlateauNoiseModel">openworm/PlateauNoiseModel</a>, active 2025):
+Jupyter notebook with pharyngeal muscle plateau potential model and plotting code, related to Kenngott et al. 2025 paper. Provides validation data and reference kinetics for pharyngeal muscle models.</p>
+<p><strong>JohnsonMailler_MuscleModel</strong> (<a href="https://github.com/openworm/JohnsonMailler_MuscleModel">openworm/JohnsonMailler_MuscleModel</a>, 2025):
+Ca²⁺-force coupling mechanics from Johnson &amp; Mailler 2015. Evaluate whether the Ca²⁺ dynamics portion is separable from body wall muscle assumptions and adaptable for nonstriated pharyngeal muscle.</p>
+<p><strong>NicolettiEtAl2019_NeuronModels</strong> / <strong>NicolettiEtAl2024_MN_IN</strong> (<a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels">openworm/NicolettiEtAl2019_NeuronModels</a>, <a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN">openworm/NicolettiEtAl2024_MN_IN</a>):
+May contain HH parameter fits for pharyngeal neurons (I1, M3, MC, NSM) that could initialize <code>c302_pharynx.py</code> neuron templates.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Raizen DM, Avery L (1994).</strong> "Electrical activity and behavior in the pharynx of <em>Caenorhabditis elegans</em>." <em>Neuron</em> 12:483-495.</li>
+<li><strong>Avery L, Horvitz HR (1989).</strong> "Pharyngeal pumping continues after laser killing of the pharyngeal nervous system." <em>Neuron</em> 3:473-485.</li>
+<li><strong>WormAtlas Pharynx Handbook.</strong> wormatlas.org/hermaphrodite/pharynx/mainframe.htm</li>
+<li><strong>OpenWorm pharyngeal_muscle_model repository.</strong> github.com/openworm/pharyngeal_muscle_model — NEURON model of pm3 muscle with plateau potentials</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pharyngeal neuron connectome</td>
+<td>ConnectomeToolbox / <a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Pharyngeal neuron adjacency (20 neurons)</td>
+<td>Same format as body connectome</td>
+<td>synapse pairs + weights</td>
+</tr>
+<tr>
+<td>CeNGEN expression (pharyngeal neurons)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Per-class conductance densities</td>
+<td>NeuroML <code>&lt;channelDensity&gt;</code></td>
+<td>S/cm2</td>
+</tr>
+<tr>
+<td>RIP-&gt;I2 synaptic input (rare body&lt;-&gt;pharynx connection)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>RIP neuron voltage</td>
+<td>NeuroML coupling</td>
+<td>mV</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pumping state (contracted/relaxed per section)</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (pumping frequency validation)</td>
+<td>Per-section contraction time series</td>
+<td>Tab-separated file</td>
+<td>binary (0/1) or continuous [0,1]</td>
+</tr>
+<tr>
+<td>Pharyngeal particle forces (Option B only)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Per-particle force for pharyngeal muscles</td>
+<td>Same format as body muscle activation</td>
+<td>dimensionless [0,1]</td>
+</tr>
+<tr>
+<td>Food transport rate (future)</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Rate of material entering intestine</td>
+<td>Scalar time series</td>
+<td>um3/s</td>
+</tr>
+<tr>
+<td>Pumping state time series (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-section contraction state over all timesteps</td>
+<td>OME-Zarr: <code>pharynx/pumping_state/</code>, shape (n_timesteps, 3)</td>
+<td>continuous [0, 1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Primary repository:</strong> <code>openworm/c302</code> (same package, new module)</li>
+<li><strong>Docker stage:</strong> <code>neural</code> (same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>)</li>
+<li><strong><code>versions.lock</code> key:</strong> <code>c302</code></li>
+<li><strong>Build dependencies:</strong> pyNeuroML (pip), numpy (pip)</li>
+<li><strong>No additional Docker changes</strong> for Option A (1D oscillator is pure Python/NeuroML)</li>
+<li><strong>Option B would require:</strong> Additional ~5K particles in Sibernetic initialization, changes to <a href="../DD003_Body_Physics_Architecture/">DD003</a> Docker stage</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">pharynx</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                     </span><span class="c1"># Off by default until validated</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1d_oscillator&quot;</span><span class="w">            </span><span class="c1"># &quot;1d_oscillator&quot; (Option A) or &quot;sph&quot; (Option B, future)</span>
+<span class="w">  </span><span class="nt">pumping_frequency_target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.5</span><span class="w">     </span><span class="c1"># Hz (validation target, not a simulation parameter)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pharynx.enabled</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable pharyngeal subsystem</td>
+</tr>
+<tr>
+<td><code>pharynx.model</code></td>
+<td><code>"1d_oscillator"</code></td>
+<td><code>"1d_oscillator"</code>, <code>"sph"</code></td>
+<td>Pumping mechanics model selection</td>
+</tr>
+<tr>
+<td><code>pharynx.pumping_frequency_target</code></td>
+<td><code>3.5</code></td>
+<td><code>1.0</code>-<code>10.0</code> Hz</td>
+<td>Validation target (not a simulation parameter)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+
+<span class="c1"># Step 1: Verify pharynx doesn&#39;t break locomotion</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with pharynx.enabled: true</span>
+<span class="c1"># Verify: body still moves (pharynx must not destabilize simulation)</span>
+<span class="c1"># Verify: pharyngeal output file is generated</span>
+
+<span class="c1"># Step 2: Validate pumping frequency</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation<span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>scripts/measure_pumping.py
+<span class="c1"># Verify: pumping rate is 3-4 Hz</span>
+
+<span class="c1"># Step 3: Verify backward compatibility</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with pharynx.enabled: false</span>
+<span class="c1"># Must produce identical output to pre-pharynx baseline</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Tier 3: pumping frequency 3-4 Hz</span>
+<span class="c1">#   - Tier 3: body kinematic metrics within +/-15%</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>jnml -validate</code> passes for PharyngealMuscleCell.cell.nml</li>
+<li>[ ] <code>quick-test</code> passes with <code>pharynx.enabled: false</code> (backward compatibility)</li>
+<li>[ ] <code>quick-test</code> passes with <code>pharynx.enabled: true</code> (body still moves)</li>
+<li>[ ] Pharyngeal output file generated with contraction values in [0, 1]</li>
+<li>[ ] <code>measure_pumping.py</code> reports 3-4 Hz pumping frequency</li>
+<li>[ ] <code>validate</code> passes (Tier 3 body kinematics within +/-15%)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pharynx/pumping_state/</code> (n_timesteps, 3)</td>
+<td>3-section contraction heatmap</td>
+<td>Blue (0 = relaxed) to red (1 = contracted), per section</td>
+</tr>
+<tr>
+<td><code>pharynx/neuron_voltage/</code> (n_timesteps, 20)</td>
+<td>Pharyngeal neuron traces</td>
+<td>Standard mV colormap</td>
+</tr>
+<tr>
+<td><code>pharynx/muscle_voltage/</code> (n_timesteps, 20)</td>
+<td>Pharyngeal muscle plateau potentials</td>
+<td>Standard mV colormap, plateau visible as sustained red</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mechanical-coupling-option-a-option-b-migration">Mechanical Coupling (Option A -&gt; Option B Migration)<a class="headerlink" href="#mechanical-coupling-option-a-option-b-migration" title="Permanent link">&para;</a></h3>
+<p><strong>Option A (current):</strong> The 1D oscillator runs independently. No coupling to Sibernetic. Pharynx behavior is output as a time series but does not mechanically affect the body.</p>
+<p><strong>Option B (future):</strong> Requires:</p>
+<ol>
+<li>~5,000 additional SPH particles tagged as pharyngeal cells (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a> cell_identity)</li>
+<li>Pharyngeal muscle activation -&gt; pharyngeal particle forces (same coupling pattern as <a href="../DD002_Muscle_Model_Architecture/">DD002</a>-&gt;<a href="../DD003_Body_Physics_Architecture/">DD003</a>)</li>
+<li>Anterior attachment: pharyngeal particles mechanically connected to body wall particles at lips</li>
+<li><strong>This changes total particle count</strong> (100K -&gt; 105K), affecting simulation time and memory</li>
+</ol>
+<p><strong>Migration trigger:</strong> Option B is needed only when pharynx-body mechanical interaction matters (e.g., egg-laying, food grinding effects on body movement).</p>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c302 HH framework</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Pharyngeal neurons use same framework — channel model changes propagate</td>
+</tr>
+<tr>
+<td>CeNGEN specialization</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Pharyngeal neuron conductances come from CeNGEN</td>
+</tr>
+<tr>
+<td>Cell identity (Option B)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Pharyngeal particle tagging uses <a href="../DD004_Mechanical_Cell_Identity/">DD004</a>'s cell_id system</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intestinal input</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Eventually pharynx pumps food to intestine — if pumping dynamics change, food arrival rate changes</td>
+</tr>
+<tr>
+<td>Behavioral validation</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Pumping frequency is a Tier 3 validation target</td>
+</tr>
+<tr>
+<td>Body physics (Option B)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Additional particles change total count and body initialization</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (Phase 3)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Extract pharyngeal neuron expression from CeNGEN</p>
+</li>
+<li>Implement pharyngeal muscle HH models with plateau kinetics</li>
+<li>Create 1D pumping oscillator</li>
+<li>Validate against pumping frequency</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

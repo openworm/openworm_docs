@@ -1,0 +1,4555 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD_PHASE_ROADMAP/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../INTEGRATION_MAP/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Phase Roadmap - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openworm-modeling-phase-roadmap" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phase Roadmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mission-vision-and-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission, Vision, and Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mission, Vision, and Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mission-from-openwormorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission (from openworm.org)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-this-roadmap-serves-the-mission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This Roadmap Serves the Mission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-core-architecture-functional-stabilizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: Core Architecture (Functional, Stabilizing)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-a1-core-infrastructure-weeks-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A1: Core Infrastructure (Weeks 1-2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-a2-governance-derisking-weeks-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A2: Governance &amp; Derisking (Weeks 3-4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-cell-type-specialization-months-1-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Cell-Type Specialization (Months 1-3)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-slow-modulation-closed-loop-sensory-months-4-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Slow Modulation + Closed-Loop Sensory (Months 4-6)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-organ-systems-hybrid-ml-months-7-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Organ Systems + Hybrid ML (Months 7-12)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Mechanical Cell Identity + High-Fidelity Visualization (Months 13-18)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-intracellular-signaling-cascades-months-19-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: Intracellular Signaling Cascades (Months 19-24+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-developmental-modeling-year-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6: Developmental Modeling (Year 2+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-7-male-specific-modeling-year-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7: Male-Specific Modeling (Year 3+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-dataset-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete Dataset Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-summary-what-blocks-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Summary (What Blocks What)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequently-asked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mission-vision-and-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission, Vision, and Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mission, Vision, and Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mission-from-openwormorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission (from openworm.org)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-this-roadmap-serves-the-mission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How This Roadmap Serves the Mission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-0-core-architecture-functional-stabilizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 0: Core Architecture (Functional, Stabilizing)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-a1-core-infrastructure-weeks-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A1: Core Infrastructure (Weeks 1-2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-a2-governance-derisking-weeks-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase A2: Governance &amp; Derisking (Weeks 3-4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-cell-type-specialization-months-1-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Cell-Type Specialization (Months 1-3)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-slow-modulation-closed-loop-sensory-months-4-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Slow Modulation + Closed-Loop Sensory (Months 4-6)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-organ-systems-hybrid-ml-months-7-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Organ Systems + Hybrid ML (Months 7-12)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Mechanical Cell Identity + High-Fidelity Visualization (Months 13-18)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-intracellular-signaling-cascades-months-19-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: Intracellular Signaling Cascades (Months 19-24+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-developmental-modeling-year-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6: Developmental Modeling (Year 2+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-7-male-specific-modeling-year-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7: Male-Specific Modeling (Year 3+)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-dataset-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete Dataset Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-summary-what-blocks-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Summary (What Blocks What)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequently-asked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequently Asked Questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="openworm-modeling-phase-roadmap">OpenWorm Modeling Phase Roadmap<a class="headerlink" href="#openworm-modeling-phase-roadmap" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Version:</strong> 1.0</li>
+<li><strong>Created:</strong> 2026-02-19</li>
+<li><strong>Purpose:</strong> Master timeline for Design Document implementation with visible milestones</li>
+</ul>
+<hr />
+<h2 id="mission-vision-and-principles">Mission, Vision, and Principles<a class="headerlink" href="#mission-vision-and-principles" title="Permanent link">&para;</a></h2>
+<h3 id="mission-from-openwormorg">Mission (from openworm.org)<a class="headerlink" href="#mission-from-openwormorg" title="Permanent link">&para;</a></h3>
+<p><strong>"OpenWorm is an open source project dedicated to creating the world's first virtual organism in a computer, a <em>C. elegans</em> nematode."</strong></p>
+<h3 id="vision">Vision<a class="headerlink" href="#vision" title="Permanent link">&para;</a></h3>
+<p><strong>"Building the first digital life form. Open source."</strong></p>
+<h3 id="core-principles">Core Principles<a class="headerlink" href="#core-principles" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Physical Realism:</strong> "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."</p>
+</li>
+<li>
+<p><strong>Multi-Scale Integration:</strong> From ion channels (angstroms) to neurons (micrometers) to organs (hundreds of micrometers) to organism behavior (millimeters, seconds to minutes).</p>
+</li>
+<li>
+<p><strong>Experimental Validation:</strong> Every model must be validated against real <em>C. elegans</em> data — electrophysiology, calcium imaging, and behavior. We don't build plausible models; we build <strong>validated</strong> models.</p>
+</li>
+<li>
+<p><strong>Open Science:</strong> All code, data, and Design Documents are open source. No proprietary IP, no paywalls, no secrets.</p>
+</li>
+<li>
+<p><strong>Causal Interpretability:</strong> We can trace <em>why</em> behavior emerges through the mechanistic causal chain. Every parameter has physical meaning. Black-box ML is used only at boundaries (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a>), never replacing the mechanistic core.</p>
+</li>
+</ol>
+<h3 id="how-this-roadmap-serves-the-mission">How This Roadmap Serves the Mission<a class="headerlink" href="#how-this-roadmap-serves-the-mission" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>The Mission says:</strong> "world's first virtual organism."</li>
+<li>
+<p><strong>This Roadmap delivers:</strong> 959-cell whole-organism simulation (Phase 4) with neurons, muscles, pharynx, intestine, hypodermis, reproductive system — validated against experimental data at three scales (<a href="../DD010_Validation_Framework/">DD010</a> Tier 1-3).</p>
+</li>
+<li>
+<p><strong>The Vision says:</strong> "digital life form."</p>
+</li>
+<li>
+<p><strong>This Roadmap delivers:</strong> Not just anatomy (static 3D models exist), but <strong>dynamic temporal behavior</strong> — pumping, defecating, egg-laying, locomoting, responding to touch — emergent from coupled biophysical subsystems.</p>
+</li>
+<li>
+<p><strong>The Principles say:</strong> "soft and squishy... physics matters."</p>
+</li>
+<li><strong>This Roadmap delivers:</strong> <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">SPH</a> body physics (<a href="../DD003_Body_Physics_Architecture/">DD003</a>), calcium-force muscle coupling (<a href="../DD002_Muscle_Model_Architecture/">DD002</a>), fluid-structure interaction, mechanical cell identity (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>). The worm deforms realistically because the physics is realistic.</li>
+</ul>
+<hr />
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>OpenWorm's path from 302 generic neurons to 959 specialized cells is organized into <strong>8 implementation phases</strong> over ~18-24 months. Each phase has:</p>
+<ol>
+<li><strong>Clear scope</strong> (which DDs belong to it)</li>
+<li><strong>Visible milestone</strong> (what we can announce when complete)</li>
+<li><strong>Timeline estimate</strong> (weeks/months)</li>
+<li><strong>Success criteria</strong> (how we know it's done)</li>
+<li><strong>Blocking dependencies</strong> (what must be done first)</li>
+</ol>
+<p><strong>The North Star:</strong> By end of Phase 4, OpenWorm simulates a complete adult hermaphrodite <em>C. elegans</em> with 959 specialized cells, validated against experimental data at multiple scales (electrophysiology, neural recordings, behavior), with an interactive 3D viewer anyone can explore in a web browser.</p>
+<hr />
+<h2 id="phase-0-core-architecture-functional-stabilizing">Phase 0: Core Architecture (Functional, Stabilizing)<a class="headerlink" href="#phase-0-core-architecture-functional-stabilizing" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ✅ <strong>Functional</strong> — core simulation runs; 83 stabilization issues tracked across DD001-DD003/DD020 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)</p>
+<p><strong>Phase Rationale:</strong> These DDs describe <strong>already-implemented</strong> subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and <code>cect</code> provides 30+ connectome datasets. They form the working foundation everything else builds on.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Implementation Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Neural Circuit Architecture</td>
+<td>✅ c302 Levels A-D exist, generate NeuroML networks</td>
+</tr>
+<tr>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Muscle Model Architecture</td>
+<td>✅ GenericMuscleCell exists, Ca²⁺→force coupling works</td>
+</tr>
+<tr>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Body Physics Architecture</td>
+<td>✅ Sibernetic v1.0+ works (OpenCL only — PyTorch/Taichi do not yet match result quality; see DD003 Backend Stabilization Roadmap)</td>
+</tr>
+<tr>
+<td><a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></td>
+<td>Connectome Data Access</td>
+<td>✅ <code>cect</code> v0.2.7 exists (needs version pinning per <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What Works Today:</strong></p>
+<ul>
+<li>302 identical neurons (Level C1 graded synapses)</li>
+<li>95 body wall muscles with calcium-force coupling</li>
+<li>~100K SPH particles (fluid-structure interaction)</li>
+<li>Coupled simulation via <code>sibernetic_c302.py</code></li>
+<li>15ms simulations produce movement (validated against Schafer lab kinematics)</li>
+<li>ConnectomeToolbox provides <a href="https://doi.org/10.1038/s41586-019-1352-7">Cook2019</a>, Witvliet, Randi, Ripoll-Sanchez data</li>
+</ul>
+<p><strong>What's Missing (addressed in Phase A1):</strong></p>
+<ul>
+<li>No config system (parameters hardcoded in <code>master_openworm.py</code>)</li>
+<li>No docker-compose (raw shell scripts)</li>
+<li>No dependency pinning (branch names, not commits)</li>
+<li>No automated validation (Tier 3 toolbox is broken)</li>
+<li>Video pipeline has memory leak (OOMs &gt;2s simulations)</li>
+<li>PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)</li>
+<li>Fast trajectory screening for validation: Boyle-Cohen 2D model (<code>boyle_berri_cohen_trajectory.py</code>) enables quick-test kinematic validation without full Sibernetic GPU build (see <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> Issue 1)</li>
+</ul>
+<p><strong>Phase 0 → Phase A1 Gap Map:</strong></p>
+<table>
+<thead>
+<tr>
+<th>What's Missing (Phase 0)</th>
+<th>Addressed By</th>
+<th>Specific Issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No config system (params hardcoded)</td>
+<td>DD013 Issue 1 (openworm.yml schema)</td>
+<td>DD013 draft issues §Group 1</td>
+</tr>
+<tr>
+<td>No docker-compose</td>
+<td>DD013 Issues 2-4 (Dockerfile, compose, CI)</td>
+<td>DD013 draft issues §Group 1</td>
+</tr>
+<tr>
+<td>No dependency pinning</td>
+<td>DD013 Issue 7 (versions.lock)</td>
+<td>DD013 draft issues §Group 2</td>
+</tr>
+<tr>
+<td>No automated validation</td>
+<td>DD021 Issues 1-2 (toolbox revival)</td>
+<td>DD021 draft issues §Group 1</td>
+</tr>
+<tr>
+<td>Video pipeline memory leak</td>
+<td>DD013 Issue 5 (video pipeline fix)</td>
+<td>DD013 draft issues §Group 1</td>
+</tr>
+<tr>
+<td>Backends don't match OpenCL</td>
+<td>DD003 Issues 5-7 + DD013 Issues 39-42</td>
+<td>DD003 draft issues §Group 2</td>
+</tr>
+<tr>
+<td>Missing validation scripts (10 total)</td>
+<td>DD001 Issues 1-3, DD002 Issues 1-2, DD003 Issues 1-3</td>
+<td>See table below</td>
+</tr>
+<tr>
+<td>cect not pinned/cached in Docker</td>
+<td>DD020 Issues 1-5 (build integration)</td>
+<td>DD020 draft issues §Group 1</td>
+</tr>
+<tr>
+<td>Fast trajectory screening tool</td>
+<td>DD001 Issue 1 (boyle_berri_cohen_trajectory.py)</td>
+<td>DD001 draft issues §Group 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Missing Validation Scripts Inventory:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>DD</th>
+<th>Phase A1 Issue</th>
+<th>Target Repo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boyle_berri_cohen_trajectory.py</code></td>
+<td>DD001</td>
+<td>DD001 Issue 1</td>
+<td>openworm/c302</td>
+</tr>
+<tr>
+<td><code>extract_trajectory.py</code></td>
+<td>DD001</td>
+<td>DD001 Issue 2</td>
+<td>openworm/sibernetic</td>
+</tr>
+<tr>
+<td><code>compare_kinematics.py</code></td>
+<td>DD001</td>
+<td>Moved to DD021 Issue 1</td>
+<td>openworm/open-worm-analysis-toolbox</td>
+</tr>
+<tr>
+<td><code>check_regression.py</code></td>
+<td>DD001</td>
+<td>Moved to DD021 Issue 2</td>
+<td>openworm/open-worm-analysis-toolbox</td>
+</tr>
+<tr>
+<td><code>plot_muscle_activation.py</code></td>
+<td>DD002</td>
+<td>DD002 Issue 1</td>
+<td>openworm/c302</td>
+</tr>
+<tr>
+<td><code>validate_muscle_calcium.py</code></td>
+<td>DD002</td>
+<td>DD002 Issue 2</td>
+<td>openworm/c302</td>
+</tr>
+<tr>
+<td><code>check_stability.py</code></td>
+<td>DD003</td>
+<td>DD003 Issue 1</td>
+<td>openworm/sibernetic</td>
+</tr>
+<tr>
+<td><code>validate_incompressibility.py</code></td>
+<td>DD003</td>
+<td>DD003 Issue 2</td>
+<td>openworm/sibernetic</td>
+</tr>
+<tr>
+<td><code>backend_parity_test.py</code></td>
+<td>DD003</td>
+<td>DD003 Issue 5</td>
+<td>openworm/sibernetic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Issue Inventory:</strong> 83 total issues across 4 Phase 0 DDs (DD001: 9, DD002: 18, DD003: 21, DD020: 23) plus relocated issues (DD005: 6, DD017: 3, DD027: 3). Of these, ~35 are Phase A1 infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.</p>
+<p><strong>Milestone:</strong> <em>(Already achieved)</em> <strong>"First Whole-Nervous-System Simulation"</strong></p>
+<ul>
+<li><strong>What you run:</strong> <code>python master_openworm.py</code> — coupled c302 + Sibernetic simulation, 15ms of worm locomotion</li>
+<li><strong>What you see:</strong> ~100K SPH particles forming a worm shape that bends and propagates undulatory waves. Voltage traces for 302 neurons. Muscle activation patterns.</li>
+<li><strong>Validated against:</strong> <a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a> Schafer lab kinematic features — locomotion speed, body curvature, wave frequency within ±15% of wild-type N2</li>
+<li><strong>Published:</strong> <a href="https://doi.org/10.1098/rstb.2017.0382">Sarma et al. 2018</a>, <a href="https://doi.org/10.1098/rstb.2017.0379">Gleeson et al. 2018</a></li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 397 cells (302 neurons + 95 muscles) | 1 neuron class (generic) | 1 coupling loop (neural→body) | 0 organ systems | Tier 3 validated (±15%) | No viewer | 4 DDs implemented</p>
+<hr />
+<h2 id="phase-a1-core-infrastructure-weeks-1-2">Phase A1: Core Infrastructure (Weeks 1-2)<a class="headerlink" href="#phase-a1-core-infrastructure-weeks-1-2" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Proposed</strong> — Must complete before modeling phases proceed</p>
+<p><strong>Phase Rationale:</strong> These five DDs have the highest downstream dependency count. <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> is the orchestrator — literally nothing runs without it. <a href="../DD008_Data_Integration_Pipeline/">DD008</a> provides the unified data layer that Phase 1 DDs (<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>) query. <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> enables Tier 3 behavioral validation. <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> provides the ground truth data. <a href="../DD028_Project_Metrics_Dashboard/">DD028</a> gives CI/validation visibility — can't manage what you can't measure. Together they answer: can a contributor build the stack, access data, and validate results?</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Owner</th>
+<th>Effort</th>
+<th>Blocking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></strong></td>
+<td>Simulation Stack Architecture</td>
+<td>Integration L4 (TBD)</td>
+<td>~40 hours</td>
+<td><strong>CRITICAL</strong> — All phases need this</td>
+</tr>
+<tr>
+<td><strong><a href="../DD008_Data_Integration_Pipeline/">DD008</a></strong></td>
+<td>Data Integration Pipeline (OWMeta)</td>
+<td>Data L4 (TBD)</td>
+<td>~30 hours</td>
+<td><strong>Data layer</strong> — Phase 1+ datasets need unified access</td>
+</tr>
+<tr>
+<td><strong><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></strong></td>
+<td>Movement Toolbox Revival</td>
+<td>Validation L4 (TBD)</td>
+<td>~33 hours</td>
+<td><strong>Tier 3 validation</strong></td>
+</tr>
+<tr>
+<td><strong><a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a></strong></td>
+<td>Validation Data Acquisition Pipeline</td>
+<td>Validation L4 (TBD)</td>
+<td>~18 hours</td>
+<td>All validation tiers — data must exist before validation can run</td>
+</tr>
+<tr>
+<td><a href="../DD028_Project_Metrics_Dashboard/">DD028</a></td>
+<td>Project Metrics Dashboard</td>
+<td>Integration L4 (TBD)</td>
+<td>~12 hours</td>
+<td>CI/validation visibility</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong><code>openworm.yml</code></strong> config schema (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) — Single source of truth for simulation parameters</li>
+<li><strong>Multi-stage Docker</strong> build (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) — Subsystem caching, contributor override (--build-arg)</li>
+<li><strong><code>docker-compose.yml</code></strong> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) — quick-test, simulation, validate, viewer, shell services</li>
+<li><strong><code>versions.lock</code></strong> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) — Pin exact commits for c302, Sibernetic, cect, toolbox</li>
+<li><strong>Revived analysis toolbox</strong> (<a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>) — Python 3.12 compatible, 5 metrics extractable, WCON parser works</li>
+<li><strong>Contributor workflow</strong> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) — Fork subsystem → build with custom branch → quick-test → validate → PR</li>
+<li><strong>OWMeta data bundles</strong> (<a href="../DD008_Data_Integration_Pipeline/">DD008</a>) — Unified Python API for connectome, CeNGEN, cell positions, neuropeptide data; WBbt ID normalization across all datasets</li>
+<li><strong>Project metrics dashboard</strong> (<a href="../DD028_Project_Metrics_Dashboard/">DD028</a>) — Static-site dashboard (GitHub Pages) with 4 panels: validation scores (Tier 2/3 trend), contributor activity (BadgeList + GitHub), CI health (pass/fail across repos), phase progress (DD status parsing). Auto-updates on every CI run via GitHub Actions.</li>
+<li><strong>Validation data repository</strong> (<a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a>) — <code>openworm/validation-data</code> repo with <code>manifest.json</code> mapping datasets to DDs and validation tiers, <code>verify_validation_data.py</code> script, digitized baseline datasets (Schafer kinematics WCON, Randi 2023 correlation matrix)</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"Containerized Stack with Automated Validation"</strong> <em>(Target: Week 2, mid March 2026)</em></p>
+<ul>
+<li><strong>What you run:</strong> <code>docker compose run quick-test</code> (completes in &lt;5 min) — builds the full simulation stack, runs a short simulation, checks for crashes</li>
+<li><strong>What you see:</strong> Terminal output showing build → simulate → validate pipeline. JSON report with pass/fail on each metric. Video of worm locomotion (no more OOM at &gt;2s).</li>
+<li><strong>Then try:</strong> <code>docker compose run validate</code> — runs Tier 2 (functional connectivity vs. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>) + Tier 3 (kinematics vs. <a href="https://doi.org/10.1038/nmeth.2560">Yemini 2013</a>). Produces <code>output/validation_report.json</code> with per-metric scores.</li>
+<li><strong>Contributor workflow:</strong> Fork a subsystem → <code>docker compose run quick-test --build-arg C302_BRANCH=my-branch</code> → see if your change breaks anything → PR with CI green</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ <code>docker compose run quick-test</code> completes in &lt;5 minutes</li>
+<li>✅ <code>docker compose run validate</code> runs Tier 2 functional connectivity + Tier 3 kinematics, produces JSON report</li>
+<li>✅ <code>versions.lock</code> pins c302, Sibernetic, cect, toolbox to exact commits</li>
+<li>✅ Video pipeline memory leak fixed (can run &gt;2s without OOM)</li>
+<li>✅ Analysis toolbox installs on Python 3.12, extracts 5 metrics from sample WCON file</li>
+<li>✅ OWMeta installs, <code>connect("openworm_data")</code> returns 302 neurons with WBbt IDs (<a href="../DD008_Data_Integration_Pipeline/">DD008</a>)</li>
+<li>✅ <code>openworm/validation-data</code> repo exists, <code>manifest.json</code> covers Tier 2 + Tier 3 datasets, <code>verify_validation_data.py</code> passes (<a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a>)</li>
+<li>✅ Dashboard deployed to GitHub Pages, all 4 panels render, data auto-updates on CI run (<a href="../DD028_Project_Metrics_Dashboard/">DD028</a>)</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> for the complete inventory. Key Phase A1 datasets:</p>
+<ul>
+<li><strong>Schafer lab N2 baseline kinematics</strong> (WCON format) — Tier 3 validation baseline</li>
+<li><strong>Randi 2023 functional connectivity</strong> (302×302 correlation matrix) — Tier 2 validation</li>
+<li><strong>Validation data for digitization</strong> — Thomas 1990, Raizen 1994, O'Hagan 2005, Chalfie 1985</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>Recruit Integration L4 Maintainer (owns <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> implementation)</li>
+<li>Recruit Data L4 Maintainer (owns <a href="../DD008_Data_Integration_Pipeline/">DD008</a> OWMeta revival)</li>
+<li>Recruit Validation L4 Maintainer (owns <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> revival)</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 397 cells (unchanged — infrastructure phase) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +5 DDs (9 total)</p>
+<hr />
+<h2 id="phase-a2-governance-derisking-weeks-3-4">Phase A2: Governance &amp; Derisking (Weeks 3-4)<a class="headerlink" href="#phase-a2-governance-derisking-weeks-3-4" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Proposed</strong> — Can proceed in parallel with Phase A1</p>
+<p><strong>Phase Rationale:</strong> These DDs enable governance at scale and derisk Phase 1 science. They don't block contributor workflow but make it sustainable. <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> runs foundation model cross-validation in parallel with A1, providing priors that accelerate <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> calibration. <a href="../DD011_Contributor_Progression_Model/">DD011</a>/<a href="../DD012_Design_Document_RFC_Process/">DD012</a>/<a href="../DD015_AI_Contributor_Model/">DD015</a> formalize roles, processes, and AI agent workflows. None of these block modeling work, but all of them enable the project to scale beyond a handful of contributors.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Owner</th>
+<th>Effort</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../DD011_Contributor_Progression_Model/">DD011</a></td>
+<td>Contributor Progression Model</td>
+<td>Founder</td>
+<td>~8 hours</td>
+<td>Governance — formalizes contributor advancement (L0-L5)</td>
+</tr>
+<tr>
+<td><a href="../DD012_Design_Document_RFC_Process/">DD012</a></td>
+<td>Design Document RFC Process</td>
+<td>Founder</td>
+<td>~8 hours</td>
+<td>Governance — formalizes DD review/approval</td>
+</tr>
+<tr>
+<td><a href="../DD015_AI_Contributor_Model/">DD015</a></td>
+<td>AI-Native Contributor Model</td>
+<td>Founder</td>
+<td>~12 hours</td>
+<td>Governance — AI agent registration and task pipeline</td>
+</tr>
+<tr>
+<td><strong><a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a></strong></td>
+<td>Foundation Model Channel Kinetics</td>
+<td>ML/Structural Bio (TBD)</td>
+<td>~20 hours</td>
+<td>Derisks <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> Phase 1 calibration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong>AI contributor workflow</strong> (<a href="../DD015_AI_Contributor_Model/">DD015</a>) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates</li>
+<li><strong>Channel kinetics predictions</strong> (<a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; <code>channel_kinetics_predictions.csv</code> ready for <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> integration</li>
+<li><strong>DD RFC process and template</strong> (<a href="../DD012_Design_Document_RFC_Process/">DD012</a>) — Documented review lifecycle (Proposed → Accepted → Superseded), DD template with required sections (Integration Contract, Getting Started, Deliverables), GitHub PR-based review workflow</li>
+<li><strong>Contributor progression structure</strong> (<a href="../DD011_Contributor_Progression_Model/">DD011</a>) — L0–L4 level definitions with explicit advancement criteria, badge taxonomy (6 categories), BadgeList API integration, GitHub team/permission configuration, onboarding checklist</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"Governance Framework and Foundation Model Cross-Validation"</strong> <em>(Target: Week 4, late March 2026)</em></p>
+<ul>
+<li><strong>What you see:</strong> Contributor levels documented and enforced via GitHub teams. DD review process operational. AI agents registered and generating issues from DD Integration Contracts. Foundation model cross-validation complete — <code>channel_kinetics_predictions.csv</code> ready for Phase 1 integration.</li>
+<li><strong>Key result:</strong> If <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s naive expression→conductance mapping fails in Phase 1, structure-based predictions from DD025 are ready immediately as a fallback.</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ DD025 cross-validation: predicted kinetics within &lt;30% relative error of measured values for known channels (<a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>)</li>
+<li>✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated (<a href="../DD015_AI_Contributor_Model/">DD015</a>)</li>
+<li>✅ DD template exists with all required sections; at least one DD has completed the RFC review lifecycle (<a href="../DD012_Design_Document_RFC_Process/">DD012</a>)</li>
+<li>✅ L0–L4 levels documented, BadgeList group configured with 6 badge categories, GitHub teams match level permissions (<a href="../DD011_Contributor_Progression_Model/">DD011</a>)</li>
+</ul>
+<p><strong>Datasets Needed:</strong></p>
+<ul>
+<li><strong>DD025 inputs</strong> — Ion channel sequences (WormBase) + known kinetics (~50-100 channels)</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>None — Phase A2 has no infrastructure dependencies and can proceed in parallel with Phase A1</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 397 cells (unchanged) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +4 DDs (13 total, including Phase A1)</p>
+<hr />
+<h2 id="phase-1-cell-type-specialization-months-1-3">Phase 1: Cell-Type Specialization (Months 1-3)<a class="headerlink" href="#phase-1-cell-type-specialization-months-1-3" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Ready to Start</strong> (after Phase A1 complete)</p>
+<p><strong>Phase Rationale:</strong> Phase 1 is the first <em>modeling</em> phase — it specializes the 302 identical neurons into 128 biologically distinct classes. <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> is here because it needs CeNGEN data via <a href="../DD008_Data_Integration_Pipeline/">DD008</a> and validation tools from <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> (both Phase A1), and because its scientific risk is highest — if expression→conductance mapping fails, better to discover it early. <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>/<a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> establish visual infrastructure because months of work with no visual feedback kills contributor engagement. <a href="../DD010_Validation_Framework/">DD010</a> Tier 2 activates the functional connectivity gate (r &gt; 0.5) so Phase 2 doesn't build on a broken foundation. <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (Phase A2) integration feeds foundation model predictions into <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> calibration while it's actively running.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Dependencies</th>
+<th>What Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></strong></td>
+<td>Cell-Type Specialization Strategy</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD008_Data_Integration_Pipeline/">DD008</a>/DD020 (CeNGEN)</td>
+<td>Replace 302 identical neurons with 128 distinct neuron classes</td>
+</tr>
+<tr>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Phase 1)</strong></td>
+<td>Post-Hoc Trame Viewer</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Evolve Worm3DViewer from Streamlit to Trame; OME-Zarr export</td>
+</tr>
+<tr>
+<td><a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a></td>
+<td>Visual Rendering Specification</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>Canonical color palette (37 materials), 14 reference mockups, material definitions for all 959 cells</td>
+</tr>
+<tr>
+<td><strong><a href="../DD010_Validation_Framework/">DD010</a> (Tier 2)</strong></td>
+<td>Functional Connectivity Validation</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Activate Tier 2 blocking gate (r &gt; 0.5 vs. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>)</td>
+</tr>
+<tr>
+<td><a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (integration)</td>
+<td>Foundation Model → <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> Priors</td>
+<td>ML/Structural Bio (TBD)</td>
+<td>~12 hours</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong>128 cell-type NeuroML files</strong> (<code>cells/AVALCell.cell.nml</code>, etc.) — CeNGEN expression → conductance densities. The current 4 generic channels (leak, K_slow, K_fast, Ca_boyle) borrowed from muscle electrophysiology (Boyle &amp; Cohen 2008) expand to 14+ neuron-class-specific channels. Existing NeuroML2 models from Nicoletti et al. (2019) and NMODL files from BAAIWorm (Zhao et al. 2024) provide 31 channels as a head start. Channel assignment uses CeNGEN single-cell transcriptomics rather than functional grouping — more biologically grounded because two neurons in the same functional group may express different channel complements. See <a href="../DD005_draft_issues/">DD005 Draft Issues</a> for the channel survey, adoption, and validation tasks.</li>
+<li><strong>Calibration parameters CSV</strong> (<code>data/expression_to_conductance_calibration.csv</code>) — Fit from ~20 neurons with electrophysiology</li>
+<li><strong>Differentiated c302 network</strong> (<code>LEMS_c302_C1_Differentiated.xml</code>) — Generated via <code>python CElegans.py C1Differentiated</code></li>
+<li><strong>OME-Zarr export pipeline</strong> (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>) — <code>master_openworm.py</code> Step 4b writes <code>output/openworm.zarr/</code> with neural/, muscle/, body/ groups</li>
+<li><strong>Trame viewer</strong> (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>) — Replaces Streamlit+stpyvista, supports time animation in browser</li>
+<li><strong>Tier 2 validation</strong> (<a href="../DD010_Validation_Framework/">DD010</a>) — Automated correlation vs. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>; CI blocks PRs if r &lt; 0.5</li>
+<li><strong>Visual rendering spec</strong> (<a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>) — 37-material color palette, activity-state overlays, 14 reference mockups as acceptance tests</li>
+<li><strong>WormBrowser enhancement</strong> (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>) — Click neuron/cell → links to WormAtlas + WormBase on browser.openworm.org (quick win for John White, ~8-16 hrs)</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"Biologically Distinct Neurons"</strong> <em>(Target: Month 3, June 2026)</em></p>
+<ul>
+<li><strong>What you run:</strong> <code>docker compose run simulation</code> then <code>docker compose up viewer</code> — open <code>localhost:8501</code></li>
+<li><strong>What you see:</strong> 3D viewer with smooth worm body crawling. Toggle "Neurons" layer — 302 neurons appear, colored by class (128 distinct colors). Click AVAL — inspector panel shows its class-specific voltage and calcium traces, visibly different from ASER or AWCL. Toggle "color by class" mode to see the diversity.</li>
+<li><strong>Validated against:</strong> <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> whole-brain calcium imaging — simulated functional connectivity correlation improves ≥20% over generic baseline (e.g., r=0.3 → r≥0.36). Side-by-side comparison plot: generic model vs. CeNGEN-parameterized model vs. experimental data.</li>
+<li><strong>Video:</strong> Time-lapse of simulation with neurons glowing by activity — command interneurons (AVA, AVB) show graded potentials, sensory neurons (ASEL, ASER) show distinct response profiles, motor neurons fire rhythmically driving visible muscle contractions.</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ All 128 <code>.cell.nml</code> files generated without error</li>
+<li>✅ <code>jnml -validate</code> passes for each cell type</li>
+<li>✅ Tier 2 validation: correlation with <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> improves ≥20% vs. generic baseline</li>
+<li>✅ Tier 3 validation: kinematic metrics remain within ±15% (no regression)</li>
+<li>✅ Boyle-Cohen 2D fast trajectory tool screens kinematic impact of <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> conductance parameter changes in &lt;30 seconds (no GPU needed)</li>
+<li>✅ Trame viewer launches via <code>docker compose up viewer</code>, shows time-animated worm at localhost:8501</li>
+<li>✅ OME-Zarr export complete: <code>neural/</code>, <code>muscle/</code>, <code>body/</code> groups all populated</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> for the complete inventory. Key Phase 1 datasets:</p>
+<ul>
+<li><strong>CeNGEN L4 expression</strong> (128 classes × 20,500 genes) — DD005 conductance calibration</li>
+<li><strong>Electrophysiology training set</strong> (~20 neurons with measured conductances) — DD005 calibration regression</li>
+<li><strong>Ion channel gene list</strong> (~100 genes) — DD005 gene→channel mapping</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>Phase A1 complete (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Docker stack, <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> toolbox working)</li>
+<li>CeNGEN data downloaded and validated</li>
+<li>Electrophysiology training set curated (20 neurons with measured conductances)</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 397 cells (specialized, not added) | <strong>128</strong> neuron classes | 1 coupling loop | 0 organ systems | Tier 2 validated (r &gt; 0.5) + Tier 3 (±15%) | 2 viewer scales (organism, tissue) | +3 DDs (14 total)</p>
+<hr />
+<h2 id="phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase 2: Slow Modulation + Closed-Loop Sensory (Months 4-6)<a class="headerlink" href="#phase-2-slow-modulation-closed-loop-sensory-months-4-6" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Proposed</strong> (ready after Phase 1)</p>
+<p><strong>Phase Rationale:</strong> Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> requires specialized neurons from Phase 1 because the 31,479 peptide-receptor interactions are cell-type-specific — modulation on generic neurons would be meaningless. <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a> needs cell-type-specific MEC-4 channels from <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>. Both must exist before Phase 3: <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a> requires serotonergic modulation, and emergent behaviors (chemotaxis, thermotaxis) require sensory input. <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a> and <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a> can proceed in parallel with <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>/<a href="../DD019_Closed_Loop_Touch_Response/">DD019</a>. DD001 Level D Stage 1 starts with 5 representative multicompartmental neurons to validate the approach before committing to all 302.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Dependencies</th>
+<th>What Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></strong></td>
+<td>Neuropeptidergic Connectome Integration</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Add 31,479 peptide-receptor interactions as slow modulation layer</td>
+</tr>
+<tr>
+<td><strong><a href="../DD019_Closed_Loop_Touch_Response/">DD019</a></strong></td>
+<td>Closed-Loop Touch Response</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>MEC-4 mechanotransduction + bidirectional coupling + tap withdrawal</td>
+</tr>
+<tr>
+<td><a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a></td>
+<td>Environmental Modeling &amp; Stimulus Delivery</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a></td>
+<td>Agar substrate, chemical/thermal gradients, chemotaxis (CI &gt;0.5) + thermotaxis</td>
+</tr>
+<tr>
+<td><a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a></td>
+<td>Proprioceptive Feedback &amp; Motor Coordination</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a></td>
+<td>Stretch receptors on B-class motor neurons, wavelength stability ±10%</td>
+</tr>
+<tr>
+<td><a href="../DD026_Reservoir_Computing_Validation/">DD026</a></td>
+<td>Reservoir Computing Validation</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></td>
+<td>Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Phase 2)</strong></td>
+<td>Interactive Dynamic Viewer</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 1, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a></td>
+<td>Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay</td>
+</tr>
+<tr>
+<td><strong><a href="../DD027_Multicompartmental_Neuron_Models/">DD027</a></strong></td>
+<td>Multicompartmental Neurons (Proof of Concept)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology. Includes spatially resolved synapse placement using Witvliet 2021 EM centroid distances. Stage 1 proof-of-concept; Stage 2 (all 302 neurons) is Phase 4-5.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong>NeuroML peptide extensions</strong> (<code>lems/PeptideReleaseDynamics.xml</code>, <code>lems/PeptideReceptorDynamics.xml</code>)</li>
+<li><strong>Neuropeptidergic adjacency CSV</strong> (31,479 rows: source, target, peptide, receptor, distance, modulation_type)</li>
+<li><strong>MEC-4 channel model</strong> (<code>channel_models/mec4_chan.channel.nml</code>) — Strain-gated <a href="https://en.wikipedia.org/wiki/Degenerin">DEG/ENaC</a> channel</li>
+<li><strong>Cuticle strain readout</strong> (<code>sibernetic/coupling/strain_readout.py</code>) — SPH particles → local strain per touch neuron</li>
+<li><strong>Bidirectional coupling</strong> (<code>sibernetic_c302_closedloop.py</code>) — Extends existing forward coupling with body→sensory reverse path</li>
+<li><strong>Tap stimulus</strong> (<code>sibernetic/stimuli/tap_stimulus.py</code>) — Boundary particle displacement, configurable position</li>
+<li><strong>Agar substrate + chemical/thermal gradients</strong> (<a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a>) — Steady-state NaCl gradient field, thermal gradient, substrate boundary particles</li>
+<li><strong>Stretch receptor channel model</strong> (<a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a>) — Curvature-gated channels on B-class motor neurons (DB, VB), body curvature readout from SPH</li>
+<li><strong>Viewer enhancements</strong> (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>) — Neuropeptide volumetric layer, strain heatmap, reversal event markers, gradient field visualization</li>
+<li><strong>RC validation report</strong> (<a href="../DD026_Reservoir_Computing_Validation/">DD026</a>) — <code>rc_validation_report.json</code> with 5 RC properties × 4 neuron partitions, falsifiable predictions tested</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"The Worm Can Feel and Modulate"</strong> <em>(Target: Month 6, September 2026)</em></p>
+<ul>
+<li><strong>What you run:</strong> <code>docker compose run simulation --config closedloop_touch</code> then open the viewer</li>
+<li><strong>Demo 1 — Tap withdrawal:</strong> Worm crawls forward. At t=5s, anterior tap stimulus fires. Watch: touch receptor neurons (ALM, AVM) activate → command interneurons (AVA, AVD) depolarize → motor neurons reverse → worm reverses direction within &lt;1 second, travels backward ≥1 body length, then resumes forward crawling. Compare: <code>--config openloop</code> (same tap, no reversal — the worm is deaf).</li>
+<li><strong>Demo 2 — Neuropeptide knockout:</strong> Run with <code>neuropeptides.flp_knockout: true</code>. Watch locomotion pattern change — speed, reversal frequency, body wave amplitude all shift. Compare side-by-side with wild-type. Matches <a href="https://doi.org/10.1111/j.1749-6632.1999.tb07895.x">Li et al. 1999</a> / <a href="https://doi.org/10.1038/nn1140">Rogers et al. 2003</a> FLP loss-of-function phenotypes.</li>
+<li><strong>Validated against:</strong> <a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a> tap withdrawal (reversal latency, distance, direction discrimination); <a href="https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996">Wicks et al. 1996</a> anterior-vs-posterior direction selectivity; ≥3 peptide knockout phenotypes within 30% of experimental measurements.</li>
+<li><strong>In the viewer:</strong> Neuropeptide volumetric clouds visible as colored mist waxing/waning on seconds timescale. Cuticle strain heatmap shows where the body is being compressed. Reversal events marked on the time scrubber.</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ Peptide-enabled simulation completes without crash (Tier 3 kinematics not degraded)</li>
+<li>✅ ≥3 peptide knockout phenotypes reproduced within 30% error (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> validation)</li>
+<li>✅ Tap stimulus → reversal onset &lt;1 s, distance ≥1 body length (<a href="../DD019_Closed_Loop_Touch_Response/">DD019</a> Tier 3)</li>
+<li>✅ Anterior touch → backward, posterior touch → forward (direction discrimination, <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a>)</li>
+<li>✅ Closed-loop stable for 30s without NaN/divergence (<a href="../DD019_Closed_Loop_Touch_Response/">DD019</a> quick-test)</li>
+<li>✅ Chemotaxis: CI (chemotaxis index) &gt;0.5 on simulated NaCl gradient (<a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a>)</li>
+<li>✅ Thermotaxis: worm navigates to cultivation temperature ±2°C (<a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a>)</li>
+<li>✅ Wavelength stability: ±10% with proprioception enabled (improved from ±15%), &gt;30% degradation when stretch receptors disabled (<a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a>)</li>
+<li>✅ Viewer shows: neuropeptide volumetric clouds, cuticle strain heatmap, reversal event markers, gradient fields</li>
+<li>✅ RC validation: All 5 predictions tested across all 4 partitions; results documented in <code>rc_validation_report.json</code> (<a href="../DD026_Reservoir_Computing_Validation/">DD026</a>)</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> for the complete inventory. Key Phase 2 datasets:</p>
+<ul>
+<li><strong>Ripoll-Sanchez 2023 neuropeptide connectome</strong> (31,479 interactions) — DD006 extrasynaptic wiring</li>
+<li><strong>Touch neuron electrophysiology</strong> (MEC-4 kinetics) — DD019 channel model validation</li>
+<li><strong>Tap withdrawal behavioral data</strong> (Chalfie 1985, Wicks 1996) — DD019 Tier 3 validation</li>
+<li><strong>BAAIWorm NMODL + SWC data</strong> — DD027 multicompartmental neurons</li>
+<li><strong>Chemotaxis and thermotaxis behavioral data</strong> — DD022 Tier 3 validation</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>Phase 1 complete (specialized neurons are substrate for peptide modulation)</li>
+<li>Ripoll-Sanchez data downloaded and ingested into ConnectomeToolbox/OWMeta</li>
+<li>3D cell positions extracted (for peptide distance-dependent attenuation)</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 403 cells (+6 touch neurons) | 128 neuron classes | <strong>2</strong> coupling loops (+body→sensory) | 0 organ systems | <strong>1</strong> modulation layer (31,479 peptide-receptor) | Tier 2 + Tier 3 validated | 2 viewer scales | +6 DDs (20 total)</p>
+<hr />
+<h2 id="phase-3-organ-systems-hybrid-ml-months-7-12">Phase 3: Organ Systems + Hybrid ML (Months 7-12)<a class="headerlink" href="#phase-3-organ-systems-hybrid-ml-months-7-12" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Proposed</strong> (ready after Phase 2)</p>
+<p><strong>Phase Rationale:</strong> Phase 3 adds three semi-autonomous organ subsystems and the ML acceleration framework. <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (pharynx) and <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a> (egg-laying) need specialized parameters from <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, and <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a> specifically requires <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>'s serotonin modulation. <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (intestine) couples to neural circuits via DVB/AVL neurons. All three organ DDs can be implemented in parallel by different contributors. <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> (hybrid ML) waits until Phase 3 because: (1) the differentiable backend needs stable ODE equations — porting during Phase 1-2 equation changes wastes effort, (2) the SPH surrogate needs 500+ training runs that go stale if body dynamics change, and (3) learned sensory models are only appropriate <em>after</em> the mechanistic approach (Phase 2) has been tried — using ML before mechanism contradicts OpenWorm's interpretability commitment.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Dependencies</th>
+<th>What Adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></strong></td>
+<td>Pharyngeal System Architecture</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping</td>
+</tr>
+<tr>
+<td><strong><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></strong></td>
+<td>Intestinal Oscillator Model</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (optional)</td>
+<td>20-cell IP3/Ca oscillator, defecation motor program (50s period)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD018_Egg_Laying_System_Architecture/">DD018</a></strong></td>
+<td>Egg-Laying System Architecture</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>28-cell reproductive circuit (HSN serotonergic, VC cholinergic, 16 sex muscles), two-state pattern</td>
+</tr>
+<tr>
+<td><strong><a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a></strong></td>
+<td>Hybrid Mechanistic-ML Framework</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Differentiable backend (auto parameter fit), SPH surrogate (1000× speedup), learned sensory (Component 3 extracted to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong>Pharyngeal network</strong> (<code>LEMS_c302_pharynx.xml</code>) — 20 neurons + 20 muscles, pumping oscillator module</li>
+<li><strong>Intestinal network</strong> (<code>LEMS_IntestineOscillator.xml</code>) — 20 cells with IP3R, gap-junction-coupled</li>
+<li><strong>Egg-laying network</strong> (<code>LEMS_c302_EggLaying.xml</code>) — HSN, VC, vulval/uterine muscles, serotonin/ACh/tyramine synapses</li>
+<li><strong>Differentiable worm</strong> (<code>openworm-ml/differentiable/</code>) — PyTorch ODE solver, full <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>+<a href="../DD002_Muscle_Model_Architecture/">DD002</a>+<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> chain</li>
+<li><strong>SPH surrogate</strong> (<code>openworm-ml/surrogate/</code>) — FNO trained on 500+ SPH runs (supplemented by 2D rod-spring model trajectories at orders of magnitude higher throughput), &lt;5% trajectory error, 1000× faster</li>
+<li><strong>Auto-fitted parameters</strong> — Gradient descent on <a href="../DD010_Validation_Framework/">DD010</a> validation loss, per-neuron-class conductances</li>
+<li><strong>Per-synapse weight optimization</strong> (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> Component 1) — Replaces the uniform baseline <code>g_syn = 0.09 nS</code> with per-synapse conductances fitted via gradient descent against whole-brain functional connectivity data, following Zhao et al. (2024). Extended with neurotransmitter identity constraints from Wang et al. (2024) and full 302-neuron optimization. Config: <code>neural.synapse_optimization: true/false</code>. See <a href="../DD017_draft_issues/">DD017 Draft Issues</a>.</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"From 302 Neurons to 433 Cells — Multi-Organ Simulation"</strong> <em>(Target: Month 12, March 2027)</em></p>
+<ul>
+<li><strong>What you run:</strong> <code>docker compose run simulation --config full_organism</code> (runs for ~20 simulated minutes to capture egg-laying cycle). Then open viewer.</li>
+<li><strong>What you see — 3 organs running simultaneously:</strong><ul>
+<li><strong>Pharynx</strong> (toggle layer ON): 63 pharyngeal cells at the head pump rhythmically at 3-4 Hz. Corpus contracts → isthmus peristalsis → terminal bulb grinds. Pharyngeal neurons (MC, M3) fire in sync with the pump cycle. Validated against <a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a> electropharyngeogram recordings.</li>
+<li><strong>Intestine</strong> (toggle layer ON): 20 intestinal cells show a calcium wave propagating posterior-to-anterior every ~50 seconds. Cells color from blue→red as [Ca2+] rises. Every wave triggers a visible defecation motor program — body contraction runs anterior-to-posterior. Validated against <a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a> (50 ± 10s cycle period).</li>
+<li><strong>Egg-laying</strong> (toggle layer ON): HSN neurons fire serotonergic bursts → vulval muscles contract → eggs deposited. Two-state pattern: ~20 min inactive, ~2 min active bout (3-5 eggs). Validated against <a href="https://doi.org/10.7554/eLife.21126">Collins et al. 2016</a> calcium imaging.</li>
+</ul>
+</li>
+<li><strong>Demo — ML surrogate:</strong> <code>docker compose run surrogate</code> — same muscle activation input, full SPH takes hours, surrogate completes in &lt;1 minute. Overlay both trajectories: &lt;5% difference. Enables rapid parameter sweeps that were previously impossible.</li>
+<li><strong>All the while:</strong> Body locomotion continues in background — worm crawls, pharynx pumps, intestine oscillates, eggs are laid. Multiple timescales visible simultaneously (ms for neurons, seconds for pumping, minutes for defecation, tens of minutes for egg-laying).</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ Pharyngeal pumping frequency: 3-4 Hz (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> Tier 3)</li>
+<li>✅ Intestinal defecation period: 50 ± 10 s (<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> Tier 3)</li>
+<li>✅ Egg-laying two-state pattern: inactive ~20 min, active ~2 min, 3-5 eggs/bout (<a href="../DD018_Egg_Laying_System_Architecture/">DD018</a> Tier 3)</li>
+<li>✅ Differentiable backend matches NEURON/jNML reference within ±5% (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> validation)</li>
+<li>✅ SPH surrogate achieves &lt;5% trajectory error, ≥100× speedup (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> validation)</li>
+<li>✅ Auto-fitted parameters equal or improve <a href="../DD010_Validation_Framework/">DD010</a> scores vs. hand-tuned baseline</li>
+<li>✅ Body locomotion still within ±15% (no regression from adding organs)</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> for the complete inventory. Key Phase 3 datasets:</p>
+<ul>
+<li><strong>Raizen 1994 EPG recordings</strong> — DD007 pharyngeal validation</li>
+<li><strong>Thomas 1990 defecation data</strong> — DD009 Tier 3 validation (50s period)</li>
+<li><strong>Collins 2016 egg-laying calcium imaging</strong> — DD018 validation</li>
+<li><strong>SPH simulation training set</strong> (500+ runs, ~2,500 GPU-hours) — DD017 surrogate training</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>Phase 1 complete (specialized neurons)</li>
+<li>Organ-specific validation data curated (pharynx EPG, defecation period, egg-laying patterns)</li>
+<li>GPU cluster access for SPH surrogate training (500+ long runs)</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | <strong>3</strong> organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (23 total)</p>
+<hr />
+<h2 id="phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4: Mechanical Cell Identity + High-Fidelity Visualization (Months 13-18)<a class="headerlink" href="#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> ⚠️ <strong>Proposed</strong> (ready after Phase 3)</p>
+<p><strong>Phase Rationale:</strong> Phase 4 completes the organism: all 959 somatic cells with cell-type mechanics and a public web viewer. <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> is here because per-cell mechanical properties (elasticity, adhesion) should be informed by organ system behavior — setting intestine elasticity before implementing the intestine means guessing. <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> needs both <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> cell boundaries and stable SPH body dynamics. <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 3 (Three.js + WebGPU public deployment) requires all content stable — static site deployment to wormsim.openworm.org is the capstone milestone. <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> and <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> can proceed in parallel.</p>
+<p><strong>Scope:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DD</th>
+<th>Title</th>
+<th>Dependencies</th>
+<th>What Adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></strong></td>
+<td>Mechanical Cell Identity</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD008_Data_Integration_Pipeline/">DD008</a>, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>/DD009 (cell positions)</td>
+<td>Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion</td>
+</tr>
+<tr>
+<td><strong><a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a></strong></td>
+<td>Anatomical Mesh Deformation Pipeline</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices</td>
+</tr>
+<tr>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Phase 3)</strong></td>
+<td>Public Experience Viewer</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 2, <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a></td>
+<td>Three.js + WebGPU, molecular scale, static site deployment, "Digital Organism In Your Browser"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Deliverables:</strong></p>
+<ol>
+<li><strong>Tagged particle file</strong> (extended SPH_Particle_v2 struct: 44 bytes with <code>cell_id</code>, <code>elasticity_mult</code>, <code>adhesion</code>)</li>
+<li><strong>Cell-to-particle mapping</strong> (<code>data/cell_to_particle_map.json</code>) — 959 somatic cells → particle indices</li>
+<li><strong>Cell boundary meshes</strong> (<code>data/cell_boundaries/*.obj</code>) — Per-cell 3D volumes from <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet 2021</a> EM</li>
+<li><strong>Deformed Virtual Worm meshes</strong> (<a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>) — 688 anatomical meshes follow SPH body shape in real-time</li>
+<li><strong>Three.js viewer</strong> (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible</li>
+<li><strong>Static site deployment</strong> — wormsim.openworm.org (GitHub Pages or CDN)</li>
+</ol>
+<p><strong>Milestone:</strong> 🎉 <strong>"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"</strong> <em>(Target: Month 18, September 2027)</em></p>
+<ul>
+<li><strong>What you run:</strong> Open <code>wormsim.openworm.org</code> in any browser. No Docker, no installation, no server.</li>
+<li><strong>What you see — 3 scales of exploration:</strong><ul>
+<li><strong>Organism scale (default):</strong> Smooth, translucent <em>C. elegans</em> crawling across the screen. Anatomical meshes (688 Virtual Worm pieces) deform with the SPH body in real-time. Pharynx pumps at the head, defecation contractions visible every ~50s.</li>
+<li><strong>Tissue/Cell scale (zoom in):</strong> Click any of 959 individually labeled cells. Neurons glow by voltage. Muscles flash by contraction. Intestinal cells show calcium waves. Inspector panel shows cell identity (WBbt ID), real-time traces, and links to WormBase.</li>
+<li><strong>Molecular scale (zoom further):</strong> See ion channels opening/closing on a neuron's membrane. Calcium flowing through IP3 receptors in intestinal cells. Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion (per <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> Mockups 13-14).</li>
+</ul>
+</li>
+<li><strong>Validated against:</strong> All previous tiers still passing — kinematics (<a href="https://doi.org/10.1038/nmeth.2560">Yemini 2013</a> ±15%), functional connectivity (<a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>), organ rhythms (pharynx, intestine, egg-laying). Cell-type-specific elasticity produces realistic body mechanics: intestine soft (0.8x), cuticle stiff (5-10x), muscles intermediate (1.5x).</li>
+<li><strong>Performance:</strong> 60fps on a 2020-era laptop. All 688 meshes deform in &lt;4ms per frame. Progressive OME-Zarr loading — start viewing immediately while more data streams in background.</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li>✅ All 959 somatic cells mapped to ≥1 SPH particle each</li>
+<li>✅ Cell-type-specific elasticity: intestine (0.8x baseline), cuticle (5-10x), muscles (1.5x), hypodermis (0.5x)</li>
+<li>✅ Tier 3 validation: kinematic metrics within ±15% with <code>cell_identity: true</code> enabled</li>
+<li>✅ Mesh deformation: All 688 Virtual Worm meshes deform with SPH body, no interpenetration, &lt;4ms per frame (60fps budget)</li>
+<li>✅ Three.js viewer: 60fps on 2020-era laptop, all 3 scales working, static deployment (no server required)</li>
+<li>✅ Molecular scale: Gene transcription → mRNA export → ribosomal translation → vesicle trafficking → channel insertion visible (<a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> Mockups 13-14)</li>
+<li>✅ WormBrowser feature parity: layer peeling, search by cell name, click-to-identify, static hosting — all WormBrowser features matched (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> checklist)</li>
+<li>✅ browser.openworm.org redirects to wormsim.openworm.org</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> for the complete inventory. Key Phase 4 datasets:</p>
+<ul>
+<li><strong>Witvliet 2021 cell boundary meshes</strong> — DD004 particle tagging (needs EM conversion)</li>
+<li><strong>Virtual Worm Blender meshes</strong> (688 meshes, ~1.6M vertices) — DD014.2 deformation</li>
+<li><strong>Cell-type mechanical properties</strong> — DD004 elasticity/adhesion parameters</li>
+</ul>
+<p><strong>Blocking Dependencies:</strong></p>
+<ul>
+<li>Phase 3 complete (organ systems implemented)</li>
+<li>Witvliet EM data converted to cell boundary meshes</li>
+<li>Virtual Worm meshes exported from Blender to individual OBJ files</li>
+<li>GPU access for mesh deformation compute shaders (WebGPU or local testing)</li>
+</ul>
+<p><strong>Cumulative Metrics:</strong> <strong>959</strong> cells (all somatic) | 128 neuron classes | 2 coupling loops | 3 organ systems | 1 modulation layer | Tier 2 + Tier 3 validated | <strong>3</strong> viewer scales (organism, tissue, molecular) | <strong>Public access</strong> (static site) | <strong>23 DDs implemented</strong></p>
+<hr />
+<h2 id="phase-5-intracellular-signaling-cascades-months-19-24">Phase 5: Intracellular Signaling Cascades (Months 19-24+)<a class="headerlink" href="#phase-5-intracellular-signaling-cascades-months-19-24" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> 📝 <strong>Not Yet Specified</strong> — Placeholder for future work</p>
+<p><strong>Anticipated Scope:</strong></p>
+<ul>
+<li>Detailed <a href="https://en.wikipedia.org/wiki/G_protein-coupled_receptor">GPCR</a> cascades (Gq/Gs/Gi → PLC/adenylyl cyclase → IP3/cAMP → PKA/PKC)</li>
+<li>Second messenger dynamics (IP3, DAG, cAMP, cGMP)</li>
+<li>Channel phosphorylation and trafficking</li>
+<li>Non-neuronal peptide signaling (intestine, hypodermis, gonad)</li>
+<li>Cross-tissue signaling (endocrine, paracrine)</li>
+</ul>
+<p><strong>Why Deferred:</strong>
+Current phenomenological models (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> conductance modulation, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> simplified IP3R) capture functional effects without full biochemical detail. Phase 5 adds mechanistic depth when validation requires it.</p>
+<p><strong>Milestone (Projected):</strong> <strong>"Molecular-Level Intracellular Dynamics"</strong></p>
+<p><strong>Foundation Model Opportunities</strong></p>
+<p>Phase 5's biggest blocker is the lack of <em>C. elegans</em>-specific biochemical rate constants — most GPCR cascade kinetics come from mammalian systems. Protein foundation models can bridge this gap by predicting binding affinities, conformational dynamics, and pathway structure from sequence rather than requiring per-species experimental measurement:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Developer</th>
+<th>Phase 5 Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/jwohlwend/boltz">Boltz-2</a></td>
+<td>MIT/Recursion</td>
+<td>Predict GPCR-G protein complex structures AND second messenger (IP3, cAMP, DAG) binding affinities to target proteins (PKA, PKC, IP3R). Single-GPU, approaching FEP+ accuracy</td>
+</tr>
+<tr>
+<td><a href="https://github.com/google-deepmind/alphafold3">AlphaFold 3</a></td>
+<td>DeepMind</td>
+<td>Model full signaling complex assemblies: GPCR→Gα→effector (PLC, adenylyl cyclase) with bound ligands, ions, and lipids</td>
+</tr>
+<tr>
+<td><a href="https://github.com/microsoft/BioEmu">BioEmu-1</a></td>
+<td>Microsoft</td>
+<td>Simulate GPCR activation (inactive→active conformational transition), channel phosphorylation-induced gating changes, and kinase catalytic dynamics at 100,000x MD speed — extract rate constants from conformational landscapes</td>
+</tr>
+<tr>
+<td><a href="https://github.com/microsoft/NatureLM">NatureLM</a></td>
+<td>Microsoft</td>
+<td>Unified protein + small molecule model (46.7B params). Predict cross-domain interactions: neuropeptide → GPCR → second messenger → kinase. Estimate binding affinities and ADMET properties for signaling molecules</td>
+</tr>
+<tr>
+<td><a href="https://github.com/CZI-BioHub/SubCell">SubCell</a></td>
+<td>CZI/Human Protein Atlas</td>
+<td>Subcellular protein localization from microscopy. Map where signaling proteins localize within cells (ER vs. plasma membrane vs. cytoplasm), constraining spatial compartmentalization of cascades. Trained on human cells — would need adaptation for <em>C. elegans</em></td>
+</tr>
+<tr>
+<td><a href="https://github.com/zjunlp/OntoProtein">OntoProtein</a></td>
+<td>Zhejiang University</td>
+<td>GO-informed protein-protein interaction prediction. Infer kinase-substrate relationships (which PKA/PKC isoforms phosphorylate which ion channels) from Gene Ontology structure, filling gaps where direct experimental data is unavailable</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jkobject/scprint">scPRINT</a></td>
+<td>Institut Pasteur</td>
+<td>Gene network inference from 50M cells. Identify co-regulation patterns between GPCR pathway components in CeNGEN data (e.g., which receptor, G protein, and effector genes are co-expressed in each neuron class), suggesting functional pathway wiring</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key insight:</strong> BioEmu-1 + Boltz-2 together could predict most of the "Biochemical rate constants" listed below from protein structure alone — GPCR activation rates from conformational dynamics, second messenger binding K_d from complex prediction, and phosphorylation effects on channel gating from before/after conformational ensembles. This reduces Phase 5's dependency on scarce <em>C. elegans</em>-specific experimental kinetics.</p>
+<p><strong>Precedent: Whole-Cell Computational Modeling (<a href="https://doi.org/10.1016/j.cell.2012.05.044">Karr et al. 2012</a>)</strong></p>
+<p>Phase 5's goal — mechanistic intracellular signaling from GPCR activation to channel phosphorylation — is conceptually related to the first whole-cell computational model, built for <em>Mycoplasma genitalium</em> by <a href="https://doi.org/10.1016/j.cell.2012.05.044">Karr, Sanghvi, Macklin et al. (2012)</a> in Markus Covert's lab at Stanford. That model demonstrated that a complete intracellular simulation is achievable:</p>
+<ul>
+<li><strong>28 submodels</strong> covering DNA replication, transcription, translation, metabolism, protein complexation, and cell division — each using the formalism best suited to its biology (FBA for metabolism, stochastic/Gillespie for transcription, ODE for metabolite dynamics, Boolean logic for gene regulation, Markov chains for RNA degradation)</li>
+<li><strong>16 shared cell state variables</strong> (chromosome, transcripts, RNA, polypeptides, protein monomers/complexes, metabolites, ribosomes, RNA polymerase, geometry, mass, time, etc.) integrated at 1-second timesteps with sequential random-order execution</li>
+<li><strong>1,900+ parameters</strong> curated manually from 900+ publications, with cross-species transfer from mammalian/bacterial data filling gaps</li>
+<li><strong>Validation:</strong> 79% accuracy on gene essentiality predictions; correctly predicted phenotypes for 72% of tested single-gene knockouts</li>
+</ul>
+<p>Karr's <a href="https://searchworks.stanford.edu/view/10590731">2014 Stanford dissertation</a> identified three key limitations that constrained the approach:</p>
+<ol>
+<li><strong>Parameter curation bottleneck:</strong> ~6 person-years to manually extract 1,900 rate constants from 900 papers — and <em>M. genitalium</em> has only 525 genes (the smallest free-living genome). <em>C. elegans</em> has ~20,000 genes.</li>
+<li><strong>Cross-species parameter transfer:</strong> ~30% of parameters were borrowed from other organisms (E. coli, yeast, mammalian) due to missing <em>M. genitalium</em> measurements. Accuracy of these transfers was unknown.</li>
+<li><strong>Scaling challenge:</strong> The hybrid multi-formalism approach worked for a 525-gene minimal cell but was not demonstrated for organisms with thousands of genes and complex multicellular signaling.</li>
+</ol>
+<p><strong>How Foundation Models Transform the Whole-Cell Approach for <em>C. elegans</em></strong></p>
+<p>The Karr/Covert limitations that seemed intractable in 2012 are now addressable with the foundation models listed above:</p>
+<table>
+<thead>
+<tr>
+<th>Karr 2012 Limitation</th>
+<th>Foundation Model Solution</th>
+<th>Improvement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parameter curation</strong> (6 person-years, 900 papers)</td>
+<td>BioEmu-1 predicts conformational dynamics → rate constants from structure alone; Boltz-2 predicts binding affinities from complex structures</td>
+<td>Months → days for ~50 key GPCR cascade parameters</td>
+</tr>
+<tr>
+<td><strong>Cross-species transfer</strong> (borrowing mammalian rates)</td>
+<td>ESM Cambrian / OntoProtein predict <em>C. elegans</em>-specific kinetics from worm protein sequences, no need to borrow from mammals</td>
+<td>Species-specific predictions from sequence</td>
+</tr>
+<tr>
+<td><strong>Pathway inference</strong> (manually reading papers)</td>
+<td>scPRINT infers gene regulatory networks from CeNGEN 50M-cell atlas; NatureLM predicts protein-small molecule interactions across domains</td>
+<td>Automated pathway wiring from expression data</td>
+</tr>
+<tr>
+<td><strong>Scaling to 20,000 genes</strong></td>
+<td>Only ~200-300 signaling genes are relevant to Phase 5 GPCR cascades (not whole-genome); <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN data identifies which genes are expressed per cell type</td>
+<td>Scoped to signaling genes, not whole genome</td>
+</tr>
+<tr>
+<td><strong>Subcellular compartmentalization</strong> (not modeled in Karr)</td>
+<td>SubCell predicts protein localization (ER vs. membrane vs. cytoplasm), constraining spatial cascade models</td>
+<td>Compartment assignment from microscopy</td>
+</tr>
+</tbody>
+</table>
+<p>The key architectural lesson from Karr et al. is the <strong>hybrid multi-formalism</strong> approach: use ODEs where kinetics are smooth, stochastic simulation where copy numbers are low, and FBA where metabolic flux balance is the right abstraction. Phase 5 should adopt this principle — GPCR cascades are well-suited to ODEs, but stochastic events (neuropeptide vesicle release, channel insertion) may require Gillespie-style simulation.</p>
+<p><strong>Why Phase 5 is tractable even though whole-cell eukaryotic modeling isn't solved yet.</strong> As of 2026, no one has built a Karr-level "every gene product accounted for" whole-cell model of a eukaryotic cell. The Covert lab scaled from <em>M. genitalium</em> (525 genes) to <a href="https://github.com/CovertLab/vEcoli"><em>E. coli</em> (4,288 genes)</a> — still prokaryotic but 8x the gene count — and in <a href="https://doi.org/10.1371/journal.pcbi.1011232">2023 extended it to whole-colony simulations</a> with single-cell heterogeneity. For eukaryotes, the yeast <a href="https://doi.org/10.1016/j.bpj.2020.01.040">WM_S288C model</a> integrates 15 cellular states and 26 processes across ~6,447 genes, but is described as <a href="https://doi.org/10.1016/j.tibtech.2021.06.010">"an important first step"</a> rather than complete — the <a href="https://doi.org/10.1093/femsyr/foae011">data integration challenge alone is still being solved</a> (YCMDB database, 2024). The eukaryotic gap comes from compartmentalization (nucleus, ER, Golgi, mitochondria), complex gene regulation (chromatin, splicing), and intracellular signaling — exactly the biology Phase 5 targets. But Phase 5 does <strong>not</strong> need to be a whole-cell model. It only needs the GPCR→second messenger→channel phosphorylation cascades for the ~200-300 signaling genes expressed in <em>C. elegans</em> neurons (<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN data scopes this precisely). That is a far more tractable problem than modeling all 20,000 genes, and the foundation models above make it feasible without the 6-person-year parameter curation that even the 525-gene <em>M. genitalium</em> model required.</p>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> "Projected Datasets (Phases 5-7)" for inventory. Key needs: biochemical rate constants, proteomics, subcellular calcium imaging, GPCR-G protein coupling specificity — many may be predictable via BioEmu-1 + Boltz-2 foundation models.</p>
+<hr />
+<h2 id="phase-6-developmental-modeling-year-2">Phase 6: Developmental Modeling (Year 2+)<a class="headerlink" href="#phase-6-developmental-modeling-year-2" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> 📝 <strong>Not Yet Specified</strong> — Placeholder for multi-stage simulation</p>
+<p><strong>Existing Work: <a href="../../Projects/DevoWorm/">DevoWorm</a></strong></p>
+<p>The <a href="../../Projects/DevoWorm/">DevoWorm project</a> (<a href="https://devoworm.weebly.com/">devoworm.weebly.com</a>, <a href="https://github.com/devoworm">github.com/devoworm</a>) has been building toward developmental modeling since 2014 as an OpenWorm sub-project. DevoWorm's three research areas map directly onto Phase 6 needs:</p>
+<ul>
+<li><strong>Developmental Dynamics:</strong> Quantitative embryogenesis datasets, differentiation trees, and embryogenetic connectome analysis — directly applicable to modeling neuron birth order, cell lineage, and stage-specific neural topology</li>
+<li><strong>Cybernetics and Digital Morphogenesis:</strong> Cellular automata (Morphozoic) and Cellular Potts (CompuCell3D) models of embryogenesis — candidate frameworks for body morphogenesis simulation (L1 ~240 µm → adult ~1000 µm)</li>
+<li><strong>Reproduction and Developmental Plasticity:</strong> Larval development and life-history data — validation targets for stage-specific behavioral differences</li>
+</ul>
+<p>Phase 6 should build on DevoWorm's datasets and models rather than starting from scratch. Key integration points:</p>
+<ul>
+<li>DevoWorm's <a href="https://github.com/devoworm/embryogenetic-connectome">embryogenetic connectome</a> analysis provides the developmental graph connecting cell lineage to neural circuit formation</li>
+<li>DevoWorm's <a href="https://www.biorxiv.org/content/early/2016/07/07/062539">differentiation trees</a> complement <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s CeNGEN-based cell-type approach by adding temporal dynamics (when each neuron class differentiates)</li>
+<li>DevoWorm's CompuCell3D models could inform the body size scaling mechanics in <a href="../DD003_Body_Physics_Architecture/">DD003</a>/<a href="../DD004_Mechanical_Cell_Identity/">DD004</a></li>
+</ul>
+<p><strong>Anticipated Scope:</strong></p>
+<ul>
+<li>Witvliet developmental connectome series (L1 → L2 → L3 → L4 → adult, 8 stages)</li>
+<li>Neuron birth and death (programmed cell death, 131 cells die during development)</li>
+<li>Body size scaling (L1 ~240 µm → adult ~1000 µm)</li>
+<li>Stage-specific validation (L1 locomotion differs from adult)</li>
+<li>CeNGEN L1 expression integration</li>
+<li>Integration of DevoWorm embryogenetic connectome and differentiation tree data</li>
+</ul>
+<p><strong>Milestone (Projected):</strong> <strong>"Worm That Grows"</strong></p>
+<ul>
+<li>Announcement: "Simulate C. elegans development from L1 larva to adult, watching neurons born and the body grow."</li>
+</ul>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> "Projected Datasets (Phases 5-7)" for inventory. Key resources: Witvliet developmental connectome series (in <code>cect</code>), CeNGEN L1 expression, Packer 2019 embryonic scRNA-seq, DevoWorm embryogenetic connectome and differentiation trees.</p>
+<hr />
+<h2 id="phase-7-male-specific-modeling-year-3">Phase 7: Male-Specific Modeling (Year 3+)<a class="headerlink" href="#phase-7-male-specific-modeling-year-3" title="Permanent link">&para;</a></h2>
+<p><strong>Status:</strong> 📝 <strong>Not Yet Specified</strong> — Placeholder for male hermaphrodite simulation</p>
+<p><strong>Anticipated Scope:</strong></p>
+<ul>
+<li>385-neuron male connectome (<a href="https://doi.org/10.1038/s41586-019-1352-7">Cook2019</a>MaleReader)</li>
+<li>83 male-specific neurons (ray neurons, HOB, spicule motor neurons)</li>
+<li>Male tail anatomy (fan, rays, spicules) in <a href="../DD003_Body_Physics_Architecture/">DD003</a>/DD004</li>
+<li>Mating circuit and copulation behavior</li>
+</ul>
+<p><strong>Milestone (Projected):</strong> <strong>"Both Sexes Simulated"</strong></p>
+<p><strong>Datasets Needed:</strong> See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> "Projected Datasets (Phases 5-7)" for inventory. Key resources: Cook 2019 male connectome (in <code>cect</code>), male behavioral/mating data, male-specific tail anatomy.</p>
+<hr />
+<h2 id="complete-dataset-inventory">Complete Dataset Inventory<a class="headerlink" href="#complete-dataset-inventory" title="Permanent link">&para;</a></h2>
+<p>For the canonical inventory of all datasets across all phases, see <strong><a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024: Validation Data Acquisition Pipeline</a></strong>. DD024 catalogs:</p>
+<ul>
+<li><strong>Tier 1-4 validation datasets</strong> — Electrophysiology, functional connectivity, behavioral kinematics, causal/interventional data</li>
+<li><strong>Connectome &amp; molecular datasets</strong> — Connectome data available via <code>cect</code> (<a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>), expression data, cell ontologies</li>
+<li><strong>Implementation &amp; reference datasets</strong> — Model inputs (BAAIWorm, Virtual Worm, ion channel sequences), reference implementations (CE_locomotion), training data (SPH simulation runs)</li>
+<li><strong>Projected datasets (Phases 5-7)</strong> — Biochemical kinetics, developmental data, male-specific anatomy</li>
+</ul>
+<p>Each dataset is tagged with its phase, consumer DD, acquisition method, and status. For connectome-specific datasets in detail, see also <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>.</p>
+<hr />
+<h2 id="dependency-summary-what-blocks-what">Dependency Summary (What Blocks What)<a class="headerlink" href="#dependency-summary-what-blocks-what" title="Permanent link">&para;</a></h2>
+<p><strong>Critical Path (must be done in order):</strong>
+<div class="highlight"><pre><span></span><code>Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) → Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md)) → Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md)) → Phase 3 ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md))
+</code></pre></div></p>
+<p><strong>Parallelizable:</strong></p>
+<ul>
+<li>Phase A2 (<a href="../DD011_Contributor_Progression_Model/">DD011</a>, <a href="../DD012_Design_Document_RFC_Process/">DD012</a>, <a href="../DD015_AI_Contributor_Model/">DD015</a>, <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>) can proceed in parallel with Phase A1 (no infrastructure dependencies)</li>
+<li>Phase 1 <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>/<a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> (viewer + rendering spec) can proceed alongside <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (cell-type specialization)</li>
+<li>Phase 2 <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a> (environment) and <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a> (proprioception) can proceed in parallel with <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> and <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a></li>
+<li>Phase 3 organ DDs (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a>) can be implemented in any order or in parallel</li>
+<li>Phase 4 <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (cell identity) and <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> (mesh deformation) can proceed in either order</li>
+</ul>
+<p><strong>What Blocks Everything:</strong></p>
+<ul>
+<li><strong>Integration Maintainer recruitment</strong> — Without this, <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> doesn't get implemented</li>
+<li><strong>Data Maintainer recruitment</strong> — Without this, <a href="../DD008_Data_Integration_Pipeline/">DD008</a> OWMeta doesn't get revived and Phase 1+ datasets lack unified access</li>
+<li><strong>Validation Maintainer recruitment</strong> — Without this, <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> doesn't get revived</li>
+<li><strong>Phase A1 completion</strong> — Without config system, data layer, and automated validation, contributor workflow doesn't work</li>
+</ul>
+<hr />
+<h2 id="timeline-summary">Timeline Summary<a class="headerlink" href="#timeline-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Duration</th>
+<th>Calendar (if start March 2026)</th>
+<th>Cumulative Cells</th>
+<th>Cumulative DD Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 0</td>
+<td>Functional</td>
+<td>Architecture defined, simulation runs</td>
+<td>397 (302 neurons + 95 muscles)</td>
+<td>4 DDs (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD003_Body_Physics_Architecture/">DD003</a>, <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>)</td>
+</tr>
+<tr>
+<td>Phase A1</td>
+<td>2 weeks</td>
+<td>Mar 2026 (Wks 1-2)</td>
+<td>(no change)</td>
+<td>+5 DDs (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>, <a href="../DD008_Data_Integration_Pipeline/">DD008</a>, <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>, <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a>, <a href="../DD028_Project_Metrics_Dashboard/">DD028</a>)</td>
+</tr>
+<tr>
+<td>Phase A2</td>
+<td>2 weeks</td>
+<td>Mar 2026 (Wks 3-4, parallel with A1)</td>
+<td>(no change)</td>
+<td>+4 DDs (<a href="../DD011_Contributor_Progression_Model/">DD011</a>, <a href="../DD012_Design_Document_RFC_Process/">DD012</a>, <a href="../DD015_AI_Contributor_Model/">DD015</a>, <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>)</td>
+</tr>
+<tr>
+<td>Phase 1</td>
+<td>3 months</td>
+<td>Apr-Jun 2026</td>
+<td>397 (specialized, not added)</td>
+<td>+3 DDs (<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>, <a href="../DD010_Validation_Framework/">DD010</a> Tier 2, <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 1, <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>)</td>
+</tr>
+<tr>
+<td>Phase 2</td>
+<td>3 months</td>
+<td>Jul-Sep 2026</td>
+<td>403 (add 6 touch neurons explicitly modeled)</td>
+<td>+5 DDs (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>, <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a>, <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">DD022</a>, <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a>, <a href="../DD026_Reservoir_Computing_Validation/">DD026</a>, <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 2)</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>6 months</td>
+<td>Oct 2026-Mar 2027</td>
+<td>514 (add 63 pharynx + 20 intestine + 28 egg-laying)</td>
+<td>+4 DDs (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a>, <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a>)</td>
+</tr>
+<tr>
+<td>Phase 4</td>
+<td>6 months</td>
+<td>Apr-Sep 2027</td>
+<td><strong>959</strong> (all somatic cells)</td>
+<td>+2 DDs (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>, <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a>, <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Phase 3)</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>~18 months</strong></td>
+<td><strong>Mar 2026 - Sep 2027</strong></td>
+<td><strong>959 cells</strong></td>
+<td><strong>23 DDs implemented</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Phases 5-7:</strong> Year 3+ (intracellular, developmental, male-specific)</p>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Why is Phase A1 first if it's infrastructure, not science?</strong>
+A: Without the config system (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) and automated validation (<a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>), contributors can't test their work efficiently. Better to invest 2 weeks in infrastructure that enables the next 18 months of science, than to implement science DDs without the tools to validate them. Phase A2 (governance, derisking) runs in parallel and doesn't block modeling.</p>
+<p><strong>Q: Can Phase 3 organ DDs (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>, <a href="../DD018_Egg_Laying_System_Architecture/">DD018</a>) be implemented in parallel?</strong>
+A: Yes — they're semi-independent subsystems. Different contributors can work on pharynx, intestine, and egg-laying simultaneously. <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> (hybrid ML) can also proceed in parallel.</p>
+<p><strong>Q: Why is <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Cell Identity) in Phase 4, not earlier?</strong>
+A: <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 3), observe their mechanics, then add cell-specific properties in Phase 4. <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> is also needed for <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> mesh deformation.</p>
+<p><strong>Q: What if Phase 1 <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> fails validation (Tier 2 doesn't improve)?</strong>
+A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (foundation model→params) or manual curation. <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s scientific risk is why it's Phase 1 — validate the approach early before building more on top of it.</p>
+<p><strong>Q: When do we write papers?</strong>
+A: After each major milestone:</p>
+<ul>
+<li>Phase 1: "CeNGEN-Parameterized Neural Circuit" (target: <em>eNeuro</em> or <em>Frontiers in Neuroinformatics</em>)</li>
+<li>Phase 2: "Closed-Loop Sensorimotor Behavior in Whole-Organism Simulation" (target: <em>PLoS Computational Biology</em>)</li>
+<li>Phase 3: "Multi-Organ, Multi-Timescale C. elegans Simulation" (target: <em>Nature Communications</em> or <em>Cell Systems</em>)</li>
+<li>Phase 4: "Complete 959-Cell Digital Organism" (target: <strong>Nature</strong> or <strong>Science</strong>)</li>
+</ul>
+<p><strong>Q: Why is DD025 (foundation model kinetics) in Phase A2, not Phase 3 with the rest of DD017?</strong>
+A: Component 3 derisks <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s uncertain transcript→conductance mapping. BioEmu-1 (100,000x MD speed) invalidated the original "computationally expensive" rejection. The inputs (WormBase sequences, literature kinetics) are available now with no infrastructure dependencies. Cross-validation in Phase A2 provides a safety net: if <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>'s naive mapping fails in Phase 1, structure-based predictions are ready immediately.</p>
+<p><strong>Q: What's the difference between Phase A1 and Phase A2?</strong>
+A: Phase A1 (Core Infrastructure) contains the 5 DDs that <strong>block all subsequent modeling work</strong> — containerization, data access, validation toolbox, baseline datasets, and project dashboard. Without them, no contributor can build, test, or validate. Phase A2 (Governance &amp; Derisking) contains 4 DDs that <strong>enable scaling and derisk Phase 1</strong> — contributor progression, RFC process, AI agent workflow, and foundation model kinetics. A2 can run entirely in parallel with A1 and doesn't block Phase 1.</p>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (awaiting founder review)</li>
+<li><strong>Maintained by:</strong> Integration L4 Maintainer (when appointed)</li>
+<li><strong>Next Review:</strong> After Phase A1 completion (reassess timeline based on actual progress)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

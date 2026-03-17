@@ -1,0 +1,5513 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD005_Cell_Type_Differentiation_Strategy/">
+      
+      
+        <link rel="prev" href="../DD025_Protein_Foundation_Model_Pipeline/">
+      
+      
+        <link rel="next" href="../DD005_draft_issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD005 Cell-Type Specialization - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd005-cell-type-specialization-strategy-using-single-cell-transcriptomics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD005 Cell-Type Specialization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cengen-scrna-seq-to-parameterize-cell-type-specific-ion-channel-densities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use CeNGEN scRNA-seq to Parameterize Cell-Type-Specific Ion Channel Densities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-extract-ion-channel-expression-from-cengen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Extract Ion Channel Expression from CeNGEN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-map-genes-to-neuroml-channel-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Map Genes to NeuroML Channel Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-calibrate-expression-conductance-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Calibrate Expression → Conductance Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-generate-cell-type-specific-neuroml-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Generate Cell-Type-Specific NeuroML Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-generate-differentiated-c302-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Generate Differentiated c302 Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-validate-against-functional-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Validate Against Functional Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-protein-foundation-models-for-channel-kinetics-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Protein Foundation Models for Channel Kinetics Prediction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-direct-electrophysiology-for-all-128-neuron-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct Electrophysiology for All 128 Neuron Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-foundation-model-regression-learned-expression-conductance-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Foundation Model Regression (Learned Expression → Conductance Mapping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-manual-curation-from-literature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Manual Curation from Literature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uniform-random-variation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uniform Random Variation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-clustering-based-parameterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Clustering-Based Parameterization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-wait-for-electrophysiology-for-all-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wait for Electrophysiology for All Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-specialized-cell-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Specialized Cell Model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roadmap-from-class-average-to-synapse-level-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap: From Class-Average to Synapse-Level Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cengen-data-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CeNGEN Data Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calibration-dataset-neurons-with-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calibration Dataset (Neurons with Electrophysiology)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-generic-to-specialized-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Generic to Specialized (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incremental-rollout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Rollout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#channelworm-ion-channel-database-high-impact-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChannelWorm Ion Channel Database (HIGH-IMPACT REUSE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-calibration-relies-on-limited-training-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Calibration Relies on Limited Training Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-cengen-is-l4-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: CeNGEN Is L4 Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-post-transcriptional-regulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Post-Transcriptional Regulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opportunity-biological-foundation-models-for-gap-filling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opportunity: Biological Foundation Models for Gap-Filling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opportunity: Biological Foundation Models for Gap-Filling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-cell-foundation-models-cross-species-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Cell Foundation Models (Cross-Species Transfer)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-structure-channel-kinetics-expanding-beyond-20-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protein Structure → Channel Kinetics (Expanding Beyond ~20 Neurons)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-integration-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITICAL: Integration Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cengen-scrna-seq-to-parameterize-cell-type-specific-ion-channel-densities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use CeNGEN scRNA-seq to Parameterize Cell-Type-Specific Ion Channel Densities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-extract-ion-channel-expression-from-cengen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Extract Ion Channel Expression from CeNGEN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-map-genes-to-neuroml-channel-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Map Genes to NeuroML Channel Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-calibrate-expression-conductance-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Calibrate Expression → Conductance Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-generate-cell-type-specific-neuroml-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Generate Cell-Type-Specific NeuroML Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-generate-differentiated-c302-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Generate Differentiated c302 Network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-validate-against-functional-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Validate Against Functional Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-protein-foundation-models-for-channel-kinetics-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Protein Foundation Models for Channel Kinetics Prediction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-direct-electrophysiology-for-all-128-neuron-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct Electrophysiology for All 128 Neuron Classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-foundation-model-regression-learned-expression-conductance-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Foundation Model Regression (Learned Expression → Conductance Mapping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-manual-curation-from-literature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Manual Curation from Literature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uniform-random-variation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uniform Random Variation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-clustering-based-parameterization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Clustering-Based Parameterization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-wait-for-electrophysiology-for-all-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wait for Electrophysiology for All Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-specialized-cell-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Specialized Cell Model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roadmap-from-class-average-to-synapse-level-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap: From Class-Average to Synapse-Level Resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cengen-data-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CeNGEN Data Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calibration-dataset-neurons-with-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calibration Dataset (Neurons with Electrophysiology)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-generic-to-specialized-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Generic to Specialized (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incremental-rollout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incremental Rollout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#channelworm-ion-channel-database-high-impact-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChannelWorm Ion Channel Database (HIGH-IMPACT REUSE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-calibration-relies-on-limited-training-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Calibration Relies on Limited Training Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-cengen-is-l4-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: CeNGEN Is L4 Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-post-transcriptional-regulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Post-Transcriptional Regulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opportunity-biological-foundation-models-for-gap-filling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opportunity: Biological Foundation Models for Gap-Filling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opportunity: Biological Foundation Models for Gap-Filling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-cell-foundation-models-cross-species-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Cell Foundation Models (Cross-Species Transfer)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-structure-channel-kinetics-expanding-beyond-20-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protein Structure → Channel Kinetics (Expanding Beyond ~20 Neurons)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-integration-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITICAL: Integration Cascade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd005-cell-type-specialization-strategy-using-single-cell-transcriptomics">DD005: Cell-Type Specialization Strategy Using Single-Cell Transcriptomics<a class="headerlink" href="#dd005-cell-type-specialization-strategy-using-single-cell-transcriptomics" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 1)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD008_Data_Integration_Pipeline/">DD008</a> (Data Integration Pipeline), <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> (Validation Data Acquisition), <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (Foundation Model Channel Kinetics)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a> | <strong>Layer:</strong> Cell-Type Specialization</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Replace the single generic neuron template used for all 302 neurons with <strong>128 cell-type-specific templates</strong> parameterized from CeNGEN single-cell RNA-seq data. This is Phase 1 work — the first DD to produce biologically distinct neurons. Success metric: <strong>20%+ improvement in functional connectivity correlation</strong> vs. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> experimental data.</p>
+<hr />
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Functional connectivity correlation</td>
+<td>Improve ≥20% vs. generic model (e.g., r=0.3 → r≥0.36)</td>
+<td>Tier 2 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Kinematic validation</td>
+<td>Within ±15% of Schafer lab baseline</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Single-cell spot-checks</td>
+<td>Predicted channel dominance matches electrophysiology for ≥50% of training neurons</td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> 302 copies of <code>GenericCell</code> — all neurons have identical conductances, dynamics differ only by connectivity.</p>
+<p><strong>After:</strong> 128 distinct cell types (one per CeNGEN neuron class) — each neuron has biologically informed conductance densities derived from transcriptomic expression data.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/c302</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>128 cell-type NeuroML files</td>
+<td><code>cells/{NeuronClass}Cell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td><code>cells/AVALCell.cell.nml</code></td>
+</tr>
+<tr>
+<td>Calibration parameters</td>
+<td><code>data/expression_to_conductance_calibration.csv</code></td>
+<td>CSV</td>
+<td><code>channel,alpha,beta,baseline,R2</code></td>
+</tr>
+<tr>
+<td>CeNGEN expression matrix</td>
+<td><code>data/CeNGEN_L4_expression.csv</code></td>
+<td>CSV (128 × 20,500)</td>
+<td><code>AVAL,unc-2,342.5,...</code></td>
+</tr>
+<tr>
+<td>Gene→channel mapping</td>
+<td><code>data/gene_to_channel_map.csv</code></td>
+<td>CSV</td>
+<td><code>unc-2,ca_boyle_chan,Cav2</code></td>
+</tr>
+<tr>
+<td>Differentiated network</td>
+<td><code>examples/generated/LEMS_c302_C1_Differentiated.xml</code></td>
+<td>LEMS XML</td>
+<td>(generated, not committed)</td>
+</tr>
+<tr>
+<td>Neuron class labels (viewer)</td>
+<td>OME-Zarr: <code>neural/neuron_class/</code>, shape (302,)</td>
+<td>string enum</td>
+<td><code>AVAL</code>, <code>AVAR</code>, <code>ASH</code>, ...</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>.cell.nml</code> file includes metadata:
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;notes&gt;</span>
+<span class="w">  </span>CeNGEN<span class="w"> </span>neuron<span class="w"> </span>class:<span class="w"> </span>AVAL
+<span class="w">  </span>Expression<span class="w"> </span>data:<span class="w"> </span>CeNGEN<span class="w"> </span>L4<span class="w"> </span>(cengen.org,<span class="w"> </span>accessed<span class="w"> </span>2026-02-14)
+<span class="w">  </span>Calibration<span class="w"> </span>method:<span class="w"> </span>expression_to_conductance_v1
+<span class="w">  </span>Validation<span class="w"> </span>status:<span class="w"> </span>inferred<span class="w"> </span>(no<span class="w"> </span>direct<span class="w"> </span>electrophysiology)
+<span class="w">  </span>Key<span class="w"> </span>channels:<span class="w"> </span>unc-2<span class="w"> </span>(high),<span class="w"> </span>shl-1<span class="w"> </span>(high),<span class="w"> </span>twk-18<span class="w"> </span>(medium)
+<span class="nt">&lt;/notes&gt;</span>
+</code></pre></div></p>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd005</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 1: Cell-Type Specialization</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd005/description</code> (e.g., <code>dd005/cengen-calibration</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD005: Generate 128 cell-type NeuroML files from CeNGEN L4</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy</li>
+<li><strong>Recommended:</strong> <code>pip install wormneuroatlas</code> (provides CeNGEN API + <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> data, see reuse opportunities below)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on the <strong>c302</strong> neural circuit framework (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>). If you have already completed <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> first to clone the c302 repository and install dependencies, then return here.</p>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to <a href="#step-by-step">Step 2</a> below.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 native setup</a>, then install additional dependencies:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># CeNGEN data access and Randi 2023 functional connectivity</span>
+pip<span class="w"> </span>install<span class="w"> </span>wormneuroatlas
+
+<span class="c1"># Cell-type annotation utilities</span>
+pip<span class="w"> </span>install<span class="w"> </span>connectometoolbox
+</code></pre></div>
+<p>Download the CeNGEN single-cell RNA-seq dataset (fallback if <code>wormneuroatlas</code> API is unavailable):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Manual download to c302/data/</span>
+wget<span class="w"> </span>-O<span class="w"> </span>data/CeNGEN_L4_expression.csv<span class="w"> </span><span class="s2">&quot;https://cengen.org/downloads/L4_expression_matrix.csv&quot;</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 0: Test wormneuroatlas API (RECOMMENDED FIRST)</span>
+<span class="c1"># This repo provides production-ready CeNGEN + Randi 2023 data access</span>
+pip<span class="w"> </span>install<span class="w"> </span>wormneuroatlas
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from wormneuroatlas import NeuroAtlas</span>
+<span class="s2">atlas = NeuroAtlas()</span>
+<span class="s2"># Test CeNGEN expression query</span>
+<span class="s2">expr = atlas.get_gene_expression(gene_names=[&#39;unc-2&#39;, &#39;egl-19&#39;], neuron_names=[&#39;AVAL&#39;, &#39;AVAR&#39;])</span>
+<span class="s2">print(f&#39;CeNGEN API working: {len(expr)} expression values retrieved&#39;)</span>
+<span class="s2"># Test Randi 2023 functional connectivity (needed for Tier 2 validation)</span>
+<span class="s2">fc = atlas.get_signal_propagation_atlas(strain=&#39;wt&#39;)</span>
+<span class="s2">print(f&#39;Randi 2023 data: {fc.shape} functional connectivity matrix&#39;)</span>
+<span class="s2">&quot;</span>
+<span class="c1"># If this works, skip Step 1 manual download — use wormneuroatlas API instead</span>
+
+<span class="c1"># Step 1: Download CeNGEN data (FALLBACK if wormneuroatlas unavailable)</span>
+<span class="c1"># Data files go into c302/data/</span>
+wget<span class="w"> </span>-O<span class="w"> </span>data/CeNGEN_L4_expression.csv<span class="w"> </span><span class="s2">&quot;https://cengen.org/downloads/L4_expression_matrix.csv&quot;</span>
+
+<span class="c1"># Step 1b: (ALTERNATIVE) Use wormneuroatlas API for CeNGEN access</span>
+python<span class="w"> </span>scripts/fetch_cengen_via_atlas.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>data/CeNGEN_L4_expression.csv
+<span class="c1"># [TO BE CREATED] — Wrapper script that uses wormneuroatlas API</span>
+<span class="c1"># Benefit: Handles neuron ID normalization, versioning, easier than manual download</span>
+
+<span class="c1"># Step 2: Fit calibration parameters from electrophysiology training set</span>
+python<span class="w"> </span>scripts/fit_calibration.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--expression<span class="w"> </span>data/CeNGEN_L4_expression.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--electrophysiology<span class="w"> </span>data/electrophysiology_training_set.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>data/expression_to_conductance_calibration.csv
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+<span class="c1"># Expected output: CSV with alpha, beta, baseline, R² per channel type</span>
+
+<span class="c1"># Step 3: Generate 128 cell-type NeuroML files</span>
+python<span class="w"> </span>scripts/generate_differentiated_cells.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--expression<span class="w"> </span>data/CeNGEN_L4_expression.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--calibration<span class="w"> </span>data/expression_to_conductance_calibration.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>cells/
+<span class="c1"># Expected output: 128 .cell.nml files in cells/ directory</span>
+
+<span class="c1"># Step 4: Generate differentiated c302 network</span>
+python<span class="w"> </span>c302/CElegans.py<span class="w"> </span>C1Differentiated
+<span class="c1"># Expected output: LEMS_c302_C1_Differentiated.xml</span>
+
+<span class="c1"># Step 5: Quick validation (must pass before PR)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">   </span><span class="c1"># with neural.differentiated: true</span>
+<span class="c1"># Green light: simulation completes, worm moves, no NaN values</span>
+
+<span class="c1"># Step 6: Full validation (must pass before merge)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Green light: Tier 2 functional connectivity r &gt; 0.5</span>
+<span class="c1"># Green light: Tier 3 kinematic metrics within ±15% of baseline</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/fit_calibration.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/generate_differentiated_cells.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/compute_functional_connectivity.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/compare_to_randi2023.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/benchmark_improvement.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> Neurons layer with <strong>color-by-class</strong> mode.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>neural/</code> (same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>, but now with class metadata)</td>
+</tr>
+<tr>
+<td><strong>Color mode</strong></td>
+<td>Color-by-neuron-class: 128 distinct colors, one per CeNGEN class</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>OME-Zarr: <code>neural/neuron_class/</code>, shape (302,) — string enum mapping each of 302 neurons to its class</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>Neurons colored by class. Clicking a neuron shows its CeNGEN class, dominant channels, and calibration status. Calcium traces should show distinct dynamics per class (e.g., sensory neurons with faster kinetics than interneurons).</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Side-by-side: generic model (all same color/dynamics) vs. specialized model (distinct colors/dynamics)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="use-cengen-scrna-seq-to-parameterize-cell-type-specific-ion-channel-densities">Use CeNGEN scRNA-seq to Parameterize Cell-Type-Specific Ion Channel Densities<a class="headerlink" href="#use-cengen-scrna-seq-to-parameterize-cell-type-specific-ion-channel-densities" title="Permanent link">&para;</a></h3>
+<p><strong>Approach:</strong> Map gene expression levels → conductance densities via a calibrated scaling relationship.</p>
+<h3 id="step-1-extract-ion-channel-expression-from-cengen">Step 1: Extract Ion Channel Expression from CeNGEN<a class="headerlink" href="#step-1-extract-ion-channel-expression-from-cengen" title="Permanent link">&para;</a></h3>
+<p>For each of the 128 neuron classes, extract normalized expression (TPM or log-normalized counts) for all ion channel genes. CeNGEN categorizes genes as:</p>
+<ul>
+<li>Voltage-gated K⁺ channels (unc-2, egl-2, shl-1, shk-1, kvs-1, etc.)</li>
+<li>Voltage-gated Ca²⁺ channels (unc-2, egl-19, cca-1)</li>
+<li>Leak/background K⁺ channels (twk, kcnk families)</li>
+<li>Ligand-gated channels (ACh receptors, GABA receptors, glutamate receptors)</li>
+<li>TRP channels (osm-9, ocr-2)</li>
+</ul>
+<p><strong>Data source:</strong> <code>cengen.org/downloads</code> → Gene expression matrix (128 neuron classes × 20,500 genes)</p>
+<h3 id="step-2-map-genes-to-neuroml-channel-models">Step 2: Map Genes to NeuroML Channel Models<a class="headerlink" href="#step-2-map-genes-to-neuroml-channel-models" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><em>C. elegans</em> Gene</th>
+<th>Channel Family</th>
+<th>NeuroML Model</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>unc-2</strong></td>
+<td>Cav2 (P/Q-type Ca)</td>
+<td><code>ca_boyle_chan</code></td>
+<td>Current default Ca channel</td>
+</tr>
+<tr>
+<td><strong>egl-19</strong></td>
+<td>Cav1 (L-type Ca)</td>
+<td><code>ca_LType_chan</code> (to be created)</td>
+<td>Muscle-dominant</td>
+</tr>
+<tr>
+<td><strong>cca-1</strong></td>
+<td>Cav3 (T-type Ca)</td>
+<td><code>ca_TType_chan</code> (to be created)</td>
+<td>Low-threshold</td>
+</tr>
+<tr>
+<td><strong>shl-1</strong></td>
+<td>Kv4 (A-type K)</td>
+<td><code>k_fast_chan</code></td>
+<td>Current fast K</td>
+</tr>
+<tr>
+<td><strong>shk-1</strong></td>
+<td>Kv1 (delayed rectifier)</td>
+<td><code>k_slow_chan</code></td>
+<td>Current slow K</td>
+</tr>
+<tr>
+<td><strong>unc-103</strong></td>
+<td>Kir (inward rectifier)</td>
+<td><code>k_inward_rect_chan</code> (to be created)</td>
+<td>Hyperpolarization-activated</td>
+</tr>
+<tr>
+<td><strong>twk-18</strong></td>
+<td>TWIK (two-pore leak)</td>
+<td><code>leak_chan</code></td>
+<td>Current leak</td>
+</tr>
+<tr>
+<td><strong>unc-49</strong></td>
+<td>GABA-A receptor</td>
+<td><code>gaba_a_syn</code></td>
+<td>Inhibitory ligand-gated</td>
+</tr>
+</tbody>
+</table>
+<p>For genes without existing NeuroML models, create new channel models by:</p>
+<ol>
+<li>Finding published kinetics (activation curves, time constants) if available</li>
+<li>Using generic kinetics from the channel family if specific data unavailable</li>
+<li>Flagging as "inferred" in metadata</li>
+</ol>
+<h3 id="step-3-calibrate-expression-conductance-scaling">Step 3: Calibrate Expression → Conductance Scaling<a class="headerlink" href="#step-3-calibrate-expression-conductance-scaling" title="Permanent link">&para;</a></h3>
+<p>The relationship between mRNA expression and membrane conductance is <strong>not 1:1</strong> due to:</p>
+<ul>
+<li>Post-transcriptional regulation</li>
+<li>Protein translation efficiency</li>
+<li>Subcellular localization</li>
+<li>Channel trafficking and degradation</li>
+</ul>
+<p><strong>Calibration approach:</strong> Use the ~20 neuron types with published patch-clamp data (Goodman lab, Lockery lab) as a training set.</p>
+<p>For each of these neurons:</p>
+<ol>
+<li>Extract CeNGEN expression for all ion channel genes</li>
+<li>Extract measured conductances from electrophysiology papers</li>
+<li>Fit a scaling relationship: <code>g_channel = alpha * expression^beta + baseline</code></li>
+<li>Alpha, beta, baseline are fit via regression to minimize error across the training set</li>
+</ol>
+<p><strong>Example (hypothetical):</strong>
+<div class="highlight"><pre><span></span><code>g_Kslow = 0.5 * TPM_shk1^0.7 + 0.001 mS/cm²
+</code></pre></div></p>
+<p>This calibrated relationship is then applied to the remaining 108 neuron classes lacking electrophysiology.</p>
+<h3 id="step-4-generate-cell-type-specific-neuroml-templates">Step 4: Generate Cell-Type-Specific NeuroML Templates<a class="headerlink" href="#step-4-generate-cell-type-specific-neuroml-templates" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># c302/scripts/generate_differentiated_cells.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyneuroml</span><span class="w"> </span><span class="kn">import</span> <span class="n">cell_builder</span>
+
+<span class="c1"># Load CeNGEN expression</span>
+<span class="n">cengen</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/CeNGEN_L4_expression.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Load calibration parameters (fit from training set)</span>
+<span class="n">calibration</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/expression_to_conductance_calibration.csv&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">neuron_class</span> <span class="ow">in</span> <span class="n">cengen</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="c1"># Get expression levels</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="n">cengen</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">neuron_class</span><span class="p">]</span>
+
+    <span class="c1"># Apply calibration for each channel type</span>
+    <span class="n">g_kslow</span> <span class="o">=</span> <span class="n">calibrate</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="s2">&quot;shk-1&quot;</span><span class="p">],</span> <span class="s2">&quot;k_slow&quot;</span><span class="p">,</span> <span class="n">calibration</span><span class="p">)</span>
+    <span class="n">g_kfast</span> <span class="o">=</span> <span class="n">calibrate</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="s2">&quot;shl-1&quot;</span><span class="p">],</span> <span class="s2">&quot;k_fast&quot;</span><span class="p">,</span> <span class="n">calibration</span><span class="p">)</span>
+    <span class="n">g_ca</span> <span class="o">=</span> <span class="n">calibrate</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="s2">&quot;unc-2&quot;</span><span class="p">],</span> <span class="s2">&quot;ca_boyle&quot;</span><span class="p">,</span> <span class="n">calibration</span><span class="p">)</span>
+    <span class="n">g_leak</span> <span class="o">=</span> <span class="n">calibrate</span><span class="p">(</span><span class="n">expr</span><span class="p">[</span><span class="s2">&quot;twk-18&quot;</span><span class="p">],</span> <span class="s2">&quot;leak&quot;</span><span class="p">,</span> <span class="n">calibration</span><span class="p">)</span>
+
+    <span class="c1"># Create NeuroML cell</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">cell_builder</span><span class="o">.</span><span class="n">create_cell</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">neuron_class</span><span class="si">}</span><span class="s2">Cell&quot;</span><span class="p">,</span>
+        <span class="n">channels</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;leak_chan&quot;</span><span class="p">,</span> <span class="n">g_leak</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;k_slow_chan&quot;</span><span class="p">,</span> <span class="n">g_kslow</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;k_fast_chan&quot;</span><span class="p">,</span> <span class="n">g_kfast</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;ca_boyle_chan&quot;</span><span class="p">,</span> <span class="n">g_ca</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">C_m</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">v_init</span><span class="o">=-</span><span class="mi">45</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Write to file</span>
+    <span class="n">cell_builder</span><span class="o">.</span><span class="n">write_neuroml</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;cells/</span><span class="si">{</span><span class="n">neuron_class</span><span class="si">}</span><span class="s2">Cell.cell.nml&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="step-5-generate-differentiated-c302-network">Step 5: Generate Differentiated c302 Network<a class="headerlink" href="#step-5-generate-differentiated-c302-network" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># c302/CElegans.py</span>
+<span class="n">python</span> <span class="n">CElegans</span><span class="o">.</span><span class="n">py</span> <span class="n">C1Differentiated</span>
+</code></pre></div>
+<p>This produces <code>LEMS_c302_C1_Differentiated.xml</code> with 128 distinct cell types (one per CeNGEN neuron class) instead of 302 copies of GenericCell.</p>
+<h3 id="step-6-validate-against-functional-connectivity">Step 6: Validate Against Functional Connectivity<a class="headerlink" href="#step-6-validate-against-functional-connectivity" title="Permanent link">&para;</a></h3>
+<p><strong>Primary validation:</strong> <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> whole-brain calcium imaging functional connectivity matrix.</p>
+<ul>
+<li>Compute pairwise correlations in simulated calcium signals</li>
+<li>Compare to experimental pairwise correlations</li>
+<li>Metric: Pearson correlation between simulated and real correlation matrices</li>
+</ul>
+<p><strong>Expected improvement:</strong> The specialized model should capture cell-type-specific dynamics (e.g., ASH sensory neurons with fast kinetics, interneurons with slower integration) better than the generic model.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-protein-foundation-models-for-channel-kinetics-prediction">1. Protein Foundation Models for Channel Kinetics Prediction<a class="headerlink" href="#1-protein-foundation-models-for-channel-kinetics-prediction" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use protein foundation models (AlphaFold 3, BioEmu-1, ESM Cambrian) to predict 3D structures of <em>C. elegans</em> ion channels, then extract gating kinetics from conformational dynamics.</p>
+<p><strong>Promoted to parallel track — see <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a>.</strong></p>
+<p>Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all <em>C. elegans</em> channels. DD025 runs cross-validation during Phase A2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.</p>
+<p><strong>Relationship to DD005:</strong> DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.</p>
+<h3 id="2-direct-electrophysiology-for-all-128-neuron-classes">2. Direct Electrophysiology for All 128 Neuron Classes<a class="headerlink" href="#2-direct-electrophysiology-for-all-128-neuron-classes" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Perform patch-clamp recordings for all 128 CeNGEN neuron classes.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Experimentally infeasible. Each neuron type requires identifying the cell in vivo (NeuroPAL), dissecting, patching, recording across multiple voltage protocols, and analyzing. ~1-2 weeks per neuron type × 128 = years of work.</li>
+<li>Not necessary if scaling relationship from expression works.</li>
+</ul>
+<p><strong>When to reconsider:</strong> Use targeted electrophysiology to validate model predictions for specific high-impact neurons (command interneurons, motor neurons).</p>
+<h3 id="3-foundation-model-regression-learned-expression-conductance-mapping">3. Foundation Model Regression (Learned Expression → Conductance Mapping)<a class="headerlink" href="#3-foundation-model-regression-learned-expression-conductance-mapping" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Train a neural network (e.g., gradient boosting or transformer) to predict conductance densities from full expression profiles, using the 20 neurons with electrophysiology as training data.</p>
+<p><strong>Deferred (but promising; see also <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> for structure-based approach):</strong></p>
+<ul>
+<li>Only 20 training examples (neurons with electrophysiology) may be insufficient</li>
+<li>Requires careful hyperparameter tuning and cross-validation</li>
+<li>Black-box learned mapping is less interpretable than explicit scaling</li>
+</ul>
+<p><strong>When to try:</strong> After the simple scaling approach is tested. If it performs poorly, a learned model may capture nonlinear relationships (e.g., channel subunit co-assembly, trafficking dependencies).</p>
+<h3 id="4-manual-curation-from-literature">4. Manual Curation from Literature<a class="headerlink" href="#4-manual-curation-from-literature" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Search the literature for each neuron type, extract reported channel expression, manually set conductances.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Labor-intensive (128 neuron classes × literature search)</li>
+<li>Incomplete (most neurons lack published channel data)</li>
+<li>Not reproducible or updatable as new data arrive</li>
+</ul>
+<h3 id="5-uniform-random-variation">5. Uniform Random Variation<a class="headerlink" href="#5-uniform-random-variation" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Keep the generic model but add random ±20% variation to conductances across neurons.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Biologically meaningless</li>
+<li>Does not improve model accuracy</li>
+<li>Confuses rather than clarifies</li>
+</ul>
+<h3 id="6-clustering-based-parameterization">6. Clustering-Based Parameterization<a class="headerlink" href="#6-clustering-based-parameterization" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Cluster the 128 CeNGEN neuron classes into 10-20 "super-types" based on expression similarity, then create one model per super-type.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Arbitrary clustering (how many clusters? which genes to cluster on?)</li>
+<li>Loses biological specificity (ASH nociceptor ≠ AWA olfactory neuron, even if they cluster together)</li>
+<li>The data exist to specialize all 128 classes, so why reduce resolution?</li>
+</ul>
+<p><strong>When to reconsider:</strong> If 128 cell types prove computationally intractable or if most classes are near-identical.</p>
+<h3 id="7-wait-for-electrophysiology-for-all-neurons">7. Wait for Electrophysiology for All Neurons<a class="headerlink" href="#7-wait-for-electrophysiology-for-all-neurons" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Do not specialize until direct patch-clamp data exist for all 128 classes.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Will never happen (experimentally infeasible)</li>
+<li>Perpetuates the known inaccuracy of the generic model</li>
+<li>CeNGEN data are available now; use them</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="what-defines-a-valid-specialized-cell-model">What Defines a Valid Specialized Cell Model?<a class="headerlink" href="#what-defines-a-valid-specialized-cell-model" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Expression-Based Parameterization:</strong> All conductance densities must be derived from CeNGEN expression data using the documented calibration relationship. Do not manually tune parameters.</p>
+</li>
+<li>
+<p><strong>NeuroML 2 Compliance:</strong> Each cell type is a separate NeuroML <code>&lt;cell&gt;</code> element with unique <code>id</code> (e.g., <code>AVALCell</code>, <code>ASHCell</code>).</p>
+</li>
+<li>
+<p><strong>Preserve Connectome Topology:</strong> The number of neurons (302 hermaphrodite, 385 male) and their connectivity (<a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a>) must match the biological data. Specialization changes cell properties, not network structure.</p>
+</li>
+<li>
+<p><strong>Calibration Transparency:</strong> The <code>expression_to_conductance_calibration.csv</code> file must document:</p>
+<ul>
+<li>Training set (which neurons with electrophysiology)</li>
+<li>Fit parameters (alpha, beta, baseline for each channel type)</li>
+<li>Cross-validation R² or error metric</li>
+<li>Date of calibration and CeNGEN version</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation Against Functional Data:</strong> The specialized model must improve the correlation with <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> functional connectivity compared to the generic model.</p>
+</li>
+<li>
+<p><strong>CeNGEN Expression Data as Ground Truth:</strong> All conductance densities must be traceable to CeNGEN expression values via the documented calibration relationship.</p>
+</li>
+<li>
+<p><strong>Version Control:</strong> Each cell type file is versioned. If calibration parameters change, create a new version (e.g., <code>AVALCell_v2.cell.nml</code>).</p>
+</li>
+</ol>
+<h3 id="validation-procedure">Validation Procedure<a class="headerlink" href="#validation-procedure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate differentiated network</span>
+python<span class="w"> </span>c302/CElegans.py<span class="w"> </span>C1Differentiated
+
+<span class="c1"># Run simulation with calcium recording</span>
+jnml<span class="w"> </span>LEMS_c302_C1_Differentiated.xml<span class="w"> </span>-nogui
+
+<span class="c1"># Extract pairwise calcium correlations</span>
+python<span class="w"> </span>scripts/compute_functional_connectivity.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>LEMS_c302_C1_Differentiated_calcium.dat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>simulated_func_conn.npy
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+
+<span class="c1"># Compare to Randi et al. 2023 experimental data</span>
+python<span class="w"> </span>scripts/compare_to_randi2023.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>simulated_func_conn.npy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>data/randi2023_functional_connectivity.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--metric<span class="w"> </span>correlation
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+
+<span class="c1"># Report improvement over generic model</span>
+python<span class="w"> </span>scripts/benchmark_improvement.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--baseline<span class="w"> </span>generic_func_conn.npy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--differentiated<span class="w"> </span>simulated_func_conn.npy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental<span class="w"> </span>randi2023_functional_connectivity.csv
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+</code></pre></div>
+<p><strong>Success criteria:</strong></p>
+<ul>
+<li>Correlation (simulated vs. experimental functional connectivity) improves ≥20% vs. generic model</li>
+<li>At least 50% of neuron classes show expression-predicted channel dominance</li>
+<li>No simulation instabilities (no NaN, no voltage explosions)</li>
+<li>Tier 3 kinematic validation still passes (±15%)</li>
+</ul>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Non-neural cells:</strong> Muscle, intestine, hypodermis, gonad. This DD applies only to the 302 neurons. Muscle differentiation is a separate effort (Phase 3).</p>
+</li>
+<li>
+<p><strong>Developmental stage differences:</strong> CeNGEN L4 is the reference stage. L1, adult, dauer require separate expression datasets (CeNGEN L1 is available; others are future work).</p>
+</li>
+<li>
+<p><strong>Male-specific neurons:</strong> The 83 male-specific neurons (<a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a>) lack CeNGEN data. Use hermaphrodite classes as proxy until male scRNA-seq is available.</p>
+</li>
+<li>
+<p><strong>Neuropeptide receptors:</strong> Expression is in CeNGEN, but receptor dynamics are covered in <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptidergic Connectome).</p>
+</li>
+<li>
+<p><strong>Individual genetic variation:</strong> Natural isolates show expression variation (Ben-David et al. 2021 eQTLs). This DD uses population-averaged expression. Individual variation is Phase 6+ work.</p>
+</li>
+<li>
+<p><strong>Synaptic weight differences:</strong> Expression-based specialization affects postsynaptic channels but not synaptic weights (connection strengths). Synapse-specific weights from functional data are future work.</p>
+</li>
+<li>
+<p><strong>Channel post-translational modifications:</strong> Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.</p>
+</li>
+<li>
+<p><strong>Subcellular / synapse-level molecular localization:</strong> CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for <em>C. elegans</em> (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> Level D multicompartmental models.</p>
+</li>
+</ol>
+<hr />
+<h3 id="roadmap-from-class-average-to-synapse-level-resolution">Roadmap: From Class-Average to Synapse-Level Resolution<a class="headerlink" href="#roadmap-from-class-average-to-synapse-level-resolution" title="Permanent link">&para;</a></h3>
+<p>The current power-law expression-to-conductance pipeline is a necessary first step. It uses the best available systematic data (CeNGEN) to move beyond the generic neuron template. Future phases will refine this in stages:</p>
+<ol>
+<li><strong>Phase 1 (this DD):</strong> Class-average expression → class-specific conductance densities (128 uniform templates), with <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> structure-based predictions as calibration priors where available</li>
+<li><strong>Phase 2-3:</strong> Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> differentiable backend)</li>
+<li><strong>Phase 5+:</strong> Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> Level D multicompartmental models</li>
+</ol>
+<p>Each stage preserves backward compatibility with earlier stages via the <code>openworm.yml</code> configuration system.</p>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>The current c302 model uses a <strong>single generic neuron cell template</strong> for all 302 neurons, with identical ion channel types and conductance densities. The only distinguishing feature between neuron types is their connectivity pattern. As stated in the CElegansNeuroML repository: "an accurate representation of the ion channels and their distributions in each neuron has not yet been attempted."</p>
+<p>This is biologically inaccurate. Real neurons express distinct complements of ion channels, receptors, and signaling machinery. The CeNGEN database (<a href="https://doi.org/10.1016/j.cell.2021.06.023">Taylor et al. 2021</a>) provides single-cell RNA-seq for 100,955 neurons across 128 neuron classes at L4 larval stage, making cell-type-specific specialization feasible for the first time.</p>
+<p>John White, in the February 12, 2026 meeting, emphasized: "there's a huge amount of information there" (referring to CeNGEN) and urged integration of this dataset into the modeling framework.</p>
+<h3 id="cengen-data-access">CeNGEN Data Access<a class="headerlink" href="#cengen-data-access" title="Permanent link">&para;</a></h3>
+<p><strong>RECOMMENDED: Use wormneuroatlas Python Package</strong></p>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/wormneuroatlas</code> (maintained, pip-installable)</li>
+<li><strong>Docs:</strong> https://francescorandi.github.io/wormneuroatlas/</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">wormneuroatlas</span>
+
+<span class="c1"># Access CeNGEN expression data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wormneuroatlas</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeuroAtlas</span>
+
+<span class="n">atlas</span> <span class="o">=</span> <span class="n">NeuroAtlas</span><span class="p">()</span>
+<span class="n">expression_data</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">get_gene_expression</span><span class="p">(</span>
+    <span class="n">gene_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;unc-2&quot;</span><span class="p">,</span> <span class="s2">&quot;egl-19&quot;</span><span class="p">,</span> <span class="s2">&quot;shl-1&quot;</span><span class="p">,</span> <span class="s2">&quot;shk-1&quot;</span><span class="p">,</span> <span class="s2">&quot;twk-18&quot;</span><span class="p">],</span>  <span class="c1"># Ion channel genes</span>
+    <span class="n">neuron_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AVAL&quot;</span><span class="p">,</span> <span class="s2">&quot;AVAR&quot;</span><span class="p">,</span> <span class="s2">&quot;DA01&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>  <span class="c1"># All 128 CeNGEN classes</span>
+<span class="p">)</span>
+<span class="c1"># Returns: pandas DataFrame with TPM values per gene per neuron class</span>
+<span class="c1"># Handles neuron ID normalization (AVAL vs AVA_, bilateral merging)</span>
+</code></pre></div>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>✅ No manual CSV download/parsing</li>
+<li>✅ Handles neuron ID variants automatically</li>
+<li>✅ pip-installable (works in Docker)</li>
+<li>✅ Maintained by Randi lab (Francesco Randi)</li>
+<li>✅ Also provides <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> functional connectivity for <a href="../DD010_Validation_Framework/">DD010</a> Tier 2 validation</li>
+</ul>
+<p><strong>Fallback: Manual download from cengen.org</strong></p>
+<p>If wormneuroatlas is unavailable:
+<div class="highlight"><pre><span></span><code>https://cengen.org/downloads
+</code></pre></div></p>
+<p><strong>Files:</strong></p>
+<ul>
+<li><code>CeNGEN_gene_expression_matrix_L4.csv</code> — 128 neuron classes × 20,500 genes</li>
+<li><code>CeNGEN_neuron_class_annotations.csv</code> — Maps Cook et al. neuron IDs to CeNGEN classes</li>
+<li><code>CeNGEN_ion_channel_genes.csv</code> — Curated list of ion channel genes with functional classifications</li>
+</ul>
+<h3 id="calibration-dataset-neurons-with-electrophysiology">Calibration Dataset (Neurons with Electrophysiology)<a class="headerlink" href="#calibration-dataset-neurons-with-electrophysiology" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Neuron</th>
+<th>Gene Expression Source</th>
+<th>Electrophysiology Source</th>
+<th>Key Channels Measured</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Touch neurons (ALM, AVM, PLM)</td>
+<td>CeNGEN</td>
+<td>Goodman et al. 1998</td>
+<td>mec-4, unc-2</td>
+</tr>
+<tr>
+<td>AVA interneuron</td>
+<td>CeNGEN</td>
+<td>Lockery lab</td>
+<td>unc-2, shl-1</td>
+</tr>
+<tr>
+<td>RIM motor neuron</td>
+<td>CeNGEN</td>
+<td>Liu et al. 2018</td>
+<td>egl-19, unc-2</td>
+</tr>
+<tr>
+<td>ASH polymodal nociceptor</td>
+<td>CeNGEN</td>
+<td>Hilliard et al. 2002, <strong>WormsenseLab_ASH repo</strong></td>
+<td>osm-9</td>
+</tr>
+<tr>
+<td>AWC olfactory neuron</td>
+<td>CeNGEN</td>
+<td><a href="https://doi.org/10.1038/nature06292">Chalasani et al. 2007</a></td>
+<td>tax-2/tax-4</td>
+</tr>
+</tbody>
+</table>
+<p>Approximately <strong>20 neuron types</strong> have published electrophysiological recordings suitable for calibration.</p>
+<p><strong>Note:</strong> The calibration training set should be expanded with a complete table listing each neuron, channel, measured conductance, reversal potential, and source DOI. See ChannelWorm ion channel database as a starting point.</p>
+<p><strong>CODE REUSE:</strong> The <code>openworm/ChannelWorm</code> repository (dormant since 2018 but complete) contains a curated ion channel database (<code>data/ion_channel_database.xlsx</code>) with patch clamp sources, HH parameter fitting tools (<code>channelworm/fitter.py</code>), and pre-generated NeuroML2 channel models (<code>models/*.channel.nml</code>). <strong>This is 50-70% of <a href="./">DD005</a>'s calibration pipeline already built.</strong> See "ChannelWorm Reuse" section below for integration plan.</p>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="from-generic-to-specialized-contributor-workflow">From Generic to Specialized (Contributor Workflow)<a class="headerlink" href="#from-generic-to-specialized-contributor-workflow" title="Permanent link">&para;</a></h3>
+<p><strong>Old workflow (generic model):</strong>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>c302/CElegans.py<span class="w"> </span>C1
+jnml<span class="w"> </span>LEMS_c302_C1.xml
+</code></pre></div>
+Output: 302 identical neurons.</p>
+<p><strong>New workflow (specialized model):</strong>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>c302/CElegans.py<span class="w"> </span>C1Differentiated
+jnml<span class="w"> </span>LEMS_c302_C1_Differentiated.xml
+</code></pre></div>
+Output: 128 distinct neuron types.</p>
+<p><strong>Backward compatibility:</strong> The generic model remains available. Existing scripts that depend on <code>GenericCell</code> are not broken. Both models coexist.</p>
+<h3 id="incremental-rollout">Incremental Rollout<a class="headerlink" href="#incremental-rollout" title="Permanent link">&para;</a></h3>
+<p>Do not switch the entire community to specialized models on day 1. Rollout plan:</p>
+<ol>
+<li><strong>Week 1-2:</strong> Generate specialized cells, validate locally</li>
+<li><strong>Week 3-4:</strong> Publish as experimental branch, invite community testing</li>
+<li><strong>Week 5-6:</strong> Present validation results (functional connectivity improvement, no kinematic degradation)</li>
+<li><strong>Week 7+:</strong> Make specialized model the recommended default in documentation; keep generic model for backward compatibility</li>
+</ol>
+<hr />
+<h2 id="code-reuse-opportunities">Code Reuse Opportunities<a class="headerlink" href="#code-reuse-opportunities" title="Permanent link">&para;</a></h2>
+<h3 id="channelworm-ion-channel-database-high-impact-reuse">ChannelWorm Ion Channel Database (HIGH-IMPACT REUSE)<a class="headerlink" href="#channelworm-ion-channel-database-high-impact-reuse" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/ChannelWorm</code> (pushed 2018-08-27, dormant but complete)</li>
+<li><strong>Status:</strong> Contains curated ion channel database + HH parameter fitting tools</li>
+</ul>
+<p><strong>What It Provides:</strong>
+<div class="highlight"><pre><span></span><code>ChannelWorm/
+├── data/ion_channel_database.xlsx    # Curated ion channels with patch clamp sources
+├── models/*.channel.nml               # Pre-generated NeuroML2 channel models
+├── channelworm/fitter.py              # HH parameter fitting from experimental data
+├── channelworm/digitizer.py           # Digitize patch clamp plots from papers
+└── tests/                             # SciUnit validation framework
+</code></pre></div></p>
+<p><strong>Reuse Plan:</strong></p>
+<ol>
+<li><strong>Extract ion channel database:</strong> <code>data/ion_channel_database.xlsx</code> → Convert to <a href="./">DD005</a>'s <code>electrophysiology_training_set.csv</code><ul>
+<li>Contains: gene, channel family, measured conductances, patch clamp paper DOIs</li>
+<li>Covers many of the ~20 neurons needed for calibration training set</li>
+</ul>
+</li>
+<li><strong>Reuse HH fitting code:</strong> <code>channelworm/fitter.py</code> → Adapt for <a href="./">DD005</a>'s <code>scripts/fit_calibration.py</code><ul>
+<li>Already implements least-squares fitting of HH parameters to experimental I-V curves</li>
+<li>Handles activation/inactivation gate fitting separately</li>
+</ul>
+</li>
+<li><strong>Use pre-generated NeuroML2 models:</strong> <code>models/unc2_L-type_Ca.channel.nml</code>, <code>models/egl19_L-type_Ca.channel.nml</code>, etc.<ul>
+<li>These can be <a href="./">DD005</a>'s initial channel definitions (before calibration)</li>
+<li>Cross-validate: Do ChannelWorm's models match <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>'s current channels?</li>
+</ul>
+</li>
+<li><strong>Reuse SciUnit validation:</strong> <code>tests/</code> directory → <a href="../DD010_Validation_Framework/">DD010</a> Tier 1 single-cell validation framework</li>
+</ol>
+<p><strong>Estimated Time Savings:</strong> 40-60 hours (no manual channel curation, HH fitter exists, NeuroML2 models already generated)</p>
+<p><strong>Testing:</strong>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/ChannelWorm.git
+<span class="nb">cd</span><span class="w"> </span>ChannelWorm
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">  </span><span class="c1"># May need dependency updates for Python 3.12</span>
+<span class="nb">cd</span><span class="w"> </span>data/
+<span class="c1"># Convert ion_channel_database.xlsx to CSV</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import pandas as pd; pd.read_excel(&#39;ion_channel_database.xlsx&#39;).to_csv(&#39;ion_channels.csv&#39;, index=False)&quot;</span>
+<span class="c1"># Review: How many channels? How many have measured conductances?</span>
+wc<span class="w"> </span>-l<span class="w"> </span>ion_channels.csv
+head<span class="w"> </span>-20<span class="w"> </span>ion_channels.csv
+</code></pre></div></p>
+<p><strong>Next Actions:</strong></p>
+<ul>
+<li>[ ] Test ChannelWorm installation on Python 3.12 (may need dependency updates)</li>
+<li>[ ] Extract ion channel database, count coverage (how many of 20 training neurons present?)</li>
+<li>[ ] Compare ChannelWorm's NeuroML2 models to <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>'s current channel definitions</li>
+<li>[ ] Port <code>channelworm/fitter.py</code> algorithm to <a href="./">DD005</a>'s calibration pipeline</li>
+<li>[ ] Add ChannelWorm to <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> <code>versions.lock</code> if used</li>
+</ul>
+<hr />
+<h2 id="known-issues-and-future-work">Known Issues and Future Work<a class="headerlink" href="#known-issues-and-future-work" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-calibration-relies-on-limited-training-data">Issue 1: Calibration Relies on Limited Training Data<a class="headerlink" href="#issue-1-calibration-relies-on-limited-training-data" title="Permanent link">&para;</a></h3>
+<p>Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assumes the expression→conductance relationship is conserved. This may fail for highly divergent cell types (e.g., sensory neurons with specialized channels).</p>
+<p><strong>Mitigation:</strong> <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> expands the effective calibration set by providing structure-based kinetics predictions for channels lacking electrophysiology. For neuron classes where the expression→conductance power law fails, DD025 predictions serve as fallback. Flag inferred cell types in metadata. Prioritize experimental validation for high-impact neurons (command interneurons: AVA, AVB, AVD, AVE; motor neurons: DA, DB, VA, VB).</p>
+<p><strong>CODE REUSE:</strong> The <code>openworm/ChannelWorm</code> database may expand the training set beyond 20 neurons if it contains additional patch clamp sources not yet incorporated into <a href="./">DD005</a>'s curated list.</p>
+<h3 id="issue-2-cengen-is-l4-only">Issue 2: CeNGEN Is L4 Only<a class="headerlink" href="#issue-2-cengen-is-l4-only" title="Permanent link">&para;</a></h3>
+<p>CeNGEN L1 data exist but are less mature. Adult and dauer expression are unavailable. Developmental changes in channel expression are not captured.</p>
+<p><strong>Future work:</strong> Integrate CeNGEN L1 when validated. Use <a href="https://doi.org/10.1126/science.aax1971">Packer et al. 2019</a> embryonic atlas for earlier stages. The <a href="../../Projects/DevoWorm/">DevoWorm project</a> (<a href="https://github.com/devoworm">github.com/devoworm</a>) has built differentiation trees and embryogenetic connectome analyses that map temporal dynamics of cell-type specification — these complement CeNGEN's static snapshot by adding the developmental dimension (see <a href="../DD_PHASE_ROADMAP/#phase-6-developmental-modeling-year-2">Phase 6</a>).</p>
+<h3 id="issue-3-post-transcriptional-regulation">Issue 3: Post-Transcriptional Regulation<a class="headerlink" href="#issue-3-post-transcriptional-regulation" title="Permanent link">&para;</a></h3>
+<p>mRNA levels ≠ protein levels ≠ surface channel density. The calibration implicitly absorbs these factors into the scaling relationship, but cell-type-specific regulation is not modeled.</p>
+<p><strong>Future work:</strong> If proteomics data become available (currently scarce), refine calibration using protein abundance instead of transcript abundance.</p>
+<h3 id="opportunity-biological-foundation-models-for-gap-filling">Opportunity: Biological Foundation Models for Gap-Filling<a class="headerlink" href="#opportunity-biological-foundation-models-for-gap-filling" title="Permanent link">&para;</a></h3>
+<p>Three categories of foundation models from the broader computational biology ecosystem could address the data gaps above:</p>
+<h4 id="single-cell-foundation-models-cross-species-transfer">Single-Cell Foundation Models (Cross-Species Transfer)<a class="headerlink" href="#single-cell-foundation-models-cross-species-transfer" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><a href="https://github.com/CZI-AI/TranscriptFormer">TranscriptFormer</a></strong> (Chan Zuckerberg Initiative): Trained on 112 million cells across 12 species spanning 1.5 billion years of evolution. If <em>C. elegans</em> is among those species, it has learned cross-species regulatory patterns that could impute missing or noisy CeNGEN expression values. Even if not, its cross-species transfer capabilities could predict expression for poorly-captured neuron classes</li>
+<li><strong><a href="https://github.com/snap-stanford/UCE">UCE</a></strong> (Stanford): Zero-shot single-cell model that uses protein language model representations of gene products rather than species-specific training. Could work on <em>C. elegans</em> neurons without any <em>C. elegans</em>-specific training data — a key advantage for rare or poorly-sequenced cell types</li>
+<li><strong><a href="https://github.com/jkobject/scprint">scPRINT</a></strong> (Institut Pasteur): Gene network inference from 50 million cells. Could identify co-regulation patterns between ion channel genes (e.g., if <em>egl-19</em> and <em>unc-2</em> are always co-expressed, knowing one constrains the other), improving the expression-to-conductance mapping confidence</li>
+</ul>
+<p><strong>Validation step:</strong> Run TranscriptFormer/UCE imputation on the CeNGEN matrix, then compare imputed values against the original measurements for well-characterized neuron classes. If imputed values correlate r &gt; 0.8 with measured values, adopt imputation for under-characterized classes.</p>
+<h4 id="protein-structure-channel-kinetics-expanding-beyond-20-neurons">Protein Structure → Channel Kinetics (Expanding Beyond ~20 Neurons)<a class="headerlink" href="#protein-structure-channel-kinetics-expanding-beyond-20-neurons" title="Permanent link">&para;</a></h4>
+<p>The calibration training set (Issue 1 above) is limited to ~20 neuron types with electrophysiology. Protein foundation models offer a complementary route to predict channel kinetics without patch-clamp recordings:</p>
+<ul>
+<li><strong><a href="https://github.com/google-deepmind/alphafold3">AlphaFold 3</a></strong> / <strong><a href="https://github.com/jwohlwend/boltz">Boltz-2</a></strong>: Predict 3D structures of all <em>C. elegans</em> ion channels from sequence, including ion coordination sites that determine selectivity and gating</li>
+<li><strong><a href="https://github.com/microsoft/BioEmu">BioEmu-1</a></strong> (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone</li>
+</ul>
+<p>This pipeline is now specified as a standalone Design Document: <a href="../DD025_Protein_Foundation_Model_Pipeline/">DD025</a> (Protein Foundation Model Pipeline). Cross-validation begins in Phase A2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.</p>
+<p><strong>Validation step:</strong> For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.</p>
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>wormneuroatlas</strong> (<a href="https://github.com/openworm/wormneuroatlas">openworm/wormneuroatlas</a>, PyPI: <code>pip install wormneuroatlas</code>, maintained 2025):
+Provides unified Python API for CeNGEN gene expression (<code>NeuroAtlas.get_gene_expression(gene_names, neuron_names)</code>), <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> functional connectivity, neuropeptide/GPCR mapping, and neuron ID normalization. Replaces manual CeNGEN CSV download with a production-ready, pip-installable package. <strong>Estimated time savings: 25 hours.</strong></p>
+<p><strong>ChannelWorm</strong> (<a href="https://github.com/openworm/ChannelWorm">openworm/ChannelWorm</a>, dormant since 2018 but complete):
+Contains curated ion channel database (<code>data/ion_channel_database.xlsx</code>), pre-generated NeuroML2 channel models (<code>models/*.channel.nml</code>), HH parameter fitting tools (<code>channelworm/fitter.py</code>), and SciUnit validation tests. This was designed to feed c302 and provides the exact calibration pipeline DD005 needs. <strong>Estimated time savings: 40-60 hours.</strong></p>
+<p><strong>WormsenseLab_ASH</strong> (<a href="https://github.com/openworm/WormsenseLab_ASH">openworm/WormsenseLab_ASH</a>, dormant):
+Contains ASH neuron patch clamp recordings useful for calibration training set (ASH channel conductances).</p>
+<p><strong>NicolettiEtAl2019_NeuronModels</strong> (<a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels">openworm/NicolettiEtAl2019_NeuronModels</a>, 2025):
+Pre-fitted HH models for AWCon and RMD neurons (Nicoletti et al. 2019). Expands the ~20-neuron calibration training set with published parameter fits that can serve as cross-validation targets for the expression→conductance scaling pipeline.</p>
+<p><strong>NicolettiEtAl2024_MN_IN</strong> (<a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN">openworm/NicolettiEtAl2024_MN_IN</a>, 2025):
+Motor neuron and interneuron HH models (Nicoletti et al. 2024). Provides B-class motor neuron templates needed for <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a> stretch receptor channels, and additional calibration data for motor neuron cell types.</p>
+<p><strong>NeuroPAL</strong> (<a href="https://github.com/openworm/NeuroPAL">openworm/NeuroPAL</a>, 2025):
+Scripts for NeuroPAL dataset analysis and conversion. In-vivo neuron identification datasets for validating that cell-type assignments from CeNGEN expression correctly map to anatomical neuron identities.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Taylor SR et al. (2021).</strong> "Molecular topography of an entire nervous system." <em>Cell</em> 184:4329-4347.
+   <em>CeNGEN database.</em></p>
+</li>
+<li>
+<p><strong>Goodman MB, Hall DH, Avery L, Bhatt R (1998).</strong> "Active currents regulate sensitivity and dynamic range in <em>C. elegans</em> neurons." <em>Neuron</em> 20:763-772.
+   <em>Electrophysiology validation data.</em></p>
+</li>
+<li>
+<p><strong>Randi F, Sharma AK, Dvali N, Leifer AM (2023).</strong> "Neural signal propagation atlas of <em>Caenorhabditis elegans</em>." <em>Nature</em> 623:406-414.
+   <em>Functional connectivity validation target.</em></p>
+</li>
+<li>
+<p><strong>Boyle JH, Cohen N (2008).</strong> "Caenorhabditis elegans body wall muscles are simple actuators." <em>Biosystems</em> 94:170-181.
+   <em>Source of generic channel kinetics.</em></p>
+</li>
+<li>
+<p><strong>Yemini E et al. (2021).</strong> "NeuroPAL: A multicolor atlas for whole-brain neuronal identification in <em>C. elegans</em>." <em>Cell</em> 184:272-288.
+   <em>In vivo neuron identification for validation.</em></p>
+</li>
+<li>
+<p><strong>Alon S et al. (2021).</strong> "Expansion sequencing: spatially precise in situ transcriptomics in intact biological systems." <em>Science</em> 371.
+   <em>In-situ sequencing enabling subcellular-resolution gene expression maps — future data source for per-compartment channel densities.</em></p>
+</li>
+<li>
+<p><strong>Shaib AH et al. (2023).</strong> "<em>C. elegans</em>-optimized Expansion Microscopy." ExM with 20-fold expansion for nanoscale molecular mapping.
+   <em>Future data source for synapse-level protein localization, enabling refinement beyond class-average expression.</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CeNGEN L4 expression matrix</td>
+<td>cengen.org / OWMeta (<a href="../DD008_Data_Integration_Pipeline/">DD008</a>)</td>
+<td>128 neuron classes × 20,500 genes</td>
+<td>CSV (TPM or log-normalized counts)</td>
+<td>TPM</td>
+</tr>
+<tr>
+<td>Electrophysiology calibration data</td>
+<td>Published literature (Goodman, Lockery labs)</td>
+<td>~20 neuron classes with patch-clamp</td>
+<td>CSV: neuron_class, channel, measured_g</td>
+<td>S/cm²</td>
+</tr>
+<tr>
+<td>Ion channel gene→NeuroML model mapping</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> channel definitions</td>
+<td>Gene symbol → NeuroML channel ID</td>
+<td>Python dict / CSV</td>
+<td>identifiers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>128 cell-type-specific NeuroML cell files</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (replaces GenericCell when <code>differentiated: true</code>)</td>
+<td><code>{NeuronClass}Cell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>S/cm² (conductances), mV, ms</td>
+</tr>
+<tr>
+<td>Calibration parameters file</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (reproducibility)</td>
+<td><code>expression_to_conductance_calibration.csv</code></td>
+<td>CSV: channel, alpha, beta, baseline, R²</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Neuron class labels (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-neuron class identity (128 classes) for color-by-type mode</td>
+<td>OME-Zarr: <code>neural/neuron_class/</code>, shape (302,)</td>
+<td>string enum</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-integration-cascade">CRITICAL: Integration Cascade<a class="headerlink" href="#critical-integration-cascade" title="Permanent link">&para;</a></h3>
+<p>Changing neuron conductance densities changes calcium dynamics → changes muscle activation magnitudes → changes body forces → changes locomotion. <strong>This is a full-stack cascade.</strong> Any change to the calibration relationship or CeNGEN data version MUST be validated against the complete coupling chain, not just Tier 2 functional connectivity.</p>
+<p>Validation sequence after calibration changes:</p>
+<ol>
+<li>Tier 1: Single-cell electrophysiology spot-checks (non-blocking)</li>
+<li>Tier 2: Functional connectivity correlation &gt; 0.5 (blocking)</li>
+<li><strong>Tier 3: Full coupled simulation kinematic metrics within ±15% (BLOCKING)</strong></li>
+</ol>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Primary repository:</strong> <code>openworm/c302</code></li>
+<li><strong>Docker stage:</strong> <code>neural</code> (same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>)</li>
+<li><strong><code>versions.lock</code> key:</strong> <code>c302</code></li>
+<li><strong>Build dependencies:</strong> pyNeuroML (pip), pandas (pip), scipy (pip)</li>
+<li><strong>Additional data in image:</strong> CeNGEN expression matrix (~50MB CSV), calibration file (~1KB)</li>
+<li><strong><code>versions.lock</code> note:</strong> CeNGEN data version must be recorded alongside c302 commit</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">neural</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">differentiated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">               </span><span class="c1"># false = generic model ([DD001](DD001_Neural_Circuit_Architecture.md) default)</span>
+<span class="w">                                     </span><span class="c1"># true = CeNGEN-differentiated ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))</span>
+<span class="w">  </span><span class="nt">cengen_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L4_v1.0&quot;</span><span class="w">         </span><span class="c1"># Pin the CeNGEN data version</span>
+<span class="w">  </span><span class="nt">calibration_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v1&quot;</span><span class="w">          </span><span class="c1"># Pin the calibration parameters</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>neural.differentiated</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable CeNGEN-based cell-type specialization</td>
+</tr>
+<tr>
+<td><code>neural.cengen_version</code></td>
+<td><code>"L4_v1.0"</code></td>
+<td>String</td>
+<td>CeNGEN dataset version pin</td>
+</tr>
+<tr>
+<td><code>neural.calibration_version</code></td>
+<td><code>"v1"</code></td>
+<td>String</td>
+<td>Calibration parameter version pin</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">   </span><span class="c1"># with neural.differentiated: true</span>
+<span class="c1"># Checks: simulation completes, worm moves, no NaN values</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Tier 2: functional connectivity r &gt; 0.5 AND improved vs. generic baseline</span>
+<span class="c1">#   - Tier 3: kinematic metrics within ±15% of experimental data</span>
+<span class="c1">#   - If Tier 3 fails: calibration is wrong, do NOT merge</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] All 128 <code>.cell.nml</code> files generated without error</li>
+<li>[ ] <code>jnml -validate</code> passes for each cell file</li>
+<li>[ ] <code>quick-test</code> passes with <code>differentiated: true</code></li>
+<li>[ ] <code>validate</code> passes (Tier 2 + Tier 3)</li>
+<li>[ ] Calibration CSV committed with metadata (training set, R², CeNGEN version)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>neural/neuron_class/</code> (302,)</td>
+<td>Neurons layer</td>
+<td>128-color palette, one per CeNGEN class</td>
+</tr>
+<tr>
+<td><code>neural/calcium/</code> (n_timesteps, 302)</td>
+<td>Calcium activity</td>
+<td>Warm colormap (blue→red), class-specific dynamics visible</td>
+</tr>
+<tr>
+<td><code>neural/voltage/</code> (n_timesteps, 302)</td>
+<td>Voltage traces</td>
+<td>Standard mV colormap</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeuroML channel model definitions</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If channel kinetics change, calibration must be redone</td>
+</tr>
+<tr>
+<td>CeNGEN data (external)</td>
+<td>cengen.org</td>
+<td>If CeNGEN updates expression values, all cell files must be regenerated</td>
+</tr>
+<tr>
+<td>Calibration training set (electrophysiology)</td>
+<td>Published data</td>
+<td>New electrophysiology data should improve calibration</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit dynamics</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Every neuron's voltage/calcium behavior changes</td>
+</tr>
+<tr>
+<td>Muscle activation</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Motor neuron calcium output drives muscles — different conductances = different force</td>
+</tr>
+<tr>
+<td>Body locomotion</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Changed muscle forces → changed movement</td>
+</tr>
+<tr>
+<td>Neuropeptide release</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Different calcium dynamics → different peptide release timing</td>
+</tr>
+<tr>
+<td>Functional connectivity validation</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Tier 2 baseline changes — must re-establish reference values</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (Phase 1 work)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Download CeNGEN L4 expression matrix</p>
+</li>
+<li>Curate ion channel gene list</li>
+<li>Collect electrophysiology data for calibration training set (20 neurons)</li>
+<li>Fit calibration relationship</li>
+<li>Generate 128 cell-type-specific NeuroML files</li>
+<li>Validate against <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

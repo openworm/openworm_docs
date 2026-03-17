@@ -1,0 +1,4575 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD004_Mechanical_Cell_Identity/">
+      
+      
+        <link rel="prev" href="../DD018_Egg_Laying_System_Architecture/">
+      
+      
+        <link rel="next" href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD004 Mechanical Cell Identity - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd004-mechanical-cell-identity-in-sibernetic-per-cell-physics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD004 Mechanical Cell Identity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-every-sph-particle-with-a-cell-id-from-the-wbbt-ontology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tag Every SPH Particle with a Cell ID from the WBbt Ontology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-type-specific-mechanical-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell-Type-Specific Mechanical Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-initialization-cell-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Initialization (Cell Boundaries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-keep-bulk-tissue-representation-no-cell-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Keep Bulk Tissue Representation (No Cell Identity)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-finite-element-mesh-with-explicit-cell-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Finite Element Mesh with Explicit Cell Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-coarse-grain-group-cells-into-tissue-types-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Coarse-Grain: Group Cells into Tissue Types Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-backend-validation-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Backend Validation Requirement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-change-particle-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Change: Particle Data Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-every-sph-particle-with-a-cell-id-from-the-wbbt-ontology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tag Every SPH Particle with a Cell ID from the WBbt Ontology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-type-specific-mechanical-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell-Type-Specific Mechanical Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-initialization-cell-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial Initialization (Cell Boundaries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-keep-bulk-tissue-representation-no-cell-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Keep Bulk Tissue Representation (No Cell Identity)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-finite-element-mesh-with-explicit-cell-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Finite Element Mesh with Explicit Cell Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-coarse-grain-group-cells-into-tissue-types-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Coarse-Grain: Group Cells into Tissue Types Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-backend-validation-requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Backend Validation Requirement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-change-particle-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Change: Particle Data Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd004-mechanical-cell-identity-in-sibernetic-per-cell-physics">DD004: Mechanical Cell Identity in Sibernetic (Per-Cell Physics)<a class="headerlink" href="#dd004-mechanical-cell-identity-in-sibernetic-per-cell-physics" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 4)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics), <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (Pharyngeal System), <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (Intestinal Model)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cell-type-specific mechanics (intestinal peristalsis, cuticle stiffness, hypodermal compliance). Extends the particle struct from 32 to 44 bytes. Success: all 959 somatic cells represented, Tier 3 kinematics within ±15%.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Complete Organism — see <a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Tagged particle file: each of ~100K SPH particles gets a WBbt cell ID + cell-type-specific elasticity/adhesion</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: kinematic metrics within ±15% with <code>cell_identity: true</code>; all 959 somatic cells mapped</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> — issues labeled <code>dd004</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>body.cell_identity: true</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> with <code>cell_identity: false</code> (backward compat), then <code>cell_identity: true</code> (tagged sim)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>body/cell_ids/</code> layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray)</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 3 kinematic validation blocks merge; backward compatibility with <code>cell_identity: false</code> required</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Kinematic metrics</td>
+<td>Within ±15% of Schafer lab baseline with <code>cell_identity: true</code></td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Cell coverage</td>
+<td>All 959 somatic cells mapped to at least one SPH particle</td>
+<td>Required (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Backward compatibility</td>
+<td><code>cell_identity: false</code> produces identical output to unmodified Sibernetic</td>
+<td>Required (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> ~100K SPH particles with bulk elastic/liquid properties — all elastic particles have identical stiffness and adhesion. No cell boundaries, no per-cell mechanics.</p>
+<p><strong>After:</strong> Each SPH particle tagged with a WBbt cell ID and cell-type-specific elasticity/adhesion multipliers. 959 somatic cells represented. Intestinal, cuticle, hypodermal, and gonad sheath mechanics are cell-type-specific.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/sibernetic</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extended SPH_Particle_v2 struct</td>
+<td><code>src/</code> (C++ header)</td>
+<td>C struct definition</td>
+<td>44-byte struct with <code>cell_id</code>, <code>elasticity_mult</code>, <code>adhesion</code></td>
+</tr>
+<tr>
+<td>Tagged particle initialization file</td>
+<td><code>data/particles_tagged.csv</code></td>
+<td>CSV</td>
+<td><code>particle_id,x,y,z,type,cell_id,elasticity,adhesion</code></td>
+</tr>
+<tr>
+<td>Cell-to-particle mapping</td>
+<td><code>data/cell_to_particle_map.json</code></td>
+<td>JSON</td>
+<td><code>{"WBbt:0005189": [0, 1, 2, ...], ...}</code></td>
+</tr>
+<tr>
+<td>Cell boundary meshes</td>
+<td><code>data/cell_boundaries/</code></td>
+<td>OBJ or STL per cell</td>
+<td><code>data/cell_boundaries/int1.obj</code></td>
+</tr>
+<tr>
+<td>Cell identity labels (viewer)</td>
+<td>OME-Zarr: <code>body/cell_ids/</code>, shape (n_particles,)</td>
+<td>OME-Zarr</td>
+<td>Integer cell ID per particle</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd004</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 4: Mechanical Cell Identity</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd004/description</code> (e.g., <code>dd004/particle-tagging</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD004: Implement per-particle cell ID tagging from Witvliet EM data</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: OpenCL SDK, CMake, C++ compiler (same as <a href="../DD003_Body_Physics_Architecture/">DD003</a>)</li>
+<li>Cell boundary mesh data from <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet et al. 2021</a> (included in Docker image or downloaded at build time)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on the <strong>Sibernetic</strong> body physics framework (<a href="../DD003_Body_Physics_Architecture/">DD003</a>). If you have already completed <a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow <a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 Getting Started</a> first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.</p>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to <a href="#step-by-step">Step 2 (tagged simulation)</a> below. The Docker image includes OpenCL, CMake, all Sibernetic dependencies, and the Witvliet cell boundary mesh data.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete <a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 native setup</a> (includes OpenCL platform notes for Linux/macOS/Windows), then:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Download cell boundary meshes from Witvliet et al. 2021 EM reconstructions</span>
+<span class="nb">cd</span><span class="w"> </span>sibernetic
+scripts/download_cell_boundaries.sh<span class="w">   </span><span class="c1"># [TO BE CREATED] — fetches OBJ/STL meshes into data/cell_boundaries/</span>
+
+<span class="c1"># Generate tagged particle file from cell boundaries + WBbt ontology</span>
+python<span class="w"> </span>scripts/generate_tagged_particles.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--boundaries<span class="w"> </span>data/cell_boundaries/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>data/particles_tagged.csv<span class="w">   </span><span class="c1"># [TO BE CREATED]</span>
+</code></pre></div>
+<p><strong>Neural identity mapping (optional):</strong> If you also need neural cell identity (e.g., mapping motor neuron positions to muscle-tagged particles for <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>/<a href="../DD002_Muscle_Model_Architecture/">DD002</a> coupling), complete <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> to set up the c302 neural model and PyOpenWorm/OWMeta data layer.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Verify backward compatibility (cell_identity: false)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with cell_identity: false in openworm.yml</span>
+<span class="c1"># Green light: produces identical output to unmodified Sibernetic</span>
+<span class="c1"># Green light: simulation completes without NaN, segfault, or SIGKILL</span>
+
+<span class="c1"># Step 2: Run tagged simulation (cell_identity: true)</span>
+<span class="c1"># (modify openworm.yml: body.cell_identity: true)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Green light: simulation completes without crash</span>
+<span class="c1"># Green light: all particle cell_ids are valid WBbt identifiers</span>
+<span class="c1"># Green light: locomotion still occurs (body still moves)</span>
+
+<span class="c1"># Step 3: Validate mechanics</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Green light: Tier 3 kinematic metrics within ±15% with cell_identity enabled</span>
+<span class="c1"># Green light: all 959 somatic cells mapped to at least one particle</span>
+</code></pre></div>
+<h3 id="scripts-that-may-not-exist-yet">Scripts that may not exist yet<a class="headerlink" href="#scripts-that-may-not-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/generate_tagged_particles.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic — label <code>dd004</code></td>
+</tr>
+<tr>
+<td><code>scripts/validate_cell_coverage.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic — label <code>dd004</code></td>
+</tr>
+<tr>
+<td><code>scripts/extract_cell_boundaries.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic — label <code>dd004</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> <code>body/cell_ids/</code> — particles colored by cell type.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>body/cell_ids/</code></td>
+</tr>
+<tr>
+<td><strong>Color mode</strong></td>
+<td>Particles colored by cell type: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta, seam cells=orange</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>OME-Zarr: <code>body/cell_ids/</code>, shape (n_particles,) — integer ID mapping each particle to its WBbt cell</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>The worm body with distinct cell boundaries visible as color transitions. Intestinal cells should form a tube along the body axis. Muscle quadrants (MDR, MVR, MVL, MDL) should be visible as four colored bands. Cuticle should form the outermost shell. Clicking a particle shows its WBbt cell ID and cell-type-specific mechanical properties.</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Side-by-side: bulk tissue (all elastic=green, <a href="../DD003_Body_Physics_Architecture/">DD003</a> default) vs. cell-tagged (distinct colors per cell type)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="tag-every-sph-particle-with-a-cell-id-from-the-wbbt-ontology">Tag Every SPH Particle with a Cell ID from the WBbt Ontology<a class="headerlink" href="#tag-every-sph-particle-with-a-cell-id-from-the-wbbt-ontology" title="Permanent link">&para;</a></h3>
+<p>Use the <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet et al. 2021</a> full-body EM reconstructions (8 animals, L1 through adult) to define 3D cell boundaries at multiple developmental stages. Assign each SPH particle a cell ID (WBbt identifier, e.g., <code>WBbt:0005189</code> for intestinal cell int1).</p>
+<p><strong>Data structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">pos</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span><span class="w">        </span><span class="c1">// Position (x, y, z)</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vel</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span><span class="w">        </span><span class="c1">// Velocity</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">density</span><span class="p">;</span><span class="w">       </span><span class="c1">// Local density</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">particle_type</span><span class="p">;</span><span class="w">   </span><span class="c1">// LIQUID, ELASTIC, BOUNDARY</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cell_id</span><span class="p">;</span><span class="w">         </span><span class="c1">// NEW: WBbt cell identifier</span>
+<span class="p">}</span><span class="w"> </span><span class="n">SPH_Particle</span><span class="p">;</span>
+</code></pre></div></p>
+<h3 id="cell-type-specific-mechanical-properties">Cell-Type-Specific Mechanical Properties<a class="headerlink" href="#cell-type-specific-mechanical-properties" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cell Type</th>
+<th>WBbt Count</th>
+<th>Elasticity Multiplier</th>
+<th>Adhesion Strength</th>
+<th>Contractile?</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Body wall muscle</strong></td>
+<td>95</td>
+<td>1.5x baseline</td>
+<td>High</td>
+<td>Yes (HH-driven)</td>
+<td>Current default</td>
+</tr>
+<tr>
+<td><strong>Intestinal</strong></td>
+<td>20</td>
+<td>0.8x (compliant)</td>
+<td>Medium</td>
+<td>No (peristaltic waves)</td>
+<td>Phase 3 target</td>
+</tr>
+<tr>
+<td><strong>Hyp7 syncytium</strong></td>
+<td>1 (covers body)</td>
+<td>0.5x (soft)</td>
+<td>Very high</td>
+<td>No</td>
+<td>Largest cell</td>
+</tr>
+<tr>
+<td><strong>Cuticle (basal)</strong></td>
+<td>--</td>
+<td>5x (stiff)</td>
+<td>N/A (acellular)</td>
+<td>No</td>
+<td>Protective shell</td>
+</tr>
+<tr>
+<td><strong>Cuticle (medial)</strong></td>
+<td>--</td>
+<td>3x</td>
+<td>N/A</td>
+<td>No</td>
+<td>Layered structure</td>
+</tr>
+<tr>
+<td><strong>Cuticle (cortical)</strong></td>
+<td>--</td>
+<td>10x (rigid)</td>
+<td>N/A</td>
+<td>No</td>
+<td>Outermost</td>
+</tr>
+<tr>
+<td><strong>Gonad sheath</strong></td>
+<td>2</td>
+<td>1.0x</td>
+<td>Medium</td>
+<td>Yes (cAMP-driven)</td>
+<td>Oocyte transport</td>
+</tr>
+<tr>
+<td><strong>Pharyngeal muscle</strong></td>
+<td>20</td>
+<td>2x</td>
+<td>High</td>
+<td>Yes (pumping)</td>
+<td>See <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+</tr>
+<tr>
+<td><strong>Seam cells</strong></td>
+<td>10</td>
+<td>1.2x</td>
+<td>Medium</td>
+<td>No</td>
+<td>Lateral epidermis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Elasticity coefficient per particle:</strong>
+<div class="highlight"><pre><span></span><code>k_particle = k_baseline * cell_type_elasticity_multiplier
+</code></pre></div></p>
+<p><strong>Adhesion between adjacent cells:</strong>
+<div class="highlight"><pre><span></span><code>F_adhesion = adhesion_strength * overlap_area
+</code></pre></div></p>
+<p>Where <code>adhesion_strength</code> depends on both source and target cell types (e.g., muscle-muscle &gt; muscle-intestine).</p>
+<h3 id="spatial-initialization-cell-boundaries">Spatial Initialization (Cell Boundaries)<a class="headerlink" href="#spatial-initialization-cell-boundaries" title="Permanent link">&para;</a></h3>
+<p><strong>Data sources:</strong></p>
+<ol>
+<li><strong><a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet et al. 2021</a>:</strong> 3D cell volumes at L1, L4, adult (choose adult hermaphrodite as reference)</li>
+<li><strong>WormAtlas Slidable Worm:</strong> Consecutive TEM sections with hand-annotated cell boundaries</li>
+<li><strong><a href="https://doi.org/10.1038/nmeth.1366">Long et al. 2009</a>:</strong> 3D nuclear positions for L1 (357 nuclei)</li>
+</ol>
+<p><strong>Initialization algorithm:</strong></p>
+<ol>
+<li>Load cell boundary meshes from Witvliet EM data (3D surface reconstruction)</li>
+<li>For each cell, fill its 3D volume with SPH particles at spacing = smoothing radius h</li>
+<li>Tag particles with the cell's WBbt ID</li>
+<li>Assign cell-type-specific mechanical properties from the table above</li>
+</ol>
+<p><strong>File format:</strong>
+<div class="highlight"><pre><span></span><code>particle_id,x,y,z,type,cell_id,elasticity,adhesion
+0,10.2,5.3,100.1,ELASTIC,WBbt:0005189,0.8,0.5
+1,10.5,5.3,100.1,ELASTIC,WBbt:0005189,0.8,0.5
+...
+</code></pre></div></p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-keep-bulk-tissue-representation-no-cell-identity">1. Keep Bulk Tissue Representation (No Cell Identity)<a class="headerlink" href="#1-keep-bulk-tissue-representation-no-cell-identity" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Cannot model cell-type-specific mechanics (intestinal peristalsis, cuticle layers, syncytium compliance). Limits biological realism.</p>
+<h3 id="2-finite-element-mesh-with-explicit-cell-boundaries">2. Finite Element Mesh with Explicit Cell Boundaries<a class="headerlink" href="#2-finite-element-mesh-with-explicit-cell-boundaries" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> FEM mesh generation is harder than SPH particle tagging. SPH is already implemented. Tagging is a data structure change, not an algorithmic change.</p>
+<h3 id="3-coarse-grain-group-cells-into-tissue-types-only">3. Coarse-Grain: Group Cells into Tissue Types Only<a class="headerlink" href="#3-coarse-grain-group-cells-into-tissue-types-only" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Tag particles as "muscle," "intestine," "hypodermis" without individual cell identity.</p>
+<p><strong>Rejected:</strong> The data exist for single-cell resolution (959 cells). Why reduce? Individual cell identity enables:</p>
+<ul>
+<li>Per-cell state tracking (e.g., intestinal cell 1 vs. cell 20 calcium)</li>
+<li>Cell division / death during development</li>
+<li>Fine-grained validation</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>All 959 Somatic Cells Represented:</strong> Every cell in the WBbt cell list must map to at least one SPH particle.</p>
+</li>
+<li>
+<p><strong>Spatial Accuracy:</strong> Cell boundaries must match EM data within ±2 µm (SPH smoothing radius is ~3 µm).</p>
+</li>
+<li>
+<p><strong>Mechanical Realism:</strong> Cell-type-specific elasticity must be justified by literature (e.g., cuticle is stiffer than intestine) or default to baseline.</p>
+</li>
+<li>
+<p><strong>Validation:</strong> Intestinal peristalsis (Phase 3), hypodermal compliance during body bending, cuticle rigidity should be qualitatively correct.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Neural cell identity:</strong> Neurons are covered by <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>. This DD covers non-neural somatic cells only (muscle, intestine, hypodermis, cuticle, gonad, seam cells, pharyngeal muscle).</p>
+</li>
+<li>
+<p><strong>Developmental stage transitions:</strong> Cell boundaries change during development (L1 through adult). This DD uses adult hermaphrodite as the reference stage. Multi-stage support is future work.</p>
+</li>
+<li>
+<p><strong>Cell division and death:</strong> Programmed cell death (131 cells die during development) and cell division are not modeled. Fixed adult cell count (959 somatic cells).</p>
+</li>
+<li>
+<p><strong>Sub-cellular structure:</strong> Organelles, cytoskeletal networks, and intracellular compartments are not represented. Each cell is a homogeneous collection of SPH particles.</p>
+</li>
+<li>
+<p><strong>Cadherin-specific adhesion dynamics:</strong> Adhesion is parameterized as a scalar strength per cell-type pair. Molecular-level cadherin binding/unbinding kinetics are out of scope.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>Current Sibernetic represents the worm body as <strong>bulk elastic and liquid particles</strong> without cell boundaries. All elastic particles have identical mechanical properties (stiffness, adhesion). This is sufficient for basic locomotion but cannot capture:</p>
+<ul>
+<li>Intestinal peristalsis (requires distinct intestinal cell mechanics)</li>
+<li>Cuticle layering (basal, medial, cortical zones)</li>
+<li>Hypodermal syncytium (hyp7) covering most of the body</li>
+<li>Gonad sheath contraction for oocyte transport</li>
+<li>Cell-cell adhesion specificity (cadherin-mediated)</li>
+</ul>
+<p>The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides the EM foundation for this DD. For developmental modeling beyond static cell identity (e.g., morphogenesis, cell division, body growth), the <a href="../../Projects/DevoWorm/">DevoWorm project</a> (<a href="https://github.com/devoworm">github.com/devoworm</a>) has built Cellular Potts (CompuCell3D) and Cellular Automata (Morphozoic) models of embryogenesis that could inform future body-scaling mechanics (see <a href="../DD_PHASE_ROADMAP/#phase-6-developmental-modeling-year-2">Phase 6</a>).</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Witvliet D et al. (2021).</strong> "Connectomes across development." <em>Nature</em> 596:257-261. 3D EM reconstructions.</li>
+<li><strong>Long F et al. (2009).</strong> "A 3D digital atlas of <em>C. elegans</em>." <em>Nature Methods</em> 6:667-672.</li>
+<li><strong>WormAtlas.</strong> wormatlas.org. Slidable Worm, cell lists, anatomy handbooks.</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cell boundary meshes</td>
+<td>OWMeta (<a href="../DD008_Data_Integration_Pipeline/">DD008</a>) / <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet 2021</a> EM</td>
+<td>3D surface reconstruction per cell</td>
+<td>OBJ or STL mesh files</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>WBbt cell ontology IDs</td>
+<td>OWMeta (<a href="../DD008_Data_Integration_Pipeline/">DD008</a>) / WormBase</td>
+<td>Cell name → WBbt ID mapping</td>
+<td>CSV or OWMeta query</td>
+<td>identifiers</td>
+</tr>
+<tr>
+<td>Baseline SPH particle layout</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Current particle initialization</td>
+<td>Binary particle file</td>
+<td>µm (positions)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tagged particle file</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic initialization)</td>
+<td>Per-particle: position, type, cell_id, elasticity, adhesion</td>
+<td>Extended binary or CSV (see struct below)</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Cell-to-particle mapping</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (intestinal oscillator)</td>
+<td>Lookup: cell_id → list of particle indices</td>
+<td>JSON or Python dict</td>
+<td>indices</td>
+</tr>
+<tr>
+<td>Cell-to-particle mapping</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (pharynx)</td>
+<td>Lookup: cell_id → list of particle indices</td>
+<td>JSON or Python dict</td>
+<td>indices</td>
+</tr>
+<tr>
+<td>Cell identity labels (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-particle cell_id for cell-based coloring/selection</td>
+<td>OME-Zarr: <code>body/cell_ids/</code>, shape (n_particles,)</td>
+<td>integer ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><code>openworm/sibernetic</code> (particle initialization is part of Sibernetic)</td>
+</tr>
+<tr>
+<td><strong>Docker stage</strong></td>
+<td><code>body</code> (same as <a href="../DD003_Body_Physics_Architecture/">DD003</a>)</td>
+</tr>
+<tr>
+<td><strong><code>versions.lock</code> key</strong></td>
+<td><code>sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Build dependencies</strong></td>
+<td>Same as <a href="../DD003_Body_Physics_Architecture/">DD003</a> + cell boundary mesh data from <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet 2021</a></td>
+</tr>
+<tr>
+<td><strong>Additional data</strong></td>
+<td>Cell boundary meshes must be included in the Docker image (or downloaded at build time from a pinned release)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">body</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">               </span><span class="c1"># false = bulk tissue (backward compatible)</span>
+<span class="w">                                     </span><span class="c1"># true = per-particle cell IDs ([DD004](DD004_Mechanical_Cell_Identity.md))</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body.cell_identity</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable per-particle cell IDs from WBbt ontology</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test: backward compatibility (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with cell_identity: false</span>
+<span class="c1"># Checks: produces identical output to unmodified Sibernetic</span>
+
+<span class="c1"># Per-PR quick test: tagged simulation (must pass before submission)</span>
+<span class="c1"># (set body.cell_identity: true in openworm.yml)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Checks: simulation completes without crash</span>
+<span class="c1"># Checks: all particle cell_ids are valid WBbt identifiers</span>
+<span class="c1"># Checks: locomotion still occurs (body still moves)</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Tier 3 kinematic metrics within ±15% with cell_identity enabled</span>
+<span class="c1">#   - All 959 somatic cells mapped to at least one particle</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>quick-test</code> passes with <code>cell_identity: false</code> (backward compat)</li>
+<li>[ ] <code>quick-test</code> passes with <code>cell_identity: true</code> (tagged sim)</li>
+<li>[ ] <code>validate</code> passes (Tier 3 kinematics with cell identity)</li>
+<li>[ ] All 959 somatic cells mapped to at least one particle</li>
+<li>[ ] Particle file version header present (first 4 bytes = format version)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body/cell_ids/</code> (n_particles,)</td>
+<td>Cell identity overlay</td>
+<td>Cell type → color: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta</td>
+</tr>
+<tr>
+<td><code>body/positions/</code> (n_timesteps, n_particles, 3)</td>
+<td>Body particles (from <a href="../DD003_Body_Physics_Architecture/">DD003</a>)</td>
+<td>Combined with cell_ids for cell-aware particle rendering</td>
+</tr>
+</tbody>
+</table>
+<h3 id="multi-backend-validation-requirement">Multi-Backend Validation Requirement<a class="headerlink" href="#multi-backend-validation-requirement" title="Permanent link">&para;</a></h3>
+<p>The particle struct change must be validated across <strong>all stable backends</strong> per <a href="../DD003_Body_Physics_Architecture/">DD003</a> Quality Criterion 5 ("GPU Backend Compatibility") and Criterion 6 ("Cross-Backend Parity"). Specifically:</p>
+<ul>
+<li><strong>OpenCL:</strong> Updated struct definition required in <code>.cl</code> kernel files (<code>sphFluid.cl</code>)</li>
+<li><strong>PyTorch:</strong> Updated tensor shapes in <code>pytorch_solver.py</code> to accommodate new fields</li>
+<li><strong>Taichi:</strong> Updated struct in <code>taichi_solver.py</code> field definitions</li>
+<li><strong>All backends:</strong> Must pass the <a href="../DD003_Body_Physics_Architecture/#cross-backend-parity-requirements">DD003 cross-backend parity tests</a> after the struct change</li>
+</ul>
+<h3 id="breaking-change-particle-data-structure">Breaking Change: Particle Data Structure<a class="headerlink" href="#breaking-change-particle-data-structure" title="Permanent link">&para;</a></h3>
+<p>Adding <code>cell_id</code> to the SPH particle struct is a <strong>breaking change</strong> to the Sibernetic binary format. Migration plan:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Old struct ([DD003](DD003_Body_Physics_Architecture.md) current)</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">pos</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vel</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">density</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">particle_type</span><span class="p">;</span><span class="w">     </span><span class="c1">// LIQUID, ELASTIC, BOUNDARY</span>
+<span class="p">}</span><span class="w"> </span><span class="n">SPH_Particle</span><span class="p">;</span><span class="w">            </span><span class="c1">// 32 bytes</span>
+
+<span class="c1">// New struct ([DD004](DD004_Mechanical_Cell_Identity.md))</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">pos</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vel</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">density</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">particle_type</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cell_id</span><span class="p">;</span><span class="w">           </span><span class="c1">// NEW: WBbt cell identifier (0 = untagged)</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">elasticity_mult</span><span class="p">;</span><span class="w"> </span><span class="c1">// NEW: cell-type-specific multiplier (1.0 = default)</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">adhesion</span><span class="p">;</span><span class="w">        </span><span class="c1">// NEW: cell-type-specific adhesion strength</span>
+<span class="p">}</span><span class="w"> </span><span class="n">SPH_Particle_v2</span><span class="p">;</span><span class="w">        </span><span class="c1">// 44 bytes</span>
+</code></pre></div>
+<p><strong>Backward compatibility:</strong> When <code>body.cell_identity: false</code> in <code>openworm.yml</code>:</p>
+<ul>
+<li>Use the old struct (32 bytes)</li>
+<li>Sibernetic reads old-format particle files</li>
+<li>All existing tools continue to work</li>
+</ul>
+<p>When <code>body.cell_identity: true</code>:</p>
+<ul>
+<li>Use new struct (44 bytes)</li>
+<li>Particle file includes a <strong>version header</strong> (first 4 bytes = format version number)</li>
+<li>All downstream tools must check the version header before reading</li>
+</ul>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPH particle struct</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If <a href="../DD003_Body_Physics_Architecture/">DD003</a> changes the base struct, <a href="./">DD004</a> extension must match</td>
+</tr>
+<tr>
+<td>EM cell boundary data</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a>/OWMeta</td>
+<td>If cell boundary meshes are updated (new EM data), particle tagging must be regenerated</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intestinal oscillator</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> drives intestinal-tagged particles; if cell_id assignment changes, wrong particles contract</td>
+</tr>
+<tr>
+<td>Pharynx mechanics</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (Option B)</td>
+<td>Pharyngeal-tagged particles need correct cell_ids for pumping</td>
+</tr>
+<tr>
+<td>Cuticle mechanics</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (future)</td>
+<td>Cuticle stiffness multiplier affects body bending — changes affect locomotion</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (Phase 4)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Extract cell boundaries from Witvliet EM data</p>
+</li>
+<li>Implement particle tagging in Sibernetic data structures</li>
+<li>Assign cell-type-specific mechanical properties</li>
+<li>Validate with intestinal model (<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4663 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD009_Intestinal_Oscillator_Model/">
+      
+      
+        <link rel="prev" href="../DD007_Pharyngeal_System_Architecture/">
+      
+      
+        <link rel="next" href="../DD017_Hybrid_Mechanistic_ML_Framework/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD009 Intestinal Oscillator - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd009-intestinal-calcium-oscillator-and-defecation-motor-program" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD009 Intestinal Oscillator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-the-20-intestinal-cells-with-ip3calcium-oscillator-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model the 20 Intestinal Cells with IP3/Calcium Oscillator Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip3-receptor-model-itr-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IP3 Receptor Model (ITR-1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-junction-coupling-inter-intestinal-cell-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Junction Coupling (Inter-Intestinal Cell Synchronization)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-enteric-muscles-defecation-motor-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Enteric Muscles (Defecation Motor Program)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-neural-pacemaker-model-not-intrinsic-intestinal-oscillations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Neural Pacemaker Model (Not Intrinsic Intestinal Oscillations)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-detailed-er-geometry-and-diffusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Detailed ER Geometry and Diffusion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mitochondrial-calcium-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mitochondrial Calcium Buffering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-budget-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Budget Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-enteric-muscles-defecation-motor-program_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Enteric Muscles (Defecation Motor Program)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-dd004-mechanical-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to DD004 (Mechanical Identity)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-the-20-intestinal-cells-with-ip3calcium-oscillator-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model the 20 Intestinal Cells with IP3/Calcium Oscillator Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip3-receptor-model-itr-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IP3 Receptor Model (ITR-1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gap-junction-coupling-inter-intestinal-cell-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gap Junction Coupling (Inter-Intestinal Cell Synchronization)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-enteric-muscles-defecation-motor-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Enteric Muscles (Defecation Motor Program)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-neural-pacemaker-model-not-intrinsic-intestinal-oscillations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Neural Pacemaker Model (Not Intrinsic Intestinal Oscillations)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-detailed-er-geometry-and-diffusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Detailed ER Geometry and Diffusion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mitochondrial-calcium-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mitochondrial Calcium Buffering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-budget-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Budget Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-enteric-muscles-defecation-motor-program_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Enteric Muscles (Defecation Motor Program)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-dd004-mechanical-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to DD004 (Mechanical Identity)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd009-intestinal-calcium-oscillator-and-defecation-motor-program">DD009: Intestinal Calcium Oscillator and Defecation Motor Program<a class="headerlink" href="#dd009-intestinal-calcium-oscillator-and-defecation-motor-program" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 3)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity), <a href="../DD008_Data_Integration_Pipeline/">DD008</a> (Data Integration)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the defecation motor program (~50s period). Calcium waves propagate posterior-to-anterior through gap-junction-coupled intestinal cells and trigger the pBoc, aBoc, Exp behavioral sequence via enteric muscle innervation. Success: oscillation period 50+/-10 seconds, correct wave direction, and &gt;=3 consecutive cycles without damping.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase 3</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Organ Systems — see <a href="../DD_PHASE_ROADMAP/#phase-3-organ-systems-hybrid-ml-months-7-12">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>20 intestinal cell models (IP3/Ca2+ oscillator in NeuroML/LEMS), defecation trigger signal, per-cell calcium time series</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: defecation cycle period 50 +/- 10 seconds; posterior-to-anterior wave; &gt;=3 consecutive cycles</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a> (<code>c302_intestine.py</code>, <code>intestine/</code> module) — issues labeled <code>dd009</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>intestine.enabled: true</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> with <code>intestine.enabled: true</code> (5s partial cycle), nightly: <code>measure_defecation_period.py</code> (200s full validation)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>intestine/calcium/</code> layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); <code>intestine/defecation_events/</code> for pBoc/aBoc/Exp markers</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Per-PR: 5s quick-test (no crash); nightly: full 200s period validation (Tier 3) blocks merge</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Defecation cycle period</td>
+<td>50 +/- 10 seconds (<a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a>)</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Wave direction</td>
+<td>Posterior-to-anterior (int20 -&gt; int1)</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Motor program sequence</td>
+<td>pBoc -&gt; aBoc -&gt; Exp in correct temporal order</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Quaternary:</strong> Cycle stability</td>
+<td>&gt;=3 consecutive cycles without damping</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No intestinal model exists. Defecation motor program is absent from the simulation. The organism model has no internal organ dynamics.</p>
+<p><strong>After:</strong> 20 intestinal cells with autonomous IP3/Ca2+ oscillations, gap-junction-coupled to produce posterior-to-anterior calcium waves, triggering the full pBoc -&gt; aBoc -&gt; Exp defecation sequence via DVB/AVL enteric neurons.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/c302</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intestinal cell template</td>
+<td><code>intestine/IntestinalCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>IP3R + Ca dynamics cell</td>
+</tr>
+<tr>
+<td>IP3 receptor model</td>
+<td><code>intestine/IP3Receptor.channel.nml</code></td>
+<td>NeuroML 2 / LEMS XML</td>
+<td>Li-Rinzel IP3R model</td>
+</tr>
+<tr>
+<td>Intestinal network generator</td>
+<td><code>c302_intestine.py</code></td>
+<td>Python script</td>
+<td>Generates <code>LEMS_IntestineOscillator.xml</code></td>
+</tr>
+<tr>
+<td>Enteric muscle coupling</td>
+<td><code>intestine/intestine_coupling.py</code></td>
+<td>Python</td>
+<td>Couples Ca peaks to DVB/AVL neurons</td>
+</tr>
+<tr>
+<td>Per-cell calcium time series</td>
+<td>Output: <code>LEMS_IntestineOscillator_calcium.dat</code></td>
+<td>Tab-separated</td>
+<td><code>cell_id, timestep, [Ca2+]</code></td>
+</tr>
+<tr>
+<td>Calcium heatmap (viewer)</td>
+<td>OME-Zarr: <code>intestine/calcium/</code>, shape (n_timesteps, 20)</td>
+<td>OME-Zarr array</td>
+<td>20-cell posterior-to-anterior heatmap</td>
+</tr>
+<tr>
+<td>Defecation event markers (viewer)</td>
+<td>OME-Zarr: <code>intestine/defecation_events/</code></td>
+<td>OME-Zarr event list</td>
+<td>pBoc/aBoc/Exp timestamps</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd009</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 3: Intestinal Oscillator</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd009/description</code> (e.g., <code>dd009/ip3r-lems-model</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD009: Implement Li-Rinzel IP3R model in LEMS for intestinal cells</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pyNeuroML, jnml</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on the <strong>c302</strong> neural circuit framework (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>). If you have already completed <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> first to clone the c302 repository and install dependencies, then return here.</p>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to <a href="#step-by-step">Step 2</a> below.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 native setup</a>, then install additional dependencies for the IP3/calcium oscillator ODE system:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SciPy is needed for ODE integration of the Li-Rinzel IP3R model</span>
+pip<span class="w"> </span>install<span class="w"> </span>scipy<span class="w">   </span><span class="c1"># if not already installed</span>
+</code></pre></div>
+<p>The intestinal oscillator model uses coupled ODEs (IP3 receptor dynamics, SERCA pump, ER calcium stores) solved via <code>scipy.integrate</code>. The standard pyNeuroML/jnml toolchain from DD001 handles the NeuroML/LEMS portions.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Generate intestinal model</span>
+python<span class="w"> </span>c302/c302_intestine.py
+<span class="c1"># Expected output: LEMS_IntestineOscillator.xml</span>
+
+<span class="c1"># Step 2: Quick oscillation check (5 seconds sim — one partial cycle)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with intestine.enabled: true</span>
+<span class="c1"># Green light: simulation completes without error</span>
+<span class="c1"># Green light: intestinal calcium output file exists</span>
+<span class="c1"># Green light: calcium values are non-zero and oscillatory</span>
+
+<span class="c1"># Step 3: Full validation (nightly, not per-PR — 200s sim, ~10 hours wall time)</span>
+jnml<span class="w"> </span>LEMS_IntestineOscillator.xml<span class="w"> </span>-nogui<span class="w"> </span>-run<span class="w"> </span><span class="m">200000</span><span class="w">  </span><span class="c1"># ms</span>
+
+<span class="c1"># Step 4: Extract and measure</span>
+python<span class="w"> </span>scripts/extract_intestinal_calcium.py<span class="w"> </span>LEMS_IntestineOscillator_calcium.dat
+python<span class="w"> </span>scripts/measure_defecation_period.py<span class="w"> </span>intestinal_calcium.csv
+python<span class="w"> </span>scripts/validate_wave_direction.py<span class="w"> </span>intestinal_calcium.csv
+
+<span class="c1"># Step 5: Compare to experimental data</span>
+python<span class="w"> </span>scripts/compare_to_thomas1990.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--simulated<span class="w"> </span>defecation_metrics.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental<span class="w"> </span>data/thomas1990_defecation.csv
+
+<span class="c1"># Step 6: Verify backward compatibility</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with intestine.enabled: false</span>
+<span class="c1"># Must produce identical output to pre-intestine baseline</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c302_intestine.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>intestine/IntestinalCell.cell.nml</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>intestine/IP3Receptor.channel.nml</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>intestine/intestine_coupling.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/extract_intestinal_calcium.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/measure_defecation_period.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/validate_wave_direction.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/compare_to_thomas1990.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="green-light-criteria">Green light criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>c302_intestine.py</code> generates <code>LEMS_IntestineOscillator.xml</code> without error</li>
+<li>5s quick-test completes, calcium output file exists, values are non-zero</li>
+<li>Full 200s validation: period = 40-60 seconds, wave = posterior-to-anterior, &gt;=3 consecutive cycles</li>
+</ul>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> <code>intestine/calcium/</code> for 20-cell calcium heatmap; <code>intestine/defecation_events/</code> for motor program markers.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>intestine/</code> (new layer group for intestinal dynamics)</td>
+</tr>
+<tr>
+<td><strong>Calcium heatmap</strong></td>
+<td>OME-Zarr: <code>intestine/calcium/</code>, shape (n_timesteps, 20) — 20 cells ordered posterior-to-anterior</td>
+</tr>
+<tr>
+<td><strong>Color mapping</strong></td>
+<td>Warm colormap (blue=low Ca2+ -&gt; red=high Ca2+); posterior-to-anterior wave should be visible as a diagonal stripe</td>
+</tr>
+<tr>
+<td><strong>Event markers</strong></td>
+<td><code>intestine/defecation_events/</code> — pBoc (red), aBoc (orange), Exp (yellow) vertical markers on timeline</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>Rhythmic calcium waves sweeping from int20 (posterior) to int1 (anterior) every ~50 seconds. Each wave peak is followed by pBoc/aBoc/Exp event markers. At least 3 complete cycles visible in a 200s simulation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="model-the-20-intestinal-cells-with-ip3calcium-oscillator-dynamics">Model the 20 Intestinal Cells with IP3/Calcium Oscillator Dynamics<a class="headerlink" href="#model-the-20-intestinal-cells-with-ip3calcium-oscillator-dynamics" title="Permanent link">&para;</a></h3>
+<p>Each intestinal cell has:</p>
+<ul>
+<li><strong>Membrane voltage</strong> (HH framework as in <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>/DD002, but with intestine-specific channels)</li>
+<li><strong>Cytoplasmic [Ca2+]</strong></li>
+<li><strong>ER luminal [Ca2+]_ER</strong></li>
+<li><strong>[IP3]</strong> (inositol 1,4,5-trisphosphate)</li>
+</ul>
+<p><strong>Coupled ODEs:</strong></p>
+<div class="highlight"><pre><span></span><code>(1) Membrane voltage (simplified HH):
+C * dV/dt = I_leak + I_K + I_Ca + I_gap
+
+(2) Cytoplasmic calcium:
+d[Ca]/dt = J_release - J_pump - J_leak_ER + J_influx
+
+Where:
+- J_release = IP3 receptor flux from ER (IP3-gated, Ca-activated)
+- J_pump = SERCA pump (Ca back into ER)
+- J_leak_ER = passive ER leak
+- J_influx = voltage-gated Ca channels on plasma membrane
+
+(3) ER calcium:
+d[Ca]_ER/dt = (J_pump - J_release - J_leak_ER) * (V_cyto / V_ER)
+
+(4) IP3 dynamics:
+d[IP3]/dt = k_production - k_degradation * [IP3]
+</code></pre></div>
+<h3 id="ip3-receptor-model-itr-1">IP3 Receptor Model (ITR-1)<a class="headerlink" href="#ip3-receptor-model-itr-1" title="Permanent link">&para;</a></h3>
+<p>Use a <strong>simplified Li-Rinzel model</strong> (reduction of the DeYoung-Keizer IP3R model):</p>
+<div class="highlight"><pre><span></span><code>J_release = v_release * m_inf^3 * n * h * ([Ca]_ER - [Ca])
+
+Where:
+- m_inf = [IP3] / ([IP3] + K_IP3)  # IP3 binding (instantaneous)
+- dn/dt = (n_inf - n) / tau_n      # Ca activation gate (slow, ~seconds)
+- dh/dt = (h_inf - h) / tau_h      # Ca inactivation gate (slow)
+- n_inf, h_inf depend on [Ca] and [IP3]
+</code></pre></div>
+<p>Parameters (fit to match ~50 second period):</p>
+<ul>
+<li>v_release (max release rate): ~10 uM/s</li>
+<li>K_IP3 (IP3 half-activation): ~0.3 uM</li>
+<li>Ca activation threshold: ~0.2 uM</li>
+<li>Ca inactivation threshold: ~0.4 uM</li>
+</ul>
+<h3 id="gap-junction-coupling-inter-intestinal-cell-synchronization">Gap Junction Coupling (Inter-Intestinal Cell Synchronization)<a class="headerlink" href="#gap-junction-coupling-inter-intestinal-cell-synchronization" title="Permanent link">&para;</a></h3>
+<p>Intestinal cells are electrically coupled via <strong>gap junctions</strong> (innexins: inx-3, inx-16). This synchronizes the calcium oscillations.</p>
+<div class="highlight"><pre><span></span><code>I_gap = g_gap * sum (V_neighbor - V)
+</code></pre></div>
+<p>Where g_gap = 0.5-1.0 nS (higher than neuronal gap junctions to ensure synchrony).</p>
+<p><strong>Cell topology:</strong> Linear chain (int1 &lt;-&gt; int2 &lt;-&gt; int3 ... &lt;-&gt; int20) with additional anterior-posterior skip connections.</p>
+<h3 id="coupling-to-enteric-muscles-defecation-motor-program">Coupling to Enteric Muscles (Defecation Motor Program)<a class="headerlink" href="#coupling-to-enteric-muscles-defecation-motor-program" title="Permanent link">&para;</a></h3>
+<p>The intestinal calcium wave triggers the <strong>defecation motor program</strong> via innervation of 4 enteric muscles:</p>
+<table>
+<thead>
+<tr>
+<th>Muscle</th>
+<th>Innervation</th>
+<th>Function</th>
+<th>Contraction Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anal depressor</td>
+<td>DVB, AVL neurons</td>
+<td>Opens anus</td>
+<td>Intestinal Ca wave -&gt; neuron activation</td>
+</tr>
+<tr>
+<td>Anal sphincter</td>
+<td>AVL</td>
+<td>Controls expulsion</td>
+<td></td>
+</tr>
+<tr>
+<td>Enteric muscles (posterior)</td>
+<td>DVB</td>
+<td>pBoc (posterior body contraction)</td>
+<td></td>
+</tr>
+<tr>
+<td>Enteric muscles (anterior)</td>
+<td>AVL</td>
+<td>aBoc (anterior body contraction)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coupling:</strong> When intestinal [Ca2+] peaks (oscillator peak), release signal to DVB/AVL neurons -&gt; activate enteric muscles -&gt; trigger pBoc/aBoc/Exp sequence.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-neural-pacemaker-model-not-intrinsic-intestinal-oscillations">1. Neural Pacemaker Model (Not Intrinsic Intestinal Oscillations)<a class="headerlink" href="#1-neural-pacemaker-model-not-intrinsic-intestinal-oscillations" title="Permanent link">&para;</a></h3>
+<p><strong>Hypothesis:</strong> Defecation is driven by a neural pacemaker circuit, not intestinal oscillations.</p>
+<p><strong>Rejected:</strong> Experiments show intestinal calcium oscillations are <strong>cell-autonomous</strong> (<a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a>, <a href="https://doi.org/10.1016/S0092-8674(00)81510-X">Dal Santo et al. 1999</a>). Isolated intestinal cells oscillate in culture. Neurons modulate but do not generate.</p>
+<h3 id="2-detailed-er-geometry-and-diffusion">2. Detailed ER Geometry and Diffusion<a class="headerlink" href="#2-detailed-er-geometry-and-diffusion" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Explicitly model ER tubules and cisternae with 3D geometry, solve Ca2+ diffusion within ER lumen.</p>
+<p><strong>Rejected (Phase 3):</strong> Simplified lumped-pool ER model (single [Ca]_ER variable) is sufficient to produce oscillations. Detailed ER geometry is future work if spatial Ca2+ gradients within cells prove essential.</p>
+<h3 id="3-mitochondrial-calcium-buffering">3. Mitochondrial Calcium Buffering<a class="headerlink" href="#3-mitochondrial-calcium-buffering" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Add mitochondria as a third calcium pool (cytoplasm, ER, mitochondria).</p>
+<p><strong>Deferred:</strong> Mitochondria buffer calcium but likely do not drive the oscillations. Add if simple IP3R + ER model fails to match ~50s period.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Oscillation Period:</strong> Simulated defecation cycle period must be 50 +/- 10 seconds (<a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a> experimental data).</p>
+</li>
+<li>
+<p><strong>Wave Direction:</strong> Calcium wave must propagate <strong>posterior-to-anterior</strong> (int20 -&gt; int1).</p>
+</li>
+<li>
+<p><strong>Cell Autonomy:</strong> Individual intestinal cells must oscillate when uncoupled (zero gap junction conductance). Coupling synchronizes but does not create oscillations.</p>
+</li>
+<li>
+<p><strong>Motor Program Sequence:</strong> Must reproduce pBoc -&gt; aBoc -&gt; Exp in correct temporal order.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Food particle transport:</strong> Bacteria flowing through pharyngeal-intestinal lumen not modeled.</li>
+<li><strong>Intestinal gene regulation:</strong> Transcription factor dynamics, metabolic state out of scope.</li>
+<li><strong>Developmental changes:</strong> Focus on adult L4/adult. Larval stages future work.</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>The <em>C. elegans</em> intestine is a 20-cell tube (int1-int9 in anterior, int10-int20 in posterior) that comprises approximately one-third of the organism's somatic mass. It is the <strong>pacemaker for the defecation motor program</strong>, a stereotyped behavioral sequence with ~50 second period:</p>
+<ol>
+<li><strong>Posterior body contraction (pBoc):</strong> Muscles in posterior compress intestine</li>
+<li><strong>Anterior body contraction (aBoc):</strong> Wave propagates forward</li>
+<li><strong>Expulsion step (Exp):</strong> Anal depressor and sphincter muscles contract, expelling contents</li>
+</ol>
+<p>The intestinal oscillator is driven by <strong>IP3 receptor (ITR-1) mediated calcium waves</strong> that propagate posterior-to-anterior through the 20 intestinal cells via gap junction coupling. Calcium oscillations are <strong>cell-autonomous</strong> (persist in isolated intestinal cells) and require endoplasmic reticulum (ER) calcium stores.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Thomas JH (1990).</strong> "Genetic analysis of defecation in <em>Caenorhabditis elegans</em>." <em>Genetics</em> 124:855-872.</li>
+<li><strong>Dal Santo P, Logan MA, Chisholm AD, Jorgensen EM (1999).</strong> "The inositol trisphosphate receptor regulates a 50-second behavioral rhythm in <em>C. elegans</em>." <em>Cell</em> 98:757-767.</li>
+<li><strong>Teramoto T, Iwasaki K (2006).</strong> "Intestinal calcium waves coordinate a behavioral motor program in <em>C. elegans</em>." <em>Cell Calcium</em> 40:319-327.</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP3 production rate</td>
+<td>Internal (cell-autonomous)</td>
+<td><code>k_production</code></td>
+<td>Scalar parameter per cell</td>
+<td>uM/s</td>
+</tr>
+<tr>
+<td>Gap junction conductances</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> framework (innexin expression)</td>
+<td><code>g_gap</code> per innexin pair</td>
+<td>NeuroML <code>&lt;gapJunction&gt;</code></td>
+<td>nS</td>
+</tr>
+<tr>
+<td>CeNGEN expression (intestinal cells)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Per-cell channel densities</td>
+<td>NeuroML <code>&lt;channelDensity&gt;</code></td>
+<td>S/cm2</td>
+</tr>
+<tr>
+<td>Intestinal cell positions</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (when cell_identity enabled)</td>
+<td>3D coordinates for int1-int20</td>
+<td>Cell-to-particle mapping JSON</td>
+<td>um</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intestinal [Ca2+] per cell</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (drives intestinal particle mechanics)</td>
+<td>Per-cell calcium time series</td>
+<td>Tab-separated: cell_id, timestep, [Ca2+]</td>
+<td>uM</td>
+</tr>
+<tr>
+<td>Defecation trigger signal</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (DVB/AVL neuron activation)</td>
+<td>Binary trigger when Ca peaks in int1</td>
+<td>Event file: timestamp of each peak</td>
+<td>ms</td>
+</tr>
+<tr>
+<td>Defecation motor program state</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (Tier 3 validation)</td>
+<td>pBoc/aBoc/Exp occurrence timestamps</td>
+<td>Tab-separated event log</td>
+<td>ms</td>
+</tr>
+<tr>
+<td>ER [Ca2+] per cell</td>
+<td>Internal (diagnostics)</td>
+<td>Per-cell ER calcium time series</td>
+<td>Tab-separated</td>
+<td>uM</td>
+</tr>
+<tr>
+<td>Intestinal calcium time series (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-cell [Ca2+] over all timesteps</td>
+<td>OME-Zarr: <code>intestine/calcium/</code>, shape (n_timesteps, 20)</td>
+<td>uM</td>
+</tr>
+<tr>
+<td>Defecation event markers (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>pBoc/aBoc/Exp event timestamps</td>
+<td>OME-Zarr: <code>intestine/defecation_events/</code></td>
+<td>ms</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/c302</code> (same package, new module)</li>
+<li><strong>Docker stage:</strong> <code>neural</code> (same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> — intestinal models use NeuroML/LEMS)</li>
+<li><strong>No additional Docker changes</strong> for the intestinal oscillator itself</li>
+<li><strong>Coupling to <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> particles</strong> (future): requires <code>body</code> stage to have cell_identity enabled</li>
+</ul>
+<p><strong>Repository structure:</strong>
+<div class="highlight"><pre><span></span><code>c302/
+├── c302_intestine.py              # NEW: Intestinal network generation
+├── intestine/
+│   ├── IntestinalCell.cell.nml    # IP3R + Ca dynamics cell template
+│   ├── IP3Receptor.channel.nml    # Li-Rinzel IP3R model in LEMS
+│   └── intestine_coupling.py     # Coupling to enteric muscles ([DD001](DD001_Neural_Circuit_Architecture.md) neurons DVB/AVL)
+</code></pre></div></p>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p><strong><code>openworm.yml</code> Section:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">intestine</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                    </span><span class="c1"># Off by default until validated</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ip3_calcium&quot;</span><span class="w">             </span><span class="c1"># Only option for now</span>
+<span class="w">  </span><span class="nt">oscillator_period_target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span><span class="w">   </span><span class="c1"># seconds (validation target, not simulation parameter)</span>
+<span class="w">  </span><span class="nt">gap_junction_conductance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span><span class="w">   </span><span class="c1"># nS (default, tunable)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intestine.enabled</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable intestinal oscillator module</td>
+</tr>
+<tr>
+<td><code>intestine.model</code></td>
+<td><code>"ip3_calcium"</code></td>
+<td><code>"ip3_calcium"</code></td>
+<td>Oscillator model type (only one for now)</td>
+</tr>
+<tr>
+<td><code>intestine.oscillator_period_target</code></td>
+<td><code>50.0</code></td>
+<td>30-70 seconds</td>
+<td>Validation target period (not a simulation parameter)</td>
+</tr>
+<tr>
+<td><code>intestine.gap_junction_conductance</code></td>
+<td><code>0.75</code></td>
+<td>0.1-2.0 nS</td>
+<td>Gap junction conductance between adjacent intestinal cells</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (5 seconds sim — must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>c302/c302_intestine.py
+<span class="c1"># Check: LEMS_IntestineOscillator.xml created without error</span>
+
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with intestine.enabled: true</span>
+<span class="c1"># Check: simulation completes without error</span>
+<span class="c1"># Check: intestinal calcium output file exists</span>
+<span class="c1"># Check: calcium values are non-zero and oscillatory</span>
+
+<span class="c1"># Full validation (nightly, not per-PR — 200s sim)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>python<span class="w"> </span>scripts/measure_defecation_period.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--duration<span class="w"> </span><span class="m">200000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--expected_period<span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tolerance<span class="w"> </span><span class="m">10</span>
+<span class="c1"># Check: period = 50 +/- 10 seconds</span>
+<span class="c1"># Check: wave direction = posterior-to-anterior</span>
+<span class="c1"># Check: &gt;=3 consecutive cycles without damping</span>
+
+<span class="c1"># Backward compatibility (must pass)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with intestine.enabled: false</span>
+<span class="c1"># Check: identical output to pre-intestine baseline</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>c302_intestine.py</code> generates LEMS XML without error</li>
+<li>[ ] <code>jnml -validate</code> passes on generated XML</li>
+<li>[ ] <code>quick-test</code> passes with <code>intestine.enabled: true</code></li>
+<li>[ ] <code>quick-test</code> passes with <code>intestine.enabled: false</code> (backward compat)</li>
+<li>[ ] No NaN values in calcium output</li>
+<li>[ ] Calcium values are oscillatory (not flat, not diverging)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intestine/calcium/</code> (n_timesteps, 20)</td>
+<td>Intestinal calcium heatmap</td>
+<td>Warm colormap (blue=low -&gt; red=high Ca2+), posterior-to-anterior wave visible as diagonal stripe</td>
+</tr>
+<tr>
+<td><code>intestine/defecation_events/</code></td>
+<td>Defecation event markers</td>
+<td>pBoc (red), aBoc (orange), Exp (yellow) vertical markers on timeline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="compute-budget-warning">Compute Budget Warning<a class="headerlink" href="#compute-budget-warning" title="Permanent link">&para;</a></h3>
+<p><strong>Validation requires 200 seconds of simulated time</strong> (4 defecation cycles at ~50s each). At current performance:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulation wall time</td>
+<td>~10 hours for 200s sim</td>
+<td>Not practical for CI (use nightly builds)</td>
+</tr>
+<tr>
+<td>Memory (with video pipeline)</td>
+<td>&gt;64 GB (OOM)</td>
+<td><strong>Video pipeline memory leak (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Issue #332) MUST be fixed first</strong></td>
+</tr>
+<tr>
+<td>Memory (no video)</td>
+<td>~4 GB</td>
+<td>Feasible if video is disabled</td>
+</tr>
+<tr>
+<td>CI strategy</td>
+<td>Nightly validation job, not per-PR</td>
+<td>Per-PR tests run 5s (one partial cycle), nightly runs 200s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The memory leak in the video/plotting pipeline is a BLOCKING dependency for intestinal validation.</strong> Until fixed, intestinal validation can only run with <code>output.video: false</code> and <code>output.plots: false</code>.</p>
+<h3 id="coupling-to-enteric-muscles-defecation-motor-program_1">Coupling to Enteric Muscles (Defecation Motor Program)<a class="headerlink" href="#coupling-to-enteric-muscles-defecation-motor-program_1" title="Permanent link">&para;</a></h3>
+<p>The intestinal calcium wave must trigger enteric muscle contraction via the neural circuit. <strong>Interface:</strong></p>
+<ol>
+<li>Intestinal oscillator produces per-cell [Ca2+] time series</li>
+<li>When int1 [Ca2+] peaks (anterior cell), a <strong>trigger signal</strong> is sent to DVB and AVL neurons in the <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> neural circuit</li>
+<li>DVB/AVL activate enteric muscles via standard NMJ synapses (<a href="../DD002_Muscle_Model_Architecture/">DD002</a> framework)</li>
+<li>Enteric muscles contract -&gt; pBoc -&gt; aBoc -&gt; Exp sequence</li>
+</ol>
+<p><strong>Coupling mechanism:</strong> A new coupling script (<code>intestine_coupling.py</code>) translates intestinal calcium peaks into current injection on DVB/AVL neurons. This is analogous to how <code>sibernetic_c302.py</code> couples neural output to body physics.</p>
+<h3 id="coupling-to-dd004-mechanical-identity">Coupling to <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Identity)<a class="headerlink" href="#coupling-to-dd004-mechanical-identity" title="Permanent link">&para;</a></h3>
+<p>When <code>body.cell_identity: true</code>, intestinal cells are represented by tagged SPH particles. The coupling works as:</p>
+<ol>
+<li><a href="./">DD009</a> outputs per-cell activation (from [Ca2+])</li>
+<li><a href="../DD004_Mechanical_Cell_Identity/">DD004</a>'s cell-to-particle mapping translates cell_id -&gt; list of particle indices</li>
+<li>Intestinal particle elasticity is modulated: <code>k_particle = k_baseline * (1 + activation * peristalsis_strength)</code></li>
+<li>This produces peristaltic waves in the SPH simulation</li>
+</ol>
+<p><strong>This coupling is Phase 4 work</strong> (requires <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> to be implemented first).</p>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeuroML/LEMS framework</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Intestinal cells use same framework — solver or channel model changes propagate</td>
+</tr>
+<tr>
+<td>CeNGEN expression (intestinal cells)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>If intestinal cell expression data changes, channel densities change, period may shift</td>
+</tr>
+<tr>
+<td>Cell identity (for mechanical coupling)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If intestinal cell_ids change, wrong particles contract</td>
+</tr>
+<tr>
+<td>Video pipeline fix</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (Issue #332)</td>
+<td>Until fixed, cannot run 200s validation with video/plots enabled</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation (defecation cycle)</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Defecation period is a Tier 3 validation target; if oscillator dynamics change, validation criteria may need updating</td>
+</tr>
+<tr>
+<td>Neural circuit (DVB/AVL activation)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If trigger signal timing or format changes, enteric muscle activation breaks</td>
+</tr>
+<tr>
+<td>Mechanical identity (peristalsis)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If per-cell activation format changes, particle force modulation breaks</td>
+</tr>
+<tr>
+<td>Pharynx (food transport, future)</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>Eventually pharynx pumps food to intestine; if intestinal acceptance changes, food arrival modeling is affected</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (Phase 3)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Implement IP3R dynamics in LEMS</p>
+</li>
+<li>Add intestinal cell-specific HH models from CeNGEN</li>
+<li>Couple to enteric muscles</li>
+<li>Validate against 50s period</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

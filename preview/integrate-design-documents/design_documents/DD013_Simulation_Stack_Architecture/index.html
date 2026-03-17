@@ -1,0 +1,5623 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD013_Simulation_Stack_Architecture/">
+      
+      
+        <link rel="prev" href="../DD008_Data_Integration_Pipeline/">
+      
+      
+        <link rel="next" href="../DD013_draft_issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD013 Simulation Stack - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd013-simulation-stack-architecture-the-integration-backbone" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD013 Simulation Stack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-gap-between-vision-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Gap Between Vision and Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-actually-runs-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Actually Runs Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-critical-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Critical Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-contributor-experience-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Contributor Experience Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-scale-of-whats-coming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Scale of What's Coming
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simulation-configuration-system-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Simulation Configuration System (openworm.yml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-stage-docker-build-layered-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Multi-Stage Docker Build (Layered Images)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-docker-compose-for-composable-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Docker Compose for Composable Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-dependency-pinning-versionslock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Dependency Pinning (versions.lock)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-enhanced-master_openwormpy-implement-all-5-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Enhanced master_openworm.py (Implement All 5 Steps)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cicd-pipeline-automated-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. CI/CD Pipeline (Automated Quality Gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-contributor-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Contributor Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Contributor Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors-working-on-a-specific-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For contributors working on a specific subsystem:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors-adding-a-new-subsystem-eg-dd007-pharynx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For contributors adding a new subsystem (e.g., DD007 pharynx):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-pre-built-images-on-docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pre-Built Images on Docker Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-jupyterlab-interface-issue-347" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. JupyterLab Interface (Issue #347)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-monorepo-all-subsystems-in-one-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Monorepo (All Subsystems in One Repository)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git-submodules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Git Submodules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nix-guix-for-reproducible-builds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nix / Guix for Reproducible Builds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-kubernetes-microservices-one-container-per-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Kubernetes / Microservices (One Container Per Subsystem)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-keep-current-approach-single-dockerfile-shell-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Keep Current Approach (Single Dockerfile, Shell Scripts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green Light Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-the-simulation-stack-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Simulation Stack Itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ownership-and-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ownership and Maintenance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ownership and Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-is-a-shared-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Is a Shared Responsibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-role-l4-integration-maintainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Role: L4 Integration Maintainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mind-of-a-worm-support-for-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mind-of-a-Worm Support for Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-contributor-simulation-feedback-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Contributor → Simulation Feedback Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-questions-require-founder-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open Questions (Require Founder Input)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open Questions (Require Founder Input)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-v09x-to-v0100-this-dd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From v0.9.x to v0.10.0 (This DD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-gap-between-vision-and-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Gap Between Vision and Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-actually-runs-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Actually Runs Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-critical-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Critical Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-contributor-experience-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Contributor Experience Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-scale-of-whats-coming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Scale of What's Coming
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simulation-configuration-system-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Simulation Configuration System (openworm.yml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-stage-docker-build-layered-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Multi-Stage Docker Build (Layered Images)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-docker-compose-for-composable-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Docker Compose for Composable Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-dependency-pinning-versionslock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Dependency Pinning (versions.lock)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-enhanced-master_openwormpy-implement-all-5-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Enhanced master_openworm.py (Implement All 5 Steps)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cicd-pipeline-automated-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. CI/CD Pipeline (Automated Quality Gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-contributor-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Contributor Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Contributor Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors-working-on-a-specific-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For contributors working on a specific subsystem:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors-adding-a-new-subsystem-eg-dd007-pharynx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For contributors adding a new subsystem (e.g., DD007 pharynx):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-pre-built-images-on-docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pre-Built Images on Docker Hub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-jupyterlab-interface-issue-347" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. JupyterLab Interface (Issue #347)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-monorepo-all-subsystems-in-one-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Monorepo (All Subsystems in One Repository)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git-submodules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Git Submodules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nix-guix-for-reproducible-builds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nix / Guix for Reproducible Builds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-kubernetes-microservices-one-container-per-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Kubernetes / Microservices (One Container Per Subsystem)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-keep-current-approach-single-dockerfile-shell-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Keep Current Approach (Single Dockerfile, Shell Scripts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green Light Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-the-simulation-stack-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Simulation Stack Itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ownership-and-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ownership and Maintenance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ownership and Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-is-a-shared-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Is a Shared Responsibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-role-l4-integration-maintainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Role: L4 Integration Maintainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mind-of-a-worm-support-for-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mind-of-a-Worm Support for Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-contributor-simulation-feedback-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Contributor → Simulation Feedback Loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-questions-require-founder-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open Questions (Require Founder Input)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Open Questions (Require Founder Input)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-v09x-to-v0100-this-dd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From v0.9.x to v0.10.0 (This DD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd013-simulation-stack-architecture-the-integration-backbone">DD013: Simulation Stack Architecture (The Integration Backbone)<a class="headerlink" href="#dd013-simulation-stack-architecture-the-integration-backbone" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-15</li>
+<li><strong>Supersedes:</strong> Informal Docker meta-repo approach</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>–<a href="../DD010_Validation_Framework/">DD010</a> (all technical subsystems), <a href="../DD011_Contributor_Progression_Model/">DD011</a> (Contributor Progression), <a href="../DD012_Design_Document_RFC_Process/">DD012</a> (RFC Process)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-a1-core-infrastructure-weeks-1-2">Phase A1: Core Infrastructure</a> | <strong>Layer:</strong> Integration</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>The OpenWorm simulation stack uses Docker Compose to orchestrate five containerized subsystems (neural, muscle, body physics, sensory, visualization) with a shared OME-Zarr data bus. Every contributor runs the same environment via <code>docker compose up</code>, ensuring reproducibility from laptop to CI server. This DD replaces the current monolithic Dockerfile and shell-script approach with a multi-stage Docker build, a declarative <code>openworm.yml</code> configuration system, dependency pinning via <code>versions.lock</code>, and automated CI/CD validation gates.</p>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
+<h3 id="the-gap-between-vision-and-execution">The Gap Between Vision and Execution<a class="headerlink" href="#the-gap-between-vision-and-execution" title="Permanent link">&para;</a></h3>
+<p>Design Documents <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD012_Design_Document_RFC_Process/">DD012</a> specify a rich, multi-tissue, multi-scale organism simulation:</p>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>DD</th>
+<th>Primary Repo</th>
+<th>Integration Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit (c302)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td><code>openworm/c302</code></td>
+<td><strong>Working</strong> — runs via NEURON</td>
+</tr>
+<tr>
+<td>Muscle model</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td><code>openworm/c302</code> + <code>openworm/muscle_model</code></td>
+<td><strong>Working</strong> — coupled to c302</td>
+</tr>
+<tr>
+<td>Body physics (Sibernetic)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td><code>openworm/sibernetic</code></td>
+<td><strong>Working</strong> — coupled to c302 via <code>sibernetic_c302.py</code></td>
+</tr>
+<tr>
+<td>Mechanical cell identity</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td><code>openworm/sibernetic</code> (future)</td>
+<td><strong>Not started</strong></td>
+</tr>
+<tr>
+<td>Cell-type specialization</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td><code>openworm/c302</code> (future)</td>
+<td><strong>Not started</strong></td>
+</tr>
+<tr>
+<td>Neuropeptides</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td><code>openworm/c302</code> (future)</td>
+<td><strong>Not started</strong></td>
+</tr>
+<tr>
+<td>Pharynx</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>New repo TBD</td>
+<td><strong>Not started</strong></td>
+</tr>
+<tr>
+<td>Data integration (OWMeta)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td><code>openworm/owmeta</code></td>
+<td><strong>Dormant</strong> (last real commit Jul 2024)</td>
+</tr>
+<tr>
+<td>Intestinal oscillator</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>New repo TBD</td>
+<td><strong>Not started</strong></td>
+</tr>
+<tr>
+<td>Validation framework</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a>, <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></td>
+<td><code>openworm/open-worm-analysis-toolbox</code> + <code>openworm/tracker-commons</code></td>
+<td><strong>Dormant</strong> (last commit Jan 2020) — <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> revival plan</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>openworm/OpenWorm</code> meta-repository is the only place where these subsystems come together as a runnable simulation. <strong>It is the architectural backbone of the entire project.</strong> And right now, it consists of:</p>
+<ul>
+<li>One Dockerfile</li>
+<li>One Python script (<code>master_openworm.py</code>) with 3 of 5 steps unimplemented</li>
+<li>Four shell scripts (<code>build.sh</code>, <code>run.sh</code>, <code>run-quick.sh</code>, <code>stop.sh</code>)</li>
+<li>No configuration system</li>
+<li>No dependency pinning beyond branch names</li>
+<li>No automated validation</li>
+<li>No docker-compose</li>
+<li>One active maintainer (Neural Circuit L4)</li>
+</ul>
+<h3 id="what-actually-runs-today">What Actually Runs Today<a class="headerlink" href="#what-actually-runs-today" title="Permanent link">&para;</a></h3>
+<p>The current simulation pipeline (v0.9.7) executes Step 3 of <code>master_openworm.py</code>:</p>
+<div class="highlight"><pre><span></span><code>1. Build Docker image (ubuntu:24.04 + NEURON 8.2.6 + c302 @ ow-0.9.7 + Sibernetic @ ow-0.9.7 + AMD OpenCL SDK)
+2. Launch container with X11 forwarding and GPU passthrough
+3. Execute sibernetic_c302.py:
+   a. c302 generates NeuroML network (Level C2, &quot;FW&quot; reference)
+   b. NEURON simulates neural activity
+   c. Sibernetic simulates body physics driven by neural output
+   d. Both run in a coupled loop for 15ms (default)
+4. Record video via xvfb + tmux + ffmpeg screen capture
+5. Copy outputs (PNGs, WCON, MP4) to shared volume
+</code></pre></div>
+<p>Steps 1, 2, 4, and 5 of <code>master_openworm.py</code> are stubs ("Not yet implemented"):</p>
+<ul>
+<li>Step 1: Rebuild c302 from latest OWMeta</li>
+<li>Step 2: Execute unit tests</li>
+<li>Step 4: Movement analysis</li>
+<li>Step 5: Report on movement analysis fit</li>
+</ul>
+<h3 id="known-critical-issues">Known Critical Issues<a class="headerlink" href="#known-critical-issues" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Impact</th>
+<th>GitHub #</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Memory leak in plotting/video</strong></td>
+<td>OOM kills simulations &gt;2s; 5s sim needs 64GB RAM</td>
+<td>#332, #341</td>
+<td>Unfixed</td>
+</tr>
+<tr>
+<td><strong>No GPU in Docker</strong></td>
+<td>OpenCL runs on CPU only; 10× slower than necessary</td>
+<td>#320</td>
+<td>Open since 2021</td>
+</tr>
+<tr>
+<td><strong>External dependency downloads</strong></td>
+<td>AMD SDK from SourceForge; build can break any time</td>
+<td>—</td>
+<td>Fragile</td>
+</tr>
+<tr>
+<td><strong>No dependency pinning</strong></td>
+<td>apt packages unpinned; c302/Sibernetic pinned to branch name, not commit</td>
+<td>#317</td>
+<td>Open since 2021</td>
+</tr>
+<tr>
+<td><strong>No virtualenv</strong></td>
+<td><code>pip install --break-system-packages</code></td>
+<td>#314</td>
+<td>Open since 2021</td>
+</tr>
+<tr>
+<td><strong>Fragile video pipeline</strong></td>
+<td>xvfb + tmux + ffmpeg screen capture chain</td>
+<td>#315, #268</td>
+<td>Open</td>
+</tr>
+<tr>
+<td><strong>No docker-compose</strong></td>
+<td>Raw <code>docker run</code> in shell scripts</td>
+<td>—</td>
+<td>Never addressed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-contributor-experience-today">The Contributor Experience Today<a class="headerlink" href="#the-contributor-experience-today" title="Permanent link">&para;</a></h3>
+<p>A contributor who wants to test a change against the full simulation must:</p>
+<ol>
+<li>Fork the relevant repo (e.g., <code>c302</code>)</li>
+<li>Make their change</li>
+<li>Modify the Dockerfile to point <code>git clone</code> at their fork/branch</li>
+<li>Build the entire Docker image from scratch (~20 minutes)</li>
+<li>Run the simulation (~10 minutes for 15ms)</li>
+<li>Manually inspect output (PNGs, video)</li>
+<li>No automated validation — must visually compare</li>
+</ol>
+<p><strong>This is why most contributors work on subsystems in isolation and never see how their work affects the whole organism.</strong></p>
+<h3 id="the-scale-of-whats-coming">The Scale of What's Coming<a class="headerlink" href="#the-scale-of-whats-coming" title="Permanent link">&para;</a></h3>
+<p>The <a href="../DD_PHASE_ROADMAP/">Whole-Organism Modeling Proposal</a> (Phases 1-6) will expand the simulation from:</p>
+<ul>
+<li><strong>302 identical neurons + body wall muscles + fluid body</strong> →</li>
+<li><strong>128 differentiated neuron types + neuropeptides + pharynx (63 cells) + intestine (20 cells) + mechanical cell identity + intercellular signaling</strong></li>
+</ul>
+<p>This means:</p>
+<ul>
+<li>More repos to integrate (pharynx model, intestinal oscillator, neuropeptide layer)</li>
+<li>More configuration knobs (which tissues enabled, which c302 level, which backend)</li>
+<li>More validation targets (Tier 1, 2, 3 across multiple tissues)</li>
+<li>More contributors touching different subsystems simultaneously</li>
+<li>More compute requirements (longer simulations, more particles, more neurons)</li>
+</ul>
+<p><strong>The current meta-repo architecture cannot support this growth.</strong></p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>docker-compose.yml</code> — orchestration of all simulation containers (quick-test, simulation, validate, viewer, shell services)</li>
+<li><code>Dockerfile</code> (multi-stage) — per-subsystem container definitions (base, neural, body, validation, full, viewer stages)</li>
+<li><code>versions.lock</code> — pinned dependency versions (exact commit hashes) across all subsystems</li>
+<li><code>openworm.yml</code> — unified declarative configuration file for simulation parameters</li>
+<li><code>master_openworm.py</code> (enhanced) — orchestrator implementing all 5 pipeline steps driven by config</li>
+<li><code>.github/workflows/integration.yml</code> — CI/CD pipeline with build, smoke test, and validation gates</li>
+<li><code>scripts/quick-test.sh</code> — contributor smoke test <code>[TO BE CREATED]</code></li>
+<li>Starter Jupyter notebooks (4) — orientation and exploration notebooks for newcomers <code>[TO BE CREATED]</code></li>
+</ul>
+<hr />
+<h2 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h2>
+<h3 id="1-simulation-configuration-system-openwormyml">1. Simulation Configuration System (<code>openworm.yml</code>)<a class="headerlink" href="#1-simulation-configuration-system-openwormyml" title="Permanent link">&para;</a></h3>
+<p>Replace hardcoded defaults in <code>master_openworm.py</code> with a declarative YAML configuration file that specifies exactly what to simulate.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># openworm.yml — Simulation Configuration</span>
+<span class="c1"># This file lives in the OpenWorm meta-repo root.</span>
+<span class="c1"># Contributors copy and modify for their experiments.</span>
+
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.10.0&quot;</span>
+
+<span class="c1"># === Neural Subsystem ([DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) ===</span>
+<span class="nt">neural</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">framework</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">c302</span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C1</span><span class="w">                          </span><span class="c1"># A, B, C, C1, C2, D</span>
+<span class="w">  </span><span class="nt">differentiated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">              </span><span class="c1"># Phase 1: CeNGEN cell-type specialization ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))</span>
+<span class="w">  </span><span class="nt">neuropeptides</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">               </span><span class="c1"># Phase 2: peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))</span>
+<span class="w">  </span><span class="nt">connectome_dataset</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Cook2019&quot;</span><span class="w">     </span><span class="c1"># Cook2019, Witvliet2021, Varshney2011</span>
+<span class="w">  </span><span class="nt">data_reader</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;UpdatedSpreadsheetDataReader2&quot;</span>
+<span class="w">  </span><span class="nt">reference</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FW&quot;</span><span class="w">                    </span><span class="c1"># FW (forward crawl), BA (backward), TU (turning)</span>
+
+<span class="c1"># === Body Physics ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md)) ===</span>
+<span class="nt">body</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sibernetic</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencl</span><span class="w">                    </span><span class="c1"># opencl (production), pytorch (testing), taichi-metal (experimental), taichi-cuda (experimental)</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;worm_crawl_half_resolution&quot;</span>
+<span class="w">  </span><span class="nt">particle_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span><span class="w">             </span><span class="c1"># ~100K for standard, ~25K for quick</span>
+<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">               </span><span class="c1"># Phase 4: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))</span>
+<span class="w">  </span><span class="nt">timestep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00002</span><span class="w">                  </span><span class="c1"># seconds</span>
+
+<span class="c1"># === Muscle Model ([DD002](DD002_Muscle_Model_Architecture.md)) ===</span>
+<span class="nt">muscle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                      </span><span class="c1"># Requires neural.enabled</span>
+<span class="w">  </span><span class="nt">calcium_coupling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">             </span><span class="c1"># Ca²⁺ → force pipeline</span>
+
+<span class="c1"># === Pharynx ([DD007](DD007_Pharyngeal_System_Architecture.md)) — Phase 3 ===</span>
+<span class="nt">pharynx</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">pumping_frequency_target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.5</span><span class="w">      </span><span class="c1"># Hz</span>
+
+<span class="c1"># === Intestine ([DD009](DD009_Intestinal_Oscillator_Model.md)) — Phase 3 ===</span>
+<span class="nt">intestine</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">oscillator_period_target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span><span class="w">     </span><span class="c1"># seconds</span>
+
+<span class="c1"># === Simulation Parameters ===</span>
+<span class="nt">simulation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15.0</span><span class="w">                     </span><span class="c1"># milliseconds</span>
+<span class="w">  </span><span class="nt">dt_neuron</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w">                    </span><span class="c1"># ms (NEURON timestep)</span>
+<span class="w">  </span><span class="nt">dt_coupling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span><span class="w">                 </span><span class="c1"># ms (neural↔body coupling interval)</span>
+<span class="w">  </span><span class="nt">output_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">               </span><span class="c1"># steps between output frames</span>
+
+<span class="c1"># === Validation ([DD010](DD010_Validation_Framework.md)) ===</span>
+<span class="nt">validation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run_after_simulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">        </span><span class="c1"># Set true for CI</span>
+<span class="w">  </span><span class="nt">tier1_electrophysiology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># Single-cell validation</span>
+<span class="w">  </span><span class="nt">tier2_functional_connectivity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># Circuit-level (requires 60s sim)</span>
+<span class="w">  </span><span class="nt">tier3_behavioral</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">            </span><span class="c1"># Movement kinematics (requires ~5s sim)</span>
+
+<span class="c1"># === Output ===</span>
+<span class="nt">output</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./output&quot;</span>
+<span class="w">  </span><span class="nt">video</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">plots</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">wcon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                         </span><span class="c1"># WCON movement file</span>
+<span class="w">  </span><span class="nt">raw_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                    </span><span class="c1"># Full simulation state dumps</span>
+
+<span class="c1"># === Visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===</span>
+<span class="nt">visualization</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                      </span><span class="c1"># Export OME-Zarr for viewer</span>
+<span class="w">  </span><span class="nt">export_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zarr&quot;</span><span class="w">              </span><span class="c1"># &quot;zarr&quot; (OME-Zarr, recommended) or &quot;legacy&quot; (position_buffer.txt)</span>
+<span class="w">  </span><span class="nt">surface_reconstruction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># Marching cubes → smooth body surface mesh</span>
+<span class="w">  </span><span class="nt">export_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">                </span><span class="c1"># Timesteps between Zarr frames (every 10th output frame)</span>
+
+<span class="nt">viewer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                     </span><span class="c1"># Launch Trame viewer after simulation</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8501</span><span class="w">                         </span><span class="c1"># Viewer port</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;trame&quot;</span><span class="w">                   </span><span class="c1"># &quot;trame&quot; (Phase 1) or &quot;threejs&quot; (Phase 2+)</span>
+<span class="w">  </span><span class="nt">default_layers</span><span class="p">:</span><span class="w">                    </span><span class="c1"># Layers visible on startup</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body_surface</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscles</span>
+</code></pre></div>
+<p><strong>Why this matters:</strong></p>
+<ul>
+<li>Contributors can toggle subsystems on/off to test specific changes</li>
+<li>CI can run different configurations (quick smoke test vs. full validation)</li>
+<li>New subsystems (pharynx, intestine) plug in by adding a config section</li>
+<li>The configuration file is self-documenting (comments explain every option)</li>
+<li>Experiment reproducibility: commit the config file alongside results</li>
+</ul>
+<h3 id="2-multi-stage-docker-build-layered-images">2. Multi-Stage Docker Build (Layered Images)<a class="headerlink" href="#2-multi-stage-docker-build-layered-images" title="Permanent link">&para;</a></h3>
+<p>Replace the monolithic Dockerfile with a multi-stage build that separates concerns:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># === Stage 0: Base Environment ===</span>
+<span class="c"># System packages, Python, NEURON, build tools</span>
+<span class="c"># Rebuilt rarely (only when system deps change)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:24.04</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
+<span class="c"># ... system packages, Python 3, pip, virtualenv ...</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">neuron</span><span class="o">==</span><span class="m">8</span>.2.6
+
+<span class="c"># === Stage 1: Subsystem — c302 (Neural Circuit) ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">neural</span>
+<span class="k">ARG</span><span class="w"> </span><span class="nv">C302_REF</span><span class="o">=</span>ow-0.10.0
+<span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="nv">$C302_REF</span><span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://github.com/openworm/c302.git<span class="w"> </span>/opt/openworm/c302
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/opt/openworm/c302
+
+<span class="c"># === Stage 2: Subsystem — Sibernetic (Body Physics) ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">body</span>
+<span class="k">ARG</span><span class="w"> </span><span class="nv">SIBERNETIC_REF</span><span class="o">=</span>ow-0.10.0
+<span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="nv">$SIBERNETIC_REF</span><span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://github.com/openworm/sibernetic.git<span class="w"> </span>/opt/openworm/sibernetic
+<span class="c"># OpenCL SDK + build</span>
+<span class="k">RUN</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/opt/openworm/sibernetic<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+<span class="c"># NOTE: Taichi/PyTorch backends require additional dependencies:</span>
+<span class="c">#   pip install taichi torch</span>
+<span class="c"># These should be installed conditionally based on body.backend config.</span>
+<span class="c"># See DD003 Backend Stabilization Roadmap for when Taichi will be Dockerfile-ready.</span>
+
+<span class="c"># === Stage 3: Subsystem — Validation Tools ([DD010](DD010_Validation_Framework.md)) ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">validation</span>
+<span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://github.com/openworm/open-worm-analysis-toolbox.git<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/opt/openworm/validation
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/opt/openworm/validation
+
+<span class="c"># === Stage 4: Integration (Full Stack) ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">full</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>neural<span class="w"> </span>/opt/openworm/c302<span class="w"> </span>/opt/openworm/c302
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>body<span class="w"> </span>/opt/openworm/sibernetic<span class="w"> </span>/opt/openworm/sibernetic
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>validation<span class="w"> </span>/opt/openworm/validation<span class="w"> </span>/opt/openworm/validation
+<span class="c"># Copy orchestration</span>
+<span class="k">COPY</span><span class="w"> </span>master_openworm.py<span class="w"> </span>/opt/openworm/
+<span class="k">COPY</span><span class="w"> </span>openworm.yml<span class="w"> </span>/opt/openworm/default_config.yml
+
+<span class="c"># === Stage 5: Viewer ([DD014](DD014_Dynamic_Visualization_Architecture.md) Dynamic Visualization) ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">full</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">viewer</span>
+<span class="k">ARG</span><span class="w"> </span><span class="nv">WORM3DVIEWER_REF</span><span class="o">=</span>main
+<span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span><span class="nv">$WORM3DVIEWER_REF</span><span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://github.com/openworm/Worm3DViewer.git<span class="w"> </span>/opt/openworm/viewer
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>trame<span class="w"> </span>trame-vtk<span class="w"> </span>trame-vuetify<span class="w"> </span>pyvista<span class="w"> </span>zarr<span class="w"> </span>ome-zarr
+<span class="c"># Surface reconstruction + OME-Zarr export utilities</span>
+<span class="k">COPY</span><span class="w"> </span>viewer/<span class="w"> </span>/opt/openworm/viewer/
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8501</span>
+</code></pre></div>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Build caching:</strong> Changing c302 code only rebuilds Stage 1 + Stage 4 (not Sibernetic)</li>
+<li><strong>Contributor override:</strong> <code>docker build --build-arg C302_REF=my-feature-branch .</code> swaps in a custom c302</li>
+<li><strong>Modular images:</strong> Can run just c302 (Stage 1) for neural-only development</li>
+<li><strong>Smaller rebuild time:</strong> ~5 minutes for a single-subsystem change vs. ~20 minutes for full rebuild</li>
+</ul>
+<h3 id="3-docker-compose-for-composable-execution">3. Docker Compose for Composable Execution<a class="headerlink" href="#3-docker-compose-for-composable-execution" title="Permanent link">&para;</a></h3>
+<p>Add a <code>docker-compose.yml</code> that defines services for different use cases:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.8&quot;</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># === Quick smoke test (CI, contributor sanity check) ===</span>
+<span class="w">  </span><span class="nt">quick-test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 /opt/openworm/master_openworm.py</span>
+<span class="w">        </span><span class="no">--config /opt/openworm/default_config.yml</span>
+<span class="w">        </span><span class="no">--duration 10</span>
+<span class="w">        </span><span class="no">--no-video</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+
+<span class="w">  </span><span class="c1"># === Standard simulation (default 15ms) ===</span>
+<span class="w">  </span><span class="nt">simulation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 /opt/openworm/master_openworm.py</span>
+<span class="w">        </span><span class="no">--config /opt/openworm/default_config.yml</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8G</span>
+
+<span class="w">  </span><span class="c1"># === Full validation suite (CI blocking check) ===</span>
+<span class="w">  </span><span class="nt">validate</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 /opt/openworm/master_openworm.py</span>
+<span class="w">        </span><span class="no">--config configs/validation_full.yml</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16G</span>
+
+<span class="w">  </span><span class="c1"># === Viewer — Dynamic visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===</span>
+<span class="w">  </span><span class="nt">viewer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">viewer</span><span class="w">                 </span><span class="c1"># New Docker stage (see below)</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 /opt/openworm/viewer/app.py</span>
+<span class="w">        </span><span class="no">--data /opt/openworm/output/openworm.zarr</span>
+<span class="w">        </span><span class="no">--port 8501</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8501:8501&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">simulation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span>
+
+<span class="w">  </span><span class="c1"># === Neural-only development (no body physics) ===</span>
+<span class="w">  </span><span class="nt">neural-dev</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">neural</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 -c &quot;from c302 import generate; generate(&#39;C1&#39;, &#39;FW&#39;)&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+
+<span class="w">  </span><span class="c1"># === Interactive shell (contributor debugging) ===</span>
+<span class="w">  </span><span class="nt">shell</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+<span class="w">    </span><span class="nt">stdin_open</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/opt/openworm/workspace</span>
+</code></pre></div>
+<p><strong>Usage for contributors:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Quick sanity check (2 minutes)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+
+<span class="c1"># Standard simulation</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+
+<span class="c1"># Full validation (for PRs to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+
+<span class="c1"># Interactive debugging</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell
+
+<span class="c1"># Test with your branch of c302</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">C302_REF</span><span class="o">=</span>my-feature-branch<span class="w"> </span>simulation
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+</code></pre></div></p>
+<h3 id="4-dependency-pinning-versionslock">4. Dependency Pinning (<code>versions.lock</code>)<a class="headerlink" href="#4-dependency-pinning-versionslock" title="Permanent link">&para;</a></h3>
+<p>Replace branch-name dependencies with a lockfile that pins exact commits:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># versions.lock — Pinned dependency versions</span>
+<span class="c1"># Updated by the Integration Maintainer for each release.</span>
+<span class="c1"># Contributors should NOT modify this file.</span>
+
+<span class="nt">c302</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/c302.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;a1b2c3d4e5f6&quot;</span><span class="w">  </span><span class="c1"># Exact commit hash</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ow-0.10.0&quot;</span>
+<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">        </span><span class="c1"># If published to PyPI</span>
+
+<span class="nt">sibernetic</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/sibernetic.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;f6e5d4c3b2a1&quot;</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ow-0.10.0&quot;</span>
+
+<span class="nt">connectome_toolbox</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/ConnectomeToolbox.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1a2b3c4d5e6f&quot;</span>
+<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.2.7&quot;</span><span class="w">    </span><span class="c1"># Also pinned via pip</span>
+
+<span class="nt">neuron</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8.2.6&quot;</span>
+
+<span class="nt">open_worm_analysis_toolbox</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/open-worm-analysis-toolbox.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6f5e4d3c2b1a&quot;</span><span class="w">  </span><span class="c1"># [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival — pin after Python 3.12 update</span>
+
+<span class="nt">tracker_commons</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/tracker-commons.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;a1b2c3d4e5f6&quot;</span><span class="w">  </span><span class="c1"># [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) — WCON 1.0 spec pin</span>
+<span class="w">  </span><span class="nt">wcon_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+
+<span class="nt">owmeta</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/owmeta.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deadbeef1234&quot;</span>
+
+<span class="c1"># System dependencies (Dockerfile apt-get)</span>
+<span class="nt">system</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ubuntu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;24.04&quot;</span>
+<span class="w">  </span><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span>
+<span class="w">  </span><span class="nt">java</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;8&quot;</span>
+
+<span class="c1"># External SDKs (with checksum for integrity)</span>
+<span class="nt">opencl_sdk</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/sibernetic/releases/download/v1.0/AMD-APP-SDK-3.0.tar.bz2&quot;</span>
+<span class="w">  </span><span class="nt">sha256</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123...&quot;</span><span class="w">  </span><span class="c1"># Verify download integrity</span>
+</code></pre></div>
+<p><strong>Build script reads <code>versions.lock</code>:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># build.sh (enhanced)</span>
+<span class="nv">C302_COMMIT</span><span class="o">=</span><span class="k">$(</span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import yaml; print(yaml.safe_load(open(&#39;versions.lock&#39;))[&#39;c302&#39;][&#39;commit&#39;])&quot;</span><span class="k">)</span>
+docker<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">C302_REF</span><span class="o">=</span><span class="nv">$C302_COMMIT</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">SIBERNETIC_REF</span><span class="o">=</span><span class="k">$(</span>get_version<span class="w"> </span>sibernetic<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-t<span class="w"> </span>openworm/openworm:<span class="k">$(</span>cat<span class="w"> </span>VERSION<span class="k">)</span><span class="w"> </span>.
+</code></pre></div></p>
+<h3 id="5-enhanced-master_openwormpy-implement-all-5-steps">5. Enhanced <code>master_openworm.py</code> (Implement All 5 Steps)<a class="headerlink" href="#5-enhanced-master_openwormpy-implement-all-5-steps" title="Permanent link">&para;</a></h3>
+<p>The orchestrator must implement the full pipeline, driven by <code>openworm.yml</code>:</p>
+<div class="highlight"><pre><span></span><code>Step 1: Load configuration (openworm.yml)
+Step 2: Initialize subsystems based on config
+         - If neural.enabled: generate c302 network at specified level
+         - If body.enabled: initialize Sibernetic with specified backend
+         - If pharynx.enabled: initialize pharyngeal circuit
+         - If intestine.enabled: initialize intestinal oscillator
+Step 3: Run coupled simulation
+         - Time-step loop with configurable coupling intervals
+         - Each enabled subsystem advances one step
+         - Data exchange at coupling boundaries (Ca²⁺ → forces, etc.)
+Step 4: Generate outputs
+         - Plots (membrane potentials, calcium, movement)
+         - WCON trajectory file
+         - Video (if enabled — fix the memory leak first)
+Step 4b: Export OME-Zarr ([DD014](DD014_Dynamic_Visualization_Architecture.md), if visualization.enabled)
+         - Collect all subsystem outputs into openworm.zarr
+         - body/positions, body/types, body/cell_ids ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
+         - neural/voltage, neural/calcium, neural/positions ([DD001](DD001_Neural_Circuit_Architecture.md))
+         - muscle/activation, muscle/calcium ([DD002](DD002_Muscle_Model_Architecture.md))
+         - pharynx/pumping_state ([DD007](DD007_Pharyngeal_System_Architecture.md), if pharynx.enabled)
+         - intestine/calcium, intestine/defecation_events ([DD009](DD009_Intestinal_Oscillator_Model.md), if intestine.enabled)
+         - neuropeptides/concentrations ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), if neural.neuropeptides)
+         - validation/overlay ([DD010](DD010_Validation_Framework.md), if validation.run_after_simulation)
+         - geometry/ (cell metadata, VirtualWorm meshes)
+         - Run surface reconstruction (marching cubes) if visualization.surface_reconstruction
+Step 5: Run validation (if enabled)
+         - Tier 1: Single-cell electrophysiology checks
+         - Tier 2: Functional connectivity vs. Randi 2023
+         - Tier 3: Behavioral kinematics vs. Schafer lab
+         - Generate pass/fail report
+         - Exit with non-zero code if blocking tiers fail
+</code></pre></div>
+<p><strong>Critical fix needed:</strong> The video generation pipeline (xvfb + tmux + ffmpeg screen capture) must be replaced. Options:</p>
+<ol>
+<li><strong>Headless rendering</strong> via OSMesa or EGL (no X server needed)</li>
+<li><strong>Post-hoc visualization</strong> from saved particle positions (decouple recording from simulation)</li>
+<li><strong>Skip video in CI</strong> (validation doesn't need video, only data)</li>
+</ol>
+<h3 id="6-cicd-pipeline-automated-quality-gates">6. CI/CD Pipeline (Automated Quality Gates)<a class="headerlink" href="#6-cicd-pipeline-automated-quality-gates" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/integration.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Integration Test Suite</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">dev*</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># === Gate 1: Build (does it compile?) ===</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build Docker image</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose build simulation</span>
+
+<span class="w">  </span><span class="c1"># === Gate 2: Smoke test (does it run?) ===</span>
+<span class="w">  </span><span class="nt">smoke-test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run 10ms simulation (no video)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose run quick-test</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check outputs exist</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">test -f output/*.png &amp;&amp; echo &quot;Plots: OK&quot;</span>
+<span class="w">          </span><span class="no">test -f output/*.wcon &amp;&amp; echo &quot;WCON: OK&quot;</span>
+
+<span class="w">  </span><span class="c1"># === Gate 3: Tier 2 validation (circuit-level, BLOCKING) ===</span>
+<span class="w">  </span><span class="nt">tier2-validation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smoke-test</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.event_name == &#39;pull_request&#39;</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run functional connectivity validation</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose run validate</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check pass/fail</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python3 scripts/check_ci_results.py output/validation_report.json</span>
+
+<span class="w">  </span><span class="c1"># === Gate 4: Tier 3 validation (behavioral, BLOCKING for main) ===</span>
+<span class="w">  </span><span class="nt">tier3-validation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smoke-test</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.ref == &#39;refs/heads/main&#39;</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run behavioral validation (5s sim)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">          </span><span class="no">docker compose run -e DURATION=5000 validate</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload validation report</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validation-report</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output/validation_report.json</span>
+
+<span class="w">  </span><span class="c1"># NOTE: Once Taichi graduates to Production (see DD003 Backend Stabilization Roadmap),</span>
+<span class="w">  </span><span class="c1"># CI should run smoke tests on multiple backends (at minimum OpenCL + one Python backend)</span>
+<span class="w">  </span><span class="c1"># to catch backend-specific regressions.</span>
+</code></pre></div>
+<h3 id="7-contributor-development-workflow">7. Contributor Development Workflow<a class="headerlink" href="#7-contributor-development-workflow" title="Permanent link">&para;</a></h3>
+<h4 id="for-contributors-working-on-a-specific-subsystem">For contributors working on a specific subsystem:<a class="headerlink" href="#for-contributors-working-on-a-specific-subsystem" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Fork the subsystem repo (e.g., c302)</span>
+gh<span class="w"> </span>repo<span class="w"> </span>fork<span class="w"> </span>openworm/c302
+
+<span class="c1"># 2. Clone the meta-repo (for integration testing)</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git
+<span class="nb">cd</span><span class="w"> </span>OpenWorm
+
+<span class="c1"># 3. Build with your branch of c302</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">C302_REF</span><span class="o">=</span>my-feature-branch<span class="w"> </span>simulation
+
+<span class="c1"># 4. Run quick test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+
+<span class="c1"># 5. Check results</span>
+ls<span class="w"> </span>output/<span class="w">   </span><span class="c1"># PNGs, WCON files</span>
+
+<span class="c1"># 6. Run validation before submitting PR</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+
+<span class="c1"># 7. If validation passes, submit PR to c302 repo</span>
+<span class="c1"># CI on the meta-repo will automatically test the integration</span>
+</code></pre></div>
+<h4 id="for-contributors-adding-a-new-subsystem-eg-dd007-pharynx">For contributors adding a new subsystem (e.g., <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> pharynx):<a class="headerlink" href="#for-contributors-adding-a-new-subsystem-eg-dd007-pharynx" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Create new repo (L4 maintainer action)</span>
+gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>openworm/pharynx-model<span class="w"> </span>--public
+
+<span class="c1"># 2. Add to versions.lock</span>
+<span class="c1"># pharynx:</span>
+<span class="c1">#   repo: &quot;https://github.com/openworm/pharynx-model.git&quot;</span>
+<span class="c1">#   commit: &quot;initial&quot;</span>
+
+<span class="c1"># 3. Add Docker stage to Dockerfile</span>
+<span class="c1"># FROM base AS pharynx</span>
+<span class="c1"># RUN git clone ... /opt/openworm/pharynx</span>
+
+<span class="c1"># 4. Add config section to openworm.yml</span>
+<span class="c1"># pharynx:</span>
+<span class="c1">#   enabled: false  # Off by default until validated</span>
+
+<span class="c1"># 5. Add coupling code to master_openworm.py</span>
+<span class="c1"># if config[&#39;pharynx&#39;][&#39;enabled&#39;]:</span>
+<span class="c1">#     pharynx.step(dt)</span>
+
+<span class="c1"># 6. Add validation targets</span>
+<span class="c1"># validation:</span>
+<span class="c1">#   pharynx_pumping: true  # 3-4 Hz check</span>
+
+<span class="c1"># 7. Submit PR to meta-repo with all of the above</span>
+</code></pre></div>
+<h3 id="8-pre-built-images-on-docker-hub">8. Pre-Built Images on Docker Hub<a class="headerlink" href="#8-pre-built-images-on-docker-hub" title="Permanent link">&para;</a></h3>
+<p>For users who just want to run the simulation without building:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pull and run (no build required)</span>
+docker<span class="w"> </span>pull<span class="w"> </span>openworm/openworm:0.10.0
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/output:/opt/openworm/output<span class="w"> </span>openworm/openworm:0.10.0
+
+<span class="c1"># Or with docker compose</span>
+docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span>simulation
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+</code></pre></div>
+<p><strong>Automated publishing:</strong> GitHub Actions builds and pushes tagged images to Docker Hub on every release.</p>
+<h3 id="9-jupyterlab-interface-issue-347">9. JupyterLab Interface (Issue #347)<a class="headerlink" href="#9-jupyterlab-interface-issue-347" title="Permanent link">&para;</a></h3>
+<p>Add an optional JupyterLab service for interactive exploration:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml (additional service)</span>
+<span class="w">  </span><span class="nt">jupyter</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">jupyter lab --ip=0.0.0.0 --port=8888 --no-browser</span>
+<span class="w">      </span><span class="no">--NotebookApp.token=&#39;&#39;</span>
+<span class="w">      </span><span class="no">--notebook-dir=/opt/openworm/notebooks</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8888:8888&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./notebooks:/opt/openworm/notebooks</span>
+</code></pre></div>
+<p><strong>Include starter notebooks:</strong></p>
+<ul>
+<li><code>01_explore_connectome.ipynb</code> — Load and visualize the connectome</li>
+<li><code>02_run_c302_network.ipynb</code> — Generate and simulate a neural circuit</li>
+<li><code>03_analyze_output.ipynb</code> — Plot simulation results</li>
+<li><code>04_validate_against_data.ipynb</code> — Run validation comparisons</li>
+</ul>
+<p>This directly addresses newcomer onboarding (<a href="../DD011_Contributor_Progression_Model/">DD011</a> L0→L1 tasks) and makes orientation tasks executable in a browser.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-monorepo-all-subsystems-in-one-repository">1. Monorepo (All Subsystems in One Repository)<a class="headerlink" href="#1-monorepo-all-subsystems-in-one-repository" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Single clone, atomic commits across subsystems, simple CI.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>OpenWorm already has 109 repos with established histories</li>
+<li>Different subsystems have different maintainers and release cadences</li>
+<li>Monorepo migration would be massively disruptive</li>
+<li>The current multi-repo approach is standard for scientific projects</li>
+</ul>
+<p><strong>When to reconsider:</strong> Never. The multi-repo approach with a meta-repo integrator is the right pattern for this project.</p>
+<h3 id="2-git-submodules">2. Git Submodules<a class="headerlink" href="#2-git-submodules" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Built-in Git feature, pins exact commits.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Submodules are notoriously confusing for contributors (<code>git clone --recursive</code>, detached HEAD, update commands)</li>
+<li>OpenWorm tried this before (the meta-repo once had submodules — they were removed)</li>
+<li>The <code>versions.lock</code> + build-arg approach gives the same pinning benefits without submodule pain</li>
+</ul>
+<h3 id="3-nix-guix-for-reproducible-builds">3. Nix / Guix for Reproducible Builds<a class="headerlink" href="#3-nix-guix-for-reproducible-builds" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Perfectly reproducible, content-addressed, covers system deps.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Extremely steep learning curve (most contributors won't know Nix)</li>
+<li>Docker is already the standard in this project and the broader scientific computing community</li>
+<li>Nix inside Docker is possible but adds complexity without clear benefit for this project size</li>
+</ul>
+<h3 id="4-kubernetes-microservices-one-container-per-subsystem">4. Kubernetes / Microservices (One Container Per Subsystem)<a class="headerlink" href="#4-kubernetes-microservices-one-container-per-subsystem" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Clean separation, independent scaling, true composability.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Massive operational overhead for a volunteer-run open source project</li>
+<li>The subsystems communicate via shared memory and files, not network APIs</li>
+<li>Latency between containers would harm the tight neural↔body coupling loop</li>
+<li>Nobody would maintain a Kubernetes cluster</li>
+</ul>
+<h3 id="5-keep-current-approach-single-dockerfile-shell-scripts">5. Keep Current Approach (Single Dockerfile, Shell Scripts)<a class="headerlink" href="#5-keep-current-approach-single-dockerfile-shell-scripts" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Cannot support adding new subsystems without growing a monolithic Dockerfile</li>
+<li>No contributor workflow for testing changes against the full stack</li>
+<li>No automated validation</li>
+<li>Memory leak and video pipeline issues remain unaddressed</li>
+<li>Single maintainer is a bus factor risk</li>
+</ul>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker Engine 24+ and Docker Compose v2 (<code>docker compose</code> — note: no hyphen)</li>
+<li>Git</li>
+<li>8 GB RAM minimum (16 GB recommended for full validation)</li>
+<li>10 GB disk space for Docker images</li>
+<li>Optional: GPU with OpenCL support (for accelerated body physics)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>DD013 defines the Docker infrastructure that all other DDs depend on. This is the canonical guide for setting up the entire OpenWorm simulation environment. Other DDs cross-reference this section for their Docker setup paths.</p>
+<p><strong>Clone the meta-repo:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git
+<span class="nb">cd</span><span class="w"> </span>OpenWorm
+</code></pre></div>
+<p><strong>Path A — Docker (primary, recommended for all users):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build all subsystem images (neural, body, validation, viewer)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build
+
+<span class="c1"># Run a quick smoke test (2 minutes, verifies everything works)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+
+<span class="c1"># Run a standard simulation (15ms default)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+
+<span class="c1"># Run full validation suite (for PRs to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+
+<span class="c1"># Launch the visualization viewer (after simulation completes)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+<span class="c1"># Opens at http://localhost:8501</span>
+</code></pre></div>
+<p><strong>Building with a custom subsystem branch:</strong></p>
+<p>Contributors working on a specific subsystem (e.g., c302) can swap in their branch:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build with your fork&#39;s branch of c302</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">C302_REF</span><span class="o">=</span>my-feature-branch<span class="w"> </span>simulation
+
+<span class="c1"># Test your changes against the full stack</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+</code></pre></div>
+<p>Similarly for Sibernetic: <code>--build-arg SIBERNETIC_REF=my-branch</code>.</p>
+<p><strong>Pre-built images (no build required):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pull the latest release image from Docker Hub</span>
+docker<span class="w"> </span>pull<span class="w"> </span>openworm/openworm:0.10.0
+docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/output:/opt/openworm/output<span class="w"> </span>openworm/openworm:0.10.0
+
+<span class="c1"># Or with docker compose</span>
+docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span>simulation
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+</code></pre></div>
+<p><strong>Path B — Native (individual subsystems only):</strong></p>
+<p>DD013 defines the Docker orchestration layer. Running the full integrated simulation natively is not supported — Docker is the integration surface. However, individual subsystems can be run natively per their own DDs:</p>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>DD</th>
+<th>Native Setup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit (c302)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td><code>pip install -e c302; pip install pyneuroml neuron</code></td>
+</tr>
+<tr>
+<td>Body physics (Sibernetic)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>CMake build with OpenCL SDK</td>
+</tr>
+<tr>
+<td>Validation tools</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a>, <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></td>
+<td><code>pip install -e open-worm-analysis-toolbox</code></td>
+</tr>
+<tr>
+<td>Visualization viewer</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td><code>pip install trame pyvista zarr</code></td>
+</tr>
+</tbody>
+</table>
+<p>See each DD's own Getting Started section for native setup details.</p>
+<p><strong>Interactive shell (debugging):</strong></p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell
+<span class="c1"># Drops into a bash shell inside the full simulation container</span>
+<span class="c1"># All subsystems are available at /opt/openworm/</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Build the Docker images</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build
+<span class="c1"># Expected: all stages build successfully (base, neural, body, validation, full, viewer)</span>
+
+<span class="c1"># Step 2: Run quick smoke test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Expected: 10ms simulation completes, output/ contains PNGs and WCON file</span>
+
+<span class="c1"># Step 3: Verify outputs exist</span>
+ls<span class="w"> </span>output/
+<span class="c1"># Expected: *.png (plots), *.wcon (trajectory), openworm.zarr/ (OME-Zarr data)</span>
+
+<span class="c1"># Step 4: Run validation (for PRs)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Expected: validation_report.json in output/ with tier pass/fail results</span>
+
+<span class="c1"># Step 5: Launch viewer</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+<span class="c1"># Expected: web app at http://localhost:8501 showing animated worm</span>
+
+<span class="c1"># Step 6: Test with custom configuration</span>
+cp<span class="w"> </span>openworm.yml<span class="w"> </span>my_experiment.yml
+<span class="c1"># Edit my_experiment.yml (e.g., change duration, enable/disable subsystems)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">CONFIG</span><span class="o">=</span>/opt/openworm/my_experiment.yml<span class="w"> </span>simulation
+</code></pre></div>
+<h3 id="green-light-criteria">Green Light Criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Pass Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker build</td>
+<td><code>docker compose build</code> completes without errors</td>
+</tr>
+<tr>
+<td>Smoke test</td>
+<td><code>docker compose run quick-test</code> exits 0, output files present</td>
+</tr>
+<tr>
+<td>Simulation</td>
+<td><code>docker compose run simulation</code> produces PNGs, WCON, and OME-Zarr output</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td><code>docker compose run validate</code> produces <code>validation_report.json</code></td>
+</tr>
+<tr>
+<td>Viewer</td>
+<td><code>docker compose up viewer</code> serves at localhost:8501</td>
+</tr>
+<tr>
+<td>Custom config</td>
+<td>Modified <code>openworm.yml</code> is respected by the simulation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="for-the-simulation-stack-itself">For the Simulation Stack Itself<a class="headerlink" href="#for-the-simulation-stack-itself" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Build succeeds in CI on every push to main.</strong> Zero tolerance for broken builds.</p>
+</li>
+<li>
+<p><strong>Quick test completes in &lt;5 minutes.</strong> This is the contributor feedback loop — if it takes longer, people won't run it.</p>
+</li>
+<li>
+<p><strong>Full validation suite completes in &lt;2 hours.</strong> This runs on PRs to main. Must be fast enough to not block contributor workflow.</p>
+</li>
+<li>
+<p><strong>Pre-built Docker images published for every tagged release.</strong> Users should never need to build from source unless developing.</p>
+</li>
+<li>
+<p><strong>Configuration file is the single source of truth.</strong> No simulation parameters hardcoded in Python scripts, Dockerfiles, or shell scripts.</p>
+</li>
+<li>
+<p><strong>Every subsystem can be disabled independently.</strong> A contributor working on c302 should be able to run neural-only simulations without building Sibernetic.</p>
+</li>
+<li>
+<p><strong><code>versions.lock</code> is updated atomically with releases.</strong> When we release 0.10.0, all component commits are pinned together.</p>
+</li>
+</ol>
+<h3 id="for-contributors">For Contributors<a class="headerlink" href="#for-contributors" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>A new contributor can go from <code>git clone</code> to running simulation in &lt;30 minutes</strong> (including Docker image pull, not build).</p>
+</li>
+<li>
+<p><strong>Testing a change to one subsystem requires rebuilding only that subsystem's Docker stage</strong> (~5 minutes, not 20).</p>
+</li>
+<li>
+<p><strong>Validation results are automatically reported on PRs.</strong> Contributors see pass/fail before human review.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-out-of-scope">Boundaries (Out of Scope)<a class="headerlink" href="#boundaries-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="this-design-document-does-not-cover">This Design Document Does NOT Cover:<a class="headerlink" href="#this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Cloud execution.</strong> Running simulations on AWS/GCP/Azure is out of scope. The stack runs locally in Docker. Cloud deployment can be a future DD.</p>
+</li>
+<li>
+<p><strong>Real-time visualization.</strong> Geppetto (the web-based viewer) is dormant and not part of this architecture. Post-hoc visualization via Jupyter notebooks is in scope.</p>
+</li>
+<li>
+<p><strong>Multi-node / HPC distribution.</strong> The simulation runs on a single machine. Distributing across nodes (MPI) is future work.</p>
+</li>
+<li>
+<p><strong>Specific subsystem implementations.</strong> This DD covers how subsystems plug together, not what they compute internally (that's <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>).</p>
+</li>
+<li>
+<p><strong>AI agent deployment.</strong> N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist are separate infrastructure (see <a href="../../Community/ai_agents/">AI Agents for Community Scaling</a>).</p>
+</li>
+</ol>
+<hr />
+<h2 id="ownership-and-maintenance">Ownership and Maintenance<a class="headerlink" href="#ownership-and-maintenance" title="Permanent link">&para;</a></h2>
+<h3 id="integration-is-a-shared-responsibility">Integration Is a Shared Responsibility<a class="headerlink" href="#integration-is-a-shared-responsibility" title="Permanent link">&para;</a></h3>
+<p><strong>Integration is not solely the Integration Maintainer's job.</strong> The INTEGRATION_AUDIT.md (produced alongside this DD) identified that every Design Document was originally written in isolation — specifying what each subsystem does but not how it composes with the rest of the organism.</p>
+<p>The fix: <strong>every DD now has an Integration Contract section</strong> (inputs, outputs, config, Docker, integration test, coupling dependencies). This distributes integration responsibility:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Integration Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Integration Maintainer (L4)</strong></td>
+<td>Owns Docker build, CI pipeline, <code>openworm.yml</code> schema, <code>versions.lock</code>, <code>master_openworm.py</code> orchestrator</td>
+</tr>
+<tr>
+<td><strong>Subsystem Maintainer (L4)</strong></td>
+<td>Owns their DD's Integration Contract. Ensures changes to their subsystem don't break downstream consumers. Updates consuming DDs' input specs when outputs change.</td>
+</tr>
+<tr>
+<td><strong>Committer (L3)</strong></td>
+<td>When reviewing PRs, checks the DD's Integration Contract section. If a PR changes a coupling interface, coordinates with consuming subsystem maintainers before merging.</td>
+</tr>
+<tr>
+<td><strong>Contributor (L2)</strong></td>
+<td>Runs <code>docker compose run quick-test</code> before submitting PRs. Includes integration test results in PR description.</td>
+</tr>
+<tr>
+<td><strong>Mind-of-a-Worm (AI)</strong></td>
+<td>Automatically identifies coupling interface changes, tags affected maintainers, verifies integration test evidence in PR description.</td>
+</tr>
+<tr>
+<td><strong>Mad-Worm-Scientist (AI)</strong></td>
+<td>Escalates integration CI failures on <code>main</code> as <strong>IMMEDIATE</strong> priority to founder.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The through-line:</strong> The Integration Maintainer owns the infrastructure that makes integration possible. But every contributor, reviewer, and maintainer is responsible for keeping their piece integratable. Mind-of-a-Worm automates what it can; human judgment handles the rest.</p>
+<h3 id="new-role-l4-integration-maintainer">New Role: L4 Integration Maintainer<a class="headerlink" href="#new-role-l4-integration-maintainer" title="Permanent link">&para;</a></h3>
+<p>This Design Document introduces a new entry in the Subsystem Ownership Map (<a href="../DD011_Contributor_Progression_Model/">DD011</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Design Documents</th>
+<th>L4 Maintainer</th>
+<th>Primary Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Integration Stack</strong></td>
+<td><strong><a href="./">DD013</a></strong> (this), <a href="../DD010_Validation_Framework/">DD010</a></td>
+<td><strong>TBD — Critical hire</strong></td>
+<td><code>openworm/OpenWorm</code></td>
+</tr>
+</tbody>
+</table>
+<p>The Integration Maintainer is responsible for:</p>
+<table>
+<thead>
+<tr>
+<th>Responsibility</th>
+<th>Frequency</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Merge PRs to meta-repo</td>
+<td>As needed</td>
+<td>1-2 hrs/week</td>
+</tr>
+<tr>
+<td>Update <code>versions.lock</code> for releases</td>
+<td>Monthly</td>
+<td>2-4 hrs/month</td>
+</tr>
+<tr>
+<td>Maintain Dockerfile and docker-compose</td>
+<td>As needed</td>
+<td>1-2 hrs/month</td>
+</tr>
+<tr>
+<td>Maintain CI/CD pipeline</td>
+<td>As needed</td>
+<td>1-2 hrs/month</td>
+</tr>
+<tr>
+<td>Review subsystem integration PRs</td>
+<td>As needed</td>
+<td>2-3 hrs/week</td>
+</tr>
+<tr>
+<td>Triage integration issues</td>
+<td>Weekly</td>
+<td>1 hr/week</td>
+</tr>
+<tr>
+<td>Coordinate with subsystem L4 maintainers</td>
+<td>Bi-weekly</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>Update getting-started documentation</td>
+<td>Per release</td>
+<td>2-4 hrs/release</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total estimated effort: 5-10 hrs/week.</strong></p>
+<p><strong>Who should fill this role:</strong></p>
+<ul>
+<li>Currently the Neural Circuit L4 Maintainer is doing this de facto but it's not formalized or sustainable alongside their Neural Circuit role</li>
+<li>Ideal candidate: Someone with strong DevOps/Docker experience who also understands the science</li>
+<li>Alternative: An L3 contributor who can be mentored into this role</li>
+<li>Mind-of-a-Worm AI can assist with routine tasks (dependency updates, CI triage) but cannot own architectural decisions</li>
+</ul>
+<p><strong>Founder involvement:</strong> Approve L4 appointment, review major architectural changes (per <a href="../DD011_Contributor_Progression_Model/">DD011</a>). This role should <strong>reduce</strong> founder time, not increase it.</p>
+<h3 id="mind-of-a-worm-support-for-integration">Mind-of-a-Worm Support for Integration<a class="headerlink" href="#mind-of-a-worm-support-for-integration" title="Permanent link">&para;</a></h3>
+<p>Mind-of-a-Worm (AI agent) can automate routine integration tasks:</p>
+<ol>
+<li>
+<p><strong>Dependency staleness alerts:</strong> Weekly check if any pinned commit in <code>versions.lock</code> is &gt;30 days behind the subsystem repo's main branch. Post alert to <code>#development</code>.</p>
+</li>
+<li>
+<p><strong>CI failure triage:</strong> When CI fails, Mind-of-a-Worm reads the logs, identifies which subsystem broke, and tags the relevant L4 maintainer.</p>
+</li>
+<li>
+<p><strong>PR integration checklist:</strong> When a PR modifies <code>openworm.yml</code>, <code>versions.lock</code>, or <code>Dockerfile</code>, Mind-of-a-Worm verifies:</p>
+<ul>
+<li>Config schema is valid</li>
+<li>All referenced repos/commits exist</li>
+<li>No subsystem accidentally disabled</li>
+<li>Version numbers are consistent</li>
+</ul>
+</li>
+<li>
+<p><strong>Onboarding verification:</strong> For L0→L1 Task B1 ("Install and run Docker simulation"), Mind-of-a-Worm can verify the output screenshot includes the correct version string.</p>
+</li>
+</ol>
+<hr />
+<h2 id="implementation-roadmap">Implementation Roadmap<a class="headerlink" href="#implementation-roadmap" title="Permanent link">&para;</a></h2>
+<p>For the granular task breakdown of DD013 implementation, see the <a href="../DD013_draft_issues/">DD013 Draft Issues</a> (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the <a href="../DD_PHASE_ROADMAP/">DD Phase Roadmap</a> — DD013 is assigned to <strong>Phase A1: Core Infrastructure (Weeks 1–2)</strong>.</p>
+<hr />
+<h2 id="the-contributor-simulation-feedback-loop">The Contributor → Simulation Feedback Loop<a class="headerlink" href="#the-contributor-simulation-feedback-loop" title="Permanent link">&para;</a></h2>
+<p>This is the critical path that makes the whole system work:</p>
+<div class="highlight"><pre><span></span><code>Contributor makes a change
+        │
+        ▼
+Pushes to their fork of a subsystem repo (e.g., c302)
+        │
+        ▼
+Runs locally: docker compose build --build-arg C302_REF=my-branch simulation
+              docker compose run quick-test     (~2 min)
+              docker compose run validate       (~30 min)
+        │
+        ▼
+Opens PR to subsystem repo
+        │
+        ▼
+Subsystem CI runs (unit tests for that repo)
+        │
+        ▼
+Integration CI triggered (runs full stack with PR branch)
+  ├── Build: Does it compile with the rest of the stack?
+  ├── Smoke test: Does it produce output?
+  ├── Tier 2: Does functional connectivity hold?
+  └── Tier 3: Does movement still look right?
+        │
+        ▼
+Mind-of-a-Worm pre-review:
+  ├── Design Document compliance check
+  ├── Code style and test coverage
+  └── Validation results summary
+        │
+        ▼
+Human review (L3/L4)
+        │
+        ▼
+Merge → versions.lock updated → next release includes change
+        │
+        ▼
+Docker Hub image published
+        │
+        ▼
+Next newcomer who runs the Docker image sees the improvement
+</code></pre></div>
+<p><strong>This is the through-line:</strong> Every contributor's work flows through a path that ends with the next newcomer experiencing a better simulation. The Docker image is the product. The configuration system is the interface. The validation framework is the quality gate. The meta-repo is the integration point.</p>
+<hr />
+<h2 id="open-questions-require-founder-input">Open Questions (Require Founder Input)<a class="headerlink" href="#open-questions-require-founder-input" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Who is the L4 Integration Maintainer?</strong> The Neural Circuit L4 Maintainer is the de facto integration maintainer but this should be formalized and ideally shared with someone else to reduce bus factor.</p>
+</li>
+<li>
+<p><strong>GPU support priority:</strong> Should we invest in fixing Docker GPU passthrough (issue #320) now, or wait for Phase 1 to be further along? GPU would make longer simulations practical.</p>
+</li>
+<li>
+<p><strong>MyBinder vs. Google Colab:</strong> For zero-install demos, MyBinder is fully open but resource-limited. Google Colab has GPU but requires Google account. Which aligns better with open science values?</p>
+</li>
+<li>
+<p><strong>OpenCL SDK hosting:</strong> The AMD SDK is currently downloaded from SourceForge at build time. Should we host it in the OpenWorm org (GitHub Releases on the sibernetic repo) for reliability?</p>
+</li>
+<li>
+<p><strong>Release cadence target:</strong> Current cadence is roughly quarterly. Should we aim for monthly releases once the new stack is in place?</p>
+</li>
+</ol>
+<hr />
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>sibernetic_config_gen</strong> (<a href="https://github.com/openworm/sibernetic_config_gen">openworm/sibernetic_config_gen</a>, 2016, dormant):
+Generates starting particle positions and <code>.ini</code> config files for Sibernetic. Contains particle placement algorithms for different body resolutions. Reusable for DD013's <code>openworm.yml</code> → Sibernetic <code>.ini</code> translation layer. <strong>Estimated time savings: 10-20 hours.</strong></p>
+<p><strong>sibernetic_NEURON</strong> (<a href="https://github.com/openworm/sibernetic_NEURON">openworm/sibernetic_NEURON</a>, 2016, dormant):
+Predecessor to <code>sibernetic_c302.py</code> — contains Sibernetic-NEURON interface code. Review for patterns applicable to <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a>'s bidirectional coupling.</p>
+<p><strong>skeletonExtraction</strong> (<a href="https://github.com/openworm/skeletonExtraction">openworm/skeletonExtraction</a>, 2016, dormant):
+Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports to COLLADA. The skeleton extraction algorithm is directly needed for DD013's SPH → WCON export pipeline and <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>'s analysis toolbox input. <strong>Estimated time savings: 15-25 hours.</strong></p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Docker multi-stage builds.</strong> https://docs.docker.com/build/building/multi-stage/</li>
+<li><strong>Docker Compose specification.</strong> https://docs.docker.com/compose/compose-file/</li>
+<li><strong>GitHub Actions for Docker.</strong> https://docs.docker.com/build/ci/github-actions/</li>
+<li><strong>MyBinder.org.</strong> https://mybinder.org/ — Zero-install reproducible environments</li>
+<li><strong><a href="https://doi.org/10.12688/f1000research.9095.1">Sarma et al. (2016)</a>.</strong> "Unit testing, model validation, and biological simulation." <em>F1000Research</em> 5:1946.</li>
+<li><strong>OpenWorm/OpenWorm repository.</strong> https://github.com/openworm/OpenWorm</li>
+</ol>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="from-v09x-to-v0100-this-dd">From v0.9.x to v0.10.0 (This DD)<a class="headerlink" href="#from-v09x-to-v0100-this-dd" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>v0.9.7 remains available.</strong> The current Dockerfile and scripts are preserved in the <code>legacy-0.9.x</code> branch.</li>
+<li><strong>v0.10.0 introduces the new architecture</strong> (<code>openworm.yml</code>, multi-stage Docker, docker-compose, <code>versions.lock</code>).</li>
+<li><strong>Backward compatibility:</strong> <code>run.sh</code> continues to work but prints a deprecation notice pointing to <code>docker compose run simulation</code>.</li>
+<li><strong>No behavioral change:</strong> The default <code>openworm.yml</code> produces the same simulation output as v0.9.7 (c302 Level C2, Sibernetic half-res, 15ms).</li>
+<li><strong>Phased introduction:</strong> New subsystems (pharynx, intestine, neuropeptides) are added as <code>enabled: false</code> config options. Contributors opt in.</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p>The simulation stack is the <strong>integration layer</strong> — it consumes and routes outputs from all science DDs:</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>DD</th>
+<th>Data</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consumes</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Neural state</td>
+<td>OME-Zarr <code>/neural/</code></td>
+</tr>
+<tr>
+<td>Consumes</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Muscle forces</td>
+<td>OME-Zarr <code>/muscle/</code></td>
+</tr>
+<tr>
+<td>Consumes</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Body geometry</td>
+<td>OME-Zarr <code>/physics/</code></td>
+</tr>
+<tr>
+<td>Produces</td>
+<td>All</td>
+<td>Unified simulation state</td>
+<td>OME-Zarr <code>/simulation/</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Primary repository: <code>openworm/OpenWorm</code></li>
+<li>Docker multi-stage build: orchestrator layer</li>
+<li><code>versions.lock</code> key: <code>openworm</code></li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>openworm.yml</code> root section: <code>simulation:</code></li>
+<li>Key parameters: <code>timestep</code>, <code>duration</code>, <code>output_format</code>, <code>subsystems[]</code></li>
+</ul>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>docker compose run quick-test</code> — verifies all containers start and communicate</li>
+<li><code>docker compose run validate</code> — runs <a href="../DD010_Validation_Framework/">DD010</a> Tier 2 correlation check</li>
+</ul>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Upstream:</strong> DD001, DD002, DD003, DD005, DD006, DD007, DD009 (all science subsystems)</li>
+<li><strong>Downstream:</strong> DD014 (visualization), DD010 (validation)</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending (requires founder + Integration Maintainer appointment)</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Appoint or recruit L4 Integration Maintainer</p>
+</li>
+<li>Begin Phase A1 (config system + multi-stage Docker)</li>
+<li>Fix the video pipeline memory leak (critical for any serious use)</li>
+<li>Set up CI with docker-compose-based test suite</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

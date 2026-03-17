@@ -1,0 +1,4050 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD001_draft_issues/">
+      
+      
+        <link rel="prev" href="../DD001_Neural_Circuit_Architecture/">
+      
+      
+        <link rel="next" href="../DD002_Muscle_Model_Architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD001 Draft Issues - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd001-draft-github-issues" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD001 Draft Issues
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-validation-infrastructure-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Validation Infrastructure (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Validation Infrastructure (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-port-boyle-cohen-2d-body-model-as-scriptsboyle_berri_cohen_trajectorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Port Boyle-Cohen 2D body model as scripts/boyle_berri_cohen_trajectory.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-adapt-sibernetics-wcon-generator-as-scriptsextract_trajectorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Adapt Sibernetic's WCON generator as scripts/extract_trajectory.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-audit-c302-simulation-output-files-and-document-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Audit c302 simulation output files and document format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-data-pipeline-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: Data Pipeline &amp; Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: Data Pipeline &amp; Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-implement-ome-zarr-export-for-neural-voltage-and-calcium-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Implement OME-Zarr export for neural voltage and calcium data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-ion-channel-library-relocated-to-dd005-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 3: Ion Channel Library~~ → Relocated to DD005 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-synaptic-optimization-relocated-to-dd017-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 4: Synaptic Optimization~~ → Relocated to DD017 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-level-d-multicompartmental-relocated-to-dd027-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 5: Level D Multicompartmental~~ → Relocated to DD027 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-documentation-contributor-support-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Documentation &amp; Contributor Support (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Documentation &amp; Contributor Support (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-create-c302-architecture-overview-for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Create c302 architecture overview for contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-c302-contributingmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create c302 CONTRIBUTING.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-document-c302-level-comparison-with-runnable-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Document c302 level comparison with runnable examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-audit-existing-c302-test-suite-and-document-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Audit existing c302 test suite and document coverage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-infrastructure-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Infrastructure (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Infrastructure (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-create-c302-changelog-documenting-framework-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Create c302 changelog documenting framework evolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph-critical-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph (Critical Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-validation-infrastructure-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Validation Infrastructure (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Validation Infrastructure (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-port-boyle-cohen-2d-body-model-as-scriptsboyle_berri_cohen_trajectorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Port Boyle-Cohen 2D body model as scripts/boyle_berri_cohen_trajectory.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-adapt-sibernetics-wcon-generator-as-scriptsextract_trajectorypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Adapt Sibernetic's WCON generator as scripts/extract_trajectory.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-audit-c302-simulation-output-files-and-document-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Audit c302 simulation output files and document format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-data-pipeline-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: Data Pipeline &amp; Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: Data Pipeline &amp; Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-implement-ome-zarr-export-for-neural-voltage-and-calcium-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Implement OME-Zarr export for neural voltage and calcium data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-ion-channel-library-relocated-to-dd005-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 3: Ion Channel Library~~ → Relocated to DD005 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-synaptic-optimization-relocated-to-dd017-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 4: Synaptic Optimization~~ → Relocated to DD017 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-level-d-multicompartmental-relocated-to-dd027-draft-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ~~Group 5: Level D Multicompartmental~~ → Relocated to DD027 Draft Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-documentation-contributor-support-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Documentation &amp; Contributor Support (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Documentation &amp; Contributor Support (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-create-c302-architecture-overview-for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Create c302 architecture overview for contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-c302-contributingmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create c302 CONTRIBUTING.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-document-c302-level-comparison-with-runnable-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Document c302 level comparison with runnable examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-audit-existing-c302-test-suite-and-document-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Audit existing c302 test suite and document coverage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-infrastructure-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Infrastructure (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Infrastructure (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-create-c302-changelog-documenting-framework-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Create c302 changelog documenting framework evolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph-critical-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph (Critical Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd001-draft-github-issues">DD001 Draft GitHub Issues<a class="headerlink" href="#dd001-draft-github-issues" title="Permanent link">&para;</a></h1>
+<p><strong>Epic:</strong> DD001 — Neural Circuit Architecture and Multi-Level Framework</p>
+<p><strong>Generated from:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001: Neural Circuit Architecture</a></p>
+<p><strong>Methodology:</strong> <a href="../DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation">DD015 §2.2 — DD Issue Generator</a></p>
+<p><strong>Totals:</strong> 9 issues (ai-workable: 6 / human-expert: 3 | L1: 5, L2: 3, L3: 1)</p>
+<p><strong>Note:</strong> DD001's "How to Build &amp; Test" section references kinematic validation scripts (<code>check_regression.py</code>, Schafer baseline generation) at Steps 5-6. Those scripts are <strong>thin wrappers around <code>open-worm-analysis-toolbox</code></strong>, which DD021 owns. They have been moved to <a href="../DD021_draft_issues/">DD021 Draft Issues</a> (Issues 1-2) where they belong as Phase A1 validation infrastructure. DD001 is a <strong>consumer</strong> of that validation pipeline, not the owner.</p>
+<p><strong>Roadmap Context:</strong> DD001 is a <strong>Phase 0</strong> DD (existing, working). Its draft issues span multiple roadmap phases:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Phase</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Validation Infrastructure (Issues 1-3)</td>
+<td><strong>Phase A1</strong></td>
+<td>Trajectory extraction tools for automated validation pipeline</td>
+</tr>
+<tr>
+<td>2. Data Pipeline (Issue 4)</td>
+<td><strong>Phase A1</strong></td>
+<td>OME-Zarr export for DD014 viewer</td>
+</tr>
+<tr>
+<td>3. Documentation (Issues 5-8)</td>
+<td><strong>Any</strong></td>
+<td>Can be addressed independently</td>
+</tr>
+<tr>
+<td>Infrastructure (Issue 9-10)</td>
+<td><strong>Phase A1</strong></td>
+<td>Changelog</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Issues relocated to other DDs:</strong> Ion Channel Library (6 issues) → <a href="../DD005_draft_issues/">DD005 Draft Issues</a>; Synaptic Optimization (3 issues) → <a href="../DD017_draft_issues/">DD017 Draft Issues</a>; Level D Multicompartmental (2 issues) + spatial synapses config → <a href="../DD027_draft_issues/">DD027 Draft Issues</a>.</p>
+<hr />
+<h2 id="group-1-validation-infrastructure-phase-a1">Group 1: Validation Infrastructure (Phase A1)<a class="headerlink" href="#group-1-validation-infrastructure-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by <a href="../DD021_draft_issues/">DD021</a>.</p>
+<hr />
+<h3 id="issue-1-port-boyle-cohen-2d-body-model-as-scriptsboyle_berri_cohen_trajectorypy">Issue 1: Port Boyle-Cohen 2D body model as <code>scripts/boyle_berri_cohen_trajectory.py</code><a class="headerlink" href="#issue-1-port-boyle-cohen-2d-body-model-as-scriptsboyle_berri_cohen_trajectorypy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Port Boyle-Cohen 2D body model into boyle_berri_cohen_trajectory.py — fast trajectory screening tool</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, physics</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#how-to-build-test">DD001 — How to Build &amp; Test</a> (Step 3a) and <a href="../DD001_Neural_Circuit_Architecture/#deliverables">DD001 — Deliverables</a> (WCON row)</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/CelegansNeuromechanicalGaitModulation"><code>openworm/CelegansNeuromechanicalGaitModulation/WormSim/Model/worm.cc</code></a> — Complete C++ Boyle-Cohen model (48 segments, Sundials IDA solver) with bistable neural circuit, muscle model, stretch receptors, and obstacle avoidance. <strong>Also includes <code>generate_wcon.py</code> that already converts simulation CSV output to WCON 1.0 format</strong>, plus <code>WormView.py</code> and <code>WormPlot.py</code> visualization tools.</li>
+<li><a href="https://github.com/openworm/CE_locomotion"><code>openworm/CE_locomotion/WormBody.cpp</code></a> — Complete C++ implementation (50 segments, custom semi-implicit backward Euler DAE solver) by Randall Beer. Full neuromechanical coupling loop in <code>Worm.cpp</code>: body → stretch receptors → nervous system → muscles → body. Includes <code>load_data.py</code> for visualization. 3 documented deviations from original BBC code with <code>BBC_STRICT</code> toggle.</li>
+<li><a href="https://github.com/openworm/Worm2D"><code>openworm/Worm2D/src/CE_locomotion/WormBody.cpp</code></a> — C++ implementation (50 segments) with c302 integration layer via CPython embedding (<code>src/neuromlModel/c302ForW2D.cpp</code>). Shows how to bridge c302's Python neural simulation with the C++ body model.</li>
+<li><strong>Paper:</strong> <a href="https://doi.org/10.3389/fncom.2012.00010">Boyle, Berri &amp; Cohen 2012</a></li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Port or wrap</strong> the existing C++ body model, do not reimplement from scratch. Two viable paths: (a) Python/NumPy port of <code>WormBody.cpp</code> (~200 lines of core math plus DAE solver), treating the C++ as the reference specification; (b) compile <code>CelegansNeuromechanicalGaitModulation/WormSim/Model/worm.cc</code> as a subprocess and adapt the existing <code>generate_wcon.py</code> for WCON output. Path (a) gives tighter c302 integration; path (b) is faster to ship.</li>
+<li><strong>DD013 Pipeline Role:</strong> Neural-stage script. Must be callable from <code>master_openworm.py</code> with output path from <code>openworm.yml</code>. Produces WCON artifact at a well-known path for downstream DD021/DD010 consumption.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/boyle_berri_cohen_trajectory.py</code> (new — port/wrapper of existing C++ implementations)</li>
+<li><code>tests/test_boyle_berri_cohen_trajectory.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jnml LEMS_c302_C1_Muscles.xml -nogui</code></li>
+<li><code>python3 scripts/boyle_berri_cohen_trajectory.py --input . --output trajectory.wcon</code></li>
+<li><code>pytest tests/test_boyle_berri_cohen_trajectory.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Reads c302/NEURON muscle calcium <code>.dat</code> files (96 muscle cells)</li>
+<li>[ ] Converts calcium to activation via threshold/low-pass filter (reference: <code>Muscles.cpp</code> in CE_locomotion, time constant T_muscle = 0.1)</li>
+<li>[ ] Runs Boyle-Cohen 2D rod-spring model (48–50 segments, ~150 state variables, anisotropic drag) — ported from or wrapping one of the three existing C++ implementations</li>
+<li>[ ] Body model output matches the reference C++ implementation within numerical tolerance</li>
+<li>[ ] Exports 49-point worm centerline in WCON 1.0 format (reference: <code>generate_wcon.py</code> in CelegansNeuromechanicalGaitModulation)</li>
+<li>[ ] Output validates against WCON JSON schema</li>
+<li>[ ] Compatible with <code>open-worm-analysis-toolbox</code> for DD010 Tier 3</li>
+<li>[ ] Runs in &lt;30 seconds on single CPU (fast enough for CI quick-test)</li>
+<li>[ ] Unit tests with synthetic calcium data</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A fast validation ruler built on proven code. Three OpenWorm repos already implement the Boyle-Cohen 2D body model in C++ — this issue ports one of them to Python and wires it to c302's muscle output. Change a neural parameter → re-run → check if the worm still crawls correctly — all in under 30 seconds, no GPU needed.</li>
+</ul>
+<hr />
+<h3 id="issue-2-adapt-sibernetics-wcon-generator-as-scriptsextract_trajectorypy">Issue 2: Adapt Sibernetic's WCON generator as <code>scripts/extract_trajectory.py</code><a class="headerlink" href="#issue-2-adapt-sibernetics-wcon-generator-as-scriptsextract_trajectorypy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Adapt Sibernetic's existing WCON generator into extract_trajectory.py — full-fidelity trajectory extraction</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/Sibernetic</code></li>
+<li><strong>Required Capabilities:</strong> python, physics</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#how-to-build-test">DD001 — How to Build &amp; Test</a> (Step 3b) and <a href="../DD001_Neural_Circuit_Architecture/#deliverables">DD001 — Deliverables</a> (WCON row)</li>
+<li><strong>Depends On:</strong> DD003 (Sibernetic must produce particle output)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic/wcon/generate_wcon.py</code></a> — ~300 lines of <strong>working Python</strong> that reads <code>worm_motion_log.txt</code> from Sibernetic, generates WCON JSON, validates against <code>wcon_schema.json</code>, and computes speed/curvature. Also includes <code>wcon/__init__.py</code>, <code>wcon/wcon_schema.json</code>, and test WCON files.</li>
+<li><a href="https://github.com/openworm/skeletonExtraction"><code>openworm/skeletonExtraction</code></a> — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation, not 2D midline — different purpose but the centerline concept is related)</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Adapt and extend</strong> the existing <code>sibernetic/wcon/generate_wcon.py</code>. The core WCON generation pipeline exists; extend it to handle the full acceptance criteria (49-point centerline from elastic shell particles, 3D→2D projection, schema validation).</li>
+<li><strong>DD013 Pipeline Role:</strong> Body-stage script. Runs after Sibernetic simulation completes. Output WCON path configured via <code>openworm.yml</code>. Must be callable from <code>master_openworm.py</code>.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/extract_trajectory.py</code> (new — adapted from existing <code>wcon/generate_wcon.py</code>)</li>
+<li><code>tests/test_extract_trajectory.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/extract_trajectory.py --input sibernetic_output/ --output trajectory.wcon</code></li>
+<li><code>pytest tests/test_extract_trajectory.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Built on the existing <code>sibernetic/wcon/generate_wcon.py</code> codebase, not from scratch</li>
+<li>[ ] Reads Sibernetic SPH elastic particle positions from simulation output</li>
+<li>[ ] Extracts 3D worm centerline (49-point skeleton) from elastic shell particles</li>
+<li>[ ] Projects to 2D x/y for WCON 1.0 (which is 2D centerline format)</li>
+<li>[ ] Exports in WCON 1.0 format</li>
+<li>[ ] Output validates against WCON JSON schema (reuse existing <code>wcon/wcon_schema.json</code>)</li>
+<li>[ ] Compatible with <code>open-worm-analysis-toolbox</code> for DD010 Tier 3</li>
+<li>[ ] Captures full 3D body deformation effects (fluid-structure, pseudocoelomic pressure)</li>
+<li>[ ] Unit tests with synthetic particle data</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Sibernetic already has a working WCON generator — this issue extends it for the full DD001 validation chain. The existing <code>generate_wcon.py</code> reads motion logs and produces WCON; this version adds 49-point centerline extraction from the ~100K SPH particle cloud, capturing 3D effects the fast 2D model cannot.</li>
+</ul>
+<hr />
+<h3 id="issue-3-audit-c302-simulation-output-files-and-document-format">Issue 3: Audit c302 simulation output files and document format<a class="headerlink" href="#issue-3-audit-c302-simulation-output-files-and-document-format" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Audit and document c302/NEURON simulation output file formats</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#inputs--outputs">DD001 — Integration Contract — Outputs</a> and <a href="../DD001_Neural_Circuit_Architecture/#coupling-bridge-ownership">DD001 — Coupling Bridge Ownership</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>c302/runAndPlot.py</code> — Already generates summary images and HTML pages across all configs; shows which output files are produced</li>
+<li><code>c302/c302_info.py</code> — Generates cell info summaries</li>
+<li><code>c302/examples/summary/README.md</code> — HTML table of all config × parameter-set combinations</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Document existing outputs.</strong> Run simulations and catalog what's produced; the outputs exist but are undocumented.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/output_formats.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation/audit task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Run a Level C1 simulation and catalog every output file produced</li>
+<li>[ ] Document: file name pattern, format (tab-separated, CSV, etc.), column headers, units</li>
+<li>[ ] Document: <code>*_calcium.dat</code> format (which columns = which muscles/neurons)</li>
+<li>[ ] Document: <code>*_voltages.dat</code> format</li>
+<li>[ ] Document: which files <code>sibernetic_c302.py</code> reads (the coupling bridge)</li>
+<li>[ ] Identify any undocumented output files</li>
+<li>[ ] Post findings as <code>docs/output_formats.md</code></li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The neural simulation produces dozens of output files containing voltage traces, calcium concentrations, and synaptic currents for 302 neurons and 96 muscles. But nobody has documented what's in each file. This audit maps every output file so downstream tools (body physics coupling, validation, visualization) know exactly what to read and how.</li>
+</ul>
+<hr />
+<h2 id="group-2-data-pipeline-integration-phase-a1">Group 2: Data Pipeline &amp; Integration (Phase A1)<a class="headerlink" href="#group-2-data-pipeline-integration-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: OME-Zarr export and coupling interface documentation.</p>
+<hr />
+<h3 id="issue-4-implement-ome-zarr-export-for-neural-voltage-and-calcium-data">Issue 4: Implement OME-Zarr export for neural voltage and calcium data<a class="headerlink" href="#issue-4-implement-ome-zarr-export-for-neural-voltage-and-calcium-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Implement OME-Zarr export for neural/voltage, neural/calcium, neural/positions</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#deliverables">DD001 — Deliverables</a> (OME-Zarr rows) and <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (OME-Zarr schema)</li>
+<li><strong>Depends On:</strong> Issue 3 (output format documentation)</li>
+<li><strong>DD013 Pipeline Role:</strong> Neural-stage post-processing. Produces Zarr store artifact for DD014 visualization stage. Output path from <code>openworm.yml</code>.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/export_zarr.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/export_zarr.py --input . --output neural.zarr</code></li>
+<li><code>python3 -c "import zarr; z = zarr.open('neural.zarr'); print(z['neural/voltage'].shape, z['neural/calcium'].shape, z['neural/positions'].shape)"</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Reads c302/NEURON <code>.dat</code> output files (voltage and calcium time series)</li>
+<li>[ ] Exports <code>neural/voltage/</code>: shape (n_timesteps, 302), dtype float32, units mV</li>
+<li>[ ] Exports <code>neural/calcium/</code>: shape (n_timesteps, 302), dtype float32, units mol/cm³</li>
+<li>[ ] Exports <code>neural/positions/</code>: shape (302, 3), dtype float32, units µm (static neuron coordinates)</li>
+<li>[ ] Neuron positions sourced from WormAtlas or Long et al. 2009 3D atlas</li>
+<li>[ ] Zarr store readable by DD014 viewer</li>
+<li>[ ] Includes OME-Zarr metadata (axes labels, neuron name mapping)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> OME-Zarr is the universal data bus connecting simulation to visualization. This script converts c302's raw text output into a structured Zarr store that the DD014 3D viewer can read. You'll see 302 neurons at their real 3D positions in the worm, colored by how active they are — like a real-time fMRI of a virtual worm brain.</li>
+</ul>
+<hr />
+<h2 id="group-3-ion-channel-library-relocated-to-dd005-draft-issues">~~Group 3: Ion Channel Library~~ → Relocated to <a href="../DD005_draft_issues/">DD005 Draft Issues</a><a class="headerlink" href="#group-3-ion-channel-library-relocated-to-dd005-draft-issues" title="Permanent link">&para;</a></h2>
+<p>6 issues (survey + adopt/validate 14 channels) relocated to DD005, which drives Phase 1 cell-type specialization. See <a href="../DD005_draft_issues/">DD005 Draft Issues</a> Issues 1-6.</p>
+<h2 id="group-4-synaptic-optimization-relocated-to-dd017-draft-issues">~~Group 4: Synaptic Optimization~~ → Relocated to <a href="../DD017_draft_issues/">DD017 Draft Issues</a><a class="headerlink" href="#group-4-synaptic-optimization-relocated-to-dd017-draft-issues" title="Permanent link">&para;</a></h2>
+<p>3 issues (neurotransmitter constraints, synapse optimization toggle, Randi 2023 adapter) relocated to DD017, which provides the differentiable simulation backend. See <a href="../DD017_draft_issues/">DD017 Draft Issues</a> Issues 1-3.</p>
+<h2 id="group-5-level-d-multicompartmental-relocated-to-dd027-draft-issues">~~Group 5: Level D Multicompartmental~~ → Relocated to <a href="../DD027_draft_issues/">DD027 Draft Issues</a><a class="headerlink" href="#group-5-level-d-multicompartmental-relocated-to-dd027-draft-issues" title="Permanent link">&para;</a></h2>
+<p>2 issues (morphology evaluation, AWC proof-of-concept) + 1 infrastructure issue (spatial synapses config) relocated to DD027, which specifies multicompartmental models. See <a href="../DD027_draft_issues/">DD027 Draft Issues</a> Issues 1-3.</p>
+<hr />
+<h2 id="group-3-documentation-contributor-support-any">Group 3: Documentation &amp; Contributor Support (Any)<a class="headerlink" href="#group-3-documentation-contributor-support-any" title="Permanent link">&para;</a></h2>
+<p>(Renumbered from original Group 6. Issues renumbered 5-8.)</p>
+<p>Target: Enable new contributors to understand and modify the neural circuit model.</p>
+<hr />
+<h3 id="issue-5-create-c302-architecture-overview-for-contributors">Issue 5: Create c302 architecture overview for contributors<a class="headerlink" href="#issue-5-create-c302-architecture-overview-for-contributors" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Create c302 architecture overview documentation for contributors</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#technical-approach">DD001 — Technical Approach</a> and <a href="../DD001_Neural_Circuit_Architecture/#implementation-references">DD001 — Implementation References</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/architecture.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Explains: what c302 is, what it produces, who uses its output</li>
+<li>[ ] File map: which Python scripts generate which levels</li>
+<li>[ ] Data flow: connectome data → c302 Python → NeuroML XML → NEURON simulation → output files</li>
+<li>[ ] Level comparison: table showing what each level adds (copied from DD001 but with code pointers)</li>
+<li>[ ] Channel library: which channels exist, where their definitions live</li>
+<li>[ ] Coupling interface: how c302 output feeds into <code>sibernetic_c302.py</code></li>
+<li>[ ] Aimed at L2 contributors (familiar with neuroscience but new to codebase)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The map before the territory. c302 is a complex system — Python scripts that generate XML files that NEURON simulates. This guide explains the architecture so new contributors can find what they need. Like a building blueprint showing where the electrical, plumbing, and HVAC systems run.</li>
+</ul>
+<hr />
+<h3 id="issue-6-create-c302-contributingmd">Issue 6: Create c302 CONTRIBUTING.md<a class="headerlink" href="#issue-6-create-c302-contributingmd" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Create CONTRIBUTING.md with neural circuit development workflow</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#quality-criteria">DD001 — Quality Criteria</a> and <a href="../DD001_Neural_Circuit_Architecture/#how-to-build-test">DD001 — How to Build &amp; Test</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>CONTRIBUTING.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Prerequisites: Python, pyNeuroML, NEURON, ConnectomeToolbox</li>
+<li>[ ] Build instructions: how to generate a network at each level</li>
+<li>[ ] Testing workflow: <code>jnml -validate</code> → simulation → validation → regression check</li>
+<li>[ ] PR checklist from DD001 Quality Criteria (all 5 criteria)</li>
+<li>[ ] Branch naming: <code>dd001/description</code></li>
+<li>[ ] How to add a new ion channel (step-by-step)</li>
+<li>[ ] How to modify synapse parameters (and what tests to run)</li>
+<li>[ ] Warning: do NOT modify connectome topology without explicit justification</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The entry point for neural circuit contributors. Explains how to build, test, and validate changes. The most important rule: never change which neurons connect to which (the wiring diagram is fixed by biology). You CAN change how strong those connections are, what channels neurons express, and how synapses behave — but always test against the movement validation afterward.</li>
+</ul>
+<hr />
+<h3 id="issue-7-document-c302-level-comparison-with-runnable-examples">Issue 7: Document c302 level comparison with runnable examples<a class="headerlink" href="#issue-7-document-c302-level-comparison-with-runnable-examples" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Document c302 levels A-D with runnable comparison examples</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#architecture-levels">DD001 — Architecture Levels</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>c302/runAndPlot.py -all</code> — Already generates comparison images across all levels/configs with HTML summary</li>
+<li><code>c302/examples/summary/README.md</code> — Existing HTML table of all config × parameter-set combinations</li>
+<li><code>c302/examples/test/Comparison.ipynb</code> — Existing Jupyter notebook comparing configurations</li>
+<li><code>test.sh</code> — Already generates and validates all 9 parameter sets × 8 configs (proves all levels work)</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Build on existing infrastructure.</strong> The level generation, validation, and comparison plotting already exist in <code>runAndPlot.py</code> and <code>test.sh</code>. This issue wraps that into a contributor-friendly document with narrative, not a new comparison tool.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/level_comparison.md</code> (new — in c302 repo)</li>
+<li><code>examples/compare_levels.py</code> (new — wrapping existing runAndPlot.py functionality)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 examples/compare_levels.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Table comparing all levels: cell type, synapse type, channels, compute cost, use case</li>
+<li>[ ] For each level: a minimal runnable example (10 neurons, 5ms simulation)</li>
+<li>[ ] <code>compare_levels.py</code>: generates and simulates a small network at each level, plots voltage traces (build on existing <code>runAndPlot.py</code>)</li>
+<li>[ ] Shows the key difference: Level A spikes (wrong), Level C1 is graded (correct for <em>C. elegans</em>)</li>
+<li>[ ] Explains when to use each level (testing → production → research)</li>
+<li>[ ] Includes expected output screenshots</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> c302 already generates and validates all levels in CI and produces comparison images via <code>runAndPlot.py</code>. This issue turns that existing infrastructure into a visual guide showing "what does each level look like?" — so contributors understand why Level C1 is the default.</li>
+</ul>
+<hr />
+<h3 id="issue-8-audit-existing-c302-test-suite-and-document-coverage">Issue 8: Audit existing c302 test suite and document coverage<a class="headerlink" href="#issue-8-audit-existing-c302-test-suite-and-document-coverage" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Audit existing c302 test suite and document test coverage</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, testing</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#quality-criteria">DD001 — Quality Criteria</a> (criterion 3)</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>c302/test.sh</code> — <strong>~150+ line shell script</strong> running ALL readers, ALL generators, ALL validators, ALL simulators. This IS the test suite — it just needs documentation.</li>
+<li><code>.github/workflows/ci.yml</code> — OMV tests across Python 3.10/3.13 with jNeuroML, NEURON, and validate engines</li>
+<li><code>.github/workflows/non_omv.yml</code> — Non-OMV tests on Ubuntu + macOS</li>
+<li><code>examples/*.omt</code> and <code>examples/*.mep</code> — <strong>18+ OMV test/expected-value pairs</strong></li>
+<li><code>examples/parametersweep/*.py</code> — Parameter sweep test infrastructure</li>
+<li><code>examples/test/test_WNA.py</code> — WormNeuroAtlas integration test</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Document what exists.</strong> The test suite is extensive but undocumented. Run it, catalog it, identify gaps.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/test_coverage.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/ -v --tb=short</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Inventory ALL existing tests: <code>test.sh</code>, OMV <code>.omt</code>/<code>.mep</code> files, CI workflows, parametersweep scripts, <code>test_WNA.py</code></li>
+<li>[ ] Document: which tests exist, what they test, which level they cover</li>
+<li>[ ] Run all tests and report pass/fail status on current main branch</li>
+<li>[ ] Identify gaps: which DD001 Quality Criteria are not covered</li>
+<li>[ ] Identify: are there tests for each level (A, B, C, C1, C2, D)?</li>
+<li>[ ] Recommend: priority test additions to improve coverage</li>
+<li>[ ] Post findings as <code>docs/test_coverage.md</code></li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> c302 has an extensive test suite — <code>test.sh</code> runs all 9 parameter sets × 8 configs, CI validates on multiple Python versions and OSes, and 18+ OMV tests check expected values. But nobody has documented what it all covers. This audit catalogs everything and identifies where the gaps are. You can't improve what you don't measure.</li>
+</ul>
+<hr />
+<h2 id="group-4-infrastructure-phase-a1">Group 4: Infrastructure (Phase A1)<a class="headerlink" href="#group-4-infrastructure-phase-a1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="issue-9-create-c302-changelog-documenting-framework-evolution">Issue 9: Create c302 changelog documenting framework evolution<a class="headerlink" href="#issue-9-create-c302-changelog-documenting-framework-evolution" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD001] Create annotated changelog documenting c302's evolution</code></li>
+<li><strong>Labels:</strong> <code>DD001</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> git, docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#references">DD001 — References</a> (Gleeson et al. 2018) and <a href="../DD001_Neural_Circuit_Architecture/#architecture-levels">DD001 — Architecture Levels</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>CHANGELOG.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Lists major milestones: Level A creation, Level C/C1, graded synapses, Sibernetic coupling</li>
+<li>[ ] Maps milestones to publications (Gleeson et al. 2018, etc.)</li>
+<li>[ ] Notes key branch points and tags (<code>ow-0.9.7</code>, etc.)</li>
+<li>[ ] Documents current active branches</li>
+<li>[ ] Notes when Johnson &amp; Mailler muscle model was added</li>
+<li>[ ] Documents the relationship between c302 and CElegansNeuroML repos</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> c302 has been in development since ~2014, evolving from simple integrate-and-fire models to sophisticated Hodgkin-Huxley conductance-based neurons. A changelog helps new contributors understand what exists and how it got there — preventing them from reinventing solutions that were already tried (and sometimes abandoned for good reasons).</li>
+</ul>
+<hr />
+<h2 id="summary-statistics">Summary Statistics<a class="headerlink" href="#summary-statistics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Issues</strong></td>
+<td>9</td>
+</tr>
+<tr>
+<td><strong>ai-workable</strong></td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>human-expert</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Issues</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1: Validation Infrastructure</strong></td>
+<td>1–3</td>
+<td>Trajectory tools (ported from existing C++), output format audit. Kinematic regression detection moved to <a href="../DD021_draft_issues/">DD021</a>.</td>
+</tr>
+<tr>
+<td><strong>2: Data Pipeline</strong></td>
+<td>4</td>
+<td>OME-Zarr export</td>
+</tr>
+<tr>
+<td><strong>3: Documentation</strong></td>
+<td>5–8</td>
+<td>Architecture docs, contributing guide, level comparison, test audit</td>
+</tr>
+<tr>
+<td><strong>4: Infrastructure</strong></td>
+<td>9</td>
+<td>Changelog</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relocated issues:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Issues Moved</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../DD005_draft_issues/">DD005 Draft Issues</a></td>
+<td>Ion Channel Library (original Issues 5-10)</td>
+<td>6</td>
+</tr>
+<tr>
+<td><a href="../DD017_draft_issues/">DD017 Draft Issues</a></td>
+<td>Synaptic Optimization (original Issues 11-13)</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href="../DD027_draft_issues/">DD027 Draft Issues</a></td>
+<td>Level D Multicompartmental (original Issues 14-15) + spatial synapses config (original Issue 20)</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Related DD</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD005_draft_issues/">DD005</a> (Cell-Type Specialization)</strong></td>
+<td><strong>Ion channel issues relocated there</strong> — 6 issues (original Issues 5-10)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD017_draft_issues/">DD017</a> (Hybrid ML)</strong></td>
+<td><strong>Synaptic optimization issues relocated there</strong> — 3 issues (original Issues 11-13)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD027_draft_issues/">DD027</a> (Multicompartmental)</strong></td>
+<td><strong>Level D issues relocated there</strong> — 3 issues (original Issues 14-15, 20)</td>
+</tr>
+<tr>
+<td><strong><a href="../DD021_draft_issues/">DD021</a> (Movement Toolbox)</strong></td>
+<td>Kinematic validation scripts moved there — DD021 Issues 1-2. DD001 is a consumer of DD021's validation pipeline.</td>
+</tr>
+<tr>
+<td>DD002 (Muscle Model)</td>
+<td>DD002 Issue 18 documents <code>sibernetic_c302.py</code> coupling bridge</td>
+</tr>
+<tr>
+<td>DD003 (Body Physics)</td>
+<td>Issue 2 (extract_trajectory.py)</td>
+</tr>
+<tr>
+<td>DD010 (Validation Framework)</td>
+<td>Issues 1, 2 produce WCON consumed by DD010 Tier 3</td>
+</tr>
+<tr>
+<td>DD013 (Simulation Stack)</td>
+<td>DD013 Issue 24 covers c302 notebook</td>
+</tr>
+<tr>
+<td>DD014 (Dynamic Visualization)</td>
+<td>Issue 4 (OME-Zarr export for viewer)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependency-graph-critical-path">Dependency Graph (Critical Path)<a class="headerlink" href="#dependency-graph-critical-path" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Issue 3 (output format audit)
+  └→ Issue 4 (OME-Zarr export)
+
+Issue 1 (boyle_berri_cohen_trajectory.py — port existing C++) — independent, fast path
+Issue 2 (extract_trajectory.py — adapt Sibernetic generate_wcon.py) — depends on DD003
+  ├→ [both Issue 1 and Issue 2 produce WCON for DD021 regression checking]
+
+Issues 5, 6, 7, 8 (docs) — independent
+Issue 9 (changelog) — independent
+
+Ion channel library → see DD005 Draft Issues
+Synaptic optimization → see DD017 Draft Issues
+Level D multicompartmental → see DD027 Draft Issues
+Kinematic validation → see DD021 Issues 1-2
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

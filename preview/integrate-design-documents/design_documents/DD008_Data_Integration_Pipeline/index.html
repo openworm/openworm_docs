@@ -1,0 +1,4782 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD008_Data_Integration_Pipeline/">
+      
+      
+        <link rel="prev" href="../DD020_draft_issues/">
+      
+      
+        <link rel="next" href="../DD013_Simulation_Stack_Architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD008 Data Integration - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd008-data-integration-pipeline-and-owmeta-knowledge-graph" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD008 Data Integration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-owmeta-as-the-canonical-data-access-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use OWMeta as the Canonical Data Access Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation-with-dd020-connectome-data-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconciliation with DD020 (Connectome Data Access)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owmeta-entity-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWMeta Entity Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-ingestion-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Ingestion Priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owmeta-update-process-for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWMeta Update Process (For Contributors)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-direct-file-parsing-no-owmeta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Direct File Parsing (No OWMeta)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sql-database-instead-of-semantic-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SQL Database Instead of Semantic Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-wormbase-api-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Use WormBase API Directly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reality-check-phased-owmeta-mandate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reality Check: Phased OWMeta Mandate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation-with-dd020-connectome-data-access-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconciliation with DD020 (Connectome Data Access Policy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-owmeta-as-the-canonical-data-access-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use OWMeta as the Canonical Data Access Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation-with-dd020-connectome-data-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconciliation with DD020 (Connectome Data Access)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owmeta-entity-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWMeta Entity Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-ingestion-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Ingestion Priority
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owmeta-update-process-for-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWMeta Update Process (For Contributors)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-direct-file-parsing-no-owmeta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Direct File Parsing (No OWMeta)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sql-database-instead-of-semantic-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SQL Database Instead of Semantic Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-wormbase-api-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Use WormBase API Directly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reality-check-phased-owmeta-mandate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reality Check: Phased OWMeta Mandate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconciliation-with-dd020-connectome-data-access-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconciliation with DD020 (Connectome Data Access Policy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd008-data-integration-pipeline-and-owmeta-knowledge-graph">DD008: Data Integration Pipeline and OWMeta Knowledge Graph<a class="headerlink" href="#dd008-data-integration-pipeline-and-owmeta-knowledge-graph" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Accepted (with proposed extensions)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> All other DDs (data layer for entire project)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>OWMeta is a semantic knowledge graph providing unified programmatic access to 15+ biological data sources (WormBase, CeNGEN, Cook connectome, Ripoll-Sanchez neuropeptides, Randi functional connectivity, etc.). All modeling code should access data through OWMeta, not by parsing raw files. Success: all downstream DDs can query data via a unified API; ID consistency across all datasets with every neuron/cell ID mapping to the WBbt ontology.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-a1-core-infrastructure-weeks-1-2">Phase A1: Core Infrastructure</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Data Integration — see <a href="../DD_PHASE_ROADMAP/#phase-a1-core-infrastructure-weeks-1-2">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Unified data access layer (OWMeta) for connectome, CeNGEN expression, cell positions, neuropeptide interactions — all via Python API</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td>All downstream DDs (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology)</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/owmeta"><code>openworm/owmeta</code></a> + <a href="https://github.com/openworm/owmeta-core"><code>openworm/owmeta-core</code></a> — issues labeled <code>dd008</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>data.backend: owmeta</code> (recommended) or <code>data.backend: direct</code> (legacy) in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run shell python -c "import owmeta_core"</code> (installs?), query 302 neurons (returns correct count?)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>geometry/cell_metadata.json</code> — cell names, types, lineage for viewer tooltips and search</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>OWMeta installation + basic query test blocks merge for data-layer changes</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> ID consistency</td>
+<td>All neuron/cell IDs map to WBbt ontology; no orphaned IDs</td>
+<td>Tier 1 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Dataset ingestion</td>
+<td>All Phase 1-3 datasets ingested and queryable via OWMeta</td>
+<td>Tier 1 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Downstream migration</td>
+<td>c302, Sibernetic init, and validation scripts successfully migrated to OWMeta queries</td>
+<td>Tier 2 (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> Each contributor writes custom parsers for CSV/JSON files from different sources; IDs are inconsistent across datasets (Cook uses "AVAL," WormBase uses "WBGene00006748"); data versions drift.</p>
+<p><strong>After:</strong> Single <code>connect("openworm_data")</code> call provides unified access to all datasets with normalized IDs, versioned data, and provenance metadata.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path / Location</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OWMeta data bundles</td>
+<td><code>openworm_data</code> bundle (baked into Docker image or downloaded at build)</td>
+<td>RDF graph (OWMeta bundle)</td>
+<td><code>connect("openworm_data")</code></td>
+</tr>
+<tr>
+<td>Ingestion scripts per dataset</td>
+<td><code>openworm/owmeta</code> repo, per-dataset scripts</td>
+<td>Python</td>
+<td><code>ingest_ripoll_sanchez.py</code>, <code>ingest_witvliet.py</code></td>
+</tr>
+<tr>
+<td>Python query API</td>
+<td><code>owmeta-core</code> + <code>owmeta</code> packages</td>
+<td>Python package (pip)</td>
+<td><code>pip install owmeta-core owmeta</code></td>
+</tr>
+<tr>
+<td>Entity types</td>
+<td>OWMeta schema</td>
+<td>Python classes (RDF-backed)</td>
+<td><code>Neuron</code>, <code>Muscle</code>, <code>Connection</code>, <code>Gene</code>, <code>Channel</code>, <code>Cell</code></td>
+</tr>
+<tr>
+<td>Cell metadata for viewer</td>
+<td>OME-Zarr: <code>geometry/cell_metadata.json</code></td>
+<td>JSON</td>
+<td>Cell names, types, lineage, WormAtlas links</td>
+</tr>
+<tr>
+<td>Configuration schema</td>
+<td><code>openworm.yml</code> <code>data:</code> section</td>
+<td>YAML</td>
+<td><code>data.backend: owmeta</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/owmeta"><code>openworm/owmeta</code></a> + <a href="https://github.com/openworm/owmeta-core"><code>openworm/owmeta-core</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd008</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Phase 1-3: Data Integration</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd008/description</code> (e.g., <code>dd008/ingest-ripoll-sanchez</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD008: Ingest Ripoll-Sanchez neuropeptide-receptor pairs into OWMeta</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pip</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p><strong>Path A — Docker (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cross-ref: DD013 Simulation Stack Architecture for full Docker setup</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import owmeta_core; print(owmeta_core.__version__)&quot;</span>
+<span class="c1"># Then skip to Step 3 below — OWMeta packages are pre-installed in the container</span>
+</code></pre></div>
+<p>Cross-reference: <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> for the containerized simulation stack.</p>
+<p><strong>Path B — Native:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/PyOpenWorm.git
+<span class="nb">cd</span><span class="w"> </span>PyOpenWorm
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">  </span><span class="c1"># includes RDFLib, ZODB</span>
+</code></pre></div>
+<p>Additionally, for connectome data access:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>connectometoolbox<span class="w">  </span><span class="c1"># for connectome data access (see DD020)</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Install OWMeta packages</span>
+pip<span class="w"> </span>install<span class="w"> </span>owmeta-core<span class="w"> </span>owmeta
+
+<span class="c1"># Step 2: Verify import works</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import owmeta_core; print(owmeta_core.__version__)&quot;</span>
+
+<span class="c1"># Step 3: Verify data queries work</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from owmeta_core import connect</span>
+<span class="s2">conn = connect(&#39;openworm_data&#39;)</span>
+<span class="s2"># Verify connectome query returns 302 neurons</span>
+<span class="s2">neurons = list(conn.query(Neuron)())</span>
+<span class="s2">assert len(neurons) &gt;= 302, f&#39;Expected 302+ neurons, got {len(neurons)}&#39;</span>
+<span class="s2">print(f&#39;Connectome loaded: {len(neurons)} neurons&#39;)</span>
+<span class="s2">&quot;</span>
+
+<span class="c1"># Step 4: Docker-based verification</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import owmeta_core; print(owmeta_core.__version__)&quot;</span>
+
+<span class="c1"># Step 5: Backward compatibility (direct backend)</span>
+<span class="c1"># When data.backend: &quot;direct&quot;, OWMeta is not required</span>
+<span class="c1"># Modeling code falls back to direct file access</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with data.backend: &quot;direct&quot;</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ingest_ripoll_sanchez.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/owmeta#TBD</td>
+</tr>
+<tr>
+<td><code>ingest_witvliet.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/owmeta#TBD</td>
+</tr>
+<tr>
+<td><code>ingest_randi.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/owmeta#TBD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="green-light-criteria">Green light criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>import owmeta_core</code> succeeds in Docker</li>
+<li>Query returns &gt;= 302 neurons</li>
+<li><code>docker compose run quick-test</code> passes with <code>data.backend: "direct"</code> (backward compatibility)</li>
+</ul>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> <code>geometry/cell_metadata.json</code> for tooltips, search, and cell identification.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>geometry/</code> (cell metadata overlay)</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>OME-Zarr: <code>geometry/cell_metadata.json</code> — cell names, types, lineage, WormAtlas links</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>Clicking any cell in the 3D viewer shows its WBbt ID, cell type, lineage, and links to WormAtlas. Search by cell name returns the correct 3D position. All 302 neurons + non-neural cells are labeled and searchable.</td>
+</tr>
+<tr>
+<td><strong>Color mapping</strong></td>
+<td>Cell type color coding: neurons (by class), muscles (by quadrant), intestinal cells, hypodermal cells</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="use-owmeta-as-the-canonical-data-access-layer">Use OWMeta as the Canonical Data Access Layer<a class="headerlink" href="#use-owmeta-as-the-canonical-data-access-layer" title="Permanent link">&para;</a></h3>
+<p>All modeling code (c302, Sibernetic initialization, validation scripts) MUST access biological data through OWMeta, not by directly parsing raw files.</p>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li><strong>Single source of truth:</strong> WormBase IDs, cell names, gene symbols are normalized</li>
+<li><strong>Versioned:</strong> OWMeta tracks dataset versions (e.g., WS298, CeNGEN v1.0)</li>
+<li><strong>Queryable:</strong> Semantic queries like "Get all neurons in the nerve ring expressing unc-2" are one-liners</li>
+<li><strong>Extensible:</strong> New datasets (Ripoll-Sanchez neuropeptides, Witvliet development) can be added without modifying downstream code</li>
+</ul>
+<h3 id="reconciliation-with-dd020-connectome-data-access">Reconciliation with <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a> (Connectome Data Access)<a class="headerlink" href="#reconciliation-with-dd020-connectome-data-access" title="Permanent link">&para;</a></h3>
+<p>OWMeta and <code>cect</code> (<a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>) serve complementary purposes:</p>
+<ul>
+<li><strong>Phase 1-2 (current):</strong> Use <code>cect</code> directly for connectome data (<a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>). OWMeta is optional for semantic queries.</li>
+<li><strong>Phase 3+ (future):</strong> OWMeta wraps <code>cect</code> internally. Consuming DDs can use either API.</li>
+</ul>
+<p>Contributors should follow <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a> for connectome-specific data access and use OWMeta when broader semantic queries across multiple data types are needed.</p>
+<h3 id="owmeta-entity-types">OWMeta Entity Types<a class="headerlink" href="#owmeta-entity-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neuron</strong></td>
+<td>name, WormBase ID, type (sensory/inter/motor), position</td>
+<td><code>AVAL</code> (WBbt:0006748)</td>
+</tr>
+<tr>
+<td><strong>Muscle</strong></td>
+<td>name, quadrant, row, innervation</td>
+<td><code>MDR05</code></td>
+</tr>
+<tr>
+<td><strong>Connection</strong></td>
+<td>pre, post, type (syn/gap/peptide), weight</td>
+<td><code>AVAL → AVAR</code> (gap)</td>
+</tr>
+<tr>
+<td><strong>Gene</strong></td>
+<td>symbol, WormBase ID, expression by cell</td>
+<td><code>unc-2</code> (WBGene00006765)</td>
+</tr>
+<tr>
+<td><strong>Channel</strong></td>
+<td>gene, type (Kv/Cav/Cl), NeuroML model</td>
+<td><code>unc-2</code> → <code>ca_boyle_chan</code></td>
+</tr>
+<tr>
+<td><strong>Cell</strong></td>
+<td>WBbt ID, lineage, anatomy, neighbors</td>
+<td><code>int5</code> (WBbt:0005193)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-queries">Example Queries<a class="headerlink" href="#example-queries" title="Permanent link">&para;</a></h3>
+<p><strong>Get all neurons expressing unc-2:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">owmeta_core</span><span class="w"> </span><span class="kn">import</span> <span class="n">connect</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openworm_data&quot;</span><span class="p">)</span>
+
+<span class="n">neurons</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Neuron</span><span class="p">)()</span><span class="o">.</span><span class="n">get_neuron_type_by_expression</span><span class="p">(</span><span class="s2">&quot;unc-2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neurons</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">n</span><span class="o">.</span><span class="n">expression_level</span><span class="p">(</span><span class="s1">&#39;unc-2&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> TPM&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Get connectome for AVAL:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">aval</span> <span class="o">=</span> <span class="n">Neuron</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;AVAL&quot;</span><span class="p">)</span>
+<span class="n">connections</span> <span class="o">=</span> <span class="n">aval</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">pre_cell</span><span class="p">()</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">post_cell</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">connection_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> weight=</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Get 3D position for all intestinal cells:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">intestine_cells</span> <span class="o">=</span> <span class="n">Cell</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">lineage_contains</span><span class="o">=</span><span class="s2">&quot;E&quot;</span><span class="p">)</span>  <span class="c1"># E lineage = intestine</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">intestine_cells</span><span class="p">:</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">position_3d</span><span class="p">()</span>  <span class="c1"># From WormAtlas or Witvliet EM</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="data-ingestion-priority">Data Ingestion Priority<a class="headerlink" href="#data-ingestion-priority" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>OWMeta Status</th>
+<th>Priority</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-019-1352-7">Cook 2019</a> connectome</td>
+<td>Integrated</td>
+<td>--</td>
+<td>Maintain</td>
+</tr>
+<tr>
+<td>WormBase WS298</td>
+<td>Integrated</td>
+<td>--</td>
+<td>Maintain (archival)</td>
+</tr>
+<tr>
+<td>WormAtlas anatomy</td>
+<td>Partial</td>
+<td>High</td>
+<td>Complete integration</td>
+</tr>
+<tr>
+<td>CeNGEN L4 expression</td>
+<td>Integrated</td>
+<td>--</td>
+<td>Maintain</td>
+</tr>
+<tr>
+<td>CeNGEN L1 expression</td>
+<td>Not yet</td>
+<td>Medium</td>
+<td>Add in Phase 1</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet 2021</a> dev. connectomes</td>
+<td>Not yet</td>
+<td>High</td>
+<td>Add for Phase 6 (development)</td>
+</tr>
+<tr>
+<td>Ripoll-Sanchez neuropeptides</td>
+<td>Not yet</td>
+<td>High</td>
+<td>Add for Phase 2 (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>)</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> functional connectivity</td>
+<td>Not yet</td>
+<td>High</td>
+<td>Add for validation</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1126/science.aax1971">Packer 2019</a> embryonic scRNA-seq</td>
+<td>Not yet</td>
+<td>Medium</td>
+<td>Add for Phase 6</td>
+</tr>
+<tr>
+<td>Ben-David 2021 eQTLs</td>
+<td>Not yet</td>
+<td>Low</td>
+<td>Phase 6+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="owmeta-update-process-for-contributors">OWMeta Update Process (For Contributors)<a class="headerlink" href="#owmeta-update-process-for-contributors" title="Permanent link">&para;</a></h3>
+<p><strong>DO NOT directly edit OWMeta.</strong>  Updates go through a review process:</p>
+<ol>
+<li><strong>Propose a dataset addition</strong> via GitHub issue on the OWMeta repository</li>
+<li><strong>Provide data source:</strong> DOI, URL, file format, license</li>
+<li><strong>Provide mapping:</strong> How identifiers in the new dataset map to WormBase IDs or WBbt ontology</li>
+<li><strong>Write an ingestion script</strong> following OWMeta patterns</li>
+<li><strong>Submit PR</strong> with ingestion script + documentation + example queries</li>
+<li><strong>Maintainer review:</strong> OWMeta maintainers check for ID conflicts, data quality, schema consistency</li>
+<li><strong>Merge and version:</strong> New dataset becomes available in next OWMeta release</li>
+</ol>
+<p><strong>Do not:</strong></p>
+<ul>
+<li>Parse raw CSV/JSON files directly in modeling code</li>
+<li>Hardcode cell IDs or gene names</li>
+<li>Duplicate data across repositories</li>
+</ul>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-direct-file-parsing-no-owmeta">1. Direct File Parsing (No OWMeta)<a class="headerlink" href="#1-direct-file-parsing-no-owmeta" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Every contributor writing their own CSV parser leads to:</p>
+<ul>
+<li>ID mismatches (Cook uses "AVAL," WormBase uses "WBGene00006748")</li>
+<li>Version drift (contributor uses old WormBase release)</li>
+<li>Code duplication</li>
+</ul>
+<h3 id="2-sql-database-instead-of-semantic-graph">2. SQL Database Instead of Semantic Graph<a class="headerlink" href="#2-sql-database-instead-of-semantic-graph" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Semantic RDF graphs better capture biological relationships (is-a, part-of, expressed-in, connected-to) than rigid SQL schemas. OWMeta uses RDF + SPARQL.</p>
+<h3 id="3-use-wormbase-api-directly">3. Use WormBase API Directly<a class="headerlink" href="#3-use-wormbase-api-directly" title="Permanent link">&para;</a></h3>
+<p><strong>Partial use:</strong> WormBase REST API is a data source for OWMeta. But WormBase lacks:</p>
+<ul>
+<li>Connectome data (ConnectomeToolbox)</li>
+<li>Single-cell expression (CeNGEN)</li>
+<li>3D positions (WormAtlas)</li>
+</ul>
+<p>OWMeta aggregates WormBase + all other sources.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>All Data Versioned:</strong> OWMeta must track the version of every source dataset (e.g., "WormBase WS298," "CeNGEN v1.0 L4").</p>
+</li>
+<li>
+<p><strong>ID Consistency:</strong> All neuron/cell identifiers must map to WBbt ontology. No orphaned IDs.</p>
+</li>
+<li>
+<p><strong>Provenance Metadata:</strong> Every datum includes source DOI, access date, confidence level (experimental/inferred).</p>
+</li>
+<li>
+<p><strong>API Stability:</strong> OWMeta query syntax must remain backward-compatible across updates. Deprecate gracefully.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Raw experimental data storage:</strong> OWMeta stores curated metadata and normalized identifiers, not raw imaging files, electrophysiology recordings, or EM micrographs. Raw data remains at its source (WormBase, CeNGEN portal, journal supplements).</p>
+</li>
+<li>
+<p><strong>Real-time data ingestion:</strong> OWMeta is a batch pipeline. Datasets are ingested via scripts, reviewed, and released as versioned bundles. There is no streaming or live-update pathway.</p>
+</li>
+<li>
+<p><strong>Data visualization:</strong> Rendering and interactive exploration of data are handled by <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>. OWMeta produces the data; <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> displays it.</p>
+</li>
+<li>
+<p><strong>Connectome graph algorithms:</strong> Graph analysis, bilateral symmetry metrics, and network topology computations are handled by ConnectomeToolbox (<code>cect</code>) per <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>. OWMeta provides semantic queries across data types; <code>cect</code> provides direct connectome-specific analysis.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook connectome, Witvliet developmental data, Ripoll-Sanchez neuropeptides, Randi functional connectivity, Schafer kinematics, and more. These datasets use different formats, identifiers, and coordinate systems.</p>
+<p><strong>The challenge:</strong> A contributor implementing <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (cell-type specialization) must pull CeNGEN expression, map neuron IDs to CeNGEN classes, extract channel genes, and generate NeuroML. Without a unified data layer, this requires writing custom parsers for each dataset.</p>
+<p><strong>The solution:</strong> <strong>OWMeta</strong> (openworm.org/OWMeta) — a semantic knowledge graph providing unified programmatic access to all OpenWorm-relevant biological data.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>OWMeta Documentation:</strong> https://pypi.org/project/owmeta-core/</li>
+<li><strong>ConnectomeToolbox:</strong> openworm.org/ConnectomeToolbox</li>
+<li><strong>WormBase REST API:</strong> https://wormbase.org/about/userguide/for_developers</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-019-1352-7">Cook 2019</a> connectome</td>
+<td>wormwiring.org</td>
+<td>Neuron adjacency + weights</td>
+<td>CSV/Excel → RDF ingestion</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>CeNGEN L4 scRNA-seq</td>
+<td>cengen.org</td>
+<td>Per-neuron-class TPM values</td>
+<td>CSV → RDF ingestion</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>WormAtlas anatomy</td>
+<td>wormatlas.org</td>
+<td>Cell positions, morphology, EM images</td>
+<td>HTML/images → RDF ingestion</td>
+<td>Partial</td>
+</tr>
+<tr>
+<td>Ripoll-Sanchez neuropeptides</td>
+<td>Neuron 111:3570 supplement</td>
+<td>Peptide-receptor pairs + expression</td>
+<td>CSV → RDF ingestion</td>
+<td><strong>Not yet ingested into OWMeta</strong> (needed for <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>). Note: this data <em>is</em> already available in ConnectomeToolbox (<code>cect</code>) per <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>; the "not yet ingested" status refers specifically to OWMeta's RDF graph.</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> functional connectivity</td>
+<td>Nature 623:406 supplement</td>
+<td>302×302 correlation matrix</td>
+<td>NumPy .npy → RDF metadata only</td>
+<td><strong>Not yet ingested</strong> (needed for <a href="../DD010_Validation_Framework/">DD010</a>)</td>
+</tr>
+<tr>
+<td><a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet 2021</a> dev. connectomes</td>
+<td>Nature 596:257</td>
+<td>Multi-stage connectomes (L1, L4, adult)</td>
+<td>CSV → RDF ingestion</td>
+<td><strong>Not yet ingested</strong> (needed for Phase 6)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neuron adjacency (connectome)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Synapse pairs + weights</td>
+<td>OWMeta query → Python objects</td>
+<td>synapse count</td>
+</tr>
+<tr>
+<td>Per-class gene expression</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>TPM per gene per neuron class</td>
+<td>OWMeta query → DataFrame</td>
+<td>TPM</td>
+</tr>
+<tr>
+<td>Neuropeptide-receptor pairs</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Peptide ligand → receptor → expressing cells</td>
+<td>OWMeta query → edge list</td>
+<td>binary (expressed/not)</td>
+</tr>
+<tr>
+<td>Cell positions (3D)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Per-cell x, y, z coordinates</td>
+<td>OWMeta query → NumPy array</td>
+<td>um</td>
+</tr>
+<tr>
+<td>Cell ontology IDs</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Cell name → WBbt ID mapping</td>
+<td>OWMeta query → dict</td>
+<td>identifiers</td>
+</tr>
+<tr>
+<td>Cell metadata (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Cell names, types, lineage, WormAtlas links</td>
+<td>OME-Zarr: <code>geometry/cell_metadata.json</code></td>
+<td>mixed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/owmeta</code> + <code>openworm/owmeta-core</code></li>
+<li><strong>Docker stage:</strong> <code>data</code> in multi-stage Dockerfile (new stage)</li>
+<li><strong><code>versions.lock</code> key:</strong> <code>owmeta</code>, <code>owmeta_core</code></li>
+<li><strong>Build dependencies:</strong> <code>pip install owmeta-core owmeta</code></li>
+<li><strong>Data bundle:</strong> OWMeta data bundle must be downloaded or baked into the Docker image at build time</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># versions.lock</span>
+<span class="nt">owmeta_core</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.14.x&quot;</span><span class="w">         </span><span class="c1"># Pin to specific minor version</span>
+<span class="nt">owmeta</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/openworm/owmeta.git&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TBD&quot;</span><span class="w">                   </span><span class="c1"># Must be updated when OWMeta is revived</span>
+</code></pre></div>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p><strong><code>openworm.yml</code> Section:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owmeta</span><span class="w">                    </span><span class="c1"># &quot;owmeta&quot; (recommended) or &quot;direct&quot; (legacy file access)</span>
+<span class="w">  </span><span class="nt">owmeta_bundle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openworm_data&quot;</span><span class="w">    </span><span class="c1"># OWMeta data bundle name</span>
+<span class="w">  </span><span class="nt">connectome_dataset</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Cook2019&quot;</span><span class="w">     </span><span class="c1"># Cook2019, Witvliet2021, Varshney2011</span>
+<span class="w">  </span><span class="nt">cengen_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;L4_v1.0&quot;</span><span class="w">         </span><span class="c1"># CeNGEN dataset version</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data.backend</code></td>
+<td><code>owmeta</code></td>
+<td><code>owmeta</code> / <code>direct</code></td>
+<td>Data access backend; <code>direct</code> is legacy fallback</td>
+</tr>
+<tr>
+<td><code>data.owmeta_bundle</code></td>
+<td><code>"openworm_data"</code></td>
+<td>String</td>
+<td>OWMeta data bundle name</td>
+</tr>
+<tr>
+<td><code>data.connectome_dataset</code></td>
+<td><code>"Cook2019"</code></td>
+<td><code>Cook2019</code>, <code>Witvliet2021</code>, <code>Varshney2011</code></td>
+<td>Which connectome dataset to use</td>
+</tr>
+<tr>
+<td><code>data.cengen_version</code></td>
+<td><code>"L4_v1.0"</code></td>
+<td>String</td>
+<td>CeNGEN dataset version pin</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import owmeta_core; print(owmeta_core.__version__)&quot;</span>
+<span class="c1"># Check: import succeeds, version prints</span>
+
+<span class="c1"># Data query test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from owmeta_core import connect</span>
+<span class="s2">conn = connect(&#39;openworm_data&#39;)</span>
+<span class="s2">neurons = list(conn.query(Neuron)())</span>
+<span class="s2">assert len(neurons) &gt;= 302, f&#39;Expected 302+ neurons, got {len(neurons)}&#39;</span>
+<span class="s2">print(f&#39;Connectome loaded: {len(neurons)} neurons&#39;)</span>
+<span class="s2">&quot;</span>
+<span class="c1"># Check: 302+ neurons returned</span>
+
+<span class="c1"># Backward compatibility test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with data.backend: &quot;direct&quot;</span>
+<span class="c1"># Check: simulation completes without OWMeta installed</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>import owmeta_core</code> succeeds in Docker</li>
+<li>[ ] Neuron count query returns &gt;= 302</li>
+<li>[ ] <code>quick-test</code> passes with <code>data.backend: "direct"</code> (backward compatibility)</li>
+<li>[ ] New ingestion scripts include source DOI, version, and ID mapping documentation</li>
+<li>[ ] No orphaned IDs (all IDs map to WBbt ontology)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>geometry/cell_metadata.json</code></td>
+<td>Cell metadata overlay</td>
+<td>Cell type color coding: neurons (by class), muscles (by quadrant), intestinal, hypodermal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reality-check-phased-owmeta-mandate">Reality Check: Phased OWMeta Mandate<a class="headerlink" href="#reality-check-phased-owmeta-mandate" title="Permanent link">&para;</a></h3>
+<p>OWMeta is <strong>dormant</strong> (last real commit Jul 2024, <code>owmeta-core</code> last updated Mar 2025). The mandate "all code MUST use OWMeta" cannot be enforced immediately. Phased approach:</p>
+<ul>
+<li><strong>Phase 1:</strong> OWMeta is <strong>optional</strong>. Direct file access is acceptable with documented data provenance (source DOI, version, access date).</li>
+<li><strong>Phase 2:</strong> OWMeta is <strong>recommended</strong>. New code should use OWMeta where possible. Migration scripts provided for existing direct-access code.</li>
+<li><strong>Phase 3+:</strong> OWMeta is <strong>required</strong>. All modeling code accesses data through OWMeta. Direct file parsing is prohibited.</li>
+</ul>
+<p><strong>Trigger for Phase 2→3 transition:</strong> OWMeta is installable on Python 3.12, all Phase 1-2 datasets are ingested, and at least 3 downstream consumers (c302, Sibernetic init, validation) have been successfully migrated.</p>
+<h3 id="reconciliation-with-dd020-connectome-data-access-policy">Reconciliation with <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a> (Connectome Data Access Policy)<a class="headerlink" href="#reconciliation-with-dd020-connectome-data-access-policy" title="Permanent link">&para;</a></h3>
+<p><strong><a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></strong> specifies ConnectomeToolbox (<code>cect</code>, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and <code>cect</code> serve complementary purposes and should coexist:</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><code>cect</code> (<a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>)</th>
+<th>OWMeta (<a href="./">DD008</a>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Direct connectome data access</td>
+<td>Semantic knowledge graph (multi-modal)</td>
+</tr>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>Direct Python API</td>
+<td>RDF semantic graph</td>
+</tr>
+<tr>
+<td><strong>Query style</strong></td>
+<td><code>get_instance()</code> → <code>ConnectomeDataset</code></td>
+<td><code>connect("openworm_data")</code> → SPARQL-like</td>
+</tr>
+<tr>
+<td><strong>Data scope</strong></td>
+<td>Connectome topology only (30+ datasets)</td>
+<td>Connectome + CeNGEN + WormAtlas + lineage + anatomy</td>
+</tr>
+<tr>
+<td><strong>Maintainer</strong></td>
+<td>Active maintainer (commits within days)</td>
+<td>OWMeta team (dormant since Jul 2024)</td>
+</tr>
+<tr>
+<td><strong>Current status</strong></td>
+<td>v0.2.7, preprint pending</td>
+<td>Working but under-maintained</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Direct adjacency matrix access, visualization, cross-dataset comparison</td>
+<td>Unified multi-modal biological queries, provenance tracking</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current recommendation (Phase 1-2):</strong> Use <code>cect</code> directly for all connectome queries (see <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a> API contract). This is the actively maintained, stable tool with 30+ dataset readers.</p>
+<p><strong>Future integration (Phase 3+):</strong> When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>, Ripoll-Sanchez, <a href="https://doi.org/10.7554/eLife.95402">Wang 2024</a>), it should call <code>cect</code> internally as its connectome data provider. Consuming DDs can then use either <code>cect</code> (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.</p>
+<p><strong>Action for OWMeta revival:</strong> Add a <code>cect</code> ingestion adapter so OWMeta wraps <code>cect</code> readers rather than duplicating connectome parsing logic.</p>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WormBase releases</td>
+<td>External</td>
+<td>New WormBase releases may change gene IDs or annotations</td>
+</tr>
+<tr>
+<td>CeNGEN updates</td>
+<td>External</td>
+<td>New expression data may change downstream conductances</td>
+</tr>
+<tr>
+<td>ConnectomeToolbox</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If connectome representation changes, OWMeta ingestion scripts must update</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural circuit (connectome queries)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If neuron adjacency format or ID scheme changes, c302 network generation breaks</td>
+</tr>
+<tr>
+<td>Cell-type specialization (expression data)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>If CeNGEN query format changes, conductance pipeline breaks</td>
+</tr>
+<tr>
+<td>Neuropeptides (peptide-receptor data)</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>If peptide interaction data format changes, neuropeptide layer breaks</td>
+</tr>
+<tr>
+<td>Mechanical cell identity (cell positions)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If cell position queries change, particle tagging breaks</td>
+</tr>
+<tr>
+<td>Validation (experimental data metadata)</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>If data provenance metadata changes, validation data versioning breaks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> OpenWorm Steering</li>
+<li><strong>Implementation Status:</strong> Partial (core OWMeta exists, extensions proposed)</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Ingest Ripoll-Sanchez neuropeptides</p>
+</li>
+<li>Ingest Witvliet developmental connectomes</li>
+<li>Ingest Randi functional connectivity</li>
+<li>Document canonical query patterns for common tasks</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

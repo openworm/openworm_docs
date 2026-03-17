@@ -1,0 +1,5638 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD014_Dynamic_Visualization_Architecture/">
+      
+      
+        <link rel="prev" href="../DD010_Validation_Framework/">
+      
+      
+        <link rel="next" href="../DD014.1_Visual_Rendering_Specification/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD014 Dynamic Visualization - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd014-dynamic-visualization-and-multi-scale-exploration-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD014 Dynamic Visualization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-missing-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Missing Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wormbrowser-2012-what-people-actually-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The WormBrowser (2012): What People Actually Use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wormsim-vision-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The WormSim Vision (2014)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worm3dviewer-2025-a-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worm3DViewer (2025): A Starting Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-2026-technology-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 2026 Technology Landscape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-multi-scale-dynamic-visualization-layer-in-three-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a Multi-Scale Dynamic Visualization Layer in Three Stages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-visualization-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Visualization Scales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-evolve-worm3dviewer-into-the-canonical-post-hoc-viewer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-output-format-ome-zarr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation Output Format: OME-Zarr
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-reconstruction-particles-smooth-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surface Reconstruction (Particles → Smooth Body)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-mapping-for-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Color Mapping for Activity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-ui-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer UI Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green Light Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-keep-particle-cloud-rendering-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Keep Particle Cloud Rendering Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-revive-geppetto-as-the-visualization-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Revive Geppetto as the Visualization Platform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-directly-in-threejs-webgpu-skip-trame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Build Directly in Three.js + WebGPU (Skip Trame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-neuroglancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Use Neuroglancer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-unityunreal-for-a-game-engine-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Use Unity/Unreal for a Game-Engine Experience
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Compose Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-1-post-hoc-trame-viewer-roadmap-phase-1-weeks-1-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap Phase 1, Weeks 1-8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-2-interactive-dynamic-viewer-roadmap-phase-2-weeks-9-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 2: Interactive Dynamic Viewer (Roadmap Phase 2, Weeks 9-20)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-3-wormsim-20-a-digital-organism-in-your-browser-roadmap-phase-4-weeks-21-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap Phase 4, Weeks 21-32+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end-state-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The End-State Vision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-plan-from-wormbrowser-to-wormsim-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Plan: From WormBrowser to WormSim 2.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Plan: From WormBrowser to WormSim 2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-live-where-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Live Where, When
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-quick-win-wormbrowser-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 Quick Win: WormBrowser Enhancement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wormbrowser-feature-parity-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WormBrowser Feature Parity Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-missing-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Missing Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wormbrowser-2012-what-people-actually-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The WormBrowser (2012): What People Actually Use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wormsim-vision-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The WormSim Vision (2014)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worm3dviewer-2025-a-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worm3DViewer (2025): A Starting Point
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-2026-technology-landscape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 2026 Technology Landscape
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decision
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-a-multi-scale-dynamic-visualization-layer-in-three-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build a Multi-Scale Dynamic Visualization Layer in Three Stages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-visualization-scales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Visualization Scales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-evolve-worm3dviewer-into-the-canonical-post-hoc-viewer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulation-output-format-ome-zarr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulation Output Format: OME-Zarr
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-reconstruction-particles-smooth-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surface Reconstruction (Particles → Smooth Body)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-mapping-for-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Color Mapping for Activity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-ui-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer UI Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green Light Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-keep-particle-cloud-rendering-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Keep Particle Cloud Rendering Only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-revive-geppetto-as-the-visualization-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Revive Geppetto as the Visualization Platform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-directly-in-threejs-webgpu-skip-trame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Build Directly in Three.js + WebGPU (Skip Trame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-neuroglancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Use Neuroglancer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-unityunreal-for-a-game-engine-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Use Unity/Unreal for a Game-Engine Experience
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Compose Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-1-post-hoc-trame-viewer-roadmap-phase-1-weeks-1-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap Phase 1, Weeks 1-8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-2-interactive-dynamic-viewer-roadmap-phase-2-weeks-9-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 2: Interactive Dynamic Viewer (Roadmap Phase 2, Weeks 9-20)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-stage-3-wormsim-20-a-digital-organism-in-your-browser-roadmap-phase-4-weeks-21-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap Phase 4, Weeks 21-32+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-end-state-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The End-State Vision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-plan-from-wormbrowser-to-wormsim-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Plan: From WormBrowser to WormSim 2.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Plan: From WormBrowser to WormSim 2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-live-where-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Live Where, When
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-quick-win-wormbrowser-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 Quick Win: WormBrowser Enhancement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wormbrowser-feature-parity-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WormBrowser Feature Parity Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd014-dynamic-visualization-and-multi-scale-exploration-architecture">DD014: Dynamic Visualization and Multi-Scale Exploration Architecture<a class="headerlink" href="#dd014-dynamic-visualization-and-multi-scale-exploration-architecture" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-15</li>
+<li><strong>Supersedes:</strong> WormBrowser (browser.openworm.org, 2012), WormSim (org.wormsim.frontend, 2014-2015), informal Geppetto coupling</li>
+<li><strong>Related:</strong> <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics), <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (Simulation Stack), All DDs (visualization consumes all subsystem outputs)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a>, <a href="../DD_PHASE_ROADMAP/#phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase 2</a>, <a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4</a> | <strong>Layer:</strong> Visualization</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>DD014 defines the three-scale visualization system (molecular, cellular, organism) for the OpenWorm simulation, connecting simulation data to real-time 3D rendering via OME-Zarr export and a Trame/Three.js viewer. The key success metric is that every simulation variable must be visually inspectable within 2 seconds, and the viewer must support full time playback in a web browser with toggleable layers for each subsystem.</p>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
+<h3 id="the-missing-layer">The Missing Layer<a class="headerlink" href="#the-missing-layer" title="Permanent link">&para;</a></h3>
+<p>Design Documents <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> specify a scientifically rigorous simulation engine and its integration backbone. But <strong>none of them describe what a human being actually sees when the simulation runs.</strong> The current visual output is:</p>
+<table>
+<thead>
+<tr>
+<th>What Exists</th>
+<th>What You See</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sibernetic particle renderer</td>
+<td>~100,000 colored dots (blue/green/gray) deforming in a worm shape</td>
+</tr>
+<tr>
+<td>Video capture (xvfb + tmux + ffmpeg)</td>
+<td>Screen recording of particle renderer — <strong>broken, OOMs at &gt;2s</strong></td>
+</tr>
+<tr>
+<td>PNG frames</td>
+<td>Snapshots of particle cloud or matplotlib voltage plots</td>
+</tr>
+<tr>
+<td>WCON trajectory file</td>
+<td>Numerical data (not visual)</td>
+</tr>
+</tbody>
+</table>
+<p>There is no smooth-surfaced worm, no way to zoom into a firing neuron, no way for a non-scientist to understand what they're looking at, and no way to experience the multi-scale nature of the simulation (ion channels → neurons → muscles → body → behavior).</p>
+<h3 id="the-wormbrowser-2012-what-people-actually-use">The WormBrowser (2012): What People Actually Use<a class="headerlink" href="#the-wormbrowser-2012-what-people-actually-use" title="Permanent link">&para;</a></h3>
+<p>The most-used OpenWorm visualization tool is not a simulation viewer — it's the <strong>WormBrowser</strong> (<a href="https://browser.openworm.org">browser.openworm.org</a>), a static 3D anatomy browser live since 2012.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3D anatomy</strong></td>
+<td>Full <em>C. elegans</em> cellular anatomy from VirtualWorm meshes (Caltech/WormBase)</td>
+</tr>
+<tr>
+<td><strong>Layer peeling</strong></td>
+<td>Opacity slider revealing cuticle → organs → muscles → neurons</td>
+</tr>
+<tr>
+<td><strong>Layer toggles</strong></td>
+<td>Individual on/off for cuticle, organs, muscles, neurons</td>
+</tr>
+<tr>
+<td><strong>Search</strong></td>
+<td>Find any cell by name</td>
+</tr>
+<tr>
+<td><strong>Click-to-select</strong></td>
+<td>Click any entity to see its identity</td>
+</tr>
+<tr>
+<td><strong>Zero installation</strong></td>
+<td>WebGL in any modern browser — no Docker, no server</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Technology:</strong> jQuery 1.6.3, open-3d-viewer (WebGL), hosted on Google App Engine. Built by Giovanni Idili (2012). iOS version: <code>openworm/openwormbrowser-ios</code> (2013). Last code update: 2013, but the site remains live and widely referenced — papers, Wikipedia, Experiments with Google, talks.</p>
+<p><strong>John White (Feb 12, 2026 meeting):</strong> <em>"One of the things that gets OpenWorm known... that could do with an update."</em> Specific suggestions:</p>
+<ul>
+<li><strong>Multiple developmental stages</strong> — L1, L4, adult, dauer reconstructions now exist</li>
+<li><strong>Male anatomy</strong> — being reconstructed (Cook 2019 male connectome)</li>
+<li><strong>Comparative species</strong> — <em>Pristionchus pacificus</em> and other nematodes now mapped</li>
+<li><strong>Click neuron → link to WormAtlas</strong> — <em>"click on and identify a particular neuron and have a link"</em></li>
+<li><strong>Work with WormAtlas team</strong> (Nate Schroeder)</li>
+</ul>
+<p>The WormBrowser is approaching end of life (legacy jQuery, no updates since 2013), but it's too important to abandon without a replacement that matches its features. <strong>WormSim 2.0 must achieve WormBrowser feature parity before browser.openworm.org can redirect.</strong></p>
+<h3 id="the-wormsim-vision-2014">The WormSim Vision (2014)<a class="headerlink" href="#the-wormsim-vision-2014" title="Permanent link">&para;</a></h3>
+<p>The Kickstarter-funded WormSim project (<code>org.wormsim.frontend</code>) envisioned "A Digital Organism In Your Browser":</p>
+<ul>
+<li>Name your worm, pick its color, be guided through its biology</li>
+<li>Toggle between skin, muscles, and neurons in 3D</li>
+<li>Watch pre-recorded simulation results streamed like Netflix</li>
+<li>Neurons glow when they fire</li>
+<li>"Now you are having a look INSIDE MY MIND!"</li>
+</ul>
+<p>WormSim's frontend has been dormant since December 2015. The underlying Geppetto platform is maintained but not connected to the current simulation pipeline. <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> explicitly declared Geppetto "out of scope."</p>
+<h3 id="worm3dviewer-2025-a-starting-point">Worm3DViewer (2025): A Starting Point<a class="headerlink" href="#worm3dviewer-2025-a-starting-point" title="Permanent link">&para;</a></h3>
+<p>The Neural Circuit L4 Maintainer created <code>openworm/Worm3DViewer</code> (v0.0.8, June-September 2025) as a prototype that composites three data sources into a single 3D scene:</p>
+<table>
+<thead>
+<tr>
+<th>Data Source</th>
+<th>What It Shows</th>
+<th>Loader</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sibernetic replay</strong> (<code>position_buffer.txt</code>)</td>
+<td>SPH particles color-coded by type, with time slider for animation</td>
+<td><code>SiberneticReplay.py</code></td>
+</tr>
+<tr>
+<td><strong>NeuroML c302</strong> (<code>*.net.nml</code> + <code>*.cell.nml</code>)</td>
+<td>302 neurons with full morphology (soma spheres + dendrite/axon tubes)</td>
+<td><code>neuromlmodel.py</code></td>
+</tr>
+<tr>
+<td><strong>VirtualWorm meshes</strong> (<code>bwm.obj</code>, <code>neurons.obj</code>)</td>
+<td>Smooth 3D anatomy (muscles in green, neurons in jet colormap)</td>
+<td><code>virtualworm.py</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Technology:</strong> Streamlit + PyVista + stpyvista (VTK-based), Docker container, CI with NeuroML validation.</p>
+<p><strong>Critical limitation:</strong> stpyvista renders static iframes. The Sibernetic animation (time slider, play button) works in native VTK GUI mode but <strong>does not function in the Streamlit web deployment</strong>. The web user sees a single frozen frame.</p>
+<h3 id="the-2026-technology-landscape">The 2026 Technology Landscape<a class="headerlink" href="#the-2026-technology-landscape" title="Permanent link">&para;</a></h3>
+<p>The visualization technology available in 2026 is dramatically better than what WormSim had in 2014:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>2014 (WormSim era)</th>
+<th>2026 (Now)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser 3D rendering</td>
+<td>WebGL 1.0 only</td>
+<td><strong>WebGPU production-ready</strong> in Chrome, Firefox, Safari</td>
+</tr>
+<tr>
+<td>3D library</td>
+<td>THREE.js r69</td>
+<td>THREE.js r172+ with zero-config WebGPU + WebGL fallback</td>
+</tr>
+<tr>
+<td>Large data streaming</td>
+<td>Custom HDF5 via Geppetto</td>
+<td><strong>OME-Zarr</strong> (chunked, cloud-native, progressive loading)</td>
+</tr>
+<tr>
+<td>Particle rendering</td>
+<td>~10K particles practical</td>
+<td><strong>100K-1M+ particles at 60 FPS</strong> via instanced rendering / compute shaders</td>
+</tr>
+<tr>
+<td>Server requirement</td>
+<td>Java Geppetto backend required</td>
+<td>Fully <strong>client-side</strong> possible (static files + browser)</td>
+</tr>
+<tr>
+<td>Python → web</td>
+<td>None (Java was required)</td>
+<td><strong>Trame</strong> (Kitware) serves PyVista to browser; <strong>VTK.wasm</strong> runs VTK in browser</td>
+</tr>
+<tr>
+<td>Multi-scale viewers</td>
+<td>Nothing biological</td>
+<td><strong>Neuroglancer</strong>, <strong>Vitessce</strong>, <strong>WEBKNOSSOS</strong> — production tools for multi-scale bio data</td>
+</tr>
+<tr>
+<td>Mobile</td>
+<td>Not supported</td>
+<td>WebGPU on Chrome Android, Safari iOS 26</td>
+</tr>
+<tr>
+<td>VR/AR</td>
+<td>Not practical</td>
+<td><strong>WebXR</strong> with WebGPU (Safari 26.2 on Vision Pro)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h2>
+<h3 id="build-a-multi-scale-dynamic-visualization-layer-in-three-stages">Build a Multi-Scale Dynamic Visualization Layer in Three Stages<a class="headerlink" href="#build-a-multi-scale-dynamic-visualization-layer-in-three-stages" title="Permanent link">&para;</a></h3>
+<p>The visualization layer is not a single tool. It is a <strong>data export pipeline</strong> (from simulation to viewable format), a <strong>viewer application</strong> (renders the data), and a <strong>multi-scale exploration experience</strong> (lets users zoom between organism, tissue/cell, and molecular scales).</p>
+<h3 id="three-visualization-scales">Three Visualization Scales<a class="headerlink" href="#three-visualization-scales" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>What the User Sees</th>
+<th>Data Sources</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Organism</strong></td>
+<td>Smooth-surfaced worm crawling in an environment. Pharynx pumps. Body bends. Defecation events visible.</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> particle positions → surface reconstruction, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> pumping state, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> defecation events</td>
+<td>Google Earth from orbit</td>
+</tr>
+<tr>
+<td><strong>Tissue / Cell</strong></td>
+<td>Individual cells colored by activity. Click a muscle to see its calcium trace. Neurons glow when they fire. Intestinal calcium waves propagate as color gradients.</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> neuron V/Ca, <a href="../DD002_Muscle_Model_Architecture/">DD002</a> muscle activation, <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> cell IDs, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> pharynx cells, <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> intestinal cells</td>
+<td>Google Earth street view</td>
+</tr>
+<tr>
+<td><strong>Molecular</strong></td>
+<td>Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells.</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> channel states, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> conductance densities, <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> peptide concentrations</td>
+<td>Google Earth indoor view</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DD014 Viewer Phases vs. Roadmap Phases:</strong></p>
+<p>DD014 is developed incrementally across three Roadmap phases. To avoid confusion, the table below maps DD014's internal viewer stages to the <a href="../DD_PHASE_ROADMAP/">Phase Roadmap</a>:</p>
+<table>
+<thead>
+<tr>
+<th>DD014 Viewer Stage</th>
+<th>Roadmap Phase</th>
+<th>Timeline</th>
+<th>What Ships</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Viewer Stage 1</strong> — Post-hoc Trame viewer</td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a> (Cell-Type Specialization, months 1-3)</td>
+<td>Weeks 1-8</td>
+<td>Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing.</td>
+</tr>
+<tr>
+<td><strong>Viewer Stage 2</strong> — Interactive dynamic viewer</td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase 2</a> (Modulation + Closed-Loop, months 4-6)</td>
+<td>Weeks 9-20</td>
+<td>All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins.</td>
+</tr>
+<tr>
+<td><strong>Viewer Stage 3</strong> — WormSim 2.0</td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4</a> (Complete Organism, months 13-18)</td>
+<td>Weeks 21-32+</td>
+<td><strong>Molecular scale</strong> (ion channels, gene expression per <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. <strong>browser.openworm.org redirects here after feature parity achieved.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Note: There is no DD014 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is <em>used</em> to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.</p>
+<p>See <strong><a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> (Visual Rendering Specification)</strong> for complete appearance specifications at all three scales. Note: <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are <strong>Viewer Stage 3 only</strong> (Roadmap Phase 4) — not part of Stage 1-2 deliverables.</p>
+<p><strong>Viewer Stage 1 (Roadmap Phase 1): Post-hoc static viewer.</strong> Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. <strong>Build on Worm3DViewer.</strong></p>
+<p><strong>Viewer Stage 2 (Roadmap Phase 2): Interactive dynamic viewer.</strong> Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.</p>
+<p><strong>Viewer Stage 3 (Roadmap Phase 4): WormSim 2.0.</strong> The "Digital Organism In Your Browser" — <strong>adds molecular scale</strong> (gene expression, channel dynamics, intracellular compartments per <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.</p>
+<h3 id="phase-1-evolve-worm3dviewer-into-the-canonical-post-hoc-viewer">Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer<a class="headerlink" href="#phase-1-evolve-worm3dviewer-into-the-canonical-post-hoc-viewer" title="Permanent link">&para;</a></h3>
+<p><strong>What changes from current Worm3DViewer:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Current (v0.0.8)</th>
+<th>Phase 1 Target (v1.0)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Streamlit + stpyvista (static iframe)</td>
+<td><strong>Trame</strong> (PyVista + live server, real animation)</td>
+</tr>
+<tr>
+<td>Reads <code>position_buffer.txt</code> (custom text)</td>
+<td>Reads <strong>OME-Zarr</strong> (standardized, chunked, streamable)</td>
+</tr>
+<tr>
+<td>Three separate views side-by-side</td>
+<td><strong>Single integrated scene</strong> with layer toggle (body, neurons, muscles)</td>
+</tr>
+<tr>
+<td>Hardcoded file paths</td>
+<td>Reads from <code>openworm.yml</code> output directory</td>
+</tr>
+<tr>
+<td>No time animation in web mode</td>
+<td><strong>Full time scrubbing</strong> with slider and play/pause</td>
+</tr>
+<tr>
+<td>No cell selection</td>
+<td><strong>Click any cell</strong> to see its ID, type, and time-series data</td>
+</tr>
+<tr>
+<td>No color-by-activity mapping</td>
+<td><strong>Neurons/muscles colored by activity</strong> (voltage → heatmap)</td>
+</tr>
+<tr>
+<td>v0.0.8 prototype</td>
+<td>v1.0 with Docker integration, CI, documentation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key architectural decision:</strong> Use <strong>Trame</strong> (not raw Streamlit) as the web framework. Trame is Kitware's production web framework for VTK/PyVista, supports both server-side rendering (for large datasets) and client-side vtk.js rendering (for small datasets), and is actively maintained. This preserves the existing PyVista investment in Worm3DViewer while solving the animation problem.</p>
+<p><strong>Alternative considered — rewrite in Three.js now:</strong> Rejected for Phase 1. A Three.js rewrite would require JavaScript expertise that may not exist in the community. Trame lets Python-fluent contributors (who already work with c302 and Sibernetic) build the viewer without learning a new language. Phase 2 or 3 may migrate to Three.js + WebGPU for the public experience.</p>
+<h3 id="simulation-output-format-ome-zarr">Simulation Output Format: OME-Zarr<a class="headerlink" href="#simulation-output-format-ome-zarr" title="Permanent link">&para;</a></h3>
+<p>All simulation subsystems must export their time-varying state to a common format that the viewer can consume. <strong>OME-Zarr</strong> is the standard:</p>
+<div class="highlight"><pre><span></span><code>output/
+├── openworm.zarr/                    # Root Zarr store
+│   ├── .zattrs                       # Global metadata (config, duration, dt)
+│   ├── body/                         # [DD003](DD003_Body_Physics_Architecture.md): SPH particle positions
+│   │   ├── positions/                # Shape: (n_timesteps, n_particles, 3)
+│   │   ├── types/                    # Shape: (n_particles,) — liquid/elastic/boundary
+│   │   ├── cell_ids/                 # Shape: (n_particles,) — [DD004](DD004_Mechanical_Cell_Identity.md) cell identity (when enabled)
+│   │   └── .zattrs                   # Particle count, dt, coordinate units
+│   ├── neural/                       # [DD001](DD001_Neural_Circuit_Architecture.md): Neuron state
+│   │   ├── voltage/                  # Shape: (n_timesteps, 302)
+│   │   ├── calcium/                  # Shape: (n_timesteps, 302)
+│   │   ├── positions/                # Shape: (302, 3) — static neuron positions
+│   │   ├── neuron_ids/               # Shape: (302,) — neuron names
+│   │   └── .zattrs                   # Neuron count, dt, class labels
+│   ├── muscle/                       # [DD002](DD002_Muscle_Model_Architecture.md): Muscle state
+│   │   ├── activation/               # Shape: (n_timesteps, 95)
+│   │   ├── calcium/                  # Shape: (n_timesteps, 95)
+│   │   ├── positions/                # Shape: (95, 3) — muscle center positions
+│   │   ├── muscle_ids/               # Shape: (95,) — muscle names (MDR01-MDR24, etc.)
+│   │   └── .zattrs                   # Muscle count, quadrant mapping
+│   ├── pharynx/                      # [DD007](DD007_Pharyngeal_System_Architecture.md): Pharyngeal state (when enabled)
+│   │   ├── pumping_state/            # Shape: (n_timesteps, 3) — corpus/isthmus/terminal_bulb
+│   │   └── .zattrs
+│   ├── intestine/                    # [DD009](DD009_Intestinal_Oscillator_Model.md): Intestinal state (when enabled)
+│   │   ├── calcium/                  # Shape: (n_timesteps, 20) — per intestinal cell
+│   │   ├── defecation_events/        # Shape: (n_events, 3) — timestamp, type (pBoc/aBoc/Exp)
+│   │   └── .zattrs
+│   ├── neuropeptides/                # [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Peptide state (when enabled)
+│   │   ├── concentrations/           # Shape: (n_timesteps, n_peptides, 302) — per-neuron concentrations
+│   │   └── .zattrs
+│   ├── validation/                   # [DD010](DD010_Validation_Framework.md): Validation results
+│   │   ├── tier2_report.json
+│   │   ├── tier3_report.json
+│   │   └── .zattrs
+│   └── geometry/                     # Static 3D geometry (loaded once)
+│       ├── body_surface.obj          # Reconstructed smooth body surface from particles
+│       ├── neuron_morphologies/      # NeuroML-derived neuron meshes (from Worm3DViewer)
+│       ├── muscle_meshes/            # VirtualWorm body wall muscle mesh
+│       └── .zattrs                   # Geometry metadata, coordinate systems
+</code></pre></div>
+<p><strong>Why OME-Zarr:</strong></p>
+<ul>
+<li><strong>Chunked:</strong> Browser fetches only the time window being viewed, not the entire dataset</li>
+<li><strong>Cloud-native:</strong> Can be served from S3/GCS or a simple HTTP server (no custom backend)</li>
+<li><strong>Standardized:</strong> Supported by Neuroglancer, Vitessce, napari — not an OpenWorm-specific format</li>
+<li><strong>Progressive loading:</strong> Start viewing immediately while more data loads in background</li>
+<li><strong>Versioned metadata:</strong> <code>.zattrs</code> stores provenance (config hash, simulation version, timestamps)</li>
+</ul>
+<h3 id="surface-reconstruction-particles-smooth-body">Surface Reconstruction (Particles → Smooth Body)<a class="headerlink" href="#surface-reconstruction-particles-smooth-body" title="Permanent link">&para;</a></h3>
+<p>The SPH particle cloud must be converted to a smooth surface for the Organism-scale view. Two approaches:</p>
+<p><strong>Option 1: Marching Cubes on density field (recommended for Phase 1)</strong></p>
+<ul>
+<li>Compute a density field from particle positions (Gaussian kernel smoothing)</li>
+<li>Extract an isosurface via marching cubes (VTK's <code>vtkMarchingCubes</code>)</li>
+<li>Result: smooth triangulated mesh of the body surface</li>
+<li>Can be done post-hoc during export (not during simulation)</li>
+<li>PyVista has built-in support: <code>pv.wrap(points).reconstruct_surface()</code></li>
+</ul>
+<p><strong>Option 2: Mesh skinning from reference anatomy</strong></p>
+<ul>
+<li>Start with the VirtualWorm OBJ mesh (smooth anatomical surface)</li>
+<li>Deform it to match particle positions at each timestep (skinning)</li>
+<li>Higher visual quality but requires mapping between particles and mesh vertices</li>
+<li>Phase 2 work</li>
+</ul>
+<h3 id="color-mapping-for-activity">Color Mapping for Activity<a class="headerlink" href="#color-mapping-for-activity" title="Permanent link">&para;</a></h3>
+<p>The viewer maps simulation state to visual properties:</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Visual Mapping</th>
+<th>Colormap</th>
+<th>Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neuron voltage</td>
+<td>Sphere/tube brightness</td>
+<td>Blue (rest) → Red (depolarized)</td>
+<td>-80 mV to +20 mV</td>
+</tr>
+<tr>
+<td>Neuron [Ca²⁺]</td>
+<td>Sphere/tube brightness</td>
+<td>Black (0) → Yellow (high)</td>
+<td>0 to max_ca</td>
+</tr>
+<tr>
+<td>Muscle activation</td>
+<td>Mesh face color</td>
+<td>Green (relaxed) → Red (contracted)</td>
+<td>0.0 to 1.0</td>
+</tr>
+<tr>
+<td>Intestinal [Ca²⁺]</td>
+<td>Cell color gradient</td>
+<td>Blue (low) → Red (high)</td>
+<td>0 to max_intestinal_ca</td>
+</tr>
+<tr>
+<td>Pharynx pumping</td>
+<td>Section opacity</td>
+<td>Transparent (relaxed) → Opaque (contracted)</td>
+<td>0.0 to 1.0</td>
+</tr>
+<tr>
+<td>Neuropeptide concentration</td>
+<td>Volumetric cloud</td>
+<td>Transparent (low) → Colored (high)</td>
+<td>0 to max_conc</td>
+</tr>
+<tr>
+<td>Particle type</td>
+<td>Point color</td>
+<td>Blue/Green/Gray (liquid/elastic/boundary)</td>
+<td>Categorical</td>
+</tr>
+<tr>
+<td>Cell identity (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>)</td>
+<td>Cell outline color</td>
+<td>Per-tissue-type color</td>
+<td>Categorical</td>
+</tr>
+</tbody>
+</table>
+<h3 id="layer-system">Layer System<a class="headerlink" href="#layer-system" title="Permanent link">&para;</a></h3>
+<p>The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons toggle:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What It Shows</th>
+<th>Default State</th>
+<th>Prerequisite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Body surface</strong></td>
+<td>Smooth reconstructed surface from SPH particles</td>
+<td>ON</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> output</td>
+</tr>
+<tr>
+<td><strong>Body particles</strong></td>
+<td>Raw SPH particle cloud (scientific view)</td>
+<td>OFF</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> output</td>
+</tr>
+<tr>
+<td><strong>Neurons</strong></td>
+<td>302 neuron morphologies colored by voltage/calcium</td>
+<td>OFF</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> output</td>
+</tr>
+<tr>
+<td><strong>Muscles</strong></td>
+<td>95 body wall muscles colored by activation</td>
+<td>ON</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a> output</td>
+</tr>
+<tr>
+<td><strong>Pharynx</strong></td>
+<td>63 pharyngeal cells with pumping animation</td>
+<td>OFF</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> output + enabled</td>
+</tr>
+<tr>
+<td><strong>Intestine</strong></td>
+<td>20 intestinal cells with calcium wave</td>
+<td>OFF</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> output + enabled</td>
+</tr>
+<tr>
+<td><strong>Neuropeptides</strong></td>
+<td>Volumetric peptide concentration clouds</td>
+<td>OFF</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> output + enabled</td>
+</tr>
+<tr>
+<td><strong>Cell boundaries</strong></td>
+<td>Per-cell outlines from <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> tagging</td>
+<td>OFF</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a> output + enabled</td>
+</tr>
+<tr>
+<td><strong>Validation overlay</strong></td>
+<td>Green/red markers showing pass/fail per metric</td>
+<td>OFF</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> output</td>
+</tr>
+<tr>
+<td><strong>Annotations</strong></td>
+<td>Text labels on cells/structures (educational)</td>
+<td>OFF</td>
+<td>Static data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="viewer-ui-layout">Viewer UI Layout<a class="headerlink" href="#viewer-ui-layout" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│  OpenWorm Simulation Viewer                    [Layers ▼] [⚙]  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│                                                                 │
+│                   ┌─────────────────────┐                       │
+│                   │                     │                       │
+│                   │    3D Viewport      │   ┌────────────────┐  │
+│                   │                     │   │ Inspector      │  │
+│                   │  [Smooth worm body  │   │                │  │
+│                   │   crawling, neurons │   │ Selected:      │  │
+│                   │   glowing, muscles  │   │ AVAL (neuron)  │  │
+│                   │   contracting]      │   │ V: -52.3 mV    │  │
+│                   │                     │   │ Ca: 0.012 µM   │  │
+│                   │                     │   │ Class: Command  │  │
+│                   │                     │   │ ───────────────│  │
+│                   └─────────────────────┘   │ [Voltage plot] │  │
+│                                             │ [Calcium plot] │  │
+│                                             └────────────────┘  │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ◀ ▶ ■   ━━━━━━━━━●━━━━━━━━━━━━━━━━━━   t=7.2ms / 15.0ms     │
+│           Time: 0.0ms                                  15.0ms   │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p><strong>Key interactions:</strong></p>
+<ul>
+<li><strong>Click</strong> any cell/neuron/muscle → Inspector panel shows identity, state, time series</li>
+<li><strong>Scroll wheel</strong> zooms between scales (organism → tissue → cell)</li>
+<li><strong>Layer toggle</strong> shows/hides different subsystems</li>
+<li><strong>Time scrubber</strong> plays, pauses, or scrubs through simulation time</li>
+<li><strong>Playback speed</strong> adjustable (0.1× to 10×)</li>
+</ul>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, <a href="https://docs.pyvista.org/">PyVista</a>, <a href="https://kitware.github.io/trame/">Trame</a>, VTK</li>
+<li>For Phase 3 (Three.js viewer): Node.js 18+, npm</li>
+<li>A simulation output in OME-Zarr format (produced by <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> pipeline)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>There are two paths: <strong>Docker</strong> (recommended for newcomers) and <strong>native Python</strong> (for viewer development). The primary viewer target is the Phase 1 Trame viewer.</p>
+<p><strong>Clone the meta-repo:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git
+<span class="nb">cd</span><span class="w"> </span>OpenWorm
+</code></pre></div>
+<p><strong>Path A — Docker (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build the viewer service (includes Trame, PyVista, Zarr dependencies)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>viewer
+
+<span class="c1"># Run a simulation first (produces OME-Zarr output)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+
+<span class="c1"># Launch the viewer (serves at http://localhost:8501)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+</code></pre></div>
+<p>The viewer reads simulation output from <code>./output/openworm.zarr</code> and serves a web application with time-animated, multi-layer, interactive 3D visualization.</p>
+<p><strong>Path B — Native Python (for viewer development):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Trame + PyVista viewer dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>trame<span class="w"> </span>pyvista<span class="w"> </span><span class="s2">&quot;trame-vtk&gt;=2.0&quot;</span><span class="w"> </span><span class="s2">&quot;trame-vuetify&gt;=2.0&quot;</span>
+
+<span class="c1"># Install OME-Zarr data reading dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>zarr<span class="w"> </span>fsspec<span class="w"> </span>ome-zarr
+
+<span class="c1"># Install surface reconstruction and mesh utilities</span>
+pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>trimesh
+</code></pre></div>
+<p>You also need a simulation output directory containing <code>openworm.zarr</code>. Either run the Docker simulation (<code>docker compose run simulation</code>) or use sample data from the meta-repo.</p>
+<p><strong>Path C — Phase 3 Three.js Preview (future):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Once the Three.js viewer directory exists in the meta-repo:</span>
+<span class="nb">cd</span><span class="w"> </span>viewer/threejs
+npm<span class="w"> </span>install
+npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">    </span><span class="c1"># Serves at http://localhost:5173</span>
+</code></pre></div>
+<p>This path is not yet available. See Implementation Roadmap Stage 3 below.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Generate simulation output (if not already present)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+<span class="c1"># Expected: ./output/openworm.zarr/ directory with body/, neural/, muscle/ groups</span>
+
+<span class="c1"># Step 2: Launch the Trame viewer</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+<span class="c1"># Expected: web app at http://localhost:8501</span>
+
+<span class="c1"># Step 3: Verify viewer functionality</span>
+<span class="c1"># - Open http://localhost:8501 in a browser</span>
+<span class="c1"># - Verify smooth body surface is rendered (not just a particle cloud)</span>
+<span class="c1"># - Click time scrubber: animation should play forward</span>
+<span class="c1"># - Toggle layers: body_surface, muscles, neurons should each toggle independently</span>
+<span class="c1"># - Click a cell/neuron: inspector panel should show identity and state</span>
+
+<span class="c1"># Step 4: Run viewer smoke test (CI)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>viewer<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from viewer.app import create_viewer</span>
+<span class="s2">v = create_viewer(&#39;/opt/openworm/output/openworm.zarr&#39;)</span>
+<span class="s2">print(&#39;Viewer initialized successfully&#39;)</span>
+<span class="s2">&quot;</span>
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: no import errors, viewer object created</span>
+
+<span class="c1"># Step 5: Verify OME-Zarr export format</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">import zarr</span>
+<span class="s2">z = zarr.open(&#39;output/openworm.zarr&#39;, mode=&#39;r&#39;)</span>
+<span class="s2">for key in z.keys():</span>
+<span class="s2">    print(f&#39;{key}: {list(z[key].keys()) if hasattr(z[key], \&quot;keys\&quot;) else z[key].shape}&#39;)</span>
+<span class="s2">&quot;</span>
+<span class="c1"># Expected: body/positions, body/types, neural/voltage, neural/calcium,</span>
+<span class="c1">#           muscle/activation, muscle/calcium groups present</span>
+</code></pre></div>
+<h3 id="green-light-criteria">Green Light Criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Pass Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Viewer starts</td>
+<td><code>docker compose up viewer</code> serves at localhost:8501 without errors</td>
+</tr>
+<tr>
+<td>Body renders</td>
+<td>Smooth worm surface visible (marching cubes reconstruction, not particle cloud)</td>
+</tr>
+<tr>
+<td>Time playback</td>
+<td>Scrubber plays animation; body bends propagate</td>
+</tr>
+<tr>
+<td>Layer toggles</td>
+<td>Each layer (body, muscles, neurons) can be shown/hidden independently</td>
+</tr>
+<tr>
+<td>Cell selection</td>
+<td>Clicking a cell opens inspector with identity and state</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>&gt;15 FPS on a 2020-era laptop with integrated GPU</td>
+</tr>
+<tr>
+<td>OME-Zarr valid</td>
+<td>All expected Zarr groups present with correct shapes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-keep-particle-cloud-rendering-only">1. Keep Particle Cloud Rendering Only<a class="headerlink" href="#1-keep-particle-cloud-rendering-only" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> The particle cloud is scientifically useful but communicates nothing to non-scientists. It does not show cellular structure, neural activity, or multi-scale dynamics. The worm looks like a colored blob.</p>
+<h3 id="2-revive-geppetto-as-the-visualization-platform">2. Revive Geppetto as the Visualization Platform<a class="headerlink" href="#2-revive-geppetto-as-the-visualization-platform" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Geppetto is maintained but is a heavy Java-based platform with a complex deployment model. It requires per-client server processes and has not been updated for WebGPU. The WormSim frontend built on Geppetto is 10 years stale. Starting fresh on modern tooling (Trame → Three.js) is more practical.</p>
+<h3 id="3-build-directly-in-threejs-webgpu-skip-trame">3. Build Directly in Three.js + WebGPU (Skip Trame)<a class="headerlink" href="#3-build-directly-in-threejs-webgpu-skip-trame" title="Permanent link">&para;</a></h3>
+<p><strong>Deferred to Phase 2/3:</strong> A pure Three.js viewer would be optimal for the public experience (no server, static hosting, best performance). But it requires JavaScript expertise and a longer development timeline. Phase 1 builds on the existing PyVista/Python ecosystem to get a working viewer faster, then Phase 2 ports the interactive experience to the browser.</p>
+<h3 id="4-use-neuroglancer">4. Use Neuroglancer<a class="headerlink" href="#4-use-neuroglancer" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected for primary viewer:</strong> Neuroglancer is optimized for volumetric EM data, not dynamic simulation state. It could be useful for viewing the static EM data that underlies cell boundary definitions (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>), but it cannot play back time-varying particle simulations or display ion channel dynamics.</p>
+<h3 id="5-use-unityunreal-for-a-game-engine-experience">5. Use Unity/Unreal for a Game-Engine Experience<a class="headerlink" href="#5-use-unityunreal-for-a-game-engine-experience" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Game engines produce beautiful results but create a walled garden. They don't run in a browser without heavy WASM builds, require proprietary toolchains, and are unfamiliar to scientific contributors. The web platform (WebGPU + Three.js) achieves comparable visual quality while remaining open and accessible.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Animation works in the browser.</strong> The viewer must support full time playback (play, pause, scrub) when accessed via a web browser. Static iframes are not acceptable.</p>
+</li>
+<li>
+<p><strong>Smooth body surface.</strong> The organism-scale view must show a smooth, recognizable worm shape, not a particle cloud. Non-scientists must be able to identify it as a worm.</p>
+</li>
+<li>
+<p><strong>Activity visualization.</strong> Neuron voltage and muscle activation must be visually distinguishable in the tissue/cell-scale view. A human observer must be able to see which neurons are firing and which muscles are contracting.</p>
+</li>
+<li>
+<p><strong>Layer independence.</strong> Each layer must be independently toggleable without affecting other layers' rendering or performance.</p>
+</li>
+<li>
+<p><strong>Performance.</strong> The viewer must maintain &gt;15 FPS for a standard simulation (100K particles, 302 neurons, 95 muscles) on a 2020-era laptop with integrated GPU.</p>
+</li>
+<li>
+<p><strong>Data format compliance.</strong> All simulation output consumed by the viewer must be in OME-Zarr format (or documented interim formats during migration).</p>
+</li>
+<li>
+<p><strong>Cell selection.</strong> A user must be able to click on any visible cell/neuron/muscle and see its identity and state in an inspector panel.</p>
+</li>
+<li>
+<p><strong>Reproducible deployment.</strong> The viewer must be launchable via <code>docker compose run viewer</code> with no additional setup.</p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-what-this-subsystem-consumes">Inputs (What This Subsystem Consumes)<a class="headerlink" href="#inputs-what-this-subsystem-consumes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPH particle positions (all timesteps)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Per-particle (x, y, z) over time</td>
+<td>OME-Zarr: <code>body/positions/</code></td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Particle types</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Per-particle type (liquid/elastic/boundary)</td>
+<td>OME-Zarr: <code>body/types/</code></td>
+<td>enum</td>
+</tr>
+<tr>
+<td>Particle cell IDs (when enabled)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>Per-particle cell identity</td>
+<td>OME-Zarr: <code>body/cell_ids/</code></td>
+<td>WBbt ID</td>
+</tr>
+<tr>
+<td>Neuron voltage time series</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Per-neuron membrane voltage</td>
+<td>OME-Zarr: <code>neural/voltage/</code></td>
+<td>mV</td>
+</tr>
+<tr>
+<td>Neuron calcium time series</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Per-neuron [Ca²⁺]ᵢ</td>
+<td>OME-Zarr: <code>neural/calcium/</code></td>
+<td>mol/cm³</td>
+</tr>
+<tr>
+<td>Neuron 3D positions</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Static 3D coordinates for 302 neurons</td>
+<td>OME-Zarr: <code>neural/positions/</code></td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Neuron morphologies</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (c302)</td>
+<td>NeuroML cell files with segment geometry</td>
+<td><code>.cell.nml</code> files (static)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Muscle activation time series</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Per-muscle activation [0, 1]</td>
+<td>OME-Zarr: <code>muscle/activation/</code></td>
+<td>dimensionless</td>
+</tr>
+<tr>
+<td>Muscle calcium time series</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Per-muscle [Ca²⁺]ᵢ</td>
+<td>OME-Zarr: <code>muscle/calcium/</code></td>
+<td>mol/cm³</td>
+</tr>
+<tr>
+<td>Muscle 3D positions</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a> / <a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>Static 3D coordinates for 95 muscles</td>
+<td>OME-Zarr: <code>muscle/positions/</code></td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Muscle 3D meshes</td>
+<td>VirtualWorm project</td>
+<td>OBJ mesh of body wall muscles</td>
+<td><code>bwm.obj</code> (static)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Neuron 3D meshes</td>
+<td>VirtualWorm project</td>
+<td>OBJ mesh of neuron anatomy</td>
+<td><code>neurons.obj</code> (static)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Pharyngeal pumping state</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>Per-section contraction over time</td>
+<td>OME-Zarr: <code>pharynx/pumping_state/</code></td>
+<td>[0, 1]</td>
+</tr>
+<tr>
+<td>Intestinal calcium per cell</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Per-cell [Ca²⁺] over time</td>
+<td>OME-Zarr: <code>intestine/calcium/</code></td>
+<td>µM</td>
+</tr>
+<tr>
+<td>Defecation events</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>pBoc/aBoc/Exp timestamps</td>
+<td>OME-Zarr: <code>intestine/defecation_events/</code></td>
+<td>ms</td>
+</tr>
+<tr>
+<td>Neuropeptide concentrations</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Per-peptide, per-neuron concentration over time</td>
+<td>OME-Zarr: <code>neuropeptides/concentrations/</code></td>
+<td>µM</td>
+</tr>
+<tr>
+<td>Validation results</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Tier 1/2/3 pass/fail + metrics</td>
+<td>JSON in <code>validation/</code></td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Simulation config</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td><code>openworm.yml</code> used for this run</td>
+<td>Zarr <code>.zattrs</code> metadata</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs-what-this-subsystem-produces">Outputs (What This Subsystem Produces)<a class="headerlink" href="#outputs-what-this-subsystem-produces" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interactive 3D viewer</td>
+<td>Human users (scientists, public)</td>
+<td>Web application on port 8501</td>
+<td>HTML + WebGL/vtk.js</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Screenshot / video export</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (output pipeline), publications</td>
+<td>Static images or MP4 from viewer</td>
+<td>PNG, MP4</td>
+<td>pixels</td>
+</tr>
+<tr>
+<td>Selected cell state (inspector)</td>
+<td>Human users</td>
+<td>Time series for selected cell</td>
+<td>In-app plot</td>
+<td>mV, µM, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-openwormyml-section">Configuration (<code>openworm.yml</code> Section)<a class="headerlink" href="#configuration-openwormyml-section" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">visualization</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                      </span><span class="c1"># Generate viewer-compatible output</span>
+<span class="w">  </span><span class="nt">export_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zarr&quot;</span><span class="w">              </span><span class="c1"># &quot;zarr&quot; (OME-Zarr, recommended) or &quot;legacy&quot; (position_buffer.txt)</span>
+<span class="w">  </span><span class="nt">surface_reconstruction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># Convert particles to smooth surface mesh</span>
+<span class="w">  </span><span class="nt">export_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">                </span><span class="c1"># Export every Nth simulation timestep (reduces file size)</span>
+
+<span class="nt">viewer</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                     </span><span class="c1"># Launch viewer service in docker-compose</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8501</span><span class="w">                         </span><span class="c1"># Web UI port</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;trame&quot;</span><span class="w">                   </span><span class="c1"># &quot;trame&quot; (Phase 1) or &quot;threejs&quot; (Phase 2/3, future)</span>
+<span class="w">  </span><span class="nt">default_layers</span><span class="p">:</span><span class="w">                    </span><span class="c1"># Which layers are ON by default</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body_surface</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscles</span>
+<span class="w">  </span><span class="nt">colormap</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">neurons</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;coolwarm&quot;</span><span class="w">              </span><span class="c1"># Blue (rest) → Red (depolarized)</span>
+<span class="w">    </span><span class="nt">muscles</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RdYlGn_r&quot;</span><span class="w">             </span><span class="c1"># Green (relaxed) → Red (contracted)</span>
+<span class="w">    </span><span class="nt">intestine</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hot&quot;</span><span class="w">                 </span><span class="c1"># Black → Red → Yellow</span>
+</code></pre></div>
+<h3 id="docker-build">Docker Build<a class="headerlink" href="#docker-build" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/Worm3DViewer</code> (existing repo, to be evolved)</li>
+<li><strong>Docker stage:</strong> <code>viewer</code> in multi-stage Dockerfile (new stage)</li>
+<li><strong><code>versions.lock</code> key:</strong> <code>worm3dviewer</code></li>
+<li><strong>Build dependencies:</strong> <code>pip install pyvista trame trame-vtk trame-vuetify zarr ome-zarr libneuroml pyneuroml</code></li>
+<li><strong>Dockerfile addition:</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c"># === Stage: Viewer ===</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">viewer</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyvista<span class="w"> </span>trame<span class="w"> </span>trame-vtk<span class="w"> </span>trame-vuetify<span class="w"> </span>zarr<span class="w"> </span>ome-zarr<span class="w"> </span>libneuroml<span class="w"> </span>pyneuroml
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libxrender1<span class="w"> </span>libgl1-mesa-glx<span class="w"> </span>xvfb
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>full<span class="w"> </span>/opt/openworm/output<span class="w"> </span>/opt/openworm/output
+<span class="k">COPY</span><span class="w"> </span>viewer/<span class="w"> </span>/opt/openworm/viewer/
+</code></pre></div>
+<h3 id="docker-compose-service">Docker Compose Service<a class="headerlink" href="#docker-compose-service" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml (new service)</span>
+<span class="w">  </span><span class="nt">viewer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">viewer</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">      </span><span class="no">python3 /opt/openworm/viewer/app.py</span>
+<span class="w">        </span><span class="no">--data /opt/openworm/output/openworm.zarr</span>
+<span class="w">        </span><span class="no">--port 8501</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8501:8501&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./output:/opt/openworm/output</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simulation</span>
+</code></pre></div>
+<p><strong>Usage:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run simulation first, then launch viewer</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+<span class="c1"># Open http://localhost:8501 in browser</span>
+</code></pre></div></p>
+<h3 id="integration-test">Integration Test<a class="headerlink" href="#integration-test" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Verify OME-Zarr export is generated</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>simulation
+ls<span class="w"> </span>output/openworm.zarr/
+<span class="c1"># Verify: body/, neural/, muscle/ directories exist</span>
+<span class="c1"># Verify: .zattrs contains simulation metadata</span>
+
+<span class="c1"># Step 2: Verify viewer launches</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>viewer
+curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8501/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;OpenWorm&quot;</span>
+<span class="c1"># Verify: HTTP 200, page contains &quot;OpenWorm&quot;</span>
+
+<span class="c1"># Step 3: Verify data loads correctly</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">import zarr</span>
+<span class="s2">z = zarr.open(&#39;output/openworm.zarr&#39;, mode=&#39;r&#39;)</span>
+<span class="s2">assert &#39;body&#39; in z, &#39;Missing body group&#39;</span>
+<span class="s2">assert &#39;neural&#39; in z, &#39;Missing neural group&#39;</span>
+<span class="s2">assert z[&#39;body/positions&#39;].shape[1] &gt; 0, &#39;No particles&#39;</span>
+<span class="s2">assert z[&#39;neural/voltage&#39;].shape[1] == 302, &#39;Expected 302 neurons&#39;</span>
+<span class="s2">print(&#39;Zarr validation passed&#39;)</span>
+<span class="s2">&quot;</span>
+
+<span class="c1"># Step 4: Verify surface reconstruction</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">import pyvista as pv</span>
+<span class="s2">import numpy as np</span>
+<span class="s2">import zarr</span>
+<span class="s2">z = zarr.open(&#39;output/openworm.zarr&#39;, mode=&#39;r&#39;)</span>
+<span class="s2">points = np.array(z[&#39;body/positions&#39;][0])  # First timestep</span>
+<span class="s2">cloud = pv.PolyData(points)</span>
+<span class="s2">surface = cloud.reconstruct_surface()</span>
+<span class="s2">assert surface.n_cells &gt; 0, &#39;Surface reconstruction failed&#39;</span>
+<span class="s2">print(f&#39;Surface: {surface.n_cells} faces, {surface.n_points} vertices&#39;)</span>
+<span class="s2">&quot;</span>
+
+<span class="c1"># Step 5: Verify backward compatibility</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w">  </span><span class="c1"># with visualization.export_format: &quot;legacy&quot;</span>
+<span class="c1"># Must still produce position_buffer.txt for Worm3DViewer v0.0.8 compatibility</span>
+</code></pre></div>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particle positions format</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If SPH output format changes, Zarr export script must update</td>
+</tr>
+<tr>
+<td>Neuron state output</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If calcium/voltage file format or neuron count changes, neural Zarr group breaks</td>
+</tr>
+<tr>
+<td>Muscle activation output</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>If activation format changes, muscle Zarr group breaks</td>
+</tr>
+<tr>
+<td>Cell identity (particle tagging)</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If cell_id scheme changes, cell-based coloring/selection breaks</td>
+</tr>
+<tr>
+<td>Pharyngeal output format</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>If pumping state format changes, pharynx layer breaks</td>
+</tr>
+<tr>
+<td>Intestinal output format</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>If calcium per-cell format changes, intestine layer breaks</td>
+</tr>
+<tr>
+<td>Neuropeptide output format</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>If concentration format changes, neuropeptide volumetric layer breaks</td>
+</tr>
+<tr>
+<td>Validation report format</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>If report JSON schema changes, validation overlay breaks</td>
+</tr>
+<tr>
+<td>Docker compose structure</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If output directory or service naming changes, viewer service breaks</td>
+</tr>
+<tr>
+<td>VirtualWorm 3D meshes</td>
+<td>External (Caltech/WormBase)</td>
+<td>If mesh coordinates or structure change, anatomy layers break</td>
+</tr>
+<tr>
+<td>NeuroML cell morphologies</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (c302)</td>
+<td>If cell morphology files change, neuron rendering breaks</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulation stack (export step)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If Zarr schema changes, <code>master_openworm.py</code> export step must update</td>
+</tr>
+<tr>
+<td>Contributor onboarding</td>
+<td><a href="../DD011_Contributor_Progression_Model/">DD011</a></td>
+<td>If viewer Docker service changes, L0 orientation task B1 instructions must update</td>
+</tr>
+<tr>
+<td>N2-Whisperer orientation</td>
+<td>AI Agents</td>
+<td>If viewer URL/port changes, N2-Whisperer "run simulation" instructions must update</td>
+</tr>
+<tr>
+<td>Output pipeline</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If screenshot/video export changes, automated output generation changes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-roadmap">Implementation Roadmap<a class="headerlink" href="#implementation-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="viewer-stage-1-post-hoc-trame-viewer-roadmap-phase-1-weeks-1-8">Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a>, Weeks 1-8)<a class="headerlink" href="#viewer-stage-1-post-hoc-trame-viewer-roadmap-phase-1-weeks-1-8" title="Permanent link">&para;</a></h3>
+<p>Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Owner</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add OME-Zarr export to <code>master_openworm.py</code></td>
+<td>Integration Maintainer</td>
+<td>16 hrs</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Phase A1</td>
+</tr>
+<tr>
+<td>Port Worm3DViewer from Streamlit to Trame</td>
+<td>Visualization L4</td>
+<td>24 hrs</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Implement time scrubbing (slider + play/pause)</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td>Trame port</td>
+</tr>
+<tr>
+<td>Implement layer toggle system</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td>Trame port</td>
+</tr>
+<tr>
+<td>Implement surface reconstruction (marching cubes)</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td>OME-Zarr export</td>
+</tr>
+<tr>
+<td>Add neuron voltage → color mapping</td>
+<td>Visualization L4</td>
+<td>4 hrs</td>
+<td>OME-Zarr export</td>
+</tr>
+<tr>
+<td>Add muscle activation → color mapping</td>
+<td>Visualization L4</td>
+<td>4 hrs</td>
+<td>OME-Zarr export</td>
+</tr>
+<tr>
+<td>Add cell click → inspector panel</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td>Trame port</td>
+</tr>
+<tr>
+<td>Add Docker stage + compose service</td>
+<td>Integration Maintainer</td>
+<td>4 hrs</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Phase A1</td>
+</tr>
+<tr>
+<td>Add to CI (build + smoke test)</td>
+<td>Integration Maintainer</td>
+<td>4 hrs</td>
+<td>Docker stage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deliverable:</strong> <code>docker compose up viewer</code> serves a web app with time-animated, multi-layer, interactive 3D worm at <code>localhost:8501</code>.</p>
+<h3 id="viewer-stage-2-interactive-dynamic-viewer-roadmap-phase-2-weeks-9-20">Viewer Stage 2: Interactive Dynamic Viewer (Roadmap <a href="../DD_PHASE_ROADMAP/#phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase 2</a>, Weeks 9-20)<a class="headerlink" href="#viewer-stage-2-interactive-dynamic-viewer-roadmap-phase-2-weeks-9-20" title="Permanent link">&para;</a></h3>
+<p>Enhance the viewer with deeper interactivity and begin Three.js migration for public deployment.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Owner</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add pharynx layer (when enabled)</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> output</td>
+</tr>
+<tr>
+<td>Add intestine layer (when enabled)</td>
+<td>Visualization L4</td>
+<td>8 hrs</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> output</td>
+</tr>
+<tr>
+<td>Add neuropeptide volumetric layer (when enabled)</td>
+<td>Visualization L4</td>
+<td>16 hrs</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> output</td>
+</tr>
+<tr>
+<td>Add validation overlay (green/red pass/fail markers)</td>
+<td>Visualization L4</td>
+<td>4 hrs</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> output</td>
+</tr>
+<tr>
+<td>Mesh skinning (VirtualWorm mesh deformed by particles)</td>
+<td>Visualization L4</td>
+<td>24 hrs</td>
+<td>Stage 1 surface</td>
+</tr>
+<tr>
+<td>Begin Three.js + WebGPU prototype</td>
+<td>Visualization L4 + community</td>
+<td>40 hrs</td>
+<td>Stage 1 data pipeline</td>
+</tr>
+<tr>
+<td>Static OME-Zarr hosting (no server required for viewing)</td>
+<td>Integration Maintainer</td>
+<td>8 hrs</td>
+<td>OME-Zarr export</td>
+</tr>
+<tr>
+<td>Multi-scale zoom (organism → tissue transition)</td>
+<td>Visualization L4</td>
+<td>16 hrs</td>
+<td>All layers working</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deliverable:</strong> Full tissue/cell-scale exploration. Early Three.js prototype for server-free deployment.</p>
+<h3 id="viewer-stage-3-wormsim-20-a-digital-organism-in-your-browser-roadmap-phase-4-weeks-21-32">Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap <a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4</a>, Weeks 21-32+)<a class="headerlink" href="#viewer-stage-3-wormsim-20-a-digital-organism-in-your-browser-roadmap-phase-4-weeks-21-32" title="Permanent link">&para;</a></h3>
+<p>The full WormSim vision, rebuilt on modern technology. Deploys to <code>wormsim.openworm.org</code> as a static site. browser.openworm.org redirects here once WormBrowser feature parity is achieved (see Deployment Plan below).</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Owner</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete Three.js + WebGPU viewer</td>
+<td>Visualization L4 + community</td>
+<td>80 hrs</td>
+<td>Stage 2 prototype</td>
+</tr>
+<tr>
+<td>OME-Zarr served from cloud storage (GitHub Pages, S3)</td>
+<td>Integration Maintainer</td>
+<td>8 hrs</td>
+<td>Stage 2 static hosting</td>
+</tr>
+<tr>
+<td>Narrative-guided onboarding (tutorial mode)</td>
+<td>Community contributor</td>
+<td>24 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>Educational annotations (cell labels, biology facts)</td>
+<td>Community contributor</td>
+<td>16 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>Molecular-scale view (ion channels, Ca dynamics)</td>
+<td>Visualization L4</td>
+<td>40 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>Mobile-responsive design</td>
+<td>Community contributor</td>
+<td>16 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>WebXR support (VR/AR exploration)</td>
+<td>Community contributor</td>
+<td>24 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>Deploy to <code>wormsim.openworm.org</code> (static site)</td>
+<td>Integration Maintainer</td>
+<td>4 hrs</td>
+<td>Three.js viewer</td>
+</tr>
+<tr>
+<td>Verify WormBrowser feature parity (see checklist)</td>
+<td>Visualization L4</td>
+<td>4 hrs</td>
+<td>All Stage 3 features</td>
+</tr>
+<tr>
+<td>Redirect browser.openworm.org → wormsim.openworm.org</td>
+<td>Integration Maintainer</td>
+<td>2 hrs</td>
+<td>Feature parity confirmed</td>
+</tr>
+<tr>
+<td>MyBinder/Colab integration (zero-install demo)</td>
+<td>Community contributor</td>
+<td>8 hrs</td>
+<td>Stage 1 Trame viewer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deliverable:</strong> Anyone with a browser can visit <code>wormsim.openworm.org</code> and explore a dynamic, multi-scale simulation of <em>C. elegans</em> — no Docker, no installation, no server.</p>
+<hr />
+<h2 id="the-end-state-vision">The End-State Vision<a class="headerlink" href="#the-end-state-vision" title="Permanent link">&para;</a></h2>
+<p>When the full system is running (all phases complete), a user visiting <code>wormsim.openworm.org</code> would experience:</p>
+<p><strong>Organism Scale (default view):</strong>
+A smooth, translucent <em>C. elegans</em> crawling across the screen. Body bends propagate anterior to posterior. The pharynx pumps rhythmically at 3-4 Hz at the head. Every ~50 seconds, a visible contraction wave runs posterior-to-anterior as the defecation motor program fires.</p>
+<p><strong>Click "Show Muscles":</strong>
+The body becomes semi-transparent. 95 body wall muscles appear in four quadrants (dorsal right, ventral right, ventral left, dorsal left). As the worm crawls, you see alternating dorsal-ventral contraction waves — muscles flash red when contracting, green when relaxed. The undulatory locomotion pattern is immediately visible.</p>
+<p><strong>Click "Show Neurons":</strong>
+302 neurons appear as glowing spheres and dendrite/axon tubes embedded in the body. Command interneurons (AVA, AVB, AVD, AVE, PVC) pulse with graded potentials. Motor neurons fire rhythmically, driving the muscle contraction pattern. You can see the neural basis of locomotion in real time.</p>
+<p><strong>Click on a single neuron (e.g., AVAL):</strong>
+An inspector panel slides open showing: neuron name, class (command interneuron), WormBase ID, real-time voltage trace, calcium trace, all pre/post-synaptic partners highlighted in the 3D view. Links to WormBase and WormAtlas for biological context.</p>
+<p><strong>Zoom into the pharynx:</strong>
+The 63-cell pharyngeal organ fills the viewport. 20 pharyngeal muscles contract synchronously in a pumping rhythm. Pharyngeal neurons (M1-M5, I1-I6, MC, MI, NSM) are visible with their distinct firing patterns. The grinder at the terminal bulb crushes (future: bacteria particles flowing through the lumen).</p>
+<p><strong>Zoom into the intestine:</strong>
+20 intestinal cells arranged in a tube. A calcium wave propagates posterior-to-anterior, coloring cells from blue to red as [Ca²⁺] rises and falls. Every ~50 seconds, the wave triggers the defecation motor program — you see the contraction propagate through the body.</p>
+<p><strong>Toggle "Neuropeptides":</strong>
+Faint volumetric clouds appear between neurons, showing neuropeptide diffusion fields. Slow modulatory signaling visible as colored mist that waxes and wanes on a seconds timescale, overlaid on the fast synaptic activity.</p>
+<p><strong>Toggle "Validation":</strong>
+Green checkmarks appear on subsystems passing validation (locomotion speed within ±15% of experimental data, pumping frequency 3-4 Hz, defecation period 40-60s). Red marks highlight any deviations.</p>
+<p><strong>This is WormSim 2.0</strong> — the fulfillment of the 2014 Kickstarter promise, rebuilt with 2026 technology. Not a static anatomy browser, not a particle cloud, not a matplotlib plot — a living, dynamic, multi-scale simulation that anyone can explore in a web browser, backed by the most complete computational model of any organism ever built. When this launches, browser.openworm.org redirects here.</p>
+<hr />
+<h2 id="deployment-plan-from-wormbrowser-to-wormsim-20">Deployment Plan: From WormBrowser to WormSim 2.0<a class="headerlink" href="#deployment-plan-from-wormbrowser-to-wormsim-20" title="Permanent link">&para;</a></h2>
+<h3 id="whats-live-where-when">What's Live Where, When<a class="headerlink" href="#whats-live-where-when" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>browser.openworm.org</th>
+<th>wormsim.openworm.org</th>
+<th>Docker viewer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase A1</td>
+<td>WormBrowser (legacy, live)</td>
+<td>Does not exist</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Phase 1</td>
+<td><strong>WormBrowser enhanced</strong> — click neuron/cell → links to WormAtlas + WormBase</td>
+<td>Does not exist</td>
+<td><code>docker compose up viewer</code> → Trame at localhost:8501</td>
+</tr>
+<tr>
+<td>Phase 2</td>
+<td>WormBrowser enhanced (continues)</td>
+<td>Three.js prototype (may lack some WormBrowser features)</td>
+<td>Trame viewer continues</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>WormBrowser enhanced (continues)</td>
+<td>Three.js with organ systems (approaching parity)</td>
+<td>Trame viewer continues</td>
+</tr>
+<tr>
+<td>Phase 4</td>
+<td><strong>Redirects → wormsim.openworm.org</strong></td>
+<td><strong>WormSim 2.0</strong> — full public experience</td>
+<td>Trame viewer continues (local dev)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-1-quick-win-wormbrowser-enhancement">Phase 1 Quick Win: WormBrowser Enhancement<a class="headerlink" href="#phase-1-quick-win-wormbrowser-enhancement" title="Permanent link">&para;</a></h3>
+<p>The existing WormBrowser at browser.openworm.org gets a targeted enhancement in Phase 1 — not a full rewrite, just adding click-to-identify with database links:</p>
+<ul>
+<li><strong>Click any neuron</strong> → tooltip/panel shows: neuron name, class (sensory/inter/motor), <a href="https://wormatlas.org">WormAtlas</a> link, <a href="https://wormbase.org">WormBase</a> link</li>
+<li><strong>Click any muscle</strong> → similar links</li>
+<li>JavaScript patch to the existing legacy codebase (jQuery + open-3d-viewer)</li>
+<li>Estimated effort: ~8-16 hours (AI-assisted)</li>
+<li>Directly addresses John White's Feb 12 request: <em>"click on and identify a particular neuron and have a link"</em></li>
+<li>Ships to browser.openworm.org independently of WormSim 2.0 development</li>
+<li>Timeline: gives John a tangible result for the April 10, 2026 NYC prize meeting</li>
+</ul>
+<h3 id="wormbrowser-feature-parity-checklist">WormBrowser Feature Parity Checklist<a class="headerlink" href="#wormbrowser-feature-parity-checklist" title="Permanent link">&para;</a></h3>
+<p>WormSim 2.0 must have ALL of the following before browser.openworm.org redirects to it:</p>
+<p><strong>WormBrowser features (must match):</strong></p>
+<ul>
+<li>[ ] 3D anatomy from VirtualWorm meshes (688 meshes, 37 material categories)</li>
+<li>[ ] Layer peeling / opacity control (opacity slider)</li>
+<li>[ ] Individual layer toggles (cuticle, organs, muscles, neurons)</li>
+<li>[ ] Search by cell name</li>
+<li>[ ] Click any cell → identify it (name, type, links to WormAtlas + WormBase)</li>
+<li>[ ] Zero installation (works in any WebGL/WebGPU browser)</li>
+<li>[ ] Static hosting (no server process required)</li>
+</ul>
+<p><strong>WormSim 2.0 additions (why users switch):</strong></p>
+<ul>
+<li>[ ] Simulation data overlay (neurons fire, muscles contract, organs pump)</li>
+<li>[ ] Time scrubbing (play, pause, scrub through simulation)</li>
+<li>[ ] Inspector panel (click cell → voltage trace, calcium trace, connections)</li>
+<li>[ ] Multi-scale zoom (organism → tissue → molecular)</li>
+<li>[ ] Validation overlay (pass/fail vs. experimental data)</li>
+</ul>
+<p><strong>John White requirements (phased):</strong></p>
+<ul>
+<li>[ ] Click neuron → links to WormAtlas and WormBase — <strong>Phase 1 quick win on existing WormBrowser</strong></li>
+<li>[ ] Multiple developmental stages (L1, L4, adult) — from <a href="https://doi.org/10.1038/s41586-021-03778-8">Witvliet et al. 2021</a> EM reconstructions (Phase 4+)</li>
+<li>[ ] Dauer larva anatomy — from <a href="https://doi.org/10.1038/s41467-024-45943-3">Yim et al. 2024</a> (Phase 4+)</li>
+<li>[ ] Male anatomy — from <a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a> male connectome (Phase 4+)</li>
+<li>[ ] Comparative species view — <em>Pristionchus pacificus</em> and other nematodes (Phase 5+)</li>
+<li>[ ] Stage/sex comparison mode (Phase 4+)</li>
+</ul>
+<hr />
+<h2 id="boundaries-out-of-scope">Boundaries (Out of Scope)<a class="headerlink" href="#boundaries-out-of-scope" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Running simulation in the browser.</strong> The viewer displays pre-computed results. Client-side simulation (WebGPU compute shaders running SPH) is a moonshot idea but not part of this DD.</p>
+</li>
+<li>
+<p><strong>Gamification / scoring.</strong> The viewer is an exploration tool, not a game. No points, levels, or achievements.</p>
+</li>
+<li>
+<p><strong>Live multi-user collaboration.</strong> The viewer is single-user. Real-time collaborative annotation is future work.</p>
+</li>
+<li>
+<p><strong>VR hardware requirements.</strong> WebXR support (Phase 3) works with standard browsers. No dedicated VR headset required.</p>
+</li>
+<li>
+<p><strong>Editing simulation parameters.</strong> The viewer is read-only. Changing parameters and re-running requires Docker. A future "interactive mode" could allow parameter tweaking but is not in this DD.</p>
+</li>
+</ol>
+<hr />
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>NemaNode</strong> (<a href="https://github.com/openworm/NemaNode">openworm/NemaNode</a>, 2024, dormant):
+Interactive web-based map of neural connections (formerly nemanode.org). May contain reusable graph layout algorithms and layer toggle patterns for DD014's neural circuit visualization layer.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>WormBrowser:</strong> <code>openworm/wormbrowser</code> (Idili, 2012, <a href="https://browser.openworm.org">browser.openworm.org</a>) — Static 3D anatomy browser, still live</li>
+<li><strong>WormBrowser iOS:</strong> <code>openworm/openwormbrowser-ios</code> (2013) — iOS companion app</li>
+<li><strong>WormSim original vision:</strong> <code>openworm/org.wormsim.frontend</code> (2014 Kickstarter, $121K raised from 799 backers, dormant since 2015)</li>
+<li><strong>Worm3DViewer:</strong> <code>openworm/Worm3DViewer</code> (Gleeson, 2025, v0.0.8, Streamlit + PyVista)</li>
+<li><strong>Trame (Kitware):</strong> https://kitware.github.io/trame/ — Production web framework for VTK/PyVista</li>
+<li><strong>OME-Zarr specification:</strong> https://ngff.openmicroscopy.org/ — Cloud-native bioimaging format</li>
+<li><strong>Three.js WebGPU renderer:</strong> https://threejs.org/ — r172+ with production WebGPU support</li>
+<li><strong>VirtualWorm project:</strong> 3D anatomical models of <em>C. elegans</em> (Caltech/WormBase)</li>
+<li><strong>Neuroglancer:</strong> https://github.com/google/neuroglancer — Multi-scale biological data viewer</li>
+<li><strong>PyVista surface reconstruction:</strong> https://docs.pyvista.org/ — <code>reconstruct_surface()</code> for marching cubes</li>
+</ol>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Evolve Worm3DViewer from Streamlit to Trame (Phase 1, critical path)</p>
+</li>
+<li>Implement OME-Zarr export in <code>master_openworm.py</code></li>
+<li>Implement surface reconstruction pipeline</li>
+<li>Identify / recruit Visualization L4 Maintainer</li>
+<li>Coordinate with Neural Circuit L4 Maintainer on Worm3DViewer evolution roadmap</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

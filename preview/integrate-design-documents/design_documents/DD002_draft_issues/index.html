@@ -1,0 +1,4713 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD002_draft_issues/">
+      
+      
+        <link rel="prev" href="../DD002_Muscle_Model_Architecture/">
+      
+      
+        <link rel="next" href="../DD003_Body_Physics_Architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD002 Draft Issues - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd002-draft-github-issues" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD002 Draft Issues
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-validation-scripts-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Validation Scripts (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Validation Scripts (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-refactor-c302_muscletestpy-plotting-into-standalone-plot_muscle_activationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Refactor c302_MuscleTest.py plotting into standalone plot_muscle_activation.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-adapt-muscle_model-validation-code-into-validate_muscle_calciumpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Adapt muscle_model validation code into validate_muscle_calcium.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-convert-c302_iclampmusclepy-and-c302_muscletestpy-into-pytest-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Convert c302_IClampMuscle.py and c302_MuscleTest.py into pytest suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-extend-muscle_modelcomparetoneuroml2py-into-full-parameter-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Extend muscle_model/compareToNeuroML2.py into full parameter audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-output-pipeline-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: Output Pipeline &amp; Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: Output Pipeline &amp; Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-implement-ome-zarr-export-for-muscle-activation-and-calcium-time-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Implement OME-Zarr export for muscle activation and calcium time series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-add-muscle-config-section-validation-to-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Add muscle config section validation to openworm.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-create-dd002dd003-calcium-interface-integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Create DD002→DD003 calcium interface integration test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-extend-c302_targetmusclepy-into-systematic-nmj-connectivity-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Extend c302_TargetMuscle.py into systematic NMJ connectivity validator
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-bug-fixes-improvements-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Bug Fixes &amp; Improvements (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Bug Fixes &amp; Improvements (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-patch-get_muscle_names-to-return-95-muscles-fix-mvl24-phantom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Patch get_muscle_names() to return 95 muscles — fix MVL24 phantom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-10-propagate-muscle-config-parameters-from-openwormyml-to-sibernetic_c302py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 10: Propagate muscle config parameters from openworm.yml to sibernetic_c302.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-11-verify-and-document-calcium-to-activation-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 11: Verify and document calcium-to-activation edge cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-12-audit-nmj-conductance-range-across-all-motor-neuronmuscle-pairs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 12: Audit NMJ conductance range across all motor neuron–muscle pairs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-research-advanced-features-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Research &amp; Advanced Features (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Research &amp; Advanced Features (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-13-survey-cengen-transcriptomic-data-for-muscle-type-specific-channel-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 13: Survey CeNGEN transcriptomic data for muscle-type-specific channel expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-14-prototype-multi-compartment-muscle-cell-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 14: Prototype multi-compartment muscle cell model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-15-evaluate-hill-type-crossbridge-mechanics-feasibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 15: Evaluate Hill-type crossbridge mechanics feasibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-documentation-maintenance-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 5: Documentation &amp; Maintenance (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 5: Documentation &amp; Maintenance (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-16-augment-and-consolidate-muscle-model-contributor-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 16: Augment and consolidate muscle model contributor guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-17-document-nmj-connectivity-and-muscle-quadrant-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 17: Document NMJ connectivity and muscle quadrant mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-18-document-sibernetic_c302py-coupling-script-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 18: Document sibernetic_c302.py coupling script architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reuse-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-validation-scripts-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Validation Scripts (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Validation Scripts (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-refactor-c302_muscletestpy-plotting-into-standalone-plot_muscle_activationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Refactor c302_MuscleTest.py plotting into standalone plot_muscle_activation.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-adapt-muscle_model-validation-code-into-validate_muscle_calciumpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Adapt muscle_model validation code into validate_muscle_calcium.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-convert-c302_iclampmusclepy-and-c302_muscletestpy-into-pytest-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Convert c302_IClampMuscle.py and c302_MuscleTest.py into pytest suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-extend-muscle_modelcomparetoneuroml2py-into-full-parameter-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Extend muscle_model/compareToNeuroML2.py into full parameter audit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-output-pipeline-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: Output Pipeline &amp; Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: Output Pipeline &amp; Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-implement-ome-zarr-export-for-muscle-activation-and-calcium-time-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Implement OME-Zarr export for muscle activation and calcium time series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-add-muscle-config-section-validation-to-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Add muscle config section validation to openworm.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-create-dd002dd003-calcium-interface-integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Create DD002→DD003 calcium interface integration test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-extend-c302_targetmusclepy-into-systematic-nmj-connectivity-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Extend c302_TargetMuscle.py into systematic NMJ connectivity validator
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-bug-fixes-improvements-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Bug Fixes &amp; Improvements (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Bug Fixes &amp; Improvements (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-patch-get_muscle_names-to-return-95-muscles-fix-mvl24-phantom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Patch get_muscle_names() to return 95 muscles — fix MVL24 phantom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-10-propagate-muscle-config-parameters-from-openwormyml-to-sibernetic_c302py" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 10: Propagate muscle config parameters from openworm.yml to sibernetic_c302.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-11-verify-and-document-calcium-to-activation-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 11: Verify and document calcium-to-activation edge cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-12-audit-nmj-conductance-range-across-all-motor-neuronmuscle-pairs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 12: Audit NMJ conductance range across all motor neuron–muscle pairs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-research-advanced-features-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Research &amp; Advanced Features (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Research &amp; Advanced Features (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-13-survey-cengen-transcriptomic-data-for-muscle-type-specific-channel-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 13: Survey CeNGEN transcriptomic data for muscle-type-specific channel expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-14-prototype-multi-compartment-muscle-cell-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 14: Prototype multi-compartment muscle cell model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-15-evaluate-hill-type-crossbridge-mechanics-feasibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 15: Evaluate Hill-type crossbridge mechanics feasibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-documentation-maintenance-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 5: Documentation &amp; Maintenance (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 5: Documentation &amp; Maintenance (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-16-augment-and-consolidate-muscle-model-contributor-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 16: Augment and consolidate muscle model contributor guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-17-document-nmj-connectivity-and-muscle-quadrant-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 17: Document NMJ connectivity and muscle quadrant mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-18-document-sibernetic_c302py-coupling-script-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 18: Document sibernetic_c302.py coupling script architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reuse-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd002-draft-github-issues">DD002 Draft GitHub Issues<a class="headerlink" href="#dd002-draft-github-issues" title="Permanent link">&para;</a></h1>
+<p><strong>Epic:</strong> DD002 — Muscle Model Architecture and Calcium-Force Coupling</p>
+<p><strong>Generated from:</strong> <a href="../DD002_Muscle_Model_Architecture/">DD002: Muscle Model Architecture</a></p>
+<p><strong>Methodology:</strong> <a href="../DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation">DD015 §2.2 — DD Issue Generator</a></p>
+<p><strong>Totals:</strong> 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)</p>
+<p><strong>Note:</strong> DD002's <code>GenericMuscleCell</code> template and <code>sibernetic_c302.py</code> coupling script are already implemented. These issues cover missing validation scripts, output pipeline, bug fixes, documentation, and research for future muscle-type differentiation. Significant working code already exists across multiple OpenWorm repos (<code>c302</code>, <code>muscle_model</code>, <code>sibernetic</code>, <code>CE_locomotion</code>) that can be directly imported, adapted, or used as templates — each issue below includes an <strong>"Existing Code to Reuse"</strong> section pointing contributors to the right starting point rather than writing from scratch. Where applicable, <strong>"DD013 Stack Notes"</strong> describe how each script integrates into the DD013 simulation stack (Docker containers, <code>docker compose run</code>, CI gates).</p>
+<p><strong>Roadmap Context:</strong> DD002 is a <strong>Phase 0</strong> DD (existing, working). Its draft issues span multiple roadmap phases:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Phase</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Validation Scripts (Issues 1-4)</td>
+<td><strong>Phase A1</strong></td>
+<td>2 <code>[TO BE CREATED]</code> scripts + test suite + parameter audit</td>
+</tr>
+<tr>
+<td>2. Output Pipeline (Issues 5-8)</td>
+<td><strong>Phase A1</strong></td>
+<td>OME-Zarr export, config validation, integration tests</td>
+</tr>
+<tr>
+<td>3. Bug Fixes (Issues 9-12)</td>
+<td><strong>Phase A1</strong></td>
+<td>MVL24 fix, config propagation, edge cases</td>
+</tr>
+<tr>
+<td>4. Research (Issues 13-15)</td>
+<td><strong>Phase 1+</strong></td>
+<td>CeNGEN muscle survey, multi-compartment, Hill-type</td>
+</tr>
+<tr>
+<td>5. Documentation (Issues 16-18)</td>
+<td><strong>Any</strong></td>
+<td>Can be addressed independently</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="group-1-validation-scripts-phase-a1">Group 1: Validation Scripts (Phase A1)<a class="headerlink" href="#group-1-validation-scripts-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: Create the two scripts listed as <code>[TO BE CREATED]</code> in DD002, plus unit tests and parameter auditing.</p>
+<hr />
+<h3 id="issue-1-refactor-c302_muscletestpy-plotting-into-standalone-plot_muscle_activationpy">Issue 1: Refactor <code>c302_MuscleTest.py</code> plotting into standalone <code>plot_muscle_activation.py</code><a class="headerlink" href="#issue-1-refactor-c302_muscletestpy-plotting-into-standalone-plot_muscle_activationpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Refactor c302_MuscleTest.py plotting into standalone plot_muscle_activation.py</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, matplotlib</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#how-to-build-test">DD002 — How to Build &amp; Test</a> (Step 4) and <a href="../DD002_Muscle_Model_Architecture/#how-to-visualize">DD002 — How to Visualize</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/c302_MuscleTest.py</code> — already stimulates all 96 muscles and plots calcium dynamics; <strong>extract</strong> the plotting logic into a standalone script that reads <code>.dat</code> files instead of running inline (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_Muscles.py</code> — shows data generation pattern and <code>.dat</code> output format (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>plot_positions.py</code> — plotting template for simulation output (reuse strategy: <strong>reference</strong>)</li>
+<li><code>c302.__init__.get_muscle_names()</code> — import directly for muscle enumeration and quadrant grouping (reuse strategy: <strong>import directly</strong>)</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Script should be runnable inside the Docker container (<code>docker compose run shell</code>). Output to <code>./output/</code> volume mount.</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/plot_muscle_activation.py</code> (new — adapts from <code>c302_MuscleTest.py</code> plotting logic)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python CElegans.py C1Muscles &amp;&amp; jnml LEMS_c302_C1_Muscles.xml -nogui</code></li>
+<li><code>python scripts/plot_muscle_activation.py LEMS_c302_C1_Muscles_muscles.dat</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Reads LEMS muscle output <code>.dat</code> file (tab-separated, first column = time)</li>
+<li>[ ] Extracts intracellular calcium concentration per muscle</li>
+<li>[ ] Computes activation coefficient: <code>activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)</code></li>
+<li>[ ] Plots activation time series for all 95 muscles (4 subplots by quadrant: MDR, MVR, MVL, MDL)</li>
+<li>[ ] Plots heatmap: muscles (y-axis) vs. time (x-axis), warm colormap [0,1]</li>
+<li>[ ] Saves figures to <code>output/</code> directory (PNG or PDF)</li>
+<li>[ ] Prints summary: min/max/mean activation, number of muscles with peak &gt; 0.3</li>
+<li>[ ] Works as standalone script (no c302 import dependency beyond data file)</li>
+<li>[ ] Adapts plotting logic from <code>c302_MuscleTest.py</code> rather than writing from scratch</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> This script turns raw simulation numbers into pictures of muscle activity. Each of the worm's 95 body wall muscles contracts when calcium flows in — this script shows you which muscles are contracting, when, and how strongly. It's like watching an MRI of muscle activity: a heatmap where red means "contracting" and blue means "relaxed." DD002 lists this script as needed but never created. Most of the plotting logic already exists in <code>c302_MuscleTest.py</code> — this issue extracts it into a reusable standalone script.</li>
+</ul>
+<hr />
+<h3 id="issue-2-adapt-muscle_model-validation-code-into-validate_muscle_calciumpy">Issue 2: Adapt <code>muscle_model</code> validation code into <code>validate_muscle_calcium.py</code><a class="headerlink" href="#issue-2-adapt-muscle_model-validation-code-into-validate_muscle_calciumpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Adapt muscle_model validation code into validate_muscle_calcium.py — calcium dynamics and activation range checker</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, numpy</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#how-to-build-test">DD002 — How to Build &amp; Test</a> (Step 5) and <a href="../DD002_Muscle_Model_Architecture/#green-light-criteria">DD002 — Green Light Criteria</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/muscle_model</code> → <code>BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py</code> — already validates calcium dynamics against the published Boyle-Cohen model; <strong>adapt</strong> its validation logic for this script (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>BoyleCohen2008/PythonSupport/Main_Version/input_vars.py</code> — published parameter values for comparison targets (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — 4e-7 Ca²⁺ threshold is hardcoded here; reference for expected scaling (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_MuscleTest.py</code> — comprehensive test that can generate validation data (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Should be callable from <code>docker compose run quick-test</code> pipeline. Exit code 0/1 for CI gate.</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/validate_muscle_calcium.py</code> (new — adapts validation logic from <code>muscle_model/compareToNeuroML2.py</code>)</li>
+<li><code>tests/test_validate_muscle_calcium.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python scripts/validate_muscle_calcium.py LEMS_c302_C1_Muscles_muscles.dat</code></li>
+<li><code>pytest tests/test_validate_muscle_calcium.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Reads LEMS muscle output and extracts calcium and voltage traces</li>
+<li>[ ] Checks activation range: all values in [0, 1]</li>
+<li>[ ] Checks peak activation during neural drive &gt; 0.3 (warning if &lt; 0.5)</li>
+<li>[ ] Estimates calcium decay time constant and checks ~12 ms (Boyle &amp; Cohen 2008)</li>
+<li>[ ] Checks voltage range: no values below -60 mV, no values above +20 mV</li>
+<li>[ ] Prints PASS/FAIL for each criterion with diagnostic details</li>
+<li>[ ] Returns exit code 0 on all-pass, non-zero on any failure</li>
+<li>[ ] Unit tests with synthetic data (clean data → PASS, out-of-range data → FAIL)</li>
+<li>[ ] Adapts validation approach from <code>muscle_model/compareToNeuroML2.py</code></li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The muscle model converts electrical signals into calcium, and calcium into contraction force. This script is a health check — it verifies the calcium dynamics look physically realistic: are contractions in the right range? Does calcium decay at the right speed (~12 ms)? Are voltages staying in biologically plausible bounds? The <code>muscle_model</code> repo already has validation code comparing NeuroML against published equations — this issue adapts that approach into a general-purpose validation script. It's listed as a DD002 deliverable but was never created.</li>
+</ul>
+<hr />
+<h3 id="issue-3-convert-c302_iclampmusclepy-and-c302_muscletestpy-into-pytest-suite">Issue 3: Convert <code>c302_IClampMuscle.py</code> and <code>c302_MuscleTest.py</code> into pytest suite<a class="headerlink" href="#issue-3-convert-c302_iclampmusclepy-and-c302_muscletestpy-into-pytest-suite" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Convert c302_IClampMuscle.py and c302_MuscleTest.py into pytest suite for GenericMuscleCell validation</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#quality-criteria">DD002 — Quality Criteria</a> (criteria 3-5) and <a href="../DD002_Muscle_Model_Architecture/#muscle-cell-template">DD002 — Implementation References — Muscle Cell Template</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/c302_IClampMuscle.py</code> — already tests a single muscle (MDR01) with current clamp injection; <strong>convert</strong> to pytest assertions (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_MuscleTest.py</code> — already validates all muscles with calcium dynamics; <strong>convert</strong> to pytest assertions (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>NeuroML2/SingleCompMuscle.cell.nml</code> — reference for expected channel structure (4 channels, morphology) (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/custom_muscle_components.xml</code> — the actual channel definitions (k_fast_muscle, k_slow_muscle, ca_boyle_muscle) to validate against (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/parameters_C.py</code> (or <code>parameters_D.py</code>) — actual conductance density values used in simulation (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_muscle_cell.py</code> (new — converts <code>c302_IClampMuscle.py</code> and <code>c302_MuscleTest.py</code> logic into pytest)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/test_muscle_cell.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Validates GenericMuscleCell is valid NeuroML 2 (<code>jnml -validate</code>)</li>
+<li>[ ] Verifies all 4 channels present: leak, K_slow, K_fast, Ca_boyle</li>
+<li>[ ] Verifies muscle conductance densities match DD002 spec (leak: 5e-7, K_slow: 0.0006, K_fast: 0.0001, Ca_boyle: 0.0007 S/cm²)</li>
+<li>[ ] Verifies conductance densities are 10-1000x smaller than neuron equivalents (DD002 Quality Criterion 5)</li>
+<li>[ ] Verifies membrane capacitance = 1 µF/cm² and initial voltage = -45 mV</li>
+<li>[ ] Verifies 95 muscle cells are generated (not 96 — see MVL24 issue)</li>
+<li>[ ] Verifies all 4 quadrants present (MDR, MVR, MVL, MDL) with correct counts</li>
+<li>[ ] Tests can run without NEURON installed (NeuroML XML inspection only)</li>
+<li>[ ] Test logic adapted from existing <code>c302_IClampMuscle.py</code> and <code>c302_MuscleTest.py</code> scripts</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Unit tests that verify the muscle cell "recipe" is correct. Each muscle cell has 4 ion channels (leak, two potassium, one calcium) with specific conductance densities tuned to produce slow, sustained contractions rather than sharp spikes. The c302 repo already has two scripts (<code>c302_IClampMuscle.py</code> for single-muscle testing, <code>c302_MuscleTest.py</code> for all-muscle validation) — this issue converts their logic into a proper pytest suite that can run in CI.</li>
+</ul>
+<hr />
+<h3 id="issue-4-extend-muscle_modelcomparetoneuroml2py-into-full-parameter-audit">Issue 4: Extend <code>muscle_model/compareToNeuroML2.py</code> into full parameter audit<a class="headerlink" href="#issue-4-extend-muscle_modelcomparetoneuroml2py-into-full-parameter-audit" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Extend muscle_model/compareToNeuroML2.py into full conductance density audit against Boyle &amp; Cohen 2008 and DD002 spec</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons">DD002 — Technical Approach — Muscle Cells</a> and <a href="https://doi.org/10.1016/j.biosystems.2008.05.025">Boyle &amp; Cohen 2008</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/muscle_model</code> → <code>BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py</code> — <strong>THIS IS THE AUDIT TOOL</strong>. Already compares NeuroML values against Boyle &amp; Cohen 2008 equations; <strong>extend</strong> to output a full comparison table (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>BoyleCohen2008/PythonSupport/Main_Version/input_vars.py</code> — published Boyle-Cohen parameter values as Python constants (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>NeuroML2/SingleCompMuscle.cell.nml</code> — reference values: leak 0.0193, K_slow 0.436, K_fast 0.400, Ca_boyle 0.220 mS/cm² (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/parameters_C.py</code> and <code>c302/parameters_D.py</code> — the actual conductance values in the simulation code (reuse strategy: <strong>reference</strong>)</li>
+<li><strong>Unit note:</strong> The <code>muscle_model</code> repo values (mS/cm²) differ in units from DD002 spec (S/cm²). The audit should explicitly reconcile these unit differences.</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (audit task — output is a summary posted on the issue, extending the <code>compareToNeuroML2.py</code> approach)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (audit task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] For each of the 4 channels (leak, K_slow, K_fast, Ca_boyle), find the conductance value in <code>c302_Muscles.py</code></li>
+<li>[ ] Compare against DD002 spec values and Boyle &amp; Cohen 2008 Table 1</li>
+<li>[ ] Document: file path, line number, variable name, actual value, expected value</li>
+<li>[ ] Check calcium dynamics parameters: rho (0.000238), tau_Ca (11.5943 ms)</li>
+<li>[ ] Check activation formula: <code>min(1.0, [Ca²⁺]ᵢ / 4e-7)</code></li>
+<li>[ ] Check max_muscle_force = 4000 in <code>sibernetic_c302.py</code></li>
+<li>[ ] Reconcile unit differences between <code>muscle_model</code> values (mS/cm²) and DD002 spec values (S/cm²)</li>
+<li>[ ] Post findings as issue comment with comparison table</li>
+<li>[ ] If discrepancies found, file follow-up issues for fixes</li>
+<li>[ ] Uses <code>compareToNeuroML2.py</code> as starting point for the audit methodology</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A parameter audit — checking that the numbers in the code match the numbers in the scientific paper. The <code>muscle_model</code> repo already has <code>compareToNeuroML2.py</code> that does exactly this kind of validation for the standalone muscle model. This issue extends that approach to audit the c302 muscle parameters comprehensively. If parameters drifted during development (a common issue in long-running projects), the simulation's muscle behavior could be subtly wrong. This audit catches silent parameter drift.</li>
+</ul>
+<hr />
+<h2 id="group-2-output-pipeline-integration-phase-a1">Group 2: Output Pipeline &amp; Integration (Phase A1)<a class="headerlink" href="#group-2-output-pipeline-integration-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: OME-Zarr export, config validation, and integration testing for DD002's interfaces with DD001 and DD003.</p>
+<hr />
+<h3 id="issue-5-implement-ome-zarr-export-for-muscle-activation-and-calcium-time-series">Issue 5: Implement OME-Zarr export for muscle activation and calcium time series<a class="headerlink" href="#issue-5-implement-ome-zarr-export-for-muscle-activation-and-calcium-time-series" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Implement OME-Zarr export for muscle/activation/ and muscle/calcium/</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, zarr</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#deliverables">DD002 — Deliverables</a> (OME-Zarr rows) and <a href="../DD014_Dynamic_Visualization_Architecture/">DD014 — OME-Zarr Schema</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — documents the 96-element muscle array format: <code>[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]</code> (reuse strategy: <strong>reference</strong>)</li>
+<li><code>c302.__init__.get_muscle_names()</code> — canonical muscle ordering for array indices (reuse strategy: <strong>import directly</strong>)</li>
+<li>No existing OME-Zarr code in any OpenWorm repo — this is genuinely new work, but data format is well-documented in the references above</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Export script should be runnable inside the Docker container. Output to shared <code>./output/</code> volume. Should be callable from <code>docker compose run shell</code> and eventually integrated into post-simulation pipeline.</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/export_muscle_zarr.py</code> (new)</li>
+<li><code>tests/test_export_muscle_zarr.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python scripts/export_muscle_zarr.py LEMS_c302_C1_Muscles_muscles.dat --output output/openworm.zarr</code></li>
+<li><code>python -c "import zarr; z = zarr.open('output/openworm.zarr'); print(z['muscle/activation'].shape, z['muscle/calcium'].shape)"</code></li>
+<li><code>pytest tests/test_export_muscle_zarr.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Reads LEMS muscle output and extracts per-muscle calcium time series</li>
+<li>[ ] Computes activation coefficients: <code>min(1.0, [Ca²⁺]ᵢ / 4e-7)</code> per muscle per timestep</li>
+<li>[ ] Exports <code>muscle/activation/</code> array: shape (n_timesteps, 95), dtype float32, dimensionless [0,1]</li>
+<li>[ ] Exports <code>muscle/calcium/</code> array: shape (n_timesteps, 95), dtype float32, units mol/cm³</li>
+<li>[ ] Includes OME-Zarr metadata (axes labels: time, muscle_id; units)</li>
+<li>[ ] Muscle IDs ordered by quadrant and row number (MDR01...MDR24, MVR01...MVR24, MVL01...MVL23, MDL01...MDL24)</li>
+<li>[ ] Zarr store readable by DD014 viewer</li>
+<li>[ ] Unit tests verify shapes, dtypes, value ranges, and metadata</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> OME-Zarr is the data format that connects the muscle simulation to the 3D viewer (DD014). This script converts the raw simulation output into a structured data store containing two "movies" — muscle activation (how hard each muscle is contracting) and muscle calcium (the ion concentration driving contraction). The viewer reads this to show a heatmap of the worm's 95 muscles over time.</li>
+</ul>
+<hr />
+<h3 id="issue-6-add-muscle-config-section-validation-to-openwormyml">Issue 6: Add muscle config section validation to openworm.yml<a class="headerlink" href="#issue-6-add-muscle-config-section-validation-to-openwormyml" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Add muscle config section validation and cross-constraint checking</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, yaml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#configuration">DD002 — Integration Contract — Configuration</a> and <a href="../DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml">DD013 §1</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/OpenWorm</code> → <code>.openworm.yml</code> — current minimal config file to validate against (reuse strategy: <strong>reference</strong>)</li>
+<li>DD013 specifies the full <code>openworm.yml</code> schema (see DD013 §1) — use this as the validation spec (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>sibernetic_c302.py</code> — currently reads no config; this issue's work enables Issue 10 (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Validation script should be callable from <code>docker compose run quick-test</code> as a pre-simulation check. Exit code 0/1 for CI gate. Must run before any simulation step.</li>
+<li><strong>Depends On:</strong> DD013 Issue 1 (openworm.yml config schema), DD013 Issue 2 (validation script)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/validate_config.py</code> (extend — add muscle section rules)</li>
+<li><code>tests/test_config.py</code> (extend — add muscle validation tests)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python scripts/validate_config.py openworm.yml</code></li>
+<li><code>pytest tests/test_config.py -k muscle</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Validates <code>muscle.enabled</code> is boolean</li>
+<li>[ ] Validates <code>muscle.calcium_coupling</code> is boolean</li>
+<li>[ ] Validates <code>muscle.max_muscle_force</code> is a positive float</li>
+<li>[ ] Validates <code>muscle.max_ca</code> is a positive float (physically reasonable range: 1e-8 to 1e-5 mol)</li>
+<li>[ ] Enforces cross-constraint: <code>muscle.enabled: true</code> requires <code>neural.enabled: true</code></li>
+<li>[ ] Enforces cross-constraint: <code>muscle.calcium_coupling: true</code> requires <code>muscle.enabled: true</code></li>
+<li>[ ] Warns if <code>max_muscle_force</code> deviates more than 2x from default (4000)</li>
+<li>[ ] Unit tests cover valid config, missing keys, invalid types, cross-constraint violations</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The muscle section in <code>openworm.yml</code> has 4 parameters that control how muscles behave. This adds validation rules — a safety net that catches mistakes like turning on muscles without turning on the neural circuit (muscles need neurons to tell them when to contract). It also catches typos like setting force to -4000 or calcium to a nonsensical value.</li>
+</ul>
+<hr />
+<h3 id="issue-7-create-dd002dd003-calcium-interface-integration-test">Issue 7: Create DD002→DD003 calcium interface integration test<a class="headerlink" href="#issue-7-create-dd002dd003-calcium-interface-integration-test" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Create integration test verifying muscle calcium → Sibernetic activation pipeline</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/sibernetic</code></li>
+<li><strong>Required Capabilities:</strong> python, docker</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#inputs--outputs">DD002 — Integration Contract — Outputs</a> and <a href="../DD002_Muscle_Model_Architecture/#coupling-bridge-ownership">DD002 — Coupling Bridge Ownership</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/sibernetic</code> → <code>sibernetic_c302.py</code> — <strong>THE file to test</strong>. This IS the coupling bridge between c302/NEURON and Sibernetic (reuse strategy: <strong>reference — test target</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> → <code>C302NRNSimulation</code> class — live NEURON integration mode that extracts <code>cai</code> (calcium) from soma; documents the coupling data flow (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>Worm.cpp</code> → <code>Step()</code> — reference for the correct coupling sequence (neural→NMJ→muscle→body); use as gold standard for testing the correct order of operations (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_Muscles.py</code> — generates the test network the integration test should use (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Test should use <code>docker compose run quick-test</code> infrastructure. Short simulation (1-2s sim time). Must be runnable in CI without GPU (mock Sibernetic physics if needed).</li>
+<li><strong>Depends On:</strong> Issue 2 (validate_muscle_calcium.py)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_dd002_dd003_integration.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>docker compose run quick-test</code></li>
+<li><code>pytest tests/test_dd002_dd003_integration.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Runs a short coupled simulation (c302 muscles + Sibernetic, 1-2 seconds sim time)</li>
+<li>[ ] Verifies <code>sibernetic_c302.py</code> reads muscle [Ca²⁺]ᵢ from NEURON state</li>
+<li>[ ] Verifies activation coefficients are computed correctly: <code>min(1.0, [Ca²⁺]ᵢ / max_ca)</code></li>
+<li>[ ] Verifies activation values written to Sibernetic are in [0, 1] range</li>
+<li>[ ] Verifies at least some muscles have non-zero activation (coupling is working)</li>
+<li>[ ] Verifies coupling timestep matches config (<code>dt_coupling = 0.005 ms</code>)</li>
+<li>[ ] Test uses Docker (<code>docker compose run quick-test</code>) or can mock the file interface</li>
+<li>[ ] Reports which muscle IDs are active and their peak activation values</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The critical handoff: muscle calcium from the neural simulation (c302/NEURON) must flow correctly into the body physics engine (Sibernetic) via the coupling script. This test verifies the entire pipeline — neurons fire, muscles accumulate calcium, calcium converts to a contraction coefficient, and that coefficient reaches Sibernetic. If this pipeline breaks, the virtual worm is paralyzed.</li>
+</ul>
+<hr />
+<h3 id="issue-8-extend-c302_targetmusclepy-into-systematic-nmj-connectivity-validator">Issue 8: Extend <code>c302_TargetMuscle.py</code> into systematic NMJ connectivity validator<a class="headerlink" href="#issue-8-extend-c302_targetmusclepy-into-systematic-nmj-connectivity-validator" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Extend c302_TargetMuscle.py into systematic NMJ connectivity validator against Cook et al. 2019</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroscience, connectomics</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling">DD002 — Neural-to-Muscle Coupling</a> and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a> (cect API)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/c302_TargetMuscle.py</code> — already queries which neurons synapse onto a given muscle; <strong>extend</strong> to iterate over all muscles and produce a systematic comparison (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>NervousSystem.cpp</code> — NMJ weight constants per motor neuron class: <code>NMJ_DA</code>, <code>NMJ_DB</code>, <code>NMJ_DD</code>, <code>NMJ_VA</code>, <code>NMJ_VB</code>, <code>NMJ_VD</code> (reuse strategy: <strong>reference</strong>)</li>
+<li>ConnectomeToolbox (<code>cect</code>) API — <code>from cect import connectome_data</code> for Cook et al. 2019 adult hermaphrodite NMJ data (reuse strategy: <strong>import directly</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/validate_nmj_connectivity.py</code> (new — extends <code>c302_TargetMuscle.py</code> approach to all muscles)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python scripts/validate_nmj_connectivity.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Extract NMJ connectivity from c302 muscle network (which motor neurons innervate which muscles)</li>
+<li>[ ] Extract NMJ connectivity from cect/ConnectomeToolbox (Cook et al. 2019 adult hermaphrodite)</li>
+<li>[ ] Compare: for each muscle, list motor neurons in c302 vs. Cook et al. 2019</li>
+<li>[ ] Report: number of matching connections, missing connections, extra connections</li>
+<li>[ ] Flag any muscles with zero innervation in c302 but known innervation in Cook et al.</li>
+<li>[ ] Flag NMJ conductance values: are 0.5-1.0 nS values consistent across all NMJs?</li>
+<li>[ ] Post comparison table as issue comment</li>
+<li>[ ] File follow-up issues for any significant discrepancies</li>
+<li>[ ] Builds on <code>c302_TargetMuscle.py</code> query approach rather than reimplementing NMJ lookup</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Motor neurons connect to muscles via neuromuscular junctions (NMJs) — the biological "wires" that tell muscles when to contract. Cook et al. (2019) mapped every NMJ connection in the real worm using electron microscopy. The c302 repo already has <code>c302_TargetMuscle.py</code> that queries NMJ connections for a single muscle — this issue extends that into a systematic validator across all 95 muscles against the ground truth connectome. This requires domain expertise to interpret which discrepancies matter biologically.</li>
+</ul>
+<hr />
+<h2 id="group-3-bug-fixes-improvements-phase-a1">Group 3: Bug Fixes &amp; Improvements (Phase A1)<a class="headerlink" href="#group-3-bug-fixes-improvements-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: Fix known issues and improve muscle model configurability.</p>
+<hr />
+<h3 id="issue-9-patch-get_muscle_names-to-return-95-muscles-fix-mvl24-phantom">Issue 9: Patch <code>get_muscle_names()</code> to return 95 muscles — fix MVL24 phantom<a class="headerlink" href="#issue-9-patch-get_muscle_names-to-return-95-muscles-fix-mvl24-phantom" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Patch get_muscle_names() in c302/__init__.py to return 95 muscles — fix MVL24 phantom</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#issue-3-mvl24-muscle-does-not-exist">DD002 — Known Issues — Issue 3: MVL24</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/__init__.py</code> → <code>get_muscle_names()</code> — returns all 96 muscle names; <strong>this function must be patched</strong> to return 95 (excluding MVL24) (reuse strategy: <strong>modify in place</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_Muscles.py</code> — muscle generation loop that creates MVL24; must be updated to skip it (reuse strategy: <strong>modify in place</strong>)</li>
+<li><code>CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv</code> — row to remove (reuse strategy: <strong>modify in place</strong>)</li>
+<li><code>c302.__init__.is_muscle(cell_name)</code> — verify this still works after the fix (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> Issue 3 (unit tests — to verify fix doesn't break anything)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/__init__.py</code> (modify <code>get_muscle_names()</code> to exclude MVL24)</li>
+<li><code>c302/c302_Muscles.py</code> (modify muscle generation)</li>
+<li><code>CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv</code> (update to 95 rows)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python CElegans.py C1Muscles</code></li>
+<li><code>jnml -validate LEMS_c302_C1_Muscles.xml</code></li>
+<li><code>pytest tests/test_muscle_cell.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] MVL24 is either removed or has all conductances set to zero</li>
+<li>[ ] <code>muscles.csv</code> contains exactly 95 rows (not 96)</li>
+<li>[ ] Quadrant counts: MDR=24, MVR=24, MVL=23, MDL=24 (total=95)</li>
+<li>[ ] <code>get_muscle_names()</code> returns exactly 95 names</li>
+<li>[ ] NeuroML validation passes (<code>jnml -validate</code>)</li>
+<li>[ ] Simulation runs without error after fix</li>
+<li>[ ] Existing unit tests still pass</li>
+<li>[ ] If MVL24 is removed (preferred), update any hardcoded references to 96 muscles</li>
+<li>[ ] If MVL24 is zeroed (fallback), add comment explaining why</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The real worm has 95 body wall muscles, but the simulation has 96 — an extra phantom muscle called MVL24 that doesn't exist in nature. The fix is surgical: patch <code>get_muscle_names()</code> in <code>c302/__init__.py</code> to exclude MVL24, update the muscle generation loop, and remove the row from <code>muscles.csv</code>. This is a minor biological inaccuracy that should be fixed to prevent confusion and ensure muscle-count-dependent analyses are correct.</li>
+</ul>
+<hr />
+<h3 id="issue-10-propagate-muscle-config-parameters-from-openwormyml-to-sibernetic_c302py">Issue 10: Propagate muscle config parameters from openworm.yml to sibernetic_c302.py<a class="headerlink" href="#issue-10-propagate-muscle-config-parameters-from-openwormyml-to-sibernetic_c302py" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Propagate muscle.max_muscle_force and muscle.max_ca from openworm.yml to coupling script</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/sibernetic</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#configuration">DD002 — Integration Contract — Configuration</a> and <a href="../DD013_Simulation_Stack_Architecture/#1-simulation-configuration-system-openwormyml">DD013 §1</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/sibernetic</code> → <code>sibernetic_c302.py</code> — <strong>THE file to modify</strong>. Currently hardcodes <code>max_force</code> and <code>max_ca</code>; replace hardcoded values with config loading (reuse strategy: <strong>modify in place</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — 4e-7 hardcoded at the Ca²⁺ scaling line; must also read from config (reuse strategy: <strong>modify in place</strong>)</li>
+<li><code>openworm/OpenWorm</code> → <code>master_openworm.py</code> — orchestrator that launches <code>sibernetic_c302.py</code>; needs to pass config path (reuse strategy: <strong>modify in place</strong>)</li>
+<li>DD013 §1 <code>openworm.yml</code> schema — defines <code>muscle.max_muscle_force</code> and <code>muscle.max_ca</code> fields (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>DD013 Stack Notes:</strong> Config must flow through the full chain: <code>openworm.yml</code> → <code>master_openworm.py</code> → <code>sibernetic_c302.py</code> → NEURON/Sibernetic. Config file path should be a Docker volume mount or environment variable.</li>
+<li><strong>Depends On:</strong> DD013 Issue 1 (openworm.yml schema), DD013 Issue 9 (config loading in master_openworm.py)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>sibernetic_c302.py</code> (read config instead of hardcoded values)</li>
+<li><code>tests/test_coupling_config.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python -c "import yaml; c = yaml.safe_load(open('openworm.yml')); print(c['muscle'])"</code></li>
+<li><code>pytest tests/test_coupling_config.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>sibernetic_c302.py</code> reads <code>muscle.max_muscle_force</code> from <code>openworm.yml</code> (default: 4000)</li>
+<li>[ ] <code>sibernetic_c302.py</code> reads <code>muscle.max_ca</code> from <code>openworm.yml</code> (default: 4e-7)</li>
+<li>[ ] Activation formula uses config value: <code>min(1.0, ca / config['muscle']['max_ca'])</code></li>
+<li>[ ] Force formula uses config value: <code>activation * config['muscle']['max_muscle_force']</code></li>
+<li>[ ] Falls back to hardcoded defaults if config not available (backward compatible)</li>
+<li>[ ] Unit tests verify config loading and fallback behavior</li>
+<li>[ ] Changing config values in openworm.yml changes simulation behavior (no restart of NEURON needed)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Currently the muscle coupling script has key parameters hardcoded (max force = 4000, max calcium = 4e-7). This moves them to the central config file (<code>openworm.yml</code>) so contributors can tune muscle strength and calcium sensitivity without editing code. Think of it like moving a knob from inside the engine to the dashboard.</li>
+</ul>
+<hr />
+<h3 id="issue-11-verify-and-document-calcium-to-activation-edge-cases">Issue 11: Verify and document calcium-to-activation edge cases<a class="headerlink" href="#issue-11-verify-and-document-calcium-to-activation-edge-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Verify calcium-to-activation formula handles edge cases correctly</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#calcium-to-force-coupling-the-bridge-to-sibernetic">DD002 — Calcium-to-Force Coupling</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — the actual activation formula implementation to test; locate the <code>min(1.0, ca / max_ca)</code> line (reuse strategy: <strong>reference — test target</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>sibernetic_c302.py</code> — where the formula is applied in production (reuse strategy: <strong>reference — test target</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>Muscles.cpp</code> — alternative (simpler) muscle dynamics using first-order low-pass filter; useful comparison for expected behavior at edge cases (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_activation_edge_cases.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/test_activation_edge_cases.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Tests activation formula: <code>activation = min(1.0, [Ca²⁺]ᵢ / max_ca)</code></li>
+<li>[ ] Verifies: [Ca²⁺]ᵢ = 0 → activation = 0</li>
+<li>[ ] Verifies: [Ca²⁺]ᵢ = max_ca → activation = 1.0</li>
+<li>[ ] Verifies: [Ca²⁺]ᵢ &gt; max_ca → activation = 1.0 (clamped, not &gt; 1)</li>
+<li>[ ] Verifies: negative [Ca²⁺]ᵢ (numerical artifact) → activation clamped to 0 (not negative)</li>
+<li>[ ] Verifies: very small [Ca²⁺]ᵢ (1e-20) → activation ≈ 0 (not NaN, not underflow)</li>
+<li>[ ] Documents any negative-calcium clamping in code comments</li>
+<li>[ ] If negative calcium is possible, add <code>max(0, ca)</code> guard and document why</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The activation formula converts calcium concentration to a contraction coefficient [0, 1]. But what happens at the edges? What if calcium goes negative (a numerical glitch)? What if it exceeds the maximum? What about extremely tiny values? This issue verifies the formula is robust — no NaN values, no negative contractions, no activation above 100%. Defensive programming for the most critical equation in the muscle model.</li>
+</ul>
+<hr />
+<h3 id="issue-12-audit-nmj-conductance-range-across-all-motor-neuronmuscle-pairs">Issue 12: Audit NMJ conductance range across all motor neuron–muscle pairs<a class="headerlink" href="#issue-12-audit-nmj-conductance-range-across-all-motor-neuronmuscle-pairs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Audit NMJ conductance values (0.5-1.0 nS) across all motor neuron–muscle pairs</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroscience</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling">DD002 — Neural-to-Muscle Coupling</a> and <a href="../DD001_Neural_Circuit_Architecture/">DD001 — Integration Contract</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/parameters_C.py</code> → <code>neuron_to_muscle_chem_exc_syn_gbase</code>, <code>neuron_to_muscle_chem_inh_syn_gbase</code> — the actual synapse conductance values used in the simulation (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_TargetMuscle.py</code> — queries NMJ connections for a given muscle; use to enumerate all connections (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>NervousSystem.cpp</code> — NMJ weight constants per motor neuron class (<code>NMJ_DA</code>, <code>NMJ_DB</code>, <code>NMJ_DD</code>, <code>NMJ_VA</code>, <code>NMJ_VB</code>, <code>NMJ_VD</code>); comparison reference (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (audit task — output is a summary posted on the issue)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (audit task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Extract all NMJ synapse conductance values from c302 muscle network LEMS/NeuroML files</li>
+<li>[ ] Verify all NMJ conductances are in the 0.5-1.0 nS range specified in DD002</li>
+<li>[ ] Compare NMJ conductance (0.5-1.0 nS) vs. inter-neuron synapse conductance (0.09 nS) — confirm ratio is ~5-11x</li>
+<li>[ ] Check if any motor neuron classes (VA, VB, DA, DB, DD, VD, AS) have systematically different NMJ weights</li>
+<li>[ ] Report distribution: histogram of NMJ conductance values across all ~350 NMJ connections</li>
+<li>[ ] Identify outliers (any NMJ conductance &lt; 0.3 nS or &gt; 2.0 nS)</li>
+<li>[ ] Post findings as issue comment with comparison table and histogram</li>
+<li>[ ] Assess whether uniform conductance is appropriate or if motor-neuron-class-specific values would be more realistic</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Each motor neuron connects to its target muscle via a neuromuscular junction (NMJ) with a specific "volume" setting — the conductance. DD002 says all NMJs should be 0.5-1.0 nS (about 5-10x louder than neuron-to-neuron connections). But are they actually set correctly in the code? Do different motor neuron types (e.g., the ones for forward vs. backward locomotion) need different conductance values? This audit requires neuroscience expertise to interpret the results.</li>
+</ul>
+<hr />
+<h2 id="group-4-research-advanced-features-phase-1">Group 4: Research &amp; Advanced Features (Phase 1+)<a class="headerlink" href="#group-4-research-advanced-features-phase-1" title="Permanent link">&para;</a></h2>
+<p>Target: Investigate muscle-type differentiation, multi-compartment modeling, and alternative mechanical models for future phases.</p>
+<hr />
+<h3 id="issue-13-survey-cengen-transcriptomic-data-for-muscle-type-specific-channel-expression">Issue 13: Survey CeNGEN transcriptomic data for muscle-type-specific channel expression<a class="headerlink" href="#issue-13-survey-cengen-transcriptomic-data-for-muscle-type-specific-channel-expression" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Survey CeNGEN data for muscle-type-specific ion channel expression profiles</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>human-expert</code>, <code>L3</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, bioinformatics, neuroscience</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#if-muscle-type-diversity-is-required-phase-3">DD002 — Migration Path — Muscle-Type Diversity</a> and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/wormneuroatlas</code> repo — Python package for accessing CeNGEN single-cell RNA-seq data; use as the primary data access interface (reuse strategy: <strong>import directly</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/parameters_D.py</code> — current channel→gene mapping (which genes map to which model channels); use as the mapping to validate against (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>NeuroML2/*.channel.nml</code> — the channel definitions that would need gene-specific conductances if differentiation is warranted (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/JohnsonMailler_MuscleModel</code> → <code>NeuroML2/CaPool.nml</code> — alternative Ca²⁺ pool dynamics as reference for different channel implementations (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a report)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (research task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Query CeNGEN single-cell RNA-seq database for body wall muscle cells</li>
+<li>[ ] Extract expression levels for DD002's 4 channel genes: leak (best candidate), K_slow (kvs-1? egl-2?), K_fast (shk-1?), Ca_boyle (egl-19? unc-2?)</li>
+<li>[ ] Determine which WormBase gene IDs correspond to each DD002 channel type</li>
+<li>[ ] Compare expression across body wall muscles vs. pharyngeal muscles vs. vulval muscles</li>
+<li>[ ] Assess: do body wall muscles in different quadrants (MDR/MVR/MVL/MDL) show differential channel expression?</li>
+<li>[ ] Summarize: which muscle types might need distinct conductance profiles?</li>
+<li>[ ] Post report as issue comment with data tables and citations</li>
+<li>[ ] If differentiation is warranted, draft a follow-up issue for Phase 3 implementation</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The current model uses one generic muscle cell type for all 95 body wall muscles. But real worms might have subtle differences — do muscles near the head express different ion channels than muscles near the tail? CeNGEN is a massive dataset of gene expression in individual C. elegans cells. This research mines that data to determine whether we need different "recipes" for different muscles, or whether the single generic model is biologically justified.</li>
+</ul>
+<hr />
+<h3 id="issue-14-prototype-multi-compartment-muscle-cell-model">Issue 14: Prototype multi-compartment muscle cell model<a class="headerlink" href="#issue-14-prototype-multi-compartment-muscle-cell-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Prototype multi-compartment muscle cell to evaluate voltage non-uniformity</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>human-expert</code>, <code>L3</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, neuroscience, computational-modeling</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#issue-1-single-muscle-compartment">DD002 — Known Issues — Issue 1: Single Muscle Compartment</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/muscle_model</code> → <code>NeuroML2/SingleCompMuscle.cell.nml</code> — <strong>starting point</strong>: the complete single-compartment muscle cell with 4 channels and morphology; extend to multi-compartment (reuse strategy: <strong>adapt</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/custom_muscle_components.xml</code> — channel definitions (k_fast_muscle, k_slow_muscle, ca_boyle_muscle) to include in multi-compartment version (reuse strategy: <strong>import/include</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>WormBody.h</code> — body segment dimensions (50 segments); use for determining realistic compartment sizes for the ~60 µm muscle spindle (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/prototypes/multi_compartment_muscle.py</code> (new — experimental)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python c302/prototypes/multi_compartment_muscle.py</code></li>
+<li><code>jnml -validate MultiCompartmentMuscle.nml</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Create a prototype muscle cell with 4-8 compartments along spindle axis (~60 µm length)</li>
+<li>[ ] Use same channel densities as GenericMuscleCell (DD002 spec)</li>
+<li>[ ] Add axial resistance between compartments (estimate from muscle cell dimensions)</li>
+<li>[ ] Run single-cell simulation: inject current at one end, measure voltage at both ends</li>
+<li>[ ] Quantify voltage attenuation: is voltage uniform (single-compartment is fine) or non-uniform (multi-compartment is needed)?</li>
+<li>[ ] Report: compute time increase per muscle cell (current: 1 compartment → prototype: N compartments)</li>
+<li>[ ] Assess feasibility: N compartments × 95 muscles × simulation duration → practical?</li>
+<li>[ ] Post findings with go/no-go recommendation for multi-compartment adoption</li>
+<li>[ ] Starts from <code>SingleCompMuscle.cell.nml</code> rather than building from scratch</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Each muscle is currently modeled as a single point — the voltage is the same everywhere in the cell. But real muscles are spindle-shaped, ~60 µm long. If one end of the muscle is stimulated by a motor neuron, does the other end "know"? This prototype starts from the existing <code>SingleCompMuscle.cell.nml</code> in the <code>muscle_model</code> repo and extends it to 4-8 compartments. It tests whether voltage spreads uniformly (single-compartment is fine, saving enormous computation) or attenuates (we'd need multi-compartment, at 4-8x the computational cost per muscle).</li>
+</ul>
+<hr />
+<h3 id="issue-15-evaluate-hill-type-crossbridge-mechanics-feasibility">Issue 15: Evaluate Hill-type crossbridge mechanics feasibility<a class="headerlink" href="#issue-15-evaluate-hill-type-crossbridge-mechanics-feasibility" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Evaluate Hill-type crossbridge mechanics for specialized muscles (egg-laying, defecation)</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>human-expert</code>, <code>L3</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> physics, biomechanics, neuroscience</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#1-hill-type-muscle-model-with-crossbridge-dynamics">DD002 — Alternatives Considered — Hill-Type Muscle Model</a> and <a href="../DD002_Muscle_Model_Architecture/#migration-path">DD002 — Migration Path</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/JohnsonMailler_MuscleModel</code> — <strong>THE alternative muscle model</strong> to evaluate. Has different Ca²⁺ dynamics (EGL_19/L-type Ca²⁺, SHK_1/K⁺) from Boyle-Cohen; compare channel repertoire and dynamics (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/muscle_model</code> → <code>BoyleCohen2008/</code> — baseline Boyle-Cohen model to compare against (reuse strategy: <strong>reference</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>Muscles.cpp</code> — simplest coupling model (first-order low-pass filter: <code>dV/dt = (V_input - V_muscle) / T_muscle</code>); lower bound for muscle dynamics complexity (reuse strategy: <strong>reference</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a feasibility report)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (research task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Review literature on C. elegans muscle mechanics: tetanic contraction (egg-laying), rapid twitches (defecation), isometric force-length curves</li>
+<li>[ ] Identify which muscle types may require crossbridge dynamics (vulval, uterine, anal depressor, intestinal)</li>
+<li>[ ] Assess parameter availability: are actin-myosin binding rates, length-tension curves measured for C. elegans?</li>
+<li>[ ] Estimate computational cost: 6+ additional state variables per muscle × N specialized muscles</li>
+<li>[ ] Compare against DD002's linear activation model: when does linear fail?</li>
+<li>[ ] Compare Boyle-Cohen, JohnsonMailler, and CE_locomotion muscle dynamics approaches</li>
+<li>[ ] Propose LEMS ComponentType extension approach (per DD002 Migration Path)</li>
+<li>[ ] Post feasibility report with go/no-go recommendation per muscle type</li>
+<li>[ ] If Hill-type is warranted for any muscle type, draft DD amendment for Phase 3</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> DD002's muscle model uses a simple linear formula: more calcium = more force. This works for locomotion (Boyle &amp; Cohen 2008 showed body wall muscles are "simple actuators"). But what about specialized muscles — the vulval muscles that lay eggs, the anal depressor muscle that contracts during defecation, the pharyngeal muscles that pump food? These might need a richer mechanical model (Hill-type) with actin-myosin crossbridge dynamics. Three different muscle model implementations exist across OpenWorm repos (<code>muscle_model</code>, <code>JohnsonMailler_MuscleModel</code>, <code>CE_locomotion</code>) — this research compares them to determine which muscles, if any, need upgrading.</li>
+</ul>
+<hr />
+<h2 id="group-5-documentation-maintenance-any">Group 5: Documentation &amp; Maintenance (Any)<a class="headerlink" href="#group-5-documentation-maintenance-any" title="Permanent link">&para;</a></h2>
+<p>Target: Comprehensive documentation enabling contributors to understand and modify the muscle model.</p>
+<hr />
+<h3 id="issue-16-augment-and-consolidate-muscle-model-contributor-guide">Issue 16: Augment and consolidate muscle model contributor guide<a class="headerlink" href="#issue-16-augment-and-consolidate-muscle-model-contributor-guide" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Augment existing BadgeList muscle model progression into a comprehensive contributor guide</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/openworm_docs</code></li>
+<li><strong>Required Capabilities:</strong> docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#quality-criteria">DD002 — Quality Criteria</a>, <a href="../DD002_Muscle_Model_Architecture/#testing-procedure">DD002 — Testing Procedure</a>, and <a href="../DD002_Muscle_Model_Architecture/#boundaries-explicitly-out-of-scope">DD002 — Boundaries</a></li>
+<li><strong>Documentation Tier:</strong> Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion repos; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><strong><a href="https://badgelist.com/openworm">BadgeList muscle model badges</a></strong> — Three existing badges form a de facto getting-started progression: <strong>Muscle Model Explorer</strong> (9 earners — explore the muscle model), <strong>Muscle Model Builder</strong> (2 earners — build it), <strong>Muscle Model Hacker</strong> (12 earners — hack/extend it). These map to <a href="../DD011_Contributor_Progression_Model/">DD011</a> skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". <strong>Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression</strong> (reuse strategy: <strong>augment</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/c302_Muscles.py</code>, <code>c302/c302_MuscleTest.py</code>, <code>c302/c302_IClampMuscle.py</code>, <code>c302/c302_MusclesSine.py</code> — document these as the hands-on workflow; show contributors the progression from single-muscle test → all-muscle test → oscillatory stimulation (reuse strategy: <strong>document as resources</strong>)</li>
+<li><code>openworm/muscle_model</code> repo — document as the biophysical reference implementation for Boyle-Cohen muscle (reuse strategy: <strong>document as resource</strong>)</li>
+<li><code>openworm/c302</code> → <code>c302/parameters_C.py</code> through <code>parameters_D.py</code> — document the parameter level system (A/B/C/D) and when to use each (reuse strategy: <strong>document as resource</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → locomotion model with muscle actuation (reuse strategy: <strong>document as resource</strong>)</li>
+<li>The contributor guide should <strong>map all existing code resources across repos</strong> so contributors know what's already built before starting new work</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> Augment — BadgeList already provides the onboarding funnel; this guide adds the technical depth that badges can't contain</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/Resources/muscle_model_guide.md</code> (new — on docs.openworm.org, not in a single repo, because it spans c302, muscle_model, and CE_locomotion)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3.13 -m mkdocs build</code> (verify page renders correctly on docs site)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Opens with link to BadgeList muscle model badge progression and frames the guide as the "deep dive" companion to the badges</li>
+<li>[ ] Overview: what the muscle model does, what it produces, who uses its output</li>
+<li>[ ] Cross-repo file map: c302 muscle scripts, muscle_model repo, CE_locomotion body model, Sibernetic coupling</li>
+<li>[ ] Existing code inventory: catalog all muscle-related scripts across c302, muscle_model, CE_locomotion, and Sibernetic repos</li>
+<li>[ ] Contributor workflow: generate muscle network → validate NeuroML → run simulation → check outputs</li>
+<li>[ ] Quality criteria: 5 rules from DD002 (calcium interface, movement validation, NeuroML 2, units, muscle-neuron distinction)</li>
+<li>[ ] Common mistakes: copying neuron parameters to muscles, changing calcium variable name without updating <code>sibernetic_c302.py</code></li>
+<li>[ ] Maps badge progression to code: "Muscle Model Explorer" → run <code>c302_MuscleTest.py</code>; "Builder" → modify parameters; "Hacker" → add new muscle types or modify coupling</li>
+<li>[ ] References to DD002 for specification, DD003 for body physics coupling, DD014 for visualization</li>
+<li>[ ] Aimed at L1–L2 contributors (aligns with BadgeList skill badge level)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> BadgeList already has a muscle model getting-started progression (Explorer → Builder → Hacker) with 23 total earners. This guide doesn't replace those badges — it augments them with the technical depth that a badge description can't contain. Where to find the code across 4 repos, which files to edit, what tests to run, what mistakes to avoid. The badges are the curriculum; this guide is the textbook. Lives on docs.openworm.org because it spans multiple repos — you can't put a cross-repo guide inside just one repo.</li>
+</ul>
+<hr />
+<h3 id="issue-17-document-nmj-connectivity-and-muscle-quadrant-mapping">Issue 17: Document NMJ connectivity and muscle quadrant mapping<a class="headerlink" href="#issue-17-document-nmj-connectivity-and-muscle-quadrant-mapping" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Document muscle quadrant layout and NMJ connectivity diagram</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#context-background">DD002 — Context &amp; Background</a>, <a href="../DD002_Muscle_Model_Architecture/#muscle-list-95-cells">DD002 — Muscle List</a>, and <a href="../DD002_Muscle_Model_Architecture/#neural-to-muscle-coupling">DD002 — Neural-to-Muscle Coupling</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/c302</code> → <code>c302/__init__.py</code> → <code>get_muscle_names()</code> — canonical naming convention (MDR01-24, MVR01-24, MVL01-23, MDL01-24); document this as the authoritative source (reuse strategy: <strong>document as resource</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — 96-element array layout <code>[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]</code>; document the index mapping (reuse strategy: <strong>document as resource</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>Worm.cpp</code> — NMJ wiring showing which motor classes (DA, DB, DD, VA, VB, VD, AS) innervate dorsal vs. ventral quadrants (reuse strategy: <strong>document as resource</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>WormBody.h</code> — 50-segment body layout for anterior-posterior positioning (reuse strategy: <strong>document as resource</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/muscle_quadrant_mapping.md</code> (new — in c302 repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Diagram: 4 quadrants (MDR, MVR, MVL, MDL) arranged around body cross-section</li>
+<li>[ ] Table: all 95 muscles with quadrant, row number (1-24), anterior-posterior position</li>
+<li>[ ] Explanation: why MDL has 24, MVL has 23 (no MVL24)</li>
+<li>[ ] Diagram: motor neuron classes (VA, VB, DA, DB, DD, VD, AS) and which quadrants they innervate</li>
+<li>[ ] Explanation: excitatory (VA/VB/DA/DB/AS) vs. inhibitory (DD/VD) motor neurons</li>
+<li>[ ] Explanation: dorsal vs. ventral muscle coordination for undulatory locomotion</li>
+<li>[ ] Index mapping: c302 muscle names → Sibernetic array indices (from <code>main_sim.py</code>)</li>
+<li>[ ] Cross-references to DD003 (elastic particle mapping in Sibernetic) and WormAtlas</li>
+<li>[ ] Visual enough for L1 contributors to understand muscle anatomy at a glance</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The worm's 95 body wall muscles wrap around the body in 4 strips (quadrants). During forward crawling, dorsal and ventral muscles activate in alternating waves — like a crowd doing "the wave" in a stadium. This document maps out which muscles are where, which motor neurons control them, and how that creates coordinated movement. It includes the critical index mapping between c302 muscle names and Sibernetic array positions. It's the anatomical atlas for anyone working on the muscle system.</li>
+</ul>
+<hr />
+<h3 id="issue-18-document-sibernetic_c302py-coupling-script-architecture">Issue 18: Document sibernetic_c302.py coupling script architecture<a class="headerlink" href="#issue-18-document-sibernetic_c302py-coupling-script-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD002] Document sibernetic_c302.py coupling script: data flow, timing, and variable mapping</code></li>
+<li><strong>Labels:</strong> <code>DD002</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/sibernetic</code></li>
+<li><strong>Required Capabilities:</strong> python, docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD002_Muscle_Model_Architecture/#coupling-to-sibernetic">DD002 — Coupling to Sibernetic</a> and <a href="../DD002_Muscle_Model_Architecture/#coupling-bridge-ownership">DD002 — Coupling Bridge Ownership</a></li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><code>openworm/sibernetic</code> → <code>sibernetic_c302.py</code> — <strong>THE file to document</strong> (8.6 KB); the entire coupling bridge between c302/NEURON and Sibernetic (reuse strategy: <strong>document as primary subject</strong>)</li>
+<li><code>openworm/sibernetic</code> → <code>src/main_sim.py</code> — coupling modes (synthetic waves, file-based, live NEURON) and data flow (17.9 KB); documents three different ways coupling can work (reuse strategy: <strong>document as primary subject</strong>)</li>
+<li><code>openworm/CE_locomotion</code> → <code>Worm.cpp</code> → <code>Step()</code> — cleanest reference for correct coupling sequence: body physics → stretch receptors → neural compute → NMJ translation → muscle dynamics → body activation (reuse strategy: <strong>document as reference architecture</strong>)</li>
+<li><code>openworm/OpenWorm</code> → <code>master_openworm.py</code> — how the orchestrator invokes the coupling; Steps 4-5 (analysis/validation) are unimplemented stubs (reuse strategy: <strong>document as context</strong>)</li>
+</ul>
+</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/coupling_script_architecture.md</code> (new — in Sibernetic repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Data flow diagram: NEURON muscle state → <code>sibernetic_c302.py</code> → Sibernetic muscle activation</li>
+<li>[ ] Variable mapping: which NEURON variable (<code>ca_internal</code>) maps to which Sibernetic input</li>
+<li>[ ] Timing diagram: coupling timestep (dt_coupling = 0.005 ms), when reads/writes happen</li>
+<li>[ ] Activation formula walkthrough: <code>min(1.0, [Ca²⁺]ᵢ / max_ca)</code> with units and typical values</li>
+<li>[ ] Force injection: how Sibernetic converts activation [0,1] to elastic particle forces (max_force = 4000)</li>
+<li>[ ] Muscle ID mapping: c302 muscle names → Sibernetic muscle indices</li>
+<li>[ ] Coupling modes: document all three modes from <code>main_sim.py</code> (synthetic, file-based, live NEURON)</li>
+<li>[ ] Change impact analysis: what breaks if you change each parameter (from DD002 Coupling Bridge Ownership section)</li>
+<li>[ ] Coordination notes: who must agree before changing the coupling interface</li>
+<li>[ ] Cross-references to DD002 (muscle model), DD003 (body physics), DD013 (simulation stack)</li>
+<li>[ ] Reference <code>CE_locomotion/Worm.cpp::Step()</code> as gold standard for coupling sequence</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The coupling script is the bridge between two very different worlds: the electrical simulation (NEURON, millisecond timescale, voltages in millivolts) and the mechanical simulation (Sibernetic, microsecond timescale, forces in arbitrary units). This document explains exactly how data flows across that bridge — what gets read, what gets computed, what gets written, and when. It references the <code>CE_locomotion</code> implementation as the gold standard for coupling sequence. It's the most critical integration point in the entire worm simulation, and currently the least documented.</li>
+</ul>
+<hr />
+<h2 id="summary-statistics">Summary Statistics<a class="headerlink" href="#summary-statistics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Issues</strong></td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>ai-workable</strong></td>
+<td>13</td>
+</tr>
+<tr>
+<td><strong>human-expert</strong></td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>9</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Issues</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1: Validation Scripts</strong></td>
+<td>1–4</td>
+<td>Adapt existing scripts into validation tools, unit tests, parameter audit</td>
+</tr>
+<tr>
+<td><strong>2: Output Pipeline &amp; Integration</strong></td>
+<td>5–8</td>
+<td>OME-Zarr export, config validation, interface testing</td>
+</tr>
+<tr>
+<td><strong>3: Bug Fixes &amp; Improvements</strong></td>
+<td>9–12</td>
+<td>MVL24 fix, config propagation, edge cases, NMJ audit</td>
+</tr>
+<tr>
+<td><strong>4: Research &amp; Advanced</strong></td>
+<td>13–15</td>
+<td>Transcriptomics survey, multi-compartment, Hill-type</td>
+</tr>
+<tr>
+<td><strong>5: Documentation</strong></td>
+<td>16–18</td>
+<td>Contributor guide, anatomy mapping, coupling architecture</td>
+</tr>
+</tbody>
+</table>
+<h3 id="code-reuse-summary">Code Reuse Summary<a class="headerlink" href="#code-reuse-summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Reframe Level</th>
+<th>Primary Source Code</th>
+<th>Reuse Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Aggressively reframed</td>
+<td><code>c302/c302_MuscleTest.py</code></td>
+<td>Extract plotting logic into standalone script</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Aggressively reframed</td>
+<td><code>muscle_model/.../compareToNeuroML2.py</code></td>
+<td>Adapt validation code</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Aggressively reframed</td>
+<td><code>c302/c302_IClampMuscle.py</code>, <code>c302/c302_MuscleTest.py</code></td>
+<td>Convert to pytest suite</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Aggressively reframed</td>
+<td><code>muscle_model/.../compareToNeuroML2.py</code>, <code>input_vars.py</code></td>
+<td>Extend audit methodology</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Genuinely new</td>
+<td>(no existing Zarr code)</td>
+<td>New work; data format documented</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Genuinely new</td>
+<td>(no existing config validation)</td>
+<td>New work; schema from DD013</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Genuinely new</td>
+<td><code>sibernetic/sibernetic_c302.py</code> (test target)</td>
+<td>New test for existing pipeline</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Aggressively reframed</td>
+<td><code>c302/c302_TargetMuscle.py</code>, cect API</td>
+<td>Extend single-muscle query to all muscles</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Aggressively reframed</td>
+<td><code>c302/__init__.py</code> → <code>get_muscle_names()</code></td>
+<td>Patch function in place</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Modify existing</td>
+<td><code>sibernetic/sibernetic_c302.py</code></td>
+<td>Replace hardcoded values with config</td>
+</tr>
+<tr>
+<td>11</td>
+<td>New tests</td>
+<td><code>sibernetic/src/main_sim.py</code> (test target)</td>
+<td>New tests for existing formula</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Analysis</td>
+<td><code>c302/parameters_C.py</code>, <code>c302_TargetMuscle.py</code></td>
+<td>Audit using existing query tools</td>
+</tr>
+<tr>
+<td>13–15</td>
+<td>Research</td>
+<td>Various repos</td>
+<td>Reference only</td>
+</tr>
+<tr>
+<td>16–18</td>
+<td>Documentation</td>
+<td>All repos</td>
+<td>Catalog existing code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Related DD</th>
+<th>Related Issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD001 (Neural Circuit)</td>
+<td>Issues 8, 12 (NMJ connectivity and conductance)</td>
+</tr>
+<tr>
+<td>DD003 (Body Physics)</td>
+<td>Issues 7, 10, 18 (calcium interface, config, coupling)</td>
+</tr>
+<tr>
+<td>DD005 (Cell-Type Specialization)</td>
+<td>Issue 13 (CeNGEN transcriptomics for muscle types)</td>
+</tr>
+<tr>
+<td>DD007 (Pharyngeal System)</td>
+<td>Issue 15 (specialized muscle mechanics)</td>
+</tr>
+<tr>
+<td>DD010 (Validation Framework)</td>
+<td>Issues 1, 2, 7 (validation scripts and integration testing)</td>
+</tr>
+<tr>
+<td>DD013 (Simulation Stack)</td>
+<td>Issues 6, 10 (config schema and propagation)</td>
+</tr>
+<tr>
+<td>DD014 (Dynamic Visualization)</td>
+<td>Issue 5 (OME-Zarr export for viewer)</td>
+</tr>
+<tr>
+<td>DD020 (Connectome Data Access)</td>
+<td>Issue 8 (cect API for NMJ validation)</td>
+</tr>
+<tr>
+<td>DD003 Draft Issues (Issue 18)</td>
+<td>Issue 17 (complementary: c302-side NMJ mapping vs. Sibernetic-side particle mapping)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependency-graph">Dependency Graph<a class="headerlink" href="#dependency-graph" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Issue 1 (plot_muscle_activation.py) — independent
+Issue 2 (validate_muscle_calcium.py) — independent
+Issue 3 (unit tests) ─────────────────→ Issue 9 (MVL24 fix — tests verify fix)
+Issue 4 (parameter audit) — independent
+
+Issue 5 (OME-Zarr export) — independent
+Issue 6 (config validation) — depends on DD013 Issues 1, 2
+Issue 7 (DD002→DD003 integration test) — depends on Issue 2
+Issue 8 (NMJ connectivity validation) — independent
+
+Issue 9 (MVL24 fix) — depends on Issue 3
+Issue 10 (config propagation) — depends on DD013 Issues 1, 9
+Issue 11 (edge cases) — independent
+Issue 12 (NMJ conductance audit) — independent
+
+Issues 13–15 (research) — independent
+Issues 16–18 (documentation) — independent
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

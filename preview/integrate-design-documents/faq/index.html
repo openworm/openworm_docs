@@ -1,0 +1,3957 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/faq/">
+      
+      
+        <link rel="prev" href="../references/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>FAQ - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#frequently-asked-questions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FAQ
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm general
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm general">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-c-elegans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why C. elegans?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-does-the-real-worm-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What does the real worm do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-you-simulate-all-that" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you simulate all that?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#so-say-the-virtual-organism-lays-eggs-are-the-eggs-intended-to-be-new-viable-openworms-or-is-fertilization-not-a-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-it-need-to-know-how-to-be-a-worm-to-act-like-a-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does it need to know how to be a worm to act like a worm?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#given-all-that-we-dont-know-about-c-elegans-all-the-various-synaptic-strengths-dynamics-gap-junction-rectification-long-range-neuromodulation-etc-how-do-you-know-the-model-you-eventually-make-truly-recapitulates-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Given all that we DON'T know about C. elegans (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-there-only-one-solution-to-all-those-variables-in-the-connectome-that-will-make-a-virtual-c-elegans-that-resembles-a-real-one-or-are-there-multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is there only one solution to all those variables in the connectome that will make a virtual C. elegans that resembles a real one, or are there multiple?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-not-start-with-simulating-something-simpler-are-nematodes-too-complex-for-a-first-go-at-whole-organism-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-do-you-think-the-simulation-will-be-complete-and-which-behaviors-would-that-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When do you think the simulation will be "complete", and which behaviors would that include?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#currently-what-are-your-biggest-problems-or-needs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currently, what are your biggest problems or needs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-i-could-read-about-your-to-dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where I could read about your "to do's?"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-know-which-issues-are-safe-to-work-on-how-do-i-know-i-wont-be-stepping-on-any-toes-of-work-already-going-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-you-all-ever-meet-up-somewhere-physically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you all ever meet up somewhere physically?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-simulation-and-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm simulation and modeling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm simulation and modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-level-of-granularity-of-these-models-ie-cells-subcellular-etc-and-how-does-that-play-out-in-terms-of-computational-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the level of granularity of these models (ie. cells, subcellular, etc.), and how does that play out in terms of computational requirements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-the-data-source-for-your-computer-simulation-of-the-living-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's the data source for your computer simulation of the living worm?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-there-been-previous-modeling-work-on-various-subsystems-illustrating-what-level-of-simulation-is-necessary-to-produce-observed-behaviors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-are-neurons-simulated-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How are neurons simulated today?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-connection-between-the-basic-properties-of-c-elegans-neurons-and-human-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the connection between the basic properties of C. elegans neurons and human neurons?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-level-of-detail-of-the-wiring-diagram-for-the-non-neuron-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the level of detail of the wiring diagram for the non-neuron elements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-sph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is SPH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-are-you-doing-with-sph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are you doing with SPH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-code-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm code reuse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm code reuse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-are-lems-and-jlems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are LEMS and jLEMS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-about-geppetto-osgi-spring-tomcat-virgo-and-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-links-and-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm links and resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm links and resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-you-have-a-website" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you have a website?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-can-i-send-my-inquiries-about-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where can I send my inquiries about the project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-can-i-find-the-worm-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where can I find the "worm browser"?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-join-the-community" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I join the community?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-are-downloads-located" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where are downloads located?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm general
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm general">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-c-elegans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why C. elegans?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-does-the-real-worm-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What does the real worm do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-you-simulate-all-that" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you simulate all that?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#so-say-the-virtual-organism-lays-eggs-are-the-eggs-intended-to-be-new-viable-openworms-or-is-fertilization-not-a-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-it-need-to-know-how-to-be-a-worm-to-act-like-a-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does it need to know how to be a worm to act like a worm?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#given-all-that-we-dont-know-about-c-elegans-all-the-various-synaptic-strengths-dynamics-gap-junction-rectification-long-range-neuromodulation-etc-how-do-you-know-the-model-you-eventually-make-truly-recapitulates-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Given all that we DON'T know about C. elegans (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-there-only-one-solution-to-all-those-variables-in-the-connectome-that-will-make-a-virtual-c-elegans-that-resembles-a-real-one-or-are-there-multiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is there only one solution to all those variables in the connectome that will make a virtual C. elegans that resembles a real one, or are there multiple?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-not-start-with-simulating-something-simpler-are-nematodes-too-complex-for-a-first-go-at-whole-organism-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-do-you-think-the-simulation-will-be-complete-and-which-behaviors-would-that-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When do you think the simulation will be "complete", and which behaviors would that include?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#currently-what-are-your-biggest-problems-or-needs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currently, what are your biggest problems or needs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-i-could-read-about-your-to-dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where I could read about your "to do's?"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-know-which-issues-are-safe-to-work-on-how-do-i-know-i-wont-be-stepping-on-any-toes-of-work-already-going-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-you-all-ever-meet-up-somewhere-physically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you all ever meet up somewhere physically?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-simulation-and-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm simulation and modeling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm simulation and modeling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-level-of-granularity-of-these-models-ie-cells-subcellular-etc-and-how-does-that-play-out-in-terms-of-computational-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the level of granularity of these models (ie. cells, subcellular, etc.), and how does that play out in terms of computational requirements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-the-data-source-for-your-computer-simulation-of-the-living-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's the data source for your computer simulation of the living worm?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-there-been-previous-modeling-work-on-various-subsystems-illustrating-what-level-of-simulation-is-necessary-to-produce-observed-behaviors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-are-neurons-simulated-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How are neurons simulated today?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-connection-between-the-basic-properties-of-c-elegans-neurons-and-human-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the connection between the basic properties of C. elegans neurons and human neurons?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-level-of-detail-of-the-wiring-diagram-for-the-non-neuron-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the level of detail of the wiring diagram for the non-neuron elements?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-sph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is SPH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-are-you-doing-with-sph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are you doing with SPH?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-code-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm code reuse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm code reuse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-are-lems-and-jlems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are LEMS and jLEMS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-about-geppetto-osgi-spring-tomcat-virgo-and-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openworm-links-and-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenWorm links and resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenWorm links and resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-you-have-a-website" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you have a website?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-can-i-send-my-inquiries-about-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where can I send my inquiries about the project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-can-i-find-the-worm-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where can I find the "worm browser"?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-join-the-community" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I join the community?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-are-downloads-located" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where are downloads located?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h1>
+<h2 id="openworm-general">OpenWorm general<a class="headerlink" href="#openworm-general" title="Permanent link">&para;</a></h2>
+<h3 id="why-c-elegans">Why <em>C. elegans</em>?<a class="headerlink" href="#why-c-elegans" title="Permanent link">&para;</a></h3>
+<p>The tiny worm <em>C. elegans</em> is by far the most understood and studied animal with a brain in all of biology -- first genome mapped, exactly 302 neurons with a complete <a href="../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/">connectome</a>, and three Nobel prizes awarded for work on it. When making a complex computer model, it is important to start where the data are the most complete. For the full story, see the <a href="background/">Background</a> page.</p>
+<h3 id="what-does-the-real-worm-do">What does the real worm do?<a class="headerlink" href="#what-does-the-real-worm-do" title="Permanent link">&para;</a></h3>
+<p>It has all sorts of behaviors! Some include:</p>
+<ul>
+<li>It finds food and mates</li>
+<li>It avoids toxins and predators</li>
+<li>It lays eggs</li>
+<li>It crawls and there are a bunch of different crawling motions</li>
+</ul>
+<h3 id="do-you-simulate-all-that">Do you simulate all that?<a class="headerlink" href="#do-you-simulate-all-that" title="Permanent link">&para;</a></h3>
+<p>Yes! Today we simulate crawling (302 neurons + 95 <a href="../design_documents/DD002_Muscle_Model_Architecture/">muscles</a> + <a href="../design_documents/DD003_Body_Physics_Architecture/">body physics</a>, validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to <strong>emerge from the behavior of each of its cells put together</strong>. Each behavior is formally specified in a <a href="design_documents/">Design Document</a> with quantitative validation targets. See the <a href="design_documents/#phase-overview">Phase Overview</a> for the complete phase-by-phase plan.</p>
+<h3 id="so-say-the-virtual-organism-lays-eggs-are-the-eggs-intended-to-be-new-viable-openworms-or-is-fertilization-not-a-goal">So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?<a class="headerlink" href="#so-say-the-virtual-organism-lays-eggs-are-the-eggs-intended-to-be-new-viable-openworms-or-is-fertilization-not-a-goal" title="Permanent link">&para;</a></h3>
+<p>Egg-laying is specified in <strong><a href="../design_documents/DD018_Egg_Laying_System_Architecture/">DD018 (Egg-Laying System Architecture)</a></strong> — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.</p>
+<p>Developmental modeling (embryo to L1 to L4 to adult) is Phase 6 work in our roadmap, using the Witvliet developmental connectome series (8 stages). <em>C. elegans</em> has the <a href="https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing">best known developmental history of any organism</a>, making it a fascinating future direction.</p>
+<h3 id="does-it-need-to-know-how-to-be-a-worm-to-act-like-a-worm">Does it need to know how to be a worm to act like a worm?<a class="headerlink" href="#does-it-need-to-know-how-to-be-a-worm-to-act-like-a-worm" title="Permanent link">&para;</a></h3>
+<p>The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in <a href="../design_documents/DD001_Neural_Circuit_Architecture/">DD001 (Neural Circuit Architecture)</a>, which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.</p>
+<h3 id="given-all-that-we-dont-know-about-c-elegans-all-the-various-synaptic-strengths-dynamics-gap-junction-rectification-long-range-neuromodulation-etc-how-do-you-know-the-model-you-eventually-make-truly-recapitulates-reality">Given all that we DON'T know about <em>C. elegans</em> (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?<a class="headerlink" href="#given-all-that-we-dont-know-about-c-elegans-all-the-various-synaptic-strengths-dynamics-gap-junction-rectification-long-range-neuromodulation-etc-how-do-you-know-the-model-you-eventually-make-truly-recapitulates-reality" title="Permanent link">&para;</a></h3>
+<p>All models are wrong, some models are useful :) We must have the model make a prediction and then test it. Based on how well the model fits the available data, we can quantify how well the model recapitulates reality.</p>
+<p>We now have a formal <strong>3-tier validation framework</strong> (<a href="../design_documents/DD010_Validation_Framework/">DD010</a>):</p>
+<ul>
+<li><strong>Tier 1:</strong> Single-cell electrophysiology (patch clamp comparison)</li>
+<li><strong>Tier 2:</strong> Circuit-level functional connectivity (must correlate r &gt; 0.5 with <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> whole-brain imaging)</li>
+<li><strong>Tier 3:</strong> Behavioral kinematics (speed, wavelength, frequency within +/-15% of Schafer lab database)</li>
+</ul>
+<p><strong>Tiers 2 and 3 are blocking</strong> — code cannot merge if validation regresses. See the <a href="validation/">Validation page</a> for details.</p>
+<h3 id="is-there-only-one-solution-to-all-those-variables-in-the-connectome-that-will-make-a-virtual-c-elegans-that-resembles-a-real-one-or-are-there-multiple">Is there only one solution to all those variables in the connectome that will make a virtual <em>C. elegans</em> that resembles a real one, or are there multiple?<a class="headerlink" href="#is-there-only-one-solution-to-all-those-variables-in-the-connectome-that-will-make-a-virtual-c-elegans-that-resembles-a-real-one-or-are-there-multiple" title="Permanent link">&para;</a></h3>
+<p>It is very likely to be multiple, <a href="https://doi.org/10.1038/nn1312">given what we know about the variability of neuronal networks in general</a> (Prinz, Bucher &amp; Marder 2004). One technique to deal with this is to <a href="https://doi.org/10.1038/nrn3056">generate multiple models that work</a> (Marder &amp; Taylor 2011) and analyze them under different conditions. What we are after is the <a href="https://doi.org/10.1371/journal.pcbi.0020094">solution space that works</a> (Achard &amp; De Schutter 2006, see Fig 6 for an example), rather than a single solution.</p>
+<p><a href="../design_documents/DD017_Hybrid_Mechanistic_ML_Framework/">DD017 (Hybrid Mechanistic-ML Framework)</a> now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.</p>
+<h3 id="why-not-start-with-simulating-something-simpler-are-nematodes-too-complex-for-a-first-go-at-whole-organism-simulation">Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?<a class="headerlink" href="#why-not-start-with-simulating-something-simpler-are-nematodes-too-complex-for-a-first-go-at-whole-organism-simulation" title="Permanent link">&para;</a></h3>
+<p>Nematodes have been studied far more than simpler multi-cellular organisms, and therefore more data exist that we can use to build our model. We would need to get, for example, another connectome and another anatomical 3D map whereas in <em>C. elegans</em> they already exist. The community of scientists using <em>C. elegans</em> as their model organism is much larger than communities that studying simpler multi-cellular organisms, so the effect of the community size also weighed in on the decision.</p>
+<h3 id="when-do-you-think-the-simulation-will-be-complete-and-which-behaviors-would-that-include">When do you think the simulation will be "complete", and which behaviors would that include?<a class="headerlink" href="#when-do-you-think-the-simulation-will-be-complete-and-which-behaviors-would-that-include" title="Permanent link">&para;</a></h3>
+<p><strong>"Complete" is relative</strong> -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered over ~18 months in 4 phases. We define completion at each phase as meeting all <a href="../design_documents/DD010_Validation_Framework/">DD010 validation criteria</a>. Beyond Phase 4, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the <a href="design_documents/#phase-overview">Phase Overview</a> for the full phase-by-phase timeline.</p>
+<h3 id="currently-what-are-your-biggest-problems-or-needs">Currently, what are your biggest problems or needs?<a class="headerlink" href="#currently-what-are-your-biggest-problems-or-needs" title="Permanent link">&para;</a></h3>
+<p>To make this project move faster, we'd love more help from motivated folks. Both programmers and experimentalists. We have a lot we want to do and not enough hands to do it.</p>
+<p><strong>Current priorities:</strong></p>
+<ul>
+<li><strong>Core infrastructure (Phase A1):</strong> Docker stack (<a href="../design_documents/DD013_Simulation_Stack_Architecture/">DD013</a>), toolbox revival (<a href="../design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>), CI/CD pipeline</li>
+<li><strong>Phase 1 science:</strong> CeNGEN cell-type specialization (<a href="../design_documents/DD005_Cell_Type_Differentiation_Strategy/">DD005</a>), functional connectivity validation (<a href="../design_documents/DD010_Validation_Framework/">DD010</a> Tier 2)</li>
+<li><strong>Integration + Validation maintainers:</strong> Two critical L4 roles are currently vacant</li>
+</ul>
+<p>Read more about ways to help <a href="https://www.openworm.org/get_involved.html">on our website</a> or check the <a href="community/">contributor guide</a>.</p>
+<h3 id="where-i-could-read-about-your-to-dos">Where I could read about your "to do's?"<a class="headerlink" href="#where-i-could-read-about-your-to-dos" title="Permanent link">&para;</a></h3>
+<p>Our work is organized through <a href="design_documents/">Design Documents</a>, which define the complete roadmap from 302 neurons to 959 cells. Each DD contains deliverables, testing procedures, and integration contracts.</p>
+<p>We also have <a href="https://github.com/orgs/openworm/projects">GitHub issues</a> across all our repositories for specific programming tasks.</p>
+<h3 id="how-do-i-know-which-issues-are-safe-to-work-on-how-do-i-know-i-wont-be-stepping-on-any-toes-of-work-already-going-on">How do I know which issues are safe to work on? How do I know I won't be stepping on any toes of work already going on?<a class="headerlink" href="#how-do-i-know-which-issues-are-safe-to-work-on-how-do-i-know-i-wont-be-stepping-on-any-toes-of-work-already-going-on" title="Permanent link">&para;</a></h3>
+<p>We primarily use <a href="https://openworm.org/contacts.html">Slack</a> for coordination. If you are interested in helping with an issue but don't know if others are working on it, ask in the relevant Slack channel. You can also comment on the GitHub issue directly. All contributors are advised to announce their intent on Slack or GitHub as soon as they start working on a task.</p>
+<p>In general, you won't step on any toes though -- multiple people doing the same thing can still be helpful as different individuals bring different perspectives to the table.</p>
+<p>For a structured approach, see the <a href="Community/github/#contributing-to-design-document-implementation">DD contribution workflow</a> and the <a href="../design_documents/DD011_Contributor_Progression_Model/">contributor progression model</a> (Observer to Senior Contributor, L0-L5).</p>
+<h3 id="do-you-all-ever-meet-up-somewhere-physically">Do you all ever meet up somewhere physically?<a class="headerlink" href="#do-you-all-ever-meet-up-somewhere-physically" title="Permanent link">&para;</a></h3>
+<p>The core OpenWorm team has met in person several times, including early meetings in <a href="https://openworm.tumblr.com/post/57193347335/community-updates-from-openworm-in-paris">Paris (July 2014)</a> and London (Fall 2014). We use Slack and video calls to meet face to face on a regular basis.</p>
+<h2 id="openworm-simulation-and-modeling">OpenWorm simulation and modeling<a class="headerlink" href="#openworm-simulation-and-modeling" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-the-level-of-granularity-of-these-models-ie-cells-subcellular-etc-and-how-does-that-play-out-in-terms-of-computational-requirements">What is the level of granularity of these models (ie. cells, subcellular, etc.), and how does that play out in terms of computational requirements?<a class="headerlink" href="#what-is-the-level-of-granularity-of-these-models-ie-cells-subcellular-etc-and-how-does-that-play-out-in-terms-of-computational-requirements" title="Permanent link">&para;</a></h3>
+<p>We model at <strong>five scales simultaneously</strong> (detailed on the <a href="modeling/">modeling approach page</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>Design Documents</th>
+<th>Computational Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Molecular</td>
+<td><a href="../design_documents/DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a></td>
+<td>Low (parameter lookup)</td>
+</tr>
+<tr>
+<td>Channel</td>
+<td><a href="../design_documents/DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../design_documents/DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>Moderate (HH equations per cell)</td>
+</tr>
+<tr>
+<td>Cellular</td>
+<td><a href="../design_documents/DD001_Neural_Circuit_Architecture/">DD001</a>, <a href="../design_documents/DD002_Muscle_Model_Architecture/">DD002</a>, <a href="../design_documents/DD007_Pharyngeal_System_Architecture/">DD007</a>-<a href="../design_documents/DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>Moderate-High (302-959 cells)</td>
+</tr>
+<tr>
+<td>Tissue</td>
+<td><a href="../design_documents/DD003_Body_Physics_Architecture/">DD003</a>, <a href="../design_documents/DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>High (~100K SPH particles)</td>
+</tr>
+<tr>
+<td>Organism</td>
+<td><a href="../design_documents/DD010_Validation_Framework/">DD010</a>, <a href="../design_documents/DD019_Closed_Loop_Touch_Response/">DD019</a></td>
+<td>Validation overhead</td>
+</tr>
+</tbody>
+</table>
+<p>In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. <a href="../design_documents/DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> specifies neural surrogates that can provide 1000x speedup for body physics.</p>
+<h3 id="whats-the-data-source-for-your-computer-simulation-of-the-living-worm">What's the data source for your computer simulation of the living worm?<a class="headerlink" href="#whats-the-data-source-for-your-computer-simulation-of-the-living-worm" title="Permanent link">&para;</a></h3>
+<p>There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. <a href="../design_documents/DD008_Data_Integration_Pipeline/">DD008 (Data Integration Pipeline)</a> specifies the formal approach. Key datasets include:</p>
+<ul>
+<li><a href="https://caltech.wormbase.org/virtualworm/">The Virtual Worm (3D atlas of <em>C. elegans</em> anatomy)</a></li>
+<li><a href="https://www.wormatlas.org/neuronalwiring.html">The <em>C. elegans</em> connectome</a> — accessed via <a href="https://github.com/openworm/ConnectomeToolbox">ConnectomeToolbox (cect)</a> per <a href="../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a></li>
+<li><a href="https://cengen.shinyapps.io/CengenApp/">CeNGEN single-cell transcriptomics</a> — drives <a href="../design_documents/DD005_Cell_Type_Differentiation_Strategy/">cell-type differentiation</a></li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/36859544/">Randi 2023 whole-brain calcium imaging</a> — <a href="../design_documents/DD010_Validation_Framework/">Tier 2 validation</a> target for functional connectivity</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/37080210/">Ripoll-Sanchez 2023 neuropeptide connectome</a> — 31,479 interactions feeding the <a href="../design_documents/DD006_Neuropeptidergic_Connectome_Integration/">neuropeptide model</a></li>
+<li><a href="https://wormbehavior.mrc-lmb.cam.ac.uk/">Schafer lab WCON behavioral database</a> — <a href="../design_documents/DD010_Validation_Framework/">Tier 3 validation</a> target for behavioral kinematics</li>
+</ul>
+<h3 id="has-there-been-previous-modeling-work-on-various-subsystems-illustrating-what-level-of-simulation-is-necessary-to-produce-observed-behaviors">Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?<a class="headerlink" href="#has-there-been-previous-modeling-work-on-various-subsystems-illustrating-what-level-of-simulation-is-necessary-to-produce-observed-behaviors" title="Permanent link">&para;</a></h3>
+<p>There have been <a href="https://www.artificialbrains.com/openworm#similar">other modeling efforts in <em>C. elegans</em> and their subsystems</a>, as well as in academic journal articles. However, the question of "what level of simulation is necessary" to produce observed behaviors is still an open question. Each Design Document includes an "Existing Code Resources" section identifying reusable repos from the OpenWorm GitHub org (15+ repos with production-ready data APIs, validated models, and infrastructure tools).</p>
+<h3 id="how-are-neurons-simulated-today">How are neurons simulated today?<a class="headerlink" href="#how-are-neurons-simulated-today" title="Permanent link">&para;</a></h3>
+<p>Our neural models are specified in <a href="../design_documents/DD001_Neural_Circuit_Architecture/">DD001 (Neural Circuit Architecture)</a> and implemented in the <a href="https://github.com/openworm/c302">c302 framework</a>. c302 generates NeuroML2 networks at multiple levels of biophysical detail:</p>
+<p>There are a wide variety of ways to simulate neurons, as shown in figure 2 of <a href="http://www.ncbi.nlm.nih.gov/pubmed/15484883">Izhikevich 2004</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Cell Type</th>
+<th>Synapses</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Integrate-and-Fire</td>
+<td>Event-driven</td>
+<td>Topology testing</td>
+</tr>
+<tr>
+<td>B</td>
+<td>IAF + Activity</td>
+<td>Event-driven</td>
+<td>Community extensions</td>
+</tr>
+<tr>
+<td>C</td>
+<td>HH conductance-based</td>
+<td>Event-driven</td>
+<td>Working</td>
+</tr>
+<tr>
+<td><strong>C1</strong></td>
+<td><strong>HH + graded synapses</strong></td>
+<td><strong>Graded</strong></td>
+<td><strong>Recommended default</strong></td>
+</tr>
+<tr>
+<td>D</td>
+<td>Multicompartmental HH</td>
+<td>Event-driven</td>
+<td>Specialized studies</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Level C1 is the default</strong> because <em>C. elegans</em> neurons communicate via graded potentials (not action potentials), and graded synapses are essential for coupling with the <a href="../design_documents/DD003_Body_Physics_Architecture/">body physics</a> (<a href="../Projects/sibernetic/">Sibernetic</a>).</p>
+<h3 id="what-is-the-connection-between-the-basic-properties-of-c-elegans-neurons-and-human-neurons">What is the connection between the basic properties of <em>C. elegans</em> neurons and human neurons?<a class="headerlink" href="#what-is-the-connection-between-the-basic-properties-of-c-elegans-neurons-and-human-neurons" title="Permanent link">&para;</a></h3>
+<p><em>C. elegans</em> neurons do not spike (i.e. have <a href="https://en.wikipedia.org/wiki/Action_potential">action potentials</a>), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the <a href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model">Hodgkin-Huxley model</a>, used in <a href="../design_documents/DD001_Neural_Circuit_Architecture/">DD001</a>) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have <a href="https://en.wikipedia.org/wiki/Chemical_synapse">chemical synapses</a>, both have <a href="https://en.wikipedia.org/wiki/Cell_membrane">excitable cell membranes</a>, and both use <a href="https://en.wikipedia.org/wiki/Voltage-gated_ion_channel">voltage sensitive ion channels</a> to modify the <a href="https://en.wikipedia.org/wiki/Membrane_potential">electrical potential across their cell membranes</a>.</p>
+<h3 id="what-is-the-level-of-detail-of-the-wiring-diagram-for-the-non-neuron-elements">What is the level of detail of the wiring diagram for the non-neuron elements?<a class="headerlink" href="#what-is-the-level-of-detail-of-the-wiring-diagram-for-the-non-neuron-elements" title="Permanent link">&para;</a></h3>
+<p>There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, <a href="../design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020 (Connectome Data Access)</a> specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.</p>
+<h3 id="what-is-sph">What is SPH?<a class="headerlink" href="#what-is-sph" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics#Uses_in_solid_mechanics">Smoothed Particle Hydrodynamics</a> — a mesh-free method for simulating fluid and solid mechanics using particles. More information is <a href="https://www.zora.uzh.ch/29724/1/Barbara.pdf">available online.</a></p>
+<h3 id="what-are-you-doing-with-sph">What are you doing with SPH?<a class="headerlink" href="#what-are-you-doing-with-sph" title="Permanent link">&para;</a></h3>
+<p>We are building the body of the worm using particles that are being driven by SPH. This is formally specified in <a href="../design_documents/DD003_Body_Physics_Architecture/">DD003 (Body Physics Architecture)</a>, which defines the PCISPH pressure solver, ~100K particles (liquid, elastic, boundary types), and validated body mechanics. This allows for physical interactions between the body of the worm and its environment.</p>
+<h2 id="openworm-code-reuse">OpenWorm code reuse<a class="headerlink" href="#openworm-code-reuse" title="Permanent link">&para;</a></h2>
+<h3 id="what-are-lems-and-jlems">What are LEMS and jLEMS?<a class="headerlink" href="#what-are-lems-and-jlems" title="Permanent link">&para;</a></h3>
+<p><a href="https://lems.github.io/jLEMS/">LEMS (Low Entropy Model Specification)</a> is a compact model specification that allows definition of mathematical models in a transparent machine readable way. <a href="https://docs.neuroml.org/Userdocs/NeuroMLv2.html">NeuroML 2.0</a> is built on top of LEMS and defines component types useful for describing neural systems (e.g. ion channels, synapses). <a href="https://lems.github.io/LEMS/">jLEMS</a> is the Java library that reads, validates, and provides basic solving for LEMS. A utility, <a href="https://github.com/NeuroML/jNeuroML">jNeuroML</a>, has been created which bundles jLEMS, and allows any LEMS or NeuroML 2 model to be executed, can validate NeuroML 2 files, and convert LEMS/NeuroML 2 models to multiple simulator languages (e.g. NEURON, Brian) and to other formats.</p>
+<h3 id="what-about-geppetto-osgi-spring-tomcat-virgo-and-maven">What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?<a class="headerlink" href="#what-about-geppetto-osgi-spring-tomcat-virgo-and-maven" title="Permanent link">&para;</a></h3>
+<p>These were core technologies for the <a href="../archived_projects/#geppetto-web-platform-2014-2020">Geppetto simulation platform</a>, which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by <a href="../design_documents/DD014_Dynamic_Visualization_Architecture/">DD014 (Dynamic Visualization)</a>, which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).</p>
+<p>See <a href="../archived_projects/">Archived Projects</a> for the full historical context.</p>
+<h2 id="openworm-links-and-resources">OpenWorm links and resources<a class="headerlink" href="#openworm-links-and-resources" title="Permanent link">&para;</a></h2>
+<h3 id="do-you-have-a-website">Do you have a website?<a class="headerlink" href="#do-you-have-a-website" title="Permanent link">&para;</a></h3>
+<p><a href="https://openworm.org">https://openworm.org</a></p>
+<h3 id="where-can-i-send-my-inquiries-about-the-project">Where can I send my inquiries about the project?<a class="headerlink" href="#where-can-i-send-my-inquiries-about-the-project" title="Permanent link">&para;</a></h3>
+<p><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;">&#105;&#110;&#102;&#111;&#64;&#111;&#112;&#101;&#110;&#119;&#111;&#114;&#109;&#46;&#111;&#114;&#103;</a></p>
+<h3 id="where-can-i-find-the-worm-browser">Where can I find the "worm browser"?<a class="headerlink" href="#where-can-i-find-the-worm-browser" title="Permanent link">&para;</a></h3>
+<p><a href="https://browser.openworm.org">https://browser.openworm.org</a></p>
+<h3 id="how-do-i-join-the-community">How do I join the community?<a class="headerlink" href="#how-do-i-join-the-community" title="Permanent link">&para;</a></h3>
+<p>We primarily use <a href="https://openworm.org/contacts.html">Slack</a> for day-to-day communication. Fill out our <a href="https://goo.gl/3ncZWn">volunteer application form</a> to get an invite.</p>
+<h3 id="where-are-downloads-located">Where are downloads located?<a class="headerlink" href="#where-are-downloads-located" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.openworm.org/downloads.html">https://www.openworm.org/downloads.html</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

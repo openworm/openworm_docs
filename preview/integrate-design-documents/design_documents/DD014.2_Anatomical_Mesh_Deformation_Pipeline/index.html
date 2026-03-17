@@ -1,0 +1,5693 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline/">
+      
+      
+        <link rel="prev" href="../DD004_Mechanical_Cell_Identity/">
+      
+      
+        <link rel="next" href="../../modeling/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD014.2 Mesh Deformation - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd0142-anatomical-mesh-deformation-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD014.2 Mesh Deformation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-resolution-mismatch-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Resolution Mismatch Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-overview-three-stage-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Overview: Three-Stage Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-body-wall-skinning-sph-particles-to-cage-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: Body Wall Skinning — SPH Particles to Cage Mesh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1: Body Wall Skinning — SPH Particles to Cage Mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1a-cluster-sph-particles-into-virtual-bones-precomputation-done-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1a: Cluster SPH particles into virtual bones (precomputation, done once)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1b-compute-bone-transforms-from-sph-particles-per-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1b: Compute bone transforms from SPH particles (per frame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1c-skin-mesh-vertices-to-virtual-bones-precomputation-per-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1c: Skin mesh vertices to virtual bones (precomputation + per frame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-interior-deformation-cage-based-deformation-with-mean-value-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: Interior Deformation — Cage-Based Deformation with Mean Value Coordinates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2: Interior Deformation — Cage-Based Deformation with Mean Value Coordinates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-are-cage-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are cage coordinates?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-value-coordinates-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mean Value Coordinates (MVC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparsification-for-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sparsification for performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-frame-gpu-compute-shader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-frame GPU compute shader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-body-wall-mesh-as-cage-practical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The body wall mesh as cage: practical considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-collision-resolution-position-based-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: Collision Resolution — Position-Based Dynamics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3: Collision Resolution — Position-Based Dynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collision-pairs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collision pairs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pbd-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBD algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-spine-shortcut-optimization-for-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Spine Shortcut (Optimization for Phase 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-free-form-deformation-ffd-lattice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Free-Form Deformation (FFD) Lattice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-radial-basis-function-rbf-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Radial Basis Function (RBF) Interpolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-harmonic-coordinates-instead-of-mean-value-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Harmonic Coordinates Instead of Mean Value Coordinates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-green-coordinates-shape-preserving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Green Coordinates (Shape-Preserving)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-direct-sph-to-vertex-mapping-no-cage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Direct SPH-to-Vertex Mapping (No Cage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-re-simulate-all-meshes-as-sph-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Re-simulate All Meshes as SPH Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-mesh-deformation-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Mesh Deformation Implementation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-virtual-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Virtual Worm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-decade-long-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Decade-Long Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-of-the-art-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Art (2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-spine-based-deformation-weeks-1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Spine-Based Deformation (Weeks 1-4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-full-cage-pipeline-weeks-5-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Full Cage Pipeline (Weeks 5-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-refinements-weeks-13-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Refinements (Weeks 13-16)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-resolution-mismatch-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Resolution Mismatch Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-overview-three-stage-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Overview: Three-Stage Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-body-wall-skinning-sph-particles-to-cage-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: Body Wall Skinning — SPH Particles to Cage Mesh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1: Body Wall Skinning — SPH Particles to Cage Mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1a-cluster-sph-particles-into-virtual-bones-precomputation-done-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1a: Cluster SPH particles into virtual bones (precomputation, done once)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1b-compute-bone-transforms-from-sph-particles-per-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1b: Compute bone transforms from SPH particles (per frame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1c-skin-mesh-vertices-to-virtual-bones-precomputation-per-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1c: Skin mesh vertices to virtual bones (precomputation + per frame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-interior-deformation-cage-based-deformation-with-mean-value-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: Interior Deformation — Cage-Based Deformation with Mean Value Coordinates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2: Interior Deformation — Cage-Based Deformation with Mean Value Coordinates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-are-cage-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What are cage coordinates?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-value-coordinates-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mean Value Coordinates (MVC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparsification-for-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sparsification for performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-frame-gpu-compute-shader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-frame GPU compute shader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-body-wall-mesh-as-cage-practical-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The body wall mesh as cage: practical considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-collision-resolution-position-based-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: Collision Resolution — Position-Based Dynamics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3: Collision Resolution — Position-Based Dynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collision-pairs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collision pairs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pbd-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBD algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-spine-shortcut-optimization-for-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Spine Shortcut (Optimization for Phase 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-free-form-deformation-ffd-lattice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Free-Form Deformation (FFD) Lattice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-radial-basis-function-rbf-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Radial Basis Function (RBF) Interpolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-harmonic-coordinates-instead-of-mean-value-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Harmonic Coordinates Instead of Mean Value Coordinates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-green-coordinates-shape-preserving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Green Coordinates (Shape-Preserving)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-direct-sph-to-vertex-mapping-no-cage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Direct SPH-to-Vertex Mapping (No Cage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-re-simulate-all-meshes-as-sph-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Re-simulate All Meshes as SPH Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-mesh-deformation-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Mesh Deformation Implementation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-virtual-worm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Virtual Worm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-decade-long-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Decade-Long Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-of-the-art-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State of the Art (2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-spine-based-deformation-weeks-1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Spine-Based Deformation (Weeks 1-4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-full-cage-pipeline-weeks-5-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Full Cage Pipeline (Weeks 5-12)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-refinements-weeks-13-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Refinements (Weeks 13-16)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd0142-anatomical-mesh-deformation-pipeline">DD014.2: Anatomical Mesh Deformation Pipeline<a class="headerlink" href="#dd0142-anatomical-mesh-deformation-pipeline" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-16</li>
+<li><strong>Companion to:</strong> <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Dynamic Visualization Architecture), <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a> (Visual Rendering Specification)</li>
+<li><strong>Related:</strong> <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics / Sibernetic), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity), <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (Simulation Stack)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18">Phase 4</a> | <strong>Layer:</strong> Visualization</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>The Virtual Worm Blender model contains <strong>688 anatomical meshes</strong> (~1.6M vertices) representing every cell in <em>C. elegans</em>. Sibernetic's SPH simulation drives body shape with only <strong>~40K elastic particles</strong>. This document specifies how to deform the high-resolution meshes to follow the low-resolution physics — using the body wall mesh as a deformation <strong>cage</strong> that drives all interior anatomy, with Position-Based Dynamics collision resolution to prevent interpenetration. The result: every cell in the worm bends, stretches, and moves coherently with the simulated body, at 60fps in a WebGPU browser viewer.</p>
+<hr />
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Visual coherence</td>
+<td>All 688 meshes deform smoothly with the SPH body shape — no mesh tearing, no vertex explosions, no frozen anatomy against a bending body</td>
+<td>Visual QC (blocking)</td>
+</tr>
+<tr>
+<td><strong>Primary:</strong> Spatial containment</td>
+<td>Interior meshes (intestine, neurons, reproductive) never penetrate the body wall surface</td>
+<td>Visual QC (blocking)</td>
+</tr>
+<tr>
+<td><strong>Primary:</strong> Performance</td>
+<td>Deformation pipeline runs in &lt;4 ms per frame on mid-range GPU (within 60fps budget)</td>
+<td>Performance (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Inter-mesh non-penetration</td>
+<td>Adjacent organs (intestine, gonad, muscle quadrants) do not interpenetrate during body bending</td>
+<td>Visual QC (non-blocking Phase 2)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Anatomical fidelity</td>
+<td>Anterior-posterior ordering of all organs preserved during deformation — pharynx stays at the head, rectum stays at the tail</td>
+<td>Visual QC (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Viewer Stage 1 (Roadmap Phase 1) uses marching cubes to reconstruct a smooth body surface from SPH particles. The 688 Virtual Worm meshes sit as static, undeformed geometry inside a moving body — completely wrong.</p>
+<p><strong>After:</strong> All 688 meshes deform in real-time with the simulated body. The cuticle bends, muscles visibly shift within their quadrants, neurons ride along inside the body, and the intestine snakes through the interior — all driven by the SPH physics.</p>
+<hr />
+<h2 id="the-resolution-mismatch-problem">The Resolution Mismatch Problem<a class="headerlink" href="#the-resolution-mismatch-problem" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Representation</th>
+<th>Vertices/Particles</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Virtual Worm meshes (all 688)</td>
+<td>~1,600,000 vertices</td>
+<td>Visual rendering (what the user sees)</td>
+</tr>
+<tr>
+<td>Sibernetic elastic particles</td>
+<td>~40,000 particles</td>
+<td>Physics simulation (what drives the motion)</td>
+</tr>
+<tr>
+<td>Sibernetic liquid particles</td>
+<td>~50,000 particles</td>
+<td>Internal pressure (not directly visible)</td>
+</tr>
+<tr>
+<td>Sibernetic boundary particles</td>
+<td>~10,000 particles</td>
+<td>Environment (not visible at organism scale)</td>
+</tr>
+</tbody>
+</table>
+<p>The elastic particles outnumber the visual vertices by a ratio of <strong>1:40</strong> — each SPH particle must influence ~40 mesh vertices on average. Direct vertex-to-particle mapping is impossible. We need a technique that <strong>interpolates</strong> a smooth deformation field from the sparse SPH particles and applies it to the dense mesh vertices.</p>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="architecture-overview-three-stage-pipeline">Architecture Overview: Three-Stage Pipeline<a class="headerlink" href="#architecture-overview-three-stage-pipeline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Stage 1: Body Wall Skinning (SPH → Cage Mesh)
+    Input:  ~40K SPH elastic particle positions (per frame)
+    Output: Deformed body wall mesh (~50K vertices)
+    Method: GPU skinning with particle-derived virtual bones
+
+Stage 2: Interior Deformation (Cage → All Internal Meshes)
+    Input:  Deformed body wall mesh (the &quot;cage&quot;)
+    Output: Deformed positions for all ~1.55M interior vertices
+    Method: Cage-based deformation with Mean Value Coordinates
+
+Stage 3: Collision Resolution (Post-Process)
+    Input:  All deformed mesh vertex positions
+    Output: Adjusted positions with no interpenetration
+    Method: Position-Based Dynamics constraint projection
+</code></pre></div>
+<p>Each stage feeds into the next. All three run as WebGPU compute shaders, chained in a single command buffer per frame.</p>
+<hr />
+<h3 id="stage-1-body-wall-skinning-sph-particles-to-cage-mesh">Stage 1: Body Wall Skinning — SPH Particles to Cage Mesh<a class="headerlink" href="#stage-1-body-wall-skinning-sph-particles-to-cage-mesh" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Map ~40K scattered SPH particle positions to ~50K body wall mesh vertices every frame.</p>
+<p><strong>Solution:</strong> Cluster the SPH particles into <strong>virtual bones</strong> and use GPU skinning (the same technique used for character animation in games) to deform the cuticle/hypodermis mesh.</p>
+<h4 id="step-1a-cluster-sph-particles-into-virtual-bones-precomputation-done-once">Step 1a: Cluster SPH particles into virtual bones (precomputation, done once)<a class="headerlink" href="#step-1a-cluster-sph-particles-into-virtual-bones-precomputation-done-once" title="Permanent link">&para;</a></h4>
+<p>At initialization (t=0), spatially cluster the ~40K elastic particles into <strong>~500 virtual bones</strong> using k-means on particle rest positions:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># precompute/cluster_bones.py (runs once at initialization)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">MiniBatchKMeans</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_virtual_bones</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">,</span> <span class="n">n_bones</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cluster ~40K SPH particles into ~500 virtual bones.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bone_centers: (n_bones, 3) — rest position of each bone</span>
+<span class="sd">        particle_to_bone: (n_particles,) — which bone each particle belongs to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">MiniBatchKMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_bones</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</code></pre></div>
+<p>Each virtual bone represents a local cluster of ~80 SPH particles. Per frame, the bone's position and orientation are computed from its member particles.</p>
+<h4 id="step-1b-compute-bone-transforms-from-sph-particles-per-frame">Step 1b: Compute bone transforms from SPH particles (per frame)<a class="headerlink" href="#step-1b-compute-bone-transforms-from-sph-particles-per-frame" title="Permanent link">&para;</a></h4>
+<p>For each virtual bone, compute a rigid transform (rotation + translation) from its member particles' rest positions to their current positions. This uses the Kabsch algorithm (SVD-based rigid alignment):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per frame, on CPU or GPU</span>
+<span class="k">for</span> <span class="n">each</span> <span class="n">bone</span> <span class="n">b</span><span class="p">:</span>
+    <span class="n">rest_pts</span> <span class="o">=</span> <span class="n">rest_positions</span><span class="p">[</span><span class="n">particles_in_bone</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>     <span class="c1"># (K, 3)</span>
+    <span class="n">curr_pts</span> <span class="o">=</span> <span class="n">current_positions</span><span class="p">[</span><span class="n">particles_in_bone</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>   <span class="c1"># (K, 3)</span>
+
+    <span class="c1"># Centroids</span>
+    <span class="n">rest_centroid</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">rest_pts</span><span class="p">)</span>
+    <span class="n">curr_centroid</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">curr_pts</span><span class="p">)</span>
+
+    <span class="c1"># Covariance matrix</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="n">rest_pts</span> <span class="o">-</span> <span class="n">rest_centroid</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">curr_pts</span> <span class="o">-</span> <span class="n">curr_centroid</span><span class="p">)</span>
+
+    <span class="c1"># SVD → optimal rotation</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">if</span> <span class="n">det</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># reflection correction</span>
+        <span class="n">Vt</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Translation</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">curr_centroid</span> <span class="o">-</span> <span class="n">R</span> <span class="o">@</span> <span class="n">rest_centroid</span>
+
+    <span class="n">bone_transforms</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># 3x3 rotation + 3-vector translation</span>
+</code></pre></div>
+<p>This gives us ~500 rigid transforms per frame — the "skeleton" that drives the visual mesh.</p>
+<h4 id="step-1c-skin-mesh-vertices-to-virtual-bones-precomputation-per-frame">Step 1c: Skin mesh vertices to virtual bones (precomputation + per frame)<a class="headerlink" href="#step-1c-skin-mesh-vertices-to-virtual-bones-precomputation-per-frame" title="Permanent link">&para;</a></h4>
+<p><strong>Precomputation (done once):</strong> For each body wall mesh vertex, find the nearest <strong>K=4 virtual bones</strong> and compute inverse-distance skinning weights:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># precompute/compute_skin_weights.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_skin_weights</span><span class="p">(</span><span class="n">mesh_vertices</span><span class="p">,</span> <span class="n">bone_centers</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For each mesh vertex, compute weights to its K nearest bones.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bone_indices: (n_vertices, K) — which bones influence each vertex</span>
+<span class="sd">        bone_weights: (n_vertices, K) — normalized weights (sum to 1.0)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">cKDTree</span>
+
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">bone_centers</span><span class="p">)</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">mesh_vertices</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
+
+    <span class="c1"># Inverse distance weights, normalized</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">distances</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+    <span class="n">weights</span> <span class="o">/=</span> <span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">indices</span><span class="p">,</span> <span class="n">weights</span>
+</code></pre></div>
+<p><strong>Per frame (GPU compute shader):</strong> Standard Linear Blend Skinning (LBS):</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Stage 1 compute shader: skin body wall vertices to virtual bones</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rest_positions</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 500 bones × 12 floats (3x3 R + 3 t)</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bone_indices</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">u32</span><span class="o">&gt;</span><span class="p">;</span><span class="w">     </span><span class="c1">// n_verts × 4</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bone_weights</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span><span class="w">     </span><span class="c1">// n_verts × 4</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read_write</span><span class="o">&gt;</span><span class="w"> </span><span class="n">deformed_positions</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="nd">@compute</span><span class="w"> </span><span class="nd">@workgroup_size</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">fn</span><span class="w"> </span><span class="n">skin_body_wall</span><span class="p">(</span><span class="nd">@builtin</span><span class="p">(</span><span class="nb">global_invocation_id</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">vec3u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vi</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">num_vertices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rest_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rest_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rest_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rest_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rest_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rest_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">bi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bone_indices</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">w</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">bone_weights</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">        </span><span class="c1">// Read 3x3 rotation + translation for this bone</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">mat3x3f</span><span class="p">(</span>
+<span class="w">            </span><span class="nb">vec3f</span><span class="p">(</span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">2</span><span class="p">]),</span>
+<span class="w">            </span><span class="nb">vec3f</span><span class="p">(</span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">5</span><span class="p">]),</span>
+<span class="w">            </span><span class="nb">vec3f</span><span class="p">(</span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">6</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">7</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">8</span><span class="p">])</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">9</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">10</span><span class="p">],</span><span class="w"> </span><span class="n">bone_transforms</span><span class="p">[</span><span class="n">base</span><span class="o">+</span><span class="mi">11</span><span class="p">]);</span>
+
+<span class="w">        </span><span class="n">pos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span><span class="n">rest_x</span><span class="p">,</span><span class="w"> </span><span class="n">rest_y</span><span class="p">,</span><span class="w"> </span><span class="n">rest_z</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">deformed_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">deformed_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="n">deformed_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Why LBS works for a worm:</strong> Linear Blend Skinning produces artifacts at sharply rotating joints (the "candy wrapper" effect). But <em>C. elegans</em> bends smoothly along its length — there are no discrete joints. The smooth bending of the worm body is exactly the case where LBS performs best. If artifacts are observed at extreme curvature, Dual Quaternion Skinning (DQS) is a drop-in replacement that preserves volume better, at minimal additional cost.</p>
+<hr />
+<h3 id="stage-2-interior-deformation-cage-based-deformation-with-mean-value-coordinates">Stage 2: Interior Deformation — Cage-Based Deformation with Mean Value Coordinates<a class="headerlink" href="#stage-2-interior-deformation-cage-based-deformation-with-mean-value-coordinates" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> After Stage 1, the body wall mesh (cuticle + hypodermis) is correctly deformed. But the ~1.55M interior vertices (neurons, muscles, intestine, pharynx, reproductive system) are still in their rest positions.</p>
+<p><strong>Solution:</strong> Use the body wall mesh as a <strong>deformation cage</strong>. The cage is a closed surface that encloses all interior anatomy. When the cage deforms, everything inside follows smoothly.</p>
+<h4 id="what-are-cage-coordinates">What are cage coordinates?<a class="headerlink" href="#what-are-cage-coordinates" title="Permanent link">&para;</a></h4>
+<p>For every interior vertex, we precompute a set of <strong>generalized barycentric coordinates</strong> — weights that express its position as a weighted combination of cage (body wall) vertices:</p>
+<div class="highlight"><pre><span></span><code>interior_position = Σ_i (w_i × cage_vertex_i)
+</code></pre></div>
+<p>If these weights are computed correctly, they have two critical properties:</p>
+<ol>
+<li><strong>Interpolation:</strong> When the cage vertex positions change, the interior point moves smoothly</li>
+<li><strong>Containment:</strong> If weights are non-negative, the interior point stays inside the cage</li>
+</ol>
+<h4 id="mean-value-coordinates-mvc">Mean Value Coordinates (MVC)<a class="headerlink" href="#mean-value-coordinates-mvc" title="Permanent link">&para;</a></h4>
+<p>MVC (Floater 2003, Ju et al. 2005) are the simplest generalized barycentric coordinates for arbitrary closed triangle meshes. For an interior point <strong>p</strong> and cage vertex <strong>v_i</strong>:</p>
+<div class="highlight"><pre><span></span><code>w_i(p) = [ Σ_f∈faces_incident(v_i)  α_i(f, p) ] / Σ_j [ Σ_f∈faces_incident(v_j)  α_j(f, p) ]
+</code></pre></div>
+<p>Where α values are derived from the solid angles subtended by cage faces as seen from <strong>p</strong>. The full formula involves tangent half-angle computations over each cage triangle.</p>
+<p><strong>Key properties for our use case:</strong></p>
+<ul>
+<li>Defined for any closed triangle mesh (our body wall is a closed surface)</li>
+<li>Smooth and continuous everywhere inside the cage</li>
+<li>Weights sum to 1.0</li>
+<li><strong>Mostly</strong> non-negative for convex-ish cages (the worm body is roughly convex in cross-section)</li>
+<li>Computational complexity: O(V_interior × F_cage) for precomputation, O(V_interior × K_sparse) per frame</li>
+</ul>
+<h4 id="sparsification-for-performance">Sparsification for performance<a class="headerlink" href="#sparsification-for-performance" title="Permanent link">&para;</a></h4>
+<p>The full weight matrix is (1.55M interior vertices × ~100K cage faces) — too large. But MVC weights fall off with distance, so we <strong>sparsify</strong>: for each interior vertex, keep only the <strong>K=30 largest weights</strong> (nearest cage vertices), set the rest to zero, and renormalize.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># precompute/compute_cage_coordinates.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pymvc</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_value_coordinates</span>  <span class="c1"># hypothetical library</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_sparse_mvc</span><span class="p">(</span><span class="n">interior_vertices</span><span class="p">,</span> <span class="n">cage_vertices</span><span class="p">,</span> <span class="n">cage_faces</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute sparse Mean Value Coordinates for all interior vertices.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cage_indices: (n_interior, K) — which cage vertices influence each interior vertex</span>
+<span class="sd">        cage_weights: (n_interior, K) — normalized sparse weights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_interior</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">interior_vertices</span><span class="p">)</span>
+    <span class="n">all_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_interior</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">all_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_interior</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">interior_vertices</span><span class="p">):</span>
+        <span class="c1"># Compute full MVC weights (slow, but done once)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">mean_value_coordinates</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">cage_vertices</span><span class="p">,</span> <span class="n">cage_faces</span><span class="p">)</span>
+
+        <span class="c1"># Keep top K weights</span>
+        <span class="n">top_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">weights</span><span class="p">))[</span><span class="o">-</span><span class="n">K</span><span class="p">:]</span>
+        <span class="n">sparse_w</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">top_k</span><span class="p">]</span>
+        <span class="n">sparse_w</span> <span class="o">/=</span> <span class="n">sparse_w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># renormalize</span>
+
+        <span class="n">all_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_k</span>
+        <span class="n">all_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sparse_w</span>
+
+    <span class="k">return</span> <span class="n">all_indices</span><span class="p">,</span> <span class="n">all_weights</span>
+</code></pre></div>
+<h4 id="per-frame-gpu-compute-shader">Per-frame GPU compute shader<a class="headerlink" href="#per-frame-gpu-compute-shader" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// Stage 2 compute shader: deform interior vertices using cage coordinates</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cage_positions</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span><span class="w">    </span><span class="c1">// From Stage 1 output</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cage_indices</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">u32</span><span class="o">&gt;</span><span class="p">;</span><span class="w">      </span><span class="c1">// (n_interior, K)</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cage_weights</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span><span class="w">      </span><span class="c1">// (n_interior, K)</span>
+<span class="nd">@group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="nd">@binding</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="o">&lt;</span><span class="nb">storage</span><span class="p">,</span><span class="w"> </span><span class="nb">read_write</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interior_positions</span><span class="p">:</span><span class="w"> </span><span class="nb">array</span><span class="o">&lt;</span><span class="nb">f32</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="n">K</span><span class="p">:</span><span class="w"> </span><span class="nb">u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+
+<span class="nd">@compute</span><span class="w"> </span><span class="nd">@workgroup_size</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">fn</span><span class="w"> </span><span class="n">deform_interior</span><span class="p">(</span><span class="nd">@builtin</span><span class="p">(</span><span class="nb">global_invocation_id</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">vec3u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vi</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">num_interior_vertices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cage_indices</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">w</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">cage_weights</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">        </span><span class="n">pos</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span>
+<span class="w">            </span><span class="n">cage_positions</span><span class="p">[</span><span class="n">ci</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span>
+<span class="w">            </span><span class="n">cage_positions</span><span class="p">[</span><span class="n">ci</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">            </span><span class="n">cage_positions</span><span class="p">[</span><span class="n">ci</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">interior_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="n">interior_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="n">interior_positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="the-body-wall-mesh-as-cage-practical-considerations">The body wall mesh as cage: practical considerations<a class="headerlink" href="#the-body-wall-mesh-as-cage-practical-considerations" title="Permanent link">&para;</a></h4>
+<p>The Virtual Worm cuticle + hypodermis meshes form the outermost surface of the worm body. Together they define a closed volume. However:</p>
+<ol>
+<li>
+<p><strong>The cage must be a single closed mesh.</strong> The Virtual Worm splits the outer surface into multiple meshes (cuticle, hyp1-hyp11, seam cells). These must be <strong>merged into a single watertight cage mesh</strong> at initialization. Use a boolean union or simply stitch shared edges.</p>
+</li>
+<li>
+<p><strong>Cage resolution vs. quality.</strong> The full cuticle mesh has ~50K vertices. MVC precomputation with a 50K-vertex cage on 1.55M interior points is expensive but feasible as a one-time cost (~10-30 minutes). If too slow, decimate the cage to ~5K-10K vertices (sufficient for smooth deformation of a worm body) and compute MVC against the simplified cage.</p>
+</li>
+<li>
+<p><strong>Open ends.</strong> The worm has open ends (mouth, anus). The cage must be capped with simple polygons at both ends to form a closed volume. These caps can be flat discs positioned at the anterior and posterior extremes of the body wall mesh.</p>
+</li>
+</ol>
+<hr />
+<h3 id="stage-3-collision-resolution-position-based-dynamics">Stage 3: Collision Resolution — Position-Based Dynamics<a class="headerlink" href="#stage-3-collision-resolution-position-based-dynamics" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Cage-based deformation produces smooth, coherent motion but does not prevent <strong>inter-mesh penetration</strong>. During extreme bending, the intestine might clip through a muscle layer, or two gonad arms might overlap.</p>
+<p><strong>Solution:</strong> After Stages 1+2, run a Position-Based Dynamics (PBD) constraint pass to project overlapping vertices apart.</p>
+<h4 id="collision-pairs">Collision pairs<a class="headerlink" href="#collision-pairs" title="Permanent link">&para;</a></h4>
+<p>Not all 688 meshes need collision testing against each other. Define a collision pair table based on anatomical adjacency:</p>
+<table>
+<thead>
+<tr>
+<th>Mesh A</th>
+<th>Mesh B</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Body wall (cuticle)</td>
+<td>All interior meshes</td>
+<td>Nothing should poke through the skin</td>
+</tr>
+<tr>
+<td>Intestine</td>
+<td>Body wall muscles</td>
+<td>Adjacent structures, often in contact</td>
+</tr>
+<tr>
+<td>Intestine</td>
+<td>Gonad arms</td>
+<td>Wrap around each other in the body cavity</td>
+</tr>
+<tr>
+<td>Pharynx</td>
+<td>Neurons (anterior)</td>
+<td>Tightly packed in the head</td>
+</tr>
+<tr>
+<td>Gonad arm (anterior)</td>
+<td>Gonad arm (posterior)</td>
+<td>U-shaped gonad folds back on itself</td>
+</tr>
+</tbody>
+</table>
+<p>This reduces collision detection from O(688²) = 473,344 pairs to ~20-30 relevant pairs.</p>
+<h4 id="pbd-algorithm">PBD algorithm<a class="headerlink" href="#pbd-algorithm" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>for iteration in range(N_ITERATIONS):  # typically 5-10
+    for each collision pair (mesh_A, mesh_B):
+
+        # Broad phase: BVH overlap test (AABB tree)
+        overlapping_triangles = bvh_overlap(mesh_A.bvh, mesh_B.bvh)
+
+        # Narrow phase: vertex-triangle distance test
+        for (vertex, triangle) in overlapping_triangles:
+            distance = signed_distance(vertex, triangle)
+            if distance &lt; 0:  # penetration
+                normal = triangle.normal
+                correction = -distance * normal * 0.5  # split correction between both meshes
+                vertex.position += correction
+                # Also nudge triangle vertices in opposite direction
+                for tv in triangle.vertices:
+                    tv.position -= correction / 3.0
+
+    # Optional: volume preservation constraint
+    for each mesh with volume tracking:
+        current_volume = compute_volume(mesh)
+        if current_volume &lt; 0.9 * rest_volume:
+            scale_outward(mesh, target=rest_volume)
+</code></pre></div>
+<h4 id="gpu-implementation">GPU implementation<a class="headerlink" href="#gpu-implementation" title="Permanent link">&para;</a></h4>
+<p>PBD parallelizes well with Jacobi iteration (each constraint resolved independently, averaged after each iteration). Recent work demonstrated <strong>640K nodes at 60fps</strong> in WebGPU for cloth simulation with triangle-triangle collision. Our ~50K total vertices for collision-active meshes are well within budget.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Stage 3 compute shader: PBD collision resolution</span>
+<span class="c1">// Runs after Stages 1+2 have written deformed positions</span>
+
+<span class="nd">@compute</span><span class="w"> </span><span class="nd">@workgroup_size</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">fn</span><span class="w"> </span><span class="n">resolve_collisions</span><span class="p">(</span><span class="nd">@builtin</span><span class="p">(</span><span class="nb">global_invocation_id</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">vec3u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vi</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">num_collision_vertices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">vec3f</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">num_corrections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// For each potential collision triangle (from BVH broad phase, precomputed)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_collision_candidates</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tri_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collision_candidates</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">max_collision_candidates</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tri_idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// sentinel: no more candidates</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">signed_distance_to_triangle</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">vi</span><span class="p">],</span><span class="w"> </span><span class="n">tri_idx</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">triangle_normal</span><span class="p">(</span><span class="n">tri_idx</span><span class="p">);</span>
+<span class="w">            </span><span class="n">correction</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">EPSILON</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">            </span><span class="n">num_corrections</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1u</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num_corrections</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">correction</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">f32</span><span class="p">(</span><span class="n">num_corrections</span><span class="p">);</span>
+<span class="w">        </span><span class="n">positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">correction</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">f32</span><span class="p">(</span><span class="n">num_corrections</span><span class="p">);</span>
+<span class="w">        </span><span class="n">positions</span><span class="p">[</span><span class="n">vi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">correction</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">f32</span><span class="p">(</span><span class="n">num_corrections</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="the-spine-shortcut-optimization-for-phase-1">The Spine Shortcut (Optimization for Phase 1)<a class="headerlink" href="#the-spine-shortcut-optimization-for-phase-1" title="Permanent link">&para;</a></h3>
+<p>The Virtual Worm Blender file contains a <strong>bezier spine curve</strong> running along the body's central axis. The <code>Blender2NeuroML</code> repo already has <code>blenderStraighten.py</code> that uses it. This offers a fast Phase 1 approximation before the full cage pipeline is ready:</p>
+<p><strong>Spine-based deformation (simpler, faster, less accurate):</strong></p>
+<ol>
+<li>Fit a deformable spine curve (cubic B-spline, ~20 control points) to the SPH particle centerline each frame</li>
+<li>Each mesh vertex is parameterized at initialization by <strong>(s, r, θ)</strong> — distance along spine, distance from spine, angle around spine</li>
+<li>Per frame: evaluate the new spine at parameter <strong>s</strong>, orient the local frame by the spine tangent/normal, and place the vertex at offset <strong>(r, θ)</strong> in the local frame</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per vertex (precomputed):</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">project_onto_spine</span><span class="p">(</span><span class="n">vertex_rest_position</span><span class="p">,</span> <span class="n">spine_rest</span><span class="p">)</span>  <span class="c1"># arc length parameter</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">distance_from_spine</span><span class="p">(</span><span class="n">vertex_rest_position</span><span class="p">,</span> <span class="n">spine_rest</span><span class="p">)</span> <span class="c1"># radial distance</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">angle_around_spine</span><span class="p">(</span><span class="n">vertex_rest_position</span><span class="p">,</span> <span class="n">spine_rest</span><span class="p">)</span> <span class="c1"># angular position</span>
+
+<span class="c1"># Per frame:</span>
+<span class="n">new_spine_point</span> <span class="o">=</span> <span class="n">evaluate_spine</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">current_spine_control_points</span><span class="p">)</span>
+<span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">frenet_frame</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">current_spine_control_points</span><span class="p">)</span>  <span class="c1"># tangent, normal, binormal</span>
+<span class="n">deformed_position</span> <span class="o">=</span> <span class="n">new_spine_point</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">N</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Advantages:</strong> Extremely fast (just a spline evaluation per vertex), preserves anterior-posterior ordering perfectly, interior structures ride along naturally.</p>
+<p><strong>Disadvantages:</strong> Cannot capture cross-sectional deformation (e.g., muscles bulging during contraction), treats the worm as a rigid cross-section sliding along a flexible centerline. The body cross-section shape is assumed constant.</p>
+<p><strong>Recommendation:</strong> Use spine-based deformation for Phase 1 (gets meshes moving immediately), then upgrade to the full cage pipeline for Phase 2 (captures cross-sectional deformation and individual muscle bulging).</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to repo)</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Virtual bone cluster data</td>
+<td><code>openworm/Worm3DViewer</code> — <code>data/bone_clusters.npz</code></td>
+<td>NumPy archive</td>
+<td>500 bone centers, particle-to-bone assignments</td>
+</tr>
+<tr>
+<td>Body wall skin weights</td>
+<td><code>data/body_wall_skin_weights.npz</code></td>
+<td>NumPy archive</td>
+<td>(n_cuticle_verts, 4) indices + weights</td>
+</tr>
+<tr>
+<td>Watertight cage mesh</td>
+<td><code>data/cage_mesh.obj</code></td>
+<td>OBJ</td>
+<td>Merged + capped cuticle/hypodermis mesh</td>
+</tr>
+<tr>
+<td>MVC cage coordinates (sparse)</td>
+<td><code>data/cage_coordinates.npz</code></td>
+<td>NumPy archive</td>
+<td>(n_interior_verts, 30) indices + weights</td>
+</tr>
+<tr>
+<td>Spine parameters</td>
+<td><code>data/spine_parameters.npz</code></td>
+<td>NumPy archive</td>
+<td>Per-vertex (s, r, theta) for all 688 meshes</td>
+</tr>
+<tr>
+<td>Precomputation script</td>
+<td><code>scripts/precompute_deformation.py</code></td>
+<td>Python</td>
+<td>Generates all above from Virtual Worm meshes + SPH rest positions</td>
+</tr>
+<tr>
+<td>Stage 1 compute shader</td>
+<td><code>shaders/skin_body_wall.wgsl</code></td>
+<td>WGSL</td>
+<td>GPU skinning of body wall</td>
+</tr>
+<tr>
+<td>Stage 2 compute shader</td>
+<td><code>shaders/deform_interior.wgsl</code></td>
+<td>WGSL</td>
+<td>Cage-based interior deformation</td>
+</tr>
+<tr>
+<td>Stage 3 compute shader</td>
+<td><code>shaders/resolve_collisions.wgsl</code></td>
+<td>WGSL</td>
+<td>PBD collision resolution</td>
+</tr>
+<tr>
+<td>Spine deformation shader</td>
+<td><code>shaders/spine_deform.wgsl</code></td>
+<td>WGSL</td>
+<td>Phase 1 spine-based shortcut</td>
+</tr>
+<tr>
+<td>Collision pair config</td>
+<td><code>data/collision_pairs.json</code></td>
+<td>JSON</td>
+<td>Which mesh pairs need collision testing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/Worm3DViewer"><code>openworm/Worm3DViewer</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd014b</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Anatomical Mesh Deformation</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd014b/description</code> (e.g., <code>dd014b/cage-deformation</code>, <code>dd014b/spine-shortcut</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD014.2: Implement spine-based deformation for Phase 1 viewer</code></td>
+</tr>
+<tr>
+<td><strong>Source meshes</strong></td>
+<td><a href="https://github.com/openworm/Blender2NeuroML"><code>openworm/Blender2NeuroML</code></a> — <code>src/Data/Virtual_Worm_February_2012.blend</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python 3.10+, numpy, scipy, scikit-learn, trimesh, pyvista</li>
+<li>Blender 3.6+ (for mesh export from Virtual Worm .blend file)</li>
+<li>WebGPU-capable browser (Chrome 113+, Firefox 121+)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>There are two paths: <strong>Docker</strong> (recommended for integration testing) and <strong>native Python + Blender</strong> (for mesh pipeline development).</p>
+<p><strong>Clone the required repositories:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/Blender2NeuroML.git<span class="w">   </span><span class="c1"># Virtual Worm source meshes</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git<span class="w">           </span><span class="c1"># for docker compose integration</span>
+</code></pre></div>
+<p><strong>Path A — Docker (integration testing):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>viewer<span class="w">     </span><span class="c1"># builds viewer stage with mesh deformation deps</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer<span class="w">        </span><span class="c1"># launches viewer with deformed meshes at localhost:8501</span>
+</code></pre></div>
+<p>This path uses the pre-built deformation pipeline inside the Docker viewer service. See <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> for full Docker environment setup.</p>
+<p><strong>Path B — Native Python + Blender (pipeline development):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Python mesh processing dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>scikit-learn<span class="w"> </span>trimesh<span class="w"> </span>pyvista
+
+<span class="c1"># Install STL/OBJ mesh I/O</span>
+pip<span class="w"> </span>install<span class="w"> </span>numpy-stl
+
+<span class="c1"># Verify Blender is available (needed for mesh export from .blend file)</span>
+blender<span class="w"> </span>--version
+<span class="c1"># Expected: Blender 3.6+ (4.x recommended)</span>
+
+<span class="c1"># Blender headless mesh export (no GUI required)</span>
+blender<span class="w"> </span>--background<span class="w"> </span>--python<span class="w"> </span>scripts/export_virtual_worm_meshes.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>Blender2NeuroML/src/Data/Virtual_Worm_February_2012.blend<span class="w"> </span>output/meshes/
+</code></pre></div>
+<p>The Virtual Worm Blender file (<code>Virtual_Worm_February_2012.blend</code>) contains 688 anatomical meshes (~1.6M vertices). The export script converts these to individual OBJ files for the deformation pipeline.</p>
+<p><strong>Blender headless Docker (alternative):</strong></p>
+<p>If you do not have Blender installed natively, you can use a headless Blender container:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nytimes/blender:4.0-cpu<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>blender<span class="w"> </span>--background<span class="w"> </span>--python<span class="w"> </span>scripts/export_virtual_worm_meshes.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>/work/Blender2NeuroML/src/Data/Virtual_Worm_February_2012.blend<span class="w"> </span>/work/output/meshes/
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Export Virtual Worm meshes from Blender to individual OBJ files</span>
+blender<span class="w"> </span>--background<span class="w"> </span>--python<span class="w"> </span>scripts/export_virtual_worm_meshes.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>src/Data/Virtual_Worm_February_2012.blend<span class="w"> </span>output/meshes/
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: 688 OBJ files in output/meshes/</span>
+
+<span class="c1"># Step 2: Generate watertight cage mesh from cuticle + hypodermis</span>
+python<span class="w"> </span>scripts/build_cage_mesh.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--meshes<span class="w"> </span>output/meshes/cuticle.obj<span class="w"> </span>output/meshes/hyp*.obj<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>data/cage_mesh.obj
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: single closed OBJ mesh</span>
+
+<span class="c1"># Step 3: Run full precomputation (bones, weights, cage coords, spine params)</span>
+python<span class="w"> </span>scripts/precompute_deformation.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--meshes<span class="w"> </span>output/meshes/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cage<span class="w"> </span>data/cage_mesh.obj<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sph_rest_positions<span class="w"> </span>/path/to/sibernetic/worm_rest_positions.dat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>data/
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: bone_clusters.npz, body_wall_skin_weights.npz,</span>
+<span class="c1">#           cage_coordinates.npz, spine_parameters.npz</span>
+
+<span class="c1"># Step 4: Run deformation unit test (known displacement → expected output)</span>
+python<span class="w"> </span>scripts/test_deformation.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--test_case<span class="w"> </span>uniform_bend_90deg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--precomputed<span class="w"> </span>data/
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: all interior vertices remain inside cage, max penetration &lt; 1 µm</span>
+
+<span class="c1"># Step 5: Run performance benchmark</span>
+python<span class="w"> </span>scripts/benchmark_deformation.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--precomputed<span class="w"> </span>data/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--n_frames<span class="w"> </span><span class="m">100</span>
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/Worm3DViewer#TBD</span>
+<span class="c1"># Expected: per-frame time &lt; 4 ms (CPU reference), &lt; 1 ms (GPU target)</span>
+
+<span class="c1"># Step 6: Visual integration test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>viewer
+<span class="c1"># Navigate to localhost:8501, load a Sibernetic replay</span>
+<span class="c1"># Verify: all meshes deform with body, no penetration visible</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/export_virtual_worm_meshes.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/build_cage_mesh.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/precompute_deformation.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/test_deformation.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/benchmark_deformation.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>shaders/skin_body_wall.wgsl</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>shaders/deform_interior.wgsl</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>shaders/resolve_collisions.wgsl</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+<tr>
+<td><code>shaders/spine_deform.wgsl</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/Worm3DViewer#TBD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong>This DD is itself a visualization pipeline.</strong> Its output IS the deformed meshes rendered in the <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Default view</strong></td>
+<td>Deformed Virtual Worm meshes replace marching-cubes surface at Phase 2+</td>
+</tr>
+<tr>
+<td><strong>Debug mode: bones</strong></td>
+<td>Toggle to show virtual bone positions as small spheres + lines to their SPH particles</td>
+</tr>
+<tr>
+<td><strong>Debug mode: cage</strong></td>
+<td>Toggle to show the cage mesh as a wireframe overlaid on the deformed body</td>
+</tr>
+<tr>
+<td><strong>Debug mode: collision</strong></td>
+<td>Toggle to highlight vertices that were corrected by PBD (red = penetration detected)</td>
+</tr>
+<tr>
+<td><strong>A/B comparison</strong></td>
+<td>Side-by-side: marching cubes surface (Phase 1) vs. deformed Virtual Worm meshes (Phase 2)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-free-form-deformation-ffd-lattice">1. Free-Form Deformation (FFD) Lattice<a class="headerlink" href="#1-free-form-deformation-ffd-lattice" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Embed the entire worm in a regular 3D grid of control points (e.g., 20 × 4 × 4). Map control points to SPH particles. Deforming the lattice deforms all embedded meshes via trivariate Bernstein polynomial evaluation.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>A regular lattice is a poor fit for the worm's elongated, curved anatomy — most lattice cells would be empty</li>
+<li>Lattice resolution limits the spatial detail of deformation (cannot capture localized muscle bulging without very fine lattice)</li>
+<li>Requires manual lattice design or adaptive lattice generation</li>
+</ul>
+<p><strong>When to reconsider:</strong> If the cage mesh approach proves too complex or if cross-sectional deformation fidelity is less important than speed.</p>
+<h3 id="2-radial-basis-function-rbf-interpolation">2. Radial Basis Function (RBF) Interpolation<a class="headerlink" href="#2-radial-basis-function-rbf-interpolation" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use SPH particle displacements as scattered control points for a smooth RBF deformation field. Evaluate the field at every mesh vertex.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Requires solving a linear system per frame (N × N where N = number of control points). With ~40K SPH particles, this is a 40K × 40K system — infeasible per frame even with precomputed factorization</li>
+<li>Subsampling to ~500 control points is possible but then RBF offers no advantage over the virtual-bone skinning approach (Stage 1)</li>
+<li>Does not inherently provide containment guarantees (interior vertices can escape the body)</li>
+</ul>
+<p><strong>When to reconsider:</strong> If the skinning + cage approach produces visible artifacts and a globally smooth deformation field is needed.</p>
+<h3 id="3-harmonic-coordinates-instead-of-mean-value-coordinates">3. Harmonic Coordinates Instead of Mean Value Coordinates<a class="headerlink" href="#3-harmonic-coordinates-instead-of-mean-value-coordinates" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use Harmonic Coordinates (DeRose et al. 2007, Pixar) instead of MVC for the cage deformation. HC are strictly non-negative inside any cage, producing more intuitive deformations.</p>
+<p><strong>Deferred because:</strong></p>
+<ul>
+<li>HC require solving a 3D Laplace equation at precomputation time (voxelize the interior, solve ∇²w_i = 0 with boundary conditions). This is more expensive than MVC's closed-form evaluation</li>
+<li>MVC are sufficient for the smooth, convex-ish cross-section of the worm body. The cases where MVC produce negative weights (highly concave cages) do not apply here</li>
+<li>HC can be adopted later as a drop-in replacement if MVC artifacts are observed</li>
+</ul>
+<p><strong>When to switch:</strong> If MVC produces visible artifacts (interior vertices moving in wrong directions during extreme bending near the head or tail, where the body tapers).</p>
+<h3 id="4-green-coordinates-shape-preserving">4. Green Coordinates (Shape-Preserving)<a class="headerlink" href="#4-green-coordinates-shape-preserving" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Green Coordinates (Lipman et al. 2008) preserve local shape (conformal deformation) by incorporating cage face normals, not just vertex positions.</p>
+<p><strong>Deferred because:</strong></p>
+<ul>
+<li>Highest computational cost per vertex (requires face normal contributions in addition to vertex positions)</li>
+<li>Shape preservation is less critical for anatomical visualization than for character animation</li>
+<li>Gains over MVC are marginal for smooth bending deformations</li>
+</ul>
+<p><strong>When to try:</strong> If implementing a close-up view of muscle striations or fine anatomical detail that requires preservation of local surface structure during deformation.</p>
+<h3 id="5-direct-sph-to-vertex-mapping-no-cage">5. Direct SPH-to-Vertex Mapping (No Cage)<a class="headerlink" href="#5-direct-sph-to-vertex-mapping-no-cage" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Assign each mesh vertex to its nearest SPH particle(s) and interpolate directly.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>40K particles driving 1.6M vertices means each particle drives ~40 vertices. The mapping is extremely sparse — many mesh vertices would be far from any particle</li>
+<li>No containment guarantee — interior meshes can easily escape the body surface</li>
+<li>Produces visible artifacts: mesh vertices "snap to" discrete particle positions rather than deforming smoothly</li>
+<li>Does not preserve inter-mesh spatial relationships (each mesh deforms independently)</li>
+</ul>
+<h3 id="6-re-simulate-all-meshes-as-sph-particles">6. Re-simulate All Meshes as SPH Particles<a class="headerlink" href="#6-re-simulate-all-meshes-as-sph-particles" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Convert every Virtual Worm mesh vertex into an SPH particle and simulate the complete anatomy at full resolution.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>1.6M particles would be ~16× the current particle count, increasing simulation time by ~16² = 256× (SPH is O(N²) with neighbor search)</li>
+<li>Sibernetic is a physics engine, not a rendering engine. The detailed mesh vertices exist only for visual quality, not for physics</li>
+<li>Completely infeasible for real-time or even practical offline simulation</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="what-defines-a-valid-mesh-deformation-implementation">What Defines a Valid Mesh Deformation Implementation?<a class="headerlink" href="#what-defines-a-valid-mesh-deformation-implementation" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>No vertex explosions.</strong> No mesh vertex may move more than 100 µm from its cage-predicted position in a single frame. Any vertex exceeding this threshold is clamped and flagged.</p>
+</li>
+<li>
+<p><strong>Cage containment.</strong> After Stage 2 + Stage 3, ≥99.5% of interior vertices must lie inside the cage mesh (signed distance ≥ 0). The remaining 0.5% tolerance accounts for vertices near the cage surface (within 1 particle spacing).</p>
+</li>
+<li>
+<p><strong>Anterior-posterior preservation.</strong> The anterior-posterior ordering of all anatomical structures must be preserved. Define: for any two meshes A, B where A is anatomically anterior to B, the centroid of deformed A must be anterior to the centroid of deformed B. Test with the 20 intestinal cells (int1 through int9, strict ordering).</p>
+</li>
+<li>
+<p><strong>Frame coherence.</strong> No mesh vertex may move more than 10 µm between consecutive frames (at standard 60fps playback). Sudden jumps indicate numerical instability.</p>
+</li>
+<li>
+<p><strong>Performance.</strong> The complete 3-stage pipeline (skinning + cage + PBD) must execute in &lt;4 ms per frame on a mid-range discrete GPU (e.g., NVIDIA GTX 1660, Apple M1). Spine-based shortcut must execute in &lt;1 ms.</p>
+</li>
+<li>
+<p><strong>Backward compatibility.</strong> When <code>visualization.mesh_deformation: false</code> in <code>openworm.yml</code>, the viewer falls back to marching-cubes surface reconstruction (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Viewer Stage 1). No regression in existing functionality.</p>
+</li>
+</ol>
+<h3 id="validation-procedure">Validation Procedure<a class="headerlink" href="#validation-procedure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Containment test (static)</span>
+python<span class="w"> </span>scripts/test_deformation.py<span class="w"> </span>--test_case<span class="w"> </span>no_deformation
+<span class="c1"># Expected: 100% vertices inside cage (rest positions = cage rest)</span>
+
+<span class="c1"># 2. Containment test (bent body)</span>
+python<span class="w"> </span>scripts/test_deformation.py<span class="w"> </span>--test_case<span class="w"> </span>uniform_bend_90deg
+<span class="c1"># Expected: ≥99.5% vertices inside cage</span>
+
+<span class="c1"># 3. Ordering test</span>
+python<span class="w"> </span>scripts/test_deformation.py<span class="w"> </span>--test_case<span class="w"> </span>s_curve_crawl
+<span class="c1"># Expected: intestinal cell centroids maintain anterior→posterior order</span>
+
+<span class="c1"># 4. Performance benchmark</span>
+python<span class="w"> </span>scripts/benchmark_deformation.py<span class="w"> </span>--n_frames<span class="w"> </span><span class="m">1000</span>
+<span class="c1"># Expected: mean per-frame time &lt; 4 ms, max &lt; 8 ms</span>
+
+<span class="c1"># 5. Visual inspection (requires human)</span>
+<span class="c1"># Load a 10-second Sibernetic replay in the viewer</span>
+<span class="c1"># Verify: no visible mesh tearing, no organs poking through skin,</span>
+<span class="c1">#         smooth motion throughout body bending</span>
+</code></pre></div>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Muscle contraction visualization.</strong> Visible muscle bulging/shortening during contraction is a Phase 3 enhancement requiring per-muscle deformation offsets driven by <a href="../DD002_Muscle_Model_Architecture/">DD002</a> activation signals. <a href="./">DD014.2</a> handles only the gross body-shape deformation.</p>
+</li>
+<li>
+<p><strong>Pharynx pumping deformation.</strong> The pharynx pumps rhythmically (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>), requiring a local deformation that compresses the lumen. This needs a dedicated pharyngeal deformation model (separate from the body cage), deferred to Phase 2.</p>
+</li>
+<li>
+<p><strong>Growth and developmental changes.</strong> Body size and shape change during larval development (L1-L4 → adult). <a href="./">DD014.2</a> assumes a fixed adult body. Developmental morphing is Phase 6 work.</p>
+</li>
+<li>
+<p><strong>Real-time SPH simulation.</strong> <a href="./">DD014.2</a> consumes pre-recorded SPH output. It does not run Sibernetic in real-time.</p>
+</li>
+<li>
+<p><strong>Mesh generation or repair.</strong> <a href="./">DD014.2</a> assumes the Virtual Worm meshes are valid and watertight. If mesh defects exist (holes, non-manifold edges, self-intersections), they must be repaired upstream.</p>
+</li>
+<li>
+<p><strong>NeuroML morphology deformation.</strong> Neuron morphologies from NeuroML (soma spheres + dendrite/axon tubes) are separate from Virtual Worm meshes. Their deformation follows the same cage pipeline but uses the c302-derived geometry, not Virtual Worm OBJ data. Integration is future work.</p>
+</li>
+<li>
+<p><strong>Color, lighting, and rendering.</strong> See <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a>. <a href="./">DD014.2</a> is purely about geometry deformation.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<h3 id="the-virtual-worm">The Virtual Worm<a class="headerlink" href="#the-virtual-worm" title="Permanent link">&para;</a></h3>
+<p>The Virtual Worm was created by Dr. Christian Grove and Dr. Paul Sternberg at Caltech/WormBase. It is the most complete 3D anatomical model of <em>C. elegans</em>, containing meshes for every identified cell in the adult hermaphrodite. Two versions exist in <code>openworm/Blender2NeuroML</code>:</p>
+<ul>
+<li><code>Virtual_Worm_March_2011.blend</code> (~18 MB)</li>
+<li><code>Virtual_Worm_February_2012.blend</code> (~11 MB, used by Worm3DViewer)</li>
+</ul>
+<p>The model organizes cells into 4 layers: Cuticle (15 meshes), Neurons (362 meshes), Muscles (113 meshes), Organs (198 meshes), totaling 688 mesh objects across 37 material categories.</p>
+<h3 id="the-decade-long-gap">The Decade-Long Gap<a class="headerlink" href="#the-decade-long-gap" title="Permanent link">&para;</a></h3>
+<p>This problem was identified in 2015. Geppetto issue #268 ("Need exact definition of muscle contraction movement") documented the discussion between @gitmado and @a-palyanov about how to skin the Virtual Worm meshes to the Sibernetic simulation. The proposed "imaginary skeleton" approach was never implemented. The <code>blenderStraighten.py</code> script in Blender2NeuroML demonstrates spine-based coordinate transformation but is a one-way offline tool, not a real-time deformation pipeline.</p>
+<p>For 10 years, the Virtual Worm meshes and the Sibernetic simulation have existed as parallel representations with no bridge between them. <a href="./">DD014.2</a> closes this gap.</p>
+<h3 id="state-of-the-art-2026">State of the Art (2026)<a class="headerlink" href="#state-of-the-art-2026" title="Permanent link">&para;</a></h3>
+<p>The techniques specified here — GPU skinning, cage-based deformation, PBD collision — are production-proven in game engines and film VFX. Key references:</p>
+<ul>
+<li>WebGPU skinning is built into Three.js r172+ (<code>SkinnedMesh</code> with WebGPU backend)</li>
+<li>A 2025 paper demonstrated real-time PBD cloth simulation at 640K nodes / 60fps in WebGPU</li>
+<li>Cage-based deformation has been production-standard at Pixar since 2007 (Harmonic Coordinates)</li>
+<li>The <code>*Cages</code> system (Le &amp; Deng 2013) specifically addresses nested cage hierarchies — exactly our use case of body wall enclosing organs enclosing sub-structures</li>
+</ul>
+<p>The tools exist. The anatomical data exists. <a href="./">DD014.2</a> specifies how to connect them.</p>
+<hr />
+<h2 id="implementation-roadmap">Implementation Roadmap<a class="headerlink" href="#implementation-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-spine-based-deformation-weeks-1-4">Phase 1: Spine-Based Deformation (Weeks 1-4)<a class="headerlink" href="#phase-1-spine-based-deformation-weeks-1-4" title="Permanent link">&para;</a></h3>
+<p>Get meshes moving immediately with the simpler spine approach.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Export Virtual Worm meshes to individual OBJ files</td>
+<td>4 hrs</td>
+<td>Blender access</td>
+</tr>
+<tr>
+<td>Extract spine curve from Blender file</td>
+<td>2 hrs</td>
+<td>blenderExportSpine.py exists</td>
+</tr>
+<tr>
+<td>Compute per-vertex spine parameters (s, r, θ)</td>
+<td>8 hrs</td>
+<td>Mesh export</td>
+</tr>
+<tr>
+<td>Implement spine-based deformation in WGSL compute shader</td>
+<td>16 hrs</td>
+<td>Spine params</td>
+</tr>
+<tr>
+<td>Fit B-spline to SPH particle centerline per frame</td>
+<td>8 hrs</td>
+<td>Sibernetic output</td>
+</tr>
+<tr>
+<td>Integrate into Worm3DViewer</td>
+<td>8 hrs</td>
+<td>Trame/Three.js viewer</td>
+</tr>
+<tr>
+<td>Visual validation: load replay, verify meshes follow body</td>
+<td>4 hrs</td>
+<td>Integration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deliverable:</strong> All 688 meshes bend and translate with the simulated body shape. Cross-sectional deformation is approximate (rigid cross-section assumption).</p>
+<h3 id="phase-2-full-cage-pipeline-weeks-5-12">Phase 2: Full Cage Pipeline (Weeks 5-12)<a class="headerlink" href="#phase-2-full-cage-pipeline-weeks-5-12" title="Permanent link">&para;</a></h3>
+<p>Replace spine shortcut with the three-stage pipeline.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build watertight cage mesh from cuticle/hypodermis</td>
+<td>8 hrs</td>
+<td>Mesh export</td>
+</tr>
+<tr>
+<td>Cluster SPH particles into virtual bones</td>
+<td>4 hrs</td>
+<td>SPH rest positions</td>
+</tr>
+<tr>
+<td>Compute body wall skin weights (vertex → 4 bones)</td>
+<td>4 hrs</td>
+<td>Bone clusters</td>
+</tr>
+<tr>
+<td>Implement Stage 1 compute shader (LBS skinning)</td>
+<td>8 hrs</td>
+<td>Weights</td>
+</tr>
+<tr>
+<td>Compute sparse MVC cage coordinates for all interior vertices</td>
+<td>16 hrs</td>
+<td>Cage mesh</td>
+</tr>
+<tr>
+<td>Implement Stage 2 compute shader (cage deformation)</td>
+<td>8 hrs</td>
+<td>MVC coords</td>
+</tr>
+<tr>
+<td>Define collision pair table</td>
+<td>2 hrs</td>
+<td>Anatomical knowledge</td>
+</tr>
+<tr>
+<td>Implement Stage 3 compute shader (PBD collision)</td>
+<td>16 hrs</td>
+<td>Collision pairs</td>
+</tr>
+<tr>
+<td>Validation: containment, ordering, performance</td>
+<td>8 hrs</td>
+<td>Full pipeline</td>
+</tr>
+<tr>
+<td>Replace spine shortcut in viewer</td>
+<td>4 hrs</td>
+<td>Full pipeline working</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deliverable:</strong> Full three-stage deformation pipeline running in WebGPU. Interior anatomy deforms with cross-sectional accuracy. No interpenetration.</p>
+<h3 id="phase-3-refinements-weeks-13-16">Phase 3: Refinements (Weeks 13-16)<a class="headerlink" href="#phase-3-refinements-weeks-13-16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Effort</th>
+<th>Dependency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per-muscle deformation offsets (visible contraction bulging)</td>
+<td>16 hrs</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a> activation data</td>
+</tr>
+<tr>
+<td>Pharyngeal pumping local deformation</td>
+<td>8 hrs</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> pumping state</td>
+</tr>
+<tr>
+<td>LOD for deformation (skip PBD at organism scale)</td>
+<td>4 hrs</td>
+<td>Performance profiling</td>
+</tr>
+<tr>
+<td>Dual Quaternion Skinning upgrade (if LBS artifacts visible)</td>
+<td>8 hrs</td>
+<td>Phase 2 working</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="performance-budget">Performance Budget<a class="headerlink" href="#performance-budget" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Operation</th>
+<th>Vertices</th>
+<th>GPU Time (estimated)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stage 1</td>
+<td>Skin body wall (LBS, 4 bones/vert)</td>
+<td>~50K</td>
+<td>0.2 ms</td>
+</tr>
+<tr>
+<td>Stage 2</td>
+<td>Cage deform interior (30 weights/vert)</td>
+<td>~1.55M</td>
+<td>1.5 ms</td>
+</tr>
+<tr>
+<td>Stage 3</td>
+<td>PBD collision (10 iterations, sparse)</td>
+<td>~50K active</td>
+<td>1.5 ms</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td></td>
+<td><strong>~3.2 ms</strong></td>
+</tr>
+<tr>
+<td>Spine shortcut (Phase 1)</td>
+<td>Spline eval per vertex</td>
+<td>~1.6M</td>
+<td>0.8 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Budget is 16.6 ms per frame for 60fps. Deformation uses ~20% of the frame budget, leaving ~13 ms for rendering (well within Three.js capabilities for this mesh complexity).</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Floater MS (2003).</strong> "Mean value coordinates." <em>Computer Aided Geometric Design</em> 20:19-27. <em>Original MVC formulation.</em></p>
+</li>
+<li>
+<p><strong>Ju T, Schaefer S, Warren J (2005).</strong> "Mean value coordinates for closed triangular meshes." <em>ACM SIGGRAPH</em> 2005. <em>Extension of MVC to 3D closed meshes.</em></p>
+</li>
+<li>
+<p><strong>DeRose T, Meyer M, et al. (2007).</strong> "Harmonic Coordinates for Character Articulation." <em>ACM SIGGRAPH</em> 2007. <em>Harmonic coordinates (alternative to MVC with non-negativity guarantee).</em></p>
+</li>
+<li>
+<p><strong>Lipman Y, Levin D, Cohen-Or D (2008).</strong> "Green Coordinates." <em>ACM Trans. Graphics</em> 27(3). <em>Shape-preserving cage deformation.</em></p>
+</li>
+<li>
+<p><strong>Le BH, Deng Z (2013).</strong> "<em>Cages: A Multi-level, Multi-cage System for Mesh Deformation." </em>ACM Trans. Graphics<em> 32(6). </em>Nested cage hierarchies — relevant for body wall → organs → sub-structures.*</p>
+</li>
+<li>
+<p><strong>Kavan L, Collins S, Zara J, O'Sullivan C (2007).</strong> "Skinning with Dual Quaternions." <em>I3D</em> 2007. <em>DQS — volume-preserving alternative to LBS.</em></p>
+</li>
+<li>
+<p><strong>WebGPU Cloth Simulation (2025).</strong> Real-time PBD cloth simulation maintaining 60fps with 640K nodes in WebGPU. <em>Performance benchmark for PBD in browser.</em></p>
+</li>
+<li>
+<p><strong>Toji (2025).</strong> "Using WebGPU Compute Shaders with Vertex Data." <em>Best practices for compute-based vertex deformation in WebGPU.</em></p>
+</li>
+<li>
+<p><strong>Three.js WebGPU Skinning.</strong> <code>github.com/mrdoob/three.js/blob/dev/examples/webgpu_skinning.html</code> — Built-in GPU skinning example.</p>
+</li>
+<li>
+<p><strong>Stroter et al. (2024).</strong> "A Survey on Cage-based Deformation of 3D Models." <em>Computer Graphics Forum.</em> <em>Comprehensive review of cage deformation techniques.</em></p>
+</li>
+<li>
+<p><strong>Virtual Worm Project.</strong> Grove &amp; Sternberg, Caltech/WormBase. <code>openworm/Blender2NeuroML</code> — Source Blender files and conversion scripts.</p>
+</li>
+<li>
+<p><strong>Geppetto Issue #268.</strong> <code>openworm/org.geppetto/issues/268</code> — Original 2015 discussion on muscle contraction mesh deformation.</p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPH elastic particle positions (per frame)</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>Per-particle (x, y, z)</td>
+<td>OME-Zarr: <code>body/positions/</code> or direct from Sibernetic state</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>SPH elastic particle rest positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>Per-particle (x, y, z) at t=0</td>
+<td>Snapshot</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Virtual Worm mesh files (static)</td>
+<td>Blender2NeuroML repo</td>
+<td>OBJ per cell/tissue</td>
+<td>OBJ mesh files</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Muscle activation (optional, Phase 3)</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Per-muscle [0,1]</td>
+<td>OME-Zarr: <code>muscle/activation/</code></td>
+<td>dimensionless</td>
+</tr>
+<tr>
+<td>Pharynx pumping state (optional, Phase 3)</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>Per-section [0,1]</td>
+<td>OME-Zarr: <code>pharynx/pumping_state/</code></td>
+<td>dimensionless</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deformed mesh vertex positions (per frame)</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer (rendering)</td>
+<td>Per-vertex (x, y, z) for all 688 meshes</td>
+<td>GPU buffer (WebGPU <code>GPUBuffer</code>)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Deformed mesh normals (per frame)</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer (lighting)</td>
+<td>Per-vertex normal vector</td>
+<td>GPU buffer</td>
+<td>unit vectors</td>
+</tr>
+<tr>
+<td>Collision debug overlay (optional)</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer (debug mode)</td>
+<td>Per-vertex boolean (collided/not)</td>
+<td>GPU buffer</td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">visualization</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mesh_deformation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">             </span><span class="c1"># Enable Virtual Worm mesh deformation</span>
+<span class="w">  </span><span class="nt">deformation_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cage&quot;</span><span class="w">         </span><span class="c1"># &quot;spine&quot; (Phase 1) or &quot;cage&quot; (Phase 2+)</span>
+<span class="w">  </span><span class="nt">n_virtual_bones</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span><span class="w">               </span><span class="c1"># Number of SPH particle clusters for skinning</span>
+<span class="w">  </span><span class="nt">cage_sparsity_k</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">                </span><span class="c1"># Number of cage influences per interior vertex</span>
+<span class="w">  </span><span class="nt">pbd_iterations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">                  </span><span class="c1"># Collision resolution iterations</span>
+<span class="w">  </span><span class="nt">pbd_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                  </span><span class="c1"># Enable collision resolution</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visualization.mesh_deformation</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable Virtual Worm mesh deformation</td>
+</tr>
+<tr>
+<td><code>visualization.deformation_method</code></td>
+<td><code>"spine"</code></td>
+<td><code>"spine"</code>, <code>"cage"</code></td>
+<td>Deformation pipeline to use</td>
+</tr>
+<tr>
+<td><code>visualization.n_virtual_bones</code></td>
+<td><code>500</code></td>
+<td>100-2000</td>
+<td>Number of SPH particle clusters</td>
+</tr>
+<tr>
+<td><code>visualization.cage_sparsity_k</code></td>
+<td><code>30</code></td>
+<td>10-100</td>
+<td>Cage weight sparsity</td>
+</tr>
+<tr>
+<td><code>visualization.pbd_iterations</code></td>
+<td><code>8</code></td>
+<td>1-20</td>
+<td>PBD collision resolution iterations</td>
+</tr>
+<tr>
+<td><code>visualization.pbd_enabled</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable PBD collision pass</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPH particle positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If particle count, indexing, or coordinate frame changes, bone clusters and skin weights must be recomputed</td>
+</tr>
+<tr>
+<td>Virtual Worm mesh files</td>
+<td>External (Blender2NeuroML)</td>
+<td>If mesh geometry changes, all precomputed weights/coordinates must be regenerated</td>
+</tr>
+<tr>
+<td>Muscle activation (Phase 3)</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>If activation range or muscle ID mapping changes, per-muscle deformation offsets must be updated</td>
+</tr>
+<tr>
+<td>OME-Zarr data format</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>If Zarr schema changes, data loading in the deformation pipeline must update</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visual rendering</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> / <a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a></td>
+<td>If deformed vertex buffer format changes, the renderer must update its vertex attribute bindings</td>
+</tr>
+<tr>
+<td>Cell selection / inspector</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>If mesh-to-cell-ID mapping changes, click-to-identify must update</td>
+</tr>
+<tr>
+<td>Activity coloring</td>
+<td><a href="../DD014.1_Visual_Rendering_Specification/">DD014.1</a></td>
+<td>Activity color overlay is applied to deformed mesh vertices — deformation must preserve vertex-to-cell mapping (vertex indices must not change)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Export Virtual Worm meshes to individual OBJ files (requires Blender access)</p>
+</li>
+<li>Extract and validate spine curve data from Blender file</li>
+<li>Implement spine-based deformation (Phase 1 — get meshes moving)</li>
+<li>Build watertight cage mesh from cuticle/hypodermis</li>
+<li>Implement MVC precomputation and benchmark cage approach</li>
+<li>Implement three-stage WebGPU compute shader pipeline</li>
+<li>Visual validation with Sibernetic replay data</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

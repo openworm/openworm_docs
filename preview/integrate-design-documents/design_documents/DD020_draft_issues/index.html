@@ -1,0 +1,4756 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD020_draft_issues/">
+      
+      
+        <link rel="prev" href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">
+      
+      
+        <link rel="next" href="../DD008_Data_Integration_Pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD020 Draft Issues - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd020-draft-github-issues" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD020 Draft Issues
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-build-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Build Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Build Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-pin-cect027-in-versionslock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Pin cect==0.2.7 in versions.lock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-add-dataconnectome-section-to-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Add data.connectome section to openworm.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-write-connectome-config-validation-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Write connectome config validation logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-add-cect-to-docker-neural-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Add cect to Docker neural stage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-pre-cache-cect-dataset-json-in-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Pre-cache cect dataset JSON in Docker image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-ci-quality-gates-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: CI &amp; Quality Gates (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: CI &amp; Quality Gates (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-ci-gate-for-cect-version-and-dataset-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create CI gate for cect version and dataset load
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-audit-consuming-dds-for-raw-file-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Audit consuming DDs for raw file parsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-create-connectome-api-compliance-checker-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Create connectome API compliance checker script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-create-cect-version-update-procedure-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Create cect version update procedure script
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-consumer-dd-integration-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Consumer DD Integration (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Consumer DD Integration (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-10-create-canonical-connectome-loader-for-c302-dd001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 10: Create canonical connectome loader for c302 (DD001)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-11-create-neuron-to-muscle-loader-for-dd002" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 11: Create neuron-to-muscle loader for DD002
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-12-create-pharyngeal-connectome-loader-for-dd007" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 12: Create pharyngeal connectome loader for DD007
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-13-create-neuropeptide-and-neurotransmitter-loaders-for-dd006" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 13: Create neuropeptide and neurotransmitter loaders for DD006
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-multi-dataset-validation-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Multi-Dataset Validation (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Multi-Dataset Validation (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-14-implement-cross-dataset-validation-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 14: Implement cross-dataset validation script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-15-implement-bilateral-symmetry-validation-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 15: Implement bilateral symmetry validation metric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-16-create-dataset-sensitivity-analysis-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 16: Create dataset sensitivity analysis tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-17-create-multi-dataset-regression-test-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 17: Create multi-dataset regression test suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-documentation-notebooks-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 5: Documentation &amp; Notebooks (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 5: Documentation &amp; Notebooks (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-18-create-connectome-data-exploration-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 18: Create connectome data exploration notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-19-create-multi-dataset-comparison-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 19: Create multi-dataset comparison notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-20-write-cect-api-usage-guide-for-dd-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 20: Write cect API usage guide for DD contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-6-future-work-evaluation-phase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 6: Future Work &amp; Evaluation (Phase 3+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 6: Future Work &amp; Evaluation (Phase 3+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-21-evaluate-wormneuroatlas-for-versionslock-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 21: Evaluate wormneuroatlas for versions.lock integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-22-evaluate-nemanode-for-per-synapse-spatial-position-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 22: Evaluate NemaNode for per-synapse spatial position data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-23-create-openwormunifiedreader-stability-monitoring-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 23: Create OpenWormUnifiedReader stability monitoring test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references-to-other-dd-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References to Other DD Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph-critical-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph (Critical Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-build-integration-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Build Integration (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Build Integration (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-pin-cect027-in-versionslock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Pin cect==0.2.7 in versions.lock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-add-dataconnectome-section-to-openwormyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Add data.connectome section to openworm.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-write-connectome-config-validation-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Write connectome config validation logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-add-cect-to-docker-neural-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Add cect to Docker neural stage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-pre-cache-cect-dataset-json-in-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Pre-cache cect dataset JSON in Docker image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-2-ci-quality-gates-phase-a1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2: CI &amp; Quality Gates (Phase A1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2: CI &amp; Quality Gates (Phase A1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-ci-gate-for-cect-version-and-dataset-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create CI gate for cect version and dataset load
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-7-audit-consuming-dds-for-raw-file-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 7: Audit consuming DDs for raw file parsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-8-create-connectome-api-compliance-checker-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 8: Create connectome API compliance checker script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-9-create-cect-version-update-procedure-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 9: Create cect version update procedure script
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-3-consumer-dd-integration-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 3: Consumer DD Integration (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 3: Consumer DD Integration (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-10-create-canonical-connectome-loader-for-c302-dd001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 10: Create canonical connectome loader for c302 (DD001)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-11-create-neuron-to-muscle-loader-for-dd002" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 11: Create neuron-to-muscle loader for DD002
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-12-create-pharyngeal-connectome-loader-for-dd007" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 12: Create pharyngeal connectome loader for DD007
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-13-create-neuropeptide-and-neurotransmitter-loaders-for-dd006" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 13: Create neuropeptide and neurotransmitter loaders for DD006
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-4-multi-dataset-validation-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 4: Multi-Dataset Validation (Phase 1+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 4: Multi-Dataset Validation (Phase 1+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-14-implement-cross-dataset-validation-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 14: Implement cross-dataset validation script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-15-implement-bilateral-symmetry-validation-metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 15: Implement bilateral symmetry validation metric
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-16-create-dataset-sensitivity-analysis-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 16: Create dataset sensitivity analysis tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-17-create-multi-dataset-regression-test-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 17: Create multi-dataset regression test suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-5-documentation-notebooks-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 5: Documentation &amp; Notebooks (Any)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 5: Documentation &amp; Notebooks (Any)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-18-create-connectome-data-exploration-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 18: Create connectome data exploration notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-19-create-multi-dataset-comparison-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 19: Create multi-dataset comparison notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-20-write-cect-api-usage-guide-for-dd-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 20: Write cect API usage guide for DD contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-6-future-work-evaluation-phase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 6: Future Work &amp; Evaluation (Phase 3+)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 6: Future Work &amp; Evaluation (Phase 3+)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-21-evaluate-wormneuroatlas-for-versionslock-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 21: Evaluate wormneuroatlas for versions.lock integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-22-evaluate-nemanode-for-per-synapse-spatial-position-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 22: Evaluate NemaNode for per-synapse spatial position data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-23-create-openwormunifiedreader-stability-monitoring-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 23: Create OpenWormUnifiedReader stability monitoring test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references-to-other-dd-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References to Other DD Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph-critical-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph (Critical Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd020-draft-github-issues">DD020 Draft GitHub Issues<a class="headerlink" href="#dd020-draft-github-issues" title="Permanent link">&para;</a></h1>
+<p><strong>Epic:</strong> DD020 — Connectome Data Access and Dataset Policy</p>
+<p><strong>Generated from:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020: Connectome Data Access and Dataset Policy</a></p>
+<p><strong>Methodology:</strong> <a href="../DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation">DD015 §2.2 — DD Issue Generator</a></p>
+<p><strong>Totals:</strong> 23 issues (ai-workable: 18 / human-expert: 5 | L1: 10, L2: 10, L3: 3)</p>
+<p><strong>Roadmap Context:</strong> DD020 is a <strong>Phase 0</strong> DD (existing, working). Its draft issues span multiple roadmap phases:</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Phase</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Build Integration (Issues 1-5)</td>
+<td><strong>Phase A1</strong></td>
+<td>Pin cect in DD013 Docker stack</td>
+</tr>
+<tr>
+<td>2. CI &amp; Quality Gates (Issues 6-9)</td>
+<td><strong>Phase A1</strong></td>
+<td>Automated regression detection</td>
+</tr>
+<tr>
+<td>3. Connectome Loaders (Issues 10-14)</td>
+<td><strong>Phase 1+</strong></td>
+<td>Built as consuming DDs are implemented</td>
+</tr>
+<tr>
+<td>4. API &amp; Utilities (Issues 15-18)</td>
+<td><strong>Phase 1+</strong></td>
+<td>Bilateral symmetry, cell type classifier</td>
+</tr>
+<tr>
+<td>5. Documentation (Issues 19-21)</td>
+<td><strong>Any</strong></td>
+<td>Can be addressed independently</td>
+</tr>
+<tr>
+<td>6. Research (Issues 22-23)</td>
+<td><strong>Phase 3+</strong></td>
+<td>Developmental connectome, E/L classification</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="group-1-build-integration-phase-a1">Group 1: Build Integration (Phase A1)<a class="headerlink" href="#group-1-build-integration-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: <code>cect</code> is pinned, configured, cached, and installable inside the DD013 Docker stack.</p>
+<hr />
+<h3 id="issue-1-pin-cect027-in-versionslock">Issue 1: Pin <code>cect==0.2.7</code> in <code>versions.lock</code><a class="headerlink" href="#issue-1-pin-cect027-in-versionslock" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Pin cect==0.2.7 in versions.lock</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> yaml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#version-pinning-update-procedure">DD020 — Version Pinning &amp; Update Procedure</a> and <a href="../DD013_Simulation_Stack_Architecture/#4-dependency-pinning-versionslock">DD013 §4 — Dependency Pinning</a></li>
+<li><strong>Depends On:</strong> DD013 Issue 7 (versions.lock file)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>versions.lock</code> (add <code>cect</code> entry)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "import yaml; d = yaml.safe_load(open('versions.lock')); assert d['cect'] == '0.2.7'"</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>versions.lock</code> contains <code>cect: "0.2.7"</code> entry</li>
+<li>[ ] Entry includes repo URL: <code>https://github.com/openworm/ConnectomeToolbox</code></li>
+<li>[ ] Entry includes current commit hash from ConnectomeToolbox main branch</li>
+<li>[ ] Comment references DD020 as the policy owner</li>
+<li>[ ] Valid YAML after edit</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Version pinning ensures every contributor gets the exact same connectome data. Without it, one person might install cect 0.2.5 (missing bilateral symmetry) while another gets 0.3.0 (potentially changed connection counts). Like pinning a reagent lot number in a lab protocol — reproducible science requires reproducible dependencies.</li>
+</ul>
+<hr />
+<h3 id="issue-2-add-dataconnectome-section-to-openwormyml">Issue 2: Add <code>data.connectome</code> section to <code>openworm.yml</code><a class="headerlink" href="#issue-2-add-dataconnectome-section-to-openwormyml" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Add data.connectome configuration section to openworm.yml</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> yaml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#configuration">DD020 — Configuration</a> (openworm.yml section)</li>
+<li><strong>Depends On:</strong> DD013 Issue 1 (openworm.yml config schema)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>openworm.yml</code> (add <code>data.connectome</code> section)</li>
+<li><code>configs/validation_full.yml</code> (add connectome cross-validation settings)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "import yaml; d = yaml.safe_load(open('openworm.yml')); print(d['data']['connectome']['dataset'])"</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>data.connectome.dataset</code> defaults to <code>"Cook2019Herm"</code></li>
+<li>[ ] <code>data.connectome.cect_version</code> set to <code>"0.2.7"</code></li>
+<li>[ ] <code>data.connectome.use_cache</code> defaults to <code>true</code></li>
+<li>[ ] All 10 config keys from DD020 Configuration table present with correct defaults</li>
+<li>[ ] <code>pharyngeal_dataset</code>, <code>functional_dataset</code>, <code>neuropeptide_dataset</code>, <code>neurotransmitter_dataset</code>, <code>cross_validation_dataset</code> keys included</li>
+<li>[ ] Each key has an inline comment referencing the consuming DD</li>
+<li>[ ] <code>validation_full.yml</code> enables cross-validation dataset</li>
+<li>[ ] Valid YAML after edit</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> This config section is the "dataset control panel" for the connectome. It specifies which wiring diagram the simulation uses (default: Cook 2019 adult hermaphrodite), which neuropeptide network to load (Ripoll-Sanchez), which functional data for validation (Randi 2023), and what version of cect to use. One place to control all connectome data access across 9 consuming Design Documents.</li>
+</ul>
+<hr />
+<h3 id="issue-3-write-connectome-config-validation-logic">Issue 3: Write connectome config validation logic<a class="headerlink" href="#issue-3-write-connectome-config-validation-logic" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Add connectome config validation to validate_config.py</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#configuration">DD020 — Configuration</a> (config keys table) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a></li>
+<li><strong>Depends On:</strong> Issue 2, DD013 Issue 2 (validate_config.py)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/validate_config.py</code> (add connectome validation rules)</li>
+<li><code>tests/test_config.py</code> (add connectome validation tests)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/validate_config.py openworm.yml</code></li>
+<li><code>pytest tests/test_config.py -k connectome</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Validates <code>data.connectome.dataset</code> is a known cect reader name</li>
+<li>[ ] Validates <code>data.connectome.cect_version</code> matches <code>versions.lock</code> entry</li>
+<li>[ ] Validates <code>use_cache</code> is boolean</li>
+<li>[ ] Warns if <code>developmental_dataset</code> is set (non-standard usage)</li>
+<li>[ ] Validates that reader names correspond to importable cect modules (e.g., <code>"Cook2019Herm"</code> → <code>cect.Cook2019HermReader</code>)</li>
+<li>[ ] Cross-validates: if <code>neural.neuropeptides: true</code> (DD006), then <code>neuropeptide_dataset</code> must be set</li>
+<li>[ ] Unit tests cover: valid config passes, unknown reader name fails, version mismatch warns</li>
+<li>[ ] Returns exit code 0 on valid, non-zero on invalid</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A guardrail that catches connectome config mistakes before the simulation runs. Typo in the dataset name? Wrong cect version? Neuropeptide mode enabled but no neuropeptide dataset specified? This script catches all of that upfront instead of failing 10 minutes into a simulation.</li>
+</ul>
+<hr />
+<h3 id="issue-4-add-cect-to-docker-neural-stage">Issue 4: Add <code>cect</code> to Docker neural stage<a class="headerlink" href="#issue-4-add-cect-to-docker-neural-stage" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Install cect at pinned version in Docker neural stage</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> docker</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#repository-packaging">DD020 — Repository &amp; Packaging</a> (Docker stage, build dependencies)</li>
+<li><strong>Depends On:</strong> Issue 1, DD013 Issue 3 (multi-stage Dockerfile)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>Dockerfile</code> (neural stage — add <code>pip install cect==$CECT_VERSION</code>)</li>
+<li><code>build.sh</code> (pass <code>--build-arg CECT_VERSION</code> from versions.lock)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>docker build --target neural .</code></li>
+<li><code>docker run openworm/neural python3 -c "import cect; print(cect.__version__)"</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>pip install cect==$CECT_VERSION</code> in neural Docker stage</li>
+<li>[ ] <code>CECT_VERSION</code> build arg read from <code>versions.lock</code> by <code>build.sh</code></li>
+<li>[ ] <code>cect</code> and its dependencies (numpy, xlrd, openpyxl, networkx, wormneuroatlas) installed</li>
+<li>[ ] <code>import cect</code> succeeds inside container</li>
+<li>[ ] <code>cect.__version__</code> matches pinned version</li>
+<li>[ ] Cached JSON data files present in container (~5MB)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The neural Docker stage is where c302 generates the worm's nervous system from connectome data. Installing cect here means the wiring diagram is available at the moment the neural circuit is built — like putting the blueprint in the workshop before construction starts.</li>
+</ul>
+<hr />
+<h3 id="issue-5-pre-cache-cect-dataset-json-in-docker-image">Issue 5: Pre-cache cect dataset JSON in Docker image<a class="headerlink" href="#issue-5-pre-cache-cect-dataset-json-in-docker-image" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Pre-generate and cache cect dataset JSON files in Docker image</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, docker</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#dataset-selection-rules">DD020 — Dataset Selection Rules</a> (rule 4: <code>from_cache=True</code> in CI) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a> (criterion 6)</li>
+<li><strong>Depends On:</strong> Issue 4</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>Dockerfile</code> (neural stage — add cache generation step)</li>
+<li><code>scripts/precache_cect.py</code> (new — generates cached JSON files)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>docker build --target neural .</code></li>
+<li><code>docker run openworm/neural python3 -c "from cect.Cook2019HermReader import get_instance; cds = get_instance(from_cache=True); print(len(cds.nodes))"</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>scripts/precache_cect.py</code> calls <code>get_instance()</code> (without cache) for the default dataset and stores JSON</li>
+<li>[ ] Also caches: Cook2019Herm, Randi2023 (functional), RipollSanchezShortRange (neuropeptide), Witvliet8 (cross-validation)</li>
+<li>[ ] Cached JSON files embedded in Docker image at build time</li>
+<li>[ ] <code>from_cache=True</code> calls succeed inside container without network access</li>
+<li>[ ] Cache adds &lt;10MB to Docker image size</li>
+<li>[ ] Cache files deterministic: same input → same JSON bytes</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The cect package can load datasets from cached JSON files instead of parsing Excel/CSV every time. Pre-caching in the Docker image means: (1) no network access needed during CI or simulation, (2) faster startup (~100ms vs ~3s), and (3) bit-identical data across all runs — critical for reproducible science. Like pre-loading reagents into a lab kit.</li>
+</ul>
+<hr />
+<h2 id="group-2-ci-quality-gates-phase-a1">Group 2: CI &amp; Quality Gates (Phase A1)<a class="headerlink" href="#group-2-ci-quality-gates-phase-a1" title="Permanent link">&para;</a></h2>
+<p>Target: Every PR is automatically checked for correct connectome data access.</p>
+<hr />
+<h3 id="issue-6-create-ci-gate-for-cect-version-and-dataset-load">Issue 6: Create CI gate for cect version and dataset load<a class="headerlink" href="#issue-6-create-ci-gate-for-cect-version-and-dataset-load" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create CI gate: verify cect version and default dataset load</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> ci-cd, python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#how-to-test-contributor-workflow">DD020 — How to Test</a> (quick test and full validation scripts)</li>
+<li><strong>Depends On:</strong> Issue 4, DD013 Issue 13 (CI Gate 1)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/test_connectome.py</code> (new — DD020 CI test)</li>
+<li><code>.github/workflows/integration.yml</code> (add connectome test step)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/test_connectome.py</code></li>
+<li>Push to branch and verify CI runs connectome test</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Verifies <code>cect.__version__</code> matches <code>versions.lock</code></li>
+<li>[ ] Loads Cook2019Herm from cache, verifies ≥300 nodes</li>
+<li>[ ] Verifies <code>original_connection_infos</code> is non-empty</li>
+<li>[ ] Verifies cell classification: <code>get_SIM_class('AVAL') == 'Interneuron'</code></li>
+<li>[ ] Verifies bilateral symmetry function returns valid percentage</li>
+<li>[ ] CI step added after Docker build, before smoke test</li>
+<li>[ ] Script prints <code>[DD020] connectome test: PASS</code> on success</li>
+<li>[ ] Script returns exit code 0 on pass, non-zero on fail</li>
+<li>[ ] Total test time &lt;30 seconds</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The automatic checkpoint that runs on every PR. Does the connectome package load? Is it the right version? Can it return the worm's wiring diagram? If any of these fail, the PR is blocked before a human even looks at it. Catches version drift and broken installs instantly.</li>
+</ul>
+<hr />
+<h3 id="issue-7-audit-consuming-dds-for-raw-file-parsing">Issue 7: Audit consuming DDs for raw file parsing<a class="headerlink" href="#issue-7-audit-consuming-dds-for-raw-file-parsing" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Audit all 9 consuming DDs for raw connectome file parsing</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, git</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a> (criterion 1: API-only access) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#goal-success-criteria">DD020 — Goal &amp; Success Criteria</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a summary posted on the issue)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (audit task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Search <code>openworm/c302</code> for direct CSV/Excel connectome file parsing (grep for <code>pandas.read_csv</code>, <code>xlrd</code>, <code>openpyxl</code>, hardcoded neuron lists)</li>
+<li>[ ] Search <code>openworm/Sibernetic</code> for any connectome data loading outside <code>cect</code></li>
+<li>[ ] Search <code>openworm/owmeta</code> for connectome ingestion that bypasses <code>cect</code></li>
+<li>[ ] Check all 9 consuming DD repos for compliance with DD020 API-only access rule</li>
+<li>[ ] Document each finding: file path, line number, what it does, whether it should use <code>cect</code> instead</li>
+<li>[ ] Categorize: already compliant / needs refactoring / n/a</li>
+<li>[ ] File follow-up issues for repos that need refactoring</li>
+<li>[ ] Post findings as issue comment with a compliance table</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> DD020's primary goal is "all consuming DDs obtain connectome data via cect API, not raw file parsing." But does the code actually do this today? This audit checks all 9 repos to find any places where connectome data is loaded from raw CSV/Excel files instead of through cect. Like a lab safety audit — find the violations before they cause problems.</li>
+</ul>
+<hr />
+<h3 id="issue-8-create-connectome-api-compliance-checker-script">Issue 8: Create connectome API compliance checker script<a class="headerlink" href="#issue-8-create-connectome-api-compliance-checker-script" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create connectome API compliance checker for CI</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a> (all 6 criteria) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#api-contract-for-consumers">DD020 — API Contract for Consumers</a></li>
+<li><strong>Depends On:</strong> Issue 7 (audit findings)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/check_connectome_compliance.py</code> (new)</li>
+<li><code>tests/test_connectome_compliance.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/check_connectome_compliance.py --repo openworm/c302</code></li>
+<li><code>pytest tests/test_connectome_compliance.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Scans Python files for connectome data access patterns</li>
+<li>[ ] Flags: raw CSV/Excel parsing of connectome data (criterion 1)</li>
+<li>[ ] Flags: unnamed/implicit dataset usage — imports without explicit reader name (criterion 2)</li>
+<li>[ ] Flags: hardcoded cect version not matching versions.lock (criterion 3)</li>
+<li>[ ] Flags: custom cell name normalization (criterion 4)</li>
+<li>[ ] Reports compliance percentage per repo</li>
+<li>[ ] Prints PASS if all checks pass, FAIL with details if not</li>
+<li>[ ] Unit tests with synthetic code samples (compliant and non-compliant)</li>
+<li>[ ] Can be run as CI step on consuming repos</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> An automated linter for connectome data access patterns. Scans Python code in any repo and flags violations of DD020's quality criteria — like using raw file parsing instead of cect, or importing unnamed datasets. Think of it as a spell-checker for connectome API usage. Prevents drift back to ad hoc data loading.</li>
+</ul>
+<hr />
+<h3 id="issue-9-create-cect-version-update-procedure-script">Issue 9: Create cect version update procedure script<a class="headerlink" href="#issue-9-create-cect-version-update-procedure-script" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create cect version update and regression test script</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase A1</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#update-procedure">DD020 — Update Procedure</a> (6-step process)</li>
+<li><strong>Depends On:</strong> Issue 6 (CI test)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/update_cect_version.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/update_cect_version.py --new-version 0.2.8 --dry-run</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Accepts <code>--new-version X.Y.Z</code> argument</li>
+<li>[ ] Installs new cect version in temporary virtualenv</li>
+<li>[ ] Loads default dataset with new version and compares neuron count, connection count, and adjacency matrix against current version</li>
+<li>[ ] Reports: any new/removed neurons, changed connection counts, new/removed readers</li>
+<li>[ ] <code>--dry-run</code> mode prints comparison report without modifying any files</li>
+<li>[ ] <code>--apply</code> mode updates <code>versions.lock</code> and <code>openworm.yml</code> cect_version</li>
+<li>[ ] If neuron count or connection count changes, prints warning: "SIMULATION-AFFECTING CHANGE — requires full DD010 revalidation"</li>
+<li>[ ] Regenerates cect cache files if <code>--apply</code> used</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> When cect releases a new version, we need to check if anything changed that would affect the simulation. Did a connection count change? Did a new neuron appear? This script automates the 6-step update procedure from DD020, comparing old vs. new versions side-by-side and flagging any simulation-affecting changes. Like a diff tool for biological wiring diagrams.</li>
+</ul>
+<hr />
+<h2 id="group-3-consumer-dd-integration-phase-1">Group 3: Consumer DD Integration (Phase 1+)<a class="headerlink" href="#group-3-consumer-dd-integration-phase-1" title="Permanent link">&para;</a></h2>
+<p>Target: Canonical data loaders exist for each consuming DD's connectome access pattern.</p>
+<hr />
+<h3 id="issue-10-create-canonical-connectome-loader-for-c302-dd001">Issue 10: Create canonical connectome loader for c302 (DD001)<a class="headerlink" href="#issue-10-create-canonical-connectome-loader-for-c302-dd001" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create canonical connectome loader for c302 using DD020 API patterns</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD001</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns">DD020 — Canonical Query Patterns</a> (Patterns 1, 2, 5, 6) and <a href="../DD001_Neural_Circuit_Architecture/">DD001 Integration Contract</a></li>
+<li><strong>Depends On:</strong> Issue 4 (cect in Docker)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/connectome_loader.py</code> (new — canonical loader wrapping cect)</li>
+<li><code>c302/CElegans.py</code> (refactor to use connectome_loader)</li>
+<li><code>tests/test_connectome_loader.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "from c302.connectome_loader import load_connectome; cds = load_connectome('Cook2019Herm'); print(len(cds.nodes))"</code></li>
+<li><code>pytest tests/test_connectome_loader.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>connectome_loader.py</code> provides <code>load_connectome(dataset_name, from_cache=True)</code> function</li>
+<li>[ ] Wraps cect reader import + <code>get_instance()</code> call</li>
+<li>[ ] Used by <code>CElegans.py</code> for network generation (replaces any direct file parsing)</li>
+<li>[ ] Logs which dataset and cect version are being used</li>
+<li>[ ] Raises clear error if dataset name is invalid or cect not installed</li>
+<li>[ ] Unit tests verify: loads Cook2019Herm, returns expected neuron count, works with cache</li>
+<li>[ ] Existing c302 network generation produces identical results after refactor</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> c302 is where the connectome becomes a neural circuit — it reads the wiring diagram and generates a runnable NeuroML network. This creates a clean, testable loader function that follows DD020's API patterns, replacing whatever ad hoc data loading currently exists. The single funnel through which all connectome data enters the neural circuit model.</li>
+</ul>
+<hr />
+<h3 id="issue-11-create-neuron-to-muscle-loader-for-dd002">Issue 11: Create neuron-to-muscle loader for DD002<a class="headerlink" href="#issue-11-create-neuron-to-muscle-loader-for-dd002" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create neuron-to-muscle connection loader for DD002 muscle model</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD002</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns">DD020 — Canonical Query Patterns</a> (Pattern 3: neuron-to-muscle) and <a href="../DD002_Muscle_Model_Architecture/">DD002 Integration Contract</a></li>
+<li><strong>Depends On:</strong> Issue 10 (connectome loader)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/connectome_loader.py</code> (add <code>load_neuron_to_muscle_conns()</code> function)</li>
+<li><code>tests/test_connectome_loader.py</code> (add NMJ tests)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "from c302.connectome_loader import load_neuron_to_muscle_conns; conns = load_neuron_to_muscle_conns(); print(f'{len(conns)} NMJ connections')"</code></li>
+<li><code>pytest tests/test_connectome_loader.py -k muscle</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>load_neuron_to_muscle_conns(dataset_name)</code> returns list of <code>ConnectionInfo</code> for neuron→muscle connections</li>
+<li>[ ] Uses <code>cds.get_neuron_to_muscle_conns()</code> from cect</li>
+<li>[ ] Maps motor neuron names to Sibernetic muscle unit indices (references DD003 muscle mapping)</li>
+<li>[ ] Returns connections for all 95 body-wall muscles + pharyngeal muscles</li>
+<li>[ ] Unit tests verify: expected number of NMJ connections, known motor neuron→muscle pairs present</li>
+<li>[ ] Used by sibernetic_c302.py coupling code</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The neuromuscular junction (NMJ) is where neural signals become physical movement — motor neurons connect to muscles, and those connections determine which muscles contract. This loader provides the exact wiring from the connectome: which motor neuron drives which muscle, and how strongly. The bridge between DD001 (neural circuit) and DD002 (muscle model).</li>
+</ul>
+<hr />
+<h3 id="issue-12-create-pharyngeal-connectome-loader-for-dd007">Issue 12: Create pharyngeal connectome loader for DD007<a class="headerlink" href="#issue-12-create-pharyngeal-connectome-loader-for-dd007" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create pharyngeal connectome view loader for DD007</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD007</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns">DD020 — Canonical Query Patterns</a> (Pattern 4: pharyngeal view) and <a href="../DD007_Pharyngeal_System_Architecture/">DD007 Integration Contract</a></li>
+<li><strong>Depends On:</strong> Issue 10 (connectome loader)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/connectome_loader.py</code> (add <code>load_pharyngeal_connectome()</code> function)</li>
+<li><code>tests/test_connectome_loader.py</code> (add pharynx tests)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "from c302.connectome_loader import load_pharyngeal_connectome; pcds = load_pharyngeal_connectome(); print(f'{len(pcds.nodes)} pharyngeal neurons')"</code></li>
+<li><code>pytest tests/test_connectome_loader.py -k pharynx</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>load_pharyngeal_connectome(dataset_name)</code> returns filtered <code>ConnectomeDataset</code> using <code>cds.get_connectome_view("Pharynx")</code></li>
+<li>[ ] Returns only pharyngeal neurons (20 neurons: I1-I6, M1-M5, MI, MCL/MCR, NSML/NSMR, etc.)</li>
+<li>[ ] Includes pharyngeal muscles (pm1-pm8)</li>
+<li>[ ] Config reads <code>data.connectome.pharyngeal_dataset</code> and <code>pharyngeal_view</code> from openworm.yml</li>
+<li>[ ] Unit tests verify: ~20 neurons returned, known pharyngeal neuron M3L present, no somatic neurons included</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The pharynx has its own mini nervous system (20 neurons) that pumps bacteria into the worm's gut at ~3.5 Hz. It's semi-independent from the somatic nervous system. This loader extracts just the pharyngeal subset from the full 302-neuron connectome using cect's view filter — like looking at one department's org chart instead of the whole company's.</li>
+</ul>
+<hr />
+<h3 id="issue-13-create-neuropeptide-and-neurotransmitter-loaders-for-dd006">Issue 13: Create neuropeptide and neurotransmitter loaders for DD006<a class="headerlink" href="#issue-13-create-neuropeptide-and-neurotransmitter-loaders-for-dd006" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create neuropeptide network and neurotransmitter identity loaders for DD006</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD006</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns">DD020 — Canonical Query Patterns</a> (Patterns 8 and 9) and <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006 Integration Contract</a></li>
+<li><strong>Depends On:</strong> Issue 10 (connectome loader)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>c302/connectome_loader.py</code> (add <code>load_neuropeptide_network()</code> and <code>load_neurotransmitter_identity()</code>)</li>
+<li><code>tests/test_connectome_loader.py</code> (add neuropeptide and neurotransmitter tests)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 -c "from c302.connectome_loader import load_neuropeptide_network; rs = load_neuropeptide_network(); print(f'{len(rs.nodes)} peptidergic nodes')"</code></li>
+<li><code>pytest tests/test_connectome_loader.py -k neuropeptide</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] <code>load_neuropeptide_network(range_type)</code> loads Ripoll-Sanchez data via cect: short-range, mid-range, or long-range reader</li>
+<li>[ ] Config reads <code>data.connectome.neuropeptide_dataset</code> from openworm.yml</li>
+<li>[ ] <code>load_neurotransmitter_identity()</code> loads Wang2024 data via cect</li>
+<li>[ ] Config reads <code>data.connectome.neurotransmitter_dataset</code> from openworm.yml</li>
+<li>[ ] Returns <code>ConnectomeDataset</code> objects with peptide-receptor interaction data</li>
+<li>[ ] Unit tests verify: expected node count for Ripoll-Sanchez data, known neuropeptide constants importable</li>
+<li>[ ] Wang2024 reader returns 16 neurotransmitter systems</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Beyond fast electrical synapses, worm neurons communicate via 31,479 neuropeptide-receptor interactions (Ripoll-Sanchez 2023) and 16 neurotransmitter systems (Wang 2024). These loaders provide DD006 with clean access to both datasets through cect — the peptide signaling layer that modulates behavior over slower timescales and the neurotransmitter identity atlas that tells us what each synapse "says."</li>
+</ul>
+<hr />
+<h2 id="group-4-multi-dataset-validation-phase-1">Group 4: Multi-Dataset Validation (Phase 1+)<a class="headerlink" href="#group-4-multi-dataset-validation-phase-1" title="Permanent link">&para;</a></h2>
+<p>Target: Infrastructure for comparing simulations across multiple connectome datasets.</p>
+<hr />
+<h3 id="issue-14-implement-cross-dataset-validation-script">Issue 14: Implement cross-dataset validation script<a class="headerlink" href="#issue-14-implement-cross-dataset-validation-script" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Implement cross-dataset validation: Cook2019 vs Witvliet8 comparison</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD010</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation">DD020 — Multi-Dataset Validation</a> (validation protocol table)</li>
+<li><strong>Depends On:</strong> Issue 5 (cached datasets)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/cross_validate_connectome.py</code> (new)</li>
+<li><code>tests/test_cross_validate.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/cross_validate_connectome.py --primary Cook2019Herm --secondary Witvliet8</code></li>
+<li><code>pytest tests/test_cross_validate.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Loads two datasets via cect and compares: neuron overlap, connection count delta, topology similarity</li>
+<li>[ ] Reports: neurons present in both, neurons only in primary, neurons only in secondary</li>
+<li>[ ] Reports: per-neuron-pair connection count differences</li>
+<li>[ ] Computes graph-level metrics: degree distribution similarity, clustering coefficient comparison</li>
+<li>[ ] Generates markdown comparison table suitable for pasting into issues</li>
+<li>[ ] <code>--json</code> flag outputs structured JSON for programmatic use</li>
+<li>[ ] Unit tests verify: comparing identical datasets produces zero delta</li>
+<li>[ ] Documents expected discrepancy ranges (biological variability, not bugs)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Different labs reconstructing different worms will find slightly different wiring. Cook 2019 and Witvliet 2021 (adult stage 8) are both adult hermaphrodite connectomes but report different connection counts for some neuron pairs. This script quantifies those differences — which connections are consistent (robust biology) and which differ (noise or biological variability). Essential for knowing how much to trust any single connectome dataset.</li>
+</ul>
+<hr />
+<h3 id="issue-15-implement-bilateral-symmetry-validation-metric">Issue 15: Implement bilateral symmetry validation metric<a class="headerlink" href="#issue-15-implement-bilateral-symmetry-validation-metric" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Implement bilateral symmetry as a connectome quality and simulation validation metric</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD010</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#bilateral-symmetry-as-a-validation-metric">DD020 — Bilateral Symmetry as a Validation Metric</a></li>
+<li><strong>Depends On:</strong> Issue 5 (cached datasets)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/validate_symmetry.py</code> (new)</li>
+<li><code>tests/test_validate_symmetry.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/validate_symmetry.py --dataset Cook2019Herm</code></li>
+<li><code>python3 scripts/validate_symmetry.py --all-datasets</code></li>
+<li><code>pytest tests/test_validate_symmetry.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Uses <code>cect.Analysis.convert_to_symmetry_array()</code> to compute bilateral symmetry for any dataset</li>
+<li>[ ] Reports symmetry percentage per synapse class (chemical, electrical, neuropeptidergic)</li>
+<li>[ ] <code>--all-datasets</code> mode compares symmetry across Cook2019, Witvliet stages, Varshney</li>
+<li>[ ] Generates comparison table: dataset × synapse class → symmetry percentage</li>
+<li>[ ] Flags datasets with &lt;40% bilateral symmetry for chemical synapses (below biological expectation)</li>
+<li>[ ] <code>--json</code> flag for CI integration</li>
+<li>[ ] Unit tests verify: symmetry is in valid range (0-100%), known bilateral pairs (AVAL/AVAR) are detected</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The worm is largely bilaterally symmetric — left neurons mirror right neurons. If the simulation produces wildly asymmetric behavior (always turns left), this metric helps diagnose whether the problem is the connectome data or the model. Computing symmetry across all datasets also reveals which datasets are most/least symmetric — a quality indicator for the underlying EM reconstruction.</li>
+</ul>
+<hr />
+<h3 id="issue-16-create-dataset-sensitivity-analysis-tool">Issue 16: Create dataset sensitivity analysis tool<a class="headerlink" href="#issue-16-create-dataset-sensitivity-analysis-tool" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create dataset sensitivity analysis: which connections matter most for behavior?</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD010</code>, <code>human-expert</code>, <code>L3</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, physics</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation">DD020 — Multi-Dataset Validation</a> (sensitivity analysis row)</li>
+<li><strong>Depends On:</strong> Issue 14 (cross-validation script), DD013 Issue 11 (coupled sim loop)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>scripts/connectome_sensitivity.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>python3 scripts/connectome_sensitivity.py --perturbation remove_one --output sensitivity_report.json</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Implements "leave-one-connection-out" analysis: removes each connection individually and measures behavioral impact</li>
+<li>[ ] Behavioral impact measured by: change in locomotion speed, wavelength, amplitude (DD010 Tier 3 metrics)</li>
+<li>[ ] Ranks connections by impact: most critical connections that most affect behavior</li>
+<li>[ ] Compares critical connection sets between Cook2019 and Witvliet8</li>
+<li>[ ] Identifies connections present in both datasets that are always high-impact (robust functional predictions)</li>
+<li>[ ] Generates ranked table: connection → behavioral impact score</li>
+<li>[ ] Identifies connections that differ between datasets AND have high behavioral impact (uncertainty risk)</li>
+<li>[ ] Output as JSON + markdown summary</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Not all 7,000 synaptic connections matter equally for behavior. Some are critical (remove them and the worm can't crawl), others are redundant. This analysis finds the VIP connections — the ones that most affect locomotion. Crucially, it compares this ranking across datasets: if a high-impact connection differs between Cook and Witvliet, that's a red flag for simulation reliability. This is how we identify where connectome uncertainty matters most.</li>
+</ul>
+<hr />
+<h3 id="issue-17-create-multi-dataset-regression-test-suite">Issue 17: Create multi-dataset regression test suite<a class="headerlink" href="#issue-17-create-multi-dataset-regression-test-suite" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create multi-dataset regression test suite for cect version updates</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1+</li>
+<li><strong>Target Repo:</strong> <code>openworm/ConnectomeToolbox</code></li>
+<li><strong>Required Capabilities:</strong> python, testing</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#update-procedure">DD020 — Update Procedure</a> (breaking change policy) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a></li>
+<li><strong>Depends On:</strong> Issue 5 (cached datasets)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_dataset_regression.py</code> (new — in ConnectomeToolbox repo)</li>
+<li><code>tests/baseline/</code> (new — baseline metric files per dataset)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/test_dataset_regression.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Baseline metrics captured for: Cook2019Herm, Cook2019Male, Witvliet8, RipollSanchezShortRange, Wang2024Herm</li>
+<li>[ ] Each baseline records: node count, connection count, unique synclasses, top-10 highest-degree neurons</li>
+<li>[ ] Test loads each dataset and compares against baseline</li>
+<li>[ ] Fails if node count changes, connection count changes by &gt;1%, or top-10 degree ranking changes</li>
+<li>[ ] <code>--update-baseline</code> flag regenerates baseline files from current cect version</li>
+<li>[ ] Baseline files committed to repo (small JSON)</li>
+<li>[ ] Runs in &lt;60 seconds total</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> When cect releases a new version, these regression tests immediately tell us if any dataset's contents changed. Did a neuron disappear? Did a connection count change? Did the most-connected neurons shuffle? Catches silent data changes that would propagate into the simulation as mysterious behavioral shifts. The biological equivalent of a checksum.</li>
+</ul>
+<hr />
+<h2 id="group-5-documentation-notebooks-any">Group 5: Documentation &amp; Notebooks (Any)<a class="headerlink" href="#group-5-documentation-notebooks-any" title="Permanent link">&para;</a></h2>
+<p>Target: New contributors can explore connectome data interactively and understand DD020's API patterns.</p>
+<hr />
+<h3 id="issue-18-create-connectome-data-exploration-notebook">Issue 18: Create connectome data exploration notebook<a class="headerlink" href="#issue-18-create-connectome-data-exploration-notebook" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create notebook: connectome data exploration with cect</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, jupyter</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#how-to-visualize">DD020 — How to Visualize</a> and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#canonical-query-patterns">DD020 — Canonical Query Patterns</a> (all 9 patterns)</li>
+<li><strong>Depends On:</strong> DD013 Issue 23 (JupyterLab service)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>notebooks/05_explore_connectome_datasets.ipynb</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jupyter nbconvert --execute notebooks/05_explore_connectome_datasets.ipynb</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Loads Cook2019Herm via cect and displays summary statistics (neuron count, connection count, synapse types)</li>
+<li>[ ] Demonstrates all 9 canonical query patterns from DD020</li>
+<li>[ ] Visualizes connectivity matrix using <code>cds.to_plotly_matrix_fig()</code></li>
+<li>[ ] Visualizes network graph using <code>cds.to_plotly_graph_fig()</code></li>
+<li>[ ] Demonstrates subgraph extraction (e.g., touch response circuit — sensory → interneuron → motor pathway)</li>
+<li>[ ] Shows cell classification breakdown (sensory, inter, motor neuron counts)</li>
+<li>[ ] Demonstrates bilateral symmetry analysis</li>
+<li>[ ] Shows pharyngeal view filter</li>
+<li>[ ] Each code cell has markdown explanation accessible to newcomers</li>
+<li>[ ] Runs to completion without errors</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A hands-on tour of the worm's wiring diagram using cect. Load the connectome, query connections, visualize the network, explore bilateral symmetry — all in an interactive notebook. This is how newcomers learn to work with connectome data before diving into simulation code. Demonstrates every API pattern from DD020 with real data and live plots.</li>
+</ul>
+<hr />
+<h3 id="issue-19-create-multi-dataset-comparison-notebook">Issue 19: Create multi-dataset comparison notebook<a class="headerlink" href="#issue-19-create-multi-dataset-comparison-notebook" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create notebook: multi-dataset connectome comparison</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, jupyter</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#multi-dataset-validation">DD020 — Multi-Dataset Validation</a> and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#developmental-connectome-support">DD020 — Developmental Connectome Support</a></li>
+<li><strong>Depends On:</strong> Issue 18 (exploration notebook), Issue 14 (cross-validation script)</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>notebooks/06_compare_connectome_datasets.ipynb</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jupyter nbconvert --execute notebooks/06_compare_connectome_datasets.ipynb</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Loads Cook2019Herm and Witvliet8 side-by-side</li>
+<li>[ ] Compares neuron counts, connection counts, degree distributions</li>
+<li>[ ] Visualizes differences: which connections are unique to each dataset</li>
+<li>[ ] Shows Witvliet developmental series (stages 1-8): how the connectome grows</li>
+<li>[ ] Plots neuron count and connection count across developmental stages</li>
+<li>[ ] Compares neuropeptidergic (Ripoll-Sanchez) vs structural (Cook) connectivity</li>
+<li>[ ] Computes bilateral symmetry for each dataset</li>
+<li>[ ] Markdown explanations interpret results biologically</li>
+<li>[ ] Runs to completion without errors</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A deep dive into how different connectome datasets compare. Side-by-side Cook vs Witvliet. The developmental series showing the worm's brain literally wiring itself up from 180 neurons to 300+ across 8 larval stages. Neuropeptide network overlaid on structural connectivity. This notebook makes the biological complexity tangible and visual — essential for anyone who wants to understand why dataset selection matters.</li>
+</ul>
+<hr />
+<h3 id="issue-20-write-cect-api-usage-guide-for-dd-contributors">Issue 20: Write cect API usage guide for DD contributors<a class="headerlink" href="#issue-20-write-cect-api-usage-guide-for-dd-contributors" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Write cect API usage guide for consuming DD contributors</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Any</li>
+<li><strong>Target Repo:</strong> <code>openworm/openworm_docs</code></li>
+<li><strong>Required Capabilities:</strong> docs</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#api-contract-for-consumers">DD020 — API Contract for Consumers</a> and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#quality-criteria">DD020 — Quality Criteria</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>docs/Resources/cect_usage_guide.md</code> (new — in openworm_docs repo)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (documentation task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Quick-start: install cect, load a dataset, query connections — in 5 lines of code</li>
+<li>[ ] Complete reference: all 9 canonical query patterns with copy-paste examples</li>
+<li>[ ] Anti-patterns section: "Don't parse raw files", "Don't build custom cell name normalizers", "Don't use unnamed datasets"</li>
+<li>[ ] Which dataset for which DD: table mapping each consuming DD to its recommended dataset</li>
+<li>[ ] How to switch datasets: changing openworm.yml for experiments</li>
+<li>[ ] Version update procedure: what to do when cect releases a new version</li>
+<li>[ ] Links to DD020 for full specification</li>
+<li>[ ] Aimed at L1-L2 contributors (comfortable with Python but new to connectome data)</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> The practical handbook for anyone writing code that touches connectome data. Not the full DD020 spec (too detailed), but the "how do I actually load worm wiring data in my code?" cheat sheet. Every consuming DD contributor should read this before writing their first connectome query. Quick-start in 5 lines, anti-patterns to avoid, and copy-paste examples for every use case.</li>
+</ul>
+<hr />
+<h2 id="group-6-future-work-evaluation-phase-3">Group 6: Future Work &amp; Evaluation (Phase 3+)<a class="headerlink" href="#group-6-future-work-evaluation-phase-3" title="Permanent link">&para;</a></h2>
+<p>Target: Research tasks to evaluate upcoming data sources and prepare for future cect evolution.</p>
+<hr />
+<h3 id="issue-21-evaluate-wormneuroatlas-for-versionslock-integration">Issue 21: Evaluate wormneuroatlas for versions.lock integration<a class="headerlink" href="#issue-21-evaluate-wormneuroatlas-for-versionslock-integration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Evaluate wormneuroatlas package for versions.lock and Docker integration</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 3+</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, git</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#existing-code-resources">DD020 — Existing Code Resources</a> (wormneuroatlas section)</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a summary posted on the issue)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (research task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Install <code>wormneuroatlas</code> and verify it works alongside <code>cect</code></li>
+<li>[ ] Document: which data does wormneuroatlas provide that cect does not? (CeNGEN expression, Randi functional, peptide deorphanization)</li>
+<li>[ ] Document: does wormneuroatlas duplicate any cect functionality? (both access WormNeuroAtlas data)</li>
+<li>[ ] Document: which consuming DDs would benefit? (DD005 CeNGEN, DD006 peptide GPCR, DD010 functional validation)</li>
+<li>[ ] Document: package size, dependencies, Python version compatibility</li>
+<li>[ ] Recommend: add to versions.lock yes/no, with rationale</li>
+<li>[ ] Post findings as issue comment</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> wormneuroatlas is a companion package to cect that provides data cect doesn't: gene expression from CeNGEN (for DD005 cell-type specialization), Randi functional connectivity (for DD010 validation), and peptide-GPCR deorphanization (for DD006). Should we add it to our build? This evaluation determines if it's worth the extra dependency.</li>
+</ul>
+<hr />
+<h3 id="issue-22-evaluate-nemanode-for-per-synapse-spatial-position-data">Issue 22: Evaluate NemaNode for per-synapse spatial position data<a class="headerlink" href="#issue-22-evaluate-nemanode-for-per-synapse-spatial-position-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Evaluate NemaNode for per-synapse spatial data needed by DD001 Level D</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>DD001</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 3+</li>
+<li><strong>Target Repo:</strong> <code>openworm/OpenWorm</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroscience</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#per-synapse-spatial-position-data">DD020 — Per-Synapse Spatial Position Data</a> and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#existing-code-resources">DD020 — Existing Code Resources</a> (NemaNode section)</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a summary posted on the issue)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (research task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Inspect NemaNode codebase (openworm/NemaNode) and nemanode.org API</li>
+<li>[ ] Document: does NemaNode expose per-synapse centroid coordinates from Witvliet EM data?</li>
+<li>[ ] Document: what format? (x, y, z coordinates along neurites)</li>
+<li>[ ] Document: how many synapses have spatial data? (subset or all?)</li>
+<li>[ ] Assess: can this data be added to cect's WitvlietDataReader? (extending ConnectionInfo with position fields)</li>
+<li>[ ] Assess: is Zhao et al. 2024 inverse Gaussian distribution model accessible in code form?</li>
+<li>[ ] Document: effort estimate to integrate spatial synapse data into cect</li>
+<li>[ ] Post findings as issue comment with go/no-go recommendation</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> DD001 Level D (multicompartmental neurons) needs to know not just which neurons connect, but WHERE along the neurite each synapse sits. Witvliet's EM data has this information, and NemaNode may expose it. Zhao et al. (2024) showed synapse-to-soma distances follow an inverse Gaussian distribution. This evaluation determines whether we can extract per-synapse positions from NemaNode into cect — the data needed to place synapses on multicompartmental neuron models instead of treating each neuron as a point.</li>
+</ul>
+<hr />
+<h3 id="issue-23-create-openwormunifiedreader-stability-monitoring-test">Issue 23: Create OpenWormUnifiedReader stability monitoring test<a class="headerlink" href="#issue-23-create-openwormunifiedreader-stability-monitoring-test" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD020] Create stability monitoring test for OpenWormUnifiedReader</code></li>
+<li><strong>Labels:</strong> <code>DD020</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 3+</li>
+<li><strong>Target Repo:</strong> <code>openworm/ConnectomeToolbox</code></li>
+<li><strong>Required Capabilities:</strong> python, testing</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#known-issues-and-future-work">DD020 — Known Issues</a> (Issue 1: OpenWormUnifiedReader is WIP) and <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/#5-default-to-openwormunifiedreader-instead-of-cook2019herm">DD020 — Alternatives Considered</a> (alternative 5)</li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_unified_reader_stability.py</code> (new — in ConnectomeToolbox repo)</li>
+<li><code>tests/baseline/unified_reader_baseline.json</code> (new — snapshot)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/test_unified_reader_stability.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Loads OpenWormUnifiedReader and snapshots: node count, connection count, synclass list, top-20 highest-degree neurons</li>
+<li>[ ] Compares against baseline snapshot from previous run</li>
+<li>[ ] If snapshot changes: test passes but prints WARNING: "OpenWormUnifiedReader changed — review before considering as default"</li>
+<li>[ ] Tracks: number of consecutive runs without change (stability metric)</li>
+<li>[ ] Documents: when WIP designation is removed (triggers review for default adoption)</li>
+<li>[ ] <code>--update-baseline</code> flag saves new snapshot</li>
+<li>[ ] Designed to run weekly (cron job or manual) rather than on every PR</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> OpenWormUnifiedReader is intended to become the "best estimate" connectome, but it's currently WIP and changes without notice. This monitoring test takes regular snapshots of what the reader returns. When it stops changing (stable across multiple weeks) and the WIP designation is removed, that's the signal to consider adopting it as the new default — replacing Cook2019Herm. Until then, we just watch and wait.</li>
+</ul>
+<hr />
+<h2 id="summary-statistics">Summary Statistics<a class="headerlink" href="#summary-statistics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Issues</strong></td>
+<td>23</td>
+</tr>
+<tr>
+<td><strong>ai-workable</strong></td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>human-expert</strong></td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Issues</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1: Build Integration</strong></td>
+<td>1–5</td>
+<td>cect pinned, configured, cached in Docker</td>
+</tr>
+<tr>
+<td><strong>2: CI &amp; Quality Gates</strong></td>
+<td>6–9</td>
+<td>Automated compliance and version checking</td>
+</tr>
+<tr>
+<td><strong>3: Consumer DD Integration</strong></td>
+<td>10–13</td>
+<td>Canonical data loaders for consuming DDs</td>
+</tr>
+<tr>
+<td><strong>4: Multi-Dataset Validation</strong></td>
+<td>14–17</td>
+<td>Cross-validation and regression infrastructure</td>
+</tr>
+<tr>
+<td><strong>5: Documentation &amp; Notebooks</strong></td>
+<td>18–20</td>
+<td>Interactive exploration and API guide</td>
+</tr>
+<tr>
+<td><strong>6: Future Work &amp; Evaluation</strong></td>
+<td>21–23</td>
+<td>Research on upcoming data sources</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-references-to-other-dd-issues">Cross-References to Other DD Issues<a class="headerlink" href="#cross-references-to-other-dd-issues" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Other DD Issue</th>
+<th>Title</th>
+<th>How DD020 Relates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD013 Issue 1</td>
+<td>Create openworm.yml config schema</td>
+<td>DD020 Issue 2 adds <code>data.connectome</code> section</td>
+</tr>
+<tr>
+<td>DD013 Issue 3</td>
+<td>Multi-stage Dockerfile</td>
+<td>DD020 Issue 4 adds cect to neural stage</td>
+</tr>
+<tr>
+<td>DD013 Issue 7</td>
+<td>Create versions.lock</td>
+<td>DD020 Issue 1 adds cect entry</td>
+</tr>
+<tr>
+<td>DD013 Issue 13</td>
+<td>CI Gate 1</td>
+<td>DD020 Issue 6 adds connectome test step</td>
+</tr>
+<tr>
+<td>DD003 Issue 13</td>
+<td>WCON trajectory export</td>
+<td>Uses cect cell classification for neuron identification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependency-graph-critical-path">Dependency Graph (Critical Path)<a class="headerlink" href="#dependency-graph-critical-path" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>DD013 Issue 1 (openworm.yml)
+  └→ Issue 2 (data.connectome section)
+       └→ Issue 3 (config validation)
+
+DD013 Issue 7 (versions.lock)
+  └→ Issue 1 (pin cect)
+       └→ Issue 4 (cect in Docker)
+            └→ Issue 5 (pre-cache datasets)
+                 ├→ Issue 6 (CI gate) → Issue 9 (version update script)
+                 ├→ Issue 14 (cross-validation script) → Issue 16 (sensitivity analysis)
+                 ├→ Issue 15 (bilateral symmetry metric)
+                 └→ Issue 17 (regression test suite)
+
+Issue 4 (cect in Docker)
+  └→ Issue 10 (c302 connectome loader)
+       ├→ Issue 11 (neuron-to-muscle loader)
+       ├→ Issue 12 (pharyngeal loader)
+       └→ Issue 13 (neuropeptide + neurotransmitter loaders)
+
+Issue 7 (audit) → Issue 8 (compliance checker)
+
+DD013 Issue 23 (JupyterLab)
+  └→ Issue 18 (exploration notebook) → Issue 19 (comparison notebook)
+
+Issues 20, 21, 22, 23 — independent (docs/research)
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

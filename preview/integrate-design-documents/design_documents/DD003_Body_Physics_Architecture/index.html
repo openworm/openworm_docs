@@ -1,0 +1,5428 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD003_Body_Physics_Architecture/">
+      
+      
+        <link rel="prev" href="../DD002_draft_issues/">
+      
+      
+        <link rel="next" href="../DD003_draft_issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD003 Body Physics - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd003-body-physics-engine-sibernetic-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD003 Body Physics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-particle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Particle Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validated-kinematic-outputs-palyanov-et-al-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validated Kinematic Outputs (Palyanov et al. 2018)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sph-kernel-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPH Kernel Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-bonds-body-wall-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Bonds (Body Wall Structure)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-actuation-force-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Actuation (Force Injection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictive-corrective-pressure-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predictive-Corrective Pressure Solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-finite-element-method-fem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Finite Element Method (FEM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mass-spring-system-simple-elastic-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Mass-Spring System (Simple Elastic Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lattice-boltzmann-method-lbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lattice Boltzmann Method (LBM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-position-based-dynamics-pbd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Position-Based Dynamics (PBD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-boyle-berri-cohen-2d-rod-spring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boyle-Berri-Cohen 2D Rod-Spring Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-backends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Backends
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-stabilization-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Stabilization Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Stabilization Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-opencl-must-be-replaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why OpenCL Must Be Replaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-result-quality-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Result Quality Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-taichi-coordinate-space-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Taichi Coordinate-Space Bug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-backend-parity-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Backend Parity Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-graduation-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Graduation Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stabilization-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stabilization Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-config-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend-Config Translation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-particle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Particle Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validated-kinematic-outputs-palyanov-et-al-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validated Kinematic Outputs (Palyanov et al. 2018)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sph-kernel-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPH Kernel Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-bonds-body-wall-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Bonds (Body Wall Structure)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-actuation-force-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Actuation (Force Injection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictive-corrective-pressure-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predictive-Corrective Pressure Solver
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-finite-element-method-fem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Finite Element Method (FEM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mass-spring-system-simple-elastic-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Mass-Spring System (Simple Elastic Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lattice-boltzmann-method-lbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lattice Boltzmann Method (LBM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-position-based-dynamics-pbd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Position-Based Dynamics (PBD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-boyle-berri-cohen-2d-rod-spring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boyle-Berri-Cohen 2D Rod-Spring Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-backends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Backends
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-stabilization-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Stabilization Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Stabilization Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-opencl-must-be-replaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why OpenCL Must Be Replaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-result-quality-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Result Quality Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-taichi-coordinate-space-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Taichi Coordinate-Space Bug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-backend-parity-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Backend Parity Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-graduation-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Graduation Criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stabilization-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stabilization Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-config-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend-Config Translation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd003-body-physics-engine-sibernetic-architecture">DD003: Body Physics Engine (Sibernetic) Architecture<a class="headerlink" href="#dd003-body-physics-engine-sibernetic-architecture" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Accepted</li>
+<li><strong>Author:</strong> Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p><a href="https://doi.org/10.1145/1531326.1531346">PCISPH</a> <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">SPH</a> framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from <a href="../DD002_Muscle_Model_Architecture/">DD002</a> calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation &lt;1%.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-0-existing-foundation-accepted-working">Phase 0</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Core Architecture — see <a href="../DD_PHASE_ROADMAP/#phase-0-existing-foundation-accepted-working">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Particle position time series (~100K SPH particles), <a href="https://github.com/openworm/tracker-commons">WCON</a> trajectory files, rendered body frames</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: kinematic metrics within ±15%; density deviation &lt;1% for liquid particles</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> — issues labeled <code>dd003</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>body.enabled: true</code> / <code>body.backend: opencl</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> (no NaN/segfault, *.wcon exists), <code>docker compose run validate</code> (Tier 3)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>body/positions/</code> layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray)</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 3 kinematic validation + physical stability (no particle escape) blocks merge</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Kinematic metrics</td>
+<td>Within ±15% of Schafer lab baseline</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Physical stability</td>
+<td>No particle escape, no NaN, no divergence over 10 s simulation</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Density deviation</td>
+<td>&lt;1% for liquid particles after PCISPH convergence</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No fluid-structure interaction — rigid body or mass-spring models that cannot capture pseudocoelomic pressure or hydrostatic skeleton mechanics.</p>
+<p><strong>After:</strong> ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from <a href="../DD002_Muscle_Model_Architecture/">DD002</a>.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/sibernetic</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particle position time series</td>
+<td><code>output/</code> (per-run)</td>
+<td>Binary state dump or WCON trajectory</td>
+<td><code>output.dat</code>, <code>output.wcon</code></td>
+</tr>
+<tr>
+<td>WCON trajectory files</td>
+<td><code>output/*.wcon</code></td>
+<td>WCON JSON</td>
+<td>Worm centroid + posture over time</td>
+</tr>
+<tr>
+<td>Rendered frames / video</td>
+<td><code>output/frames/</code></td>
+<td>PNG (per-frame)</td>
+<td><code>frame_00001.png</code></td>
+</tr>
+<tr>
+<td>Sibernetic binary (C++/OpenCL)</td>
+<td><code>build/Sibernetic</code></td>
+<td>Compiled executable</td>
+<td><code>./Sibernetic -config ...</code></td>
+</tr>
+<tr>
+<td>Taichi backends</td>
+<td><code>taichi_backend/</code></td>
+<td>Python/Taichi scripts</td>
+<td><code>taichi_backend/sph_metal.py</code></td>
+</tr>
+<tr>
+<td>Particle positions (viewer)</td>
+<td><a href="https://ngff.openmicroscopy.org">OME-Zarr</a>: <code>body/positions/</code>, shape (n_timesteps, n_particles, 3)</td>
+<td>OME-Zarr</td>
+<td>Per-particle (x, y, z) over all output timesteps</td>
+</tr>
+<tr>
+<td>Particle types (viewer)</td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,)</td>
+<td>OME-Zarr</td>
+<td>Enum: liquid/elastic/boundary</td>
+</tr>
+<tr>
+<td>Surface mesh (viewer)</td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> (per-frame OBJ or vertices+faces arrays)</td>
+<td>OME-Zarr</td>
+<td>Reconstructed smooth body surface per timestep</td>
+</tr>
+<tr>
+<td>Stability checker</td>
+<td><code>scripts/check_stability.py</code></td>
+<td>Python script</td>
+<td>Verify no NaN, no particle escape, no divergence <code>[TO BE CREATED]</code></td>
+</tr>
+<tr>
+<td>Incompressibility validator</td>
+<td><code>scripts/validate_incompressibility.py</code></td>
+<td>Python script</td>
+<td>Verify density deviation &lt;1% <code>[TO BE CREATED]</code></td>
+</tr>
+<tr>
+<td>Backend parity test suite</td>
+<td><code>scripts/backend_parity_test.py</code></td>
+<td>Python script</td>
+<td>Cross-backend kinematic comparison <code>[TO BE CREATED]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd003</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Body Physics Engine</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd003/description</code> (e.g., <code>dd003/pcisph-stability-fix</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD003: Fix density deviation in PCISPH pressure solver</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: <a href="https://www.khronos.org/opencl/">OpenCL</a> SDK (AMD or Intel), CMake, C++ compiler</li>
+<li>Optional: <code>pip install taichi</code> for <a href="https://www.taichi-lang.org/">Taichi</a> Metal/CUDA backends</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>There are two paths: <strong>Docker</strong> (recommended — avoids OpenCL SDK setup) and <strong>native C++ build</strong> (for Sibernetic development).</p>
+<p><strong>Clone the repositories:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/sibernetic.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git<span class="w">           </span><span class="c1"># for docker compose</span>
+</code></pre></div>
+<p><strong>Path A — Docker (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to Step 5 below (<code>docker compose run quick-test</code>). This is the easiest way to get a working simulation — the Docker image includes OpenCL, CMake, and all dependencies.</p>
+<p><strong>Path B — Native C++ build:</strong></p>
+<p>Requires an OpenCL SDK on your system:</p>
+<ul>
+<li><strong>Linux (AMD/Intel):</strong> Install your GPU vendor's OpenCL runtime, plus <code>cmake</code> and a C++ compiler (<code>apt install cmake g++ ocl-icd-opencl-dev</code> on Ubuntu/Debian)</li>
+<li><strong>macOS:</strong> OpenCL is deprecated but still available on Intel Macs. Apple Silicon does not support OpenCL natively — use the Taichi Metal backend instead (<code>pip install taichi</code>)</li>
+<li><strong>Windows:</strong> Install your GPU vendor's OpenCL SDK (AMD APP SDK or Intel OpenCL Runtime)</li>
+</ul>
+<p>Steps 1–4 below use the native build path. Steps 5–6 use Docker.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Build Sibernetic (C++/OpenCL)</span>
+<span class="nb">cd</span><span class="w"> </span>Sibernetic/
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+make<span class="w"> </span>-j8
+
+<span class="c1"># Step 2: Run standard test configuration</span>
+./Sibernetic<span class="w"> </span>-config<span class="w"> </span>../configurations/worm_body_test.ini<span class="w"> </span>-timestep<span class="w"> </span><span class="m">0</span>.00002<span class="w"> </span>-duration<span class="w"> </span><span class="m">1</span>.0
+
+<span class="c1"># Step 3: Check for divergence</span>
+python<span class="w"> </span>../scripts/check_stability.py<span class="w"> </span>output.dat
+<span class="c1"># [TO BE CREATED] if not present — verify existence in repo</span>
+
+<span class="c1"># Step 4: Validate density constraint</span>
+python<span class="w"> </span>../scripts/validate_incompressibility.py<span class="w"> </span>output.dat<span class="w"> </span>--max_deviation<span class="w"> </span><span class="m">0</span>.01
+<span class="c1"># [TO BE CREATED] if not present — verify existence in repo</span>
+
+<span class="c1"># Step 5: Quick validation via Docker (must pass before PR)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Green light: simulation completes without NaN, segfault, or SIGKILL</span>
+<span class="c1"># Green light: output/*.wcon exists</span>
+
+<span class="c1"># Step 6: Full validation via Docker (must pass before merge)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Green light: density deviation &lt; 1% for liquid particles</span>
+<span class="c1"># Green light: Tier 3 kinematic metrics within ±15% of baseline</span>
+<span class="c1"># Green light: no particle escape (all positions within bounding box)</span>
+</code></pre></div>
+<h3 id="scripts-that-may-not-exist-yet">Scripts that may not exist yet<a class="headerlink" href="#scripts-that-may-not-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/check_stability.py</code></td>
+<td>Verify in repo</td>
+<td>openworm/sibernetic — label <code>dd003</code></td>
+</tr>
+<tr>
+<td><code>scripts/validate_incompressibility.py</code></td>
+<td>Verify in repo</td>
+<td>openworm/sibernetic — label <code>dd003</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> <code>body/positions/</code> — SPH particles colored by type.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>body/positions/</code></td>
+</tr>
+<tr>
+<td><strong>Color mode</strong></td>
+<td>Particles colored by type: liquid=blue, elastic=green, boundary=gray</td>
+</tr>
+<tr>
+<td><strong>Type data</strong></td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,) — enum mapping each particle to its type</td>
+</tr>
+<tr>
+<td><strong>Surface mesh</strong></td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> — reconstructed smooth body surface per timestep</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>A worm-shaped particle cloud deforming over time. Blue liquid particles filling the interior (pseudocoelom), green elastic particles forming the body wall, gray boundary particles defining the environment. Muscle activation should produce visible bending. Surface mesh should show smooth locomotion.</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Side-by-side: particle view (raw SPH) vs. surface mesh (reconstructed body shape)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework">Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework<a class="headerlink" href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" title="Permanent link">&para;</a></h3>
+<p>OpenWorm uses <strong>Predictive-Corrective Incompressible SPH (PCISPH)</strong> to simulate the worm as a deformable body embedded in a viscous fluid. SPH represents continuous fields (density, velocity, pressure) as weighted sums over discrete particles, making it naturally suited for coupled fluid-solid systems.</p>
+<h3 id="three-particle-types">Three Particle Types<a class="headerlink" href="#three-particle-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Represents</th>
+<th>Count</th>
+<th>Dynamics</th>
+<th>Color (Viz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Liquid</strong></td>
+<td>Pseudocoelom fluid</td>
+<td>~50,000</td>
+<td>Navier-Stokes via SPH</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td><strong>Elastic</strong></td>
+<td>Body wall structure</td>
+<td>~40,000</td>
+<td>Spring-bonded network</td>
+<td>Green</td>
+</tr>
+<tr>
+<td><strong>Boundary</strong></td>
+<td>Environmental surfaces</td>
+<td>~10,000</td>
+<td>Fixed or moving constraints</td>
+<td>Gray</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total particle count:</strong> ~100,000 for an adult hermaphrodite.</p>
+<h3 id="physical-parameters">Physical Parameters<a class="headerlink" href="#physical-parameters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Units</th>
+<th>Biological Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rest density (ρ₀)</td>
+<td>1000</td>
+<td>kg/m³</td>
+<td>Aqueous tissue</td>
+</tr>
+<tr>
+<td>Viscosity (µ)</td>
+<td>4e-6</td>
+<td>Pa·s</td>
+<td>Low Reynolds number (Re ≤ 0.05)</td>
+</tr>
+<tr>
+<td>Smoothing radius (h)</td>
+<td>3.34</td>
+<td>Particle units</td>
+<td>Determines neighbor interaction range</td>
+</tr>
+<tr>
+<td>Timestep (dt)</td>
+<td>2.0e-5</td>
+<td>s</td>
+<td>Stability for explicit integration</td>
+</tr>
+<tr>
+<td>Simulation length</td>
+<td>~311</td>
+<td>Particles</td>
+<td>Adult body length (~1 mm)</td>
+</tr>
+<tr>
+<td>Adult worm mass</td>
+<td>3.25e-9</td>
+<td>kg</td>
+<td>Mapped to total particle mass</td>
+</tr>
+<tr>
+<td>Elasticity coefficient</td>
+<td>4 × 1.5e-4 / mass</td>
+<td>--</td>
+<td>Spring stiffness for elastic bonds</td>
+</tr>
+<tr>
+<td>Max muscle contraction force</td>
+<td>2.7 × 10⁻⁹</td>
+<td>N</td>
+<td>Experimental range: (1.4–9.6) × 10⁻⁹ N</td>
+</tr>
+<tr>
+<td>Number of muscle units</td>
+<td>96</td>
+<td>--</td>
+<td>95 body-wall muscles, 24 per quadrant × 4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="validated-kinematic-outputs-palyanov-et-al-2018">Validated Kinematic Outputs (Palyanov et al. 2018)<a class="headerlink" href="#validated-kinematic-outputs-palyanov-et-al-2018" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Simulated</th>
+<th>Experimental</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crawling velocity</td>
+<td>0.13–0.15 mm/s</td>
+<td>0.1–0.3 mm/s</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Crawling frequency</td>
+<td>0.36–0.37 Hz</td>
+<td>0.3–0.8 Hz</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Crawling wavelength</td>
+<td>0.62–0.72 mm</td>
+<td>0.65 mm</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming velocity</td>
+<td>0.26–0.41 mm/s</td>
+<td>0.29 ± 0.03 mm/s</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming frequency</td>
+<td>1.76–1.83 Hz</td>
+<td>1.74 ± 0.16 Hz</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming wavelength</td>
+<td>0.43–0.47 mm</td>
+<td>0.46 mm</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Freq–wavelength slope</td>
+<td>0.59</td>
+<td>0.64 (Boyle et al.)</td>
+<td>Figure 5</td>
+</tr>
+<tr>
+<td>Freq–wavelength intercept</td>
+<td>0.48</td>
+<td>0.42 (Boyle et al.)</td>
+<td>Figure 5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Validated behaviors:</strong> Forward crawling, swimming, omega turns, body shortening, two-frequency undulation (head vs. body).</p>
+<h3 id="sph-kernel-functions">SPH Kernel Functions<a class="headerlink" href="#sph-kernel-functions" title="Permanent link">&para;</a></h3>
+<p>Following <a href="https://doi.org/10.2312/SCA03/154-159">Müller, Charypar &amp; Gross (2003)</a>:</p>
+<p><strong>Density estimation (Wpoly6):</strong>
+<div class="highlight"><pre><span></span><code>ρᵢ = Σⱼ mⱼ * Wpoly6(rᵢⱼ, h)
+Wpoly6(r, h) = (315 / (64πh⁹)) * (h² - r²)³  if r &lt; h, else 0
+</code></pre></div></p>
+<p><strong>Pressure gradient (∇Wspiky):</strong>
+<div class="highlight"><pre><span></span><code>∇pᵢ = Σⱼ mⱼ * ((pᵢ + pⱼ) / (2ρⱼ)) * ∇Wspiky(rᵢⱼ, h)
+∇Wspiky(r, h) = -(45 / (πh⁶)) * (h - r)² * (r / |r|)  if r &lt; h, else 0
+</code></pre></div></p>
+<p><strong>Viscous diffusion (∇²Wviscosity):</strong>
+<div class="highlight"><pre><span></span><code>Fᵢ^viscosity = µ * Σⱼ mⱼ * ((vⱼ - vᵢ) / ρⱼ) * ∇²Wviscosity(rᵢⱼ, h)
+∇²Wviscosity(r, h) = (45 / (πh⁶)) * (h - r)  if r &lt; h, else 0
+</code></pre></div></p>
+<h3 id="elastic-bonds-body-wall-structure">Elastic Bonds (Body Wall Structure)<a class="headerlink" href="#elastic-bonds-body-wall-structure" title="Permanent link">&para;</a></h3>
+<p>Elastic particles are connected by spring-like bonds with rest lengths:</p>
+<div class="highlight"><pre><span></span><code>F_elastic = k * (|rᵢⱼ| - L₀) * (rᵢⱼ / |rᵢⱼ|)
+</code></pre></div>
+<ul>
+<li>k = elasticity coefficient (see table above)</li>
+<li>L₀ = rest length (initial inter-particle distance)</li>
+</ul>
+<p>Bonds are created during initialization based on spatial proximity. Particles within the smoothing radius are bonded if they are both elastic-type.</p>
+<h3 id="muscle-actuation-force-injection">Muscle Actuation (Force Injection)<a class="headerlink" href="#muscle-actuation-force-injection" title="Permanent link">&para;</a></h3>
+<p><strong>Muscle cell mapping (Palyanov et al. 2018):</strong> The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing <strong>individual muscle cells</strong> with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.</p>
+<p>Muscle forces from the calcium-force coupling (<a href="../DD002_Muscle_Model_Architecture/">DD002</a>) are injected by modulating elastic bond stiffness:</p>
+<div class="highlight"><pre><span></span><code>k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
+</code></pre></div>
+<p>Where <code>activation(t)</code> comes from the [Ca²⁺]ᵢ time series of each muscle cell. Bonds tagged as muscle bonds (MDR, MVR, MVL, MDL in 4 quadrants) receive this time-varying stiffness. Each of the 96 muscle units can be activated independently, enabling the full range of body postures observed in <em>C. elegans</em>.</p>
+<h3 id="predictive-corrective-pressure-solver">Predictive-Corrective Pressure Solver<a class="headerlink" href="#predictive-corrective-pressure-solver" title="Permanent link">&para;</a></h3>
+<p>Standard SPH suffers from density fluctuations causing artificial pressure waves. PCISPH (<a href="https://doi.org/10.1145/1531326.1531346">Solenthaler &amp; Pajarola 2009</a>) adds a predictive-corrective iteration:</p>
+<ol>
+<li><strong>Predict:</strong> Estimate particle positions at t + dt using current forces</li>
+<li><strong>Correct:</strong> Iteratively adjust pressure forces to maintain incompressibility (ρ ≈ ρ₀)</li>
+<li><strong>Update:</strong> Advance to the next timestep once density error &lt; threshold</li>
+</ol>
+<p>This stabilizes the simulation at the cost of ~3-7 iterations per timestep.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-finite-element-method-fem">1. <a href="https://en.wikipedia.org/wiki/Finite_element_method">Finite Element Method</a> (FEM)<a class="headerlink" href="#1-finite-element-method-fem" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Higher accuracy for solid mechanics, well-established in biomechanics.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Mesh generation for complex morphology is labor-intensive</li>
+<li>Large deformations (bending during crawling) cause mesh distortion</li>
+<li>Fluid-structure coupling in FEM+CFD is computationally expensive</li>
+<li>SPH is meshless, naturally handles topology changes, and couples fluid-solid seamlessly</li>
+</ul>
+<p><strong>When to reconsider:</strong> If future work requires extremely accurate stress/strain fields (e.g., modeling cuticle fracture, cell rupture). Not needed for behavior simulation.</p>
+<p><strong>Update (2026-02):</strong> Zhao et al. (2024) demonstrated that modern Projective Dynamics FEM solvers (<a href="https://doi.org/10.1145/2601097.2601116">Bouaziz et al. 2014</a>) address the mesh distortion and speed concerns listed above. Their implementation used a tetrahedral mesh of 984 vertices and 3,341 tetrahedrons with 96 muscle actuators and achieved real-time simulation at 30 frames per second — orders of magnitude faster than the current Sibernetic SPH approach (~100K particles). The key insight is that a Projective Dynamics solver uses a local-global optimization that is unconditionally stable under large deformations, eliminating the traditional FEM mesh distortion problem.</p>
+<p>However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of <em>C. elegans</em> locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.</p>
+<p><strong>OpenWorm's position:</strong> Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a <strong>fast alternative</strong> for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a>'s learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.</p>
+<p>Configuration: <code>body.backend: "fem-projective"</code> alongside existing <code>opencl</code>, <code>taichi-metal</code>, <code>taichi-cuda</code>, <code>pytorch</code>.</p>
+<p>Reference: <a href="https://doi.org/10.1145/2601097.2601116">Bouaziz S et al. (2014)</a>. "Projective Dynamics: Fusing constraint projections for fast simulation." <em>ACM Trans Graphics</em> 33:154.</p>
+<h3 id="2-mass-spring-system-simple-elastic-network">2. Mass-Spring System (Simple Elastic Network)<a class="headerlink" href="#2-mass-spring-system-simple-elastic-network" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Extremely fast, simple to implement.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>No fluid mechanics (pseudocoelom is critical for worm locomotion)</li>
+<li>Difficult to enforce incompressibility</li>
+<li>No pressure dynamics</li>
+</ul>
+<p>This was tried in early OpenWorm prototypes and abandoned because crawling requires fluid pressure to antagonize muscle contraction.</p>
+<h3 id="3-lattice-boltzmann-method-lbm">3. Lattice Boltzmann Method (LBM)<a class="headerlink" href="#3-lattice-boltzmann-method-lbm" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Good for fluid flow, naturally parallelizes.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Fixed Cartesian grid poorly represents complex worm morphology</li>
+<li>Deformable solid modeling in LBM is cumbersome</li>
+<li>SPH is more natural for moving, deforming boundaries</li>
+</ul>
+<h3 id="4-position-based-dynamics-pbd">4. Position-Based Dynamics (PBD)<a class="headerlink" href="#4-position-based-dynamics-pbd" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Unconditionally stable, used in real-time graphics/games.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Sacrifices physical accuracy for stability (violates momentum conservation in general)</li>
+<li>Not suited for quantitative biophysical validation</li>
+<li>OpenWorm prioritizes biological accuracy over simulation speed</li>
+</ul>
+<h3 id="5-boyle-berri-cohen-2d-rod-spring-model">5. Boyle-Berri-Cohen 2D Rod-Spring Model<a class="headerlink" href="#5-boyle-berri-cohen-2d-rod-spring-model" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Extremely fast (~seconds on single CPU), published and validated (<a href="https://doi.org/10.3389/fncom.2012.00010">Boyle, Berri &amp; Cohen 2012</a>), already implemented in three OpenWorm repos (<a href="https://github.com/openworm/CE_locomotion">CE_locomotion</a>, <a href="https://github.com/openworm/Worm2D">Worm2D</a>, <a href="https://github.com/openworm/CelegansNeuromechanicalGaitModulation">CelegansNeuromechanicalGaitModulation</a>), ~150 state variables, produces WCON output directly, has c302 integration and proprioception support.</p>
+<p><strong>Not a replacement for Sibernetic because:</strong></p>
+<ul>
+<li>2D only — no dorsal-ventral body mechanics, omega turns, or body roll</li>
+<li>No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes</li>
+<li>No internal body volume — cannot support <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (cell identity), <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/">DD014.2</a> (mesh deformation), or Phase 3+ organs</li>
+<li>No fluid-structure interaction — <a href="../DD019_Closed_Loop_Touch_Response/">DD019</a> touch mechanotransduction requires 3D particle strain</li>
+</ul>
+<p><strong>Role in OpenWorm:</strong> Fast validation screening tool (<code>scripts/boyle_berri_cohen_trajectory.py</code> in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<p>A contribution to Sibernetic MUST:</p>
+<ol>
+<li>
+<p><strong>Preserve Physical Stability:</strong> Simulations must not explode (density &lt; 0, particles escaping to infinity, NaN values). Run at least 10 seconds of simulation time without divergence.</p>
+</li>
+<li>
+<p><strong>Maintain Incompressibility:</strong> Density deviation from ρ₀ should be &lt; 1% for liquid particles after PCISPH convergence.</p>
+</li>
+<li>
+<p><strong>Pass Unit Tests:</strong> Sibernetic repository contains unit tests for kernel functions, neighbor search, and pressure solver. All must pass.</p>
+</li>
+<li>
+<p><strong>Validate Against Known Cases:</strong></p>
+<ul>
+<li>Drop test: Sphere of liquid particles under gravity should settle and spread</li>
+<li>Elastic deformation: A suspended elastic body under gravity should sag</li>
+<li>Muscle contraction: Activating one muscle quadrant should bend the body</li>
+</ul>
+</li>
+<li>
+<p><strong>GPU Backend Compatibility:</strong> Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and <a href="https://pytorch.org/">PyTorch</a> (CPU reference). Test on at least two backends.</p>
+</li>
+<li>
+<p><strong>Cross-Backend Parity:</strong> Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a>) must pass before any backend is marked Production.</p>
+</li>
+</ol>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="this-design-document-does-not-cover">This Design Document Does NOT Cover:<a class="headerlink" href="#this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Per-cell mechanical identity beyond muscles:</strong> Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (Palyanov et al. 2018, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.</p>
+</li>
+<li>
+<p><strong>Cuticle fine structure:</strong> The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.</p>
+</li>
+<li>
+<p><strong>Environmental complexity beyond liquid/gel:</strong> Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid (Palyanov et al. 2018, Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.</p>
+</li>
+<li>
+<p><strong>Thermodynamics:</strong> No temperature, no heat diffusion, no thermal expansion. <em>C. elegans</em> is studied at 20°C but temperature effects are not modeled.</p>
+</li>
+<li>
+<p><strong>Growth and molting:</strong> Body size changes during development. Current model assumes fixed adult size. Phase 6 work.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p><em>C. elegans</em> is a soft-bodied organism. Locomotion emerges from the interaction between:</p>
+<ul>
+<li>Muscle contractile forces (internal)</li>
+<li>Body wall elasticity (structural)</li>
+<li>Pseudocoelomic fluid pressure (hydrostatic skeleton)</li>
+<li>Environmental resistance (viscous drag, surface contact)</li>
+</ul>
+<p>Classical rigid-body physics engines (used in robotics) cannot capture this fluid-structure interaction. Finite element methods (FEM) are accurate but computationally expensive and poorly suited for large deformations and topological changes.</p>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="repository">Repository<a class="headerlink" href="#repository" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>https://github.com/openworm/Sibernetic
+</code></pre></div>
+<p><strong>Key files:</strong></p>
+<ul>
+<li><code>src/owPhysicsFluidSimulator.cpp</code> — Main SPH loop</li>
+<li><code>src/owWorldSimulation.cpp</code> — Particle initialization, boundary conditions</li>
+<li><code>kernels/sph_cl.cl</code> — OpenCL kernel for GPU acceleration</li>
+<li><code>taichi_backend/</code> — Taichi Metal/CUDA implementations</li>
+</ul>
+<h3 id="configuration-format">Configuration Format<a class="headerlink" href="#configuration-format" title="Permanent link">&para;</a></h3>
+<p>Sibernetic reads <code>.ini</code> files specifying:</p>
+<ul>
+<li>Particle counts (liquid, elastic, boundary)</li>
+<li>Initial positions (from pre-generated <code>.obj</code> 3D mesh or procedural)</li>
+<li>Muscle activation input file</li>
+<li>Simulation duration, timestep, output frequency</li>
+</ul>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="k">[simulation]</span>
+<span class="na">timestep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.00002</span>
+<span class="na">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0</span>
+<span class="na">output_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.01</span>
+
+<span class="k">[particles]</span>
+<span class="na">liquid_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">50000</span>
+<span class="na">elastic_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">40000</span>
+<span class="na">boundary_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10000</span>
+
+<span class="k">[physics]</span>
+<span class="na">rest_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1000.0</span>
+<span class="na">viscosity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4e-6</span>
+<span class="na">elasticity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.0006</span>
+</code></pre></div></p>
+<h3 id="compute-backends">Compute Backends<a class="headerlink" href="#compute-backends" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Language</th>
+<th>Hardware</th>
+<th>Speed</th>
+<th>Result Quality</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCL</td>
+<td>C++</td>
+<td>CPU/GPU (Linux)</td>
+<td>Baseline</td>
+<td><strong>Gold standard</strong> — validated ±15%</td>
+<td><strong>Production</strong> (but losing driver support)</td>
+</tr>
+<tr>
+<td>PyTorch</td>
+<td>Python</td>
+<td>CPU</td>
+<td>Slow</td>
+<td>Does not yet match OpenCL</td>
+<td><strong>Stable</strong> (doesn't crash; 76+ tests; results need work)</td>
+</tr>
+<tr>
+<td>Taichi Metal</td>
+<td>Python/Taichi</td>
+<td>Apple Silicon GPU</td>
+<td>~3x faster (target)</td>
+<td>Does not yet match OpenCL</td>
+<td><strong>Blocked</strong> — elastic coordinate bug</td>
+</tr>
+<tr>
+<td>Taichi CUDA</td>
+<td>Python/Taichi</td>
+<td>NVIDIA GPU</td>
+<td>~5x faster (target)</td>
+<td>Does not yet match OpenCL</td>
+<td><strong>Blocked</strong> — elastic coordinate bug</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation:</strong> OpenCL remains the only backend producing validated simulation results. However, OpenCL driver support is shrinking across platforms (Apple dropped OpenCL; AMD/NVIDIA deprioritizing). PyTorch and Taichi backends must achieve result parity with OpenCL before they can serve as replacements. See <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a> below.</p>
+<hr />
+<h2 id="backend-stabilization-roadmap">Backend Stabilization Roadmap<a class="headerlink" href="#backend-stabilization-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="why-opencl-must-be-replaced">Why OpenCL Must Be Replaced<a class="headerlink" href="#why-opencl-must-be-replaced" title="Permanent link">&para;</a></h3>
+<p>The OpenCL backend is the <strong>only</strong> backend producing validated simulation results (kinematic metrics within ±15% of Schafer lab baseline). However, OpenCL driver support is shrinking across all major platforms:</p>
+<ul>
+<li><strong>Apple</strong> dropped OpenCL entirely (deprecated since macOS 10.14, removed from Apple Silicon native support)</li>
+<li><strong>AMD</strong> is deprioritizing OpenCL in favor of ROCm/HIP</li>
+<li><strong>NVIDIA</strong> is deprioritizing OpenCL in favor of CUDA</li>
+<li><strong>Docker</strong> — OpenCL runs CPU-only in Docker (GPU passthrough broken, issue #320)</li>
+</ul>
+<p>The core challenge: the only backend producing good simulation results is losing the platforms it runs on. The goal is to achieve OpenCL-equivalent result quality on PyTorch and/or Taichi <strong>before</strong> OpenCL becomes unusable.</p>
+<h3 id="the-result-quality-gap">The Result Quality Gap<a class="headerlink" href="#the-result-quality-gap" title="Permanent link">&para;</a></h3>
+<p>Neither PyTorch nor Taichi currently matches OpenCL's validated kinematics:</p>
+<ul>
+<li><strong>PyTorch:</strong> Stable (doesn't crash, 76+ tests pass, 3+ second simulations without divergence). But simulation results don't yet match OpenCL quality. Good as a correctness reference for debugging, not yet a replacement.</li>
+<li><strong>Taichi:</strong> Has an additional elastic coordinate-space bug on top of the general quality gap (see below). Elastic forces ~287x too weak, causing elastic bodies to flatten to floor.</li>
+</ul>
+<p><strong>Root cause analysis needed:</strong> What specific algorithmic differences produce the quality gap? The OpenCL C++ kernels (<code>sphFluid.cl</code>, ~64KB) are the reference implementation — PyTorch/Taichi must match their behavior line-by-line.</p>
+<h3 id="the-taichi-coordinate-space-bug">The Taichi Coordinate-Space Bug<a class="headerlink" href="#the-taichi-coordinate-space-bug" title="Permanent link">&para;</a></h3>
+<p>Taichi has a <strong>known coordinate-space bug</strong> that is separate from (and on top of) the general result quality gap shared with PyTorch:</p>
+<ul>
+<li>SPH forces are computed in world coordinates, but elastic forces are computed in scaled coordinates</li>
+<li>This mismatch makes elastic forces effectively ~287x too weak (factor of 1/simulation_scale)</li>
+<li>Result: elastic bodies flatten to floor instead of maintaining shape</li>
+</ul>
+<p><strong>Comparison data:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>PyTorch</th>
+<th>Taichi</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elastic body mean Y (after 3s floor collision)</td>
+<td>1.45</td>
+<td>0.24</td>
+<td>&gt;1.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Three-step fix (documented in Sibernetic README):</strong></p>
+<ol>
+<li>Remove incorrect <code>/sim_scale</code> division in elastic force calculation</li>
+<li>Add <code>simulationScaleInv</code> to the integration step</li>
+<li>Use <code>h_scaled</code> for kernel coefficients instead of unscaled <code>h</code></li>
+</ol>
+<h3 id="cross-backend-parity-requirements">Cross-Backend Parity Requirements<a class="headerlink" href="#cross-backend-parity-requirements" title="Permanent link">&para;</a></h3>
+<p>Replacement backends must produce kinematic outputs matching OpenCL within ±5% on the same configuration. The parity test suite consists of:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>What It Measures</th>
+<th>Pass Criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Drop test</td>
+<td>Liquid sphere under gravity settles and spreads</td>
+<td>Position/velocity metrics within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Elastic deformation</td>
+<td>Suspended elastic body sags under gravity</td>
+<td>Mean displacement within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Muscle contraction</td>
+<td>Single quadrant activation bends body</td>
+<td>Curvature within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Full worm crawling</td>
+<td>15ms coupled simulation</td>
+<td>WCON trajectory metrics within ±5% of OpenCL</td>
+</tr>
+</tbody>
+</table>
+<p>Each test produces numeric metrics; the parity suite compares against OpenCL baseline values stored in a reference file.</p>
+<h3 id="backend-graduation-criteria">Backend Graduation Criteria<a class="headerlink" href="#backend-graduation-criteria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Experimental</strong></td>
+<td>Compiles, runs, produces output without crashing</td>
+</tr>
+<tr>
+<td><strong>Stable</strong></td>
+<td>Runs 10s without divergence, passes parity tests within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td><strong>Production</strong></td>
+<td>Stable + integrated in Docker + CI-gated + performance benchmarked</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current status:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Level</th>
+<th>Blocking Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCL</td>
+<td><strong>Production</strong></td>
+<td>Losing platform support</td>
+</tr>
+<tr>
+<td>PyTorch</td>
+<td><strong>Experimental</strong></td>
+<td>Stable but results don't match OpenCL</td>
+</tr>
+<tr>
+<td>Taichi Metal</td>
+<td><strong>Experimental</strong></td>
+<td>Elastic coordinate-space bug + results don't match</td>
+</tr>
+<tr>
+<td>Taichi CUDA</td>
+<td><strong>Experimental</strong></td>
+<td>Elastic coordinate-space bug + results don't match</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stabilization-sequence">Stabilization Sequence<a class="headerlink" href="#stabilization-sequence" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Create validation scripts:</strong> <code>scripts/check_stability.py</code> and <code>scripts/validate_incompressibility.py</code></li>
+<li><strong>Create cross-backend parity test suite:</strong> <code>scripts/backend_parity_test.py</code> — compare against OpenCL baseline</li>
+<li><strong>Fix Taichi elastic coordinate bug:</strong> Apply the documented 3-step fix (remove <code>/sim_scale</code>, add <code>simulationScaleInv</code>, use <code>h_scaled</code>)</li>
+<li><strong>Audit and fix result quality gap:</strong> Line-by-line algorithmic audit of PyTorch/Taichi kernel implementations against OpenCL <code>sphFluid.cl</code></li>
+<li><strong>Run parity tests:</strong> Graduate backends that pass to Stable</li>
+<li><strong>Add to Dockerfile and CI:</strong> Add graduated backends to Docker image, add backend-specific CI gates</li>
+<li><strong>Performance benchmark:</strong> Update recommendation for which backend to use on which platform</li>
+</ol>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong><a href="https://doi.org/10.2312/SCA03/154-159">Müller M, Charypar D, Gross M (2003)</a>.</strong> "Particle-based fluid simulation for interactive applications." <em>Proc. ACM SIGGRAPH/Eurographics Symp. Computer Animation</em>, pp. 154-159.
+   <em>SPH kernel functions.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1145/1531326.1531346">Solenthaler B, Pajarola R (2009)</a>.</strong> "Predictive-Corrective Incompressible SPH." <em>ACM Trans. Graphics</em> 28(3):40.
+   <em>PCISPH pressure solver.</em></p>
+</li>
+<li>
+<p><strong>Boyle JH, Cohen N (2008).</strong> "Caenorhabditis elegans body wall muscles are simple actuators." <em>Biosystems</em> 94:170-181.
+   <em>Muscle-to-physics coupling validation.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov A, Khayrulin S, Larson SD (2018)</a>.</strong> "Three-dimensional simulation of the <em>Caenorhabditis elegans</em> body and muscle cells in liquid and gel environments for behavioural analysis." <em>Phil. Trans. R. Soc. B</em> 373:20170376.
+   <em>Primary Sibernetic publication. Describes muscle cell mapping (96 units), validated kinematics (Table 1), force–velocity/force–length relationships, omega turns, and agar gel simulation.</em></p>
+</li>
+<li>
+<p><strong>Zhao M et al. (2024).</strong> <em>Nat Comp Sci</em> 4:978-990.
+   <em>Demonstrated real-time FEM body simulation of C. elegans at 30 FPS.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1145/2601097.2601116">Bouaziz S et al. (2014)</a>.</strong> <em>ACM Trans Graphics</em> 33:154.
+   <em>Projective Dynamics FEM solver.</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+<th>Timestep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muscle activation coefficients</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a> (via <code>sibernetic_c302.py</code>)</td>
+<td>Per-muscle activation [0, 1]</td>
+<td>Written to muscle activation file by coupling script</td>
+<td>dimensionless</td>
+<td>dt_coupling (0.005 ms from neural side)</td>
+</tr>
+<tr>
+<td>Particle initialization geometry</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (when cell_identity enabled)</td>
+<td>Per-particle position, type, cell_id</td>
+<td>Binary or CSV particle file</td>
+<td>µm (positions), enum (type)</td>
+<td>One-time at sim start</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particle position time series</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (Tier 3 validation)</td>
+<td>All particle positions per output frame</td>
+<td>Binary state dump or WCON trajectory</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Rendered frames / video</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (output pipeline)</td>
+<td>Visual frames of worm body</td>
+<td>PNG or direct framebuffer</td>
+<td>pixels</td>
+</tr>
+<tr>
+<td>Body deformation state</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (pharynx, if Option B)</td>
+<td>Anterior attachment point displacement</td>
+<td>Shared memory or file</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Particle positions (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-particle (x, y, z) over all output timesteps</td>
+<td>OME-Zarr: <code>body/positions/</code>, shape (n_timesteps, n_particles, 3)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Particle types (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-particle type (liquid/elastic/boundary)</td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,)</td>
+<td>enum</td>
+</tr>
+<tr>
+<td>Surface mesh (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Reconstructed smooth body surface per timestep</td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> (per-frame OBJ or vertices+faces arrays)</td>
+<td>µm</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><code>openworm/sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Docker stage</strong></td>
+<td><code>body</code> in multi-stage Dockerfile</td>
+</tr>
+<tr>
+<td><strong><code>versions.lock</code> key</strong></td>
+<td><code>sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Build dependencies</strong></td>
+<td>OpenCL SDK (AMD or Intel), CMake, C++ compiler</td>
+</tr>
+<tr>
+<td><strong>Backend note</strong></td>
+<td>Taichi backends require <code>pip install taichi</code> (not currently in Dockerfile)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">body</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sibernetic</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencl</span><span class="w">                    </span><span class="c1"># opencl, taichi-metal, taichi-cuda, pytorch</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;worm_crawl_half_resolution&quot;</span>
+<span class="w">  </span><span class="nt">particle_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span>
+<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscle</span><span class="w">              </span><span class="c1"># &quot;muscle&quot; = 96 muscle units mapped (default). &quot;all&quot; = Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): extend to all tissue types. &quot;false&quot; = bulk elastic only.</span>
+<span class="w">  </span><span class="nt">timestep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00002</span><span class="w">                  </span><span class="c1"># seconds</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body.enabled</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable body physics simulation</td>
+</tr>
+<tr>
+<td><code>body.engine</code></td>
+<td><code>sibernetic</code></td>
+<td><code>sibernetic</code></td>
+<td>Physics engine selection</td>
+</tr>
+<tr>
+<td><code>body.backend</code></td>
+<td><code>opencl</code></td>
+<td><code>opencl</code>, <code>taichi-metal</code>, <code>taichi-cuda</code>, <code>pytorch</code></td>
+<td>Compute backend</td>
+</tr>
+<tr>
+<td><code>body.configuration</code></td>
+<td><code>"worm_crawl_half_resolution"</code></td>
+<td>String</td>
+<td>Simulation configuration name</td>
+</tr>
+<tr>
+<td><code>body.particle_count</code></td>
+<td><code>100000</code></td>
+<td>Integer</td>
+<td>Total particle count</td>
+</tr>
+<tr>
+<td><code>body.cell_identity</code></td>
+<td><code>muscle</code></td>
+<td><code>false</code>/<code>muscle</code>/<code>all</code></td>
+<td><code>muscle</code> = 96 muscle units mapped (existing). <code>all</code> = extend to all tissue types (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>, Phase 4). <code>false</code> = bulk elastic only.</td>
+</tr>
+<tr>
+<td><code>body.timestep</code></td>
+<td><code>0.00002</code></td>
+<td>Float (seconds)</td>
+<td>Simulation timestep</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Checks: simulation completes without NaN, segfault, or SIGKILL</span>
+<span class="c1"># Checks: output/*.wcon exists</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Density deviation &lt; 1% for liquid particles</span>
+<span class="c1">#   - Tier 3 kinematic metrics within ±15% of baseline</span>
+<span class="c1">#   - No particle escape (all positions within bounding box)</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] Build succeeds (<code>cmake .. &amp;&amp; make -j8</code>)</li>
+<li>[ ] <code>quick-test</code> passes (no NaN, no segfault, *.wcon exists)</li>
+<li>[ ] <code>validate</code> passes (Tier 3 kinematics + density constraint)</li>
+<li>[ ] Tested on at least two backends if core SPH algorithms changed</li>
+<li>[ ] No particle escape (all positions within bounding box)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body/positions/</code> (n_timesteps, n_particles, 3)</td>
+<td>Body particles</td>
+<td>Liquid=blue, elastic=green, boundary=gray</td>
+</tr>
+<tr>
+<td><code>body/types/</code> (n_particles,)</td>
+<td>Particle type overlay</td>
+<td>Type enum → color mapping</td>
+</tr>
+<tr>
+<td><code>geometry/body_surface/</code> (per-frame)</td>
+<td>Reconstructed mesh</td>
+<td>Smooth surface rendering</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backend-config-translation">Backend-Config Translation<a class="headerlink" href="#backend-config-translation" title="Permanent link">&para;</a></h3>
+<p>Sibernetic internally reads <code>.ini</code> configuration files. The <code>master_openworm.py</code> orchestrator (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) is responsible for translating <code>openworm.yml</code> body section to Sibernetic <code>.ini</code> format at runtime:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># master_openworm.py (pseudocode)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_sibernetic_config</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">):</span>
+    <span class="n">ini</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;simulation&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">])</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;particles&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;particle_count&#39;</span><span class="p">])</span>
+    <span class="c1"># ... etc</span>
+    <span class="n">ini</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sibernetic_config.ini&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muscle activation format</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>If activation value range, file format, or muscle count changes, Sibernetic reads wrong data</td>
+</tr>
+<tr>
+<td><code>sibernetic_c302.py</code> script</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>/DD002</td>
+<td>This script bridges neural→body; changes to it affect coupling timing</td>
+</tr>
+<tr>
+<td>Cell boundary data</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If particle initialization changes (cell-tagged particles), body geometry changes</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Movement validation</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>If particle output format changes, validation toolbox can't read trajectory data</td>
+</tr>
+<tr>
+<td>Mechanical cell identity</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+<td>If particle struct changes (adding/removing fields), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> initialization must match</td>
+</tr>
+<tr>
+<td>Pharynx attachment</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>If body geometry changes at anterior, pharynx coupling point shifts</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> OpenWorm Steering</li>
+<li><strong>Implementation Status:</strong> Complete (OpenCL production but losing platform support; PyTorch/Taichi experimental — results do not yet match OpenCL. See <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a>)</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Create stability validation scripts (<code>scripts/check_stability.py</code>, <code>scripts/validate_incompressibility.py</code>)</p>
+</li>
+<li>Create cross-backend parity test suite against OpenCL baseline (<code>scripts/backend_parity_test.py</code>)</li>
+<li><strong>Fix Taichi elastic coordinate-space bug</strong> (3-step fix documented in Sibernetic README)</li>
+<li><strong>Audit and fix PyTorch/Taichi result quality gap vs OpenCL</strong> (algorithmic audit of kernel implementations)</li>
+<li>Graduate backends that pass parity tests; add to Dockerfile and CI</li>
+<li>Extend per-particle cell IDs to all tissue types (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>)</li>
+<li>Add cell-type-specific mechanical properties</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

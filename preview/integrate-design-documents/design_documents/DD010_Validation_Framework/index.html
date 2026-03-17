@@ -1,0 +1,5447 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD010_Validation_Framework/">
+      
+      
+        <link rel="prev" href="../DD005_draft_issues/">
+      
+      
+        <link rel="next" href="../DD014_Dynamic_Visualization_Architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD010 Validation Framework - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd010-validation-framework-and-quantitative-benchmarks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD010 Validation Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-tier-validation-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three-Tier Validation Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-1-single-cell-validation-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 1: Single-Cell Validation (Unit Tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2-circuit-level-validation-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2: Circuit-Level Validation (Integration Tests)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tier 2: Circuit-Level Validation (Integration Tests)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tier-2a-whole-network-functional-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2a: Whole-Network Functional Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2b-neuropeptide-modulation-validation-unc-31-natural-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-3-behavioral-validation-system-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 3: Behavioral Validation (System Tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-4-causal-interventional-validation-non-blocking-advisory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 4: Causal / Interventional Validation (Non-Blocking, Advisory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-in-silico-perturbation-battery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard In-Silico Perturbation Battery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-grounding-for-acceptance-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Grounding for Acceptance Thresholds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavioral-quantification-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavioral Quantification Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-no-quantitative-validation-visual-inspection-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. No Quantitative Validation (Visual Inspection Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-single-validation-level-behavior-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Single Validation Level (Behavior Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-strict-thresholds-must-match-exactly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Strict Thresholds (Must Match Exactly)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-single-metric-validation-one-number-to-rule-them-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Single-Metric Validation (One Number to Rule Them All)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-threshold-free-qualitative-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Threshold-Free Qualitative Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd-ownership-split-dd010-vs-dd013" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Ownership Split (DD010 vs. DD013)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-data-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Data Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-reuse-wormneuroatlas-and-connectometoolbox-for-tier-2-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse: wormneuroatlas and ConnectomeToolbox for Tier 2 Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-worm-analysis-toolbox-revival-dd021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        open-worm-analysis-toolbox Revival (DD021)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-worm-analysis-toolbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open-Worm-Analysis-Toolbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-data-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Data Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-manual-validation-to-automated-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Manual Validation to Automated CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#three-tier-validation-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three-Tier Validation Hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-1-single-cell-validation-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 1: Single-Cell Validation (Unit Tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2-circuit-level-validation-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2: Circuit-Level Validation (Integration Tests)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tier 2: Circuit-Level Validation (Integration Tests)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tier-2a-whole-network-functional-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2a: Whole-Network Functional Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2b-neuropeptide-modulation-validation-unc-31-natural-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-3-behavioral-validation-system-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 3: Behavioral Validation (System Tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-4-causal-interventional-validation-non-blocking-advisory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 4: Causal / Interventional Validation (Non-Blocking, Advisory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#standard-in-silico-perturbation-battery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard In-Silico Perturbation Battery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-grounding-for-acceptance-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistical Grounding for Acceptance Thresholds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#behavioral-quantification-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavioral Quantification Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-no-quantitative-validation-visual-inspection-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. No Quantitative Validation (Visual Inspection Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-single-validation-level-behavior-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Single Validation Level (Behavior Only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-strict-thresholds-must-match-exactly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Strict Thresholds (Must Match Exactly)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-single-metric-validation-one-number-to-rule-them-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Single-Metric Validation (One Number to Rule Them All)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-threshold-free-qualitative-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Threshold-Free Qualitative Assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-what-this-subsystem-consumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs (What This Subsystem Consumes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs-what-this-subsystem-produces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs (What This Subsystem Produces)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd-ownership-split-dd010-vs-dd013" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Ownership Split (DD010 vs. DD013)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-openwormyml-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration (openworm.yml Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-data-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Data Location
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-reuse-wormneuroatlas-and-connectometoolbox-for-tier-2-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse: wormneuroatlas and ConnectomeToolbox for Tier 2 Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-worm-analysis-toolbox-revival-dd021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        open-worm-analysis-toolbox Revival (DD021)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#open-worm-analysis-toolbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open-Worm-Analysis-Toolbox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-data-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Data Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-manual-validation-to-automated-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Manual Validation to Automated CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd010-validation-framework-and-quantitative-benchmarks">DD010: Validation Framework and Quantitative Benchmarks<a class="headerlink" href="#dd010-validation-framework-and-quantitative-benchmarks" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Accepted</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> All other DDs (validation applies to all models), <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptides — Tier 2b unc-31 validation), <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> (Movement Analysis Toolbox — Tier 3 validation tool), <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> (Validation Data Acquisition Pipeline — data sourcing for all tiers)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a> | <strong>Layer:</strong> Validation</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Every pull request must pass quantitative validation at four levels — single cells, neural network dynamics, whole-animal locomotion, and causal perturbations — before merging. This DD defines the thresholds, data sources, and CI pipeline for each tier.</p>
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Validation — see <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via <code>open-worm-analysis-toolbox</code> — see <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>)</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td>Tier 2a: correlation-of-correlations r &gt; 0.5 vs. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>; Tier 2b: neuropeptide contribution r &gt; 0.3 (wt-vs-unc-31); Tier 3: 5 kinematic metrics within ±15% of <a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a> Schafer lab data</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td>Validation scripts in <code>openworm/OpenWorm</code> meta-repo; Tier 3 tool: <a href="https://github.com/openworm/open-worm-analysis-toolbox"><code>openworm/open-worm-analysis-toolbox</code></a> (<a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>)</td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>validation.run_after_simulation: true</code>, <code>validation.tier2_functional_connectivity: true</code>, <code>validation.tier2_neuropeptide_unc31: true</code>, <code>validation.tier3_behavioral: true</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run validate</code> — runs all enabled tiers, produces <code>output/validation_report.json</code></td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td>Validation overlay in <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer: <code>validation/overlay/</code> OME-Zarr group shows per-metric pass/fail</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 2 blocks PR merge (r &lt; 0.5 = fail); Tier 3 blocks merge to main (&gt;15% deviation = fail)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>OpenWorm's core philosophy, articulated in <a href="https://doi.org/10.12688/f1000research.9095.1">Sarma et al. 2016</a> "Unit Testing, Model Validation, and Biological Simulation" (<em>F1000Research</em>), is that <strong>model validation is a form of testing</strong>. Just as software has unit tests, integration tests, and system tests, biological models must be validated at multiple levels:</p>
+<ul>
+<li><strong>Single-cell level:</strong> Electrophysiology (voltage, conductance, kinetics)</li>
+<li><strong>Circuit level:</strong> Functional connectivity (calcium correlations)</li>
+<li><strong>Behavioral level:</strong> Movement kinematics, pumping, defecation</li>
+</ul>
+<p>A simulation that produces movement but fails electrophysiology validation has <strong>passed the behavioral test but failed the mechanistic test</strong>. Both matter.</p>
+<hr />
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<p><strong>Goal:</strong> Automated, multi-tier quantitative validation that runs on every PR and blocks merges when model quality degrades.</p>
+<p><strong>Success criteria:</strong></p>
+<ul>
+<li>Tier 2a functional connectivity correlation r &gt; 0.5 vs. Randi 2023 experimental data</li>
+<li>Tier 2b neuropeptide contribution correlation r &gt; 0.3 (wild-type vs. unc-31)</li>
+<li>Tier 3 behavioral kinematics within +/-15% of Yemini et al. 2013 Schafer lab data for all 5 metrics</li>
+<li>Tier 4 causal perturbation direction-of-effect matches &gt;=70% of published interventions</li>
+<li>All tiers run without manual intervention via <code>docker compose run validate</code></li>
+</ul>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tier 1 expression-consistency checker</td>
+<td><code>validation/tier1_expression_consistency.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Tier 1 single-cell electrophysiology comparator</td>
+<td><code>validation/tier1_cell_electrophys.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Tier 2a functional connectivity validator</td>
+<td><code>validation/tier2a_functional_connectivity.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Tier 2b unc-31 neuropeptide validator</td>
+<td><code>validation/tier2b_neuropeptide_unc31.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Tier 3 behavioral kinematics validator</td>
+<td><code>validation/tier3_behavioral.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Tier 4 perturbation battery runner</td>
+<td><code>validation/tier4_perturbation_battery.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Acceptance criteria checker</td>
+<td><code>validation/check_acceptance.py</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Reference datasets (baked into Docker)</td>
+<td><code>/opt/openworm/validation/data/</code></td>
+<td>Partial</td>
+</tr>
+<tr>
+<td>CI workflow</td>
+<td><code>.github/workflows/validation.yml</code></td>
+<td>[TO BE CREATED]</td>
+</tr>
+<tr>
+<td>Validation config section</td>
+<td><code>openworm.yml</code> → <code>validation:</code></td>
+<td>Defined below</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Primary repository:</strong> <code>openworm/OpenWorm</code> (meta-repo — validation scripts live here)</li>
+<li><strong>Tier 3 toolbox:</strong> <code>openworm/open-worm-analysis-toolbox</code> (see <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>)</li>
+<li><strong>Tier 2 data API:</strong> <code>openworm/wormneuroatlas</code> (Randi 2023 functional connectivity)</li>
+<li><strong>Issue label:</strong> <code>dd010</code>, <code>validation</code></li>
+<li><strong>Milestone:</strong> Phase 1 — Validation CI Pipeline</li>
+<li><strong>ClickUp task:</strong> 868hjdzqy (Validation L4 Maintainer)</li>
+</ul>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>The validation framework is cross-cutting — it spans multiple repositories depending on which validation tier you are working on.</p>
+<p><strong>All tiers — clone the meta-repo:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git<span class="w">  </span><span class="c1"># meta-repo with docker compose</span>
+<span class="nb">cd</span><span class="w"> </span>OpenWorm
+</code></pre></div>
+<p><strong>Per-tier additional repositories:</strong></p>
+<ul>
+<li><strong>Tier 1 (single-cell electrophysiology):</strong> Also needs c302 — see <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> for setup</li>
+<li><strong>Tier 2 (circuit-level functional connectivity):</strong> Also needs c302 — see <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> for setup</li>
+<li><strong>Tier 3 (behavioral kinematics):</strong> Also needs <code>open-worm-analysis-toolbox</code> — see <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/#getting-started-environment-setup">DD021 Getting Started</a> for setup</li>
+</ul>
+<p><strong>Path A — Docker (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># From the OpenWorm meta-repo</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w">  </span><span class="c1"># runs all tiers automatically</span>
+</code></pre></div>
+<p><strong>Path B — Native:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install dependencies in each relevant repo</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">  </span><span class="c1"># in each repo needed for the tier(s) you are working on</span>
+</code></pre></div>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run the full validation suite (all enabled tiers)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+
+<span class="c1"># Run a specific tier</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--tier<span class="w"> </span>2a
+
+<span class="c1"># Check results</span>
+cat<span class="w"> </span>output/validation_report.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+
+<span class="c1"># Quick smoke test (verify tools install and data is present)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from open_worm_analysis_toolbox import NormalizedWorm; print(&#39;OK&#39;)&quot;</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>ls<span class="w"> </span>/opt/openworm/validation/data/
+</code></pre></div>
+<p>See the <a href="#integration-test">Integration Test</a> subsection below for a full step-by-step verification procedure.</p>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p>Validation results are displayed through the <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer and standalone reports:</p>
+<ul>
+<li><strong>Correlation matrix heatmaps:</strong> Tier 2a produces a simulated 302x302 functional connectivity matrix displayed alongside the Randi 2023 experimental matrix. Difference heatmap highlights neuron pairs with largest discrepancies.</li>
+<li><strong>Locomotion parameter dashboards:</strong> Tier 3 produces a bar chart of the 5 kinematic metrics (speed, wavelength, frequency, amplitude, gait) with experimental mean +/-15% tolerance bands.</li>
+<li><strong>Per-neuron expression-consistency overlay:</strong> Tier 1 expression-consistency results are rendered as a pass/fail color map over the 3D worm body in the DD014 viewer (<code>validation/overlay/</code> OME-Zarr group).</li>
+<li><strong>Perturbation effect comparison:</strong> Tier 4 results are displayed as a table of predicted vs. observed effect directions with magnitude bars.</li>
+<li><strong>CI summary badge:</strong> GitHub Actions produces a pass/fail badge linked to the full validation report JSON.</li>
+</ul>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="three-tier-validation-hierarchy">Three-Tier Validation Hierarchy<a class="headerlink" href="#three-tier-validation-hierarchy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>What Is Validated</th>
+<th>Validation Data</th>
+<th>Acceptance Criteria</th>
+<th>Blocking?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tier 1: Unit (Single Cell)</strong></td>
+<td>Membrane voltage, conductances, calcium dynamics</td>
+<td><a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a> patch-clamp, <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> single-neuron Ca imaging</td>
+<td>Quantitative match within 20%</td>
+<td>No (warning)</td>
+</tr>
+<tr>
+<td><strong>Tier 2a: Integration (Circuit)</strong></td>
+<td>Functional connectivity, network dynamics</td>
+<td><a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> whole-brain pairwise correlations (wild-type)</td>
+<td>Correlation coefficient &gt; 0.5 vs. experimental</td>
+<td>Yes (blocks merge)</td>
+</tr>
+<tr>
+<td><strong>Tier 2b: Integration (Neuropeptides)</strong></td>
+<td>Neuropeptide modulation effect on functional connectivity</td>
+<td><a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> wild-type vs. <em>unc-31</em> mutant</td>
+<td>Neuropeptide contribution correlation r &gt; 0.3</td>
+<td>Yes (after <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>)</td>
+</tr>
+<tr>
+<td><strong>Tier 3: System (Behavior)</strong></td>
+<td>Movement kinematics, pumping, defecation</td>
+<td><a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a> (Schafer lab kinematics), <a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a> (pharyngeal EPG), <a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a> (defecation)</td>
+<td>Statistical match via open-worm-analysis-toolbox</td>
+<td>Yes (blocks merge)</td>
+</tr>
+<tr>
+<td><strong>Tier 4: Causal (Intervention)</strong></td>
+<td>Perturbation response: ablation, silencing, mutation</td>
+<td>Published laser ablation, optogenetics, mutant phenotype data</td>
+<td>Direction of effect matches ≥70%; magnitude within ±30%</td>
+<td>No (advisory → blocking Phase 3+)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Blocking:</strong> A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.</p>
+<h3 id="tier-1-single-cell-validation-unit-tests">Tier 1: Single-Cell Validation (Unit Tests)<a class="headerlink" href="#tier-1-single-cell-validation-unit-tests" title="Permanent link">&para;</a></h3>
+<p><strong>For each neuron class with published electrophysiology:</strong></p>
+<p>Run the cell model in isolation (no synaptic inputs, no network effects) with standard voltage-clamp or current-clamp protocols. Compare:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Measurement</th>
+<th>Typical Acceptance Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resting potential (V_rest)</td>
+<td>No current injection</td>
+<td>± 5 mV</td>
+</tr>
+<tr>
+<td>Input resistance (R_in)</td>
+<td>Small current step</td>
+<td>± 30%</td>
+</tr>
+<tr>
+<td>I-V curve</td>
+<td>Voltage ramp</td>
+<td>Pearson r &gt; 0.8</td>
+</tr>
+<tr>
+<td>Spike threshold</td>
+<td>Depolarizing current</td>
+<td>± 10 mV (if applicable)</td>
+</tr>
+<tr>
+<td>Calcium influx</td>
+<td>Depolarization-evoked</td>
+<td>± 40% (noisy measurement)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Primary Tier 1 datasets:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Neuron(s)</th>
+<th>Dataset</th>
+<th>What It Provides</th>
+<th>Validation Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALM, AVM, PLM (touch receptors)</td>
+<td><a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a>, <a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a></td>
+<td>Whole-cell patch-clamp: resting potential, I-V curves, MEC-4/DEG-ENaC channel kinetics</td>
+<td>Validate touch neuron resting potential, input resistance, mechanoreceptor current amplitude</td>
+</tr>
+<tr>
+<td>ALM, AVM, PLM (touch receptors)</td>
+<td><a href="https://doi.org/10.1016/S0896-6273(03)00539-7">Suzuki et al. 2003</a></td>
+<td>In vivo calcium imaging during mechanical stimulation</td>
+<td>Validate calcium transient amplitude and kinetics in response to touch</td>
+</tr>
+<tr>
+<td>AWC (olfactory)</td>
+<td><a href="https://doi.org/10.1038/nature06292">Chalasani et al. 2007</a></td>
+<td>Calcium imaging with odor presentation, TAX-2/TAX-4 channel characterization</td>
+<td>Validate sensory transduction dynamics, OFF-response calcium kinetics</td>
+</tr>
+<tr>
+<td>ASH (nociceptor)</td>
+<td><a href="https://doi.org/10.1038/sj.emboj.7600493">Hilliard et al. 2005</a>, <strong>WormsenseLab_ASH</strong> repo</td>
+<td>Calcium imaging, OSM-9/TRPV channel characterization</td>
+<td>Validate polymodal nociceptor response profile</td>
+</tr>
+<tr>
+<td>AVA (command interneuron)</td>
+<td>Lockery lab (<a href="https://doi.org/10.1038/ncomms1304">Lindsay et al. 2011</a>)</td>
+<td>Whole-cell recordings, graded potential dynamics</td>
+<td>Validate command interneuron I-V curve, graded (non-spiking) response</td>
+</tr>
+<tr>
+<td>RIM (motor/modulatory)</td>
+<td><a href="https://doi.org/10.1016/j.cell.2018.08.018">Liu et al. 2018</a></td>
+<td>Calcium imaging + electrophysiology, EGL-19/UNC-2 channels</td>
+<td>Validate motor neuron calcium dynamics, channel conductance ratios</td>
+</tr>
+<tr>
+<td>Pharyngeal neurons (MC, M3)</td>
+<td><a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a></td>
+<td>Electropharyngeogram (EPG): extracellular field potentials from pharyngeal muscles and neurons</td>
+<td>Validate pharyngeal neuron firing patterns (Phase 3, <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coverage:</strong> ~7 neuron classes have direct patch-clamp or detailed calcium imaging data suitable for Tier 1 spot-checks. An additional ~13 classes have partial recordings (single-channel data, calcium responses to specific stimuli) curated in the <code>openworm/ChannelWorm</code> ion channel database. See <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> Calibration Dataset for the full training set.</p>
+<p><strong>For the ~121 neuron classes without direct electrophysiology:</strong> Tier 1 cannot compare to patch-clamp recordings that don't exist. Instead, we run <strong>expression-consistency checks</strong> — systematic tests that the model's electrical behavior is consistent with its <a href="https://cengen.org">CeNGEN</a> (<a href="https://doi.org/10.1016/j.cell.2021.06.023">Taylor et al. 2021</a>) ion channel expression profile. This catches gross errors (e.g., a model with large calcium currents in a neuron that doesn't express calcium channels) without requiring experimental recordings.</p>
+<p><strong>Expression-consistency check: gene → expected electrical property</strong></p>
+<p>For each neuron class, <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> maps CeNGEN expression to conductance densities. The following table defines what each major channel gene predicts about the model's electrical behavior:</p>
+<table>
+<thead>
+<tr>
+<th>CeNGEN Gene</th>
+<th>Channel Type</th>
+<th>If Highly Expressed (top quartile)</th>
+<th>If Not Expressed (&lt;1 TPM)</th>
+<th>Model Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>egl-19</strong></td>
+<td>Cav1 (L-type Ca²⁺)</td>
+<td>Large sustained calcium current during depolarization; high resting [Ca²⁺]</td>
+<td>No L-type calcium current</td>
+<td>Inject +20mV step → measure I_Ca amplitude</td>
+</tr>
+<tr>
+<td><strong>unc-2</strong></td>
+<td>Cav2 (P/Q-type Ca²⁺)</td>
+<td>Large transient calcium current; fast synaptic release</td>
+<td>No P/Q-type current</td>
+<td>Voltage ramp → I-V curve shows Ca²⁺ peak</td>
+</tr>
+<tr>
+<td><strong>cca-1</strong></td>
+<td>Cav3 (T-type Ca²⁺)</td>
+<td>Low-threshold calcium spikes; rebound bursting after hyperpolarization</td>
+<td>No rebound activity</td>
+<td>Hyperpolarize → release → check for rebound depolarization</td>
+</tr>
+<tr>
+<td><strong>shl-1</strong></td>
+<td>Kv4 (A-type K⁺)</td>
+<td>Fast transient outward current; delays depolarization onset</td>
+<td>No A-type current</td>
+<td>Depolarize from -80mV → measure transient K⁺ peak</td>
+</tr>
+<tr>
+<td><strong>shk-1</strong></td>
+<td>Kv1 (delayed rectifier K⁺)</td>
+<td>Sustained outward current; limits depolarization duration</td>
+<td>No sustained K⁺ current</td>
+<td>Sustained depolarization → measure steady-state K⁺ current</td>
+</tr>
+<tr>
+<td><strong>unc-103</strong></td>
+<td>Kir (inward rectifier)</td>
+<td>Inward current at hyperpolarized potentials; stabilizes resting potential</td>
+<td>No inward rectification</td>
+<td>I-V curve shows inward current below -80mV</td>
+</tr>
+<tr>
+<td><strong>twk-18</strong></td>
+<td>TWIK (two-pore leak K⁺)</td>
+<td>Low input resistance; hyperpolarized resting potential</td>
+<td>High input resistance</td>
+<td>Measure R_in and V_rest</td>
+</tr>
+<tr>
+<td><strong>osm-9</strong></td>
+<td>TRPV (mechanosensory)</td>
+<td>Mechanically-gated inward current (sensory neurons only)</td>
+<td>No mechanosensory response</td>
+<td>Only in ASH, AWA, etc. — check for presence/absence</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Systematic validation procedure:</strong></p>
+<ol>
+<li>
+<p><strong>Rank channels by expression.</strong> For each neuron class, sort its ion channel genes by CeNGEN TPM (transcripts per million). The top 3 expressed channels define the neuron's expected "electrical fingerprint."</p>
+</li>
+<li>
+<p><strong>Run the model.</strong> Simulate each neuron class in isolation with a standard voltage-clamp protocol (ramp from -100mV to +40mV, 200ms).</p>
+</li>
+<li>
+<p><strong>Extract current contributions.</strong> Measure the peak current carried by each channel type in the model.</p>
+</li>
+<li>
+<p><strong>Check rank-order consistency.</strong> The model's current ranking should match the expression ranking:</p>
+<ul>
+<li>If CeNGEN says <code>egl-19 &gt;&gt; shl-1 &gt;&gt; unc-2</code> for neuron X, then the model's L-type Ca²⁺ current should be larger than its A-type K⁺ current, which should be larger than its P/Q-type Ca²⁺ current.</li>
+<li>Rank-order correlation (Spearman) between expression and model current magnitudes should be positive.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check qualitative predictions.</strong> Verify the binary checks from the table above:</p>
+<ul>
+<li>Gene not expressed (&lt;1 TPM) → corresponding current is absent (&lt;1% of total)</li>
+<li>Gene highly expressed (top quartile) → corresponding current is present and substantial (&gt;10% of total)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Acceptance criteria (expression-consistency):</strong></p>
+<ul>
+<li><strong>Rank-order correlation:</strong> Spearman ρ &gt; 0.5 between CeNGEN expression rank and model current rank, averaged across all 128 neuron classes</li>
+<li><strong>Absence check:</strong> For genes with &lt;1 TPM expression, the corresponding model current must be &lt;1% of total current in ≥95% of cases</li>
+<li><strong>Presence check:</strong> For genes in the top quartile of expression, the corresponding model current must be &gt;10% of total current in ≥80% of cases</li>
+<li><strong>Zero known violations:</strong> No neuron class should have its dominant current type contradicted by CeNGEN (e.g., a neuron dominated by L-type Ca²⁺ current that doesn't express egl-19)</li>
+</ul>
+<p><strong>Testing command:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run expression-consistency validation across all 128 neuron classes</span>
+python<span class="w"> </span>scripts/validate_expression_consistency.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cell_models<span class="w"> </span>cells/*.cell.nml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cengen_expression<span class="w"> </span>data/CeNGEN_L4_expression.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gene_channel_map<span class="w"> </span>data/gene_to_channel_map.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>validation_report_tier1_consistency.json
+
+<span class="c1"># Output: per-neuron rank correlation, absence/presence checks, violations</span>
+</code></pre></div></p>
+<p><strong>This is non-blocking</strong> because (a) the expression→conductance calibration (<a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a>) is approximate, (b) post-transcriptional regulation means mRNA ≠ protein ≠ membrane conductance, and (c) some channel genes have poorly characterized kinetics. But it catches the most common failure mode: a calibration error that gives a neuron the wrong dominant current type.</p>
+<p><strong>Example (AVA neuron validation — direct electrophysiology):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run isolated AVA model (one of ~7 neurons with patch-clamp data)</span>
+python<span class="w"> </span>c302/test_single_cell.py<span class="w"> </span>--cell<span class="w"> </span>AVACell<span class="w"> </span>--protocol<span class="w"> </span>voltage_clamp
+
+<span class="c1"># Compare to Lockery lab data (Lindsay et al. 2011)</span>
+python<span class="w"> </span>scripts/validate_single_cell_electrophys.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--simulated<span class="w"> </span>AVA_voltage_clamp.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental<span class="w"> </span>data/electrophysiology/AVA_lockery_vclamp.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>validation_report_AVA.html
+</code></pre></div></p>
+<p><strong>Outcome:</strong> For neurons with electrophysiology: parameter-by-parameter comparison report. If &gt;2 parameters fail (exceed acceptance range), flag for review. For all 128 neurons: expression-consistency report with rank correlations and violation flags.</p>
+<h3 id="tier-2-circuit-level-validation-integration-tests">Tier 2: Circuit-Level Validation (Integration Tests)<a class="headerlink" href="#tier-2-circuit-level-validation-integration-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Primary target:</strong> <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> functional connectivity matrix (pairwise calcium signal correlations for all 302 neurons during spontaneous activity). Available via <code>wormneuroatlas</code> API and also integrated into the <a href="https://github.com/openworm/ConnectomeToolbox">ConnectomeToolbox</a> (<code>cect</code> package) as one of five connectivity modalities (anatomical, contactome, neurotransmitter, extrasynaptic, <strong>functional</strong>).</p>
+<h4 id="tier-2a-whole-network-functional-connectivity">Tier 2a: Whole-Network Functional Connectivity<a class="headerlink" href="#tier-2a-whole-network-functional-connectivity" title="Permanent link">&para;</a></h4>
+<p><strong>Validation procedure:</strong></p>
+<ol>
+<li>Run c302 simulation for 60 seconds (spontaneous activity, no stimulus)</li>
+<li>Extract calcium time series for all neurons</li>
+<li>Compute pairwise Pearson correlations → 302×302 matrix</li>
+<li>Compare to Randi et al. experimental 302×302 matrix</li>
+<li>Metric: <strong>Correlation of correlations</strong> (Pearson r between simulated and experimental matrices, flattened to vectors)</li>
+</ol>
+<p><strong>Acceptance criterion:</strong></p>
+<ul>
+<li><strong>r &gt; 0.5</strong> between simulated and experimental functional connectivity</li>
+<li>At least 70% of neuron pairs have correlation sign agreement (both positive, both negative, or both near-zero)</li>
+</ul>
+<p><strong>Testing command:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run functional connectivity validation</span>
+python<span class="w"> </span>scripts/validate_functional_connectivity.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model<span class="w"> </span>c302_C1_Differentiated<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental_data<span class="w"> </span>data/randi2023_functional_connectivity.npy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>func_conn_validation.json
+
+<span class="c1"># Check if acceptance criteria pass</span>
+python<span class="w"> </span>scripts/check_validation_criteria.py<span class="w"> </span>func_conn_validation.json
+</code></pre></div></p>
+<p><strong>Blocking:</strong> If this test fails (r &lt; 0.5), the PR cannot merge to <code>main</code>.</p>
+<p><strong>PCA structure validation (additional Tier 2 metric):</strong> Beyond pairwise correlation matching, the low-dimensional dynamical structure of the neural network should be validated. <a href="https://doi.org/10.1016/j.cell.2015.09.034">Kato et al. (2015)</a> showed that PCA of whole-brain calcium activity reveals a dominant mode (PC1) that separates forward-locomotion neurons (AVB, PVC, VB, DB classes) from backward-locomotion neurons (AVA, AVD, VA, DA classes). After synaptic weight optimization (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>), simulated membrane potential time series should reproduce this PC1 separation. Zhao et al. (2024) demonstrated this validation approach on a 136-neuron circuit; OpenWorm will apply it to the full 302-neuron network.</p>
+<h4 id="tier-2b-neuropeptide-modulation-validation-unc-31-natural-experiment">Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)<a class="headerlink" href="#tier-2b-neuropeptide-modulation-validation-unc-31-natural-experiment" title="Permanent link">&para;</a></h4>
+<p><strong>Purpose:</strong> Validate that <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (neuropeptide modulation) produces the correct effect on functional connectivity.</p>
+<p><strong>The natural experiment:</strong> UNC-31 is the CAPS protein required for dense-core vesicle fusion — the mechanism by which neuropeptides are released. The <em>unc-31</em> mutant has intact synaptic transmission but <strong>no neuropeptide signaling</strong>. <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> measured functional connectivity for both wild-type and <em>unc-31</em> mutant strains. The <strong>difference</strong> between the two matrices isolates the neuropeptide contribution to neural dynamics.</p>
+<p><strong>Validation procedure:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Experimental (Randi 2023)</th>
+<th>Simulated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>With neuropeptides</strong></td>
+<td><code>fc_wt</code> (wild-type)</td>
+<td><code>sim_fc_on</code> (DD006 enabled)</td>
+</tr>
+<tr>
+<td><strong>Without neuropeptides</strong></td>
+<td><code>fc_unc31</code> (<em>unc-31</em> mutant)</td>
+<td><code>sim_fc_off</code> (DD006 disabled)</td>
+</tr>
+<tr>
+<td><strong>Neuropeptide contribution</strong></td>
+<td><code>fc_diff_exp = fc_wt - fc_unc31</code></td>
+<td><code>sim_fc_diff = sim_fc_on - sim_fc_off</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Acceptance criterion:</strong></p>
+<ul>
+<li>Correlation between <code>fc_diff_exp</code> and <code>sim_fc_diff</code> (flattened) <strong>r &gt; 0.3</strong></li>
+<li>This is a weaker threshold than Tier 2a (r &gt; 0.5) because the difference signal is smaller and noisier than the absolute functional connectivity</li>
+</ul>
+<p><strong>Testing command:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run unc-31 validation (requires two simulation runs)</span>
+python<span class="w"> </span>scripts/validate_neuropeptide_fc.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model_with_neuropeptides<span class="w"> </span>c302_C1_DD006_enabled<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--model_without_neuropeptides<span class="w"> </span>c302_C1_DD006_disabled<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>neuropeptide_fc_validation.json
+
+<span class="c1"># Check acceptance</span>
+python<span class="w"> </span>scripts/check_validation_criteria.py<span class="w"> </span>neuropeptide_fc_validation.json
+</code></pre></div></p>
+<p><strong>Data access:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">wormneuroatlas</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeuroAtlas</span>
+
+<span class="n">atlas</span> <span class="o">=</span> <span class="n">NeuroAtlas</span><span class="p">()</span>
+<span class="n">fc_wt</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">get_signal_propagation_atlas</span><span class="p">(</span><span class="n">strain</span><span class="o">=</span><span class="s2">&quot;wt&quot;</span><span class="p">)</span>
+<span class="n">fc_unc31</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">get_signal_propagation_atlas</span><span class="p">(</span><span class="n">strain</span><span class="o">=</span><span class="s2">&quot;unc31&quot;</span><span class="p">)</span>
+<span class="n">fc_diff_exp</span> <span class="o">=</span> <span class="n">fc_wt</span> <span class="o">-</span> <span class="n">fc_unc31</span>  <span class="c1"># Neuropeptide contribution (experimental)</span>
+</code></pre></div></p>
+<p><strong>Blocking:</strong> This sub-test becomes blocking after <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> is implemented (Phase 2). Before DD006, it is informational only.</p>
+<p><strong>Cross-reference:</strong> See <a href="../DD006_Neuropeptidergic_Connectome_Integration/#validation-procedure">DD006 §Validation</a> for the full neuropeptide validation methodology, which uses this same unc-31 comparison as its Tier 1 functional connectivity validation.</p>
+<h3 id="tier-3-behavioral-validation-system-tests">Tier 3: Behavioral Validation (System Tests)<a class="headerlink" href="#tier-3-behavioral-validation-system-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Primary tool:</strong> <code>open-worm-analysis-toolbox</code> (see <strong><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a></strong> for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to <a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a> Schafer lab experimental data in WCON format.</p>
+<p><strong>Validated metrics:</strong></p>
+<ol>
+<li><strong>Speed:</strong> Mean forward velocity (µm/s)</li>
+<li><strong>Wavelength:</strong> Body bend wavelength (µm)</li>
+<li><strong>Frequency:</strong> Undulation frequency (Hz)</li>
+<li><strong>Amplitude:</strong> Body bend amplitude (degrees)</li>
+<li><strong>Crawl/swim classification:</strong> Behavioral mode based on gait</li>
+</ol>
+<p><strong>Acceptance criteria:</strong></p>
+<ul>
+<li>All 5 metrics within <strong>±15% of experimental mean</strong></li>
+<li>Movement trajectory visually resembles real worm (qualitative check)</li>
+</ul>
+<p><strong>Testing command:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run behavioral validation suite</span>
+<span class="nb">cd</span><span class="w"> </span>open-worm-analysis-toolbox/
+python<span class="w"> </span>validate_movement.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--simulated<span class="w"> </span>../c302/output/worm_trajectory.wcon<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--experimental<span class="w"> </span>data/schafer_baseline_N2.wcon<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>validation_report.json
+
+<span class="c1"># Check pass/fail</span>
+python<span class="w"> </span>check_acceptance.py<span class="w"> </span>validation_report.json<span class="w"> </span>--tolerance<span class="w"> </span><span class="m">0</span>.15
+</code></pre></div></p>
+<p><strong>Additional behavioral tests:</strong></p>
+<ol>
+<li><strong>Pharyngeal pumping:</strong> 3-4 Hz (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>)</li>
+<li><strong>Defecation cycle:</strong> 50 ± 10 seconds period (<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a>)</li>
+<li><strong>Reversal initiation:</strong> Response to aversive stimulus (&lt;1 second latency)</li>
+</ol>
+<p><strong>Blocking:</strong> If movement validation degrades by &gt;15%, the PR is blocked.</p>
+<h3 id="tier-4-causal-interventional-validation-non-blocking-advisory">Tier 4: Causal / Interventional Validation (Non-Blocking, Advisory)<a class="headerlink" href="#tier-4-causal-interventional-validation-non-blocking-advisory" title="Permanent link">&para;</a></h3>
+<p><strong>Rationale:</strong> Tiers 1-3 validate against observational data — recordings from intact, unperturbed animals. However, a model that reproduces normal behavior may do so for the wrong mechanistic reasons (parameter compensation, degenerate solutions). As <a href="https://www.hachettebookgroup.com/titles/judea-pearl/the-book-of-why/9780465097616/">Pearl &amp; Mackenzie (2018)</a> argue in their framework for causal inference, observational data alone cannot distinguish correlation from causation. To establish that the model captures true causal relationships between neurons, we need to validate against <em>interventional</em> data — experiments where specific neurons are ablated, silenced, or activated, and the resulting changes in neural activity and behavior are measured.</p>
+<p><strong>Validation data sources (published):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Intervention</th>
+<th>Organism Response</th>
+<th>Data Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Touch neuron ablation (ALM, AVM, PLM)</td>
+<td>Loss of gentle touch response</td>
+<td><a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. (1985)</a>, <em>J Neurosci</em> 5:956-964</td>
+</tr>
+<tr>
+<td>Pharyngeal neuron laser killing</td>
+<td>Pumping continues (semi-autonomous organ)</td>
+<td><a href="https://doi.org/10.1016/0896-6273(89)90206-7">Avery &amp; Horvitz (1989)</a>, <em>Neuron</em> 3:473-485</td>
+</tr>
+<tr>
+<td>Optogenetic activation of specific neurons</td>
+<td>Stimulus-specific behavioral responses</td>
+<td><a href="https://doi.org/10.1038/nmeth.1554">Leifer et al. (2011)</a>, <em>Nat Methods</em> 8:147-152</td>
+</tr>
+<tr>
+<td>unc-2 (Cav2) loss of function</td>
+<td>Reduced locomotion speed</td>
+<td>Schafer lab WCON mutant data</td>
+</tr>
+<tr>
+<td>egl-1, unc-103 loss of function</td>
+<td>Egg-laying phenotypes</td>
+<td><a href="https://doi.org/10.1093/genetics/104.4.619">Trent et al. (1983)</a>, <a href="https://doi.org/10.1523/JNEUROSCI.3896-12.2013">Collins &amp; Koelle (2013)</a></td>
+</tr>
+<tr>
+<td>flp peptide knockouts</td>
+<td>Altered locomotion patterns</td>
+<td><a href="https://doi.org/10.1038/nn1140">Rogers et al. (2003)</a>, <a href="https://doi.org/10.1016/S0006-8993(99)01972-1">Li et al. (1999)</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Validation procedure:</strong> Simulate the specific perturbation (zero out a neuron's output, remove a channel type, delete a peptide gene) and compare the resulting behavioral change to published experimental data. The model should predict the <em>direction</em> of the effect (faster/slower, more/fewer reversals) and ideally the <em>magnitude</em> within 30%.</p>
+<p><strong>Acceptance criteria:</strong>
+- Direction of effect matches experimental observation for ≥70% of tested perturbations
+- Magnitude within ±30% for well-characterized perturbations (e.g., touch neuron ablation latency, unc-2 speed reduction)
+- Model does not predict catastrophic failure (NaN, divergence) for perturbations that produce viable animals in vivo</p>
+<p><strong>Status:</strong> Non-blocking (advisory) in Phase 1-2. Becomes blocking in Phase 3+ as more subsystems come online and the model makes increasingly specific causal predictions.</p>
+<p><strong>Note:</strong> A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals (<a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a>; <a href="https://arxiv.org/abs/2308.06578">Haspel et al. 2023</a>). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See <a href="../DD024_Validation_Data_Acquisition_Pipeline/">DD024</a> (Validation Data Acquisition) for the data sourcing roadmap.</p>
+<h3 id="standard-in-silico-perturbation-battery">Standard In-Silico Perturbation Battery<a class="headerlink" href="#standard-in-silico-perturbation-battery" title="Permanent link">&para;</a></h3>
+<p><a href="https://doi.org/10.1038/s43588-024-00738-w">Zhao et al. (2024)</a> demonstrated several informative in-silico perturbation experiments that reveal how network structure shapes dynamics and behavior. OpenWorm should formalize these as a standard perturbation battery that every model version is tested against:</p>
+<table>
+<thead>
+<tr>
+<th>Perturbation</th>
+<th>Expected Effect</th>
+<th>Experimental Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remove all gap junctions</td>
+<td>Greater disruption to correlation matrix than removing chemical synapses</td>
+<td><a href="https://doi.org/10.1038/s43588-024-00738-w">Zhao et al. 2024</a> Fig. 10D-G; <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a> unc-7 data</td>
+</tr>
+<tr>
+<td>Remove neurites (soma-only model)</td>
+<td>Higher body twisting, degraded forward locomotion</td>
+<td><a href="https://doi.org/10.1038/s43588-024-00738-w">Zhao et al. 2024</a> Fig. 10B</td>
+</tr>
+<tr>
+<td>Shuffle synapse locations on neurites</td>
+<td>Faster head/tail oscillation, slower forward speed</td>
+<td><a href="https://doi.org/10.1038/s43588-024-00738-w">Zhao et al. 2024</a> Fig. 10C</td>
+</tr>
+<tr>
+<td>Ablate AVA bilaterally</td>
+<td>Loss of backward locomotion command</td>
+<td><a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a></td>
+</tr>
+<tr>
+<td>Silence all B-class motor neurons</td>
+<td>Loss of forward locomotion</td>
+<td><a href="https://doi.org/10.1016/S0896-6273(00)80849-1">Zheng et al. 1999</a></td>
+</tr>
+<tr>
+<td>Block Cav2 (unc-2 null)</td>
+<td>Reduced locomotion speed</td>
+<td>Schafer lab mutant data</td>
+</tr>
+</tbody>
+</table>
+<p>These perturbation experiments serve dual purposes: (a) validation that the model responds correctly to interventions, and (b) scientific discovery — any unexpected model response identifies a gap in understanding.</p>
+<h3 id="statistical-grounding-for-acceptance-thresholds">Statistical Grounding for Acceptance Thresholds<a class="headerlink" href="#statistical-grounding-for-acceptance-thresholds" title="Permanent link">&para;</a></h3>
+<p>The ±15% tolerance used in Tier 3 is grounded in measured inter-animal variability. Yemini et al. (2013) compiled a database of <em>C. elegans</em> behavioral phenotypes from thousands of tracked animals and found that wild-type (N2) locomotion metrics typically exhibit coefficients of variation (CV) in the range of 15-25% for speed, body bend amplitude, and wavelength. A model that matches the experimental mean within one CV is performing within the biological noise floor — tighter matching would be overfitting to a specific animal rather than capturing the population behavior.</p>
+<p>For Tier 2 (functional connectivity), the r &gt; 0.5 threshold reflects the observation that calcium correlation matrices from independent recording sessions of the same genotype show inter-session correlations in the range of r = 0.6-0.8 (Randi et al. 2023). A model achieving r &gt; 0.5 is thus approaching the reproducibility ceiling of the experimental data itself.</p>
+<h3 id="behavioral-quantification-methods">Behavioral Quantification Methods<a class="headerlink" href="#behavioral-quantification-methods" title="Permanent link">&para;</a></h3>
+<p>Tiers 3 and 4 require robust, unbiased behavioral quantification. The field of computational neuroethology has developed systematic approaches to this challenge:</p>
+<ul>
+<li><strong>Unsupervised behavioral decomposition</strong> (<a href="https://doi.org/10.1098/rsif.2014.0672">Berman et al. 2014</a>) identifies stereotyped behavioral motifs from continuous recordings without pre-defined categories, enabling discovery of behavioral states that the model should reproduce</li>
+<li><strong>Deep learning-based pose estimation</strong> (<a href="https://doi.org/10.1038/s41592-022-01426-1">Pereira et al. 2022</a>, SLEAP) provides sub-pixel body posture tracking that can extract kinematic features more precisely than centroid-only approaches</li>
+<li><strong>Computational neuroethology frameworks</strong> (<a href="https://doi.org/10.1016/j.neuron.2019.09.038">Datta et al. 2019</a>) advocate for treating behavior as a high-dimensional continuous signal rather than a set of discrete categories, which aligns with how our simulation outputs movement data</li>
+</ul>
+<p>As the validation toolbox (<a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>) is revived, it should incorporate or interface with these modern approaches rather than relying solely on the classic 5-metric kinematic comparison.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-no-quantitative-validation-visual-inspection-only">1. No Quantitative Validation (Visual Inspection Only)<a class="headerlink" href="#1-no-quantitative-validation-visual-inspection-only" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> "It looks right" is subjective. Quantitative metrics enable regression detection and objective comparison between models.</p>
+<h3 id="2-single-validation-level-behavior-only">2. Single Validation Level (Behavior Only)<a class="headerlink" href="#2-single-validation-level-behavior-only" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> A model can produce correct movement for the wrong reasons (parameter compensation). Multi-level validation (electrophysiology + connectivity + behavior) ensures mechanistic correctness.</p>
+<h3 id="3-strict-thresholds-must-match-exactly">3. Strict Thresholds (Must Match Exactly)<a class="headerlink" href="#3-strict-thresholds-must-match-exactly" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Biological data have measurement noise and animal-to-animal variability. ±15-20% tolerance accounts for this. Exact matches are neither achievable nor necessary.</p>
+<h3 id="4-single-metric-validation-one-number-to-rule-them-all">4. Single-Metric Validation (One Number to Rule Them All)<a class="headerlink" href="#4-single-metric-validation-one-number-to-rule-them-all" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> A single aggregate score (e.g., overall behavioral similarity) allows degenerate solutions — a model can score well by excelling on one metric while failing others. Multi-metric validation across all four tiers prevents this.</p>
+<h3 id="5-threshold-free-qualitative-assessment">5. Threshold-Free Qualitative Assessment<a class="headerlink" href="#5-threshold-free-qualitative-assessment" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected:</strong> Without explicit numeric thresholds, "good enough" becomes subjective and shifts over time. Quantitative acceptance criteria (r &gt; 0.5, +/-15%, etc.) make pass/fail decisions objective, reproducible, and enforceable in CI.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Automated Test Suite:</strong> All validation tests must be runnable via CI/CD without manual intervention.</p>
+</li>
+<li>
+<p><strong>Regression Detection:</strong> Every PR that modifies cell models, connectome, or physics must run the validation suite. Report before/after comparison.</p>
+</li>
+<li>
+<p><strong>Versioned Experimental Data:</strong> Validation datasets must be versioned and archived (e.g., <code>data/randi2023_v1.0/</code>). Do not overwrite.</p>
+</li>
+<li>
+<p><strong>Pass/Fail Criteria Documented:</strong> Each test must have explicit acceptance criteria (e.g., "r &gt; 0.5," "period = 50 ± 10 s") in the test script, not tribal knowledge.</p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-what-this-subsystem-consumes">Inputs (What This Subsystem Consumes)<a class="headerlink" href="#inputs-what-this-subsystem-consumes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neuron calcium time series</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>Per-neuron [Ca²⁺] over time</td>
+<td>Tab-separated <code>*_calcium.dat</code></td>
+<td>mol/cm³</td>
+</tr>
+<tr>
+<td>Single-cell electrophysiology</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>V, I_Ca, I_K per cell</td>
+<td>Tab-separated from NEURON</td>
+<td>mV, nA</td>
+</tr>
+<tr>
+<td>Movement trajectory</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>Body centroid + posture over time</td>
+<td>WCON file</td>
+<td>µm, frames</td>
+</tr>
+<tr>
+<td>Pharyngeal pumping state</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>Per-section contraction time series</td>
+<td>Tab-separated</td>
+<td>binary or [0,1]</td>
+</tr>
+<tr>
+<td>Defecation motor program</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>pBoc/aBoc/Exp timestamps</td>
+<td>Event log</td>
+<td>ms</td>
+</tr>
+<tr>
+<td>Experimental data (electrophysiology)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a> / published papers</td>
+<td>Patch-clamp recordings</td>
+<td>CSV</td>
+<td>mV, nA</td>
+</tr>
+<tr>
+<td>Experimental data (functional connectivity, wild-type)</td>
+<td><code>wormneuroatlas</code> API / <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a></td>
+<td>302×302 correlation matrix</td>
+<td>NumPy <code>.npy</code></td>
+<td>dimensionless</td>
+</tr>
+<tr>
+<td>Experimental data (functional connectivity, <em>unc-31</em>)</td>
+<td><code>wormneuroatlas</code> API / <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a></td>
+<td>302×302 correlation matrix (no neuropeptide release)</td>
+<td>NumPy <code>.npy</code></td>
+<td>dimensionless</td>
+</tr>
+<tr>
+<td>Neuropeptide-on/off simulation outputs</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Per-neuron [Ca²⁺] with DD006 enabled vs. disabled</td>
+<td>Tab-separated <code>*_calcium.dat</code></td>
+<td>mol/cm³</td>
+</tr>
+<tr>
+<td>Experimental data (kinematics)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a> / <a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a> (Schafer lab)</td>
+<td>Movement trajectories</td>
+<td>WCON</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Experimental data (defecation)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a> / <a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a></td>
+<td>Defecation cycle periods</td>
+<td>CSV</td>
+<td>seconds</td>
+</tr>
+<tr>
+<td>Experimental data (pumping)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a> / <a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen 1994</a></td>
+<td>EPG recordings</td>
+<td>CSV</td>
+<td>mV</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs-what-this-subsystem-produces">Outputs (What This Subsystem Produces)<a class="headerlink" href="#outputs-what-this-subsystem-produces" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tier 1 validation report</td>
+<td><a href="../DD012_Design_Document_RFC_Process/">DD012</a> (PR review)</td>
+<td>Per-cell pass/fail + metrics</td>
+<td>JSON</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Tier 2 validation report</td>
+<td><a href="../DD012_Design_Document_RFC_Process/">DD012</a> (PR review), <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (CI gate)</td>
+<td>Correlation-of-correlations score</td>
+<td>JSON</td>
+<td>dimensionless (r value)</td>
+</tr>
+<tr>
+<td>Tier 3 validation report</td>
+<td><a href="../DD012_Design_Document_RFC_Process/">DD012</a> (PR review), <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (CI gate)</td>
+<td>Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait)</td>
+<td>JSON</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Regression alert</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (CI pipeline)</td>
+<td>Pass/fail + diff from baseline</td>
+<td>JSON + exit code</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>Validation dashboard</td>
+<td>Mad-Worm-Scientist (daily digest)</td>
+<td>Summary metrics for all tiers</td>
+<td>JSON</td>
+<td>mixed</td>
+</tr>
+<tr>
+<td>Validation overlay data (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-metric pass/fail + experimental comparison traces</td>
+<td>OME-Zarr: <code>validation/overlay/</code> (tier results + reference data)</td>
+<td>mixed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cicd-ownership-split-dd010-vs-dd013">CI/CD Ownership Split (<a href="./">DD010</a> vs. <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>)<a class="headerlink" href="#cicd-ownership-split-dd010-vs-dd013" title="Permanent link">&para;</a></h3>
+<p><strong><a href="./">DD010</a> defines WHAT to validate.</strong> <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> defines HOW to run it in Docker and CI.</p>
+<table>
+<thead>
+<tr>
+<th>Responsibility</th>
+<th>Owned By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validation metrics, acceptance criteria, test scripts</td>
+<td><a href="./">DD010</a></td>
+</tr>
+<tr>
+<td>Docker compose services (<code>quick-test</code>, <code>validate</code>)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+</tr>
+<tr>
+<td>CI/CD pipeline (GitHub Actions workflow)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+</tr>
+<tr>
+<td>Validation data packaging in Docker image</td>
+<td><a href="./">DD010</a> + <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (shared)</td>
+</tr>
+<tr>
+<td>Pass/fail decision logic (blocking PRs)</td>
+<td><a href="./">DD010</a> (criteria) + <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> (enforcement)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reconciliation:</strong> The <code>docker compose run validate</code> service (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>) runs the validation scripts defined by <a href="./">DD010</a>. The scripts produce JSON reports. <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>'s CI pipeline reads those reports and applies <a href="./">DD010</a>'s acceptance criteria to determine pass/fail.</p>
+<h3 id="configuration-openwormyml-section">Configuration (<code>openworm.yml</code> Section)<a class="headerlink" href="#configuration-openwormyml-section" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">validation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run_after_simulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">         </span><span class="c1"># Set true for CI; false for interactive use</span>
+<span class="w">  </span><span class="nt">tier1_electrophysiology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">      </span><span class="c1"># Single-cell validation (requires specific cell models)</span>
+<span class="w">  </span><span class="nt">tier2_functional_connectivity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># Tier 2a: Circuit-level (requires 60s sim)</span>
+<span class="w">  </span><span class="nt">tier2_neuropeptide_unc31</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">       </span><span class="c1"># Tier 2b: unc-31 comparison (requires 2×60s sim, DD006)</span>
+<span class="w">  </span><span class="nt">tier3_behavioral</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">             </span><span class="c1"># Movement kinematics (requires ~5s sim)</span>
+<span class="w">  </span><span class="nt">tier3_pumping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                </span><span class="c1"># Pharyngeal pumping (requires pharynx.enabled + ~5s sim)</span>
+<span class="w">  </span><span class="nt">tier3_defecation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">             </span><span class="c1"># Defecation cycle (requires intestine.enabled + ~200s sim)</span>
+<span class="w">  </span><span class="nt">acceptance_criteria</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tier2_min_correlation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">        </span><span class="c1"># Minimum r for functional connectivity</span>
+<span class="w">    </span><span class="nt">tier3_max_deviation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span><span class="w">         </span><span class="c1"># Maximum deviation from experimental mean (±15%)</span>
+<span class="w">    </span><span class="nt">tier3_pumping_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4.0</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># Hz</span>
+<span class="w">    </span><span class="nt">tier3_defecation_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">40</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">60</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># seconds</span>
+</code></pre></div>
+<p><strong>Default vs. CI configuration:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># configs/validation_full.yml (used by CI)</span>
+<span class="nt">validation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">run_after_simulation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">tier2_functional_connectivity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">tier3_behavioral</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<h3 id="docker-build">Docker Build<a class="headerlink" href="#docker-build" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/open-worm-analysis-toolbox</code> (movement validation, see <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>) + <code>openworm/tracker-commons</code> (WCON spec, see <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>) + validation scripts in <code>openworm/OpenWorm</code> meta-repo</li>
+<li><strong>Docker stage:</strong> <code>validation</code> in multi-stage Dockerfile</li>
+<li><strong><code>versions.lock</code> keys:</strong> <code>open_worm_analysis_toolbox</code>, <code>tracker_commons</code> (both managed per <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>)</li>
+<li><strong>Build dependencies:</strong> <code>pip install open-worm-analysis-toolbox</code> + validation data files</li>
+</ul>
+<h3 id="validation-data-location">Validation Data Location<a class="headerlink" href="#validation-data-location" title="Permanent link">&para;</a></h3>
+<p>All validation datasets are <strong>baked into the Docker image at build time</strong> (not downloaded at runtime):</p>
+<div class="highlight"><pre><span></span><code>/opt/openworm/validation/data/
+├── electrophysiology/
+│   ├── goodman1998_touch_neurons.csv
+│   ├── lockery_AVA_recordings.csv
+│   └── README.md (sources, DOIs, licenses)
+├── functional_connectivity/
+│   ├── randi2023_wt_matrix.npy
+│   ├── randi2023_unc31_matrix.npy
+│   ├── randi2023_metadata.json
+│   └── README.md
+├── kinematics/
+│   ├── schafer_N2_baseline.wcon
+│   ├── schafer_unc2_mutant.wcon
+│   └── README.md
+└── behavioral/
+    ├── thomas1990_defecation.csv
+    ├── raizen1994_pumping_EPG.csv
+    └── README.md
+</code></pre></div>
+<p><strong>Licensing requirement:</strong> All validation data must be openly accessible (CC-BY or equivalent). Each directory includes a README with source DOIs and licenses.</p>
+<h3 id="code-reuse-wormneuroatlas-and-connectometoolbox-for-tier-2-validation">Code Reuse: wormneuroatlas and ConnectomeToolbox for Tier 2 Validation<a class="headerlink" href="#code-reuse-wormneuroatlas-and-connectometoolbox-for-tier-2-validation" title="Permanent link">&para;</a></h3>
+<p>Two existing OpenWorm packages provide all the experimental data needed for Tier 2 validation — no manual data extraction required:</p>
+<p><strong>1. wormneuroatlas</strong> — Functional connectivity matrices from <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a></p>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/wormneuroatlas</code> (pushed 2025-10-22, maintained)</li>
+<li><strong>Installation:</strong> <code>pip install wormneuroatlas</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">wormneuroatlas</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeuroAtlas</span>
+
+<span class="n">atlas</span> <span class="o">=</span> <span class="n">NeuroAtlas</span><span class="p">()</span>
+
+<span class="c1"># Tier 2a: Wild-type functional connectivity</span>
+<span class="n">fc_wt</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">get_signal_propagation_atlas</span><span class="p">(</span><span class="n">strain</span><span class="o">=</span><span class="s2">&quot;wt&quot;</span><span class="p">)</span>
+<span class="c1"># Returns: 302×302 correlation matrix (exactly what Tier 2a needs)</span>
+
+<span class="c1"># Tier 2b: unc-31 mutant functional connectivity (no neuropeptide release)</span>
+<span class="n">fc_unc31</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">get_signal_propagation_atlas</span><span class="p">(</span><span class="n">strain</span><span class="o">=</span><span class="s2">&quot;unc31&quot;</span><span class="p">)</span>
+<span class="c1"># Returns: 302×302 correlation matrix without neuropeptide modulation</span>
+
+<span class="c1"># Tier 2b: Neuropeptide contribution = difference</span>
+<span class="n">fc_neuropeptide_contribution</span> <span class="o">=</span> <span class="n">fc_wt</span> <span class="o">-</span> <span class="n">fc_unc31</span>
+</code></pre></div>
+<p>Both wild-type and <em>unc-31</em> datasets are production-ready. No manual download from Nature supplement needed — the package handles data access, versioning, and neuron ID normalization.</p>
+<p><strong>2. ConnectomeToolbox (<code>cect</code>)</strong> — Unified connectivity data across five modalities</p>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/ConnectomeToolbox</code> (<a href="https://github.com/openworm/ConnectomeToolbox">Gleeson et al., in preparation</a>)</li>
+<li><strong>Installation:</strong> <code>pip install cect</code></li>
+</ul>
+<p>The ConnectomeToolbox aggregates C. elegans connectivity data into a unified API with five modalities: anatomical, contactome, neurotransmitter atlases, extrasynaptic (neuropeptidergic — <a href="https://doi.org/10.1016/j.neuron.2023.09.043">Ripoll-Sánchez 2023</a>, <a href="https://doi.org/10.1371/journal.pcbi.1005283">Bentley 2016</a>, <a href="https://doi.org/10.7554/eLife.12432">Pereira 2015</a>, <a href="https://doi.org/10.1101/2022.10.30.514428">Beets 2022</a>), and functional (<a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a>). For Tier 2 validation, the functional connectivity modality provides an alternative access path to the same Randi 2023 data:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cect</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectomeDataset</span>
+
+<span class="c1"># Access functional connectivity via cect</span>
+<span class="n">functional</span> <span class="o">=</span> <span class="n">ConnectomeDataset</span><span class="p">(</span><span class="s2">&quot;Randi2023&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Recommendation:</strong> Use <code>wormneuroatlas</code> directly for Tier 2 validation (more mature API for functional connectivity matrices, strain-specific access). Use <code>cect</code> when you need structural + functional connectivity together (e.g., comparing structural predictions to functional observations).</p>
+<p><strong>Testing:</strong>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>wormneuroatlas
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from wormneuroatlas import NeuroAtlas</span>
+<span class="s2">atlas = NeuroAtlas()</span>
+<span class="s2">fc_wt = atlas.get_signal_propagation_atlas(strain=&#39;wt&#39;)</span>
+<span class="s2">fc_unc31 = atlas.get_signal_propagation_atlas(strain=&#39;unc31&#39;)</span>
+<span class="s2">print(f&#39;Wild-type FC: {fc_wt.shape}&#39;)</span>
+<span class="s2">print(f&#39;unc-31 FC: {fc_unc31.shape}&#39;)</span>
+<span class="s2">print(f&#39;Neuropeptide contribution matrix: {(fc_wt - fc_unc31).shape}&#39;)</span>
+<span class="s2">&quot;</span>
+<span class="c1"># Expected: (302, 302) for all three</span>
+</code></pre></div></p>
+<p><strong>Action Items:</strong></p>
+<ul>
+<li>[ ] Add <code>wormneuroatlas</code> to <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Docker validation stage</li>
+<li>[ ] Add <code>cect</code> to <a href="../DD013_Simulation_Stack_Architecture/">DD013</a> Docker validation stage</li>
+<li>[ ] Pin versions for both in <code>versions.lock</code></li>
+<li>[ ] Update Tier 2a validation scripts to use wormneuroatlas API</li>
+<li>[ ] Implement Tier 2b (unc-31 comparison) validation script after <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></li>
+</ul>
+<p><strong>Estimated Time Savings:</strong> 15-20 hours (no manual data extraction, both APIs are production-ready)</p>
+<hr />
+<h3 id="open-worm-analysis-toolbox-revival-dd021"><code>open-worm-analysis-toolbox</code> Revival (<a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a>)<a class="headerlink" href="#open-worm-analysis-toolbox-revival-dd021" title="Permanent link">&para;</a></h3>
+<p>This repo is <strong>dormant</strong> (last commit Jan 2020). <strong><a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> (Movement Analysis Toolbox and WCON Policy)</strong> owns the full revival plan, including:</p>
+<ul>
+<li>8-task revival roadmap with owners, effort estimates, and dependencies (~33 hours total)</li>
+<li>Python 3.12 compatibility, dependency updates, test suite fixes</li>
+<li>WCON 1.0 format pinning from <code>tracker-commons</code></li>
+<li>Docker <code>validation</code> stage and <code>versions.lock</code> entries</li>
+<li>API contract for <code>NormalizedWorm</code> and <code>WormFeatures</code> classes</li>
+<li>Relationship to Tierpsy Tracker (modern successor)</li>
+</ul>
+<p><strong>See <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> for the complete revival plan.</strong> This is a Phase A1 (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.</p>
+<p>Note: The archived predecessor repo <code>openworm/movement_validation</code> should not be used — it was superseded by the analysis toolbox.</p>
+<h3 id="integration-test">Integration Test<a class="headerlink" href="#integration-test" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Verify validation tools install</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from open_worm_analysis_toolbox import NormalizedWorm, WormFeatures</span>
+<span class="s2">print(&#39;Analysis toolbox loaded successfully&#39;)</span>
+<span class="s2">&quot;</span>
+
+<span class="c1"># Step 2: Verify validation data is present</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>shell<span class="w"> </span>ls<span class="w"> </span>/opt/openworm/validation/data/
+<span class="c1"># Must show: electrophysiology/, functional_connectivity/, kinematics/, behavioral/</span>
+
+<span class="c1"># Step 3: Run validation suite (after simulation)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Verify: output/validation_report.json exists</span>
+<span class="c1"># Verify: report contains tier2 and tier3 sections</span>
+<span class="c1"># Verify: CI exit code = 0 if all tiers pass, non-zero if any blocking tier fails</span>
+
+<span class="c1"># Step 4: Test regression detection</span>
+<span class="c1"># Modify a parameter known to degrade locomotion</span>
+<span class="c1"># Run validation</span>
+<span class="c1"># Verify: Tier 3 fails with specific metric(s) identified</span>
+</code></pre></div>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural output format</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If calcium time series format changes, Tier 1 and Tier 2 validators can't read data</td>
+</tr>
+<tr>
+<td>Neuropeptide on/off toggle</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>If DD006 enable/disable mechanism changes, Tier 2b (unc-31) validation can't run paired simulations</td>
+</tr>
+<tr>
+<td>Movement output format</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If WCON format or particle output changes, Tier 3 movement validator breaks</td>
+</tr>
+<tr>
+<td>Pharyngeal output format</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+<td>If pumping state format changes, pumping validation breaks</td>
+</tr>
+<tr>
+<td>Intestinal output format</td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>If defecation event format changes, defecation validation breaks</td>
+</tr>
+<tr>
+<td>Experimental data (OWMeta)</td>
+<td><a href="../DD008_Data_Integration_Pipeline/">DD008</a></td>
+<td>If data provenance or versioning changes, validation baselines may shift</td>
+</tr>
+<tr>
+<td>Docker compose services</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If <code>validate</code> service configuration changes, validation pipeline breaks</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CI pipeline (blocking gates)</td>
+<td><a href="../DD013_Simulation_Stack_Architecture/">DD013</a></td>
+<td>If acceptance criteria change, CI may pass/fail differently</td>
+</tr>
+<tr>
+<td>PR review (Mind-of-a-Worm)</td>
+<td><a href="../DD012_Design_Document_RFC_Process/">DD012</a></td>
+<td>Mind-of-a-Worm references <a href="./">DD010</a> criteria when checking PR compliance</td>
+</tr>
+<tr>
+<td>Founder digest (Mad-Worm-Scientist)</td>
+<td>AI Agents</td>
+<td>If validation report format changes, Mad-Worm-Scientist can't parse regression alerts</td>
+</tr>
+<tr>
+<td>All subsystem DDs</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+<td>If a tier's acceptance criteria tighten, previously-passing subsystems may now fail</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="open-worm-analysis-toolbox">Open-Worm-Analysis-Toolbox<a class="headerlink" href="#open-worm-analysis-toolbox" title="Permanent link">&para;</a></h3>
+<p><strong>Repository:</strong>
+<div class="highlight"><pre><span></span><code>https://github.com/openworm/open-worm-analysis-toolbox
+</code></pre></div></p>
+<blockquote>
+<p><strong>Note:</strong> The predecessor repo <code>openworm/movement_validation</code> is <strong>archived</strong> and should not be used. The analysis toolbox is the current, canonical implementation. See <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> for full repository landscape and revival plan.</p>
+</blockquote>
+<p><strong>Key modules:</strong></p>
+<ul>
+<li><code>movement_validation/</code> — Statistical feature extraction from WCON files</li>
+<li><code>comparison/</code> — Compare simulated vs. real</li>
+<li><code>wcon_parser/</code> — WCON format handling</li>
+</ul>
+<p><strong>Usage:</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">open_worm_analysis_toolbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalizedWorm</span><span class="p">,</span> <span class="n">WormFeatures</span>
+
+<span class="c1"># Load experimental data</span>
+<span class="n">exp_worm</span> <span class="o">=</span> <span class="n">NormalizedWorm</span><span class="o">.</span><span class="n">from_schafer_file</span><span class="p">(</span><span class="s2">&quot;schafer_N2_baseline.wcon&quot;</span><span class="p">)</span>
+<span class="n">exp_features</span> <span class="o">=</span> <span class="n">WormFeatures</span><span class="p">(</span><span class="n">exp_worm</span><span class="p">)</span>
+
+<span class="c1"># Load simulated data</span>
+<span class="n">sim_worm</span> <span class="o">=</span> <span class="n">NormalizedWorm</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="s2">&quot;c302_output.wcon&quot;</span><span class="p">)</span>
+<span class="n">sim_features</span> <span class="o">=</span> <span class="n">WormFeatures</span><span class="p">(</span><span class="n">sim_worm</span><span class="p">)</span>
+
+<span class="c1"># Compare</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">exp_features</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">sim_features</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comparison</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>  <span class="c1"># Pass/fail report</span>
+</code></pre></div></p>
+<h3 id="validation-data-repository">Validation Data Repository<a class="headerlink" href="#validation-data-repository" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>openworm/validation_data/
+├── electrophysiology/
+│   ├── goodman1998_touch_neurons.csv
+│   ├── lockery_AVA_recordings.csv
+│   └── ...
+├── functional_connectivity/
+│   ├── randi2023_wt_matrix.npy
+│   ├── randi2023_unc31_matrix.npy
+│   ├── randi2023_metadata.json
+│   └── ...
+├── kinematics/
+│   ├── schafer_N2_baseline.wcon
+│   ├── schafer_unc2_mutant.wcon  # Calcium channel mutant
+│   └── ...
+└── behavioral/
+    ├── thomas1990_defecation.csv
+    ├── raizen1994_pumping_EPG.csv
+    └── ...
+</code></pre></div>
+<p><strong>Licensing:</strong> All validation data must be openly accessible (CC-BY or equivalent). Cite original publications.</p>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="from-manual-validation-to-automated-ci">From Manual Validation to Automated CI<a class="headerlink" href="#from-manual-validation-to-automated-ci" title="Permanent link">&para;</a></h3>
+<p><strong>Current state:</strong> Validation is run manually before major releases.</p>
+<p><strong>Target state (Phase 1):</strong> GitHub Actions CI runs validation suite on every PR to <code>main</code>.</p>
+<p><strong>Implementation:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/validation.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model Validation</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tier2_functional_connectivity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate c302 network</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python c302/CElegans.py C1Differentiated</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run simulation</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jnml LEMS_c302_C1_Differentiated.xml -nogui</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validate vs. Randi 2023</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python scripts/validate_functional_connectivity.py</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check acceptance</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python scripts/check_criteria.py --min_correlation 0.5</span>
+
+<span class="w">  </span><span class="nt">tier3_behavioral</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run movement validation</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd open-worm-analysis-toolbox &amp;&amp; python validate_movement.py</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check acceptance</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python scripts/check_criteria.py --max_deviation 0.15</span>
+</code></pre></div></p>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Developmental validation:</strong> Validating stage-specific models (L1, dauer, male) is Phase 6 work.</li>
+<li><strong>Genetic variation:</strong> Validating against natural isolates (Ben-David eQTLs) is Phase 6+ work.</li>
+<li><strong>Pharmacological validation:</strong> Drug effects (aldicarb, levamisole) are future work.</li>
+</ol>
+<hr />
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>wormneuroatlas</strong> (<a href="https://github.com/openworm/wormneuroatlas">openworm/wormneuroatlas</a>, PyPI: <code>pip install wormneuroatlas</code>, maintained 2025):
+Provides direct API access to <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> functional connectivity via <code>NeuroAtlas.get_signal_propagation_atlas(strain="wt")</code>, returning the exact 302x302 correlation matrix needed for Tier 2 validation. No manual data download required. <strong>Estimated time savings: 15 hours.</strong></p>
+<p><strong>neuronal-analysis</strong> (<a href="https://github.com/openworm/neuronal-analysis">openworm/neuronal-analysis</a>, 2017, dormant):
+Tools to produce, analyse and compare simulated and recorded neuronal datasets — directly relevant to Tier 1 electrophysiology validation. May contain reusable single-cell comparison scripts.</p>
+<p><strong>owmeta-sciunit</strong> (<a href="https://github.com/openworm/owmeta-sciunit">openworm/owmeta-sciunit</a>, 2021):
+OWMeta-integrated SciUnit types providing formalized Tier 1 single-cell validation test classes with Z-scores, pass/fail, and goodness-of-fit metrics. Recommended tooling for automating Tier 1 electrophysiology validation in CI (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>).</p>
+<p><strong>worm-functional-connectivity</strong> (<a href="https://github.com/openworm/worm-functional-connectivity">openworm/worm-functional-connectivity</a>, 2023):
+Alternative/supplementary source for Tier 2 functional connectivity matrices. Check if it includes unc-31 neuropeptide-deficient mutant data alongside wild-type.</p>
+<p><strong>NicolettiEtAl2024_MN_IN</strong> + <strong>NicolettiEtAl2019_NeuronModels</strong> (<a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN">openworm/NicolettiEtAl2024_MN_IN</a>, <a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels">openworm/NicolettiEtAl2019_NeuronModels</a>):
+Published HH parameter fits for motor neurons, interneurons, AWCon, and RMD. Expand the Tier 1 calibration set beyond the current ~20 neurons.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong><a href="https://doi.org/10.12688/f1000research.9095.1">Sarma et al. 2016</a></strong> — "Unit testing, model validation, and biological simulation." <em>F1000Research</em> 5:1946.</li>
+<li><strong><a href="https://doi.org/10.1038/s41586-023-06683-4">Randi et al. 2023</a></strong> — "Neural signal propagation atlas of <em>Caenorhabditis elegans</em>." <em>Nature</em> 623:406-414.</li>
+<li><strong><a href="https://doi.org/10.1038/nmeth.2560">Yemini et al. 2013</a></strong> — "A database of <em>Caenorhabditis elegans</em> behavioral phenotypes." <em>Nature Methods</em> 10:877-879.</li>
+<li><strong><a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a></strong> — "Active currents regulate sensitivity and dynamic range in <em>C. elegans</em> neurons." <em>Nature</em> 415:1039-1042.</li>
+<li><strong><a href="https://doi.org/10.1016/0896-6273(94)90207-0">Raizen &amp; Avery 1994</a></strong> — "Electrical activity and behavior in the pharynx of <em>Caenorhabditis elegans</em>." <em>Neuron</em> 12:483-495.</li>
+<li><strong><a href="https://doi.org/10.1093/genetics/124.4.855">Thomas 1990</a></strong> — "The defecation motor program of <em>Caenorhabditis elegans</em>." <em>Genetics</em> 124:855-872.</li>
+<li><strong><a href="https://github.com/openworm/ConnectomeToolbox">Gleeson et al., in preparation</a></strong> — "ConnectomeToolbox: a unified software framework for <em>C. elegans</em> connectivity data." (Manuscript in preparation; <code>cect</code> Python package published.)</li>
+<li><strong><a href="https://doi.org/10.1016/j.neuron.2023.09.043">Ripoll-Sánchez et al. 2023</a></strong> — "The neuropeptidergic connectome of <em>C. elegans</em>." <em>Neuron</em> 111:3570-3589. (Extrasynaptic connectivity data in ConnectomeToolbox.)</li>
+<li><strong><a href="https://doi.org/10.7554/eLife.12432">Pereira et al. 2015</a></strong> — "A cellular and regulatory map of the cholinergic nervous system of <em>C. elegans</em>." <em>eLife</em> 4:e12432. (Peptide co-expression data in ConnectomeToolbox.)</li>
+<li><strong>Pearl J, Mackenzie D (2018).</strong> <a href="https://www.hachettebookgroup.com/titles/judea-pearl/the-book-of-why/9780465097616/"><em>The Book of Why: The New Science of Cause and Effect.</em></a> Basic Books (ISBN: 978-0465097609). <em>Theoretical framework for causal inference — observational data is insufficient for validating causal models; interventional data (perturbations) is required.</em></li>
+<li><strong><a href="https://doi.org/10.1098/rsif.2014.0672">Berman GJ, Choi DM, Bialek W, Shaevitz JW (2014).</a></strong> "Mapping the stereotyped behaviour of freely moving fruit flies." <em>J R Soc Interface</em> 11:20140672. <em>Unsupervised behavioral decomposition — systematic approach to identifying behavioral motifs from continuous recordings.</em></li>
+<li><strong><a href="https://doi.org/10.1038/s41592-022-01426-1">Pereira TD et al. 2022</a></strong> — "SLEAP: A deep learning system for multi-animal pose estimation." <em>Nature Methods</em> 19:486-495. <em>Deep learning pose estimation for high-precision behavioral quantification.</em></li>
+<li><strong><a href="https://doi.org/10.1016/j.neuron.2019.09.038">Datta SR, Anderson DJ, Branson K, Perona P, Leifer A (2019).</a></strong> "Computational neuroethology: a call to action." <em>Neuron</em> 104:11-24. <em>Framework for treating behavior as a high-dimensional continuous signal — relevant to how we quantify simulated vs. real movement.</em></li>
+<li><strong><a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S (1985)</a>.</strong> "The neural circuit for touch sensitivity in <em>Caenorhabditis elegans</em>." <em>J Neurosci</em> 5:956-964. <em>Foundational touch neuron ablation data — Tier 4 causal validation target.</em></li>
+<li><strong>Haspel G et al. (2023).</strong> "To reverse engineer an entire nervous system." <em>arXiv</em> [q-bio.NC] 2308.06578. <em>White paper on observational and perturbational completeness in C. elegans neuroscience — motivates Tier 4 validation.</em></li>
+<li><strong><a href="https://doi.org/10.1016/j.cell.2015.09.034">Kato S, Kaplan HS, Schrodel T, Skora S, Lindsay TH, Yemini E, Lockery S, Zimmer M (2015).</a></strong> "Global brain dynamics embed the motor command sequence of <em>Caenorhabditis elegans</em>." <em>Cell</em> 163:656-669. <em>Whole-brain calcium imaging showing PCA structure of neural dynamics — PC1 separates forward vs. backward locomotion command neurons.</em></li>
+<li><strong>Zhao M, Wang N, Jiang X, et al. (2024).</strong> "An integrative data-driven model simulating <em>C. elegans</em> brain, body and environment interactions." <em>Nature Computational Science</em> 4(12):978-990. <em>MetaWorm model — 136-neuron circuit with neurite-level spatial detail, demonstrates PCA validation, gap junction perturbation, and closed-loop chemotaxis.</em></li>
+</ol>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> OpenWorm Steering</li>
+<li>
+<p><strong>Implementation Status:</strong> Partial</p>
+</li>
+<li>
+<p><strong>Tier 1</strong> (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)</p>
+</li>
+<li><strong>Tier 2a</strong> (functional connectivity): <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> data accessible via <code>wormneuroatlas</code> API — no manual ingestion needed (blocking)</li>
+<li><strong>Tier 2b</strong> (neuropeptide unc-31 comparison): <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> <em>unc-31</em> data also in <code>wormneuroatlas</code> — blocked on <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> implementation (Phase 2)</li>
+<li><strong>Tier 3</strong> (behavioral kinematics): <strong>BLOCKED</strong> — <code>open-worm-analysis-toolbox</code> is dormant (last commit Jan 2020, broken on Python 3.12)</li>
+</ul>
+<p><strong>See <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> (Movement Analysis Toolbox and WCON Policy)</strong> for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.</p>
+<p><strong>Next Actions:</strong></p>
+<ol>
+<li><strong>URGENT:</strong> Prioritize <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/">DD021</a> toolbox revival as Phase A1 work (parallel with <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>)</li>
+<li>Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)</li>
+<li>Add <code>wormneuroatlas</code> + <code>cect</code> to Docker validation stage — <a href="https://doi.org/10.1038/s41586-023-06683-4">Randi 2023</a> data is already accessible via API (no manual ingestion needed)</li>
+<li>After <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>: Implement Tier 2b (unc-31 comparison) validation script</li>
+<li>After <a href="../DD013_Simulation_Stack_Architecture/">DD013</a>: Implement Steps 4-5 in <code>master_openworm.py</code> (validation pipeline)</li>
+<li>Set up GitHub Actions CI with Tier 2a+2b+3 blocking gates</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

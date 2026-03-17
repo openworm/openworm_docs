@@ -1,0 +1,5801 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD019_Closed_Loop_Touch_Response/">
+      
+      
+        <link rel="prev" href="../DD006_Neuropeptidergic_Connectome_Integration/">
+      
+      
+        <link rel="next" href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD019 Touch Response - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd019-closed-loop-touch-response-and-tap-withdrawal-behavior" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD019 Touch Response
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-closing-the-sensorimotor-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview: Closing the Sensorimotor Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-1-cuticle-strain-readout-from-sph-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 1: Cuticle Strain Readout from SPH Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-2-mec-4mec-10-mechanosensory-channel-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 2: MEC-4/MEC-10 Mechanosensory Channel Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-3-touch-receptor-neuron-cell-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 3: Touch Receptor Neuron Cell Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-4-tap-withdrawal-neural-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 4: Tap Withdrawal Neural Circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-5-bidirectional-coupling-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 5: Bidirectional Coupling Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-6-tap-stimulus-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 6: Tap Stimulus Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-direct-current-injection-instead-of-mechanotransduction-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Direct Current Injection Instead of Mechanotransduction Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-simplified-linear-transduction-strain-current-no-channel-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Simplified Linear Transduction (Strain → Current, No Channel Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-machine-learned-transduction-model-dd017-component-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Machine-Learned Transduction Model (DD017 Component 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-finite-element-strain-computation-instead-of-sph-particle-displacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Finite Element Strain Computation Instead of SPH Particle Displacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-proprioceptive-feedback-via-stretch-receptors-on-motor-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proprioceptive Feedback via Stretch Receptors on Motor Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-detailed-cuticle-layer-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Detailed Cuticle Layer Mechanics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-closed-loop-touch-response-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Closed-Loop Touch Response Implementation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ce_locomotion-proprioceptive-feedback-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CE_locomotion Proprioceptive Feedback Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-longstanding-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Longstanding Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-exists-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Exists Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-missing-dd019-fills-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Missing (DD019 Fills This)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biological-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biological Foundations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Data Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-mechanotransduction-model-needs-updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Mechanotransduction Model Needs Updating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-additional-sensory-modalities-are-added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Additional Sensory Modalities Are Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-dont-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that don't exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-closing-the-sensorimotor-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview: Closing the Sensorimotor Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-1-cuticle-strain-readout-from-sph-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 1: Cuticle Strain Readout from SPH Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-2-mec-4mec-10-mechanosensory-channel-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 2: MEC-4/MEC-10 Mechanosensory Channel Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-3-touch-receptor-neuron-cell-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 3: Touch Receptor Neuron Cell Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-4-tap-withdrawal-neural-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 4: Tap Withdrawal Neural Circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-5-bidirectional-coupling-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 5: Bidirectional Coupling Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-6-tap-stimulus-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component 6: Tap Stimulus Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-direct-current-injection-instead-of-mechanotransduction-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Direct Current Injection Instead of Mechanotransduction Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-simplified-linear-transduction-strain-current-no-channel-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Simplified Linear Transduction (Strain → Current, No Channel Model)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-machine-learned-transduction-model-dd017-component-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Machine-Learned Transduction Model (DD017 Component 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-finite-element-strain-computation-instead-of-sph-particle-displacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Finite Element Strain Computation Instead of SPH Particle Displacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-proprioceptive-feedback-via-stretch-receptors-on-motor-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proprioceptive Feedback via Stretch Receptors on Motor Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-detailed-cuticle-layer-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Detailed Cuticle Layer Mechanics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-defines-a-valid-closed-loop-touch-response-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Defines a Valid Closed-Loop Touch Response Implementation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-reuse-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reuse Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Reuse Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ce_locomotion-proprioceptive-feedback-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CE_locomotion Proprioceptive Feedback Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Context &amp; Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-longstanding-goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Longstanding Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-exists-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Exists Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-missing-dd019-fills-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Missing (DD019 Fills This)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biological-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biological Foundations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Data Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-mechanotransduction-model-needs-updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Mechanotransduction Model Needs Updating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-additional-sensory-modalities-are-added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Additional Sensory Modalities Are Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-code-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Code Resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd019-closed-loop-touch-response-and-tap-withdrawal-behavior">DD019: Closed-Loop Touch Response and Tap Withdrawal Behavior<a class="headerlink" href="#dd019-closed-loop-touch-response-and-tap-withdrawal-behavior" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed (Phase 2-3)</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-16</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics), <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization), <a href="../DD010_Validation_Framework/">DD010</a> (Validation Framework), <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> (Hybrid Mechanistic-ML Framework)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic SPH particles, transducing it through a biophysical MEC-4/MEC-10 channel model on touch receptor neurons (ALM, AVM, PLM, PVD), and coupling this into the existing c302 tap withdrawal circuit — producing emergent backward locomotion in response to a simulated tap. This is the first behavior that requires <strong>bidirectional coupling</strong>: body physics → sensory neurons (new) AND neurons → muscles → body physics (existing). Success: a forward-crawling worm reverses direction within 1 second of a tap stimulus, travels ≥1 body length backward, and resumes forward crawling within 10 seconds.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase 2</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Modulation + Closed-Loop — see <a href="../DD_PHASE_ROADMAP/#phase-2-slow-modulation-closed-loop-sensory-months-4-6">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Closed-loop mechanosensory transduction model: Sibernetic cuticle strain → MEC-4 channel currents on touch neurons (ALM, AVM, PLM, PVD) → tap withdrawal circuit → motor reversal → backward locomotion</td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: tap stimulus → reversal onset &lt;1 s, backward locomotion ≥1 body length, return to forward crawling within 10 s</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a> (mechanosensory model, circuit) + <a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> (strain readout, tap stimulus, bidirectional coupling)</td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>sensory.mechanotransduction: true</code> / <code>behavior.tap_withdrawal: true</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> (closed-loop runs, reversal occurs), <code>docker compose run validate</code> (Tier 3 behavioral)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>sensory/strain/</code> layer — cuticle strain heatmap; <code>neural/</code> layer — touch neuron + command interneuron activation; <code>body/</code> layer — body trajectory with reversal event markers</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 3 behavioral validation blocks merge; closed-loop stability (no NaN/divergence over 30 s) blocks PR</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Reversal onset latency</td>
+<td>Tap stimulus → first backward body bend &lt;1 s (<a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a>: 300-800 ms)</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Primary:</strong> Reversal distance</td>
+<td>≥1 body length backward travel</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Primary:</strong> Recovery to forward</td>
+<td>Resume forward crawling within 10 s of tap</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Anterior vs. posterior discrimination</td>
+<td>Anterior touch (ALM/AVM activated) → backward; posterior touch (PLM activated) → forward acceleration</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Closed-loop stability</td>
+<td>30 s bidirectional simulation without NaN, divergence, or oscillatory instability</td>
+<td>Quick-test (blocking per-PR)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Touch neuron calcium dynamics</td>
+<td>MEC-4 channel current onset &lt;50 ms from strain application, decay &lt;500 ms</td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> Open-loop simulation — sensory neurons receive artificial current injections or no input at all. The c302_TapWithdrawal circuit exists but "does not produce the correct behavior" (per code header). No body→sensory feedback path.</p>
+<p><strong>After:</strong> Closed-loop simulation — mechanical contact on the cuticle propagates through the mechanosensory transduction chain to produce emergent tap withdrawal behavior with no manual current injection.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to repo)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEC-4 mechanosensory channel model</td>
+<td><code>openworm/c302</code> — <code>channel_models/mec4_chan.channel.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>DEG/ENaC mechanically-gated cation channel</td>
+</tr>
+<tr>
+<td>Touch receptor neuron templates</td>
+<td><code>openworm/c302</code> — <code>cells/ALMCell.cell.nml</code>, <code>AVMCell.cell.nml</code>, <code>PLMCell.cell.nml</code>, <code>PVDCell.cell.nml</code></td>
+<td>NeuroML 2 XML</td>
+<td>HH cell with MEC-4 channel + standard channels</td>
+</tr>
+<tr>
+<td>Updated tap withdrawal circuit</td>
+<td><code>openworm/c302</code> — <code>c302/c302_TapWithdrawal.py</code></td>
+<td>Python → NeuroML 2 XML</td>
+<td>Updated circuit with mechanosensory input</td>
+</tr>
+<tr>
+<td>Cuticle strain readout module</td>
+<td><code>openworm/sibernetic</code> — <code>coupling/strain_readout.py</code></td>
+<td>Python</td>
+<td>Reads SPH particle positions → computes local strain per body segment</td>
+</tr>
+<tr>
+<td>Bidirectional coupling script</td>
+<td><code>openworm/sibernetic</code> — <code>sibernetic_c302_closedloop.py</code></td>
+<td>Python</td>
+<td>Extends <code>sibernetic_c302.py</code> with body→sensory feedback path</td>
+</tr>
+<tr>
+<td>Tap stimulus generator</td>
+<td><code>openworm/sibernetic</code> — <code>stimuli/tap_stimulus.py</code></td>
+<td>Python</td>
+<td>Delivers boundary particle displacement at configurable body position</td>
+</tr>
+<tr>
+<td>Sensory strain time series (viewer)</td>
+<td>OME-Zarr: <code>sensory/strain/</code>, shape (n_timesteps, n_segments)</td>
+<td>OME-Zarr</td>
+<td>Per-segment cuticle strain over time</td>
+</tr>
+<tr>
+<td>Reversal event annotations (viewer)</td>
+<td>OME-Zarr: <code>behavior/events/</code>, shape (n_events, 3)</td>
+<td>OME-Zarr</td>
+<td>(onset_time, offset_time, type) per reversal event</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository (mechanosensory model)</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Repository (coupling + stimulus)</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd019</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Closed-Loop Touch Response</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd019/description</code> (e.g., <code>dd019/mec4-channel-model</code>, <code>dd019/strain-readout</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD019: MEC-4 mechanosensory channel model for touch receptor neurons</code></td>
+</tr>
+<tr>
+<td><strong>Related GitHub issues</strong></td>
+<td><a href="https://github.com/openworm/openworm/issues/223">openworm/openworm#223</a>, <a href="https://github.com/openworm/openworm/issues/224">#224</a>, <a href="https://github.com/openworm/openworm/issues/225">#225</a>, <a href="https://github.com/openworm/openworm/issues/227">#227</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, pyNeuroML, jnml, NEURON 8.2.6, Sibernetic (with OpenCL or Taichi backend)</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>This DD builds on <strong>two repositories</strong>: the <strong>c302</strong> neural circuit framework (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>) for the MEC-4 channel model and tap withdrawal circuit, and <strong>Sibernetic</strong> (<a href="../DD003_Body_Physics_Architecture/">DD003</a>) for mechanotransduction coupling (body physics to sensory neurons).</p>
+<p>If you have already completed both <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> and <a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 Getting Started</a>, you are ready for the steps below.</p>
+<p>If starting fresh, follow both setup guides first, then return here:</p>
+<ol>
+<li><a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 Getting Started</a> — clone c302, install neural circuit dependencies</li>
+<li><a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 Getting Started</a> — clone Sibernetic, install body physics dependencies</li>
+</ol>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>This builds both the <code>neural</code> and <code>body</code> Docker stages. Then skip to <a href="#step-by-step">Step 1</a> below.</p>
+<p><strong>Path B — Native (for development):</strong></p>
+<p>Complete both <a href="../DD001_Neural_Circuit_Architecture/#getting-started-environment-setup">DD001 native setup</a> and <a href="../DD003_Body_Physics_Architecture/#getting-started-environment-setup">DD003 native setup</a>, then install additional dependencies:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># NEURON simulator (required for MEC-4 channel model and bidirectional coupling)</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">neuron</span><span class="o">==</span><span class="m">8</span>.2.6
+</code></pre></div>
+<p>The closed-loop touch response requires <strong>bidirectional coupling</strong>: body physics (Sibernetic SPH particles) feed cuticle strain into sensory neurons (c302 MEC-4 channels), while neural output drives muscles back into the body simulation.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Validate MEC-4 channel model</span>
+jnml<span class="w"> </span>-validate<span class="w"> </span>c302/channel_models/mec4_chan.channel.nml
+
+<span class="c1"># Step 2: Generate tap withdrawal network with mechanosensory input</span>
+<span class="nb">cd</span><span class="w"> </span>c302/
+python<span class="w"> </span>c302/c302_TapWithdrawal.py<span class="w"> </span>--mechanosensory
+<span class="c1"># Expected output: LEMS_c302_C1_TapWithdrawal.xml with MEC-4 channels on touch neurons</span>
+
+<span class="c1"># Step 3: Validate NeuroML syntax</span>
+jnml<span class="w"> </span>-validate<span class="w"> </span>LEMS_c302_C1_TapWithdrawal.xml
+
+<span class="c1"># Step 4: Unit test — MEC-4 channel responds to strain</span>
+python<span class="w"> </span>scripts/test_mec4_channel.py
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/c302#TBD</span>
+<span class="c1"># Expected: channel opens for strain &gt; threshold, current &lt; 100 pA, correct reversal potential</span>
+
+<span class="c1"># Step 5: Unit test — strain readout from Sibernetic particles</span>
+python<span class="w"> </span>scripts/test_strain_readout.py
+<span class="c1"># [TO BE CREATED] — GitHub issue: openworm/sibernetic#TBD</span>
+<span class="c1"># Expected: known particle displacement → correct strain value at touch neuron position</span>
+
+<span class="c1"># Step 6: Closed-loop quick test (must pass before PR)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal
+<span class="c1"># Green light: simulation runs 10 s without NaN or divergence</span>
+<span class="c1"># Green light: at least one reversal event detected after tap stimulus</span>
+<span class="c1"># Green light: body trajectory file (*.wcon) exists</span>
+
+<span class="c1"># Step 7: Full behavioral validation (must pass before merge)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal
+<span class="c1"># Green light: reversal onset &lt; 1 s after tap</span>
+<span class="c1"># Green light: reversal distance ≥ 1 body length</span>
+<span class="c1"># Green light: return to forward within 10 s</span>
+<span class="c1"># Green light: anterior touch → backward, posterior touch → forward (direction discrimination)</span>
+</code></pre></div>
+<h3 id="scripts-that-dont-exist-yet">Scripts that don't exist yet<a class="headerlink" href="#scripts-that-dont-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c302/scripts/test_mec4_channel.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>sibernetic/scripts/test_strain_readout.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic#TBD</td>
+</tr>
+<tr>
+<td><code>sibernetic/coupling/strain_readout.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic#TBD</td>
+</tr>
+<tr>
+<td><code>sibernetic/sibernetic_c302_closedloop.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic#TBD</td>
+</tr>
+<tr>
+<td><code>sibernetic/stimuli/tap_stimulus.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/sibernetic#TBD</td>
+</tr>
+<tr>
+<td><code>c302/scripts/validate_tap_withdrawal.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>c302/scripts/detect_reversal_events.py</code></td>
+<td><code>[TO BE CREATED]</code></td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layers:</strong> Three new overlays for closed-loop touch response.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer 1: Cuticle strain</strong></td>
+<td><code>sensory/strain/</code> — body segments colored by local strain magnitude. Blue (no strain) → red (high strain). Tap stimulus should produce a transient red flash at the contact point.</td>
+</tr>
+<tr>
+<td><strong>Layer 2: Touch circuit activity</strong></td>
+<td><code>neural/</code> layer with touch neurons (ALM, AVM, PLM, PVD) and command interneurons (AVA, AVB) highlighted. During tap: touch neurons depolarize (warm) → AVA activates (warm), AVB inhibited (cool) → motor neurons switch.</td>
+</tr>
+<tr>
+<td><strong>Layer 3: Reversal events</strong></td>
+<td><code>behavior/events/</code> — body trajectory with event markers. Forward crawling = green path, reversal = red path. Tap onset marked with vertical line on timeline.</td>
+</tr>
+<tr>
+<td><strong>Combined view</strong></td>
+<td>Side-by-side: (left) SPH particle view with strain heatmap, (center) circuit diagram with live activation, (right) body trajectory with event timeline.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="overview-closing-the-sensorimotor-loop">Overview: Closing the Sensorimotor Loop<a class="headerlink" href="#overview-closing-the-sensorimotor-loop" title="Permanent link">&para;</a></h3>
+<p>The tap withdrawal behavior requires a complete causal loop:</p>
+<div class="highlight"><pre><span></span><code>Environment → Cuticle deformation → Cuticle strain (SPH)
+    → Mechanosensory transduction (MEC-4 channels)
+    → Touch receptor neuron depolarization (ALM, AVM, PLM, PVD)
+    → Command interneuron decision (AVA backward / AVB forward)
+    → Motor neuron pattern switch (DA/VA backward wave vs. DB/VB forward wave)
+    → Muscle activation ([DD002](DD002_Muscle_Model_Architecture.md) calcium-force)
+    → Body deformation ([DD003](DD003_Body_Physics_Architecture.md) SPH)
+    → Movement in environment → (loop)
+</code></pre></div>
+<p>Currently, the <strong>forward path</strong> (neural → muscle → body) is implemented via <code>sibernetic_c302.py</code>. <a href="./">DD019</a> adds the <strong>reverse path</strong> (body → sensory) and connects them into a single closed loop.</p>
+<h3 id="component-1-cuticle-strain-readout-from-sph-particles">Component 1: Cuticle Strain Readout from SPH Particles<a class="headerlink" href="#component-1-cuticle-strain-readout-from-sph-particles" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Sibernetic represents the body wall as ~40,000 elastic SPH particles. When the cuticle is deformed (e.g., by a tap stimulus or contact with a boundary object), particles displace from their rest positions. We need to compute a local strain signal at each touch receptor neuron's anatomical position.</p>
+<p><strong>Approach:</strong> Compute strain as the local deformation of elastic particles relative to their rest configuration, averaged over a receptive field centered at each touch neuron's known anatomical position.</p>
+<p><strong>Touch neuron positions (<a href="https://doi.org/10.1098/rstb.1986.0056">White et al. 1986</a>, WormAtlas):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Neuron</th>
+<th>Position (% body length from anterior)</th>
+<th>Receptive Field</th>
+<th>Touch Modality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALML</td>
+<td>~30%</td>
+<td>Anterior body (10-50%)</td>
+<td>Gentle (light) touch</td>
+</tr>
+<tr>
+<td>ALMR</td>
+<td>~30%</td>
+<td>Anterior body (10-50%)</td>
+<td>Gentle touch</td>
+</tr>
+<tr>
+<td>AVM</td>
+<td>~40%</td>
+<td>Anterior-mid body (20-55%)</td>
+<td>Gentle touch</td>
+</tr>
+<tr>
+<td>PLML</td>
+<td>~75%</td>
+<td>Posterior body (50-90%)</td>
+<td>Gentle touch</td>
+</tr>
+<tr>
+<td>PLMR</td>
+<td>~75%</td>
+<td>Posterior body (50-90%)</td>
+<td>Gentle touch</td>
+</tr>
+<tr>
+<td>PVD</td>
+<td>~65%</td>
+<td>Full body (overlapping)</td>
+<td>Harsh (nociceptive) touch</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Strain computation:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># coupling/strain_readout.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_local_strain</span><span class="p">(</span><span class="n">particle_positions</span><span class="p">,</span> <span class="n">rest_positions</span><span class="p">,</span> <span class="n">neuron_position</span><span class="p">,</span>
+                         <span class="n">receptive_field_radius</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute local cuticle strain at a touch neuron&#39;s anatomical position.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    particle_positions : ndarray, shape (n_elastic, 3)</span>
+<span class="sd">        Current positions of elastic (body wall) particles.</span>
+<span class="sd">    rest_positions : ndarray, shape (n_elastic, 3)</span>
+<span class="sd">        Rest (equilibrium) positions of elastic particles.</span>
+<span class="sd">    neuron_position : float</span>
+<span class="sd">        Fractional position along body axis (0 = anterior, 1 = posterior).</span>
+<span class="sd">    receptive_field_radius : float</span>
+<span class="sd">        Radius of the neuron&#39;s receptive field in particle units.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    strain : float</span>
+<span class="sd">        Local strain magnitude (dimensionless, 0 = no deformation).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Map neuron position to body-axis coordinate</span>
+    <span class="n">body_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">neuron_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">neuron_position</span> <span class="o">*</span> <span class="n">body_length</span>
+
+    <span class="c1"># Select particles within receptive field</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">neuron_x</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&lt;</span> <span class="n">receptive_field_radius</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>  <span class="c1"># Not enough particles — no signal</span>
+
+    <span class="c1"># Compute local displacement</span>
+    <span class="n">displacements</span> <span class="o">=</span> <span class="n">particle_positions</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">-</span> <span class="n">rest_positions</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="c1"># Strain = RMS displacement magnitude normalized by particle spacing</span>
+    <span class="n">particle_spacing</span> <span class="o">=</span> <span class="n">body_length</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rest_positions</span><span class="p">))</span>
+    <span class="n">strain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">displacements</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span> <span class="o">/</span> <span class="n">particle_spacing</span>
+
+    <span class="k">return</span> <span class="n">strain</span>
+</code></pre></div>
+<p><strong>Temporal filtering:</strong> Raw SPH positions are noisy at the particle level. Apply a 1st-order low-pass filter (tau = 5 ms, matching MEC channel kinetics) to produce a smooth strain signal before feeding to the channel model:</p>
+<div class="highlight"><pre><span></span><code>d(strain_filtered)/dt = (strain_raw - strain_filtered) / tau_filter
+</code></pre></div>
+<h3 id="component-2-mec-4mec-10-mechanosensory-channel-model">Component 2: MEC-4/MEC-10 Mechanosensory Channel Model<a class="headerlink" href="#component-2-mec-4mec-10-mechanosensory-channel-model" title="Permanent link">&para;</a></h3>
+<p><strong>Biology:</strong> The six gentle-touch receptor neurons (ALML/R, AVM, PLML/R, PVD for harsh touch) express the MEC-4/MEC-10 DEG/ENaC mechanically-gated ion channel complex. This channel opens in response to mechanical deformation of the cuticle transmitted through a specialized extracellular matrix (the "mantle") attached via MEC-1/MEC-5/MEC-9 linker proteins.</p>
+<p>The MEC-4 channel is a non-selective cation channel with these electrophysiological properties (<a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a>, <a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reversal potential (E_MEC)</td>
+<td>+10 mV</td>
+<td>Non-selective cation (Na⁺/K⁺/Ca²⁺)</td>
+</tr>
+<tr>
+<td>Maximum conductance</td>
+<td>100-150 pS per channel complex</td>
+<td><a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a></td>
+</tr>
+<tr>
+<td>Total conductance per cell</td>
+<td>~20 nS (estimated, ~130-200 channels)</td>
+<td>Goodman lab</td>
+</tr>
+<tr>
+<td>Activation threshold</td>
+<td>~1-2 µm cuticle indentation</td>
+<td><a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a></td>
+</tr>
+<tr>
+<td>Activation time constant</td>
+<td>~1-5 ms</td>
+<td>Rapid onset</td>
+</tr>
+<tr>
+<td>Inactivation time constant</td>
+<td>~50-200 ms</td>
+<td>Adapts during sustained touch</td>
+</tr>
+<tr>
+<td>Deactivation time constant</td>
+<td>~5-10 ms</td>
+<td>Rapid offset after stimulus removal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Channel model (NeuroML):</strong></p>
+<p>We model MEC-4 as a mechanically-gated conductance with activation and inactivation gates:</p>
+<div class="highlight"><pre><span></span><code>I_MEC = g_MEC * m(strain) * h(strain, t) * (V - E_MEC)
+</code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>m(strain)</code> = activation gate — opens with cuticle strain (Boltzmann sigmoid)</li>
+<li><code>h(strain, t)</code> = inactivation gate — adapts during sustained strain (slow exponential decay)</li>
+<li><code>E_MEC</code> = +10 mV (cation reversal potential)</li>
+<li><code>g_MEC</code> = 20 nS (total mechanosensory conductance per cell)</li>
+</ul>
+<p><strong>Activation gate (strain-dependent, effectively instantaneous):</strong></p>
+<div class="highlight"><pre><span></span><code>m_inf(strain) = 1 / (1 + exp(-(strain - strain_half) / k_strain))
+</code></pre></div>
+<ul>
+<li><code>strain_half</code> = 0.05 (dimensionless strain at half-activation, ~1-2 µm indentation)</li>
+<li><code>k_strain</code> = 0.015 (sensitivity slope)</li>
+<li><code>tau_m</code> = 2 ms (fast activation)</li>
+</ul>
+<p><strong>Inactivation gate (time-dependent adaptation):</strong></p>
+<div class="highlight"><pre><span></span><code>h_inf(strain) = 1 / (1 + exp((strain - strain_half_h) / k_strain_h))
+dh/dt = (h_inf - h) / tau_h
+</code></pre></div>
+<ul>
+<li><code>strain_half_h</code> = 0.08 (adapts at stronger sustained strain)</li>
+<li><code>k_strain_h</code> = 0.02</li>
+<li><code>tau_h</code> = 100 ms (slow inactivation → adaptation to sustained touch)</li>
+</ul>
+<p>This produces the experimentally observed response: rapid onset current that adapts over ~100-200 ms during sustained touch, matching <a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a> recordings from ALM.</p>
+<p><strong>NeuroML implementation:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- channel_models/mec4_chan.channel.nml --&gt;</span>
+<span class="nt">&lt;neuroml</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.neuroml.org/schema/neuroml2&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;ionChannelHH</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;mec4_chan&quot;</span><span class="w"> </span><span class="na">conductance=</span><span class="s">&quot;20nS&quot;</span><span class="w"> </span><span class="na">species=</span><span class="s">&quot;non_specific&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;notes&gt;</span>
+<span class="w">      </span>MEC-4/MEC-10<span class="w"> </span>DEG/ENaC<span class="w"> </span>mechanosensory<span class="w"> </span>channel.
+<span class="w">      </span>Mechanically<span class="w"> </span>gated<span class="w"> </span>by<span class="w"> </span>cuticle<span class="w"> </span>strain.
+<span class="w">      </span>Source:<span class="w"> </span>O&#39;Hagan<span class="w"> </span>et<span class="w"> </span>al.<span class="w"> </span>2005,<span class="w"> </span>Goodman<span class="w"> </span>et<span class="w"> </span>al.<span class="w"> </span>2002.
+<span class="w">      </span>Activation:<span class="w"> </span>strain-dependent<span class="w"> </span>Boltzmann.
+<span class="w">      </span>Inactivation:<span class="w"> </span>time-dependent<span class="w"> </span>adaptation.
+<span class="w">    </span><span class="nt">&lt;/notes&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;gateHHrates</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="na">instances=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- Activation depends on strain exposure variable, not voltage --&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- Uses strain-dependent alpha/beta or tabulated rates --&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- Strain exposure mapped from Sibernetic via coupling script --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/gateHHrates&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;gateHHrates</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;h&quot;</span><span class="w"> </span><span class="na">instances=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- Inactivation: slow adaptation (~100 ms tau) --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/gateHHrates&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;/ionChannelHH&gt;</span>
+
+<span class="nt">&lt;/neuroml&gt;</span>
+</code></pre></div>
+<p><strong>Implementation note:</strong> Standard NeuroML channels are voltage-gated. To make a strain-gated channel, we use NeuroML's <code>&lt;exposure&gt;</code> mechanism to inject the strain signal as an external variable. The coupling script (<code>sibernetic_c302_closedloop.py</code>) computes strain and injects it via NEURON's external variable interface at each coupling timestep. If NeuroML's exposure mechanism is insufficient, implement as a LEMS ComponentType extension:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;ComponentType</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MEC4Channel&quot;</span><span class="w"> </span><span class="na">extends=</span><span class="s">&quot;baseIonChannel&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Exposure</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;strain&quot;</span><span class="w"> </span><span class="na">dimension=</span><span class="s">&quot;none&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- Strain drives activation gate instead of voltage --&gt;</span>
+<span class="nt">&lt;/ComponentType&gt;</span>
+</code></pre></div>
+<h3 id="component-3-touch-receptor-neuron-cell-templates">Component 3: Touch Receptor Neuron Cell Templates<a class="headerlink" href="#component-3-touch-receptor-neuron-cell-templates" title="Permanent link">&para;</a></h3>
+<p>Each touch receptor neuron has the standard <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> channels (leak, K_slow, K_fast, Ca_boyle) PLUS the MEC-4 mechanosensory channel:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># c302/cells/ALMCell.cell.nml (pseudocode)</span>
+<span class="n">cell</span> <span class="o">=</span> <span class="n">GenericCell</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;ALMCell&quot;</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s2">&quot;mec4_chan&quot;</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mf">20e-9</span><span class="p">)</span>  <span class="c1"># 20 nS mechanosensory</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">add_exposure</span><span class="p">(</span><span class="s2">&quot;strain&quot;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">&quot;sibernetic_strain_readout&quot;</span><span class="p">)</span>
+<span class="c1"># Standard channels remain at [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 defaults</span>
+</code></pre></div>
+<p>If <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (cell-type specialization) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.</p>
+<h3 id="component-4-tap-withdrawal-neural-circuit">Component 4: Tap Withdrawal Neural Circuit<a class="headerlink" href="#component-4-tap-withdrawal-neural-circuit" title="Permanent link">&para;</a></h3>
+<p>The existing <code>c302_TapWithdrawal.py</code> defines 16 interneurons forming the tap withdrawal circuit. <a href="./">DD019</a> integrates mechanosensory input into this existing circuit rather than replacing it.</p>
+<p><strong>Circuit architecture (<a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a>, <a href="https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996">Wicks et al. 1996</a>):</strong></p>
+<div class="highlight"><pre><span></span><code>GENTLE ANTERIOR TOUCH:
+  ALM, AVM → (excitatory) → AVD → (excitatory) → AVA → backward command
+         → (excitatory) → PVC → (inhibitory on AVB) → suppresses forward
+
+GENTLE POSTERIOR TOUCH:
+  PLM → (excitatory) → PVC → (excitatory) → AVB → forward command
+      → (inhibitory) → AVD → (suppresses AVA) → suppresses backward
+
+HARSH TOUCH:
+  PVD → (excitatory) → AVA → backward command (direct, fast)
+      → (excitatory) → PVC → modulates forward/backward balance
+</code></pre></div>
+<p><strong>Command interneuron output → motor pattern switching:</strong></p>
+<p>The key behavioral switch is controlled by the relative activity of AVA (backward) vs. AVB (forward):</p>
+<table>
+<thead>
+<tr>
+<th>Command Interneuron</th>
+<th>Active State</th>
+<th>Motor Pattern</th>
+<th>Motor Neurons Driven</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AVB</strong> (default high)</td>
+<td>Forward crawling</td>
+<td>Anterograde wave</td>
+<td>DB, VB (B-class)</td>
+</tr>
+<tr>
+<td><strong>AVA</strong> (activated by touch)</td>
+<td>Backward crawling</td>
+<td>Retrograde wave</td>
+<td>DA, VA (A-class)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Motor pattern switching mechanism (per issue #227):</strong></p>
+<p>Rather than sinusoidal input to motor neurons (current approach in c302_TapWithdrawal.py), the motor pattern emerges from the relative activation of A-class vs. B-class motor neurons by command interneurons:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Motor neuron activation based on command interneuron calcium</span>
+<span class="c1"># (replaces hardcoded sinusoidal input in current c302_TapWithdrawal.py)</span>
+
+<span class="c1"># Forward mode (AVB active, AVA quiet):</span>
+<span class="c1">#   DB/VB motor neurons receive excitatory drive from AVB</span>
+<span class="c1">#   DA/VA motor neurons are quiescent</span>
+<span class="c1">#   → anterograde (head-to-tail) muscle wave → forward locomotion</span>
+
+<span class="c1"># Backward mode (AVA active, AVB quiet):</span>
+<span class="c1">#   DA/VA motor neurons receive excitatory drive from AVA</span>
+<span class="c1">#   DB/VB motor neurons are quiescent</span>
+<span class="c1">#   → retrograde (tail-to-head) muscle wave → backward locomotion</span>
+</code></pre></div>
+<p><strong>Updates to <code>c302_TapWithdrawal.py</code>:</strong></p>
+<ol>
+<li><strong>Remove</strong> artificial sinusoidal current injections to VB/DB motor neurons</li>
+<li><strong>Add</strong> MEC-4 channel to touch receptor neurons (ALM, AVM, PLM, PVD)</li>
+<li><strong>Add</strong> strain input exposure to touch neurons (fed from Sibernetic)</li>
+<li><strong>Preserve</strong> existing connection polarity overrides (<code>conn_polarity_override</code>) and gap junction weight overrides (<code>conn_number_override</code>) from previous circuit tuning work (issues #224, #225)</li>
+<li><strong>Add</strong> proprioceptive coupling between adjacent body segments for wave propagation (B-class motor neurons have stretch receptor properties — Wen et al. 2012)</li>
+</ol>
+<h3 id="component-5-bidirectional-coupling-script">Component 5: Bidirectional Coupling Script<a class="headerlink" href="#component-5-bidirectional-coupling-script" title="Permanent link">&para;</a></h3>
+<p>The closed-loop coupling extends the existing <code>sibernetic_c302.py</code> (which handles neural→body) with the new body→sensory path:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># sibernetic_c302_closedloop.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">strain_readout</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_local_strain</span>
+
+<span class="c1"># Touch neuron registry</span>
+<span class="n">TOUCH_NEURONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ALML&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.30</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;gentle&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;ALMR&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.30</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;gentle&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;AVM&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.40</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">35.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;gentle&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;PLML&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;gentle&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;PLMR&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;gentle&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;PVDL&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">80.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;harsh&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;PVDR&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span> <span class="s1">&#39;rf_radius&#39;</span><span class="p">:</span> <span class="mf">80.0</span><span class="p">,</span> <span class="s1">&#39;modality&#39;</span><span class="p">:</span> <span class="s1">&#39;harsh&#39;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClosedLoopCoupling</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bidirectional coupling between c302 (neural) and Sibernetic (body).</span>
+
+<span class="sd">    Forward path (existing): muscle calcium → activation → SPH forces</span>
+<span class="sd">    Reverse path (new): SPH particle strain → MEC-4 current on touch neurons</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c302_sim</span><span class="p">,</span> <span class="n">sibernetic_sim</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neural</span> <span class="o">=</span> <span class="n">c302_sim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">sibernetic_sim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt_coupling</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;coupling&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">]</span>  <span class="c1"># 0.005 ms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rest_positions</span> <span class="o">=</span> <span class="n">sibernetic_sim</span><span class="o">.</span><span class="n">get_elastic_particle_positions</span><span class="p">()</span>  <span class="c1"># t=0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strain_filters</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">TOUCH_NEURONS</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau_filter</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># ms, low-pass filter time constant</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;One bidirectional coupling step.&quot;&quot;&quot;</span>
+
+        <span class="c1"># === FORWARD PATH (existing) ===</span>
+        <span class="c1"># Read muscle calcium from c302</span>
+        <span class="n">muscle_ca</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">neural</span><span class="o">.</span><span class="n">get_muscle_calcium</span><span class="p">()</span>
+        <span class="c1"># Convert to activation [0, 1]</span>
+        <span class="n">activation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">muscle_ca</span> <span class="o">/</span> <span class="mf">4e-7</span><span class="p">)</span>
+        <span class="c1"># Write to Sibernetic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">set_muscle_activation</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span>
+
+        <span class="c1"># === REVERSE PATH (new: [DD019](DD019_Closed_Loop_Touch_Response.md)) ===</span>
+        <span class="c1"># Read current elastic particle positions from Sibernetic</span>
+        <span class="n">current_positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">get_elastic_particle_positions</span><span class="p">()</span>
+
+        <span class="c1"># Compute strain at each touch neuron</span>
+        <span class="k">for</span> <span class="n">neuron_name</span><span class="p">,</span> <span class="n">props</span> <span class="ow">in</span> <span class="n">TOUCH_NEURONS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">raw_strain</span> <span class="o">=</span> <span class="n">compute_local_strain</span><span class="p">(</span>
+                <span class="n">current_positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rest_positions</span><span class="p">,</span>
+                <span class="n">props</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">],</span> <span class="n">props</span><span class="p">[</span><span class="s1">&#39;rf_radius&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1"># Low-pass filter</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_coupling</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau_filter</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_coupling</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strain_filters</span><span class="p">[</span><span class="n">neuron_name</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="n">raw_strain</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_filters</span><span class="p">[</span><span class="n">neuron_name</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1"># Inject strain as exposure variable on MEC-4 channel</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">neural</span><span class="o">.</span><span class="n">set_strain_exposure</span><span class="p">(</span>
+                <span class="n">neuron_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strain_filters</span><span class="p">[</span><span class="n">neuron_name</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Advance both simulators by dt_coupling</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">neural</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt_coupling</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt_coupling</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="component-6-tap-stimulus-model">Component 6: Tap Stimulus Model<a class="headerlink" href="#component-6-tap-stimulus-model" title="Permanent link">&para;</a></h3>
+<p>A tap stimulus is a brief, spatially broad mechanical perturbation of the agar plate surface, transmitted through the plate to the worm's body. In the simulation:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># stimuli/tap_stimulus.py</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TapStimulus</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delivers a mechanical tap to the simulated worm.</span>
+
+<span class="sd">    A tap is modeled as a transient displacement of boundary particles</span>
+<span class="sd">    (the agar surface) beneath the worm, simulating plate vibration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onset_time</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;stimulus&#39;</span><span class="p">][</span><span class="s1">&#39;onset&#39;</span><span class="p">]</span>      <span class="c1"># s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;stimulus&#39;</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span>      <span class="c1"># 0.01 s (10 ms)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;stimulus&#39;</span><span class="p">][</span><span class="s1">&#39;amplitude&#39;</span><span class="p">]</span>    <span class="c1"># µm displacement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;stimulus&#39;</span><span class="p">][</span><span class="s1">&#39;position&#39;</span><span class="p">]</span>      <span class="c1"># &#39;anterior&#39;, &#39;posterior&#39;, &#39;whole&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_boundary_displacement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">boundary_positions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns displacement vector for boundary particles at time t.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">onset_time</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">onset_time</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">boundary_positions</span><span class="p">)</span>
+
+        <span class="c1"># Half-sine pulse (smooth onset/offset)</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">onset_time</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">magnitude</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+
+        <span class="c1"># Apply displacement in the dorsal-ventral axis (z)</span>
+        <span class="n">displacement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">boundary_positions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="s1">&#39;whole&#39;</span><span class="p">:</span>
+            <span class="n">displacement</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">magnitude</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="s1">&#39;anterior&#39;</span><span class="p">:</span>
+            <span class="c1"># Only displace boundary particles near anterior 50%</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">boundary_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">boundary_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">displacement</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">magnitude</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="s1">&#39;posterior&#39;</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">boundary_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">boundary_positions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">displacement</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">magnitude</span>
+
+        <span class="k">return</span> <span class="n">displacement</span>
+</code></pre></div>
+<p><strong>Stimulus parameters:</strong></p>
+<ul>
+<li>Duration: 10 ms (brief mechanical impulse, as in <a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a>)</li>
+<li>Amplitude: 5-20 µm (boundary particle displacement — produces cuticle strain above MEC-4 threshold)</li>
+<li>Position: configurable (whole plate, anterior only, posterior only — for testing directional discrimination)</li>
+</ul>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-direct-current-injection-instead-of-mechanotransduction-model">1. Direct Current Injection Instead of Mechanotransduction Model<a class="headerlink" href="#1-direct-current-injection-instead-of-mechanotransduction-model" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Skip the MEC-4 channel model entirely. Inject a fixed current pulse into touch neurons when a "tap" event is triggered.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Does not close the loop — the stimulus is artificial, not derived from body mechanics</li>
+<li>Cannot produce graded responses to varying touch intensity</li>
+<li>Cannot model adaptation (MEC-4 channels inactivate during sustained touch)</li>
+<li>Cannot distinguish gentle vs. harsh touch (different channel populations)</li>
+<li>The existing c302_TapWithdrawal.py already tried this approach (empty <code>cells_to_stimulate</code>) and "does not produce the correct behavior"</li>
+</ul>
+<p><strong>When to reconsider:</strong> Never. The whole point of <a href="./">DD019</a> is mechanistically closing this loop.</p>
+<h3 id="2-simplified-linear-transduction-strain-current-no-channel-model">2. Simplified Linear Transduction (Strain → Current, No Channel Model)<a class="headerlink" href="#2-simplified-linear-transduction-strain-current-no-channel-model" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use a simple proportional mapping <code>I_touch = k * strain</code> without modeling MEC-4 channel kinetics.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Loses adaptation dynamics (the hallmark of touch receptor neuron responses)</li>
+<li>Cannot reproduce the rapid onset + slow decay profile observed electrophysiologically</li>
+<li>Cannot be validated against <a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a> channel recordings</li>
+<li>Minimal complexity savings — the HH-style channel adds only 2 state variables per touch neuron</li>
+</ul>
+<p><strong>When to reconsider:</strong> If MEC-4 channel parameters prove too uncertain and the linear model suffices for behavioral validation.</p>
+<h3 id="3-machine-learned-transduction-model-dd017-component-4">3. Machine-Learned Transduction Model (<a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> Component 4)<a class="headerlink" href="#3-machine-learned-transduction-model-dd017-component-4" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Train an RNN on calcium imaging data from touch neurons to learn the strain→activity mapping.</p>
+<p><strong>Deferred because:</strong></p>
+<ul>
+<li>Insufficient training data (calcium imaging during calibrated mechanical stimulation is scarce)</li>
+<li>Black-box model — cannot interpret the transduction mechanism</li>
+<li>Better to start with the biophysical model and compare to ML later</li>
+</ul>
+<p><strong>When to try:</strong> After the biophysical MEC-4 model is validated. If it performs poorly, the learned model from <a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> Component 4 may capture nonlinear dynamics that the HH approximation misses.</p>
+<h3 id="4-finite-element-strain-computation-instead-of-sph-particle-displacement">4. Finite Element Strain Computation Instead of SPH Particle Displacement<a class="headerlink" href="#4-finite-element-strain-computation-instead-of-sph-particle-displacement" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Compute strain using a finite element mesh overlaid on the SPH body, for more accurate continuum mechanics.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Adds significant computational cost (FEM mesh + SPH particles in parallel)</li>
+<li>SPH particle displacement provides sufficient strain resolution for the ~6 touch neuron receptive fields</li>
+<li>Maintaining FEM/SPH consistency during large deformations is non-trivial</li>
+<li>FEM was already rejected for body physics in <a href="../DD003_Body_Physics_Architecture/">DD003</a></li>
+</ul>
+<p><strong>When to reconsider:</strong> If strain computation from SPH particles proves too noisy or spatially inaccurate for fine mechanosensory discrimination.</p>
+<h3 id="5-proprioceptive-feedback-via-stretch-receptors-on-motor-neurons">5. Proprioceptive Feedback via Stretch Receptors on Motor Neurons<a class="headerlink" href="#5-proprioceptive-feedback-via-stretch-receptors-on-motor-neurons" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> In addition to touch neurons, model stretch-sensitive channels on B-class motor neurons (Wen et al. 2012) for proprioceptive wave propagation.</p>
+<p><strong>Deferred (but important) because:</strong></p>
+<ul>
+<li>This is a separate proprioceptive feedback loop, not the touch response loop</li>
+<li>Adding it simultaneously would confound validation of the touch circuit</li>
+<li>Motor neuron proprioception is likely needed for stable undulatory locomotion but is not required for tap withdrawal specifically</li>
+</ul>
+<p><strong>When to add:</strong> Phase 3, after <a href="./">DD019</a>'s touch-response closed loop is validated. Proprioceptive feedback could be <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/">DD020</a>.</p>
+<h3 id="6-detailed-cuticle-layer-mechanics">6. Detailed Cuticle Layer Mechanics<a class="headerlink" href="#6-detailed-cuticle-layer-mechanics" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Model the three cuticle layers (cortical, medial, basal) with distinct mechanical properties and the MEC protein complex (MEC-1/MEC-5/MEC-9 extracellular attachment) explicitly.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li><a href="../DD003_Body_Physics_Architecture/">DD003</a> currently uses homogeneous elastic particles for the body wall</li>
+<li>Adding cuticle microstructure requires <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity) to tag particles with tissue layers</li>
+<li>Overkill for the behavioral validation target (tap withdrawal doesn't require cuticle layer resolution)</li>
+<li>Insufficient mechanical characterization of individual cuticle layers</li>
+</ul>
+<p><strong>When to reconsider:</strong> If touch sensitivity requires modeling cuticle anisotropy (longitudinal vs. circumferential strain transmission).</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<h3 id="what-defines-a-valid-closed-loop-touch-response-implementation">What Defines a Valid Closed-Loop Touch Response Implementation?<a class="headerlink" href="#what-defines-a-valid-closed-loop-touch-response-implementation" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>MEC-4 Channel Electrophysiology:</strong> The channel model must reproduce the key features of <a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a> recordings:</p>
+<ul>
+<li>Rapid onset (&lt;5 ms from strain application)</li>
+<li>Peak current 50-150 pA for threshold strain</li>
+<li>Reversal potential near +10 mV</li>
+<li>Adaptation (current decays to &lt;20% of peak within 200 ms of sustained strain)</li>
+</ul>
+</li>
+<li>
+<p><strong>Strain Readout Physical Consistency:</strong> Computed strain values must be:</p>
+<ul>
+<li>Zero when no external force is applied (resting state)</li>
+<li>Proportional to applied boundary displacement (linear regime)</li>
+<li>Spatially localized (strain at posterior should not affect anterior touch neurons)</li>
+<li>Temporally consistent with SPH timestep (no aliasing artifacts)</li>
+</ul>
+</li>
+<li>
+<p><strong>Closed-Loop Stability:</strong> The bidirectional coupling must not introduce:</p>
+<ul>
+<li>Oscillatory instability (positive feedback: strain → touch → motor → movement → more strain)</li>
+<li>Numerical divergence (NaN, infinite voltages, particle escape)</li>
+<li>Must remain stable for at least 30 seconds of simulated time</li>
+</ul>
+</li>
+<li>
+<p><strong>Behavioral Correctness:</strong></p>
+<ul>
+<li>Anterior touch → backward locomotion (ALM/AVM → AVA pathway)</li>
+<li>Posterior touch → forward acceleration (PLM → AVB pathway)</li>
+<li>Whole-plate tap → backward (anterior-dominant response, as in real worms)</li>
+<li>No response without stimulus (baseline forward crawling preserved)</li>
+</ul>
+</li>
+<li>
+<p><strong>Preservation of Existing Behavior:</strong> With <code>sensory.mechanotransduction: false</code>, the simulation must produce identical results to the existing open-loop model. No regression in forward crawling kinematics.</p>
+</li>
+</ol>
+<h3 id="validation-procedure">Validation Procedure<a class="headerlink" href="#validation-procedure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. MEC-4 channel unit test</span>
+python<span class="w"> </span>scripts/test_mec4_channel.py
+<span class="c1"># Expected: matches O&#39;Hagan et al. 2005 current traces within ±30%</span>
+
+<span class="c1"># 2. Strain readout unit test</span>
+python<span class="w"> </span>scripts/test_strain_readout.py<span class="w"> </span>--known_displacement<span class="w"> </span><span class="m">10</span>.0
+<span class="c1"># Expected: strain proportional to displacement, correct spatial localization</span>
+
+<span class="c1"># 3. Open-loop regression</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>forward_crawl
+<span class="c1"># Expected: identical kinematic scores with mechanotransduction disabled</span>
+
+<span class="c1"># 4. Closed-loop tap withdrawal</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal
+<span class="c1"># Expected:</span>
+<span class="c1">#   - Reversal onset: &lt; 1 s (target: 300-800 ms per Chalfie et al.)</span>
+<span class="c1">#   - Reversal distance: ≥ 1 body length</span>
+<span class="c1">#   - Recovery: forward crawling resumes within 10 s</span>
+<span class="c1">#   - Direction discrimination: anterior → backward, posterior → forward</span>
+
+<span class="c1"># 5. Stability test</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal<span class="w"> </span>--duration<span class="w"> </span><span class="m">30</span>
+<span class="c1"># Expected: no NaN, no divergence, no oscillatory instability</span>
+</code></pre></div>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="what-this-design-document-does-not-cover">What This Design Document Does NOT Cover:<a class="headerlink" href="#what-this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Chemosensory transduction:</strong> Olfactory (AWA, AWC), gustatory (ASE), nociceptive chemical (ASH) neuron responses to chemical stimuli. Each requires a separate channel model and stimulus delivery system. Future DDs.</p>
+</li>
+<li>
+<p><strong>Thermosensory transduction:</strong> AFD thermosensory neurons and cryophilic/thermophilic navigation. Different transduction mechanism entirely.</p>
+</li>
+<li>
+<p><strong>Proprioceptive feedback:</strong> Stretch-sensitive channels on B-class motor neurons (Wen et al. 2012). Important for locomotion wave propagation but a separate feedback loop from touch. Deferred to future DD.</p>
+</li>
+<li>
+<p><strong>Nose touch:</strong> The nose-touch response involves different neurons (OLQ, CEP, FLP, ASH) and likely different mechanosensory channels (TRP family, not DEG/ENaC). Separate behavior circuit.</p>
+</li>
+<li>
+<p><strong>Habituation and sensitization:</strong> Repeated taps cause habituation (decreased reversal probability). This involves neuromodulatory mechanisms (dopamine, serotonin) not modeled in <a href="./">DD019</a>. See <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptidergic Connectome) for the modulatory framework.</p>
+</li>
+<li>
+<p><strong>Male-specific touch neurons:</strong> Males have additional touch-related neurons (e.g., ray neurons for mating). Hermaphrodite only in <a href="./">DD019</a>.</p>
+</li>
+<li>
+<p><strong>Environmental mechanics beyond flat agar:</strong> Soil, bacterial lawns, geometric obstacles, microfluidic channels. <a href="../DD003_Body_Physics_Architecture/">DD003</a> currently supports simple boundary conditions only.</p>
+</li>
+<li>
+<p><strong>Cuticle fine structure:</strong> Three-layer cuticle mechanics, annuli, alae. Homogeneous elastic particles are sufficient for <a href="./">DD019</a>.</p>
+</li>
+</ol>
+<hr />
+<h2 id="code-reuse-opportunities">Code Reuse Opportunities<a class="headerlink" href="#code-reuse-opportunities" title="Permanent link">&para;</a></h2>
+<h3 id="ce_locomotion-proprioceptive-feedback-model">CE_locomotion Proprioceptive Feedback Model<a class="headerlink" href="#ce_locomotion-proprioceptive-feedback-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repository:</strong> <code>openworm/CE_locomotion</code> (pushed 2026-02-18, <strong>VERY ACTIVE</strong>)</li>
+<li><strong>Collaboration:</strong> Dr. Erick Olivares &amp; Prof. Randall Beer</li>
+</ul>
+<p>This repo contains a <strong>complete neuromechanical C++ model</strong> with a <code>StretchReceptor</code> module implementing proprioceptive feedback on motor neurons (Wen et al. 2012). This is the <strong>missing piece</strong> <a href="./">DD019</a> scopes out for future work.</p>
+<p><strong>What It Provides:</strong></p>
+<ul>
+<li><code>StretchReceptor.cpp/h</code> — B-class motor neuron stretch-sensitive currents</li>
+<li>Produces forward + backward locomotion from the same circuit (gait modulation)</li>
+<li>Evolutionary parameter fitting algorithm</li>
+</ul>
+<p><strong>Reuse Plan for <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a> (Proprioceptive Feedback):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone and test</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/CE_locomotion.git
+<span class="nb">cd</span><span class="w"> </span>CE_locomotion
+make
+./main<span class="w">  </span><span class="c1"># Runs evolutionary optimization (~2 minutes)</span>
+python<span class="w"> </span>viz.py<span class="w">  </span><span class="c1"># Visualize neural/muscle activity</span>
+
+<span class="c1"># Extract StretchReceptor algorithm</span>
+<span class="c1"># File: StretchReceptor.cpp (lines 1-120, stretch-dependent current model)</span>
+<span class="c1"># Port: C++ → Python or NeuroML for c302 integration</span>
+</code></pre></div></p>
+<p><strong>Next Actions:</strong></p>
+<ul>
+<li>[ ] Contact authors (still active as of 2026-02-18) — collaborate on proprioception DD?</li>
+<li>[ ] Extract StretchReceptor model, compare to Wen et al. 2012 data</li>
+<li>[ ] Write <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a>: Proprioceptive Feedback (references CE_locomotion as source)</li>
+<li>[ ] Integrate with <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> B-class motor neurons</li>
+</ul>
+<p><strong>Estimated Time Savings:</strong> 30-40 hours (proprioceptive model exists, just needs porting)</p>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<h3 id="the-longstanding-goal">The Longstanding Goal<a class="headerlink" href="#the-longstanding-goal" title="Permanent link">&para;</a></h3>
+<p>The tap withdrawal reflex is arguably the most studied mechanosensory behavior in <em>C. elegans</em>. Martin Chalfie's pioneering work (Nobel Prize 2008, partly for GFP discovery in touch neuron studies) established the genetic and cellular basis:</p>
+<ul>
+<li>Six touch receptor neurons mediate gentle body touch</li>
+<li>MEC genes encode the mechanosensory channel complex</li>
+<li>The neural circuit for tap withdrawal was mapped by <a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a> and refined by <a href="https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996">Wicks et al. 1996</a></li>
+</ul>
+<p>For OpenWorm, implementing closed-loop touch response has been a goal since the project's inception. GitHub issues #223-#227 (openworm/openworm) document multi-year efforts to connect the c302 neural circuit with Sibernetic body physics for this behavior.</p>
+<h3 id="what-exists-today">What Exists Today<a class="headerlink" href="#what-exists-today" title="Permanent link">&para;</a></h3>
+<p><strong>c302_TapWithdrawal.py</strong> defines the tap withdrawal circuit with:</p>
+<ul>
+<li>16 interneurons: AVAL/R, AVBL/R, PVCL/R, AVDL/R, DVA, PVDL/R, PLML/R, AVM, ALML/R</li>
+<li>Motor neuron groups: VA1-12, VB1-11, DA1-9, DB1-7, DD1-6, VD1-13</li>
+<li>130+ connection polarity overrides (exc/inh assignments, manually curated from Chalfie et al.)</li>
+<li>60+ gap junction weight overrides</li>
+<li><strong>But:</strong> sensory neurons have no input (<code>cells_to_stimulate</code> is empty)</li>
+<li><strong>But:</strong> motor output uses artificial sinusoidal inputs to VB/DB rather than command interneuron drive</li>
+<li><strong>Header note:</strong> "Tap-Withdrawal circuit still under development — it does not produce the correct behavior!"</li>
+</ul>
+<p><strong>sibernetic_c302.py</strong> implements the forward coupling (neural → body):</p>
+<ul>
+<li>Reads muscle calcium from NEURON</li>
+<li>Converts to activation coefficients</li>
+<li>Writes to Sibernetic muscle input file</li>
+<li><strong>But:</strong> no reverse path (body → sensory)</li>
+</ul>
+<h3 id="whats-missing-dd019-fills-this">What's Missing (<a href="./">DD019</a> Fills This)<a class="headerlink" href="#whats-missing-dd019-fills-this" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Mechanosensory transduction model</strong> — converting cuticle strain to neural current</li>
+<li><strong>Cuticle strain readout</strong> — computing strain from SPH particle displacements</li>
+<li><strong>Bidirectional coupling</strong> — extending <code>sibernetic_c302.py</code> with the reverse path</li>
+<li><strong>Tap stimulus</strong> — delivering a mechanical perturbation through Sibernetic boundary particles</li>
+<li><strong>Command-interneuron-driven motor switching</strong> — replacing artificial sinusoidal inputs with emergent motor pattern selection</li>
+</ol>
+<h3 id="biological-foundations">Biological Foundations<a class="headerlink" href="#biological-foundations" title="Permanent link">&para;</a></h3>
+<p>The tap withdrawal circuit is one of the best-characterized neural circuits in any organism:</p>
+<p><strong><a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a></strong> — defined the gentle touch circuit: ALM/AVM (anterior) and PLM (posterior) touch neurons, AVA/AVD (backward command) and AVB/PVC (forward command) interneurons.</p>
+<p><strong><a href="https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996">Wicks et al. 1996</a></strong> — showed that anterior touch preferentially activates backward locomotion, posterior touch activates forward locomotion, and a whole-plate tap produces a net backward response because the anterior pathway dominates.</p>
+<p><strong><a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a></strong> — first direct electrophysiological recordings from <em>C. elegans</em> touch receptor neurons. Showed MEC-4 channel responses with rapid onset, adaptation, and ~100-150 pA peak currents.</p>
+<p><strong><a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a></strong> — characterized MEC-4/MEC-10 as a DEG/ENaC family channel with non-selective cation permeability (E_rev ≈ +10 mV).</p>
+<p><strong>Wen et al. 2012</strong> — demonstrated proprioceptive feedback in B-class motor neurons, suggesting the locomotion wave is partially driven by stretch-sensitive mechanisms (deferred to future DD, out of scope here).</p>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="existing-code-locations">Existing Code Locations<a class="headerlink" href="#existing-code-locations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>openworm/c302/
+├── c302/c302_TapWithdrawal.py         # Existing circuit definition (to be updated)
+├── c302/c302_GenericCell.py            # Generic neuron template ([DD001](DD001_Neural_Circuit_Architecture.md))
+├── channel_models/                     # Existing channel models
+│   ├── leak_chan.channel.nml
+│   ├── k_slow_chan.channel.nml
+│   ├── k_fast_chan.channel.nml
+│   └── ca_boyle_chan.channel.nml
+├── channel_models/mec4_chan.channel.nml  # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
+└── cells/                              # NEW touch neuron templates ([DD019](DD019_Closed_Loop_Touch_Response.md))
+    ├── ALMCell.cell.nml
+    ├── AVMCell.cell.nml
+    ├── PLMCell.cell.nml
+    └── PVDCell.cell.nml
+
+openworm/sibernetic/
+├── sibernetic_c302.py                  # Existing forward coupling
+├── sibernetic_c302_closedloop.py       # NEW bidirectional ([DD019](DD019_Closed_Loop_Touch_Response.md))
+├── coupling/
+│   └── strain_readout.py              # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
+└── stimuli/
+    └── tap_stimulus.py                # NEW ([DD019](DD019_Closed_Loop_Touch_Response.md))
+</code></pre></div>
+<h3 id="key-data-sources">Key Data Sources<a class="headerlink" href="#key-data-sources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Connectome (NMJ + interneuron):</strong> ConnectomeToolbox / <code>cect</code> package (<a href="https://doi.org/10.1038/s41586-019-1352-7">Cook et al. 2019</a>)</li>
+<li><strong>MEC-4 electrophysiology:</strong> <a href="https://doi.org/10.1038/nn1362">O'Hagan et al. 2005</a>, <a href="https://doi.org/10.1038/4151039a">Goodman et al. 2002</a></li>
+<li><strong>Behavioral data:</strong> <a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie et al. 1985</a> (reversal latency), <a href="https://doi.org/10.1523/JNEUROSCI.16-12-04017.1996">Wicks et al. 1996</a> (direction discrimination)</li>
+<li><strong>Touch neuron positions:</strong> WormAtlas, <a href="https://doi.org/10.1098/rstb.1986.0056">White et al. 1986</a></li>
+</ul>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="if-mechanotransduction-model-needs-updating">If Mechanotransduction Model Needs Updating<a class="headerlink" href="#if-mechanotransduction-model-needs-updating" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Create a new channel model</strong> (e.g., <code>mec4_v2_chan.channel.nml</code>) rather than modifying the original</li>
+<li><strong>Pin the channel version</strong> in <code>openworm.yml</code>: <code>sensory.mec4_version: "v2"</code></li>
+<li><strong>Re-validate</strong> all behavioral tests (reversal latency, distance, direction discrimination)</li>
+<li><strong>Update coupling script</strong> if strain→channel interface changes</li>
+</ol>
+<h3 id="if-additional-sensory-modalities-are-added">If Additional Sensory Modalities Are Added<a class="headerlink" href="#if-additional-sensory-modalities-are-added" title="Permanent link">&para;</a></h3>
+<p>Each new sensory modality (chemosensory, thermosensory, proprioceptive) follows the <a href="./">DD019</a> pattern:</p>
+<ol>
+<li>Define the transduction channel model</li>
+<li>Create a stimulus readout module (chemical concentration, temperature, stretch)</li>
+<li>Extend the bidirectional coupling script</li>
+<li>Validate the emergent behavior</li>
+</ol>
+<h3 id="existing-code-resources">Existing Code Resources<a class="headerlink" href="#existing-code-resources" title="Permanent link">&para;</a></h3>
+<p><strong>WormsenseLab_ASH</strong> (<a href="https://github.com/openworm/WormsenseLab_ASH">openworm/WormsenseLab_ASH</a>, 2021, dormant):
+Contains ASH neuron patch clamp recordings. ASH is a polymodal nociceptor responding to mechanical, chemical, and osmotic stimuli — relevant for validating touch neuron models and extending beyond gentle touch.</p>
+<p><strong>CE_locomotion</strong> (<a href="https://github.com/openworm/CE_locomotion">openworm/CE_locomotion</a>, active 2026):
+Contains <code>StretchReceptor.cpp/h</code> implementing proprioceptive feedback on B-class motor neurons (Wen et al. 2012 model). Directly relevant for the proprioceptive feedback deferred to <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/">DD023</a>. <strong>Estimated time savings: 30 hours.</strong></p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong><a href="https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985">Chalfie M, Sulston JE, White JG, Southgate E, Thomson JN, Brenner S (1985)</a>.</strong> "The neural circuit for touch sensitivity in <em>Caenorhabditis elegans</em>." <em>J Neurosci</em> 5:956-964.
+   <em>Foundational touch circuit: touch neurons, command interneurons, reversal behavior.</em></p>
+</li>
+<li>
+<p><strong>Wicks SR, Roehrig CJ, Bhatt R, Rankin CH (1996).</strong> "Tap withdrawal in <em>Caenorhabditis elegans</em>: Identification of neural substrates." <em>J Neurobiol</em> 31:1-11.
+   <em>Refined circuit diagram. Anterior vs. posterior discrimination.</em></p>
+</li>
+<li>
+<p><strong>O'Hagan R, Bhatt S, Bhatt R, Bhatt R (2005).</strong> "The MEC-4 DEG/ENaC channel of <em>Caenorhabditis elegans</em> touch receptor neurons transduces mechanical signals." <em>Nat Neurosci</em> 8:43-50.
+   <em>First direct electrophysiology of touch receptor neurons. MEC-4 channel kinetics.</em></p>
+</li>
+<li>
+<p><strong>Goodman MB, Ernstrom GG, Bhatt R, Davis MW, Jones BK (2002).</strong> "MEC-2 regulates <em>C. elegans</em> DEG/ENaC channels needed for mechanosensation." <em>Nature</em> 415:1039-1042.
+   <em>MEC channel complex characterization. Reversal potential, conductance.</em></p>
+</li>
+<li>
+<p><strong>Wen Q, Po MD, Hulme E, Chen S, Liu X, Kwok SW, Gershow M, Leifer AM, Butler V, Fang-Yen C, Samuel ADT (2012).</strong> "Proprioceptive coupling within motor neurons drives undulatory locomotion in <em>C. elegans</em>." <em>Neuron</em> 76:750-761.
+   <em>B-class motor neuron proprioception (stretch-sensitive, out of scope for <a href="./">DD019</a>).</em></p>
+</li>
+<li>
+<p><strong>Boyle JH, Cohen N (2008).</strong> "Caenorhabditis elegans body wall muscles are simple actuators." <em>Biosystems</em> 94:170-181.
+   <em>Muscle model parameters used in <a href="../DD002_Muscle_Model_Architecture/">DD002</a> calcium-force coupling.</em></p>
+</li>
+<li>
+<p><strong>Cook SJ et al. (2019).</strong> "Whole-animal connectomes of both <em>Caenorhabditis elegans</em> sexes." <em>Nature</em> 571:63-71.
+   <em>Connectome topology for circuit definition.</em></p>
+</li>
+<li>
+<p><strong>White JG, Southgate E, Thomson JN, Brenner S (1986).</strong> "The structure of the nervous system of the nematode <em>Caenorhabditis elegans</em>." <em>Phil Trans R Soc Lond B</em> 314:1-340.
+   <em>Original connectome paper (Mind of a Worm). Touch neuron positions and morphology.</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+<th>Timestep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elastic particle positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>Per-particle (x, y, z) for body wall particles</td>
+<td>Sibernetic internal state / shared memory</td>
+<td>µm</td>
+<td>dt_body (20 µs)</td>
+</tr>
+<tr>
+<td>Rest particle positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>Per-particle (x, y, z) at t=0</td>
+<td>Snapshot at initialization</td>
+<td>µm</td>
+<td>One-time</td>
+</tr>
+<tr>
+<td>Boundary particle positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td>Per-particle (x, y, z) for agar surface</td>
+<td>Sibernetic internal state</td>
+<td>µm</td>
+<td>dt_body</td>
+</tr>
+<tr>
+<td>Connectome (touch circuit)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (ConnectomeToolbox)</td>
+<td>Touch neuron → interneuron → motor neuron adjacency</td>
+<td>ConnectomeToolbox API</td>
+<td>neuron pairs + weights</td>
+<td>One-time</td>
+</tr>
+<tr>
+<td>Cell-type channel densities (optional)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>CeNGEN-derived conductances for ALM, AVM, PLM, PVD</td>
+<td>NeuroML <code>&lt;channelDensity&gt;</code></td>
+<td>S/cm²</td>
+<td>One-time</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+<th>Timestep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Touch neuron membrane voltage</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (part of network simulation)</td>
+<td><code>V</code> per touch neuron</td>
+<td>NeuroML state variable</td>
+<td>mV</td>
+<td>dt_neuron (0.05 ms)</td>
+</tr>
+<tr>
+<td>Touch neuron [Ca²⁺]ᵢ</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (downstream synaptic output)</td>
+<td><code>ca_internal</code> per touch neuron</td>
+<td>NeuroML state variable</td>
+<td>mol/cm³</td>
+<td>dt_neuron</td>
+</tr>
+<tr>
+<td>Command interneuron activity (AVA, AVB)</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a> (motor neuron drive)</td>
+<td>Calcium/voltage of command interneurons</td>
+<td>NeuroML state variable</td>
+<td>mV, mol/cm³</td>
+<td>dt_neuron</td>
+</tr>
+<tr>
+<td>Reversal event log</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> (Tier 3 validation)</td>
+<td>Event onset/offset/type</td>
+<td>JSON or CSV</td>
+<td>s (timestamps)</td>
+<td>Per-event</td>
+</tr>
+<tr>
+<td>Cuticle strain time series (viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-body-segment strain magnitude</td>
+<td>OME-Zarr: <code>sensory/strain/</code>, shape (n_timesteps, n_segments)</td>
+<td>dimensionless</td>
+<td>output_interval</td>
+</tr>
+<tr>
+<td>Reversal event annotations (viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Event markers on timeline</td>
+<td>OME-Zarr: <code>behavior/events/</code>, shape (n_events, 3)</td>
+<td>s, enum</td>
+<td>Per-event</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository (channel model + circuit)</strong></td>
+<td><code>openworm/c302</code></td>
+</tr>
+<tr>
+<td><strong>Repository (coupling + stimulus)</strong></td>
+<td><code>openworm/sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Docker stage</strong></td>
+<td><code>neural</code> (c302 changes) + <code>body</code> (Sibernetic changes)</td>
+</tr>
+<tr>
+<td><strong><code>versions.lock</code> keys</strong></td>
+<td><code>c302</code>, <code>sibernetic</code> (both must be pinned together for closed-loop)</td>
+</tr>
+<tr>
+<td><strong>Build dependencies</strong></td>
+<td>Same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> + <a href="../DD003_Body_Physics_Architecture/">DD003</a>; no new dependencies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">sensory</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mechanotransduction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># Enable MEC-4 channel on touch neurons</span>
+<span class="w">  </span><span class="nt">mec4_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v1&quot;</span><span class="w">                   </span><span class="c1"># Pin channel model version</span>
+<span class="w">  </span><span class="nt">strain_filter_tau</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">               </span><span class="c1"># ms, low-pass filter on strain signal</span>
+<span class="w">  </span><span class="nt">strain_readout_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sph_displacement&quot;</span><span class="w">  </span><span class="c1"># Method for computing strain</span>
+
+<span class="nt">behavior</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">tap_withdrawal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                 </span><span class="c1"># Enable closed-loop tap withdrawal</span>
+<span class="w">  </span><span class="nt">motor_switching</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;command_interneuron&quot;</span><span class="w">  </span><span class="c1"># &quot;command_interneuron&quot; ([DD019](DD019_Closed_Loop_Touch_Response.md)) or &quot;sinusoidal&quot; (legacy)</span>
+
+<span class="nt">stimulus</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tap&quot;</span><span class="w">                          </span><span class="c1"># Stimulus type</span>
+<span class="w">  </span><span class="nt">onset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">                           </span><span class="c1"># s, time of tap delivery</span>
+<span class="w">  </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">                       </span><span class="c1"># s, tap duration (10 ms impulse)</span>
+<span class="w">  </span><span class="nt">amplitude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span><span class="w">                      </span><span class="c1"># µm, boundary particle displacement</span>
+<span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;whole&quot;</span><span class="w">                    </span><span class="c1"># &quot;whole&quot;, &quot;anterior&quot;, &quot;posterior&quot;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sensory.mechanotransduction</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable MEC-4 mechanosensory transduction</td>
+</tr>
+<tr>
+<td><code>sensory.mec4_version</code></td>
+<td><code>"v1"</code></td>
+<td>String</td>
+<td>Pin MEC-4 channel model version</td>
+</tr>
+<tr>
+<td><code>sensory.strain_filter_tau</code></td>
+<td><code>5.0</code></td>
+<td>1.0-50.0 ms</td>
+<td>Low-pass filter time constant for strain signal</td>
+</tr>
+<tr>
+<td><code>sensory.strain_readout_method</code></td>
+<td><code>"sph_displacement"</code></td>
+<td><code>"sph_displacement"</code></td>
+<td>Strain computation method</td>
+</tr>
+<tr>
+<td><code>behavior.tap_withdrawal</code></td>
+<td><code>false</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable closed-loop tap withdrawal circuit</td>
+</tr>
+<tr>
+<td><code>behavior.motor_switching</code></td>
+<td><code>"sinusoidal"</code></td>
+<td><code>"sinusoidal"</code>, <code>"command_interneuron"</code></td>
+<td>Motor pattern source</td>
+</tr>
+<tr>
+<td><code>stimulus.type</code></td>
+<td><code>"tap"</code></td>
+<td><code>"tap"</code>, <code>"gentle_anterior"</code>, <code>"gentle_posterior"</code></td>
+<td>Stimulus type</td>
+</tr>
+<tr>
+<td><code>stimulus.onset</code></td>
+<td><code>5.0</code></td>
+<td>Positive float (s)</td>
+<td>Stimulus onset time</td>
+</tr>
+<tr>
+<td><code>stimulus.duration</code></td>
+<td><code>0.01</code></td>
+<td>0.001-1.0 s</td>
+<td>Stimulus duration</td>
+</tr>
+<tr>
+<td><code>stimulus.amplitude</code></td>
+<td><code>10.0</code></td>
+<td>1.0-50.0 µm</td>
+<td>Boundary displacement amplitude</td>
+</tr>
+<tr>
+<td><code>stimulus.position</code></td>
+<td><code>"whole"</code></td>
+<td><code>"whole"</code>, <code>"anterior"</code>, <code>"posterior"</code></td>
+<td>Spatial position of stimulus</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal
+<span class="c1"># Checks: 30 s simulation without NaN/divergence</span>
+<span class="c1"># Checks: reversal event detected after tap</span>
+<span class="c1"># Checks: forward crawling preserved before tap</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>tap_withdrawal
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Reversal onset &lt; 1 s (Tier 3, blocking)</span>
+<span class="c1">#   - Reversal distance ≥ 1 body length (Tier 3, blocking)</span>
+<span class="c1">#   - Recovery to forward &lt; 10 s (Tier 3, blocking)</span>
+<span class="c1">#   - Direction discrimination (anterior→backward, posterior→forward) (Tier 3, blocking)</span>
+<span class="c1">#   - No regression in forward crawling kinematics (Tier 3, blocking)</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>jnml -validate</code> passes for MEC-4 channel model and touch neuron cell files</li>
+<li>[ ] MEC-4 unit test passes (onset, peak current, adaptation, reversal potential)</li>
+<li>[ ] Strain readout unit test passes (spatial localization, proportionality)</li>
+<li>[ ] <code>quick-test</code> passes (closed-loop stable 30 s, reversal event detected)</li>
+<li>[ ] <code>validate</code> passes (Tier 3 behavioral + no forward-crawl regression)</li>
+<li>[ ] Existing open-loop simulations produce identical results when mechanotransduction is disabled</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sensory/strain/</code> (n_timesteps, n_segments)</td>
+<td>Cuticle strain heatmap</td>
+<td>Blue (0) → red (&gt;0.1 strain)</td>
+</tr>
+<tr>
+<td><code>neural/calcium/</code> (n_timesteps, 302) — touch + command neurons highlighted</td>
+<td>Touch circuit activation</td>
+<td>Warm colormap, touch neurons + AVA/AVB highlighted</td>
+</tr>
+<tr>
+<td><code>behavior/events/</code> (n_events, 3)</td>
+<td>Reversal event markers</td>
+<td>Green (forward) → red (backward) on timeline</td>
+</tr>
+<tr>
+<td><code>body/positions/</code> (existing)</td>
+<td>Body trajectory</td>
+<td>Path colored by locomotion direction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elastic particle positions</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If particle count, indexing, or coordinate frame changes, strain readout breaks</td>
+</tr>
+<tr>
+<td>Muscle activation interface</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+<td>Forward coupling path (existing) — if activation format changes, coupling script breaks</td>
+</tr>
+<tr>
+<td>Touch circuit connectivity</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If connectome data for touch neurons or command interneurons changes, circuit behavior changes</td>
+</tr>
+<tr>
+<td>Cell-type conductances (optional)</td>
+<td><a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a></td>
+<td>If CeNGEN-derived densities for touch neurons change, baseline excitability changes</td>
+</tr>
+<tr>
+<td>Neuropeptide modulation (optional)</td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+<td>Dopamine/serotonin modulation of touch sensitivity (habituation) — future work</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Behavioral validation</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Tier 3 behavioral tests are defined by <a href="./">DD019</a> success criteria</td>
+</tr>
+<tr>
+<td>Learned sensory transduction</td>
+<td><a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a></td>
+<td><a href="../DD017_Hybrid_Mechanistic_ML_Framework/">DD017</a> Component 4 may replace MEC-4 model with learned alternative — interface must match</td>
+</tr>
+<tr>
+<td>Future sensory DDs</td>
+<td>Future</td>
+<td><a href="./">DD019</a> establishes the pattern for body→sensory coupling; future modalities follow same architecture</td>
+</tr>
+<tr>
+<td>Visualization</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>New OME-Zarr groups (<code>sensory/</code>, <code>behavior/</code>) require viewer support</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Implement MEC-4 channel model in NeuroML (<code>mec4_chan.channel.nml</code>)</p>
+</li>
+<li>Implement cuticle strain readout from SPH particles (<code>strain_readout.py</code>)</li>
+<li>Implement tap stimulus delivery (<code>tap_stimulus.py</code>)</li>
+<li>Extend coupling script for bidirectional communication (<code>sibernetic_c302_closedloop.py</code>)</li>
+<li>Update <code>c302_TapWithdrawal.py</code>: add MEC-4 to touch neurons, replace sinusoidal input with command interneuron drive</li>
+<li>Validate: MEC-4 unit test → strain readout unit test → closed-loop stability → behavioral metrics</li>
+<li>Create GitHub issues for each script and component (track with <code>dd019</code> label)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

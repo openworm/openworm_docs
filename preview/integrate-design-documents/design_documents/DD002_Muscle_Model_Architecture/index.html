@@ -1,0 +1,4931 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD002_Muscle_Model_Architecture/">
+      
+      
+        <link rel="prev" href="../DD001_draft_issues/">
+      
+      
+        <link rel="next" href="../DD002_draft_issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD002 Muscle Model - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd002-muscle-model-architecture-and-calcium-force-coupling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD002 Muscle Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Cells Use the Same Hodgkin-Huxley Framework as Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcium-to-force-coupling-the-bridge-to-sibernetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calcium-to-Force Coupling (The Bridge to Sibernetic)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neural-to-muscle-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neural-to-Muscle Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hill-type-muscle-model-with-crossbridge-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hill-Type Muscle Model with Crossbridge Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-direct-neural-activation-without-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct Neural Activation Without Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fitzhugh-nagumo-simplified-excitable-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. FitzHugh-Nagumo Simplified Excitable Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-cell-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Cell Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-list-95-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle List (95 Cells)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-sibernetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Sibernetic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-detailed-crossbridge-mechanics-become-necessary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Detailed Crossbridge Mechanics Become Necessary:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-muscle-type-diversity-is-required-phase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Muscle-Type Diversity Is Required (Phase 3):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-single-muscle-compartment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Single Muscle Compartment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-lack-of-direct-muscle-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Lack of Direct Muscle Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-mvl24-muscle-does-not-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: MVL24 Muscle Does Not Exist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-bridge-ownership" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Bridge Ownership
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Environment Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-that-may-not-exist-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts that may not exist yet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#green-light-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Green light criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Cells Use the Same Hodgkin-Huxley Framework as Neurons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcium-to-force-coupling-the-bridge-to-sibernetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calcium-to-Force Coupling (The Bridge to Sibernetic)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neural-to-muscle-coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neural-to-Muscle Coupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hill-type-muscle-model-with-crossbridge-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hill-Type Muscle Model with Crossbridge Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-direct-neural-activation-without-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Direct Neural Activation Without Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fitzhugh-nagumo-simplified-excitable-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. FitzHugh-Nagumo Simplified Excitable Dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-cell-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Cell Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-list-95-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle List (95 Cells)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-to-sibernetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling to Sibernetic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Path
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-detailed-crossbridge-mechanics-become-necessary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Detailed Crossbridge Mechanics Become Necessary:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-muscle-type-diversity-is-required-phase-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If Muscle-Type Diversity Is Required (Phase 3):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-and-future-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Future Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known Issues and Future Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-single-muscle-compartment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Single Muscle Compartment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-lack-of-direct-muscle-electrophysiology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Lack of Direct Muscle Electrophysiology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-mvl24-muscle-does-not-exist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: MVL24 Muscle Does Not Exist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd014-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD014 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-bridge-ownership" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Bridge Ownership
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd002-muscle-model-architecture-and-calcium-force-coupling">DD002: Muscle Model Architecture and Calcium-Force Coupling<a class="headerlink" href="#dd002-muscle-model-architecture-and-calcium-force-coupling" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Accepted</li>
+<li><strong>Author:</strong> OpenWorm Core Team (based on <a href="https://doi.org/10.1016/j.biosystems.2008.05.025">Boyle &amp; Cohen 2008</a>)</li>
+<li><strong>Date:</strong> 2026-02-14</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>The muscle model uses <a href="https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model">Hodgkin-Huxley</a> muscle cells with Ca²⁺-to-force coupling, bridging the neural voltage domain (mV, milliseconds) to the Sibernetic body physics domain (forces, mechanical strain). 95 body wall muscles in 4 quadrants convert intracellular calcium concentration to a linear activation coefficient [0, 1] consumed by Sibernetic. Success: forward speed and body bend amplitude within ±15% of Schafer lab experimental data.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-0-existing-foundation-accepted-working">Phase 0</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Core Architecture — see <a href="../DD_PHASE_ROADMAP/#phase-0-existing-foundation-accepted-working">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td><code>GenericMuscleCell</code> <a href="https://www.neuroml.org">NeuroML</a> template (95 body wall muscles), muscle [Ca²⁺]→activation coupling via <code>sibernetic_c302.py</code></td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td><a href="../DD010_Validation_Framework/">DD010</a> Tier 3: forward speed and body bend amplitude within ±15% of baseline</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a> (muscle templates) + <a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> (coupling script) — issues labeled <code>dd002</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>muscle.enabled: true</code> / <code>muscle.calcium_coupling: true</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> (activation in [0,1]?), <code>docker compose run validate</code> (Tier 3 kinematics)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> <code>muscle/activation/</code> layer — 95 muscles with [0,1] activation heatmap, warm colormap</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 3 kinematic validation blocks merge</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th><a href="../DD010_Validation_Framework/">DD010</a> Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Forward speed</td>
+<td>Within ±15% of Schafer lab WCON baseline</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Primary:</strong> Body bend amplitude</td>
+<td>Within ±15% of Schafer lab WCON baseline</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Muscle activation range</td>
+<td>All activations in [0, 1], peak &gt; 0.3 during neural drive</td>
+<td>Quick-test (blocking per-PR)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Calcium decay dynamics</td>
+<td>Decay time constant ~12 ms, consistent with <a href="https://doi.org/10.1016/j.biosystems.2008.05.025">Boyle &amp; Cohen 2008</a></td>
+<td>Tier 1 (non-blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No electrophysiological muscle model — neurons could not drive body physics through a biophysically realistic pathway.</p>
+<p><strong>After:</strong> 95 body wall muscles receive motor neuron input via NMJ synapses, depolarize via HH channels, accumulate intracellular calcium, and produce a [0, 1] activation coefficient that Sibernetic converts to contractile force.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to repo)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generic muscle cell template</td>
+<td><code>openworm/c302</code> — <code>c302/c302_Muscles.py</code></td>
+<td>Python → NeuroML 2 XML</td>
+<td><code>GenericMuscleCell</code> with 4 channels (muscle-specific densities)</td>
+</tr>
+<tr>
+<td>Muscle list (95 cells)</td>
+<td><code>CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv</code></td>
+<td>CSV</td>
+<td><code>muscle_id, quadrant, row_number, anterior_position, synaptic_partners</code></td>
+</tr>
+<tr>
+<td>Coupling script</td>
+<td><code>openworm/sibernetic</code> — <code>sibernetic_c302.py</code></td>
+<td>Python</td>
+<td>Reads muscle [Ca²⁺]ᵢ, writes activation to Sibernetic</td>
+</tr>
+<tr>
+<td>Muscle activation time series (viewer)</td>
+<td><a href="https://ngff.openmicroscopy.org">OME-Zarr</a>: <code>muscle/activation/</code>, shape (n_timesteps, 95)</td>
+<td>OME-Zarr</td>
+<td>dimensionless [0, 1] per muscle per timestep</td>
+</tr>
+<tr>
+<td>Muscle calcium time series (viewer)</td>
+<td>OME-Zarr: <code>muscle/calcium/</code>, shape (n_timesteps, 95)</td>
+<td>OME-Zarr</td>
+<td>mol/cm³ per muscle per timestep</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository (templates)</strong></td>
+<td><a href="https://github.com/openworm/c302"><code>openworm/c302</code></a></td>
+</tr>
+<tr>
+<td><strong>Repository (coupling)</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd002</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Muscle Model Architecture</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd002/description</code> (e.g., <code>dd002/tune-nmj-conductance</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD002: Adjust muscle conductance densities for locomotion fidelity</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Docker with <code>docker compose</code> (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a> simulation stack)</li>
+<li>OR: Python 3.10+, <a href="https://github.com/NeuroML/pyNeuroML">pyNeuroML</a>, <a href="https://github.com/NeuroML/jNeuroML">jnml</a>, <a href="https://www.neuron.yale.edu">NEURON</a> 8.2.6</li>
+</ul>
+<h3 id="getting-started-environment-setup">Getting Started (Environment Setup)<a class="headerlink" href="#getting-started-environment-setup" title="Permanent link">&para;</a></h3>
+<p>The muscle model lives in the same c302 repository as the neural circuit (<a href="../DD001_Neural_Circuit_Architecture/">DD001</a>). If you already set up DD001, you're ready — skip to Step 1 below.</p>
+<p><strong>Clone the repositories:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/c302.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/sibernetic.git<span class="w">        </span><span class="c1"># for coupled simulation</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openworm/OpenWorm.git<span class="w">           </span><span class="c1"># for docker compose</span>
+</code></pre></div>
+<p><strong>Path A — Docker (recommended for newcomers):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>OpenWorm
+docker<span class="w"> </span>compose<span class="w"> </span>build
+</code></pre></div>
+<p>Then skip to Step 6 below (<code>docker compose run quick-test</code>).</p>
+<p><strong>Path B — Native Python:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>c302
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="w">                     </span><span class="c1"># installs c302 + dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>pyneuroml<span class="w"> </span>neuron<span class="w">         </span><span class="c1"># NeuroML tools + NEURON simulator</span>
+</code></pre></div>
+<p>You also need <a href="https://github.com/NeuroML/jNeuroML">jNeuroML</a> (<code>jnml</code>) on your PATH (requires Java). Steps 1–5 below use the native path. Steps 6–7 use Docker.</p>
+<h3 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Generate muscle network</span>
+<span class="nb">cd</span><span class="w"> </span>c302/
+python<span class="w"> </span>CElegans.py<span class="w"> </span>C1Muscles
+
+<span class="c1"># Step 2: Validate NeuroML syntax</span>
+jnml<span class="w"> </span>-validate<span class="w"> </span>LEMS_c302_C1_Muscles.xml
+
+<span class="c1"># Step 3: Run simulation</span>
+jnml<span class="w"> </span>LEMS_c302_C1_Muscles.xml<span class="w"> </span>-nogui
+
+<span class="c1"># Step 4: Check muscle activation outputs</span>
+python<span class="w"> </span>scripts/plot_muscle_activation.py<span class="w"> </span>LEMS_c302_C1_Muscles_muscles.dat
+<span class="c1"># [TO BE CREATED] if not present — GitHub issue: openworm/c302#TBD</span>
+
+<span class="c1"># Step 5: Verify activation ranges and calcium dynamics</span>
+python<span class="w"> </span>scripts/validate_muscle_calcium.py
+<span class="c1"># [TO BE CREATED] if not present — GitHub issue: openworm/c302#TBD</span>
+
+<span class="c1"># Step 6: Quick test via Docker (must pass before PR)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Green light: output plots show muscle activation in [0, 1] range</span>
+<span class="c1"># Green light: peak activation during neural drive &gt; 0.3</span>
+
+<span class="c1"># Step 7: Full validation via Docker (must pass before merge)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Green light: Tier 3 kinematic metrics within ±15% of baseline</span>
+<span class="c1"># Green light: forward speed and body bend amplitude specifically checked</span>
+</code></pre></div>
+<h3 id="scripts-that-may-not-exist-yet">Scripts that may not exist yet<a class="headerlink" href="#scripts-that-may-not-exist-yet" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Status</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/plot_muscle_activation.py</code></td>
+<td><code>[TO BE CREATED]</code> if not present</td>
+<td>openworm/c302#TBD</td>
+</tr>
+<tr>
+<td><code>scripts/validate_muscle_calcium.py</code></td>
+<td><code>[TO BE CREATED]</code> if not present</td>
+<td>openworm/c302#TBD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="green-light-criteria">Green light criteria<a class="headerlink" href="#green-light-criteria" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Muscle activation range: [0, 1]</li>
+<li>Peak activation during neural drive: &gt;0.5 (&gt;0.3 minimum)</li>
+<li>Calcium decay time constant: ~12 ms</li>
+<li>No negative voltages below -60 mV, no positive voltages above +20 mV</li>
+<li>Tier 3 kinematic metrics within ±15% of baseline</li>
+</ul>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> viewer layer:</strong> <code>muscle/activation/</code> — 95 body wall muscles with [0, 1] activation heatmap, warm colormap.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>muscle/activation/</code></td>
+</tr>
+<tr>
+<td><strong>Color mode</strong></td>
+<td>Warm colormap: 0 (blue/cool) → 1 (red/hot) representing activation coefficient</td>
+</tr>
+<tr>
+<td><strong>Data source</strong></td>
+<td>OME-Zarr: <code>muscle/activation/</code> shape (n_timesteps, 95), <code>muscle/calcium/</code> shape (n_timesteps, 95)</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>95 body wall muscles arranged in 4 quadrants (MDR, MVR, MVL, MDL). During forward locomotion, dorsal and ventral muscles should activate in alternating waves propagating anterior-to-posterior. Activation values should range [0, 1] with smooth transitions (no flickering or binary on/off).</td>
+</tr>
+<tr>
+<td><strong>Trace view</strong></td>
+<td>Clicking a muscle shows its calcium concentration and activation coefficient time series. Calcium decay should be ~12 ms.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons">Muscle Cells Use the Same Hodgkin-Huxley Framework as Neurons<a class="headerlink" href="#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons" title="Permanent link">&para;</a></h3>
+<p>Muscles are modeled as single-compartment conductance-based cells using the <strong>same ion channel types</strong> (leak, K_slow, K_fast, Ca_boyle) with <strong>muscle-specific conductance densities</strong> tuned to produce slower, sustained depolarizations rather than sharp action potentials.</p>
+<p><strong>Muscle conductance densities (from <a href="https://doi.org/10.1016/j.biosystems.2008.05.025">Boyle &amp; Cohen 2008</a>):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Muscle g_max</th>
+<th>E_rev</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leak</td>
+<td>5e-7 S/cm²</td>
+<td>-50 mV</td>
+<td>100x smaller than neurons → slower dynamics</td>
+</tr>
+<tr>
+<td>K_slow</td>
+<td>0.0006 S/cm²</td>
+<td>-60 mV</td>
+<td>5000x smaller than neurons</td>
+</tr>
+<tr>
+<td>K_fast</td>
+<td>0.0001 S/cm²</td>
+<td>-60 mV</td>
+<td>711x smaller than neurons</td>
+</tr>
+<tr>
+<td>Ca_boyle</td>
+<td>0.0007 S/cm²</td>
+<td>+40 mV</td>
+<td>~4300x smaller than neurons</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Membrane properties:</strong></p>
+<ul>
+<li>Specific capacitance: 1 µF/cm²</li>
+<li>Cell diameter: larger than neurons (varies by muscle, ~5-10 µm)</li>
+<li>Initial voltage: -45 mV</li>
+</ul>
+<h3 id="calcium-to-force-coupling-the-bridge-to-sibernetic">Calcium-to-Force Coupling (The Bridge to Sibernetic)<a class="headerlink" href="#calcium-to-force-coupling-the-bridge-to-sibernetic" title="Permanent link">&para;</a></h3>
+<p>Intracellular calcium concentration ([Ca²⁺]ᵢ) is the coupling variable between the electrophysiological model (NeuroML/NEURON) and the body physics model (Sibernetic/<a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">SPH</a>).</p>
+<p><strong>Calcium dynamics:</strong>
+<div class="highlight"><pre><span></span><code>d[Ca]/dt = -rho * I_Ca - [Ca]/tau_Ca
+</code></pre></div></p>
+<ul>
+<li>rho = 0.000238 mol/(C·cm)</li>
+<li>tau_Ca = 11.5943 ms</li>
+</ul>
+<p><strong>Activation coefficient (linear scaling):</strong>
+<div class="highlight"><pre><span></span><code>activation = min(1.0, [Ca²⁺]ᵢ / [Ca²⁺]_max)
+</code></pre></div></p>
+<ul>
+<li>[Ca²⁺]_max = 4e-7 mol (maximum calcium for full contraction)</li>
+</ul>
+<p><strong>Force generation:</strong>
+<div class="highlight"><pre><span></span><code>F_muscle = activation * max_muscle_force
+</code></pre></div></p>
+<ul>
+<li>max_muscle_force = 4000 (Sibernetic units)</li>
+</ul>
+<p>This linear scaling is a <strong>simplification</strong>. Real muscle involves crossbridge dynamics (actin-myosin binding), cooperative activation, length-tension relationships, and force-velocity curves. But Boyle &amp; Cohen (2008) showed that "<em>Caenorhabditis elegans</em> body wall muscles are simple actuators" -- they behave as direct transducers of calcium to force without complex mechanical nonlinearities.</p>
+<h3 id="neural-to-muscle-coupling">Neural-to-Muscle Coupling<a class="headerlink" href="#neural-to-muscle-coupling" title="Permanent link">&para;</a></h3>
+<p>Neurons communicate to muscles via <strong><a href="https://en.wikipedia.org/wiki/Neuromuscular_junction">neuromuscular junctions</a> (NMJs)</strong> modeled as excitatory chemical synapses:</p>
+<ul>
+<li>Neuron releases synaptic current proportional to presynaptic voltage (graded release)</li>
+<li>Muscle receives depolarizing current</li>
+<li>Muscle voltage rises → Ca channels open → [Ca²⁺]ᵢ increases → contraction</li>
+</ul>
+<p><strong>Critical parameter:</strong> NMJ conductance is higher than neuron-neuron synapses to produce strong muscle depolarization. Typical values: 0.5-1.0 nS (vs. 0.09 nS for inter-neuron synapses).</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-hill-type-muscle-model-with-crossbridge-dynamics">1. Hill-Type Muscle Model with Crossbridge Dynamics<a class="headerlink" href="#1-hill-type-muscle-model-with-crossbridge-dynamics" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Explicitly model actin-myosin binding, ADP/ATP cycling, length-tension curves, force-velocity relationships.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Boyle &amp; Cohen (2008) demonstrated that simple linear activation is sufficient to reproduce <em>C. elegans</em> locomotion</li>
+<li>Adds significant computational cost (6+ additional state variables per muscle)</li>
+<li>Lacks experimental data to parameterize crossbridge kinetics in <em>C. elegans</em> muscles</li>
+<li>Violates YAGNI (You Aren't Gonna Need It) principle</li>
+</ul>
+<p><strong>When to reconsider:</strong> If simulations fail to reproduce detailed muscle mechanics (e.g., tetanic contraction during egg-laying, rapid twitches during defecation, isometric force-length relationships).</p>
+<h3 id="2-direct-neural-activation-without-electrophysiology">2. Direct Neural Activation Without Electrophysiology<a class="headerlink" href="#2-direct-neural-activation-without-electrophysiology" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Skip the muscle HH model entirely. Let neurons directly control Sibernetic particle forces.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Throws away the biophysical realism that is OpenWorm's core strength</li>
+<li>Loses the voltage-to-calcium-to-force causal chain, making the model less interpretable</li>
+<li>Cannot capture muscle dynamics like refractory periods, fatigue, or calcium-dependent force modulation</li>
+</ul>
+<h3 id="3-fitzhugh-nagumo-simplified-excitable-dynamics">3. <a href="https://en.wikipedia.org/wiki/FitzHugh%E2%80%93Nagumo_model">FitzHugh-Nagumo</a> Simplified Excitable Dynamics<a class="headerlink" href="#3-fitzhugh-nagumo-simplified-excitable-dynamics" title="Permanent link">&para;</a></h3>
+<p><strong>Description:</strong> Use a 2-variable reduced model (V, recovery variable) instead of full HH.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>FHN does not explicitly model calcium, which is the critical coupling variable to Sibernetic</li>
+<li>Parameters are abstract (not directly tied to conductances and ion channels)</li>
+<li>Loses the modularity of being able to add/remove specific channels</li>
+</ul>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<p>A contribution to the muscle model MUST:</p>
+<ol>
+<li>
+<p><strong>Preserve the Calcium Interface:</strong> The output of the muscle model to Sibernetic is [Ca²⁺]ᵢ. Any change must maintain this interface or provide a migration path for Sibernetic.</p>
+</li>
+<li>
+<p><strong>Validate Against Movement Data:</strong> Changes must not degrade kinematic validation scores. The Boyle &amp; Cohen parameter set has been validated against real worm movement via open-worm-analysis-toolbox.</p>
+</li>
+<li>
+<p><strong>NeuroML 2 Compliance:</strong> Muscle cell definitions must be valid NeuroML 2.</p>
+</li>
+<li>
+<p><strong>Biophysical Units:</strong> Conductances in S/cm² or mS/cm², voltages in mV, time constants in ms, calcium in mol or mM.</p>
+</li>
+<li>
+<p><strong>Muscle-Neuron Distinction:</strong> Muscle conductance densities are 10-1000x smaller than neuron densities. Do not copy neuron parameters to muscles.</p>
+</li>
+</ol>
+<h3 id="testing-procedure">Testing Procedure<a class="headerlink" href="#testing-procedure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate muscle network</span>
+<span class="nb">cd</span><span class="w"> </span>c302/
+python<span class="w"> </span>CElegans.py<span class="w"> </span>C1Muscles
+
+<span class="c1"># Run simulation</span>
+jnml<span class="w"> </span>LEMS_c302_C1_Muscles.xml<span class="w"> </span>-nogui
+
+<span class="c1"># Check muscle activation outputs</span>
+python<span class="w"> </span>scripts/plot_muscle_activation.py<span class="w"> </span>LEMS_c302_C1_Muscles_muscles.dat
+
+<span class="c1"># Verify activation ranges are [0, 1] and follow calcium dynamics</span>
+python<span class="w"> </span>scripts/validate_muscle_calcium.py
+</code></pre></div>
+<p><strong>Expected results:</strong></p>
+<ul>
+<li>Muscle activation range: [0, 1]</li>
+<li>Peak activation during neural drive: &gt;0.5</li>
+<li>Calcium decay time constant: ~12 ms</li>
+<li>No negative voltages below -60 mV, no positive voltages above +20 mV</li>
+</ul>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="this-design-document-does-not-cover">This Design Document Does NOT Cover:<a class="headerlink" href="#this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Pharyngeal muscles:</strong> Modeled separately (see <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>: Pharyngeal System). Pharyngeal muscle is nonstriated and functionally distinct from body wall muscle.</p>
+</li>
+<li>
+<p><strong>Specialized muscles (vulval, uterine, anal, intestinal):</strong> Future work. These may require different channel complements or calcium-to-force relationships.</p>
+</li>
+<li>
+<p><strong>Muscle cell geometry:</strong> Currently single-compartment. Multicompartmental muscle with spindle morphology is future work.</p>
+</li>
+<li>
+<p><strong>Developmental changes:</strong> Muscle properties change during development (L1 vs. adult). Phase 6 work.</p>
+</li>
+<li>
+<p><strong>Myosin isoform diversity:</strong> <em>C. elegans</em> expresses multiple myosin heavy chain genes. Current model uses generic contractility.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p><em>C. elegans</em> body wall muscles enable locomotion by generating contractile forces that deform the elastic body against the fluid-filled pseudocoelom. The worm has 95 body wall muscles arranged in 4 quadrants (MDR, MVR, MVL, MDL) of 24 rows each, extending along the anterior-posterior axis. These muscles are excitable membranes innervated by motor neurons.</p>
+<p>The coupling challenge: neurons operate in the voltage domain (mV, milliseconds), body physics operates in the force domain (Newtons, mechanical strain). The muscle model bridges these domains.</p>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="muscle-cell-template">Muscle Cell Template<a class="headerlink" href="#muscle-cell-template" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># c302/c302_Muscles.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_generic_muscle_cell</span><span class="p">():</span>
+    <span class="n">muscle_cell</span> <span class="o">=</span> <span class="n">NeuroMLCell</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;GenericMuscleCell&quot;</span><span class="p">)</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s2">&quot;leak_chan&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="s2">&quot;5e-7 S_per_cm2&quot;</span><span class="p">)</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s2">&quot;k_slow_chan&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="s2">&quot;0.0006 S_per_cm2&quot;</span><span class="p">)</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s2">&quot;k_fast_chan&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="s2">&quot;0.0001 S_per_cm2&quot;</span><span class="p">)</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s2">&quot;ca_boyle_chan&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="s2">&quot;0.0007 S_per_cm2&quot;</span><span class="p">)</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># uF_per_cm2</span>
+    <span class="n">muscle_cell</span><span class="o">.</span><span class="n">v_init</span> <span class="o">=</span> <span class="o">-</span><span class="mi">45</span>  <span class="c1"># mV</span>
+    <span class="k">return</span> <span class="n">muscle_cell</span>
+</code></pre></div>
+<h3 id="muscle-list-95-cells">Muscle List (95 Cells)<a class="headerlink" href="#muscle-list-95-cells" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv
+</code></pre></div>
+<p>Each muscle row: <code>muscle_id, quadrant (MDR/MVR/MVL/MDL), row_number (1-24), anterior_position, synaptic_partners</code></p>
+<h3 id="coupling-to-sibernetic">Coupling to Sibernetic<a class="headerlink" href="#coupling-to-sibernetic" title="Permanent link">&para;</a></h3>
+<p>The <code>c302_Sibernetic</code> integration script:</p>
+<ol>
+<li>Reads muscle [Ca²⁺]ᵢ time series from NEURON simulation</li>
+<li>Converts to activation coefficients via <code>activation = min(1, ca/max_ca)</code></li>
+<li>Writes to Sibernetic-readable muscle activation file</li>
+<li>Sibernetic reads and applies forces to elastic particle connections representing each muscle</li>
+</ol>
+<hr />
+<h2 id="migration-path">Migration Path<a class="headerlink" href="#migration-path" title="Permanent link">&para;</a></h2>
+<h3 id="if-detailed-crossbridge-mechanics-become-necessary">If Detailed Crossbridge Mechanics Become Necessary:<a class="headerlink" href="#if-detailed-crossbridge-mechanics-become-necessary" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Create a new Level D cell type</strong> with crossbridge state variables (attached, detached, power stroke, etc.).</li>
+<li><strong>Implement as a LEMS ComponentType extension</strong> rather than modifying the base GenericMuscleCell.</li>
+<li><strong>Provide [Ca²⁺]ᵢ → force mapping</strong> that preserves the Sibernetic interface.</li>
+<li><strong>Validate against isometric force recordings</strong> if such data become available for <em>C. elegans</em>.</li>
+</ol>
+<h3 id="if-muscle-type-diversity-is-required-phase-3">If Muscle-Type Diversity Is Required (Phase 3):<a class="headerlink" href="#if-muscle-type-diversity-is-required-phase-3" title="Permanent link">&para;</a></h3>
+<p>See <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (Pharyngeal System) for an example of creating a distinct muscle cell type. The general pattern:</p>
+<ul>
+<li>Create a new LEMS cell template (e.g., <code>PharyngealMuscleCell</code>)</li>
+<li>Adjust channel densities based on transcriptomic or electrophysiological data</li>
+<li>Adjust calcium-to-force parameters if pharyngeal contraction dynamics differ</li>
+<li>Validate against tissue-specific behavior (pumping rate, not crawling)</li>
+</ul>
+<hr />
+<h2 id="known-issues-and-future-work">Known Issues and Future Work<a class="headerlink" href="#known-issues-and-future-work" title="Permanent link">&para;</a></h2>
+<h3 id="issue-1-single-muscle-compartment">Issue 1: Single Muscle Compartment<a class="headerlink" href="#issue-1-single-muscle-compartment" title="Permanent link">&para;</a></h3>
+<p>Real <em>C. elegans</em> body wall muscles are spindle-shaped with ~60 µm length. Voltage may not be uniform along the length. Multicompartmental muscle models (Level D equivalent for muscle) would require:</p>
+<ul>
+<li>Morphological reconstructions (EM data exists but not yet digitized in cable-equation-compatible format)</li>
+<li>Axial resistance parameters</li>
+<li>Increased compute cost (24 compartments/muscle × 95 muscles = 2,280 compartments)</li>
+</ul>
+<p><strong>When to address:</strong> If single-compartment fails to reproduce localized muscle responses or wave propagation.</p>
+<h3 id="issue-2-lack-of-direct-muscle-electrophysiology">Issue 2: Lack of Direct Muscle Electrophysiology<a class="headerlink" href="#issue-2-lack-of-direct-muscle-electrophysiology" title="Permanent link">&para;</a></h3>
+<p>Most validation is indirect (via movement). Direct patch-clamp recordings from <em>C. elegans</em> muscle are rare. We validate via the emergent behavior (crawling), not the muscle voltage directly.</p>
+<p><strong>When to address:</strong> If muscle-specific electrophysiology data become available, recalibrate conductance densities.</p>
+<h3 id="issue-3-mvl24-muscle-does-not-exist">Issue 3: MVL24 Muscle Does Not Exist<a class="headerlink" href="#issue-3-mvl24-muscle-does-not-exist" title="Permanent link">&para;</a></h3>
+<p>The simulation includes MVL24 for symmetry (4 quadrants × 24 rows = 96 muscles), but the real worm has only 95 (MVL24 is absent). This is a minor biological inaccuracy preserved for code simplicity.</p>
+<p><strong>Fix:</strong> Set MVL24 conductances to zero or remove from the simulation. Low priority.</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Boyle JH, Cohen N (2008).</strong> "Caenorhabditis elegans body wall muscles are simple actuators." <em>Biosystems</em> 94:170-181.
+   <em>Source of muscle conductance densities and calcium-to-force coupling.</em></p>
+</li>
+<li>
+<p><strong>Goodman MB, Hall DH, Avery L, Bhatt R (1998).</strong> "Active currents regulate sensitivity and dynamic range in <em>C. elegans</em> neurons." <em>Neuron</em> 20:763-772.
+   <em>Evidence for graded potentials in the nervous system that drives these muscles.</em></p>
+</li>
+<li>
+<p><strong>Cook SJ et al. (2019).</strong> "Whole-animal connectomes of both <em>Caenorhabditis elegans</em> sexes." <em>Nature</em> 571:63-71.
+   <em>NMJ connectivity (which motor neurons innervate which muscles).</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Motor neuron synaptic current</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (via NMJ graded synapses)</td>
+<td><code>I_syn</code> on each muscle cell</td>
+<td>NeuroML synapse coupling (within same LEMS simulation)</td>
+<td>nA</td>
+</tr>
+<tr>
+<td>Motor neuron identity</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a> connectome</td>
+<td>NMJ adjacency (which neurons innervate which muscles)</td>
+<td>ConnectomeToolbox</td>
+<td>neuron-muscle pairs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+<th>Timestep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muscle [Ca²⁺]ᵢ</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td><code>ca_internal</code> per muscle</td>
+<td>Read by <code>sibernetic_c302.py</code> from NEURON state</td>
+<td>mol/cm³</td>
+<td>dt_coupling (0.005 ms)</td>
+</tr>
+<tr>
+<td>Muscle activation coefficient</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a> (Sibernetic)</td>
+<td><code>activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)</code></td>
+<td>Computed in <code>sibernetic_c302.py</code>, written to Sibernetic muscle activation input</td>
+<td>dimensionless [0, 1]</td>
+<td>dt_coupling</td>
+</tr>
+<tr>
+<td>Muscle activation time series (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-muscle activation over all timesteps</td>
+<td>OME-Zarr: <code>muscle/activation/</code>, shape (n_timesteps, 95)</td>
+<td>dimensionless [0, 1]</td>
+<td>output_interval</td>
+</tr>
+<tr>
+<td>Muscle calcium time series (for viewer)</td>
+<td><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></strong> (visualization)</td>
+<td>Per-muscle [Ca²⁺] over all timesteps</td>
+<td>OME-Zarr: <code>muscle/calcium/</code>, shape (n_timesteps, 95)</td>
+<td>mol/cm³</td>
+<td>output_interval</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository (templates)</strong></td>
+<td><code>openworm/c302</code> (muscle cells are NeuroML templates within c302)</td>
+</tr>
+<tr>
+<td><strong>Repository (coupling)</strong></td>
+<td><code>openworm/sibernetic</code> (<code>sibernetic_c302.py</code>)</td>
+</tr>
+<tr>
+<td><strong>Docker stage</strong></td>
+<td>Same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (<code>neural</code> stage)</td>
+</tr>
+<tr>
+<td><strong><code>versions.lock</code> key</strong></td>
+<td>No separate pin — muscles are part of the c302 package</td>
+</tr>
+<tr>
+<td><strong>Build dependencies</strong></td>
+<td>Same as <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (NEURON 8.2.6, pyNeuroML)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p><strong><code>openworm.yml</code> section:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">muscle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                      </span><span class="c1"># Requires neural.enabled</span>
+<span class="w">  </span><span class="nt">calcium_coupling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">             </span><span class="c1"># Ca²⁺ → force pipeline</span>
+<span class="w">  </span><span class="nt">max_muscle_force</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4000</span><span class="w">             </span><span class="c1"># Sibernetic force units</span>
+<span class="w">  </span><span class="nt">max_ca</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4e-7</span><span class="w">                       </span><span class="c1"># mol; calcium for full contraction</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>muscle.enabled</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable muscle simulation (requires <code>neural.enabled</code>)</td>
+</tr>
+<tr>
+<td><code>muscle.calcium_coupling</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable Ca²⁺ → force coupling pipeline</td>
+</tr>
+<tr>
+<td><code>muscle.max_muscle_force</code></td>
+<td><code>4000</code></td>
+<td>Positive float</td>
+<td>Maximum muscle force in Sibernetic units</td>
+</tr>
+<tr>
+<td><code>muscle.max_ca</code></td>
+<td><code>4e-7</code></td>
+<td>Positive float (mol)</td>
+<td>Calcium concentration for full contraction (activation = 1.0)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Checks: output plots show muscle activation in [0, 1] range</span>
+<span class="c1"># Checks: peak activation during neural drive &gt; 0.3</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Tier 3: kinematic metrics within ±15% of baseline</span>
+<span class="c1">#   - Specifically: forward speed and body bend amplitude are most sensitive to muscle changes</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] <code>jnml -validate</code> passes for muscle NeuroML/LEMS files</li>
+<li>[ ] <code>docker compose run quick-test</code> passes (activation in [0, 1], peak &gt; 0.3)</li>
+<li>[ ] <code>docker compose run validate</code> passes (Tier 3 kinematics)</li>
+<li>[ ] Muscle conductance densities are 10-1000x smaller than neuron densities (no copy-paste from neuron params)</li>
+<li>[ ] Calcium interface to Sibernetic is preserved (variable name, units)</li>
+</ul>
+<h3 id="how-to-visualize-dd014-connection">How to Visualize (<a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Connection)<a class="headerlink" href="#how-to-visualize-dd014-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>muscle/activation/</code> (n_timesteps, 95)</td>
+<td>Muscle activation heatmap</td>
+<td>Warm colormap: 0.0 (blue) → 1.0 (red)</td>
+</tr>
+<tr>
+<td><code>muscle/calcium/</code> (n_timesteps, 95)</td>
+<td>Muscle calcium concentration</td>
+<td>mol/cm³ colormap</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neuron→muscle synaptic conductance</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>NMJ weight changes → muscle depolarization amplitude changes</td>
+</tr>
+<tr>
+<td>c302 HH framework</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+<td>If channel model equations change, muscle dynamics change (same framework)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Body physics forces</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+<td>If calcium→activation mapping changes (max_ca, activation formula), Sibernetic locomotion behavior changes</td>
+</tr>
+<tr>
+<td>Kinematic validation</td>
+<td><a href="../DD010_Validation_Framework/">DD010</a></td>
+<td>Muscle force directly determines movement — any change affects Tier 3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coupling-bridge-ownership">Coupling Bridge Ownership<a class="headerlink" href="#coupling-bridge-ownership" title="Permanent link">&para;</a></h3>
+<p><strong>The <code>sibernetic_c302.py</code> coupling script</strong> (lives in <code>openworm/sibernetic</code> repo) reads muscle calcium from NEURON and writes activation to Sibernetic. This script is the single point where <a href="./">DD002</a> output format matters. Changes to:</p>
+<ul>
+<li>Muscle calcium variable name → must update <code>sibernetic_c302.py</code></li>
+<li>Activation formula → must update <code>sibernetic_c302.py</code></li>
+<li>Number of muscles (e.g., adding pharyngeal muscles per <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>) → must update muscle mapping in <code>sibernetic_c302.py</code></li>
+</ul>
+<p><strong>Coordination required:</strong> Muscle model maintainer + Body Physics maintainer (<a href="../DD003_Body_Physics_Architecture/">DD003</a>) + Integration Maintainer (<a href="../DD013_Simulation_Stack_Architecture/">DD013</a>)</p>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> OpenWorm Steering</li>
+<li><strong>Implementation Status:</strong> Complete (GenericMuscleCell in c302)</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Differentiate into muscle-type-specific models using transcriptomics (Phase 3)</p>
+</li>
+<li>Add pharyngeal muscles (<a href="../DD007_Pharyngeal_System_Architecture/">DD007</a>)</li>
+<li>Model specialized muscles (vulval, uterine, enteric) as needed</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

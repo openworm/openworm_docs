@@ -1,0 +1,8025 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD014.1_Visual_Rendering_Specification/">
+      
+      
+        <link rel="prev" href="../DD014_Dynamic_Visualization_Architecture/">
+      
+      
+        <link rel="next" href="../DD006_Neuropeptidergic_Connectome_Integration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD014.1 Visual Rendering - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd0141-visual-rendering-specification-for-multi-scale-visualization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD014.1 Visual Rendering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-canonical-color-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Canonical Color Palette
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Canonical Color Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-heritage-palette-virtual-worm-37-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1A. Heritage Palette — Virtual Worm 37 Materials
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1A. Heritage Palette — Virtual Worm 37 Materials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-tissues-7-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Tissues (7 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuron-types-5-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuron Types (5 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structural-epithelial-tissues-14-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structural &amp; Epithelial Tissues (14 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excretory-system-4-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excretory System (4 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproductive-system-5-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproductive System (5 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-2-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other (2 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-material-properties-from-mtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Material Properties (from MTL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1b-activity-state-dynamic-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1B. Activity-State Dynamic Colors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1B. Activity-State Dynamic Colors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voltage-to-visual-mapping-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Voltage-to-Visual Mapping (Detail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-activation-mapping-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Activation Mapping (Detail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1c-molecular-scale-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1C. Molecular-Scale Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lighting-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Lighting &amp; Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Lighting &amp; Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2a-global-lighting-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2A. Global Lighting Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2B. Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2c-material-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2C. Material Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scale-specific-rendering-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scale-Specific Rendering Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scale-Specific Rendering Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3a-organism-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3A. Organism Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3A. Organism Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-visibility-through-cuticle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Visibility Through Cuticle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3b-tissue-cell-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3B. Tissue / Cell Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3B. Tissue / Cell Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell Geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuron-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuron Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharynx-detail-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharynx Detail View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intestinal-calcium-wave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intestinal Calcium Wave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depth-of-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depth of Field
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3c-molecular-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3C. Molecular Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3C. Molecular Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#membrane-cross-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membrane Cross-Section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ion-channel-glyphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ion Channel Glyphs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ion-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ion Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuropeptide-molecules-molecular-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuropeptide Molecules (Molecular Scale)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-interior-nucleus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell Interior &amp; Nucleus
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cell Interior &amp; Nucleus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nucleus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nucleus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-transcription-at-active-locus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gene Transcription (at Active Locus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mrna-nuclear-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mRNA Nuclear Export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ribosomal-translation-on-rough-er" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ribosomal Translation (on Rough ER)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vesicle-trafficking-er-plasma-membrane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vesicle Trafficking (ER → Plasma Membrane)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-expression-pipeline-complete-visual-narrative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gene Expression Pipeline — Complete Visual Narrative
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-intracellular-elements-updated-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Intracellular Elements (Updated Context)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-multi-scale-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Multi-Scale Transitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Multi-Scale Transitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4a-zoom-breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Zoom Breakpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4b-organism-tissue-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Organism → Tissue Transition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4c-tissue-molecular-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Tissue → Molecular Transition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4d-level-of-detail-lod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4D. Level of Detail (LOD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rendering-technique-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Rendering Technique Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Rendering Technique Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5a-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5A. Transparency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5b-bloom-glow-post-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5B. Bloom / Glow Post-Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5c-particle-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5C. Particle Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5d-volumetric-rendering-neuropeptide-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5D. Volumetric Rendering (Neuropeptide Clouds)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5e-anti-aliasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5E. Anti-Aliasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5f-animation-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5F. Animation &amp; Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reference-mockup-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reference Mockup Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Reference Mockup Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mockup-1-organism-dorsal-view-crawling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 1: Organism — Dorsal View (Crawling)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-2-organism-lateral-view-body-bending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 2: Organism — Lateral View (Body Bending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-3-muscles-through-translucent-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 3: Muscles Through Translucent Body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-4-neural-circuit-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 4: Neural Circuit Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-5-single-neuron-selected-inspector-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 5: Single Neuron Selected (Inspector Panel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-6-pharynx-close-up-pumping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 6: Pharynx Close-Up (Pumping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-7-intestinal-calcium-wave-mid-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 7: Intestinal Calcium Wave (Mid-Propagation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-8-neuropeptide-volumetric-cloud-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 8: Neuropeptide Volumetric Cloud Overlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-9-cell-boundaries-dd004-tagging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 9: Cell Boundaries (DD004 Tagging)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-10-molecular-membrane-cross-section-with-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 10: Molecular — Membrane Cross-Section with Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-11-molecular-calcium-flowing-through-open-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 11: Molecular — Calcium Flowing Through Open Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-12-multi-scale-transition-organism-tissue-mid-zoom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 12: Multi-Scale Transition (Organism → Tissue, Mid-Zoom)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-13-molecular-nucleus-and-gene-transcription" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 13: Molecular — Nucleus and Gene Transcription
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-14-molecular-mrna-export-and-channel-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 14: Molecular — mRNA Export and Channel Assembly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-assigning-colors-to-all-959-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Assigning Colors to All 959 Cells
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Assigning Colors to All 959 Cells">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-to-material-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell-to-Material Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-flat-cartoon-rendering-style-cell-shading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flat / Cartoon Rendering Style (Cell Shading)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-photorealistic-rendering-path-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Photorealistic Rendering (Path Tracing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-false-color-only-no-surface-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. False-Color Only (No Surface Rendering)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-per-cell-unique-colors-959-distinct-hues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Per-Cell Unique Colors (959 Distinct Hues)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-dynamic-color-palette-based-on-data-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Dynamic Color Palette Based on Data Range
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-canonical-color-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Canonical Color Palette
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Canonical Color Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1a-heritage-palette-virtual-worm-37-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1A. Heritage Palette — Virtual Worm 37 Materials
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1A. Heritage Palette — Virtual Worm 37 Materials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#muscle-tissues-7-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Tissues (7 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuron-types-5-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuron Types (5 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structural-epithelial-tissues-14-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structural &amp; Epithelial Tissues (14 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#excretory-system-4-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excretory System (4 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproductive-system-5-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproductive System (5 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-2-materials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other (2 materials)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-material-properties-from-mtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Material Properties (from MTL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1b-activity-state-dynamic-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1B. Activity-State Dynamic Colors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1B. Activity-State Dynamic Colors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voltage-to-visual-mapping-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Voltage-to-Visual Mapping (Detail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-activation-mapping-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Activation Mapping (Detail)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1c-molecular-scale-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1C. Molecular-Scale Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lighting-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Lighting &amp; Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Lighting &amp; Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2a-global-lighting-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2A. Global Lighting Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2B. Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2c-material-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2C. Material Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scale-specific-rendering-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scale-Specific Rendering Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scale-Specific Rendering Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3a-organism-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3A. Organism Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3A. Organism Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-visibility-through-cuticle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Visibility Through Cuticle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3b-tissue-cell-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3B. Tissue / Cell Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3B. Tissue / Cell Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell Geometry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuron-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuron Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pharynx-detail-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pharynx Detail View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intestinal-calcium-wave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intestinal Calcium Wave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depth-of-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depth of Field
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3c-molecular-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3C. Molecular Scale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3C. Molecular Scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#membrane-cross-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membrane Cross-Section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ion-channel-glyphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ion Channel Glyphs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ion-particles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ion Particles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neuropeptide-molecules-molecular-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Neuropeptide Molecules (Molecular Scale)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-interior-nucleus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell Interior &amp; Nucleus
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cell Interior &amp; Nucleus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nucleus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nucleus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-transcription-at-active-locus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gene Transcription (at Active Locus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mrna-nuclear-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mRNA Nuclear Export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ribosomal-translation-on-rough-er" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ribosomal Translation (on Rough ER)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vesicle-trafficking-er-plasma-membrane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vesicle Trafficking (ER → Plasma Membrane)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-expression-pipeline-complete-visual-narrative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gene Expression Pipeline — Complete Visual Narrative
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-intracellular-elements-updated-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Existing Intracellular Elements (Updated Context)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-multi-scale-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Multi-Scale Transitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Multi-Scale Transitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4a-zoom-breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4A. Zoom Breakpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4b-organism-tissue-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4B. Organism → Tissue Transition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4c-tissue-molecular-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4C. Tissue → Molecular Transition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4d-level-of-detail-lod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4D. Level of Detail (LOD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rendering-technique-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Rendering Technique Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Rendering Technique Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5a-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5A. Transparency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5b-bloom-glow-post-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5B. Bloom / Glow Post-Processing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5c-particle-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5C. Particle Rendering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5d-volumetric-rendering-neuropeptide-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5D. Volumetric Rendering (Neuropeptide Clouds)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5e-anti-aliasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5E. Anti-Aliasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5f-animation-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5F. Animation &amp; Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reference-mockup-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reference Mockup Specifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Reference Mockup Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mockup-1-organism-dorsal-view-crawling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 1: Organism — Dorsal View (Crawling)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-2-organism-lateral-view-body-bending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 2: Organism — Lateral View (Body Bending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-3-muscles-through-translucent-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 3: Muscles Through Translucent Body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-4-neural-circuit-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 4: Neural Circuit Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-5-single-neuron-selected-inspector-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 5: Single Neuron Selected (Inspector Panel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-6-pharynx-close-up-pumping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 6: Pharynx Close-Up (Pumping)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-7-intestinal-calcium-wave-mid-propagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 7: Intestinal Calcium Wave (Mid-Propagation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-8-neuropeptide-volumetric-cloud-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 8: Neuropeptide Volumetric Cloud Overlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-9-cell-boundaries-dd004-tagging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 9: Cell Boundaries (DD004 Tagging)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-10-molecular-membrane-cross-section-with-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 10: Molecular — Membrane Cross-Section with Channels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-11-molecular-calcium-flowing-through-open-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 11: Molecular — Calcium Flowing Through Open Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-12-multi-scale-transition-organism-tissue-mid-zoom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 12: Multi-Scale Transition (Organism → Tissue, Mid-Zoom)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-13-molecular-nucleus-and-gene-transcription" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 13: Molecular — Nucleus and Gene Transcription
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mockup-14-molecular-mrna-export-and-channel-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockup 14: Molecular — mRNA Export and Channel Assembly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-assigning-colors-to-all-959-cells" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Assigning Colors to All 959 Cells
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Assigning Colors to All 959 Cells">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-to-material-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cell-to-Material Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-flat-cartoon-rendering-style-cell-shading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flat / Cartoon Rendering Style (Cell Shading)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-photorealistic-rendering-path-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Photorealistic Rendering (Path Tracing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-false-color-only-no-surface-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. False-Color Only (No Surface Rendering)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-per-cell-unique-colors-959-distinct-hues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Per-Cell Unique Colors (959 Distinct Hues)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-dynamic-color-palette-based-on-data-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Dynamic Color Palette Based on Data Range
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd0141-visual-rendering-specification-for-multi-scale-visualization">DD014.1: Visual Rendering Specification for Multi-Scale Visualization<a class="headerlink" href="#dd0141-visual-rendering-specification-for-multi-scale-visualization" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Proposed</li>
+<li><strong>Author:</strong> OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-02-16</li>
+<li><strong>Companion to:</strong> <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (Dynamic Visualization and Multi-Scale Exploration Architecture)</li>
+<li><strong>Related:</strong> <a href="../DD001_Neural_Circuit_Architecture/">DD001</a> (Neural Circuit), <a href="../DD002_Muscle_Model_Architecture/">DD002</a> (Muscle Model), <a href="../DD003_Body_Physics_Architecture/">DD003</a> (Body Physics), <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Cell Identity), <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (Cell-Type Specialization), <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> (Neuropeptidergic Connectome), <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> (Pharyngeal System), <a href="../DD008_Data_Integration_Pipeline/">DD008</a> (Data Integration), <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> (Intestinal Oscillator), <a href="../DD010_Validation_Framework/">DD010</a> (Validation Framework)</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>Phase:</strong> <a href="../DD_PHASE_ROADMAP/#phase-1-cell-type-differentiation-months-1-3">Phase 1</a> | <strong>Layer:</strong> Visualization</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>This document defines what the OpenWorm simulation <strong>looks like</strong> — exact colors, materials, lighting, transparency, transitions, and rendering algorithms for every visual element at every scale. <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> specifies the architecture (data pipeline, Zarr schema, Trame/Three.js framework, Docker integration); <a href="./">DD014.1</a> specifies the visual design. A developer should be able to implement any visual element by reading <a href="./">DD014.1</a> (appearance) and <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (data format) without guessing.</p>
+<hr />
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Implementation-complete visual spec.</strong> A developer working in Three.js, PyVista, or any WebGPU renderer can implement any visual element described here without asking "what color?" or "how bright?" or "how transparent?"</li>
+<li><strong>Canonical color palette.</strong> Every one of the 959 cells in the <em>C. elegans</em> organism has a defined color assignment, either directly (for the 37 Virtual Worm material categories) or by inheritance (cell → tissue type → material category).</li>
+<li><strong>Reference mockups as acceptance test.</strong> 14 canonical views define "correct" rendering. Visual review of implementation screenshots against these mockup specifications is the acceptance test.</li>
+<li><strong>Multi-scale continuity.</strong> Transitions between organism, tissue, and molecular scales are specified with enough detail to implement smooth, non-jarring zoom animations.</li>
+</ol>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Canonical color palette definition (hex values for all 37 Virtual Worm material categories, activity-state dynamic colors, and molecular-scale palette)</li>
+<li>14 reference mockup specifications as acceptance criteria (Sections 6, Mockups 1-14)</li>
+<li>Rendering technique specifications (ambient occlusion, subsurface scattering parameters, OIT, bloom)</li>
+<li>Cell-to-material mapping rules for all 959 cells (Section 7)</li>
+<li>Theme/style configuration file (JSON/YAML) for the DD014 viewer <code>[TO BE CREATED]</code></li>
+</ul>
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Primary repository: <code>openworm/viewer</code> <code>[TO BE CREATED]</code> (rendering configuration and theme files)</li>
+<li>Issue label: <code>dd014.1</code>, <code>rendering</code></li>
+<li>Related: <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> parent DD (viewer architecture)</li>
+</ul>
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Prerequisites:</strong> DD014 viewer running locally (see <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>)</li>
+<li><strong>Test procedure:</strong> Load reference scene, compare implementation screenshots against the 14 mockup specifications (Section 6)</li>
+<li><strong>Automated:</strong> Color palette validation script checks hex values match specification <code>[TO BE CREATED]</code></li>
+<li><strong>Green light:</strong> All 14 reference mockups match within perceptual similarity threshold; all 37 material categories render correctly</li>
+</ul>
+<hr />
+<h2 id="1-canonical-color-palette">1. Canonical Color Palette<a class="headerlink" href="#1-canonical-color-palette" title="Permanent link">&para;</a></h2>
+<p>All colors originate from the Virtual Worm February 2012 Blender model (<code>Virtual_Worm_February_2012.blend</code>), which defines 37 material categories covering the complete anatomy of <em>C. elegans</em>. These are the <strong>heritage colors</strong> — the closest thing the project has to a canonical palette, and they are preserved here.</p>
+<h3 id="1a-heritage-palette-virtual-worm-37-materials">1A. Heritage Palette — Virtual Worm 37 Materials<a class="headerlink" href="#1a-heritage-palette-virtual-worm-37-materials" title="Permanent link">&para;</a></h3>
+<p>Extracted directly from <code>Virtual_Worm_February_2012.mtl</code>. RGB values are the Kd (diffuse) component. All materials share: specular exponent Ns=96, ambient Ka=(0,0,0), illumination model 2 (Blinn-Phong).</p>
+<h4 id="muscle-tissues-7-materials">Muscle Tissues (7 materials)<a class="headerlink" href="#muscle-tissues-7-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Body Wall Muscle</td>
+<td><code>Body_Wall_Muscle</code></td>
+<td>0.16, 0.32, 0.00</td>
+<td>41, 82, 0</td>
+<td><code>#295200</code></td>
+<td>Dark green</td>
+</tr>
+<tr>
+<td>Vulval Muscle</td>
+<td><code>Vulval_Muscle</code></td>
+<td>0.48, 0.64, 0.32</td>
+<td>122, 163, 82</td>
+<td><code>#7AA352</code></td>
+<td>Yellow-green</td>
+</tr>
+<tr>
+<td>Uterine Muscle</td>
+<td><code>Uterine_Muscle</code></td>
+<td>0.48, 0.64, 0.00</td>
+<td>122, 163, 0</td>
+<td><code>#7AA300</code></td>
+<td>Bright yellow-green</td>
+</tr>
+<tr>
+<td>Stomatointestinal Muscle</td>
+<td><code>Stomatoint_Muscle</code></td>
+<td>0.00, 0.32, 0.00</td>
+<td>0, 82, 0</td>
+<td><code>#005200</code></td>
+<td>Forest green</td>
+</tr>
+<tr>
+<td>Sphincter &amp; Anal Depressor Muscle</td>
+<td><code>Sphnc_&amp;_Anal_Dep_Musc</code></td>
+<td>0.32, 0.48, 0.00</td>
+<td>82, 122, 0</td>
+<td><code>#527A00</code></td>
+<td>Olive green</td>
+</tr>
+<tr>
+<td>Even Pharyngeal Muscle</td>
+<td><code>Even#PhMusc</code></td>
+<td>0.64, 0.80, 0.48</td>
+<td>163, 204, 122</td>
+<td><code>#A3CC7A</code></td>
+<td>Light green</td>
+</tr>
+<tr>
+<td>Odd Pharyngeal Muscle</td>
+<td><code>Odd#PhMuscle</code></td>
+<td>0.16, 0.64, 0.00</td>
+<td>41, 163, 0</td>
+<td><code>#29A300</code></td>
+<td>Bright green</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design rationale:</strong> All muscles share the green family. Body wall muscles are the darkest green (most prominent, needs contrast with other tissues). Pharyngeal muscles are lighter green to distinguish from BWM. This green baseline is important because the activity-state overlay (Section 1B) shifts muscles toward red when contracted — the green→red dynamic range is the primary visual indicator of muscle state.</p>
+<h4 id="neuron-types-5-materials">Neuron Types (5 materials)<a class="headerlink" href="#neuron-types-5-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interneuron</td>
+<td><code>Interneuron</code></td>
+<td>0.80, 0.16, 0.00</td>
+<td>204, 41, 0</td>
+<td><code>#CC2900</code></td>
+<td>Orange-red</td>
+</tr>
+<tr>
+<td>Motor Neuron</td>
+<td><code>Motor_Neuron</code></td>
+<td>0.48, 0.32, 0.75</td>
+<td>122, 82, 190</td>
+<td><code>#7A52BE</code></td>
+<td>Purple-blue</td>
+</tr>
+<tr>
+<td>Sensory Neuron</td>
+<td><code>SensoryNeuron</code></td>
+<td>0.80, 0.32, 0.75</td>
+<td>204, 82, 190</td>
+<td><code>#CC52BE</code></td>
+<td>Magenta-pink</td>
+</tr>
+<tr>
+<td>Polymodal Neuron</td>
+<td><code>PolymodalNeuron</code></td>
+<td>0.77, 0.01, 0.01</td>
+<td>196, 2, 2</td>
+<td><code>#C40202</code></td>
+<td>Deep red</td>
+</tr>
+<tr>
+<td>Neuron (Unknown Function)</td>
+<td><code>NeurUnkFunc</code></td>
+<td>0.48, 0.00, 0.16</td>
+<td>122, 0, 41</td>
+<td><code>#7A0029</code></td>
+<td>Burgundy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design rationale:</strong> Neuron types use warm/saturated colors that stand out against the green muscle background. Each functional class has a distinct hue to support visual identification. The activity-state overlay (Section 1B) modulates brightness, not hue — the base color always communicates neuron class.</p>
+<h4 id="structural-epithelial-tissues-14-materials">Structural &amp; Epithelial Tissues (14 materials)<a class="headerlink" href="#structural-epithelial-tissues-14-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hypodermis</td>
+<td><code>Hypodermis</code></td>
+<td>0.69, 0.61, 0.54</td>
+<td>176, 156, 138</td>
+<td><code>#B09C8A</code></td>
+<td>Tan/beige</td>
+</tr>
+<tr>
+<td>Seam Cell</td>
+<td><code>Seam_Cell</code></td>
+<td>0.64, 0.32, 0.16</td>
+<td>163, 82, 41</td>
+<td><code>#A35229</code></td>
+<td>Brown</td>
+</tr>
+<tr>
+<td>Intestine</td>
+<td><code>Intestine</code></td>
+<td>0.80, 0.64, 0.80</td>
+<td>204, 163, 204</td>
+<td><code>#CCA3CC</code></td>
+<td>Light lavender</td>
+</tr>
+<tr>
+<td>Pharyngeal Epithelium</td>
+<td><code>Pharyngeal_Epithelium</code></td>
+<td>0.48, 0.32, 0.32</td>
+<td>122, 82, 82</td>
+<td><code>#7A5252</code></td>
+<td>Muted rose</td>
+</tr>
+<tr>
+<td>Rectal Epithelium</td>
+<td><code>Rectal_epithelium</code></td>
+<td>0.48, 0.32, 0.32</td>
+<td>122, 82, 82</td>
+<td><code>#7A5252</code></td>
+<td>Muted rose</td>
+</tr>
+<tr>
+<td>Vulva Epithelium</td>
+<td><code>Vulva_epithelium</code></td>
+<td>0.48, 0.48, 0.80</td>
+<td>122, 122, 204</td>
+<td><code>#7A7ACC</code></td>
+<td>Periwinkle</td>
+</tr>
+<tr>
+<td>Arcade Cells</td>
+<td><code>Arcade_Cells</code></td>
+<td>0.64, 0.64, 0.00</td>
+<td>163, 163, 0</td>
+<td><code>#A3A300</code></td>
+<td>Dark yellow</td>
+</tr>
+<tr>
+<td>Socket Cell</td>
+<td><code>SocketCell</code></td>
+<td>0.80, 0.48, 0.48</td>
+<td>204, 122, 122</td>
+<td><code>#CC7A7A</code></td>
+<td>Salmon</td>
+</tr>
+<tr>
+<td>GLR Cells</td>
+<td><code>GLR_Cells</code></td>
+<td>0.75, 0.48, 0.00</td>
+<td>190, 122, 0</td>
+<td><code>#BE7A00</code></td>
+<td>Amber</td>
+</tr>
+<tr>
+<td>Marginal Cells</td>
+<td><code>marginal_cells</code></td>
+<td>0.75, 0.16, 0.75</td>
+<td>190, 41, 190</td>
+<td><code>#BE29BE</code></td>
+<td>Magenta</td>
+</tr>
+<tr>
+<td>Head Mesodermal Cell</td>
+<td><code>Head_Mesodermal_Cell</code></td>
+<td>0.80, 0.32, 0.16</td>
+<td>204, 82, 41</td>
+<td><code>#CC5229</code></td>
+<td>Burnt orange</td>
+</tr>
+<tr>
+<td>Coelomocyte</td>
+<td><code>Coelomocyte</code></td>
+<td>0.80, 0.64, 0.00</td>
+<td>204, 163, 0</td>
+<td><code>#CCA300</code></td>
+<td>Gold</td>
+</tr>
+<tr>
+<td>Pharyngeal &amp; Rectal Glands</td>
+<td><code>Phary_&amp;_Rect_Glands</code></td>
+<td>0.64, 0.64, 0.80</td>
+<td>163, 163, 204</td>
+<td><code>#A3A3CC</code></td>
+<td>Lavender-gray</td>
+</tr>
+<tr>
+<td>VPI &amp; VIR</td>
+<td><code>VPI_&amp;_VIR</code></td>
+<td>0.48, 0.32, 0.16</td>
+<td>122, 82, 41</td>
+<td><code>#7A5229</code></td>
+<td>Brown</td>
+</tr>
+</tbody>
+</table>
+<h4 id="excretory-system-4-materials">Excretory System (4 materials)<a class="headerlink" href="#excretory-system-4-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Excretory Cell</td>
+<td><code>Excretory_Cell</code></td>
+<td>0.64, 0.16, 0.32</td>
+<td>163, 41, 82</td>
+<td><code>#A32952</code></td>
+<td>Rose</td>
+</tr>
+<tr>
+<td>Excretory Pore Cell</td>
+<td><code>Excretory_Pore_Cell</code></td>
+<td>0.74, 0.77, 0.45</td>
+<td>189, 198, 114</td>
+<td><code>#BDC672</code></td>
+<td>Khaki</td>
+</tr>
+<tr>
+<td>Excretory Duct Cell</td>
+<td><code>Excretory_Duct_Cell</code></td>
+<td>0.64, 0.48, 0.32</td>
+<td>163, 122, 82</td>
+<td><code>#A37A52</code></td>
+<td>Tan</td>
+</tr>
+<tr>
+<td>Excretory Gland Cells</td>
+<td><code>Excretory_Gland_Cells</code></td>
+<td>0.48, 0.48, 0.64</td>
+<td>122, 122, 163</td>
+<td><code>#7A7AA3</code></td>
+<td>Steel blue</td>
+</tr>
+</tbody>
+</table>
+<h4 id="reproductive-system-5-materials">Reproductive System (5 materials)<a class="headerlink" href="#reproductive-system-5-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Germline</td>
+<td><code>Germline</code></td>
+<td>0.00, 0.16, 0.32</td>
+<td>0, 41, 82</td>
+<td><code>#002952</code></td>
+<td>Dark navy</td>
+</tr>
+<tr>
+<td>DTC &amp; Somatic Gonad</td>
+<td><code>DTC_&amp;_Somatic_Gonad</code></td>
+<td>0.48, 0.32, 0.80</td>
+<td>122, 82, 204</td>
+<td><code>#7A52CC</code></td>
+<td>Purple</td>
+</tr>
+<tr>
+<td>Spermatheca</td>
+<td><code>Spermatheca</code></td>
+<td>0.16, 0.48, 0.80</td>
+<td>41, 122, 204</td>
+<td><code>#297ACC</code></td>
+<td>Blue</td>
+</tr>
+<tr>
+<td>Spermathecal-Uterine Valve</td>
+<td><code>Spermath_Uterin_Valve</code></td>
+<td>0.32, 0.32, 0.48</td>
+<td>82, 82, 122</td>
+<td><code>#52527A</code></td>
+<td>Slate</td>
+</tr>
+<tr>
+<td>Uterus</td>
+<td><code>Uterus</code></td>
+<td>0.48, 0.64, 0.64</td>
+<td>122, 163, 163</td>
+<td><code>#7AA3A3</code></td>
+<td>Teal</td>
+</tr>
+</tbody>
+</table>
+<h4 id="other-2-materials">Other (2 materials)<a class="headerlink" href="#other-2-materials" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>MTL Name</th>
+<th>RGB (0-1)</th>
+<th>RGB (0-255)</th>
+<th>Hex</th>
+<th>Visual Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sheath (Other)</td>
+<td><code>SheathOther</code></td>
+<td>0.16, 0.48, 0.48</td>
+<td>41, 122, 122</td>
+<td><code>#297A7A</code></td>
+<td>Dark teal</td>
+</tr>
+<tr>
+<td>Temp DRG Color</td>
+<td><code>Temp_DRG_Color</code></td>
+<td>0.77, 0.16, 0.00</td>
+<td>198, 42, 0</td>
+<td><code>#C62A00</code></td>
+<td>Orange-red</td>
+</tr>
+</tbody>
+</table>
+<h4 id="global-material-properties-from-mtl">Global Material Properties (from MTL)<a class="headerlink" href="#global-material-properties-from-mtl" title="Permanent link">&para;</a></h4>
+<p>All 37 Virtual Worm materials share these base properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>MTL Key</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specular exponent</td>
+<td><code>Ns</code></td>
+<td>96.078431</td>
+<td>Moderately sharp specular highlights</td>
+</tr>
+<tr>
+<td>Ambient</td>
+<td><code>Ka</code></td>
+<td>(0, 0, 0)</td>
+<td>No ambient contribution (lighting-dependent)</td>
+</tr>
+<tr>
+<td>Specular</td>
+<td><code>Ks</code></td>
+<td>(0, 0, 0)*</td>
+<td>No specular highlights for most tissues</td>
+</tr>
+<tr>
+<td>Opacity</td>
+<td><code>d</code></td>
+<td>0.05</td>
+<td>5% opaque (highly translucent)</td>
+</tr>
+<tr>
+<td>Illumination model</td>
+<td><code>illum</code></td>
+<td>2</td>
+<td>Blinn-Phong shading</td>
+</tr>
+</tbody>
+</table>
+<p>*Exception: Coelomocyte has Ks=(0.5, 0.5, 0.5) — a slight wet/glossy look, biologically motivated by their scavenger function.</p>
+<p><strong>Note on opacity:</strong> The MTL file specifies d=0.05 (5% opaque) for all materials. This works in the original Blender model where all 37 tissue layers are composited together — each layer contributes a faint wash of color, and stacking them produces the complete worm. In the interactive viewer, <strong>opacity must be adjusted per-context</strong> (see Section 3 for scale-specific opacity values).</p>
+<h3 id="1b-activity-state-dynamic-colors">1B. Activity-State Dynamic Colors<a class="headerlink" href="#1b-activity-state-dynamic-colors" title="Permanent link">&para;</a></h3>
+<p>These are <strong>overlays</strong> on the base heritage colors. They communicate time-varying simulation state. When a cell is at rest, it shows its base color from Section 1A. When active, the dynamic mapping modifies brightness, hue, or opacity.</p>
+<table>
+<thead>
+<tr>
+<th>Data Source</th>
+<th>Visual Property Modified</th>
+<th>Rest State</th>
+<th>Active State</th>
+<th>Colormap</th>
+<th>Scale Range</th>
+<th>DD Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neuron membrane voltage</td>
+<td>Brightness + hue shift</td>
+<td>Base color at 30% brightness</td>
+<td>Base color at 100% brightness + white core glow</td>
+<td>Blue tint (rest) → base color (threshold) → white core (peak)</td>
+<td>-80 mV (rest) to +20 mV (peak depolarization)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+</tr>
+<tr>
+<td>Neuron intracellular [Ca²⁺]</td>
+<td>Additive glow color</td>
+<td>No glow (black additive)</td>
+<td>Gold/yellow glow (<code>#FFD700</code>)</td>
+<td>Black (0) → Gold (max) additive blend</td>
+<td>0 to <code>max_ca</code> (per-neuron normalized)</td>
+<td><a href="../DD001_Neural_Circuit_Architecture/">DD001</a></td>
+</tr>
+<tr>
+<td>Muscle activation</td>
+<td>Hue shift (green→red)</td>
+<td>Base green color (<code>#295200</code>)</td>
+<td>Red (<code>#CC2200</code>)</td>
+<td><code>RdYlGn_r</code> (reversed Red-Yellow-Green)</td>
+<td>0.0 (relaxed) to 1.0 (max contraction)</td>
+<td><a href="../DD002_Muscle_Model_Architecture/">DD002</a></td>
+</tr>
+<tr>
+<td>Intestinal [Ca²⁺] per cell</td>
+<td>Cell face color gradient</td>
+<td>Cool blue (<code>#2244CC</code>)</td>
+<td>Hot red (<code>#CC2200</code>)</td>
+<td>Blue→Red (sequential)</td>
+<td>0 to <code>max_intestinal_ca</code></td>
+<td><a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></td>
+</tr>
+<tr>
+<td>Pharynx pumping state</td>
+<td>Opacity modulation</td>
+<td>40% opacity (relaxed)</td>
+<td>95% opacity (contracted)</td>
+<td>Transparent→Opaque</td>
+<td>0.0 (relaxed) to 1.0 (contracted)</td>
+<td><a href="../DD007_Pharyngeal_System_Architecture/">DD007</a></td>
+</tr>
+<tr>
+<td>Neuropeptide concentration</td>
+<td>Volumetric cloud density + color</td>
+<td>Fully transparent</td>
+<td>Colored semi-transparent cloud</td>
+<td>Per-peptide color, alpha ∝ concentration</td>
+<td>0 to <code>max_conc</code></td>
+<td><a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a></td>
+</tr>
+<tr>
+<td>SPH particle type</td>
+<td>Point color (categorical)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Blue=liquid, Green=elastic, Gray=boundary</td>
+<td>Categorical</td>
+<td><a href="../DD003_Body_Physics_Architecture/">DD003</a></td>
+</tr>
+<tr>
+<td>Cell identity (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a>)</td>
+<td>Cell outline color</td>
+<td>Per-tissue-type color from 1A</td>
+<td>N/A</td>
+<td>Categorical (same as heritage palette)</td>
+<td>Categorical</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="voltage-to-visual-mapping-detail">Voltage-to-Visual Mapping (Detail)<a class="headerlink" href="#voltage-to-visual-mapping-detail" title="Permanent link">&para;</a></h4>
+<p>The neuron voltage mapping is the most visually complex dynamic overlay. Here is the precise algorithm:</p>
+<div class="highlight"><pre><span></span><code>input:  V (membrane voltage in mV), base_color (RGB from Section 1A)
+output: rendered_color (RGB), glow_intensity (float 0-1)
+
+V_rest   = -80.0   # mV
+V_thresh = -40.0   # mV (approximate action potential threshold)
+V_peak   = +20.0   # mV
+
+# Normalize voltage to 0-1 range
+t = clamp((V - V_rest) / (V_peak - V_rest), 0.0, 1.0)
+
+# Brightness: ramp from 0.3 (rest) to 1.0 (peak)
+brightness = 0.3 + 0.7 * t
+
+# At rest (t &lt; 0.25): tint toward blue
+# At threshold (t ≈ 0.5): show base color at full brightness
+# At peak (t &gt; 0.85): blend toward white
+if t &lt; 0.25:
+    blue_tint = RGB(0.2, 0.3, 0.6)
+    rendered_color = lerp(blue_tint, base_color, t / 0.25) * brightness
+elif t &lt; 0.85:
+    rendered_color = base_color * brightness
+else:
+    white = RGB(1.0, 1.0, 1.0)
+    rendered_color = lerp(base_color, white, (t - 0.85) / 0.15) * brightness
+
+# Glow: only emits above threshold
+glow_intensity = max(0.0, (t - 0.5) / 0.5)  # 0 below threshold, ramps to 1.0
+</code></pre></div>
+<h4 id="muscle-activation-mapping-detail">Muscle Activation Mapping (Detail)<a class="headerlink" href="#muscle-activation-mapping-detail" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>input:  activation (float 0-1), base_green = RGB(0.16, 0.32, 0.0)
+output: rendered_color (RGB)
+
+relaxed_color   = RGB(0.16, 0.50, 0.0)   # Slightly brighter green than base
+mid_color       = RGB(0.80, 0.80, 0.0)   # Yellow at half activation
+contracted_color = RGB(0.80, 0.13, 0.0)  # Red at full contraction
+
+if activation &lt; 0.5:
+    rendered_color = lerp(relaxed_color, mid_color, activation / 0.5)
+else:
+    rendered_color = lerp(mid_color, contracted_color, (activation - 0.5) / 0.5)
+</code></pre></div>
+<h3 id="1c-molecular-scale-palette">1C. Molecular-Scale Palette<a class="headerlink" href="#1c-molecular-scale-palette" title="Permanent link">&para;</a></h3>
+<p>These colors apply only at the molecular scale (Section 3C). They are new assignments (not from Virtual Worm) designed for visual clarity when viewing membrane cross-sections and intracellular dynamics.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Hex</th>
+<th>RGB (0-255)</th>
+<th>Visual Description</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Na⁺ ion channel</td>
+<td><code>#4488FF</code></td>
+<td>68, 136, 255</td>
+<td>Bright blue</td>
+<td>Convention: Na⁺ = blue in electrophysiology diagrams</td>
+</tr>
+<tr>
+<td>K⁺ ion channel</td>
+<td><code>#44BB44</code></td>
+<td>68, 187, 68</td>
+<td>Green</td>
+<td>Convention: K⁺ = green</td>
+</tr>
+<tr>
+<td>Ca²⁺ ion channel</td>
+<td><code>#FFD700</code></td>
+<td>255, 215, 0</td>
+<td>Gold</td>
+<td>Matches calcium glow from 1B</td>
+</tr>
+<tr>
+<td>Cl⁻ ion channel</td>
+<td><code>#DD4444</code></td>
+<td>221, 68, 68</td>
+<td>Red</td>
+<td>Convention: Cl⁻ = red</td>
+</tr>
+<tr>
+<td>Lipid bilayer</td>
+<td><code>#C8B8A8</code></td>
+<td>200, 184, 168</td>
+<td>Warm gray</td>
+<td>Neutral background, slight biological warmth</td>
+</tr>
+<tr>
+<td>IP3 receptor</td>
+<td><code>#CC44CC</code></td>
+<td>204, 68, 204</td>
+<td>Magenta</td>
+<td>Distinct from ion channels, signals second-messenger pathway</td>
+</tr>
+<tr>
+<td>GPCR receptor</td>
+<td><code>#44BBBB</code></td>
+<td>68, 187, 187</td>
+<td>Teal</td>
+<td>Distinct from IP3, signals peptide reception</td>
+</tr>
+<tr>
+<td>Ca²⁺ free ion</td>
+<td><code>#FFD700</code></td>
+<td>255, 215, 0</td>
+<td>Gold (glowing)</td>
+<td>Same as channel — continuity as Ca²⁺ flows through pore</td>
+</tr>
+<tr>
+<td>Neuropeptide molecule</td>
+<td>Per-peptide</td>
+<td>Varies</td>
+<td>Matches volumetric cloud color from 1B</td>
+<td>Visual continuity across scales</td>
+</tr>
+<tr>
+<td>Cell interior background</td>
+<td><code>#0A0A14</code></td>
+<td>10, 10, 20</td>
+<td>Near-black with blue tint</td>
+<td>Dark interior, slight cool tone suggests aqueous cytoplasm</td>
+</tr>
+<tr>
+<td><strong>Nucleus &amp; Gene Expression</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Nuclear envelope</td>
+<td><code>#3D3570</code></td>
+<td>61, 53, 112</td>
+<td>Deep indigo</td>
+<td>Double membrane, distinct from plasma membrane and ER</td>
+</tr>
+<tr>
+<td>Nuclear pore complex</td>
+<td><code>#6B5DAA</code></td>
+<td>107, 93, 170</td>
+<td>Medium purple</td>
+<td>Lighter than envelope to show pore structure</td>
+</tr>
+<tr>
+<td>Chromatin (inactive)</td>
+<td><code>#1A1440</code></td>
+<td>26, 20, 64</td>
+<td>Very dark purple</td>
+<td>Tightly packed, barely visible against nucleus interior</td>
+</tr>
+<tr>
+<td>Chromatin (active locus)</td>
+<td><code>#8877CC</code></td>
+<td>136, 119, 204</td>
+<td>Bright lavender</td>
+<td>Glowing, unwound region where transcription is happening</td>
+</tr>
+<tr>
+<td>RNA polymerase II</td>
+<td><code>#FF8844</code></td>
+<td>255, 136, 68</td>
+<td>Bright orange</td>
+<td>Warm, highly visible — the "engine" of transcription</td>
+</tr>
+<tr>
+<td>mRNA transcript</td>
+<td><code>#FF6688</code></td>
+<td>255, 102, 136</td>
+<td>Coral pink</td>
+<td>Warm pink strand, visually tracks from nucleus → cytoplasm</td>
+</tr>
+<tr>
+<td>Nuclear pore transit glow</td>
+<td><code>#AA88FF</code></td>
+<td>170, 136, 255</td>
+<td>Soft violet</td>
+<td>Brief glow when mRNA passes through nuclear pore</td>
+</tr>
+<tr>
+<td>Ribosome</td>
+<td><code>#66AA66</code></td>
+<td>102, 170, 102</td>
+<td>Muted green</td>
+<td>Distinct from ion channels; biological convention (green for translation)</td>
+</tr>
+<tr>
+<td>Rough ER membrane</td>
+<td><code>#8A7A6A</code></td>
+<td>138, 122, 106</td>
+<td>Warm dark gray</td>
+<td>Same as smooth ER, but studded with green ribosome dots</td>
+</tr>
+<tr>
+<td>Nascent protein (folding)</td>
+<td><code>#DDBB44</code></td>
+<td>221, 187, 68</td>
+<td>Warm gold-yellow</td>
+<td>Emerging from ribosome, color hints at final channel identity</td>
+</tr>
+<tr>
+<td>Transport vesicle</td>
+<td><code>#55AADD</code></td>
+<td>85, 170, 221</td>
+<td>Sky blue</td>
+<td>Distinct from all other elements; suggests fluid transport</td>
+</tr>
+<tr>
+<td>Vesicle membrane fusion glow</td>
+<td><code>#88DDFF</code></td>
+<td>136, 221, 255</td>
+<td>Bright cyan</td>
+<td>Flash when vesicle fuses with plasma membrane</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-lighting-environment">2. Lighting &amp; Environment<a class="headerlink" href="#2-lighting-environment" title="Permanent link">&para;</a></h2>
+<h3 id="2a-global-lighting-setup">2A. Global Lighting Setup<a class="headerlink" href="#2a-global-lighting-setup" title="Permanent link">&para;</a></h3>
+<p>All scales share a three-point lighting rig, with parameters adjusted per scale.</p>
+<table>
+<thead>
+<tr>
+<th>Light</th>
+<th>Type</th>
+<th>Position (relative to camera)</th>
+<th>Color</th>
+<th>Intensity</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key light</td>
+<td>Directional</td>
+<td>30° above, 45° right</td>
+<td><code>#FFFAF0</code> (warm white)</td>
+<td>1.0</td>
+<td>Primary illumination, defines form</td>
+</tr>
+<tr>
+<td>Fill light</td>
+<td>Directional</td>
+<td>15° above, 30° left</td>
+<td><code>#E8E8FF</code> (cool white)</td>
+<td>0.4</td>
+<td>Softens shadows, prevents pure-black regions</td>
+</tr>
+<tr>
+<td>Rim light</td>
+<td>Directional</td>
+<td>10° above, directly behind</td>
+<td><code>#FFFFFF</code> (pure white)</td>
+<td>0.6</td>
+<td>Silhouette separation from background</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2b-background">2B. Background<a class="headerlink" href="#2b-background" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>Background</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Organism</td>
+<td>Dark gradient</td>
+<td>Linear gradient from <code>#1A1A2E</code> (top) to <code>#16213E</code> (bottom). No environment map, no grid, no distracting elements. The worm is the sole subject.</td>
+</tr>
+<tr>
+<td>Tissue/Cell</td>
+<td>Same dark gradient</td>
+<td>Consistent with organism scale; depth-of-field blur softens background cells.</td>
+</tr>
+<tr>
+<td>Molecular</td>
+<td>Cell interior</td>
+<td><code>#0A0A14</code> (near-black). Slight procedural noise texture (amplitude 0.02, frequency 0.5/µm) to suggest cytoplasmic structure without distracting from channels.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2c-material-model">2C. Material Model<a class="headerlink" href="#2c-material-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>WebGPU (Three.js Phase 2/3)</th>
+<th>WebGL Fallback (Phase 1 / Trame)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shading model</td>
+<td>PBR (MeshStandardMaterial)</td>
+<td>Phong (MeshPhongMaterial)</td>
+</tr>
+<tr>
+<td>Metalness</td>
+<td>0.0 (all biological tissues)</td>
+<td>N/A (Phong has no metalness)</td>
+</tr>
+<tr>
+<td>Roughness</td>
+<td>0.6 (default for soft tissue)</td>
+<td>Shininess = 30 (approximate equivalent)</td>
+</tr>
+<tr>
+<td>Roughness: cuticle</td>
+<td>0.3 (smoother, slightly glossy)</td>
+<td>Shininess = 60</td>
+</tr>
+<tr>
+<td>Roughness: wet tissue (intestine, gonad)</td>
+<td>0.4 (slightly glossy)</td>
+<td>Shininess = 45</td>
+</tr>
+<tr>
+<td>Subsurface scattering</td>
+<td>Enabled for cuticle (WebGPU only)</td>
+<td>Not available — use alpha=0.85 + backface coloring as approximation</td>
+</tr>
+<tr>
+<td>Normal maps</td>
+<td>Used for muscle striations (tissue scale)</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Emissive</td>
+<td>Used for active neurons (glow_intensity from 1B)</td>
+<td>Same (emissive color = base_color * glow_intensity)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-scale-specific-rendering-specifications">3. Scale-Specific Rendering Specifications<a class="headerlink" href="#3-scale-specific-rendering-specifications" title="Permanent link">&para;</a></h2>
+<h3 id="3a-organism-scale">3A. Organism Scale<a class="headerlink" href="#3a-organism-scale" title="Permanent link">&para;</a></h3>
+<p><strong>What the user sees:</strong> A smooth, translucent <em>C. elegans</em> body crawling. Body bends propagate as sinusoidal waves. The pharynx is faintly visible through the cuticle as a rhythmic shadow. Defecation contractions are visible as a brief posterior-to-anterior tightening.</p>
+<h4 id="surface">Surface<a class="headerlink" href="#surface" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry source</td>
+<td>Marching cubes isosurface from SPH particles (Phase 1); VirtualWorm mesh skinning (Phase 2+)</td>
+<td>See <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> Surface Reconstruction</td>
+</tr>
+<tr>
+<td>Cuticle opacity</td>
+<td>0.85</td>
+<td>Semi-translucent — internal structures visible as shadows</td>
+</tr>
+<tr>
+<td>Cuticle color</td>
+<td><code>#B09C8A</code> (Hypodermis) with slight desaturation</td>
+<td>The outermost visible surface uses the hypodermis color</td>
+</tr>
+<tr>
+<td>Cuticle roughness</td>
+<td>0.3</td>
+<td>Smoother than internal tissues — worm cuticle has a slight sheen</td>
+</tr>
+<tr>
+<td>Subsurface scattering radius</td>
+<td>0.15 mm (WebGPU)</td>
+<td>Light penetrates thin cuticle, creating soft internal glow</td>
+</tr>
+<tr>
+<td>Surface normal smoothing</td>
+<td>Laplacian smooth, 2 iterations</td>
+<td>Removes marching-cubes staircase artifacts</td>
+</tr>
+<tr>
+<td>Body bend visualization</td>
+<td>Surface deformation from SPH particle motion</td>
+<td>No artificial displacement — the physics engine drives the shape</td>
+</tr>
+<tr>
+<td>Muscle ridges (Phase 2+)</td>
+<td>Subtle normal-map perturbation on dorsal/ventral muscle quadrants</td>
+<td>Amplitude 0.02 mm, 24 ridges per quadrant matching BWM count</td>
+</tr>
+</tbody>
+</table>
+<h4 id="internal-visibility-through-cuticle">Internal Visibility Through Cuticle<a class="headerlink" href="#internal-visibility-through-cuticle" title="Permanent link">&para;</a></h4>
+<p>When the body surface layer is ON (default), internal structures are visible only as <strong>shadows and color wash</strong> through the translucent cuticle:</p>
+<ul>
+<li><strong>Pharynx pumping:</strong> Appears as a rhythmic darkening/lightening at the anterior, ~3-4 Hz</li>
+<li><strong>Intestine:</strong> Faint lavender (<code>#CCA3CC</code>) wash visible through mid-body</li>
+<li><strong>Muscles:</strong> Not individually visible — their effect is seen as body bending</li>
+</ul>
+<p>To see individual cells, the user must zoom to tissue scale or toggle body surface OFF.</p>
+<h4 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default position</td>
+<td>Dorsal view, camera 800 µm from body center</td>
+</tr>
+<tr>
+<td>Field of view</td>
+<td>35° (tight framing, worm fills ~70% of viewport width)</td>
+</tr>
+<tr>
+<td>Orbit</td>
+<td>Free orbit (trackball rotation), clamped to prevent camera-inside-body</td>
+</tr>
+<tr>
+<td>Pan</td>
+<td>Right-click drag or two-finger drag</td>
+</tr>
+<tr>
+<td>Zoom</td>
+<td>Scroll wheel, continuous (triggers scale transition at breakpoints)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3b-tissue-cell-scale">3B. Tissue / Cell Scale<a class="headerlink" href="#3b-tissue-cell-scale" title="Permanent link">&para;</a></h3>
+<p><strong>What the user sees:</strong> Individual cells as distinct colored shapes. Muscles show green→red activation. Neurons glow when depolarized. Cell boundaries are visible as thin outlines. Clicking any cell opens the inspector panel.</p>
+<p><strong>Zoom breakpoint:</strong> Tissue scale activates when camera distance &lt; 400 µm from nearest body surface point.</p>
+<h4 id="cell-geometry">Cell Geometry<a class="headerlink" href="#cell-geometry" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cell shape source</td>
+<td>VirtualWorm OBJ meshes (per-tissue groupings)</td>
+<td>Each tissue type is a separate mesh in the OBJ</td>
+</tr>
+<tr>
+<td>Individual cell segmentation</td>
+<td><a href="../DD004_Mechanical_Cell_Identity/">DD004</a> particle-to-cell mapping → convex hull per cell (Phase 2+)</td>
+<td>Phase 1 uses tissue-level meshes, not individual cells</td>
+</tr>
+<tr>
+<td>Cell boundary outlines</td>
+<td>1.5 px screen-space line in 30%-darkened base color</td>
+<td>E.g., Body Wall Muscle outline = <code>#1D3600</code> (darker <code>#295200</code>)</td>
+</tr>
+<tr>
+<td>Cell boundary visibility</td>
+<td>OFF by default; toggled via "Cell boundaries" layer</td>
+<td>Reduces visual clutter at default view</td>
+</tr>
+</tbody>
+</table>
+<h4 id="neuron-rendering">Neuron Rendering<a class="headerlink" href="#neuron-rendering" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Soma geometry</td>
+<td>Sphere, radius from NeuroML morphology (typically 2-4 µm)</td>
+<td>Loaded from <code>.cell.nml</code> files via Worm3DViewer's <code>neuromlmodel.py</code></td>
+</tr>
+<tr>
+<td>Dendrite/axon geometry</td>
+<td>Cylindrical tubes following NeuroML segment coordinates</td>
+<td>Radius from NeuroML; minimum 0.3 µm for visibility</td>
+</tr>
+<tr>
+<td>Base color</td>
+<td>From Section 1A neuron type table</td>
+<td>Interneuron=<code>#CC2900</code>, Motor=<code>#7A52BE</code>, etc.</td>
+</tr>
+<tr>
+<td>Resting appearance</td>
+<td>Base color at 30% brightness, no glow</td>
+<td>Neuron is present but visually quiet</td>
+</tr>
+<tr>
+<td>Active appearance</td>
+<td>Full brightness + bloom glow</td>
+<td>See voltage mapping in Section 1B</td>
+</tr>
+<tr>
+<td>Bloom post-process</td>
+<td>Gaussian blur, kernel 9px, threshold = 0.7 × max emissive intensity</td>
+<td>Only active neurons emit enough to exceed bloom threshold</td>
+</tr>
+<tr>
+<td>Bloom color</td>
+<td>Matches base color (not white)</td>
+<td>Interneuron glow is orange-red, motor neuron glow is purple</td>
+</tr>
+<tr>
+<td>Selected neuron highlight</td>
+<td>White wireframe overlay + inspector panel open</td>
+<td>2px white wireframe on soma + connected segments</td>
+</tr>
+</tbody>
+</table>
+<h4 id="muscle-rendering">Muscle Rendering<a class="headerlink" href="#muscle-rendering" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td>VirtualWorm <code>bwm.obj</code> mesh faces, grouped by muscle ID</td>
+<td>95 muscles in 4 quadrants</td>
+</tr>
+<tr>
+<td>Base color (relaxed)</td>
+<td><code>#295200</code> (Body Wall Muscle)</td>
+<td>From Section 1A</td>
+</tr>
+<tr>
+<td>Activated color</td>
+<td>Green→Yellow→Red per Section 1B</td>
+<td><code>RdYlGn_r</code> colormap</td>
+</tr>
+<tr>
+<td>Striations (Phase 2+)</td>
+<td>Normal map: parallel ridges along muscle long axis</td>
+<td>Period 2 µm, amplitude 0.01 mm, visible only at close zoom</td>
+</tr>
+<tr>
+<td>Opacity</td>
+<td>0.9</td>
+<td>Nearly opaque when muscle layer is ON</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pharynx-detail-view">Pharynx Detail View<a class="headerlink" href="#pharynx-detail-view" title="Permanent link">&para;</a></h4>
+<p>Visible when zoomed into anterior region and pharynx layer is ON.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cell geometry</td>
+<td>63 cells from VirtualWorm pharyngeal meshes</td>
+<td>Includes pm1-pm8 muscles, mc1-mc3 marginal cells, epithelial cells</td>
+</tr>
+<tr>
+<td>Pumping animation</td>
+<td>Opacity modulation per-section (corpus / isthmus / terminal bulb)</td>
+<td>See Section 1B: 40% relaxed → 95% contracted</td>
+</tr>
+<tr>
+<td>Pumping frequency</td>
+<td>3-4 Hz (from <a href="../DD007_Pharyngeal_System_Architecture/">DD007</a> simulation output)</td>
+<td>Visual should match this rate</td>
+</tr>
+<tr>
+<td>Grinder visualization (Phase 3)</td>
+<td>Rotation animation of terminal bulb interior</td>
+<td>Simplified: sinusoidal rotation ±15° synchronized with pump cycle</td>
+</tr>
+<tr>
+<td>Pharyngeal neuron visibility</td>
+<td>20 pharyngeal neurons visible when neurons layer ON</td>
+<td>Colors from Section 1A by neuron type</td>
+</tr>
+</tbody>
+</table>
+<h4 id="intestinal-calcium-wave">Intestinal Calcium Wave<a class="headerlink" href="#intestinal-calcium-wave" title="Permanent link">&para;</a></h4>
+<p>Visible when intestine layer is ON.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cell geometry</td>
+<td>20 int cells, tube arrangement (from VirtualWorm <code>Intestine</code> mesh segments)</td>
+<td>Each cell is a ring-segment of the tube</td>
+</tr>
+<tr>
+<td>Resting color</td>
+<td>Blue (<code>#2244CC</code>)</td>
+<td>Cool blue = low [Ca²⁺]</td>
+</tr>
+<tr>
+<td>Peak calcium color</td>
+<td>Red (<code>#CC2200</code>)</td>
+<td>Hot red = high [Ca²⁺]</td>
+</tr>
+<tr>
+<td>Wave propagation</td>
+<td>Posterior→anterior color gradient, each cell transitions blue→red→blue</td>
+<td>One wave every ~50 seconds (<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> defecation motor program period)</td>
+</tr>
+<tr>
+<td>Transition speed per cell</td>
+<td>~2 seconds rise, ~5 seconds fall</td>
+<td>Matches biological IP3-mediated calcium dynamics</td>
+</tr>
+</tbody>
+</table>
+<h4 id="depth-of-field">Depth of Field<a class="headerlink" href="#depth-of-field" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Focus point</td>
+<td>Center of currently selected cell, or screen center</td>
+</tr>
+<tr>
+<td>Focal distance</td>
+<td>Camera-to-focus-point distance</td>
+</tr>
+<tr>
+<td>Aperture (f-stop equivalent)</td>
+<td>f/2.8 (shallow) at tissue scale; f/8 (deep) at organism scale</td>
+</tr>
+<tr>
+<td>Bokeh shape</td>
+<td>Circular</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Post-process CoC (circle of confusion) blur; WebGPU compute or fragment shader</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3c-molecular-scale">3C. Molecular Scale<a class="headerlink" href="#3c-molecular-scale" title="Permanent link">&para;</a></h3>
+<p><strong>What the user sees:</strong> A cross-section of a cell membrane with embedded ion channel proteins. Calcium ions flow through open channels as glowing gold particles. The lipid bilayer is a textured surface with protein complexes embedded in it.</p>
+<p><strong>Zoom breakpoint:</strong> Molecular scale activates when camera distance &lt; 5 µm from a selected cell's membrane.</p>
+<h4 id="membrane-cross-section">Membrane Cross-Section<a class="headerlink" href="#membrane-cross-section" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lipid bilayer geometry</td>
+<td>Textured plane, 200nm × 200nm visible area, 7nm thick</td>
+<td>Two parallel sheets with hydrophobic tails facing inward</td>
+</tr>
+<tr>
+<td>Bilayer color</td>
+<td><code>#C8B8A8</code> (warm gray)</td>
+<td>From Section 1C</td>
+</tr>
+<tr>
+<td>Bilayer texture</td>
+<td>Procedural: packed ellipses (lipid heads) on surface, random orientation</td>
+<td>Head diameter ~0.7nm, gap ~0.1nm</td>
+</tr>
+<tr>
+<td>Bilayer opacity</td>
+<td>0.7</td>
+<td>Translucent enough to see channel pores through the membrane</td>
+</tr>
+<tr>
+<td>Bilayer edge treatment</td>
+<td>Fades to transparent at visible-area boundary</td>
+<td>No sharp edge — membrane extends beyond view</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ion-channel-glyphs">Ion Channel Glyphs<a class="headerlink" href="#ion-channel-glyphs" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Channel geometry</td>
+<td>Simplified cylinder pore (outer diameter 8nm, pore diameter 0.5-2nm) embedded in bilayer</td>
+<td>Not atomistic — schematic representation</td>
+</tr>
+<tr>
+<td>Channel color</td>
+<td>By ion selectivity (Section 1C): Na⁺=blue, K⁺=green, Ca²⁺=gold, Cl⁻=red</td>
+<td></td>
+</tr>
+<tr>
+<td>Channel material</td>
+<td>Roughness 0.4, slight metalness 0.1</td>
+<td>Protein has a faint sheen, distinguishes from lipid</td>
+</tr>
+<tr>
+<td>Closed state</td>
+<td>Pore diameter 0.5nm, channel color at 50% brightness</td>
+<td>Visually "pinched shut"</td>
+</tr>
+<tr>
+<td>Open state</td>
+<td>Pore diameter 2nm, channel color at 100% brightness + subtle glow</td>
+<td>Pore visibly dilated</td>
+</tr>
+<tr>
+<td>Gating animation</td>
+<td>Pore diameter interpolation over 200ms</td>
+<td>Simplified conformational change</td>
+</tr>
+<tr>
+<td>Channel density</td>
+<td>From <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN expression data mapped to conductance density</td>
+<td>Approximate: 1-5 channels per 200nm² patch</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ion-particles">Ion Particles<a class="headerlink" href="#ion-particles" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ca²⁺ geometry</td>
+<td>Sphere, visual radius 1nm (exaggerated ~5× for visibility)</td>
+<td>Actual ionic radius is ~0.1nm — too small to see</td>
+</tr>
+<tr>
+<td>Ca²⁺ color</td>
+<td><code>#FFD700</code> (gold)</td>
+<td>Matches channel and glow from Section 1B/1C</td>
+</tr>
+<tr>
+<td>Ca²⁺ glow</td>
+<td>Emissive material, intensity 0.8</td>
+<td>Glowing spheres stand out against dark interior</td>
+</tr>
+<tr>
+<td>Ca²⁺ motion</td>
+<td>GPU particle system, physics-based diffusion + channel transit</td>
+<td>When channel opens: ions flow through pore along concentration gradient</td>
+</tr>
+<tr>
+<td>Flow speed through channel</td>
+<td>50 nm/ms (exaggerated for visibility)</td>
+<td>Real transit time is ~10ns — imperceptibly fast at real scale</td>
+</tr>
+<tr>
+<td>Extracellular Ca²⁺</td>
+<td>Sparse gold particles above membrane, random Brownian motion</td>
+<td>Concentration: ~5 particles per 200nm² at 2mM extracellular</td>
+</tr>
+<tr>
+<td>Intracellular Ca²⁺</td>
+<td>Very sparse gold particles below membrane</td>
+<td>~0-1 particles per 200nm² at 100nM resting; increases during influx</td>
+</tr>
+</tbody>
+</table>
+<h4 id="neuropeptide-molecules-molecular-scale">Neuropeptide Molecules (Molecular Scale)<a class="headerlink" href="#neuropeptide-molecules-molecular-scale" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td>Icosphere, visual radius 3nm (exaggerated)</td>
+<td>Peptides are larger than ions but still sub-microscopic</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Per-peptide (matches volumetric cloud from tissue scale)</td>
+<td>Visual continuity across zoom levels</td>
+</tr>
+<tr>
+<td>Glow</td>
+<td>Emissive intensity 0.5</td>
+<td>Less bright than Ca²⁺ — peptides are modulatory, not the main event</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>Brownian diffusion in extracellular space</td>
+<td>Slower than ions; diffusion coefficient ~10⁻⁶ cm²/s</td>
+</tr>
+<tr>
+<td>GPCR binding</td>
+<td>Peptide snaps to receptor glyph, brief flash, then fades</td>
+<td>500ms animation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cell-interior-nucleus">Cell Interior &amp; Nucleus<a class="headerlink" href="#cell-interior-nucleus" title="Permanent link">&para;</a></h4>
+<p>The molecular scale reveals not just the membrane but the <strong>entire intracellular scene</strong> — from the nucleus where ion channel genes are transcribed, through mRNA export and ribosomal translation on the rough ER, to vesicle trafficking that delivers newly synthesized channel proteins to the plasma membrane. This connects <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (CeNGEN gene expression data) directly to the functional channels visible at the membrane surface.</p>
+<p><strong>Scene layout (cross-section view, top to bottom):</strong></p>
+<div class="highlight"><pre><span></span><code>    ═══════════════════════════════  Extracellular space (light)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  Plasma membrane (channels embedded)
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  Cytoplasm (dark, with vesicles in transit)
+    ▓▓▓▓▓   Rough ER (ribosomes)   ▓▓▓  Smooth ER
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  Cytoplasm
+    ╔══════════════════════════╗      Nuclear envelope (double membrane)
+    ║  ●  Chromatin            ║      Nuclear pore complexes at gaps
+    ║     ✦ Active locus       ║      RNA Pol II visible at active gene
+    ║        ~ mRNA emerging   ║
+    ╚══════════════════════════╝
+</code></pre></div>
+<h5 id="nucleus">Nucleus<a class="headerlink" href="#nucleus" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td>Ellipsoid, ~3 µm diameter (visual, scaled to cell type)</td>
+<td>Positioned in lower half of cross-section view</td>
+</tr>
+<tr>
+<td>Nuclear envelope</td>
+<td>Double membrane, indigo (<code>#3D3570</code>), 30nm gap between membranes (exaggerated for visibility)</td>
+<td>Slight translucency (opacity 0.8) so interior is visible</td>
+</tr>
+<tr>
+<td>Nuclear pore complexes</td>
+<td>8-sided ring structures (<code>#6B5DAA</code>), ~120nm diameter, spaced ~200nm apart on envelope</td>
+<td>Visible as gaps/portals in the nuclear membrane</td>
+</tr>
+<tr>
+<td>Nuclear interior</td>
+<td><code>#0D0A20</code> (darker than cytoplasm, slightly purple-tinted)</td>
+<td>Distinct from cytoplasm to show compartmentalization</td>
+</tr>
+<tr>
+<td>Chromatin (bulk)</td>
+<td>Dense, thread-like masses, very dark purple (<code>#1A1440</code>)</td>
+<td>Procedural: Perlin-noise-displaced tubes, tightly packed, low opacity</td>
+</tr>
+<tr>
+<td>Chromatin (active gene locus)</td>
+<td>Bright lavender (<code>#8877CC</code>) unwound loop, emissive glow intensity 0.4</td>
+<td>Only 1-3 active loci visible at a time; which genes are active depends on <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN data for this cell type</td>
+</tr>
+</tbody>
+</table>
+<h5 id="gene-transcription-at-active-locus">Gene Transcription (at Active Locus)<a class="headerlink" href="#gene-transcription-at-active-locus" title="Permanent link">&para;</a></h5>
+<p>This is the first stage of the gene expression pipeline. The user sees a gene being read and an mRNA strand emerging.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RNA Polymerase II</td>
+<td>Sphere-cluster glyph (~15nm), bright orange (<code>#FF8844</code>), emissive 0.3</td>
+<td>The "machine" crawling along the DNA. Visually prominent.</td>
+</tr>
+<tr>
+<td>Pol II motion</td>
+<td>Slides along active chromatin loop at ~50nm/s (exaggerated 1000× for visibility)</td>
+<td>Real rate: ~25 nt/s ≈ 8nm/s. Sped up so the process is watchable.</td>
+</tr>
+<tr>
+<td>Nascent mRNA</td>
+<td>Coral pink (<code>#FF6688</code>) strand emerging from Pol II, growing in length</td>
+<td>Rendered as a bezier-curve tube (radius 1nm visual), growing 1nm per frame from Pol II</td>
+</tr>
+<tr>
+<td>mRNA completion</td>
+<td>When strand reaches ~200nm visual length, it detaches from Pol II and coils slightly</td>
+<td>Simplified: no splicing shown (intron removal happens but is not visually rendered to avoid clutter)</td>
+</tr>
+<tr>
+<td>Active gene label</td>
+<td>Floating text label near active locus: gene name (e.g., "egl-19 (Ca²⁺ channel)")</td>
+<td>Font: 8px screen-space, <code>#AAAAAA</code>, fades at distance</td>
+</tr>
+<tr>
+<td>Transcription frequency</td>
+<td>Driven by <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN expression level for this cell type</td>
+<td>High-expression genes: new Pol II starts every ~5 seconds. Low-expression: every ~30 seconds.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Which genes are shown:</strong> At any time, 1-3 gene loci are visually active, selected from the ion channel / receptor genes that <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> maps to this cell type. For a motor neuron, this might include <code>unc-2</code> (Ca²⁺ channel), <code>egl-36</code> (K⁺ channel), and <code>unc-49</code> (GABA receptor). The viewer cycles through the cell's expressed channel genes over time.</p>
+<h5 id="mrna-nuclear-export">mRNA Nuclear Export<a class="headerlink" href="#mrna-nuclear-export" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mRNA travel to pore</td>
+<td>Completed mRNA coils into a ~30nm ball, drifts toward nearest nuclear pore</td>
+<td>Brownian-biased motion toward pore, ~100nm/s</td>
+</tr>
+<tr>
+<td>Nuclear pore transit</td>
+<td>mRNA ball passes through pore ring; pore ring briefly glows violet (<code>#AA88FF</code>) for 300ms</td>
+<td>The "aha" moment — genetic information leaving the nucleus</td>
+</tr>
+<tr>
+<td>Export animation</td>
+<td>mRNA ball squeezes slightly as it passes through pore (scale X/Z to 0.7, then back to 1.0)</td>
+<td>Communicates that the pore is a selective barrier</td>
+</tr>
+<tr>
+<td>Post-export</td>
+<td>mRNA enters cytoplasm, uncoils slightly into an elongated coil, drifts toward rough ER</td>
+<td>Color remains coral pink (<code>#FF6688</code>) for visual tracking continuity</td>
+</tr>
+</tbody>
+</table>
+<h5 id="ribosomal-translation-on-rough-er">Ribosomal Translation (on Rough ER)<a class="headerlink" href="#ribosomal-translation-on-rough-er" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rough ER geometry</td>
+<td>Folded membrane sheets, warm dark gray (<code>#8A7A6A</code>), positioned between nucleus and plasma membrane</td>
+<td>~5nm thick membrane with visible ribosomes studded on cytoplasmic face</td>
+</tr>
+<tr>
+<td>Ribosome geometry</td>
+<td>Small sphere doublet (~25nm, large + small subunit), muted green (<code>#66AA66</code>)</td>
+<td>Packed along ER surface, ~30nm spacing</td>
+</tr>
+<tr>
+<td>mRNA docking</td>
+<td>mRNA strand threads through a ribosome; ribosome begins glowing slightly (emissive 0.2)</td>
+<td>Contact triggers the translation animation</td>
+</tr>
+<tr>
+<td>Translation animation</td>
+<td>Ribosome slides along mRNA at ~20nm/s; a warm gold-yellow (<code>#DDBB44</code>) nascent protein strand emerges on the ER-lumen side</td>
+<td>The protein is being synthesized and simultaneously inserted into the ER membrane</td>
+</tr>
+<tr>
+<td>Nascent channel protein</td>
+<td>Gold-yellow strand folds into a simplified cylinder shape as it grows</td>
+<td>Folding: tube collapses into a compact form over ~3 seconds</td>
+</tr>
+<tr>
+<td>Completion</td>
+<td>Ribosome releases mRNA, falls off; completed channel protein is now embedded in ER membrane</td>
+<td>Protein takes on its final ion-channel color (e.g., gold for Ca²⁺, blue for Na⁺)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="vesicle-trafficking-er-plasma-membrane">Vesicle Trafficking (ER → Plasma Membrane)<a class="headerlink" href="#vesicle-trafficking-er-plasma-membrane" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vesicle budding</td>
+<td>A bump forms on the ER membrane, pinches off as a sphere (~50nm visual radius), sky blue (<code>#55AADD</code>)</td>
+<td>The channel protein is visible as a colored dot embedded in the vesicle membrane</td>
+</tr>
+<tr>
+<td>Vesicle motion</td>
+<td>Vesicle drifts from ER toward plasma membrane along a slightly curved path</td>
+<td>~200nm/s (exaggerated). In reality, motor proteins carry vesicles along microtubules — simplified to smooth drift.</td>
+</tr>
+<tr>
+<td>Vesicle contents</td>
+<td>1-2 channel proteins visible as colored patches on vesicle surface</td>
+<td>E.g., a gold dot for a Ca²⁺ channel being delivered</td>
+</tr>
+<tr>
+<td>Membrane fusion</td>
+<td>Vesicle contacts plasma membrane → brief bright cyan flash (<code>#88DDFF</code>, 200ms) → vesicle membrane merges with plasma membrane</td>
+<td>The channel protein is now in the plasma membrane and functional</td>
+</tr>
+<tr>
+<td>Post-fusion</td>
+<td>New channel appears at fusion site in closed state</td>
+<td>Connects the gene expression pipeline to the existing channel gating visualization</td>
+</tr>
+</tbody>
+</table>
+<h5 id="gene-expression-pipeline-complete-visual-narrative">Gene Expression Pipeline — Complete Visual Narrative<a class="headerlink" href="#gene-expression-pipeline-complete-visual-narrative" title="Permanent link">&para;</a></h5>
+<p>The full sequence a user can watch at molecular scale:</p>
+<div class="highlight"><pre><span></span><code>1. NUCLEUS: Chromatin locus glows → RNA Pol II transcribes gene → mRNA strand grows
+2. EXPORT:  mRNA coils → drifts to nuclear pore → squeezes through (violet flash)
+3. TRANSIT: mRNA drifts through cytoplasm to rough ER
+4. TRANSLATION: mRNA docks at ribosome → ribosome slides along → protein strand emerges
+5. FOLDING: Nascent protein folds into channel shape, takes on ion-type color
+6. TRAFFICKING: Vesicle buds from ER with embedded channel → drifts to plasma membrane
+7. INSERTION: Vesicle fuses (cyan flash) → new channel appears in membrane, closed state
+8. FUNCTION: Channel responds to voltage/ligand → opens → ions flow through
+</code></pre></div>
+<p><strong>Total pipeline duration (visual, exaggerated):</strong> ~30-60 seconds per channel protein. Real biological timescale: minutes to hours. The exaggeration makes the process watchable in a single viewing session.</p>
+<p><strong>Data source:</strong> The rate and type of channels being produced is driven by <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN expression levels for the selected cell. A cell with high <code>egl-19</code> expression produces Ca²⁺ channels more frequently than a cell with low expression.</p>
+<h5 id="existing-intracellular-elements-updated-context">Existing Intracellular Elements (Updated Context)<a class="headerlink" href="#existing-intracellular-elements-updated-context" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cytoplasm background</td>
+<td><code>#0A0A14</code> with noise texture</td>
+<td>Dark, aqueous feel</td>
+</tr>
+<tr>
+<td>IP3 receptor (on ER membrane)</td>
+<td>Magenta (<code>#CC44CC</code>) cylinder, on ER lumen-facing surface</td>
+<td>Visually distinct from plasma membrane channels; connects to <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> intestinal Ca wave</td>
+</tr>
+<tr>
+<td>Smooth ER membrane</td>
+<td>Warm gray (<code>#8A7A6A</code>), continuous with rough ER but no ribosomes</td>
+<td>Positioned near nucleus; IP3 receptors are here</td>
+</tr>
+<tr>
+<td>Rough ER membrane</td>
+<td>Same gray, but studded with green ribosome spheres</td>
+<td>Between nucleus and plasma membrane; translation happens here</td>
+</tr>
+<tr>
+<td>Ca²⁺ release from ER</td>
+<td>Gold particles emerge from IP3 receptor when activated</td>
+<td>Connects to <a href="../DD009_Intestinal_Oscillator_Model/">DD009</a> intestinal calcium wave at molecular level</td>
+</tr>
+<tr>
+<td>Microtubule hints (Phase 3)</td>
+<td>Faint gray lines (<code>#333340</code>) from nucleus toward cell periphery</td>
+<td>Not individually modeled; subtle visual guides suggesting cytoskeletal structure. Vesicles follow these paths.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-multi-scale-transitions">4. Multi-Scale Transitions<a class="headerlink" href="#4-multi-scale-transitions" title="Permanent link">&para;</a></h2>
+<h3 id="4a-zoom-breakpoints">4A. Zoom Breakpoints<a class="headerlink" href="#4a-zoom-breakpoints" title="Permanent link">&para;</a></h3>
+<p>Scale transitions are triggered by camera distance to the nearest object. Three discrete scales with smooth transitions between them:</p>
+<table>
+<thead>
+<tr>
+<th>Transition</th>
+<th>Camera Distance Trigger</th>
+<th>Duration</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Organism → Tissue</td>
+<td>&lt; 400 µm from body surface</td>
+<td>0.75 seconds</td>
+<td>Zoom in</td>
+</tr>
+<tr>
+<td>Tissue → Organism</td>
+<td>&gt; 500 µm from body surface</td>
+<td>0.75 seconds</td>
+<td>Zoom out</td>
+</tr>
+<tr>
+<td>Tissue → Molecular</td>
+<td>&lt; 5 µm from selected cell membrane</td>
+<td>1.0 seconds</td>
+<td>Zoom in (requires cell selection)</td>
+</tr>
+<tr>
+<td>Molecular → Tissue</td>
+<td>&gt; 8 µm from membrane</td>
+<td>1.0 seconds</td>
+<td>Zoom out</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hysteresis gap</strong> (e.g., 400 µm in, 500 µm out) prevents flickering at boundary.</p>
+<h3 id="4b-organism-tissue-transition">4B. Organism → Tissue Transition<a class="headerlink" href="#4b-organism-tissue-transition" title="Permanent link">&para;</a></h3>
+<p>Animated sequence (0.75 seconds):</p>
+<table>
+<thead>
+<tr>
+<th>Time (normalized)</th>
+<th>Body Surface</th>
+<th>Cells</th>
+<th>Neurons/Muscles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0 (organism)</td>
+<td>Opacity 0.85, smooth surface</td>
+<td>Hidden</td>
+<td>Hidden</td>
+</tr>
+<tr>
+<td>0.0-0.3</td>
+<td>Opacity fades 0.85 → 0.3</td>
+<td>Begin fading in from 0% opacity</td>
+<td>Begin fading in</td>
+</tr>
+<tr>
+<td>0.3-0.7</td>
+<td>Surface becomes wireframe (edges only, 1px white, opacity 0.2)</td>
+<td>Opacity rises to 0.7</td>
+<td>Individual neurons/muscles appear at base brightness</td>
+</tr>
+<tr>
+<td>0.7-1.0</td>
+<td>Wireframe fades to invisible</td>
+<td>Full opacity (per-layer settings)</td>
+<td>Fully visible with activity coloring</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4c-tissue-molecular-transition">4C. Tissue → Molecular Transition<a class="headerlink" href="#4c-tissue-molecular-transition" title="Permanent link">&para;</a></h3>
+<p>Requires a cell to be selected (clicked) before zoom can proceed to molecular scale.</p>
+<p>Animated sequence (1.0 seconds):</p>
+<table>
+<thead>
+<tr>
+<th>Time (normalized)</th>
+<th>Surrounding Cells</th>
+<th>Selected Cell</th>
+<th>Membrane/Channels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0 (tissue)</td>
+<td>Visible, activity-colored</td>
+<td>Highlighted (white wireframe)</td>
+<td>Hidden</td>
+</tr>
+<tr>
+<td>0.0-0.3</td>
+<td>Fade to 10% opacity</td>
+<td>Camera orbits to face cell membrane</td>
+<td>Hidden</td>
+</tr>
+<tr>
+<td>0.3-0.6</td>
+<td>Hidden</td>
+<td>Cell surface becomes translucent, cross-section plane appears</td>
+<td>Lipid bilayer materializes along cross-section plane</td>
+</tr>
+<tr>
+<td>0.6-1.0</td>
+<td>Hidden</td>
+<td>Cell surface fades out</td>
+<td>Channels, ions, receptors appear; particle system starts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4d-level-of-detail-lod">4D. Level of Detail (LOD)<a class="headerlink" href="#4d-level-of-detail-lod" title="Permanent link">&para;</a></h3>
+<p>To maintain 60fps during transitions and at tissue scale with 959 cells visible:</p>
+<table>
+<thead>
+<tr>
+<th>LOD Level</th>
+<th>Camera Distance</th>
+<th>Geometry</th>
+<th>Shading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOD 0 (full)</td>
+<td>&lt; 50 µm</td>
+<td>Full mesh from VirtualWorm/NeuroML</td>
+<td>Full PBR/Phong + activity coloring + bloom</td>
+</tr>
+<tr>
+<td>LOD 1 (medium)</td>
+<td>50-200 µm</td>
+<td>Simplified mesh (50% triangle reduction)</td>
+<td>Full shading, no bloom</td>
+</tr>
+<tr>
+<td>LOD 2 (low)</td>
+<td>200-500 µm</td>
+<td>Convex hull per cell</td>
+<td>Flat shading (base color only, no lighting calc)</td>
+</tr>
+<tr>
+<td>LOD 3 (billboard)</td>
+<td>&gt; 500 µm</td>
+<td>Camera-facing quad (sprite)</td>
+<td>Solid color dot, size ∝ 1/distance</td>
+</tr>
+</tbody>
+</table>
+<p>LOD transitions use alpha-blended cross-fade over 5 frames to prevent popping.</p>
+<hr />
+<h2 id="5-rendering-technique-specifications">5. Rendering Technique Specifications<a class="headerlink" href="#5-rendering-technique-specifications" title="Permanent link">&para;</a></h2>
+<h3 id="5a-transparency">5A. Transparency<a class="headerlink" href="#5a-transparency" title="Permanent link">&para;</a></h3>
+<p>The viewer composites multiple semi-transparent layers (cuticle, muscles, neurons, neuropeptide clouds). Naive alpha blending produces order-dependent artifacts.</p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>When Used</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Order-Independent Transparency (OIT)</td>
+<td>WebGPU path (Phase 2/3)</td>
+<td>Weighted Blended OIT (McGuire &amp; Bavoil 2013). Weight function: <code>w = alpha * max(0.01, min(3000, 10 / (0.00001 + pow(z/200, 4))))</code> where z is view-space depth.</td>
+</tr>
+<tr>
+<td>Depth-sorted alpha blending</td>
+<td>WebGL/Trame fallback (Phase 1)</td>
+<td>Sort transparent objects back-to-front per frame. Acceptable for &lt; 100 transparent objects.</td>
+</tr>
+<tr>
+<td>Dual-depth peeling</td>
+<td>Volumetric neuropeptide clouds</td>
+<td>For high-quality volumetric compositing when OIT is insufficient.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5b-bloom-glow-post-processing">5B. Bloom / Glow Post-Processing<a class="headerlink" href="#5b-bloom-glow-post-processing" title="Permanent link">&para;</a></h3>
+<p>Active neurons emit light (emissive material). Bloom creates the "glow" effect.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bloom threshold</td>
+<td>0.7 × max emissive intensity</td>
+<td>Only neurons above ~-40mV threshold produce bloom</td>
+</tr>
+<tr>
+<td>Bloom passes</td>
+<td>5 (progressive downsample/upsample)</td>
+<td>Standard Kawase or dual-filter blur</td>
+</tr>
+<tr>
+<td>Bloom kernel size</td>
+<td>9px at full resolution</td>
+<td>Expands with each downsample pass</td>
+</tr>
+<tr>
+<td>Bloom intensity</td>
+<td>0.4</td>
+<td>Subtle halo, not overwhelming</td>
+</tr>
+<tr>
+<td>Bloom color</td>
+<td>Source emissive color (not white)</td>
+<td>Interneuron bloom is orange, motor neuron bloom is purple</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5c-particle-rendering">5C. Particle Rendering<a class="headerlink" href="#5c-particle-rendering" title="Permanent link">&para;</a></h3>
+<p>Used for SPH body particles (organism scale, scientific view), calcium ions (molecular scale), and neuropeptide molecules.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>SPH Particles</th>
+<th>Ca²⁺ Ions</th>
+<th>Neuropeptide Molecules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count</td>
+<td>~100,000</td>
+<td>10-200 (per visible patch)</td>
+<td>5-50 (per visible region)</td>
+</tr>
+<tr>
+<td>Technique</td>
+<td>GPU instanced rendering (InstancedMesh)</td>
+<td>GPU instanced spheres</td>
+<td>GPU instanced icospheres</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>2 µm (screen-space minimum 1px)</td>
+<td>1 nm visual radius (screen-space minimum 2px)</td>
+<td>3 nm visual radius</td>
+</tr>
+<tr>
+<td>Color source</td>
+<td>Particle type (Blue/Green/Gray)</td>
+<td><code>#FFD700</code> gold, emissive</td>
+<td>Per-peptide from Section 1C</td>
+</tr>
+<tr>
+<td>Billboard</td>
+<td>No (true spheres at close range, points at distance)</td>
+<td>Yes (always face camera)</td>
+<td>No (rotation visible)</td>
+</tr>
+<tr>
+<td>Motion update</td>
+<td>Per-frame from Zarr time series</td>
+<td>Physics-based particle system (GPU compute)</td>
+<td>Brownian diffusion (GPU compute)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5d-volumetric-rendering-neuropeptide-clouds">5D. Volumetric Rendering (Neuropeptide Clouds)<a class="headerlink" href="#5d-volumetric-rendering-neuropeptide-clouds" title="Permanent link">&para;</a></h3>
+<p>Neuropeptide concentration fields (<a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a>) are rendered as semi-transparent volumetric clouds at tissue scale.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Algorithm</td>
+<td>Ray marching through 3D concentration texture</td>
+<td>Fragment shader; one ray per pixel</td>
+</tr>
+<tr>
+<td>Volume data</td>
+<td>3D texture from <a href="../DD006_Neuropeptidergic_Connectome_Integration/">DD006</a> concentration field, resampled to 64³ voxels per visible region</td>
+<td>Updated per animation frame from Zarr</td>
+</tr>
+<tr>
+<td>Step size</td>
+<td><code>voxel_size / 2</code></td>
+<td>Nyquist sampling to avoid aliasing</td>
+</tr>
+<tr>
+<td>Max steps</td>
+<td>128</td>
+<td>Performance cap; early-exit when accumulated alpha &gt; 0.95</td>
+</tr>
+<tr>
+<td>Transfer function</td>
+<td>Alpha = concentration / max_conc × 0.3 (max cloud opacity 30%)</td>
+<td>Faint overlay, never obscures underlying cells</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Per-peptide assignment; if no specific assignment, default to <code>#8844AA</code> (purple mist)</td>
+<td>Each neuropeptide family gets a unique hue</td>
+</tr>
+<tr>
+<td>Blending</td>
+<td>Additive (front-to-back accumulation with premultiplied alpha)</td>
+<td>Overlapping peptide fields combine additively</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5e-anti-aliasing">5E. Anti-Aliasing<a class="headerlink" href="#5e-anti-aliasing" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>When Used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSAA 4×</td>
+<td>Default for all rendering paths</td>
+</tr>
+<tr>
+<td>FXAA (post-process)</td>
+<td>Fallback when MSAA unavailable or too expensive</td>
+</tr>
+<tr>
+<td>Temporal AA</td>
+<td>WebGPU path (Phase 3) for smoother animation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5f-animation-performance">5F. Animation &amp; Performance<a class="headerlink" href="#5f-animation-performance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Target</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frame rate</td>
+<td>60 fps</td>
+<td>On 2020-era laptop with discrete GPU</td>
+</tr>
+<tr>
+<td>Minimum acceptable</td>
+<td>15 fps</td>
+<td>On 2020-era laptop with integrated GPU (per <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> QC5)</td>
+</tr>
+<tr>
+<td>Simulation timestep interpolation</td>
+<td>Linear interpolation between adjacent Zarr timesteps</td>
+<td>Prevents jerky playback when Zarr export interval &gt; 1</td>
+</tr>
+<tr>
+<td>Playback speed</td>
+<td>Configurable 0.1× to 10× real-time</td>
+<td>Default: 1×</td>
+</tr>
+<tr>
+<td>Time scrubbing</td>
+<td>Instant seek to any timestep (load from Zarr chunk)</td>
+<td>Progressive: show cached low-res first, then full resolution</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-reference-mockup-specifications">6. Reference Mockup Specifications<a class="headerlink" href="#6-reference-mockup-specifications" title="Permanent link">&para;</a></h2>
+<p>These 14 views define "correct" rendering. Each is described with enough detail to unambiguously determine whether an implementation screenshot matches. Mockups 1-12 cover organism, tissue, and membrane scales; Mockups 13-14 cover intracellular/nuclear gene expression.</p>
+<h3 id="mockup-1-organism-dorsal-view-crawling">Mockup 1: Organism — Dorsal View (Crawling)<a class="headerlink" href="#mockup-1-organism-dorsal-view-crawling" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 1: Organism dorsal view" src="../../images/mockup_01_organism_dorsal.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Dorsal (looking down onto worm's back), distance 800 µm</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (ON), others OFF</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Mid-crawl (body showing 1.5 sinusoidal bends)</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>Smooth cuticle surface, <code>#B09C8A</code> with slight translucency</td>
+</tr>
+<tr>
+<td>Background</td>
+<td><code>#1A1A2E</code> → <code>#16213E</code> gradient</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>A recognizable worm shape, ~1mm long, S-curved mid-crawl. Smooth surface with slight sheen. Faint internal shadows visible. Anterior (pharynx) at left, posterior at right.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-2-organism-lateral-view-body-bending">Mockup 2: Organism — Lateral View (Body Bending)<a class="headerlink" href="#mockup-2-organism-lateral-view-body-bending" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 2: Organism lateral view" src="../../images/mockup_02_organism_lateral.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Lateral (side view), distance 800 µm, 10° above horizontal</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Same as Mockup 1</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Worm body seen from the side. Dorsal-ventral thickness visible (~80 µm). Sinusoidal bending in the dorsal-ventral plane. Rim light creates bright edge along dorsal surface.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-3-muscles-through-translucent-body">Mockup 3: Muscles Through Translucent Body<a class="headerlink" href="#mockup-3-muscles-through-translucent-body" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 3: Muscles through translucent body" src="../../images/mockup_03_muscles_translucent.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Lateral view, distance 500 µm</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (ON, opacity 0.5 — reduced for this view), Muscles (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Mid-crawl with clear dorsal-ventral alternation</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Semi-transparent cuticle revealing 4 quadrants of body wall muscles. Dorsal muscles are red (contracted) where body bends dorsally; corresponding ventral muscles are green (relaxed). Pattern alternates along body length.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-4-neural-circuit-overview">Mockup 4: Neural Circuit Overview<a class="headerlink" href="#mockup-4-neural-circuit-overview" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 4: Neural circuit overview" src="../../images/mockup_04_neural_circuit.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Dorsal view, distance 600 µm</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (OFF), Neurons (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Mid-activity (locomotion command active)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>302 neurons visible as colored spheres with dendrite/axon tubes. Most neurons dim (resting). Command interneurons (AVA, AVB at anterior) glowing bright orange-red. Motor neurons along ventral cord showing alternating activation pattern (purple glow propagating). Sensory neurons in head region faint magenta. Clear distinction between neuron classes by color.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-5-single-neuron-selected-inspector-panel">Mockup 5: Single Neuron Selected (Inspector Panel)<a class="headerlink" href="#mockup-5-single-neuron-selected-inspector-panel" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 5: Single neuron selected with inspector panel" src="../../images/mockup_05_neuron_inspector.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Oblique anterior view, distance 200 µm, centered on AVAL</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Neurons (ON), Muscles (ON at 30% opacity)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>AVAL at peak depolarization</td>
+</tr>
+<tr>
+<td>Selected</td>
+<td>AVAL neuron — white wireframe highlight</td>
+</tr>
+<tr>
+<td>Inspector panel</td>
+<td>Visible at right side. Shows: "AVAL", "Command Interneuron", voltage trace (line plot, 2 seconds of history), calcium trace, list of synaptic partners.</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>AVAL soma glowing bright orange-red with bloom halo. Surrounding neurons at various activity levels. Inspector panel with live data.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-6-pharynx-close-up-pumping">Mockup 6: Pharynx Close-Up (Pumping)<a class="headerlink" href="#mockup-6-pharynx-close-up-pumping" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 6: Pharynx close-up pumping" src="../../images/mockup_06_pharynx_pumping.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Anterior, distance 100 µm, facing into pharynx</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (OFF), Pharynx (ON), Neurons (ON at 50% opacity)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Mid-pump (corpus contracted, isthmus relaxed, terminal bulb relaxing)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>63 pharyngeal cells visible. Corpus region opaque (contracted, green muscles bright). Isthmus translucent (relaxed). Terminal bulb semi-opaque. Pharyngeal neurons (M1-M5, MC) visible as small glowing points among the muscle cells.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-7-intestinal-calcium-wave-mid-propagation">Mockup 7: Intestinal Calcium Wave (Mid-Propagation)<a class="headerlink" href="#mockup-7-intestinal-calcium-wave-mid-propagation" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 7: Intestinal calcium wave" src="../../images/mockup_07_intestinal_calcium.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Lateral view, distance 300 µm, centered on mid-body</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (OFF), Intestine (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Calcium wave at ~40% propagation (cells 8-12 of 20 at peak)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>20 intestinal cells as tube segments. Posterior cells (1-7) returning to blue (wave has passed). Cells 8-12 bright red (peak calcium). Cells 13-20 still blue (wave hasn't arrived). Clear gradient visible at wave front.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-8-neuropeptide-volumetric-cloud-overlay">Mockup 8: Neuropeptide Volumetric Cloud Overlay<a class="headerlink" href="#mockup-8-neuropeptide-volumetric-cloud-overlay" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 8: Neuropeptide volumetric clouds" src="../../images/mockup_08_neuropeptide_clouds.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Dorsal view, distance 500 µm</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Neurons (ON), Neuropeptides (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Active neuromodulatory state (e.g., serotonergic neurons releasing peptides)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Neural circuit visible as in Mockup 4. Additionally, faint colored clouds surround releasing neurons — semi-transparent volumes that extend beyond the neuron soma, indicating diffusion range. Clouds are colored per peptide type. Multiple overlapping clouds visible with additive blending.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-9-cell-boundaries-dd004-tagging">Mockup 9: Cell Boundaries (<a href="../DD004_Mechanical_Cell_Identity/">DD004</a> Tagging)<a class="headerlink" href="#mockup-9-cell-boundaries-dd004-tagging" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 9: Cell boundaries" src="../../images/mockup_09_cell_boundaries.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Lateral view, distance 200 µm, focused on mid-body region</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (OFF), Cell boundaries (ON), Muscles (ON at 50% opacity)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Any (static property)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Individual cell outlines visible as thin dark lines. Each cell filled with its tissue-type color. Muscle cells green, hypodermal cells tan, seam cells brown. Cell boundaries clearly delineate individual cells — not tissue-level blobs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-10-molecular-membrane-cross-section-with-channels">Mockup 10: Molecular — Membrane Cross-Section with Channels<a class="headerlink" href="#mockup-10-molecular-membrane-cross-section-with-channels" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 10: Membrane cross-section with ion channels" src="../../images/mockup_10_membrane_channels.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Perpendicular to membrane surface, distance 100 nm</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Molecular (ON) — automatically active at this zoom</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Resting state (channels mostly closed)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Lipid bilayer as warm gray textured surface spanning the viewport. 3-5 ion channel proteins embedded: gold (Ca²⁺), blue (Na⁺), green (K⁺) cylinders with visible closed pores. Dark cell interior below, lighter extracellular space above. A few scattered gold Ca²⁺ ions in extracellular space.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-11-molecular-calcium-flowing-through-open-channel">Mockup 11: Molecular — Calcium Flowing Through Open Channel<a class="headerlink" href="#mockup-11-molecular-calcium-flowing-through-open-channel" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 11: Calcium flowing through open channel" src="../../images/mockup_11_calcium_flow.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Side view of membrane, distance 50 nm, angled 30° from membrane normal</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Molecular (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Ca²⁺ channel open, active influx</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>One Ca²⁺ channel (gold) in center, pore visibly open (dilated). Stream of gold glowing spheres (Ca²⁺ ions) flowing through the pore from extracellular (top) to intracellular (bottom). Ions above membrane: sparse, random. Ions in channel: aligned, fast-moving. Ions below membrane: dispersing into cell interior. Channel glowing brighter than neighbors (which are closed).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-12-multi-scale-transition-organism-tissue-mid-zoom">Mockup 12: Multi-Scale Transition (Organism → Tissue, Mid-Zoom)<a class="headerlink" href="#mockup-12-multi-scale-transition-organism-tissue-mid-zoom" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 12: Multi-scale transition" src="../../images/mockup_12_scale_transition.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Lateral view, distance 400 µm (at transition breakpoint)</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Body surface (mid-fade), Muscles (appearing), Neurons (appearing)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Mid-crawl</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Body surface at reduced opacity (~0.4), partially wireframe. Individual muscle cells beginning to appear as green/red shapes beneath the fading cuticle. Some neurons visible as faint colored spheres. A "between-worlds" view showing both the smooth organism and the cellular interior simultaneously.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-13-molecular-nucleus-and-gene-transcription">Mockup 13: Molecular — Nucleus and Gene Transcription<a class="headerlink" href="#mockup-13-molecular-nucleus-and-gene-transcription" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 13: Nucleus and gene transcription" src="../../images/mockup_13_nucleus_transcription.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Interior view, distance 2 µm from nucleus center, looking at nuclear surface</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Molecular (ON) — zoomed past membrane into cell interior</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Active transcription of <code>egl-19</code> (Ca²⁺ channel gene)</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td>Indigo nuclear envelope fills the lower half of the frame, with 3-4 nuclear pore complexes visible as purple ring structures. Through the translucent envelope, dark chromatin masses are visible inside. One locus glows bright lavender — the active gene. A bright orange RNA Polymerase II complex sits on the unwound chromatin. A coral pink mRNA strand extends from the polymerase, growing visibly. A gene label ("egl-19 (Ca²⁺ channel)") floats near the locus. In the upper portion of the frame, rough ER membranes with green ribosome dots are faintly visible.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mockup-14-molecular-mrna-export-and-channel-assembly">Mockup 14: Molecular — mRNA Export and Channel Assembly<a class="headerlink" href="#mockup-14-molecular-mrna-export-and-channel-assembly" title="Permanent link">&para;</a></h3>
+<p><img alt="Mockup 14: mRNA export and channel assembly pipeline" src="../../images/mockup_14_gene_to_channel_pipeline.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera</td>
+<td>Side view showing nucleus (left), cytoplasm (center), plasma membrane (right), distance 3 µm — wide enough to see the full pipeline</td>
+</tr>
+<tr>
+<td>Visible layers</td>
+<td>Molecular (ON)</td>
+</tr>
+<tr>
+<td>Time point</td>
+<td>Multiple pipeline stages simultaneously visible</td>
+</tr>
+<tr>
+<td>Expected visual</td>
+<td><strong>Left:</strong> Nuclear envelope with one pore glowing violet as an mRNA ball squeezes through it. <strong>Center-left:</strong> A completed coral pink mRNA coil drifting toward rough ER. <strong>Center:</strong> A ribosome on the ER glowing faintly, with a gold-yellow nascent protein strand emerging through the ER membrane — a channel protein being built. <strong>Center-right:</strong> A sky blue transport vesicle with a gold dot (Ca²⁺ channel) embedded in it, drifting toward the plasma membrane. <strong>Right:</strong> The plasma membrane with existing channels; a cyan flash where a vesicle just fused, depositing a new channel. The entire gene-to-channel pipeline is visible in a single frame — from transcription to functional membrane protein.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-assigning-colors-to-all-959-cells">7. Assigning Colors to All 959 Cells<a class="headerlink" href="#7-assigning-colors-to-all-959-cells" title="Permanent link">&para;</a></h2>
+<p>The Virtual Worm palette defines 37 material categories, not 959 individual cell colors. Every cell in <em>C. elegans</em> maps to one of these categories based on its tissue type. The mapping uses WormBase cell ontology (WBbt) identifiers and is resolved by <a href="../DD004_Mechanical_Cell_Identity/">DD004</a> (Mechanical Cell Identity) and <a href="../DD008_Data_Integration_Pipeline/">DD008</a> (Data Integration Pipeline).</p>
+<h3 id="cell-to-material-mapping-rules">Cell-to-Material Mapping Rules<a class="headerlink" href="#cell-to-material-mapping-rules" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cell Class</th>
+<th>Count</th>
+<th>Material Category</th>
+<th>Base Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Body wall muscle cells</td>
+<td>95</td>
+<td><code>Body_Wall_Muscle</code></td>
+<td><code>#295200</code></td>
+</tr>
+<tr>
+<td>Pharyngeal muscle cells (pm1, pm3, pm5, pm7)</td>
+<td>~20</td>
+<td><code>Odd#PhMuscle</code></td>
+<td><code>#29A300</code></td>
+</tr>
+<tr>
+<td>Pharyngeal muscle cells (pm2, pm4, pm6, pm8)</td>
+<td>~20</td>
+<td><code>Even#PhMusc</code></td>
+<td><code>#A3CC7A</code></td>
+</tr>
+<tr>
+<td>Stomatointestinal muscle</td>
+<td>2</td>
+<td><code>Stomatoint_Muscle</code></td>
+<td><code>#005200</code></td>
+</tr>
+<tr>
+<td>Vulval muscle cells</td>
+<td>8</td>
+<td><code>Vulval_Muscle</code></td>
+<td><code>#7AA352</code></td>
+</tr>
+<tr>
+<td>Uterine muscle cells</td>
+<td>8</td>
+<td><code>Uterine_Muscle</code></td>
+<td><code>#7AA300</code></td>
+</tr>
+<tr>
+<td>Sphincter &amp; anal depressor muscle</td>
+<td>3</td>
+<td><code>Sphnc_&amp;_Anal_Dep_Musc</code></td>
+<td><code>#527A00</code></td>
+</tr>
+<tr>
+<td>Sensory neurons</td>
+<td>~60</td>
+<td><code>SensoryNeuron</code></td>
+<td><code>#CC52BE</code></td>
+</tr>
+<tr>
+<td>Interneurons</td>
+<td>~80</td>
+<td><code>Interneuron</code></td>
+<td><code>#CC2900</code></td>
+</tr>
+<tr>
+<td>Motor neurons</td>
+<td>~120</td>
+<td><code>Motor_Neuron</code></td>
+<td><code>#7A52BE</code></td>
+</tr>
+<tr>
+<td>Polymodal neurons</td>
+<td>~10</td>
+<td><code>PolymodalNeuron</code></td>
+<td><code>#C40202</code></td>
+</tr>
+<tr>
+<td>Neurons (unknown function)</td>
+<td>~32</td>
+<td><code>NeurUnkFunc</code></td>
+<td><code>#7A0029</code></td>
+</tr>
+<tr>
+<td>Hypodermal cells (hyp1-hyp11, P cells)</td>
+<td>~30</td>
+<td><code>Hypodermis</code></td>
+<td><code>#B09C8A</code></td>
+</tr>
+<tr>
+<td>Seam cells (H, V, T lineages)</td>
+<td>16</td>
+<td><code>Seam_Cell</code></td>
+<td><code>#A35229</code></td>
+</tr>
+<tr>
+<td>Intestinal cells (int1-int9)</td>
+<td>20</td>
+<td><code>Intestine</code></td>
+<td><code>#CCA3CC</code></td>
+</tr>
+<tr>
+<td>Pharyngeal epithelial cells</td>
+<td>~10</td>
+<td><code>Pharyngeal_Epithelium</code></td>
+<td><code>#7A5252</code></td>
+</tr>
+<tr>
+<td>Rectal epithelial cells</td>
+<td>~6</td>
+<td><code>Rectal_epithelium</code></td>
+<td><code>#7A5252</code></td>
+</tr>
+<tr>
+<td>Vulval epithelial cells</td>
+<td>~22</td>
+<td><code>Vulva_epithelium</code></td>
+<td><code>#7A7ACC</code></td>
+</tr>
+<tr>
+<td>Arcade cells</td>
+<td>~6</td>
+<td><code>Arcade_Cells</code></td>
+<td><code>#A3A300</code></td>
+</tr>
+<tr>
+<td>Socket cells</td>
+<td>~20</td>
+<td><code>SocketCell</code></td>
+<td><code>#CC7A7A</code></td>
+</tr>
+<tr>
+<td>Sheath cells</td>
+<td>~10</td>
+<td><code>SheathOther</code></td>
+<td><code>#297A7A</code></td>
+</tr>
+<tr>
+<td>GLR cells</td>
+<td>6</td>
+<td><code>GLR_Cells</code></td>
+<td><code>#BE7A00</code></td>
+</tr>
+<tr>
+<td>Marginal cells (mc1-mc3)</td>
+<td>~9</td>
+<td><code>marginal_cells</code></td>
+<td><code>#BE29BE</code></td>
+</tr>
+<tr>
+<td>Head mesodermal cell</td>
+<td>1</td>
+<td><code>Head_Mesodermal_Cell</code></td>
+<td><code>#CC5229</code></td>
+</tr>
+<tr>
+<td>Coelomocytes</td>
+<td>6</td>
+<td><code>Coelomocyte</code></td>
+<td><code>#CCA300</code></td>
+</tr>
+<tr>
+<td>Excretory cell</td>
+<td>1</td>
+<td><code>Excretory_Cell</code></td>
+<td><code>#A32952</code></td>
+</tr>
+<tr>
+<td>Excretory pore cell</td>
+<td>1</td>
+<td><code>Excretory_Pore_Cell</code></td>
+<td><code>#BDC672</code></td>
+</tr>
+<tr>
+<td>Excretory duct cell</td>
+<td>1</td>
+<td><code>Excretory_Duct_Cell</code></td>
+<td><code>#A37A52</code></td>
+</tr>
+<tr>
+<td>Excretory gland cells</td>
+<td>2</td>
+<td><code>Excretory_Gland_Cells</code></td>
+<td><code>#7A7AA3</code></td>
+</tr>
+<tr>
+<td>Germline (syncytial)</td>
+<td>~1000*</td>
+<td><code>Germline</code></td>
+<td><code>#002952</code></td>
+</tr>
+<tr>
+<td>DTC &amp; somatic gonad</td>
+<td>~12</td>
+<td><code>DTC_&amp;_Somatic_Gonad</code></td>
+<td><code>#7A52CC</code></td>
+</tr>
+<tr>
+<td>Spermatheca</td>
+<td>~24</td>
+<td><code>Spermatheca</code></td>
+<td><code>#297ACC</code></td>
+</tr>
+<tr>
+<td>Spermathecal-uterine valve</td>
+<td>~4</td>
+<td><code>Spermath_Uterin_Valve</code></td>
+<td><code>#52527A</code></td>
+</tr>
+<tr>
+<td>Uterus (non-muscle)</td>
+<td>~12</td>
+<td><code>Uterus</code></td>
+<td><code>#7AA3A3</code></td>
+</tr>
+<tr>
+<td>Pharyngeal &amp; rectal glands</td>
+<td>~9</td>
+<td><code>Phary_&amp;_Rect_Glands</code></td>
+<td><code>#A3A3CC</code></td>
+</tr>
+<tr>
+<td>VPI &amp; VIR cells</td>
+<td>~6</td>
+<td><code>VPI_&amp;_VIR</code></td>
+<td><code>#7A5229</code></td>
+</tr>
+</tbody>
+</table>
+<p>*Germline contains ~1000 germ cells but is treated as a syncytial tissue for visualization purposes.</p>
+<p><strong>Cells not in the above table:</strong> Any cell not explicitly listed is assigned to the closest tissue-type material based on its WBbt lineage. The <a href="../DD004_Mechanical_Cell_Identity/">DD004</a>/DD008 integration pipeline resolves this mapping. If a cell has no WBbt annotation, it defaults to <code>Hypodermis</code> (<code>#B09C8A</code>) — the most common non-specific tissue.</p>
+<hr />
+<h2 id="8-alternatives-considered">8. Alternatives Considered<a class="headerlink" href="#8-alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-flat-cartoon-rendering-style-cell-shading">1. Flat / Cartoon Rendering Style (Cell Shading)<a class="headerlink" href="#1-flat-cartoon-rendering-style-cell-shading" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected.</strong> Cel-shaded or flat-color rendering produces clean, illustrative visuals but does not convey biological depth. Translucency, subsurface scattering, and volumetric effects are essential for communicating that this is a living organism, not a diagram. Flat rendering also eliminates the lighting cues needed for 3D perception.</p>
+<h3 id="2-photorealistic-rendering-path-tracing">2. Photorealistic Rendering (Path Tracing)<a class="headerlink" href="#2-photorealistic-rendering-path-tracing" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected.</strong> Path-traced rendering produces beautiful results but is computationally prohibitive for real-time playback at 60fps, even with WebGPU. It also risks the uncanny valley — a "almost real" worm that looks slightly wrong is worse than a clearly stylized rendering that communicates the right information. PBR with bloom and OIT achieves a "scientifically evocative" look without the performance cost.</p>
+<h3 id="3-false-color-only-no-surface-rendering">3. False-Color Only (No Surface Rendering)<a class="headerlink" href="#3-false-color-only-no-surface-rendering" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected.</strong> Displaying only colormapped data (like a heatmap overlaid on wireframe) communicates quantitative information but not anatomy. A non-scientist cannot identify structures or understand spatial relationships. The smooth-surface organism scale is essential for the "a person can see it's a worm" criterion.</p>
+<h3 id="4-per-cell-unique-colors-959-distinct-hues">4. Per-Cell Unique Colors (959 Distinct Hues)<a class="headerlink" href="#4-per-cell-unique-colors-959-distinct-hues" title="Permanent link">&para;</a></h3>
+<p><strong>Rejected.</strong> Assigning a unique color to each of the 959 cells would make the tissue-type grouping invisible. The human visual system cannot distinguish 959 colors. The 37-material-category approach groups cells by tissue type, which is biologically meaningful and visually parseable.</p>
+<h3 id="5-dynamic-color-palette-based-on-data-range">5. Dynamic Color Palette Based on Data Range<a class="headerlink" href="#5-dynamic-color-palette-based-on-data-range" title="Permanent link">&para;</a></h3>
+<p><strong>Considered for future.</strong> An auto-scaling palette that adjusts color ranges based on actual simulation data min/max could improve contrast. However, it makes visual comparison across simulations inconsistent. The fixed scales in Section 1B (e.g., -80mV to +20mV for voltage) match physiological ranges and produce consistent visuals regardless of simulation output.</p>
+<hr />
+<h2 id="9-quality-criteria">9. Quality Criteria<a class="headerlink" href="#9-quality-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Every cell type has a color.</strong> All 37 Virtual Worm material categories are implemented. Any cell visible in the viewer is colored according to its tissue-type mapping (Section 7).</p>
+</li>
+<li>
+<p><strong>Worm recognition.</strong> A non-scientist shown the organism-scale view (Mockup 1) can identify "that's a worm" without prompting.</p>
+</li>
+<li>
+<p><strong>Activity discrimination.</strong> Active vs. resting neurons are visually distinguishable at 1080p resolution. An observer can point to the "glowing" neuron in a field of 302.</p>
+</li>
+<li>
+<p><strong>Muscle state visible.</strong> Contracted (red) vs. relaxed (green) muscles are distinguishable in the tissue-scale view (Mockup 3). The locomotion wave pattern is visible as alternating color bands.</p>
+</li>
+<li>
+<p><strong>Molecular communication — membrane.</strong> The molecular-scale membrane view (Mockup 10) communicates "this is a cell membrane with channels" to a biology undergraduate. Ion channels, lipid bilayer, and flowing ions are identifiable.</p>
+</li>
+<li>
+<p><strong>Molecular communication — gene expression.</strong> The molecular-scale intracellular view (Mockups 13-14) communicates the central dogma: a user can watch a gene being transcribed in the nucleus, see the mRNA travel to the ER, watch a ribosome build a channel protein, and see the finished channel arrive at the membrane. The full pipeline is visually traceable in a single session.</p>
+</li>
+<li>
+<p><strong>Scale transitions are smooth.</strong> The organism→tissue transition (Mockup 12) does not produce visual artifacts, sudden pops, or disorienting jumps. A user can smoothly zoom from organism to molecular scale.</p>
+</li>
+<li>
+<p><strong>CeNGEN-driven expression.</strong> The gene expression pipeline at molecular scale reflects the selected cell's actual expression profile from <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN data — a motor neuron produces different channel types than a sensory neuron.</p>
+</li>
+<li>
+<p><strong>Reference mockup match.</strong> All 14 mockups have corresponding implementation screenshots that match the specifications. Deviations are documented and justified.</p>
+</li>
+<li>
+<p><strong>Performance.</strong> Rendering meets the targets in Section 5F (60fps target, 15fps minimum on integrated GPU) at all three scales.</p>
+</li>
+</ol>
+<hr />
+<h2 id="10-boundaries">10. Boundaries<a class="headerlink" href="#10-boundaries" title="Permanent link">&para;</a></h2>
+<p>This document does <strong>NOT</strong> specify:</p>
+<ul>
+<li><strong>Data formats or schemas</strong> — See <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (OME-Zarr structure, <code>.zattrs</code> metadata)</li>
+<li><strong>Viewer UI layout or interaction design</strong> — See <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (layout mockup, layer toggle system, inspector panel)</li>
+<li><strong>Docker deployment or CI/CD</strong> — See <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> + <a href="../DD013_Simulation_Stack_Architecture/">DD013</a></li>
+<li><strong>Simulation algorithms</strong> — See <a href="../DD001_Neural_Circuit_Architecture/">DD001</a>-<a href="../DD009_Intestinal_Oscillator_Model/">DD009</a></li>
+<li><strong>Validation criteria</strong> — See <a href="../DD010_Validation_Framework/">DD010</a></li>
+<li><strong>Web framework choice (Trame vs Three.js)</strong> — See <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></li>
+</ul>
+<p><a href="./">DD014.1</a> specifies purely: what things look like, what color they are, how they glow, how they transition between scales, and what the rendering algorithms are.</p>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p>Scientific visualization requires consistent, meaningful color coding to communicate biological data accurately. Medical and scientific illustration conventions (e.g., Netter atlas color traditions, electrophysiology colormaps) inform palette choices throughout this specification.</p>
+<p>The Virtual Worm project (2012) established the only canonical color palette for <em>C. elegans</em> anatomy, defining 37 material categories in a Blender model. This specification preserves those heritage colors as the foundation and extends them with activity-state overlays and molecular-scale assignments. Ensuring visual consistency across all OpenWorm renderings, publications, and documentation screenshots is essential for project identity and scientific communication.</p>
+<p>The rendering techniques specified here (PBR materials, bloom, OIT, volumetric ray marching) represent a balance between visual quality and real-time performance. They were selected to run at 60fps on commodity hardware while communicating biological structure at three distinct spatial scales.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Virtual Worm Blender Model (February 2012):</strong> <code>Virtual_Worm_February_2012.blend</code> — Source of 37 canonical material categories. MTL file: <code>Virtual_Worm_February_2012.mtl</code>.</li>
+<li><strong><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a>: Dynamic Visualization Architecture:</strong> Companion document specifying data pipeline, Zarr schema, viewer framework, and Docker integration.</li>
+<li><strong>McGuire &amp; Bavoil (2013):</strong> "Weighted Blended Order-Independent Transparency" — Algorithm for OIT compositing (Section 5A).</li>
+<li><strong>Three.js MeshStandardMaterial:</strong> https://threejs.org/docs/#api/en/materials/MeshStandardMaterial — PBR material model reference.</li>
+<li><strong>CeNGEN (2020-2024):</strong> <em>C. elegans</em> Neuronal Gene Expression Map — Source for cell-type-specific channel densities referenced in molecular scale.</li>
+<li><strong>WormBase cell ontology (WBbt):</strong> https://wormbase.org — Canonical cell identity assignments used for cell-to-material mapping.</li>
+<li><strong>WormAtlas:</strong> https://wormatlas.org — Anatomical reference for tissue structure and cell positions.</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Source/Consumer</th>
+<th>Data</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td><a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a></td>
+<td>Simulation state data</td>
+<td>OME-Zarr</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Viewer</td>
+<td>Rendered frames</td>
+<td>WebGL/PNG</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Color palette: defined as JSON/YAML theme file consumed by DD014 viewer</li>
+<li>Rendering parameters: ambient occlusion radius, SSS depth, bloom threshold</li>
+</ul>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Upstream:</strong> <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> (viewer architecture), <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> (cell type list determines color assignments)</li>
+<li><strong>Downstream:</strong> All visualization outputs, publications, documentation screenshots</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> Pending</li>
+<li><strong>Implementation Status:</strong> Proposed</li>
+<li>
+<p><strong>Next Actions:</strong></p>
+</li>
+<li>
+<p>Validate hex values against Virtual Worm Blender model (re-export MTL and cross-check)</p>
+</li>
+<li>Create reference mockup images (Blender renders or concept art) for the 14 canonical views</li>
+<li>Implement heritage palette in Worm3DViewer (Phase 1) — replace current ad-hoc colors with Section 1A</li>
+<li>Implement voltage-to-visual mapping (Section 1B) in the neuron rendering pipeline</li>
+<li>Review with community: do the molecular-scale visual choices (Section 3C) communicate biology effectively?</li>
+<li>Map <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005</a> CeNGEN expression data to per-cell-type gene expression visualization parameters (which genes are visually transcribed, at what rate)</li>
+<li>Design data pipeline for gene expression events (transcription → export → translation → trafficking) — may require new Zarr group in <a href="../DD014_Dynamic_Visualization_Architecture/">DD014</a> schema</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

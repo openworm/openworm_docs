@@ -1,0 +1,3635 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD005_draft_issues/">
+      
+      
+        <link rel="prev" href="../DD005_Cell_Type_Differentiation_Strategy/">
+      
+      
+        <link rel="next" href="../DD010_Validation_Framework/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>DD005 Draft Issues - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd005-draft-github-issues" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD005 Draft Issues
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_Neural_Circuit_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Neural Circuit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD001_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_Muscle_Model_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Muscle Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD002_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD002 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_Body_Physics_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD003_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD003 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_Connectome_Data_Access_and_Dataset_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Connectome Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD020_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD020 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A1 — Core Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A1 — Core Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD008_Data_Integration_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD008 Data Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_Simulation_Stack_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Simulation Stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD013_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD013 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_Movement_Analysis_Toolbox_and_WCON_Policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Movement Toolbox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD021_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD021 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD024_Validation_Data_Acquisition_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD024 Validation Data Acquisition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD028_Project_Metrics_Dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD028 Project Metrics Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase A2 — Governance & Derisking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase A2 — Governance & Derisking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD011_Contributor_Progression_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD011 Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD012_Design_Document_RFC_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD012 RFC Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD015_AI_Contributor_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD015 AI Contributor Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD025_Protein_Foundation_Model_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD025 Foundation Model Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 — Cell-Type Specialization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD005_Cell_Type_Differentiation_Strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Cell-Type Specialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD005 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-extended-ion-channel-library-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Extended Ion Channel Library (Phase 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Extended Ion Channel Library (Phase 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-survey-existing-ion-channel-implementations-across-all-openworm-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Survey existing ion channel implementations across all OpenWorm repos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-validate-and-adopt-egl-19-cav1-l-type-neuroml2-channel-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Validate and adopt EGL-19 (Cav1 L-type) NeuroML2 channel into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-validate-and-adopt-slo-1-bk-ca2-activated-k-neuroml2-channel-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Validate and adopt SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-validate-and-adopt-kvs-1-and-egl-36-neuroml2-channels-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Validate and adopt KVS-1 and EGL-36 NeuroML2 channels into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-adopt-or-convert-remaining-medium-priority-channels-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Adopt or convert remaining MEDIUM-priority channels into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-channel-library-test-suite-with-voltage-clamp-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create channel library test suite with voltage-clamp protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD010_Validation_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD010 Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014_Dynamic_Visualization_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014 Dynamic Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.1_Visual_Rendering_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.1 Visual Rendering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 2 — Modulation + Closed-Loop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD006_Neuropeptidergic_Connectome_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD006 Neuropeptides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD019_Closed_Loop_Touch_Response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD019 Touch Response
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD022_Environmental_Modeling_and_Stimulus_Delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD022 Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD023_Proprioceptive_Feedback_and_Motor_Coordination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD023 Proprioception
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD026_Reservoir_Computing_Validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD026 Reservoir Computing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_Multicompartmental_Neuron_Models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Multicompartmental Neurons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD027_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD027 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 — Organ Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 3 — Organ Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD007_Pharyngeal_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD007 Pharyngeal System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD009_Intestinal_Oscillator_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD009 Intestinal Oscillator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_Hybrid_Mechanistic_ML_Framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Hybrid ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD017_draft_issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD017 Draft Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD018_Egg_Laying_System_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD018 Egg-Laying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 4 — Complete Organism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 4 — Complete Organism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD004_Mechanical_Cell_Identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD004 Mechanical Cell Identity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD014.2_Anatomical_Mesh_Deformation_Pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD014.2 Mesh Deformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#group-1-extended-ion-channel-library-phase-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1: Extended Ion Channel Library (Phase 1)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1: Extended Ion Channel Library (Phase 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issue-1-survey-existing-ion-channel-implementations-across-all-openworm-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 1: Survey existing ion channel implementations across all OpenWorm repos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-2-validate-and-adopt-egl-19-cav1-l-type-neuroml2-channel-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 2: Validate and adopt EGL-19 (Cav1 L-type) NeuroML2 channel into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-3-validate-and-adopt-slo-1-bk-ca2-activated-k-neuroml2-channel-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 3: Validate and adopt SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-4-validate-and-adopt-kvs-1-and-egl-36-neuroml2-channels-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 4: Validate and adopt KVS-1 and EGL-36 NeuroML2 channels into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-5-adopt-or-convert-remaining-medium-priority-channels-into-c302" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 5: Adopt or convert remaining MEDIUM-priority channels into c302
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-6-create-channel-library-test-suite-with-voltage-clamp-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue 6: Create channel library test suite with voltage-clamp protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Statistics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-References
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd005-draft-github-issues">DD005 Draft GitHub Issues<a class="headerlink" href="#dd005-draft-github-issues" title="Permanent link">&para;</a></h1>
+<p><strong>Epic:</strong> DD005 — Cell-Type Differentiation Strategy</p>
+<p><strong>Generated from:</strong> <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005: Cell-Type Differentiation Strategy</a></p>
+<p><strong>Methodology:</strong> <a href="../DD015_AI_Contributor_Model/#22-the-dd-issue-generator-automated-issue-creation">DD015 §2.2 — DD Issue Generator</a></p>
+<p><strong>Totals:</strong> 6 issues (ai-workable: 3 / human-expert: 3 | L1: 2, L2: 3, L3: 1)</p>
+<p><strong>Roadmap Context:</strong> DD005 is a <strong>Phase 1</strong> DD (proposed). These ion channel library issues were originally part of DD001 Draft Issues (Group 3) and have been relocated here because the extended channel library is a prerequisite for DD005's expression→conductance mapping. DD005 drives cell-type specialization; these channels provide the molecular basis.</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Phase</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Ion Channel Library (Issues 1-6)</td>
+<td><strong>Phase 1</strong></td>
+<td>Extended channels feed DD005 cell-type specialization</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="group-1-extended-ion-channel-library-phase-1">Group 1: Extended Ion Channel Library (Phase 1)<a class="headerlink" href="#group-1-extended-ion-channel-library-phase-1" title="Permanent link">&para;</a></h2>
+<p>Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, leveraging existing NeuroML2 models from Nicoletti et al. and NMODL files from BAAIWorm.</p>
+<hr />
+<h3 id="issue-1-survey-existing-ion-channel-implementations-across-all-openworm-repos">Issue 1: Survey existing ion channel implementations across all OpenWorm repos<a class="headerlink" href="#issue-1-survey-existing-ion-channel-implementations-across-all-openworm-repos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Survey existing NeuroML2 and NMODL ion channel implementations across all OpenWorm and related repos</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>ai-workable</code>, <code>L1</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> (code reuse plan) and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 — Ion Channel Sources</a></li>
+<li><strong>Depends On:</strong> None</li>
+<li><strong>Existing Code to Reuse (THIS IS THE CODE TO SURVEY):</strong><ul>
+<li><a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels"><code>openworm/NicolettiEtAl2019_NeuronModels/NeuroML2/</code></a> — <strong>31 ion channels already in NeuroML2</strong>: AWCon (16 channels: shal, kvs1, shak, kqt3, egl2, kir, unc2, egl19, cca, bk, slo1, bk2, slo2, sk, nca, leak) and RMD (15 channels: bk, bk2, cca, egl19, egl36, kir, leak, nca, shak, shal, sk, slo1, slo2, unc2). Includes <code>GenerateNeuroML.py</code> and Ca dynamics model. <strong>Validated against original XPP models.</strong></li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>openworm/NicolettiEtAl2024_MN_IN/</code></a> — <strong>22 NMODL files</strong> for motor neurons (VA5, VB6, VD5) and interneurons (AVAL, AVAR, AIY, RIM). Includes voltage-clamp and current-clamp simulation scripts. <strong>6 channels partially converted to NeuroML2</strong> (AIY subset: egl19, egl2, shk1, shl1, unc2, leak).</li>
+<li><a href="https://github.com/Jessie940611/BAAIWorm"><code>Jessie940611/BAAIWorm/eworm/components/mechanism/modfile/</code></a> — <strong>17+ NMODL files</strong> covering all DD001 target channels. Also contains per-neuron conductance parameters (<code>eworm/components/param/cell/*.json</code> — one JSON per neuron with max conductance for each channel), ion channel validation scripts (<code>eworm/ion_channel_tune/</code>), and calcium correlation data (<code>eworm/components/cb2022_data/</code>). All channels cite Nicoletti et al. 2019 as source.</li>
+<li><a href="https://github.com/openworm/ChannelWorm2"><code>openworm/ChannelWorm2/NML2_models/</code></a> — <strong>4 NeuroML2 channels</strong> (EGL-19, SHK-1, SHL-1, SLO-2) with annotated PDFs of equations. Uses Boyle &amp; Cohen 2008 parameters (different from Nicoletti). Also has <strong>200+ raw electrophysiology JSON files</strong> with digitized I-V curves for C. elegans channels, and a parameter fitting pipeline (<code>parameter_fitting/</code>).</li>
+<li><a href="https://github.com/openworm/CElegansNeuroML"><code>openworm/CElegansNeuroML/CElegans/generatedNeuroML2/</code></a> — Generic <code>LeakConductance.channel.nml</code> only, but has 11 synapse types (Acetylcholine, GABA, Glutamate, etc.) and all 302 neuron morphologies as multicompartmental NeuroML2.</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Survey, catalog, and produce a reconciliation matrix</strong> — not just BAAIWorm, but ALL existing channel implementations. The key output is: which channels already exist in NeuroML2 (and can be adopted immediately), which exist only as NMODL (and need conversion), and where parameter discrepancies exist between sources.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li>None (research issue — output is a summary comment on the issue)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li>N/A (research task)</li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Catalog all existing NeuroML2 channel files across: NicolettiEtAl2019, NicolettiEtAl2024, ChannelWorm2, CElegansNeuroML</li>
+<li>[ ] Catalog all existing NMODL channel files across: BAAIWorm, NicolettiEtAl2024</li>
+<li>[ ] For each of the 14 channels in DD001's target library table: identify ALL existing implementations (NeuroML2 and/or NMODL), note repository, file path, and parameter source</li>
+<li>[ ] Produce a reconciliation matrix: where parameters differ between sources (e.g., ChannelWorm2 EGL-19 uses Boyle &amp; Cohen 2008 parameters vs. Nicoletti 2019 parameters), flag for expert review</li>
+<li>[ ] Assess: do the existing NicolettiEtAl2019 NeuroML2 channels pass <code>jnml -validate</code>? Test all 31</li>
+<li>[ ] Document: license compatibility across repos (Apache 2.0 / MIT)</li>
+<li>[ ] Recommend: for each channel, which existing implementation to adopt as canonical</li>
+<li>[ ] Post findings as issue comment</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Before converting anything, let's catalog what already exists. Multiple OpenWorm and related repos already contain ion channel models — 31 channels in NeuroML2 from Nicoletti 2019 alone. This survey maps every existing implementation, flags parameter discrepancies between sources, and recommends which to adopt. It could save weeks of conversion work.</li>
+</ul>
+<hr />
+<h3 id="issue-2-validate-and-adopt-egl-19-cav1-l-type-neuroml2-channel-into-c302">Issue 2: Validate and adopt EGL-19 (Cav1 L-type) NeuroML2 channel into c302<a class="headerlink" href="#issue-2-validate-and-adopt-egl-19-cav1-l-type-neuroml2-channel-into-c302" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Validate and adopt existing EGL-19 (Cav1 L-type Ca²⁺) NeuroML2 channel into c302 channel library</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, electrophysiology</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> (EGL-19 row, HIGH priority) and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 — Conductance Calibration</a></li>
+<li><strong>Depends On:</strong> Issue 1 (survey)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels"><code>NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_egl19.channel.nml</code></a> — <strong>EGL-19 already exists in validated NeuroML2.</strong> Part of the AWCon 16-channel model. Validated against XPP original.</li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>NicolettiEtAl2024_MN_IN/NeuroML/egl19.channel.nml</code></a> — Another NeuroML2 version (AIY subset conversion)</li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>NicolettiEtAl2024_MN_IN/egl19.mod</code></a> — NMODL reference</li>
+<li><a href="https://github.com/openworm/ChannelWorm2"><code>ChannelWorm2/NML2_models/EGL-19.channel.nml</code></a> — Older NeuroML2 version using Boyle &amp; Cohen 2008 parameters (different from Nicoletti)</li>
+<li><code>ChannelWorm2/raw_data/JSON/</code> — Digitized experimental I-V curves for validation</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Validate and adopt</strong> the existing NicolettiEtAl2019 NeuroML2 channel. Reconcile parameters against the NicolettiEtAl2024 and ChannelWorm2 versions. Validate against experimental I-V data from ChannelWorm2. Do NOT convert from NMODL — the NeuroML2 already exists.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>channel_models/egl19_cav1.channel.nml</code> (adopted from NicolettiEtAl2019, possibly reconciled)</li>
+<li><code>tests/test_egl19_channel.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jnml -validate channel_models/egl19_cav1.channel.nml</code></li>
+<li><code>pytest tests/test_egl19_channel.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] EGL-19 channel adopted from existing NicolettiEtAl2019 NeuroML2 — not reimplemented</li>
+<li>[ ] Parameters reconciled against NicolettiEtAl2024 and ChannelWorm2 versions; discrepancies documented</li>
+<li>[ ] Passes <code>jnml -validate</code></li>
+<li>[ ] I-V curve matches NMODL reference within ±5% (test with voltage clamp protocol)</li>
+<li>[ ] Validated against ChannelWorm2 experimental I-V data where available</li>
+<li>[ ] Activation and inactivation kinetics (V_half, slope, tau) documented with literature source</li>
+<li>[ ] Can be inserted into a GenericCell definition alongside existing channels</li>
+<li>[ ] Unit test compares NeuroML channel output against NMODL reference</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> EGL-19 is the primary L-type calcium channel in <em>C. elegans</em> — and it already exists in NeuroML2 format from Nicoletti et al. 2019. This issue validates that existing model against experimental data and integrates it into c302's channel library. Adoption, not reinvention.</li>
+</ul>
+<hr />
+<h3 id="issue-3-validate-and-adopt-slo-1-bk-ca2-activated-k-neuroml2-channel-into-c302">Issue 3: Validate and adopt SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302<a class="headerlink" href="#issue-3-validate-and-adopt-slo-1-bk-ca2-activated-k-neuroml2-channel-into-c302" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Validate and adopt existing SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302 channel library</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, electrophysiology</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> (SLO-1 row, HIGH priority) and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 — Conductance Calibration</a></li>
+<li><strong>Depends On:</strong> Issue 1 (survey)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels"><code>NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_slo1.channel.nml</code></a> — <strong>SLO-1 already exists in validated NeuroML2.</strong> Calcium-dependent gating modeled. Part of AWCon model.</li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>NicolettiEtAl2024_MN_IN/slo1egl19.mod</code>, <code>slo1unc2.mod</code>, <code>slo1iso.mod</code></a> — Three SLO-1 variants coupled to different calcium sources (EGL-19, UNC-2, isolated)</li>
+<li><a href="https://github.com/Jessie940611/BAAIWorm"><code>BAAIWorm/eworm/components/mechanism/modfile/slo1_egl19.mod</code>, <code>slo1_unc2.mod</code></a> — BAAIWorm NMODL versions</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Validate and adopt</strong> the existing NicolettiEtAl2019 NeuroML2 channel. Note that BAAIWorm and NicolettiEtAl2024 have calcium-source-specific variants (SLO-1 coupled to EGL-19 vs UNC-2) — determine if the c302 library needs separate variants or a unified model.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>channel_models/slo1_bk.channel.nml</code> (adopted from NicolettiEtAl2019)</li>
+<li><code>tests/test_slo1_channel.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jnml -validate channel_models/slo1_bk.channel.nml</code></li>
+<li><code>pytest tests/test_slo1_channel.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] SLO-1 BK channel adopted from existing NicolettiEtAl2019 NeuroML2 — not reimplemented</li>
+<li>[ ] Calcium-dependent gating correctly modeled (conductance depends on both V and [Ca²⁺]ᵢ)</li>
+<li>[ ] Decision documented: single unified SLO-1 or separate EGL-19/UNC-2/iso variants per NicolettiEtAl2024</li>
+<li>[ ] I-V curve matches NMODL reference within ±5%</li>
+<li>[ ] Activation kinetics documented with literature source</li>
+<li>[ ] Unit test compares NeuroML channel output against NMODL reference</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> SLO-1 is a "big potassium" (BK) channel that opens when it senses both voltage AND calcium inside the cell. It already exists in NeuroML2 from Nicoletti et al. 2019. This issue validates and adopts it, with a decision on whether to carry the calcium-source-specific variants from the newer Nicoletti 2024 models.</li>
+</ul>
+<hr />
+<h3 id="issue-4-validate-and-adopt-kvs-1-and-egl-36-neuroml2-channels-into-c302">Issue 4: Validate and adopt KVS-1 and EGL-36 NeuroML2 channels into c302<a class="headerlink" href="#issue-4-validate-and-adopt-kvs-1-and-egl-36-neuroml2-channels-into-c302" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Validate and adopt existing KVS-1 (Kv Shaker) and EGL-36 (ERG) NeuroML2 channels into c302 library</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>human-expert</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, electrophysiology</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> (KVS-1 and EGL-36 rows, HIGH priority) and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 — Conductance Calibration</a></li>
+<li><strong>Depends On:</strong> Issue 1 (survey)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels"><code>NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_kvs1.channel.nml</code></a> — <strong>KVS-1 already exists in validated NeuroML2</strong> (AWCon model)</li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2019_NeuronModels"><code>NicolettiEtAl2019_NeuronModels/NeuroML2/RMD_egl36.channel.nml</code></a> — <strong>EGL-36 already exists in validated NeuroML2</strong> (RMD model)</li>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>NicolettiEtAl2024_MN_IN/kvs1.mod</code>, <code>egl36.mod</code></a> — NMODL references</li>
+<li><code>ChannelWorm2/raw_data/JSON/</code> — Experimental I-V data for KVS-1 and EGL-36</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Validate and adopt</strong> the existing NeuroML2 channels from NicolettiEtAl2019. Both channels already exist — reconcile and integrate.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>channel_models/kvs1_shaker.channel.nml</code> (adopted)</li>
+<li><code>channel_models/egl36_erg.channel.nml</code> (adopted)</li>
+<li><code>tests/test_kvs1_channel.py</code> (new)</li>
+<li><code>tests/test_egl36_channel.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>jnml -validate channel_models/kvs1_shaker.channel.nml</code></li>
+<li><code>jnml -validate channel_models/egl36_erg.channel.nml</code></li>
+<li><code>pytest tests/test_kvs1_channel.py tests/test_egl36_channel.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Both channels adopted from existing NicolettiEtAl2019 NeuroML2 — not reimplemented</li>
+<li>[ ] KVS-1: Shaker-type voltage-gated K⁺ channel with fast activation kinetics</li>
+<li>[ ] EGL-36: ERG-type K⁺ channel with characteristic slow inactivation recovery</li>
+<li>[ ] I-V curves match NMODL references within ±5%</li>
+<li>[ ] All kinetics documented with literature sources</li>
+<li>[ ] Unit tests compare NeuroML outputs against NMODL references</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Both KVS-1 and EGL-36 already exist as validated NeuroML2 files from Nicoletti et al. 2019. This issue adopts them into c302's channel library with validation against experimental data and NMODL references.</li>
+</ul>
+<hr />
+<h3 id="issue-5-adopt-or-convert-remaining-medium-priority-channels-into-c302">Issue 5: Adopt or convert remaining MEDIUM-priority channels into c302<a class="headerlink" href="#issue-5-adopt-or-convert-remaining-medium-priority-channels-into-c302" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Adopt existing NeuroML2 or convert NMODL for MEDIUM-priority channels (CCA-1, EGL-2, KQT-3, SLO-2, KCNL, IRK, NCA)</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>ai-workable</code>, <code>L3</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml, electrophysiology</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> (MEDIUM priority rows) and <a href="../DD005_Cell_Type_Differentiation_Strategy/">DD005 — Conductance Calibration</a></li>
+<li><strong>Depends On:</strong> Issues 3-4 (HIGH priority channels establish the adoption/validation workflow)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><strong>Already in NeuroML2 (NicolettiEtAl2019):</strong> CCA-1 (<code>AWCon_cca.channel.nml</code>), EGL-2 (<code>AWCon_egl2.channel.nml</code>), KQT-3 (<code>AWCon_kqt3.channel.nml</code>), SLO-2 (<code>AWCon_slo2.channel.nml</code>), SK/KCNL (<code>AWCon_sk.channel.nml</code>), IRK/KIR (<code>AWCon_kir.channel.nml</code>), NCA (<code>AWCon_nca.channel.nml</code>) — <strong>ALL 7 channels already exist in validated NeuroML2</strong></li>
+<li><strong>NMODL references (NicolettiEtAl2024):</strong> <code>cca1.mod</code>, <code>egl2.mod</code>, <code>kqt3.mod</code>, <code>slo2egl19.mod</code>/<code>slo2unc2.mod</code>/<code>slo2iso.mod</code>, <code>kcnl.mod</code>, <code>irk.mod</code>, <code>nca.mod</code></li>
+<li><strong>ChannelWorm2:</strong> <code>SLO-2.channel.nml</code> (older NeuroML2 with Boyle &amp; Cohen parameters)</li>
+<li><strong>BAAIWorm per-neuron conductances:</strong> <code>eworm/components/param/cell/*.json</code> — max conductance values for every channel in every neuron (302 neurons × ~15 channels)</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Adopt all 7 from NicolettiEtAl2019 NeuroML2</strong> — they already exist and are validated. Reconcile with NicolettiEtAl2024 variants where parameters differ. This should be primarily validation and integration work, not conversion.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>channel_models/cca1_cav3.channel.nml</code> (adopted)</li>
+<li><code>channel_models/egl2_eag.channel.nml</code> (adopted)</li>
+<li><code>channel_models/kqt3_kcnq.channel.nml</code> (adopted)</li>
+<li><code>channel_models/slo2_sk.channel.nml</code> (adopted)</li>
+<li><code>channel_models/kcnl2_sk.channel.nml</code> (adopted)</li>
+<li><code>channel_models/irk_kir.channel.nml</code> (adopted)</li>
+<li><code>channel_models/nca_na.channel.nml</code> (adopted)</li>
+<li><code>tests/test_medium_channels.py</code> (new)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>for f in channel_models/*.nml; do jnml -validate $f; done</code></li>
+<li><code>pytest tests/test_medium_channels.py</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] All 7 channels adopted from existing NicolettiEtAl2019 NeuroML2 — conversion from NMODL only if no NeuroML2 version exists after Issue 1 survey</li>
+<li>[ ] Each passes <code>jnml -validate</code></li>
+<li>[ ] I-V curves match NMODL references within ±5%</li>
+<li>[ ] Parameters reconciled against NicolettiEtAl2024 and ChannelWorm2 where applicable; discrepancies documented</li>
+<li>[ ] All kinetics documented with literature sources</li>
+<li>[ ] Total channel library: 4 existing + 4 HIGH + 7 MEDIUM = 15 channels</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> Here's the plot twist: all 7 MEDIUM-priority channels already exist in NeuroML2 from Nicoletti et al. 2019's AWCon model. This issue validates and adopts them into c302's channel library — turning what looked like weeks of conversion work into a validation and integration task.</li>
+</ul>
+<hr />
+<h3 id="issue-6-create-channel-library-test-suite-with-voltage-clamp-protocols">Issue 6: Create channel library test suite with voltage-clamp protocols<a class="headerlink" href="#issue-6-create-channel-library-test-suite-with-voltage-clamp-protocols" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Title:</strong> <code>[DD005] Create comprehensive channel library test suite with standard voltage-clamp protocols</code></li>
+<li><strong>Labels:</strong> <code>DD005</code>, <code>ai-workable</code>, <code>L2</code></li>
+<li><strong>Roadmap Phase:</strong> Phase 1</li>
+<li><strong>Target Repo:</strong> <code>openworm/c302</code></li>
+<li><strong>Required Capabilities:</strong> python, neuroml</li>
+<li><strong>DD Section to Read:</strong> <a href="../DD001_Neural_Circuit_Architecture/#extended-ion-channel-library-phase-1-2">DD001 — Extended Ion Channel Library</a> and <a href="../DD001_Neural_Circuit_Architecture/#quality-criteria">DD001 — Quality Criteria</a> (criterion 3: biophysical units)</li>
+<li><strong>Depends On:</strong> Issues 2-5 (channel adoptions)</li>
+<li><strong>Existing Code to Reuse:</strong><ul>
+<li><a href="https://github.com/openworm/NicolettiEtAl2024_MN_IN"><code>NicolettiEtAl2024_MN_IN/*_vclamp.py</code></a> — Voltage-clamp simulation scripts already exist for VA5, VB6, VD5 neurons. Includes conductance unit conversion utilities (<code>g_to_Scm2.py</code>, <code>g_to_nS.py</code>).</li>
+<li><a href="https://github.com/Jessie940611/BAAIWorm"><code>BAAIWorm/eworm/ion_channel_tune/</code></a> — Channel validation scripts with result PNG plots for each channel against published I-V curves</li>
+<li><a href="https://github.com/openworm/ChannelWorm2"><code>ChannelWorm2/raw_data/JSON/</code></a> — <strong>200+ digitized experimental I-V curves</strong> across species — use C. elegans-specific data for validation targets</li>
+<li><code>c302/examples/parametersweep/</code> — Parameter sweep infrastructure with firing rate analysis and heatmap generation</li>
+</ul>
+</li>
+<li><strong>Approach:</strong> <strong>Adapt existing voltage-clamp protocols</strong> from NicolettiEtAl2024 and BAAIWorm validation scripts. Use ChannelWorm2's experimental I-V data as validation targets.</li>
+<li><strong>Files to Modify:</strong><ul>
+<li><code>tests/test_channel_library.py</code> (new — adapted from existing vclamp scripts)</li>
+<li><code>tests/protocols/</code> (new — voltage clamp protocol files)</li>
+</ul>
+</li>
+<li><strong>Test Commands:</strong><ul>
+<li><code>pytest tests/test_channel_library.py -v</code></li>
+</ul>
+</li>
+<li><strong>Acceptance Criteria:</strong><ul>
+<li>[ ] Standard voltage-clamp protocol: step from -80mV to -60,-40,-20,0,+20,+40 mV</li>
+<li>[ ] For each channel: measure peak current, steady-state current, activation time constant</li>
+<li>[ ] Compare against published electrophysiology data where available (use ChannelWorm2 JSON data)</li>
+<li>[ ] Generate I-V curve plots for each channel (saved as PNG test artifacts)</li>
+<li>[ ] Verify units are correct (conductance in nS, voltage in mV, time in ms)</li>
+<li>[ ] Detect common errors: reversed polarity, wrong magnitude, unrealistic kinetics</li>
+<li>[ ] All 15 channels pass the test suite</li>
+</ul>
+</li>
+<li><strong>Sponsor Summary Hint:</strong> A voltage-clamp test suite built on existing validation scripts from Nicoletti et al. and BAAIWorm, plus 200+ digitized experimental I-V curves from ChannelWorm2 as ground truth. Calibrating 15 ion channels against their published spec sheets.</li>
+</ul>
+<hr />
+<h2 id="summary-statistics">Summary Statistics<a class="headerlink" href="#summary-statistics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total Issues</strong></td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>ai-workable</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>human-expert</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>L3</strong></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Issues</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1: Ion Channel Library</strong></td>
+<td>1–6</td>
+<td>Survey + adopt/validate 14 channels from existing NeuroML2 and NMODL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cross-references">Cross-References<a class="headerlink" href="#cross-references" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Related DD</th>
+<th>Relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="../DD001_draft_issues/">DD001</a> (Neural Circuit)</strong></td>
+<td><strong>Original source</strong> — these issues were extracted from DD001 Draft Issues Group 3</td>
+</tr>
+<tr>
+<td>DD010 (Validation Framework)</td>
+<td>Channel validation criteria</td>
+</tr>
+<tr>
+<td>DD025 (Foundation Models)</td>
+<td>Alternative kinetics prediction pathway</td>
+</tr>
+<tr>
+<td><a href="../DD027_draft_issues/">DD027</a> (Multicompartmental)</td>
+<td>Issues 1-2 depend on this channel library</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependency-graph">Dependency Graph<a class="headerlink" href="#dependency-graph" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Issue 1 (channel survey across ALL repos — reconciliation matrix)
+  ├→ Issue 2 (adopt EGL-19 from NicolettiEtAl2019)   ─┐
+  ├→ Issue 3 (adopt SLO-1 from NicolettiEtAl2019)     ├→ Issue 5 (adopt MEDIUM channels)
+  └→ Issue 4 (adopt KVS-1, EGL-36)                    ─┘    └→ Issue 6 (channel test suite)
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
