@@ -25,7 +25,7 @@
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
 | **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
-| **Validation methodology** | Every physics change in Sibernetic must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. Mind-of-a-Worm enforces this on every PR via the [Validation Methodology](#validation-methodology) checklist. |
+| **Validation methodology** | Every physics change in Sibernetic must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. [Mind-of-a-Worm](../contributing/ai-contributors.md) enforces this on every PR via the [Validation Methodology](#validation-methodology) checklist. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
@@ -80,80 +80,29 @@
 
 ## How to Build & Test
 
-### Prerequisites
+Build and run instructions live with the code, in the [**Sibernetic README**](https://github.com/openworm/sibernetic/blob/master/README.md). That's the canonical source — it tracks the actual build system as it evolves (Docker stages, CMake flags, supported platforms, GPU SDK setup, demo configurations) and is updated more frequently than this design document.
 
-- Docker with `docker compose` (DD011 simulation stack)
-- OR: [OpenCL](https://www.khronos.org/opencl/) SDK (AMD or Intel), CMake, C++ compiler
-- Optional: `pip install taichi` for [Taichi](https://www.taichi-lang.org/) Metal/CUDA backends
+What this design document *does* specify is the **acceptance criteria** for whether a build is correct (below), and the **validation workflow** any contributor must follow when changing the physics (see [Validation Methodology](#validation-methodology)).
 
-### Getting Started (Environment Setup)
+### Acceptance Criteria (Green-Light Definitions)
 
-There are two paths: **Docker** (recommended — avoids OpenCL SDK setup) and **native C++ build** (for Sibernetic development).
+A working build must satisfy, on at least one of the [Compute Backends](#compute-backends):
 
-**Clone the repositories:**
+| Gate | What it proves | How it's run |
+|------|----------------|--------------|
+| **quick-test** | Simulation completes without NaN, segfault, SIGKILL; `output/*.wcon` exists | `docker compose run quick-test` (or the equivalent native path documented in the Sibernetic README) |
+| **validate** | Density deviation < 1% for liquid particles; kinematic metrics within ±15% of baseline; no particle escape | `docker compose run validate` |
+| **parity** (native substrates) | Per-demo kinematic match against OpenCL reference within ±5% — see [Cross-Backend Parity Requirements](#cross-backend-parity-requirements) | `python3 tests/test_demo*_backend_parity.py` |
+| **differentiability** (native substrates) | Every paired backward kernel within ±5% relative error of finite-difference | `python3 src/metal_diff/test_*.py` (and equivalent for `src/cuda/`) |
 
-```bash
-git clone https://github.com/openworm/sibernetic.git
-git clone https://github.com/openworm/OpenWorm.git           # for docker compose
-```
+### Validation Tooling Status
 
-**Path A — Docker (recommended):**
-
-```bash
-cd OpenWorm
-docker compose build
-```
-
-Then skip to Step 5 below (`docker compose run quick-test`). This is the easiest way to get a working simulation — the Docker image includes OpenCL, CMake, and all dependencies.
-
-**Path B — Native C++ build:**
-
-Requires an OpenCL SDK on your system:
-
-- **Linux (AMD/Intel):** Install your GPU vendor's OpenCL runtime, plus `cmake` and a C++ compiler (`apt install cmake g++ ocl-icd-opencl-dev` on Ubuntu/Debian)
-- **macOS:** OpenCL is deprecated but still available on Intel Macs. Apple Silicon does not support OpenCL natively — use the Taichi Metal backend instead (`pip install taichi`)
-- **Windows:** Install your GPU vendor's OpenCL SDK (AMD APP SDK or Intel OpenCL Runtime)
-
-Steps 1–4 below use the native build path. Steps 5–6 use Docker.
-
-### Step-by-step
-
-```bash
-# Step 1: Build Sibernetic (C++/OpenCL)
-cd Sibernetic/
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j8
-
-# Step 2: Run standard test configuration
-./Sibernetic -config ../configurations/worm_body_test.ini -timestep 0.00002 -duration 1.0
-
-# Step 3: Check for divergence
-python ../scripts/check_stability.py output.dat
-# [TO BE CREATED] if not present — verify existence in repo
-
-# Step 4: Validate density constraint
-python ../scripts/validate_incompressibility.py output.dat --max_deviation 0.01
-# [TO BE CREATED] if not present — verify existence in repo
-
-# Step 5: Quick validation via Docker (must pass before PR)
-docker compose run quick-test
-# Green light: simulation completes without NaN, segfault, or SIGKILL
-# Green light: output/*.wcon exists
-
-# Step 6: Full validation via Docker (must pass before merge)
-docker compose run validate
-# Green light: density deviation < 1% for liquid particles
-# Green light: Tier 3 kinematic metrics within ±15% of baseline
-# Green light: no particle escape (all positions within bounding box)
-```
-
-### Scripts that may not exist yet
+Two stability/incompressibility scripts referenced in older validation documents may not yet exist in the repo. If absent, they should be created against `openworm/sibernetic` with label `dd001`:
 
 | Script | Status | Tracking |
 |--------|--------|----------|
-| `scripts/check_stability.py` | Verify in repo | openworm/sibernetic — label `dd001` |
-| `scripts/validate_incompressibility.py` | Verify in repo | openworm/sibernetic — label `dd001` |
+| `scripts/check_stability.py` | Verify in repo | `openworm/sibernetic` — label `dd001` |
+| `scripts/validate_incompressibility.py` | Verify in repo | `openworm/sibernetic` — label `dd001` |
 
 ---
 
@@ -202,7 +151,7 @@ OpenWorm uses **Predictive-Corrective Incompressible SPH (PCISPH)** to simulate 
 | Max muscle contraction force | 2.7 × 10⁻⁹ | N | Experimental range: (1.4–9.6) × 10⁻⁹ N |
 | Number of muscle units | 96 | -- | 95 body-wall muscles, 24 per quadrant × 4 |
 
-### Validated Kinematic Outputs (Palyanov et al. 2018)
+### Validated Kinematic Outputs ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376))
 
 | Metric | Simulated | Experimental | Source |
 |--------|-----------|-------------|--------|
@@ -254,7 +203,7 @@ Bonds are created during initialization based on spatial proximity. Particles wi
 
 ### Muscle Actuation (Force Injection)
 
-**Muscle cell mapping (Palyanov et al. 2018):** The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing **individual muscle cells** with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.
+**Muscle cell mapping ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376)):** The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing **individual muscle cells** with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.
 
 Muscle forces from the calcium-force coupling (DD003) are injected by modulating elastic bond stiffness:
 
@@ -264,7 +213,7 @@ k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
 
 Where `activation(t)` comes from the [Ca²⁺]ᵢ time series of each muscle cell. Bonds tagged as muscle bonds (MDR, MVR, MVL, MDL in 4 quadrants) receive this time-varying stiffness. Each of the 96 muscle units can be activated independently, enabling the full range of body postures observed in *C. elegans*.
 
-### Predictive-Corrective Pressure Solver
+### Predictive-Corrective Pressure Solver (PCISPH — OpenCL Reference)
 
 Standard SPH suffers from density fluctuations causing artificial pressure waves. PCISPH ([Solenthaler & Pajarola 2009](https://doi.org/10.1145/1531326.1531346)) adds a predictive-corrective iteration:
 
@@ -272,7 +221,39 @@ Standard SPH suffers from density fluctuations causing artificial pressure waves
 2. **Correct:** Iteratively adjust pressure forces to maintain incompressibility (ρ ≈ ρ₀)
 3. **Update:** Advance to the next timestep once density error < threshold
 
-This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
+This stabilizes the simulation at the cost of ~3-7 iterations per timestep. PCISPH is the approach used by the OpenCL reference implementation (`sphFluid.cl`) and is the validated kinematic baseline against which all newer substrates are measured.
+
+### Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)
+
+The native Metal substrate (and the in-progress CUDA substrate) uses [eXtended Position-Based Dynamics (XPBD)](https://matthias-research.github.io/pages/publications/XPBD.pdf) ([Macklin, Müller & Chentanez 2016](https://matthias-research.github.io/pages/publications/XPBD.pdf)) as the constraint-projection framework. XPBD generalizes Position-Based Dynamics by introducing a per-constraint compliance parameter `α`, which is the *inverse stiffness*: small α ⇒ stiff (hard) constraint, large α ⇒ compliant (soft) constraint. Each constraint contributes a Lagrange-multiplier update that, when iterated K times per timestep, drives the simulation toward the constrained manifold.
+
+The Sibernetic native substrate expresses each physical phenomenon as an XPBD constraint and projects them sequentially per timestep:
+
+1. **Predict:** `predict_positions` advances positions using gravity, external forces, prior velocity (one shader pass)
+2. **Constrain:** K projection passes, each solving one constraint kind in turn:
+    - **Density constraint** (`solve_density_constraint`) — particles within smoothing radius `h` project toward target density `ρ_rest` with compliance `α_density`. This is the XPBD equivalent of PCISPH's iterative pressure correction.
+    - **Distance constraints** (`solve_distance_constraints_seq`) — elastic bonds (springs + anchors) project toward rest length.
+    - **Floor / box-clamp constraints** (`solve_floor_constraint`, `clamp_to_box`) — boundary collision with restitution.
+    - **Membrane constraints** (`membrane_apply`) — plane-projection through Ihmsen 2014 membrane mechanism (M10 kernels).
+3. **Update velocities:** `update_velocities` derives new velocities from position deltas (one shader pass)
+
+For phenomena that don't fit cleanly as constraints — viscous pair forces, surface tension, SPH pressure-gradient buoyancy needed for water-on-worm dynamics — additional force kernels (`pair_forces_grid`, `pair_forces_pressure_grid`) are interleaved within the same XPBD loop, contributing impulses that the constraint projection then resolves against.
+
+#### Why XPBD for the Native Substrate
+
+The XPBD choice is what makes the substrate differentiable end-to-end:
+
+1. **Each constraint has a closed-form Jacobian.** Every projection step's gradient `∂x_new / ∂x_old` can be derived analytically. The substrate exploits this: every forward constraint kernel (`solve_density_constraint`, `solve_distance_constraints_seq`, etc.) has a paired backward kernel that walks the Jacobian, FD-validated to ±5% relative error. PCISPH's iterative pressure-force loop produces gradients in principle too, but autodiff through the iteration is memory-expensive and analytic backwards through iterative implicit methods are harder to derive. XPBD's per-constraint structure is the cleanest match for analytic backward-mode AD. See [Differentiability](#differentiability).
+
+2. **Per-step state is bounded and saveable.** Each XPBD constraint kernel reads a fixed set of inputs and writes a fixed set of outputs. The substrate persists per-step state (positions, velocities, density, ∇C, denominator helpers, per-kernel auxiliaries) so `xpbd_full_bwd` can walk K constraint iterations in reverse. The state's bounded shape per kernel makes this practical at the worm-scale particle counts (~100K particles × multiple kernels × tens of timesteps).
+
+3. **Unconditional stability (PBD heritage).** XPBD doesn't have the CFL-like stiffness constraint that PCISPH inherits from explicit pressure-force integration. Stiffer constraints don't require smaller timesteps — they require lower compliance α. This means kinematic parameter tuning via SGD can vary stiffness across orders of magnitude without restabilizing the integration loop.
+
+#### Cross-Approach Parity
+
+PCISPH and XPBD are mathematically distinct, but the validation methodology requires the native (XPBD) substrate to reproduce the OpenCL (PCISPH) reference's *kinematic outputs* — the per-demo trajectory parity gates ensure equivalent behavior at the observable level even though the inner numerical scheme differs. Where pure XPBD with constraint projection alone produced wrong kinematics (e.g., a worm sinking because there was no upward SPH pressure-gradient force from surrounding liquid), the substrate added the missing force kernel (`pair_forces_pressure_grid`, ported from `sphFluid.cl`) rather than abandoning the XPBD framework. The substrate is thus a *hybrid*: XPBD as the constraint-projection backbone with SPH force kernels interleaved where projection alone is insufficient. This hybrid is what reaches forward parity on the five validated demos; see [Cross-Backend Parity Requirements](#cross-backend-parity-requirements).
+
+The choice is also a Position-Based Dynamics revisitation. PBD itself was rejected for Sibernetic's original architecture as too inaccurate (see [Alternatives Considered §4](#4-position-based-dynamics-pbd)). XPBD's per-constraint compliance restores the physical accuracy that vanilla PBD lacked while keeping PBD's stability and differentiability properties — making it a fit for biophysical validation that vanilla PBD never was.
 
 ---
 
@@ -375,7 +356,7 @@ A contribution to Sibernetic MUST:
 
 ## Validation Methodology
 
-**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — must follow the 8-phase workflow below.** Mind-of-a-Worm uses the checklist at the end of this section as a binding PR gate. Reviewers (human or AI) MUST verify each item before approving.
+**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — must follow the 8-phase workflow below.** [Mind-of-a-Worm](../contributing/ai-contributors.md) uses the checklist at the end of this section as a binding PR gate. Reviewers (human or AI) MUST verify each item before approving.
 
 The methodology emerged from the native-Metal port (consolidated on the `ow-native-gpu-0.1.0` branch) and is now baked into the repo's tooling. It is the substrate-correctness story: hand-derived backward kernels per [Differentiability](#differentiability) prove the *math* is right; this workflow proves the *physics* is right.
 
@@ -575,11 +556,11 @@ The matching cuda substrate (when it lands per `src/cuda/README.md`) must includ
 
 ### This Design Document Does NOT Cover:
 
-1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (Palyanov et al. 2018, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
+1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376), Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
 
 2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.
 
-3. **Environmental complexity beyond liquid/gel:** Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid (Palyanov et al. 2018, Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.
+3. **Environmental complexity beyond liquid/gel:** Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376), Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.
 
 4. **Thermodynamics:** No temperature, no heat diffusion, no thermal expansion. *C. elegans* is studied at 20°C but temperature effects are not modeled.
 
