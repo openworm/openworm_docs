@@ -19,7 +19,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 **If you disagree with a DD:**
 
-1. Propose a new DD that supersedes it (follow [DD012](DD012_Design_Document_RFC_Process.md) RFC process)
+1. Propose a new DD that supersedes it (follow [Decision Process](../contributing/decision-process.md) RFC process)
 2. Do NOT silently deviate from an accepted DD without approval
 
 ### For Reviewers (L3+)
@@ -32,7 +32,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
     - Check the DD's "Depends On Me" table in Integration Contract
     - Tag maintainers of consuming DDs for coordination
     - Require integration test evidence (`docker compose run validate` output)
-4. If the PR deviates from a DD, request justification or DD amendment via [DD012](DD012_Design_Document_RFC_Process.md) RFC
+4. If the PR deviates from a DD, request justification or DD amendment via [Decision Process](../contributing/decision-process.md) RFC
 
 ### For Mind-of-a-Worm AI
 
@@ -73,7 +73,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 **Status definitions:**
 
-- ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [DD012](DD012_Design_Document_RFC_Process.md) RFC.
+- ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [Decision Process](../contributing/decision-process.md) RFC.
 - ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
 - 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
 - 📦 **Archived / Backburner:** Deferred or superseded. Do not implement without reopening discussion.
@@ -84,7 +84,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 ## Template & Reference
 
-- **[DD012](DD012_Design_Document_RFC_Process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
+- **[Decision Process](../contributing/decision-process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
 - **[DD005](DD005_Cell_Type_Differentiation_Strategy.md):** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as your model when writing a new DD.
 - **[DD001](DD001_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
 
@@ -124,9 +124,9 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 ### Step 3: Use the Template
 
-Follow [DD012 (RFC Process)](DD012_Design_Document_RFC_Process.md) template structure. Use [DD005 (Cell-Type Specialization)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
+Follow [DD012 (RFC Process)](../contributing/decision-process.md) template structure. Use [DD005 (Cell-Type Specialization)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
 
-**Required sections (from [DD012](DD012_Design_Document_RFC_Process.md)):**
+**Required sections (from [Decision Process](../contributing/decision-process.md)):**
 
 - TL;DR (2-3 sentences)
 - Goal & Success Criteria (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
@@ -213,7 +213,7 @@ Once DD is approved and merged:
 
 ## Anti-Patterns (What NOT to Do)
 
-From [DD012](DD012_Design_Document_RFC_Process.md) Quality Criteria section:
+From [Decision Process](../contributing/decision-process.md) Quality Criteria section:
 
 **❌ Too vague:**
 > "We should use realistic channel models."
@@ -238,7 +238,7 @@ From [DD012](DD012_Design_Document_RFC_Process.md) Quality Criteria section:
 **❌ Buried punchline:**
 > Validation goal appears at line 300 instead of the Goal section (line 30).
 
-*Lead with WHY and WHAT (impact), end with HOW (background). [DD012](DD012_Design_Document_RFC_Process.md) template enforces this.*
+*Lead with WHY and WHAT (impact), end with HOW (background). [Decision Process](../contributing/decision-process.md) template enforces this.*
 
 **❌ Phantom scripts:**
 > Commands reference `validate_network.py` with no tracking, no `[TO BE CREATED]` marker.
@@ -281,7 +281,7 @@ A: No. Trivial fixes (typos, dead link updates, comment improvements) do not req
 A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
 
 **Q: Can I modify an accepted DD?**
-A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [DD012](DD012_Design_Document_RFC_Process.md) RFC process. L4 maintainer or founder approves amendments.
+A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [Decision Process](../contributing/decision-process.md) RFC process. L4 maintainer or founder approves amendments.
 
 **Q: What if my DD is rejected?**
 A: The rejection itself is documented (DD status → Rejected, Alternatives Considered explains why). You (and future contributors) now know that approach was considered and why it doesn't serve the mission. This preserves institutional memory.
@@ -293,7 +293,7 @@ A: DDs with major scientific implications (e.g., choosing what biological detail
 A: [DD014](DD014_Dynamic_Visualization_Architecture.md) is the main visualization architecture (data pipeline, viewer framework, phase roadmap). [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
 
 **Q: Where are the GitHub issues for DD implementation?**
-A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([DD015](DD015_AI_Contributor_Model.md)) will auto-generate GitHub issues from Integration Contract sections.
+A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
 A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

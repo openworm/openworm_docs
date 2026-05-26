@@ -4,7 +4,7 @@
 
 **Generated from:** [DD013: Simulation Stack Architecture](DD013_Simulation_Stack_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 42 issues (ai-workable: 31 / human-expert: 11 | L1: 17, L2: 15, L3: 9)
 
@@ -563,7 +563,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
     - [ ] Mounts `./output` and `./notebooks` directories
     - [ ] No authentication token (empty token for local use)
     - [ ] JupyterLab accessible at `http://localhost:8888`
-- **Sponsor Summary Hint:** JupyterLab gives newcomers an interactive notebook environment inside the simulation container. They can explore the connectome, run simulations, and visualize results — all in a web browser. This directly supports [DD011](DD011_Contributor_Progression_Model.md) L0→L1 onboarding.
+- **Sponsor Summary Hint:** JupyterLab gives newcomers an interactive notebook environment inside the simulation container. They can explore the connectome, run simulations, and visualize results — all in a web browser. This directly supports [Contributor Progression](../contributing/contributor-progression.md) L0→L1 onboarding.
 
 ---
 
@@ -855,7 +855,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 - **Labels:** `DD013`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD013 Phase D](DD013_Simulation_Stack_Architecture.md#phase-d-polish-and-onboarding-weeks-17-20) and [DD011](DD011_Contributor_Progression_Model.md) (L0→L1 orientation tasks)
+- **DD Section to Read:** [DD013 Phase D](DD013_Simulation_Stack_Architecture.md#phase-d-polish-and-onboarding-weeks-17-20) and [Contributor Progression](../contributing/contributor-progression.md) (L0→L1 orientation tasks)
 - **Depends On:** Issue 32
 - **Files to Modify:**
     - `n2_whisperer_orientation_tasks.md` (update references to new Docker workflow)

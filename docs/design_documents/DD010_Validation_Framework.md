@@ -498,9 +498,9 @@ As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Poli
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Tier 1 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review) | Per-cell pass/fail + metrics | JSON | mixed |
-| Tier 2 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
-| Tier 3 validation report | [DD012](DD012_Design_Document_RFC_Process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
+| Tier 1 validation report | [Decision Process](../contributing/decision-process.md) (PR review) | Per-cell pass/fail + metrics | JSON | mixed |
+| Tier 2 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
+| Tier 3 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
 | Regression alert | [DD013](DD013_Simulation_Stack_Architecture.md) (CI pipeline) | Pass/fail + diff from baseline | JSON + exit code | boolean |
 | Validation dashboard | Mad-Worm-Scientist (daily digest) | Summary metrics for all tiers | JSON | mixed |
 | Validation overlay data (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-metric pass/fail + experimental comparison traces | OME-Zarr: `validation/overlay/` (tier results + reference data) | mixed |
@@ -707,7 +707,7 @@ docker compose run validate
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | CI pipeline (blocking gates) | [DD013](DD013_Simulation_Stack_Architecture.md) | If acceptance criteria change, CI may pass/fail differently |
-| PR review (Mind-of-a-Worm) | [DD012](DD012_Design_Document_RFC_Process.md) | Mind-of-a-Worm references [DD010](DD010_Validation_Framework.md) criteria when checking PR compliance |
+| PR review (Mind-of-a-Worm) | [Decision Process](../contributing/decision-process.md) | Mind-of-a-Worm references [DD010](DD010_Validation_Framework.md) criteria when checking PR compliance |
 | Founder digest (Mad-Worm-Scientist) | AI Agents | If validation report format changes, Mad-Worm-Scientist can't parse regression alerts |
 | All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
 

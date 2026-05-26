@@ -562,7 +562,7 @@ from tierpsy import ...  # (inspect their API)
 - Create `tierpsy_adapter.py` that wraps Tierpsy's feature extraction with OpenWorm's comparison API
 - Maintain backward compatibility with existing validation scripts
 - Update [DD010](DD010_Validation_Framework.md) acceptance criteria if Tierpsy's feature definitions differ slightly
-- File DD amendment via [DD012](DD012_Design_Document_RFC_Process.md) RFC process
+- File DD amendment via [Decision Process](../contributing/decision-process.md) RFC process
 
 ---
 
@@ -783,7 +783,7 @@ print('[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) full validati
 |---------------|----|-----------------------------|
 | Tier 3 validation (acceptance criteria) | [DD010](DD010_Validation_Framework.md) | If feature computation changes, Tier 3 pass/fail thresholds may need recalibration |
 | CI pipeline (behavioral gate) | [DD013](DD013_Simulation_Stack_Architecture.md) | If toolbox API changes, CI validation scripts must be updated |
-| Validation report format | [DD012](DD012_Design_Document_RFC_Process.md) (PR review) | If report JSON schema changes, Mind-of-a-Worm can't parse Tier 3 results |
+| Validation report format | [Decision Process](../contributing/decision-process.md) (PR review) | If report JSON schema changes, Mind-of-a-Worm can't parse Tier 3 results |
 | Visualization overlay | [DD014](DD014_Dynamic_Visualization_Architecture.md) | If validation output format changes, viewer overlay breaks |
 
 ### Integration Test

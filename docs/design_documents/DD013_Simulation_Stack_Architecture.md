@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-15
 - **Supersedes:** Informal Docker meta-repo approach
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [DD011](DD011_Contributor_Progression_Model.md) (Contributor Progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC Process)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [Contributor Progression](../contributing/contributor-progression.md) (Contributor Progression), [Decision Process](../contributing/decision-process.md) (RFC Process)
 
 ---
 
@@ -18,7 +18,7 @@ The OpenWorm simulation stack uses Docker Compose to orchestrate five containeri
 
 ### The Gap Between Vision and Execution
 
-Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD012](DD012_Design_Document_RFC_Process.md) specify a rich, multi-tissue, multi-scale organism simulation:
+Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[Decision Process](../contributing/decision-process.md) specify a rich, multi-tissue, multi-scale organism simulation:
 
 | Subsystem | DD | Primary Repo | Integration Status |
 |-----------|----|--------------|--------------------|
@@ -676,7 +676,7 @@ Add an optional JupyterLab service for interactive exploration:
 - `03_analyze_output.ipynb` — Plot simulation results
 - `04_validate_against_data.ipynb` — Run validation comparisons
 
-This directly addresses newcomer onboarding ([DD011](DD011_Contributor_Progression_Model.md) L0→L1 tasks) and makes orientation tasks executable in a browser.
+This directly addresses newcomer onboarding ([Contributor Progression](../contributing/contributor-progression.md) L0→L1 tasks) and makes orientation tasks executable in a browser.
 
 ---
 
@@ -933,7 +933,7 @@ The fix: **every DD now has an Integration Contract section** (inputs, outputs, 
 
 ### New Role: L4 Integration Maintainer
 
-This Design Document introduces a new entry in the Subsystem Ownership Map ([DD011](DD011_Contributor_Progression_Model.md)):
+This Design Document introduces a new entry in the Subsystem Ownership Map ([Contributor Progression](../contributing/contributor-progression.md)):
 
 | Subsystem | Design Documents | L4 Maintainer | Primary Repository |
 |-----------|-----------------|---------------|-------------------|
@@ -961,7 +961,7 @@ The Integration Maintainer is responsible for:
 - Alternative: An L3 contributor who can be mentored into this role
 - Mind-of-a-Worm AI can assist with routine tasks (dependency updates, CI triage) but cannot own architectural decisions
 
-**Founder involvement:** Approve L4 appointment, review major architectural changes (per [DD011](DD011_Contributor_Progression_Model.md)). This role should **reduce** founder time, not increase it.
+**Founder involvement:** Approve L4 appointment, review major architectural changes (per [Contributor Progression](../contributing/contributor-progression.md)). This role should **reduce** founder time, not increase it.
 
 ### Mind-of-a-Worm Support for Integration
 
