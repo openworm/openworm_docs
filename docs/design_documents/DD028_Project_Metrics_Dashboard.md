@@ -3,7 +3,7 @@
 - **Status:** Proposed
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-27
-- **Related:** [DD010](DD010_Validation_Framework.md), [DD011](DD011_Contributor_Progression_Model.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)
+- **Related:** [DD010](DD010_Validation_Framework.md), [Contributor Progression](../contributing/contributor-progression.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)
 
 > **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Infrastructure
 

@@ -614,7 +614,7 @@ docker compose run quick-test  # with visualization.export_format: "legacy"
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | Simulation stack (export step) | [DD013](DD013_Simulation_Stack_Architecture.md) | If Zarr schema changes, `master_openworm.py` export step must update |
-| Contributor onboarding | [DD011](DD011_Contributor_Progression_Model.md) | If viewer Docker service changes, L0 orientation task B1 instructions must update |
+| Contributor onboarding | [Contributor Progression](../contributing/contributor-progression.md) | If viewer Docker service changes, L0 orientation task B1 instructions must update |
 | N2-Whisperer orientation | AI Agents | If viewer URL/port changes, N2-Whisperer "run simulation" instructions must update |
 | Output pipeline | [DD013](DD013_Simulation_Stack_Architecture.md) | If screenshot/video export changes, automated output generation changes |
 

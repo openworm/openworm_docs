@@ -24,7 +24,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 **New to Design Documents?**
 
-- 📋 [DD012: RFC Process](DD012_Design_Document_RFC_Process.md) — How DDs work, template structure
+- 📋 [Decision Process](../contributing/decision-process.md) — How design decisions get made, DD template, RFC workflow (in the Contributing section)
 - 🌟 [DD005: Cell-Type Specialization](DD005_Cell_Type_Differentiation_Strategy.md) — Reference implementation with all sections filled
 - 🗺️ [Integration Map](INTEGRATION_MAP.md) — PlantUML diagram showing how all DDs couple together
 - 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month implementation timeline with milestones
@@ -32,8 +32,8 @@ For the philosophical commitments behind these principles — mechanistic explan
 **Implementing or Contributing?**
 
 - 🛠️ [Contributing Guide](contributing_guide.md) — How to use, write, and review DDs (lifecycle, templates, examples, anti-patterns, FAQ)
-- 📈 [DD011: Contributor Progression](DD011_Contributor_Progression_Model.md) — L0→L5 path, badge system
-- 🤖 [DD015: AI-Native Model](DD015_AI_Contributor_Model.md) — Autonomous agent registration
+- 📈 [Contributor Progression](../contributing/contributor-progression.md) — L0→L5 path, badge system (in the Contributing section)
+- 🤖 [AI Contributors](../contributing/ai-contributors.md) — Autonomous agent registration (in the Contributing section)
 
 **Resources:**
 
@@ -51,7 +51,7 @@ The key insight behind this phasing: **validate the hardest science early**. Pha
 |-------|------|----------|-----------------|---------|-------|
 | 0 | Core Architecture | Functional | Neural circuit + muscle + body + connectome data — simulation runs, 83 stabilization issues tracked | 4 | 302 neurons + 95 muscles |
 | A1 | Core Infrastructure | Wks 1-2 | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
-| A2 | Governance & Derisking | Wks 3-4 | L0-L5 contributor levels + badge taxonomy ([DD011](DD011_Contributor_Progression_Model.md)), DD proposal/review process ([DD012](DD012_Design_Document_RFC_Process.md)), AI agent registration + task pipeline ([DD015](DD015_AI_Contributor_Model.md)), ion channel kinetics predictions derisking Phase 1 ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) | 4 | — |
+| A2 | Governance & Derisking | Wks 3-4 | L0-L5 contributor levels + badge taxonomy ([Contributor Progression](../contributing/contributor-progression.md)), DD proposal/review process ([Decision Process](../contributing/decision-process.md)), AI agent registration + task pipeline ([AI Contributors](../contributing/ai-contributors.md)), ion channel kinetics predictions derisking Phase 1 ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) | 4 | — |
 | 1 | Cell-Type Specialization | Mo 1-3 | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
 | 2 | Modulation + Closed-Loop | Mo 4-6 | Neuropeptides, touch response, proprioception | 6 | +sensory loop |
 | 3 | Organ Systems | Mo 7-12 | Pharynx, intestine, egg-laying, ML hybrid | 4 | +3 organs |
@@ -101,7 +101,7 @@ For detailed milestones, success criteria, datasets, and blocking dependencies, 
 [DD013](DD013_Simulation_Stack_Architecture.md) (simulation stack), [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization), [DD014.1](DD014.1_Visual_Rendering_Specification.md) (visual rendering), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD028](DD028_Project_Metrics_Dashboard.md) (project metrics dashboard)
 
 **Governance:**
-[DD011](DD011_Contributor_Progression_Model.md) (contributor progression), [DD012](DD012_Design_Document_RFC_Process.md) (RFC process), [DD015](DD015_AI_Contributor_Model.md) (AI contributors)
+[Contributor Progression](../contributing/contributor-progression.md) (contributor progression), [Decision Process](../contributing/decision-process.md) (RFC process), [AI Contributors](../contributing/ai-contributors.md) (AI contributors)
 
 **Hybrid/Advanced:**
 [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (mechanistic-ML hybrid), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (foundation model channel kinetics), [DD026](DD026_Reservoir_Computing_Validation.md) (reservoir computing validation)
@@ -163,9 +163,9 @@ For detailed milestones, success criteria, datasets, and blocking dependencies, 
 
 ### Governance
 
-- **Contributors:** [DD011](DD011_Contributor_Progression_Model.md) (L0-L5 progression, badge system)
-- **RFC Process:** [DD012](DD012_Design_Document_RFC_Process.md) (DD template, approval workflow, Mind-of-a-Worm enforcement)
-- **AI Contributors:** [DD015](DD015_AI_Contributor_Model.md) (autonomous agents as L1-L3 contributors)
+- **Contributors:** [Contributor Progression](../contributing/contributor-progression.md) (L0-L5 progression, badge system)
+- **RFC Process:** [Decision Process](../contributing/decision-process.md) (DD template, approval workflow, Mind-of-a-Worm enforcement)
+- **AI Contributors:** [AI Contributors](../contributing/ai-contributors.md) (autonomous agents as L1-L3 contributors)
 
 ### Hybrid & Advanced
 

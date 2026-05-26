@@ -4,7 +4,7 @@
 
 **Generated from:** [DD027: Multicompartmental Neuron Models](DD027_Multicompartmental_Neuron_Models.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 3 issues (ai-workable: 1 / human-expert: 2 | L1: 1, L2: 0, L3: 2)
 

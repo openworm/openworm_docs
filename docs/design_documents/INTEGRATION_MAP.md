@@ -137,9 +137,9 @@ package "Infrastructure" as infra #FFF9C4 {
   component "DD028\nMetrics\nDashboard" as DD028 #FFE4B5
 }
 
-' === GOVERNANCE ===
-package "Governance" as gov #F5F5F5 {
-  component "DD011 Contributors\nDD012 RFC Process\nDD015 AI Agents" as GOV #E0E0E0
+' === GOVERNANCE (Contributing section) ===
+package "Governance (Contributing)" as gov #F5F5F5 {
+  component "Contributor Progression\nDecision Process\nAI Contributors" as GOV #E0E0E0
 }
 
 ' === EDGES ===
@@ -274,9 +274,9 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD021 (Movement Toolbox) | Phase A1 | Blocked |
 | DD024 (Validation Data) | Phase A1 | Proposed |
 | DD028 (Project Metrics Dashboard) | Phase A1 | Proposed |
-| DD011 (Contributor Progression) | Phase A2 | Proposed |
-| DD012 (RFC Process) | Phase A2 | Proposed |
-| DD015 (AI Contributor Model) | Phase A2 | Proposed |
+| [Contributor Progression](../contributing/contributor-progression.md) | Governance (Contributing section) | Active |
+| [Decision Process](../contributing/decision-process.md) | Governance (Contributing section) | Active |
+| [AI Contributors](../contributing/ai-contributors.md) | Governance (Contributing section) | Active |
 | DD025 (Foundation Models) | Phase A2 | Proposed |
 | DD005 (Cell-Type Specialization) | Phase 1 | Proposed |
 | DD010 (Validation Framework) | Phase 1 | Proposed |

@@ -4,7 +4,7 @@
 
 **Generated from:** [DD005: Cell-Type Differentiation Strategy](DD005_Cell_Type_Differentiation_Strategy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 6 issues (ai-workable: 3 / human-expert: 3 | L1: 2, L2: 3, L3: 1)
 

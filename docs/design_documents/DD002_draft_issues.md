@@ -4,7 +4,7 @@
 
 **Generated from:** [DD002: Muscle Model Architecture](DD002_Muscle_Model_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)
 
@@ -552,7 +552,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 - **DD Section to Read:** [DD002 — Quality Criteria](DD002_Muscle_Model_Architecture.md#quality-criteria), [DD002 — Testing Procedure](DD002_Muscle_Model_Architecture.md#testing-procedure), and [DD002 — Boundaries](DD002_Muscle_Model_Architecture.md#boundaries-explicitly-out-of-scope)
 - **Documentation Tier:** Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion repos; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
 - **Existing Code to Reuse:**
-    - **[BadgeList muscle model badges](https://badgelist.com/openworm)** — Three existing badges form a de facto getting-started progression: **Muscle Model Explorer** (9 earners — explore the muscle model), **Muscle Model Builder** (2 earners — build it), **Muscle Model Hacker** (12 earners — hack/extend it). These map to [DD011](DD011_Contributor_Progression_Model.md) skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". **Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression** (reuse strategy: **augment**)
+    - **[BadgeList muscle model badges](https://badgelist.com/openworm)** — Three existing badges form a de facto getting-started progression: **Muscle Model Explorer** (9 earners — explore the muscle model), **Muscle Model Builder** (2 earners — build it), **Muscle Model Hacker** (12 earners — hack/extend it). These map to [Contributor Progression](../contributing/contributor-progression.md) skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". **Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression** (reuse strategy: **augment**)
     - `openworm/c302` → `c302/c302_Muscles.py`, `c302/c302_MuscleTest.py`, `c302/c302_IClampMuscle.py`, `c302/c302_MusclesSine.py` — document these as the hands-on workflow; show contributors the progression from single-muscle test → all-muscle test → oscillatory stimulation (reuse strategy: **document as resources**)
     - `openworm/muscle_model` repo — document as the biophysical reference implementation for Boyle-Cohen muscle (reuse strategy: **document as resource**)
     - `openworm/c302` → `c302/parameters_C.py` through `parameters_D.py` — document the parameter level system (A/B/C/D) and when to use each (reuse strategy: **document as resource**)

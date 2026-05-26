@@ -4,7 +4,7 @@
 
 **Generated from:** [DD003: Body Physics Engine Architecture](DD003_Body_Physics_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](DD015_AI_Contributor_Model.md#23-reuse-first-methodology), [DD015 §2.4 — DD013 Simulation Stack Integration](DD015_AI_Contributor_Model.md#24-dd013-simulation-stack-integration)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](../contributing/ai-contributors.md#23-reuse-first-methodology), [DD015 §2.4 — DD013 Simulation Stack Integration](../contributing/ai-contributors.md#24-dd013-simulation-stack-integration)
 
 **Totals:** 21 issues (ai-workable: 14 / human-expert: 7 | L1: 8, L2: 8, L3: 5)
 

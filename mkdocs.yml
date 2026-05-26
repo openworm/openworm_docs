@@ -35,10 +35,8 @@ nav:
           - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
           - DD028 Project Metrics Dashboard: design_documents/DD028_Project_Metrics_Dashboard.md
       - "Phase A2 — Governance & Derisking":
-          - DD011 Contributor Progression: design_documents/DD011_Contributor_Progression_Model.md
-          - DD012 RFC Process: design_documents/DD012_Design_Document_RFC_Process.md
-          - DD015 AI Contributor Model: design_documents/DD015_AI_Contributor_Model.md
           - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
+          - "Contributor governance →": contributing/index.md
       - "Phase 1 — Cell-Type Specialization":
           - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD005 Draft Issues: design_documents/DD005_draft_issues.md
@@ -83,6 +81,11 @@ nav:
       - Community Outreach: Projects/community-proj.md
       - Muscle / Neuron /  Channel: Projects/muscle-neuron-integration.md
       - C. elegans Robots: Projects/c-elegans-robot.md
+  - Contributing:
+      - Overview: contributing/index.md
+      - Contributor Progression: contributing/contributor-progression.md
+      - Decision Process: contributing/decision-process.md
+      - AI Contributors: contributing/ai-contributors.md
   - Community:
       - Community Overview: community.md
       - GitHub: Community/github.md

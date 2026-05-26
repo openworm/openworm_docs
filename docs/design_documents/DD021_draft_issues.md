@@ -4,7 +4,7 @@
 
 **Generated from:** [DD021: Movement Analysis Toolbox and WCON Policy](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 

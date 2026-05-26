@@ -216,7 +216,7 @@ When a new connectome dataset is published (e.g., a future revision or new speci
 1. **The ConnectomeToolbox maintainer adds a reader** to ConnectomeToolbox (typically within days of publication)
 2. **Bump `cect` version** in `versions.lock` after reviewing the changelog
 3. **Run regression tests** — ensure existing simulations produce equivalent results with the new version
-4. **Do NOT change the default dataset** without an RFC ([DD012](DD012_Design_Document_RFC_Process.md) process). Changing from [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm to a new default affects all consuming DDs
+4. **Do NOT change the default dataset** without an RFC ([Decision Process](../contributing/decision-process.md) process). Changing from [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm to a new default affects all consuming DDs
 5. **New datasets can be used for cross-validation** without changing defaults — add them as comparison targets in [DD010](DD010_Validation_Framework.md)
 
 ---

@@ -195,35 +195,30 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Status:** ⚠️ **Proposed** — Can proceed in parallel with Phase A1
 
-**Phase Rationale:** These DDs enable governance at scale and derisk Phase 1 science. They don't block contributor workflow but make it sustainable. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) runs foundation model cross-validation in parallel with A1, providing priors that accelerate [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration. [DD011](DD011_Contributor_Progression_Model.md)/[DD012](DD012_Design_Document_RFC_Process.md)/[DD015](DD015_AI_Contributor_Model.md) formalize roles, processes, and AI agent workflows. None of these block modeling work, but all of them enable the project to scale beyond a handful of contributors.
+**Phase Rationale:** This phase derisks Phase 1 science. [DD025](DD025_Protein_Foundation_Model_Pipeline.md) runs foundation model cross-validation in parallel with A1, providing priors that accelerate [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration.
+
+> **Note on governance scope:** Contributor progression, design-document RFC process, and AI-contributor model — previously listed here as DD011, DD012, and DD015 — are governance/process documents rather than technical Design Documents. They have been moved to the dedicated [Contributing section](../contributing/index.md) where they live as living governance pages independent of the DD phase structure.
 
 **Scope:**
 
 | DD | Title | Owner | Effort | Purpose |
 |----|-------|-------|--------|---------|
-| [DD011](DD011_Contributor_Progression_Model.md) | Contributor Progression Model | Founder | ~8 hours | Governance — formalizes contributor advancement (L0-L5) |
-| [DD012](DD012_Design_Document_RFC_Process.md) | Design Document RFC Process | Founder | ~8 hours | Governance — formalizes DD review/approval |
-| [DD015](DD015_AI_Contributor_Model.md) | AI-Native Contributor Model | Founder | ~12 hours | Governance — AI agent registration and task pipeline |
 | **[DD025](DD025_Protein_Foundation_Model_Pipeline.md)** | Foundation Model Channel Kinetics | ML/Structural Bio (TBD) | ~20 hours | Derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Phase 1 calibration |
 
 **Key Deliverables:**
 
-1. **AI contributor workflow** ([DD015](DD015_AI_Contributor_Model.md)) — Agent registration system, DD→GitHub issue decomposition, AI pre-review pipeline, human final-approval gates
-2. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
-3. **DD RFC process and template** ([DD012](DD012_Design_Document_RFC_Process.md)) — Documented review lifecycle (Proposed → Accepted → Superseded), DD template with required sections (Integration Contract, Getting Started, Deliverables), GitHub PR-based review workflow
-4. **Contributor progression structure** ([DD011](DD011_Contributor_Progression_Model.md)) — L0–L4 level definitions with explicit advancement criteria, badge taxonomy (6 categories), BadgeList API integration, GitHub team/permission configuration, onboarding checklist
+1. **Channel kinetics predictions** ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for [DD005](DD005_Cell_Type_Differentiation_Strategy.md) integration
+2. **Governance pages** — see [Contributing section](../contributing/index.md): contributor progression, decision process, AI contributors
 
-**Milestone:** 🎉 **"Governance Framework and Foundation Model Cross-Validation"** *(Target: Week 4, late March 2026)*
+**Milestone:** 🎉 **"Foundation Model Cross-Validation"** *(Target: Week 4, late March 2026)*
 
-- **What you see:** Contributor levels documented and enforced via GitHub teams. DD review process operational. AI agents registered and generating issues from DD Integration Contracts. Foundation model cross-validation complete — `channel_kinetics_predictions.csv` ready for Phase 1 integration.
+- **What you see:** Foundation model cross-validation complete — `channel_kinetics_predictions.csv` ready for Phase 1 integration. Governance pages are live in the Contributing section.
 - **Key result:** If [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s naive expression→conductance mapping fails in Phase 1, structure-based predictions from DD025 are ready immediately as a fallback.
 
 **Success Criteria:**
 
 - ✅ DD025 cross-validation: predicted kinetics within <30% relative error of measured values for known channels ([DD025](DD025_Protein_Foundation_Model_Pipeline.md))
-- ✅ AI contributor registry repo exists, issue auto-generation from DD Integration Contracts demonstrated ([DD015](DD015_AI_Contributor_Model.md))
-- ✅ DD template exists with all required sections; at least one DD has completed the RFC review lifecycle ([DD012](DD012_Design_Document_RFC_Process.md))
-- ✅ L0–L4 levels documented, BadgeList group configured with 6 badge categories, GitHub teams match level permissions ([DD011](DD011_Contributor_Progression_Model.md))
+- ✅ Contributing section is live with the three governance pages — see [Contributing](../contributing/index.md)
 
 **Datasets Needed:**
 
@@ -632,7 +627,7 @@ Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_In
 
 **Parallelizable:**
 
-- Phase A2 ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) can proceed in parallel with Phase A1 (no infrastructure dependencies)
+- Phase A2 ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) can proceed in parallel with Phase A1 (no infrastructure dependencies). Governance pages — [contributor progression, decision process, AI contributors](../contributing/index.md) — are maintained continuously in the Contributing section, not phase-gated.
 - Phase 1 [DD014](DD014_Dynamic_Visualization_Architecture.md)/[DD014.1](DD014.1_Visual_Rendering_Specification.md) (viewer + rendering spec) can proceed alongside [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization)
 - Phase 2 [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (environment) and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioception) can proceed in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) and [DD019](DD019_Closed_Loop_Touch_Response.md)
 - Phase 3 organ DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) can be implemented in any order or in parallel
@@ -653,7 +648,7 @@ Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_In
 |-------|----------|-------------------------------|------------------|------------------------------|
 | Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) |
 | Phase A1 | 2 weeks | Mar 2026 (Wks 1-2) | (no change) | +5 DDs ([DD013](DD013_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), [DD028](DD028_Project_Metrics_Dashboard.md)) |
-| Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +4 DDs ([DD011](DD011_Contributor_Progression_Model.md), [DD012](DD012_Design_Document_RFC_Process.md), [DD015](DD015_AI_Contributor_Model.md), [DD025](DD025_Protein_Foundation_Model_Pipeline.md)) |
+| Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +1 DD ([DD025](DD025_Protein_Foundation_Model_Pipeline.md)) + [Contributing](../contributing/index.md) section live |
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (specialized, not added) | +3 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 1, [DD014.1](DD014.1_Visual_Rendering_Specification.md)) |
 | Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +5 DDs ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md), [DD026](DD026_Reservoir_Computing_Validation.md), [DD014](DD014_Dynamic_Visualization_Architecture.md) Phase 2) |
 | Phase 3 | 6 months | Oct 2026-Mar 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) |

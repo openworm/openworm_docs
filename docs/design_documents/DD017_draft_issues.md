@@ -4,7 +4,7 @@
 
 **Generated from:** [DD017: Hybrid Mechanistic-ML Framework](DD017_Hybrid_Mechanistic_ML_Framework.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 3 issues (ai-workable: 2 / human-expert: 1 | L1: 1, L2: 2, L3: 0)
 

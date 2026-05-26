@@ -4,7 +4,7 @@
 
 **Generated from:** [DD020: Connectome Data Access and Dataset Policy](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 23 issues (ai-workable: 18 / human-expert: 5 | L1: 10, L2: 10, L3: 3)
 

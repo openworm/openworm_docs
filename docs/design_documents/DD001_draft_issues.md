@@ -4,7 +4,7 @@
 
 **Generated from:** [DD001: Neural Circuit Architecture](DD001_Neural_Circuit_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](DD015_AI_Contributor_Model.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 9 issues (ai-workable: 6 / human-expert: 3 | L1: 5, L2: 3, L3: 1)
 
