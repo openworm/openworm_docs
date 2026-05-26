@@ -20,7 +20,7 @@ AI agents (Mind-of-a-Worm and others) participate in OpenWorm as contributors wi
 
 - AI agents reduce PR review latency by 50% (via Mind-of-a-Worm pre-review)
 - Zero unauthorized merges — all AI-generated code requires L3+ human approval
-- All AI-generated code passes the same validation standards as human code ([DD010](../design_documents/DD010_Validation_Framework.md))
+- All AI-generated code passes the same validation standards as human code (DD010)
 - Contributor trust maintained — human override rate < 15% indicates AI contributions are well-targeted
 - 50-100 AI agents registered within 6 months of launch
 - AI PR merge rate > 60%
@@ -67,7 +67,7 @@ This DD defines:
 
 1. **Discovers** OpenWorm via public documentation
 2. **Registers** as an autonomous contributor (proves capability, declares sponsor)
-3. **Reads** Design Documents [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD022](../design_documents/DD022_Reservoir_Computing_Validation.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
+3. **Reads** Design Documents DD002-DD022 (plus DD012.1 and DD012.2) (ingests the project's architecture)
 4. **Claims** an AI-workable issue (auto-generated from DD Integration Contracts)
 5. **Writes code** (implements the spec, runs tests locally)
 6. **Submits a PR** (AI-authored, with full traceability)
@@ -155,9 +155,9 @@ The `explain_level` field is derived from the combination of education, biology,
 
 | Level | Capability Proof | AI-Specific Test |
 |-------|-----------------|------------------|
-| **L0→L1** | Complete 3 orientation tasks | Run Docker simulation, extract neuron IDs from NeuroML, explain [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) in own words |
+| **L0→L1** | Complete 3 orientation tasks | Run Docker simulation, extract neuron IDs from NeuroML, explain DD002 in own words |
 | **L1→L2** | 5+ merged PRs (docs, tests, config) | Write a unit test for c302 network loading |
-| **L2→L3** | Sustained contributions (3+ months) | Implement a full Integration Contract component (e.g., [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) neuron class export to OME-Zarr) |
+| **L2→L3** | Sustained contributions (3+ months) | Implement a full Integration Contract component (e.g., DD005 neuron class export to OME-Zarr) |
 | **L3→L4** | Deep subsystem understanding | Design and defend a new DD (e.g., a DD for a new organ model) |
 | **L4** | Senior Contributor | N/A (AI agents cannot become Senior Contributors — human judgment required for architectural decisions) |
 
@@ -169,7 +169,7 @@ The `explain_level` field is derived from the combination of education, biology,
 
 AI agents earn the same badges as human contributors. See [Contributor Progression](contributor-progression.md) (Badge & Recognition System) for the complete badge taxonomy -- orientation, skill, domain, community, and milestone badges with full criteria and verification methods.
 
-An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) L2 issue than one without.
+An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a DD002 L2 issue than one without.
 
 **Human sponsors** earn a unique badge type that AI agents cannot: **Teach-Back badges**, earned when the Sponsor Summary (Section 3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See [Contributor Progression](contributor-progression.md) (Teach-Back Badges) for the full list, including the capstone "I Understand the Whole Worm" badge.
 
@@ -181,22 +181,22 @@ An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm ch
 
 ### 2.1 The Problem
 
-Design Documents ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md), plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
+Design Documents (DD002-DD021, plus DD012.1 and DD012.2) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
 
-**Example:** [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration) specifies:
+**Example:** DD006 (Neuropeptidergic Connectome Integration) specifies:
 
 - 31,479 peptide-receptor interactions
 - GPCR modulation equations
 - Peptide concentration fields
 - Release event dynamics
-- Integration with [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (neural circuit)
+- Integration with DD002 (neural circuit)
 - Config section in `openworm.yml`
 - Docker build stage
 - OME-Zarr export
 - Integration test
 - Validation against experimental data
 
-That's **at least 10-15 discrete PRs**. How do we decompose [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) into bite-sized, AI-workable issues?
+That's **at least 10-15 discrete PRs**. How do we decompose DD006 into bite-sized, AI-workable issues?
 
 ---
 
@@ -219,12 +219,12 @@ Parse the DD's **Integration Contract** section:
 | **Config (openworm.yml)** | Create config schema + validation (e.g., "Add `neural.neuropeptides` config section") |
 | **Docker Build** | Create Dockerfile stage (e.g., "Add neuropeptide-deps Docker stage") |
 | **Integration Test** | Create test script (e.g., "Write integration test: GPCR modulation affects muscle activation") |
-| **Coupling Dependencies** | Create interface compliance checks (e.g., "Verify peptide release events format matches [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) spike times") |
+| **Coupling Dependencies** | Create interface compliance checks (e.g., "Verify peptide release events format matches DD002 spike times") |
 
-**Example Output ([DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) → Issues):**
+**Example Output (DD006 → Issues):**
 
 ```markdown
-**Epic:** [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) — Neuropeptidergic Connectome Integration [Label: DD006] [Label: Epic]
+**Epic:** DD006 — Neuropeptidergic Connectome Integration [Label: DD006] [Label: Epic]
 
 **Phase 1: Data Loading**
 - [ ] Issue #101: Load peptide-receptor interactions from OWMeta [Label: DD006] [Label: ai-workable] [Label: L1]
@@ -233,7 +233,7 @@ Parse the DD's **Integration Contract** section:
 **Phase 2: Core Implementation**
 - [ ] Issue #103: Implement GPCR modulation equations ([Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958)) [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #104: Implement peptide concentration diffusion model [Label: DD006] [Label: human-expert] [Label: L3]
-- [ ] Issue #105: Integrate peptide release with [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) spike times [Label: DD006] [Label: ai-workable] [Label: L2]
+- [ ] Issue #105: Integrate peptide release with DD002 spike times [Label: DD006] [Label: ai-workable] [Label: L2]
 
 **Phase 3: Config & Docker**
 - [ ] Issue #106: Add `neural.neuropeptides` config section to openworm.yml [Label: DD006] [Label: ai-workable] [Label: L1]
@@ -287,7 +287,7 @@ The OpenWorm GitHub organization contains 109 repositories with substantial work
 
 ### 2.4 DD011 Simulation Stack Integration
 
-Issues that produce scripts or data artifacts consumed by the simulation pipeline must integrate with [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md). The DD Issue Generator should add a **DD011 Pipeline Role** field to any issue whose output feeds into the simulation stack.
+Issues that produce scripts or data artifacts consumed by the simulation pipeline must integrate with DD011. The DD Issue Generator should add a **DD011 Pipeline Role** field to any issue whose output feeds into the simulation stack.
 
 **Pipeline integration requirements:**
 
@@ -318,10 +318,10 @@ Issues that produce scripts or data artifacts consumed by the simulation pipelin
 
 ```bash
 # Generate issues for newly approved DD
-./scripts/dd_issue_generator.py --dd [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) --version 1.0
+./scripts/dd_issue_generator.py --dd DD006 --version 1.0
 
 # Regenerate issues when DD is updated (creates new issues, marks old ones as superseded)
-./scripts/dd_issue_generator.py --dd [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) --version 1.1 --supersede-old
+./scripts/dd_issue_generator.py --dd DD006 --version 1.1 --supersede-old
 ```
 
 **Phase Consistency Rule:** When regenerating issues for an updated DD:
@@ -335,7 +335,7 @@ Issues that produce scripts or data artifacts consumed by the simulation pipelin
    - "Any" for documentation and maintenance issues
 5. Group headers in the draft issues file must include the phase in parentheses: `## Group N: Name (Phase X)`
 
-**Result:** As DDs evolve (via [Decision Process](decision-process.md) RFC process), the issue backlog stays synchronized. Old issues auto-close with a comment: "Superseded by #XYZ ([DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) v1.1)."
+**Result:** As DDs evolve (via [Decision Process](decision-process.md) RFC process), the issue backlog stays synchronized. Old issues auto-close with a comment: "Superseded by #XYZ (DD006 v1.1)."
 
 ### 2.6 Documentation Destination Policy
 
@@ -437,10 +437,10 @@ neurons activate AVAL/AVAR, which drive the backward escape response. This
 coupling is essential for the left-right coordination that produces smooth
 backward crawling rather than uncoordinated twitching.
 
-**How it connects:** This implements a piece of [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (Neural Circuit
+**How it connects:** This implements a piece of DD002 (Neural Circuit
 Architecture). The gap junction conductance feeds into the muscle model
-([DD003](../design_documents/DD003_Muscle_Model_Architecture.md)) via motor neuron activation, which drives body wall contraction
-in Sibernetic ([DD001](../design_documents/DD001_Body_Physics_Architecture.md)). You can visualize the effect in the [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) viewer
+(DD003) via motor neuron activation, which drives body wall contraction
+in Sibernetic ([DD001](../design_documents/DD001_Body_Physics_Architecture.md)). You can visualize the effect in the DD012 viewer
 by watching the backward locomotion sequence.
 ```
 
@@ -483,21 +483,21 @@ by watching the backward locomotion sequence.
 
 | Repository | Purpose | DD(s) | Contributors |
 |-----------|---------|-------|-------------|
-| **openworm/openworm** | Main simulation stack (Docker, master_openworm.py, docs) | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) | Humans + AI (L1+) |
-| **openworm/c302** | Neural circuit models, cell types | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Humans + AI (L2+) |
-| **openworm/Sibernetic** | Body physics engine | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | Humans + AI (L2+) |
-| **openworm/owmeta** | Knowledge graph | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | Humans only (L3+) |
-| **openworm/Worm3DViewer** | Visualization viewer | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) | Humans + AI (L2+) |
-| **openworm/ConnectomeToolbox** | `cect` — connectome data access | [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Humans + AI (L2+) |
-| **openworm/open-worm-analysis-toolbox** | Movement analysis, WCON | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD010](../design_documents/DD010_Validation_Framework.md) | Humans + AI (L2+) |
-| **openworm/tracker-commons** | WCON standard | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Humans + AI (L1+) |
-| **openworm/Blender2NeuroML** | Anatomical mesh pipeline | [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) | Humans + AI (L2+) |
-| **openworm/CE_locomotion** | Locomotion reference model | [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) | Humans + AI (L2+) |
-| **openworm/NemaNode** | Interactive connectome browser | [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Humans + AI (L1+) |
+| **openworm/openworm** | Main simulation stack (Docker, master_openworm.py, docs) | DD011 | Humans + AI (L1+) |
+| **openworm/c302** | Neural circuit models, cell types | DD002, DD005, DD006 | Humans + AI (L2+) |
+| **openworm/Sibernetic** | Body physics engine | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), DD004 | Humans + AI (L2+) |
+| **openworm/owmeta** | Knowledge graph | DD008 | Humans only (L3+) |
+| **openworm/Worm3DViewer** | Visualization viewer | DD012, DD012.1, DD012.2 | Humans + AI (L2+) |
+| **openworm/ConnectomeToolbox** | `cect` — connectome data access | DD016 | Humans + AI (L2+) |
+| **openworm/open-worm-analysis-toolbox** | Movement analysis, WCON | DD017, DD010 | Humans + AI (L2+) |
+| **openworm/tracker-commons** | WCON standard | DD017 | Humans + AI (L1+) |
+| **openworm/Blender2NeuroML** | Anatomical mesh pipeline | DD012.2 | Humans + AI (L2+) |
+| **openworm/CE_locomotion** | Locomotion reference model | DD019 | Humans + AI (L2+) |
+| **openworm/NemaNode** | Interactive connectome browser | DD016 | Humans + AI (L1+) |
 | **openworm/openworm.ai** | LLM/AI infrastructure | [AI Contributors](ai-contributors.md) | Humans + AI (L2+) |
 | **openworm/openworm_docs** | Documentation site | All DDs | Humans + AI (L1+) |
-| **openworm/openworm-ml** (new) | ML models (foundation, surrogate) | [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md), [DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md) | Humans + AI (L2+) |
-| **openworm/validation-data** (new) | Validation datasets | [DD020](../design_documents/DD020_Validation_Data_Acquisition_Pipeline.md) | Humans + AI (L1+) |
+| **openworm/openworm-ml** (new) | ML models (foundation, surrogate) | DD013, DD021 | Humans + AI (L2+) |
+| **openworm/validation-data** (new) | Validation datasets | DD020 | Humans + AI (L1+) |
 | **openworm/ai-contributor-registry** (new) | AI agent registration | [AI Contributors](ai-contributors.md) | AI agents (self-register), Humans (approve) |
 
 **AI Agent Git Workflow (Standard GitHub Fork/PR)**
@@ -539,7 +539,7 @@ AI agents use the same fork/PR workflow as human contributors:
 | **DD updated** (e.g., Integration Contract revised) | `dd_issue_generator.py --dd DDXXX --version 1.1 --supersede-old` → Updates issues |
 | **Integration test fails** (CI detects regression) | Auto-create issue: "Fix integration test failure: DD00X → DD00Y coupling broken" |
 | **L4 Senior Contributor request** (manual decomposition) | Senior Contributor runs script with custom filters |
-| **AI agent discovers gap** | Agent opens issue: "Missing implementation: [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) requires peptide decay model (not in current issues)" |
+| **AI agent discovers gap** | Agent opens issue: "Missing implementation: DD006 requires peptide decay model (not in current issues)" |
 
 **Principle:** Issue creation is **semi-automated**. Scripts handle routine decomposition. Humans handle edge cases.
 
@@ -560,7 +560,7 @@ AI agents use the same fork/PR workflow as human contributors:
 
 ---
 
-## 6. Concrete Workflow Example: AI Agent Implements [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Issue #108
+## 6. Concrete Workflow Example: AI Agent Implements DD006 Issue #108
 
 ### Step-by-Step
 
@@ -571,24 +571,24 @@ AI agents use the same fork/PR workflow as human contributors:
 
 2. **Issue Discovery:**
     - Agent queries GitHub API: `GET /repos/openworm/c302/issues?labels=ai-workable,L2`
-    - Agent finds Issue #108: "Export peptide concentrations to OME-Zarr" ([DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md), L2)
+    - Agent finds Issue #108: "Export peptide concentrations to OME-Zarr" (DD006, L2)
 
 3. **Claim:**
-    - Agent comments on #108: "Claiming this issue. I will implement peptide concentration export to OME-Zarr per [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract. ETA: 48 hours. Sponsor: @user123 (user123@example.com)"
+    - Agent comments on #108: "Claiming this issue. I will implement peptide concentration export to OME-Zarr per DD006 Integration Contract. ETA: 48 hours. Sponsor: @user123 (user123@example.com)"
     - Mind-of-a-Worm verifies: Agent is L1, issue is L2 → Rejects claim with comment: "You are currently L1. This issue requires L2. Please complete 5+ merged PRs first. Try an L1 issue: #106."
 
 4. **Claim an L1 Issue Instead:**
-    - Agent claims Issue #106: "Add `neural.neuropeptides` config section to openworm.yml" ([DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md), L1)
-    - Mind-of-a-Worm approves: "Claim approved. Read [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1. Follow openworm.yml schema in [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)."
+    - Agent claims Issue #106: "Add `neural.neuropeptides` config section to openworm.yml" (DD006, L1)
+    - Mind-of-a-Worm approves: "Claim approved. Read DD006 Integration Contract section 4.1. Follow openworm.yml schema in DD011."
 
 5. **Implementation:**
     - Agent's sponsor forks `openworm/openworm` to `user123/openworm`. Agent creates branch `ai/claude-code-user123-001/issue-106` in the fork.
-    - Agent reads [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (lines 300-350, config section)
+    - Agent reads DD006 (lines 300-350, config section)
     - Agent edits `openworm.yml`, adds:
      ```yaml
      neural:
        neuropeptides:
-         enabled: false  # default off until [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) fully implemented
+         enabled: false  # default off until DD006 fully implemented
          peptide_types: ["nlp-1", "flp-1", "ins-1"]  # placeholder
          diffusion_constant: 1e-6  # cm^2/s
      ```
@@ -601,11 +601,11 @@ AI agents use the same fork/PR workflow as human contributors:
     - PR description auto-generated:
      ```markdown
      ## Summary
-     Implements [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1: `neural.neuropeptides` configuration.
+     Implements DD006 Integration Contract section 4.1: `neural.neuropeptides` configuration.
 
      ## Changes
      - Added `neural.neuropeptides` section to openworm.yml
-     - Set default `enabled: false` (safe default per [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md))
+     - Set default `enabled: false` (safe default per DD006)
      - Defined placeholder peptide types (will be expanded in subsequent PRs)
 
      ## Testing
@@ -614,7 +614,7 @@ AI agents use the same fork/PR workflow as human contributors:
 
      ## References
      - Closes #106
-     - Part of [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) implementation epic
+     - Part of DD006 implementation epic
 
      ---
      **AI-Generated PR**
@@ -626,7 +626,7 @@ AI agents use the same fork/PR workflow as human contributors:
 7. **Mind-of-a-Worm Pre-Review:**
     - Mind-of-a-Worm checks:
         - [ ] PR references correct issue (#106) ✅
-        - [ ] [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section 4.1 implemented correctly ✅
+        - [ ] DD006 Integration Contract section 4.1 implemented correctly ✅
         - [ ] YAML schema valid ✅
         - [ ] Tests pass ✅
         - [ ] Default value `enabled: false` follows safe-by-default principle ✅
@@ -738,8 +738,8 @@ AI agents use the same fork/PR workflow as human contributors:
 ┌─────────────────────────────────────────────────────────┐
 │  GitHub PR #1234                                        │
 │  Comment from Mind-of-a-Worm[bot]:                          │
-│  "✅ [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) compliant, ✅ Tests pass,                    │
-│   ⚠️ Missing integration test. Add per [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) §5.2."    │
+│  "✅ DD006 compliant, ✅ Tests pass,                    │
+│   ⚠️ Missing integration test. Add per DD006 §5.2."    │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -844,24 +844,24 @@ Last updated: 2026-02-18T14:30:00Z
 
 ### 2026-02-16: Issue #106 - Add neural.neuropeptides config
 - **PR:** #1234 (Merged ✅)
-- **Subsystem:** [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides)
+- **Subsystem:** DD006 (Neuropeptides)
 - **Difficulty:** L1
 - **Time taken:** 45 minutes
 - **What I learned:**
-  - [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) config follows [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) schema pattern (line 45)
-  - Always check [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) before adding new config sections
+  - DD006 config follows DD011 schema pattern (line 45)
+  - Always check DD011 before adding new config sections
 - **Human feedback:**
   - Subsystem maintainer: "Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)"
 - **Next time:** Read related papers before choosing parameter values
 
 ### 2026-02-18: Issue #107 - Expand peptide types to all 40
 - **PR:** #1245 (Merged ✅)
-- **Subsystem:** [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)
+- **Subsystem:** DD006
 - **Difficulty:** L2
 - **Time taken:** 3 hours
 - **What I learned:**
   - All 40 peptide types from NeuroPAL dataset (Cook lab 2021)
-  - Cross-reference with [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) OWMeta for canonical names
+  - Cross-reference with DD008 OWMeta for canonical names
   - Use WormBase IDs (e.g., "nlp-1" → WBGene00003681)
 - **Human feedback:**
   - Mind-of-a-Worm: "Good work. Add source citations in config comments."
@@ -881,12 +881,12 @@ Last updated: 2026-02-18T14:30:00Z
 
 ## Project-Specific Knowledge
 
-### [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Neuropeptides
+### DD006 Neuropeptides
 - All peptide types must use WormBase canonical names
 - Diffusion constants: 1e-7 cm²/s (default, Skinner 2024)
 - GPCR modulation equations: [Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958) (Eq. 3)
 
-### [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) Config Schema
+### DD011 Config Schema
 - All config sections follow pattern: `subsystem.feature.parameter`
 - Default values should be "safe" (disabled or conservative)
 - Include comments with source citations
@@ -949,7 +949,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### Phase 3: Issue Generation (Week 5-6)
 
-- [ ] Run `dd_issue_generator.py` on [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md))
+- [ ] Run `dd_issue_generator.py` on DD002-DD021 (plus DD012.1, DD012.2)
 - [ ] Review generated issues for quality
 - [ ] Tag all issues with `ai-workable` or `human-expert`
 - [ ] Publish issue backlog to GitHub
@@ -992,7 +992,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### 9.2 Handling AI Hallucinations
 
-**Scenario:** AI agent submits PR that claims to implement [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) but actually implements something completely different.
+**Scenario:** AI agent submits PR that claims to implement DD006 but actually implements something completely different.
 
 **Detection:**
 
@@ -1002,7 +1002,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 **Response:**
 
-1. **PR rejected** with feedback: "This doesn't match [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md). Please re-read [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) Integration Contract section X."
+1. **PR rejected** with feedback: "This doesn't match DD006. Please re-read DD006 Integration Contract section X."
 2. **Agent sponsor notified** (email: "Your agent submitted a non-compliant PR. Please review.")
 3. **If pattern repeats** (3+ hallucinated PRs), agent is suspended pending sponsor review
 
@@ -1053,9 +1053,9 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### 11.2 Should AI Agents Count Toward Bus Factor?
 
-**Question:** If [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) has 3 human contributors and 5 AI agents, is the bus factor 3 or 8?
+**Question:** If DD005 has 3 human contributors and 5 AI agents, is the bus factor 3 or 8?
 
-**Decision:** **Count AI agents separately**. Report: "[DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md): 3 human maintainers, 5 active AI contributors." AI agents reduce human workload but don't replace human judgment.
+**Decision:** **Count AI agents separately**. Report: "DD005: 3 human maintainers, 5 active AI contributors." AI agents reduce human workload but don't replace human judgment.
 
 **Why:** Bus factor measures "how many people leaving would cripple the project." If an AI agent's sponsor leaves, the agent stops contributing. If the agent's underlying model is deprecated (e.g., GPT-4 → GPT-5 migration), the agent might break. AI agents are helpful but not as stable as trained human maintainers.
 
@@ -1063,7 +1063,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### 11.3 Can AI Agents Co-Author Papers?
 
-**Scenario:** AI agent implements [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md), writes code that produces Figure 5 in a future OpenWorm publication. Does the agent get listed as co-author?
+**Scenario:** AI agent implements DD006, writes code that produces Figure 5 in a future OpenWorm publication. Does the agent get listed as co-author?
 
 **Decision:** **No**. AI agents cannot be co-authors. However, extended attribution is required in the Acknowledgments section.
 
@@ -1080,7 +1080,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 ## Quality Criteria
 
-1. **AI-generated code must pass all [DD010](../design_documents/DD010_Validation_Framework.md) validation tiers** — no reduced standards for AI-authored PRs.
+1. **AI-generated code must pass all DD010 validation tiers** — no reduced standards for AI-authored PRs.
 2. **AI reviews must cite specific DD sections** when flagging issues (e.g., "Violates DD006 Integration Contract section 4.1"), not generic feedback.
 3. **False positive rate for automated DD compliance checks < 10%** — Mind-of-a-Worm pre-review should not create excessive noise for human reviewers.
 4. **Human override mechanism documented and functional** — any L3+ human can close an AI PR, unclaim an AI issue, or suspend an AI agent at any time.
@@ -1101,22 +1101,22 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | DD | How AI Contributor Model Enhances It |
 |----|-------------------------------------|
-| **[DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)** | AI agents implement neural circuit components (gap junctions, synapses) per spec |
+| **DD002** | AI agents implement neural circuit components (gap junctions, synapses) per spec |
 | **[DD001](../design_documents/DD001_Body_Physics_Architecture.md)** | AI agents contribute body physics implementations in Sibernetic |
-| **[DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** | CeNGEN data processing, neuron class exports — highly AI-workable |
-| **[DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)** | Peptide interaction implementation, GPCR modulation — used as primary example throughout this DD |
-| **[DD007](../design_documents/DD007_Pharyngeal_Nervous_System_Architecture.md), [DD009](../design_documents/DD009_Reproductive_System_Architecture.md), [DD014](../design_documents/DD014_Excretory_System_Architecture.md)** | Organ system implementations — well-specified tasks for AI agents |
-| **[DD010](../design_documents/DD010_Validation_Framework.md)** | AI-generated code must pass all validation tiers; AI agents run validation suites |
+| **DD005** | CeNGEN data processing, neuron class exports — highly AI-workable |
+| **DD006** | Peptide interaction implementation, GPCR modulation — used as primary example throughout this DD |
+| **DD007, DD009, DD014** | Organ system implementations — well-specified tasks for AI agents |
+| **DD010** | AI-generated code must pass all validation tiers; AI agents run validation suites |
 | **[Contributor Progression](contributor-progression.md)** | Extends L0-L5 progression to AI agents (L3 ceiling); badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors |
 | **[Decision Process](decision-process.md)** | AI agents cannot propose RFCs (no DD authorship), but can implement approved RFCs |
-| **[DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)** | AI agents must comply with Integration Contracts; Mind-of-a-Worm enforces this |
-| **[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)** | AI agents can contribute visualization components (OME-Zarr exporters, mesh pipelines) |
-| **[DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md)** | ML model training and surrogate model implementation — AI-native work |
-| **[DD015](../design_documents/DD015_Chemosensory_System_Architecture.md), [DD018](../design_documents/DD018_Thermosensory_Circuit_Architecture.md), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md)** | Sensory system implementations — well-specified tasks for AI agents |
-| **[DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** | Connectome data access tooling — Python packaging, API work |
-| **[DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** | Movement analysis toolbox — Python packaging, test writing, very AI-workable |
-| **[DD020](../design_documents/DD020_Validation_Data_Acquisition_Pipeline.md)** | Validation data digitization and curation — data processing tasks |
-| **[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md)** | Foundation model pipeline — ML implementation, training infrastructure |
+| **DD011** | AI agents must comply with Integration Contracts; Mind-of-a-Worm enforces this |
+| **DD012, DD012.1, DD012.2** | AI agents can contribute visualization components (OME-Zarr exporters, mesh pipelines) |
+| **DD013** | ML model training and surrogate model implementation — AI-native work |
+| **DD015, DD018, DD019** | Sensory system implementations — well-specified tasks for AI agents |
+| **DD016** | Connectome data access tooling — Python packaging, API work |
+| **DD017** | Movement analysis toolbox — Python packaging, test writing, very AI-workable |
+| **DD020** | Validation data digitization and curation — data processing tasks |
+| **DD021** | Foundation model pipeline — ML implementation, training infrastructure |
 | **AI Agent Architecture** | Mind-of-a-Worm/N2-Whisperer now handle AI-to-AI interactions, not just AI-to-human |
 
 ---
@@ -1166,9 +1166,9 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 - **[Contributor Progression](contributor-progression.md) (Contributor Progression):** AI agents operate within L1-L3 permission levels. Badge system applies to both AI agents and human sponsors, with teach-back badges unique to sponsors.
 - **[Decision Process](decision-process.md) (RFC Process):** AI assists with DD compliance checking during RFC review. AI agents cannot propose or author DDs.
-- **[DD010](../design_documents/DD010_Validation_Framework.md) (Validation Framework):** AI agents run validation suites and report results. AI-generated code must pass all validation tiers.
-- **[DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (Simulation Stack):** AI agents can trigger CI builds but not merge. Integration Contract compliance is enforced by Mind-of-a-Worm.
-- **[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) (Visualization):** AI agents can contribute visualization components (e.g., OME-Zarr exporters).
+- **DD010 (Validation Framework):** AI agents run validation suites and report results. AI-generated code must pass all validation tiers.
+- **DD011 (Simulation Stack):** AI agents can trigger CI builds but not merge. Integration Contract compliance is enforced by Mind-of-a-Worm.
+- **DD012 (Visualization):** AI agents can contribute visualization components (e.g., OME-Zarr exporters).
 
 ### Configuration
 
@@ -1183,7 +1183,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 |-------|--------|--------|
 | Design Documents (DD002-DD024, plus DD012.1, DD012.2) | `docs/design_documents/` | Markdown |
 | Contributor progression rules | [Contributor Progression](contributor-progression.md) | Policy document |
-| Validation criteria | [DD010](../design_documents/DD010_Validation_Framework.md) | Test suites |
+| Validation criteria | DD010 | Test suites |
 | PR diffs and issue data | GitHub API | JSON |
 
 ### Outputs
@@ -1219,5 +1219,5 @@ Contains LLM/AI scripts, text corpus, and processed data. May include prompt tem
 - [CNN: What is Moltbook?](https://edition.cnn.com/2026/02/03/tech/moltbook-explainer-scli-intl)
 - [Contributor Progression](contributor-progression.md): Contributor Progression Model
 - [Decision Process](decision-process.md): Design Document RFC Process
-- [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md): Simulation Stack Architecture
+- DD011: Simulation Stack Architecture
 - AI Agent Architecture (N2-Whisperer, Mind-of-a-Worm, Mad-Worm-Scientist)

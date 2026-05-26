@@ -4,13 +4,13 @@
 - **Author:** Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity)
+- **Related:** DD002 (Neural Circuit), DD003 (Muscle Model), DD004 (Mechanical Cell Identity)
 
 ---
 
 ## TL;DR
 
-[PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD003](DD003_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
+[PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from DD003 calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
 
 **Architecturally differentiable.** The native Metal substrate (`src/metal_diff/`) implements every forward kernel with a paired analytic backward kernel, validated against finite-difference. End-to-end reverse-mode differentiation through multi-step XPBD integration produces gradients on initial conditions and all physical parameters (rest density, spring stiffness, viscosity, density-constraint compliance, floor restitution, membrane mechanics). This is a structural property of the substrate — not an optional layer — and is the design requirement that the in-progress CUDA port inherits.
 
@@ -23,19 +23,19 @@
 | **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
-| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
+| **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
 | **Validation methodology** | Every physics change in Sibernetic must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. Mind-of-a-Worm enforces this on every PR via the [Validation Methodology](#validation-methodology) checklist. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
-| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
+| **Visualize** | DD012 `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
 | **CI gate** | Tier 3 kinematic validation + physical stability (no particle escape) blocks merge |
 ---
 
 ## Goal & Success Criteria
 
-| Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
+| Criterion | Target | DD010 Tier |
 |-----------|--------|------------|
 | **Primary:** Kinematic metrics | Within ±15% of Schafer lab baseline | Tier 3 (blocking) |
 | **Secondary:** Physical stability | No particle escape, no NaN, no divergence over 10 s simulation | Tier 3 (blocking) |
@@ -43,7 +43,7 @@
 
 **Before:** No fluid-structure interaction — rigid body or mass-spring models that cannot capture pseudocoelomic pressure or hydrostatic skeleton mechanics.
 
-**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from [DD003](DD003_Muscle_Model_Architecture.md).
+**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from DD003.
 
 ---
 
@@ -82,7 +82,7 @@
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` (DD011 simulation stack)
 - OR: [OpenCL](https://www.khronos.org/opencl/) SDK (AMD or Intel), CMake, C++ compiler
 - Optional: `pip install taichi` for [Taichi](https://www.taichi-lang.org/) Metal/CUDA backends
 
@@ -159,7 +159,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `body/positions/` — SPH particles colored by type.
+**DD012 viewer layer:** `body/positions/` — SPH particles colored by type.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -256,7 +256,7 @@ Bonds are created during initialization based on spatial proximity. Particles wi
 
 **Muscle cell mapping (Palyanov et al. 2018):** The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing **individual muscle cells** with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.
 
-Muscle forces from the calcium-force coupling ([DD003](DD003_Muscle_Model_Architecture.md)) are injected by modulating elastic bond stiffness:
+Muscle forces from the calcium-force coupling (DD003) are injected by modulating elastic bond stiffness:
 
 ```
 k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
@@ -295,7 +295,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 
 However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of *C. elegans* locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.
 
-**OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)'s learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
+**OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to DD013's learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
 
 Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch`.
 
@@ -341,10 +341,10 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 
 - 2D only — no dorsal-ventral body mechanics, omega turns, or body roll
 - No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes
-- No internal body volume — cannot support [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organs
-- No fluid-structure interaction — [DD015](DD015_Closed_Loop_Touch_Response.md) touch mechanotransduction requires 3D particle strain
+- No internal body volume — cannot support DD004 (cell identity), DD012.2 (mesh deformation), or Phase 3+ organs
+- No fluid-structure interaction — DD015 touch mechanotransduction requires 3D particle strain
 
-**Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
+**Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating DD013 surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
 
 ---
 
@@ -575,7 +575,7 @@ The matching cuda substrate (when it lands per `src/cuda/README.md`) must includ
 
 ### This Design Document Does NOT Cover:
 
-1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (Palyanov et al. 2018, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
+1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (Palyanov et al. 2018, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
 
 2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.
 
@@ -752,7 +752,7 @@ The native Metal substrate is **architecturally differentiable**. This is not a 
 
 ### Why Differentiability Is a Substrate Property, Not a Framework Layer
 
-Earlier OpenWorm planning ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)) treated "differentiable simulation" as a future framework component — a PyTorch reimplementation living in a separate `openworm-ml/differentiable/` repo, scheduled for Phase 3. The native-port work overtook that plan: as part of building hand-written Metal kernels, the implementers chose to derive analytic backwards alongside each forward kernel rather than rely on an autodiff layer. This produces three structural advantages over the framework-layer approach:
+Earlier OpenWorm planning (DD013) treated "differentiable simulation" as a future framework component — a PyTorch reimplementation living in a separate `openworm-ml/differentiable/` repo, scheduled for Phase 3. The native-port work overtook that plan: as part of building hand-written Metal kernels, the implementers chose to derive analytic backwards alongside each forward kernel rather than rely on an autodiff layer. This produces three structural advantages over the framework-layer approach:
 
 1. **No re-implementation drift.** A separate PyTorch reimplementation would have to track the OpenCL reference's behavior over time; an in-substrate backward is the same code path as the forward.
 2. **GPU-native gradients.** Backward kernels run on the same Metal command queue as the forwards — no host round-trip, no autodiff graph overhead.
@@ -811,10 +811,10 @@ SGD harness lives at `src/metal_diff/sgd_*.py` (8 scripts total, see repo). The 
 
 Because the substrate exposes a differentiable contract, downstream subsystems that couple to body physics can now ask gradient-based questions of it:
 
-- **Neural ↔ body coupling ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md))** — muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be jointly optimized against kinematic targets. The muscle force injection path (Sibernetic's modulation of elastic bond stiffness via `k_muscle(t) = k_baseline × (1 + activation(t) × strength_multiplier)`) is differentiable through `xpbd_full_bwd`; activation traces can be backpropagated to neural circuit parameters when those are also expressed in a differentiable form.
-- **Validation framework ([DD010](DD010_Validation_Framework.md))** — kinematic-metric mismatches against Schafer-lab baselines (speed, wavelength, frequency, gait) can directly drive parameter updates rather than requiring manual sweeps. Tier 3 validation becomes a loss function the substrate can be optimized against.
-- **Simulation stack ([DD011](DD011_Simulation_Stack_Architecture.md))** — the `body.backend: metal-native` configuration should expose a differentiable interface alongside the forward-only interface, so other subsystems can opt into gradient-based parameter fitting via `openworm.yml`.
-- **Hybrid ML framework ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md))** — now narrows to its remaining scope: neural surrogates for SPH (1000× speedup target) and learned sensory transduction. The "differentiable simulation backend" component of DD013 is delivered here, in DD001.
+- **Neural ↔ body coupling (DD002, DD003)** — muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be jointly optimized against kinematic targets. The muscle force injection path (Sibernetic's modulation of elastic bond stiffness via `k_muscle(t) = k_baseline × (1 + activation(t) × strength_multiplier)`) is differentiable through `xpbd_full_bwd`; activation traces can be backpropagated to neural circuit parameters when those are also expressed in a differentiable form.
+- **Validation framework (DD010)** — kinematic-metric mismatches against Schafer-lab baselines (speed, wavelength, frequency, gait) can directly drive parameter updates rather than requiring manual sweeps. Tier 3 validation becomes a loss function the substrate can be optimized against.
+- **Simulation stack (DD011)** — the `body.backend: metal-native` configuration should expose a differentiable interface alongside the forward-only interface, so other subsystems can opt into gradient-based parameter fitting via `openworm.yml`.
+- **Hybrid ML framework (DD013)** — now narrows to its remaining scope: neural surrogates for SPH (1000× speedup target) and learned sensory transduction. The "differentiable simulation backend" component of DD013 is delivered here, in DD001.
 
 ### What's Not (Yet) Differentiable
 
@@ -867,20 +867,20 @@ For a worked example with SGD harness, see `src/metal_diff/sgd_true.py` (the can
 
 | Input | Source DD | Variable | Format | Units | Timestep |
 |-------|----------|----------|--------|-------|----------|
-| Muscle activation coefficients | [DD003](DD003_Muscle_Model_Architecture.md) (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
-| Particle initialization geometry | [DD004](DD004_Mechanical_Cell_Identity.md) (when cell_identity enabled) | Per-particle position, type, cell_id | Binary or CSV particle file | µm (positions), enum (type) | One-time at sim start |
+| Muscle activation coefficients | DD003 (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
+| Particle initialization geometry | DD004 (when cell_identity enabled) | Per-particle position, type, cell_id | Binary or CSV particle file | µm (positions), enum (type) | One-time at sim start |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Particle position time series | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | All particle positions per output frame | Binary state dump or WCON trajectory | µm |
-| Rendered frames / video | [DD011](DD011_Simulation_Stack_Architecture.md) (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
-| Body deformation state | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx, if Option B) | Anterior attachment point displacement | Shared memory or file | µm |
-| Particle positions (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
-| Particle types (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
-| Surface mesh (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
-| **Parameter gradients** (native substrates only) | [DD002](DD002_Neural_Circuit_Architecture.md) (joint neural↔body fitting), [DD003](DD003_Muscle_Model_Architecture.md) (muscle parameter fitting), [DD010](DD010_Validation_Framework.md) (gradient-based validation loop) | `∂L/∂(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)` via `xpbd_full_bwd` | Binary float32 buffers per parameter | mixed (per-particle position grads, scalar parameter grads) |
+| Particle position time series | DD010 (Tier 3 validation) | All particle positions per output frame | Binary state dump or WCON trajectory | µm |
+| Rendered frames / video | DD011 (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
+| Body deformation state | DD007 (pharynx, if Option B) | Anterior attachment point displacement | Shared memory or file | µm |
+| Particle positions (for viewer) | **DD012** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
+| Particle types (for viewer) | **DD012** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
+| Surface mesh (for viewer) | **DD012** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
+| **Parameter gradients** (native substrates only) | DD002 (joint neural↔body fitting), DD003 (muscle parameter fitting), DD010 (gradient-based validation loop) | `∂L/∂(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)` via `xpbd_full_bwd` | Binary float32 buffers per parameter | mixed (per-particle position grads, scalar parameter grads) |
 
 ### Repository & Packaging
 
@@ -901,7 +901,7 @@ body:
   backend: opencl                    # opencl, metal-native, cuda-native, pytorch
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
-  cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): extend to all tissue types. "false" = bulk elastic only.
+  cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 (DD004): extend to all tissue types. "false" = bulk elastic only.
   timestep: 0.00002                  # seconds
 ```
 
@@ -912,7 +912,7 @@ body:
 | `body.backend` | `opencl` | `opencl`, `metal-native`, `cuda-native`, `pytorch` | Compute backend. `metal-native` targets Apple Silicon via hand-written Metal shaders; `cuda-native` targets NVIDIA via hand-written CUDA kernels. The earlier `taichi-metal` / `taichi-cuda` options are superseded by the native ports. |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
-| `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4). `false` = bulk elastic only. |
+| `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types (DD004, Phase 4). `false` = bulk elastic only. |
 | `body.timestep` | `0.00002` | Float (seconds) | Simulation timestep |
 
 ### How to Test (Contributor Workflow)
@@ -939,7 +939,7 @@ docker compose run validate
 - [ ] Tested on at least two backends if core SPH algorithms changed
 - [ ] No particle escape (all positions within bounding box)
 
-### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize (DD012 Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -949,7 +949,7 @@ docker compose run validate
 
 ### Backend-Config Translation
 
-Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator ([DD011](DD011_Simulation_Stack_Architecture.md)) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
+Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator (DD011) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
 
 ```python
 # master_openworm.py (pseudocode)
@@ -965,15 +965,15 @@ def write_sibernetic_config(openworm_config):
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Muscle activation format | [DD003](DD003_Muscle_Model_Architecture.md) | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
-| `sibernetic_c302.py` script | [DD002](DD002_Neural_Circuit_Architecture.md)/DD003 | This script bridges neural→body; changes to it affect coupling timing |
-| Cell boundary data | [DD004](DD004_Mechanical_Cell_Identity.md) | If particle initialization changes (cell-tagged particles), body geometry changes |
+| Muscle activation format | DD003 | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
+| `sibernetic_c302.py` script | DD002/DD003 | This script bridges neural→body; changes to it affect coupling timing |
+| Cell boundary data | DD004 | If particle initialization changes (cell-tagged particles), body geometry changes |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Movement validation | [DD010](DD010_Validation_Framework.md) | If particle output format changes, validation toolbox can't read trajectory data |
-| Mechanical cell identity | [DD004](DD004_Mechanical_Cell_Identity.md) | If particle struct changes (adding/removing fields), [DD004](DD004_Mechanical_Cell_Identity.md) initialization must match |
-| Pharynx attachment | [DD007](DD007_Pharyngeal_System_Architecture.md) | If body geometry changes at anterior, pharynx coupling point shifts |
+| Movement validation | DD010 | If particle output format changes, validation toolbox can't read trajectory data |
+| Mechanical cell identity | DD004 | If particle struct changes (adding/removing fields), DD004 initialization must match |
+| Pharynx attachment | DD007 | If body geometry changes at anterior, pharynx coupling point shifts |
 
 ---
 
@@ -986,8 +986,8 @@ def write_sibernetic_config(openworm_config):
 3. **Land the native-gpu branch consolidation** — merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`)
 4. **Complete OpenCL ↔ Native Metal parity** on remaining demos (demo2 sheet-scale, worm_swim swim parity)
 5. **Bring native CUDA substrate up to demo1 parity** (review and merge PR #229, then iterate) — including paired backward kernels per the architectural contract
-6. **Expose differentiable interface in `openworm.yml`** ([DD011](DD011_Simulation_Stack_Architecture.md)) so downstream subsystems can opt into gradient-based parameter fitting
-7. **Joint neural ↔ body parameter fitting prototype** ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md)) — use SGD to tune muscle activation scaling end-to-end against kinematic targets
+6. **Expose differentiable interface in `openworm.yml`** (DD011) so downstream subsystems can opt into gradient-based parameter fitting
+7. **Joint neural ↔ body parameter fitting prototype** (DD002, DD003) — use SGD to tune muscle activation scaling end-to-end against kinematic targets
 8. Graduate backends that pass parity tests; add to Dockerfile and CI per-platform
-9. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
+9. Extend per-particle cell IDs to all tissue types (DD004)
 10. Add cell-type-specific mechanical properties

@@ -101,7 +101,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 **L2 (Junior Contributor):**
 
 - Can: Open PRs to designated "contributor-ready" subsystems (data pipelines, validation scripts, non-critical NeuroML extensions)
-- Cannot: Modify core cell models ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD001](../design_documents/DD001_Body_Physics_Architecture.md)), merge others' PRs
+- Cannot: Modify core cell models (DD002-[DD001](../design_documents/DD001_Body_Physics_Architecture.md)), merge others' PRs
 - Review process: Mind-of-a-Worm pre-review (subsystem + integration compliance) → L3/L4 human review → merge
 - **Integration requirement:** Must run `docker compose run quick-test` before submitting PRs and include results in PR description
 - Progression: Sustained quality (error-free PRs, good communication, alignment with Design Documents **including Integration Contracts**) over 3+ months → L3 nomination
@@ -112,7 +112,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Cannot: Change Design Documents, make cross-cutting architectural decisions
 - Responsibilities:
   - Mentor L1/L2 contributors in their subsystem
-  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
+  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** (DD002-DD011)
   - **When reviewing PRs that change a coupling interface, coordinate with Senior Contributors of consuming subsystems before merging**
   - Run `docker compose run validate` for PRs that modify core model parameters
   - Triage issues specific to their subsystem
@@ -149,13 +149,13 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 | Subsystem | Design Documents | Current Senior Contributor (L4) | Primary Repository |
 |-----------|-----------------|---------------------|-------------------|
-| **Neural Circuit** | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | TBD (Neural Circuit L4) | CElegansNeuroML, c302 |
-| **Body Physics** | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | TBD (Body Physics L4) | Sibernetic |
-| **Muscle Models** | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md) | TBD (propose from community) | c302, Sibernetic |
-| **Data Integration** | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | TBD | OWMeta, ConnectomeToolbox |
-| **Validation** | [DD010](../design_documents/DD010_Validation_Framework.md) | TBD | open-worm-analysis-toolbox |
-| **Integration Stack** | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) | TBD — **Critical hire** | OpenWorm (meta-repo) |
-| **Visualization** | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) | TBD | Worm3DViewer, Worm Browser |
+| **Neural Circuit** | DD002, DD005, DD006 | TBD (Neural Circuit L4) | CElegansNeuroML, c302 |
+| **Body Physics** | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), DD004 | TBD (Body Physics L4) | Sibernetic |
+| **Muscle Models** | DD003, DD007, DD009 | TBD (propose from community) | c302, Sibernetic |
+| **Data Integration** | DD008 | TBD | OWMeta, ConnectomeToolbox |
+| **Validation** | DD010 | TBD | open-worm-analysis-toolbox |
+| **Integration Stack** | DD011 | TBD — **Critical hire** | OpenWorm (meta-repo) |
+| **Visualization** | DD012 | TBD | Worm3DViewer, Worm Browser |
 
 **Critical:** At least one L4 Senior Contributor per subsystem. If a subsystem lacks an L4, the founder is the de-facto owner (unsustainable).
 
@@ -212,7 +212,7 @@ Submit at least **5 merged contributions** that:
 - Documentation (docstrings, inline comments where needed)
 - Communication quality (clear PR descriptions, responsive to review feedback)
 
-**DD020 data digitization as a contribution pathway:** [DD020](../design_documents/DD020_Validation_Data_Acquisition_Pipeline.md) identifies approximately 18 hours of data digitization work for Phase A1 — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:
+**DD020 data digitization as a contribution pathway:** DD020 identifies approximately 18 hours of data digitization work for Phase A1 — extracting published experimental data from figures and tables into machine-readable formats. These tasks are ideal L1 contributions because they are structured, clearly scoped, scientifically meaningful, and teach contributors the biology as they work:
 
 - Schafer lab N2 baseline kinematics (WCON format conversion)
 - Thomas 1990 defecation cycle timing data
@@ -220,7 +220,7 @@ Submit at least **5 merged contributions** that:
 - O'Hagan 2005 MEC-4 channel current kinetics
 - Chalfie 1985 touch response latency measurements
 
-Each digitization task produces a validation dataset that directly feeds [DD010](../design_documents/DD010_Validation_Framework.md) Tier 2/3 gates — so L1 contributors immediately see their work used in simulation validation. N2-Whisperer can assign these as "Data Digitizer" tasks with clear instructions, expected output format, and the paper section to digitize.
+Each digitization task produces a validation dataset that directly feeds DD010 Tier 2/3 gates — so L1 contributors immediately see their work used in simulation validation. N2-Whisperer can assign these as "Data Digitizer" tasks with clear instructions, expected output format, and the paper section to digitize.
 
 **Typical timeline:** 1-3 months of sustained engagement.
 
@@ -368,8 +368,8 @@ Mind-of-a-Worm maintains a **contributor database**:
     "teach_back": ["i_understand_neurons", "i_understand_muscles", "i_understand_the_body"],
     "sponsor_domains_covered": 3,
     "explain_level_overrides": {
-      "[DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)": "graduate",
-      "[DD003](../design_documents/DD003_Muscle_Model_Architecture.md)": "undergrad",
+      "DD002": "graduate",
+      "DD003": "undergrad",
       "[DD001](../design_documents/DD001_Body_Physics_Architecture.md)": "undergrad"
     }
   }
@@ -411,7 +411,7 @@ Update openworm.org/people.html to include:
 2. **Recent Achievements sidebar:** Display the last 10 badges earned across the community — creates a sense of activity and momentum even for first-time visitors
 3. **Individual progress view:** Link each contributor's name to their BadgeList profile, showing earned badges, current level, and progression toward next level
 4. **"Join at Your Level" CTA:** Prominent button linking to the Choose Your Level self-assessment (see Fast-Track Assessment section), placed at the top of the page alongside the existing "How to join" information
-5. **Activity metrics:** Reference [DD024](../design_documents/DD024_Project_Metrics_Dashboard.md) as the data source for contributor activity metrics (PRs merged, badges earned, active days in last 30 days) displayed per contributor or per level
+5. **Activity metrics:** Reference DD024 as the data source for contributor activity metrics (PRs merged, badges earned, active days in last 30 days) displayed per contributor or per level
 
 **Technical note:** The existing `rowify()` JS templating function on people.html generates contributor cards from a static array. This can be extended to pull level and badge data from Mind-of-a-Worm's contributor database via a REST API endpoint, or from a static JSON file generated by CI (simpler, no runtime dependency). The JSON approach is recommended for Phase 1: a GitHub Action runs nightly, queries Mind-of-a-Worm's contributor database, writes `contributors.json`, and deploys to openworm.org alongside the page.
 
@@ -491,12 +491,12 @@ Earned by completing onboarding milestones. Assigned and verified by N2-Whispere
 |-------|----------|--------------|---------------------|
 | **Connected** | Join Slack, GitHub, subscribe to mailing list | N2-Whisperer confirms channel presence | "Plugged In" (15 earners) |
 | **Simulation Runner** | Install Docker, run simulation stack, post output | Screenshot with version number | "Simulation Stack Apprentice" (79 earners) |
-| **Explorer** | Navigate the OpenWorm viewer ([DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Stage 1 Trame viewer or legacy Worm Browser), identify 5 neurons, describe their function and one connection | N2-Whisperer evaluates response | — |
+| **Explorer** | Navigate the OpenWorm viewer (DD012 Stage 1 Trame viewer or legacy Worm Browser), identify 5 neurons, describe their function and one connection | N2-Whisperer evaluates response | — |
 | **Paper Reader** | Read [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382), summarize in 3 bullets | N2-Whisperer evaluates summary | — |
 
 **L0 → L1 requirement:** Earn 3 of 4 orientation badges.
 
-**The viewer as engagement hook:** The [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) WormSim viewer is the project's primary engagement hook — the visual, interactive "front door" that draws newcomers in. Stage 1 (post-hoc Trame viewer with cell selection and time scrubbing) should be the first thing a new contributor sees. The Explorer badge is deliberately designed to require interacting with it, ensuring every new contributor experiences the simulation visually before diving into code or data.
+**The viewer as engagement hook:** The DD012 WormSim viewer is the project's primary engagement hook — the visual, interactive "front door" that draws newcomers in. Stage 1 (post-hoc Trame viewer with cell selection and time scrubbing) should be the first thing a new contributor sees. The Explorer badge is deliberately designed to require interacting with it, ensuring every new contributor experiences the simulation visually before diving into code or data.
 
 #### 2. Skill Badges (L1 → L2)
 
@@ -504,14 +504,14 @@ Earned by demonstrating specific technical capabilities. Verified by Mind-of-a-W
 
 | Badge | Criteria | DD Alignment | BadgeList Equivalent |
 |-------|----------|-------------|---------------------|
-| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) | "H-H Tutorial Graduate" (17 earners) |
-| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) | "Muscle Model Explorer" (9 earners) |
+| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | DD002 | "H-H Tutorial Graduate" (17 earners) |
+| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | DD003 | "Muscle Model Explorer" (9 earners) |
 | **Body Physics Basics** | Run Sibernetic, explain SPH approach | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) | — |
-| **Data Wrangler** | Extract data from a paper using [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) pipeline | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | "Literature Mining I" (4 earners) |
-| **Movement Analyst** | Run analysis toolbox on sample data, generate report | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | "Movement Database User" (3 earners) |
+| **Data Wrangler** | Extract data from a paper using DD008 pipeline | DD008 | "Literature Mining I" (4 earners) |
+| **Movement Analyst** | Run analysis toolbox on sample data, generate report | DD017 | "Movement Database User" (3 earners) |
 | **GitHub Proficient** | Submit clean PR with tests, respond to review | General | "GitHub Best Practices" (10 earners) |
 | **First Issue Resolved** | First merged PR (any subsystem) | General | "Code Warrior" (9 earners) |
-| **Cell Biology Foundations** | Complete worm development tutorial | [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | "Worm Development I" (3 earners) |
+| **Cell Biology Foundations** | Complete worm development tutorial | DD004 | "Worm Development I" (3 earners) |
 
 **L1 → L2 (Junior Contributor) requirement:** Earn "First Issue Resolved" + 2 skill badges + 5 total merged PRs.
 
@@ -521,15 +521,15 @@ Earned by sustained contribution to a specific Design Document's domain. Tracked
 
 | Badge | Criteria | DD |
 |-------|----------|----|
-| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) |
-| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) |
+| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | DD002 |
+| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | DD003 |
 | **Body Physics Contributor** | 5+ merged PRs in Sibernetic | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
-| **Data Pipeline Contributor** | 5+ merged PRs in OWMeta/data tools | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) |
-| **Validation Contributor** | 5+ merged PRs in analysis toolbox | [DD010](../design_documents/DD010_Validation_Framework.md) |
-| **Visualization Contributor** | 5+ merged PRs in Worm3DViewer/browser | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) |
-| **Integration Contributor** | 5+ merged PRs in simulation stack glue | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) |
-| **Neuropeptide Contributor** | 5+ merged PRs in neuropeptide subsystem | [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) |
-| **Pharyngeal Contributor** | 5+ merged PRs in pharyngeal system | [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) |
+| **Data Pipeline Contributor** | 5+ merged PRs in OWMeta/data tools | DD008 |
+| **Validation Contributor** | 5+ merged PRs in analysis toolbox | DD010 |
+| **Visualization Contributor** | 5+ merged PRs in Worm3DViewer/browser | DD012 |
+| **Integration Contributor** | 5+ merged PRs in simulation stack glue | DD011 |
+| **Neuropeptide Contributor** | 5+ merged PRs in neuropeptide subsystem | DD006 |
+| **Pharyngeal Contributor** | 5+ merged PRs in pharyngeal system | DD007 |
 
 **L2 → L3 (Contributor) requirement:** Earn at least 1 domain badge + sustained activity over 3+ months.
 
@@ -539,16 +539,16 @@ Unique to the AI contributor model. Earned when a human sponsor's AI agent lands
 
 | Badge | Criteria | Domain |
 |-------|----------|--------|
-| **I Understand Neurons** | Sponsor Summary for a [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) contribution passes review | Neural Circuit |
-| **I Understand Muscles** | Sponsor Summary for a [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) contribution passes review | Muscle Model |
+| **I Understand Neurons** | Sponsor Summary for a DD002 contribution passes review | Neural Circuit |
+| **I Understand Muscles** | Sponsor Summary for a DD003 contribution passes review | Muscle Model |
 | **I Understand the Body** | Sponsor Summary for a [DD001](../design_documents/DD001_Body_Physics_Architecture.md) contribution passes review | Body Physics |
-| **I Understand Peptides** | Sponsor Summary for a [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) contribution passes review | Neuropeptides |
-| **I Understand Validation** | Sponsor Summary for a [DD010](../design_documents/DD010_Validation_Framework.md) contribution passes review | Validation |
+| **I Understand Peptides** | Sponsor Summary for a DD006 contribution passes review | Neuropeptides |
+| **I Understand Validation** | Sponsor Summary for a DD010 contribution passes review | Validation |
 | **I Understand the Whole Worm** | Earn teach-back badges in 5+ different domains | Cross-domain |
 
 **How this works in practice:**
 
-1. A middle schooler sponsors an AI agent that implements a gap junction in [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)
+1. A middle schooler sponsors an AI agent that implements a gap junction in DD002
 2. The agent writes a Sponsor Summary at `explain_level: child`: "You helped connect two brain cells that tell the worm to back up!"
 3. Mind-of-a-Worm verifies the summary is scientifically accurate at that level
 4. The sponsor earns **"I Understand Neurons"** badge
@@ -735,7 +735,7 @@ Badges and levels only drive sustained participation if they're wired into an ac
 - Phase progress: which DD milestones were hit, what's next
 - Contributor spotlights: celebrate recent level-ups and notable contributions
 - "Join back in" CTA: link to open issues tagged by difficulty level
-- Data sourced from [DD024](../design_documents/DD024_Project_Metrics_Dashboard.md) dashboard metrics
+- Data sourced from DD024 dashboard metrics
 
 **Re-engagement nudge:** Contributors inactive for >2 weeks receive a personalized email with 2-3 open GitHub issues matched to their declared skills and current level. The tone is invitational, not guilt-inducing: "We noticed you haven't been around — here are some things that could use your expertise." If no response after 2 nudges (spaced 2 weeks apart), the contributor moves to quarterly digest frequency.
 
@@ -743,7 +743,7 @@ Badges and levels only drive sustained participation if they're wired into an ac
 
 - **Mind-of-a-Worm** generates all engagement notifications (badge earned, level up, next challenge, re-engagement nudges, weekly digest)
 - **N2-Whisperer** delivers onboarding-specific messages (orientation badge prompts, Choose Your Level assessment, first-week check-ins)
-- **"State of the Worm" newsletter** content is generated from [DD024](../design_documents/DD024_Project_Metrics_Dashboard.md) metrics data, formatted by Mind-of-a-Worm, and distributed via email
+- **"State of the Worm" newsletter** content is generated from DD024 metrics data, formatted by Mind-of-a-Worm, and distributed via email
 
 ---
 
@@ -784,7 +784,7 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 - **DD011 (Simulation Stack):** Subsystem ownership map determines merge permissions per repository
 - **DD012 (Dynamic Visualization Architecture):** The WormSim viewer serves as the primary engagement hook for the Explorer orientation badge; contributor community data can surface in the viewer's community panel
 - **[AI Contributors](ai-contributors.md):** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
-- **DD020 (Validation Data Acquisition Pipeline):** Provides structured data digitization tasks suitable for L1 contributor onboarding; digitized datasets feed into [DD010](../design_documents/DD010_Validation_Framework.md) validation gates
+- **DD020 (Validation Data Acquisition Pipeline):** Provides structured data digitization tasks suitable for L1 contributor onboarding; digitized datasets feed into DD010 validation gates
 - **DD024 (Project Metrics Dashboard):** Mind-of-a-Worm contributor metrics (badge counts by category, level distribution, active contributor count, onboarding conversion rates) feed into DD024's contributor panel; "State of the Worm" newsletter content is generated from DD024 dashboard data
 
 ### Configuration
@@ -794,7 +794,7 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 - Mind-of-a-Worm contributor database tracks level, badges, and subsystem assignments
 - BadgeList API integration awards badges on GitHub events (PR merge, orientation completion)
 - Mind-of-a-Worm generates engagement notifications (badge earned, level up, next challenge, re-engagement nudges) via Slack and email
-- "State of the Worm" monthly newsletter uses [DD024](../design_documents/DD024_Project_Metrics_Dashboard.md) metrics data
+- "State of the Worm" monthly newsletter uses DD024 metrics data
 - Reactivation campaign emails use contributor application archive data matched to DD-derived issues
 
 ---

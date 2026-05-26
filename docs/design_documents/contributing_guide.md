@@ -15,7 +15,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 3. Check the DD's Integration Contract (what it consumes from other DDs, what it produces)
 4. Implement according to the DD's specifications
 5. Run the DD's validation procedure (`docker compose run quick-test`, `docker compose run validate`)
-6. Reference the DD number in your PR description (e.g., "Implements [DD005](DD005_Cell_Type_Differentiation_Strategy.md) CeNGEN calibration")
+6. Reference the DD number in your PR description (e.g., "Implements DD005 CeNGEN calibration")
 
 **If you disagree with a DD:**
 
@@ -38,11 +38,11 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 **Automated compliance checking:**
 
-- Parse PR files to identify affected subsystems (e.g., `c302/` → [DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
+- Parse PR files to identify affected subsystems (e.g., `c302/` → DD002, DD005, DD006)
 - Retrieve relevant DDs and their Integration Contracts
 - Check:
-  - ✅ NeuroML validation ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md): `jnml -validate` must pass)
-  - ✅ Unit compliance ([DD010](DD010_Validation_Framework.md): biophysical units correct)
+  - ✅ NeuroML validation (DD002, DD003: `jnml -validate` must pass)
+  - ✅ Unit compliance (DD010: biophysical units correct)
   - ✅ Parameter ranges (conductances, voltages, time constants within DD-specified ranges)
   - ⚠️ Coupling interface changes (flag if output variables, file formats, or OME-Zarr schema modified)
   - ❌ Alternatives-considered violations (re-proposing explicitly rejected approaches)
@@ -75,7 +75,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 - ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [Decision Process](../contributing/decision-process.md) RFC.
 - ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
-- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
+- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., DD017 blocked on toolbox dormancy).
 - 📦 **Archived / Backburner:** Deferred or superseded. Do not implement without reopening discussion.
 - **Superseded:** Replaced by a newer DD. Reference the superseding DD number.
 - **Rejected:** Explicitly not adopted. Alternatives Considered section documents why.
@@ -85,17 +85,17 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 ## Template & Reference
 
 - **[Decision Process](../contributing/decision-process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
-- **[DD005](DD005_Cell_Type_Differentiation_Strategy.md):** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as your model when writing a new DD.
-- **[DD002](DD002_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
+- **DD005:** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use DD005 as your model when writing a new DD.
+- **DD002:** Example of Quick Action Reference table (7 key questions answered at the top)
 
-All science DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
+All science DDs (DD002-DD009, DD014-DD015) include a **Quick Action Reference** table answering:
 
 1. What does this produce?
-2. Success metric (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
+2. Success metric (which DD010 tier, quantitative threshold)
 3. Repository (GitHub link, issue label convention)
 4. Config toggle (openworm.yml keys)
 5. Build & test (docker commands, green-light criteria)
-6. Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
+6. Visualize (DD012 layer, color mapping, what you should see)
 7. CI gate (what blocks merge)
 
 ---
@@ -108,7 +108,7 @@ All science DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Int
 
 - Does this advance the mission ("world's first virtual organism")?
 - Does it maintain physical realism ("soft and squishy")?
-- Is it experimentally validated ([DD010](DD010_Validation_Framework.md) tiers)?
+- Is it experimentally validated (DD010 tiers)?
 - Is it open source and causally interpretable?
 
 **If yes to all:** Proceed. **If no:** Reconsider or clarify how it serves the mission.
@@ -124,16 +124,16 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 ### Step 3: Use the Template
 
-Follow [DD012 (RFC Process)](../contributing/decision-process.md) template structure. Use [DD005 (Cell-Type Specialization)](DD005_Cell_Type_Differentiation_Strategy.md) as your reference implementation.
+Follow [DD012 (RFC Process)](../contributing/decision-process.md) template structure. Use DD005 (Cell-Type Specialization) as your reference implementation.
 
 **Required sections (from [Decision Process](../contributing/decision-process.md)):**
 
 - TL;DR (2-3 sentences)
-- Goal & Success Criteria (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
+- Goal & Success Criteria (which DD010 tier, quantitative threshold)
 - Deliverables (exact files, paths, formats)
 - Repository & Issues (GitHub repo, issue label, branch convention)
 - How to Build & Test (copy-pasteable commands, green-light criteria)
-- How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
+- How to Visualize (DD012 layer, color mapping, what you should see)
 - Technical Approach (equations, parameters, algorithms)
 - Alternatives Considered (why other approaches were rejected)
 - Quality Criteria (testable acceptance criteria)
@@ -183,22 +183,22 @@ Once DD is approved and merged:
 
 ## Examples of Excellent Design Documents
 
-### [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
+### DD005 (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
 
 **Why it's excellent:**
 
 - ✅ **TL;DR at top** — Reader knows what/why/success metric in 3 sentences
 - ✅ **Mission-aligned** — Uses CeNGEN (world's largest single-cell atlas for any organism) to create biologically distinct neurons
-- ✅ **Goal & Success Criteria** — [DD010](DD010_Validation_Framework.md) Tier 2, quantitative threshold (≥20% improvement in functional connectivity)
+- ✅ **Goal & Success Criteria** — DD010 Tier 2, quantitative threshold (≥20% improvement in functional connectivity)
 - ✅ **Deliverables** — Exact files (128 `.cell.nml` files), paths, formats (NeuroML 2 XML)
 - ✅ **Repository & Issues** — `openworm/c302`, issue label `dd005`, branch convention
 - ✅ **How to Build & Test** — 8 copy-pasteable commands, green-light criteria, scripts marked `[TO BE CREATED]`
-- ✅ **How to Visualize** — [DD012](DD012_Dynamic_Visualization_Architecture.md) neural/ layer, color-by-neuron-class mode
+- ✅ **How to Visualize** — DD012 neural/ layer, color-by-neuron-class mode
 - ✅ **Technical Approach** — 6-step pipeline with code examples
 - ✅ **7 alternatives considered** — All rejected with rationale
 - ✅ **Integration Contract** — Complete with all 5 required sub-sections
 
-### [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit Architecture)
+### DD002 (Neural Circuit Architecture)
 
 **Why it's excellent:**
 
@@ -228,7 +228,7 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 **❌ No validation:**
 > "Implement IP3 receptor model."
 
-*How do you know if it works? What's the acceptance test? Which [DD010](DD010_Validation_Framework.md) tier?*
+*How do you know if it works? What's the acceptance test? Which DD010 tier?*
 
 **❌ Scope creep:**
 > "This DD covers neurons, muscles, intestine, hypodermis, and gonad."
@@ -246,9 +246,9 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 *Mark all non-existent scripts `[TO BE CREATED]` with GitHub issue link or #TBD.*
 
 **❌ Disconnected from viewer:**
-> No "How to Visualize" section, no mention of [DD012](DD012_Dynamic_Visualization_Architecture.md) layers.
+> No "How to Visualize" section, no mention of DD012 layers.
 
-*Contributors can't see what they're building. Every science DD must specify its [DD012](DD012_Dynamic_Visualization_Architecture.md) visualization.*
+*Contributors can't see what they're building. Every science DD must specify its DD012 visualization.*
 
 **❌ No repo guidance:**
 > Doesn't specify which GitHub repo, where to file issues, branch naming convention.
@@ -278,7 +278,7 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 A: No. Trivial fixes (typos, dead link updates, comment improvements) do not require DDs.
 
 **Q: Do I need a DD to add a new neuron to the connectome?**
-A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
+A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth (DD016), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
 
 **Q: Can I modify an accepted DD?**
 A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [Decision Process](../contributing/decision-process.md) RFC process. L4 maintainer or founder approves amendments.
@@ -289,11 +289,11 @@ A: The rejection itself is documented (DD status → Rejected, Alternatives Cons
 **Q: How do DDs relate to the Scientific Advisory Board?**
 A: DDs with major scientific implications (e.g., choosing what biological detail to model, which validation targets to prioritize) should be reviewed by SAB before final approval. L4 maintainers coordinate SAB review for their subsystem.
 
-**Q: What's the difference between [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD012.1](DD012.1_Visual_Rendering_Specification.md), and [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)?**
-A: [DD012](DD012_Dynamic_Visualization_Architecture.md) is the main visualization architecture (data pipeline, viewer framework, phase roadmap). [DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
+**Q: What's the difference between DD012, DD012.1, and DD012.2?**
+A: DD012 is the main visualization architecture (data pipeline, viewer framework, phase roadmap). DD012.1 (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). DD012.2 (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
 
 **Q: Where are the GitHub issues for DD implementation?**
 A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-003, [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs (DD002-003, DD016) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
