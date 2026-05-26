@@ -518,6 +518,8 @@ docker compose run validate
 | Body physics forces | [DD001](DD001_Body_Physics_Architecture.md) | If calcium→activation mapping changes (max_ca, activation formula), Sibernetic locomotion behavior changes |
 | Kinematic validation | [DD010](DD010_Validation_Framework.md) | Muscle force directly determines movement — any change affects Tier 3 |
 
+**Note on differentiability downstream:** Sibernetic ([DD001](DD001_Body_Physics_Architecture.md#differentiability)) is end-to-end differentiable on the native Metal substrate — the muscle activation → elastic-bond-stiffness modulation path is included in the differentiable pipeline. This means muscle parameters that act *through* the body (force magnitudes, per-muscle scaling, activation timing) can be tuned via gradient descent against kinematic targets once the muscle-side ODE is also differentiable. See [DD002 §Joint Neural ↔ Body Parameter Fitting](DD002_Neural_Circuit_Architecture.md#joint-neural-body-parameter-fitting-forward-reference) for the joint-fitting story.
+
 ### Coupling Bridge Ownership
 
 **The `sibernetic_c302.py` coupling script** (lives in `openworm/sibernetic` repo) reads muscle calcium from NEURON and writes activation to Sibernetic. This script is the single point where [DD003](DD003_Muscle_Model_Architecture.md) output format matters. Changes to:

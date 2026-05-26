@@ -711,6 +711,10 @@ docker compose run validate
 | Founder digest (Mad-Worm-Scientist) | AI Agents | If validation report format changes, Mad-Worm-Scientist can't parse regression alerts |
 | All subsystem DDs | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
 
+### Gradient-Based Validation (Forward Reference)
+
+Where the substrate is differentiable ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability) — native Metal substrate, CUDA in progress), Tier 3 kinematic targets can act as loss functions rather than pass/fail predicates. A divergence between a simulation's kinematic metrics (speed, wavelength, frequency, amplitude, gait) and the Schafer-lab baseline becomes a gradient that flows back through `xpbd_full_bwd` into the physical parameters (`spring_K`, `viscosity`, `α_density`, restitution, …). This shortens the calibration loop from manual sweeps to SGD. Four Sibernetic demos (demo1, demo2, one_sprig, worm_alone) have already been tuned this way — see DD001. The validation framework should grow a `validate-grad` mode that emits per-parameter gradient suggestions alongside the existing pass/fail report.
+
 ---
 
 ## Implementation References

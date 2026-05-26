@@ -4,15 +4,33 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack)
+- **Related:** [DD001](DD001_Body_Physics_Architecture.md) (Body Physics — *delivers the differentiable substrate this DD's SPH surrogate trains against*), [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 
 > **Phase:** [Phase 3: Organ Integration & Behavior](DD_PHASE_ROADMAP.md#phase-3-organ-integration--behavior-months-13-18) | **Layer:** ML Framework
 
+!!! info "Scope reduced (2026-05)"
+    This DD was originally planned with four components. Three have moved out of its scope:
+
+    - **Differentiable SPH simulation backend** → now a property of the [Sibernetic native Metal substrate](DD001_Body_Physics_Architecture.md#differentiability) (DD001). 19 paired backward kernels, multi-step `xpbd_full_bwd`, 4 demos SGD-tuned to OpenCL reference. CUDA port inherits the same architecture.
+    - **Foundation model → ODE parameters** → extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md), promoted to Phase A2/Phase 1.
+    - **Differentiable neural/muscle ODE substrate** → deferred to Phase 3 design discussion (implementation strategy: hand-derived analytic backwards à la DD001, or PyTorch autodiff reimplementation, TBD).
+
+    The remaining DD013 scope is **two ML-augmentation components**: SPH neural surrogate (for speed) and learned sensory transduction (for data-gap filling).
+
 ## TL;DR
 
-When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining scope after recent architectural shifts is two ML-augmentation components:
+
+1. **Neural surrogate for SPH body physics** (1000× speedup target with <5% trajectory error)
+2. **Learned sensory transduction** (close the stimulus-response loop where mechanistic models are unavailable)
+
+**Scope reductions:**
+
+- **Differentiable simulation backend (SPH portion)** has been delivered as a property of the native Sibernetic Metal substrate — see [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability). The Phase 3 plan was overtaken by the native-port work, which built end-to-end reverse-mode AD into the substrate itself (19 paired analytic backward kernels, multi-step `xpbd_full_bwd`, 4 demos SGD-tuned to OpenCL reference). The same architectural contract is mandated for the in-progress CUDA port.
+- **Differentiable neural/muscle ODE substrate** (originally part of component 1) — still future work. The c302 / NEURON / muscle ODE pipelines are not yet differentiable. Whether the path forward is a PyTorch reimplementation or following DD001's pattern of hand-derived analytic backwards is a Phase 3 design decision.
+- **Foundation model → ODE parameters** (component 3) extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
 
 ## Goal & Success Criteria
 
@@ -21,27 +39,28 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 **Success Criteria:**
 
 - ML-augmented models match or exceed pure-mechanistic validation scores ([DD010](DD010_Validation_Framework.md) Tier 2 correlation r > 0.5)
-- Differentiable backend reproduces NEURON/jNML reference within +/-5% on all state variables
-- SPH surrogate achieves at least 100x speedup (target 1000x) with < 5% trajectory error
-- Auto-fitted parameters outperform hand-tuned parameters on [DD010](DD010_Validation_Framework.md) metrics
+- SPH surrogate achieves at least 100x speedup (target 1000x) with < 5% trajectory error vs. the native Sibernetic substrate ([DD001](DD001_Body_Physics_Architecture.md))
+- Learned sensory transduction matches available experimental tuning-curve data within published noise ranges
 - Every ML component has a documented replacement pathway for when experimental data becomes available
+- *(Differentiable SPH substrate success criterion has moved to [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) item 7: every native-substrate forward kernel ships with a paired backward kernel within ±5% FD-validated)*
 
 ## Deliverables
 
 - Framework specification document (this DD)
-- Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD002](DD002_Neural_Circuit_Architecture.md)+[DD003](DD003_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
-- Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`)
-- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — **Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md)**
+- Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`) — **trained against the differentiable substrate from [DD001](DD001_Body_Physics_Architecture.md#differentiability)**; gradient flow from surrogate loss back through reference physics enables joint training and online drift correction
 - Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
 - ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
 - Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
+- *(Differentiable SPH simulation backend — **delivered** in [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability), not in this DD)*
+- *(Foundation model parameter pipeline — **extracted** to [DD021](DD021_Protein_Foundation_Model_Pipeline.md))*
+- *(Differentiable c302/NEURON/muscle ODE substrate — **future work**, scope and implementation strategy to be decided in Phase 3; could follow DD001's hand-derived-analytic-backwards pattern or use autodiff via PyTorch reimplementation)*
 
 ## Repository & Issues
 
 - **Repository:** `openworm/openworm-ml` (new repo) `[TO BE CREATED]`
 - **Issue label:** `dd013`
 - **Milestone:** Phase 3 — Hybrid ML Framework
-- **Example PR title:** `dd013: differentiable HH backend matches NEURON reference within ±5%`
+- **Example PR title:** `dd013: SPH surrogate matches Sibernetic Metal trajectories within ±5%`
 
 ## Quick Action Reference
 
@@ -49,12 +68,12 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 |----------|--------|
 | **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (4) Learned sensory transduction module. Component 3 (foundation model → ODE parameters) extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) |
-| **Success metric** | Differentiable model matches [DD010](DD010_Validation_Framework.md) Tier 2+3 validation within ±5% of reference NEURON/jNML; SPH surrogate achieves 1000x speedup with <5% trajectory error; auto-fitted parameters outperform hand-tuned on [DD010](DD010_Validation_Framework.md) metrics |
+| **What does this produce?** | (1) Neural surrogate for Sibernetic SPH (trained against [DD001](DD001_Body_Physics_Architecture.md)'s differentiable substrate), (2) Learned sensory transduction module. *(Differentiable SPH substrate moved to DD001; foundation model parameter pipeline extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md); differentiable neural/muscle ODE substrate deferred to Phase 3 design discussion)* |
+| **Success metric** | SPH surrogate achieves 100x–1000x speedup with <5% trajectory error vs. Sibernetic Metal reference; learned sensory transduction matches tuning-curve data within published noise ranges |
 | **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd013` |
-| **Config toggle** | `ml.differentiable_backend: true`, `ml.sph_surrogate: true`, `ml.sensory_model: learned` in `openworm.yml` |
-| **Build & test** | `docker compose run ml-test` (differentiable model matches reference), `docker compose run surrogate-validate` (surrogate vs. full SPH) |
-| **CI gate** | Differentiable model must reproduce [DD010](DD010_Validation_Framework.md) Tier 2+3 scores within ±5% of NEURON reference |
+| **Config toggle** | `ml.sph_surrogate: true`, `ml.sensory_model: learned` in `openworm.yml` |
+| **Build & test** | `docker compose run surrogate-validate` (surrogate vs. full SPH), `docker compose run sensory-test` (learned vs. mechanistic transduction) |
+| **CI gate** | SPH surrogate must reproduce kinematic outputs within ±5% of Sibernetic native-Metal reference on the [DD010](DD010_Validation_Framework.md) demo suite |
 
 ---
 

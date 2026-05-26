@@ -600,6 +600,10 @@ docker compose run validate
 
 The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD002](DD002_Neural_Circuit_Architecture.md)→[DD003](DD003_Muscle_Model_Architecture.md)→[DD001](DD001_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD001](DD001_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD011](DD011_Simulation_Stack_Architecture.md)).**
 
+### Joint Neural ↔ Body Parameter Fitting (Forward Reference)
+
+The native Sibernetic substrate is end-to-end differentiable ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)) — gradients on `(spring_K, viscosity, density compliance, …)` are available via `xpbd_full_bwd`. As the c302/NEURON pipeline gains a differentiable substrate of its own (currently future work tracked under [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), joint optimization becomes possible: muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be tuned end-to-end against kinematic targets ([DD010](DD010_Validation_Framework.md) Tier 3 metrics) rather than via manual sweeps. This is a Phase 3 capability gated on the neural-side substrate, not a current deliverable of this DD.
+
 ---
 
 - **Approved by:** OpenWorm Steering

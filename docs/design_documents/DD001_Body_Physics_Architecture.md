@@ -12,6 +12,8 @@
 
 [PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD003](DD003_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
 
+**Architecturally differentiable.** The native Metal substrate (`src/metal_diff/`) implements every forward kernel with a paired analytic backward kernel, validated against finite-difference. End-to-end reverse-mode differentiation through multi-step XPBD integration produces gradients on initial conditions and all physical parameters (rest density, spring stiffness, viscosity, density-constraint compliance, floor restitution, membrane mechanics). This is a structural property of the substrate — not an optional layer — and is the design requirement that the in-progress CUDA port inherits.
+
 ---
 
 ## Quick Action Reference
@@ -20,8 +22,9 @@
 |----------|--------|
 | **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
-| **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames |
-| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
+| **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
+| **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
+| **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
@@ -363,6 +366,8 @@ A contribution to Sibernetic MUST:
 
 6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
 
+7. **Paired Backward Per Forward (Native Substrates):** Every new forward kernel added to the native Metal or native CUDA substrate MUST ship with a paired analytic backward kernel, validated against finite-difference to within ±5% relative error. This is the architectural contract of the substrate; see [Differentiability](#differentiability). New kernels without a paired backward break the end-to-end differentiability guarantee and must not land.
+
 ---
 
 ## Boundaries (Explicitly Out of Scope)
@@ -440,13 +445,13 @@ elasticity = 0.0006
 
 ### Compute Backends
 
-| Backend | Language | Hardware | Speed | Result Quality | Status |
-|---------|----------|----------|-------|---------------|--------|
-| OpenCL | C++ | CPU/GPU (Linux, Intel Mac) | Baseline | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
-| Native Metal | C++/Metal shaders | Apple Silicon GPU | First-pass ~2.7 ms/step on M-series | Forward parity in progress; 5+ demos working (cube drop, membrane, worm_alone, worm_swim) | **Experimental → Stable** — consolidated on `ow-native-gpu-0.1.0` branch; PR #230 in flight |
-| Native CUDA | C++/CUDA | NVIDIA GPU | Target ~5x OpenCL | Scaffolding stage | **Scaffolding** — PR #229 (sib_cuda) in review |
-| PyTorch | Python | CPU | Slow | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; useful as correctness reference) |
-| Taichi Metal / CUDA | Python/Taichi | Apple Silicon / NVIDIA | n/a | n/a | **Superseded** — earlier prototyping path; supplanted by the native ports above |
+| Backend | Language | Hardware | Speed | Differentiable | Result Quality | Status |
+|---------|----------|----------|-------|----------------|---------------|--------|
+| OpenCL | C++ | CPU/GPU (Linux, Intel Mac) | Baseline | ❌ forward only | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
+| Native Metal | C++/Metal shaders | Apple Silicon GPU | First-pass ~2.7 ms/step on M-series | ✅ **end-to-end** — 19 paired backward kernels, multi-step `xpbd_full_bwd`, FD-validated, 4 demos SGD-tuned | Forward parity in progress; 5+ demos working (cube drop, membrane, worm_alone, worm_swim) | **Experimental → Stable** — consolidated on `ow-native-gpu-0.1.0` branch; PR #230 in flight |
+| Native CUDA | C++/CUDA | NVIDIA GPU | Target ~5x OpenCL | 🟡 **structural mandate** — `src/cuda/README.md` requires mirroring Metal's paired-backward architecture | Scaffolding stage | **Scaffolding** — PR #229 (sib_cuda) in review |
+| PyTorch | Python | CPU | Slow | (autodiff possible but not on critical path) | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; useful as correctness reference) |
+| Taichi Metal / CUDA | Python/Taichi | Apple Silicon / NVIDIA | n/a | n/a | n/a | **Superseded** — earlier prototyping path; supplanted by the native ports above |
 
 **Recommendation:** OpenCL remains the only backend producing validated simulation results today. However, OpenCL driver support is shrinking across platforms (Apple removed OpenCL on Apple Silicon; AMD/NVIDIA deprioritizing). The path forward is **native** Metal and CUDA substrates — hand-written GPU kernels that target each platform's first-class API directly, rather than Python/Taichi abstractions that introduced their own divergence from the OpenCL reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
 
@@ -518,7 +523,7 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 | Backend | Level | Blocking Issue |
 |---------|-------|---------------|
 | OpenCL | **Production** | Losing platform support |
-| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; full demo2 sheet-scale tuning + worm_swim parity in progress. Backward (differentiability) is a byproduct of the implementation approach; see [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) for the framework that consumes it. |
+| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; demo2 sheet-scale tuning + worm_swim parity in progress. Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned to OpenCL reference. See [Differentiability](#differentiability) section. |
 | Native CUDA | **Scaffolding** | Awaiting kernel implementation (PR #229 introduces the substrate skeleton) |
 | PyTorch | **Experimental** | Stable but results don't match OpenCL; positioned as a CPU correctness reference |
 | Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction |
@@ -537,6 +542,97 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 ### Community Contributions to Modernization
 
 Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on `openworm/sibernetic` rather than in this design document — see the `contributor-acknowledgment` label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues such as #226 (Port sphFluid.cl to Metal for ARM64 Mac).
+
+---
+
+## Differentiability
+
+The native Metal substrate is **architecturally differentiable**. This is not a bolt-on or a future framework: every physical kernel was implemented from day one with a paired analytic backward kernel, and the multi-step integration loop walks K iterations in reverse to produce gradients on initial conditions and physical parameters. The same architecture is the design requirement for the in-progress CUDA port.
+
+### Why Differentiability Is a Substrate Property, Not a Framework Layer
+
+Earlier OpenWorm planning ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)) treated "differentiable simulation" as a future framework component — a PyTorch reimplementation living in a separate `openworm-ml/differentiable/` repo, scheduled for Phase 3. The native-port work overtook that plan: as part of building hand-written Metal kernels, the implementers chose to derive analytic backwards alongside each forward kernel rather than rely on an autodiff layer. This produces three structural advantages over the framework-layer approach:
+
+1. **No re-implementation drift.** A separate PyTorch reimplementation would have to track the OpenCL reference's behavior over time; an in-substrate backward is the same code path as the forward.
+2. **GPU-native gradients.** Backward kernels run on the same Metal command queue as the forwards — no host round-trip, no autodiff graph overhead.
+3. **Parameter gradients arrive for free.** Once each forward kernel has an analytic backward, every physical parameter (stiffness, viscosity, rest density, compliance) is differentiable end-to-end without explicit `requires_grad` plumbing.
+
+The CUDA scaffolding at `src/cuda/README.md` makes this explicit: the CUDA substrate must mirror `src/metal_diff/` file-for-file, including paired backward kernels per forward kernel. Differentiability is the *architectural contract* the substrate exposes — not an optional feature flag.
+
+### What's Differentiable Today
+
+| Forward kernel | Backward kernel | Status | FD validation |
+|----------------|-----------------|--------|---------------|
+| `dist_active_static` / `_active_active` (pairwise distance) | `*_backward` | Implemented | <1% rel-err |
+| `wpoly6_inplace` (Müller poly6 SPH kernel) | `wpoly6_inplace_backward` | Implemented | <1% rel-err |
+| `rowsum_density` (SPH density via threadgroup reduction) | `rowsum_density_backward` | Implemented | <1% rel-err |
+| `density_grad_combined` (fused density + ∇W + denom) | `density_constraint_grad_backward` | Implemented | <5% rel-err |
+| `solve_density_constraint` (XPBD density correction) | `solve_density_constraint_backward` | Implemented | <5% rel-err |
+| `predict_positions` (XPBD predictive step) | `predict_positions_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `solve_distance_constraints_seq` (iterative constraint projection) | `*_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `pair_forces_grid` (viscosity + surface tension) | `pair_forces_grid_backward` | Implemented | <1% rel-err |
+| `apply_ext_accel` (external acceleration) | `apply_ext_accel_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `spring_bonds_force` (Hooke spring bonds) | `spring_bonds_force_backward` | Implemented | <1% rel-err |
+| `spring_anchor_force` (boundary anchor springs) | `spring_anchor_force_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `solve_floor_constraint` (floor collision + restitution) | `solve_floor_constraint_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `update_velocities` (verlet velocity update) | `update_velocities_backward` | Implemented | end-to-end via `xpbd_full_bwd` |
+| `membrane_clear` / `_accumulate` / `_apply` (Ihmsen 2014 M10) | analytic backward through plane projection | Implemented | <7e-4 rel-err (test_xpbd_full_membrane.py, K ∈ {1,2,3,5}) |
+
+**19 forward kernels, 19 paired backward kernels.** All analytic, hand-derived from the physics. All validated against finite-difference at ε = 1e-3 to within 1–5% relative error (membrane: <7e-4).
+
+### Multi-Step Reverse-Mode AD: `xpbd_full_fwd` / `xpbd_full_bwd`
+
+The substrate exposes an end-to-end forward + backward pair (`ops_xpbd_full.mm`):
+
+- **`run_xpbd_full_fwd(argc, argv)`** — runs K XPBD constraint-projection steps, persisting per-step state (positions, velocities, density, ∇C, denominator helpers, per-kernel auxiliaries) to disk for the backward walk.
+- **`run_xpbd_full_bwd(argc, argv)`** — consumes the saved state + a ∂L/∂x_final seed gradient, walks K steps in reverse, and outputs:
+  - `∂L/∂x_init`, `∂L/∂v_init` (initial-condition gradients)
+  - `∂L/∂ρ_rest`, `∂L/∂spring_K`, `∂L/∂visc_coef`, `∂L/∂α_density`, `∂L/∂floor_y`, `∂L/∂restitution` (scalar parameter gradients)
+  - Per-particle parameter gradients where applicable
+
+Per-step gradient clipping (env: `BWD_CLIP_NORM`) keeps long sequences numerically stable; TBPTT support lets training scripts trade memory for trajectory length.
+
+### Gradient-Tuned Demos (SGD Already Applied)
+
+Four of the five working demos have been tuned via gradient descent against OpenCL reference trajectories:
+
+| Demo | Parameters tuned | SGD script | Status |
+|------|-----------------|------------|--------|
+| **demo1** (cube drop) | `ρ_rest`, `spring_K`, `visc_coef` | `sgd_true.py` (TBPTT + grad clipping) | tuned to OpenCL parity (commit `bf6b333` series) |
+| **demo2** (membrane permeability) | membrane elasticity, permeability | `sgd_demo2_membrane.py`, `sgd_demo2_permeability.py` | tuned to OpenCL parity |
+| **one_sprig_test** | `spring_K` (single anchor spring) | `sgd_one_sprig.py` | reference oscillator validated |
+| **worm_alone_half_resolution** | `spring_K`, `visc` on worm elastic particles | `sgd_worm.py` | tuned to OpenCL trajectory |
+| **worm_swim_half_resolution** | (in progress) | — | forward parity demonstrated; SGD pending |
+
+SGD harness lives at `src/metal_diff/sgd_*.py` (8 scripts total, see repo). The pattern is reusable for any new demo or parameter sweep.
+
+### Implications for Downstream Subsystems
+
+Because the substrate exposes a differentiable contract, downstream subsystems that couple to body physics can now ask gradient-based questions of it:
+
+- **Neural ↔ body coupling ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md))** — muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be jointly optimized against kinematic targets. The muscle force injection path (Sibernetic's modulation of elastic bond stiffness via `k_muscle(t) = k_baseline × (1 + activation(t) × strength_multiplier)`) is differentiable through `xpbd_full_bwd`; activation traces can be backpropagated to neural circuit parameters when those are also expressed in a differentiable form.
+- **Validation framework ([DD010](DD010_Validation_Framework.md))** — kinematic-metric mismatches against Schafer-lab baselines (speed, wavelength, frequency, gait) can directly drive parameter updates rather than requiring manual sweeps. Tier 3 validation becomes a loss function the substrate can be optimized against.
+- **Simulation stack ([DD011](DD011_Simulation_Stack_Architecture.md))** — the `body.backend: metal-native` configuration should expose a differentiable interface alongside the forward-only interface, so other subsystems can opt into gradient-based parameter fitting via `openworm.yml`.
+- **Hybrid ML framework ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md))** — now narrows to its remaining scope: neural surrogates for SPH (1000× speedup target) and learned sensory transduction. The "differentiable simulation backend" component of DD013 is delivered here, in DD001.
+
+### What's Not (Yet) Differentiable
+
+- **OpenCL backend** — the reference implementation remains forward-only. Validated as the kinematic ground truth; not a differentiation target.
+- **CUDA substrate** — scaffolding stage; PR #229 introduces the substrate skeleton. The architectural contract (paired backward per forward) is mandated by the CUDA README but not yet implemented.
+- **PyTorch backend** — forward-only CPU reference; could in principle be made differentiable via autodiff, but is not on the critical path (the native substrates are the production target).
+
+### How to Use the Differentiable Interface
+
+```bash
+# Forward pass: run K steps, save state
+./sib_metal xpbd_full_fwd <args> --save-state /tmp/sim_state.bin
+
+# Backward pass: seed gradient + retrieve parameter gradients
+./sib_metal xpbd_full_bwd /tmp/sim_state.bin /tmp/grad_seed.bin \
+    --out-grads /tmp/param_grads.bin
+```
+
+For a worked example with SGD harness, see `src/metal_diff/sgd_true.py` (the canonical reference implementation that tunes `(ρ_rest, spring_K, visc_coef, α_density, floor_y)` against an OpenCL target trajectory using TBPTT + gradient clipping).
 
 ---
 
@@ -583,6 +679,7 @@ Substantial portions of the native-port modernization have been driven by commun
 | Particle positions (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
 | Particle types (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
 | Surface mesh (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
+| **Parameter gradients** (native substrates only) | [DD002](DD002_Neural_Circuit_Architecture.md) (joint neural↔body fitting), [DD003](DD003_Muscle_Model_Architecture.md) (muscle parameter fitting), [DD010](DD010_Validation_Framework.md) (gradient-based validation loop) | `∂L/∂(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)` via `xpbd_full_bwd` | Binary float32 buffers per parameter | mixed (per-particle position grads, scalar parameter grads) |
 
 ### Repository & Packaging
 
@@ -680,14 +777,16 @@ def write_sibernetic_config(openworm_config):
 ---
 
 - **Approved by:** OpenWorm Steering
-- **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working; native CUDA substrate in scaffolding; PyTorch experimental as CPU correctness reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap))
+- **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated; PyTorch experimental as CPU correctness reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
 - **Next Actions:**
 
 1. Create stability validation scripts (`scripts/check_stability.py`, `scripts/validate_incompressibility.py`)
 2. Create cross-backend parity test suite against OpenCL baseline (`scripts/backend_parity_test.py`)
 3. **Land the native-gpu branch consolidation** — merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`)
 4. **Complete OpenCL ↔ Native Metal parity** on remaining demos (demo2 sheet-scale, worm_swim swim parity)
-5. **Bring native CUDA substrate up to demo1 parity** (review and merge PR #229, then iterate)
-6. Graduate backends that pass parity tests; add to Dockerfile and CI per-platform
-7. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
-8. Add cell-type-specific mechanical properties
+5. **Bring native CUDA substrate up to demo1 parity** (review and merge PR #229, then iterate) — including paired backward kernels per the architectural contract
+6. **Expose differentiable interface in `openworm.yml`** ([DD011](DD011_Simulation_Stack_Architecture.md)) so downstream subsystems can opt into gradient-based parameter fitting
+7. **Joint neural ↔ body parameter fitting prototype** ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md)) — use SGD to tune muscle activation scaling end-to-end against kinematic targets
+8. Graduate backends that pass parity tests; add to Dockerfile and CI per-platform
+9. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
+10. Add cell-type-specific mechanical properties

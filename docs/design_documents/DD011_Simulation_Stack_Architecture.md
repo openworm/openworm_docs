@@ -1099,7 +1099,10 @@ The simulation stack is the **integration layer** — it consumes and routes out
 | Consumes | [DD002](DD002_Neural_Circuit_Architecture.md) | Neural state | OME-Zarr `/neural/` |
 | Consumes | [DD003](DD003_Muscle_Model_Architecture.md) | Muscle forces | OME-Zarr `/muscle/` |
 | Consumes | [DD001](DD001_Body_Physics_Architecture.md) | Body geometry | OME-Zarr `/physics/` |
+| Consumes | [DD001](DD001_Body_Physics_Architecture.md#differentiability) | Parameter gradients (native substrates only) | Binary float32 buffers per parameter via `xpbd_full_bwd` |
 | Produces | All | Unified simulation state | OME-Zarr `/simulation/` |
+
+**Differentiable-substrate config exposure.** When `body.backend` is `metal-native` or `cuda-native` ([DD001 §Configuration](DD001_Body_Physics_Architecture.md#configuration)), the stack should expose an optional `body.differentiable: true` flag in `openworm.yml`. When enabled, the body subsystem produces gradient outputs alongside the forward simulation, and the orchestrator routes them to whichever downstream consumer requested gradient-based parameter fitting (validation loop, joint neural↔body tuning, etc.). When `backend: opencl` is selected, this flag must be a no-op or error — OpenCL is forward-only.
 
 ### Repository & Packaging
 
