@@ -4,7 +4,7 @@ Current releases
 The recent and planned releases for the Docker image which contains the assembled OpenWorm software stack can be found at the [OpenWorm Milestones](https://github.com/openworm/OpenWorm/milestones).
 
 !!! note "Current Approach"
-    The simulation stack is now containerized via Docker, as specified in [DD013: Simulation Stack Architecture](design_documents/DD013_Simulation_Stack_Architecture.md). The Docker image bundles [Sibernetic](Projects/sibernetic.md) (body physics), [c302](Projects/c302.md) (neural network), and validation tooling into a single reproducible environment. See the [Docker simulation stack](Projects/docker.md) page for setup instructions.
+    The simulation stack is now containerized via Docker, as specified in [DD011: Simulation Stack Architecture](design_documents/DD011_Simulation_Stack_Architecture.md). The Docker image bundles [Sibernetic](Projects/sibernetic.md) (body physics), [c302](Projects/c302.md) (neural network), and validation tooling into a single reproducible environment. See the [Docker simulation stack](Projects/docker.md) page for setup instructions.
 
 **An overview of the core repositories in the project, along with the current status of automated testing, can be found [here](https://github.com/openworm/.github/blob/main/testsheet/README.md).**
 

@@ -75,7 +75,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 - ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [Decision Process](../contributing/decision-process.md) RFC.
 - ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
-- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
+- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) blocked on toolbox dormancy).
 - 📦 **Archived / Backburner:** Deferred or superseded. Do not implement without reopening discussion.
 - **Superseded:** Replaced by a newer DD. Reference the superseding DD number.
 - **Rejected:** Explicitly not adopted. Alternatives Considered section documents why.
@@ -88,14 +88,14 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 - **[DD005](DD005_Cell_Type_Differentiation_Strategy.md):** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as your model when writing a new DD.
 - **[DD001](DD001_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
 
-All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
+All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
 
 1. What does this produce?
 2. Success metric (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
 3. Repository (GitHub link, issue label convention)
 4. Config toggle (openworm.yml keys)
 5. Build & test (docker commands, green-light criteria)
-6. Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
+6. Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
 7. CI gate (what blocks merge)
 
 ---
@@ -133,7 +133,7 @@ Follow [DD012 (RFC Process)](../contributing/decision-process.md) template struc
 - Deliverables (exact files, paths, formats)
 - Repository & Issues (GitHub repo, issue label, branch convention)
 - How to Build & Test (copy-pasteable commands, green-light criteria)
-- How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
+- How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) layer, color mapping, what you should see)
 - Technical Approach (equations, parameters, algorithms)
 - Alternatives Considered (why other approaches were rejected)
 - Quality Criteria (testable acceptance criteria)
@@ -193,7 +193,7 @@ Once DD is approved and merged:
 - ✅ **Deliverables** — Exact files (128 `.cell.nml` files), paths, formats (NeuroML 2 XML)
 - ✅ **Repository & Issues** — `openworm/c302`, issue label `dd005`, branch convention
 - ✅ **How to Build & Test** — 8 copy-pasteable commands, green-light criteria, scripts marked `[TO BE CREATED]`
-- ✅ **How to Visualize** — [DD014](DD014_Dynamic_Visualization_Architecture.md) neural/ layer, color-by-neuron-class mode
+- ✅ **How to Visualize** — [DD012](DD012_Dynamic_Visualization_Architecture.md) neural/ layer, color-by-neuron-class mode
 - ✅ **Technical Approach** — 6-step pipeline with code examples
 - ✅ **7 alternatives considered** — All rejected with rationale
 - ✅ **Integration Contract** — Complete with all 5 required sub-sections
@@ -246,9 +246,9 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 *Mark all non-existent scripts `[TO BE CREATED]` with GitHub issue link or #TBD.*
 
 **❌ Disconnected from viewer:**
-> No "How to Visualize" section, no mention of [DD014](DD014_Dynamic_Visualization_Architecture.md) layers.
+> No "How to Visualize" section, no mention of [DD012](DD012_Dynamic_Visualization_Architecture.md) layers.
 
-*Contributors can't see what they're building. Every science DD must specify its [DD014](DD014_Dynamic_Visualization_Architecture.md) visualization.*
+*Contributors can't see what they're building. Every science DD must specify its [DD012](DD012_Dynamic_Visualization_Architecture.md) visualization.*
 
 **❌ No repo guidance:**
 > Doesn't specify which GitHub repo, where to file issues, branch naming convention.
@@ -278,7 +278,7 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 A: No. Trivial fixes (typos, dead link updates, comment improvements) do not require DDs.
 
 **Q: Do I need a DD to add a new neuron to the connectome?**
-A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
+A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
 
 **Q: Can I modify an accepted DD?**
 A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [Decision Process](../contributing/decision-process.md) RFC process. L4 maintainer or founder approves amendments.
@@ -289,11 +289,11 @@ A: The rejection itself is documented (DD status → Rejected, Alternatives Cons
 **Q: How do DDs relate to the Scientific Advisory Board?**
 A: DDs with major scientific implications (e.g., choosing what biological detail to model, which validation targets to prioritize) should be reviewed by SAB before final approval. L4 maintainers coordinate SAB review for their subsystem.
 
-**Q: What's the difference between [DD014](DD014_Dynamic_Visualization_Architecture.md), [DD014.1](DD014.1_Visual_Rendering_Specification.md), and [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)?**
-A: [DD014](DD014_Dynamic_Visualization_Architecture.md) is the main visualization architecture (data pipeline, viewer framework, phase roadmap). [DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
+**Q: What's the difference between [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD012.1](DD012.1_Visual_Rendering_Specification.md), and [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)?**
+A: [DD012](DD012_Dynamic_Visualization_Architecture.md) is the main visualization architecture (data pipeline, viewer framework, phase roadmap). [DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
 
 **Q: Where are the GitHub issues for DD implementation?**
 A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

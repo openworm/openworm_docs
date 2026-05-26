@@ -1,10 +1,10 @@
-# DD027: Multicompartmental Neuron Models
+# DD023: Multicompartmental Neuron Models
 
 - **Status:** Proposed
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-24
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
 
 ---
 
@@ -62,7 +62,7 @@ The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/J
 1. Select 5 representative neurons with published morphological reconstructions AND published electrophysiology: AWC (sensory), AIY (interneuron), AVA (command interneuron), RIM (interneuron), VD5 (motor neuron) — the same set validated by Zhao et al. (2024)
 2. Obtain morphologies from EM reconstructions (Witvliet et al. 2021; Cook et al. 2019) or from BAAIWorm SWC files; convert to NeuroML `<morphology>` elements with segments < 2 μm
 3. Assign per-segment channel densities from the Extended Channel Library (14 classes), guided by CeNGEN expression profiles ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and functional group membership
-4. Optimize passive parameters (axial resistance, membrane capacitance) and channel densities using automated fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend or NEURON's built-in optimizer) to match published I-V curves and current-clamp responses
+4. Optimize passive parameters (axial resistance, membrane capacitance) and channel densities using automated fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend or NEURON's built-in optimizer) to match published I-V curves and current-clamp responses
 5. Propagate fitted parameters to all neurons in the same CeNGEN functional class, scaling channel densities by expression level ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
 ### Stage 2 (Phase 4-5 — Scale to Full Circuit)
@@ -74,7 +74,7 @@ The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/J
 
 ### OpenWorm Extensions Beyond Zhao et al.
 
-(a) We target all 302 neurons, not 136; (b) we use NeuroML standard format enabling multi-simulator support and community sharing; (c) we integrate with CeNGEN transcriptomics for principled parameter propagation rather than purely functional-group-based assignment; (d) our models include neuropeptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) and organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)) that the locomotion-only circuit does not capture.
+(a) We target all 302 neurons, not 136; (b) we use NeuroML standard format enabling multi-simulator support and community sharing; (c) we integrate with CeNGEN transcriptomics for principled parameter propagation rather than purely functional-group-based assignment; (d) our models include neuropeptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) and organ systems ([DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)) that the locomotion-only circuit does not capture.
 
 ---
 
@@ -88,7 +88,7 @@ OpenWorm will adopt this approach with one improvement: quantitative validation 
 
 **Applies only when:** `neural.level: D` and `neural.spatial_synapses: true`. For Level C1, synapse placement is irrelevant and this feature is disabled.
 
-**Data requirement:** Synapse centroid distances from Witvliet et al. 2021, to be acquired per [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline). See also [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for ConnectomeToolbox data access.
+**Data requirement:** Synapse centroid distances from Witvliet et al. 2021, to be acquired per [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline). See also [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) for ConnectomeToolbox data access.
 
 ---
 
@@ -120,7 +120,7 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 4. **EM morphology data:** Witvliet et al. 2021 and Cook et al. 2019 for synapse centroid distances
 5. **BAAIWorm reference:** Per-neuron conductance JSONs at `eworm/components/param/cell/*.json`
 
-**First contribution:** Start with [DD027 Draft Issues](DD027_draft_issues.md) — Issue 14 (evaluate existing morphologies) is the entry point.
+**First contribution:** Start with [DD023 Draft Issues](DD023_draft_issues.md) — Issue 14 (evaluate existing morphologies) is the entry point.
 
 ---
 
@@ -147,9 +147,9 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 |-------|--------|----------|--------|-------|
 | Single-compartment neuron models | [DD001](DD001_Neural_Circuit_Architecture.md) | Level C1 network | NeuroML | — |
 | Cell-type-specific conductances | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-class channel expression | CSV | TPM → g_max |
-| Neuron morphologies (EM) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) / Witvliet 2021 | 3D segment coordinates | NeuroML `<morphology>` | µm |
-| Synapse centroid distances | [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) / Witvliet 2021 | Distance distributions | CSV | µm |
-| Differentiable fitting backend | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) | Parameter optimizer | Python API | — |
+| Neuron morphologies (EM) | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) / Witvliet 2021 | 3D segment coordinates | NeuroML `<morphology>` | µm |
+| Synapse centroid distances | [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) / Witvliet 2021 | Distance distributions | CSV | µm |
+| Differentiable fitting backend | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) | Parameter optimizer | Python API | — |
 
 **Outputs (What This Subsystem Produces)**
 

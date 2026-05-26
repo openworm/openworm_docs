@@ -25,7 +25,7 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd004` |
 | **Config toggle** | `body.cell_identity: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `cell_identity: false` (backward compat), then `cell_identity: true` (tagged sim) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `body/cell_ids/` layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray) |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `body/cell_ids/` layer — particles colored by cell type (muscle=red, intestine=yellow, cuticle=gray) |
 | **CI gate** | Tier 3 kinematic validation blocks merge; backward compatibility with `cell_identity: false` required |
 ---
 
@@ -71,7 +71,7 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: OpenCL SDK, CMake, C++ compiler (same as [DD003](DD003_Body_Physics_Architecture.md))
 - Cell boundary mesh data from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (included in Docker image or downloaded at build time)
 
@@ -140,7 +140,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `body/cell_ids/` — particles colored by cell type.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `body/cell_ids/` — particles colored by cell type.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -311,7 +311,7 @@ The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides 
 | Tagged particle file | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic initialization) | Per-particle: position, type, cell_id, elasticity, adhesion | Extended binary or CSV (see struct below) | mixed |
 | Cell-to-particle mapping | [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal oscillator) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
 | Cell-to-particle mapping | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
-| Cell identity labels (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle cell_id for cell-based coloring/selection | OME-Zarr: `body/cell_ids/`, shape (n_particles,) | integer ID |
+| Cell identity labels (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle cell_id for cell-based coloring/selection | OME-Zarr: `body/cell_ids/`, shape (n_particles,) | integer ID |
 
 ### Repository & Packaging
 
@@ -364,7 +364,7 @@ docker compose run validate
 - [ ] All 959 somatic cells mapped to at least one particle
 - [ ] Particle file version header present (first 4 bytes = format version)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|

@@ -25,7 +25,7 @@ Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level 
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_pharynx.py`, `pharynx/` module) — issues labeled `dd007` |
 | **Config toggle** | `pharynx.enabled: true` / `pharynx.model: "1d_oscillator"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `pharynx.enabled: true` (body still moves?), `scripts/measure_pumping.py` (3-4 Hz?) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `pharynx/pumping_state/` layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `pharynx/pumping_state/` layer — 3-section contraction animation (corpus, isthmus, terminal bulb), [0,1] heatmap |
 | **CI gate** | Pumping frequency validation (Tier 3) blocks merge; backward compatibility with `pharynx.enabled: false` required |
 ---
 
@@ -83,7 +83,7 @@ Each pharyngeal NeuroML file includes metadata:
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 
 ### Getting Started (Environment Setup)
@@ -154,7 +154,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** Pharyngeal pumping state as a 3-section contraction heatmap.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** Pharyngeal pumping state as a 3-section contraction heatmap.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -366,7 +366,7 @@ May contain HH parameter fits for pharyngeal neurons (I1, M3, MC, NSM) that coul
 | Pumping state (contracted/relaxed per section) | [DD010](DD010_Validation_Framework.md) (pumping frequency validation) | Per-section contraction time series | Tab-separated file | binary (0/1) or continuous [0,1] |
 | Pharyngeal particle forces (Option B only) | [DD003](DD003_Body_Physics_Architecture.md) | Per-particle force for pharyngeal muscles | Same format as body muscle activation | dimensionless [0,1] |
 | Food transport rate (future) | [DD009](DD009_Intestinal_Oscillator_Model.md) | Rate of material entering intestine | Scalar time series | um3/s |
-| Pumping state time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-section contraction state over all timesteps | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | continuous [0, 1] |
+| Pumping state time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-section contraction state over all timesteps | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | continuous [0, 1] |
 
 ### Repository & Packaging
 
@@ -426,7 +426,7 @@ docker compose run validate
 - [ ] `measure_pumping.py` reports 3-4 Hz pumping frequency
 - [ ] `validate` passes (Tier 3 body kinematics within +/-15%)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|

@@ -4,9 +4,9 @@
 OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/openclaw) framework — to scale our volunteer community while protecting founder time. This page describes the strategy, the agents, and the community model they enable.
 
 !!! info "Governing Design Documents"
-    - **[DD011: Contributor Progression Model](../design_documents/DD011_Contributor_Progression_Model.md)** — L0–L5 levels, meritocratic ladder
-    - **[DD013: Simulation Stack Architecture](../design_documents/DD013_Simulation_Stack_Architecture.md)** — Integration support from Mind-of-a-Worm
-    - **[DD015: AI Contributor Model](../design_documents/DD015_AI_Contributor_Model.md)** — Autonomous AI agents as registered contributors
+    - **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — L0–L5 levels, meritocratic ladder
+    - **[DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md)** — Integration support from Mind-of-a-Worm
+    - **[DD015: AI Contributor Model](../contributing/ai-contributors.md)** — Autonomous AI agents as registered contributors
 
 ---
 
@@ -116,7 +116,7 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Design Document Enforcement** | Flags deviations from established architectural decisions; links to the relevant DD |
 | **Graduated Task Assignment** | Maintains a 5-level difficulty scale; recommends tasks based on contributor history |
 | **Progress Tracking** | Tracks each contributor's level (L1–L5), completed tasks, review quality |
-| **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers ([DD013](../design_documents/DD013_Simulation_Stack_Architecture.md)) |
+| **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers ([DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)) |
 | **Peer Mentoring** | Connects senior contributors with newcomers working in the same subsystem |
 
 **What it replaces:** The 15% of founder time spent on code review, explaining architectural decisions, and assigning work.
@@ -139,7 +139,7 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 
 ## The Graduated Access System
 
-Drawing on the Apache Software Foundation's contributor ladder, the Linux kernel's maintainer tree, and the medical residency model of graduated autonomy, contributors progress through explicit levels defined in [DD011](../design_documents/DD011_Contributor_Progression_Model.md):
+Drawing on the Apache Software Foundation's contributor ladder, the Linux kernel's maintainer tree, and the medical residency model of graduated autonomy, contributors progress through explicit levels defined in [DD011](../contributing/contributor-progression.md):
 
 | Level | Title | Access | Earned By | Mentored By |
 |-------|-------|--------|-----------|-------------|
@@ -169,10 +169,10 @@ Each [Design Document](../design_documents/index.md) encodes:
 2. **Decision** — The chosen approach, with specificity about fidelity, parameters, and data sources
 3. **Alternatives Considered** — What was rejected and why (prevents re-proposals)
 4. **Quality Criteria** — How to validate correctness
-5. **Integration Contract** — How the subsystem connects to the rest of the organism ([DD013](../design_documents/DD013_Simulation_Stack_Architecture.md))
+5. **Integration Contract** — How the subsystem connects to the rest of the organism ([DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
 6. **References** — Relevant papers, datasets, and prior work
 
-Mind-of-a-Worm enforces Design Documents automatically during PR review. Contributors who disagree with a decision can propose a new DD through the [RFC process](../design_documents/DD012_Design_Document_RFC_Process.md).
+Mind-of-a-Worm enforces Design Documents automatically during PR review. Contributors who disagree with a decision can propose a new DD through the [RFC process](../contributing/decision-process.md).
 
 ---
 
@@ -226,7 +226,7 @@ This approach is informed by several production deployments:
 
 ## AI-Assisted vs. AI-Native
 
-This page describes the **AI-assisted model** where AI agents help human contributors. OpenWorm also explores an **AI-native model** where autonomous AI agents register as independent contributors — see [DD015: AI Contributor Model](../design_documents/DD015_AI_Contributor_Model.md) for that complementary approach.
+This page describes the **AI-assisted model** where AI agents help human contributors. OpenWorm also explores an **AI-native model** where autonomous AI agents register as independent contributors — see [DD015: AI Contributor Model](../contributing/ai-contributors.md) for that complementary approach.
 
 ---
 
@@ -234,7 +234,7 @@ This page describes the **AI-assisted model** where AI agents help human contrib
 
 | Component | Status |
 |-----------|--------|
-| Design Documents (DD001–DD028, DD014.1, DD014.2) | Complete (29 documents, ~350 pages) |
+| Design Documents (DD001–DD024, DD012.1, DD012.2) | Complete (29 documents, ~350 pages) |
 | Agent architecture specification | Complete |
 | Agent foundational knowledge docs | Partially complete (~60%) |
 | OpenClaw deployment | Not yet deployed |

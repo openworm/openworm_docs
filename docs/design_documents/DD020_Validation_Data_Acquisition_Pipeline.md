@@ -1,10 +1,10 @@
-# DD024: Validation Data Acquisition Pipeline
+# DD020: Validation Data Acquisition Pipeline
 
 - **Status:** Proposed (Phase A1 — Core Infrastructure)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-21
 - **Supersedes:** None
-- **Related:** [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox)
+- **Related:** [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox)
 
 ---
 
@@ -16,7 +16,7 @@
 |----------|--------|
 | **What does this produce?** | Version-controlled repository of all experimental datasets needed for [DD010](DD010_Validation_Framework.md) validation across tiers 1-4 and all subsystem DDs |
 | **Success metric** | Every [DD010](DD010_Validation_Framework.md) validation test can run against locally cached, versioned data without requiring external API calls at runtime |
-| **Repository** | `openworm/validation-data` (new repo) — issues labeled `dd024` |
+| **Repository** | `openworm/validation-data` (new repo) — issues labeled `dd020` |
 | **Config toggle** | `validation.data_path: /opt/openworm/validation/data/` in `openworm.yml` |
 | **Build & test** | `docker compose run shell python scripts/verify_validation_data.py` — checks all datasets present, checksums match |
 | **Visualize** | N/A (data infrastructure, not a model) |
@@ -26,7 +26,7 @@
 
 ## TL;DR
 
-Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A1 infrastructure — without clean, versioned validation data, no validation tier can function. This DD also serves as the **canonical dataset inventory** for all phases, consolidating validation, implementation, and projected datasets in one place (see [Phase Roadmap](DD_PHASE_ROADMAP.md) for implementation timeline).
+Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md)) specifies validation targets that depend on published experimental data, but no DD owns the systematic acquisition, formatting, and version control of that data. This DD fills that gap. It catalogs every dataset referenced by [DD010](DD010_Validation_Framework.md)'s four validation tiers, defines how each is acquired (API, supplement download, manual digitization), what format it is stored in, and where it lives in the `openworm/validation-data` repository. This is Phase A1 infrastructure — without clean, versioned validation data, no validation tier can function. This DD also serves as the **canonical dataset inventory** for all phases, consolidating validation, implementation, and projected datasets in one place (see [Phase Roadmap](DD_PHASE_ROADMAP.md) for implementation timeline).
 
 ---
 
@@ -49,7 +49,7 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | Data manifest | `manifest.json` | JSON: dataset_id, source, DOI, license, checksum, format, DD_consumer |
 | Verification script | `scripts/verify_validation_data.py` | Python |
 | Per-dataset README | `{category}/{dataset}/README.md` | Markdown with provenance |
-| Docker data volume | Baked into [DD013](DD013_Simulation_Stack_Architecture.md) Docker `validation` stage | Directory tree at `/opt/openworm/validation/data/` |
+| Docker data volume | Baked into [DD011](DD011_Simulation_Stack_Architecture.md) Docker `validation` stage | Directory tree at `/opt/openworm/validation/data/` |
 
 ---
 
@@ -58,9 +58,9 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | Item | Value |
 |------|-------|
 | **Repository** | `openworm/validation-data` (new — to be created) |
-| **Issue label** | `dd024` |
+| **Issue label** | `dd020` |
 | **Milestone** | Phase A1: Core Infrastructure |
-| **Branch convention** | `dd024/dataset-name` (e.g., `dd024/randi2023-functional-connectivity`) |
+| **Branch convention** | `dd020/dataset-name` (e.g., `dd020/randi2023-functional-connectivity`) |
 
 ---
 
@@ -76,7 +76,7 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | AWC olfactory neuron recordings | Chalasani et al. 2007, *Nature* 450:63-70 | AWC | CSV: time, V, I, odor | Digitize from paper | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Medium | Phase 2+ |
 | RIA compartmentalized calcium | Hendricks et al. 2012, *Nature* 487:99-103 | RIA | CSV: time, Ca_proximal, Ca_distal | Supplement or digitize | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2 |
 | AWA calcium action potentials | Liu et al. 2018, *Cell* 175:57-70 | AWA | CSV: time, V, Ca | Supplement data | [DD001](DD001_Neural_Circuit_Architecture.md) (Level D) | Medium | Phase 2+ |
-| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A1 |
+| MEC-4 channel kinetics | O'Hagan et al. 2005, *Nat Neurosci* 8:43-50 | Touch receptor | CSV: strain, current, activation/inactivation curves | Digitize from paper | [DD015](DD015_Closed_Loop_Touch_Response.md) | High | Phase A1 |
 | Pharyngeal muscle plateau potentials | Raizen & Avery 1994, *Neuron* 12:483-495 | pm3-pm8 | CSV: time, V (intracellular recording) | Digitize from paper figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A1 |
 | Electrophysiology training set (~20 neurons) | Goodman lab, Lockery lab, published papers | ~20 neuron classes | CSV: neuron_class, channel, measured_g, source_doi | Curate from multiple papers | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | High | Phase 1 |
 
@@ -98,31 +98,31 @@ Every subsystem DD ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_
 | N2 behavioral phenotype statistics | Yemini et al. 2013 | Population means, CVs for ~700 features | CSV from supplement | Download supplementary data | [DD010](DD010_Validation_Framework.md) (±15% threshold grounding) | High | Phase A1 |
 | Defecation cycle periods | Thomas 1990, *Genetics* 124:855-872 | ~50s period, posterior-to-anterior wave | CSV: animal_id, cycle_start, cycle_end, period | Digitize from Table 1 | [DD009](DD009_Intestinal_Oscillator_Model.md) | High | Phase A1 |
 | Pharyngeal pumping EPG | Raizen & Avery 1994, *Neuron* 12:483-495 | 3-4 Hz pumping frequency, EPG waveform | CSV: time, voltage | Digitize from figures | [DD007](DD007_Pharyngeal_System_Architecture.md) | Medium | Phase A1 |
-| Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD018](DD018_Egg_Laying_System_Architecture.md) | Medium | Phase 3 |
-| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD019](DD019_Closed_Loop_Touch_Response.md) | High | Phase A1 |
+| Egg-laying bout statistics | Collins et al. 2016, *eLife* 5:e21126 | Inactive/active bout durations, eggs per bout | CSV from supplement | Download supplement | [DD014](DD014_Egg_Laying_System_Architecture.md) | Medium | Phase 3 |
+| Touch response latency | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985), *J Neurosci* 5:956-964 | Reversal onset 300-800 ms | CSV: stimulus_type, latency | Digitize from paper | [DD015](DD015_Closed_Loop_Touch_Response.md) | High | Phase A1 |
 | Foraging behavior decomposition | Flavell et al. 2020, *Genetics* 216:315-332 | Dwelling/roaming state durations, transition rates | CSV: state, duration, transition_probability | Digitize from paper or request | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Medium | Phase 2 |
-| Chemotaxis behavioral data | Iino & Yoshida 2009, Bargmann & Horvitz 1991 | Chemotaxis assay | CSV: chemotaxis index, trajectory data | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
-| Thermotaxis behavioral data | Hedgecock & Russell 1975, Mori & Ohshima 1995 | Thermotaxis assay | CSV: isothermal tracking, cultivation temp preference | Digitize from papers | [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
-| B-class motor neuron stretch response | Wen et al. 2012 | DB, VB neurons | Calcium imaging (DB, VB response to body bending) | Extract from paper | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Medium | Phase 2 |
+| Chemotaxis behavioral data | Iino & Yoshida 2009, Bargmann & Horvitz 1991 | Chemotaxis assay | CSV: chemotaxis index, trajectory data | Digitize from papers | [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
+| Thermotaxis behavioral data | Hedgecock & Russell 1975, Mori & Ohshima 1995 | Thermotaxis assay | CSV: isothermal tracking, cultivation temp preference | Digitize from papers | [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Medium | Phase 2 |
+| B-class motor neuron stretch response | Wen et al. 2012 | DB, VB neurons | Calcium imaging (DB, VB response to body bending) | Extract from paper | [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) | Medium | Phase 2 |
 
 ### Tier 4: Causal / Interventional
 
 | Dataset | Source Publication | Intervention | Expected Phenotype | Format Needed | Consumer DD | Priority | Phase |
 |---------|-------------------|-------------|-------------------|---------------|-------------|----------|-------|
-| Touch neuron ablation | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High | Phase 2 |
+| Touch neuron ablation | [Chalfie et al. 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) | Laser ablation of ALM, AVM, PLM | Loss of gentle touch response | CSV: ablated_neurons, stimulus, response | [DD015](DD015_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) | High | Phase 2 |
 | Pharyngeal neuron ablation | Avery & Horvitz 1989, *Neuron* 3:473-485 | Laser killing of pharyngeal neurons | Pumping persists (semi-autonomous) | CSV: ablated_neurons, pumping_frequency | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
 | Neuropeptide knockouts (FLP, NLP) | Li et al. 1999; Rogers et al. 2003 | Gene deletion | Altered locomotion | CSV: genotype, speed, reversal_rate | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md) | High | Phase 2 |
-| unc-103 loss-of-function | Collins & Koelle 2013, *J Neurosci* 33:761-775 | ERG channel removal from vm2 | Constitutive egg-laying | CSV: genotype, egg_count, bout_pattern | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
-| egl-1 loss-of-function | Trent et al. 1983, *Genetics* 104:619-647 | HSN cell death | Egg-laying defective | CSV: genotype, phenotype_class | [DD018](DD018_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
+| unc-103 loss-of-function | Collins & Koelle 2013, *J Neurosci* 33:761-775 | ERG channel removal from vm2 | Constitutive egg-laying | CSV: genotype, egg_count, bout_pattern | [DD014](DD014_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
+| egl-1 loss-of-function | Trent et al. 1983, *Genetics* 104:619-647 | HSN cell death | Egg-laying defective | CSV: genotype, phenotype_class | [DD014](DD014_Egg_Laying_System_Architecture.md), [DD010](DD010_Validation_Framework.md) | Medium | Phase 3 |
 | Optogenetic single-neuron activation | Leifer et al. 2011, *Nat Methods* 8:147-152 | Light activation of specific neurons | Stimulus-specific behavioral response | CSV: neuron, stimulus, behavior | [DD010](DD010_Validation_Framework.md) | Low (Phase 3+) | Phase 3+ |
 
 ### Connectome & Molecular (Supporting)
 
 | Dataset | Source | Content | Format Needed | Acquisition Method | Consumer DD | Status | Phase |
 |---------|--------|---------|---------------|-------------------|-------------|--------|-------|
-| Synaptic + gap junction connectome | Cook et al. 2019, *Nature* 571:63-71 | Adjacency matrices | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
-| Developmental connectomes | Witvliet et al. 2021, *Nature* 596:257-261 | 8 animals L1-adult | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
-| Neuropeptidergic connectome | Ripoll-Sanchez et al. 2023, *Neuron* 111:3570-3589 | 31,479 interactions | CSV + **in `cect`** | Supplement Table S1 + ConnectomeToolbox | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 2 |
+| Synaptic + gap junction connectome | Cook et al. 2019, *Nature* 571:63-71 | Adjacency matrices | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
+| Developmental connectomes | Witvliet et al. 2021, *Nature* 596:257-261 | 8 animals L1-adult | **Already in `cect`** | Via ConnectomeToolbox API | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 0 |
+| Neuropeptidergic connectome | Ripoll-Sanchez et al. 2023, *Neuron* 111:3570-3589 | 31,479 interactions | CSV + **in `cect`** | Supplement Table S1 + ConnectomeToolbox | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Available | Phase 2 |
 | CeNGEN L4 expression | Taylor et al. 2021, *Cell* 184:4329-4347 | 128 classes x 20,500 genes | CSV (TPM) via `wormneuroatlas` | API or cengen.org download | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Available | Phase 1 |
 | WBbt cell ontology | WormBase | 959 somatic cell IDs | OWL/OBO | WormBase download | [DD004](DD004_Mechanical_Cell_Identity.md) | Available | Phase 4 |
 | 3D nuclear positions | Long et al. 2009, *Nat Methods* 6:667-672 | 357 nuclei at L1 | CSV: cell_name, x, y, z | Supplement | [DD004](DD004_Mechanical_Cell_Identity.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Needs acquisition | Phase 2 |
@@ -135,16 +135,16 @@ These datasets are inputs to model building (not validation). They are included 
 
 | Dataset | Source | Content | Format | Consumer DD | Status | Phase |
 |---------|--------|---------|--------|-------------|--------|-------|
-| **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | Cell-type-specific expression for non-neural cells | CSV (subset of L4 expression) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md) | Available (filter CeNGEN L4 by cell type) | Phase 3 |
-| **CE_locomotion stretch receptor model** | [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) | C++ reference implementation (StretchReceptor.cpp) | C++ source | [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) | Available (repo active 2026-02-18) | Phase 2 |
+| **CeNGEN pharyngeal/intestinal/reproductive expression** | cengen.org | Cell-type-specific expression for non-neural cells | CSV (subset of L4 expression) | [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md) | Available (filter CeNGEN L4 by cell type) | Phase 3 |
+| **CE_locomotion stretch receptor model** | [openworm/CE_locomotion](https://github.com/openworm/CE_locomotion) | C++ reference implementation (StretchReceptor.cpp) | C++ source | [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) | Available (repo active 2026-02-18) | Phase 2 |
 | **BAAIWorm NMODL ion channel files and SWC morphology data** | [github.com/Jessie940611/BAAIWorm](https://github.com/Jessie940611/BAAIWorm), Apache 2.0, Zenodo: [10.5281/zenodo.13951773](https://doi.org/10.5281/zenodo.13951773) | NMODL (.mod) + SWC (.swc) for multicompartmental neurons | NMODL + SWC | [DD001](DD001_Neural_Circuit_Architecture.md) Level D Stage 1 | Available (open-source) | Phase 2 |
-| **Virtual Worm Blender meshes** | Blender2NeuroML repo (Grove & Sternberg 2012) | 688 anatomical meshes, ~1.6M vertices | .blend file | [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) | Available (Virtual_Worm_February_2012.blend) | Phase 4 |
+| **Virtual Worm Blender meshes** | Blender2NeuroML repo (Grove & Sternberg 2012) | 688 anatomical meshes, ~1.6M vertices | .blend file | [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) | Available (Virtual_Worm_February_2012.blend) | Phase 4 |
 | **Witvliet 2021 cell boundary meshes** | Nature 596:257 supplement | 3D EM reconstructions per cell | OBJ or STL per cell | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs extraction/conversion from EM data | Phase 4 |
 | **Cell-type mechanical properties** | Literature review (biomechanics) | Elasticity, adhesion per tissue type | CSV: cell_type, elasticity_mult, adhesion_strength | [DD004](DD004_Mechanical_Cell_Identity.md) | Needs curation from biomechanics literature | Phase 4 |
-| **Ion channels with known kinetics** | PDB + electrophysiology literature | ~50-100 channels with measured HH parameters | CSV: channel, structure, V_half, k, tau | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Needs curation | Phase A2 |
-| **C. elegans ion channel sequences** | WormBase | All C. elegans ion channel protein sequences | FASTA | [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Available | Phase A2 |
-| **SPH simulation training set** | Generate from Sibernetic | 500+ runs: muscle activation to trajectory pairs | HDF5 | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (surrogate) | Generate in Phase 3 (~2,500 GPU-hours) | Phase 3 |
-| **Sensory neuron calcium imaging** | Suzuki 2003/2008, Chalasani 2007 | Stimulus to Ca response curves | CSV | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory) | Extract from papers | Phase 3 |
+| **Ion channels with known kinetics** | PDB + electrophysiology literature | ~50-100 channels with measured HH parameters | CSV: channel, structure, V_half, k, tau | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | Needs curation | Phase A2 |
+| **C. elegans ion channel sequences** | WormBase | All C. elegans ion channel protein sequences | FASTA | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | Available | Phase A2 |
+| **SPH simulation training set** | Generate from Sibernetic | 500+ runs: muscle activation to trajectory pairs | HDF5 | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 2 (surrogate) | Generate in Phase 3 (~2,500 GPU-hours) | Phase 3 |
+| **Sensory neuron calcium imaging** | Suzuki 2003/2008, Chalasani 2007 | Stimulus to Ca response curves | CSV | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (learned sensory) | Extract from papers | Phase 3 |
 
 ### Projected Datasets (Phases 5-7)
 
@@ -178,7 +178,7 @@ All datasets in `openworm/validation-data` must follow these conventions:
 |-----------|--------|---------------|
 | Time series (V, Ca, I) | CSV with header row: `time_ms, value, unit` | Universal readability, git-friendly |
 | Correlation matrices | NumPy `.npy` with companion `.json` metadata | Efficient for large matrices, metadata preserves neuron ordering |
-| Movement trajectories | WCON 1.0 (per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | Standard format for *C. elegans* tracking data |
+| Movement trajectories | WCON 1.0 (per [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) | Standard format for *C. elegans* tracking data |
 | Behavioral statistics | CSV with header: `genotype, metric, mean, std, n, source_doi` | Machine-readable, self-documenting |
 | Intervention/ablation data | CSV with header: `genotype_or_ablation, stimulus, metric, value, n, source_doi` | Uniform causal validation format |
 | Expression matrices | CSV (gene x cell class) or via `wormneuroatlas` API cache | Consistent with [DD005](DD005_Cell_Type_Differentiation_Strategy.md) pipeline |
@@ -231,15 +231,15 @@ These datasets are blocking for the two critical validation tiers (Tier 2 and Ti
 3. **Yemini 2013 behavioral statistics** (Tier 3 threshold grounding) — Download supplement CSV. ~1 hour.
 4. **Thomas 1990 defecation periods** ([DD009](DD009_Intestinal_Oscillator_Model.md) Tier 3) — Digitize Table 1. ~2 hours.
 5. **Raizen 1994 pumping frequency** ([DD007](DD007_Pharyngeal_System_Architecture.md) Tier 3) — Digitize from figures. ~3 hours.
-6. **O'Hagan 2005 MEC-4 kinetics** ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 1) — Digitize activation/inactivation curves. ~4 hours.
-7. **[Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) touch response** ([DD019](DD019_Closed_Loop_Touch_Response.md) Tier 3 + Tier 4) — Digitize latency data. ~2 hours.
+6. **O'Hagan 2005 MEC-4 kinetics** ([DD015](DD015_Closed_Loop_Touch_Response.md) Tier 1) — Digitize activation/inactivation curves. ~4 hours.
+7. **[Chalfie 1985](https://doi.org/10.1523/JNEUROSCI.05-04-00956.1985) touch response** ([DD015](DD015_Closed_Loop_Touch_Response.md) Tier 3 + Tier 4) — Digitize latency data. ~2 hours.
 
 **Estimated total: ~18 hours**
 
 ### Phase 1 (Months 1-3) — Should Have
 
 8. **Goodman 1998 touch neuron electrophysiology** (Tier 1) — Digitize I-V curves. ~4 hours.
-9. **Collins 2016 egg-laying statistics** ([DD018](DD018_Egg_Laying_System_Architecture.md) Tier 3) — Download supplement. ~2 hours.
+9. **Collins 2016 egg-laying statistics** ([DD014](DD014_Egg_Laying_System_Architecture.md) Tier 3) — Download supplement. ~2 hours.
 10. **Flavell 2020 dwelling/roaming statistics** ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md) Tier 4) — Digitize or request. ~3 hours.
 11. **Randi 2023 unc-31 mutant** (Tier 4) — Extract from `wormneuroatlas`. ~1 hour.
 12. **Long 2009 3D nuclear positions** ([DD004](DD004_Mechanical_Cell_Identity.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) — Download supplement. ~2 hours.
@@ -259,10 +259,10 @@ These datasets are blocking for the two critical validation tiers (Tier 2 and Ti
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pip
 - For data acquisition scripts: `wormneuroatlas`, `connectometoolbox` (cect), `pandas`, `numpy`
-- For WCON validation: `tracker-commons` Python package (per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+- For WCON validation: `tracker-commons` Python package (per [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 
 ### Getting Started (Environment Setup)
 
@@ -277,7 +277,7 @@ cd validation-data
 
 **Path A — Docker (verification and CI):**
 
-Validation data is baked into the [DD013](DD013_Simulation_Stack_Architecture.md) Docker build at the `validation` stage. To verify all datasets:
+Validation data is baked into the [DD011](DD011_Simulation_Stack_Architecture.md) Docker build at the `validation` stage. To verify all datasets:
 
 ```bash
 # From the OpenWorm meta-repo:
@@ -298,10 +298,10 @@ pip install numpy pandas scipy
 
 # Install data source APIs
 pip install wormneuroatlas          # Randi 2023 functional connectivity, CeNGEN expression
-pip install connectometoolbox       # cect — connectome data access (DD020)
+pip install connectometoolbox       # cect — connectome data access (DD016)
 
 # Install WCON format tools (for behavioral kinematics data)
-pip install tracker-commons         # per DD021
+pip install tracker-commons         # per DD017
 
 # Verify existing datasets
 python scripts/verify_validation_data.py
@@ -354,28 +354,28 @@ python scripts/verify_validation_data.py
 
 ## Context & Background
 
-### ConnectomeToolbox (`cect`) — [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)
+### ConnectomeToolbox (`cect`) — [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)
 
-`cect` already provides programmatic access to connectome datasets (Cook 2019, Witvliet 2021, Ripoll-Sanchez 2023). [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) does NOT duplicate this. Instead:
+`cect` already provides programmatic access to connectome datasets (Cook 2019, Witvliet 2021, Ripoll-Sanchez 2023). [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) does NOT duplicate this. Instead:
 
 - Connectome data remains in `cect` (the canonical API)
-- [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) stores *validation* data (experimental recordings, behavioral measurements) that `cect` does not cover
-- For Randi 2023 functional connectivity, [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) caches the output of `wormneuroatlas` API calls as static files to avoid runtime dependencies
+- [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) stores *validation* data (experimental recordings, behavioral measurements) that `cect` does not cover
+- For Randi 2023 functional connectivity, [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) caches the output of `wormneuroatlas` API calls as static files to avoid runtime dependencies
 
 ### OWMeta ([DD008](DD008_Data_Integration_Pipeline.md))
 
-OWMeta is the semantic knowledge graph for *C. elegans* biological facts. [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) complements it:
+OWMeta is the semantic knowledge graph for *C. elegans* biological facts. [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) complements it:
 
 - OWMeta stores structured biological knowledge (cell types, gene functions, anatomical relationships)
-- [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) stores quantitative experimental recordings used specifically for model validation
-- In Phase 3+, OWMeta may ingest [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) data as validation-specific data types
+- [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) stores quantitative experimental recordings used specifically for model validation
+- In Phase 3+, OWMeta may ingest [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) data as validation-specific data types
 
-### Docker Integration ([DD013](DD013_Simulation_Stack_Architecture.md))
+### Docker Integration ([DD011](DD011_Simulation_Stack_Architecture.md))
 
-[DD024](DD024_Validation_Data_Acquisition_Pipeline.md) data is baked into the Docker `validation` stage at build time:
+[DD020](DD020_Validation_Data_Acquisition_Pipeline.md) data is baked into the Docker `validation` stage at build time:
 
 ```dockerfile
-# In DD013 multi-stage Dockerfile
+# In DD011 multi-stage Dockerfile
 FROM validation-base AS validation
 COPY --from=openworm/validation-data:v1.0 /data /opt/openworm/validation/data/
 RUN python scripts/verify_validation_data.py
@@ -397,7 +397,7 @@ Data is NOT downloaded at runtime — all validation data is pre-packaged for re
 
 ### 3. Custom Data Format
 
-**Rejected:** Use existing community formats (NWB, WCON per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) to maximize interoperability and reduce maintenance burden.
+**Rejected:** Use existing community formats (NWB, WCON per [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) to maximize interoperability and reduce maintenance burden.
 
 ### 4. Manual Data Curation Only
 
@@ -410,7 +410,7 @@ Data is NOT downloaded at runtime — all validation data is pre-packaged for re
 1. **Provenance metadata:** All acquired datasets must have provenance metadata (source, version, download date, checksum) in their `README.md`.
 2. **Refreshable cache:** Cached data must be refreshable without breaking downstream validation scripts.
 3. **Version pinning:** Dataset versions must be pinned in `checksums.sha256` for reproducibility.
-4. **CI compatibility:** Data acquisition and verification scripts must run successfully in CI (Docker environment per [DD013](DD013_Simulation_Stack_Architecture.md)).
+4. **CI compatibility:** Data acquisition and verification scripts must run successfully in CI (Docker environment per [DD011](DD011_Simulation_Stack_Architecture.md)).
 
 ---
 
@@ -420,9 +420,9 @@ Data is NOT downloaded at runtime — all validation data is pre-packaged for re
 
 2. **Proprietary or restricted data:** Only openly redistributable data (CC-BY, CC0, or fair-use digitization from published figures) is included. Data requiring DTA or institutional agreement is documented in the manifest but not stored.
 
-3. **Simulation output data:** [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) stores *experimental* data for validation. Simulated reference outputs (baseline scores, expected trajectories) are generated by [DD010](DD010_Validation_Framework.md)/[DD013](DD013_Simulation_Stack_Architecture.md) CI pipeline, not pre-stored.
+3. **Simulation output data:** [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) stores *experimental* data for validation. Simulated reference outputs (baseline scores, expected trajectories) are generated by [DD010](DD010_Validation_Framework.md)/[DD011](DD011_Simulation_Stack_Architecture.md) CI pipeline, not pre-stored.
 
-4. **Data analysis scripts:** Scripts that *use* validation data (correlation computation, feature extraction) live in their respective DD repositories ([DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)). [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) only stores data and verification scripts.
+4. **Data analysis scripts:** Scripts that *use* validation data (correlation computation, feature extraction) live in their respective DD repositories ([DD010](DD010_Validation_Framework.md), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)). [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) only stores data and verification scripts.
 
 ---
 
@@ -461,33 +461,33 @@ validation:
 |-------|--------|-------------|
 | Published papers | PubMed / journal websites | Source material for digitization |
 | `wormneuroatlas` API | PyPI package | Randi 2023, CeNGEN programmatic access |
-| ConnectomeToolbox (`cect`) | PyPI package | Connectome data (not stored in [DD024](DD024_Validation_Data_Acquisition_Pipeline.md), but referenced) |
+| ConnectomeToolbox (`cect`) | PyPI package | Connectome data (not stored in [DD020](DD020_Validation_Data_Acquisition_Pipeline.md), but referenced) |
 | Supplement files | Journal supplement pages | Raw data tables from publications |
 
 ### Outputs (What This Subsystem Produces)
 
 | Output | Consumer DD | Description |
 |--------|------------|-------------|
-| Electrophysiology CSVs | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) (Tier 1) | Patch-clamp, V-clamp, channel kinetics |
+| Electrophysiology CSVs | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) (Tier 1) | Patch-clamp, V-clamp, channel kinetics |
 | Functional connectivity matrices | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) (Tier 2) | Randi 2023 302x302 `.npy` files |
-| Behavioral kinematic data | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) (Tier 3) | WCON files, defecation/pumping CSVs |
-| Intervention/perturbation data | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD018](DD018_Egg_Laying_System_Architecture.md), [DD019](DD019_Closed_Loop_Touch_Response.md) (Tier 4) | Ablation, mutant, and knockout phenotype CSVs |
-| Docker data volume | [DD013](DD013_Simulation_Stack_Architecture.md) (Docker build) | `/opt/openworm/validation/data/` tree |
+| Behavioral kinematic data | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD010](DD010_Validation_Framework.md) (Tier 3) | WCON files, defecation/pumping CSVs |
+| Intervention/perturbation data | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) (Tier 4) | Ablation, mutant, and knockout phenotype CSVs |
+| Docker data volume | [DD011](DD011_Simulation_Stack_Architecture.md) (Docker build) | `/opt/openworm/validation/data/` tree |
 | Data manifest | [DD010](DD010_Validation_Framework.md) (validation runner) | `manifest.json` mapping datasets to DDs and tiers |
 
 ### Coupling Dependencies
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neuron naming convention | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (ConnectomeToolbox) | If neuron IDs change in `cect`, cached Randi 2023 matrix column labels may break |
-| WCON format spec | [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | If WCON version changes, kinematics files may need re-export |
-| Docker build pipeline | [DD013](DD013_Simulation_Stack_Architecture.md) | If Docker stage names or paths change, data COPY step breaks |
+| Neuron naming convention | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (ConnectomeToolbox) | If neuron IDs change in `cect`, cached Randi 2023 matrix column labels may break |
+| WCON format spec | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | If WCON version changes, kinematics files may need re-export |
+| Docker build pipeline | [DD011](DD011_Simulation_Stack_Architecture.md) | If Docker stage names or paths change, data COPY step breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | All validation tiers | [DD010](DD010_Validation_Framework.md) | If data format or file paths change, validation scripts break |
-| CI pipeline | [DD013](DD013_Simulation_Stack_Architecture.md) | If Docker data volume path changes, `docker compose run validate` can't find data |
-| All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD019](DD019_Closed_Loop_Touch_Response.md) | If a dataset is removed or reformatted, the consuming DD's validation fails |
+| CI pipeline | [DD011](DD011_Simulation_Stack_Architecture.md) | If Docker data volume path changes, `docker compose run validate` can't find data |
+| All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) | If a dataset is removed or reformatted, the consuming DD's validation fails |
 
 ---
 
@@ -498,5 +498,5 @@ validation:
 1. Create `openworm/validation-data` GitHub repository
 2. Acquire Phase A1 datasets (7 datasets, ~18 hours)
 3. Write `verify_validation_data.py` script
-4. Integrate into [DD013](DD013_Simulation_Stack_Architecture.md) Docker build
+4. Integrate into [DD011](DD011_Simulation_Stack_Architecture.md) Docker build
 5. Announce in next board sync for contributor help with digitization tasks

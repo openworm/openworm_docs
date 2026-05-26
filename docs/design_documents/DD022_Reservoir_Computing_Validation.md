@@ -1,10 +1,10 @@
-# DD026: Reservoir Computing Validation of the C. elegans Nervous System
+# DD022: Reservoir Computing Validation of the C. elegans Nervous System
 
 - **Status:** Proposed (Phase 2)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-23
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response), [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
 
 ---
 
@@ -47,7 +47,7 @@ RC is a *framework*, not a fact. The connectome might not satisfy RC requirement
 
 ### Key Reference
 
-[Yan et al. 2024](https://doi.org/10.1038/s41467-024-49498-x) demonstrated reservoir computing in biological neural networks, showing that fixed recurrent networks can perform computation through their transient dynamics. DD026 tests whether this framework applies to the specific case of the *C. elegans* connectome as simulated by OpenWorm.
+[Yan et al. 2024](https://doi.org/10.1038/s41467-024-49498-x) demonstrated reservoir computing in biological neural networks, showing that fixed recurrent networks can perform computation through their transient dynamics. DD022 tests whether this framework applies to the specific case of the *C. elegans* connectome as simulated by OpenWorm.
 
 ---
 
@@ -92,7 +92,7 @@ The RC framework requires partitioning neurons into input, reservoir, and readou
 | **Reservoir** | Interneurons | ~100 | Recurrent processing layer |
 | **Readout** (trained W_out) | Motor neurons (body wall, head, pharyngeal) | ~113 | Natural output layer |
 
-**Rationale:** Follows standard anatomical classification from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7). Uses `cect` API ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) neuron classification.
+**Rationale:** Follows standard anatomical classification from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7). Uses `cect` API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) neuron classification.
 
 ### Partition B: Whole-Nervous-System Reservoir
 
@@ -204,7 +204,7 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 
 **Test Protocol:**
 
-1. Run simulation with naturalistic input (e.g., [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) gradient + [DD019](DD019_Closed_Loop_Touch_Response.md) touch stimuli) for 60 seconds
+1. Run simulation with naturalistic input (e.g., [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) gradient + [DD015](DD015_Closed_Loop_Touch_Response.md) touch stimuli) for 60 seconds
 2. Record reservoir neuron states **X** (time × reservoir neurons matrix)
 3. Record readout neuron states **Y** (time × readout neurons matrix) — this is the ground truth
 4. Train ridge regression: **Y_pred = X · W_out** (with cross-validation for regularization)
@@ -247,7 +247,7 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 
 ```json
 {
-  "dd026_version": "1.0",
+  "dd022_version": "1.0",
   "timestamp": "2026-09-XX",
   "simulation_config": {
     "duration_seconds": 60,
@@ -309,9 +309,9 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 |------|-------|
 | **Repository** | `openworm/OpenWorm` (validation scripts) `[TO BE CREATED]` |
 | **Subdirectory** | `validation/reservoir_computing/` |
-| **Issue label** | `dd026` |
+| **Issue label** | `dd022` |
 | **Milestone** | Phase 2 — Reservoir Computing Validation |
-| **Example PR title** | `DD026: echo state property test across 4 partitions` |
+| **Example PR title** | `DD022: echo state property test across 4 partitions` |
 
 ---
 
@@ -323,7 +323,7 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 | **Layer** | Analysis / Validation — pure analysis of simulation output, no simulation changes |
 | **What does this produce?** | Quantitative assessment of whether the connectome functions as a reservoir computer |
 | **Success metric** | All 5 predictions × 4 partitions tested; linear readout R² ≥ 0.5 under ≥1 partition |
-| **Repository** | `openworm/OpenWorm/validation/reservoir_computing/` — issues labeled `dd026` |
+| **Repository** | `openworm/OpenWorm/validation/reservoir_computing/` — issues labeled `dd022` |
 | **Config toggle** | `validation.reservoir_computing: true` in `openworm.yml` |
 | **Build & test** | `python validation/reservoir_computing/rc_analysis.py --config openworm.yml` |
 
@@ -334,14 +334,14 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 ### Prerequisites
 
 - Python 3.10+, NumPy, SciPy, scikit-learn, PyTorch (for MLP readout), matplotlib
-- `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) for connectome neuron classification
+- `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) for connectome neuron classification
 - Simulation output from [DD001](DD001_Neural_Circuit_Architecture.md) (neural state HDF5) and [DD002](DD002_Muscle_Model_Architecture.md) (motor activation HDF5)
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) and also requires the **open-worm-analysis-toolbox** ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) for behavioral analysis of simulation output.
+This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) and also requires the **open-worm-analysis-toolbox** ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) for behavioral analysis of simulation output.
 
-If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you have the simulation infrastructure ready. DD026 is a **pure analysis** DD — it does not modify the simulation, only analyzes its output.
+If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you have the simulation infrastructure ready. DD022 is a **pure analysis** DD — it does not modify the simulation, only analyzes its output.
 
 If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to set up the simulation stack, then return here.
 
@@ -426,14 +426,14 @@ print(f'Robustness: {summary[\"robustness\"]}')
 ```
 DD001 neural states (HDF5) ──→ rc_analysis.py ──→ rc_validation_report.json
 DD002 motor activation ────────┤                         │
-DD019/DD022 sensory input ─────┤                         ▼
-DD020 connectome (cect) ───────┘                   DD010 (advisory)
+DD015/DD018 sensory input ─────┤                         ▼
+DD016 connectome (cect) ───────┘                   DD010 (advisory)
 ```
 
 1. **Load neural states** from [DD001](DD001_Neural_Circuit_Architecture.md) simulation output (HDF5: 302 neurons × T timesteps, voltage + calcium)
 2. **Load motor activation** from [DD002](DD002_Muscle_Model_Architecture.md) output (95 muscles × T timesteps)
-3. **Load sensory input** from [DD019](DD019_Closed_Loop_Touch_Response.md)/[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) stimulus logs
-4. **Classify neurons** using `cect` API ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) into sensory/interneuron/motor for each partition
+3. **Load sensory input** from [DD015](DD015_Closed_Loop_Touch_Response.md)/[DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) stimulus logs
+4. **Classify neurons** using `cect` API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) into sensory/interneuron/motor for each partition
 5. **Run 5 tests per partition** (see Falsifiable Predictions section)
 6. **Produce JSON report** consumed by [DD010](DD010_Validation_Framework.md) as advisory (non-blocking)
 
@@ -504,7 +504,7 @@ class MLPReadout(nn.Module):
 
 ```yaml
 validation:
-  # DD026: Reservoir Computing Validation
+  # DD022: Reservoir Computing Validation
   reservoir_computing: false     # Enable RC analysis
   rc_partitions: ["A", "B", "C", "D"]  # Which partitions to test
   rc_esp_trials: 10              # Number of ESP perturbation trials
@@ -522,7 +522,7 @@ validation:
 
 ## Validation
 
-DD026 is itself a validation document — it validates a *computational framework* rather than a biophysical parameter. Results feed into [DD010](DD010_Validation_Framework.md) as **Tier 2a advisory** (non-blocking):
+DD022 is itself a validation document — it validates a *computational framework* rather than a biophysical parameter. Results feed into [DD010](DD010_Validation_Framework.md) as **Tier 2a advisory** (non-blocking):
 
 | Metric | Threshold | Blocking? | Rationale |
 |--------|-----------|-----------|-----------|
@@ -544,8 +544,8 @@ DD026 is itself a validation document — it validates a *computational framewor
 |-------|--------|----------|--------|-------|
 | Neural states (302 neurons) | [DD001](DD001_Neural_Circuit_Architecture.md) | Voltage, calcium traces | HDF5 | mV, µM |
 | Motor activation (95 muscles) | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle activation | HDF5 | dimensionless [0,1] |
-| Sensory input log | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | Stimulus time series | HDF5/CSV | mixed |
-| Connectome topology + neuron classification | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | `cect` API (sensory/inter/motor labels) | Python API | categorical |
+| Sensory input log | [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Stimulus time series | HDF5/CSV | mixed |
+| Connectome topology + neuron classification | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | `cect` API (sensory/inter/motor labels) | Python API | categorical |
 
 ### Outputs (What This Subsystem Produces)
 
@@ -560,8 +560,8 @@ DD026 is itself a validation document — it validates a *computational framewor
 |-------------|----|-----------------------------|
 | Neural state output format | [DD001](DD001_Neural_Circuit_Architecture.md) | If HDF5 schema changes, `rc_analysis.py` must update parser |
 | Motor activation format | [DD002](DD002_Muscle_Model_Architecture.md) | If activation file format changes, readout training breaks |
-| Neuron classification | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) | If `cect` changes neuron labels, partition definitions break |
-| Sensory input format | [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) | If stimulus log format changes, input reconstruction breaks |
+| Neuron classification | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | If `cect` changes neuron labels, partition definitions break |
+| Sensory input format | [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | If stimulus log format changes, input reconstruction breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
@@ -571,11 +571,11 @@ DD026 is itself a validation document — it validates a *computational framewor
 
 ## Boundaries (Explicitly Out of Scope)
 
-1. **Modifying the simulation:** DD026 is pure *analysis* of simulation output. No changes to [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), or [DD003](DD003_Body_Physics_Architecture.md) models.
-2. **Training the reservoir:** In standard RC, the reservoir is fixed. DD026 does not train or optimize the connectome weights.
+1. **Modifying the simulation:** DD022 is pure *analysis* of simulation output. No changes to [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), or [DD003](DD003_Body_Physics_Architecture.md) models.
+2. **Training the reservoir:** In standard RC, the reservoir is fixed. DD022 does not train or optimize the connectome weights.
 3. **Online/real-time RC:** All analysis is post-hoc on recorded simulation data. No real-time readout during simulation.
-4. **Comparing to other computational frameworks:** DD026 tests RC specifically. Testing attractor networks, Bayesian inference, or other frameworks would be separate DDs.
-5. **Biological RC experiments:** DD026 tests the *simulated* connectome, not the biological worm. Wet-lab RC experiments are out of scope.
+4. **Comparing to other computational frameworks:** DD022 tests RC specifically. Testing attractor networks, Bayesian inference, or other frameworks would be separate DDs.
+5. **Biological RC experiments:** DD022 tests the *simulated* connectome, not the biological worm. Wet-lab RC experiments are out of scope.
 
 ---
 
@@ -585,14 +585,14 @@ DD026 is itself a validation document — it validates a *computational framewor
 
 | Step | Task | Hours | Dependencies |
 |------|------|-------|-------------|
-| 1 | Implement `rc_partitions.py` with 4 partition definitions using `cect` | 2 | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) |
+| 1 | Implement `rc_partitions.py` with 4 partition definitions using `cect` | 2 | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) |
 | 2 | Implement `rc_metrics.py` (ESP, memory capacity, separation ratio) | 4 | None |
 | 3 | Implement `rc_readout.py` (ridge regression + MLP training) | 4 | scikit-learn, PyTorch |
 | 4 | Implement `rc_analysis.py` (orchestrator: load data → run tests → produce report) | 4 | [DD001](DD001_Neural_Circuit_Architecture.md) HDF5 output |
 | 5 | Create `RC_Validation.ipynb` with visualization and interpretation | 4 | Steps 1-4 |
 | 6 | Integration test with Phase 2 simulation output | 2 | Phase 2 simulation running |
 
-**Parallelization:** DD026 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD019](DD019_Closed_Loop_Touch_Response.md), [DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 1 specialized neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
+**Parallelization:** DD022 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 1 specialized neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
 
 ---
 

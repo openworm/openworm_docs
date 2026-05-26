@@ -100,7 +100,7 @@ Contributing to Design Document Implementation
 
 ### DD Contribution Workflow
 
-1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), visualization -> [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md), etc.)
+1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), visualization -> [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), etc.)
 2. **Read the DD** — understand the goal, deliverables, and quality criteria
 3. **Read "How to Build & Test" section** — copy-pasteable commands to get started
 4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md))
@@ -113,7 +113,7 @@ Contributing to Design Document Implementation
 
 ### Contributor Levels
 
-See **[DD011 (Contributor Progression)](../design_documents/DD011_Contributor_Progression_Model.md)** for the L0 to L5 path:
+See **[DD011 (Contributor Progression)](../contributing/contributor-progression.md)** for the L0 to L5 path:
 
 | Level | Role | Can Do |
 |-------|------|--------|

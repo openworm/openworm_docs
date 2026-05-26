@@ -4,11 +4,11 @@
 
 **Generated from:** [DD003: Body Physics Engine Architecture](DD003_Body_Physics_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](../contributing/ai-contributors.md#23-reuse-first-methodology), [DD015 §2.4 — DD013 Simulation Stack Integration](../contributing/ai-contributors.md#24-dd013-simulation-stack-integration)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](../contributing/ai-contributors.md#23-reuse-first-methodology), [DD015 §2.4 — DD011 Simulation Stack Integration](../contributing/ai-contributors.md#24-dd011-simulation-stack-integration)
 
 **Totals:** 21 issues (ai-workable: 14 / human-expert: 7 | L1: 8, L2: 8, L3: 5)
 
-**Note:** Backend stabilization Issues 40–44 in [DD013_draft_issues](DD013_draft_issues.md) are also labeled `DD003` and are cross-referenced here but not duplicated.
+**Note:** Backend stabilization Issues 40–44 in [DD011_draft_issues](DD011_draft_issues.md) are also labeled `DD003` and are cross-referenced here but not duplicated.
 
 **Roadmap Context:** DD003 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
@@ -41,7 +41,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
     - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test already exists; validates that total system energy (kinetic + potential) remains bounded across timesteps. Reuse its energy-bounding logic as a stability criterion alongside NaN/escape detection.
     - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations that run Sibernetic with different parameters; reference for how tests are invoked.
 - **Approach:** Extend — build on the energy conservation logic in `owPhysicTest.cpp` and add NaN/escape/velocity checks as a Python wrapper.
-- **DD013 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed. Output path configured via `openworm.yml`.
+- **DD011 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed. Output path configured via `openworm.yml`.
 - **Files to Modify:**
     - `scripts/check_stability.py` (new)
     - `tests/test_check_stability.py` (new)
@@ -74,7 +74,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
     - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Defines rest density ρ₀ and other physical constants with extensive inline documentation. Reference for expected density values and particle type classifications.
     - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The PCISPH pressure solver that enforces incompressibility; reference for understanding what the script validates.
 - **Approach:** Create — no existing incompressibility validation script exists, but `owPhysicsConstant.h` provides all physical constants needed.
-- **DD013 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed.
+- **DD011 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed.
 - **Files to Modify:**
     - `scripts/validate_incompressibility.py` (new)
     - `tests/test_validate_incompressibility.py` (new)
@@ -135,7 +135,7 @@ Target: Scripts and test configurations needed to measure simulation quality and
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements)
-- **Depends On:** Issue 3 (test configs), DD013 Issue 39 (parity test script)
+- **Depends On:** Issue 3 (test configs), DD011 Issue 39 (parity test script)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing binary configuration directories provide the test scenarios to run.
     - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test provides a reference for what metrics to capture (energy, position bounds).
@@ -222,12 +222,12 @@ Target: Scripts and test configurations needed to measure simulation quality and
 
 Target: PyTorch and Taichi backends produce results matching OpenCL within ±5%.
 
-**Note:** The core backend stabilization issues are tracked in [DD013_draft_issues.md](DD013_draft_issues.md) as Issues 39–42 (labeled `DD003`). They cover:
+**Note:** The core backend stabilization issues are tracked in [DD011_draft_issues.md](DD011_draft_issues.md) as Issues 39–42 (labeled `DD003`). They cover:
 
-- **DD013 Issue 39:** Create cross-backend parity test suite
-- **DD013 Issue 40:** Fix Taichi elastic coordinate-space bug
-- **DD013 Issue 41:** Audit and fix PyTorch/Taichi result quality gap
-- **DD013 Issue 42:** Graduate backends to Stable/Production
+- **DD011 Issue 39:** Create cross-backend parity test suite
+- **DD011 Issue 40:** Fix Taichi elastic coordinate-space bug
+- **DD011 Issue 41:** Audit and fix PyTorch/Taichi result quality gap
+- **DD011 Issue 42:** Graduate backends to Stable/Production
 
 Stability validation scripts (`check_stability.py`, `validate_incompressibility.py`) are DD003 Issues 1–2 above.
 
@@ -261,7 +261,7 @@ The issues below supplement that sequence with DD003-specific work.
     - [ ] Documents neighbor search data structures
     - [ ] Identifies any undocumented heuristics, magic numbers, or non-standard modifications to PCISPH
     - [ ] Provides a "function call graph" showing the order of kernel invocations per timestep
-- **Sponsor Summary Hint:** The OpenCL kernel file is the 64KB brain of the physics engine — the actual GPU code that moves 100,000 particles. Nobody has documented what it does at the code level. Before we can audit why PyTorch/Taichi produce different results (DD013 Issue 41), we need to understand what the reference implementation actually computes. This is like creating an annotated blueprint before renovating a building.
+- **Sponsor Summary Hint:** The OpenCL kernel file is the 64KB brain of the physics engine — the actual GPU code that moves 100,000 particles. Nobody has documented what it does at the code level. Before we can audit why PyTorch/Taichi produce different results (DD011 Issue 41), we need to understand what the reference implementation actually computes. This is like creating an annotated blueprint before renovating a building.
 
 ---
 
@@ -277,7 +277,7 @@ The issues below supplement that sequence with DD003-specific work.
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing bash test configurations. These should be integrated into the CI workflow alongside PyTorch tests.
 - **Approach:** Create — Sibernetic currently has NO CI infrastructure at all (no `.github/workflows/` directory on main branch). This issue creates CI from scratch, starting with PyTorch since it's the easiest backend to test without GPU hardware.
-- **DD013 Pipeline Role:** Body-stage CI gate. CI must pass before merging PRs to Sibernetic. Integrates with DD013's `docker compose run quick-test` workflow.
+- **DD011 Pipeline Role:** Body-stage CI gate. CI must pass before merging PRs to Sibernetic. Integrates with DD011's `docker compose run quick-test` workflow.
 - **Note:** Sibernetic currently has NO CI at all — no GitHub Actions workflows exist on the main branch. This issue creates the first CI workflow.
 - **Files to Modify:**
     - `.github/workflows/ci.yml` (new — first CI workflow for Sibernetic)
@@ -329,7 +329,7 @@ The issues below supplement that sequence with DD003-specific work.
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, benchmarking
 - **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](DD003_Body_Physics_Architecture.md#stabilization-sequence) (step 7)
-- **Depends On:** DD013 Issue 40 (Taichi coordinate fix — must work before meaningful benchmarks)
+- **Depends On:** DD011 Issue 40 (Taichi coordinate fix — must work before meaningful benchmarks)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations that can serve as benchmark scenarios.
 - **Approach:** Create — no benchmark infrastructure exists. Use `run_all_tests.sh` scenarios and existing binary configuration directories as benchmark inputs.
@@ -353,7 +353,7 @@ The issues below supplement that sequence with DD003-specific work.
 
 ## Group 3: Output Pipeline & Visualization (Phase A1/1)
 
-Target: Sibernetic produces output in formats needed by DD010 (validation), DD013 (simulation stack), DD014 (viewer), and DD021 (movement analysis).
+Target: Sibernetic produces output in formats needed by DD010 (validation), DD011 (simulation stack), DD012 (viewer), and DD017 (movement analysis).
 
 ---
 
@@ -364,13 +364,13 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 - **Roadmap Phase:** Phase A1/1
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD003 — Deliverables](DD003_Body_Physics_Architecture.md#deliverables) (OME-Zarr rows) and [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
+- **DD Section to Read:** [DD003 — Deliverables](DD003_Body_Physics_Architecture.md#deliverables) (OME-Zarr rows) and [DD012](DD012_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export already exists for particle data visualization. Reference for how particle data is extracted and formatted for external tools.
     - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — Shows how to read Sibernetic output files from Python. Reference for I/O patterns.
 - **Approach:** Create — no OME-Zarr export exists. Use `owVtkExport.h` and `generate_wcon.py` as references for how particle data is accessed.
-- **DD013 Pipeline Role:** Body-stage post-processing. Runs after Sibernetic simulation completes. Produces Zarr store artifact at path configured via `openworm.yml` for DD014 visualization stage.
+- **DD011 Pipeline Role:** Body-stage post-processing. Runs after Sibernetic simulation completes. Produces Zarr store artifact at path configured via `openworm.yml` for DD012 visualization stage.
 - **Files to Modify:**
     - `scripts/export_zarr.py` (new)
 - **Test Commands:**
@@ -381,10 +381,10 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
     - [ ] `body/positions/` array: shape (n_timesteps, n_particles, 3), dtype float32
     - [ ] `body/types/` array: shape (n_particles,), dtype int32 (0=liquid, 1=elastic, 2=boundary)
     - [ ] Export interval configurable (every Nth output frame)
-    - [ ] Zarr store readable by DD014 viewer
+    - [ ] Zarr store readable by DD012 viewer
     - [ ] Handles typical simulation sizes (~100K particles × ~500 frames) without OOM
     - [ ] Includes OME-Zarr metadata (axes labels, units)
-- **Sponsor Summary Hint:** OME-Zarr is the universal data format connecting simulation to visualization. This script converts Sibernetic's raw binary output into a structured Zarr store that the DD014 3D viewer can read. It's the bridge between physics engine and interactive visualization. The existing `owVtkExport.h` shows how particle data is already extracted for VTK — this creates the OME-Zarr equivalent.
+- **Sponsor Summary Hint:** OME-Zarr is the universal data format connecting simulation to visualization. This script converts Sibernetic's raw binary output into a structured Zarr store that the DD012 3D viewer can read. It's the bridge between physics engine and interactive visualization. The existing `owVtkExport.h` shows how particle data is already extracted for VTK — this creates the OME-Zarr equivalent.
 
 ---
 
@@ -401,7 +401,7 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
     - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export for particle visualization. Can serve as the input reader for surface reconstruction.
     - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation). Different purpose (animation skeleton vs. surface mesh) but related geometry processing on the same particle data.
 - **Approach:** Extend — build on `owVtkExport.h` for particle data access and reference `skeletonExtraction` for geometry processing patterns on Sibernetic output.
-- **DD013 Pipeline Role:** Body-stage post-processing. Runs after OME-Zarr export. Adds `geometry/body_surface/` group to the Zarr store for DD014 viewer.
+- **DD011 Pipeline Role:** Body-stage post-processing. Runs after OME-Zarr export. Adds `geometry/body_surface/` group to the Zarr store for DD012 viewer.
 - **Files to Modify:**
     - `scripts/reconstruct_surface.py` (new)
 - **Test Commands:**
@@ -426,12 +426,12 @@ Target: Sibernetic produces output in formats needed by DD010 (validation), DD01
 - **Roadmap Phase:** Phase A1/1
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, c++
-- **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Body_Physics_Architecture.md#configuration) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml) (`simulation.output_interval`)
-- **Depends On:** DD013 Issue 9 (config loading in master_openworm.py)
+- **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Body_Physics_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml) (`simulation.output_interval`)
+- **Depends On:** DD011 Issue 9 (config loading in master_openworm.py)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/owPhysicsFluidSimulator.cpp`](https://github.com/openworm/sibernetic) — Contains the output writing logic. The output frequency is controlled here — this is the file to modify.
 - **Approach:** Create — no configurable output frequency exists. Modify the output loop in `owPhysicsFluidSimulator.cpp` to respect an interval parameter.
-- **DD013 Pipeline Role:** Body-stage configuration. `master_openworm.py` passes `simulation.output_interval` from `openworm.yml` to Sibernetic via command-line argument.
+- **DD011 Pipeline Role:** Body-stage configuration. `master_openworm.py` passes `simulation.output_interval` from `openworm.yml` to Sibernetic via command-line argument.
 - **Files to Modify:**
     - `src/owPhysicsFluidSimulator.cpp` (output frequency)
     - Sibernetic command-line argument parsing
@@ -532,12 +532,12 @@ Target: New backend options, environmental support, and integration improvements
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** physics
 - **DD Section to Read:** [DD003 — Boundaries](DD003_Body_Physics_Architecture.md#boundaries-explicitly-out-of-scope) (item 3: gel simulation) and Palyanov et al. 2018 (Section 2c, agar gel)
-- **Depends On:** DD013 Issue 1 (openworm.yml config schema)
+- **Depends On:** DD011 Issue 1 (openworm.yml config schema)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/worm_crawl_*`](https://github.com/openworm/sibernetic) — Existing crawl configuration directories that may already include gel/agar environment settings.
     - [`openworm/sibernetic/src/sphFluid_crawling.cl`](https://github.com/openworm/sibernetic) — Crawling-specific OpenCL kernel with agar gel particle interactions. This kernel variant handles the gel environment physics.
 - **Approach:** Wrap — gel mode already exists in the codebase (`sphFluid_crawling.cl` + `worm_crawl_*` configs). This issue verifies it works, documents it, and wraps it with an `openworm.yml` config option.
-- **DD013 Pipeline Role:** Body-stage configuration. `body.environment` in `openworm.yml` selects between liquid (swimming) and gel (crawling) modes.
+- **DD011 Pipeline Role:** Body-stage configuration. `body.environment` in `openworm.yml` selects between liquid (swimming) and gel (crawling) modes.
 - **Files to Modify:**
     - `configuration/README.md` (update — document gel vs. liquid configs)
     - Documentation update in DD003 (if gel support is confirmed working)
@@ -641,7 +641,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
     - [ ] Branch naming convention: `dd003/description`
     - [ ] How to add a new backend (step-by-step guide)
     - [ ] How to run the cross-backend parity test suite
-    - [ ] Links to DD003 for specifications and DD013 for Docker integration
+    - [ ] Links to DD003 for specifications and DD011 for Docker integration
 - **Sponsor Summary Hint:** A CONTRIBUTING.md is the entry point for any developer. This one specifically guides physics engine contributors through the multi-backend testing workflow — build, test, compare against OpenCL baseline, submit PR. Without it, contributors won't know which tests to run or what quality bar to meet.
 
 ---
@@ -717,21 +717,21 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 | Group | Issues | Target |
 |-------|--------|--------|
 | **1: Validation Infrastructure** | 1–6 | Scripts and test configs to measure quality |
-| **2: Backend Stabilization** | 7–10 | Support the DD013 Issues 39–42 stabilization sequence |
+| **2: Backend Stabilization** | 7–10 | Support the DD011 Issues 39–42 stabilization sequence |
 | **3: Output Pipeline** | 11–13 | OME-Zarr, surface mesh, configurable output |
 | **4: Advanced Features** | 14–16 | FEM evaluation, Python bindings, gel environment |
 | **5: Documentation** | 17–21 | Architecture docs, muscle mapping, contributing guide |
 
-### Cross-Reference: DD013 Backend Stabilization Issues (also labeled DD003)
+### Cross-Reference: DD011 Backend Stabilization Issues (also labeled DD003)
 
-| DD013 Issue | Title | Label | Level |
+| DD011 Issue | Title | Label | Level |
 |-------------|-------|-------|-------|
 | 39 | Create cross-backend parity test suite | `DD003`, `ai-workable` | L2 |
 | 40 | Fix Taichi elastic coordinate-space bug | `DD003`, `human-expert` | L2 |
 | 41 | Audit PyTorch/Taichi result quality gap | `DD003`, `human-expert` | L3 |
 | 42 | Graduate backends to Stable/Production | `DD003`, `ai-workable` | L2 |
 
-**Combined DD003 total (this doc + DD013):** 25 issues
+**Combined DD003 total (this doc + DD011):** 25 issues
 
 ### Dependency Graph (Critical Path)
 
@@ -740,22 +740,22 @@ Issue 1 (check_stability.py) ─┐
 Issue 2 (incompressibility.py)─┤
 Issue 3 (test configs) ────────┤
                                ├→ Issue 4 (OpenCL baseline)
-                               │     └→ DD013 Issue 39 (parity test suite)
-                               │           ├→ DD013 Issue 40 (Taichi coordinate fix)
-                               │           │     └→ DD013 Issue 41 (quality gap audit)
-                               │           │           └→ DD013 Issue 42 (graduate backends)
+                               │     └→ DD011 Issue 39 (parity test suite)
+                               │           ├→ DD011 Issue 40 (Taichi coordinate fix)
+                               │           │     └→ DD011 Issue 41 (quality gap audit)
+                               │           │           └→ DD011 Issue 42 (graduate backends)
                                │           └→ Issue 10 (benchmarks)
                                │
 Issue 5 (PyTorch kernel tests) ┤
 Issue 6 (Taichi kernel tests)  ├→ Issue 8 (PyTorch CI)
                                │
-Issue 7 (OpenCL docs) ─────────┘→ DD013 Issue 41 (quality gap audit)
+Issue 7 (OpenCL docs) ─────────┘→ DD011 Issue 41 (quality gap audit)
 
 Issue 11 (OME-Zarr export) → Issue 12 (surface mesh)
-Issue 13 (output frequency) — depends on DD013 Issue 9
+Issue 13 (output frequency) — depends on DD011 Issue 9
 Issue 14 (FEM evaluation) — independent
 Issue 15 (Python bindings) — independent
-Issue 16 (gel environment) — depends on DD013 Issue 1
+Issue 16 (gel environment) — depends on DD011 Issue 1
 
 Issues 9, 17–21 (audits/docs) — independent
 ```

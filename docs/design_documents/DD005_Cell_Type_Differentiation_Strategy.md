@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
 
 ---
 
@@ -70,7 +70,7 @@ Each `.cell.nml` file includes metadata:
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy
 - **Recommended:** `pip install wormneuroatlas` (provides CeNGEN API + [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data, see reuse opportunities below)
 
@@ -179,7 +179,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** Neurons layer with **color-by-class** mode.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** Neurons layer with **color-by-class** mode.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -321,11 +321,11 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 **Description:** Use protein foundation models (AlphaFold 3, BioEmu-1, ESM Cambrian) to predict 3D structures of *C. elegans* ion channels, then extract gating kinetics from conformational dynamics.
 
-**Promoted to parallel track — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md).**
+**Promoted to parallel track — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md).**
 
-Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD025 runs cross-validation during Phase A2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
+Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD021 runs cross-validation during Phase A2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
 
-**Relationship to DD005:** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
+**Relationship to DD005:** DD021 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD021 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD021 predictions substitute immediately.
 
 ### 2. Direct Electrophysiology for All 128 Neuron Classes
 
@@ -342,7 +342,7 @@ Originally rejected (Feb 2026) because molecular dynamics was "computationally e
 
 **Description:** Train a neural network (e.g., gradient boosting or transformer) to predict conductance densities from full expression profiles, using the 20 neurons with electrophysiology as training data.
 
-**Deferred (but promising; see also [DD025](DD025_Protein_Foundation_Model_Pipeline.md) for structure-based approach):**
+**Deferred (but promising; see also [DD021](DD021_Protein_Foundation_Model_Pipeline.md) for structure-based approach):**
 
 - Only 20 training examples (neurons with electrophysiology) may be insufficient
 - Requires careful hyperparameter tuning and cross-validation
@@ -481,8 +481,8 @@ python scripts/benchmark_improvement.py \
 
 The current power-law expression-to-conductance pipeline is a necessary first step. It uses the best available systematic data (CeNGEN) to move beyond the generic neuron template. Future phases will refine this in stages:
 
-1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD025](DD025_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
-2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
+1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD021](DD021_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
+2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
 3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models
 
 Each stage preserves backward compatibility with earlier stages via the `openworm.yml` configuration system.
@@ -641,7 +641,7 @@ head -20 ion_channels.csv
 - [ ] Extract ion channel database, count coverage (how many of 20 training neurons present?)
 - [ ] Compare ChannelWorm's NeuroML2 models to [DD001](DD001_Neural_Circuit_Architecture.md)'s current channel definitions
 - [ ] Port `channelworm/fitter.py` algorithm to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s calibration pipeline
-- [ ] Add ChannelWorm to [DD013](DD013_Simulation_Stack_Architecture.md) `versions.lock` if used
+- [ ] Add ChannelWorm to [DD011](DD011_Simulation_Stack_Architecture.md) `versions.lock` if used
 
 ---
 
@@ -651,7 +651,7 @@ head -20 ion_channels.csv
 
 Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assumes the expression→conductance relationship is conserved. This may fail for highly divergent cell types (e.g., sensory neurons with specialized channels).
 
-**Mitigation:** [DD025](DD025_Protein_Foundation_Model_Pipeline.md) expands the effective calibration set by providing structure-based kinetics predictions for channels lacking electrophysiology. For neuron classes where the expression→conductance power law fails, DD025 predictions serve as fallback. Flag inferred cell types in metadata. Prioritize experimental validation for high-impact neurons (command interneurons: AVA, AVB, AVD, AVE; motor neurons: DA, DB, VA, VB).
+**Mitigation:** [DD021](DD021_Protein_Foundation_Model_Pipeline.md) expands the effective calibration set by providing structure-based kinetics predictions for channels lacking electrophysiology. For neuron classes where the expression→conductance power law fails, DD021 predictions serve as fallback. Flag inferred cell types in metadata. Prioritize experimental validation for high-impact neurons (command interneurons: AVA, AVB, AVD, AVE; motor neurons: DA, DB, VA, VB).
 
 **CODE REUSE:** The `openworm/ChannelWorm` database may expand the training set beyond 20 neurons if it contains additional patch clamp sources not yet incorporated into [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s curated list.
 
@@ -686,7 +686,7 @@ The calibration training set (Issue 1 above) is limited to ~20 neuron types with
 - **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** / **[Boltz-2](https://github.com/jwohlwend/boltz)**: Predict 3D structures of all *C. elegans* ion channels from sequence, including ion coordination sites that determine selectivity and gating
 - **[BioEmu-1](https://github.com/microsoft/BioEmu)** (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone
 
-This pipeline is now specified as a standalone Design Document: [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
+This pipeline is now specified as a standalone Design Document: [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
 
 **Validation step:** For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.
 
@@ -705,7 +705,7 @@ Contains ASH neuron patch clamp recordings useful for calibration training set (
 Pre-fitted HH models for AWCon and RMD neurons (Nicoletti et al. 2019). Expands the ~20-neuron calibration training set with published parameter fits that can serve as cross-validation targets for the expression→conductance scaling pipeline.
 
 **NicolettiEtAl2024_MN_IN** ([openworm/NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN), 2025):
-Motor neuron and interneuron HH models (Nicoletti et al. 2024). Provides B-class motor neuron templates needed for [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md) stretch receptor channels, and additional calibration data for motor neuron cell types.
+Motor neuron and interneuron HH models (Nicoletti et al. 2024). Provides B-class motor neuron templates needed for [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) stretch receptor channels, and additional calibration data for motor neuron cell types.
 
 **NeuroPAL** ([openworm/NeuroPAL](https://github.com/openworm/NeuroPAL), 2025):
 Scripts for NeuroPAL dataset analysis and conversion. In-vivo neuron identification datasets for validating that cell-type assignments from CeNGEN expression correctly map to anatomical neuron identities.
@@ -755,7 +755,7 @@ Scripts for NeuroPAL dataset analysis and conversion. In-vivo neuron identificat
 |--------|------------|----------|--------|-------|
 | 128 cell-type-specific NeuroML cell files | [DD001](DD001_Neural_Circuit_Architecture.md) (replaces GenericCell when `differentiated: true`) | `{NeuronClass}Cell.cell.nml` | NeuroML 2 XML | S/cm² (conductances), mV, ms |
 | Calibration parameters file | [DD001](DD001_Neural_Circuit_Architecture.md) (reproducibility) | `expression_to_conductance_calibration.csv` | CSV: channel, alpha, beta, baseline, R² | mixed |
-| Neuron class labels (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron class identity (128 classes) for color-by-type mode | OME-Zarr: `neural/neuron_class/`, shape (302,) | string enum |
+| Neuron class labels (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron class identity (128 classes) for color-by-type mode | OME-Zarr: `neural/neuron_class/`, shape (302,) | string enum |
 
 ### CRITICAL: Integration Cascade
 
@@ -815,7 +815,7 @@ docker compose run validate
 - [ ] `validate` passes (Tier 2 + Tier 3)
 - [ ] Calibration CSV committed with metadata (training set, R², CeNGEN version)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|

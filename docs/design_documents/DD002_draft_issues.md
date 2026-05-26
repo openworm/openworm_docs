@@ -8,7 +8,7 @@
 
 **Totals:** 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)
 
-**Note:** DD002's `GenericMuscleCell` template and `sibernetic_c302.py` coupling script are already implemented. These issues cover missing validation scripts, output pipeline, bug fixes, documentation, and research for future muscle-type differentiation. Significant working code already exists across multiple OpenWorm repos (`c302`, `muscle_model`, `sibernetic`, `CE_locomotion`) that can be directly imported, adapted, or used as templates — each issue below includes an **"Existing Code to Reuse"** section pointing contributors to the right starting point rather than writing from scratch. Where applicable, **"DD013 Stack Notes"** describe how each script integrates into the DD013 simulation stack (Docker containers, `docker compose run`, CI gates).
+**Note:** DD002's `GenericMuscleCell` template and `sibernetic_c302.py` coupling script are already implemented. These issues cover missing validation scripts, output pipeline, bug fixes, documentation, and research for future muscle-type differentiation. Significant working code already exists across multiple OpenWorm repos (`c302`, `muscle_model`, `sibernetic`, `CE_locomotion`) that can be directly imported, adapted, or used as templates — each issue below includes an **"Existing Code to Reuse"** section pointing contributors to the right starting point rather than writing from scratch. Where applicable, **"DD011 Stack Notes"** describe how each script integrates into the DD011 simulation stack (Docker containers, `docker compose run`, CI gates).
 
 **Roadmap Context:** DD002 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
@@ -41,7 +41,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
     - `openworm/c302` → `c302/c302_Muscles.py` — shows data generation pattern and `.dat` output format (reuse strategy: **reference**)
     - `openworm/sibernetic` → `plot_positions.py` — plotting template for simulation output (reuse strategy: **reference**)
     - `c302.__init__.get_muscle_names()` — import directly for muscle enumeration and quadrant grouping (reuse strategy: **import directly**)
-- **DD013 Stack Notes:** Script should be runnable inside the Docker container (`docker compose run shell`). Output to `./output/` volume mount.
+- **DD011 Stack Notes:** Script should be runnable inside the Docker container (`docker compose run shell`). Output to `./output/` volume mount.
 - **Depends On:** None
 - **Files to Modify:**
     - `scripts/plot_muscle_activation.py` (new — adapts from `c302_MuscleTest.py` plotting logic)
@@ -75,7 +75,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD002, plus unit t
     - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/input_vars.py` — published parameter values for comparison targets (reuse strategy: **reference**)
     - `openworm/sibernetic` → `src/main_sim.py` — 4e-7 Ca²⁺ threshold is hardcoded here; reference for expected scaling (reuse strategy: **reference**)
     - `openworm/c302` → `c302/c302_MuscleTest.py` — comprehensive test that can generate validation data (reuse strategy: **reference**)
-- **DD013 Stack Notes:** Should be callable from `docker compose run quick-test` pipeline. Exit code 0/1 for CI gate.
+- **DD011 Stack Notes:** Should be callable from `docker compose run quick-test` pipeline. Exit code 0/1 for CI gate.
 - **Depends On:** None
 - **Files to Modify:**
     - `scripts/validate_muscle_calcium.py` (new — adapts validation logic from `muscle_model/compareToNeuroML2.py`)
@@ -177,12 +177,12 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, zarr
-- **DD Section to Read:** [DD002 — Deliverables](DD002_Muscle_Model_Architecture.md#deliverables) (OME-Zarr rows) and [DD014 — OME-Zarr Schema](DD014_Dynamic_Visualization_Architecture.md)
+- **DD Section to Read:** [DD002 — Deliverables](DD002_Muscle_Model_Architecture.md#deliverables) (OME-Zarr rows) and [DD012 — OME-Zarr Schema](DD012_Dynamic_Visualization_Architecture.md)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `src/main_sim.py` — documents the 96-element muscle array format: `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]` (reuse strategy: **reference**)
     - `c302.__init__.get_muscle_names()` — canonical muscle ordering for array indices (reuse strategy: **import directly**)
     - No existing OME-Zarr code in any OpenWorm repo — this is genuinely new work, but data format is well-documented in the references above
-- **DD013 Stack Notes:** Export script should be runnable inside the Docker container. Output to shared `./output/` volume. Should be callable from `docker compose run shell` and eventually integrated into post-simulation pipeline.
+- **DD011 Stack Notes:** Export script should be runnable inside the Docker container. Output to shared `./output/` volume. Should be callable from `docker compose run shell` and eventually integrated into post-simulation pipeline.
 - **Depends On:** None
 - **Files to Modify:**
     - `scripts/export_muscle_zarr.py` (new)
@@ -198,9 +198,9 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
     - [ ] Exports `muscle/calcium/` array: shape (n_timesteps, 95), dtype float32, units mol/cm³
     - [ ] Includes OME-Zarr metadata (axes labels: time, muscle_id; units)
     - [ ] Muscle IDs ordered by quadrant and row number (MDR01...MDR24, MVR01...MVR24, MVL01...MVL23, MDL01...MDL24)
-    - [ ] Zarr store readable by DD014 viewer
+    - [ ] Zarr store readable by DD012 viewer
     - [ ] Unit tests verify shapes, dtypes, value ranges, and metadata
-- **Sponsor Summary Hint:** OME-Zarr is the data format that connects the muscle simulation to the 3D viewer (DD014). This script converts the raw simulation output into a structured data store containing two "movies" — muscle activation (how hard each muscle is contracting) and muscle calcium (the ion concentration driving contraction). The viewer reads this to show a heatmap of the worm's 95 muscles over time.
+- **Sponsor Summary Hint:** OME-Zarr is the data format that connects the muscle simulation to the 3D viewer (DD012). This script converts the raw simulation output into a structured data store containing two "movies" — muscle activation (how hard each muscle is contracting) and muscle calcium (the ion concentration driving contraction). The viewer reads this to show a heatmap of the worm's 95 muscles over time.
 
 ---
 
@@ -211,13 +211,13 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Existing Code to Reuse:**
     - `openworm/OpenWorm` → `.openworm.yml` — current minimal config file to validate against (reuse strategy: **reference**)
-    - DD013 specifies the full `openworm.yml` schema (see DD013 §1) — use this as the validation spec (reuse strategy: **reference**)
+    - DD011 specifies the full `openworm.yml` schema (see DD011 §1) — use this as the validation spec (reuse strategy: **reference**)
     - `openworm/sibernetic` → `sibernetic_c302.py` — currently reads no config; this issue's work enables Issue 10 (reuse strategy: **reference**)
-- **DD013 Stack Notes:** Validation script should be callable from `docker compose run quick-test` as a pre-simulation check. Exit code 0/1 for CI gate. Must run before any simulation step.
-- **Depends On:** DD013 Issue 1 (openworm.yml config schema), DD013 Issue 2 (validation script)
+- **DD011 Stack Notes:** Validation script should be callable from `docker compose run quick-test` as a pre-simulation check. Exit code 0/1 for CI gate. Must run before any simulation step.
+- **Depends On:** DD011 Issue 1 (openworm.yml config schema), DD011 Issue 2 (validation script)
 - **Files to Modify:**
     - `scripts/validate_config.py` (extend — add muscle section rules)
     - `tests/test_config.py` (extend — add muscle validation tests)
@@ -250,7 +250,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
     - `openworm/sibernetic` → `src/main_sim.py` → `C302NRNSimulation` class — live NEURON integration mode that extracts `cai` (calcium) from soma; documents the coupling data flow (reuse strategy: **reference**)
     - `openworm/CE_locomotion` → `Worm.cpp` → `Step()` — reference for the correct coupling sequence (neural→NMJ→muscle→body); use as gold standard for testing the correct order of operations (reuse strategy: **reference**)
     - `openworm/c302` → `c302/c302_Muscles.py` — generates the test network the integration test should use (reuse strategy: **reference**)
-- **DD013 Stack Notes:** Test should use `docker compose run quick-test` infrastructure. Short simulation (1-2s sim time). Must be runnable in CI without GPU (mock Sibernetic physics if needed).
+- **DD011 Stack Notes:** Test should use `docker compose run quick-test` infrastructure. Short simulation (1-2s sim time). Must be runnable in CI without GPU (mock Sibernetic physics if needed).
 - **Depends On:** Issue 2 (validate_muscle_calcium.py)
 - **Files to Modify:**
     - `tests/test_dd002_dd003_integration.py` (new)
@@ -277,7 +277,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD002's 
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience, connectomics
-- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](DD002_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (cect API)
+- **DD Section to Read:** [DD002 — Neural-to-Muscle Coupling](DD002_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (cect API)
 - **Existing Code to Reuse:**
     - `openworm/c302` → `c302/c302_TargetMuscle.py` — already queries which neurons synapse onto a given muscle; **extend** to iterate over all muscles and produce a systematic comparison (reuse strategy: **adapt**)
     - `openworm/CE_locomotion` → `NervousSystem.cpp` — NMJ weight constants per motor neuron class: `NMJ_DA`, `NMJ_DB`, `NMJ_DD`, `NMJ_VA`, `NMJ_VB`, `NMJ_VD` (reuse strategy: **reference**)
@@ -350,14 +350,14 @@ Target: Fix known issues and improve muscle model configurability.
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD013 §1](DD013_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
+- **DD Section to Read:** [DD002 — Integration Contract — Configuration](DD002_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
 - **Existing Code to Reuse:**
     - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to modify**. Currently hardcodes `max_force` and `max_ca`; replace hardcoded values with config loading (reuse strategy: **modify in place**)
     - `openworm/sibernetic` → `src/main_sim.py` — 4e-7 hardcoded at the Ca²⁺ scaling line; must also read from config (reuse strategy: **modify in place**)
     - `openworm/OpenWorm` → `master_openworm.py` — orchestrator that launches `sibernetic_c302.py`; needs to pass config path (reuse strategy: **modify in place**)
-    - DD013 §1 `openworm.yml` schema — defines `muscle.max_muscle_force` and `muscle.max_ca` fields (reuse strategy: **reference**)
-- **DD013 Stack Notes:** Config must flow through the full chain: `openworm.yml` → `master_openworm.py` → `sibernetic_c302.py` → NEURON/Sibernetic. Config file path should be a Docker volume mount or environment variable.
-- **Depends On:** DD013 Issue 1 (openworm.yml schema), DD013 Issue 9 (config loading in master_openworm.py)
+    - DD011 §1 `openworm.yml` schema — defines `muscle.max_muscle_force` and `muscle.max_ca` fields (reuse strategy: **reference**)
+- **DD011 Stack Notes:** Config must flow through the full chain: `openworm.yml` → `master_openworm.py` → `sibernetic_c302.py` → NEURON/Sibernetic. Config file path should be a Docker volume mount or environment variable.
+- **Depends On:** DD011 Issue 1 (openworm.yml schema), DD011 Issue 9 (config loading in master_openworm.py)
 - **Files to Modify:**
     - `sibernetic_c302.py` (read config instead of hardcoded values)
     - `tests/test_coupling_config.py` (new)
@@ -573,7 +573,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
     - [ ] Quality criteria: 5 rules from DD002 (calcium interface, movement validation, NeuroML 2, units, muscle-neuron distinction)
     - [ ] Common mistakes: copying neuron parameters to muscles, changing calcium variable name without updating `sibernetic_c302.py`
     - [ ] Maps badge progression to code: "Muscle Model Explorer" → run `c302_MuscleTest.py`; "Builder" → modify parameters; "Hacker" → add new muscle types or modify coupling
-    - [ ] References to DD002 for specification, DD003 for body physics coupling, DD014 for visualization
+    - [ ] References to DD002 for specification, DD003 for body physics coupling, DD012 for visualization
     - [ ] Aimed at L1–L2 contributors (aligns with BadgeList skill badge level)
 - **Sponsor Summary Hint:** BadgeList already has a muscle model getting-started progression (Explorer → Builder → Hacker) with 23 total earners. This guide doesn't replace those badges — it augments them with the technical depth that a badge description can't contain. Where to find the code across 4 repos, which files to edit, what tests to run, what mistakes to avoid. The badges are the curriculum; this guide is the textbook. Lives on docs.openworm.org because it spans multiple repos — you can't put a cross-repo guide inside just one repo.
 
@@ -639,7 +639,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
     - [ ] Coupling modes: document all three modes from `main_sim.py` (synthetic, file-based, live NEURON)
     - [ ] Change impact analysis: what breaks if you change each parameter (from DD002 Coupling Bridge Ownership section)
     - [ ] Coordination notes: who must agree before changing the coupling interface
-    - [ ] Cross-references to DD002 (muscle model), DD003 (body physics), DD013 (simulation stack)
+    - [ ] Cross-references to DD002 (muscle model), DD003 (body physics), DD011 (simulation stack)
     - [ ] Reference `CE_locomotion/Worm.cpp::Step()` as gold standard for coupling sequence
 - **Sponsor Summary Hint:** The coupling script is the bridge between two very different worlds: the electrical simulation (NEURON, millisecond timescale, voltages in millivolts) and the mechanical simulation (Sibernetic, microsecond timescale, forces in arbitrary units). This document explains exactly how data flows across that bridge — what gets read, what gets computed, what gets written, and when. It references the `CE_locomotion` implementation as the gold standard for coupling sequence. It's the most critical integration point in the entire worm simulation, and currently the least documented.
 
@@ -673,7 +673,7 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 | 3 | Aggressively reframed | `c302/c302_IClampMuscle.py`, `c302/c302_MuscleTest.py` | Convert to pytest suite |
 | 4 | Aggressively reframed | `muscle_model/.../compareToNeuroML2.py`, `input_vars.py` | Extend audit methodology |
 | 5 | Genuinely new | (no existing Zarr code) | New work; data format documented |
-| 6 | Genuinely new | (no existing config validation) | New work; schema from DD013 |
+| 6 | Genuinely new | (no existing config validation) | New work; schema from DD011 |
 | 7 | Genuinely new | `sibernetic/sibernetic_c302.py` (test target) | New test for existing pipeline |
 | 8 | Aggressively reframed | `c302/c302_TargetMuscle.py`, cect API | Extend single-muscle query to all muscles |
 | 9 | Aggressively reframed | `c302/__init__.py` → `get_muscle_names()` | Patch function in place |
@@ -692,9 +692,9 @@ Target: Comprehensive documentation enabling contributors to understand and modi
 | DD005 (Cell-Type Specialization) | Issue 13 (CeNGEN transcriptomics for muscle types) |
 | DD007 (Pharyngeal System) | Issue 15 (specialized muscle mechanics) |
 | DD010 (Validation Framework) | Issues 1, 2, 7 (validation scripts and integration testing) |
-| DD013 (Simulation Stack) | Issues 6, 10 (config schema and propagation) |
-| DD014 (Dynamic Visualization) | Issue 5 (OME-Zarr export for viewer) |
-| DD020 (Connectome Data Access) | Issue 8 (cect API for NMJ validation) |
+| DD011 (Simulation Stack) | Issues 6, 10 (config schema and propagation) |
+| DD012 (Dynamic Visualization) | Issue 5 (OME-Zarr export for viewer) |
+| DD016 (Connectome Data Access) | Issue 8 (cect API for NMJ validation) |
 | DD003 Draft Issues (Issue 18) | Issue 17 (complementary: c302-side NMJ mapping vs. Sibernetic-side particle mapping) |
 
 ### Dependency Graph
@@ -706,12 +706,12 @@ Issue 3 (unit tests) ─────────────────→ Issu
 Issue 4 (parameter audit) — independent
 
 Issue 5 (OME-Zarr export) — independent
-Issue 6 (config validation) — depends on DD013 Issues 1, 2
+Issue 6 (config validation) — depends on DD011 Issues 1, 2
 Issue 7 (DD002→DD003 integration test) — depends on Issue 2
 Issue 8 (NMJ connectivity validation) — independent
 
 Issue 9 (MVL24 fix) — depends on Issue 3
-Issue 10 (config propagation) — depends on DD013 Issues 1, 9
+Issue 10 (config propagation) — depends on DD011 Issues 1, 9
 Issue 11 (edge cases) — independent
 Issue 12 (NMJ conductance audit) — independent
 

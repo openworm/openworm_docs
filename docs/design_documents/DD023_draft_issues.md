@@ -1,19 +1,19 @@
-# DD027 Draft GitHub Issues
+# DD023 Draft GitHub Issues
 
-**Epic:** DD027 — Multicompartmental Neuron Models
+**Epic:** DD023 — Multicompartmental Neuron Models
 
-**Generated from:** [DD027: Multicompartmental Neuron Models](DD027_Multicompartmental_Neuron_Models.md)
+**Generated from:** [DD023: Multicompartmental Neuron Models](DD023_Multicompartmental_Neuron_Models.md)
 
 **Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 3 issues (ai-workable: 1 / human-expert: 2 | L1: 1, L2: 0, L3: 2)
 
-**Roadmap Context:** DD027 is a **Phase 2** DD (proposed). These issues were originally part of DD001 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD027.
+**Roadmap Context:** DD023 is a **Phase 2** DD (proposed). These issues were originally part of DD001 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD023.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
 | 1. Level D Multicompartmental (Issues 1-2) | **Phase 2** | Proof-of-concept requires EM morphologies + Nicoletti channels |
-| 2. Infrastructure (Issue 3) | **Phase A1** | Config toggle depends on DD013 openworm.yml |
+| 2. Infrastructure (Issue 3) | **Phase A1** | Config toggle depends on DD011 openworm.yml |
 
 ---
 
@@ -25,12 +25,12 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ### Issue 1: Evaluate and refine existing NeuroML2 morphologies for Level D neurons
 
-- **Title:** `[DD027] Evaluate existing CElegansNeuroML morphologies for AWC, AIY, AVA, RIM, VD5 and refine for Level D`
-- **Labels:** `DD027`, `human-expert`, `L3`
+- **Title:** `[DD023] Evaluate existing CElegansNeuroML morphologies for AWC, AIY, AVA, RIM, VD5 and refine for Level D`
+- **Labels:** `DD023`, `human-expert`, `L3`
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroanatomy
-- **DD Section to Read:** [DD027 — Implementation Pathway](DD027_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, step 2)
+- **DD Section to Read:** [DD023 — Implementation Pathway](DD023_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, step 2)
 - **Depends On:** DD005 Issue 5 (channel survey, which also catalogs morphology sources)
 - **Existing Code to Reuse:**
     - [`CElegansNeuroML/CElegans/generatedNeuroML2/`](https://github.com/openworm/CElegansNeuroML) — **All 302 neurons already exist as multicompartmental NeuroML2 cells** with realistic 3D morphology (derived from VirtualWorm Blender files). Includes `AWCL.cell.nml`, `AWCR.cell.nml`, `AIYL.cell.nml`, `AIYR.cell.nml`, `AVAL.cell.nml`, `AVAR.cell.nml`, `RIML.cell.nml`, `RIMR.cell.nml`, `VD5.cell.nml` — all 5 target neurons.
@@ -59,12 +59,12 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ### Issue 2: Integrate existing components into AWC Level D proof-of-concept
 
-- **Title:** `[DD027] Integrate existing Nicoletti AWCon channels + CElegansNeuroML morphology into c302 Level D AWC proof-of-concept`
-- **Labels:** `DD027`, `human-expert`, `L3`
+- **Title:** `[DD023] Integrate existing Nicoletti AWCon channels + CElegansNeuroML morphology into c302 Level D AWC proof-of-concept`
+- **Labels:** `DD023`, `human-expert`, `L3`
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD027 — Implementation Pathway](DD027_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, steps 3-4) and Reference 3 (Nicoletti et al. 2019 AWCon model)
+- **DD Section to Read:** [DD023 — Implementation Pathway](DD023_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, steps 3-4) and Reference 3 (Nicoletti et al. 2019 AWCon model)
 - **Depends On:** Issue 1 (AWC morphology evaluation), DD005 Issues 6-9 (adopted channel library)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon.cell.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **Complete AWCon single-compartment model with ALL 16 channels in NeuroML2**, validated against XPP original. Includes `CaDynamics.nml` for calcium concentration dynamics and `GenerateNeuroML.py` for programmatic cell generation.
@@ -97,13 +97,13 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ### Issue 3: Add `neural.spatial_synapses` config toggle for Level D
 
-- **Title:** `[DD027] Add neural.spatial_synapses config toggle for spatially resolved synapse placement`
-- **Labels:** `DD027`, `ai-workable`, `L1`
+- **Title:** `[DD023] Add neural.spatial_synapses config toggle for spatially resolved synapse placement`
+- **Labels:** `DD023`, `ai-workable`, `L1`
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD027 — Spatially Resolved Synapse Placement](DD027_Multicompartmental_Neuron_Models.md#spatially-resolved-synapse-placement)
-- **Depends On:** DD013 Issue 1 (openworm.yml schema)
+- **DD Section to Read:** [DD023 — Spatially Resolved Synapse Placement](DD023_Multicompartmental_Neuron_Models.md#spatially-resolved-synapse-placement)
+- **Depends On:** DD011 Issue 1 (openworm.yml schema)
 - **Files to Modify:**
     - `openworm.yml` (add `neural.spatial_synapses: false`)
 - **Test Commands:**
@@ -140,10 +140,10 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 | **[DD001](DD001_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD001 Draft Issues Groups 5 and Infrastructure Issue 20 |
 | **[DD005](DD005_draft_issues.md) (Cell-Type Specialization)** | Issues 6-9 (channel library) are prerequisites for Issue 2 |
 | DD010 (Validation Framework) | Level D validation criteria |
-| DD013 (Simulation Stack) | Issue 3 (config toggle depends on openworm.yml schema) |
-| DD017 (Hybrid ML) | Parameter fitting backend for Stage 1 Step 4 |
-| DD020 (Connectome Data Access) | Morphology data access |
-| DD024 (Validation Data Acquisition) | Synapse centroid distance data |
+| DD011 (Simulation Stack) | Issue 3 (config toggle depends on openworm.yml schema) |
+| DD013 (Hybrid ML) | Parameter fitting backend for Stage 1 Step 4 |
+| DD016 (Connectome Data Access) | Morphology data access |
+| DD020 (Validation Data Acquisition) | Synapse centroid distance data |
 
 ### Dependency Graph
 
@@ -152,5 +152,5 @@ DD005 Issue 5 (channel survey)
   └→ Issue 1 (evaluate existing morphologies)
        └→ Issue 2 (AWC Level D integration — channels + morphology + framework)
 
-Issue 3 (spatial_synapses config) — depends on DD013 Issue 1
+Issue 3 (spatial_synapses config) — depends on DD011 Issue 1
 ```

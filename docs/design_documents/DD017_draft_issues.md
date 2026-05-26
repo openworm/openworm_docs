@@ -1,113 +1,85 @@
 # DD017 Draft GitHub Issues
 
-**Epic:** DD017 — Hybrid Mechanistic-ML Framework
+**Epic:** DD017 — Movement Analysis Toolbox Revival and WCON Policy
 
-**Generated from:** [DD017: Hybrid Mechanistic-ML Framework](DD017_Hybrid_Mechanistic_ML_Framework.md)
+**Generated from:** [DD017: Movement Analysis Toolbox and WCON Policy](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 
 **Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
-**Totals:** 3 issues (ai-workable: 2 / human-expert: 1 | L1: 1, L2: 2, L3: 0)
+**Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 
-**Roadmap Context:** DD017 is a **Phase 3** DD (proposed). These synaptic optimization issues were originally part of DD001 Draft Issues (Group 4) and have been relocated here because synaptic weight optimization requires DD017's differentiable simulation backend. DD017 Component 1 provides the gradient descent infrastructure; these issues prepare the biological constraints and validation targets.
+**Note:** These are the first two issues for DD017. DD017's full issue set (toolbox revival, Python 3.12 compat, WCON parser, etc.) will be generated in a future pass. These two issues were originally in DD001 but belong here because they are **validation infrastructure** — thin wrappers around the analysis toolbox that serve as CI gates in the DD011 simulation pipeline. They are consumed by all DDs that need kinematic validation (DD001, DD002, DD003, DD010), not specific to any one DD. They are Phase A1 deliverables required for the milestone: "Containerized Stack with Automated Validation."
 
-| Group | Phase | Rationale |
-|-------|-------|-----------|
-| 1. Synaptic Optimization (Issues 1-3) | **Phase 2** | Weight optimization requires DD017 differentiable backend |
+**Note on provenance:** These issues were moved from DD001 Draft Issues (originally Issues 3 and 4) because they wrap `open-worm-analysis-toolbox` functionality — which DD017 owns — and target `openworm/open-worm-analysis-toolbox`, not `openworm/c302`.
 
 ---
 
-## Group 1: Synaptic Optimization (Phase 2)
+## Phase A1: Validation Infrastructure
 
-Target: Per-synapse conductance optimization using differentiable simulation and neurotransmitter identity constraints.
-
----
-
-### Issue 1: Consolidate existing neurotransmitter data into synapse polarity constraints
-
-- **Title:** `[DD017] Consolidate existing neurotransmitter identity data from c302, wormneuroatlas, and Wang et al. 2024 into validated synapse polarity constraints`
-- **Labels:** `DD017`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 2
-- **Target Repo:** `openworm/c302`
-- **Required Capabilities:** python, neuroml, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints) and [DD017 — Component 1: Differentiable Backend](DD017_Hybrid_Mechanistic_ML_Framework.md)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`c302/data/GABA.py`](https://github.com/openworm/c302) — GABAergic neuron identity vector (binary, 279 neurons). Already used in c302 network generation.
-    - [`c302/data/Bentley_et_al_2016_expression.csv`](https://github.com/openworm/c302) — Comprehensive CSV with neurotransmitter identities (Dopamine, Serotonin, GABA, etc.), neuropeptide expression, and receptor expression per neuron, with evidence citations.
-    - [`c302/__init__.py` `generate()` function](https://github.com/openworm/c302) — Already uses `synclass` to set synapse polarity (excitatory vs inhibitory) during network generation.
-    - [`wormneuroatlas/SynapseSign.py`](https://github.com/openworm/wormneuroatlas) — Synapse sign predictions from Fenyves et al. 2020, accessible via `NeuroAtlas.get_synapse_sign()`.
-    - [`BAAIWorm/eworm/components/cb2022_data/`](https://github.com/Jessie940611/BAAIWorm) — Calcium correlation data used for model fitting
-- **Approach:** **Consolidate and validate** existing data sources — c302 already has neurotransmitter data in multiple places (GABA.py, Bentley CSV, synclass in generate()). Merge these with wormneuroatlas SynapseSign data, update with Wang et al. 2024 where it supersedes older sources, and create a single validated constraint module.
-- **Files to Modify:**
-    - `c302/data/neurotransmitter_identities.csv` (new — consolidated from existing sources)
-    - `c302/synapse_constraints.py` (new — wrapping existing polarity logic)
-- **Test Commands:**
-    - `python3 -c "from c302 import synapse_constraints; sc = synapse_constraints.load(); print(sc.get_polarity('AVAL', 'AVAR'))"`
-    - `pytest tests/test_synapse_constraints.py`
-- **Acceptance Criteria:**
-    - [ ] Consolidates neurotransmitter data from: c302 GABA.py, Bentley et al. 2016 CSV, wormneuroatlas SynapseSign, and Wang et al. 2024
-    - [ ] Documents where sources agree and disagree; flags conflicts for expert review
-    - [ ] Map neurotransmitter type to synapse polarity: glutamatergic → excitatory, GABAergic → inhibitory, cholinergic → excitatory (with exceptions)
-    - [ ] Provide a Python API: `get_polarity(pre, post)` returns +1 (excitatory) or -1 (inhibitory)
-    - [ ] Flag synapses where polarity is ambiguous or unknown
-    - [ ] Data stored in version-controlled CSV with provenance
-    - [ ] Unit tests verify known polarity assignments (e.g., DD/VD GABAergic → inhibitory)
-- **Sponsor Summary Hint:** c302 already has neurotransmitter data scattered across multiple files (GABA.py, Bentley CSV, synclass logic) and wormneuroatlas provides synapse sign predictions. This issue consolidates all of it — plus newer Wang et al. 2024 data — into a single validated constraint module, so the synapse optimizer can't violate known biology.
+Target: Make the revived analysis toolbox usable as a CI gate — regression detection and baseline generation.
 
 ---
 
-### Issue 2: Add `neural.synapse_optimization` config toggle
+### Issue 1: Wrap OWAT's statistics engine as `scripts/check_regression.py`
 
-- **Title:** `[DD017] Add neural.synapse_optimization config toggle to openworm.yml`
+- **Title:** `[DD017] Wrap open-worm-analysis-toolbox statistics engine into check_regression.py — validation regression detector`
 - **Labels:** `DD017`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 2
-- **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
-- **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (Configuration section) and [DD017 — Configuration](DD017_Hybrid_Mechanistic_ML_Framework.md)
-- **Depends On:** DD013 Issue 1 (openworm.yml schema)
+- **Target Repo:** `openworm/open-worm-analysis-toolbox`
+- **Required Capabilities:** python
+- **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 5-6) and [DD010 — Tier 3](DD010_Validation_Framework.md) (kinematic validation)
+- **Existing Code to Reuse:**
+    - [`open-worm-analysis-toolbox/statistics/statistics_manager.py`](https://github.com/openworm/open-worm-analysis-toolbox) — **Already computes** Wilcoxon rank-sum and Student's t-test across **726 kinematic features** with FDR correction (q-values). Includes `histogram_manager.py` for feature distribution comparison. (reuse strategy: **wrap**)
+    - [`open-worm-analysis-toolbox/features/`](https://github.com/openworm/open-worm-analysis-toolbox) — Locomotion features including speed, wavelength, frequency, amplitude, crawling/swimming classification — all 5 key metrics needed for validation are already computed. (reuse strategy: **import directly**)
+    - `c302/runAndPlot.py` — Generates comparison images across all parameter sets (visual regression checking) (reuse strategy: **reference**)
+- **Approach:** **Wrap** OWAT's `StatisticsManager` with a pass/fail gate. Map the 5 key metrics to the corresponding OWAT feature names, add threshold comparison against baseline, return exit code.
+- **DD011 Pipeline Role:** Validation gate. Runs as final pipeline stage in `master_openworm.py`. Non-zero exit code blocks the run as failed. Must be callable from `docker compose run validate`.
+- **Depends On:** DD017 toolbox revival (OWAT must be installable on Python 3.12)
 - **Files to Modify:**
-    - `openworm.yml` (add `neural.synapse_optimization: false`)
-    - c302 network generation (read optimization flag)
+    - `scripts/check_regression.py` (new — thin wrapper around OWAT)
+    - `tests/test_check_regression.py` (new)
+    - `baseline/validation_baseline.json` (new — baseline scores)
 - **Test Commands:**
-    - `python3 -c "from c302 import generate; generate('C1', 'FW', synapse_optimization=False)"`
-    - `python3 -c "from c302 import generate; generate('C1', 'FW', synapse_optimization=True)"`
+    - `python3 scripts/check_regression.py validation_report.json baseline/validation_baseline.json`
+    - `pytest tests/test_check_regression.py`
 - **Acceptance Criteria:**
-    - [ ] `neural.synapse_optimization: false` → uses uniform g_syn = 0.09 nS (backward compatible)
-    - [ ] `neural.synapse_optimization: true` → loads per-synapse fitted values from `data/optimized_weights.json`
-    - [ ] Placeholder `optimized_weights.json` with uniform weights (actual optimization is a separate issue)
-    - [ ] Config documented with DD cross-reference to DD017 (differentiable backend)
-    - [ ] Both modes produce valid NeuroML
-- **Sponsor Summary Hint:** Currently all synapses in the model have the same strength (0.09 nS) — like every connection in the brain being equally strong. In reality, some connections are powerful and some are whisper-quiet. This toggle switches between the simple uniform model and an optimized model where each synapse has its own fitted strength. The optimization itself is a separate task (requires DD017 differentiable backend).
+    - [ ] Uses `open-worm-analysis-toolbox` `StatisticsManager` as the comparison engine — does NOT reimplement feature comparison
+    - [ ] Reads a validation report JSON (output from OWAT) and a baseline JSON
+    - [ ] Compares 5 key metrics: speed, wavelength, frequency, amplitude, crawling/swimming classification
+    - [ ] Flags REGRESSION if any metric degrades >15% from baseline
+    - [ ] Prints per-metric comparison table (current vs. baseline vs. threshold)
+    - [ ] Returns exit code 0 if no regression, non-zero if regression detected
+    - [ ] Unit tests with synthetic reports (passing, regressing, improving)
+- **Sponsor Summary Hint:** A guard-rail script built on the existing Schafer lab analysis toolbox — which already compares 726 kinematic features using statistical tests. This wraps that engine with a simple pass/fail gate for CI: does the worm still move like a real worm? If not, the change is flagged. Used by DD001 (neural changes), DD002 (muscle changes), DD003 (body physics changes) — any change that could affect movement is checked here.
 
 ---
 
-### Issue 3: Create thin adapter for Randi 2023 functional connectivity via wormneuroatlas
+### Issue 2: Generate Schafer lab kinematic baseline using OWAT
 
-- **Title:** `[DD017] Create adapter for Randi 2023 functional connectivity matrix using wormneuroatlas API`
+- **Title:** `[DD017] Generate kinematic baseline metrics from Schafer lab N2 WCON data using open-worm-analysis-toolbox`
 - **Labels:** `DD017`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 2
-- **Target Repo:** `openworm/c302`
-- **Required Capabilities:** python, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and [DD017 — Validation Targets](DD017_Hybrid_Mechanistic_ML_Framework.md)
-- **Depends On:** None
+- **Target Repo:** `openworm/open-worm-analysis-toolbox`
+- **Required Capabilities:** python, worm-biology
+- **DD Section to Read:** [DD001 — Goal & Success Criteria](DD001_Neural_Circuit_Architecture.md#goal-success-criteria) (±15% of Schafer lab) and [DD010](DD010_Validation_Framework.md) (Tier 3)
 - **Existing Code to Reuse:**
-    - [`wormneuroatlas`](https://github.com/openworm/wormneuroatlas) — **The Randi 2023 signal propagation atlas is already included** as `funatlas.h5` with a clean Python API: `NeuroAtlas.get_signal_propagation_atlas(strain="wt")`. Supports WT and unc-31 strains. Handles neuron ID conventions and bilateral/dorsoventral merging.
-    - [`c302/examples/test/test_WNA.py`](https://github.com/openworm/c302) — Already tests wormneuroatlas integration including gap junctions, chemical synapses, and neurotransmitter sign
-    - [`BAAIWorm/eworm/components/cb2022_data/Ca_corr_mat.txt`](https://github.com/Jessie940611/BAAIWorm) — Same underlying Randi data in matrix form, used for BAAIWorm model fitting
-- **Approach:** **Thin adapter on wormneuroatlas** — the data loading is essentially a one-liner (`NeuroAtlas.get_signal_propagation_atlas()`). The real work is neuron name mapping to c302 conventions and the `compare_to_simulation()` utility.
+    - [`open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) — **IS the Python port of the Schafer lab's Worm Analysis Toolbox.** `WormFeatures` class computes all 726 Schafer features including the 5 key metrics needed. Has WCON loading (`examples/WCON demo.py`), `NormalizedWorm` class for 49-point skeleton, and validation against original MATLAB toolbox (`documentation/Schafer_validation/`). (reuse strategy: **import directly**)
+    - [`open-worm-analysis-toolbox/examples/generate_stats.py`](https://github.com/openworm/open-worm-analysis-toolbox) — Example script for statistical comparison (reuse strategy: **adapt**)
+- **Approach:** **Use the existing library** — load Schafer N2 WCON data through OWAT, extract the 5 key metrics from its 726-feature output, save as baseline JSON. The feature computation is already implemented; this issue is data extraction and formatting, not algorithm development.
+- **DD011 Pipeline Role:** Produces the baseline artifact that `check_regression.py` (Issue 1) compares against. Run once to generate, then committed to repo.
+- **Depends On:** DD017 toolbox revival (OWAT must be installable on Python 3.12)
 - **Files to Modify:**
-    - `c302/data/randi2023_functional_connectivity.py` (new — thin adapter)
-    - `tests/test_randi_data.py` (new)
+    - `baseline/schafer_baseline_metrics.json` (new)
+    - `scripts/generate_baseline.py` (new — thin script calling OWAT)
 - **Test Commands:**
-    - `python3 -c "from c302.data import randi2023_functional_connectivity as rfc; m = rfc.load_correlation_matrix(); print(m.shape)"`
-    - `pytest tests/test_randi_data.py`
+    - `python3 scripts/generate_baseline.py --input schafer_n2_data/ --output baseline/schafer_baseline_metrics.json`
 - **Acceptance Criteria:**
-    - [ ] Loads Randi 2023 data via `wormneuroatlas.NeuroAtlas.get_signal_propagation_atlas()` — does NOT duplicate the dataset
-    - [ ] Maps neuron IDs from wormneuroatlas convention to c302 neuron names
-    - [ ] Handle missing neurons gracefully (not all 302 are in the imaging data)
-    - [ ] Provide utility: `compare_to_simulation(sim_calcium_matrix)` → Pearson correlation
-    - [ ] Unit tests verify matrix is symmetric, diagonal is 1.0, shape is correct
-- **Sponsor Summary Hint:** Randi et al. (2023) recorded nearly every neuron in the worm's brain simultaneously — and the data is already in wormneuroatlas with a clean Python API. This issue writes a thin adapter that maps wormneuroatlas neuron names to c302's conventions, plus a comparison utility for optimization. The hard data work is already done.
+    - [ ] Uses `open-worm-analysis-toolbox` `WormFeatures` to compute kinematics — does NOT reimplement feature extraction
+    - [ ] Downloads or locates Schafer lab N2 wild-type WCON data (from open-worm-analysis-toolbox or Zenodo)
+    - [ ] Extracts 5 key metrics via OWAT: forward speed, body wavelength, undulation frequency, body amplitude, crawling/swimming gait classification
+    - [ ] Saves metrics with mean ± std to JSON file
+    - [ ] Documents data provenance (which dataset, which animals, which conditions)
+    - [ ] ±15% thresholds computed and stored alongside baseline values
+    - [ ] Baseline committed to repo as reference for `check_regression.py`
+- **Sponsor Summary Hint:** The Schafer lab analysis toolbox — already ported to Python by OpenWorm — computes 726 movement features from real worm tracking data. This issue runs it on wild-type N2 recordings to extract the 5 key metrics our simulation must match. The toolbox does the heavy lifting; this issue extracts and formats the answer key.
 
 ---
 
@@ -115,31 +87,33 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 3 |
+| **Total Issues** | 2 |
 | **ai-workable** | 2 |
-| **human-expert** | 1 |
+| **human-expert** | 0 |
 | **L1** | 1 |
-| **L2** | 2 |
-| **L3** | 0 |
+| **L2** | 1 |
 
-| Group | Issues | Target |
+| Phase | Issues | Target |
 |-------|--------|--------|
-| **1: Synaptic Optimization** | 1–3 | Consolidate neurotransmitter data, weight fitting prep |
+| **Phase A1: Validation Infrastructure** | 1–2 | CI regression gate (via OWAT) and Schafer lab baseline generation |
 
 ### Cross-References
 
-| Related DD | Relationship |
-|------------|-------------|
-| **[DD001](DD001_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD001 Draft Issues Group 4 |
-| DD005 (Cell-Type Specialization) | Channel library informs synapse models |
-| DD010 (Validation Framework) | Functional connectivity validation targets |
-| DD013 (Simulation Stack) | Issue 2 (config toggle depends on openworm.yml schema) |
-| DD020 (Connectome Data Access) | Neurotransmitter data consolidation |
+| Related DD | Related Issues |
+|------------|---------------|
+| DD001 (Neural Circuit) | Consumer: neural circuit changes validated by Issue 1 regression gate |
+| DD002 (Muscle Model) | Consumer: muscle changes validated by Issue 1 regression gate |
+| DD003 (Body Physics) | Consumer: body physics changes validated by Issue 1 regression gate |
+| DD010 (Validation Framework) | Issue 1 implements the Tier 3 kinematic validation gate that DD010 specifies |
+| DD011 (Simulation Stack) | Issue 1 runs as `docker compose run validate` pipeline stage |
 
 ### Dependency Graph
 
 ```
-Issue 1 (consolidate neurotransmitter constraints) — independent
-Issue 2 (synapse_optimization config) — depends on DD013 Issue 1
-Issue 3 (Randi 2023 adapter via wormneuroatlas) — independent
+DD017 toolbox revival (OWAT Python 3.12 compatible)
+  └→ Issue 2 (generate Schafer baseline) → Issue 1 (check_regression.py wrapping OWAT)
 ```
+
+### Future Issues (Not Yet Generated)
+
+DD017's full issue set — covering toolbox revival (Python 3.12 compat, dependency cleanup), WCON parser fixes, feature extraction validation, and integration with DD010's validation framework — will be generated in a future pass. Issues 1-2 above are the "last mile" deliverables that depend on the toolbox being functional.

@@ -1,10 +1,10 @@
-# DD025: Protein Foundation Model Pipeline for Ion Channel Kinetics
+# DD021: Protein Foundation Model Pipeline for Ion Channel Kinetics
 
 - **Status:** Proposed (Phase A2 / Phase 1)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-22
-- **Supersedes:** None (extracted from [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3)
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
+- **Supersedes:** None (extracted from [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 3)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
 
 ---
 
@@ -48,11 +48,11 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 
 | Item | Value |
 |------|-------|
-| **Repository** | `openworm/openworm-ml` (new repo, shared with [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)) `[TO BE CREATED]` |
+| **Repository** | `openworm/openworm-ml` (new repo, shared with [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)) `[TO BE CREATED]` |
 | **Subdirectory** | `foundation_params/` |
-| **Issue label** | `dd025` |
+| **Issue label** | `dd021` |
 | **Milestone** | Phase A2 — Foundation Model Channel Kinetics |
-| **Example PR title** | `DD025: cross-validation of BioEmu-1 kinetics predictions on 50 channels` |
+| **Example PR title** | `DD021: cross-validation of BioEmu-1 kinetics predictions on 50 channels` |
 
 ---
 
@@ -64,7 +64,7 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 | **Layer** | ML/Structural Biology — parallel track derisking [DD005](DD005_Cell_Type_Differentiation_Strategy.md) |
 | **What does this produce?** | Predicted HH kinetic parameters for *C. elegans* ion channels from protein sequence + structure |
 | **Success metric** | Cross-validation <30% relative error on known channels; end-to-end [DD010](DD010_Validation_Framework.md) Tier 2 scores not degraded |
-| **Repository** | `openworm/openworm-ml/foundation_params/` — issues labeled `dd025` |
+| **Repository** | `openworm/openworm-ml/foundation_params/` — issues labeled `dd021` |
 | **Config toggle** | `ml.foundation_params: true` in `openworm.yml` |
 | **Build & test** | `python foundation_params/scripts/run_cross_validation.py` |
 
@@ -82,12 +82,12 @@ Predict ion channel kinetics (HH parameters: V_half, slope, tau) from amino acid
 **Path A — Docker (recommended):**
 
 ```bash
-# From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)
+# From the OpenWorm meta-repo (see DD011 Simulation Stack Architecture)
 docker compose build ml
 # Then skip to Step 3 below — dependencies are pre-installed in the container
 ```
 
-Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
+Cross-reference: [DD011](DD011_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
 
 **Path B — Native:**
 
@@ -192,12 +192,12 @@ Step 4: Feed into DD001/DD005 HH ODEs
 
 ### Why Phase A2 (Not Phase 3)
 
-This pipeline was originally specified as [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 3 in Phase 3 (months 7-12). It belongs in Phase A2 because:
+This pipeline was originally specified as [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 3 in Phase 3 (months 7-12). It belongs in Phase A2 because:
 
-1. **Derisks DD005:** If [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s power-law expression→conductance scaling fails for certain neuron classes, DD025 predictions are ready immediately as a fallback
+1. **Derisks DD005:** If [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s power-law expression→conductance scaling fails for certain neuron classes, DD021 predictions are ready immediately as a fallback
 2. **No infrastructure dependencies:** Inputs (WormBase sequences, literature kinetics) are available today. No Docker stack, no simulation infrastructure needed
 3. **Available tools:** AlphaFold 3, BioEmu-1, ESM Cambrian are all publicly available with open-source code
-4. **Independent scope:** Distinct inputs/outputs, timeline, and validation criteria from [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Components 1, 2, and 4
+4. **Independent scope:** Distinct inputs/outputs, timeline, and validation criteria from [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Components 1, 2, and 4
 
 ---
 
@@ -304,7 +304,7 @@ Predicted parameters are validated in two ways:
 
 ```yaml
 ml:
-  # DD025: Foundation model parameters
+  # DD021: Foundation model parameters
   foundation_params: false         # Use structure-predicted channel kinetics
   esm_model: "esm2_t33_650M"
   kinetics_predictor: "models/channel_kinetics_v1.pt"
@@ -326,10 +326,10 @@ ml:
 
 ## Boundaries (Explicitly Out of Scope)
 
-1. **Differentiable simulation backend:** That is [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 1 (Phase 3).
-2. **SPH surrogate model:** That is [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 2 (Phase 3).
-3. **Learned sensory transduction:** That is [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (Phase 3).
-4. **Replacing DD005's CeNGEN approach:** DD025 runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
+1. **Differentiable simulation backend:** That is [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 1 (Phase 3).
+2. **SPH surrogate model:** That is [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 2 (Phase 3).
+3. **Learned sensory transduction:** That is [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (Phase 3).
+4. **Replacing DD005's CeNGEN approach:** DD021 runs in parallel. If DD005's power-law scaling works, DD021 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD021 predictions substitute immediately.
 5. **Neuropeptide-GPCR binding affinity:** That is [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)'s use of foundation models for a different application.
 
 ---
@@ -345,8 +345,8 @@ ml:
 
 ### Phase 1: Integration with DD005 (~12 hours)
 
-1. **Generate per-neuron-class parameters:** Combine DD025 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets
-2. **Feed into DD005 calibration:** DD025 predictions serve as structure-informed priors where electrophysiology is unavailable
+1. **Generate per-neuron-class parameters:** Combine DD021 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets
+2. **Feed into DD005 calibration:** DD021 predictions serve as structure-informed priors where electrophysiology is unavailable
 3. **End-to-end validation:** Insert predicted parameters into simulation, run [DD010](DD010_Validation_Framework.md) Tier 2 + Tier 3
 4. **Deliverable:** `per_class_hh_params.csv` integrated into DD005 pipeline
 
@@ -361,11 +361,11 @@ ml:
 
 ---
 
-## Relationship to DD005 and DD017
+## Relationship to DD005 and DD013
 
-**DD005 (Cell-Type Specialization):** DD025 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD025 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD025 predictions substitute immediately.
+**DD005 (Cell-Type Specialization):** DD021 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD021 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD021 predictions substitute immediately.
 
-**DD017 (Hybrid ML Framework):** DD025 was originally DD017 Component 3. Components 1 (differentiable backend), 2 (SPH surrogate), and 4 (learned sensory) remain in DD017 as Phase 3 work. DD025 was extracted because it has no infrastructure dependencies and derisks DD005's uncertain mapping.
+**DD013 (Hybrid ML Framework):** DD021 was originally DD013 Component 3. Components 1 (differentiable backend), 2 (SPH surrogate), and 4 (learned sensory) remain in DD013 as Phase 3 work. DD021 was extracted because it has no infrastructure dependencies and derisks DD005's uncertain mapping.
 
 ---
 

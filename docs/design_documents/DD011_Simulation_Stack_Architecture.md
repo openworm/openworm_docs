@@ -1,4 +1,4 @@
-# DD013: Simulation Stack Architecture (The Integration Backbone)
+# DD011: Simulation Stack Architecture (The Integration Backbone)
 
 - **Status:** Proposed
 - **Author:** OpenWorm Core Team
@@ -31,7 +31,7 @@ Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[Decision Process
 | Pharynx | [DD007](DD007_Pharyngeal_System_Architecture.md) | New repo TBD | **Not started** |
 | Data integration (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | `openworm/owmeta` | **Dormant** (last real commit Jul 2024) |
 | Intestinal oscillator | [DD009](DD009_Intestinal_Oscillator_Model.md) | New repo TBD | **Not started** |
-| Validation framework | [DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `openworm/open-worm-analysis-toolbox` + `openworm/tracker-commons` | **Dormant** (last commit Jan 2020) — [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival plan |
+| Validation framework | [DD010](DD010_Validation_Framework.md), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `openworm/open-worm-analysis-toolbox` + `openworm/tracker-commons` | **Dormant** (last commit Jan 2020) — [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival plan |
 
 The `openworm/OpenWorm` meta-repository is the only place where these subsystems come together as a runnable simulation. **It is the architectural backbone of the entire project.** And right now, it consists of:
 
@@ -196,7 +196,7 @@ output:
   wcon: true                         # WCON movement file
   raw_data: false                    # Full simulation state dumps
 
-# === Visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===
+# === Visualization ([DD012](DD012_Dynamic_Visualization_Architecture.md)) ===
 visualization:
   enabled: true                      # Export OME-Zarr for viewer
   export_format: "zarr"              # "zarr" (OME-Zarr, recommended) or "legacy" (position_buffer.txt)
@@ -268,7 +268,7 @@ COPY --from=validation /opt/openworm/validation /opt/openworm/validation
 COPY master_openworm.py /opt/openworm/
 COPY openworm.yml /opt/openworm/default_config.yml
 
-# === Stage 5: Viewer ([DD014](DD014_Dynamic_Visualization_Architecture.md) Dynamic Visualization) ===
+# === Stage 5: Viewer ([DD012](DD012_Dynamic_Visualization_Architecture.md) Dynamic Visualization) ===
 FROM full AS viewer
 ARG WORM3DVIEWER_REF=main
 RUN git clone --branch $WORM3DVIEWER_REF --depth 1 \
@@ -338,7 +338,7 @@ services:
         limits:
           memory: 16G
 
-  # === Viewer — Dynamic visualization ([DD014](DD014_Dynamic_Visualization_Architecture.md)) ===
+  # === Viewer — Dynamic visualization ([DD012](DD012_Dynamic_Visualization_Architecture.md)) ===
   viewer:
     build:
       context: .
@@ -427,11 +427,11 @@ neuron:
 
 open_worm_analysis_toolbox:
   repo: "https://github.com/openworm/open-worm-analysis-toolbox.git"
-  commit: "6f5e4d3c2b1a"  # [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival — pin after Python 3.12 update
+  commit: "6f5e4d3c2b1a"  # [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival — pin after Python 3.12 update
 
 tracker_commons:
   repo: "https://github.com/openworm/tracker-commons.git"
-  commit: "a1b2c3d4e5f6"  # [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) — WCON 1.0 spec pin
+  commit: "a1b2c3d4e5f6"  # [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) — WCON 1.0 spec pin
   wcon_version: "1.0"
 
 owmeta:
@@ -479,7 +479,7 @@ Step 4: Generate outputs
          - Plots (membrane potentials, calcium, movement)
          - WCON trajectory file
          - Video (if enabled — fix the memory leak first)
-Step 4b: Export OME-Zarr ([DD014](DD014_Dynamic_Visualization_Architecture.md), if visualization.enabled)
+Step 4b: Export OME-Zarr ([DD012](DD012_Dynamic_Visualization_Architecture.md), if visualization.enabled)
          - Collect all subsystem outputs into openworm.zarr
          - body/positions, body/types, body/cell_ids ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
          - neural/voltage, neural/calcium, neural/positions ([DD001](DD001_Neural_Circuit_Architecture.md))
@@ -750,7 +750,7 @@ This directly addresses newcomer onboarding ([Contributor Progression](../contri
 
 ### Getting Started (Environment Setup)
 
-DD013 defines the Docker infrastructure that all other DDs depend on. This is the canonical guide for setting up the entire OpenWorm simulation environment. Other DDs cross-reference this section for their Docker setup paths.
+DD011 defines the Docker infrastructure that all other DDs depend on. This is the canonical guide for setting up the entire OpenWorm simulation environment. Other DDs cross-reference this section for their Docker setup paths.
 
 **Clone the meta-repo:**
 
@@ -807,14 +807,14 @@ docker compose run simulation
 
 **Path B — Native (individual subsystems only):**
 
-DD013 defines the Docker orchestration layer. Running the full integrated simulation natively is not supported — Docker is the integration surface. However, individual subsystems can be run natively per their own DDs:
+DD011 defines the Docker orchestration layer. Running the full integrated simulation natively is not supported — Docker is the integration surface. However, individual subsystems can be run natively per their own DDs:
 
 | Subsystem | DD | Native Setup |
 |-----------|-----|-------------|
 | Neural circuit (c302) | [DD001](DD001_Neural_Circuit_Architecture.md) | `pip install -e c302; pip install pyneuroml neuron` |
 | Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | CMake build with OpenCL SDK |
-| Validation tools | [DD010](DD010_Validation_Framework.md), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `pip install -e open-worm-analysis-toolbox` |
-| Visualization viewer | [DD014](DD014_Dynamic_Visualization_Architecture.md) | `pip install trame pyvista zarr` |
+| Validation tools | [DD010](DD010_Validation_Framework.md), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `pip install -e open-worm-analysis-toolbox` |
+| Visualization viewer | [DD012](DD012_Dynamic_Visualization_Architecture.md) | `pip install trame pyvista zarr` |
 
 See each DD's own Getting Started section for native setup details.
 
@@ -937,7 +937,7 @@ This Design Document introduces a new entry in the Subsystem Ownership Map ([Con
 
 | Subsystem | Design Documents | L4 Maintainer | Primary Repository |
 |-----------|-----------------|---------------|-------------------|
-| **Integration Stack** | **[DD013](DD013_Simulation_Stack_Architecture.md)** (this), [DD010](DD010_Validation_Framework.md) | **TBD — Critical hire** | `openworm/OpenWorm` |
+| **Integration Stack** | **[DD011](DD011_Simulation_Stack_Architecture.md)** (this), [DD010](DD010_Validation_Framework.md) | **TBD — Critical hire** | `openworm/OpenWorm` |
 
 The Integration Maintainer is responsible for:
 
@@ -983,7 +983,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 ## Implementation Roadmap
 
-For the granular task breakdown of DD013 implementation, see the [DD013 Draft Issues](DD013_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD013 is assigned to **Phase A1: Core Infrastructure (Weeks 1–2)**.
+For the granular task breakdown of DD011 implementation, see the [DD011 Draft Issues](DD011_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD011 is assigned to **Phase A1: Core Infrastructure (Weeks 1–2)**.
 
 ---
 
@@ -1055,13 +1055,13 @@ Next newcomer who runs the Docker image sees the improvement
 ### Existing Code Resources
 
 **sibernetic_config_gen** ([openworm/sibernetic_config_gen](https://github.com/openworm/sibernetic_config_gen), 2016, dormant):
-Generates starting particle positions and `.ini` config files for Sibernetic. Contains particle placement algorithms for different body resolutions. Reusable for DD013's `openworm.yml` → Sibernetic `.ini` translation layer. **Estimated time savings: 10-20 hours.**
+Generates starting particle positions and `.ini` config files for Sibernetic. Contains particle placement algorithms for different body resolutions. Reusable for DD011's `openworm.yml` → Sibernetic `.ini` translation layer. **Estimated time savings: 10-20 hours.**
 
 **sibernetic_NEURON** ([openworm/sibernetic_NEURON](https://github.com/openworm/sibernetic_NEURON), 2016, dormant):
-Predecessor to `sibernetic_c302.py` — contains Sibernetic-NEURON interface code. Review for patterns applicable to [DD019](DD019_Closed_Loop_Touch_Response.md)'s bidirectional coupling.
+Predecessor to `sibernetic_c302.py` — contains Sibernetic-NEURON interface code. Review for patterns applicable to [DD015](DD015_Closed_Loop_Touch_Response.md)'s bidirectional coupling.
 
 **skeletonExtraction** ([openworm/skeletonExtraction](https://github.com/openworm/skeletonExtraction), 2016, dormant):
-Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports to COLLADA. The skeleton extraction algorithm is directly needed for DD013's SPH → WCON export pipeline and [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)'s analysis toolbox input. **Estimated time savings: 15-25 hours.**
+Extracts 49-point skeleton (centerline) from Sibernetic particle output, exports to COLLADA. The skeleton extraction algorithm is directly needed for DD011's SPH → WCON export pipeline and [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)'s analysis toolbox input. **Estimated time savings: 15-25 hours.**
 
 ---
 
@@ -1120,7 +1120,7 @@ The simulation stack is the **integration layer** — it consumes and routes out
 ### Coupling Dependencies
 
 - **Upstream:** DD001, DD002, DD003, DD005, DD006, DD007, DD009 (all science subsystems)
-- **Downstream:** DD014 (visualization), DD010 (validation)
+- **Downstream:** DD012 (visualization), DD010 (validation)
 
 ---
 

@@ -25,7 +25,7 @@
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd003` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
 | **CI gate** | Tier 3 kinematic validation + physical stability (no particle escape) blocks merge |
 ---
 
@@ -78,7 +78,7 @@
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: [OpenCL](https://www.khronos.org/opencl/) SDK (AMD or Intel), CMake, C++ compiler
 - Optional: `pip install taichi` for [Taichi](https://www.taichi-lang.org/) Metal/CUDA backends
 
@@ -155,7 +155,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `body/positions/` — SPH particles colored by type.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `body/positions/` — SPH particles colored by type.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -291,7 +291,7 @@ This stabilizes the simulation at the cost of ~3-7 iterations per timestep.
 
 However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of *C. elegans* locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.
 
-**OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)'s learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
+**OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)'s learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
 
 Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch`.
 
@@ -337,10 +337,10 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 
 - 2D only — no dorsal-ventral body mechanics, omega turns, or body roll
 - No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes
-- No internal body volume — cannot support [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD014.2](DD014.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organs
-- No fluid-structure interaction — [DD019](DD019_Closed_Loop_Touch_Response.md) touch mechanotransduction requires 3D particle strain
+- No internal body volume — cannot support [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organs
+- No fluid-structure interaction — [DD015](DD015_Closed_Loop_Touch_Response.md) touch mechanotransduction requires 3D particle strain
 
-**Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
+**Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
 
 ---
 
@@ -518,7 +518,7 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 | Backend | Level | Blocking Issue |
 |---------|-------|---------------|
 | OpenCL | **Production** | Losing platform support |
-| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; full demo2 sheet-scale tuning + worm_swim parity in progress. Backward (differentiability) is a byproduct of the implementation approach; see [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) for the framework that consumes it. |
+| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; full demo2 sheet-scale tuning + worm_swim parity in progress. Backward (differentiability) is a byproduct of the implementation approach; see [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) for the framework that consumes it. |
 | Native CUDA | **Scaffolding** | Awaiting kernel implementation (PR #229 introduces the substrate skeleton) |
 | PyTorch | **Experimental** | Stable but results don't match OpenCL; positioned as a CPU correctness reference |
 | Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction |
@@ -578,11 +578,11 @@ Substantial portions of the native-port modernization have been driven by commun
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
 | Particle position time series | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | All particle positions per output frame | Binary state dump or WCON trajectory | µm |
-| Rendered frames / video | [DD013](DD013_Simulation_Stack_Architecture.md) (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
+| Rendered frames / video | [DD011](DD011_Simulation_Stack_Architecture.md) (output pipeline) | Visual frames of worm body | PNG or direct framebuffer | pixels |
 | Body deformation state | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx, if Option B) | Anterior attachment point displacement | Shared memory or file | µm |
-| Particle positions (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
-| Particle types (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
-| Surface mesh (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
+| Particle positions (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle (x, y, z) over all output timesteps | OME-Zarr: `body/positions/`, shape (n_timesteps, n_particles, 3) | µm |
+| Particle types (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle type (liquid/elastic/boundary) | OME-Zarr: `body/types/`, shape (n_particles,) | enum |
+| Surface mesh (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Reconstructed smooth body surface per timestep | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | µm |
 
 ### Repository & Packaging
 
@@ -641,7 +641,7 @@ docker compose run validate
 - [ ] Tested on at least two backends if core SPH algorithms changed
 - [ ] No particle escape (all positions within bounding box)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -651,7 +651,7 @@ docker compose run validate
 
 ### Backend-Config Translation
 
-Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
+Sibernetic internally reads `.ini` configuration files. The `master_openworm.py` orchestrator ([DD011](DD011_Simulation_Stack_Architecture.md)) is responsible for translating `openworm.yml` body section to Sibernetic `.ini` format at runtime:
 
 ```python
 # master_openworm.py (pseudocode)

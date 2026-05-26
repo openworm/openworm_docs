@@ -25,7 +25,7 @@ Model the 31,479 neuropeptide-receptor interactions (already in the ConnectomeTo
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd006` |
 | **Config toggle** | `neural.neuropeptides: true` / `neural.peptide_dataset: "RipollSanchez2023"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `neuropeptides: false` (backward compat), then `neuropeptides: true` |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neuropeptides/concentrations/` layer — volumetric peptide concentration fields; `neuropeptides/release_events/` for per-neuron release timing |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `neuropeptides/concentrations/` layer — volumetric peptide concentration fields; `neuropeptides/release_events/` for per-neuron release timing |
 | **CI gate** | Tier 3 kinematic validation blocks merge; conductance modulation must stay in [0.5, 3.0] range |
 ---
 
@@ -87,7 +87,7 @@ Each LEMS extension includes metadata:
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy
 - Ripoll-Sanchez Table S1 data (downloaded to `data/`)
 
@@ -113,7 +113,7 @@ Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-start
 ```bash
 # ConnectomeToolbox provides the Ripoll-Sanchez 2023 neuropeptide dataset
 # as extrasynaptic connectivity (31,479 peptide-receptor interactions)
-pip install cect              # if not already installed via DD020
+pip install cect              # if not already installed via DD016
 pip install connectometoolbox # cell-type annotation utilities
 ```
 
@@ -131,7 +131,7 @@ wget -O data/ripoll_sanchez_2023_table_s1.csv \
 ```bash
 # Step 1: Access Ripoll-Sanchez neuropeptidergic data via ConnectomeToolbox
 # Data is ALREADY in the cect package as extrasynaptic connectivity
-# pip install cect  # if not already installed via DD020
+# pip install cect  # if not already installed via DD016
 python -c "from cect import ConnectomeDataset; print('Extrasynaptic data available')"
 
 # Step 2: Generate network with neuropeptides
@@ -179,7 +179,7 @@ python scripts/validate_knockout.py \
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layers:** Neuropeptide concentration fields and release events.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layers:** Neuropeptide concentration fields and release events.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -280,7 +280,7 @@ Where:
 
 ### Data Structure: Neuropeptidergic Adjacency Matrix
 
-The ConnectomeToolbox (`cect` package, [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) **already contains** neuropeptidergic connectivity as "extrasynaptic" data — both the preliminary Bentley et al. (2016) monoaminergic/peptidergic connectome and the comprehensive Ripoll-Sánchez et al. (2023) neuropeptidergic connectome with short-, medium-, and long-range diffusion models. This data does NOT need to be added; DD006 consumes it via the `cect` API.
+The ConnectomeToolbox (`cect` package, [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) **already contains** neuropeptidergic connectivity as "extrasynaptic" data — both the preliminary Bentley et al. (2016) monoaminergic/peptidergic connectome and the comprehensive Ripoll-Sánchez et al. (2023) neuropeptidergic connectome with short-, medium-, and long-range diffusion models. This data does NOT need to be added; DD006 consumes it via the `cect` API.
 
 | Connection Type | Matrix Dimensions | Entries | Timescale | ConnectomeToolbox Status |
 |----------------|------------------|---------|-----------|------------------------|
@@ -595,7 +595,7 @@ This extrasynaptic layer likely governs slow behavioral states (arousal, stress,
 ```
 Ripoll-Sanchez et al. (2023) Supplementary Data Table S1
 ```
-**Already integrated into ConnectomeToolbox** (`cect` package v0.2.7+) as "extrasynaptic" connection type. Access via the `cect` Python API ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) — no manual download needed. The toolbox provides standardized access to the full Ripoll-Sánchez 2023 dataset including short-, medium-, and long-range diffusion categories, as well as the earlier Bentley et al. 2016 monoaminergic/peptidergic data for cross-validation.
+**Already integrated into ConnectomeToolbox** (`cect` package v0.2.7+) as "extrasynaptic" connection type. Access via the `cect` Python API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) — no manual download needed. The toolbox provides standardized access to the full Ripoll-Sánchez 2023 dataset including short-, medium-, and long-range diffusion categories, as well as the earlier Bentley et al. 2016 monoaminergic/peptidergic data for cross-validation.
 
 ### NeuroML Extension Proposal
 
@@ -890,9 +890,9 @@ Provides `PeptideGPCR.get_gpcrs_binding_to(peptides)` for neuropeptide-receptor 
 |-------|----------|----------|--------|-------|
 | Neuron [Ca2+]i (triggers peptide release) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `ca_internal` per neuron | NeuroML state variable | mol/cm3 |
 | 3D cell positions (distance calculation) | [DD008](DD008_Data_Integration_Pipeline.md) / WormAtlas | Per-neuron (x, y, z) | OWMeta query or CSV | um |
-| Neuropeptidergic connectome (extrasynaptic) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) / `cect` API | 31,479 interactions (Ripoll-Sánchez 2023), already in ConnectomeToolbox as extrasynaptic data | `cect.ConnectomeDataset` | mixed |
+| Neuropeptidergic connectome (extrasynaptic) | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) / `cect` API | 31,479 interactions (Ripoll-Sánchez 2023), already in ConnectomeToolbox as extrasynaptic data | `cect.ConnectomeDataset` | mixed |
 | Ion channel conductance baselines | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `g_baseline` per channel per neuron | NeuroML `<channelDensity>` | S/cm2 |
-| Functional connectivity (validation) | [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) / `wormneuroatlas` | Randi 2023 wild-type + unc-31 302×302 matrices | `wormneuroatlas` API | dimensionless |
+| Functional connectivity (validation) | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) / `wormneuroatlas` | Randi 2023 wild-type + unc-31 302×302 matrices | `wormneuroatlas` API | dimensionless |
 
 **Outputs (What This Subsystem Produces)**
 
@@ -900,8 +900,8 @@ Provides `PeptideGPCR.get_gpcrs_binding_to(peptides)` for neuropeptide-receptor 
 |--------|------------|----------|--------|-------|
 | Conductance modulation factors | [DD001](DD001_Neural_Circuit_Architecture.md) (modifies channel conductances in real-time) | `g_effective = g_baseline * conductance_modulation` | NeuroML `<peptideReceptor>` exposure | dimensionless multiplier [0.5, 3.0] |
 | Peptide concentration fields | Internal (receptor activation) | Per-source peptide concentration | NeuroML state variable | mol/cm3 |
-| Neuropeptide concentration fields (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-peptide volumetric concentration over time | OME-Zarr: `neuropeptides/concentrations/`, shape (n_timesteps, n_peptides, n_spatial_bins) | mol/cm3 |
-| Peptide release events (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron peptide release timestamps | OME-Zarr: `neuropeptides/release_events/` | ms |
+| Neuropeptide concentration fields (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-peptide volumetric concentration over time | OME-Zarr: `neuropeptides/concentrations/`, shape (n_timesteps, n_peptides, n_spatial_bins) | mol/cm3 |
+| Peptide release events (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron peptide release timestamps | OME-Zarr: `neuropeptides/release_events/` | ms |
 
 ### Repository & Packaging
 
@@ -957,7 +957,7 @@ docker compose run validate
 - [ ] Conductance modulation factors in [0.5, 3.0] range
 - [ ] `validate` passes (Tier 3 kinematic metrics within +/-15%)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -976,7 +976,7 @@ docker compose run validate
 
 ### Multi-Rate Integration Requirement
 
-Neuropeptides operate on seconds timescale, synapses on milliseconds. The `master_openworm.py` orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)) must support multi-rate stepping:
+Neuropeptides operate on seconds timescale, synapses on milliseconds. The `master_openworm.py` orchestrator ([DD011](DD011_Simulation_Stack_Architecture.md)) must support multi-rate stepping:
 
 ```python
 # Pseudocode for multi-rate coupling in master_openworm.py
@@ -989,7 +989,7 @@ for t in range(0, duration, dt_fast):
         step_slow_dynamics(dt_slow)   # Peptide release, diffusion, receptor binding
 ```
 
-**This is a change to the orchestrator ([DD013](DD013_Simulation_Stack_Architecture.md)), not just to c302.** The Integration Maintainer must implement multi-rate stepping support.
+**This is a change to the orchestrator ([DD011](DD011_Simulation_Stack_Architecture.md)), not just to c302.** The Integration Maintainer must implement multi-rate stepping support.
 
 ### Coupling Dependencies
 
@@ -1005,7 +1005,7 @@ for t in range(0, duration, dt_fast):
 | Muscle activation | [DD002](DD002_Muscle_Model_Architecture.md) | Changed neuron excitability -> changed motor output |
 | Locomotion | [DD003](DD003_Body_Physics_Architecture.md) | Changed motor output -> changed movement |
 | Behavioral validation | [DD010](DD010_Validation_Framework.md) | Peptide modulation shifts behavioral metrics |
-| Orchestrator | [DD013](DD013_Simulation_Stack_Architecture.md) | Multi-rate stepping requirement — if peptide dt changes, orchestrator must adapt |
+| Orchestrator | [DD011](DD011_Simulation_Stack_Architecture.md) | Multi-rate stepping requirement — if peptide dt changes, orchestrator must adapt |
 
 ---
 

@@ -1,10 +1,10 @@
-# DD017: Hybrid Mechanistic-ML Framework
+# DD013: Hybrid Mechanistic-ML Framework
 
 - **Status:** Proposed (Phase 3-4)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack)
+- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 
@@ -12,7 +12,7 @@
 
 ## TL;DR
 
-When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining three components are: (1) a differentiable simulation backend for automatic parameter fitting, (2) a neural surrogate for SPH to achieve 1000x speedup, and (4) learned sensory transduction to close the stimulus-response loop. Component 3 (foundation model → ODE parameters) has been extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
 
 ## Goal & Success Criteria
 
@@ -31,7 +31,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 - Framework specification document (this DD)
 - Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
 - Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`)
-- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — **Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md)**
+- Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — **Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md)**
 - Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
 - ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
 - Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
@@ -39,9 +39,9 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 ## Repository & Issues
 
 - **Repository:** `openworm/openworm-ml` (new repo) `[TO BE CREATED]`
-- **Issue label:** `dd017`
+- **Issue label:** `dd013`
 - **Milestone:** Phase 3 — Hybrid ML Framework
-- **Example PR title:** `dd017: differentiable HH backend matches NEURON reference within ±5%`
+- **Example PR title:** `dd013: differentiable HH backend matches NEURON reference within ±5%`
 
 ## Quick Action Reference
 
@@ -49,9 +49,9 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 |----------|--------|
 | **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (4) Learned sensory transduction module. Component 3 (foundation model → ODE parameters) extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) |
+| **What does this produce?** | (1) Differentiable c302 neural circuit in PyTorch/JAX, (2) Neural surrogate for Sibernetic SPH, (4) Learned sensory transduction module. Component 3 (foundation model → ODE parameters) extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) |
 | **Success metric** | Differentiable model matches [DD010](DD010_Validation_Framework.md) Tier 2+3 validation within ±5% of reference NEURON/jNML; SPH surrogate achieves 1000x speedup with <5% trajectory error; auto-fitted parameters outperform hand-tuned on [DD010](DD010_Validation_Framework.md) metrics |
-| **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd017` |
+| **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd013` |
 | **Config toggle** | `ml.differentiable_backend: true`, `ml.sph_surrogate: true`, `ml.sensory_model: learned` in `openworm.yml` |
 | **Build & test** | `docker compose run ml-test` (differentiable model matches reference), `docker compose run surrogate-validate` (surrogate vs. full SPH) |
 | **CI gate** | Differentiable model must reproduce [DD010](DD010_Validation_Framework.md) Tier 2+3 scores within ±5% of NEURON reference |
@@ -62,22 +62,22 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 
 ### Prerequisites
 
-- Simulation stack ([DD013](DD013_Simulation_Stack_Architecture.md)) running
-- Training datasets from [DD010](DD010_Validation_Framework.md)/[DD024](DD024_Validation_Data_Acquisition_Pipeline.md)
+- Simulation stack ([DD011](DD011_Simulation_Stack_Architecture.md)) running
+- Training datasets from [DD010](DD010_Validation_Framework.md)/[DD020](DD020_Validation_Data_Acquisition_Pipeline.md)
 
 ### Getting Started (Environment Setup)
 
-This DD shares the `openworm-ml` repository with [DD025](DD025_Protein_Foundation_Model_Pipeline.md). Follow [DD025 Getting Started](DD025_Protein_Foundation_Model_Pipeline.md#getting-started-environment-setup) to clone the repo and install base dependencies.
+This DD shares the `openworm-ml` repository with [DD021](DD021_Protein_Foundation_Model_Pipeline.md). Follow [DD021 Getting Started](DD021_Protein_Foundation_Model_Pipeline.md#getting-started-environment-setup) to clone the repo and install base dependencies.
 
 **Path A — Docker (recommended):**
 
 ```bash
-# From the OpenWorm meta-repo (see DD013 Simulation Stack Architecture)
+# From the OpenWorm meta-repo (see DD011 Simulation Stack Architecture)
 docker compose build ml
 # Then use the docker compose run commands below for each component
 ```
 
-Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
+Cross-reference: [DD011](DD011_Simulation_Stack_Architecture.md) for the full Docker Compose stack setup.
 
 **Path B — Native:**
 
@@ -123,7 +123,7 @@ Detailed commands: `[TO BE DEVELOPED as components are implemented]`
 
 ## How to Visualize
 
-- In the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer, ML-augmented components should be visually distinguished (e.g., dashed outlines or a distinct color) from fully mechanistic components, so users can see where ML is filling gaps.
+- In the [DD012](DD012_Dynamic_Visualization_Architecture.md) viewer, ML-augmented components should be visually distinguished (e.g., dashed outlines or a distinct color) from fully mechanistic components, so users can see where ML is filling gaps.
 - ML uncertainty estimates should be displayable as confidence intervals or heatmaps overlaid on the simulation.
 - The ML component registry should provide a dashboard view showing which parameters are ML-derived vs. mechanistic vs. experimentally measured.
 - Auto-fitting convergence curves (loss vs. epoch) should be plottable for debugging and reporting.
@@ -138,7 +138,7 @@ OpenWorm's simulation stack ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD00
 - **Compositionally modular:** New subsystems (neuropeptides [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), intestine [DD009](DD009_Intestinal_Oscillator_Model.md), pharynx [DD007](DD007_Pharyngeal_System_Architecture.md)) plug in via clean Integration Contracts
 - **Causally explanatory:** You can trace why behavior emerges through the causal chain (sensory input → neural voltage → muscle calcium → body force → movement)
 
-This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's ESM3, Arc's Virtual Cell Challenge). Those approaches are data-driven black boxes. OpenWorm is a mechanistic, causally interpretable model. **[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) does not replace that foundation — it enhances it.**
+This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's ESM3, Arc's Virtual Cell Challenge). Those approaches are data-driven black boxes. OpenWorm is a mechanistic, causally interpretable model. **[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) does not replace that foundation — it enhances it.**
 
 ### Four Pain Points That ML Can Address
 
@@ -488,11 +488,11 @@ for activations, trajectories in training_data:
 
 ### Component 3: Foundation Model → ODE Parameter Pipeline
 
-**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics).**
+**Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics).**
 
-Component 3 was promoted from DD017 Phase 3 to a standalone DD in Phase A2/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
+Component 3 was promoted from DD013 Phase 3 to a standalone DD in Phase A2/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
 
-See [DD025](DD025_Protein_Foundation_Model_Pipeline.md) for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.
+See [DD021](DD021_Protein_Foundation_Model_Pipeline.md) for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.
 
 **Repository location:** `openworm/openworm-ml/foundation_params/` (unchanged)
 
@@ -667,7 +667,7 @@ This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance ar
 
 ### For the Foundation Model Pipeline (Component 3)
 
-**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md).** See DD025 Quality Criteria for cross-validation and end-to-end validation requirements.
+**Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md).** See DD021 Quality Criteria for cross-validation and end-to-end validation requirements.
 
 ### For the Sensory Model (Component 4)
 
@@ -699,7 +699,7 @@ This provides a fundamentally different validation signal from [DD010](DD010_Val
 
 #### Why This Matters for the Hybrid Framework
 
-When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduction, surrogate body physics), DCell cross-validation can detect whether the ML component has learned the *right* biological structure or just fitted the training data. If a surrogate model gets the right behavioral output but DCell reveals the wrong intermediate pathway is active, the surrogate has overfit.
+When DD013's ML components fill mechanistic gaps (e.g., learned sensory transduction, surrogate body physics), DCell cross-validation can detect whether the ML component has learned the *right* biological structure or just fitted the training data. If a surrogate model gets the right behavioral output but DCell reveals the wrong intermediate pathway is active, the surrogate has overfit.
 
 ---
 
@@ -712,7 +712,7 @@ When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduc
 | HH equations and parameters (reference) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | All ODE parameters | NeuroML XML (parsed) | mixed |
 | Connectome topology | [DD001](DD001_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Adjacency matrices | Python API / CSV | Neuron pairs + weights |
 | CeNGEN expression data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-class transcript levels | CSV | TPM |
-| Ion channel gene sequences | WormBase — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | Protein sequences | FASTA | amino acids |
+| Ion channel gene sequences | WormBase — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | Protein sequences | FASTA | amino acids |
 | SPH simulation dataset (for surrogate training) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | (muscle_activation, trajectory) pairs | HDF5 | mixed |
 | Sensory neuron calcium imaging data | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | (stimulus, calcium_response) pairs | CSV | µM, °C, mM |
 | [DD010](DD010_Validation_Framework.md) validation targets | [DD010](DD010_Validation_Framework.md) | Experimental baselines | NumPy / CSV | mixed |
@@ -723,7 +723,7 @@ When DD017's ML components fill mechanistic gaps (e.g., learned sensory transduc
 |--------|------------|----------|--------|-------|
 | Auto-fitted ODE parameters | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | Per-neuron-class conductances, time constants | YAML / JSON parameter file | mixed |
 | SPH surrogate predictions | [DD010](DD010_Validation_Framework.md) (fast validation) | Body trajectory | WCON-compatible | µm |
-| Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters — see [DD025](DD025_Protein_Foundation_Model_Pipeline.md) | YAML | mV, ms, mS/cm² |
+| Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | YAML | mV, ms, mS/cm² |
 | Sensory current injections | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-sensory-neuron I_ext(t) | Time series (PyTorch tensor) | nA |
 | Gradient information | Internal | ∂(validation_loss) / ∂(parameter) | PyTorch .grad tensors | mixed |
 
@@ -749,10 +749,10 @@ ml:
   surrogate_model: "models/sph_surrogate_v1.pt"
   surrogate_fallback_threshold: 0.15  # Fall back to SPH if error > 15%
 
-  # Component 3: Foundation model parameters — see DD025 for full specification
-  foundation_params: false         # Use ESM/AlphaFold-predicted channel kinetics (DD025)
-  esm_model: "esm2_t33_650M"      # DD025
-  kinetics_predictor: "models/channel_kinetics_v1.pt"  # DD025
+  # Component 3: Foundation model parameters — see DD021 for full specification
+  foundation_params: false         # Use ESM/AlphaFold-predicted channel kinetics (DD021)
+  esm_model: "esm2_t33_650M"      # DD021
+  kinetics_predictor: "models/channel_kinetics_v1.pt"  # DD021
 
   # Component 4: Learned sensory model
   sensory_model: "generic"         # "generic" (current I_ext injection), "learned"
@@ -780,7 +780,7 @@ ml:
 | SPH output format | [DD003](DD003_Body_Physics_Architecture.md) | If trajectory format changes, surrogate training data pipeline breaks |
 | CeNGEN data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | If expression data versioning changes, foundation model predictions change |
 | Validation criteria | [DD010](DD010_Validation_Framework.md) | If acceptance criteria change, auto-fitting loss function must be updated |
-| Simulation stack (Docker) | [DD013](DD013_Simulation_Stack_Architecture.md) | If Docker compose structure changes, `ml-test` service must be updated |
+| Simulation stack (Docker) | [DD011](DD011_Simulation_Stack_Architecture.md) | If Docker compose structure changes, `ml-test` service must be updated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
@@ -818,7 +818,7 @@ ml:
 
 ### Phase D: Foundation Model Pipeline
 
-**Extracted to [DD025](DD025_Protein_Foundation_Model_Pipeline.md) and moved to Phase A2/Phase 1.** See DD025 Implementation Roadmap for the detailed timeline (~20 hours Phase A2, ~12 hours Phase 1).
+**Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and moved to Phase A2/Phase 1.** See DD021 Implementation Roadmap for the detailed timeline (~20 hours Phase A2, ~12 hours Phase 1).
 
 ### Phase E: Sensory Transduction (Weeks 25-32)
 
@@ -843,16 +843,16 @@ ml:
 ### Existing Code Resources
 
 **CE_locomotion** ([openworm/CE_locomotion](https://github.com/openworm/CE_locomotion), active 2026, collaboration with Olivares & Beer):
-Complete C++ neuromechanical model with evolutionary algorithm for parameter fitting (auto-tunes parameters to produce forward/backward locomotion). Compare to DD017 Component 1's gradient descent approach; a hybrid strategy (evolutionary global search + gradient local refinement) may be optimal.
+Complete C++ neuromechanical model with evolutionary algorithm for parameter fitting (auto-tunes parameters to produce forward/backward locomotion). Compare to DD013 Component 1's gradient descent approach; a hybrid strategy (evolutionary global search + gradient local refinement) may be optimal.
 
 **CyberElegans** ([openworm/CyberElegans](https://github.com/openworm/CyberElegans), 2016, 36 stars):
-Alternative neuromechanical model. Useful as a benchmark comparison for DD017's SPH surrogate and for learning from different architectural trade-offs.
+Alternative neuromechanical model. Useful as a benchmark comparison for DD013's SPH surrogate and for learning from different architectural trade-offs.
 
 **bionet** ([openworm/bionet](https://github.com/openworm/bionet), 2015, 32 stars):
-"Artificial biological neural network" — check for reusable neural network architectures or training pipelines applicable to DD017 Component 2 (SPH surrogate) or Component 4 (learned sensory transduction).
+"Artificial biological neural network" — check for reusable neural network architectures or training pipelines applicable to DD013 Component 2 (SPH surrogate) or Component 4 (learned sensory transduction).
 
 **simple-C-elegans** ([openworm/simple-C-elegans](https://github.com/openworm/simple-C-elegans), 2020):
-Minimalist Python model based on OpenWorm and published literature. Possible starting point for DD017 Component 1 (differentiable backend) — simpler than full c302 for initial prototyping.
+Minimalist Python model based on OpenWorm and published literature. Possible starting point for DD013 Component 1 (differentiable backend) — simpler than full c302 for initial prototyping.
 
 **wormvae** ([openworm/wormvae](https://github.com/openworm/wormvae), 2022):
 Connectome-constrained Variational Autoencoder (ICLR 2022). Directly relevant to Component 2 (SPH surrogate) and Component 4 (sensory transduction) as a pre-trained latent representation of worm dynamics.

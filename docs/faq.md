@@ -6,7 +6,7 @@ OpenWorm general
 
 ### Why _C. elegans_?
 
-The tiny worm _C. elegans_ is by far the most understood and studied animal with a brain in all of biology -- first genome mapped, exactly 302 neurons with a complete [connectome](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md), and three Nobel prizes awarded for work on it. When making a complex computer model, it is important to start where the data are the most complete. For the full story, see the [Background](background/) page.
+The tiny worm _C. elegans_ is by far the most understood and studied animal with a brain in all of biology -- first genome mapped, exactly 302 neurons with a complete [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md), and three Nobel prizes awarded for work on it. When making a complex computer model, it is important to start where the data are the most complete. For the full story, see the [Background](background/) page.
 
 ### What does the real worm do?
 
@@ -23,7 +23,7 @@ Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD0
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
-Egg-laying is specified in **[DD018 (Egg-Laying System Architecture)](design_documents/DD018_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.
+Egg-laying is specified in **[DD014 (Egg-Laying System Architecture)](design_documents/DD014_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.
 
 Developmental modeling (embryo to L1 to L4 to adult) is Phase 6 work in our roadmap, using the Witvliet developmental connectome series (8 stages). _C. elegans_ has the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing), making it a fascinating future direction.
 
@@ -47,7 +47,7 @@ We now have a formal **3-tier validation framework** ([DD010](design_documents/D
 
 It is very likely to be multiple, [given what we know about the variability of neuronal networks in general](https://doi.org/10.1038/nn1312) (Prinz, Bucher & Marder 2004). One technique to deal with this is to [generate multiple models that work](https://doi.org/10.1038/nrn3056) (Marder & Taylor 2011) and analyze them under different conditions. What we are after is the [solution space that works](https://doi.org/10.1371/journal.pcbi.0020094) (Achard & De Schutter 2006, see Fig 6 for an example), rather than a single solution.
 
-[DD017 (Hybrid Mechanistic-ML Framework)](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
+[DD013 (Hybrid Mechanistic-ML Framework)](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
 
 ### Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
 
@@ -63,7 +63,7 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 **Current priorities:**
 
-- **Core infrastructure (Phase A1):** Docker stack ([DD013](design_documents/DD013_Simulation_Stack_Architecture.md)), toolbox revival ([DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
+- **Core infrastructure (Phase A1):** Docker stack ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)), toolbox revival ([DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
 - **Phase 1 science:** CeNGEN cell-type specialization ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 
@@ -81,7 +81,7 @@ We primarily use [Slack](https://openworm.org/contacts.html) for coordination. I
 
 In general, you won't step on any toes though -- multiple people doing the same thing can still be helpful as different individuals bring different perspectives to the table.
 
-For a structured approach, see the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation) and the [contributor progression model](design_documents/DD011_Contributor_Progression_Model.md) (Observer to Senior Contributor, L0-L5).
+For a structured approach, see the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation) and the [contributor progression model](contributing/contributor-progression.md) (Observer to Senior Contributor, L0-L5).
 
 ### Do you all ever meet up somewhere physically?
 
@@ -96,20 +96,20 @@ We model at **five scales simultaneously** (detailed on the [modeling approach p
 
 | Scale | Design Documents | Computational Cost |
 |-------|------------------|-------------------|
-| Molecular | [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) | Low (parameter lookup) |
+| Molecular | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Low (parameter lookup) |
 | Channel | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Moderate (HH equations per cell) |
 | Cellular | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Moderate-High (302-959 cells) |
 | Tissue | [DD003](design_documents/DD003_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | High (~100K SPH particles) |
-| Organism | [DD010](design_documents/DD010_Validation_Framework.md), [DD019](design_documents/DD019_Closed_Loop_Touch_Response.md) | Validation overhead |
+| Organism | [DD010](design_documents/DD010_Validation_Framework.md), [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Validation overhead |
 
-In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
+In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
 
 ### What's the data source for your computer simulation of the living worm?
 
 There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. [DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md) specifies the formal approach. Key datasets include:
 
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](https://caltech.wormbase.org/virtualworm/)
--   [The _C. elegans_ connectome](https://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md)
+-   [The _C. elegans_ connectome](https://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)
 -   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives [cell-type differentiation](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
 -   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — [Tier 2 validation](design_documents/DD010_Validation_Framework.md) target for functional connectivity
 -   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions feeding the [neuropeptide model](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)
@@ -141,7 +141,7 @@ _C. elegans_ neurons do not spike (i.e. have [action potentials](https://en.wiki
 
 ### What is the level of detail of the wiring diagram for the non-neuron elements?
 
-There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, [DD020 (Connectome Data Access)](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
+There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, [DD016 (Connectome Data Access)](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
 
 ### What is SPH?
 
@@ -160,7 +160,7 @@ OpenWorm code reuse
 
 ### What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
 
-These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD014 (Dynamic Visualization)](design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
+These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD012 (Dynamic Visualization)](design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
 
 See [Archived Projects](archived_projects.md) for the full historical context.
 

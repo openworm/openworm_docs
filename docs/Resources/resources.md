@@ -9,8 +9,8 @@ Simulation engines
 
 ### Geppetto
 
-!!! note "Superseded by DD014"
-    Geppetto served OpenWorm well from 2014-2020 but has been superseded by [DD014: Dynamic Visualization Architecture](../design_documents/DD014_Dynamic_Visualization_Architecture.md), which specifies a Python-native Trame viewer. See [Archived Projects](../archived_projects.md#geppetto-web-platform-2014-2020) for context on this transition.
+!!! note "Superseded by DD012"
+    Geppetto served OpenWorm well from 2014-2020 but has been superseded by [DD012: Dynamic Visualization Architecture](../design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a Python-native Trame viewer. See [Archived Projects](../archived_projects.md#geppetto-web-platform-2014-2020) for context on this transition.
 
 Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry.
 

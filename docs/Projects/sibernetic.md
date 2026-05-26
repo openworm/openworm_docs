@@ -11,7 +11,7 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 |---------------|-------|------|--------------|
 | Liquid | ~50K | Surrounding fluid medium | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
 | Elastic | ~30K | Body wall, muscles, cuticle | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
-| Boundary | ~20K | Substrate surface | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md) |
+| Boundary | ~20K | Substrate surface | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md) |
 
 **Key algorithm:** PCISPH (Predictive-Corrective Incompressible SPH) pressure solver, implemented in C++ with GPU acceleration (OpenCL).
 
@@ -32,13 +32,13 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 - Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
 - Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
 
-**Phase 2 ([DD022](../design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
+**Phase 2 ([DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
 
 - Substrate types (agar, liquid, soil)
 - Chemical/thermal gradients
 - Food particles and obstacles
 
-**Phase 4 ([DD014.2](../design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
+**Phase 4 ([DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
 
 - GPU skinning from SPH particles to Virtual Worm anatomical meshes
 - Photorealistic rendering

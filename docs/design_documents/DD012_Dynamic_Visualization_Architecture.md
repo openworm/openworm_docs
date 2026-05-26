@@ -1,10 +1,10 @@
-# DD014: Dynamic Visualization and Multi-Scale Exploration Architecture
+# DD012: Dynamic Visualization and Multi-Scale Exploration Architecture
 
 - **Status:** Proposed
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-15
 - **Supersedes:** WormBrowser (browser.openworm.org, 2012), WormSim (org.wormsim.frontend, 2014-2015), informal Geppetto coupling
-- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD013](DD013_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack), All DDs (visualization consumes all subsystem outputs)
 
 ---
 
@@ -12,13 +12,13 @@
 
 ## TL;DR
 
-DD014 defines the three-scale visualization system (molecular, cellular, organism) for the OpenWorm simulation, connecting simulation data to real-time 3D rendering via OME-Zarr export and a Trame/Three.js viewer. The key success metric is that every simulation variable must be visually inspectable within 2 seconds, and the viewer must support full time playback in a web browser with toggleable layers for each subsystem.
+DD012 defines the three-scale visualization system (molecular, cellular, organism) for the OpenWorm simulation, connecting simulation data to real-time 3D rendering via OME-Zarr export and a Trame/Three.js viewer. The key success metric is that every simulation variable must be visually inspectable within 2 seconds, and the viewer must support full time playback in a web browser with toggleable layers for each subsystem.
 
 ## Context
 
 ### The Missing Layer
 
-Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD013](DD013_Simulation_Stack_Architecture.md) specify a scientifically rigorous simulation engine and its integration backbone. But **none of them describe what a human being actually sees when the simulation runs.** The current visual output is:
+Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[DD011](DD011_Simulation_Stack_Architecture.md) specify a scientifically rigorous simulation engine and its integration backbone. But **none of them describe what a human being actually sees when the simulation runs.** The current visual output is:
 
 | What Exists | What You See |
 |-------------|-------------|
@@ -64,7 +64,7 @@ The Kickstarter-funded WormSim project (`org.wormsim.frontend`) envisioned "A Di
 - Neurons glow when they fire
 - "Now you are having a look INSIDE MY MIND!"
 
-WormSim's frontend has been dormant since December 2015. The underlying Geppetto platform is maintained but not connected to the current simulation pipeline. [DD013](DD013_Simulation_Stack_Architecture.md) explicitly declared Geppetto "out of scope."
+WormSim's frontend has been dormant since December 2015. The underlying Geppetto platform is maintained but not connected to the current simulation pipeline. [DD011](DD011_Simulation_Stack_Architecture.md) explicitly declared Geppetto "out of scope."
 
 ### Worm3DViewer (2025): A Starting Point
 
@@ -112,25 +112,25 @@ The visualization layer is not a single tool. It is a **data export pipeline** (
 | **Tissue / Cell** | Individual cells colored by activity. Click a muscle to see its calcium trace. Neurons glow when they fire. Intestinal calcium waves propagate as color gradients. | [DD001](DD001_Neural_Circuit_Architecture.md) neuron V/Ca, [DD002](DD002_Muscle_Model_Architecture.md) muscle activation, [DD004](DD004_Mechanical_Cell_Identity.md) cell IDs, [DD007](DD007_Pharyngeal_System_Architecture.md) pharynx cells, [DD009](DD009_Intestinal_Oscillator_Model.md) intestinal cells | Google Earth street view |
 | **Molecular** | Ion channels opening/closing on a cell membrane. Calcium flowing through IP3 receptors. Neuropeptide clouds diffusing between cells. | [DD001](DD001_Neural_Circuit_Architecture.md) channel states, [DD005](DD005_Cell_Type_Differentiation_Strategy.md) conductance densities, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) peptide concentrations | Google Earth indoor view |
 
-**DD014 Viewer Phases vs. Roadmap Phases:**
+**DD012 Viewer Phases vs. Roadmap Phases:**
 
-DD014 is developed incrementally across three Roadmap phases. To avoid confusion, the table below maps DD014's internal viewer stages to the [Phase Roadmap](DD_PHASE_ROADMAP.md):
+DD012 is developed incrementally across three Roadmap phases. To avoid confusion, the table below maps DD012's internal viewer stages to the [Phase Roadmap](DD_PHASE_ROADMAP.md):
 
-| DD014 Viewer Stage | Roadmap Phase | Timeline | What Ships |
+| DD012 Viewer Stage | Roadmap Phase | Timeline | What Ships |
 |--------------------|---------------|----------|------------|
 | **Viewer Stage 1** — Post-hoc Trame viewer | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (Cell-Type Specialization, months 1-3) | Weeks 1-8 | Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing. |
 | **Viewer Stage 2** — Interactive dynamic viewer | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Modulation + Closed-Loop, months 4-6) | Weeks 9-20 | All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins. |
-| **Viewer Stage 3** — WormSim 2.0 | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. **browser.openworm.org redirects here after feature parity achieved.** |
+| **Viewer Stage 3** — WormSim 2.0 | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. **browser.openworm.org redirects here after feature parity achieved.** |
 
-Note: There is no DD014 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
+Note: There is no DD012 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
 
-See **[DD014.1](DD014.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD014.1](DD014.1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Viewer Stage 3 only** (Roadmap Phase 4) — not part of Stage 1-2 deliverables.
+See **[DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Viewer Stage 3 only** (Roadmap Phase 4) — not part of Stage 1-2 deliverables.
 
 **Viewer Stage 1 (Roadmap Phase 1): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
 
 **Viewer Stage 2 (Roadmap Phase 2): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
 
-**Viewer Stage 3 (Roadmap Phase 4): WormSim 2.0.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD014.1](DD014.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
+**Viewer Stage 3 (Roadmap Phase 4): WormSim 2.0.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD012.1](DD012.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
 
 ### Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
 
@@ -299,10 +299,10 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, [PyVista](https://docs.pyvista.org/), [Trame](https://kitware.github.io/trame/), VTK
 - For Phase 3 (Three.js viewer): Node.js 18+, npm
-- A simulation output in OME-Zarr format (produced by [DD013](DD013_Simulation_Stack_Architecture.md) pipeline)
+- A simulation output in OME-Zarr format (produced by [DD011](DD011_Simulation_Stack_Architecture.md) pipeline)
 
 ### Getting Started (Environment Setup)
 
@@ -475,14 +475,14 @@ for key in z.keys():
 | Defecation events | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
 | Neuropeptide concentrations | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Per-peptide, per-neuron concentration over time | OME-Zarr: `neuropeptides/concentrations/` | µM |
 | Validation results | [DD010](DD010_Validation_Framework.md) | Tier 1/2/3 pass/fail + metrics | JSON in `validation/` | mixed |
-| Simulation config | [DD013](DD013_Simulation_Stack_Architecture.md) | `openworm.yml` used for this run | Zarr `.zattrs` metadata | — |
+| Simulation config | [DD011](DD011_Simulation_Stack_Architecture.md) | `openworm.yml` used for this run | Zarr `.zattrs` metadata | — |
 
 ### Outputs (What This Subsystem Produces)
 
 | Output | Consumer | Variable | Format | Units |
 |--------|----------|----------|--------|-------|
 | Interactive 3D viewer | Human users (scientists, public) | Web application on port 8501 | HTML + WebGL/vtk.js | — |
-| Screenshot / video export | [DD013](DD013_Simulation_Stack_Architecture.md) (output pipeline), publications | Static images or MP4 from viewer | PNG, MP4 | pixels |
+| Screenshot / video export | [DD011](DD011_Simulation_Stack_Architecture.md) (output pipeline), publications | Static images or MP4 from viewer | PNG, MP4 | pixels |
 | Selected cell state (inspector) | Human users | Time series for selected cell | In-app plot | mV, µM, etc. |
 
 ### Configuration (`openworm.yml` Section)
@@ -607,16 +607,16 @@ docker compose run quick-test  # with visualization.export_format: "legacy"
 | Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If calcium per-cell format changes, intestine layer breaks |
 | Neuropeptide output format | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If concentration format changes, neuropeptide volumetric layer breaks |
 | Validation report format | [DD010](DD010_Validation_Framework.md) | If report JSON schema changes, validation overlay breaks |
-| Docker compose structure | [DD013](DD013_Simulation_Stack_Architecture.md) | If output directory or service naming changes, viewer service breaks |
+| Docker compose structure | [DD011](DD011_Simulation_Stack_Architecture.md) | If output directory or service naming changes, viewer service breaks |
 | VirtualWorm 3D meshes | External (Caltech/WormBase) | If mesh coordinates or structure change, anatomy layers break |
 | NeuroML cell morphologies | [DD001](DD001_Neural_Circuit_Architecture.md) (c302) | If cell morphology files change, neuron rendering breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Simulation stack (export step) | [DD013](DD013_Simulation_Stack_Architecture.md) | If Zarr schema changes, `master_openworm.py` export step must update |
+| Simulation stack (export step) | [DD011](DD011_Simulation_Stack_Architecture.md) | If Zarr schema changes, `master_openworm.py` export step must update |
 | Contributor onboarding | [Contributor Progression](../contributing/contributor-progression.md) | If viewer Docker service changes, L0 orientation task B1 instructions must update |
 | N2-Whisperer orientation | AI Agents | If viewer URL/port changes, N2-Whisperer "run simulation" instructions must update |
-| Output pipeline | [DD013](DD013_Simulation_Stack_Architecture.md) | If screenshot/video export changes, automated output generation changes |
+| Output pipeline | [DD011](DD011_Simulation_Stack_Architecture.md) | If screenshot/video export changes, automated output generation changes |
 
 ---
 
@@ -628,7 +628,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A1 |
+| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase A1 |
 | Port Worm3DViewer from Streamlit to Trame | Visualization L4 | 24 hrs | None |
 | Implement time scrubbing (slider + play/pause) | Visualization L4 | 8 hrs | Trame port |
 | Implement layer toggle system | Visualization L4 | 8 hrs | Trame port |
@@ -636,7 +636,7 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 | Add neuron voltage → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add muscle activation → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add cell click → inspector panel | Visualization L4 | 8 hrs | Trame port |
-| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD013](DD013_Simulation_Stack_Architecture.md) Phase A1 |
+| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase A1 |
 | Add to CI (build + smoke test) | Integration Maintainer | 4 hrs | Docker stage |
 
 **Deliverable:** `docker compose up viewer` serves a web app with time-animated, multi-layer, interactive 3D worm at `localhost:8501`.
@@ -786,7 +786,7 @@ WormSim 2.0 must have ALL of the following before browser.openworm.org redirects
 ### Existing Code Resources
 
 **NemaNode** ([openworm/NemaNode](https://github.com/openworm/NemaNode), 2024, dormant):
-Interactive web-based map of neural connections (formerly nemanode.org). May contain reusable graph layout algorithms and layer toggle patterns for DD014's neural circuit visualization layer.
+Interactive web-based map of neural connections (formerly nemanode.org). May contain reusable graph layout algorithms and layer toggle patterns for DD012's neural circuit visualization layer.
 
 ---
 

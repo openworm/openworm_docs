@@ -55,7 +55,7 @@ Ultimately, the worm has to crawl like a real worm. The [Schafer lab](https://do
 
 **Threshold: all 5 within ±15%.** Why 15%? Because that's roughly the coefficient of variation observed across real worms of the same genotype. A model matching the mean within one CV is performing within the biological noise floor. Going tighter would mean overfitting to a specific animal rather than capturing the population.
 
-**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — currently being revived per [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md).
+**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — currently being revived per [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md).
 
 **Status:** Blocking, but currently not automated — the analysis toolbox needs revival first.
 
@@ -93,7 +93,7 @@ Beyond locomotion, organ systems have their own characteristic rhythms that serv
 |-------|----|-----------------|----------------|
 | **Pharynx** | [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) | Pumping frequency | 3–4 Hz |
 | **Intestine** | [DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Defecation cycle period | 50 ± 10 seconds |
-| **Egg-laying** | [DD018](design_documents/DD018_Egg_Laying_System_Architecture.md) | Active/inactive pattern | ~20 min inactive, ~2 min active |
+| **Egg-laying** | [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) | Active/inactive pattern | ~20 min inactive, ~2 min active |
 
 These are beautiful validation targets because the rhythms are robust and well-characterized — a pharynx that pumps at 1 Hz or 10 Hz is clearly wrong.
 
@@ -106,16 +106,16 @@ These are beautiful validation targets because the rhythms are robust and well-c
 | **Tier 1** (single cell) | Scripts exist, not in CI | Automate and integrate |
 | **Tier 2a** (circuit) | Data ready via `wormneuroatlas` API | Wire into CI pipeline |
 | **Tier 2b** (neuropeptides) | Data ready, awaiting [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Implement DD006 first |
-| **Tier 3** (behavior) | **Blocked** — toolbox needs revival | [DD021](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival (~33 hrs) |
+| **Tier 3** (behavior) | **Blocked** — toolbox needs revival | [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival (~33 hrs) |
 | **Tier 4** (causal) | Future work | Phase 3+ |
 
-The infrastructure priority is getting Tiers 2 and 3 automated in CI ([DD013](design_documents/DD013_Simulation_Stack_Architecture.md)) so every pull request is validated before merging.
+The infrastructure priority is getting Tiers 2 and 3 automated in CI ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)) so every pull request is validated before merging.
 
 ---
 
 ## Continue Reading
 
 - **[DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)** — Complete specification: all thresholds, test commands, data sources, and CI integration
-- **[DD021: Movement Analysis Toolbox](design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** — Tier 3 toolbox revival plan
-- **[DD024: Validation Data Acquisition](design_documents/DD024_Validation_Data_Acquisition_Pipeline.md)** — How we source experimental data for all tiers
+- **[DD017: Movement Analysis Toolbox](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** — Tier 3 toolbox revival plan
+- **[DD020: Validation Data Acquisition](design_documents/DD020_Validation_Data_Acquisition_Pipeline.md)** — How we source experimental data for all tiers
 - **[How It Works: Modeling](modeling.md)** — How the simulation components fit together

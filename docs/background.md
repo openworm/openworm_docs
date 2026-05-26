@@ -24,7 +24,7 @@ We are building a simulation platform to prove it is possible to make good model
 Why _C. elegans_?
 -----------------
 
-In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD002_Muscle_Model_Architecture.md) on a body in a complex world.
+In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD002_Muscle_Model_Architecture.md) on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building a simple system to capture it, we are starting with making models of the individual cells and their interactions. If we do this correctly so that the cells act on each other as they do in the real organism, we will have a much more realistic model than we would get trying to go straight to the behavior.
 
@@ -134,9 +134,9 @@ Each concept on this page has been formalized into an actionable Design Document
 | Concept | Design Document | What It Specifies |
 |---------|----------------|-------------------|
 | Bottom-up simulation | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD003](design_documents/DD003_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
-| Multi-algorithm integration | [DD013](design_documents/DD013_Simulation_Stack_Architecture.md) | Docker-based simulation stack assembling all algorithms |
-| Model optimization | [DD017](design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md) | Hybrid mechanistic-ML framework for parameter fitting |
-| NeuroML | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD020](design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
+| Multi-algorithm integration | [DD011](design_documents/DD011_Simulation_Stack_Architecture.md) | Docker-based simulation stack assembling all algorithms |
+| Model optimization | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Hybrid mechanistic-ML framework for parameter fitting |
+| NeuroML | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
 
 ---
 

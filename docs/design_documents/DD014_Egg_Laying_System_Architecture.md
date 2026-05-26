@@ -1,4 +1,4 @@
-# DD018: Egg-Laying System Architecture (Reproductive Behavioral Circuit)
+# DD014: Egg-Laying System Architecture (Reproductive Behavioral Circuit)
 
 - **Status:** Proposed (Phase 3)
 - **Author:** OpenWorm Core Team
@@ -22,10 +22,10 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 | **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **What does this produce?** | Egg-laying circuit: 2 HSN neurons + 6 VC neurons + 16 sex muscles (NeuroML), serotonergic/cholinergic signaling, two-state behavioral output |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: egg-laying bout interval 20 +/- 10 min, 3-5 eggs per bout; inactive/active two-state pattern reproduced |
-| **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_egglaying.py`, `egglaying/` module) — issues labeled `dd018` |
+| **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_egglaying.py`, `egglaying/` module) — issues labeled `dd014` |
 | **Config toggle** | `egglaying.enabled: true` / `egglaying.model: "circuit"` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `egglaying.enabled: true` (body still moves?), `scripts/measure_egglaying.py` (two-state pattern?) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `egglaying/muscle_activation/` layer — 16 sex muscles with contraction heatmap; `egglaying/circuit_state/` for active/inactive state timeline |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `egglaying/muscle_activation/` layer — 16 sex muscles with contraction heatmap; `egglaying/circuit_state/` for active/inactive state timeline |
 | **CI gate** | Two-state behavioral validation (Tier 3) blocks merge; backward compatibility with `egglaying.enabled: false` required |
 ---
 
@@ -40,7 +40,7 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 
 **Before:** No egg-laying circuit. HSN and VC neurons exist in the connectome but have no sex-muscle targets. No vulval or uterine muscles modeled. No reproductive behavior.
 
-**After:** A functional egg-laying circuit producing rhythmic two-state behavior. Serotonergic command neurons drive vulval muscle contraction via feed-forward excitation with tyraminergic feedback inhibition. Egg-laying events are visible as synchronized vulval muscle calcium transients in the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer.
+**After:** A functional egg-laying circuit producing rhythmic two-state behavior. Serotonergic command neurons drive vulval muscle contraction via feed-forward excitation with tyraminergic feedback inhibition. Egg-laying events are visible as synchronized vulval muscle calcium transients in the [DD012](DD012_Dynamic_Visualization_Architecture.md) viewer.
 
 ---
 
@@ -68,10 +68,10 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 | Item | Value |
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
-| **Issue label** | `dd018` |
+| **Issue label** | `dd014` |
 | **Milestone** | Phase 3: Organ Systems |
-| **Branch convention** | `dd018/description` (e.g., `dd018/hsn-serotonin-synapse`) |
-| **Example PR title** | `DD018: Add vulval muscle cell templates with EGL-19/UNC-103 channels` |
+| **Branch convention** | `dd014/description` (e.g., `dd014/hsn-serotonin-synapse`) |
+| **Example PR title** | `DD014: Add vulval muscle cell templates with EGL-19/UNC-103 channels` |
 
 ---
 
@@ -79,7 +79,7 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml, pandas, numpy, scipy
 
 ### Getting Started (Environment Setup)
@@ -180,7 +180,7 @@ python scripts/test_serotonin_response.py \
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layers:**
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layers:**
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -825,8 +825,8 @@ Several known modulatory inputs are not included in Phase 3:
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Vulval muscle [Ca2+] per cell | [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization) | Per-muscle calcium time series | OME-Zarr: `egglaying/muscle_activation/`, shape (n_timesteps, 16) | dimensionless [0, 1] |
-| Circuit state (active/inactive) | [DD014](DD014_Dynamic_Visualization_Architecture.md) (visualization) | Binary state time series | OME-Zarr: `egglaying/circuit_state/`, shape (n_timesteps, 1) | binary |
+| Vulval muscle [Ca2+] per cell | [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization) | Per-muscle calcium time series | OME-Zarr: `egglaying/muscle_activation/`, shape (n_timesteps, 16) | dimensionless [0, 1] |
+| Circuit state (active/inactive) | [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization) | Binary state time series | OME-Zarr: `egglaying/circuit_state/`, shape (n_timesteps, 1) | binary |
 | Egg-laying event timestamps | [DD010](DD010_Validation_Framework.md) (validation) | Event log | OME-Zarr: `egglaying/egg_events/` | ms |
 | Egg-laying behavioral metrics | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | bout_interval, eggs_per_bout, active_duration | CSV output from measure_egglaying.py | min, count, min |
 | Sex muscle particle forces (Option B, future) | [DD003](DD003_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | Per-particle force for vulval/uterine muscles | Same format as [DD002](DD002_Muscle_Model_Architecture.md) muscle activation | dimensionless [0, 1] |
@@ -915,7 +915,7 @@ docker compose run simulation -- \
 - [ ] Body locomotion kinematics within +/-15% of baseline
 - [ ] No NaN values in any output variable
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -950,7 +950,7 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 |---------------|----|----------------------------|
 | Validation (egg-laying behavioral metrics) | [DD010](DD010_Validation_Framework.md) | Egg-laying pattern is a Tier 3 validation target |
 | Body physics (future, if vulval muscles are SPH particles) | [DD003](DD003_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | If vm activation format changes, particle forces change |
-| Visualization (egg-laying layers) | [DD014](DD014_Dynamic_Visualization_Architecture.md) | If output format changes, viewer layers break |
+| Visualization (egg-laying layers) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | If output format changes, viewer layers break |
 
 ---
 

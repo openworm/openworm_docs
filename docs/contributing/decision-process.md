@@ -106,7 +106,7 @@ and the single most important success metric.
 - Mark [TO BE CREATED] with a GitHub issue link
 
 ## How to Visualize                               ← REQUIRED
-- Which [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) viewer layer displays this work
+- Which [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) viewer layer displays this work
 - Color mapping or rendering specification
 - What you should SEE when it works correctly
 - (If not applicable, e.g., governance DDs: state "N/A")
@@ -159,7 +159,7 @@ Variable name, Format, Units, Timestep (if applicable).
 
 ### Repository & Packaging
 - Primary repository (e.g., `openworm/c302`)
-- Docker stage in multi-stage build ([DD013](../design_documents/DD013_Simulation_Stack_Architecture.md))
+- Docker stage in multi-stage build ([DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
 - `versions.lock` key
 - Build dependencies (pip/apt packages)
 
@@ -173,7 +173,7 @@ Variable name, Format, Units, Timestep (if applicable).
   block merge
 - Per-PR checklist (what must pass before merge)
 
-### How to Visualize ([DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Connection)
 - Which OME-Zarr groups this DD's output populates
 - Which viewer layer displays it
 - Color mapping specification
@@ -189,7 +189,7 @@ Variable name, Format, Units, Timestep (if applicable).
 
 - Anyone (L1+) can propose a Design Document
 - Open a PR to `openworm-admin/design_documents/` with a new DD file
-- Assign a DD number (next available, e.g., [DD013](../design_documents/DD013_Simulation_Stack_Architecture.md))
+- Assign a DD number (next available, e.g., [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
 - Tag relevant subsystem maintainers (L4) for review
 
 **Step 2: Discussion**
@@ -233,7 +233,7 @@ When a DD is created, approved, or changes phase assignment:
    - Issue draft `Roadmap Phase` tags are consistent with DD phase
    - Integration Map Phase Legend is current
 
-**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A1) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD020 bug discovered in Feb 2026: DD020 was Phase 0 in the roadmap but said Phase 1 in its own header.
+**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A1) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD016 bug discovered in Feb 2026: DD016 was Phase 0 in the roadmap but said Phase 1 in its own header.
 
 ### When to Write a Design Document vs. Just Opening a PR
 
@@ -298,9 +298,9 @@ When a DD is created, approved, or changes phase assignment:
 
 10. **Complete Setup Path:** The "Getting Started" sub-section must take a newcomer from a blank machine to a working environment. This means: repository clone URLs, dependency installation commands, and a clear Docker-vs-native fork. A contributor should never have to guess which repo to clone or which packages to install. If the DD shares a repo with another DD, cross-reference that DD's setup rather than duplicating instructions.
 
-11. **Visualizable:** Must describe what the work looks like in the [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
+11. **Visualizable:** Must describe what the work looks like in the [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) viewer. If not applicable (governance DDs), state "N/A."
 
-12. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD014 spans Phase 1-4), the header should reference the earliest phase and note the span.
+12. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD012 spans Phase 1-4), the header should reference the earliest phase and note the span.
 
 ### Bad Design Document Anti-Patterns
 
@@ -371,7 +371,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Action:**
 
-1. Write [DD013](../design_documents/DD013_Simulation_Stack_Architecture.md): "Simulator Backend Selection"
+1. Write [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md): "Simulator Backend Selection"
 2. Include: Context (why switch?), Decision (Brian2 vs. NEURON), Alternatives (NEST, custom solver), Quality Criteria (must reproduce all existing validation), Migration Path (parallel implementation during transition)
 3. Open RFC PR
 4. Community discusses performance benchmarks, NeuroML compatibility, learning curve
@@ -385,13 +385,13 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Action:**
 
-1. Write [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md): "Mechanosensory Transduction (MEC-4 Channel Model)"
+1. Write [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md): "Mechanosensory Transduction (MEC-4 Channel Model)"
 2. Include: MEC-4/MEC-10 DEG/ENaC channel kinetics, Goodman et al. 1998 data, coupling to Sibernetic mechanical strain
 3. Open RFC PR
 4. Discuss with L4 Neural Circuit maintainer
 5. Approve
 
-**Outcome:** [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md) becomes the specification. Contributor implements according to [DD014](../design_documents/DD014_Dynamic_Visualization_Architecture.md). Mind-of-a-Worm checks compliance.
+**Outcome:** [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) becomes the specification. Contributor implements according to [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md). Mind-of-a-Worm checks compliance.
 
 ---
 

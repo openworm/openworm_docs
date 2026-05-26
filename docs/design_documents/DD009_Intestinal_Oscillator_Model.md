@@ -25,7 +25,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_intestine.py`, `intestine/` module) — issues labeled `dd009` |
 | **Config toggle** | `intestine.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` with `intestine.enabled: true` (5s partial cycle), nightly: `measure_defecation_period.py` (200s full validation) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `intestine/calcium/` layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); `intestine/defecation_events/` for pBoc/aBoc/Exp markers |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `intestine/calcium/` layer — 20-cell calcium heatmap (posterior-to-anterior wave visible); `intestine/defecation_events/` for pBoc/aBoc/Exp markers |
 | **CI gate** | Per-PR: 5s quick-test (no crash); nightly: full 200s period validation (Tier 3) blocks merge |
 ---
 
@@ -74,7 +74,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pyNeuroML, jnml
 
 ### Getting Started (Environment Setup)
@@ -157,7 +157,7 @@ docker compose run quick-test  # with intestine.enabled: false
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `intestine/calcium/` for 20-cell calcium heatmap; `intestine/defecation_events/` for motor program markers.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `intestine/calcium/` for 20-cell calcium heatmap; `intestine/defecation_events/` for motor program markers.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -333,8 +333,8 @@ The intestinal oscillator is driven by **IP3 receptor (ITR-1) mediated calcium w
 | Defecation trigger signal | [DD001](DD001_Neural_Circuit_Architecture.md) (DVB/AVL neuron activation) | Binary trigger when Ca peaks in int1 | Event file: timestamp of each peak | ms |
 | Defecation motor program state | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | pBoc/aBoc/Exp occurrence timestamps | Tab-separated event log | ms |
 | ER [Ca2+] per cell | Internal (diagnostics) | Per-cell ER calcium time series | Tab-separated | uM |
-| Intestinal calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-cell [Ca2+] over all timesteps | OME-Zarr: `intestine/calcium/`, shape (n_timesteps, 20) | uM |
-| Defecation event markers (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | pBoc/aBoc/Exp event timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
+| Intestinal calcium time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-cell [Ca2+] over all timesteps | OME-Zarr: `intestine/calcium/`, shape (n_timesteps, 20) | uM |
+| Defecation event markers (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | pBoc/aBoc/Exp event timestamps | OME-Zarr: `intestine/defecation_events/` | ms |
 
 ### Repository & Packaging
 
@@ -408,7 +408,7 @@ docker compose run quick-test  # with intestine.enabled: false
 - [ ] No NaN values in calcium output
 - [ ] Calcium values are oscillatory (not flat, not diverging)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -422,7 +422,7 @@ docker compose run quick-test  # with intestine.enabled: false
 | Metric | Value | Implication |
 |--------|-------|-------------|
 | Simulation wall time | ~10 hours for 200s sim | Not practical for CI (use nightly builds) |
-| Memory (with video pipeline) | >64 GB (OOM) | **Video pipeline memory leak ([DD013](DD013_Simulation_Stack_Architecture.md) Issue #332) MUST be fixed first** |
+| Memory (with video pipeline) | >64 GB (OOM) | **Video pipeline memory leak ([DD011](DD011_Simulation_Stack_Architecture.md) Issue #332) MUST be fixed first** |
 | Memory (no video) | ~4 GB | Feasible if video is disabled |
 | CI strategy | Nightly validation job, not per-PR | Per-PR tests run 5s (one partial cycle), nightly runs 200s |
 
@@ -457,7 +457,7 @@ When `body.cell_identity: true`, intestinal cells are represented by tagged SPH 
 | NeuroML/LEMS framework | [DD001](DD001_Neural_Circuit_Architecture.md) | Intestinal cells use same framework — solver or channel model changes propagate |
 | CeNGEN expression (intestinal cells) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | If intestinal cell expression data changes, channel densities change, period may shift |
 | Cell identity (for mechanical coupling) | [DD004](DD004_Mechanical_Cell_Identity.md) | If intestinal cell_ids change, wrong particles contract |
-| Video pipeline fix | [DD013](DD013_Simulation_Stack_Architecture.md) (Issue #332) | Until fixed, cannot run 200s validation with video/plots enabled |
+| Video pipeline fix | [DD011](DD011_Simulation_Stack_Architecture.md) (Issue #332) | Until fixed, cannot run 200s validation with video/plots enabled |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|

@@ -1,9 +1,9 @@
-# DD028: Project Metrics Dashboard
+# DD024: Project Metrics Dashboard
 
 - **Status:** Proposed
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-27
-- **Related:** [DD010](DD010_Validation_Framework.md), [Contributor Progression](../contributing/contributor-progression.md), [DD013](DD013_Simulation_Stack_Architecture.md), [DD014](DD014_Dynamic_Visualization_Architecture.md)
+- **Related:** [DD010](DD010_Validation_Framework.md), [Contributor Progression](../contributing/contributor-progression.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md)
 
 > **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Infrastructure
 
@@ -11,7 +11,7 @@
 
 ## TL;DR
 
-DD028 defines a real-time project metrics dashboard aggregating validation scores, contributor activity, CI pipeline health, and phase progress into a single status page. The dashboard transforms the static Phase Roadmap into a live instrument panel, closing the feedback loop that lets maintainers and contributors see the project's pulse without reading issue trackers. Success metric: all four dashboard panels update automatically on every CI run.
+DD024 defines a real-time project metrics dashboard aggregating validation scores, contributor activity, CI pipeline health, and phase progress into a single status page. The dashboard transforms the static Phase Roadmap into a live instrument panel, closing the feedback loop that lets maintainers and contributors see the project's pulse without reading issue trackers. Success metric: all four dashboard panels update automatically on every CI run.
 
 ---
 
@@ -46,7 +46,7 @@ DD028 defines a real-time project metrics dashboard aggregating validation score
 ## Repository & Issues
 
 - **Repository:** `openworm/openworm` (or a dedicated `openworm/dashboard` repo if preferred)
-- **Issue label:** `dd028-dashboard`
+- **Issue label:** `dd024-dashboard`
 - **Milestone:** Phase 1 — Project Metrics Dashboard
 
 ---
@@ -98,7 +98,7 @@ It calls `collect_metrics.py`, commits updated JSON to the `gh-pages` branch, an
 
 ## How to Visualize
 
-DD028 **is** the visualization. The dashboard itself is the deliverable. It does not depend on DD014's simulation viewer — it is a separate static site focused on project health rather than simulation output.
+DD024 **is** the visualization. The dashboard itself is the deliverable. It does not depend on DD012's simulation viewer — it is a separate static site focused on project health rather than simulation output.
 
 Dashboard URL (target): `https://openworm.github.io/openworm/dashboard/` or `status.openworm.org`
 
@@ -115,7 +115,7 @@ BadgeList API ─────────────┘                        
 
 ### Panel 1: Validation Scores
 
-- **Source:** GitHub Actions artifacts from DD013's `validate` workflow
+- **Source:** GitHub Actions artifacts from DD011's `validate` workflow
 - **Data:** Tier 2 functional connectivity score (% of known connections reproduced), Tier 3 behavioral kinematics score (body wave frequency, amplitude, speed within empirical bounds)
 - **Display:** Line chart (last 30 runs), current score with pass/fail indicator, regression alerts (score drops > 5% from rolling average)
 - **Library:** Chart.js (lightweight, no build step, CDN-loadable)
@@ -176,7 +176,7 @@ BadgeList API ─────────────┘                        
 
 ## Boundaries (Explicitly Out of Scope)
 
-- **Simulation visualization** — that is DD014's domain
+- **Simulation visualization** — that is DD012's domain
 - **Real-time streaming** — the dashboard updates periodically (every CI run + every 6 hours), not via WebSocket
 - **User authentication** — the dashboard is fully public
 - **Historical data beyond 1 year** — older data can be archived; the dashboard shows rolling windows
@@ -190,7 +190,7 @@ The ExO (Exponential Organizations) framework identifies **Dashboards** as one o
 
 As the project scales from 5 active contributors toward dozens (human + AI), the absence of a shared status view creates information asymmetry. Maintainers cannot identify regressions without reading CI logs. New contributors cannot see where help is needed. The board cannot assess project health without asking the core team.
 
-DD028 closes this gap with the simplest possible implementation: a static page fed by a Python script on a cron schedule.
+DD024 closes this gap with the simplest possible implementation: a static page fed by a Python script on a cron schedule.
 
 ---
 
@@ -198,7 +198,7 @@ DD028 closes this gap with the simplest possible implementation: a static page f
 
 1. DD010 — Validation Framework (defines Tier 2/3 metrics this dashboard tracks)
 2. DD011 — Contributor Progression Model (defines badge categories and level thresholds)
-3. DD013 — Simulation Stack Architecture (defines CI pipeline whose results this dashboard aggregates)
+3. DD011 — Simulation Stack Architecture (defines CI pipeline whose results this dashboard aggregates)
 4. Chart.js — https://www.chartjs.org/ (visualization library)
 5. GitHub REST API — https://docs.github.com/en/rest (data source for CI and contributor activity)
 6. BadgeList API v1 — https://badgelist.com/api/v1 (data source for badge counts)
@@ -212,7 +212,7 @@ DD028 closes this gap with the simplest possible implementation: a static page f
 
 | Source | Data | Format | Frequency |
 |--------|------|--------|-----------|
-| DD013 CI pipeline | Validation scores, build status | GitHub Actions artifacts (JSON) | Every CI run |
+| DD011 CI pipeline | Validation scores, build status | GitHub Actions artifacts (JSON) | Every CI run |
 | DD011 BadgeList | Badge counts, user counts per level | BadgeList API v1 (JSON) | Every 6 hours |
 | GitHub API | PR/issue counts, contributor stats | REST API (JSON) | Every 6 hours |
 | DD status fields | Phase completion | Parsed from markdown files | Every 6 hours |
@@ -264,6 +264,6 @@ python -c "import json; [json.load(open(f'dashboard/data/{f}.json')) for f in ['
 
 ### Coupling Dependencies
 
-- **Upstream:** DD013 (CI artifacts), DD011/BadgeList (badge data), DD010 (validation metric definitions)
+- **Upstream:** DD011 (CI artifacts), DD011/BadgeList (badge data), DD010 (validation metric definitions)
 - **Downstream:** None (dashboard is a read-only consumer)
 - **Coupling strength:** Loose — dashboard reads public APIs and CI artifacts; no subsystem needs to know the dashboard exists

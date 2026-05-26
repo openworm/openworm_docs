@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD025](DD025_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics), [DD027](DD027_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models)
+- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics), [DD023](DD023_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models)
 
 ---
 
@@ -25,7 +25,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level [
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd001` |
 | **Config toggle** | `neural.level: C1` / `neural.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
 | **CI gate** | Tier 3 kinematic validation blocks merge; `jnml -validate` blocks PR |
 ---
 
@@ -78,7 +78,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level [
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, [pyNeuroML](https://github.com/NeuroML/pyNeuroML), [jnml](https://github.com/NeuroML/jNeuroML), [NEURON](https://www.neuron.yale.edu) 8.2.6, [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox)/`cect`
 
 ### Getting Started (Environment Setup)
@@ -172,7 +172,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `neural/` — 302 neurons with voltage and calcium trace overlays, color-by-activity.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `neural/` — 302 neurons with voltage and calcium trace overlays, color-by-activity.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -286,8 +286,8 @@ This circuit produced alternating dorsoventral muscle activation waves propagati
 The current Level C1 model has three known approximations:
 
 - **Uniform channel kinetics:** All 302 neurons share 4 channels borrowed from the muscle model (Boyle & Cohen 2008). See [DD005](DD005_Cell_Type_Differentiation_Strategy.md).
-- **Uniform synaptic weights:** All chemical synapses use `g_syn = 0.09 nS`. See [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md).
-- **Single compartment:** All neurons are modeled as isopotential spheres. See [DD027](DD027_Multicompartmental_Neuron_Models.md).
+- **Uniform synaptic weights:** All chemical synapses use `g_syn = 0.09 nS`. See [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md).
+- **Single compartment:** All neurons are modeled as isopotential spheres. See [DD023](DD023_Multicompartmental_Neuron_Models.md).
 
 ---
 
@@ -420,7 +420,7 @@ Ingests: [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) (both sex
 ### Existing Code Resources
 
 **wormneuroatlas** ([openworm/wormneuroatlas](https://github.com/openworm/wormneuroatlas), PyPI: `pip install wormneuroatlas`, maintained 2025):
-Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity via a unified Python API. Complements `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) with additional datasets.
+Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity via a unified Python API. Complements `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) with additional datasets.
 
 ---
 
@@ -469,7 +469,7 @@ Provides connectome data, CeNGEN gene expression, and [Randi 2023](https://doi.o
     *Second muscle model incorporated into c302 (one K⁺ + one Ca²⁺ channel). Based on Jospin et al. electrophysiology. See [openworm/JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel).*
 
 19. **Wen Q et al. (2012).** "Proprioceptive coupling within motor neurons drives *C. elegans* forward locomotion." *Neuron* 76:750-761.
-    *B-type motor neurons have stretch-sensitive properties. Basis for proprioceptive coupling between neighboring DB/VB neurons in c302 forward locomotion circuit. See also [DD023](DD023_Proprioceptive_Feedback_and_Motor_Coordination.md).*
+    *B-type motor neurons have stretch-sensitive properties. Basis for proprioceptive coupling between neighboring DB/VB neurons in c302 forward locomotion circuit. See also [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md).*
 
 ---
 
@@ -486,7 +486,7 @@ Do NOT modify Level C1 unless a critical bug is found.
 
 ### Level D: Multicompartmental Cable Equation Models
 
-For neurons where single-compartment approximation is insufficient, Level D multicompartmental models are specified in [DD027](DD027_Multicompartmental_Neuron_Models.md). Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers.
+For neurons where single-compartment approximation is insufficient, Level D multicompartmental models are specified in [DD023](DD023_Multicompartmental_Neuron_Models.md). Level D neurons must still pass all [DD010](DD010_Validation_Framework.md) tiers.
 
 ---
 
@@ -511,9 +511,9 @@ For neurons where single-compartment approximation is insufficient, Level D mult
 | Neuron [Ca²⁺]ᵢ | [DD002](DD002_Muscle_Model_Architecture.md) (muscle activation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptide release trigger) | `ca_internal` per neuron | NeuroML state variable | mol/cm³ | dt_neuron (0.05 ms) |
 | Muscle [Ca²⁺]ᵢ (via [DD002](DD002_Muscle_Model_Architecture.md) muscle cells in same LEMS simulation) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic, via `sibernetic_c302.py`) | `muscle_ca` per muscle | Tab-separated file: muscle_id, timestep, ca_value | mol/cm³ | dt_coupling (0.005 ms) |
 | Network activity recordings | [DD010](DD010_Validation_Framework.md) (Tier 2 validation) | `*_calcium.dat`, `*_voltages.dat` | Tab-separated, neuron_id columns × timestep rows | mV or mol | dt_neuron |
-| Neuron voltage time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron V over all timesteps | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | mV | output_interval |
-| Neuron calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron [Ca²⁺] over all timesteps | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | mol/cm³ | output_interval |
-| Neuron 3D positions | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/`, shape (302, 3) | µm | one-time |
+| Neuron voltage time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron V over all timesteps | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | mV | output_interval |
+| Neuron calcium time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron [Ca²⁺] over all timesteps | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | mol/cm³ | output_interval |
+| Neuron 3D positions | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Static 3D coordinates for 302 neurons | OME-Zarr: `neural/positions/`, shape (302, 3) | µm | one-time |
 
 ### Repository & Packaging
 
@@ -574,7 +574,7 @@ docker compose run validate
 - [ ] No changes to connectome topology (synapse existence) without explicit justification
 - [ ] All parameters have correct biophysical units
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -598,7 +598,7 @@ docker compose run validate
 
 ### Coupling Bridge Ownership
 
-The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD003](DD003_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md)).**
+The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD003](DD003_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD011](DD011_Simulation_Stack_Architecture.md)).**
 
 ---
 

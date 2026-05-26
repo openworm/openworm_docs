@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool), [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline — data sourcing for all tiers)
+- **Related:** All other DDs (validation applies to all models), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides — Tier 2b unc-31 validation), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox — Tier 3 validation tool), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition Pipeline — data sourcing for all tiers)
 
 ---
 
@@ -20,12 +20,12 @@ Every pull request must pass quantitative validation at four levels — single c
 |----------|--------|
 | **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
 | **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
-| **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
+| **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Success metric** | Tier 2a: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 2b: neuropeptide contribution r > 0.3 (wt-vs-unc-31); Tier 3: 5 kinematic metrics within ±15% of [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab data |
-| **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
+| **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Config toggle** | `validation.run_after_simulation: true`, `validation.tier2_functional_connectivity: true`, `validation.tier2_neuropeptide_unc31: true`, `validation.tier3_behavioral: true` in `openworm.yml` |
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
-| **Visualize** | Validation overlay in [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
+| **Visualize** | Validation overlay in [DD012](DD012_Dynamic_Visualization_Architecture.md) viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
 | **CI gate** | Tier 2 blocks PR merge (r < 0.5 = fail); Tier 3 blocks merge to main (>15% deviation = fail) |
 
 ---
@@ -76,7 +76,7 @@ A simulation that produces movement but fails electrophysiology validation has *
 ## Repository & Issues
 
 - **Primary repository:** `openworm/OpenWorm` (meta-repo — validation scripts live here)
-- **Tier 3 toolbox:** `openworm/open-worm-analysis-toolbox` (see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+- **Tier 3 toolbox:** `openworm/open-worm-analysis-toolbox` (see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 - **Tier 2 data API:** `openworm/wormneuroatlas` (Randi 2023 functional connectivity)
 - **Issue label:** `dd010`, `validation`
 - **Milestone:** Phase 1 — Validation CI Pipeline
@@ -101,7 +101,7 @@ cd OpenWorm
 
 - **Tier 1 (single-cell electrophysiology):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
 - **Tier 2 (circuit-level functional connectivity):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
-- **Tier 3 (behavioral kinematics):** Also needs `open-worm-analysis-toolbox` — see [DD021 Getting Started](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md#getting-started-environment-setup) for setup
+- **Tier 3 (behavioral kinematics):** Also needs `open-worm-analysis-toolbox` — see [DD017 Getting Started](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md#getting-started-environment-setup) for setup
 
 **Path A — Docker (recommended):**
 
@@ -140,11 +140,11 @@ See the [Integration Test](#integration-test) subsection below for a full step-b
 
 ## How to Visualize
 
-Validation results are displayed through the [DD014](DD014_Dynamic_Visualization_Architecture.md) viewer and standalone reports:
+Validation results are displayed through the [DD012](DD012_Dynamic_Visualization_Architecture.md) viewer and standalone reports:
 
 - **Correlation matrix heatmaps:** Tier 2a produces a simulated 302x302 functional connectivity matrix displayed alongside the Randi 2023 experimental matrix. Difference heatmap highlights neuron pairs with largest discrepancies.
 - **Locomotion parameter dashboards:** Tier 3 produces a bar chart of the 5 kinematic metrics (speed, wavelength, frequency, amplitude, gait) with experimental mean +/-15% tolerance bands.
-- **Per-neuron expression-consistency overlay:** Tier 1 expression-consistency results are rendered as a pass/fail color map over the 3D worm body in the DD014 viewer (`validation/overlay/` OME-Zarr group).
+- **Per-neuron expression-consistency overlay:** Tier 1 expression-consistency results are rendered as a pass/fail color map over the 3D worm body in the DD012 viewer (`validation/overlay/` OME-Zarr group).
 - **Perturbation effect comparison:** Tier 4 results are displayed as a table of predicted vs. observed effect directions with magnitude bars.
 - **CI summary badge:** GitHub Actions produces a pass/fail badge linked to the full validation report JSON.
 
@@ -344,7 +344,7 @@ fc_diff_exp = fc_wt - fc_unc31  # Neuropeptide contribution (experimental)
 
 ### Tier 3: Behavioral Validation (System Tests)
 
-**Primary tool:** `open-worm-analysis-toolbox` (see **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab experimental data in WCON format.
+**Primary tool:** `open-worm-analysis-toolbox` (see **[DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** for toolbox revival plan, WCON format specification, API contract, and version pinning) — compares simulated movement trajectories to [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab experimental data in WCON format.
 
 **Validated metrics:**
 
@@ -404,7 +404,7 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 
 **Status:** Non-blocking (advisory) in Phase 1-2. Becomes blocking in Phase 3+ as more subsystems come online and the model makes increasingly specific causal predictions.
 
-**Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals ([Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4); [Haspel et al. 2023](https://arxiv.org/abs/2308.06578)). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD024](DD024_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
+**Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals ([Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4); [Haspel et al. 2023](https://arxiv.org/abs/2308.06578)). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
 
 ### Standard In-Silico Perturbation Battery
 
@@ -435,7 +435,7 @@ Tiers 3 and 4 require robust, unbiased behavioral quantification. The field of c
 - **Deep learning-based pose estimation** ([Pereira et al. 2022](https://doi.org/10.1038/s41592-022-01426-1), SLEAP) provides sub-pixel body posture tracking that can extract kinematic features more precisely than centroid-only approaches
 - **Computational neuroethology frameworks** ([Datta et al. 2019](https://doi.org/10.1016/j.neuron.2019.09.038)) advocate for treating behavior as a high-dimensional continuous signal rather than a set of discrete categories, which aligns with how our simulation outputs movement data
 
-As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) is revived, it should incorporate or interface with these modern approaches rather than relying solely on the classic 5-metric kinematic comparison.
+As the validation toolbox ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) is revived, it should incorporate or interface with these modern approaches rather than relying solely on the classic 5-metric kinematic comparison.
 
 ---
 
@@ -499,25 +499,25 @@ As the validation toolbox ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Poli
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
 | Tier 1 validation report | [Decision Process](../contributing/decision-process.md) (PR review) | Per-cell pass/fail + metrics | JSON | mixed |
-| Tier 2 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
-| Tier 3 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD013](DD013_Simulation_Stack_Architecture.md) (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
-| Regression alert | [DD013](DD013_Simulation_Stack_Architecture.md) (CI pipeline) | Pass/fail + diff from baseline | JSON + exit code | boolean |
+| Tier 2 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD011](DD011_Simulation_Stack_Architecture.md) (CI gate) | Correlation-of-correlations score | JSON | dimensionless (r value) |
+| Tier 3 validation report | [Decision Process](../contributing/decision-process.md) (PR review), [DD011](DD011_Simulation_Stack_Architecture.md) (CI gate) | Per-metric pass/fail (speed, wavelength, frequency, amplitude, gait) | JSON | mixed |
+| Regression alert | [DD011](DD011_Simulation_Stack_Architecture.md) (CI pipeline) | Pass/fail + diff from baseline | JSON + exit code | boolean |
 | Validation dashboard | Mad-Worm-Scientist (daily digest) | Summary metrics for all tiers | JSON | mixed |
-| Validation overlay data (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-metric pass/fail + experimental comparison traces | OME-Zarr: `validation/overlay/` (tier results + reference data) | mixed |
+| Validation overlay data (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-metric pass/fail + experimental comparison traces | OME-Zarr: `validation/overlay/` (tier results + reference data) | mixed |
 
-### CI/CD Ownership Split ([DD010](DD010_Validation_Framework.md) vs. [DD013](DD013_Simulation_Stack_Architecture.md))
+### CI/CD Ownership Split ([DD010](DD010_Validation_Framework.md) vs. [DD011](DD011_Simulation_Stack_Architecture.md))
 
-**[DD010](DD010_Validation_Framework.md) defines WHAT to validate.** [DD013](DD013_Simulation_Stack_Architecture.md) defines HOW to run it in Docker and CI.
+**[DD010](DD010_Validation_Framework.md) defines WHAT to validate.** [DD011](DD011_Simulation_Stack_Architecture.md) defines HOW to run it in Docker and CI.
 
 | Responsibility | Owned By |
 |---------------|----------|
 | Validation metrics, acceptance criteria, test scripts | [DD010](DD010_Validation_Framework.md) |
-| Docker compose services (`quick-test`, `validate`) | [DD013](DD013_Simulation_Stack_Architecture.md) |
-| CI/CD pipeline (GitHub Actions workflow) | [DD013](DD013_Simulation_Stack_Architecture.md) |
-| Validation data packaging in Docker image | [DD010](DD010_Validation_Framework.md) + [DD013](DD013_Simulation_Stack_Architecture.md) (shared) |
-| Pass/fail decision logic (blocking PRs) | [DD010](DD010_Validation_Framework.md) (criteria) + [DD013](DD013_Simulation_Stack_Architecture.md) (enforcement) |
+| Docker compose services (`quick-test`, `validate`) | [DD011](DD011_Simulation_Stack_Architecture.md) |
+| CI/CD pipeline (GitHub Actions workflow) | [DD011](DD011_Simulation_Stack_Architecture.md) |
+| Validation data packaging in Docker image | [DD010](DD010_Validation_Framework.md) + [DD011](DD011_Simulation_Stack_Architecture.md) (shared) |
+| Pass/fail decision logic (blocking PRs) | [DD010](DD010_Validation_Framework.md) (criteria) + [DD011](DD011_Simulation_Stack_Architecture.md) (enforcement) |
 
-**Reconciliation:** The `docker compose run validate` service ([DD013](DD013_Simulation_Stack_Architecture.md)) runs the validation scripts defined by [DD010](DD010_Validation_Framework.md). The scripts produce JSON reports. [DD013](DD013_Simulation_Stack_Architecture.md)'s CI pipeline reads those reports and applies [DD010](DD010_Validation_Framework.md)'s acceptance criteria to determine pass/fail.
+**Reconciliation:** The `docker compose run validate` service ([DD011](DD011_Simulation_Stack_Architecture.md)) runs the validation scripts defined by [DD010](DD010_Validation_Framework.md). The scripts produce JSON reports. [DD011](DD011_Simulation_Stack_Architecture.md)'s CI pipeline reads those reports and applies [DD010](DD010_Validation_Framework.md)'s acceptance criteria to determine pass/fail.
 
 ### Configuration (`openworm.yml` Section)
 
@@ -549,9 +549,9 @@ validation:
 
 ### Docker Build
 
-- **Repository:** `openworm/open-worm-analysis-toolbox` (movement validation, see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + `openworm/tracker-commons` (WCON spec, see [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + validation scripts in `openworm/OpenWorm` meta-repo
+- **Repository:** `openworm/open-worm-analysis-toolbox` (movement validation, see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + `openworm/tracker-commons` (WCON spec, see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) + validation scripts in `openworm/OpenWorm` meta-repo
 - **Docker stage:** `validation` in multi-stage Dockerfile
-- **`versions.lock` keys:** `open_worm_analysis_toolbox`, `tracker_commons` (both managed per [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+- **`versions.lock` keys:** `open_worm_analysis_toolbox`, `tracker_commons` (both managed per [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 - **Build dependencies:** `pip install open-worm-analysis-toolbox` + validation data files
 
 ### Validation Data Location
@@ -642,8 +642,8 @@ print(f'Neuropeptide contribution matrix: {(fc_wt - fc_unc31).shape}')
 
 **Action Items:**
 
-- [ ] Add `wormneuroatlas` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
-- [ ] Add `cect` to [DD013](DD013_Simulation_Stack_Architecture.md) Docker validation stage
+- [ ] Add `wormneuroatlas` to [DD011](DD011_Simulation_Stack_Architecture.md) Docker validation stage
+- [ ] Add `cect` to [DD011](DD011_Simulation_Stack_Architecture.md) Docker validation stage
 - [ ] Pin versions for both in `versions.lock`
 - [ ] Update Tier 2a validation scripts to use wormneuroatlas API
 - [ ] Implement Tier 2b (unc-31 comparison) validation script after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)
@@ -652,9 +652,9 @@ print(f'Neuropeptide contribution matrix: {(fc_wt - fc_unc31).shape}')
 
 ---
 
-### `open-worm-analysis-toolbox` Revival ([DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md))
+### `open-worm-analysis-toolbox` Revival ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 
-This repo is **dormant** (last commit Jan 2020). **[DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** owns the full revival plan, including:
+This repo is **dormant** (last commit Jan 2020). **[DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** owns the full revival plan, including:
 
 - 8-task revival roadmap with owners, effort estimates, and dependencies (~33 hours total)
 - Python 3.12 compatibility, dependency updates, test suite fixes
@@ -663,7 +663,7 @@ This repo is **dormant** (last commit Jan 2020). **[DD021](DD021_Movement_Analys
 - API contract for `NormalizedWorm` and `WormFeatures` classes
 - Relationship to Tierpsy Tracker (modern successor)
 
-**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A1 ([DD013](DD013_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
+**See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A1 ([DD011](DD011_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
 
 Note: The archived predecessor repo `openworm/movement_validation` should not be used — it was superseded by the analysis toolbox.
 
@@ -702,11 +702,11 @@ docker compose run validate
 | Pharyngeal output format | [DD007](DD007_Pharyngeal_System_Architecture.md) | If pumping state format changes, pumping validation breaks |
 | Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If defecation event format changes, defecation validation breaks |
 | Experimental data (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | If data provenance or versioning changes, validation baselines may shift |
-| Docker compose services | [DD013](DD013_Simulation_Stack_Architecture.md) | If `validate` service configuration changes, validation pipeline breaks |
+| Docker compose services | [DD011](DD011_Simulation_Stack_Architecture.md) | If `validate` service configuration changes, validation pipeline breaks |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| CI pipeline (blocking gates) | [DD013](DD013_Simulation_Stack_Architecture.md) | If acceptance criteria change, CI may pass/fail differently |
+| CI pipeline (blocking gates) | [DD011](DD011_Simulation_Stack_Architecture.md) | If acceptance criteria change, CI may pass/fail differently |
 | PR review (Mind-of-a-Worm) | [Decision Process](../contributing/decision-process.md) | Mind-of-a-Worm references [DD010](DD010_Validation_Framework.md) criteria when checking PR compliance |
 | Founder digest (Mad-Worm-Scientist) | AI Agents | If validation report format changes, Mad-Worm-Scientist can't parse regression alerts |
 | All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
@@ -722,7 +722,7 @@ docker compose run validate
 https://github.com/openworm/open-worm-analysis-toolbox
 ```
 
-> **Note:** The predecessor repo `openworm/movement_validation` is **archived** and should not be used. The analysis toolbox is the current, canonical implementation. See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) for full repository landscape and revival plan.
+> **Note:** The predecessor repo `openworm/movement_validation` is **archived** and should not be used. The analysis toolbox is the current, canonical implementation. See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) for full repository landscape and revival plan.
 
 **Key modules:**
 
@@ -829,7 +829,7 @@ Provides direct API access to [Randi 2023](https://doi.org/10.1038/s41586-023-06
 Tools to produce, analyse and compare simulated and recorded neuronal datasets — directly relevant to Tier 1 electrophysiology validation. May contain reusable single-cell comparison scripts.
 
 **owmeta-sciunit** ([openworm/owmeta-sciunit](https://github.com/openworm/owmeta-sciunit), 2021):
-OWMeta-integrated SciUnit types providing formalized Tier 1 single-cell validation test classes with Z-scores, pass/fail, and goodness-of-fit metrics. Recommended tooling for automating Tier 1 electrophysiology validation in CI ([DD013](DD013_Simulation_Stack_Architecture.md)).
+OWMeta-integrated SciUnit types providing formalized Tier 1 single-cell validation test classes with Z-scores, pass/fail, and goodness-of-fit metrics. Recommended tooling for automating Tier 1 electrophysiology validation in CI ([DD011](DD011_Simulation_Stack_Architecture.md)).
 
 **worm-functional-connectivity** ([openworm/worm-functional-connectivity](https://github.com/openworm/worm-functional-connectivity), 2023):
 Alternative/supplementary source for Tier 2 functional connectivity matrices. Check if it includes unc-31 neuropeptide-deficient mutant data alongside wild-type.
@@ -869,13 +869,13 @@ Published HH parameter fits for motor neurons, interneurons, AWCon, and RMD. Exp
 - **Tier 2b** (neuropeptide unc-31 comparison): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) *unc-31* data also in `wormneuroatlas` — blocked on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) implementation (Phase 2)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
 
-**See [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
+**See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
 
 **Next Actions:**
 
-1. **URGENT:** Prioritize [DD021](DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A1 work (parallel with [DD013](DD013_Simulation_Stack_Architecture.md))
+1. **URGENT:** Prioritize [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A1 work (parallel with [DD011](DD011_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
 3. Add `wormneuroatlas` + `cect` to Docker validation stage — [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data is already accessible via API (no manual ingestion needed)
 4. After [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Implement Tier 2b (unc-31 comparison) validation script
-5. After [DD013](DD013_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
+5. After [DD011](DD011_Simulation_Stack_Architecture.md): Implement Steps 4-5 in `master_openworm.py` (validation pipeline)
 6. Set up GitHub Actions CI with Tier 2a+2b+3 blocking gates

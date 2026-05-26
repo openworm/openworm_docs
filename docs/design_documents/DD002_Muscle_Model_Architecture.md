@@ -25,7 +25,7 @@ The muscle model uses [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (muscle templates) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (coupling script) — issues labeled `dd002` |
 | **Config toggle** | `muscle.enabled: true` / `muscle.calcium_coupling: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (activation in [0,1]?), `docker compose run validate` (Tier 3 kinematics) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `muscle/activation/` layer — 95 muscles with [0,1] activation heatmap, warm colormap |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `muscle/activation/` layer — 95 muscles with [0,1] activation heatmap, warm colormap |
 | **CI gate** | Tier 3 kinematic validation blocks merge |
 ---
 
@@ -73,7 +73,7 @@ The muscle model uses [Hodgkin-Huxley](https://en.wikipedia.org/wiki/Hodgkin%E2%
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, [pyNeuroML](https://github.com/NeuroML/pyNeuroML), [jnml](https://github.com/NeuroML/jNeuroML), [NEURON](https://www.neuron.yale.edu) 8.2.6
 
 ### Getting Started (Environment Setup)
@@ -158,7 +158,7 @@ docker compose run validate
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `muscle/activation/` — 95 body wall muscles with [0, 1] activation heatmap, warm colormap.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `muscle/activation/` — 95 body wall muscles with [0, 1] activation heatmap, warm colormap.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -444,8 +444,8 @@ The simulation includes MVL24 for symmetry (4 quadrants × 24 rows = 96 muscles)
 |--------|------------|----------|--------|-------|----------|
 | Muscle [Ca²⁺]ᵢ | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | `ca_internal` per muscle | Read by `sibernetic_c302.py` from NEURON state | mol/cm³ | dt_coupling (0.005 ms) |
 | Muscle activation coefficient | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | `activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)` | Computed in `sibernetic_c302.py`, written to Sibernetic muscle activation input | dimensionless [0, 1] | dt_coupling |
-| Muscle activation time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle activation over all timesteps | OME-Zarr: `muscle/activation/`, shape (n_timesteps, 95) | dimensionless [0, 1] | output_interval |
-| Muscle calcium time series (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle [Ca²⁺] over all timesteps | OME-Zarr: `muscle/calcium/`, shape (n_timesteps, 95) | mol/cm³ | output_interval |
+| Muscle activation time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle activation over all timesteps | OME-Zarr: `muscle/activation/`, shape (n_timesteps, 95) | dimensionless [0, 1] | output_interval |
+| Muscle calcium time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-muscle [Ca²⁺] over all timesteps | OME-Zarr: `muscle/calcium/`, shape (n_timesteps, 95) | mol/cm³ | output_interval |
 
 ### Repository & Packaging
 
@@ -499,7 +499,7 @@ docker compose run validate
 - [ ] Muscle conductance densities are 10-1000x smaller than neuron densities (no copy-paste from neuron params)
 - [ ] Calcium interface to Sibernetic is preserved (variable name, units)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -526,7 +526,7 @@ docker compose run validate
 - Activation formula → must update `sibernetic_c302.py`
 - Number of muscles (e.g., adding pharyngeal muscles per [DD007](DD007_Pharyngeal_System_Architecture.md)) → must update muscle mapping in `sibernetic_c302.py`
 
-**Coordination required:** Muscle model maintainer + Body Physics maintainer ([DD003](DD003_Body_Physics_Architecture.md)) + Integration Maintainer ([DD013](DD013_Simulation_Stack_Architecture.md))
+**Coordination required:** Muscle model maintainer + Body Physics maintainer ([DD003](DD003_Body_Physics_Architecture.md)) + Integration Maintainer ([DD011](DD011_Simulation_Stack_Architecture.md))
 
 ---
 

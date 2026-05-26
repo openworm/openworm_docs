@@ -51,7 +51,7 @@ Navigating OpenWorm
 
 We've created this documentation to help orient you to the different locations on the web where OpenWorm material is found and where contributions can be made.
 
-The **[Design Documents](design_documents/)** provide the complete technical roadmap — 29 architectural specifications ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD028](design_documents/DD028_Project_Metrics_Dashboard.md), plus [DD014.1](design_documents/DD014.1_Visual_Rendering_Specification.md) and [DD014.2](design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md)) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **[Start here](design_documents/)** if you want to understand the engineering blueprint.
+The **[Design Documents](design_documents/)** provide the complete technical roadmap — 29 architectural specifications ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD024](design_documents/DD024_Project_Metrics_Dashboard.md), plus [DD012.1](design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **[Start here](design_documents/)** if you want to understand the engineering blueprint.
 
 The [modeling approach page](modeling/) explains how we model at five scales simultaneously (molecular, channel, cellular, tissue, organism) and how the current architecture evolved from the CyberElegans prototype.
 
@@ -66,7 +66,7 @@ Contributing to OpenWorm
 
 We primarily use Slack to communicate and coordinate our daily activities, you are welcome to join us! For an invitation, fill out our [volunteer application form](https://goo.gl/3ncZWn).
 
-**New contributors:** Check the [Design Documents](design_documents/) for areas matching your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation). The [contributor progression model ([DD011](design_documents/DD011_Contributor_Progression_Model.md))](design_documents/DD011_Contributor_Progression_Model.md) describes the path from Observer to Senior Contributor.
+**New contributors:** Check the [Design Documents](design_documents/) for areas matching your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation). The [contributor progression model ([DD011](contributing/contributor-progression.md))](contributing/contributor-progression.md) describes the path from Observer to Senior Contributor.
 
 Then, please browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling/) we are taking.
 

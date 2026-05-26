@@ -24,42 +24,42 @@ nav:
           - DD002 Draft Issues: design_documents/DD002_draft_issues.md
           - DD003 Body Physics: design_documents/DD003_Body_Physics_Architecture.md
           - DD003 Draft Issues: design_documents/DD003_draft_issues.md
-          - DD020 Connectome Data Access: design_documents/DD020_Connectome_Data_Access_and_Dataset_Policy.md
-          - DD020 Draft Issues: design_documents/DD020_draft_issues.md
+          - DD016 Connectome Data Access: design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md
+          - DD016 Draft Issues: design_documents/DD016_draft_issues.md
       - "Phase A1 — Core Infrastructure":
           - DD008 Data Integration: design_documents/DD008_Data_Integration_Pipeline.md
-          - DD013 Simulation Stack: design_documents/DD013_Simulation_Stack_Architecture.md
-          - DD013 Draft Issues: design_documents/DD013_draft_issues.md
-          - DD021 Movement Toolbox: design_documents/DD021_Movement_Analysis_Toolbox_and_WCON_Policy.md
-          - DD021 Draft Issues: design_documents/DD021_draft_issues.md
-          - DD024 Validation Data Acquisition: design_documents/DD024_Validation_Data_Acquisition_Pipeline.md
-          - DD028 Project Metrics Dashboard: design_documents/DD028_Project_Metrics_Dashboard.md
+          - DD011 Simulation Stack: design_documents/DD011_Simulation_Stack_Architecture.md
+          - DD011 Draft Issues: design_documents/DD011_draft_issues.md
+          - DD017 Movement Toolbox: design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md
+          - DD017 Draft Issues: design_documents/DD017_draft_issues.md
+          - DD020 Validation Data Acquisition: design_documents/DD020_Validation_Data_Acquisition_Pipeline.md
+          - DD024 Project Metrics Dashboard: design_documents/DD024_Project_Metrics_Dashboard.md
       - "Phase A2 — Governance & Derisking":
-          - DD025 Foundation Model Pipeline: design_documents/DD025_Protein_Foundation_Model_Pipeline.md
+          - DD021 Foundation Model Pipeline: design_documents/DD021_Protein_Foundation_Model_Pipeline.md
           - "Contributor governance →": contributing/index.md
       - "Phase 1 — Cell-Type Specialization":
           - DD005 Cell-Type Specialization: design_documents/DD005_Cell_Type_Differentiation_Strategy.md
           - DD005 Draft Issues: design_documents/DD005_draft_issues.md
           - DD010 Validation Framework: design_documents/DD010_Validation_Framework.md
-          - DD014 Dynamic Visualization: design_documents/DD014_Dynamic_Visualization_Architecture.md
-          - DD014.1 Visual Rendering: design_documents/DD014.1_Visual_Rendering_Specification.md
+          - DD012 Dynamic Visualization: design_documents/DD012_Dynamic_Visualization_Architecture.md
+          - DD012.1 Visual Rendering: design_documents/DD012.1_Visual_Rendering_Specification.md
       - "Phase 2 — Modulation + Closed-Loop":
           - DD006 Neuropeptides: design_documents/DD006_Neuropeptidergic_Connectome_Integration.md
-          - DD019 Touch Response: design_documents/DD019_Closed_Loop_Touch_Response.md
-          - DD022 Environment: design_documents/DD022_Environmental_Modeling_and_Stimulus_Delivery.md
-          - DD023 Proprioception: design_documents/DD023_Proprioceptive_Feedback_and_Motor_Coordination.md
-          - DD026 Reservoir Computing: design_documents/DD026_Reservoir_Computing_Validation.md
-          - DD027 Multicompartmental Neurons: design_documents/DD027_Multicompartmental_Neuron_Models.md
-          - DD027 Draft Issues: design_documents/DD027_draft_issues.md
+          - DD015 Touch Response: design_documents/DD015_Closed_Loop_Touch_Response.md
+          - DD018 Environment: design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md
+          - DD019 Proprioception: design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md
+          - DD022 Reservoir Computing: design_documents/DD022_Reservoir_Computing_Validation.md
+          - DD023 Multicompartmental Neurons: design_documents/DD023_Multicompartmental_Neuron_Models.md
+          - DD023 Draft Issues: design_documents/DD023_draft_issues.md
       - "Phase 3 — Organ Systems":
           - DD007 Pharyngeal System: design_documents/DD007_Pharyngeal_System_Architecture.md
           - DD009 Intestinal Oscillator: design_documents/DD009_Intestinal_Oscillator_Model.md
-          - DD017 Hybrid ML: design_documents/DD017_Hybrid_Mechanistic_ML_Framework.md
-          - DD017 Draft Issues: design_documents/DD017_draft_issues.md
-          - DD018 Egg-Laying: design_documents/DD018_Egg_Laying_System_Architecture.md
+          - DD013 Hybrid ML: design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md
+          - DD013 Draft Issues: design_documents/DD013_draft_issues.md
+          - DD014 Egg-Laying: design_documents/DD014_Egg_Laying_System_Architecture.md
       - "Phase 4 — Complete Organism":
           - DD004 Mechanical Cell Identity: design_documents/DD004_Mechanical_Cell_Identity.md
-          - DD014.2 Mesh Deformation: design_documents/DD014.2_Anatomical_Mesh_Deformation_Pipeline.md
+          - DD012.2 Mesh Deformation: design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md
   - How It Works:
       - Modeling Approach: modeling.md
       - Validation Framework: validation.md

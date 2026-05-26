@@ -1,10 +1,10 @@
-# DD022: Environmental Modeling and Stimulus Delivery
+# DD018: Environmental Modeling and Stimulus Delivery
 
 - **Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-19
 - **Supersedes:** None
-- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
+- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
 
 ---
 
@@ -22,10 +22,10 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 | **Layer** | Environment — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
 | **What does this produce?** | Substrate models (agar stiffness, liquid viscosity, soil), chemical/thermal gradient fields, geometric obstacles, bacterial lawn particle system |
 | **Success metric** | Chemotaxis on NaCl gradient (CI chemotaxis index >0.5), thermotaxis to cultivation temp (±2°C), tap withdrawal on agar vs. liquid (latency difference reproduced) |
-| **Repository** | `openworm/sibernetic` (substrate mechanics) + `openworm/c302` (stimulus coupling to sensory neurons) — issues labeled `dd022` |
+| **Repository** | `openworm/sibernetic` (substrate mechanics) + `openworm/c302` (stimulus coupling to sensory neurons) — issues labeled `dd018` |
 | **Config toggle** | `environment.substrate: "agar"`, `environment.chemical_gradient: true`, `environment.food_particles: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test --config chemotaxis` (worm navigates gradient?), `docker compose run validate` (CI index validation) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `environment/substrate/` layer (agar surface heatmap), `environment/gradients/` (chemical/thermal field visualization), `environment/food/` (bacterial particles) |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `environment/substrate/` layer (agar surface heatmap), `environment/gradients/` (chemical/thermal field visualization), `environment/food/` (bacterial particles) |
 | **CI gate** | Behavioral validation (chemotaxis, thermotaxis) blocks merge; substrate mechanics must not destabilize body physics |
 ---
 
@@ -33,11 +33,11 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 **OpenWorm Mission:** "Creating the world's first virtual organism."
 
-**[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) serves this by:** An organism doesn't exist in isolation — it interacts with its environment. Chemotaxis (navigating toward food), thermotaxis (seeking optimal temperature), and mechanosensation (detecting surfaces) are core *C. elegans* behaviors that require environmental context. Without gradients and substrates, the worm can't exhibit naturalistic behavior.
+**[DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) serves this by:** An organism doesn't exist in isolation — it interacts with its environment. Chemotaxis (navigating toward food), thermotaxis (seeking optimal temperature), and mechanosensation (detecting surfaces) are core *C. elegans* behaviors that require environmental context. Without gradients and substrates, the worm can't exhibit naturalistic behavior.
 
 **Core Principle:** "Building in the physics... because it matters."
 
-**[DD022](DD022_Environmental_Modeling_and_Stimulus_Delivery.md) delivers:** Physical substrates (agar = viscoelastic solid, liquid = low-Reynolds-number fluid, soil = granular medium) with realistic mechanical properties, enabling validation against environment-dependent behaviors.
+**[DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) delivers:** Physical substrates (agar = viscoelastic solid, liquid = low-Reynolds-number fluid, soil = granular medium) with realistic mechanical properties, enabling validation against environment-dependent behaviors.
 
 ---
 
@@ -52,7 +52,7 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 **Before:** Worm exists in an infinite, featureless void. No substrate, no gradients, no food. Cannot exhibit naturalistic navigation behaviors.
 
-**After:** Worm crawls on agar (or swims in liquid, or burrows in soil), senses chemical/thermal gradients via [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 sensory transduction, navigates toward attractants (food, optimal temperature), avoids repellents.
+**After:** Worm crawls on agar (or swims in liquid, or burrows in soil), senses chemical/thermal gradients via [DD015](DD015_Closed_Loop_Touch_Response.md)/DD013 sensory transduction, navigates toward attractants (food, optimal temperature), avoids repellents.
 
 ---
 
@@ -78,8 +78,8 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 |------|-------|
 | **Primary repository** | `openworm/sibernetic` (environment is part of the physics engine) |
 | **Secondary repository** | `openworm/c302` (stimulus coupling to sensory neurons) |
-| **Issue label** | `dd022`, `environment` |
-| **Related DDs** | [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD019](DD019_Closed_Loop_Touch_Response.md) (Touch Response) |
+| **Issue label** | `dd018`, `environment` |
+| **Related DDs** | [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response) |
 
 ---
 
@@ -87,7 +87,7 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 ### Prerequisites
 
-- Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD013](DD013_Simulation_Stack_Architecture.md))
+- Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD011](DD011_Simulation_Stack_Architecture.md))
 - c302 neural model ([DD001](DD001_Neural_Circuit_Architecture.md)) for sensory neuron stimulus coupling
 - Stimulus configuration files (chemical gradient profiles, thermal profiles) — included in Docker image or generated at build time
 
@@ -178,7 +178,7 @@ Diffusion equation in 2D (agar surface):
 
 - Pre-compute steady-state gradient field (no time evolution during simulation)
 - Lookup concentration at worm's (x, y) position each timestep
-- Feed to [DD019](DD019_Closed_Loop_Touch_Response.md)/DD017 chemosensory transduction model
+- Feed to [DD015](DD015_Closed_Loop_Touch_Response.md)/DD013 chemosensory transduction model
 
 ### Closed-Loop Sensorimotor Interaction for Chemotaxis
 
@@ -187,9 +187,9 @@ The defining feature of naturalistic chemotaxis is the closed-loop interaction b
 **Closed-loop cycle (each simulation timestep):**
 
 1. **Body position** ([DD003](DD003_Body_Physics_Architecture.md)) provides the worm's current location in the environment
-2. **Local concentration** (DD022 gradient field) sampled at the worm's head position
+2. **Local concentration** (DD018 gradient field) sampled at the worm's head position
 3. **Temporal derivative** `dC/dt = (C(t) - C(t-dt)) / dt` computed — this implements the biased random walk strategy where the worm responds to concentration *changes*, not absolute levels
-4. **Sensory neuron activation** ([DD001](DD001_Neural_Circuit_Architecture.md)/[DD017](DD017_Hybrid_Mechanistic_ML_Framework.md)): `dC/dt` converted to current injection on chemosensory neurons (AWC for odors, ASEL/ASER for salt)
+4. **Sensory neuron activation** ([DD001](DD001_Neural_Circuit_Architecture.md)/[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)): `dC/dt` converted to current injection on chemosensory neurons (AWC for odors, ASEL/ASER for salt)
 5. **Neural circuit computation** ([DD001](DD001_Neural_Circuit_Architecture.md)): sensory input propagates through interneurons to motor neurons
 6. **Motor output** ([DD002](DD002_Muscle_Model_Architecture.md)): motor neuron calcium drives muscle contraction
 7. **Body movement** ([DD003](DD003_Body_Physics_Architecture.md)): muscles deform the body, propelling it through the environment
@@ -209,7 +209,7 @@ Similar to chemical gradient but for temperature:
 
 - Cultivation temperature (20°C) at one end, 15°C or 25°C at other
 - Linear or radial gradient
-- Feed to [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 learned thermosensory model
+- Feed to [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 learned thermosensory model
 
 ### Component 4: Food Particles (OP50 Bacteria)
 
@@ -268,8 +268,8 @@ Similar to chemical gradient but for temperature:
 
 | Output | Consumer DD | Variable | Format |
 |--------|------------|----------|--------|
-| Local chemical concentration | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
-| Local temperature | [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
+| Local chemical concentration | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
+| Local temperature | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
 | Substrate reaction force | [DD003](DD003_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
 
 ---
@@ -298,5 +298,5 @@ Without an environment model, the virtual worm exists in a featureless void and 
 
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)
 2. Implement steady-state gradient solver (chemical, thermal)
-3. Test with [DD019](DD019_Closed_Loop_Touch_Response.md) closed-loop touch + chemotaxis
+3. Test with [DD015](DD015_Closed_Loop_Touch_Response.md) closed-loop touch + chemotaxis
 4. Validate against [Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009) chemotaxis data

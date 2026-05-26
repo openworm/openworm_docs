@@ -25,7 +25,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) — issues labeled `dd008` |
 | **Config toggle** | `data.backend: owmeta` (recommended) or `data.backend: direct` (legacy) in `openworm.yml` |
 | **Build & test** | `docker compose run shell python -c "import owmeta_core"` (installs?), query 302 neurons (returns correct count?) |
-| **Visualize** | [DD014](DD014_Dynamic_Visualization_Architecture.md) `geometry/cell_metadata.json` — cell names, types, lineage for viewer tooltips and search |
+| **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `geometry/cell_metadata.json` — cell names, types, lineage for viewer tooltips and search |
 | **CI gate** | OWMeta installation + basic query test blocks merge for data-layer changes |
 ---
 
@@ -72,7 +72,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 
 ### Prerequisites
 
-- Docker with `docker compose` ([DD013](DD013_Simulation_Stack_Architecture.md) simulation stack)
+- Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, pip
 
 ### Getting Started (Environment Setup)
@@ -80,13 +80,13 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 **Path A — Docker (recommended):**
 
 ```bash
-# Cross-ref: DD013 Simulation Stack Architecture for full Docker setup
+# Cross-ref: DD011 Simulation Stack Architecture for full Docker setup
 docker compose build
 docker compose run shell python -c "import owmeta_core; print(owmeta_core.__version__)"
 # Then skip to Step 3 below — OWMeta packages are pre-installed in the container
 ```
 
-Cross-reference: [DD013](DD013_Simulation_Stack_Architecture.md) for the containerized simulation stack.
+Cross-reference: [DD011](DD011_Simulation_Stack_Architecture.md) for the containerized simulation stack.
 
 **Path B — Native:**
 
@@ -99,7 +99,7 @@ pip install -e .  # includes RDFLib, ZODB
 Additionally, for connectome data access:
 
 ```bash
-pip install connectometoolbox  # for connectome data access (see DD020)
+pip install connectometoolbox  # for connectome data access (see DD016)
 ```
 
 ### Step-by-step
@@ -148,7 +148,7 @@ docker compose run quick-test  # with data.backend: "direct"
 
 ## How to Visualize
 
-**[DD014](DD014_Dynamic_Visualization_Architecture.md) viewer layer:** `geometry/cell_metadata.json` for tooltips, search, and cell identification.
+**[DD012](DD012_Dynamic_Visualization_Architecture.md) viewer layer:** `geometry/cell_metadata.json` for tooltips, search, and cell identification.
 
 | Viewer Feature | Specification |
 |---------------|---------------|
@@ -172,14 +172,14 @@ All modeling code (c302, Sibernetic initialization, validation scripts) MUST acc
 - **Queryable:** Semantic queries like "Get all neurons in the nerve ring expressing unc-2" are one-liners
 - **Extensible:** New datasets (Ripoll-Sanchez neuropeptides, Witvliet development) can be added without modifying downstream code
 
-### Reconciliation with [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access)
+### Reconciliation with [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access)
 
-OWMeta and `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) serve complementary purposes:
+OWMeta and `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) serve complementary purposes:
 
-- **Phase 1-2 (current):** Use `cect` directly for connectome data ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)). OWMeta is optional for semantic queries.
+- **Phase 1-2 (current):** Use `cect` directly for connectome data ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)). OWMeta is optional for semantic queries.
 - **Phase 3+ (future):** OWMeta wraps `cect` internally. Consuming DDs can use either API.
 
-Contributors should follow [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) for connectome-specific data access and use OWMeta when broader semantic queries across multiple data types are needed.
+Contributors should follow [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) for connectome-specific data access and use OWMeta when broader semantic queries across multiple data types are needed.
 
 ### OWMeta Entity Types
 
@@ -301,9 +301,9 @@ OWMeta aggregates WormBase + all other sources.
 
 2. **Real-time data ingestion:** OWMeta is a batch pipeline. Datasets are ingested via scripts, reviewed, and released as versioned bundles. There is no streaming or live-update pathway.
 
-3. **Data visualization:** Rendering and interactive exploration of data are handled by [DD014](DD014_Dynamic_Visualization_Architecture.md). OWMeta produces the data; [DD014](DD014_Dynamic_Visualization_Architecture.md) displays it.
+3. **Data visualization:** Rendering and interactive exploration of data are handled by [DD012](DD012_Dynamic_Visualization_Architecture.md). OWMeta produces the data; [DD012](DD012_Dynamic_Visualization_Architecture.md) displays it.
 
-4. **Connectome graph algorithms:** Graph analysis, bilateral symmetry metrics, and network topology computations are handled by ConnectomeToolbox (`cect`) per [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md). OWMeta provides semantic queries across data types; `cect` provides direct connectome-specific analysis.
+4. **Connectome graph algorithms:** Graph analysis, bilateral symmetry metrics, and network topology computations are handled by ConnectomeToolbox (`cect`) per [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md). OWMeta provides semantic queries across data types; `cect` provides direct connectome-specific analysis.
 
 ---
 
@@ -349,7 +349,7 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 | Neuropeptide-receptor pairs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Peptide ligand → receptor → expressing cells | OWMeta query → edge list | binary (expressed/not) |
 | Cell positions (3D) | [DD004](DD004_Mechanical_Cell_Identity.md) | Per-cell x, y, z coordinates | OWMeta query → NumPy array | um |
 | Cell ontology IDs | [DD004](DD004_Mechanical_Cell_Identity.md) | Cell name → WBbt ID mapping | OWMeta query → dict | identifiers |
-| Cell metadata (for viewer) | **[DD014](DD014_Dynamic_Visualization_Architecture.md)** (visualization) | Cell names, types, lineage, WormAtlas links | OME-Zarr: `geometry/cell_metadata.json` | mixed |
+| Cell metadata (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Cell names, types, lineage, WormAtlas links | OME-Zarr: `geometry/cell_metadata.json` | mixed |
 
 ### Repository & Packaging
 
@@ -417,7 +417,7 @@ docker compose run quick-test  # with data.backend: "direct"
 - [ ] New ingestion scripts include source DOI, version, and ID mapping documentation
 - [ ] No orphaned IDs (all IDs map to WBbt ontology)
 
-### How to Visualize ([DD014](DD014_Dynamic_Visualization_Architecture.md) Connection)
+### How to Visualize ([DD012](DD012_Dynamic_Visualization_Architecture.md) Connection)
 
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
@@ -433,11 +433,11 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 
 **Trigger for Phase 2→3 transition:** OWMeta is installable on Python 3.12, all Phase 1-2 datasets are ingested, and at least 3 downstream consumers (c302, Sibernetic init, validation) have been successfully migrated.
 
-### Reconciliation with [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access Policy)
+### Reconciliation with [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access Policy)
 
-**[DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)** specifies ConnectomeToolbox (`cect`, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
+**[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)** specifies ConnectomeToolbox (`cect`, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
 
-| Aspect | `cect` ([DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md)) | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) |
+| Aspect | `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) |
 |--------|---------------|----------------|
 | **Purpose** | Direct connectome data access | Semantic knowledge graph (multi-modal) |
 | **Architecture** | Direct Python API | RDF semantic graph |
@@ -447,7 +447,7 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 | **Current status** | v0.2.7, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 
-**Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see [DD020](DD020_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
+**Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
 
 **Future integration (Phase 3+):** When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4), Ripoll-Sanchez, [Wang 2024](https://doi.org/10.7554/eLife.95402)), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
 

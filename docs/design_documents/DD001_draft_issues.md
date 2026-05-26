@@ -8,24 +8,24 @@
 
 **Totals:** 9 issues (ai-workable: 6 / human-expert: 3 | L1: 5, L2: 3, L3: 1)
 
-**Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD021 owns. They have been moved to [DD021 Draft Issues](DD021_draft_issues.md) (Issues 1-2) where they belong as Phase A1 validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
+**Note:** DD001's "How to Build & Test" section references kinematic validation scripts (`check_regression.py`, Schafer baseline generation) at Steps 5-6. Those scripts are **thin wrappers around `open-worm-analysis-toolbox`**, which DD017 owns. They have been moved to [DD017 Draft Issues](DD017_draft_issues.md) (Issues 1-2) where they belong as Phase A1 validation infrastructure. DD001 is a **consumer** of that validation pipeline, not the owner.
 
 **Roadmap Context:** DD001 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
 | 1. Validation Infrastructure (Issues 1-3) | **Phase A1** | Trajectory extraction tools for automated validation pipeline |
-| 2. Data Pipeline (Issue 4) | **Phase A1** | OME-Zarr export for DD014 viewer |
+| 2. Data Pipeline (Issue 4) | **Phase A1** | OME-Zarr export for DD012 viewer |
 | 3. Documentation (Issues 5-8) | **Any** | Can be addressed independently |
 | Infrastructure (Issue 9-10) | **Phase A1** | Changelog |
 
-**Issues relocated to other DDs:** Ion Channel Library (6 issues) → [DD005 Draft Issues](DD005_draft_issues.md); Synaptic Optimization (3 issues) → [DD017 Draft Issues](DD017_draft_issues.md); Level D Multicompartmental (2 issues) + spatial synapses config → [DD027 Draft Issues](DD027_draft_issues.md).
+**Issues relocated to other DDs:** Ion Channel Library (6 issues) → [DD005 Draft Issues](DD005_draft_issues.md); Synaptic Optimization (3 issues) → [DD013 Draft Issues](DD013_draft_issues.md); Level D Multicompartmental (2 issues) + spatial synapses config → [DD023 Draft Issues](DD023_draft_issues.md).
 
 ---
 
 ## Group 1: Validation Infrastructure (Phase A1)
 
-Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by [DD021](DD021_draft_issues.md).
+Target: Scripts and baselines needed to measure neural circuit quality — trajectory extraction tools (ported from existing C++ implementations) and output format documentation. Kinematic regression detection is handled by [DD017](DD017_draft_issues.md).
 
 ---
 
@@ -44,7 +44,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
     - [`openworm/Worm2D/src/CE_locomotion/WormBody.cpp`](https://github.com/openworm/Worm2D) — C++ implementation (50 segments) with c302 integration layer via CPython embedding (`src/neuromlModel/c302ForW2D.cpp`). Shows how to bridge c302's Python neural simulation with the C++ body model.
     - **Paper:** [Boyle, Berri & Cohen 2012](https://doi.org/10.3389/fncom.2012.00010)
 - **Approach:** **Port or wrap** the existing C++ body model, do not reimplement from scratch. Two viable paths: (a) Python/NumPy port of `WormBody.cpp` (~200 lines of core math plus DAE solver), treating the C++ as the reference specification; (b) compile `CelegansNeuromechanicalGaitModulation/WormSim/Model/worm.cc` as a subprocess and adapt the existing `generate_wcon.py` for WCON output. Path (a) gives tighter c302 integration; path (b) is faster to ship.
-- **DD013 Pipeline Role:** Neural-stage script. Must be callable from `master_openworm.py` with output path from `openworm.yml`. Produces WCON artifact at a well-known path for downstream DD021/DD010 consumption.
+- **DD011 Pipeline Role:** Neural-stage script. Must be callable from `master_openworm.py` with output path from `openworm.yml`. Produces WCON artifact at a well-known path for downstream DD017/DD010 consumption.
 - **Files to Modify:**
     - `scripts/boyle_berri_cohen_trajectory.py` (new — port/wrapper of existing C++ implementations)
     - `tests/test_boyle_berri_cohen_trajectory.py` (new)
@@ -79,7 +79,7 @@ Target: Scripts and baselines needed to measure neural circuit quality — traje
     - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — ~300 lines of **working Python** that reads `worm_motion_log.txt` from Sibernetic, generates WCON JSON, validates against `wcon_schema.json`, and computes speed/curvature. Also includes `wcon/__init__.py`, `wcon/wcon_schema.json`, and test WCON files.
     - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation, not 2D midline — different purpose but the centerline concept is related)
 - **Approach:** **Adapt and extend** the existing `sibernetic/wcon/generate_wcon.py`. The core WCON generation pipeline exists; extend it to handle the full acceptance criteria (49-point centerline from elastic shell particles, 3D→2D projection, schema validation).
-- **DD013 Pipeline Role:** Body-stage script. Runs after Sibernetic simulation completes. Output WCON path configured via `openworm.yml`. Must be callable from `master_openworm.py`.
+- **DD011 Pipeline Role:** Body-stage script. Runs after Sibernetic simulation completes. Output WCON path configured via `openworm.yml`. Must be callable from `master_openworm.py`.
 - **Files to Modify:**
     - `scripts/extract_trajectory.py` (new — adapted from existing `wcon/generate_wcon.py`)
     - `tests/test_extract_trajectory.py` (new)
@@ -143,9 +143,9 @@ Target: OME-Zarr export and coupling interface documentation.
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (OME-Zarr rows) and [DD014](DD014_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
+- **DD Section to Read:** [DD001 — Deliverables](DD001_Neural_Circuit_Architecture.md#deliverables) (OME-Zarr rows) and [DD012](DD012_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
 - **Depends On:** Issue 3 (output format documentation)
-- **DD013 Pipeline Role:** Neural-stage post-processing. Produces Zarr store artifact for DD014 visualization stage. Output path from `openworm.yml`.
+- **DD011 Pipeline Role:** Neural-stage post-processing. Produces Zarr store artifact for DD012 visualization stage. Output path from `openworm.yml`.
 - **Files to Modify:**
     - `scripts/export_zarr.py` (new)
 - **Test Commands:**
@@ -157,9 +157,9 @@ Target: OME-Zarr export and coupling interface documentation.
     - [ ] Exports `neural/calcium/`: shape (n_timesteps, 302), dtype float32, units mol/cm³
     - [ ] Exports `neural/positions/`: shape (302, 3), dtype float32, units µm (static neuron coordinates)
     - [ ] Neuron positions sourced from WormAtlas or Long et al. 2009 3D atlas
-    - [ ] Zarr store readable by DD014 viewer
+    - [ ] Zarr store readable by DD012 viewer
     - [ ] Includes OME-Zarr metadata (axes labels, neuron name mapping)
-- **Sponsor Summary Hint:** OME-Zarr is the universal data bus connecting simulation to visualization. This script converts c302's raw text output into a structured Zarr store that the DD014 3D viewer can read. You'll see 302 neurons at their real 3D positions in the worm, colored by how active they are — like a real-time fMRI of a virtual worm brain.
+- **Sponsor Summary Hint:** OME-Zarr is the universal data bus connecting simulation to visualization. This script converts c302's raw text output into a structured Zarr store that the DD012 3D viewer can read. You'll see 302 neurons at their real 3D positions in the worm, colored by how active they are — like a real-time fMRI of a virtual worm brain.
 
 ---
 
@@ -167,13 +167,13 @@ Target: OME-Zarr export and coupling interface documentation.
 
 6 issues (survey + adopt/validate 14 channels) relocated to DD005, which drives Phase 1 cell-type specialization. See [DD005 Draft Issues](DD005_draft_issues.md) Issues 1-6.
 
-## ~~Group 4: Synaptic Optimization~~ → Relocated to [DD017 Draft Issues](DD017_draft_issues.md)
+## ~~Group 4: Synaptic Optimization~~ → Relocated to [DD013 Draft Issues](DD013_draft_issues.md)
 
-3 issues (neurotransmitter constraints, synapse optimization toggle, Randi 2023 adapter) relocated to DD017, which provides the differentiable simulation backend. See [DD017 Draft Issues](DD017_draft_issues.md) Issues 1-3.
+3 issues (neurotransmitter constraints, synapse optimization toggle, Randi 2023 adapter) relocated to DD013, which provides the differentiable simulation backend. See [DD013 Draft Issues](DD013_draft_issues.md) Issues 1-3.
 
-## ~~Group 5: Level D Multicompartmental~~ → Relocated to [DD027 Draft Issues](DD027_draft_issues.md)
+## ~~Group 5: Level D Multicompartmental~~ → Relocated to [DD023 Draft Issues](DD023_draft_issues.md)
 
-2 issues (morphology evaluation, AWC proof-of-concept) + 1 infrastructure issue (spatial synapses config) relocated to DD027, which specifies multicompartmental models. See [DD027 Draft Issues](DD027_draft_issues.md) Issues 1-3.
+2 issues (morphology evaluation, AWC proof-of-concept) + 1 infrastructure issue (spatial synapses config) relocated to DD023, which specifies multicompartmental models. See [DD023 Draft Issues](DD023_draft_issues.md) Issues 1-3.
 
 ---
 
@@ -341,7 +341,7 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 
 | Group | Issues | Target |
 |-------|--------|--------|
-| **1: Validation Infrastructure** | 1–3 | Trajectory tools (ported from existing C++), output format audit. Kinematic regression detection moved to [DD021](DD021_draft_issues.md). |
+| **1: Validation Infrastructure** | 1–3 | Trajectory tools (ported from existing C++), output format audit. Kinematic regression detection moved to [DD017](DD017_draft_issues.md). |
 | **2: Data Pipeline** | 4 | OME-Zarr export |
 | **3: Documentation** | 5–8 | Architecture docs, contributing guide, level comparison, test audit |
 | **4: Infrastructure** | 9 | Changelog |
@@ -351,22 +351,22 @@ Target: Enable new contributors to understand and modify the neural circuit mode
 | Destination | Issues Moved | Count |
 |------------|-------------|-------|
 | [DD005 Draft Issues](DD005_draft_issues.md) | Ion Channel Library (original Issues 5-10) | 6 |
-| [DD017 Draft Issues](DD017_draft_issues.md) | Synaptic Optimization (original Issues 11-13) | 3 |
-| [DD027 Draft Issues](DD027_draft_issues.md) | Level D Multicompartmental (original Issues 14-15) + spatial synapses config (original Issue 20) | 3 |
+| [DD013 Draft Issues](DD013_draft_issues.md) | Synaptic Optimization (original Issues 11-13) | 3 |
+| [DD023 Draft Issues](DD023_draft_issues.md) | Level D Multicompartmental (original Issues 14-15) + spatial synapses config (original Issue 20) | 3 |
 
 ### Cross-References
 
 | Related DD | Relationship |
 |------------|-------------|
 | **[DD005](DD005_draft_issues.md) (Cell-Type Specialization)** | **Ion channel issues relocated there** — 6 issues (original Issues 5-10) |
-| **[DD017](DD017_draft_issues.md) (Hybrid ML)** | **Synaptic optimization issues relocated there** — 3 issues (original Issues 11-13) |
-| **[DD027](DD027_draft_issues.md) (Multicompartmental)** | **Level D issues relocated there** — 3 issues (original Issues 14-15, 20) |
-| **[DD021](DD021_draft_issues.md) (Movement Toolbox)** | Kinematic validation scripts moved there — DD021 Issues 1-2. DD001 is a consumer of DD021's validation pipeline. |
+| **[DD013](DD013_draft_issues.md) (Hybrid ML)** | **Synaptic optimization issues relocated there** — 3 issues (original Issues 11-13) |
+| **[DD023](DD023_draft_issues.md) (Multicompartmental)** | **Level D issues relocated there** — 3 issues (original Issues 14-15, 20) |
+| **[DD017](DD017_draft_issues.md) (Movement Toolbox)** | Kinematic validation scripts moved there — DD017 Issues 1-2. DD001 is a consumer of DD017's validation pipeline. |
 | DD002 (Muscle Model) | DD002 Issue 18 documents `sibernetic_c302.py` coupling bridge |
 | DD003 (Body Physics) | Issue 2 (extract_trajectory.py) |
 | DD010 (Validation Framework) | Issues 1, 2 produce WCON consumed by DD010 Tier 3 |
-| DD013 (Simulation Stack) | DD013 Issue 24 covers c302 notebook |
-| DD014 (Dynamic Visualization) | Issue 4 (OME-Zarr export for viewer) |
+| DD011 (Simulation Stack) | DD011 Issue 24 covers c302 notebook |
+| DD012 (Dynamic Visualization) | Issue 4 (OME-Zarr export for viewer) |
 
 ### Dependency Graph (Critical Path)
 
@@ -376,13 +376,13 @@ Issue 3 (output format audit)
 
 Issue 1 (boyle_berri_cohen_trajectory.py — port existing C++) — independent, fast path
 Issue 2 (extract_trajectory.py — adapt Sibernetic generate_wcon.py) — depends on DD003
-  ├→ [both Issue 1 and Issue 2 produce WCON for DD021 regression checking]
+  ├→ [both Issue 1 and Issue 2 produce WCON for DD017 regression checking]
 
 Issues 5, 6, 7, 8 (docs) — independent
 Issue 9 (changelog) — independent
 
 Ion channel library → see DD005 Draft Issues
-Synaptic optimization → see DD017 Draft Issues
-Level D multicompartmental → see DD027 Draft Issues
-Kinematic validation → see DD021 Issues 1-2
+Synaptic optimization → see DD013 Draft Issues
+Level D multicompartmental → see DD023 Draft Issues
+Kinematic validation → see DD017 Issues 1-2
 ```

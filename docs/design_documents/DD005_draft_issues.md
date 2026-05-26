@@ -247,8 +247,8 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 |------------|-------------|
 | **[DD001](DD001_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD001 Draft Issues Group 3 |
 | DD010 (Validation Framework) | Channel validation criteria |
-| DD025 (Foundation Models) | Alternative kinetics prediction pathway |
-| [DD027](DD027_draft_issues.md) (Multicompartmental) | Issues 1-2 depend on this channel library |
+| DD021 (Foundation Models) | Alternative kinetics prediction pathway |
+| [DD023](DD023_draft_issues.md) (Multicompartmental) | Issues 1-2 depend on this channel library |
 
 ### Dependency Graph
 

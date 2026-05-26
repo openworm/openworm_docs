@@ -9,14 +9,14 @@ Details on installing and using the OpenWorm Docker simulation stack can be foun
 
 The source code for this project can be found [here](https://github.com/openworm/OpenWorm).
 
-!!! info "Governed by DD013"
-    The Docker simulation stack architecture is specified by [DD013: Simulation Stack Architecture](../design_documents/DD013_Simulation_Stack_Architecture.md), which defines the containerized environment, CI/CD pipeline, and `openworm.yml` configuration format.
+!!! info "Governed by DD011"
+    The Docker simulation stack architecture is specified by [DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md), which defines the containerized environment, CI/CD pipeline, and `openworm.yml` configuration format.
 
 ---
 
 ## Continue Reading
 
-- **[DD013: Simulation Stack Architecture](../design_documents/DD013_Simulation_Stack_Architecture.md)** — Full specification of the Docker-based stack
+- **[DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md)** — Full specification of the Docker-based stack
 - **[Sibernetic](sibernetic.md)** — The body physics engine inside the stack
 - **[c302](c302.md)** — The neural network framework inside the stack
 - **[How It Works: Modeling](../modeling.md)** — How all simulation components fit together
