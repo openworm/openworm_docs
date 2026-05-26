@@ -325,7 +325,7 @@ A contribution to the neural circuit model MUST:
 
 5. **Validation Against Movement Data:** Any change to the default Level C1 model must not degrade the kinematic validation score vs. Schafer lab WCON data. Run `open-worm-analysis-toolbox` before and after the change.
 
-### Validation Procedure
+### Validation Procedure (Quick Reference)
 
 ```bash
 # 1. Validate NeuroML syntax
@@ -351,6 +351,106 @@ python scripts/check_regression.py validation_report.json baseline_score.json
 ```
 
 **Acceptance threshold:** Simulated movement must remain within 15% of baseline across 5 key metrics (speed, wavelength, frequency, amplitude, crawling/swimming classification).
+
+---
+
+## Validation Methodology (Per-Cell → Per-Pair → Per-Network)
+
+Neural-circuit changes touch a three-level hierarchy: a single cell's electrophysiology, the pairwise interaction between two coupled cells, and the network-level emergent dynamics. Each level has its own validation workflow — and each follows the cross-tier [Validation Workflow Pattern](DD010_Validation_Framework.md#validation-workflow-pattern) (predict → reference → inspect → refine → implement → tune → render → compare). PRs that modify cell models, synapses, or network topology must address all three levels affected by the change.
+
+### Level 1 — Per-Cell Electrophysiology Validation
+
+**When to apply:** any change to a NeuroML cell template, ion channel kinetics, conductance density, or resting state.
+
+**Reference:** patch-clamp datasets per neuron class. Primary sources: Goodman et al. 2002 (touch receptors), Lindsay et al. 2011 (AVA command interneuron), Liu et al. 2018 (RIM), Suzuki 2003 / Chalasani 2007 (sensory neurons). See [DD010 §Tier 1 datasets](DD010_Validation_Framework.md#tier-1-single-cell-validation-unit-tests).
+
+**8-phase instantiation:**
+
+| Phase | Per-cell activity |
+|-------|-------------------|
+| 1. Predict | From CeNGEN gene expression for the neuron class, predict resting potential (V_rest), input resistance (R_in), I-V curve shape, calcium response amplitude. Cite which channels (egl-19, unc-2, shk-1, etc.) drive each prediction. |
+| 2. Reference | Pull the patch-clamp or calcium-imaging trace for this neuron class from the curated dataset directory. Cite the exact dataset version (`data/goodman2002_v1.2/`, etc.). |
+| 3. Inspect | Measure the reference's V_rest, R_in, I-V curve, time constants, spike threshold if applicable. Note any features your prediction missed. |
+| 4. Refine | Update the prediction with measured values; these become the acceptance targets per the Tier 1 thresholds (±5 mV V_rest, ±30% R_in, Pearson r>0.8 on I-V curve). |
+| 5. Implement | Encode the cell model in NeuroML 2 / LEMS. Validate XML with `jnml -validate`. |
+| 6. Tune | If parameters need adjustment, use grid search or NSGA-II (see neurotune / NeuroTune-jr) over conductance densities. Do NOT hand-sweep. Save the optimization log. |
+| 7. Render | Plot model V(t), I_Ca(t) overlaid with the reference trace. Standard protocols: V-clamp step, I-clamp ramp, depolarization-evoked Ca²⁺ response. Commit overlay PNG. |
+| 8. Compare | Per-metric pass/fail table at the Tier 1 acceptance thresholds. Commit the table + the trace overlay + the optimization log alongside the cell template change. |
+
+**Expression-consistency shortcut for the ~121 classes without patch-clamp data:** instead of comparing to a reference trace, run the [Expression-Consistency Check](DD010_Validation_Framework.md#tier-1-single-cell-validation-unit-tests) defined in DD010. The 8-phase workflow simplifies: prediction is the CeNGEN-derived expected behavior; reference is the gene-expression profile; comparison is whether the cell's electrical signature matches what its expression predicts.
+
+### Level 2 — Per-Pair Synaptic Validation
+
+**When to apply:** any change to synaptic weight, time constant, gap junction conductance, or addition of a new connection.
+
+**Reference:** NMJ EPSP shapes (Richmond & Jorgensen 1999 for cholinergic, McIntire 1993 for GABAergic), specific pairwise recordings where available. Where not, use the connectome-topology constraint (Cook 2019) as a structural reference.
+
+**8-phase instantiation:**
+
+| Phase | Per-pair activity |
+|-------|-------------------|
+| 1. Predict | From the synapse type (chemical excitatory, chemical inhibitory, gap junction) + count/weight, predict the post-synaptic response: EPSP/IPSP amplitude, time constant, summation behavior under repeated pre-synaptic spikes. |
+| 2. Reference | Patch-clamp NMJ recording or analogous pair data. For gap junctions, the symmetric-current criterion (current injected at A causes proportional V change at B and vice versa) is the structural reference. |
+| 3. Inspect | Measure reference EPSP amplitude, rise time, decay time constant, reversal potential. |
+| 4. Refine | Update synaptic-weight target; identify whether the gap is in the synapse model or in the pre-synaptic spike generation (often the latter — see Level 1 above first). |
+| 5. Implement | Add/modify synapse in NeuroML; verify connectivity matches Cook 2019 topology (do not add or remove synapses). |
+| 6. Tune | Grid search over synaptic weight + time constants. Constrain to within Cook 2019's reported synapse counts as a scaling factor. |
+| 7. Render | Pre- and post-synaptic voltage trace overlay; comparison to reference EPSP shape. Commit PNG. |
+| 8. Compare | EPSP amplitude within ±30%; time constants within ±50%; reversal potential within ±5 mV. Commit measurements + plot + tuning log. |
+
+### Level 3 — Per-Network Functional Validation
+
+**When to apply:** any change with cross-cellular reach — cell-type specialization rollouts (DD005), neuromodulator effects (DD006), large-scale parameter retuning. Per [DD010 §Tier 2a](DD010_Validation_Framework.md#tier-2a-integration-tests), this is a blocking gate for merge.
+
+**Reference:** Randi et al. 2023 whole-brain calcium imaging — pairwise functional correlations across ~189 recorded cells (wild-type for Tier 2a; wt-vs-`unc-31` for Tier 2b once DD006 lands).
+
+**8-phase instantiation:**
+
+| Phase | Per-network activity |
+|-------|----------------------|
+| 1. Predict | From the connectome topology + your changed parameters, predict which neuron pairs should be more/less correlated, and which functional clusters should emerge. |
+| 2. Reference | Randi 2023 pairwise correlation matrix (`data/randi2023_v*/correlations.npy`). |
+| 3. Inspect | Compute reference correlation-of-correlations: clusters, hub neurons, distance-from-correlation-zero distribution. |
+| 4. Refine | Update the predicted correlation pattern with the actual reference structure (often reveals e.g. "I predicted AVA-AVB anti-correlated; data shows them weakly positive — my synapse-sign assumption is wrong"). |
+| 5. Implement | Run the full c302 network simulation. Compute the model's pairwise correlation matrix. |
+| 6. Tune | Tier 2 acceptance is r > 0.5 (correlation-of-correlations). If under, identify which neuron classes most contribute to the drop (single-cell ablation analysis) and revisit Levels 1 or 2 for those classes. |
+| 7. Render | Side-by-side correlation-matrix heatmap: model vs. Randi 2023. Difference heatmap highlights specific pair divergences. Commit PNGs. |
+| 8. Compare | Aggregate correlation-of-correlations score with confidence interval; per-pair difference distribution. Commit the heatmap, the score, and the tuning log alongside the network change. |
+
+### Layer 4 — Round-Trip with the Body (Locomotion-Closing Validation)
+
+**When to apply:** any change that touches the neural-to-muscle output ([DD003](DD003_Muscle_Model_Architecture.md)) or that you expect to change behavior. Even cell-internal changes (e.g., command interneuron tuning) should be checked here because of the closed loop.
+
+**Reference:** Yemini et al. 2013 (Schafer lab) — WCON kinematic recordings of wild-type and mutant animals. See [DD010 §Tier 3](DD010_Validation_Framework.md#tier-3-behavioral-validation-system-tests).
+
+This level uses the body-physics validation tooling described in [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) — the same `dump_metal_trajectory.py` / SGD / render / compare workflow, but with the neural circuit as the upstream driver rather than a fixed muscle-activation file. The neural-circuit change is the parameter being varied; Sibernetic is the simulator; Schafer-lab WCON metrics are the reference.
+
+**Key cross-DD dependency:** as the body substrate is differentiable end-to-end ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)), kinematic-target loss can in principle backpropagate through the body into the muscle activation timing. Once the neural ODE side is also differentiable (deferred to Phase 3 per [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), this enables joint neural↔body parameter fitting via SGD. Until then, this layer uses gradient-free tuning (grid search, NSGA-II).
+
+### Mind-of-a-Worm PR Review Checklist (Neural-Circuit-Specific)
+
+When reviewing a DD002 PR, MoaW must verify:
+
+| # | Check | Pass condition |
+|---|-------|---------------|
+| 1 | **Level identified** | The PR clearly states which level(s) of validation it touches: per-cell, per-pair, per-network, or round-trip. |
+| 2 | **Written prediction filed** | For each level touched, the PR includes a prediction derived from the underlying biology (CeNGEN expression for cells, Cook 2019 topology for synapses, connectome + neuromodulation theory for networks) BEFORE the implementation. |
+| 3 | **Reference dataset version** | Each level's reference is cited with explicit dataset version path (`data/goodman2002_v1.2/`, `data/randi2023_v*/`, etc.). |
+| 4 | **NeuroML validates** | `jnml -validate` passes on any modified cell template, channel, or synapse XML. |
+| 5 | **Tier 1 trace overlays** | For per-cell changes, model V(t)/I_Ca(t) trace overlay PNGs committed alongside the cell template. |
+| 6 | **Tier 2 correlation heatmap** | For per-network changes, model-vs-Randi heatmap committed; aggregate correlation-of-correlations score in commit message. |
+| 7 | **Tier 3 round-trip if behavior could change** | For changes that could affect movement, side-by-side worm-trajectory MP4 + 5-metric pass/fail table. |
+| 8 | **Tuning log if parameters changed** | Grid search or NSGA-II convergence log committed; no hand-sweeping. |
+| 9 | **Regression check** | `check_regression.py` shows no degradation vs. baseline validation score. |
+| 10 | **Topology preservation** | If the PR touches synapses, no edges added or removed vs. Cook 2019 — only properties changed. |
+
+### Common Gotchas (Neural-Circuit-Specific)
+
+1. **Conflating prediction with simulation output.** "I predicted what NEURON gave me" is not a prediction. Predictions must come from biology (CeNGEN expression, channel kinetics, connectome topology) before the simulator runs.
+2. **Tuning a single cell to match traces, then breaking the network.** Per-cell validation passes but Tier 2 correlation drops. Always re-run Level 3 after Level 1 tuning.
+3. **Adding "missing" synapses to fix correlations.** Cook 2019 is the structural reference. Adjust weights and time constants; do not add edges.
+4. **Ignoring the closed-loop body feedback.** Cell-internal changes that look local often shift the muscle output, which shifts the body, which shifts the proprioceptive feedback (when DD019 lands), which shifts the cell input. Run Layer 4 even for "local" cell changes.
+5. **Using NEURON's default thresholds as if they were validation thresholds.** NEURON's numerical tolerances are not biological validation criteria. The acceptance thresholds in DD010 are biology-derived; use those.
 
 ---
 

@@ -27,6 +27,7 @@ Every pull request must pass quantitative validation at four levels — single c
 | **Build & test** | `docker compose run validate` — runs all enabled tiers, produces `output/validation_report.json` |
 | **Visualize** | Validation overlay in [DD012](DD012_Dynamic_Visualization_Architecture.md) viewer: `validation/overlay/` OME-Zarr group shows per-metric pass/fail |
 | **CI gate** | Tier 2 blocks PR merge (r < 0.5 = fail); Tier 3 blocks merge to main (>15% deviation = fail) |
+| **Workflow pattern** | Every subsystem's validation effort follows the **predict → reference → inspect → refine → implement → tune → render → compare** loop. See [Validation Workflow Pattern](#validation-workflow-pattern) for the meta-template; [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) is the canonical worked instance for body physics. |
 
 ---
 
@@ -163,6 +164,74 @@ Validation results are displayed through the [DD012](DD012_Dynamic_Visualization
 | **Tier 4: Causal (Intervention)** | Perturbation response: ablation, silencing, mutation | Published laser ablation, optogenetics, mutant phenotype data | Direction of effect matches ≥70%; magnitude within ±30% | No (advisory → blocking Phase 3+) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
+
+### Validation Workflow Pattern (Cross-Tier Meta-Template)
+
+The three tiers above answer *what* to validate. This section answers *how* to do validation work — the workflow every contributor should follow when adding a new validation target, retuning model parameters, porting a subsystem to a new backend, or implementing a new physics behavior. The pattern emerged from the native-Metal port of Sibernetic (consolidated on the `ow-native-gpu-0.1.0` branch), where it was used to bring 5+ benchmark scenarios to OpenCL parity. It applies horizontally across all subsystems and all tiers.
+
+The pattern is an 8-phase loop:
+
+```
+1. Predict      → write down expected behavior BEFORE running anything
+2. Reference    → run the gold-standard implementation, capture its output
+3. Inspect      → measure what the reference actually does (often surprises you)
+4. Refine       → update the prediction with measured values; these become targets
+5. Implement    → build the new code (kernel, model, backend)
+6. Tune         → close the gap to the reference via SGD against the refined targets
+7. Render       → produce side-by-side visualization (movie, plot, trace)
+8. Compare      → frame-by-frame / metric-by-metric verification + commit artifacts
+```
+
+Hand-sweeping parameters (running 3-5 variants with guessed values and picking the closest) is forbidden — use a systematic optimizer with a saved convergence history. The methodology has a paired backward kernel for *every* forward kernel ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)), so SGD has gradients to work with on the substrate side. For tiers above the substrate, gradient-free SGD or grid search with explicit acceptance thresholds is acceptable.
+
+#### How Each Tier Instantiates the Pattern
+
+| Phase | **Tier 1 (Single Cell)** | **Tier 2 (Circuit)** | **Tier 3 (Behavior)** |
+|-------|--------------------------|----------------------|------------------------|
+| **1. Predict** | From CeNGEN expression + channel kinetics, predict resting potential, I-V curve shape, calcium response amplitude | From connectome topology + known synaptic weights, predict pairwise calcium correlation matrix structure | From muscle activation pattern, predict crawling/swimming kinematic metrics (speed, wavelength, frequency, amplitude, gait) |
+| **2. Reference** | Patch-clamp data (Goodman 2002, Suzuki 2003, etc.); calcium imaging (Chalasani 2007) | Randi 2023 whole-brain pairwise correlations (wild-type) | Schafer lab kinematics (Yemini 2013); WCON-formatted trajectories |
+| **3. Inspect** | Quantify reference's I-V curve, spike threshold, time constants | Compute reference's correlation-of-correlations across neuron pairs | Compute reference's per-metric distributions (speed mean ± std, wavelength range, etc.) |
+| **4. Refine** | Update channel kinetics targets; identify expression-consistency anomalies | Identify which neuron pairs should be strongly vs. weakly correlated; locate divergences | Update target ranges per Tier 3 metric; weight metrics by biological importance |
+| **5. Implement** | Encode channel model in NeuroML (DD002); add conductance density per CeNGEN | Add neuron class to c302 network; wire connectome edges | Tune muscle force injection in Sibernetic (DD001); ensure neural→muscle coupling is correctly scaled |
+| **6. Tune** | Adjust conductance density to match I-V; sometimes fit channel kinetic parameters | Adjust synaptic strength multipliers; tune neuromodulator gain | SGD over Sibernetic physical parameters using kinematic metrics as loss (the body substrate is differentiable per [DD001](DD001_Body_Physics_Architecture.md#differentiability)) |
+| **7. Render** | Plot model V(t), I_Ca(t) overlaid with reference trace | Heatmap of correlation matrix side-by-side: model vs. Randi 2023 | Side-by-side worm-swim video: model vs. reference trajectory; per-metric bar charts |
+| **8. Compare** | Per-metric pass/fail at acceptance thresholds; commit traces + plots | Per-pair correlation diff; aggregate correlation-of-correlations; commit heatmap | Per-metric pass/fail; commit side-by-side MP4 to `docs/`; report in PR |
+
+#### Workflow Artifacts Required at Each Tier
+
+For any PR that touches model code at a given tier, the following artifacts must accompany the change. This is the cross-tier instantiation of the per-PR checklist from DD001.
+
+| Artifact | Tier 1 | Tier 2 | Tier 3 |
+|----------|--------|--------|--------|
+| Written prediction (Phase 1) | Expected V_rest, R_in, I-V shape | Expected correlation pattern for affected pairs | Expected kinematic metric values |
+| Reference data (Phase 2) | Patch-clamp / Ca imaging dataset path | `data/randi2023_v*` | `data/yemini2013_v*` |
+| Model output (Phase 5) | NeuroML cell file + trace dump | c302 simulation calcium output | WCON trajectory |
+| Tuning history (Phase 6) | Parameter optimization log if any tuning was done | Synaptic-weight grid search results | SGD convergence history (Sibernetic; see [DD001](DD001_Body_Physics_Architecture.md#validation-methodology)) |
+| Side-by-side render (Phase 7) | Trace overlay PNG | Correlation heatmap diff | Side-by-side MP4 |
+| Pass/fail report (Phase 8) | Per-metric table with thresholds | Correlation-of-correlations score | Per-metric pass/fail with values |
+
+#### Anti-Patterns (What Mind-of-a-Worm Flags)
+
+These are the recurring failure modes the workflow prevents. MoaW should flag any PR exhibiting them:
+
+1. **Skipping Phase 1 (no written prediction).** "I'll know it when I see it" is not validation. Without a prediction, the post-hoc rationalization of any output as "close enough" is unfalsifiable.
+2. **Skipping Phase 3 (no inspection of reference).** Assuming the reference matches your prediction. Almost always it doesn't — see the canonical 0.25-factor surprise in [DD001 §Worked Example](DD001_Body_Physics_Architecture.md#worked-example-one_sprig_test).
+3. **Hand-sweeping parameters in Phase 6.** Running 3-5 variants and picking the closest. Not reproducible, not defensible, and slower than SGD which converges in 5-10 iterations.
+4. **Visual comparison without quantitative metrics in Phase 7.** "Looks right" is necessary but not sufficient. Always pair with a numeric difference at sampled times / per-metric values.
+5. **Pass/fail thresholds defined post-hoc.** Thresholds in Phase 4 must be set from the reference, *before* the model output is known. Adjusting thresholds to accommodate a struggling model is data-fitting, not validation.
+6. **Treating a Tier failure as "noisy data" without root-cause investigation.** If Tier 2 correlation drops below threshold, the answer is not "the data is noisy" — it's "find which model changes drove the drop." Use bisection if needed.
+7. **Skipping Phase 8 commit of artifacts.** The reference trajectory, model output, render, and tuning history must all live alongside the code change. Future contributors need to re-run the comparison.
+
+#### Canonical Worked Example
+
+[DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) contains the full worked example for the body-physics tier (Sibernetic native-Metal port of the `one_sprig_test` scenario), including:
+
+- The 8 phases walked through with concrete commands
+- The 0.25-factor surprise that turned an analytic prediction (period 0.36 ms) into an empirically refined target (0.725 ms) and drove SGD to the correct `K=555`
+- The 10-item Mind-of-a-Worm PR review checklist
+- 10 common gotchas distilled from the lived experience of the port
+
+That worked example is body-physics-specific in its operational details (`dump_metal_trajectory.py`, `sgd_one_sprig.py`, `ffmpeg hstack` for the side-by-side MP4). The SHAPE of the workflow — predict → reference → inspect → refine → implement → tune → render → compare — applies identically to neural-circuit validation ([DD002](DD002_Neural_Circuit_Architecture.md)), muscle-model validation ([DD003](DD003_Muscle_Model_Architecture.md)), and any future subsystem that needs to match an experimental or reference target.
 
 ### Tier 1: Single-Cell Validation (Unit Tests)
 
@@ -472,6 +541,8 @@ As the validation toolbox ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Poli
 3. **Versioned Experimental Data:** Validation datasets must be versioned and archived (e.g., `data/randi2023_v1.0/`). Do not overwrite.
 
 4. **Pass/Fail Criteria Documented:** Each test must have explicit acceptance criteria (e.g., "r > 0.5," "period = 50 ± 10 s") in the test script, not tribal knowledge.
+
+5. **Workflow Pattern Followed:** Every validation-related PR (new validation target, retuning, subsystem port) must follow the [Validation Workflow Pattern](#validation-workflow-pattern) — predict → reference → inspect → refine → implement → tune → render → compare. The required artifacts table (per tier) makes this concrete. PRs that hand-sweep parameters, skip prediction, or omit side-by-side rendering are not ready to land.
 
 ---
 

@@ -896,6 +896,94 @@ docker compose run -e CONFIG=/opt/openworm/my_experiment.yml simulation
 
 ---
 
+## Stack Integration Validation Methodology
+
+Where DD001 validates physics, DD002 validates electrophysiology, and DD010 validates scientific accuracy, **this DD validates the integration layer itself** — the contract that *the stack stays runnable as new subsystems land*. A subsystem can be scientifically correct in isolation and still break the stack (image build fails, dependency conflict, config schema drift, CI cycle time blows up). This section articulates the methodology for keeping the integration layer healthy.
+
+It complements rather than duplicates [DD010's Validation Workflow Pattern](DD010_Validation_Framework.md#validation-workflow-pattern): DD010 asks "does the science match the experimental reference?"; this DD asks "does the *plumbing* keep working when the science changes?"
+
+### The Two-Gate Model
+
+Every PR passes through two gates with very different scopes:
+
+| Gate | What it proves | What it does NOT prove | Latency budget | Blocking? |
+|------|----------------|------------------------|----------------|-----------|
+| **`quick-test`** | Container starts, services communicate, no crash, no segfault, a smoke trajectory produces output files at the right paths | Scientific accuracy. Does NOT run [DD010](DD010_Validation_Framework.md) Tiers. | <5 min | Yes — every PR |
+| **`validate`** | [DD010](DD010_Validation_Framework.md) Tier 2 + Tier 3 scientific-accuracy gates pass; per-subsystem unit tests pass | Per-physics-kernel parity ([DD001 Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) is the per-kernel layer beneath this) | <2 hr | Yes — merge to main |
+
+Subsystem PRs cannot land if either gate fails. PRs that touch the integration layer itself (Dockerfile, compose, orchestrator) must additionally rebuild the affected stages and re-run BOTH gates.
+
+### Integration Validation Workflow (8-Phase Adapted)
+
+The [meta-template from DD010](DD010_Validation_Framework.md#validation-workflow-pattern) adapts to integration concerns:
+
+| Phase | Integration-layer activity |
+|-------|----------------------------|
+| 1. **Predict** | Before adding/changing a subsystem in the stack, predict: which Docker stages must rebuild, which compose services touch new ports/volumes, which `openworm.yml` keys change, what new CI minutes the change adds, what backward-compat breaks if any. |
+| 2. **Reference** | Capture baseline: current `quick-test` time, current `validate` time, current image sizes per stage, current `versions.lock` hash. |
+| 3. **Inspect** | Measure actual values after the change in a clean container build. Compare to prediction. Surprises are common: a "small" Python dep adds 200MB to the image, a "trivial" subsystem rebuilds 4 unrelated stages because of layer ordering. |
+| 4. **Refine** | Update the prediction; identify the root cause of any divergence (often Docker-layer-ordering or transitively-pulled dependencies). |
+| 5. **Implement** | Land the integration change with the now-understood scope. Update `versions.lock` atomically. |
+| 6. **Tune** | Reorder Dockerfile RUN statements, split large stages, prune dev dependencies — until image-size and rebuild-time budgets are met. |
+| 7. **Render** | Generate a stage-by-stage build-time and image-size diff (`docker history` + custom script); attach to PR. For CI cycle changes, attach the cycle-time-per-stage chart. |
+| 8. **Compare** | Verify against the per-PR budget: `quick-test < 5 min`, `validate < 2 hr`, subsystem-isolated rebuild < 5 min, image size delta < +20% per release. Commit the measurements alongside the change. |
+
+### Subsystem-Onboarding Workflow
+
+When adding a new subsystem to the stack (e.g., DD007 pharyngeal system, DD009 intestinal oscillator), the integration steps are:
+
+1. **Repository convention check** — does the subsystem have a `Dockerfile.stage` describing its build inputs and outputs? Are inputs read from `/data/inputs/` and outputs written to `/data/outputs/`? Does it expose a `health` endpoint or equivalent?
+2. **`versions.lock` registration** — add the subsystem with a pinned commit SHA.
+3. **`openworm.yml` schema** — add the subsystem's config keys with defaults; document each.
+4. **`docker-compose.yml` service** — define the service, its volumes, its depends-on chain, its CPU/memory budget.
+5. **`master_openworm.py` orchestration** — wire the subsystem into the appropriate execution step (typically Step 3 or 4 per the orchestrator's 5-step model).
+6. **CI matrix** — add `quick-test` line item that runs the subsystem in isolation; add `validate` line item if the subsystem has a DD010-Tier validator.
+7. **Cross-DD parity check** — does adding the subsystem break parity for *other* subsystems' DD001/DD002/DD010 validators? Run them all once with the new subsystem disabled, then with it enabled.
+
+### Mind-of-a-Worm PR Review Checklist (Integration-Layer-Specific)
+
+When reviewing a PR that touches `Dockerfile*`, `docker-compose.yml`, `master_openworm.py`, `openworm.yml` schema, `versions.lock`, or `.github/workflows/`, MoaW must verify:
+
+| # | Check | Pass condition |
+|---|-------|---------------|
+| 1 | **Both gates pass** | CI shows green for `quick-test` AND `validate`. |
+| 2 | **Quick-test latency budget** | `quick-test` completes in <5 minutes. PR comment shows the actual time. |
+| 3 | **Validate latency budget** | `validate` completes in <2 hours. PR comment shows the actual time. |
+| 4 | **Image-size delta acceptable** | New images <20% larger per release. PR includes per-stage image-size diff. |
+| 5 | **Subsystem-isolated rebuild** | Changing one subsystem rebuilds only its stage (~5 min). PR includes the affected-stages list. |
+| 6 | **`versions.lock` updated atomically** | All component SHAs pinned together; not partial. |
+| 7 | **`openworm.yml` is the single source of truth** | No new hardcoded parameters in scripts/Dockerfiles/shell. |
+| 8 | **New subsystems can be disabled** | The new feature has a config toggle that defaults to `false` or backward-compat-on, and disabling it produces a runnable stack. |
+| 9 | **Cross-subsystem parity preserved** | DD001/DD002/DD003/DD010 validators still pass after the integration change. |
+| 10 | **30-min onboarding still works** | A clean `git clone` → `docker compose up` → smoke trajectory still completes in <30 min on the documented hardware. |
+
+### Common Gotchas (Integration-Layer-Specific)
+
+1. **Dockerfile-layer ordering rebuilds the world.** A trivial change at line 5 invalidates the cache for everything below. Order layers so that frequently-changing items (source code) come AFTER stable items (system packages, language runtimes).
+2. **Transitively-pulled Python dependencies bloat the image.** A "small" `pip install foo` can pull 200MB if `foo` depends on PyTorch. Always check `pip install --dry-run` and `pip show` to see what's actually landing.
+3. **`docker compose run` vs `docker compose up`.** `run` creates a one-shot container; `up` brings the full stack. Tests must use the right one or risk silent partial coverage.
+4. **CI green doesn't mean PR-author-machine green.** CI runs in a clean container with no caches. If the PR-author tested locally with cached deps, the first CI run is the truth.
+5. **Skipping `validate` because "it's just a doc change".** A doc change that touches `openworm.yml` schema IS a functional change. The `validate` gate is non-negotiable for any schema-touching PR.
+6. **`versions.lock` drift between component repos.** If the c302 repo pins NeuroML-py 0.6.0 and the Sibernetic repo pins 0.5.0, image builds can succeed but runtime behavior diverges. The atomic-update rule in Quality Criterion 7 is what prevents this.
+7. **Treating a `quick-test` pass as sufficient.** `quick-test` only proves containers start and communicate. It does NOT prove the science is right — that's `validate`'s job. PRs that ship on `quick-test` only are unreviewed scientifically.
+8. **Adding a new subsystem without a config toggle.** Subsystems must be independently disable-able (per Quality Criterion 6). Hard-coupled subsystems break the modular contributor experience.
+
+### Cross-DD Validation Coordination
+
+The integration layer is where per-DD validation methodologies meet. To prevent gaps, the responsibilities are:
+
+| Layer | Owner DD | What it validates |
+|-------|----------|-------------------|
+| Per-kernel parity (OpenCL ↔ Metal ↔ CUDA) | [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) | Physics kernels match across substrates, frame-by-frame |
+| Per-cell / per-pair / per-network electrophysiology | [DD002 §Validation Methodology](DD002_Neural_Circuit_Architecture.md#validation-methodology-per-cell-per-pair-per-network) | Channel kinetics, synaptic responses, correlation matrices |
+| Twitch / curves / round-trip body bend | [DD003 §Validation Methodology](DD003_Muscle_Model_Architecture.md#validation-methodology-twitch-curves-round-trip) | Calcium-to-force coupling matches Boyle & Cohen 2008 |
+| Cross-subsystem scientific accuracy | [DD010 §Validation Workflow Pattern](DD010_Validation_Framework.md#validation-workflow-pattern) | Tier 1/2/3 acceptance against experimental references |
+| **Integration plumbing** | **This DD** | **Stack stays runnable, fast, modular as subsystems land** |
+
+A PR landing changes at any layer above must explicitly call out which layers' validators it triggers, and ensure all triggered layers pass. The Integration Maintainer (per [Subsystem Ownership Map](../contributing/contributor-progression.md#subsystem-ownership-map-initial-l4-assignments)) is the cross-DD arbiter when validators conflict.
+
+---
+
 ## Boundaries (Out of Scope)
 
 ### This Design Document Does NOT Cover:

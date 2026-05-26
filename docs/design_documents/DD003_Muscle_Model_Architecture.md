@@ -282,7 +282,7 @@ A contribution to the muscle model MUST:
 
 5. **Muscle-Neuron Distinction:** Muscle conductance densities are 10-1000x smaller than neuron densities. Do not copy neuron parameters to muscles.
 
-### Testing Procedure
+### Testing Procedure (Quick Reference)
 
 ```bash
 # Generate muscle network
@@ -305,6 +305,98 @@ python scripts/validate_muscle_calcium.py
 - Peak activation during neural drive: >0.5
 - Calcium decay time constant: ~12 ms
 - No negative voltages below -60 mV, no positive voltages above +20 mV
+
+---
+
+## Validation Methodology (Twitch → Curves → Round-Trip)
+
+Muscle-model changes affect three interlocking validation targets: a single muscle's twitch dynamics (calcium pulse → force pulse shape), the steady-state force-velocity and force-length curves, and the round-trip through Sibernetic body physics (a single quadrant activation must bend the worm in the expected direction with the expected curvature). Each target has a workflow; each follows the cross-tier [Validation Workflow Pattern](DD010_Validation_Framework.md#validation-workflow-pattern) (predict → reference → inspect → refine → implement → tune → render → compare).
+
+### Level 1 — Twitch Dynamics (Calcium → Force Pulse)
+
+**When to apply:** any change to the calcium-to-force coupling formula, the muscle cell HH parameters, or the time constants in the activation dynamics.
+
+**Reference:** Boyle & Cohen 2008 — single-muscle twitch traces showing the calcium-to-force temporal coupling. Specific values: peak twitch force ~2.7 × 10⁻⁹ N (experimentally observed range 1.4–9.6 × 10⁻⁹ N); twitch rise time ~10 ms; decay time constant ~12 ms; activation range [0, 1].
+
+**8-phase instantiation:**
+
+| Phase | Per-muscle activity |
+|-------|---------------------|
+| 1. Predict | From the HH calcium dynamics (`tau_decay`, `max_ca`) + the activation formula (e.g., `act = ca / (K_M + ca)`), predict the twitch shape: rise time, peak amplitude, decay time. |
+| 2. Reference | Pull the Boyle & Cohen 2008 twitch trace from the curated dataset directory. Cite version: `data/boyle_cohen_2008_v*/twitch_trace.csv`. |
+| 3. Inspect | Measure reference twitch: rise time, peak, decay τ. Note that experimental peak forces span ~7× (1.4–9.6 nN); typical "good fit" sits near 2.7 nN. |
+| 4. Refine | Update target values with measured ones; flag if your prediction missed by more than 30% on any (likely a wrong assumption in the coupling formula). |
+| 5. Implement | Update muscle NeuroML cell template; verify `jnml -validate` passes. |
+| 6. Tune | Grid search over `max_ca`, `K_M`, time constants. Do NOT hand-sweep. Save log. |
+| 7. Render | Overlay model twitch vs. reference twitch; mark rise, peak, decay markers. Commit PNG. |
+| 8. Compare | Per-feature pass/fail: rise time ±20%, peak ±30%, decay τ ±20%. Commit table + plot + tuning log. |
+
+### Level 2 — Steady-State Force-Velocity and Force-Length Curves
+
+**When to apply:** when the muscle model gains a contractile-dynamics component (Hill-type element, crossbridge dynamics) or when validating the steady-state behavior of the current simplified model under sustained activation.
+
+**Reference:** classical Hill 1938 force-velocity relationship; Gordon, Huxley & Julian 1966 force-length relationship. *C. elegans*-specific muscle mechanical data is sparse; the worm-specific reference is the implicit force-output range required to produce Schafer-lab locomotion kinematics under Boyle & Cohen 2008's parameter set.
+
+**8-phase instantiation:**
+
+| Phase | Per-curve activity |
+|-------|--------------------|
+| 1. Predict | From the muscle model's parameters, predict the force as a function of shortening velocity and the force as a function of length. Cite the underlying assumptions (linear vs. Hill hyperbolic, sarcomere length range). |
+| 2. Reference | Hill 1938 / Gordon-Huxley-Julian 1966 generic curves; the *C. elegans*-implied force range derived from Boyle & Cohen 2008's matched-kinematics fit. |
+| 3. Inspect | Plot the reference curves with their parameter sets (`v_max`, `a/F_0` for Hill, sarcomere optimal length range for force-length). |
+| 4. Refine | Update target curves; if the worm-specific reference is implied rather than direct, note this explicitly — pass/fail thresholds will be wider (±50% acceptable). |
+| 5. Implement | Add the contractile-dynamics component to the muscle cell or muscle-to-force coupling formula. |
+| 6. Tune | Fit Hill parameters or force-length coefficients via grid search or scipy least-squares. |
+| 7. Render | Overlay model curves on reference; mark `v_max`, `F_0`, optimal length. Commit PNGs. |
+| 8. Compare | Curve-shape match (R² > 0.7); peak values within ±50% of reference. Commit table + plots + fit log. |
+
+*Note:* If you are NOT adding a contractile-dynamics component (i.e., using Boyle & Cohen 2008's simplified calcium-proportional formula), Level 2 is not required. The simplified model is validated indirectly via Level 3 (round-trip kinematics).
+
+### Level 3 — Round-Trip with Sibernetic (Quadrant Activation → Body Bend)
+
+**When to apply:** any change to the muscle model that could shift its force output. Even formula-internal changes that "should be force-conserving" must be checked at this level — the body is a closed loop with elastic recovery, so any phase or amplitude shift propagates into kinematics.
+
+**Reference:** the canonical body-bend test — activate one muscle quadrant (e.g., dorsal-left) and observe whether the body bends in the expected direction with the expected curvature. The detailed Schafer-lab kinematic match is Tier 3 in [DD010](DD010_Validation_Framework.md#tier-3-behavioral-validation-system-tests).
+
+**This level uses the [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) tooling** — `dump_metal_trajectory.py`, side-by-side rendering, SGD tuning — with the muscle activation as the input driver. The change being validated is the muscle model; Sibernetic is the simulator; the body-bend shape is the reference.
+
+**8-phase summary:**
+
+1. **Predict** body bend curvature from quadrant activation pattern + Sibernetic elastic bond stiffness.
+2. **Reference** = a known-good baseline body-bend trajectory from before the muscle change (or, for new builds, from the OpenCL gold standard with Boyle & Cohen 2008 parameters).
+3. **Inspect** baseline curvature, time-to-peak-bend, recovery time constant.
+4. **Refine** targets.
+5. **Implement** muscle change.
+6. **Tune** any free parameters using gradient-free SGD or grid search (muscle ODE not yet differentiable per [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)).
+7. **Render** side-by-side worm-body MP4: baseline vs. post-change.
+8. **Compare** curvature, time-to-peak, recovery τ within ±15% (matches Tier 3 thresholds).
+
+**Key cross-DD dependency:** since the body substrate is differentiable end-to-end ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)), the muscle activation → elastic-bond-stiffness modulation path is included in the differentiable pipeline. This means once the muscle-side ODE is also differentiable, joint muscle-and-body parameter fitting via SGD becomes possible.
+
+### Mind-of-a-Worm PR Review Checklist (Muscle-Model-Specific)
+
+When reviewing a DD003 PR, MoaW must verify:
+
+| # | Check | Pass condition |
+|---|-------|---------------|
+| 1 | **Level identified** | The PR clearly states which level(s) of validation it touches: twitch, curves, or round-trip. |
+| 2 | **Boyle & Cohen 2008 reference cited** | PR cites the specific dataset version and notes how the change relates to the validated parameter set. |
+| 3 | **Twitch trace overlay** | For Level 1 changes, model-vs-reference twitch trace PNG committed. |
+| 4 | **Force-velocity / force-length curves** | For Level 2 changes (only if contractile dynamics added), curve overlay PNGs + Hill/Gordon-Huxley-Julian fits committed. |
+| 5 | **Body-bend round-trip MP4** | For Level 3 changes, side-by-side body-bend video committed under `docs/`. |
+| 6 | **NeuroML validates** | `jnml -validate` passes. |
+| 7 | **Tuning log if parameters changed** | Grid search or NSGA-II convergence log committed; no hand-sweeping. |
+| 8 | **Activation range [0,1] preserved** | `plot_muscle_activation.py` output shows activation in range, no negative values. |
+| 9 | **Calcium interface preserved** | The output to Sibernetic is still `[Ca²⁺]ᵢ` per the [Integration Contract](#integration-contract), or a migration path is provided. |
+| 10 | **Tier 3 regression check** | `open-worm-analysis-toolbox` confirms no degradation in the 5 kinematic metrics. |
+
+### Common Gotchas (Muscle-Model-Specific)
+
+1. **Copying neuron HH parameters to muscle.** Muscle conductance densities are 10–1000× smaller than neuron densities. Calcium dynamics also differ (slower). Per Quality Criterion 5, this is a recurring landmine.
+2. **Skipping Level 3 for "internal" changes.** A formula change that's mathematically force-conserving on paper often shifts phase or amplitude in practice. Always run the body-bend round-trip.
+3. **Targeting "right answer" instead of "right range."** The experimentally observed peak twitch force spans 1.4–9.6 nN — a 7× range. Demanding a specific value within that range is over-tuning. Pick the value that best matches the round-trip kinematics, not an arbitrary mid-point.
+4. **Breaking the calcium interface without a migration plan.** Sibernetic reads `[Ca²⁺]ᵢ` as the muscle activation source. If the formula changes such that a different variable becomes the activation source, the `sibernetic_c302.py` coupling script must change in lockstep (and that change goes through DD001 review).
+5. **Treating muscle ODE as if it were already differentiable.** It isn't (yet). Joint SGD over muscle + body parameters requires the muscle side to also be differentiable — currently future work per [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md). For now, use gradient-free tuning for the muscle and let SGD handle the body side only.
 
 ---
 
