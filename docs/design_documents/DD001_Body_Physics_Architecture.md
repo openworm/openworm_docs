@@ -25,6 +25,7 @@
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
+| **Validation methodology** | Every physics change in Sibernetic must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. Mind-of-a-Worm enforces this on every PR via the [Validation Methodology](#validation-methodology) checklist. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
@@ -367,6 +368,206 @@ A contribution to Sibernetic MUST:
 6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
 
 7. **Paired Backward Per Forward (Native Substrates):** Every new forward kernel added to the native Metal or native CUDA substrate MUST ship with a paired analytic backward kernel, validated against finite-difference to within ±5% relative error. This is the architectural contract of the substrate; see [Differentiability](#differentiability). New kernels without a paired backward break the end-to-end differentiability guarantee and must not land.
+
+8. **Validation Methodology Followed:** Every physics change MUST follow the 8-phase predict → reference → inspect → refine → implement → SGD-tune → render → compare workflow documented in [Validation Methodology](#validation-methodology). PRs that ship a Metal/CUDA implementation without (a) a benchmark config, (b) an OpenCL reference trajectory, (c) a Metal/CUDA trajectory dump, (d) a side-by-side comparison movie, and (e) visual + quantitative parity evidence are not ready to land. Hand-swept parameters are not acceptable — parameter tuning must use the SGD harness with a saved convergence history. This applies to every kernel-level PR (new physics, parameter changes, optimization PRs that affect numerical output, etc.).
+
+---
+
+## Validation Methodology
+
+**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — must follow the 8-phase workflow below.** Mind-of-a-Worm uses the checklist at the end of this section as a binding PR gate. Reviewers (human or AI) MUST verify each item before approving.
+
+The methodology emerged from the native-Metal port (consolidated on the `ow-native-gpu-0.1.0` branch) and is now baked into the repo's tooling. It is the substrate-correctness story: hand-derived backward kernels per [Differentiability](#differentiability) prove the *math* is right; this workflow proves the *physics* is right.
+
+### Why This Is Horizontal
+
+Earlier OpenCL-only Sibernetic relied on "build the kernel, eyeball the demo, ship it." That worked when there was one reference implementation. With three substrates now (OpenCL gold-standard reference, native Metal, native CUDA in scaffolding) and a differentiable pipeline that can be SGD-tuned, the cost of an incorrect kernel landing is now multi-platform divergence that's expensive to retroactively diagnose. The 8-phase workflow front-loads the cost of being right: predict before measuring, measure before implementing, tune via gradient descent not manual sweeps, prove parity visually frame-by-frame.
+
+This applies horizontally to every PR. There is no "small physics change" exemption — even a parameter default tweak goes through the workflow because the trajectory is what matters, not the change-set size.
+
+### The 8-Phase Workflow
+
+#### Phase 1 — Predict Correct Behavior (Before Running Anything)
+
+Read the benchmark configuration file (typically under `configuration/<demo>` or `configuration/test/<demo>`). Extract the physics setup: simulation box bounds, particle positions and types, velocities, spring bond topology (rest length, connection type), membranes if present, boundary anchor locations.
+
+For analytically tractable scenarios (single elastic + anchor, simple oscillators, cube under gravity), calculate expected equilibrium positions, oscillation periods, settling times, displacements *by hand* using the documented formulas (e.g., for elastic-on-anchor: `T = 2π / √(K_eff / m_eff)` where `K_eff = elasticityCoefficient × 0.25 × sim_scale` for non-worm-body elastic pairs — the 0.25 factor is a frequent gotcha).
+
+Write down the prediction with units BEFORE touching OpenCL or Metal. This written prediction becomes the SGD target in Phase 5 and the parity benchmark in Phase 7. The act of writing the prediction first surfaces assumptions and identifies where intuition is wrong.
+
+#### Phase 2 — Run OpenCL Gold-Standard Reference
+
+Run the benchmark config on the OpenCL backend (the validated ±15%-against-Schafer-lab reference). This produces a reference trajectory: per-particle position time series, typically saved as `<demo>_opencl_position.txt` or equivalent.
+
+The OpenCL trajectory is the ground truth for what the Metal (and future CUDA) implementations must match. Commit it to the repo alongside the new physics change so reviewers can re-run parity checks.
+
+#### Phase 3 — Inspect & Refine Prediction Against OpenCL
+
+Parse the OpenCL trajectory and measure observed behavior: actual oscillation period (zero-crossing analysis), amplitude, equilibrium, drift, damping, settling time. Compare against the Phase 1 prediction.
+
+```python
+zero_crossings = np.where(np.diff(np.sign(y_centered)) > 0)[0]
+observed_period_ms = np.diff(zero_crossings).mean() * frame_dt_ms
+```
+
+Surprises are common and informative:
+- Period off by 2× → forgot the 0.25 factor on non-worm-body elastic pairs
+- Particle drift when stationary → ε guards differ between paths
+- Faster fall than expected → buoyancy from SPH pressure gradients
+- Unexpected damping → viscous coupling through neighbor particles
+
+Update the written prediction with the measured values. These updated targets are what Phase 5 SGD will optimize against. A correct Metal port must reproduce *what OpenCL actually does*, not what we thought it would do.
+
+#### Phase 4 — Implement on Metal (or CUDA)
+
+Build the native substrate (`./build.sh` in `src/metal_diff/`; analogous for `src/cuda/` once it lands). Implement the new kernel or change. Run the benchmark via `dump_metal_trajectory.py` (or the equivalent CUDA dumper) with the same duration as the OpenCL reference:
+
+```bash
+python3 src/metal_diff/dump_metal_trajectory.py \
+    --scenario <demo_name> \
+    --steps 2500 --chunk 5 \
+    --rho-rest 1.0 \
+    --spring-k <initial-guess> --anchor-k <initial-guess> \
+    --out /tmp/<demo>_metal.txt
+```
+
+Sanity-check immediately: trajectory range should match the OpenCL prediction within a few percent. Massive divergence (>50%) means there's a kernel-level physics error to fix before parameter tuning is meaningful. Per [Quality Criteria #7](#quality-criteria), the new kernel must ship with a paired analytic backward and FD test.
+
+#### Phase 5 — SGD-Tune Parameters (Mandatory; Hand-Sweeps Forbidden)
+
+Use the SGD harness (`src/metal_diff/sgd_*.py`; `sgd_one_sprig.py` for single-spring scenarios, `sgd_true.py` for multi-parameter tuning, `sgd_worm.py` for worm-scale, plus demo-specific scripts). Each iteration:
+
+1. Run the simulation with current parameters via `dump_metal_trajectory.py`
+2. Measure trajectory features (period, amplitude, final position, kinematic metrics)
+3. Compute scalar loss against the Phase 3 measured targets
+4. Compute gradients — finite-difference over the CLI for measurement-based losses; analytic backward kernels via `xpbd_full_bwd` for learned parameters
+5. Update in log-space for stiffness-like params, linear-space (`--linear-trainable`) for bounded params like `floor_y`
+
+Save the convergence history to `/tmp/sgd_<demo>_history.json` and commit it alongside the parity artifacts. This is the evidence that parameters were not hand-fitted.
+
+If SGD plateaus on a loss that's worse than OpenCL by a wide margin, the problem is missing physics (a kernel), not bad parameter tuning. Port the missing OpenCL kernel — do not ship with caveats. (Example: worm sinking because no buoyancy → port the SPH pressure-force kernel. Example: water exploding → port the PCISPH iterative density correction.)
+
+#### Phase 6 — Render Comparison Movies
+
+Render OpenCL and Metal trajectories as separate panels using the per-scenario renderer (`render_one_sprig.py`, `render_worm.py`, etc. under `src/metal_diff/`), then stack horizontally with ffmpeg:
+
+```bash
+python3 src/metal_diff/render_one_sprig.py \
+    /tmp/<demo>_opencl_position.txt /tmp/<demo>_opencl_panel.mp4 \
+    --title "OpenCL <demo>"
+python3 src/metal_diff/render_one_sprig.py \
+    /tmp/<demo>_metal.txt /tmp/<demo>_metal_panel.mp4 \
+    --title "Native Metal <demo>" --max-frames 250
+
+ffmpeg -y -i /tmp/<demo>_opencl_panel.mp4 -i /tmp/<demo>_metal_panel.mp4 \
+    -filter_complex "[0:v]pad=920:900:0:0:color=white[left];[left][1:v]hstack[v]" \
+    -map "[v]" -c:v libx264 -crf 18 -pix_fmt yuv420p \
+    docs/<demo>_opencl_vs_metal.mp4
+```
+
+The renderer auto-detects trajectory format (OpenCL and Metal frame structures differ — OpenCL includes boundary particles only in frame 0; Metal includes them in every frame). Hard-code identical camera bounds and distance in both panels so visual differences reflect physics, not viewport.
+
+#### Phase 7 — Examine Frame-by-Frame for Visual Parity
+
+Extract sample frames at multiple time points from the side-by-side MP4:
+
+```bash
+ffmpeg -y -i docs/<demo>_opencl_vs_metal.mp4 \
+    -vf "select=between(n\,0\,0)+between(n\,15\,15)+between(n\,100\,100)+between(n\,200\,200)" \
+    -vsync vfr /tmp/check_frames/sxs_%d.png
+```
+
+Verify at each sample:
+- Frame 0 — correct initial positions on both sides
+- Mid-trajectory — particle positions, deformation patterns, flow lines match
+- Late frames — equilibrium / settling matches
+- No render bugs (particle missing, mis-labeled, anchor-spring topology wrong)
+
+Quantitative spot-check: at each sample frame, log the y-coordinate (or equivalent scalar metric — wave amplitude, sheet curvature, worm midline) for both sides. Δ < 5% of the OpenCL scale is the parity threshold.
+
+If visually rendered values don't match the trajectory file's numbers, it's a parser bug (re-check the auto-detect logic in the render script). If trajectory numbers diverge between OpenCL and Metal despite SGD convergence, it's a kernel-physics mismatch — return to Phase 4.
+
+#### Phase 8 — Commit, Document, Publish
+
+One commit per benchmark / per substrate port, containing:
+
+- New / modified kernel code + paired backward + FD test
+- The benchmark config file (if new)
+- The OpenCL reference trajectory
+- The Metal trajectory
+- The side-by-side MP4 under `docs/`
+- The SGD convergence history (`/tmp/sgd_<demo>_history.json` copied to a tracked location)
+- Spot-check frame images (at minimum 3-4 sampled timepoints) showing labeled y-values
+- A commit message summarizing: parity at sample frames, tuned parameters, substrate work landed
+
+Cross-link the PR to the relevant `dd001` GitHub label and the demo's parity artifact in `docs/`.
+
+### Worked Example: `one_sprig_test`
+
+**Scenario:** Single elastic particle suspended by a vertical anchor spring; no other forces. Tests anchor-spring kernel correctness in isolation.
+
+| Phase | Activity | Result |
+|-------|----------|--------|
+| 1. Predict | Config: anchor at (x, 32.565, z), elastic at (x, 16.91, z), rest_length = 15.655. Equilibrium y = 16.91. K = elasticityCoefficient × 0.25 × sim_scale = 307,500 (Metal units). Predicted T ≈ 0.36 ms. | Written prediction filed |
+| 2. Reference | Ran OpenCL gold standard, saved `/tmp/one_sprig_opencl_position.txt` | Reference trajectory captured |
+| 3. Inspect & refine | Zero-crossing analysis: actual period = 0.725 ms (1379 Hz); half-amplitude = 1.694 units. **Surprise: period is 2× expected — likely the 0.25 factor.** | Targets updated: T=0.725 ms, A=1.694 units |
+| 4. Implement Metal | Built Metal substrate, ran `dump_metal_trajectory.py --anchor-k 555`. Initial: y oscillates at 0.36 ms (2× too fast). | Kernel works; needs parameter tuning |
+| 5. SGD-tune | `sgd_one_sprig.py` with loss `L = (period_err/0.725)² + 0.25·(amplitude_err/1.694)²`. Init K=300, lr=0.5 log-space. Converged in 7 iterations to K=555. | History saved; T, A match within <1% |
+| 6. Render | `render_one_sprig.py` for both panels; ffmpeg hstack to `docs/one_sprig_opencl_vs_metal.mp4` | Side-by-side MP4 produced |
+| 7. Frame check | Samples at t=0, 10, 50, 100 ms: y = 18.606 ± 0.001 across both panels; x, z constant; spring topology correct | Visual parity confirmed |
+| 8. Commit | Squashed commit containing: kernel cleanup (M11), SGD history, MP4, frame samples, commit-message parity table | PR ready for review |
+
+### Mind-of-a-Worm PR Review Checklist
+
+MoaW (and any human reviewer) must verify each item before approving any PR that touches Sibernetic physics:
+
+| # | Check | Pass condition |
+|---|-------|---------------|
+| 1 | **Written prediction filed** | PR includes a comment, commit-message section, or doc file showing the expected behavior (period, amplitude, equilibrium, settling time, etc.) derived from the config *before* the implementation was written. |
+| 2 | **OpenCL reference trajectory committed** | An `<demo>_opencl_position.txt` (or equivalent) artifact exists in the repo or PR diff, with metadata identifying which OpenCL build produced it. |
+| 3 | **Metal/CUDA trajectory committed** | An equivalent Metal/CUDA trajectory dump exists, same scenario, same duration. |
+| 4 | **Side-by-side comparison MP4 in `docs/`** | `docs/<demo>_opencl_vs_metal.mp4` (or `_vs_cuda`) exists, OpenCL on left, native on right, identical camera. |
+| 5 | **Visual parity verified at sample frames** | PR includes at least 3-4 extracted frame images at distinct time points, with labeled y-values (or scalar metric) showing Δ < 5% of OpenCL scale. |
+| 6 | **SGD convergence history** | If any parameter was tuned, the PR includes the SGD harness output (loss-per-iteration JSON or similar) demonstrating systematic optimization, not hand-sweeping. |
+| 7 | **Paired backward kernel + FD test** | Per [Quality Criteria #7](#quality-criteria), any new forward kernel has a paired analytic backward and a `test_*.py` FD validator passing at <5% rel-err. |
+| 8 | **Tuned parameter values documented** | Final values for `rho_rest`, `spring_k`, `visc_pair_coef`, `alpha_dens`, etc., recorded in the commit message and/or the demo's README. |
+| 9 | **Substrate work itemized** | The commit message lists what substrate-level changes landed (new kernels, harness extensions, validator tests, render-script updates). |
+| 10 | **Phase 1 prediction reconciled against Phase 3 measurement** | If the OpenCL measurement surprised the predictor, the PR documents the gap and the root cause (e.g., "predicted 2× faster because forgot the 0.25 factor"). This is a learning artifact for future contributors. |
+
+A PR missing items 1, 4, 5, or 6 is not ready — it's hand-fitted or unverified.
+A PR missing items 7-10 is incomplete reporting (can be fixed in-PR; not a block).
+A PR missing items 2 or 3 is unreviewable — the reference and the candidate must both be present for parity to be checked.
+
+### Common Gotchas (Distilled from the Native-Metal Port)
+
+These are the recurring failure modes during the port that MoaW should flag if present in new PRs:
+
+1. **0.25 factor on non-worm-body elastic springs.** `sphFluid.cl` applies `elasticityCoefficient × 0.25` only to non-worm-body elastic pairs. Forgetting this in Metal makes the oscillation period 2× too short. The Phase 1 prediction must account for it.
+2. **`rho_rest = 0` causes NaN.** The density solver divides by `rho_rest`. Always use `1.0` for vacuum scenarios where SPH coupling is irrelevant; use the config's `rho0` explicitly for liquid scenarios.
+3. **CLI argv off-by-one cascades.** `dump_metal_trajectory.py` uses positional arguments. Skipping a slot doesn't skip the C++ side's argv index — you must emit placeholder `'0'` strings. When adding a new flag, verify subsequent indices are still aligned.
+4. **Hand-sweeping parameters instead of SGD.** If a PR runs 3-5 variants of `dump_metal_trajectory.py` with guessed values, stop and use the harness. SGD converges in 5-10 iterations; hand-sweeping takes 20+ and produces less defensible results.
+5. **Physics gap vs parameter gap.** If SGD plateaus on a loss that's clearly worse than OpenCL (worm sinking with no buoyancy, water exploding with no PCISPH), the issue is a missing kernel, not bad tuning. Port the missing OpenCL kernel — do not ship with caveats.
+6. **Bounded parameters in log-space blow up.** Linear parameters like `floor_y` can't use log-space updates (`floor_y = 2 × exp(0.5 × 10) = 296`). Use `--linear-trainable` with `--linear-lr 0.05-0.15` and bounded step sizes.
+7. **Oscillation around optimum on linear params.** A limit cycle (parameter bouncing between two values every iteration) means the step size is too coarse. The harness auto-halves on sign-flip + L-increase; if you still see it, drop `--linear-lr` further.
+8. **Frame-format mismatch between backends.** OpenCL and Metal trajectories differ in frame structure (boundary particles in frame 0 vs every frame). The render script auto-detects by divisibility check. Symptoms of a broken parser: elastic particle visually missing, or labeled with a boundary-particle y-value.
+9. **Frame count mismatch desyncs the side-by-side.** Use `--max-frames` on the longer trajectory to cap it to the shorter one, or both panels will end at different simulation times.
+10. **Convergence threshold too tight.** Chasing `L < 1e-6` wastes finite-difference evaluations. `L < 1e-4` is tight enough for frame-by-frame visual parity; stop there.
+
+### Validation Tooling Reference
+
+Operational scripts that implement this workflow (all in `src/metal_diff/`):
+
+- **`dump_metal_trajectory.py`** — runs a scenario on the Metal substrate; emits trajectory text file matching the OpenCL output format
+- **`render_one_sprig.py`** — renders a single trajectory as an MP4 panel; auto-detects OpenCL vs Metal frame structure
+- **`render_worm.py`** — same for worm-scale demos with iso/closeup/cross views, zoom controls, edge rendering, liquid opacity
+- **`sgd_one_sprig.py`** — single-parameter SGD harness for anchor-spring scenarios
+- **`sgd_true.py`** — multi-parameter SGD harness using analytic gradients via `xpbd_full_bwd` (the canonical reference; TBPTT + gradient clipping)
+- **`sgd_worm.py`** — worm-scale parameter tuning
+- **`sgd_demo2_membrane.py`** / **`sgd_demo2_permeability.py`** — membrane-specific tuning harnesses
+- **`tests/test_demo1_backend_parity.py`** — automated parity gate for the cube-drop demo (runs both backends, compares trajectories, reports per-metric pass/fail)
+- **`test_*.py`** in `src/metal_diff/` — 19 finite-difference validators for individual kernel backwards
+
+The matching cuda substrate (when it lands per `src/cuda/README.md`) must include the same workflow tools — `dump_cuda_trajectory.py`, `sgd_*` scripts, and FD validators.
 
 ---
 
