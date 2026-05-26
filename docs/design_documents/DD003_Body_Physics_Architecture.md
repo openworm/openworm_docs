@@ -51,7 +51,8 @@
 | WCON trajectory files | `output/*.wcon` | WCON JSON | Worm centroid + posture over time |
 | Rendered frames / video | `output/frames/` | PNG (per-frame) | `frame_00001.png` |
 | Sibernetic binary (C++/OpenCL) | `build/Sibernetic` | Compiled executable | `./Sibernetic -config ...` |
-| Taichi backends | `taichi_backend/` | Python/Taichi scripts | `taichi_backend/sph_metal.py` |
+| Native Metal substrate | `src/metal_diff/` | C++/Objective-C++/Metal shaders | `src/metal_diff/sib_metal`, `src/metal_diff/shaders.metal` |
+| Native CUDA substrate | `src/cuda/` | C++/CUDA | `src/cuda/sib_cuda` (PR #229, in review) |
 | Particle positions (viewer) | [OME-Zarr](https://ngff.openmicroscopy.org): `body/positions/`, shape (n_timesteps, n_particles, 3) | OME-Zarr | Per-particle (x, y, z) over all output timesteps |
 | Particle types (viewer) | OME-Zarr: `body/types/`, shape (n_particles,) | OME-Zarr | Enum: liquid/elastic/boundary |
 | Surface mesh (viewer) | OME-Zarr: `geometry/body_surface/` (per-frame OBJ or vertices+faces arrays) | OME-Zarr | Reconstructed smooth body surface per timestep |
@@ -358,7 +359,7 @@ A contribution to Sibernetic MUST:
     - Elastic deformation: A suspended elastic body under gravity should sag
     - Muscle contraction: Activating one muscle quadrant should bend the body
 
-5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++), Taichi Metal (Apple Silicon), Taichi CUDA (NVIDIA), and [PyTorch](https://pytorch.org/) (CPU reference). Test on at least two backends.
+5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++ reference), Native Metal (Apple Silicon), Native CUDA (NVIDIA), and [PyTorch](https://pytorch.org/) (CPU reference). Test on at least two backends.
 
 6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
 
@@ -403,10 +404,12 @@ https://github.com/openworm/Sibernetic
 
 **Key files:**
 
-- `src/owPhysicsFluidSimulator.cpp` — Main SPH loop
+- `src/owPhysicsFluidSimulator.cpp` — Main SPH loop (OpenCL reference)
 - `src/owWorldSimulation.cpp` — Particle initialization, boundary conditions
-- `kernels/sph_cl.cl` — OpenCL kernel for GPU acceleration
-- `taichi_backend/` — Taichi Metal/CUDA implementations
+- `src/sphFluid.cl` — OpenCL kernel for GPU acceleration (the canonical reference; ~64KB)
+- `src/metal_diff/` — Native Metal substrate (Apple Silicon): `sib_metal` binary, `shaders.metal`, per-op test suite
+- `src/cuda/` — Native CUDA substrate (NVIDIA): scaffolding awaiting PR #229
+- `taichi_backend/` — Historical Taichi prototyping path (superseded by the native substrates above)
 
 ### Configuration Format
 
@@ -439,12 +442,13 @@ elasticity = 0.0006
 
 | Backend | Language | Hardware | Speed | Result Quality | Status |
 |---------|----------|----------|-------|---------------|--------|
-| OpenCL | C++ | CPU/GPU (Linux) | Baseline | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
-| PyTorch | Python | CPU | Slow | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; results need work) |
-| Taichi Metal | Python/Taichi | Apple Silicon GPU | ~3x faster (target) | Does not yet match OpenCL | **Blocked** — elastic coordinate bug |
-| Taichi CUDA | Python/Taichi | NVIDIA GPU | ~5x faster (target) | Does not yet match OpenCL | **Blocked** — elastic coordinate bug |
+| OpenCL | C++ | CPU/GPU (Linux, Intel Mac) | Baseline | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
+| Native Metal | C++/Metal shaders | Apple Silicon GPU | First-pass ~2.7 ms/step on M-series | Forward parity in progress; 5+ demos working (cube drop, membrane, worm_alone, worm_swim) | **Experimental → Stable** — consolidated on `ow-native-gpu-0.1.0` branch; PR #230 in flight |
+| Native CUDA | C++/CUDA | NVIDIA GPU | Target ~5x OpenCL | Scaffolding stage | **Scaffolding** — PR #229 (sib_cuda) in review |
+| PyTorch | Python | CPU | Slow | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; useful as correctness reference) |
+| Taichi Metal / CUDA | Python/Taichi | Apple Silicon / NVIDIA | n/a | n/a | **Superseded** — earlier prototyping path; supplanted by the native ports above |
 
-**Recommendation:** OpenCL remains the only backend producing validated simulation results. However, OpenCL driver support is shrinking across platforms (Apple dropped OpenCL; AMD/NVIDIA deprioritizing). PyTorch and Taichi backends must achieve result parity with OpenCL before they can serve as replacements. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
+**Recommendation:** OpenCL remains the only backend producing validated simulation results today. However, OpenCL driver support is shrinking across platforms (Apple removed OpenCL on Apple Silicon; AMD/NVIDIA deprioritizing). The path forward is **native** Metal and CUDA substrates — hand-written GPU kernels that target each platform's first-class API directly, rather than Python/Taichi abstractions that introduced their own divergence from the OpenCL reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
 
 ---
 
@@ -459,36 +463,34 @@ The OpenCL backend is the **only** backend producing validated simulation result
 - **NVIDIA** is deprioritizing OpenCL in favor of CUDA
 - **Docker** — OpenCL runs CPU-only in Docker (GPU passthrough broken, issue #320)
 
-The core challenge: the only backend producing good simulation results is losing the platforms it runs on. The goal is to achieve OpenCL-equivalent result quality on PyTorch and/or Taichi **before** OpenCL becomes unusable.
+The core challenge: the only backend producing good simulation results is losing the platforms it runs on. The goal is to achieve OpenCL-equivalent result quality on **native** Metal (Apple Silicon) and **native** CUDA (NVIDIA) substrates **before** OpenCL becomes unusable.
+
+### Why Native Ports, Not Taichi
+
+An earlier prototyping path used [Taichi](https://www.taichi-lang.org/) as an intermediate language to target Metal and CUDA from a single Python codebase. Taichi simplified bring-up but introduced a coordinate-space divergence from the OpenCL reference (elastic forces ~287× too weak — see historical note in [Cross-Backend Parity Requirements](#cross-backend-parity-requirements) below) that proved harder to debug than implementing the GPU kernels natively.
+
+The current strategy is **hand-written kernels per platform**: a Metal shader implementation for Apple Silicon (`src/metal_diff/`), a CUDA kernel implementation for NVIDIA (`src/cuda/`). Each substrate mirrors the OpenCL `sphFluid.cl` reference line-by-line, giving direct algorithmic correspondence without an intermediate abstraction layer. This is the strategy consolidated on the `ow-native-gpu-0.1.0` branch (see PR #230) and is the active direction for the project.
 
 ### The Result Quality Gap
 
-Neither PyTorch nor Taichi currently matches OpenCL's validated kinematics:
+The native Metal substrate is the most mature of the modernization paths and reaches forward parity on five demos so far:
 
-- **PyTorch:** Stable (doesn't crash, 76+ tests pass, 3+ second simulations without divergence). But simulation results don't yet match OpenCL quality. Good as a correctness reference for debugging, not yet a replacement.
-- **Taichi:** Has an additional elastic coordinate-space bug on top of the general quality gap (see below). Elastic forces ~287x too weak, causing elastic bodies to flatten to floor.
+- **demo1** (cube drop) — forward parity within ±5%; cross-backend parity test passes 5/5 metrics
+- **demo2** (membrane permeability) — membrane mechanism ported (M10 kernels) with FD-validated backward; sheet-scale parameter tuning in progress
+- **one_sprig_test** — active muscle contraction extension to anchor-spring kernel; OpenCL reference + Metal port both validated
+- **worm_alone_half_resolution** — gravity drop + cylindrical-diameter retention matched to OpenCL
+- **worm_swim_half_resolution** — basic swim locomotion validated; SPH pressure force kernel implemented (replaces XPBD-only density solver) for accurate water-on-worm dynamics
 
-**Root cause analysis needed:** What specific algorithmic differences produce the quality gap? The OpenCL C++ kernels (`sphFluid.cl`, ~64KB) are the reference implementation — PyTorch/Taichi must match their behavior line-by-line.
+**Cross-backend parity status:**
 
-### The Taichi Coordinate-Space Bug
+| Backend | Demo1 | Demo2 | one_sprig | worm_alone | worm_swim |
+|---------|-------|-------|-----------|------------|-----------|
+| OpenCL | reference | reference | reference | reference | reference |
+| Native Metal | ✅ ±5% | 🟡 in tuning | ✅ ±5% | ✅ visual parity | 🟡 swim parity in progress |
+| Native CUDA | scaffolding | scaffolding | scaffolding | scaffolding | scaffolding |
+| PyTorch | results don't yet match | — | — | — | — |
 
-Taichi has a **known coordinate-space bug** that is separate from (and on top of) the general result quality gap shared with PyTorch:
-
-- SPH forces are computed in world coordinates, but elastic forces are computed in scaled coordinates
-- This mismatch makes elastic forces effectively ~287x too weak (factor of 1/simulation_scale)
-- Result: elastic bodies flatten to floor instead of maintaining shape
-
-**Comparison data:**
-
-| Metric | PyTorch | Taichi | Expected |
-|--------|---------|--------|----------|
-| Elastic body mean Y (after 3s floor collision) | 1.45 | 0.24 | >1.0 |
-
-**Three-step fix (documented in Sibernetic README):**
-
-1. Remove incorrect `/sim_scale` division in elastic force calculation
-2. Add `simulationScaleInv` to the integration step
-3. Use `h_scaled` for kernel coefficients instead of unscaled `h`
+**Root cause analysis approach:** The OpenCL C++ kernels (`sphFluid.cl`, ~64KB) are the reference implementation. Each native substrate (Metal, CUDA) implements the kernels per-platform with direct OpenCL-line correspondence rather than via an intermediate abstraction. The historical Taichi divergence (elastic forces ~287× too weak from a coordinate-space mismatch — `sim_scale` division applied inconsistently between SPH and elastic force paths) is not present in the native ports because the OpenCL reference's coordinate handling is preserved verbatim.
 
 ### Cross-Backend Parity Requirements
 
@@ -516,19 +518,25 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 | Backend | Level | Blocking Issue |
 |---------|-------|---------------|
 | OpenCL | **Production** | Losing platform support |
-| PyTorch | **Experimental** | Stable but results don't match OpenCL |
-| Taichi Metal | **Experimental** | Elastic coordinate-space bug + results don't match |
-| Taichi CUDA | **Experimental** | Elastic coordinate-space bug + results don't match |
+| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; full demo2 sheet-scale tuning + worm_swim parity in progress. Backward (differentiability) is a byproduct of the implementation approach; see [DD017](DD017_Hybrid_Mechanistic_ML_Framework.md) for the framework that consumes it. |
+| Native CUDA | **Scaffolding** | Awaiting kernel implementation (PR #229 introduces the substrate skeleton) |
+| PyTorch | **Experimental** | Stable but results don't match OpenCL; positioned as a CPU correctness reference |
+| Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction |
 
 ### Stabilization Sequence
 
 1. **Create validation scripts:** `scripts/check_stability.py` and `scripts/validate_incompressibility.py`
 2. **Create cross-backend parity test suite:** `scripts/backend_parity_test.py` — compare against OpenCL baseline
-3. **Fix Taichi elastic coordinate bug:** Apply the documented 3-step fix (remove `/sim_scale`, add `simulationScaleInv`, use `h_scaled`)
-4. **Audit and fix result quality gap:** Line-by-line algorithmic audit of PyTorch/Taichi kernel implementations against OpenCL `sphFluid.cl`
-5. **Run parity tests:** Graduate backends that pass to Stable
-6. **Add to Dockerfile and CI:** Add graduated backends to Docker image, add backend-specific CI gates
-7. **Performance benchmark:** Update recommendation for which backend to use on which platform
+3. **Land the native Metal substrate consolidation:** merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`) — this represents the strategic shift from Taichi prototyping to hand-written platform-native kernels
+4. **Complete OpenCL ↔ Native Metal parity per demo:** demo1 ✅, demo2 (in tuning), worm_alone ✅, worm_swim (in progress), one_sprig ✅. Each demo gets a parity gate in CI.
+5. **Land the native CUDA substrate:** review and merge PR #229; bring CUDA up to demo1 parity
+6. **Run parity tests:** Graduate backends that pass to Stable
+7. **Add to Dockerfile and CI:** Add graduated backends to Docker image, add backend-specific CI gates per platform (macOS for Metal, Linux+NVIDIA for CUDA)
+8. **Performance benchmark:** Update recommendation for which backend to use on which platform
+
+### Community Contributions to Modernization
+
+Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on `openworm/sibernetic` rather than in this design document — see the `contributor-acknowledgment` label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues such as #226 (Port sphFluid.cl to Metal for ARM64 Mac).
 
 ---
 
@@ -592,7 +600,7 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 body:
   enabled: true
   engine: sibernetic
-  backend: opencl                    # opencl, taichi-metal, taichi-cuda, pytorch
+  backend: opencl                    # opencl, metal-native, cuda-native, pytorch
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
   cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 ([DD004](DD004_Mechanical_Cell_Identity.md)): extend to all tissue types. "false" = bulk elastic only.
@@ -603,7 +611,7 @@ body:
 |-----|---------|-------------|-------------|
 | `body.enabled` | `true` | `true`/`false` | Enable body physics simulation |
 | `body.engine` | `sibernetic` | `sibernetic` | Physics engine selection |
-| `body.backend` | `opencl` | `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch` | Compute backend |
+| `body.backend` | `opencl` | `opencl`, `metal-native`, `cuda-native`, `pytorch` | Compute backend. `metal-native` targets Apple Silicon via hand-written Metal shaders; `cuda-native` targets NVIDIA via hand-written CUDA kernels. The earlier `taichi-metal` / `taichi-cuda` options are superseded by the native ports. |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
 | `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md), Phase 4). `false` = bulk elastic only. |
@@ -672,13 +680,14 @@ def write_sibernetic_config(openworm_config):
 ---
 
 - **Approved by:** OpenWorm Steering
-- **Implementation Status:** Complete (OpenCL production but losing platform support; PyTorch/Taichi experimental — results do not yet match OpenCL. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap))
+- **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working; native CUDA substrate in scaffolding; PyTorch experimental as CPU correctness reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap))
 - **Next Actions:**
 
 1. Create stability validation scripts (`scripts/check_stability.py`, `scripts/validate_incompressibility.py`)
 2. Create cross-backend parity test suite against OpenCL baseline (`scripts/backend_parity_test.py`)
-3. **Fix Taichi elastic coordinate-space bug** (3-step fix documented in Sibernetic README)
-4. **Audit and fix PyTorch/Taichi result quality gap vs OpenCL** (algorithmic audit of kernel implementations)
-5. Graduate backends that pass parity tests; add to Dockerfile and CI
-6. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
-7. Add cell-type-specific mechanical properties
+3. **Land the native-gpu branch consolidation** — merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`)
+4. **Complete OpenCL ↔ Native Metal parity** on remaining demos (demo2 sheet-scale, worm_swim swim parity)
+5. **Bring native CUDA substrate up to demo1 parity** (review and merge PR #229, then iterate)
+6. Graduate backends that pass parity tests; add to Dockerfile and CI per-platform
+7. Extend per-particle cell IDs to all tissue types ([DD004](DD004_Mechanical_Cell_Identity.md))
+8. Add cell-type-specific mechanical properties
