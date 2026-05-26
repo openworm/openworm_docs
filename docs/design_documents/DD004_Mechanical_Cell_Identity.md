@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
+- **Related:** [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 
@@ -72,14 +72,14 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 ### Prerequisites
 
 - Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
-- OR: OpenCL SDK, CMake, C++ compiler (same as [DD003](DD003_Body_Physics_Architecture.md))
+- OR: OpenCL SDK, CMake, C++ compiler (same as [DD001](DD001_Body_Physics_Architecture.md))
 - Cell boundary mesh data from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) (included in Docker image or downloaded at build time)
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **Sibernetic** body physics framework ([DD003](DD003_Body_Physics_Architecture.md)). If you have already completed [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+This DD builds on the **Sibernetic** body physics framework ([DD001](DD001_Body_Physics_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
-If starting fresh, follow [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
+If starting fresh, follow [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -92,7 +92,7 @@ Then skip to [Step 2 (tagged simulation)](#step-by-step) below. The Docker image
 
 **Path B — Native (for development):**
 
-Complete [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
+Complete [DD001 native setup](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
 
 ```bash
 # Download cell boundary meshes from Witvliet et al. 2021 EM reconstructions
@@ -105,7 +105,7 @@ python scripts/generate_tagged_particles.py \
     --output data/particles_tagged.csv   # [TO BE CREATED]
 ```
 
-**Neural identity mapping (optional):** If you also need neural cell identity (e.g., mapping motor neuron positions to muscle-tagged particles for [DD001](DD001_Neural_Circuit_Architecture.md)/[DD002](DD002_Muscle_Model_Architecture.md) coupling), complete [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up the c302 neural model and PyOpenWorm/OWMeta data layer.
+**Neural identity mapping (optional):** If you also need neural cell identity (e.g., mapping motor neuron positions to muscle-tagged particles for [DD002](DD002_Neural_Circuit_Architecture.md)/[DD003](DD003_Muscle_Model_Architecture.md) coupling), complete [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up the c302 neural model and PyOpenWorm/OWMeta data layer.
 
 ### Step-by-step
 
@@ -148,7 +148,7 @@ docker compose run validate
 | **Color mode** | Particles colored by cell type: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta, seam cells=orange |
 | **Data source** | OME-Zarr: `body/cell_ids/`, shape (n_particles,) — integer ID mapping each particle to its WBbt cell |
 | **What you should SEE** | The worm body with distinct cell boundaries visible as color transitions. Intestinal cells should form a tube along the body axis. Muscle quadrants (MDR, MVR, MVL, MDL) should be visible as four colored bands. Cuticle should form the outermost shell. Clicking a particle shows its WBbt cell ID and cell-type-specific mechanical properties. |
-| **Comparison view** | Side-by-side: bulk tissue (all elastic=green, [DD003](DD003_Body_Physics_Architecture.md) default) vs. cell-tagged (distinct colors per cell type) |
+| **Comparison view** | Side-by-side: bulk tissue (all elastic=green, [DD001](DD001_Body_Physics_Architecture.md) default) vs. cell-tagged (distinct colors per cell type) |
 
 ---
 
@@ -258,7 +258,7 @@ particle_id,x,y,z,type,cell_id,elasticity,adhesion
 
 ### What This Design Document Does NOT Cover:
 
-1. **Neural cell identity:** Neurons are covered by [DD001](DD001_Neural_Circuit_Architecture.md) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md). This DD covers non-neural somatic cells only (muscle, intestine, hypodermis, cuticle, gonad, seam cells, pharyngeal muscle).
+1. **Neural cell identity:** Neurons are covered by [DD002](DD002_Neural_Circuit_Architecture.md) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md). This DD covers non-neural somatic cells only (muscle, intestine, hypodermis, cuticle, gonad, seam cells, pharyngeal muscle).
 
 2. **Developmental stage transitions:** Cell boundaries change during development (L1 through adult). This DD uses adult hermaphrodite as the reference stage. Multi-stage support is future work.
 
@@ -302,13 +302,13 @@ The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides 
 |-------|----------|----------|--------|-------|
 | Cell boundary meshes | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) EM | 3D surface reconstruction per cell | OBJ or STL mesh files | µm |
 | WBbt cell ontology IDs | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) / WormBase | Cell name → WBbt ID mapping | CSV or OWMeta query | identifiers |
-| Baseline SPH particle layout | [DD003](DD003_Body_Physics_Architecture.md) | Current particle initialization | Binary particle file | µm (positions) |
+| Baseline SPH particle layout | [DD001](DD001_Body_Physics_Architecture.md) | Current particle initialization | Binary particle file | µm (positions) |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Tagged particle file | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic initialization) | Per-particle: position, type, cell_id, elasticity, adhesion | Extended binary or CSV (see struct below) | mixed |
+| Tagged particle file | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic initialization) | Per-particle: position, type, cell_id, elasticity, adhesion | Extended binary or CSV (see struct below) | mixed |
 | Cell-to-particle mapping | [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal oscillator) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
 | Cell-to-particle mapping | [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) | Lookup: cell_id → list of particle indices | JSON or Python dict | indices |
 | Cell identity labels (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-particle cell_id for cell-based coloring/selection | OME-Zarr: `body/cell_ids/`, shape (n_particles,) | integer ID |
@@ -318,9 +318,9 @@ The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides 
 | Item | Value |
 |------|-------|
 | **Repository** | `openworm/sibernetic` (particle initialization is part of Sibernetic) |
-| **Docker stage** | `body` (same as [DD003](DD003_Body_Physics_Architecture.md)) |
+| **Docker stage** | `body` (same as [DD001](DD001_Body_Physics_Architecture.md)) |
 | **`versions.lock` key** | `sibernetic` |
-| **Build dependencies** | Same as [DD003](DD003_Body_Physics_Architecture.md) + cell boundary mesh data from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) |
+| **Build dependencies** | Same as [DD001](DD001_Body_Physics_Architecture.md) + cell boundary mesh data from [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) |
 | **Additional data** | Cell boundary meshes must be included in the Docker image (or downloaded at build time from a pinned release) |
 
 ### Configuration
@@ -369,23 +369,23 @@ docker compose run validate
 | OME-Zarr Group | Viewer Layer | Color Mapping |
 |----------------|-------------|---------------|
 | `body/cell_ids/` (n_particles,) | Cell identity overlay | Cell type → color: muscle=red, intestine=yellow, cuticle=gray, hypodermis=cyan, gonad=magenta |
-| `body/positions/` (n_timesteps, n_particles, 3) | Body particles (from [DD003](DD003_Body_Physics_Architecture.md)) | Combined with cell_ids for cell-aware particle rendering |
+| `body/positions/` (n_timesteps, n_particles, 3) | Body particles (from [DD001](DD001_Body_Physics_Architecture.md)) | Combined with cell_ids for cell-aware particle rendering |
 
 ### Multi-Backend Validation Requirement
 
-The particle struct change must be validated across **all stable backends** per [DD003](DD003_Body_Physics_Architecture.md) Quality Criterion 5 ("GPU Backend Compatibility") and Criterion 6 ("Cross-Backend Parity"). Specifically:
+The particle struct change must be validated across **all stable backends** per [DD001](DD001_Body_Physics_Architecture.md) Quality Criterion 5 ("GPU Backend Compatibility") and Criterion 6 ("Cross-Backend Parity"). Specifically:
 
 - **OpenCL:** Updated struct definition required in `.cl` kernel files (`sphFluid.cl`)
 - **PyTorch:** Updated tensor shapes in `pytorch_solver.py` to accommodate new fields
 - **Taichi:** Updated struct in `taichi_solver.py` field definitions
-- **All backends:** Must pass the [DD003 cross-backend parity tests](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements) after the struct change
+- **All backends:** Must pass the [DD001 cross-backend parity tests](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) after the struct change
 
 ### Breaking Change: Particle Data Structure
 
 Adding `cell_id` to the SPH particle struct is a **breaking change** to the Sibernetic binary format. Migration plan:
 
 ```c
-// Old struct ([DD003](DD003_Body_Physics_Architecture.md) current)
+// Old struct ([DD001](DD001_Body_Physics_Architecture.md) current)
 typedef struct {
     float pos[3];
     float vel[3];
@@ -421,14 +421,14 @@ When `body.cell_identity: true`:
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| SPH particle struct | [DD003](DD003_Body_Physics_Architecture.md) | If [DD003](DD003_Body_Physics_Architecture.md) changes the base struct, [DD004](DD004_Mechanical_Cell_Identity.md) extension must match |
+| SPH particle struct | [DD001](DD001_Body_Physics_Architecture.md) | If [DD001](DD001_Body_Physics_Architecture.md) changes the base struct, [DD004](DD004_Mechanical_Cell_Identity.md) extension must match |
 | EM cell boundary data | [DD008](DD008_Data_Integration_Pipeline.md)/OWMeta | If cell boundary meshes are updated (new EM data), particle tagging must be regenerated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | Intestinal oscillator | [DD009](DD009_Intestinal_Oscillator_Model.md) | [DD009](DD009_Intestinal_Oscillator_Model.md) drives intestinal-tagged particles; if cell_id assignment changes, wrong particles contract |
 | Pharynx mechanics | [DD007](DD007_Pharyngeal_System_Architecture.md) (Option B) | Pharyngeal-tagged particles need correct cell_ids for pumping |
-| Cuticle mechanics | [DD003](DD003_Body_Physics_Architecture.md) (future) | Cuticle stiffness multiplier affects body bending — changes affect locomotion |
+| Cuticle mechanics | [DD001](DD001_Body_Physics_Architecture.md) (future) | Cuticle stiffness multiplier affects body bending — changes affect locomotion |
 
 ---
 

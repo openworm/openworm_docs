@@ -1,16 +1,16 @@
-# DD003: Body Physics Engine (Sibernetic) Architecture
+# DD001: Body Physics Engine (Sibernetic) Architecture
 
 - **Status:** Accepted
 - **Author:** Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity)
 
 ---
 
 ## TL;DR
 
-[PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD002](DD002_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
+[PCISPH](https://doi.org/10.1145/1531326.1531346) [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from [DD003](DD003_Muscle_Model_Architecture.md) calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation <1%.
 
 ---
 
@@ -22,7 +22,7 @@
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles |
-| **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd003` |
+| **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
 | **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `body/positions/` layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray) |
@@ -39,7 +39,7 @@
 
 **Before:** No fluid-structure interaction — rigid body or mass-spring models that cannot capture pseudocoelomic pressure or hydrostatic skeleton mechanics.
 
-**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from [DD002](DD002_Muscle_Model_Architecture.md).
+**After:** ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from [DD003](DD003_Muscle_Model_Architecture.md).
 
 ---
 
@@ -67,10 +67,10 @@
 | Item | Value |
 |------|-------|
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) |
-| **Issue label** | `dd003` |
+| **Issue label** | `dd001` |
 | **Milestone** | Body Physics Engine |
-| **Branch convention** | `dd003/description` (e.g., `dd003/pcisph-stability-fix`) |
-| **Example PR title** | `DD003: Fix density deviation in PCISPH pressure solver` |
+| **Branch convention** | `dd001/description` (e.g., `dd001/pcisph-stability-fix`) |
+| **Example PR title** | `DD001: Fix density deviation in PCISPH pressure solver` |
 
 ---
 
@@ -148,8 +148,8 @@ docker compose run validate
 
 | Script | Status | Tracking |
 |--------|--------|----------|
-| `scripts/check_stability.py` | Verify in repo | openworm/sibernetic — label `dd003` |
-| `scripts/validate_incompressibility.py` | Verify in repo | openworm/sibernetic — label `dd003` |
+| `scripts/check_stability.py` | Verify in repo | openworm/sibernetic — label `dd001` |
+| `scripts/validate_incompressibility.py` | Verify in repo | openworm/sibernetic — label `dd001` |
 
 ---
 
@@ -252,7 +252,7 @@ Bonds are created during initialization based on spatial proximity. Particles wi
 
 **Muscle cell mapping (Palyanov et al. 2018):** The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing **individual muscle cells** with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.
 
-Muscle forces from the calcium-force coupling ([DD002](DD002_Muscle_Model_Architecture.md)) are injected by modulating elastic bond stiffness:
+Muscle forces from the calcium-force coupling ([DD003](DD003_Muscle_Model_Architecture.md)) are injected by modulating elastic bond stiffness:
 
 ```
 k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
@@ -570,7 +570,7 @@ Substantial portions of the native-port modernization have been driven by commun
 
 | Input | Source DD | Variable | Format | Units | Timestep |
 |-------|----------|----------|--------|-------|----------|
-| Muscle activation coefficients | [DD002](DD002_Muscle_Model_Architecture.md) (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
+| Muscle activation coefficients | [DD003](DD003_Muscle_Model_Architecture.md) (via `sibernetic_c302.py`) | Per-muscle activation [0, 1] | Written to muscle activation file by coupling script | dimensionless | dt_coupling (0.005 ms from neural side) |
 | Particle initialization geometry | [DD004](DD004_Mechanical_Cell_Identity.md) (when cell_identity enabled) | Per-particle position, type, cell_id | Binary or CSV particle file | µm (positions), enum (type) | One-time at sim start |
 
 **Outputs (What This Subsystem Produces)**
@@ -667,8 +667,8 @@ def write_sibernetic_config(openworm_config):
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Muscle activation format | [DD002](DD002_Muscle_Model_Architecture.md) | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
-| `sibernetic_c302.py` script | [DD001](DD001_Neural_Circuit_Architecture.md)/DD002 | This script bridges neural→body; changes to it affect coupling timing |
+| Muscle activation format | [DD003](DD003_Muscle_Model_Architecture.md) | If activation value range, file format, or muscle count changes, Sibernetic reads wrong data |
+| `sibernetic_c302.py` script | [DD002](DD002_Neural_Circuit_Architecture.md)/DD003 | This script bridges neural→body; changes to it affect coupling timing |
 | Cell boundary data | [DD004](DD004_Mechanical_Cell_Identity.md) | If particle initialization changes (cell-tagged particles), body geometry changes |
 
 | Depends On Me | DD | What Breaks If I Change |

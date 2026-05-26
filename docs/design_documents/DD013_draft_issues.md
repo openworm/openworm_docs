@@ -8,7 +8,7 @@
 
 **Totals:** 3 issues (ai-workable: 2 / human-expert: 1 | L1: 1, L2: 2, L3: 0)
 
-**Roadmap Context:** DD013 is a **Phase 3** DD (proposed). These synaptic optimization issues were originally part of DD001 Draft Issues (Group 4) and have been relocated here because synaptic weight optimization requires DD013's differentiable simulation backend. DD013 Component 1 provides the gradient descent infrastructure; these issues prepare the biological constraints and validation targets.
+**Roadmap Context:** DD013 is a **Phase 3** DD (proposed). These synaptic optimization issues were originally part of DD002 Draft Issues (Group 4) and have been relocated here because synaptic weight optimization requires DD013's differentiable simulation backend. DD013 Component 1 provides the gradient descent infrastructure; these issues prepare the biological constraints and validation targets.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
@@ -29,7 +29,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints) and [DD013 — Component 1: Differentiable Backend](DD013_Hybrid_Mechanistic_ML_Framework.md)
+- **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints) and [DD013 — Component 1: Differentiable Backend](DD013_Hybrid_Mechanistic_ML_Framework.md)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`c302/data/GABA.py`](https://github.com/openworm/c302) — GABAergic neuron identity vector (binary, 279 neurons). Already used in c302 network generation.
@@ -63,7 +63,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (Configuration section) and [DD013 — Configuration](DD013_Hybrid_Mechanistic_ML_Framework.md)
+- **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (Configuration section) and [DD013 — Configuration](DD013_Hybrid_Mechanistic_ML_Framework.md)
 - **Depends On:** DD011 Issue 1 (openworm.yml schema)
 - **Files to Modify:**
     - `openworm.yml` (add `neural.synapse_optimization: false`)
@@ -88,7 +88,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 - **Roadmap Phase:** Phase 2
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience
-- **DD Section to Read:** [DD001 — Synaptic Weight and Polarity Optimization](DD001_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and [DD013 — Validation Targets](DD013_Hybrid_Mechanistic_ML_Framework.md)
+- **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and [DD013 — Validation Targets](DD013_Hybrid_Mechanistic_ML_Framework.md)
 - **Depends On:** None
 - **Existing Code to Reuse:**
     - [`wormneuroatlas`](https://github.com/openworm/wormneuroatlas) — **The Randi 2023 signal propagation atlas is already included** as `funatlas.h5` with a clean Python API: `NeuroAtlas.get_signal_propagation_atlas(strain="wt")`. Supports WT and unc-31 strains. Handles neuron ID conventions and bilateral/dorsoventral merging.
@@ -130,7 +130,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 | Related DD | Relationship |
 |------------|-------------|
-| **[DD001](DD001_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD001 Draft Issues Group 4 |
+| **[DD002](DD002_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD002 Draft Issues Group 4 |
 | DD005 (Cell-Type Specialization) | Channel library informs synapse models |
 | DD010 (Validation Framework) | Functional connectivity validation targets |
 | DD011 (Simulation Stack) | Issue 2 (config toggle depends on openworm.yml schema) |

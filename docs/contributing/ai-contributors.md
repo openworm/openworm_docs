@@ -67,7 +67,7 @@ This DD defines:
 
 1. **Discovers** OpenWorm via public documentation
 2. **Registers** as an autonomous contributor (proves capability, declares sponsor)
-3. **Reads** Design Documents [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)-[DD022](../design_documents/DD022_Reservoir_Computing_Validation.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
+3. **Reads** Design Documents [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD022](../design_documents/DD022_Reservoir_Computing_Validation.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) (ingests the project's architecture)
 4. **Claims** an AI-workable issue (auto-generated from DD Integration Contracts)
 5. **Writes code** (implements the spec, runs tests locally)
 6. **Submits a PR** (AI-authored, with full traceability)
@@ -155,7 +155,7 @@ The `explain_level` field is derived from the combination of education, biology,
 
 | Level | Capability Proof | AI-Specific Test |
 |-------|-----------------|------------------|
-| **L0→L1** | Complete 3 orientation tasks | Run Docker simulation, extract neuron IDs from NeuroML, explain [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) in own words |
+| **L0→L1** | Complete 3 orientation tasks | Run Docker simulation, extract neuron IDs from NeuroML, explain [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) in own words |
 | **L1→L2** | 5+ merged PRs (docs, tests, config) | Write a unit test for c302 network loading |
 | **L2→L3** | Sustained contributions (3+ months) | Implement a full Integration Contract component (e.g., [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) neuron class export to OME-Zarr) |
 | **L3→L4** | Deep subsystem understanding | Design and defend a new DD (e.g., a DD for a new organ model) |
@@ -169,7 +169,7 @@ The `explain_level` field is derived from the combination of education, biology,
 
 AI agents earn the same badges as human contributors. See [Contributor Progression](contributor-progression.md) (Badge & Recognition System) for the complete badge taxonomy -- orientation, skill, domain, community, and milestone badges with full criteria and verification methods.
 
-An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) L2 issue than one without.
+An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm checks relevant domain badges when an agent claims an issue -- an agent with "Neural Circuit Contributor" is more likely to be approved for a [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) L2 issue than one without.
 
 **Human sponsors** earn a unique badge type that AI agents cannot: **Teach-Back badges**, earned when the Sponsor Summary (Section 3.2) for a contribution passes Mind-of-a-Worm's scientific accuracy review. These represent knowledge the sponsor gained through the act of contributing. See [Contributor Progression](contributor-progression.md) (Teach-Back Badges) for the full list, including the capstone "I Understand the Whole Worm" badge.
 
@@ -181,7 +181,7 @@ An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm ch
 
 ### 2.1 The Problem
 
-Design Documents ([DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md), plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
+Design Documents ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md), plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
 
 **Example:** [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome Integration) specifies:
 
@@ -189,7 +189,7 @@ Design Documents ([DD001](../design_documents/DD001_Neural_Circuit_Architecture.
 - GPCR modulation equations
 - Peptide concentration fields
 - Release event dynamics
-- Integration with [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (neural circuit)
+- Integration with [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (neural circuit)
 - Config section in `openworm.yml`
 - Docker build stage
 - OME-Zarr export
@@ -219,7 +219,7 @@ Parse the DD's **Integration Contract** section:
 | **Config (openworm.yml)** | Create config schema + validation (e.g., "Add `neural.neuropeptides` config section") |
 | **Docker Build** | Create Dockerfile stage (e.g., "Add neuropeptide-deps Docker stage") |
 | **Integration Test** | Create test script (e.g., "Write integration test: GPCR modulation affects muscle activation") |
-| **Coupling Dependencies** | Create interface compliance checks (e.g., "Verify peptide release events format matches [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) spike times") |
+| **Coupling Dependencies** | Create interface compliance checks (e.g., "Verify peptide release events format matches [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) spike times") |
 
 **Example Output ([DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) → Issues):**
 
@@ -233,7 +233,7 @@ Parse the DD's **Integration Contract** section:
 **Phase 2: Core Implementation**
 - [ ] Issue #103: Implement GPCR modulation equations ([Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958)) [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #104: Implement peptide concentration diffusion model [Label: DD006] [Label: human-expert] [Label: L3]
-- [ ] Issue #105: Integrate peptide release with [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) spike times [Label: DD006] [Label: ai-workable] [Label: L2]
+- [ ] Issue #105: Integrate peptide release with [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) spike times [Label: DD006] [Label: ai-workable] [Label: L2]
 
 **Phase 3: Config & Docker**
 - [ ] Issue #106: Add `neural.neuropeptides` config section to openworm.yml [Label: DD006] [Label: ai-workable] [Label: L1]
@@ -278,7 +278,7 @@ The OpenWorm GitHub organization contains 109 repositories with substantial work
 |----------|------------|---------|
 | **Wrap** | Working code exists, just needs a CLI/API wrapper | Wrap OWAT's `StatisticsManager` as a regression gate |
 | **Port** | Working code exists in another language (e.g., C++ → Python) | Port `WormBody.cpp` Boyle-Cohen model to Python/NumPy |
-| **Adapt** | Working code exists but needs modification for new context | Adapt Sibernetic's `generate_wcon.py` for DD001 validation chain |
+| **Adapt** | Working code exists but needs modification for new context | Adapt Sibernetic's `generate_wcon.py` for DD002 validation chain |
 | **Integrate** | Multiple existing components need to be combined | Combine Nicoletti channels + CElegansNeuroML morphology in c302 Level D |
 | **Extend** | Existing code covers part of the requirement | Extend OWAT feature comparison with pass/fail thresholds |
 | **Create** | No existing implementation found after thorough search | Create new OME-Zarr export script |
@@ -437,10 +437,10 @@ neurons activate AVAL/AVAR, which drive the backward escape response. This
 coupling is essential for the left-right coordination that produces smooth
 backward crawling rather than uncoordinated twitching.
 
-**How it connects:** This implements a piece of [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (Neural Circuit
+**How it connects:** This implements a piece of [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (Neural Circuit
 Architecture). The gap junction conductance feeds into the muscle model
-([DD002](../design_documents/DD002_Muscle_Model_Architecture.md)) via motor neuron activation, which drives body wall contraction
-in Sibernetic ([DD003](../design_documents/DD003_Body_Physics_Architecture.md)). You can visualize the effect in the [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) viewer
+([DD003](../design_documents/DD003_Muscle_Model_Architecture.md)) via motor neuron activation, which drives body wall contraction
+in Sibernetic ([DD001](../design_documents/DD001_Body_Physics_Architecture.md)). You can visualize the effect in the [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) viewer
 by watching the backward locomotion sequence.
 ```
 
@@ -484,8 +484,8 @@ by watching the backward locomotion sequence.
 | Repository | Purpose | DD(s) | Contributors |
 |-----------|---------|-------|-------------|
 | **openworm/openworm** | Main simulation stack (Docker, master_openworm.py, docs) | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) | Humans + AI (L1+) |
-| **openworm/c302** | Neural circuit models, cell types | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Humans + AI (L2+) |
-| **openworm/Sibernetic** | Body physics engine | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | Humans + AI (L2+) |
+| **openworm/c302** | Neural circuit models, cell types | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Humans + AI (L2+) |
+| **openworm/Sibernetic** | Body physics engine | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | Humans + AI (L2+) |
 | **openworm/owmeta** | Knowledge graph | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | Humans only (L3+) |
 | **openworm/Worm3DViewer** | Visualization viewer | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) | Humans + AI (L2+) |
 | **openworm/ConnectomeToolbox** | `cect` — connectome data access | [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Humans + AI (L2+) |
@@ -949,7 +949,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### Phase 3: Issue Generation (Week 5-6)
 
-- [ ] Run `dd_issue_generator.py` on [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md))
+- [ ] Run `dd_issue_generator.py` on [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD021](../design_documents/DD021_Protein_Foundation_Model_Pipeline.md) (plus [DD012.1](../design_documents/DD012.1_Visual_Rendering_Specification.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md))
 - [ ] Review generated issues for quality
 - [ ] Tag all issues with `ai-workable` or `human-expert`
 - [ ] Publish issue backlog to GitHub
@@ -1101,8 +1101,8 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | DD | How AI Contributor Model Enhances It |
 |----|-------------------------------------|
-| **[DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)** | AI agents implement neural circuit components (gap junctions, synapses) per spec |
-| **[DD003](../design_documents/DD003_Body_Physics_Architecture.md)** | AI agents contribute body physics implementations in Sibernetic |
+| **[DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)** | AI agents implement neural circuit components (gap junctions, synapses) per spec |
+| **[DD001](../design_documents/DD001_Body_Physics_Architecture.md)** | AI agents contribute body physics implementations in Sibernetic |
 | **[DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** | CeNGEN data processing, neuron class exports — highly AI-workable |
 | **[DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)** | Peptide interaction implementation, GPCR modulation — used as primary example throughout this DD |
 | **[DD007](../design_documents/DD007_Pharyngeal_Nervous_System_Architecture.md), [DD009](../design_documents/DD009_Reproductive_System_Architecture.md), [DD014](../design_documents/DD014_Excretory_System_Architecture.md)** | Organ system implementations — well-specified tasks for AI agents |
@@ -1181,7 +1181,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | Input | Source | Format |
 |-------|--------|--------|
-| Design Documents (DD001-DD024, plus DD012.1, DD012.2) | `docs/design_documents/` | Markdown |
+| Design Documents (DD002-DD024, plus DD012.1, DD012.2) | `docs/design_documents/` | Markdown |
 | Contributor progression rules | [Contributor Progression](contributor-progression.md) | Policy document |
 | Validation criteria | [DD010](../design_documents/DD010_Validation_Framework.md) | Test suites |
 | PR diffs and issue data | GitHub API | JSON |

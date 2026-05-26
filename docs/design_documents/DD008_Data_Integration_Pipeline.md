@@ -21,7 +21,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 | **Phase** | [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
 | **Layer** | Data Integration — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
 | **What does this produce?** | Unified data access layer (OWMeta) for connectome, CeNGEN expression, cell positions, neuropeptide interactions — all via Python API |
-| **Success metric** | All downstream DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
+| **Success metric** | All downstream DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) — issues labeled `dd008` |
 | **Config toggle** | `data.backend: owmeta` (recommended) or `data.backend: direct` (legacy) in `openworm.yml` |
 | **Build & test** | `docker compose run shell python -c "import owmeta_core"` (installs?), query 302 neurons (returns correct count?) |
@@ -344,7 +344,7 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Neuron adjacency (connectome) | [DD001](DD001_Neural_Circuit_Architecture.md) | Synapse pairs + weights | OWMeta query → Python objects | synapse count |
+| Neuron adjacency (connectome) | [DD002](DD002_Neural_Circuit_Architecture.md) | Synapse pairs + weights | OWMeta query → Python objects | synapse count |
 | Per-class gene expression | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | TPM per gene per neuron class | OWMeta query → DataFrame | TPM |
 | Neuropeptide-receptor pairs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Peptide ligand → receptor → expressing cells | OWMeta query → edge list | binary (expressed/not) |
 | Cell positions (3D) | [DD004](DD004_Mechanical_Cell_Identity.md) | Per-cell x, y, z coordinates | OWMeta query → NumPy array | um |
@@ -459,11 +459,11 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 |-------------|----|-----------------------------|
 | WormBase releases | External | New WormBase releases may change gene IDs or annotations |
 | CeNGEN updates | External | New expression data may change downstream conductances |
-| ConnectomeToolbox | [DD001](DD001_Neural_Circuit_Architecture.md) | If connectome representation changes, OWMeta ingestion scripts must update |
+| ConnectomeToolbox | [DD002](DD002_Neural_Circuit_Architecture.md) | If connectome representation changes, OWMeta ingestion scripts must update |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit (connectome queries) | [DD001](DD001_Neural_Circuit_Architecture.md) | If neuron adjacency format or ID scheme changes, c302 network generation breaks |
+| Neural circuit (connectome queries) | [DD002](DD002_Neural_Circuit_Architecture.md) | If neuron adjacency format or ID scheme changes, c302 network generation breaks |
 | Cell-type specialization (expression data) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN query format changes, conductance pipeline breaks |
 | Neuropeptides (peptide-receptor data) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If peptide interaction data format changes, neuropeptide layer breaks |
 | Mechanical cell identity (cell positions) | [DD004](DD004_Mechanical_Cell_Identity.md) | If cell position queries change, particle tagging breaks |

@@ -11,7 +11,7 @@
 This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 1. **Active and maintained** (useful for current DD work)
-2. **Referenced in Design Documents** (DD001-DD017)
+2. **Referenced in Design Documents** (DD002-DD017)
 3. **Dormant but potentially reusable** (could be revived)
 4. **Deprecated** (archived, do not use)
 
@@ -19,13 +19,13 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 ## Core Simulation Stack (5 repos)
 
-**These repos implement [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)–[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** — the foundation of the simulation.
+**These repos implement [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)–[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** — the foundation of the simulation.
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
 | [OpenWorm](https://github.com/openworm/OpenWorm) | 2026-02-09 | 2,943 | **Active** — Meta-repo | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) |
-| [c302](https://github.com/openworm/c302) | 2026-02-18 | 135 | **Active** | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](../design_documents/DD002_Muscle_Model_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)–[DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md), [DD014](../design_documents/DD014_Egg_Laying_System_Architecture.md)–[DD015](../design_documents/DD015_Closed_Loop_Touch_Response.md) |
-| [sibernetic](https://github.com/openworm/sibernetic) | 2026-02-13 | 384 | **Active** | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (coupling), [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD015](../design_documents/DD015_Closed_Loop_Touch_Response.md) |
+| [c302](https://github.com/openworm/c302) | 2026-02-18 | 135 | **Active** | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](../design_documents/DD003_Muscle_Model_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)–[DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md), [DD014](../design_documents/DD014_Egg_Laying_System_Architecture.md)–[DD015](../design_documents/DD015_Closed_Loop_Touch_Response.md) |
+| [sibernetic](https://github.com/openworm/sibernetic) | 2026-02-13 | 384 | **Active** | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (coupling), [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD015](../design_documents/DD015_Closed_Loop_Touch_Response.md) |
 | [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | 2026-02-19 | 4 | **Active** (Neural Circuit L4 Maintainer) | [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) |
 | [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (visualization prototype) | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) |
 
@@ -55,13 +55,13 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
-| [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML) | 2023-03-30 | 140 | **Archived** (authoritative NeuroML files) | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (NeuroML cell definitions) |
+| [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML) | 2023-03-30 | 140 | **Archived** (authoritative NeuroML files) | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (NeuroML cell definitions) |
 | [Blender2NeuroML](https://github.com/openworm/Blender2NeuroML) | 2026-02-17 | 17 | **Active** | [DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (Virtual Worm meshes source) |
-| [muscle_model](https://github.com/openworm/muscle_model) | 2025-05-15 | 48 | **Maintained** | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (Boyle & Cohen implementation) |
+| [muscle_model](https://github.com/openworm/muscle_model) | 2025-05-15 | 48 | **Maintained** | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (Boyle & Cohen implementation) |
 | [hodgkin_huxley_tutorial](https://github.com/openworm/hodgkin_huxley_tutorial) | 2025-10-30 | 49 | **Active** | [DD011](../contributing/contributor-progression.md) (orientation badge "HH Tutorial Graduate") |
 
 !!! note
-    `CElegansNeuroML` is dormant but its NeuroML files are still authoritative. [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) references this repo for cell template locations.
+    `CElegansNeuroML` is dormant but its NeuroML files are still authoritative. [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) references this repo for cell template locations.
 
 ---
 
@@ -73,7 +73,7 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 | [wormbrowser](https://github.com/openworm/wormbrowser) | 2026-02-13 | 49 | **Active** | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) (historical 3D browser, still maintained) |
 | [openwormbrowser-ios](https://github.com/openworm/openwormbrowser-ios) | 2026-01-20 | 20 | **Active** | Mobile version of worm browser |
 | [WCONViewer](https://github.com/openworm/WCONViewer) | 2025-12-17 | 0 | **Maintained** | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON visualization tool) |
-| [Worm2D](https://github.com/openworm/Worm2D) | 2025-07-24 | 0 | **Maintained** | 2D worm simulation — Boyle-Cohen body model with c302 integration (see [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD003](../design_documents/DD003_Body_Physics_Architecture.md)) |
+| [Worm2D](https://github.com/openworm/Worm2D) | 2025-07-24 | 0 | **Maintained** | 2D worm simulation — Boyle-Cohen body model with c302 integration (see [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD001](../design_documents/DD001_Body_Physics_Architecture.md)) |
 | [WormWorx](https://github.com/openworm/WormWorx) | 2025-09-05 | 7 | **Maintained** | Alternative *C. elegans* simulator |
 
 ---
@@ -119,20 +119,20 @@ External research code and datasets forked into the OpenWorm org. Not under acti
 
 | Repository | Last Push | Stars | DD Reuse |
 |------------|-----------|-------|----------|
-| [CE_locomotion](https://github.com/openworm/CE_locomotion) | 2026-02-18 | 2 | **VERY ACTIVE** — [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](../design_documents/DD003_Body_Physics_Architecture.md) (neuromechanical locomotion, Boyle-Cohen 2D body model used by `boyle_berri_cohen_trajectory.py`), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioceptive model, 30-50 hr savings) |
-| [NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN) | 2025-11-04 | 0 | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (motor/interneuron HH models), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (pharyngeal neuron init), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (B-class templates) |
+| [CE_locomotion](https://github.com/openworm/CE_locomotion) | 2026-02-18 | 2 | **VERY ACTIVE** — [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](../design_documents/DD001_Body_Physics_Architecture.md) (neuromechanical locomotion, Boyle-Cohen 2D body model used by `boyle_berri_cohen_trajectory.py`), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioceptive model, 30-50 hr savings) |
+| [NicolettiEtAl2024_MN_IN](https://github.com/openworm/NicolettiEtAl2024_MN_IN) | 2025-11-04 | 0 | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (motor/interneuron HH models), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (pharyngeal neuron init), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (B-class templates) |
 | [wormneuroatlas](https://github.com/openworm/wormneuroatlas) | 2025-10-22 | 2 | [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN), [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 2 — Randi 2023 data), [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (complementary connectome data) |
-| [CelegansNeuromechanicalGaitModulation](https://github.com/openworm/CelegansNeuromechanicalGaitModulation) | 2025-08-01 | 1 | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (gait physics, Boyle-Cohen 2D body model used by `boyle_berri_cohen_trajectory.py`), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (surrogate training data), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioceptive/curvature logic) |
+| [CelegansNeuromechanicalGaitModulation](https://github.com/openworm/CelegansNeuromechanicalGaitModulation) | 2025-08-01 | 1 | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (gait physics, Boyle-Cohen 2D body model used by `boyle_berri_cohen_trajectory.py`), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (surrogate training data), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (proprioceptive/curvature logic) |
 | [tierpsy-tracker](https://github.com/openworm/tierpsy-tracker) | 2025-06-29 | 2 | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 3 validation tool), [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (may replace 33-hr toolbox revival) |
-| [JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel) | 2025-05-15 | 2 | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (alternative muscle model), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (Ca²⁺ coupling for pharyngeal muscle) |
+| [JohnsonMailler_MuscleModel](https://github.com/openworm/JohnsonMailler_MuscleModel) | 2025-05-15 | 2 | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (alternative muscle model), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (Ca²⁺ coupling for pharyngeal muscle) |
 | [NeuroPAL](https://github.com/openworm/NeuroPAL) | 2025-04-29 | 5 | [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell ID validation), [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 neuron ID), [DD020](../design_documents/DD020_Validation_Data_Acquisition_Pipeline.md) (validation data) |
-| [NicolettiEtAl2019_NeuronModels](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) | 2025-04-28 | 1 | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)/[DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (AWCon, RMD HH fits), [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 calibration expansion) |
+| [NicolettiEtAl2019_NeuronModels](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) | 2025-04-28 | 1 | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)/[DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (AWCon, RMD HH fits), [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 calibration expansion) |
 | [wormpose](https://github.com/openworm/wormpose) | 2025-02-21 | 0 | [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (Component 4 training data), [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (skeleton format bridge) |
 | [PlateauNoiseModel](https://github.com/openworm/PlateauNoiseModel) | 2025-01-30 | 0 | [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (pharyngeal plateau potentials — already cited) |
-| [sibernetic_v3](https://github.com/openworm/sibernetic_v3) | 2024-09-27 | 1 | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (next-gen SPH), [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (simulation stack), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (bulk training data gen) |
+| [sibernetic_v3](https://github.com/openworm/sibernetic_v3) | 2024-09-27 | 1 | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (next-gen SPH), [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (simulation stack), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (bulk training data gen) |
 | [NemaNode](https://github.com/openworm/NemaNode) | 2024-05-30 | 1 | [DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (cross-validation connectome data), [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) (interactive visualization reference) |
 | [worm-functional-connectivity](https://github.com/openworm/worm-functional-connectivity) | 2023-07-07 | 0 | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 2 alt. functional connectivity), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (loss function target) |
-| [multi-dev-sibernetic](https://github.com/openworm/multi-dev-sibernetic) | 2023-01-20 | 1 | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (multi-device SPH), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (bulk sim data gen), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (coupling patterns) |
+| [multi-dev-sibernetic](https://github.com/openworm/multi-dev-sibernetic) | 2023-01-20 | 1 | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (multi-device SPH), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (bulk sim data gen), [DD019](../design_documents/DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) (coupling patterns) |
 | [wormvae](https://github.com/openworm/wormvae) | 2022-04-26 | 0 | [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (connectome-constrained VAE — Components 2/4) |
 | [WormsenseLab_ASH](https://github.com/openworm/WormsenseLab_ASH) | 2021-09-28 | 3 | [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (ASH calibration — already cited), [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 electrophysiology) |
 | [owmeta-sciunit](https://github.com/openworm/owmeta-sciunit) | 2021-04-23 | 2 | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 SciUnit framework), [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (CI integration) |
@@ -149,9 +149,9 @@ External research code and datasets forked into the OpenWorm org. Not under acti
 
 | DD | Primary Repos | Secondary Repos (research/reuse) |
 |----|--------------|-----------------------------------|
-| [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (Neural) | c302, CElegansNeuroML | hodgkin_huxley_tutorial (education), NicolettiEtAl2024_MN_IN, NicolettiEtAl2019_NeuronModels (HH fits) |
-| [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (Muscle) | c302, sibernetic (coupling) | muscle_model, JohnsonMailler_MuscleModel (alternatives) |
-| [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (Body Physics) | sibernetic | sibernetic_v3 (next-gen), multi-dev-sibernetic (multi-device), CelegansNeuromechanicalGaitModulation (gait) |
+| [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (Neural) | c302, CElegansNeuroML | hodgkin_huxley_tutorial (education), NicolettiEtAl2024_MN_IN, NicolettiEtAl2019_NeuronModels (HH fits) |
+| [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (Muscle) | c302, sibernetic (coupling) | muscle_model, JohnsonMailler_MuscleModel (alternatives) |
+| [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (Body Physics) | sibernetic | sibernetic_v3 (next-gen), multi-dev-sibernetic (multi-device), CelegansNeuromechanicalGaitModulation (gait) |
 | [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) (Cell Identity) | sibernetic | — |
 | [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) | c302, wormneuroatlas | NeuroPAL (cell ID), NicolettiEtAl models (calibration), WormsenseLab_ASH (electrophysiology) |
 | [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides) | c302 | — |
@@ -251,11 +251,11 @@ Last pushed before Jan 2020. Historical or experimental. May contain useful code
 | [neuronal-analysis](https://github.com/openworm/neuronal-analysis) | 2017-03-05 | 4 | Neuronal dataset tools | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 1 comparison scripts) |
 | [behavioral_syntax](https://github.com/openworm/behavioral_syntax) | 2017-01-30 | 5 | Behavioral syntax (Andre Brown) | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 3 behavioral features) |
 | [pharyngeal_muscle_model](https://github.com/openworm/pharyngeal_muscle_model) | 2017-01-19 | 3 | pm3 pharyngeal muscle NEURON model | [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (Ca²⁺ oscillations — already cited, 20-30 hr savings) |
-| [CyberElegans](https://github.com/openworm/CyberElegans) | 2016-12-19 | 36 | Neuromechanical model | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (benchmark) |
+| [CyberElegans](https://github.com/openworm/CyberElegans) | 2016-12-19 | 36 | Neuromechanical model | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD013](../design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (benchmark) |
 | [sibernetic_NEURON](https://github.com/openworm/sibernetic_NEURON) | 2016-12-19 | 5 | Sibernetic-NEURON interface | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (coupling patterns) |
 | [skeletonExtraction](https://github.com/openworm/skeletonExtraction) | 2016-12-19 | 8 | Sibernetic → COLLADA animation | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md), [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (skeleton extraction logic) |
 | [sibernetic_config_gen](https://github.com/openworm/sibernetic_config_gen) | 2016-12-19 | 4 | Sibernetic scene config generator | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (scene generation) |
-| [BlueBrainProjectShowcase](https://github.com/openworm/BlueBrainProjectShowcase) | 2016-10-18 | 2 | BBP models in NeuroML | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (NeuroML reference models) |
+| [BlueBrainProjectShowcase](https://github.com/openworm/BlueBrainProjectShowcase) | 2016-10-18 | 2 | BBP models in NeuroML | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (NeuroML reference models) |
 | [SegWorm](https://github.com/openworm/SegWorm) | 2016-05-27 | 5 | Schafer lab MATLAB code (Yemini) | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (historical ground truth) |
 | [HeuristicWorm](https://github.com/openworm/HeuristicWorm) | 2015-05-11 | 3 | Heuristic worm model | — |
 | [org.wormsim.bower](https://github.com/openworm/org.wormsim.bower) | 2015-04-29 | 2 | WormSim bower UI components | — |

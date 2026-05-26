@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-23
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment)
 
 ---
 
@@ -335,15 +335,15 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 
 - Python 3.10+, NumPy, SciPy, scikit-learn, PyTorch (for MLP readout), matplotlib
 - `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) for connectome neuron classification
-- Simulation output from [DD001](DD001_Neural_Circuit_Architecture.md) (neural state HDF5) and [DD002](DD002_Muscle_Model_Architecture.md) (motor activation HDF5)
+- Simulation output from [DD002](DD002_Neural_Circuit_Architecture.md) (neural state HDF5) and [DD003](DD003_Muscle_Model_Architecture.md) (motor activation HDF5)
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) and also requires the **open-worm-analysis-toolbox** ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) for behavioral analysis of simulation output.
+This DD builds on the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)) and also requires the **open-worm-analysis-toolbox** ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) for behavioral analysis of simulation output.
 
-If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you have the simulation infrastructure ready. DD022 is a **pure analysis** DD — it does not modify the simulation, only analyzes its output.
+If you have already completed [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), you have the simulation infrastructure ready. DD022 is a **pure analysis** DD — it does not modify the simulation, only analyzes its output.
 
-If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to set up the simulation stack, then return here.
+If starting fresh, follow [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to set up the simulation stack, then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -356,7 +356,7 @@ Then run the simulation to produce HDF5 output, and proceed to [Step 1](#step-by
 
 **Path B — Native (for development):**
 
-Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install the RC analysis dependencies:
+Complete [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install the RC analysis dependencies:
 
 ```bash
 # Core RC analysis dependencies
@@ -383,7 +383,7 @@ print('RC analysis dependencies OK')
 ### Step-by-step
 
 ```bash
-# Run after simulation has produced neural state data (DD001 HDF5 output)
+# Run after simulation has produced neural state data (DD002 HDF5 output)
 cd openworm/OpenWorm
 
 # Step 1: Run full RC analysis across all 4 partitions
@@ -424,14 +424,14 @@ print(f'Robustness: {summary[\"robustness\"]}')
 ### Data Flow
 
 ```
-DD001 neural states (HDF5) ──→ rc_analysis.py ──→ rc_validation_report.json
-DD002 motor activation ────────┤                         │
+DD002 neural states (HDF5) ──→ rc_analysis.py ──→ rc_validation_report.json
+DD003 motor activation ────────┤                         │
 DD015/DD018 sensory input ─────┤                         ▼
 DD016 connectome (cect) ───────┘                   DD010 (advisory)
 ```
 
-1. **Load neural states** from [DD001](DD001_Neural_Circuit_Architecture.md) simulation output (HDF5: 302 neurons × T timesteps, voltage + calcium)
-2. **Load motor activation** from [DD002](DD002_Muscle_Model_Architecture.md) output (95 muscles × T timesteps)
+1. **Load neural states** from [DD002](DD002_Neural_Circuit_Architecture.md) simulation output (HDF5: 302 neurons × T timesteps, voltage + calcium)
+2. **Load motor activation** from [DD003](DD003_Muscle_Model_Architecture.md) output (95 muscles × T timesteps)
 3. **Load sensory input** from [DD015](DD015_Closed_Loop_Touch_Response.md)/[DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) stimulus logs
 4. **Classify neurons** using `cect` API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) into sensory/interneuron/motor for each partition
 5. **Run 5 tests per partition** (see Falsifiable Predictions section)
@@ -542,8 +542,8 @@ DD022 is itself a validation document — it validates a *computational framewor
 
 | Input | Source | Variable | Format | Units |
 |-------|--------|----------|--------|-------|
-| Neural states (302 neurons) | [DD001](DD001_Neural_Circuit_Architecture.md) | Voltage, calcium traces | HDF5 | mV, µM |
-| Motor activation (95 muscles) | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle activation | HDF5 | dimensionless [0,1] |
+| Neural states (302 neurons) | [DD002](DD002_Neural_Circuit_Architecture.md) | Voltage, calcium traces | HDF5 | mV, µM |
+| Motor activation (95 muscles) | [DD003](DD003_Muscle_Model_Architecture.md) | Muscle activation | HDF5 | dimensionless [0,1] |
 | Sensory input log | [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Stimulus time series | HDF5/CSV | mixed |
 | Connectome topology + neuron classification | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | `cect` API (sensory/inter/motor labels) | Python API | categorical |
 
@@ -558,8 +558,8 @@ DD022 is itself a validation document — it validates a *computational framewor
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neural state output format | [DD001](DD001_Neural_Circuit_Architecture.md) | If HDF5 schema changes, `rc_analysis.py` must update parser |
-| Motor activation format | [DD002](DD002_Muscle_Model_Architecture.md) | If activation file format changes, readout training breaks |
+| Neural state output format | [DD002](DD002_Neural_Circuit_Architecture.md) | If HDF5 schema changes, `rc_analysis.py` must update parser |
+| Motor activation format | [DD003](DD003_Muscle_Model_Architecture.md) | If activation file format changes, readout training breaks |
 | Neuron classification | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | If `cect` changes neuron labels, partition definitions break |
 | Sensory input format | [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | If stimulus log format changes, input reconstruction breaks |
 
@@ -571,7 +571,7 @@ DD022 is itself a validation document — it validates a *computational framewor
 
 ## Boundaries (Explicitly Out of Scope)
 
-1. **Modifying the simulation:** DD022 is pure *analysis* of simulation output. No changes to [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), or [DD003](DD003_Body_Physics_Architecture.md) models.
+1. **Modifying the simulation:** DD022 is pure *analysis* of simulation output. No changes to [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), or [DD001](DD001_Body_Physics_Architecture.md) models.
 2. **Training the reservoir:** In standard RC, the reservoir is fixed. DD022 does not train or optimize the connectome weights.
 3. **Online/real-time RC:** All analysis is post-hoc on recorded simulation data. No real-time readout during simulation.
 4. **Comparing to other computational frameworks:** DD022 tests RC specifically. Testing attractor networks, Bayesian inference, or other frameworks would be separate DDs.
@@ -588,7 +588,7 @@ DD022 is itself a validation document — it validates a *computational framewor
 | 1 | Implement `rc_partitions.py` with 4 partition definitions using `cect` | 2 | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) |
 | 2 | Implement `rc_metrics.py` (ESP, memory capacity, separation ratio) | 4 | None |
 | 3 | Implement `rc_readout.py` (ridge regression + MLP training) | 4 | scikit-learn, PyTorch |
-| 4 | Implement `rc_analysis.py` (orchestrator: load data → run tests → produce report) | 4 | [DD001](DD001_Neural_Circuit_Architecture.md) HDF5 output |
+| 4 | Implement `rc_analysis.py` (orchestrator: load data → run tests → produce report) | 4 | [DD002](DD002_Neural_Circuit_Architecture.md) HDF5 output |
 | 5 | Create `RC_Validation.ipynb` with visualization and interpretation | 4 | Steps 1-4 |
 | 6 | Integration test with Phase 2 simulation output | 2 | Phase 2 simulation running |
 

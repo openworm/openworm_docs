@@ -234,7 +234,7 @@ This page describes the **AI-assisted model** where AI agents help human contrib
 
 | Component | Status |
 |-----------|--------|
-| Design Documents (DD001–DD024, DD012.1, DD012.2) | Complete (29 documents, ~350 pages) |
+| Design Documents (DD002–DD024, DD012.1, DD012.2) | Complete (29 documents, ~350 pages) |
 | Agent architecture specification | Complete |
 | Agent foundational knowledge docs | Partially complete (~60%) |
 | OpenClaw deployment | Not yet deployed |

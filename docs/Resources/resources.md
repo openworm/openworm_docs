@@ -22,7 +22,7 @@ More information on running Geppetto is [available online](https://geppetto.org)
 
 ### Sibernetic
 
-Sibernetic is the code base that currently implements the crawling model using Smoothed Particle Hydrodynamics (SPH). Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella, specified by [DD003: Body Physics Architecture](../design_documents/DD003_Body_Physics_Architecture.md).
+Sibernetic is the code base that currently implements the crawling model using Smoothed Particle Hydrodynamics (SPH). Sibernetic is a C++ / Python code base by Palyanov, Khayrulin and Vella, specified by [DD001: Body Physics Architecture](../design_documents/DD001_Body_Physics_Architecture.md).
 
 ![image](../../images/sibernetic.jpg)
 
@@ -41,7 +41,7 @@ More information is available at [http://www.connectomeengine.com/]
 ### CyberElegans (Historical)
 
 !!! note "Historical Prototype"
-    CyberElegans was superseded by the current core chain: [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) (neurons) → [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (muscles) → [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (body physics). See [Archived Projects](../archived_projects.md#cyberelegans-2010-2014) for context.
+    CyberElegans was superseded by the current core chain: [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (neurons) → [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (muscles) → [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (body physics). See [Archived Projects](../archived_projects.md#cyberelegans-2010-2014) for context.
 
 When we first started, our team in Novosibirsk had produced an awesome prototype of a neuromechanical c. elegans model which they called 'CyberElegans'. We published [an article](https://iospress.metapress.com/content/p61284485326g608/?p=5e3b5e96ad274eb5af0001971360de3e&pi=4) about it. If you watch [the movie that goes along with the prototype](https://www.youtube.com/watch?v=3uV3yTmUlgo), you can see the basic components of the loop above in action:
 

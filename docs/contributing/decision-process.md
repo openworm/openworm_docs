@@ -88,8 +88,8 @@ and the single most important success metric.
   `docker compose build`, then which Step to skip to
 - **Path B — Native:** exact `pip install` / `apt install`
   / `brew install` commands for all dependencies
-- If this DD shares a repo with another DD (e.g., DD002
-  shares c302 with DD001), say so and cross-reference
+- If this DD shares a repo with another DD (e.g., DD003
+  shares c302 with DD002), say so and cross-reference
   the other DD's setup
 - Platform-specific notes if applicable (e.g., OpenCL
   availability, macOS vs Linux differences)
@@ -324,21 +324,21 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 **When a PR is opened:**
 
 1. Mind-of-a-Worm identifies which subsystem (based on files modified)
-2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md))
+2. Retrieves relevant Design Documents (e.g., modifying `c302/` triggers [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md))
 3. Checks **subsystem compliance:**
     - Are changes within the DD's scope?
     - Do quality criteria pass? (e.g., NeuroML validation, test coverage)
-    - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) explicitly rejected this)
+    - Are alternatives-considered principles violated? (e.g., re-proposing integrate-and-fire for all neurons when [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) explicitly rejected this)
 4. Checks **integration compliance** (Integration Contract section):
     - Does the PR change any **output variable** listed in the DD's Integration Contract?
     - If yes: Identify all **consuming DDs** from the Coupling Dependencies table and tag their maintainers
     - Does the PR add configurable parameters? If yes: verify `openworm.yml` schema is updated
     - Has the contributor run the integration test (`docker compose run quick-test`)?
 5. Posts automated review comment:
-    - ✅ "Passes [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) quality criteria (NeuroML validates, units correct)"
-    - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) Section 2.3"
-    - ⚠️ "**Integration alert:** This PR modifies calcium output format ([DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) (Muscle) and [DD003](../design_documents/DD003_Body_Physics_Architecture.md) (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
-    - ❌ "Violates [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md): Uses IAF model for all neurons (rejected in [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) Alternatives)"
+    - ✅ "Passes [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) quality criteria (NeuroML validates, units correct)"
+    - ⚠️ "Warning: Modifies core HH parameters; confirm alignment with [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) Section 2.3"
+    - ⚠️ "**Integration alert:** This PR modifies calcium output format ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) Integration Contract). [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (Muscle) and [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (Body Physics) consume this output. @muscle-maintainer @body-physics-maintainer please verify integration."
+    - ❌ "Violates [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md): Uses IAF model for all neurons (rejected in [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) Alternatives)"
     - ❌ "Missing integration test: No evidence of `docker compose run quick-test` in PR description"
 
 **Human reviewer** (L3+) considers Mind-of-a-Worm's assessment but makes final decision. **For PRs that modify coupling interfaces, at least one reviewer from each affected consuming subsystem must approve.**
@@ -353,7 +353,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Phase 1 (Week 1-4):** Founder writes initial DDs for existing subsystems:
 
-- [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](../design_documents/DD003_Body_Physics_Architecture.md): Neural, Muscle, Physics (document current architecture)
+- [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](../design_documents/DD001_Body_Physics_Architecture.md): Neural, Muscle, Physics (document current architecture)
 - [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)–[DD010](../design_documents/DD010_Validation_Framework.md): Future work (document proposed phases)
 - [Contributor Progression](contributor-progression.md) and [Decision Process](decision-process.md): Governance (this page and its companion)
 
@@ -408,7 +408,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 - **Implementation Status:** Proposed
 - **Next Actions:**
 
-1. Publish [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) through the governance pages for community review
+1. Publish [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) through the governance pages for community review
 2. Set up design_documents/ directory in CElegansNeuroML and Sibernetic repos
 3. Document DD RFC process in CONTRIBUTING.md
 4. Train Mind-of-a-Worm on DD compliance checking

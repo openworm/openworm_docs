@@ -279,14 +279,14 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 ---
 
-### Issue 10: Create canonical connectome loader for c302 (DD001)
+### Issue 10: Create canonical connectome loader for c302 (DD002)
 
 - **Title:** `[DD016] Create canonical connectome loader for c302 using DD016 API patterns`
-- **Labels:** `DD016`, `DD001`, `ai-workable`, `L2`
+- **Labels:** `DD016`, `DD002`, `ai-workable`, `L2`
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 1, 2, 5, 6) and [DD001 Integration Contract](DD001_Neural_Circuit_Architecture.md)
+- **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 1, 2, 5, 6) and [DD002 Integration Contract](DD002_Neural_Circuit_Architecture.md)
 - **Depends On:** Issue 4 (cect in Docker)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (new — canonical loader wrapping cect)
@@ -307,14 +307,14 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 ---
 
-### Issue 11: Create neuron-to-muscle loader for DD002
+### Issue 11: Create neuron-to-muscle loader for DD003
 
-- **Title:** `[DD016] Create neuron-to-muscle connection loader for DD002 muscle model`
-- **Labels:** `DD016`, `DD002`, `ai-workable`, `L2`
+- **Title:** `[DD016] Create neuron-to-muscle connection loader for DD003 muscle model`
+- **Labels:** `DD016`, `DD003`, `ai-workable`, `L2`
 - **Roadmap Phase:** Phase 1+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 3: neuron-to-muscle) and [DD002 Integration Contract](DD002_Muscle_Model_Architecture.md)
+- **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 3: neuron-to-muscle) and [DD003 Integration Contract](DD003_Muscle_Model_Architecture.md)
 - **Depends On:** Issue 10 (connectome loader)
 - **Files to Modify:**
     - `c302/connectome_loader.py` (add `load_neuron_to_muscle_conns()` function)
@@ -325,11 +325,11 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 - **Acceptance Criteria:**
     - [ ] `load_neuron_to_muscle_conns(dataset_name)` returns list of `ConnectionInfo` for neuron→muscle connections
     - [ ] Uses `cds.get_neuron_to_muscle_conns()` from cect
-    - [ ] Maps motor neuron names to Sibernetic muscle unit indices (references DD003 muscle mapping)
+    - [ ] Maps motor neuron names to Sibernetic muscle unit indices (references DD001 muscle mapping)
     - [ ] Returns connections for all 95 body-wall muscles + pharyngeal muscles
     - [ ] Unit tests verify: expected number of NMJ connections, known motor neuron→muscle pairs present
     - [ ] Used by sibernetic_c302.py coupling code
-- **Sponsor Summary Hint:** The neuromuscular junction (NMJ) is where neural signals become physical movement — motor neurons connect to muscles, and those connections determine which muscles contract. This loader provides the exact wiring from the connectome: which motor neuron drives which muscle, and how strongly. The bridge between DD001 (neural circuit) and DD002 (muscle model).
+- **Sponsor Summary Hint:** The neuromuscular junction (NMJ) is where neural signals become physical movement — motor neurons connect to muscles, and those connections determine which muscles contract. This loader provides the exact wiring from the connectome: which motor neuron drives which muscle, and how strongly. The bridge between DD002 (neural circuit) and DD003 (muscle model).
 
 ---
 
@@ -619,8 +619,8 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 
 ### Issue 22: Evaluate NemaNode for per-synapse spatial position data
 
-- **Title:** `[DD016] Evaluate NemaNode for per-synapse spatial data needed by DD001 Level D`
-- **Labels:** `DD016`, `DD001`, `human-expert`, `L2`
+- **Title:** `[DD016] Evaluate NemaNode for per-synapse spatial data needed by DD002 Level D`
+- **Labels:** `DD016`, `DD002`, `human-expert`, `L2`
 - **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroscience
@@ -639,7 +639,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
     - [ ] Assess: is Zhao et al. 2024 inverse Gaussian distribution model accessible in code form?
     - [ ] Document: effort estimate to integrate spatial synapse data into cect
     - [ ] Post findings as issue comment with go/no-go recommendation
-- **Sponsor Summary Hint:** DD001 Level D (multicompartmental neurons) needs to know not just which neurons connect, but WHERE along the neurite each synapse sits. Witvliet's EM data has this information, and NemaNode may expose it. Zhao et al. (2024) showed synapse-to-soma distances follow an inverse Gaussian distribution. This evaluation determines whether we can extract per-synapse positions from NemaNode into cect — the data needed to place synapses on multicompartmental neuron models instead of treating each neuron as a point.
+- **Sponsor Summary Hint:** DD002 Level D (multicompartmental neurons) needs to know not just which neurons connect, but WHERE along the neurite each synapse sits. Witvliet's EM data has this information, and NemaNode may expose it. Zhao et al. (2024) showed synapse-to-soma distances follow an inverse Gaussian distribution. This evaluation determines whether we can extract per-synapse positions from NemaNode into cect — the data needed to place synapses on multicompartmental neuron models instead of treating each neuron as a point.
 
 ---
 
@@ -697,7 +697,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 | DD011 Issue 3 | Multi-stage Dockerfile | DD016 Issue 4 adds cect to neural stage |
 | DD011 Issue 7 | Create versions.lock | DD016 Issue 1 adds cect entry |
 | DD011 Issue 13 | CI Gate 1 | DD016 Issue 6 adds connectome test step |
-| DD003 Issue 13 | WCON trajectory export | Uses cect cell classification for neuron identification |
+| DD001 Issue 13 | WCON trajectory export | Uses cect cell classification for neuron identification |
 
 ### Dependency Graph (Critical Path)
 

@@ -1,705 +1,647 @@
 # DD003 Draft GitHub Issues
 
-**Epic:** DD003 — Body Physics Engine (Sibernetic) Architecture
+**Epic:** DD003 — Muscle Model Architecture and Calcium-Force Coupling
 
-**Generated from:** [DD003: Body Physics Engine Architecture](DD003_Body_Physics_Architecture.md)
+**Generated from:** [DD003: Muscle Model Architecture](DD003_Muscle_Model_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation), [DD015 §2.3 — Reuse-First Methodology](../contributing/ai-contributors.md#23-reuse-first-methodology), [DD015 §2.4 — DD011 Simulation Stack Integration](../contributing/ai-contributors.md#24-dd011-simulation-stack-integration)
+**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
-**Totals:** 21 issues (ai-workable: 14 / human-expert: 7 | L1: 8, L2: 8, L3: 5)
+**Totals:** 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)
 
-**Note:** Backend stabilization Issues 40–44 in [DD011_draft_issues](DD011_draft_issues.md) are also labeled `DD003` and are cross-referenced here but not duplicated.
+**Note:** DD003's `GenericMuscleCell` template and `sibernetic_c302.py` coupling script are already implemented. These issues cover missing validation scripts, output pipeline, bug fixes, documentation, and research for future muscle-type differentiation. Significant working code already exists across multiple OpenWorm repos (`c302`, `muscle_model`, `sibernetic`, `CE_locomotion`) that can be directly imported, adapted, or used as templates — each issue below includes an **"Existing Code to Reuse"** section pointing contributors to the right starting point rather than writing from scratch. Where applicable, **"DD011 Stack Notes"** describe how each script integrates into the DD011 simulation stack (Docker containers, `docker compose run`, CI gates).
 
 **Roadmap Context:** DD003 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Validation Infrastructure (Issues 1-6) | **Phase A1** | 3 `[TO BE CREATED]` scripts + test configs |
-| 2. Backend Stabilization (Issues 7-10) | **Phase A1** | OpenCL documentation, CI smoke tests |
-| 3. Output Pipeline (Issues 11-13) | **Phase A1/1** | OME-Zarr export (A), surface mesh (1), config (A) |
-| 4. Advanced Features (Issues 14-16) | **Phase 2+** | FEM evaluation, Python bindings |
-| 5. Documentation (Issues 17-21) | **Any** | Can be addressed independently |
+| 1. Validation Scripts (Issues 1-4) | **Phase A1** | 2 `[TO BE CREATED]` scripts + test suite + parameter audit |
+| 2. Output Pipeline (Issues 5-8) | **Phase A1** | OME-Zarr export, config validation, integration tests |
+| 3. Bug Fixes (Issues 9-12) | **Phase A1** | MVL24 fix, config propagation, edge cases |
+| 4. Research (Issues 13-15) | **Phase 1+** | CeNGEN muscle survey, multi-compartment, Hill-type |
+| 5. Documentation (Issues 16-18) | **Any** | Can be addressed independently |
 
 ---
 
-## Group 1: Validation Infrastructure (Phase A1)
+## Group 1: Validation Scripts (Phase A1)
 
-Target: Scripts and test configurations needed to measure simulation quality and compare backends.
+Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit tests and parameter auditing.
 
 ---
 
-### Issue 1: Create `scripts/check_stability.py`
+### Issue 1: Refactor `c302_MuscleTest.py` plotting into standalone `plot_muscle_activation.py`
 
-- **Title:** `[DD003] Create check_stability.py — simulation divergence detector`
+- **Title:** `[DD003] Refactor c302_MuscleTest.py plotting into standalone plot_muscle_activation.py`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 — How to Build & Test](DD003_Body_Physics_Architecture.md#how-to-build-test) (Step 3) and [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 1)
-- **Depends On:** None
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, matplotlib
+- **DD Section to Read:** [DD003 — How to Build & Test](DD003_Muscle_Model_Architecture.md#how-to-build-test) (Step 4) and [DD003 — How to Visualize](DD003_Muscle_Model_Architecture.md#how-to-visualize)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test already exists; validates that total system energy (kinetic + potential) remains bounded across timesteps. Reuse its energy-bounding logic as a stability criterion alongside NaN/escape detection.
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations that run Sibernetic with different parameters; reference for how tests are invoked.
-- **Approach:** Extend — build on the energy conservation logic in `owPhysicTest.cpp` and add NaN/escape/velocity checks as a Python wrapper.
-- **DD011 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed. Output path configured via `openworm.yml`.
+    - `openworm/c302` → `c302/c302_MuscleTest.py` — already stimulates all 96 muscles and plots calcium dynamics; **extract** the plotting logic into a standalone script that reads `.dat` files instead of running inline (reuse strategy: **adapt**)
+    - `openworm/c302` → `c302/c302_Muscles.py` — shows data generation pattern and `.dat` output format (reuse strategy: **reference**)
+    - `openworm/sibernetic` → `plot_positions.py` — plotting template for simulation output (reuse strategy: **reference**)
+    - `c302.__init__.get_muscle_names()` — import directly for muscle enumeration and quadrant grouping (reuse strategy: **import directly**)
+- **DD011 Stack Notes:** Script should be runnable inside the Docker container (`docker compose run shell`). Output to `./output/` volume mount.
+- **Depends On:** None
 - **Files to Modify:**
-    - `scripts/check_stability.py` (new)
-    - `tests/test_check_stability.py` (new)
+    - `scripts/plot_muscle_activation.py` (new — adapts from `c302_MuscleTest.py` plotting logic)
 - **Test Commands:**
-    - `python3 scripts/check_stability.py output.dat`
-    - `pytest tests/test_check_stability.py`
+    - `python CElegans.py C1Muscles && jnml LEMS_c302_C1_Muscles.xml -nogui`
+    - `python scripts/plot_muscle_activation.py LEMS_c302_C1_Muscles_muscles.dat`
 - **Acceptance Criteria:**
-    - [ ] Reads Sibernetic binary output file (`output.dat`)
-    - [ ] Detects NaN values in particle positions or velocities
-    - [ ] Detects particles escaping bounding box (configurable box dimensions)
-    - [ ] Detects velocity divergence (magnitude exceeding physical threshold)
-    - [ ] Verifies simulation ran for at least the expected duration without early termination
-    - [ ] Prints PASS/FAIL with diagnostic details (which particles, which timestep, what went wrong)
-    - [ ] Returns exit code 0 on pass, non-zero on fail
-    - [ ] Unit tests with synthetic data (clean data → PASS, NaN-injected data → FAIL, escaped particle → FAIL)
-- **Sponsor Summary Hint:** The basic health check for any SPH simulation — did the physics blow up? NaN values mean the computation diverged (division by zero, impossible forces). Escaped particles mean the simulation lost containment. This script is listed as a DD003 deliverable but was never created. The existing `owPhysicTest.cpp` already checks energy conservation — this extends that logic into a comprehensive Python stability checker.
+    - [ ] Reads LEMS muscle output `.dat` file (tab-separated, first column = time)
+    - [ ] Extracts intracellular calcium concentration per muscle
+    - [ ] Computes activation coefficient: `activation = min(1.0, [Ca²⁺]ᵢ / 4e-7)`
+    - [ ] Plots activation time series for all 95 muscles (4 subplots by quadrant: MDR, MVR, MVL, MDL)
+    - [ ] Plots heatmap: muscles (y-axis) vs. time (x-axis), warm colormap [0,1]
+    - [ ] Saves figures to `output/` directory (PNG or PDF)
+    - [ ] Prints summary: min/max/mean activation, number of muscles with peak > 0.3
+    - [ ] Works as standalone script (no c302 import dependency beyond data file)
+    - [ ] Adapts plotting logic from `c302_MuscleTest.py` rather than writing from scratch
+- **Sponsor Summary Hint:** This script turns raw simulation numbers into pictures of muscle activity. Each of the worm's 95 body wall muscles contracts when calcium flows in — this script shows you which muscles are contracting, when, and how strongly. It's like watching an MRI of muscle activity: a heatmap where red means "contracting" and blue means "relaxed." DD003 lists this script as needed but never created. Most of the plotting logic already exists in `c302_MuscleTest.py` — this issue extracts it into a reusable standalone script.
 
 ---
 
-### Issue 2: Create `scripts/validate_incompressibility.py`
+### Issue 2: Adapt `muscle_model` validation code into `validate_muscle_calcium.py`
 
-- **Title:** `[DD003] Create validate_incompressibility.py — density deviation checker`
+- **Title:** `[DD003] Adapt muscle_model validation code into validate_muscle_calcium.py — calcium dynamics and activation range checker`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 — How to Build & Test](DD003_Body_Physics_Architecture.md#how-to-build-test) (Step 4) and [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 2)
-- **Depends On:** None
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, numpy
+- **DD Section to Read:** [DD003 — How to Build & Test](DD003_Muscle_Model_Architecture.md#how-to-build-test) (Step 5) and [DD003 — Green Light Criteria](DD003_Muscle_Model_Architecture.md#green-light-criteria)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Defines rest density ρ₀ and other physical constants with extensive inline documentation. Reference for expected density values and particle type classifications.
-    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The PCISPH pressure solver that enforces incompressibility; reference for understanding what the script validates.
-- **Approach:** Create — no existing incompressibility validation script exists, but `owPhysicsConstant.h` provides all physical constants needed.
-- **DD011 Pipeline Role:** Body-stage validation gate. Runs after Sibernetic simulation completes. Non-zero exit code blocks the pipeline run as failed.
+    - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py` — already validates calcium dynamics against the published Boyle-Cohen model; **adapt** its validation logic for this script (reuse strategy: **adapt**)
+    - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/input_vars.py` — published parameter values for comparison targets (reuse strategy: **reference**)
+    - `openworm/sibernetic` → `src/main_sim.py` — 4e-7 Ca²⁺ threshold is hardcoded here; reference for expected scaling (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/c302_MuscleTest.py` — comprehensive test that can generate validation data (reuse strategy: **reference**)
+- **DD011 Stack Notes:** Should be callable from `docker compose run quick-test` pipeline. Exit code 0/1 for CI gate.
+- **Depends On:** None
 - **Files to Modify:**
-    - `scripts/validate_incompressibility.py` (new)
-    - `tests/test_validate_incompressibility.py` (new)
+    - `scripts/validate_muscle_calcium.py` (new — adapts validation logic from `muscle_model/compareToNeuroML2.py`)
+    - `tests/test_validate_muscle_calcium.py` (new)
 - **Test Commands:**
-    - `python3 scripts/validate_incompressibility.py output.dat --max_deviation 0.01`
-    - `pytest tests/test_validate_incompressibility.py`
+    - `python scripts/validate_muscle_calcium.py LEMS_c302_C1_Muscles_muscles.dat`
+    - `pytest tests/test_validate_muscle_calcium.py`
 - **Acceptance Criteria:**
-    - [ ] Reads Sibernetic output and extracts per-particle density values
-    - [ ] Filters to liquid-type particles only (elastic and boundary excluded)
-    - [ ] Computes density deviation from rest density ρ₀ = 1000 kg/m³
-    - [ ] Reports max deviation, mean deviation, and percentage of particles exceeding threshold
-    - [ ] `--max_deviation` flag sets the pass/fail threshold (default 0.01 = 1%)
-    - [ ] Prints PASS/FAIL with statistics
-    - [ ] Returns exit code 0 on pass, non-zero on fail
-    - [ ] Unit tests with synthetic density data
-- **Sponsor Summary Hint:** PCISPH enforces incompressibility — the virtual fluid shouldn't compress. If density deviates >1% from the rest density (1000 kg/m³), the pressure solver isn't converging properly. This script checks that the core physics invariant holds.
+    - [ ] Reads LEMS muscle output and extracts calcium and voltage traces
+    - [ ] Checks activation range: all values in [0, 1]
+    - [ ] Checks peak activation during neural drive > 0.3 (warning if < 0.5)
+    - [ ] Estimates calcium decay time constant and checks ~12 ms (Boyle & Cohen 2008)
+    - [ ] Checks voltage range: no values below -60 mV, no values above +20 mV
+    - [ ] Prints PASS/FAIL for each criterion with diagnostic details
+    - [ ] Returns exit code 0 on all-pass, non-zero on any failure
+    - [ ] Unit tests with synthetic data (clean data → PASS, out-of-range data → FAIL)
+    - [ ] Adapts validation approach from `muscle_model/compareToNeuroML2.py`
+- **Sponsor Summary Hint:** The muscle model converts electrical signals into calcium, and calcium into contraction force. This script is a health check — it verifies the calcium dynamics look physically realistic: are contractions in the right range? Does calcium decay at the right speed (~12 ms)? Are voltages staying in biologically plausible bounds? The `muscle_model` repo already has validation code comparing NeuroML against published equations — this issue adapts that approach into a general-purpose validation script. It's listed as a DD003 deliverable but was never created.
 
 ---
 
-### Issue 3: Document and extend standard test configuration directories
+### Issue 3: Convert `c302_IClampMuscle.py` and `c302_MuscleTest.py` into pytest suite
 
-- **Title:** `[DD003] Document existing binary test configurations and create missing scenario directories`
+- **Title:** `[DD003] Convert c302_IClampMuscle.py and c302_MuscleTest.py into pytest suite for GenericMuscleCell validation`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** physics
-- **DD Section to Read:** [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 4) and [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements)
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroml
+- **DD Section to Read:** [DD003 — Quality Criteria](DD003_Muscle_Model_Architecture.md#quality-criteria) (criteria 3-5) and [DD003 — Implementation References — Muscle Cell Template](DD003_Muscle_Model_Architecture.md#muscle-cell-template)
+- **Existing Code to Reuse:**
+    - `openworm/c302` → `c302/c302_IClampMuscle.py` — already tests a single muscle (MDR01) with current clamp injection; **convert** to pytest assertions (reuse strategy: **adapt**)
+    - `openworm/c302` → `c302/c302_MuscleTest.py` — already validates all muscles with calcium dynamics; **convert** to pytest assertions (reuse strategy: **adapt**)
+    - `openworm/muscle_model` → `NeuroML2/SingleCompMuscle.cell.nml` — reference for expected channel structure (4 channels, morphology) (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/custom_muscle_components.xml` — the actual channel definitions (k_fast_muscle, k_slow_muscle, ca_boyle_muscle) to validate against (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/parameters_C.py` (or `parameters_D.py`) — actual conductance density values used in simulation (reuse strategy: **reference**)
 - **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — **12+ binary configuration directories** already exist, including `worm_crawl_*`, `worm_no_water_*`, and demo configurations. Sibernetic uses binary configuration directories (containing particle position/velocity/type buffers), NOT `.ini` text files. Each directory contains binary blobs that initialize particle state.
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations that exercise different scenarios (drop test, crawl, etc.) with specific command-line flags.
-- **Approach:** Adapt — document the existing binary configuration directories and `run_all_tests.sh` scenarios, then create any missing test scenario directories (e.g., isolated elastic deformation, single-quadrant muscle activation) using the existing configurations as templates.
 - **Files to Modify:**
-    - `configuration/test_elastic_deformation/` (new — binary config directory, generated from existing worm config with liquid particles removed)
-    - `configuration/test_muscle_single_quadrant/` (new — binary config directory, generated from existing worm config)
-    - `configuration/README.md` (new — documents all configs including existing ones)
+    - `tests/test_muscle_cell.py` (new — converts `c302_IClampMuscle.py` and `c302_MuscleTest.py` logic into pytest)
 - **Test Commands:**
-    - `./build/Sibernetic -f configuration/worm_crawl_demo`
-    - `./build/Sibernetic -f configuration/test_elastic_deformation`
-    - `bash run_all_tests.sh`
+    - `pytest tests/test_muscle_cell.py -v`
 - **Acceptance Criteria:**
-    - [ ] `README.md` documents ALL existing configuration directories (12+), including what each tests and expected behavior
-    - [ ] `README.md` documents the binary configuration format (position/velocity/type buffers per directory)
-    - [ ] `test_elastic_deformation/`: Elastic body suspended under gravity (no liquid). Should sag measurably.
-    - [ ] `test_muscle_single_quadrant/`: Full worm body with single quadrant (e.g., MDR) activated at constant force. Should bend.
-    - [ ] Each new config directory is generated programmatically from existing configs (document the generation script)
-    - [ ] All configs run without crash on the OpenCL backend
-    - [ ] `run_all_tests.sh` updated to include new test scenarios
-- **Sponsor Summary Hint:** Sibernetic already has 12+ binary configuration directories and 5 test scenarios in `run_all_tests.sh`. This issue documents what already exists, fills in missing test scenarios (isolated elastic test, single-quadrant muscle test), and creates a README so contributors know which configuration to use for which purpose. Note: Sibernetic uses binary configuration directories, not `.ini` text files.
+    - [ ] Validates GenericMuscleCell is valid NeuroML 2 (`jnml -validate`)
+    - [ ] Verifies all 4 channels present: leak, K_slow, K_fast, Ca_boyle
+    - [ ] Verifies muscle conductance densities match DD003 spec (leak: 5e-7, K_slow: 0.0006, K_fast: 0.0001, Ca_boyle: 0.0007 S/cm²)
+    - [ ] Verifies conductance densities are 10-1000x smaller than neuron equivalents (DD003 Quality Criterion 5)
+    - [ ] Verifies membrane capacitance = 1 µF/cm² and initial voltage = -45 mV
+    - [ ] Verifies 95 muscle cells are generated (not 96 — see MVL24 issue)
+    - [ ] Verifies all 4 quadrants present (MDR, MVR, MVL, MDL) with correct counts
+    - [ ] Tests can run without NEURON installed (NeuroML XML inspection only)
+    - [ ] Test logic adapted from existing `c302_IClampMuscle.py` and `c302_MuscleTest.py` scripts
+- **Sponsor Summary Hint:** Unit tests that verify the muscle cell "recipe" is correct. Each muscle cell has 4 ion channels (leak, two potassium, one calcium) with specific conductance densities tuned to produce slow, sustained contractions rather than sharp spikes. The c302 repo already has two scripts (`c302_IClampMuscle.py` for single-muscle testing, `c302_MuscleTest.py` for all-muscle validation) — this issue converts their logic into a proper pytest suite that can run in CI.
 
 ---
 
-### Issue 4: Create OpenCL baseline metrics for parity tests
+### Issue 4: Extend `muscle_model/compareToNeuroML2.py` into full parameter audit
 
-- **Title:** `[DD003] Generate and save OpenCL baseline metrics for cross-backend parity tests`
-- **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements)
-- **Depends On:** Issue 3 (test configs), DD011 Issue 39 (parity test script)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing binary configuration directories provide the test scenarios to run.
-    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test provides a reference for what metrics to capture (energy, position bounds).
-- **Approach:** Create — no baseline metrics infrastructure exists, but test configs and energy test provide the foundation.
-- **Files to Modify:**
-    - `tests/baseline/drop_test_opencl.json` (new)
-    - `tests/baseline/elastic_deformation_opencl.json` (new)
-    - `tests/baseline/muscle_contraction_opencl.json` (new)
-    - `tests/baseline/worm_crawl_opencl.json` (new)
-    - `tests/baseline/README.md` (new — documents baseline generation)
-- **Test Commands:**
-    - `python3 scripts/backend_parity_test.py --backend opencl --save-baseline tests/baseline/`
-- **Acceptance Criteria:**
-    - [ ] Run all 4 test scenarios on OpenCL backend using existing binary configuration directories
-    - [ ] Save numeric metrics to JSON files (position means, velocity statistics, density stats, curvature)
-    - [ ] Each baseline file includes metadata: Sibernetic version, commit hash, OpenCL platform, run date
-    - [ ] Metrics are deterministic to ±0.1% across repeated runs on same hardware
-    - [ ] README documents how to regenerate baselines and when they should be updated
-    - [ ] Baseline files committed to repo (small JSON, not large binary data)
-- **Sponsor Summary Hint:** The OpenCL backend is the gold standard — its outputs define "correct." These baseline files capture exactly what OpenCL produces for each test scenario, so we can numerically compare PyTorch and Taichi against them. Like calibrating a lab instrument against a known reference.
-
----
-
-### Issue 5: Port SPH kernel unit tests to PyTorch backend
-
-- **Title:** `[DD003] Port existing SPH kernel unit tests to run on PyTorch backend`
-- **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 3, 5) and [DD003 — SPH Kernel Functions](DD003_Body_Physics_Architecture.md#sph-kernel-functions)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file containing all SPH kernel function implementations (Wpoly6, ∇Wspiky, ∇²Wviscosity, elastic bond forces, PCISPH). These are the reference implementations that PyTorch tests must match.
-    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test showing how to validate physics output programmatically.
-- **Approach:** Create — no PyTorch kernel tests exist. Use `sphFluid.cl` as the reference specification for expected outputs.
-- **Note:** The PyTorch backend does not exist on Sibernetic's main branch. This issue targets a feature branch or requires the PyTorch backend to be merged first.
-- **Files to Modify:**
-    - `tests/test_pytorch_kernels.py` (new)
-- **Test Commands:**
-    - `pytest tests/test_pytorch_kernels.py -v`
-- **Acceptance Criteria:**
-    - [ ] Unit tests for Wpoly6 kernel function (density estimation)
-    - [ ] Unit tests for ∇Wspiky kernel function (pressure gradient)
-    - [ ] Unit tests for ∇²Wviscosity kernel function (viscous diffusion)
-    - [ ] Unit tests for elastic bond force calculation
-    - [ ] Unit tests for PCISPH pressure correction iteration
-    - [ ] Each test compares PyTorch output against analytical or OpenCL reference values
-    - [ ] All tests pass with tolerance ±1e-6 for single-precision floats
-    - [ ] Tests can be run without OpenCL installed (pure Python/PyTorch)
-- **Sponsor Summary Hint:** The SPH kernel functions are the mathematical heart of the physics engine — they compute how particles interact via density, pressure, and viscosity. Unit tests verify each function produces the correct output for known inputs. Currently these tests only exist for OpenCL. Porting to PyTorch ensures the Python implementation matches the C++ math.
-
----
-
-### Issue 6: Port SPH kernel unit tests to Taichi backend
-
-- **Title:** `[DD003] Port existing SPH kernel unit tests to run on Taichi backend`
-- **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 3, 5) and [DD003 — SPH Kernel Functions](DD003_Body_Physics_Architecture.md#sph-kernel-functions)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file containing all SPH kernel function implementations. Reference for expected outputs.
-    - [`openworm/sibernetic/src/sphFluid_crawling.cl`](https://github.com/openworm/sibernetic) — Crawling-specific kernel variant with agar gel interactions. May have additional kernel functions not in the standard version.
-- **Approach:** Create — no Taichi kernel tests exist. Use `sphFluid.cl` and `sphFluid_crawling.cl` as the reference specifications.
-- **Note:** The Taichi backend does not exist on Sibernetic's main branch. This issue targets a feature branch or requires the Taichi backend to be merged first.
-- **Files to Modify:**
-    - `tests/test_taichi_kernels.py` (new)
-- **Test Commands:**
-    - `pytest tests/test_taichi_kernels.py -v`
-- **Acceptance Criteria:**
-    - [ ] Same kernel unit tests as Issue 5 but targeting Taichi backend
-    - [ ] Tests exercise both Metal and CUDA code paths (parameterized by `ti.init(arch=...)`)
-    - [ ] Each test compares Taichi output against analytical or OpenCL reference values
-    - [ ] All tests pass with tolerance ±1e-6 for single-precision floats
-    - [ ] Tests can be run on CPU fallback (`ti.init(arch=ti.cpu)`) for CI without GPU
-- **Sponsor Summary Hint:** Same as Issue 5 but for the Taichi backend. Taichi compiles Python to GPU shaders (Metal on Apple Silicon, CUDA on NVIDIA). These unit tests verify the compiled kernels produce the same results as the C++ originals. Especially important given the known coordinate-space bug.
-
----
-
-## Group 2: Backend Stabilization (Phase A1)
-
-Target: PyTorch and Taichi backends produce results matching OpenCL within ±5%.
-
-**Note:** The core backend stabilization issues are tracked in [DD011_draft_issues.md](DD011_draft_issues.md) as Issues 39–42 (labeled `DD003`). They cover:
-
-- **DD011 Issue 39:** Create cross-backend parity test suite
-- **DD011 Issue 40:** Fix Taichi elastic coordinate-space bug
-- **DD011 Issue 41:** Audit and fix PyTorch/Taichi result quality gap
-- **DD011 Issue 42:** Graduate backends to Stable/Production
-
-Stability validation scripts (`check_stability.py`, `validate_incompressibility.py`) are DD003 Issues 1–2 above.
-
-The issues below supplement that sequence with DD003-specific work.
-
----
-
-### Issue 7: Document OpenCL kernel architecture (`sphFluid.cl`)
-
-- **Title:** `[DD003] Document OpenCL kernel architecture for algorithmic audit`
-- **Labels:** `DD003`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** opencl, physics, sph
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](DD003_Body_Physics_Architecture.md#the-result-quality-gap) and [DD003 — Implementation References](DD003_Body_Physics_Architecture.md#implementation-references)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/sphFluid.cl`](https://github.com/openworm/sibernetic) — The 64KB OpenCL kernel file. THIS is the primary subject of this documentation issue.
-    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive inline documentation of physical constants, particle types, and simulation parameters. Use as companion reference when documenting kernels.
-- **Approach:** Create — no kernel architecture documentation exists, but the source files themselves contain significant inline comments.
-- **Files to Modify:**
-    - `docs/opencl_kernel_architecture.md` (new — in Sibernetic repo)
-- **Test Commands:**
-    - N/A (documentation task)
-- **Acceptance Criteria:**
-    - [ ] Annotated walkthrough of `kernels/sphFluid.cl` (~64KB) — every major function documented
-    - [ ] Maps each OpenCL kernel function to its DD003 equation (Wpoly6, ∇Wspiky, ∇²Wviscosity, F_elastic, PCISPH)
-    - [ ] Documents coordinate spaces used (world vs. scaled) and where conversions happen
-    - [ ] Documents simulation_scale factor and its role in elastic force calculation
-    - [ ] Documents the PCISPH iteration loop (predict → correct → converge)
-    - [ ] Documents neighbor search data structures
-    - [ ] Identifies any undocumented heuristics, magic numbers, or non-standard modifications to PCISPH
-    - [ ] Provides a "function call graph" showing the order of kernel invocations per timestep
-- **Sponsor Summary Hint:** The OpenCL kernel file is the 64KB brain of the physics engine — the actual GPU code that moves 100,000 particles. Nobody has documented what it does at the code level. Before we can audit why PyTorch/Taichi produce different results (DD011 Issue 41), we need to understand what the reference implementation actually computes. This is like creating an annotated blueprint before renovating a building.
-
----
-
-### Issue 8: Add PyTorch backend to CI smoke test
-
-- **Title:** `[DD003] Add PyTorch backend smoke test to GitHub Actions CI`
+- **Title:** `[DD003] Extend muscle_model/compareToNeuroML2.py into full conductance density audit against Boyle & Cohen 2008 and DD003 spec`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** ci-cd, python
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](DD003_Body_Physics_Architecture.md#stabilization-sequence) (step 6)
-- **Depends On:** Issue 5 (PyTorch kernel tests)
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroml
+- **DD Section to Read:** [DD003 — Technical Approach — Muscle Cells](DD003_Muscle_Model_Architecture.md#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons) and [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing bash test configurations. These should be integrated into the CI workflow alongside PyTorch tests.
-- **Approach:** Create — Sibernetic currently has NO CI infrastructure at all (no `.github/workflows/` directory on main branch). This issue creates CI from scratch, starting with PyTorch since it's the easiest backend to test without GPU hardware.
-- **DD011 Pipeline Role:** Body-stage CI gate. CI must pass before merging PRs to Sibernetic. Integrates with DD011's `docker compose run quick-test` workflow.
-- **Note:** Sibernetic currently has NO CI at all — no GitHub Actions workflows exist on the main branch. This issue creates the first CI workflow.
-- **Files to Modify:**
-    - `.github/workflows/ci.yml` (new — first CI workflow for Sibernetic)
-- **Test Commands:**
-    - Push to branch and verify CI runs PyTorch tests
-- **Acceptance Criteria:**
-    - [ ] CI installs `torch` (CPU-only) in addition to OpenCL SDK
-    - [ ] Runs PyTorch kernel unit tests (`pytest tests/test_pytorch_kernels.py`)
-    - [ ] Runs a 100-step PyTorch simulation (drop test config) and verifies no crash
-    - [ ] Runs `check_stability.py` on PyTorch output
-    - [ ] CI passes on ubuntu-latest without GPU
-    - [ ] Total CI time increase <5 minutes
-- **Sponsor Summary Hint:** PyTorch is the easiest backend to test in CI — it's pure Python and runs on CPU. Adding it to CI means every code change is tested against two backends (OpenCL + PyTorch) automatically, catching cross-backend regressions before they land. Note: Sibernetic currently has NO CI at all — this creates it from scratch.
-
----
-
-### Issue 9: Audit physical parameters in code vs. DD003 spec
-
-- **Title:** `[DD003] Audit physical parameters in Sibernetic code against DD003 specification`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 — Physical Parameters](DD003_Body_Physics_Architecture.md#physical-parameters)
+    - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/compareToNeuroML2.py` — **THIS IS THE AUDIT TOOL**. Already compares NeuroML values against Boyle & Cohen 2008 equations; **extend** to output a full comparison table (reuse strategy: **adapt**)
+    - `openworm/muscle_model` → `BoyleCohen2008/PythonSupport/Main_Version/input_vars.py` — published Boyle-Cohen parameter values as Python constants (reuse strategy: **reference**)
+    - `openworm/muscle_model` → `NeuroML2/SingleCompMuscle.cell.nml` — reference values: leak 0.0193, K_slow 0.436, K_fast 0.400, Ca_boyle 0.220 mS/cm² (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/parameters_C.py` and `c302/parameters_D.py` — the actual conductance values in the simulation code (reuse strategy: **reference**)
+    - **Unit note:** The `muscle_model` repo values (mS/cm²) differ in units from DD003 spec (S/cm²). The audit should explicitly reconcile these unit differences.
 - **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive header file with inline documentation of every physical constant. THIS is the primary file to audit — it documents parameters, their units, and their physical meaning.
-- **Approach:** Create — no parameter audit exists, but `owPhysicsConstant.h` is well-documented and provides the code-side values to compare against DD003.
 - **Files to Modify:**
-    - None (research issue — output is a summary posted on the issue)
+    - None (audit task — output is a summary posted on the issue, extending the `compareToNeuroML2.py` approach)
 - **Test Commands:**
     - N/A (audit task)
 - **Acceptance Criteria:**
-    - [ ] For each parameter in DD003's Physical Parameters table, find its value in the codebase
-    - [ ] Document: file path, line number, variable name, actual value
-    - [ ] Flag any discrepancies between DD003 spec and code
-    - [ ] Check all three backends (OpenCL, PyTorch, Taichi) use the same parameter values
-    - [ ] Post findings as issue comment with a comparison table
+    - [ ] For each of the 4 channels (leak, K_slow, K_fast, Ca_boyle), find the conductance value in `c302_Muscles.py`
+    - [ ] Compare against DD003 spec values and Boyle & Cohen 2008 Table 1
+    - [ ] Document: file path, line number, variable name, actual value, expected value
+    - [ ] Check calcium dynamics parameters: rho (0.000238), tau_Ca (11.5943 ms)
+    - [ ] Check activation formula: `min(1.0, [Ca²⁺]ᵢ / 4e-7)`
+    - [ ] Check max_muscle_force = 4000 in `sibernetic_c302.py`
+    - [ ] Reconcile unit differences between `muscle_model` values (mS/cm²) and DD003 spec values (S/cm²)
+    - [ ] Post findings as issue comment with comparison table
     - [ ] If discrepancies found, file follow-up issues for fixes
-- **Sponsor Summary Hint:** DD003 specifies exact physical parameters (rest density 1000 kg/m³, viscosity 4e-6 Pa·s, etc.) but does the code actually use these values? And do all three backends use the same values? Parameter drift is a silent source of cross-backend divergence. This audit finds any mismatches. The good news: `owPhysicsConstant.h` has extensive inline documentation, making the audit tractable.
+    - [ ] Uses `compareToNeuroML2.py` as starting point for the audit methodology
+- **Sponsor Summary Hint:** A parameter audit — checking that the numbers in the code match the numbers in the scientific paper. The `muscle_model` repo already has `compareToNeuroML2.py` that does exactly this kind of validation for the standalone muscle model. This issue extends that approach to audit the c302 muscle parameters comprehensively. If parameters drifted during development (a common issue in long-running projects), the simulation's muscle behavior could be subtly wrong. This audit catches silent parameter drift.
 
 ---
 
-### Issue 10: Benchmark all backends (performance comparison)
+## Group 2: Output Pipeline & Integration (Phase A1)
 
-- **Title:** `[DD003] Benchmark all backends: OpenCL vs. PyTorch vs. Taichi (Metal/CUDA)`
+Target: OME-Zarr export, config validation, and integration testing for DD003's interfaces with DD002 and DD001.
+
+---
+
+### Issue 5: Implement OME-Zarr export for muscle activation and calcium time series
+
+- **Title:** `[DD003] Implement OME-Zarr export for muscle/activation/ and muscle/calcium/`
+- **Labels:** `DD003`, `ai-workable`, `L2`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, zarr
+- **DD Section to Read:** [DD003 — Deliverables](DD003_Muscle_Model_Architecture.md#deliverables) (OME-Zarr rows) and [DD012 — OME-Zarr Schema](DD012_Dynamic_Visualization_Architecture.md)
+- **Existing Code to Reuse:**
+    - `openworm/sibernetic` → `src/main_sim.py` — documents the 96-element muscle array format: `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]` (reuse strategy: **reference**)
+    - `c302.__init__.get_muscle_names()` — canonical muscle ordering for array indices (reuse strategy: **import directly**)
+    - No existing OME-Zarr code in any OpenWorm repo — this is genuinely new work, but data format is well-documented in the references above
+- **DD011 Stack Notes:** Export script should be runnable inside the Docker container. Output to shared `./output/` volume. Should be callable from `docker compose run shell` and eventually integrated into post-simulation pipeline.
+- **Depends On:** None
+- **Files to Modify:**
+    - `scripts/export_muscle_zarr.py` (new)
+    - `tests/test_export_muscle_zarr.py` (new)
+- **Test Commands:**
+    - `python scripts/export_muscle_zarr.py LEMS_c302_C1_Muscles_muscles.dat --output output/openworm.zarr`
+    - `python -c "import zarr; z = zarr.open('output/openworm.zarr'); print(z['muscle/activation'].shape, z['muscle/calcium'].shape)"`
+    - `pytest tests/test_export_muscle_zarr.py`
+- **Acceptance Criteria:**
+    - [ ] Reads LEMS muscle output and extracts per-muscle calcium time series
+    - [ ] Computes activation coefficients: `min(1.0, [Ca²⁺]ᵢ / 4e-7)` per muscle per timestep
+    - [ ] Exports `muscle/activation/` array: shape (n_timesteps, 95), dtype float32, dimensionless [0,1]
+    - [ ] Exports `muscle/calcium/` array: shape (n_timesteps, 95), dtype float32, units mol/cm³
+    - [ ] Includes OME-Zarr metadata (axes labels: time, muscle_id; units)
+    - [ ] Muscle IDs ordered by quadrant and row number (MDR01...MDR24, MVR01...MVR24, MVL01...MVL23, MDL01...MDL24)
+    - [ ] Zarr store readable by DD012 viewer
+    - [ ] Unit tests verify shapes, dtypes, value ranges, and metadata
+- **Sponsor Summary Hint:** OME-Zarr is the data format that connects the muscle simulation to the 3D viewer (DD012). This script converts the raw simulation output into a structured data store containing two "movies" — muscle activation (how hard each muscle is contracting) and muscle calcium (the ion concentration driving contraction). The viewer reads this to show a heatmap of the worm's 95 muscles over time.
+
+---
+
+### Issue 6: Add muscle config section validation to openworm.yml
+
+- **Title:** `[DD003] Add muscle config section validation and cross-constraint checking`
+- **Labels:** `DD003`, `ai-workable`, `L1`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/OpenWorm`
+- **Required Capabilities:** python, yaml
+- **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
+- **Existing Code to Reuse:**
+    - `openworm/OpenWorm` → `.openworm.yml` — current minimal config file to validate against (reuse strategy: **reference**)
+    - DD011 specifies the full `openworm.yml` schema (see DD011 §1) — use this as the validation spec (reuse strategy: **reference**)
+    - `openworm/sibernetic` → `sibernetic_c302.py` — currently reads no config; this issue's work enables Issue 10 (reuse strategy: **reference**)
+- **DD011 Stack Notes:** Validation script should be callable from `docker compose run quick-test` as a pre-simulation check. Exit code 0/1 for CI gate. Must run before any simulation step.
+- **Depends On:** DD011 Issue 1 (openworm.yml config schema), DD011 Issue 2 (validation script)
+- **Files to Modify:**
+    - `scripts/validate_config.py` (extend — add muscle section rules)
+    - `tests/test_config.py` (extend — add muscle validation tests)
+- **Test Commands:**
+    - `python scripts/validate_config.py openworm.yml`
+    - `pytest tests/test_config.py -k muscle`
+- **Acceptance Criteria:**
+    - [ ] Validates `muscle.enabled` is boolean
+    - [ ] Validates `muscle.calcium_coupling` is boolean
+    - [ ] Validates `muscle.max_muscle_force` is a positive float
+    - [ ] Validates `muscle.max_ca` is a positive float (physically reasonable range: 1e-8 to 1e-5 mol)
+    - [ ] Enforces cross-constraint: `muscle.enabled: true` requires `neural.enabled: true`
+    - [ ] Enforces cross-constraint: `muscle.calcium_coupling: true` requires `muscle.enabled: true`
+    - [ ] Warns if `max_muscle_force` deviates more than 2x from default (4000)
+    - [ ] Unit tests cover valid config, missing keys, invalid types, cross-constraint violations
+- **Sponsor Summary Hint:** The muscle section in `openworm.yml` has 4 parameters that control how muscles behave. This adds validation rules — a safety net that catches mistakes like turning on muscles without turning on the neural circuit (muscles need neurons to tell them when to contract). It also catches typos like setting force to -4000 or calcium to a nonsensical value.
+
+---
+
+### Issue 7: Create DD003→DD001 calcium interface integration test
+
+- **Title:** `[DD003] Create integration test verifying muscle calcium → Sibernetic activation pipeline`
+- **Labels:** `DD003`, `ai-workable`, `L2`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/sibernetic`
+- **Required Capabilities:** python, docker
+- **DD Section to Read:** [DD003 — Integration Contract — Outputs](DD003_Muscle_Model_Architecture.md#inputs--outputs) and [DD003 — Coupling Bridge Ownership](DD003_Muscle_Model_Architecture.md#coupling-bridge-ownership)
+- **Existing Code to Reuse:**
+    - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to test**. This IS the coupling bridge between c302/NEURON and Sibernetic (reuse strategy: **reference — test target**)
+    - `openworm/sibernetic` → `src/main_sim.py` → `C302NRNSimulation` class — live NEURON integration mode that extracts `cai` (calcium) from soma; documents the coupling data flow (reuse strategy: **reference**)
+    - `openworm/CE_locomotion` → `Worm.cpp` → `Step()` — reference for the correct coupling sequence (neural→NMJ→muscle→body); use as gold standard for testing the correct order of operations (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/c302_Muscles.py` — generates the test network the integration test should use (reuse strategy: **reference**)
+- **DD011 Stack Notes:** Test should use `docker compose run quick-test` infrastructure. Short simulation (1-2s sim time). Must be runnable in CI without GPU (mock Sibernetic physics if needed).
+- **Depends On:** Issue 2 (validate_muscle_calcium.py)
+- **Files to Modify:**
+    - `tests/test_dd003_dd001_integration.py` (new)
+- **Test Commands:**
+    - `docker compose run quick-test`
+    - `pytest tests/test_dd003_dd001_integration.py -v`
+- **Acceptance Criteria:**
+    - [ ] Runs a short coupled simulation (c302 muscles + Sibernetic, 1-2 seconds sim time)
+    - [ ] Verifies `sibernetic_c302.py` reads muscle [Ca²⁺]ᵢ from NEURON state
+    - [ ] Verifies activation coefficients are computed correctly: `min(1.0, [Ca²⁺]ᵢ / max_ca)`
+    - [ ] Verifies activation values written to Sibernetic are in [0, 1] range
+    - [ ] Verifies at least some muscles have non-zero activation (coupling is working)
+    - [ ] Verifies coupling timestep matches config (`dt_coupling = 0.005 ms`)
+    - [ ] Test uses Docker (`docker compose run quick-test`) or can mock the file interface
+    - [ ] Reports which muscle IDs are active and their peak activation values
+- **Sponsor Summary Hint:** The critical handoff: muscle calcium from the neural simulation (c302/NEURON) must flow correctly into the body physics engine (Sibernetic) via the coupling script. This test verifies the entire pipeline — neurons fire, muscles accumulate calcium, calcium converts to a contraction coefficient, and that coefficient reaches Sibernetic. If this pipeline breaks, the virtual worm is paralyzed.
+
+---
+
+### Issue 8: Extend `c302_TargetMuscle.py` into systematic NMJ connectivity validator
+
+- **Title:** `[DD003] Extend c302_TargetMuscle.py into systematic NMJ connectivity validator against Cook et al. 2019`
 - **Labels:** `DD003`, `human-expert`, `L2`
 - **Roadmap Phase:** Phase A1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, benchmarking
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Stabilization Sequence](DD003_Body_Physics_Architecture.md#stabilization-sequence) (step 7)
-- **Depends On:** DD011 Issue 40 (Taichi coordinate fix — must work before meaningful benchmarks)
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroscience, connectomics
+- **DD Section to Read:** [DD003 — Neural-to-Muscle Coupling](DD003_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (cect API)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations that can serve as benchmark scenarios.
-- **Approach:** Create — no benchmark infrastructure exists. Use `run_all_tests.sh` scenarios and existing binary configuration directories as benchmark inputs.
+    - `openworm/c302` → `c302/c302_TargetMuscle.py` — already queries which neurons synapse onto a given muscle; **extend** to iterate over all muscles and produce a systematic comparison (reuse strategy: **adapt**)
+    - `openworm/CE_locomotion` → `NervousSystem.cpp` — NMJ weight constants per motor neuron class: `NMJ_DA`, `NMJ_DB`, `NMJ_DD`, `NMJ_VA`, `NMJ_VB`, `NMJ_VD` (reuse strategy: **reference**)
+    - ConnectomeToolbox (`cect`) API — `from cect import connectome_data` for Cook et al. 2019 adult hermaphrodite NMJ data (reuse strategy: **import directly**)
+- **Depends On:** None
 - **Files to Modify:**
-    - `scripts/benchmark_backends.py` (new)
-    - `docs/benchmark_results.md` (new — in Sibernetic repo)
+    - `scripts/validate_nmj_connectivity.py` (new — extends `c302_TargetMuscle.py` approach to all muscles)
 - **Test Commands:**
-    - `python3 scripts/benchmark_backends.py --backend opencl --config configuration/worm_crawl_demo`
-    - `python3 scripts/benchmark_backends.py --all --config configuration/worm_crawl_demo`
+    - `python scripts/validate_nmj_connectivity.py`
 - **Acceptance Criteria:**
-    - [ ] Benchmark script runs the same configuration on each available backend
-    - [ ] Measures: wall-clock time per timestep, total sim time, memory usage, particle throughput
-    - [ ] Runs on at least two particle counts (~25K quick, ~100K standard) to measure scaling
-    - [ ] Generates a comparison table in markdown format
-    - [ ] Tests on at least 3 platforms: Linux x86 (CI), Apple Silicon (Metal), NVIDIA GPU (CUDA)
-    - [ ] Results documented in `docs/benchmark_results.md` with hardware specs
-    - [ ] Validates the "~3x faster" (Taichi Metal) and "~5x faster" (Taichi CUDA) claims from DD003
-- **Sponsor Summary Hint:** The DD003 backends table claims Taichi is 3-5x faster than OpenCL, but these are target estimates. This issue produces actual measured benchmarks on real hardware — the data needed to decide which backend to recommend for which platform.
+    - [ ] Extract NMJ connectivity from c302 muscle network (which motor neurons innervate which muscles)
+    - [ ] Extract NMJ connectivity from cect/ConnectomeToolbox (Cook et al. 2019 adult hermaphrodite)
+    - [ ] Compare: for each muscle, list motor neurons in c302 vs. Cook et al. 2019
+    - [ ] Report: number of matching connections, missing connections, extra connections
+    - [ ] Flag any muscles with zero innervation in c302 but known innervation in Cook et al.
+    - [ ] Flag NMJ conductance values: are 0.5-1.0 nS values consistent across all NMJs?
+    - [ ] Post comparison table as issue comment
+    - [ ] File follow-up issues for any significant discrepancies
+    - [ ] Builds on `c302_TargetMuscle.py` query approach rather than reimplementing NMJ lookup
+- **Sponsor Summary Hint:** Motor neurons connect to muscles via neuromuscular junctions (NMJs) — the biological "wires" that tell muscles when to contract. Cook et al. (2019) mapped every NMJ connection in the real worm using electron microscopy. The c302 repo already has `c302_TargetMuscle.py` that queries NMJ connections for a single muscle — this issue extends that into a systematic validator across all 95 muscles against the ground truth connectome. This requires domain expertise to interpret which discrepancies matter biologically.
 
 ---
 
-## Group 3: Output Pipeline & Visualization (Phase A1/1)
+## Group 3: Bug Fixes & Improvements (Phase A1)
 
-Target: Sibernetic produces output in formats needed by DD010 (validation), DD011 (simulation stack), DD012 (viewer), and DD017 (movement analysis).
+Target: Fix known issues and improve muscle model configurability.
 
 ---
 
-### Issue 11: Implement OME-Zarr export for particle data
+### Issue 9: Patch `get_muscle_names()` to return 95 muscles — fix MVL24 phantom
 
-- **Title:** `[DD003] Implement OME-Zarr export for body/positions and body/types`
+- **Title:** `[DD003] Patch get_muscle_names() in c302/__init__.py to return 95 muscles — fix MVL24 phantom`
+- **Labels:** `DD003`, `ai-workable`, `L1`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroml
+- **DD Section to Read:** [DD003 — Known Issues — Issue 3: MVL24](DD003_Muscle_Model_Architecture.md#issue-3-mvl24-muscle-does-not-exist)
+- **Existing Code to Reuse:**
+    - `openworm/c302` → `c302/__init__.py` → `get_muscle_names()` — returns all 96 muscle names; **this function must be patched** to return 95 (excluding MVL24) (reuse strategy: **modify in place**)
+    - `openworm/c302` → `c302/c302_Muscles.py` — muscle generation loop that creates MVL24; must be updated to skip it (reuse strategy: **modify in place**)
+    - `CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv` — row to remove (reuse strategy: **modify in place**)
+    - `c302.__init__.is_muscle(cell_name)` — verify this still works after the fix (reuse strategy: **reference**)
+- **Depends On:** Issue 3 (unit tests — to verify fix doesn't break anything)
+- **Files to Modify:**
+    - `c302/__init__.py` (modify `get_muscle_names()` to exclude MVL24)
+    - `c302/c302_Muscles.py` (modify muscle generation)
+    - `CElegansNeuroML/CElegans/generatedNeuroML2/muscles.csv` (update to 95 rows)
+- **Test Commands:**
+    - `python CElegans.py C1Muscles`
+    - `jnml -validate LEMS_c302_C1_Muscles.xml`
+    - `pytest tests/test_muscle_cell.py`
+- **Acceptance Criteria:**
+    - [ ] MVL24 is either removed or has all conductances set to zero
+    - [ ] `muscles.csv` contains exactly 95 rows (not 96)
+    - [ ] Quadrant counts: MDR=24, MVR=24, MVL=23, MDL=24 (total=95)
+    - [ ] `get_muscle_names()` returns exactly 95 names
+    - [ ] NeuroML validation passes (`jnml -validate`)
+    - [ ] Simulation runs without error after fix
+    - [ ] Existing unit tests still pass
+    - [ ] If MVL24 is removed (preferred), update any hardcoded references to 96 muscles
+    - [ ] If MVL24 is zeroed (fallback), add comment explaining why
+- **Sponsor Summary Hint:** The real worm has 95 body wall muscles, but the simulation has 96 — an extra phantom muscle called MVL24 that doesn't exist in nature. The fix is surgical: patch `get_muscle_names()` in `c302/__init__.py` to exclude MVL24, update the muscle generation loop, and remove the row from `muscles.csv`. This is a minor biological inaccuracy that should be fixed to prevent confusion and ensure muscle-count-dependent analyses are correct.
+
+---
+
+### Issue 10: Propagate muscle config parameters from openworm.yml to sibernetic_c302.py
+
+- **Title:** `[DD003] Propagate muscle.max_muscle_force and muscle.max_ca from openworm.yml to coupling script`
 - **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1/1
-- **Target Repo:** `openworm/Sibernetic`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD003 — Deliverables](DD003_Body_Physics_Architecture.md#deliverables) (OME-Zarr rows) and [DD012](DD012_Dynamic_Visualization_Architecture.md) (OME-Zarr schema)
+- **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
+- **Existing Code to Reuse:**
+    - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to modify**. Currently hardcodes `max_force` and `max_ca`; replace hardcoded values with config loading (reuse strategy: **modify in place**)
+    - `openworm/sibernetic` → `src/main_sim.py` — 4e-7 hardcoded at the Ca²⁺ scaling line; must also read from config (reuse strategy: **modify in place**)
+    - `openworm/OpenWorm` → `master_openworm.py` — orchestrator that launches `sibernetic_c302.py`; needs to pass config path (reuse strategy: **modify in place**)
+    - DD011 §1 `openworm.yml` schema — defines `muscle.max_muscle_force` and `muscle.max_ca` fields (reuse strategy: **reference**)
+- **DD011 Stack Notes:** Config must flow through the full chain: `openworm.yml` → `master_openworm.py` → `sibernetic_c302.py` → NEURON/Sibernetic. Config file path should be a Docker volume mount or environment variable.
+- **Depends On:** DD011 Issue 1 (openworm.yml schema), DD011 Issue 9 (config loading in master_openworm.py)
+- **Files to Modify:**
+    - `sibernetic_c302.py` (read config instead of hardcoded values)
+    - `tests/test_coupling_config.py` (new)
+- **Test Commands:**
+    - `python -c "import yaml; c = yaml.safe_load(open('openworm.yml')); print(c['muscle'])"`
+    - `pytest tests/test_coupling_config.py`
+- **Acceptance Criteria:**
+    - [ ] `sibernetic_c302.py` reads `muscle.max_muscle_force` from `openworm.yml` (default: 4000)
+    - [ ] `sibernetic_c302.py` reads `muscle.max_ca` from `openworm.yml` (default: 4e-7)
+    - [ ] Activation formula uses config value: `min(1.0, ca / config['muscle']['max_ca'])`
+    - [ ] Force formula uses config value: `activation * config['muscle']['max_muscle_force']`
+    - [ ] Falls back to hardcoded defaults if config not available (backward compatible)
+    - [ ] Unit tests verify config loading and fallback behavior
+    - [ ] Changing config values in openworm.yml changes simulation behavior (no restart of NEURON needed)
+- **Sponsor Summary Hint:** Currently the muscle coupling script has key parameters hardcoded (max force = 4000, max calcium = 4e-7). This moves them to the central config file (`openworm.yml`) so contributors can tune muscle strength and calcium sensitivity without editing code. Think of it like moving a knob from inside the engine to the dashboard.
+
+---
+
+### Issue 11: Verify and document calcium-to-activation edge cases
+
+- **Title:** `[DD003] Verify calcium-to-activation formula handles edge cases correctly`
+- **Labels:** `DD003`, `ai-workable`, `L1`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python
+- **DD Section to Read:** [DD003 — Calcium-to-Force Coupling](DD003_Muscle_Model_Architecture.md#calcium-to-force-coupling-the-bridge-to-sibernetic)
+- **Existing Code to Reuse:**
+    - `openworm/sibernetic` → `src/main_sim.py` — the actual activation formula implementation to test; locate the `min(1.0, ca / max_ca)` line (reuse strategy: **reference — test target**)
+    - `openworm/sibernetic` → `sibernetic_c302.py` — where the formula is applied in production (reuse strategy: **reference — test target**)
+    - `openworm/CE_locomotion` → `Muscles.cpp` — alternative (simpler) muscle dynamics using first-order low-pass filter; useful comparison for expected behavior at edge cases (reuse strategy: **reference**)
 - **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export already exists for particle data visualization. Reference for how particle data is extracted and formatted for external tools.
-    - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — Shows how to read Sibernetic output files from Python. Reference for I/O patterns.
-- **Approach:** Create — no OME-Zarr export exists. Use `owVtkExport.h` and `generate_wcon.py` as references for how particle data is accessed.
-- **DD011 Pipeline Role:** Body-stage post-processing. Runs after Sibernetic simulation completes. Produces Zarr store artifact at path configured via `openworm.yml` for DD012 visualization stage.
 - **Files to Modify:**
-    - `scripts/export_zarr.py` (new)
+    - `tests/test_activation_edge_cases.py` (new)
 - **Test Commands:**
-    - `python3 scripts/export_zarr.py output.dat --output output/openworm.zarr`
-    - `python3 -c "import zarr; z = zarr.open('output/openworm.zarr'); print(z['body/positions'].shape, z['body/types'].shape)"`
+    - `pytest tests/test_activation_edge_cases.py -v`
 - **Acceptance Criteria:**
-    - [ ] Reads Sibernetic binary output and exports to OME-Zarr format
-    - [ ] `body/positions/` array: shape (n_timesteps, n_particles, 3), dtype float32
-    - [ ] `body/types/` array: shape (n_particles,), dtype int32 (0=liquid, 1=elastic, 2=boundary)
-    - [ ] Export interval configurable (every Nth output frame)
-    - [ ] Zarr store readable by DD012 viewer
-    - [ ] Handles typical simulation sizes (~100K particles × ~500 frames) without OOM
-    - [ ] Includes OME-Zarr metadata (axes labels, units)
-- **Sponsor Summary Hint:** OME-Zarr is the universal data format connecting simulation to visualization. This script converts Sibernetic's raw binary output into a structured Zarr store that the DD012 3D viewer can read. It's the bridge between physics engine and interactive visualization. The existing `owVtkExport.h` shows how particle data is already extracted for VTK — this creates the OME-Zarr equivalent.
+    - [ ] Tests activation formula: `activation = min(1.0, [Ca²⁺]ᵢ / max_ca)`
+    - [ ] Verifies: [Ca²⁺]ᵢ = 0 → activation = 0
+    - [ ] Verifies: [Ca²⁺]ᵢ = max_ca → activation = 1.0
+    - [ ] Verifies: [Ca²⁺]ᵢ > max_ca → activation = 1.0 (clamped, not > 1)
+    - [ ] Verifies: negative [Ca²⁺]ᵢ (numerical artifact) → activation clamped to 0 (not negative)
+    - [ ] Verifies: very small [Ca²⁺]ᵢ (1e-20) → activation ≈ 0 (not NaN, not underflow)
+    - [ ] Documents any negative-calcium clamping in code comments
+    - [ ] If negative calcium is possible, add `max(0, ca)` guard and document why
+- **Sponsor Summary Hint:** The activation formula converts calcium concentration to a contraction coefficient [0, 1]. But what happens at the edges? What if calcium goes negative (a numerical glitch)? What if it exceeds the maximum? What about extremely tiny values? This issue verifies the formula is robust — no NaN values, no negative contractions, no activation above 100%. Defensive programming for the most critical equation in the muscle model.
 
 ---
 
-### Issue 12: Implement surface mesh reconstruction from SPH particles
+### Issue 12: Audit NMJ conductance range across all motor neuron–muscle pairs
 
-- **Title:** `[DD003] Implement marching cubes surface reconstruction from SPH particles`
-- **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase A1/1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, 3d-geometry
-- **DD Section to Read:** [DD003 — Deliverables](DD003_Body_Physics_Architecture.md#deliverables) (surface mesh row) and [DD003 — How to Visualize](DD003_Body_Physics_Architecture.md#how-to-visualize) (surface mesh description)
-- **Depends On:** Issue 11 (OME-Zarr export)
+- **Title:** `[DD003] Audit NMJ conductance values (0.5-1.0 nS) across all motor neuron–muscle pairs`
+- **Labels:** `DD003`, `human-expert`, `L2`
+- **Roadmap Phase:** Phase A1
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroscience
+- **DD Section to Read:** [DD003 — Neural-to-Muscle Coupling](DD003_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD002 — Integration Contract](DD002_Neural_Circuit_Architecture.md)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export for particle visualization. Can serve as the input reader for surface reconstruction.
-    - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation). Different purpose (animation skeleton vs. surface mesh) but related geometry processing on the same particle data.
-- **Approach:** Extend — build on `owVtkExport.h` for particle data access and reference `skeletonExtraction` for geometry processing patterns on Sibernetic output.
-- **DD011 Pipeline Role:** Body-stage post-processing. Runs after OME-Zarr export. Adds `geometry/body_surface/` group to the Zarr store for DD012 viewer.
-- **Files to Modify:**
-    - `scripts/reconstruct_surface.py` (new)
-- **Test Commands:**
-    - `python3 scripts/reconstruct_surface.py output/openworm.zarr --output output/openworm.zarr`
-    - `python3 -c "import zarr; z = zarr.open('output/openworm.zarr'); print(z['geometry/body_surface'].keys())"`
-- **Acceptance Criteria:**
-    - [ ] Reads particle positions from OME-Zarr `body/positions/`
-    - [ ] Applies marching cubes (via scikit-image or PyVista) to reconstruct smooth body surface
-    - [ ] Uses only elastic + boundary particles (not liquid) for surface reconstruction
-    - [ ] Outputs vertices and faces arrays to `geometry/body_surface/` in OME-Zarr
-    - [ ] Per-frame reconstruction (each timestep gets its own mesh)
-    - [ ] Surface is watertight (no holes) and smooth (Laplacian smoothing pass)
-    - [ ] Reasonable performance (<1s per frame for 100K particles)
-- **Sponsor Summary Hint:** The raw simulation produces a cloud of 100,000 points. This script turns that cloud into a smooth, solid worm shape using marching cubes — the same algorithm used in medical imaging to reconstruct organs from CT scans. The result is what you see in the 3D viewer: a recognizable worm body, not a spray of dots. The existing `owVtkExport.h` and `skeletonExtraction` repo provide reference implementations for working with Sibernetic's particle data.
-
----
-
-### Issue 13: Implement configurable output frequency via `openworm.yml`
-
-- **Title:** `[DD003] Implement configurable output frequency from openworm.yml simulation.output_interval`
-- **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1/1
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, c++
-- **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Body_Physics_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml) (`simulation.output_interval`)
-- **Depends On:** DD011 Issue 9 (config loading in master_openworm.py)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/owPhysicsFluidSimulator.cpp`](https://github.com/openworm/sibernetic) — Contains the output writing logic. The output frequency is controlled here — this is the file to modify.
-- **Approach:** Create — no configurable output frequency exists. Modify the output loop in `owPhysicsFluidSimulator.cpp` to respect an interval parameter.
-- **DD011 Pipeline Role:** Body-stage configuration. `master_openworm.py` passes `simulation.output_interval` from `openworm.yml` to Sibernetic via command-line argument.
-- **Files to Modify:**
-    - `src/owPhysicsFluidSimulator.cpp` (output frequency)
-    - Sibernetic command-line argument parsing
-- **Test Commands:**
-    - `./build/Sibernetic -f configuration/worm_crawl_demo -output_interval 100`
-    - `ls output/ | wc -l` (verify expected number of output files)
-- **Acceptance Criteria:**
-    - [ ] Sibernetic accepts `--output_interval N` command-line argument
-    - [ ] Output frames written every N timesteps (default: 100)
-    - [ ] `master_openworm.py` passes `simulation.output_interval` from `openworm.yml` to Sibernetic
-    - [ ] Reducing output interval does not affect simulation accuracy (only I/O frequency)
-    - [ ] Quick-test uses high interval (less output, faster), validation uses low interval (more output, thorough)
-- **Sponsor Summary Hint:** How often the simulation saves its state to disk. Writing every timestep generates enormous files (100K particles × 50,000 steps = terabytes). Writing every 100th step is a good balance. This makes output frequency configurable so quick tests save less data and validation runs save more.
-
----
-
-## Group 4: Advanced Features (Phase 2+)
-
-Target: New backend options, environmental support, and integration improvements.
-
----
-
-### Issue 14: Evaluate FEM Projective Dynamics backend feasibility
-
-- **Title:** `[DD003] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm / Metaworm)`
-- **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 2+
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** physics, c++, cuda
-- **DD Section to Read:** [DD003 — Alternatives Considered — FEM](DD003_Body_Physics_Architecture.md#1-finite-element-method-fem) (Update 2026-02 section)
+    - `openworm/c302` → `c302/parameters_C.py` → `neuron_to_muscle_chem_exc_syn_gbase`, `neuron_to_muscle_chem_inh_syn_gbase` — the actual synapse conductance values used in the simulation (reuse strategy: **reference**)
+    - `openworm/c302` → `c302/c302_TargetMuscle.py` — queries NMJ connections for a given muscle; use to enumerate all connections (reuse strategy: **adapt**)
+    - `openworm/CE_locomotion` → `NervousSystem.cpp` — NMJ weight constants per motor neuron class (`NMJ_DA`, `NMJ_DB`, `NMJ_DD`, `NMJ_VA`, `NMJ_VB`, `NMJ_VD`); comparison reference (reuse strategy: **reference**)
 - **Depends On:** None
+- **Files to Modify:**
+    - None (audit task — output is a summary posted on the issue)
+- **Test Commands:**
+    - N/A (audit task)
+- **Acceptance Criteria:**
+    - [ ] Extract all NMJ synapse conductance values from c302 muscle network LEMS/NeuroML files
+    - [ ] Verify all NMJ conductances are in the 0.5-1.0 nS range specified in DD003
+    - [ ] Compare NMJ conductance (0.5-1.0 nS) vs. inter-neuron synapse conductance (0.09 nS) — confirm ratio is ~5-11x
+    - [ ] Check if any motor neuron classes (VA, VB, DA, DB, DD, VD, AS) have systematically different NMJ weights
+    - [ ] Report distribution: histogram of NMJ conductance values across all ~350 NMJ connections
+    - [ ] Identify outliers (any NMJ conductance < 0.3 nS or > 2.0 nS)
+    - [ ] Post findings as issue comment with comparison table and histogram
+    - [ ] Assess whether uniform conductance is appropriate or if motor-neuron-class-specific values would be more realistic
+- **Sponsor Summary Hint:** Each motor neuron connects to its target muscle via a neuromuscular junction (NMJ) with a specific "volume" setting — the conductance. DD003 says all NMJs should be 0.5-1.0 nS (about 5-10x louder than neuron-to-neuron connections). But are they actually set correctly in the code? Do different motor neuron types (e.g., the ones for forward vs. backward locomotion) need different conductance values? This audit requires neuroscience expertise to interpret the results.
+
+---
+
+## Group 4: Research & Advanced Features (Phase 1+)
+
+Target: Investigate muscle-type differentiation, multi-compartment modeling, and alternative mechanical models for future phases.
+
+---
+
+### Issue 13: Survey CeNGEN transcriptomic data for muscle-type-specific channel expression
+
+- **Title:** `[DD003] Survey CeNGEN data for muscle-type-specific ion channel expression profiles`
+- **Labels:** `DD003`, `human-expert`, `L3`
+- **Roadmap Phase:** Phase 1+
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, bioinformatics, neuroscience
+- **DD Section to Read:** [DD003 — Migration Path — Muscle-Type Diversity](DD003_Muscle_Model_Architecture.md#if-muscle-type-diversity-is-required-phase-3) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization)
 - **Existing Code to Reuse:**
-    - [`Jessie940611/BAAIWorm/Metaworm/sim/fem/`](https://github.com/Jessie940611/BAAIWorm) — **Complete FEM Projective Dynamics implementation.** Directory structure includes:
-        - `FEMSolver.cpp` / `FEMSolver.h` — Core FEM solver with Projective Dynamics iteration
-        - `Constraint.cpp` / `Constraint.h` — Strain, volume, and attachment constraints
-        - `Muscle.cpp` / `Muscle.h` — 96-muscle actuator model with per-muscle activation input
-        - `World.cpp` / `World.h` — Scene management, collision handling, time integration
-    - [`Jessie940611/BAAIWorm/Metaworm/data/worm_mesh_4.obj`](https://github.com/Jessie940611/BAAIWorm) — Worm body mesh: 984 vertices, 3,341 tetrahedrons. Ready-to-use FEM mesh.
-    - [`Jessie940611/BAAIWorm/Metaworm/sim/`](https://github.com/Jessie940611/BAAIWorm) — Build system, CUDA/OptiX rendering pipeline, Python bindings via `pybind11`.
-- **Approach:** Evaluate — comprehensive feasibility study of the BAAIWorm/Metaworm FEM implementation for integration as an alternative Sibernetic backend.
+    - `openworm/wormneuroatlas` repo — Python package for accessing CeNGEN single-cell RNA-seq data; use as the primary data access interface (reuse strategy: **import directly**)
+    - `openworm/c302` → `c302/parameters_D.py` — current channel→gene mapping (which genes map to which model channels); use as the mapping to validate against (reuse strategy: **reference**)
+    - `openworm/muscle_model` → `NeuroML2/*.channel.nml` — the channel definitions that would need gene-specific conductances if differentiation is warranted (reuse strategy: **reference**)
+    - `openworm/JohnsonMailler_MuscleModel` → `NeuroML2/CaPool.nml` — alternative Ca²⁺ pool dynamics as reference for different channel implementations (reuse strategy: **reference**)
+- **Depends On:** None
+- **Files to Modify:**
+    - None (research issue — output is a report)
+- **Test Commands:**
+    - N/A (research task)
+- **Acceptance Criteria:**
+    - [ ] Query CeNGEN single-cell RNA-seq database for body wall muscle cells
+    - [ ] Extract expression levels for DD003's 4 channel genes: leak (best candidate), K_slow (kvs-1? egl-2?), K_fast (shk-1?), Ca_boyle (egl-19? unc-2?)
+    - [ ] Determine which WormBase gene IDs correspond to each DD003 channel type
+    - [ ] Compare expression across body wall muscles vs. pharyngeal muscles vs. vulval muscles
+    - [ ] Assess: do body wall muscles in different quadrants (MDR/MVR/MVL/MDL) show differential channel expression?
+    - [ ] Summarize: which muscle types might need distinct conductance profiles?
+    - [ ] Post report as issue comment with data tables and citations
+    - [ ] If differentiation is warranted, draft a follow-up issue for Phase 3 implementation
+- **Sponsor Summary Hint:** The current model uses one generic muscle cell type for all 95 body wall muscles. But real worms might have subtle differences — do muscles near the head express different ion channels than muscles near the tail? CeNGEN is a massive dataset of gene expression in individual C. elegans cells. This research mines that data to determine whether we need different "recipes" for different muscles, or whether the single generic model is biologically justified.
+
+---
+
+### Issue 14: Prototype multi-compartment muscle cell model
+
+- **Title:** `[DD003] Prototype multi-compartment muscle cell to evaluate voltage non-uniformity`
+- **Labels:** `DD003`, `human-expert`, `L3`
+- **Roadmap Phase:** Phase 1+
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** python, neuroml, neuroscience, computational-modeling
+- **DD Section to Read:** [DD003 — Known Issues — Issue 1: Single Muscle Compartment](DD003_Muscle_Model_Architecture.md#issue-1-single-muscle-compartment)
+- **Existing Code to Reuse:**
+    - `openworm/muscle_model` → `NeuroML2/SingleCompMuscle.cell.nml` — **starting point**: the complete single-compartment muscle cell with 4 channels and morphology; extend to multi-compartment (reuse strategy: **adapt**)
+    - `openworm/c302` → `c302/custom_muscle_components.xml` — channel definitions (k_fast_muscle, k_slow_muscle, ca_boyle_muscle) to include in multi-compartment version (reuse strategy: **import/include**)
+    - `openworm/CE_locomotion` → `WormBody.h` — body segment dimensions (50 segments); use for determining realistic compartment sizes for the ~60 µm muscle spindle (reuse strategy: **reference**)
+- **Depends On:** None
+- **Files to Modify:**
+    - `c302/prototypes/multi_compartment_muscle.py` (new — experimental)
+- **Test Commands:**
+    - `python c302/prototypes/multi_compartment_muscle.py`
+    - `jnml -validate MultiCompartmentMuscle.nml`
+- **Acceptance Criteria:**
+    - [ ] Create a prototype muscle cell with 4-8 compartments along spindle axis (~60 µm length)
+    - [ ] Use same channel densities as GenericMuscleCell (DD003 spec)
+    - [ ] Add axial resistance between compartments (estimate from muscle cell dimensions)
+    - [ ] Run single-cell simulation: inject current at one end, measure voltage at both ends
+    - [ ] Quantify voltage attenuation: is voltage uniform (single-compartment is fine) or non-uniform (multi-compartment is needed)?
+    - [ ] Report: compute time increase per muscle cell (current: 1 compartment → prototype: N compartments)
+    - [ ] Assess feasibility: N compartments × 95 muscles × simulation duration → practical?
+    - [ ] Post findings with go/no-go recommendation for multi-compartment adoption
+    - [ ] Starts from `SingleCompMuscle.cell.nml` rather than building from scratch
+- **Sponsor Summary Hint:** Each muscle is currently modeled as a single point — the voltage is the same everywhere in the cell. But real muscles are spindle-shaped, ~60 µm long. If one end of the muscle is stimulated by a motor neuron, does the other end "know"? This prototype starts from the existing `SingleCompMuscle.cell.nml` in the `muscle_model` repo and extends it to 4-8 compartments. It tests whether voltage spreads uniformly (single-compartment is fine, saving enormous computation) or attenuates (we'd need multi-compartment, at 4-8x the computational cost per muscle).
+
+---
+
+### Issue 15: Evaluate Hill-type crossbridge mechanics feasibility
+
+- **Title:** `[DD003] Evaluate Hill-type crossbridge mechanics for specialized muscles (egg-laying, defecation)`
+- **Labels:** `DD003`, `human-expert`, `L3`
+- **Roadmap Phase:** Phase 1+
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** physics, biomechanics, neuroscience
+- **DD Section to Read:** [DD003 — Alternatives Considered — Hill-Type Muscle Model](DD003_Muscle_Model_Architecture.md#1-hill-type-muscle-model-with-crossbridge-dynamics) and [DD003 — Migration Path](DD003_Muscle_Model_Architecture.md#migration-path)
+- **Existing Code to Reuse:**
+    - `openworm/JohnsonMailler_MuscleModel` — **THE alternative muscle model** to evaluate. Has different Ca²⁺ dynamics (EGL_19/L-type Ca²⁺, SHK_1/K⁺) from Boyle-Cohen; compare channel repertoire and dynamics (reuse strategy: **reference**)
+    - `openworm/muscle_model` → `BoyleCohen2008/` — baseline Boyle-Cohen model to compare against (reuse strategy: **reference**)
+    - `openworm/CE_locomotion` → `Muscles.cpp` — simplest coupling model (first-order low-pass filter: `dV/dt = (V_input - V_muscle) / T_muscle`); lower bound for muscle dynamics complexity (reuse strategy: **reference**)
+- **Depends On:** None
 - **Files to Modify:**
     - None (research issue — output is a feasibility report)
 - **Test Commands:**
     - N/A (research task)
 - **Acceptance Criteria:**
-    - [ ] Clone and build BAAIWorm/Metaworm FEM solver (`sim/fem/`)
-    - [ ] Document: build requirements — CUDA version (tested: 11.x), OptiX 7.x for rendering, C++17 compiler
-    - [ ] Document: mesh format — `data/worm_mesh_4.obj` (984 vertices, 3,341 tetrahedrons)
-    - [ ] Document: muscle actuator interface — `Muscle.cpp` implements 96 actuators; verify mapping compatibility with DD002's 96-muscle activation array
-    - [ ] Document: constraint system — `Constraint.cpp` implements strain limits, volume preservation, and attachment constraints
-    - [ ] Document: performance benchmarks (claimed 30 FPS — verify on available hardware)
-    - [ ] Document: physics fidelity — surface hydrodynamics only (no internal fluid simulation, unlike SPH)
-    - [ ] Assess: effort to wrap as `body.backend: "fem-projective"` in OpenWorm stack
-    - [ ] Assess: CUDA/OptiX dependency — can it run on Apple Silicon? CI? (likely no — CUDA required)
-    - [ ] Post feasibility report as issue comment with go/no-go recommendation
-- **Sponsor Summary Hint:** Zhao et al. (2024) demonstrated a worm body simulation running at 30 FPS using Projective Dynamics FEM — orders of magnitude faster than our SPH approach. Their code (BAAIWorm/Metaworm) is open source with a complete implementation: FEM solver, 984-vertex mesh, 96-muscle actuator, and constraint system all in `sim/fem/`. This feasibility study determines whether we can add it as a "fast mode" backend for rapid iteration and CI testing.
-
----
-
-### Issue 15: Create Sibernetic Python bindings for direct API access
-
-- **Title:** `[DD003] Create Python bindings for Sibernetic C++ library`
-- **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 2+
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, c++, pybind11
-- **DD Section to Read:** [DD003 — Integration Contract](DD003_Body_Physics_Architecture.md#integration-contract) (coupling dependencies)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/owSignalSimulator.cpp`](https://github.com/openworm/sibernetic) — Already contains a CPython API integration layer using direct `PyObject` calls to interface with NEURON/c302. This demonstrates that C++↔Python interop already exists in the codebase — the question is whether to formalize it with pybind11 or extend the existing CPython approach.
-- **Approach:** Extend — build on the existing CPython API calls in `owSignalSimulator.cpp`. Two viable paths: (a) formalize with pybind11 for a clean public API, (b) extend the existing CPython embedding for backward compatibility.
-- **Note:** Sibernetic uses a Makefile build system, not CMake. Adding pybind11 would require either CMake migration or Makefile-based pybind11 integration.
-- **Files to Modify:**
-    - `python/sibernetic_bindings.cpp` (new — pybind11 wrapper)
-    - `python/sibernetic/__init__.py` (new — Python package)
-    - `CMakeLists.txt` or `Makefile` (add pybind11 target)
-    - `setup.py` or `pyproject.toml` (new — pip installable)
-- **Test Commands:**
-    - `pip install -e .`
-    - `python3 -c "import sibernetic; sim = sibernetic.Simulation(); sim.step()"`
-- **Acceptance Criteria:**
-    - [ ] `pip install` produces a `sibernetic` Python package
-    - [ ] Python API exposes: `Simulation(config_path)`, `.step()`, `.get_positions()`, `.get_velocities()`, `.get_densities()`
-    - [ ] Can inject muscle forces from Python: `sim.set_muscle_activation(quadrant, value)`
-    - [ ] Can read particle state without file I/O (direct memory access)
-    - [ ] Works with OpenCL backend (C++ core + Python wrapper)
-    - [ ] Enables `sibernetic_c302.py` to call Sibernetic directly instead of via subprocess
-    - [ ] Pybind11 wraps the existing C++ API, no algorithmic changes needed
-- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O. Python bindings would allow direct function calls, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. The existing `owSignalSimulator.cpp` already has CPython API calls — this formalizes that into a proper Python package.
-
----
-
-### Issue 16: Add gel/agar environment configuration support
-
-- **Title:** `[DD003] Verify and document gel/agar environment support in openworm.yml`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 2+
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** physics
-- **DD Section to Read:** [DD003 — Boundaries](DD003_Body_Physics_Architecture.md#boundaries-explicitly-out-of-scope) (item 3: gel simulation) and Palyanov et al. 2018 (Section 2c, agar gel)
-- **Depends On:** DD011 Issue 1 (openworm.yml config schema)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/configuration/worm_crawl_*`](https://github.com/openworm/sibernetic) — Existing crawl configuration directories that may already include gel/agar environment settings.
-    - [`openworm/sibernetic/src/sphFluid_crawling.cl`](https://github.com/openworm/sibernetic) — Crawling-specific OpenCL kernel with agar gel particle interactions. This kernel variant handles the gel environment physics.
-- **Approach:** Wrap — gel mode already exists in the codebase (`sphFluid_crawling.cl` + `worm_crawl_*` configs). This issue verifies it works, documents it, and wraps it with an `openworm.yml` config option.
-- **DD011 Pipeline Role:** Body-stage configuration. `body.environment` in `openworm.yml` selects between liquid (swimming) and gel (crawling) modes.
-- **Files to Modify:**
-    - `configuration/README.md` (update — document gel vs. liquid configs)
-    - Documentation update in DD003 (if gel support is confirmed working)
-- **Test Commands:**
-    - `./build/Sibernetic -f configuration/worm_crawl_demo`
-- **Acceptance Criteria:**
-    - [ ] Verify Sibernetic's agar gel mode works with current codebase (elastic matter cubes in 3D grid, using `sphFluid_crawling.cl`)
-    - [ ] Verify the existing `worm_crawl_*` configuration directories provide gel environment
-    - [ ] Run gel simulation and verify worm produces crawling-like (not swimming) gait
-    - [ ] Document environment options in DD003: liquid (swimming, `sphFluid.cl`) vs. gel (crawling, `sphFluid_crawling.cl`)
-    - [ ] Propose `body.environment: "liquid" | "gel"` config option for `openworm.yml`
-- **Sponsor Summary Hint:** Real worms behave differently on solid surfaces (crawling) vs. in liquid (swimming). Sibernetic already supports both via `sphFluid.cl` (liquid) and `sphFluid_crawling.cl` (gel), with corresponding `worm_crawl_*` configuration directories. This issue verifies gel mode still works and makes it configurable via `openworm.yml`.
+    - [ ] Review literature on C. elegans muscle mechanics: tetanic contraction (egg-laying), rapid twitches (defecation), isometric force-length curves
+    - [ ] Identify which muscle types may require crossbridge dynamics (vulval, uterine, anal depressor, intestinal)
+    - [ ] Assess parameter availability: are actin-myosin binding rates, length-tension curves measured for C. elegans?
+    - [ ] Estimate computational cost: 6+ additional state variables per muscle × N specialized muscles
+    - [ ] Compare against DD003's linear activation model: when does linear fail?
+    - [ ] Compare Boyle-Cohen, JohnsonMailler, and CE_locomotion muscle dynamics approaches
+    - [ ] Propose LEMS ComponentType extension approach (per DD003 Migration Path)
+    - [ ] Post feasibility report with go/no-go recommendation per muscle type
+    - [ ] If Hill-type is warranted for any muscle type, draft DD amendment for Phase 3
+- **Sponsor Summary Hint:** DD003's muscle model uses a simple linear formula: more calcium = more force. This works for locomotion (Boyle & Cohen 2008 showed body wall muscles are "simple actuators"). But what about specialized muscles — the vulval muscles that lay eggs, the anal depressor muscle that contracts during defecation, the pharyngeal muscles that pump food? These might need a richer mechanical model (Hill-type) with actin-myosin crossbridge dynamics. Three different muscle model implementations exist across OpenWorm repos (`muscle_model`, `JohnsonMailler_MuscleModel`, `CE_locomotion`) — this research compares them to determine which muscles, if any, need upgrading.
 
 ---
 
 ## Group 5: Documentation & Maintenance (Any)
 
-Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic.
+Target: Comprehensive documentation enabling contributors to understand and modify the muscle model.
 
 ---
 
-### Issue 17: Create Sibernetic architecture overview documentation
+### Issue 16: Augment and consolidate muscle model contributor guide
 
-- **Title:** `[DD003] Create Sibernetic architecture overview for contributors`
+- **Title:** `[DD003] Augment existing BadgeList muscle model progression into a comprehensive contributor guide`
 - **Labels:** `DD003`, `ai-workable`, `L1`
 - **Roadmap Phase:** Any
-- **Target Repo:** `openworm/Sibernetic`
+- **Target Repo:** `openworm/openworm_docs`
 - **Required Capabilities:** docs
-- **DD Section to Read:** [DD003 — Technical Approach](DD003_Body_Physics_Architecture.md#technical-approach) and [DD003 — Implementation References](DD003_Body_Physics_Architecture.md#implementation-references)
-- **Depends On:** None
+- **DD Section to Read:** [DD003 — Quality Criteria](DD003_Muscle_Model_Architecture.md#quality-criteria), [DD003 — Testing Procedure](DD003_Muscle_Model_Architecture.md#testing-procedure), and [DD003 — Boundaries](DD003_Muscle_Model_Architecture.md#boundaries-explicitly-out-of-scope)
+- **Documentation Tier:** Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion repos; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/README.md`](https://github.com/openworm/sibernetic) — 17.5KB README with build instructions, usage examples, and project overview. Start from this as the foundation and expand into a structured architecture document.
-    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Extensive inline documentation of simulation parameters and physics constants. Source material for the architecture overview.
-- **Approach:** Extend — the 17.5KB README and well-documented `owPhysicsConstant.h` provide substantial content to build on.
+    - **[BadgeList muscle model badges](https://badgelist.com/openworm)** — Three existing badges form a de facto getting-started progression: **Muscle Model Explorer** (9 earners — explore the muscle model), **Muscle Model Builder** (2 earners — build it), **Muscle Model Hacker** (12 earners — hack/extend it). These map to [Contributor Progression](../contributing/contributor-progression.md) skill badge "Muscle Model Understanding" and domain badge "Muscle Model Contributor". **Do not duplicate this content; augment it with deeper technical guidance and link back to the badge progression** (reuse strategy: **augment**)
+    - `openworm/c302` → `c302/c302_Muscles.py`, `c302/c302_MuscleTest.py`, `c302/c302_IClampMuscle.py`, `c302/c302_MusclesSine.py` — document these as the hands-on workflow; show contributors the progression from single-muscle test → all-muscle test → oscillatory stimulation (reuse strategy: **document as resources**)
+    - `openworm/muscle_model` repo — document as the biophysical reference implementation for Boyle-Cohen muscle (reuse strategy: **document as resource**)
+    - `openworm/c302` → `c302/parameters_C.py` through `parameters_D.py` — document the parameter level system (A/B/C/D) and when to use each (reuse strategy: **document as resource**)
+    - `openworm/CE_locomotion` → locomotion model with muscle actuation (reuse strategy: **document as resource**)
+    - The contributor guide should **map all existing code resources across repos** so contributors know what's already built before starting new work
+- **Approach:** Augment — BadgeList already provides the onboarding funnel; this guide adds the technical depth that badges can't contain
+- **Depends On:** None
 - **Files to Modify:**
-    - `docs/architecture.md` (new — in Sibernetic repo)
+    - `docs/Resources/muscle_model_guide.md` (new — on docs.openworm.org, not in a single repo, because it spans c302, muscle_model, and CE_locomotion)
+- **Test Commands:**
+    - `python3.13 -m mkdocs build` (verify page renders correctly on docs site)
+- **Acceptance Criteria:**
+    - [ ] Opens with link to BadgeList muscle model badge progression and frames the guide as the "deep dive" companion to the badges
+    - [ ] Overview: what the muscle model does, what it produces, who uses its output
+    - [ ] Cross-repo file map: c302 muscle scripts, muscle_model repo, CE_locomotion body model, Sibernetic coupling
+    - [ ] Existing code inventory: catalog all muscle-related scripts across c302, muscle_model, CE_locomotion, and Sibernetic repos
+    - [ ] Contributor workflow: generate muscle network → validate NeuroML → run simulation → check outputs
+    - [ ] Quality criteria: 5 rules from DD003 (calcium interface, movement validation, NeuroML 2, units, muscle-neuron distinction)
+    - [ ] Common mistakes: copying neuron parameters to muscles, changing calcium variable name without updating `sibernetic_c302.py`
+    - [ ] Maps badge progression to code: "Muscle Model Explorer" → run `c302_MuscleTest.py`; "Builder" → modify parameters; "Hacker" → add new muscle types or modify coupling
+    - [ ] References to DD003 for specification, DD001 for body physics coupling, DD012 for visualization
+    - [ ] Aimed at L1–L2 contributors (aligns with BadgeList skill badge level)
+- **Sponsor Summary Hint:** BadgeList already has a muscle model getting-started progression (Explorer → Builder → Hacker) with 23 total earners. This guide doesn't replace those badges — it augments them with the technical depth that a badge description can't contain. Where to find the code across 4 repos, which files to edit, what tests to run, what mistakes to avoid. The badges are the curriculum; this guide is the textbook. Lives on docs.openworm.org because it spans multiple repos — you can't put a cross-repo guide inside just one repo.
+
+---
+
+### Issue 17: Document NMJ connectivity and muscle quadrant mapping
+
+- **Title:** `[DD003] Document muscle quadrant layout and NMJ connectivity diagram`
+- **Labels:** `DD003`, `ai-workable`, `L1`
+- **Roadmap Phase:** Any
+- **Target Repo:** `openworm/c302`
+- **Required Capabilities:** docs
+- **DD Section to Read:** [DD003 — Context & Background](DD003_Muscle_Model_Architecture.md#context-background), [DD003 — Muscle List](DD003_Muscle_Model_Architecture.md#muscle-list-95-cells), and [DD003 — Neural-to-Muscle Coupling](DD003_Muscle_Model_Architecture.md#neural-to-muscle-coupling)
+- **Existing Code to Reuse:**
+    - `openworm/c302` → `c302/__init__.py` → `get_muscle_names()` — canonical naming convention (MDR01-24, MVR01-24, MVL01-23, MDL01-24); document this as the authoritative source (reuse strategy: **document as resource**)
+    - `openworm/sibernetic` → `src/main_sim.py` — 96-element array layout `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]`; document the index mapping (reuse strategy: **document as resource**)
+    - `openworm/CE_locomotion` → `Worm.cpp` — NMJ wiring showing which motor classes (DA, DB, DD, VA, VB, VD, AS) innervate dorsal vs. ventral quadrants (reuse strategy: **document as resource**)
+    - `openworm/CE_locomotion` → `WormBody.h` — 50-segment body layout for anterior-posterior positioning (reuse strategy: **document as resource**)
+- **Depends On:** None
+- **Files to Modify:**
+    - `docs/muscle_quadrant_mapping.md` (new — in c302 repo)
 - **Test Commands:**
     - N/A (documentation task)
 - **Acceptance Criteria:**
-    - [ ] High-level overview: what Sibernetic is, what it produces, who uses its output
-    - [ ] File map: which source files contain which functionality
-    - [ ] Data flow diagram: input config → particle init → SPH loop → output
-    - [ ] Timestep walkthrough: what happens in one simulation step (neighbor search → density → pressure → forces → integrate)
-    - [ ] Backend comparison: when to use OpenCL vs. PyTorch vs. Taichi
-    - [ ] References to DD003 for specification details
-    - [ ] Aimed at L2 contributors (familiar with physics but new to codebase)
-- **Sponsor Summary Hint:** New contributors need a map before they can navigate. This document explains what each file does, how data flows through the simulation, and what happens in a single timestep. DD003 is the specification (what should happen); this is the implementation guide (where the code lives and how it works). The existing 17.5KB README and well-documented `owPhysicsConstant.h` provide a strong foundation.
+    - [ ] Diagram: 4 quadrants (MDR, MVR, MVL, MDL) arranged around body cross-section
+    - [ ] Table: all 95 muscles with quadrant, row number (1-24), anterior-posterior position
+    - [ ] Explanation: why MDL has 24, MVL has 23 (no MVL24)
+    - [ ] Diagram: motor neuron classes (VA, VB, DA, DB, DD, VD, AS) and which quadrants they innervate
+    - [ ] Explanation: excitatory (VA/VB/DA/DB/AS) vs. inhibitory (DD/VD) motor neurons
+    - [ ] Explanation: dorsal vs. ventral muscle coordination for undulatory locomotion
+    - [ ] Index mapping: c302 muscle names → Sibernetic array indices (from `main_sim.py`)
+    - [ ] Cross-references to DD001 (elastic particle mapping in Sibernetic) and WormAtlas
+    - [ ] Visual enough for L1 contributors to understand muscle anatomy at a glance
+- **Sponsor Summary Hint:** The worm's 95 body wall muscles wrap around the body in 4 strips (quadrants). During forward crawling, dorsal and ventral muscles activate in alternating waves — like a crowd doing "the wave" in a stadium. This document maps out which muscles are where, which motor neurons control them, and how that creates coordinated movement. It includes the critical index mapping between c302 muscle names and Sibernetic array positions. It's the anatomical atlas for anyone working on the muscle system.
 
 ---
 
-### Issue 18: Document muscle cell mapping (96 units to particle indices)
+### Issue 18: Document sibernetic_c302.py coupling script architecture
 
-- **Title:** `[DD003] Document muscle cell mapping from 96 units to elastic particle indices`
+- **Title:** `[DD003] Document sibernetic_c302.py coupling script: data flow, timing, and variable mapping`
 - **Labels:** `DD003`, `ai-workable`, `L2`
 - **Roadmap Phase:** Any
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** docs, physics
-- **DD Section to Read:** [DD003 — Muscle Actuation](DD003_Body_Physics_Architecture.md#muscle-actuation-force-injection) and Palyanov et al. 2018 (Section 2b)
-- **Depends On:** None
+- **Target Repo:** `openworm/sibernetic`
+- **Required Capabilities:** python, docs
+- **DD Section to Read:** [DD003 — Coupling to Sibernetic](DD003_Muscle_Model_Architecture.md#coupling-to-sibernetic) and [DD003 — Coupling Bridge Ownership](DD003_Muscle_Model_Architecture.md#coupling-bridge-ownership)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/main_sim.py`](https://github.com/openworm/sibernetic) — Python simulation entry point that documents the 96-element muscle array format: `[MDR_0...MDR_23, MVR_0...MVR_23, MVL_0...MVL_23, MDL_0...MDL_23]`.
-    - [`openworm/sibernetic/src/owConfigProperty.cpp`](https://github.com/openworm/sibernetic) — Configuration loading code that maps muscle indices to elastic particle subsets.
-- **Approach:** Create — no muscle mapping documentation exists, but the code in `main_sim.py` and `owConfigProperty.cpp` contains the mapping.
+    - `openworm/sibernetic` → `sibernetic_c302.py` — **THE file to document** (8.6 KB); the entire coupling bridge between c302/NEURON and Sibernetic (reuse strategy: **document as primary subject**)
+    - `openworm/sibernetic` → `src/main_sim.py` — coupling modes (synthetic waves, file-based, live NEURON) and data flow (17.9 KB); documents three different ways coupling can work (reuse strategy: **document as primary subject**)
+    - `openworm/CE_locomotion` → `Worm.cpp` → `Step()` — cleanest reference for correct coupling sequence: body physics → stretch receptors → neural compute → NMJ translation → muscle dynamics → body activation (reuse strategy: **document as reference architecture**)
+    - `openworm/OpenWorm` → `master_openworm.py` — how the orchestrator invokes the coupling; Steps 4-5 (analysis/validation) are unimplemented stubs (reuse strategy: **document as context**)
+- **Depends On:** None
 - **Files to Modify:**
-    - `docs/muscle_mapping.md` (new — in Sibernetic repo)
+    - `docs/coupling_script_architecture.md` (new — in Sibernetic repo)
 - **Test Commands:**
     - N/A (documentation task)
 - **Acceptance Criteria:**
-    - [ ] Explains: how 95 body-wall muscles → 96 independently activable units
-    - [ ] Explains: 4 quadrants (VR, VL, DR, DL) × 24 muscles per quadrant
-    - [ ] Documents: which elastic particles belong to which muscle unit
-    - [ ] Documents: how `sibernetic_c302.py` maps c302 motor neuron output to Sibernetic muscle indices
-    - [ ] Includes a diagram or table showing muscle → quadrant → particle index mapping
-    - [ ] References WormAtlas microphotograph geometries (Palyanov et al. 2018)
-- **Sponsor Summary Hint:** The 96-muscle mapping is one of Sibernetic's most sophisticated features — each muscle unit activates a specific subset of elastic particles based on real worm anatomy. But this mapping is embedded deep in the code with minimal documentation. This makes it accessible, which is critical for anyone working on the muscle-physics coupling (DD002→DD003 interface).
-
----
-
-### Issue 19: Create Sibernetic CONTRIBUTING.md with backend development guide
-
-- **Title:** `[DD003] Create CONTRIBUTING.md with backend development workflow and standards`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Any
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** docs
-- **DD Section to Read:** [DD003 — Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) and [DD003 — How to Build & Test](DD003_Body_Physics_Architecture.md#how-to-build-test)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 existing test configurations. Document these as the standard test suite in the contributing guide.
-    - [`openworm/sibernetic/README.md`](https://github.com/openworm/sibernetic) — 17.5KB README with build instructions. Reference for build workflow.
-- **Approach:** Create — no CONTRIBUTING.md exists. Use `run_all_tests.sh` and README as foundation.
-- **Files to Modify:**
-    - `CONTRIBUTING.md` (new — in Sibernetic repo)
-- **Test Commands:**
-    - N/A (documentation task)
-- **Acceptance Criteria:**
-    - [ ] Prerequisites: what to install for OpenCL, PyTorch, and Taichi development
-    - [ ] Build instructions for each backend
-    - [ ] Testing workflow: unit tests → stability check → incompressibility check → parity test
-    - [ ] PR checklist from DD003 Quality Criteria (all 6 criteria)
-    - [ ] Branch naming convention: `dd003/description`
-    - [ ] How to add a new backend (step-by-step guide)
-    - [ ] How to run the cross-backend parity test suite
-    - [ ] Links to DD003 for specifications and DD011 for Docker integration
-- **Sponsor Summary Hint:** A CONTRIBUTING.md is the entry point for any developer. This one specifically guides physics engine contributors through the multi-backend testing workflow — build, test, compare against OpenCL baseline, submit PR. Without it, contributors won't know which tests to run or what quality bar to meet.
-
----
-
-### Issue 20: Create Sibernetic changelog from git history
-
-- **Title:** `[DD003] Create annotated changelog documenting Sibernetic's evolution`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Any
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** git, docs
-- **DD Section to Read:** [DD003 — Validated Kinematic Outputs](DD003_Body_Physics_Architecture.md#validated-kinematic-outputs-palyanov-et-al-2018)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - Git history of `openworm/sibernetic` — the primary source material for this changelog.
-- **Approach:** Create — no changelog exists. Mine the git history.
-- **Files to Modify:**
-    - `CHANGELOG.md` (new — in Sibernetic repo)
-- **Test Commands:**
-    - N/A (documentation task)
-- **Acceptance Criteria:**
-    - [ ] List major milestones: initial SPH, PCISPH addition, muscle mapping, PyTorch backend, Taichi backend
-    - [ ] Map milestones to publications (Palyanov et al. 2018, etc.)
-    - [ ] Note key branch points: `master`, `ow-0.9.7`, `ow-pytorch-0.0.1`
-    - [ ] Document current active branches and what they contain
-    - [ ] Note deprecated/abandoned experiments
-    - [ ] Useful for new contributors understanding how the codebase evolved
-- **Sponsor Summary Hint:** Sibernetic has been in development since ~2014 across multiple branches. A changelog helps new contributors understand what exists, what's been tried, and what worked. Without it, they'll stumble over abandoned experiments and wonder why there are multiple solver implementations.
-
----
-
-### Issue 21: Verify and document Sibernetic's existing test suite
-
-- **Title:** `[DD003] Audit existing Sibernetic test suite and document test coverage`
-- **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Any
-- **Target Repo:** `openworm/Sibernetic`
-- **Required Capabilities:** python, testing
-- **DD Section to Read:** [DD003 Quality Criteria](DD003_Body_Physics_Architecture.md#quality-criteria) (criterion 3: unit tests)
-- **Depends On:** None
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/run_all_tests.sh`](https://github.com/openworm/sibernetic) — 5 bash test configurations. THIS is the existing test suite to audit.
-    - [`openworm/sibernetic/src/owPhysicTest.cpp`](https://github.com/openworm/sibernetic) — Energy conservation test.
-    - [`openworm/sibernetic/wcon/generate_wcon.py`](https://github.com/openworm/sibernetic) — WCON generation with schema validation (has its own test data).
-- **Approach:** Create — no test coverage documentation exists. Run and catalog all existing tests.
-- **Files to Modify:**
-    - `docs/test_coverage.md` (new — in Sibernetic repo)
-- **Test Commands:**
-    - `pytest tests/ -v --tb=short` (or equivalent for C++ tests)
-- **Acceptance Criteria:**
-    - [ ] Inventory all existing tests (unit, integration, regression)
-    - [ ] Document: which tests exist, what they test, which backend they target
-    - [ ] Run all tests and report pass/fail status
-    - [ ] Identify gaps: which DD003 Quality Criteria are not covered by existing tests
-    - [ ] Document the "76+ tests pass" claim for PyTorch backend — which specific tests?
-    - [ ] Recommend: priority test additions to improve coverage
-    - [ ] Post findings as `docs/test_coverage.md`
-- **Sponsor Summary Hint:** DD003 says "76+ tests pass" on PyTorch, but which tests? Before adding new tests, we need to know what exists. This audit catalogs the current test suite, identifies gaps, and creates a roadmap for improving coverage. You can't improve what you don't measure.
+    - [ ] Data flow diagram: NEURON muscle state → `sibernetic_c302.py` → Sibernetic muscle activation
+    - [ ] Variable mapping: which NEURON variable (`ca_internal`) maps to which Sibernetic input
+    - [ ] Timing diagram: coupling timestep (dt_coupling = 0.005 ms), when reads/writes happen
+    - [ ] Activation formula walkthrough: `min(1.0, [Ca²⁺]ᵢ / max_ca)` with units and typical values
+    - [ ] Force injection: how Sibernetic converts activation [0,1] to elastic particle forces (max_force = 4000)
+    - [ ] Muscle ID mapping: c302 muscle names → Sibernetic muscle indices
+    - [ ] Coupling modes: document all three modes from `main_sim.py` (synthetic, file-based, live NEURON)
+    - [ ] Change impact analysis: what breaks if you change each parameter (from DD003 Coupling Bridge Ownership section)
+    - [ ] Coordination notes: who must agree before changing the coupling interface
+    - [ ] Cross-references to DD003 (muscle model), DD001 (body physics), DD011 (simulation stack)
+    - [ ] Reference `CE_locomotion/Worm.cpp::Step()` as gold standard for coupling sequence
+- **Sponsor Summary Hint:** The coupling script is the bridge between two very different worlds: the electrical simulation (NEURON, millisecond timescale, voltages in millivolts) and the mechanical simulation (Sibernetic, microsecond timescale, forces in arbitrary units). This document explains exactly how data flows across that bridge — what gets read, what gets computed, what gets written, and when. It references the `CE_locomotion` implementation as the gold standard for coupling sequence. It's the most critical integration point in the entire worm simulation, and currently the least documented.
 
 ---
 
@@ -707,55 +649,72 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 21 |
-| **ai-workable** | 14 |
-| **human-expert** | 7 |
-| **L1** | 8 |
-| **L2** | 8 |
-| **L3** | 5 |
+| **Total Issues** | 18 |
+| **ai-workable** | 13 |
+| **human-expert** | 5 |
+| **L1** | 9 |
+| **L2** | 6 |
+| **L3** | 3 |
 
 | Group | Issues | Target |
 |-------|--------|--------|
-| **1: Validation Infrastructure** | 1–6 | Scripts and test configs to measure quality |
-| **2: Backend Stabilization** | 7–10 | Support the DD011 Issues 39–42 stabilization sequence |
-| **3: Output Pipeline** | 11–13 | OME-Zarr, surface mesh, configurable output |
-| **4: Advanced Features** | 14–16 | FEM evaluation, Python bindings, gel environment |
-| **5: Documentation** | 17–21 | Architecture docs, muscle mapping, contributing guide |
+| **1: Validation Scripts** | 1–4 | Adapt existing scripts into validation tools, unit tests, parameter audit |
+| **2: Output Pipeline & Integration** | 5–8 | OME-Zarr export, config validation, interface testing |
+| **3: Bug Fixes & Improvements** | 9–12 | MVL24 fix, config propagation, edge cases, NMJ audit |
+| **4: Research & Advanced** | 13–15 | Transcriptomics survey, multi-compartment, Hill-type |
+| **5: Documentation** | 16–18 | Contributor guide, anatomy mapping, coupling architecture |
 
-### Cross-Reference: DD011 Backend Stabilization Issues (also labeled DD003)
+### Code Reuse Summary
 
-| DD011 Issue | Title | Label | Level |
-|-------------|-------|-------|-------|
-| 39 | Create cross-backend parity test suite | `DD003`, `ai-workable` | L2 |
-| 40 | Fix Taichi elastic coordinate-space bug | `DD003`, `human-expert` | L2 |
-| 41 | Audit PyTorch/Taichi result quality gap | `DD003`, `human-expert` | L3 |
-| 42 | Graduate backends to Stable/Production | `DD003`, `ai-workable` | L2 |
+| Issue | Reframe Level | Primary Source Code | Reuse Strategy |
+|-------|--------------|-------------------|----------------|
+| 1 | Aggressively reframed | `c302/c302_MuscleTest.py` | Extract plotting logic into standalone script |
+| 2 | Aggressively reframed | `muscle_model/.../compareToNeuroML2.py` | Adapt validation code |
+| 3 | Aggressively reframed | `c302/c302_IClampMuscle.py`, `c302/c302_MuscleTest.py` | Convert to pytest suite |
+| 4 | Aggressively reframed | `muscle_model/.../compareToNeuroML2.py`, `input_vars.py` | Extend audit methodology |
+| 5 | Genuinely new | (no existing Zarr code) | New work; data format documented |
+| 6 | Genuinely new | (no existing config validation) | New work; schema from DD011 |
+| 7 | Genuinely new | `sibernetic/sibernetic_c302.py` (test target) | New test for existing pipeline |
+| 8 | Aggressively reframed | `c302/c302_TargetMuscle.py`, cect API | Extend single-muscle query to all muscles |
+| 9 | Aggressively reframed | `c302/__init__.py` → `get_muscle_names()` | Patch function in place |
+| 10 | Modify existing | `sibernetic/sibernetic_c302.py` | Replace hardcoded values with config |
+| 11 | New tests | `sibernetic/src/main_sim.py` (test target) | New tests for existing formula |
+| 12 | Analysis | `c302/parameters_C.py`, `c302_TargetMuscle.py` | Audit using existing query tools |
+| 13–15 | Research | Various repos | Reference only |
+| 16–18 | Documentation | All repos | Catalog existing code |
 
-**Combined DD003 total (this doc + DD011):** 25 issues
+### Cross-References
 
-### Dependency Graph (Critical Path)
+| Related DD | Related Issues |
+|------------|---------------|
+| DD002 (Neural Circuit) | Issues 8, 12 (NMJ connectivity and conductance) |
+| DD001 (Body Physics) | Issues 7, 10, 18 (calcium interface, config, coupling) |
+| DD005 (Cell-Type Specialization) | Issue 13 (CeNGEN transcriptomics for muscle types) |
+| DD007 (Pharyngeal System) | Issue 15 (specialized muscle mechanics) |
+| DD010 (Validation Framework) | Issues 1, 2, 7 (validation scripts and integration testing) |
+| DD011 (Simulation Stack) | Issues 6, 10 (config schema and propagation) |
+| DD012 (Dynamic Visualization) | Issue 5 (OME-Zarr export for viewer) |
+| DD016 (Connectome Data Access) | Issue 8 (cect API for NMJ validation) |
+| DD001 Draft Issues (Issue 18) | Issue 17 (complementary: c302-side NMJ mapping vs. Sibernetic-side particle mapping) |
+
+### Dependency Graph
 
 ```
-Issue 1 (check_stability.py) ─┐
-Issue 2 (incompressibility.py)─┤
-Issue 3 (test configs) ────────┤
-                               ├→ Issue 4 (OpenCL baseline)
-                               │     └→ DD011 Issue 39 (parity test suite)
-                               │           ├→ DD011 Issue 40 (Taichi coordinate fix)
-                               │           │     └→ DD011 Issue 41 (quality gap audit)
-                               │           │           └→ DD011 Issue 42 (graduate backends)
-                               │           └→ Issue 10 (benchmarks)
-                               │
-Issue 5 (PyTorch kernel tests) ┤
-Issue 6 (Taichi kernel tests)  ├→ Issue 8 (PyTorch CI)
-                               │
-Issue 7 (OpenCL docs) ─────────┘→ DD011 Issue 41 (quality gap audit)
+Issue 1 (plot_muscle_activation.py) — independent
+Issue 2 (validate_muscle_calcium.py) — independent
+Issue 3 (unit tests) ─────────────────→ Issue 9 (MVL24 fix — tests verify fix)
+Issue 4 (parameter audit) — independent
 
-Issue 11 (OME-Zarr export) → Issue 12 (surface mesh)
-Issue 13 (output frequency) — depends on DD011 Issue 9
-Issue 14 (FEM evaluation) — independent
-Issue 15 (Python bindings) — independent
-Issue 16 (gel environment) — depends on DD011 Issue 1
+Issue 5 (OME-Zarr export) — independent
+Issue 6 (config validation) — depends on DD011 Issues 1, 2
+Issue 7 (DD003→DD001 integration test) — depends on Issue 2
+Issue 8 (NMJ connectivity validation) — independent
 
-Issues 9, 17–21 (audits/docs) — independent
+Issue 9 (MVL24 fix) — depends on Issue 3
+Issue 10 (config propagation) — depends on DD011 Issues 1, 9
+Issue 11 (edge cases) — independent
+Issue 12 (NMJ conductance audit) — independent
+
+Issues 13–15 (research) — independent
+Issues 16–18 (documentation) — independent
 ```

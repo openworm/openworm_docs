@@ -101,7 +101,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 **L2 (Junior Contributor):**
 
 - Can: Open PRs to designated "contributor-ready" subsystems (data pipelines, validation scripts, non-critical NeuroML extensions)
-- Cannot: Modify core cell models ([DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)-[DD003](../design_documents/DD003_Body_Physics_Architecture.md)), merge others' PRs
+- Cannot: Modify core cell models ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD001](../design_documents/DD001_Body_Physics_Architecture.md)), merge others' PRs
 - Review process: Mind-of-a-Worm pre-review (subsystem + integration compliance) → L3/L4 human review → merge
 - **Integration requirement:** Must run `docker compose run quick-test` before submitting PRs and include results in PR description
 - Progression: Sustained quality (error-free PRs, good communication, alignment with Design Documents **including Integration Contracts**) over 3+ months → L3 nomination
@@ -112,7 +112,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Cannot: Change Design Documents, make cross-cutting architectural decisions
 - Responsibilities:
   - Mentor L1/L2 contributors in their subsystem
-  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** ([DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)-[DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
+  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** ([DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)-[DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
   - **When reviewing PRs that change a coupling interface, coordinate with Senior Contributors of consuming subsystems before merging**
   - Run `docker compose run validate` for PRs that modify core model parameters
   - Triage issues specific to their subsystem
@@ -149,9 +149,9 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 
 | Subsystem | Design Documents | Current Senior Contributor (L4) | Primary Repository |
 |-----------|-----------------|---------------------|-------------------|
-| **Neural Circuit** | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | TBD (Neural Circuit L4) | CElegansNeuroML, c302 |
-| **Body Physics** | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | TBD (Body Physics L4) | Sibernetic |
-| **Muscle Models** | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md) | TBD (propose from community) | c302, Sibernetic |
+| **Neural Circuit** | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md), [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | TBD (Neural Circuit L4) | CElegansNeuroML, c302 |
+| **Body Physics** | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD004](../design_documents/DD004_Mechanical_Cell_Identity.md) | TBD (Body Physics L4) | Sibernetic |
+| **Muscle Models** | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md), [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md), [DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md) | TBD (propose from community) | c302, Sibernetic |
 | **Data Integration** | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | TBD | OWMeta, ConnectomeToolbox |
 | **Validation** | [DD010](../design_documents/DD010_Validation_Framework.md) | TBD | open-worm-analysis-toolbox |
 | **Integration Stack** | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) | TBD — **Critical hire** | OpenWorm (meta-repo) |
@@ -368,9 +368,9 @@ Mind-of-a-Worm maintains a **contributor database**:
     "teach_back": ["i_understand_neurons", "i_understand_muscles", "i_understand_the_body"],
     "sponsor_domains_covered": 3,
     "explain_level_overrides": {
-      "[DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)": "graduate",
-      "[DD002](../design_documents/DD002_Muscle_Model_Architecture.md)": "undergrad",
-      "[DD003](../design_documents/DD003_Body_Physics_Architecture.md)": "undergrad"
+      "[DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)": "graduate",
+      "[DD003](../design_documents/DD003_Muscle_Model_Architecture.md)": "undergrad",
+      "[DD001](../design_documents/DD001_Body_Physics_Architecture.md)": "undergrad"
     }
   }
 }
@@ -504,9 +504,9 @@ Earned by demonstrating specific technical capabilities. Verified by Mind-of-a-W
 
 | Badge | Criteria | DD Alignment | BadgeList Equivalent |
 |-------|----------|-------------|---------------------|
-| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) | "H-H Tutorial Graduate" (17 earners) |
-| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) | "Muscle Model Explorer" (9 earners) |
-| **Body Physics Basics** | Run Sibernetic, explain SPH approach | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) | — |
+| **Neuron Modeling Foundations** | Complete Hodgkin-Huxley tutorial, explain action potential | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) | "H-H Tutorial Graduate" (17 earners) |
+| **Muscle Model Understanding** | Run muscle model, explain ion channel dynamics | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) | "Muscle Model Explorer" (9 earners) |
+| **Body Physics Basics** | Run Sibernetic, explain SPH approach | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) | — |
 | **Data Wrangler** | Extract data from a paper using [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) pipeline | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) | "Literature Mining I" (4 earners) |
 | **Movement Analyst** | Run analysis toolbox on sample data, generate report | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | "Movement Database User" (3 earners) |
 | **GitHub Proficient** | Submit clean PR with tests, respond to review | General | "GitHub Best Practices" (10 earners) |
@@ -521,9 +521,9 @@ Earned by sustained contribution to a specific Design Document's domain. Tracked
 
 | Badge | Criteria | DD |
 |-------|----------|----|
-| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) |
-| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) |
-| **Body Physics Contributor** | 5+ merged PRs in Sibernetic | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
+| **Neural Circuit Contributor** | 5+ merged PRs in c302/CElegansNeuroML | [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) |
+| **Muscle Model Contributor** | 5+ merged PRs in muscle model code | [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) |
+| **Body Physics Contributor** | 5+ merged PRs in Sibernetic | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
 | **Data Pipeline Contributor** | 5+ merged PRs in OWMeta/data tools | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) |
 | **Validation Contributor** | 5+ merged PRs in analysis toolbox | [DD010](../design_documents/DD010_Validation_Framework.md) |
 | **Visualization Contributor** | 5+ merged PRs in Worm3DViewer/browser | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) |
@@ -539,16 +539,16 @@ Unique to the AI contributor model. Earned when a human sponsor's AI agent lands
 
 | Badge | Criteria | Domain |
 |-------|----------|--------|
-| **I Understand Neurons** | Sponsor Summary for a [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md) contribution passes review | Neural Circuit |
-| **I Understand Muscles** | Sponsor Summary for a [DD002](../design_documents/DD002_Muscle_Model_Architecture.md) contribution passes review | Muscle Model |
-| **I Understand the Body** | Sponsor Summary for a [DD003](../design_documents/DD003_Body_Physics_Architecture.md) contribution passes review | Body Physics |
+| **I Understand Neurons** | Sponsor Summary for a [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) contribution passes review | Neural Circuit |
+| **I Understand Muscles** | Sponsor Summary for a [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) contribution passes review | Muscle Model |
+| **I Understand the Body** | Sponsor Summary for a [DD001](../design_documents/DD001_Body_Physics_Architecture.md) contribution passes review | Body Physics |
 | **I Understand Peptides** | Sponsor Summary for a [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) contribution passes review | Neuropeptides |
 | **I Understand Validation** | Sponsor Summary for a [DD010](../design_documents/DD010_Validation_Framework.md) contribution passes review | Validation |
 | **I Understand the Whole Worm** | Earn teach-back badges in 5+ different domains | Cross-domain |
 
 **How this works in practice:**
 
-1. A middle schooler sponsors an AI agent that implements a gap junction in [DD001](../design_documents/DD001_Neural_Circuit_Architecture.md)
+1. A middle schooler sponsors an AI agent that implements a gap junction in [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md)
 2. The agent writes a Sponsor Summary at `explain_level: child`: "You helped connect two brain cells that tell the worm to back up!"
 3. Mind-of-a-Worm verifies the summary is scientifically accurate at that level
 4. The sponsor earns **"I Understand Neurons"** badge

@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Oscillator), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack)
 
 ---
 
@@ -29,7 +29,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 ## Deliverables
 
 - Framework specification document (this DD)
-- Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
+- Differentiable simulation backend (`openworm/openworm-ml/differentiable/`) — PyTorch reimplementation of [DD002](DD002_Neural_Circuit_Architecture.md)+[DD003](DD003_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) ODEs
 - Neural surrogate for SPH body physics (`openworm/openworm-ml/surrogate/`)
 - Foundation model parameter pipeline (`openworm/openworm-ml/foundation_params/`) — **Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md)**
 - Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
@@ -132,7 +132,7 @@ Detailed commands: `[TO BE DEVELOPED as components are implemented]`
 
 ### The Current Approach Works — But Has Real Limitations
 
-OpenWorm's simulation stack ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md)) uses coupled ordinary differential equations (ODEs) with Hodgkin-Huxley (HH) conductance-based neuron models, calcium-force muscle coupling, and Smoothed Particle Hydrodynamics (SPH) for body physics. This approach is:
+OpenWorm's simulation stack ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD001](DD001_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md)) uses coupled ordinary differential equations (ODEs) with Hodgkin-Huxley (HH) conductance-based neuron models, calcium-force muscle coupling, and Smoothed Particle Hydrodynamics (SPH) for body physics. This approach is:
 
 - **Mechanistically interpretable:** Every parameter has a physical meaning (conductances in mS/cm², time constants in ms, calcium concentrations in µM)
 - **Compositionally modular:** New subsystems (neuropeptides [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), intestine [DD009](DD009_Intestinal_Oscillator_Model.md), pharynx [DD007](DD007_Pharyngeal_System_Architecture.md)) plug in via clean Integration Contracts
@@ -142,13 +142,13 @@ This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's
 
 ### Four Pain Points That ML Can Address
 
-**1. Speed:** [DD009](DD009_Intestinal_Oscillator_Model.md) notes that 200 seconds of simulated time takes ~10 hours wall clock. [DD003](DD003_Body_Physics_Architecture.md)'s SPH with ~100K particles is the bottleneck. This makes iteration brutal — a researcher adjusting one parameter waits half a day for feedback.
+**1. Speed:** [DD009](DD009_Intestinal_Oscillator_Model.md) notes that 200 seconds of simulated time takes ~10 hours wall clock. [DD001](DD001_Body_Physics_Architecture.md)'s SPH with ~100K particles is the bottleneck. This makes iteration brutal — a researcher adjusting one parameter waits half a day for feedback.
 
-**2. Parameter gaps:** [DD001](DD001_Neural_Circuit_Architecture.md) uses the *same* generic HH parameters for all 302 neurons (from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle electrophysiology). [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN transcriptomics, but the mapping from transcript counts to conductance densities is hand-crafted and unvalidated. Most neurons lack direct electrophysiology data.
+**2. Parameter gaps:** [DD002](DD002_Neural_Circuit_Architecture.md) uses the *same* generic HH parameters for all 302 neurons (from [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) muscle electrophysiology). [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN transcriptomics, but the mapping from transcript counts to conductance densities is hand-crafted and unvalidated. Most neurons lack direct electrophysiology data.
 
-**3. Manual parameter fitting:** [DD009](DD009_Intestinal_Oscillator_Model.md) states parameters were "fit to match ~50 second period." [DD002](DD002_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned. [DD001](DD001_Neural_Circuit_Architecture.md)'s synaptic conductance `g_syn = 0.09 nS` was hand-set. With hundreds of parameters across [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), manual tuning doesn't scale.
+**3. Manual parameter fitting:** [DD009](DD009_Intestinal_Oscillator_Model.md) states parameters were "fit to match ~50 second period." [DD003](DD003_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned. [DD002](DD002_Neural_Circuit_Architecture.md)'s synaptic conductance `g_syn = 0.09 nS` was hand-set. With hundreds of parameters across [DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), manual tuning doesn't scale.
 
-**4. Missing sensory front-end:** [DD001](DD001_Neural_Circuit_Architecture.md) explicitly scopes out sensory transduction: "Currently sensory neurons receive generic current injections." The worm can't sense its environment, making closed-loop behavior impossible.
+**4. Missing sensory front-end:** [DD002](DD002_Neural_Circuit_Architecture.md) explicitly scopes out sensory transduction: "Currently sensory neurons receive generic current injections." The worm can't sense its environment, making closed-loop behavior impossible.
 
 ### The Hybrid Principle
 
@@ -165,9 +165,9 @@ This is OpenWorm's core differentiator vs. Virtual Cell Foundation Models (CZI's
 │         │                  │                              │
 │  ┌──────▼──────────────────▼──────────────────────────┐  │
 │  │          MECHANISTIC CORE (unchanged)               │  │
-│  │  [DD001](DD001_Neural_Circuit_Architecture.md): HH Neural Circuit (302 neurons, ODEs)       │  │
-│  │  [DD002](DD002_Muscle_Model_Architecture.md): Muscle Ca²⁺-Force Coupling (95 muscles)     │  │
-│  │  [DD003](DD003_Body_Physics_Architecture.md): SPH Body Physics (100K particles)           │  │
+│  │  [DD002](DD002_Neural_Circuit_Architecture.md): HH Neural Circuit (302 neurons, ODEs)       │  │
+│  │  [DD003](DD003_Muscle_Model_Architecture.md): Muscle Ca²⁺-Force Coupling (95 muscles)     │  │
+│  │  [DD001](DD001_Body_Physics_Architecture.md): SPH Body Physics (100K particles)           │  │
 │  │  [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Neuropeptide Modulation                     │  │
 │  │  [DD007](DD007_Pharyngeal_System_Architecture.md): Pharyngeal System                           │  │
 │  │  [DD009](DD009_Intestinal_Oscillator_Model.md): Intestinal Oscillator                       │  │
@@ -208,7 +208,7 @@ Today, when a parameter in the simulation is wrong, the workflow is manual trial
 6. Adjust again... repeat 20-50 times
 7. Eventually land on values that produce ~50 seconds
 
-This is how [DD009](DD009_Intestinal_Oscillator_Model.md)'s parameters were fit ("fit to match ~50 second period"). [DD001](DD001_Neural_Circuit_Architecture.md)'s `g_syn = 0.09 nS` and [DD002](DD002_Muscle_Model_Architecture.md)'s `max_ca = 4e-7 mol` were similarly hand-tuned.
+This is how [DD009](DD009_Intestinal_Oscillator_Model.md)'s parameters were fit ("fit to match ~50 second period"). [DD002](DD002_Neural_Circuit_Architecture.md)'s `g_syn = 0.09 nS` and [DD003](DD003_Muscle_Model_Architecture.md)'s `max_ca = 4e-7 mol` were similarly hand-tuned.
 
 **"Differentiable" means the simulator can automatically answer: "If I increase `g_max_Kslow` by 0.001 mS/cm², how much does the worm's forward speed change?"**
 
@@ -218,7 +218,7 @@ That quantity — `∂(speed) / ∂(g_max_Kslow)` — is a **gradient**. It tell
 
 The equations do not change at all. Same HH formalism, same IP3 receptor model, same calcium dynamics. The only difference is what software runs them.
 
-| | Today ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) | Differentiable Backend |
+| | Today ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) | Differentiable Backend |
 |---|---|---|
 | **Equations** | `C * dV/dt = I_leak + I_K + I_Ca + ...` | Identical |
 | **Parameters** | Physical meaning (conductances, time constants) | Same physical meaning |
@@ -233,7 +233,7 @@ import torch
 from torchdiffeq import odeint
 
 class CelegansNeuron(torch.nn.Module):
-    """Same HH equations as [DD001](DD001_Neural_Circuit_Architecture.md), rewritten in PyTorch.
+    """Same HH equations as [DD002](DD002_Neural_Circuit_Architecture.md), rewritten in PyTorch.
 
     The key difference: every parameter is a torch.nn.Parameter,
     which means PyTorch automatically tracks how the output
@@ -242,7 +242,7 @@ class CelegansNeuron(torch.nn.Module):
     def __init__(self):
         super().__init__()
         # These are now differentiable parameters.
-        # Same values as [DD001](DD001_Neural_Circuit_Architecture.md), same physical meaning.
+        # Same values as [DD002](DD002_Neural_Circuit_Architecture.md), same physical meaning.
         self.g_leak = torch.nn.Parameter(torch.tensor(0.005))   # mS/cm²
         self.g_Kslow = torch.nn.Parameter(torch.tensor(3.0))    # mS/cm²
         self.g_Kfast = torch.nn.Parameter(torch.tensor(0.0711)) # mS/cm²
@@ -251,13 +251,13 @@ class CelegansNeuron(torch.nn.Module):
     def forward(self, t, state):
         V, Ca = state[0], state[1]
 
-        # Same equations as [DD001](DD001_Neural_Circuit_Architecture.md) line 60-76, verbatim
+        # Same equations as [DD002](DD002_Neural_Circuit_Architecture.md) line 60-76, verbatim
         I_leak = self.g_leak * (V - (-50.0))          # E_leak = -50 mV
         I_K = self.g_Kslow * m_inf(V) * (V - (-60.0)) # E_K = -60 mV
         I_Ca = self.g_Ca * m_Ca(V) * h_Ca(V) * (V - 40.0)  # E_Ca = +40 mV
 
         dVdt = -(I_leak + I_K + I_Ca) / 1.0  # C_m = 1 µF/cm²
-        dCadt = -0.000238 * I_Ca - Ca / 11.5943  # rho, tau_Ca from [DD001](DD001_Neural_Circuit_Architecture.md)
+        dCadt = -0.000238 * I_Ca - Ca / 11.5943  # rho, tau_Ca from [DD002](DD002_Neural_Circuit_Architecture.md)
 
         return torch.stack([dVdt, dCadt])
 
@@ -290,15 +290,15 @@ print(f"g_Ca gradient: {neuron.g_Ca.grad}")
 
 The system has a **302-neuron, 95-muscle, 20-intestinal-cell model** where:
 
-- [DD001](DD001_Neural_Circuit_Architecture.md) uses the *same* generic conductances for all 302 neurons
+- [DD002](DD002_Neural_Circuit_Architecture.md) uses the *same* generic conductances for all 302 neurons
 - [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing them via CeNGEN, but the mapping from transcript levels → conductances is unknown
 - [DD009](DD009_Intestinal_Oscillator_Model.md) has 4+ parameters that were manually fit to a 50-second target
-- [DD002](DD002_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned
+- [DD003](DD003_Muscle_Model_Architecture.md)'s `max_ca = 4e-7` and `muscle_strength = 4000` were manually tuned
 - [DD010](DD010_Validation_Framework.md) has quantitative validation targets (speed ±15%, period 50±10s, functional connectivity r > 0.5)
 
 A differentiable simulation enables:
 
-1. Start with the current generic [DD001](DD001_Neural_Circuit_Architecture.md) parameters
+1. Start with the current generic [DD002](DD002_Neural_Circuit_Architecture.md) parameters
 2. Define the loss as the sum of all [DD010](DD010_Validation_Framework.md) validation criteria:
    ```python
    loss = (
@@ -329,7 +329,7 @@ The neurotransmitter consistency term constrains the optimizer to respect experi
 
 #### The Existing Starting Point
 
-[DD003](DD003_Body_Physics_Architecture.md)'s compute backends already include a PyTorch solver (`pytorch_solver.py` in Sibernetic). This is the body physics side. The neural circuit side (c302) is locked in NEURON/jNML. Bridging that gap — getting the full [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) chain into a single differentiable framework — is the core engineering work.
+[DD001](DD001_Body_Physics_Architecture.md)'s compute backends already include a PyTorch solver (`pytorch_solver.py` in Sibernetic). This is the body physics side. The neural circuit side (c302) is locked in NEURON/jNML. Bridging that gap — getting the full [DD002](DD002_Neural_Circuit_Architecture.md)→[DD003](DD003_Muscle_Model_Architecture.md)→[DD001](DD001_Body_Physics_Architecture.md) chain into a single differentiable framework — is the core engineering work.
 
 #### Implementation
 
@@ -339,7 +339,7 @@ The neurotransmitter consistency term constrains the optimizer to respect experi
 - Larger community, more accessible to contributors
 - `torchdiffeq` is mature and well-tested for ODE systems
 
-**Scope:** Reimplement [DD001](DD001_Neural_Circuit_Architecture.md) (neural circuit) + [DD002](DD002_Muscle_Model_Architecture.md) (muscle model) + [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal oscillator) in PyTorch. [DD003](DD003_Body_Physics_Architecture.md) (SPH body physics) uses the existing PyTorch backend. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) and [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) follow the same pattern when ready.
+**Scope:** Reimplement [DD002](DD002_Neural_Circuit_Architecture.md) (neural circuit) + [DD003](DD003_Muscle_Model_Architecture.md) (muscle model) + [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal oscillator) in PyTorch. [DD001](DD001_Body_Physics_Architecture.md) (SPH body physics) uses the existing PyTorch backend. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) and [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx) follow the same pattern when ready.
 
 **Architecture:**
 
@@ -349,14 +349,14 @@ class DifferentiableWorm(torch.nn.Module):
 
     def __init__(self, connectome, config):
         super().__init__()
-        # [DD001](DD001_Neural_Circuit_Architecture.md): 302 neurons, each with differentiable HH parameters
+        # [DD002](DD002_Neural_Circuit_Architecture.md): 302 neurons, each with differentiable HH parameters
         self.neurons = NeuralCircuit(
             n_neurons=302,
             connectome=connectome,        # Cook 2019 topology (fixed)
             channel_params=per_class_params,  # Differentiable
             synapse_params=synapse_params,    # Differentiable
         )
-        # [DD002](DD002_Muscle_Model_Architecture.md): 95 muscles with calcium-force coupling
+        # [DD003](DD003_Muscle_Model_Architecture.md): 95 muscles with calcium-force coupling
         self.muscles = MuscleModel(
             n_muscles=95,
             coupling_params=muscle_params,  # Differentiable
@@ -368,7 +368,7 @@ class DifferentiableWorm(torch.nn.Module):
         )
 
     def forward(self, t, state):
-        """ODE right-hand side: same equations as [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md)."""
+        """ODE right-hand side: same equations as [DD002](DD002_Neural_Circuit_Architecture.md)+[DD003](DD003_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md)."""
         neuron_state, muscle_state, intestine_state = split_state(state)
 
         d_neuron = self.neurons(t, neuron_state, muscle_state)
@@ -397,7 +397,7 @@ for epoch in range(1000):
 
 #### Problem
 
-[DD003](DD003_Body_Physics_Architecture.md)'s SPH simulation is the speed bottleneck. With ~100K particles and a timestep of 20µs, simulating 200 seconds of biological time takes ~10 hours. This makes:
+[DD001](DD001_Body_Physics_Architecture.md)'s SPH simulation is the speed bottleneck. With ~100K particles and a timestep of 20µs, simulating 200 seconds of biological time takes ~10 hours. This makes:
 
 - CI validation painfully slow ([DD010](DD010_Validation_Framework.md) Tier 3)
 - Parameter sweeps impractical (exploring 10 parameter combinations = 100 hours)
@@ -502,9 +502,9 @@ See [DD021](DD021_Protein_Foundation_Model_Pipeline.md) for the full specificati
 
 #### Problem
 
-[DD001](DD001_Neural_Circuit_Architecture.md) explicitly scopes out sensory transduction:
+[DD002](DD002_Neural_Circuit_Architecture.md) explicitly scopes out sensory transduction:
 
-> "Sensory transduction: How mechanosensors, chemosensors, thermosensors convert stimuli to voltage is out of scope. Currently sensory neurons receive generic current injections." ([DD001](DD001_Neural_Circuit_Architecture.md), Boundaries)
+> "Sensory transduction: How mechanosensors, chemosensors, thermosensors convert stimuli to voltage is out of scope. Currently sensory neurons receive generic current injections." ([DD002](DD002_Neural_Circuit_Architecture.md), Boundaries)
 
 This means the worm is "open-loop" — it generates movement but cannot sense or respond to its environment. Without sensory input, behaviors like chemotaxis (navigating toward food), thermotaxis (navigating toward preferred temperature), and touch avoidance are impossible.
 
@@ -515,10 +515,10 @@ Building mechanistic models of the full transduction cascade (stimulus → recep
 Train a model on published sensory neuron calcium imaging data to learn the mapping from stimulus → sensory neuron response, without modeling the intermediate biochemistry:
 
 ```
-Environment stimulus → Learned Sensory Model → Current injection on sensory neurons → [DD001](DD001_Neural_Circuit_Architecture.md) ODE circuit
+Environment stimulus → Learned Sensory Model → Current injection on sensory neurons → [DD002](DD002_Neural_Circuit_Architecture.md) ODE circuit
 ```
 
-This is a **learned boundary condition** — a standard technique in hybrid modeling. The rest of the circuit ([DD001](DD001_Neural_Circuit_Architecture.md) interneurons, [DD002](DD002_Muscle_Model_Architecture.md) muscles, [DD003](DD003_Body_Physics_Architecture.md) body physics) remains mechanistic.
+This is a **learned boundary condition** — a standard technique in hybrid modeling. The rest of the circuit ([DD002](DD002_Neural_Circuit_Architecture.md) interneurons, [DD003](DD003_Muscle_Model_Architecture.md) muscles, [DD001](DD001_Body_Physics_Architecture.md) body physics) remains mechanistic.
 
 #### Available Training Data
 
@@ -562,7 +562,7 @@ class SensoryTransducer(torch.nn.Module):
 # Example: thermotaxis
 thermo_transducer = SensoryTransducer(n_sensory_neurons=3, stimulus_dim=1)
 # Train on Clark 2006 data: temperature ramp → AFD/AIY/AIZ calcium
-# Output feeds into [DD001](DD001_Neural_Circuit_Architecture.md) as I_ext on sensory neurons
+# Output feeds into [DD002](DD002_Neural_Circuit_Architecture.md) as I_ext on sensory neurons
 ```
 
 #### Closed-Loop Integration
@@ -574,8 +574,8 @@ With learned sensory transduction, the simulation becomes closed-loop:
 2. Environment model computes local stimulus at worm's position
    (e.g., temperature gradient, chemical concentration)
 3. Learned sensory model converts stimulus → I_ext on sensory neurons
-4. [DD001](DD001_Neural_Circuit_Architecture.md) neural circuit processes sensory input → motor output
-5. [DD002](DD002_Muscle_Model_Architecture.md) muscles contract → [DD003](DD003_Body_Physics_Architecture.md) body moves → back to step 1
+4. [DD002](DD002_Neural_Circuit_Architecture.md) neural circuit processes sensory input → motor output
+5. [DD003](DD003_Muscle_Model_Architecture.md) muscles contract → [DD001](DD001_Body_Physics_Architecture.md) body moves → back to step 1
 ```
 
 This enables emergent behaviors: chemotaxis, thermotaxis, and touch avoidance arise from the interaction of learned sensory input with the mechanistic circuit.
@@ -709,11 +709,11 @@ When DD013's ML components fill mechanistic gaps (e.g., learned sensory transduc
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| HH equations and parameters (reference) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | All ODE parameters | NeuroML XML (parsed) | mixed |
-| Connectome topology | [DD001](DD001_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Adjacency matrices | Python API / CSV | Neuron pairs + weights |
+| HH equations and parameters (reference) | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | All ODE parameters | NeuroML XML (parsed) | mixed |
+| Connectome topology | [DD002](DD002_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Adjacency matrices | Python API / CSV | Neuron pairs + weights |
 | CeNGEN expression data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-class transcript levels | CSV | TPM |
 | Ion channel gene sequences | WormBase — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | Protein sequences | FASTA | amino acids |
-| SPH simulation dataset (for surrogate training) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | (muscle_activation, trajectory) pairs | HDF5 | mixed |
+| SPH simulation dataset (for surrogate training) | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic) | (muscle_activation, trajectory) pairs | HDF5 | mixed |
 | Sensory neuron calcium imaging data | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | (stimulus, calcium_response) pairs | CSV | µM, °C, mM |
 | [DD010](DD010_Validation_Framework.md) validation targets | [DD010](DD010_Validation_Framework.md) | Experimental baselines | NumPy / CSV | mixed |
 
@@ -721,10 +721,10 @@ When DD013's ML components fill mechanistic gaps (e.g., learned sensory transduc
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| Auto-fitted ODE parameters | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | Per-neuron-class conductances, time constants | YAML / JSON parameter file | mixed |
+| Auto-fitted ODE parameters | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md) | Per-neuron-class conductances, time constants | YAML / JSON parameter file | mixed |
 | SPH surrogate predictions | [DD010](DD010_Validation_Framework.md) (fast validation) | Body trajectory | WCON-compatible | µm |
 | Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | YAML | mV, ms, mS/cm² |
-| Sensory current injections | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-sensory-neuron I_ext(t) | Time series (PyTorch tensor) | nA |
+| Sensory current injections | [DD002](DD002_Neural_Circuit_Architecture.md) | Per-sensory-neuron I_ext(t) | Time series (PyTorch tensor) | nA |
 | Gradient information | Internal | ∂(validation_loss) / ∂(parameter) | PyTorch .grad tensors | mixed |
 
 ### Configuration (`openworm.yml` Section)
@@ -775,19 +775,19 @@ ml:
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| HH equations | [DD001](DD001_Neural_Circuit_Architecture.md) | If channel model equations change, differentiable backend must be updated to match |
-| Muscle model | [DD002](DD002_Muscle_Model_Architecture.md) | If calcium-force coupling changes, differentiable chain breaks |
-| SPH output format | [DD003](DD003_Body_Physics_Architecture.md) | If trajectory format changes, surrogate training data pipeline breaks |
+| HH equations | [DD002](DD002_Neural_Circuit_Architecture.md) | If channel model equations change, differentiable backend must be updated to match |
+| Muscle model | [DD003](DD003_Muscle_Model_Architecture.md) | If calcium-force coupling changes, differentiable chain breaks |
+| SPH output format | [DD001](DD001_Body_Physics_Architecture.md) | If trajectory format changes, surrogate training data pipeline breaks |
 | CeNGEN data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | If expression data versioning changes, foundation model predictions change |
 | Validation criteria | [DD010](DD010_Validation_Framework.md) | If acceptance criteria change, auto-fitting loss function must be updated |
 | Simulation stack (Docker) | [DD011](DD011_Simulation_Stack_Architecture.md) | If Docker compose structure changes, `ml-test` service must be updated |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit (if using auto-fit params) | [DD001](DD001_Neural_Circuit_Architecture.md) | If auto-fitted parameters change (retrained model), simulation behavior changes |
+| Neural circuit (if using auto-fit params) | [DD002](DD002_Neural_Circuit_Architecture.md) | If auto-fitted parameters change (retrained model), simulation behavior changes |
 | Cell-type specialization (if using foundation params) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
 | Validation (if using surrogate for fast validation) | [DD010](DD010_Validation_Framework.md) | If surrogate accuracy degrades, false-positive validation passes possible |
-| All subsystems (if sensory model changes) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | Sensory input changes → neural dynamics change → everything downstream changes |
+| All subsystems (if sensory model changes) | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | Sensory input changes → neural dynamics change → everything downstream changes |
 
 ---
 
@@ -795,8 +795,8 @@ ml:
 
 ### Phase A: Differentiable Backend (Weeks 1-8)
 
-1. **Week 1-2:** Port [DD001](DD001_Neural_Circuit_Architecture.md) HH equations to PyTorch (single neuron)
-2. **Week 3-4:** Port [DD002](DD002_Muscle_Model_Architecture.md) muscle model, couple to neural circuit
+1. **Week 1-2:** Port [DD002](DD002_Neural_Circuit_Architecture.md) HH equations to PyTorch (single neuron)
+2. **Week 3-4:** Port [DD003](DD003_Muscle_Model_Architecture.md) muscle model, couple to neural circuit
 3. **Week 5-6:** Port [DD009](DD009_Intestinal_Oscillator_Model.md) intestinal oscillator
 4. **Week 7-8:** Equivalence testing against NEURON/jNML reference. Must match within ±5%.
 
@@ -916,6 +916,6 @@ Multi-device Sibernetic engine. Useful for bulk generation of the 500-1000 SPH s
 - **Next Actions:**
 
 1. Create `openworm/openworm-ml` repository
-2. Port [DD001](DD001_Neural_Circuit_Architecture.md) single-neuron HH model to PyTorch (Phase A, Week 1)
+2. Port [DD002](DD002_Neural_Circuit_Architecture.md) single-neuron HH model to PyTorch (Phase A, Week 1)
 3. Verify equivalence against NEURON/jNML reference
 4. Begin SPH surrogate training data generation (Phase C, can start in parallel)

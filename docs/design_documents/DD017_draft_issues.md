@@ -8,9 +8,9 @@
 
 **Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 
-**Note:** These are the first two issues for DD017. DD017's full issue set (toolbox revival, Python 3.12 compat, WCON parser, etc.) will be generated in a future pass. These two issues were originally in DD001 but belong here because they are **validation infrastructure** — thin wrappers around the analysis toolbox that serve as CI gates in the DD011 simulation pipeline. They are consumed by all DDs that need kinematic validation (DD001, DD002, DD003, DD010), not specific to any one DD. They are Phase A1 deliverables required for the milestone: "Containerized Stack with Automated Validation."
+**Note:** These are the first two issues for DD017. DD017's full issue set (toolbox revival, Python 3.12 compat, WCON parser, etc.) will be generated in a future pass. These two issues were originally in DD002 but belong here because they are **validation infrastructure** — thin wrappers around the analysis toolbox that serve as CI gates in the DD011 simulation pipeline. They are consumed by all DDs that need kinematic validation (DD002, DD003, DD001, DD010), not specific to any one DD. They are Phase A1 deliverables required for the milestone: "Containerized Stack with Automated Validation."
 
-**Note on provenance:** These issues were moved from DD001 Draft Issues (originally Issues 3 and 4) because they wrap `open-worm-analysis-toolbox` functionality — which DD017 owns — and target `openworm/open-worm-analysis-toolbox`, not `openworm/c302`.
+**Note on provenance:** These issues were moved from DD002 Draft Issues (originally Issues 3 and 4) because they wrap `open-worm-analysis-toolbox` functionality — which DD017 owns — and target `openworm/open-worm-analysis-toolbox`, not `openworm/c302`.
 
 ---
 
@@ -26,7 +26,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 - **Labels:** `DD017`, `ai-workable`, `L1`
 - **Target Repo:** `openworm/open-worm-analysis-toolbox`
 - **Required Capabilities:** python
-- **DD Section to Read:** [DD001 — How to Build & Test](DD001_Neural_Circuit_Architecture.md#how-to-build-test) (Step 5-6) and [DD010 — Tier 3](DD010_Validation_Framework.md) (kinematic validation)
+- **DD Section to Read:** [DD002 — How to Build & Test](DD002_Neural_Circuit_Architecture.md#how-to-build-test) (Step 5-6) and [DD010 — Tier 3](DD010_Validation_Framework.md) (kinematic validation)
 - **Existing Code to Reuse:**
     - [`open-worm-analysis-toolbox/statistics/statistics_manager.py`](https://github.com/openworm/open-worm-analysis-toolbox) — **Already computes** Wilcoxon rank-sum and Student's t-test across **726 kinematic features** with FDR correction (q-values). Includes `histogram_manager.py` for feature distribution comparison. (reuse strategy: **wrap**)
     - [`open-worm-analysis-toolbox/features/`](https://github.com/openworm/open-worm-analysis-toolbox) — Locomotion features including speed, wavelength, frequency, amplitude, crawling/swimming classification — all 5 key metrics needed for validation are already computed. (reuse strategy: **import directly**)
@@ -49,7 +49,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
     - [ ] Prints per-metric comparison table (current vs. baseline vs. threshold)
     - [ ] Returns exit code 0 if no regression, non-zero if regression detected
     - [ ] Unit tests with synthetic reports (passing, regressing, improving)
-- **Sponsor Summary Hint:** A guard-rail script built on the existing Schafer lab analysis toolbox — which already compares 726 kinematic features using statistical tests. This wraps that engine with a simple pass/fail gate for CI: does the worm still move like a real worm? If not, the change is flagged. Used by DD001 (neural changes), DD002 (muscle changes), DD003 (body physics changes) — any change that could affect movement is checked here.
+- **Sponsor Summary Hint:** A guard-rail script built on the existing Schafer lab analysis toolbox — which already compares 726 kinematic features using statistical tests. This wraps that engine with a simple pass/fail gate for CI: does the worm still move like a real worm? If not, the change is flagged. Used by DD002 (neural changes), DD003 (muscle changes), DD001 (body physics changes) — any change that could affect movement is checked here.
 
 ---
 
@@ -59,7 +59,7 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 - **Labels:** `DD017`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/open-worm-analysis-toolbox`
 - **Required Capabilities:** python, worm-biology
-- **DD Section to Read:** [DD001 — Goal & Success Criteria](DD001_Neural_Circuit_Architecture.md#goal-success-criteria) (±15% of Schafer lab) and [DD010](DD010_Validation_Framework.md) (Tier 3)
+- **DD Section to Read:** [DD002 — Goal & Success Criteria](DD002_Neural_Circuit_Architecture.md#goal-success-criteria) (±15% of Schafer lab) and [DD010](DD010_Validation_Framework.md) (Tier 3)
 - **Existing Code to Reuse:**
     - [`open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) — **IS the Python port of the Schafer lab's Worm Analysis Toolbox.** `WormFeatures` class computes all 726 Schafer features including the 5 key metrics needed. Has WCON loading (`examples/WCON demo.py`), `NormalizedWorm` class for 49-point skeleton, and validation against original MATLAB toolbox (`documentation/Schafer_validation/`). (reuse strategy: **import directly**)
     - [`open-worm-analysis-toolbox/examples/generate_stats.py`](https://github.com/openworm/open-worm-analysis-toolbox) — Example script for statistical comparison (reuse strategy: **adapt**)
@@ -101,9 +101,9 @@ Target: Make the revived analysis toolbox usable as a CI gate — regression det
 
 | Related DD | Related Issues |
 |------------|---------------|
-| DD001 (Neural Circuit) | Consumer: neural circuit changes validated by Issue 1 regression gate |
-| DD002 (Muscle Model) | Consumer: muscle changes validated by Issue 1 regression gate |
-| DD003 (Body Physics) | Consumer: body physics changes validated by Issue 1 regression gate |
+| DD002 (Neural Circuit) | Consumer: neural circuit changes validated by Issue 1 regression gate |
+| DD003 (Muscle Model) | Consumer: muscle changes validated by Issue 1 regression gate |
+| DD001 (Body Physics) | Consumer: body physics changes validated by Issue 1 regression gate |
 | DD010 (Validation Framework) | Issue 1 implements the Tier 3 kinematic validation gate that DD010 specifies |
 | DD011 (Simulation Stack) | Issue 1 runs as `docker compose run validate` pipeline stage |
 

@@ -1,10 +1,10 @@
-# DD001: Neural Circuit Architecture and Multi-Level Framework
+# DD002: Neural Circuit Architecture and Multi-Level Framework
 
 - **Status:** Accepted
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics), [DD023](DD023_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models)
+- **Related:** [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics), [DD023](DD023_Multicompartmental_Neuron_Models.md) (Multicompartmental Neuron Models)
 
 ---
 
@@ -22,7 +22,7 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level [
 | **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
 | **What does this produce?** | [NeuroML](https://www.neuroml.org) network files: `LEMS_c302_C1_*.xml` with 302 neurons, 95 muscles, graded synapses, [gap junctions](https://en.wikipedia.org/wiki/Gap_junction) |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% of Schafer lab [WCON](https://github.com/openworm/tracker-commons) data |
-| **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd001` |
+| **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd002` |
 | **Config toggle** | `neural.level: C1` / `neural.enabled: true` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge) |
 | **Visualize** | [DD012](DD012_Dynamic_Visualization_Architecture.md) `neural/` layer — 302 neurons with voltage/calcium traces, color-by-activity |
@@ -67,10 +67,10 @@ OpenWorm models the 302-neuron *C. elegans* nervous system using a multi-level [
 | Item | Value |
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
-| **Issue label** | `dd001` |
+| **Issue label** | `dd002` |
 | **Milestone** | Neural Circuit Architecture |
-| **Branch convention** | `dd001/description` (e.g., `dd001/graded-synapse-tuning`) |
-| **Example PR title** | `DD001: Tune graded synapse parameters for Level C1` |
+| **Branch convention** | `dd002/description` (e.g., `dd002/graded-synapse-tuning`) |
+| **Example PR title** | `DD002: Tune graded synapse parameters for Level C1` |
 
 ---
 
@@ -364,7 +364,7 @@ python scripts/check_regression.py validation_report.json baseline_score.json
 
 3. **Sensory transduction:** How mechanosensors, chemosensors, thermosensors convert stimuli to voltage is out of scope. Currently sensory neurons receive generic current injections.
 
-4. **Muscle actuation:** Covered in [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model). This document defines neuron-to-muscle signaling interface (calcium concentration) but not the muscle dynamics themselves.
+4. **Muscle actuation:** Covered in [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model). This document defines neuron-to-muscle signaling interface (calcium concentration) but not the muscle dynamics themselves.
 
 5. **Intracellular signaling cascades:** IP3, cAMP, MAPK cascades are future work (Phases 4-5). This document covers membrane voltage and calcium only.
 
@@ -507,9 +507,9 @@ For neurons where single-compartment approximation is insufficient, Level D mult
 
 | Output | Consumer DD | Variable | Format | Units | Timestep |
 |--------|------------|----------|--------|-------|----------|
-| Neuron membrane voltage | [DD002](DD002_Muscle_Model_Architecture.md) (via NMJ synapses) | `V` per neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
-| Neuron [Ca²⁺]ᵢ | [DD002](DD002_Muscle_Model_Architecture.md) (muscle activation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptide release trigger) | `ca_internal` per neuron | NeuroML state variable | mol/cm³ | dt_neuron (0.05 ms) |
-| Muscle [Ca²⁺]ᵢ (via [DD002](DD002_Muscle_Model_Architecture.md) muscle cells in same LEMS simulation) | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic, via `sibernetic_c302.py`) | `muscle_ca` per muscle | Tab-separated file: muscle_id, timestep, ca_value | mol/cm³ | dt_coupling (0.005 ms) |
+| Neuron membrane voltage | [DD003](DD003_Muscle_Model_Architecture.md) (via NMJ synapses) | `V` per neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
+| Neuron [Ca²⁺]ᵢ | [DD003](DD003_Muscle_Model_Architecture.md) (muscle activation), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptide release trigger) | `ca_internal` per neuron | NeuroML state variable | mol/cm³ | dt_neuron (0.05 ms) |
+| Muscle [Ca²⁺]ᵢ (via [DD003](DD003_Muscle_Model_Architecture.md) muscle cells in same LEMS simulation) | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic, via `sibernetic_c302.py`) | `muscle_ca` per muscle | Tab-separated file: muscle_id, timestep, ca_value | mol/cm³ | dt_coupling (0.005 ms) |
 | Network activity recordings | [DD010](DD010_Validation_Framework.md) (Tier 2 validation) | `*_calcium.dat`, `*_voltages.dat` | Tab-separated, neuron_id columns × timestep rows | mV or mol | dt_neuron |
 | Neuron voltage time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron V over all timesteps | OME-Zarr: `neural/voltage/`, shape (n_timesteps, 302) | mV | output_interval |
 | Neuron calcium time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron [Ca²⁺] over all timesteps | OME-Zarr: `neural/calcium/`, shape (n_timesteps, 302) | mol/cm³ | output_interval |
@@ -591,14 +591,14 @@ docker compose run validate
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Muscle activation | [DD002](DD002_Muscle_Model_Architecture.md) | If neuron→muscle synaptic output changes, muscle calcium dynamics change |
-| Body physics | [DD003](DD003_Body_Physics_Architecture.md) | If muscle calcium output format/units change, `sibernetic_c302.py` coupling breaks |
+| Muscle activation | [DD003](DD003_Muscle_Model_Architecture.md) | If neuron→muscle synaptic output changes, muscle calcium dynamics change |
+| Body physics | [DD001](DD001_Body_Physics_Architecture.md) | If muscle calcium output format/units change, `sibernetic_c302.py` coupling breaks |
 | Neuropeptide release | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If `ca_internal` variable name or units change, peptide release triggers break |
 | Tier 2 validation | [DD010](DD010_Validation_Framework.md) | If calcium recording file format changes, validation scripts break |
 
 ### Coupling Bridge Ownership
 
-The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD003](DD003_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD011](DD011_Simulation_Stack_Architecture.md)).**
+The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD002](DD002_Neural_Circuit_Architecture.md)→[DD003](DD003_Muscle_Model_Architecture.md)→[DD001](DD001_Body_Physics_Architecture.md) coupling chain. It reads c302/NEURON calcium output and writes Sibernetic muscle activation input. **Any change to calcium output format or variable naming in c302 must be coordinated with the Sibernetic maintainer ([DD001](DD001_Body_Physics_Architecture.md)) and the Integration Maintainer ([DD011](DD011_Simulation_Stack_Architecture.md)).**
 
 ---
 

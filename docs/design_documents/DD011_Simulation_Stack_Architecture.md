@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-15
 - **Supersedes:** Informal Docker meta-repo approach
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [Contributor Progression](../contributing/contributor-progression.md) (Contributor Progression), [Decision Process](../contributing/decision-process.md) (RFC Process)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md)–[DD010](DD010_Validation_Framework.md) (all technical subsystems), [Contributor Progression](../contributing/contributor-progression.md) (Contributor Progression), [Decision Process](../contributing/decision-process.md) (RFC Process)
 
 ---
 
@@ -18,13 +18,13 @@ The OpenWorm simulation stack uses Docker Compose to orchestrate five containeri
 
 ### The Gap Between Vision and Execution
 
-Design Documents [DD001](DD001_Neural_Circuit_Architecture.md)-[Decision Process](../contributing/decision-process.md) specify a rich, multi-tissue, multi-scale organism simulation:
+Design Documents [DD002](DD002_Neural_Circuit_Architecture.md)-[Decision Process](../contributing/decision-process.md) specify a rich, multi-tissue, multi-scale organism simulation:
 
 | Subsystem | DD | Primary Repo | Integration Status |
 |-----------|----|--------------|--------------------|
-| Neural circuit (c302) | [DD001](DD001_Neural_Circuit_Architecture.md) | `openworm/c302` | **Working** — runs via NEURON |
-| Muscle model | [DD002](DD002_Muscle_Model_Architecture.md) | `openworm/c302` + `openworm/muscle_model` | **Working** — coupled to c302 |
-| Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | `openworm/sibernetic` | **Working** — coupled to c302 via `sibernetic_c302.py` |
+| Neural circuit (c302) | [DD002](DD002_Neural_Circuit_Architecture.md) | `openworm/c302` | **Working** — runs via NEURON |
+| Muscle model | [DD003](DD003_Muscle_Model_Architecture.md) | `openworm/c302` + `openworm/muscle_model` | **Working** — coupled to c302 |
+| Body physics (Sibernetic) | [DD001](DD001_Body_Physics_Architecture.md) | `openworm/sibernetic` | **Working** — coupled to c302 via `sibernetic_c302.py` |
 | Mechanical cell identity | [DD004](DD004_Mechanical_Cell_Identity.md) | `openworm/sibernetic` (future) | **Not started** |
 | Cell-type specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | `openworm/c302` (future) | **Not started** |
 | Neuropeptides | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | `openworm/c302` (future) | **Not started** |
@@ -138,7 +138,7 @@ Replace hardcoded defaults in `master_openworm.py` with a declarative YAML confi
 
 version: "0.10.0"
 
-# === Neural Subsystem ([DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) ===
+# === Neural Subsystem ([DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) ===
 neural:
   enabled: true
   framework: c302
@@ -149,7 +149,7 @@ neural:
   data_reader: "UpdatedSpreadsheetDataReader2"
   reference: "FW"                    # FW (forward crawl), BA (backward), TU (turning)
 
-# === Body Physics ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md)) ===
+# === Body Physics ([DD001](DD001_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md)) ===
 body:
   enabled: true
   engine: sibernetic
@@ -159,7 +159,7 @@ body:
   cell_identity: false               # Phase 4: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))
   timestep: 0.00002                  # seconds
 
-# === Muscle Model ([DD002](DD002_Muscle_Model_Architecture.md)) ===
+# === Muscle Model ([DD003](DD003_Muscle_Model_Architecture.md)) ===
 muscle:
   enabled: true                      # Requires neural.enabled
   calcium_coupling: true             # Ca²⁺ → force pipeline
@@ -250,7 +250,7 @@ RUN cd /opt/openworm/sibernetic && mkdir build && cd build && \
 # NOTE: Taichi/PyTorch backends require additional dependencies:
 #   pip install taichi torch
 # These should be installed conditionally based on body.backend config.
-# See DD003 Backend Stabilization Roadmap for when Taichi will be Dockerfile-ready.
+# See DD001 Backend Stabilization Roadmap for when Taichi will be Dockerfile-ready.
 
 # === Stage 3: Subsystem — Validation Tools ([DD010](DD010_Validation_Framework.md)) ===
 FROM base AS validation
@@ -481,9 +481,9 @@ Step 4: Generate outputs
          - Video (if enabled — fix the memory leak first)
 Step 4b: Export OME-Zarr ([DD012](DD012_Dynamic_Visualization_Architecture.md), if visualization.enabled)
          - Collect all subsystem outputs into openworm.zarr
-         - body/positions, body/types, body/cell_ids ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
-         - neural/voltage, neural/calcium, neural/positions ([DD001](DD001_Neural_Circuit_Architecture.md))
-         - muscle/activation, muscle/calcium ([DD002](DD002_Muscle_Model_Architecture.md))
+         - body/positions, body/types, body/cell_ids ([DD001](DD001_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
+         - neural/voltage, neural/calcium, neural/positions ([DD002](DD002_Neural_Circuit_Architecture.md))
+         - muscle/activation, muscle/calcium ([DD003](DD003_Muscle_Model_Architecture.md))
          - pharynx/pumping_state ([DD007](DD007_Pharyngeal_System_Architecture.md), if pharynx.enabled)
          - intestine/calcium, intestine/defecation_events ([DD009](DD009_Intestinal_Oscillator_Model.md), if intestine.enabled)
          - neuropeptides/concentrations ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md), if neural.neuropeptides)
@@ -569,7 +569,7 @@ jobs:
           name: validation-report
           path: output/validation_report.json
 
-  # NOTE: Once Taichi graduates to Production (see DD003 Backend Stabilization Roadmap),
+  # NOTE: Once Taichi graduates to Production (see DD001 Backend Stabilization Roadmap),
   # CI should run smoke tests on multiple backends (at minimum OpenCL + one Python backend)
   # to catch backend-specific regressions.
 ```
@@ -811,8 +811,8 @@ DD011 defines the Docker orchestration layer. Running the full integrated simula
 
 | Subsystem | DD | Native Setup |
 |-----------|-----|-------------|
-| Neural circuit (c302) | [DD001](DD001_Neural_Circuit_Architecture.md) | `pip install -e c302; pip install pyneuroml neuron` |
-| Body physics (Sibernetic) | [DD003](DD003_Body_Physics_Architecture.md) | CMake build with OpenCL SDK |
+| Neural circuit (c302) | [DD002](DD002_Neural_Circuit_Architecture.md) | `pip install -e c302; pip install pyneuroml neuron` |
+| Body physics (Sibernetic) | [DD001](DD001_Body_Physics_Architecture.md) | CMake build with OpenCL SDK |
 | Validation tools | [DD010](DD010_Validation_Framework.md), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | `pip install -e open-worm-analysis-toolbox` |
 | Visualization viewer | [DD012](DD012_Dynamic_Visualization_Architecture.md) | `pip install trame pyvista zarr` |
 
@@ -906,7 +906,7 @@ docker compose run -e CONFIG=/opt/openworm/my_experiment.yml simulation
 
 3. **Multi-node / HPC distribution.** The simulation runs on a single machine. Distributing across nodes (MPI) is future work.
 
-4. **Specific subsystem implementations.** This DD covers how subsystems plug together, not what they compute internally (that's [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)).
+4. **Specific subsystem implementations.** This DD covers how subsystems plug together, not what they compute internally (that's [DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)).
 
 5. **AI agent deployment.** N2-Whisperer/Mind-of-a-Worm/Mad-Worm-Scientist are separate infrastructure (see [AI Agents for Community Scaling](../Community/ai_agents.md)).
 
@@ -1096,9 +1096,9 @@ The simulation stack is the **integration layer** — it consumes and routes out
 
 | Direction | DD | Data | Format |
 |-----------|------|------|--------|
-| Consumes | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural state | OME-Zarr `/neural/` |
-| Consumes | [DD002](DD002_Muscle_Model_Architecture.md) | Muscle forces | OME-Zarr `/muscle/` |
-| Consumes | [DD003](DD003_Body_Physics_Architecture.md) | Body geometry | OME-Zarr `/physics/` |
+| Consumes | [DD002](DD002_Neural_Circuit_Architecture.md) | Neural state | OME-Zarr `/neural/` |
+| Consumes | [DD003](DD003_Muscle_Model_Architecture.md) | Muscle forces | OME-Zarr `/muscle/` |
+| Consumes | [DD001](DD001_Body_Physics_Architecture.md) | Body geometry | OME-Zarr `/physics/` |
 | Produces | All | Unified simulation state | OME-Zarr `/simulation/` |
 
 ### Repository & Packaging
@@ -1119,7 +1119,7 @@ The simulation stack is the **integration layer** — it consumes and routes out
 
 ### Coupling Dependencies
 
-- **Upstream:** DD001, DD002, DD003, DD005, DD006, DD007, DD009 (all science subsystems)
+- **Upstream:** DD002, DD003, DD001, DD005, DD006, DD007, DD009 (all science subsystems)
 - **Downstream:** DD012 (visualization), DD010 (validation)
 
 ---

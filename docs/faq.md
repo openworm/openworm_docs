@@ -19,7 +19,7 @@ It has all sorts of behaviors! Some include:
 
 ### Do you simulate all that?
 
-Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD002_Muscle_Model_Architecture.md) + [body physics](design_documents/DD003_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
+Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD003_Muscle_Model_Architecture.md) + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
@@ -29,7 +29,7 @@ Developmental modeling (embryo to L1 to L4 to adult) is Phase 6 work in our road
 
 ### Does it need to know how to be a worm to act like a worm?
 
-The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in [DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
+The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in [DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
 
 ### Given all that we DON'T know about _C. elegans_ (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
 
@@ -97,9 +97,9 @@ We model at **five scales simultaneously** (detailed on the [modeling approach p
 | Scale | Design Documents | Computational Cost |
 |-------|------------------|-------------------|
 | Molecular | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Low (parameter lookup) |
-| Channel | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Moderate (HH equations per cell) |
-| Cellular | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Moderate-High (302-959 cells) |
-| Tissue | [DD003](design_documents/DD003_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | High (~100K SPH particles) |
+| Channel | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Moderate (HH equations per cell) |
+| Cellular | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Moderate-High (302-959 cells) |
+| Tissue | [DD001](design_documents/DD001_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | High (~100K SPH particles) |
 | Organism | [DD010](design_documents/DD010_Validation_Framework.md), [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Validation overhead |
 
 In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
@@ -121,7 +121,7 @@ There have been [other modeling efforts in _C. elegans_ and their subsystems](ht
 
 ### How are neurons simulated today?
 
-Our neural models are specified in [DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
+Our neural models are specified in [DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
 
 There are a wide variety of ways to simulate neurons, as shown in figure 2 of [Izhikevich 2004](http://www.ncbi.nlm.nih.gov/pubmed/15484883).
 
@@ -133,11 +133,11 @@ There are a wide variety of ways to simulate neurons, as shown in figure 2 of [I
 | **C1** | **HH + graded synapses** | **Graded** | **Recommended default** |
 | D | Multicompartmental HH | Event-driven | Specialized studies |
 
-**Level C1 is the default** because _C. elegans_ neurons communicate via graded potentials (not action potentials), and graded synapses are essential for coupling with the [body physics](design_documents/DD003_Body_Physics_Architecture.md) ([Sibernetic](Projects/sibernetic.md)).
+**Level C1 is the default** because _C. elegans_ neurons communicate via graded potentials (not action potentials), and graded synapses are essential for coupling with the [body physics](design_documents/DD001_Body_Physics_Architecture.md) ([Sibernetic](Projects/sibernetic.md)).
 
 ### What is the connection between the basic properties of _C. elegans_ neurons and human neurons?
 
-_C. elegans_ neurons do not spike (i.e. have [action potentials](https://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model), used in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](https://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](https://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](https://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](https://en.wikipedia.org/wiki/Membrane_potential).
+_C. elegans_ neurons do not spike (i.e. have [action potentials](https://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model), used in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](https://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](https://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](https://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](https://en.wikipedia.org/wiki/Membrane_potential).
 
 ### What is the level of detail of the wiring diagram for the non-neuron elements?
 
@@ -149,7 +149,7 @@ There is a map between motor neurons and muscle cells in the published wiring di
 
 ### What are you doing with SPH?
 
-We are building the body of the worm using particles that are being driven by SPH. This is formally specified in [DD003 (Body Physics Architecture)](design_documents/DD003_Body_Physics_Architecture.md), which defines the PCISPH pressure solver, ~100K particles (liquid, elastic, boundary types), and validated body mechanics. This allows for physical interactions between the body of the worm and its environment.
+We are building the body of the worm using particles that are being driven by SPH. This is formally specified in [DD001 (Body Physics Architecture)](design_documents/DD001_Body_Physics_Architecture.md), which defines the PCISPH pressure solver, ~100K particles (liquid, elastic, boundary types), and validated body mechanics. This allows for physical interactions between the body of the worm and its environment.
 
 OpenWorm code reuse
 -------------------

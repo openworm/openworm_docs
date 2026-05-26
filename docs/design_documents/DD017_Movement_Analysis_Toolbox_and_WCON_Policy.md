@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — WCON producer), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD010](DD010_Validation_Framework.md) (Validation Framework — Tier 3 consumer), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack — CI consumer), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — structural model)
+- **Related:** [DD001](DD001_Body_Physics_Architecture.md) (Body Physics — WCON producer), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD010](DD010_Validation_Framework.md) (Validation Framework — Tier 3 consumer), [DD011](DD011_Simulation_Stack_Architecture.md) (Simulation Stack — CI consumer), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access — structural model)
 
 ---
 
@@ -284,7 +284,7 @@ WCON 1.0 specification: https://github.com/openworm/tracker-commons/blob/master/
 
 ### Required Fields for OpenWorm Simulation Output
 
-Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) must produce WCON files with at minimum these fields:
+Sibernetic ([DD001](DD001_Body_Physics_Architecture.md)) must produce WCON files with at minimum these fields:
 
 ```json
 {
@@ -340,7 +340,7 @@ The analysis toolbox's WCON parser must:
 4. **Validate units** — reject files with inconsistent or missing unit declarations
 5. **Handle chunked files** — WCON supports splitting large datasets across multiple files via `"files"` array
 
-### Sibernetic WCON Output ([DD003](DD003_Body_Physics_Architecture.md) Coupling)
+### Sibernetic WCON Output ([DD001](DD001_Body_Physics_Architecture.md) Coupling)
 
 Sibernetic currently outputs body positions in a custom format (`position_buffer.txt`). A WCON exporter must be added:
 
@@ -364,7 +364,7 @@ for frame in simulation_frames:
 exporter.save("output/worm_trajectory.wcon")
 ```
 
-**This WCON exporter is a deliverable of [DD003](DD003_Body_Physics_Architecture.md)/DD011, not [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md).** [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) specifies what the toolbox expects to receive; [DD003](DD003_Body_Physics_Architecture.md)/DD011 specify how to produce it.
+**This WCON exporter is a deliverable of [DD001](DD001_Body_Physics_Architecture.md)/DD011, not [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md).** [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) specifies what the toolbox expects to receive; [DD001](DD001_Body_Physics_Architecture.md)/DD011 specify how to produce it.
 
 ---
 
@@ -646,7 +646,7 @@ from tierpsy import ...  # (inspect their API)
 
 3. **Experimental data curation:** [DD008](DD008_Data_Integration_Pipeline.md) (OWMeta) and [DD010](DD010_Validation_Framework.md) define how experimental data (Schafer lab, Raizen pumping, Thomas defecation) are ingested, versioned, and stored. This DD specifies how the toolbox consumes that data.
 
-4. **WCON production (Sibernetic output):** [DD003](DD003_Body_Physics_Architecture.md) defines how Sibernetic produces body positions. [DD011](DD011_Simulation_Stack_Architecture.md)'s orchestrator converts particle positions to skeleton → WCON. This DD specifies what the toolbox expects to receive.
+4. **WCON production (Sibernetic output):** [DD001](DD001_Body_Physics_Architecture.md) defines how Sibernetic produces body positions. [DD011](DD011_Simulation_Stack_Architecture.md)'s orchestrator converts particle positions to skeleton → WCON. This DD specifies what the toolbox expects to receive.
 
 5. **Visualization:** [DD012](DD012_Dynamic_Visualization_Architecture.md) defines the viewer. The toolbox produces matplotlib plots for validation reports; [DD012](DD012_Dynamic_Visualization_Architecture.md)'s viewer shows validation overlays in the OME-Zarr output.
 
@@ -690,7 +690,7 @@ Standard centroid-based trajectory tracking becomes unstable when the worm body 
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Simulated movement trajectory | [DD003](DD003_Body_Physics_Architecture.md) (via [DD011](DD011_Simulation_Stack_Architecture.md) orchestrator) | Body centroid + 49-point skeleton over time | WCON 1.0 file | mm, seconds |
+| Simulated movement trajectory | [DD001](DD001_Body_Physics_Architecture.md) (via [DD011](DD011_Simulation_Stack_Architecture.md) orchestrator) | Body centroid + 49-point skeleton over time | WCON 1.0 file | mm, seconds |
 | Experimental kinematic data | [DD008](DD008_Data_Integration_Pipeline.md) / [DD010](DD010_Validation_Framework.md) / Schafer lab | N2 baseline and mutant recordings | Schafer .mat or WCON | mm, seconds |
 | Validation config | [DD010](DD010_Validation_Framework.md) / [DD011](DD011_Simulation_Stack_Architecture.md) | Acceptance criteria (tolerance, metric selection) | `openworm.yml` YAML | config keys |
 
@@ -773,7 +773,7 @@ print('[DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) full validati
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Movement output format (WCON) | [DD003](DD003_Body_Physics_Architecture.md) | If Sibernetic changes skeleton format or WCON structure, parser breaks |
+| Movement output format (WCON) | [DD001](DD001_Body_Physics_Architecture.md) | If Sibernetic changes skeleton format or WCON structure, parser breaks |
 | Experimental data (Schafer lab) | [DD008](DD008_Data_Integration_Pipeline.md) / [DD010](DD010_Validation_Framework.md) | If experimental data files are relocated or reformatted, loading fails |
 | Docker validation stage | [DD011](DD011_Simulation_Stack_Architecture.md) | If `validation` service configuration changes, toolbox environment breaks |
 | `versions.lock` entry | [DD011](DD011_Simulation_Stack_Architecture.md) | If toolbox version is bumped, must verify feature computation is unchanged |
@@ -840,7 +840,7 @@ The analysis toolbox is referenced as a critical dependency in:
 
 - **[DD010](DD010_Validation_Framework.md)** (lines 95, 229, 260-270, 326-346): Tier 3 behavioral validation tool
 - **[DD011](DD011_Simulation_Stack_Architecture.md)** (lines 28, 54, 61): Validation pipeline Steps 4-5 (unimplemented)
-- **[DD001](DD001_Neural_Circuit_Architecture.md)/DD003**: Success metrics reference kinematic validation
+- **[DD002](DD002_Neural_Circuit_Architecture.md)/DD001**: Success metrics reference kinematic validation
 
 Yet no DD specifies:
 
@@ -923,5 +923,5 @@ Image synthesis and CNNs for *C. elegans* pose estimation from video. Produces s
 1. Appoint or recruit Validation L4 maintainer (or assign revival to existing contributor)
 2. Begin Task 1: Test toolbox on Python 3.12 in Docker
 3. File `dd017` issues on `openworm/open-worm-analysis-toolbox` for each revival task
-4. Coordinate with [DD003](DD003_Body_Physics_Architecture.md)/DD011 owners on WCON exporter timeline
+4. Coordinate with [DD001](DD001_Body_Physics_Architecture.md)/DD011 owners on WCON exporter timeline
 5. Pin `tracker_commons` commit in `versions.lock`

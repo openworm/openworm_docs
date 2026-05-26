@@ -36,7 +36,7 @@
 - **This Roadmap delivers:** Not just anatomy (static 3D models exist), but **dynamic temporal behavior** — pumping, defecating, egg-laying, locomoting, responding to touch — emergent from coupled biophysical subsystems.
 
 - **The Principles say:** "soft and squishy... physics matters."
-- **This Roadmap delivers:** [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) body physics ([DD003](DD003_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD002](DD002_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
+- **This Roadmap delivers:** [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) body physics ([DD001](DD001_Body_Physics_Architecture.md)), calcium-force muscle coupling ([DD003](DD003_Muscle_Model_Architecture.md)), fluid-structure interaction, mechanical cell identity ([DD004](DD004_Mechanical_Cell_Identity.md)). The worm deforms realistically because the physics is realistic.
 
 ---
 
@@ -56,7 +56,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 ## Phase 0: Core Architecture (Functional, Stabilizing)
 
-**Status:** ✅ **Functional** — core simulation runs; 83 stabilization issues tracked across DD001-DD003/DD016 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)
+**Status:** ✅ **Functional** — core simulation runs; 83 stabilization issues tracked across DD002-DD001/DD016 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)
 
 **Phase Rationale:** These DDs describe **already-implemented** subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and `cect` provides 30+ connectome datasets. They form the working foundation everything else builds on.
 
@@ -64,9 +64,9 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 | DD | Title | Implementation Status |
 |----|-------|---------------------|
-| [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ c302 Levels A-D exist, generate NeuroML networks |
-| [DD002](DD002_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ GenericMuscleCell exists, Ca²⁺→force coupling works |
-| [DD003](DD003_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL only — PyTorch/Taichi do not yet match result quality; see DD003 Backend Stabilization Roadmap) |
+| [DD002](DD002_Neural_Circuit_Architecture.md) | Neural Circuit Architecture | ✅ c302 Levels A-D exist, generate NeuroML networks |
+| [DD003](DD003_Muscle_Model_Architecture.md) | Muscle Model Architecture | ✅ GenericMuscleCell exists, Ca²⁺→force coupling works |
+| [DD001](DD001_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL only — PyTorch/Taichi do not yet match result quality; see DD001 Backend Stabilization Roadmap) |
 | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Connectome Data Access | ✅ `cect` v0.2.7 exists (needs version pinning per [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) |
 
 **What Works Today:**
@@ -85,8 +85,8 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - No dependency pinning (branch names, not commits)
 - No automated validation (Tier 3 toolbox is broken)
 - Video pipeline has memory leak (OOMs >2s simulations)
-- PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD003 Backend Stabilization Roadmap)
-- Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see [DD001](DD001_Neural_Circuit_Architecture.md) Issue 1)
+- PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD001 Backend Stabilization Roadmap)
+- Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see [DD002](DD002_Neural_Circuit_Architecture.md) Issue 1)
 
 **Phase 0 → Phase A1 Gap Map:**
 
@@ -97,26 +97,26 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | No dependency pinning | DD011 Issue 7 (versions.lock) | DD011 draft issues §Group 2 |
 | No automated validation | DD017 Issues 1-2 (toolbox revival) | DD017 draft issues §Group 1 |
 | Video pipeline memory leak | DD011 Issue 5 (video pipeline fix) | DD011 draft issues §Group 1 |
-| Backends don't match OpenCL | DD003 Issues 5-7 + DD011 Issues 39-42 | DD003 draft issues §Group 2 |
-| Missing validation scripts (10 total) | DD001 Issues 1-3, DD002 Issues 1-2, DD003 Issues 1-3 | See table below |
+| Backends don't match OpenCL | DD001 Issues 5-7 + DD011 Issues 39-42 | DD001 draft issues §Group 2 |
+| Missing validation scripts (10 total) | DD002 Issues 1-3, DD003 Issues 1-2, DD001 Issues 1-3 | See table below |
 | cect not pinned/cached in Docker | DD016 Issues 1-5 (build integration) | DD016 draft issues §Group 1 |
-| Fast trajectory screening tool | DD001 Issue 1 (boyle_berri_cohen_trajectory.py) | DD001 draft issues §Group 1 |
+| Fast trajectory screening tool | DD002 Issue 1 (boyle_berri_cohen_trajectory.py) | DD002 draft issues §Group 1 |
 
 **Missing Validation Scripts Inventory:**
 
 | Script | DD | Phase A1 Issue | Target Repo |
 |--------|----|---------------|-------------|
-| `boyle_berri_cohen_trajectory.py` | DD001 | DD001 Issue 1 | openworm/c302 |
-| `extract_trajectory.py` | DD001 | DD001 Issue 2 | openworm/sibernetic |
-| `compare_kinematics.py` | DD001 | Moved to DD017 Issue 1 | openworm/open-worm-analysis-toolbox |
-| `check_regression.py` | DD001 | Moved to DD017 Issue 2 | openworm/open-worm-analysis-toolbox |
-| `plot_muscle_activation.py` | DD002 | DD002 Issue 1 | openworm/c302 |
-| `validate_muscle_calcium.py` | DD002 | DD002 Issue 2 | openworm/c302 |
-| `check_stability.py` | DD003 | DD003 Issue 1 | openworm/sibernetic |
-| `validate_incompressibility.py` | DD003 | DD003 Issue 2 | openworm/sibernetic |
-| `backend_parity_test.py` | DD003 | DD003 Issue 5 | openworm/sibernetic |
+| `boyle_berri_cohen_trajectory.py` | DD002 | DD002 Issue 1 | openworm/c302 |
+| `extract_trajectory.py` | DD002 | DD002 Issue 2 | openworm/sibernetic |
+| `compare_kinematics.py` | DD002 | Moved to DD017 Issue 1 | openworm/open-worm-analysis-toolbox |
+| `check_regression.py` | DD002 | Moved to DD017 Issue 2 | openworm/open-worm-analysis-toolbox |
+| `plot_muscle_activation.py` | DD003 | DD003 Issue 1 | openworm/c302 |
+| `validate_muscle_calcium.py` | DD003 | DD003 Issue 2 | openworm/c302 |
+| `check_stability.py` | DD001 | DD001 Issue 1 | openworm/sibernetic |
+| `validate_incompressibility.py` | DD001 | DD001 Issue 2 | openworm/sibernetic |
+| `backend_parity_test.py` | DD001 | DD001 Issue 5 | openworm/sibernetic |
 
-**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD001: 9, DD002: 18, DD003: 21, DD016: 23) plus relocated issues (DD005: 6, DD013: 3, DD023: 3). Of these, ~35 are Phase A1 infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
+**Issue Inventory:** 83 total issues across 4 Phase 0 DDs (DD002: 9, DD003: 18, DD001: 21, DD016: 23) plus relocated issues (DD005: 6, DD013: 3, DD023: 3). Of these, ~35 are Phase A1 infrastructure work, ~25 are Phase 1+, ~23 can be addressed at any phase. See individual DD draft issue files for details.
 
 **Milestone:** *(Already achieved)* **"First Whole-Nervous-System Simulation"**
 
@@ -242,8 +242,8 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 | DD | Title | Dependencies | What Changes |
 |----|-------|-------------|--------------|
-| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | Cell-Type Specialization Strategy | [DD001](DD001_Neural_Circuit_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md)/DD016 (CeNGEN) | Replace 302 identical neurons with 128 distinct neuron classes |
-| **[DD012](DD012_Dynamic_Visualization_Architecture.md) (Phase 1)** | Post-Hoc Trame Viewer | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Evolve Worm3DViewer from Streamlit to Trame; OME-Zarr export |
+| **[DD005](DD005_Cell_Type_Differentiation_Strategy.md)** | Cell-Type Specialization Strategy | [DD002](DD002_Neural_Circuit_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md)/DD016 (CeNGEN) | Replace 302 identical neurons with 128 distinct neuron classes |
+| **[DD012](DD012_Dynamic_Visualization_Architecture.md) (Phase 1)** | Post-Hoc Trame Viewer | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD001](DD001_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Evolve Worm3DViewer from Streamlit to Trame; OME-Zarr export |
 | [DD012.1](DD012.1_Visual_Rendering_Specification.md) | Visual Rendering Specification | [DD012](DD012_Dynamic_Visualization_Architecture.md) | Canonical color palette (37 materials), 14 reference mockups, material definitions for all 959 cells |
 | **[DD010](DD010_Validation_Framework.md) (Tier 2)** | Functional Connectivity Validation | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD008](DD008_Data_Integration_Pipeline.md) | Activate Tier 2 blocking gate (r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4)) |
 | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (integration) | Foundation Model → [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Priors | ML/Structural Bio (TBD) | ~12 hours | Feeds [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration |
@@ -296,19 +296,19 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Status:** ⚠️ **Proposed** (ready after Phase 1)
 
-**Phase Rationale:** Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) requires specialized neurons from Phase 1 because the 31,479 peptide-receptor interactions are cell-type-specific — modulation on generic neurons would be meaningless. [DD015](DD015_Closed_Loop_Touch_Response.md) needs cell-type-specific MEC-4 channels from [DD005](DD005_Cell_Type_Differentiation_Strategy.md). Both must exist before Phase 3: [DD014](DD014_Egg_Laying_System_Architecture.md) requires serotonergic modulation, and emergent behaviors (chemotaxis, thermotaxis) require sensory input. [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) and [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) can proceed in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)/[DD015](DD015_Closed_Loop_Touch_Response.md). DD001 Level D Stage 1 starts with 5 representative multicompartmental neurons to validate the approach before committing to all 302.
+**Phase Rationale:** Phase 2 closes the sensory loop (body→neuron feedback) and adds the neuropeptide modulation layer. [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) requires specialized neurons from Phase 1 because the 31,479 peptide-receptor interactions are cell-type-specific — modulation on generic neurons would be meaningless. [DD015](DD015_Closed_Loop_Touch_Response.md) needs cell-type-specific MEC-4 channels from [DD005](DD005_Cell_Type_Differentiation_Strategy.md). Both must exist before Phase 3: [DD014](DD014_Egg_Laying_System_Architecture.md) requires serotonergic modulation, and emergent behaviors (chemotaxis, thermotaxis) require sensory input. [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) and [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) can proceed in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)/[DD015](DD015_Closed_Loop_Touch_Response.md). DD002 Level D Stage 1 starts with 5 representative multicompartmental neurons to validate the approach before committing to all 302.
 
 **Scope:**
 
 | DD | Title | Dependencies | What Changes |
 |----|-------|-------------|--------------|
-| **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)** | Neuropeptidergic Connectome Integration | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Add 31,479 peptide-receptor interactions as slow modulation layer |
-| **[DD015](DD015_Closed_Loop_Touch_Response.md)** | Closed-Loop Touch Response | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | MEC-4 mechanotransduction + bidirectional coupling + tap withdrawal |
-| [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Environmental Modeling & Stimulus Delivery | [DD003](DD003_Body_Physics_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | Agar substrate, chemical/thermal gradients, chemotaxis (CI >0.5) + thermotaxis |
-| [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD001](DD001_Neural_Circuit_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
-| [DD022](DD022_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes) |
+| **[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)** | Neuropeptidergic Connectome Integration | [DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Add 31,479 peptide-receptor interactions as slow modulation layer |
+| **[DD015](DD015_Closed_Loop_Touch_Response.md)** | Closed-Loop Touch Response | [DD002](DD002_Neural_Circuit_Architecture.md), [DD001](DD001_Body_Physics_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | MEC-4 mechanotransduction + bidirectional coupling + tap withdrawal |
+| [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md) | Environmental Modeling & Stimulus Delivery | [DD001](DD001_Body_Physics_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | Agar substrate, chemical/thermal gradients, chemotaxis (CI >0.5) + thermotaxis |
+| [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md) | Proprioceptive Feedback & Motor Coordination | [DD002](DD002_Neural_Circuit_Architecture.md), [DD001](DD001_Body_Physics_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | Stretch receptors on B-class motor neurons, wavelength stability ±10% |
+| [DD022](DD022_Reservoir_Computing_Validation.md) | Reservoir Computing Validation | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Tests RC framing: 5 properties × 4 partitions, falsifiable predictions (pure analysis, no sim changes) |
 | **[DD012](DD012_Dynamic_Visualization_Architecture.md) (Phase 2)** | Interactive Dynamic Viewer | [DD012](DD012_Dynamic_Visualization_Architecture.md) Phase 1, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | Layer toggle, pharynx/intestine (future), neuropeptide volumetric clouds, validation overlay |
-| **[DD023](DD023_Multicompartmental_Neuron_Models.md)** | Multicompartmental Neurons (Proof of Concept) | [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology. Includes spatially resolved synapse placement using Witvliet 2021 EM centroid distances. Stage 1 proof-of-concept; Stage 2 (all 302 neurons) is Phase 4-5. |
+| **[DD023](DD023_Multicompartmental_Neuron_Models.md)** | Multicompartmental Neurons (Proof of Concept) | [DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 5 representative neurons with 14 ion channel classes, EM morphologies, fitted to electrophysiology. Includes spatially resolved synapse placement using Witvliet 2021 EM centroid distances. Stage 1 proof-of-concept; Stage 2 (all 302 neurons) is Phase 4-5. |
 
 **Key Deliverables:**
 
@@ -372,17 +372,17 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
-| **[DD007](DD007_Pharyngeal_System_Architecture.md)** | Pharyngeal System Architecture | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping |
-| **[DD009](DD009_Intestinal_Oscillator_Model.md)** | Intestinal Oscillator Model | [DD001](DD001_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) (optional) | 20-cell IP3/Ca oscillator, defecation motor program (50s period) |
-| **[DD014](DD014_Egg_Laying_System_Architecture.md)** | Egg-Laying System Architecture | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | 28-cell reproductive circuit (HSN serotonergic, VC cholinergic, 16 sex muscles), two-state pattern |
-| **[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)** | Hybrid Mechanistic-ML Framework | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | Differentiable backend (auto parameter fit), SPH surrogate (1000× speedup), learned sensory (Component 3 extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md)) |
+| **[DD007](DD007_Pharyngeal_System_Architecture.md)** | Pharyngeal System Architecture | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | 63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping |
+| **[DD009](DD009_Intestinal_Oscillator_Model.md)** | Intestinal Oscillator Model | [DD002](DD002_Neural_Circuit_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md) (optional) | 20-cell IP3/Ca oscillator, defecation motor program (50s period) |
+| **[DD014](DD014_Egg_Laying_System_Architecture.md)** | Egg-Laying System Architecture | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | 28-cell reproductive circuit (HSN serotonergic, VC cholinergic, 16 sex muscles), two-state pattern |
+| **[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)** | Hybrid Mechanistic-ML Framework | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) | Differentiable backend (auto parameter fit), SPH surrogate (1000× speedup), learned sensory (Component 3 extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md)) |
 
 **Key Deliverables:**
 
 1. **Pharyngeal network** (`LEMS_c302_pharynx.xml`) — 20 neurons + 20 muscles, pumping oscillator module
 2. **Intestinal network** (`LEMS_IntestineOscillator.xml`) — 20 cells with IP3R, gap-junction-coupled
 3. **Egg-laying network** (`LEMS_c302_EggLaying.xml`) — HSN, VC, vulval/uterine muscles, serotonin/ACh/tyramine synapses
-4. **Differentiable worm** (`openworm-ml/differentiable/`) — PyTorch ODE solver, full [DD001](DD001_Neural_Circuit_Architecture.md)+[DD002](DD002_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) chain
+4. **Differentiable worm** (`openworm-ml/differentiable/`) — PyTorch ODE solver, full [DD002](DD002_Neural_Circuit_Architecture.md)+[DD003](DD003_Muscle_Model_Architecture.md)+[DD009](DD009_Intestinal_Oscillator_Model.md) chain
 5. **SPH surrogate** (`openworm-ml/surrogate/`) — FNO trained on 500+ SPH runs (supplemented by 2D rod-spring model trajectories at orders of magnitude higher throughput), <5% trajectory error, 1000× faster
 6. **Auto-fitted parameters** — Gradient descent on [DD010](DD010_Validation_Framework.md) validation loss, per-neuron-class conductances
 7. **Per-synapse weight optimization** ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 1) — Replaces the uniform baseline `g_syn = 0.09 nS` with per-synapse conductances fitted via gradient descent against whole-brain functional connectivity data, following Zhao et al. (2024). Extended with neurotransmitter identity constraints from Wang et al. (2024) and full 302-neuron optimization. Config: `neural.synapse_optimization: true/false`. See [DD013 Draft Issues](DD013_draft_issues.md).
@@ -434,8 +434,8 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 | DD | Title | Dependencies | What Adds |
 |----|-------|-------------|-----------|
-| **[DD004](DD004_Mechanical_Cell_Identity.md)** | Mechanical Cell Identity | [DD003](DD003_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD007](DD007_Pharyngeal_System_Architecture.md)/DD009 (cell positions) | Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion |
-| **[DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)** | Anatomical Mesh Deformation Pipeline | [DD003](DD003_Body_Physics_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md) | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices |
+| **[DD004](DD004_Mechanical_Cell_Identity.md)** | Mechanical Cell Identity | [DD001](DD001_Body_Physics_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD007](DD007_Pharyngeal_System_Architecture.md)/DD009 (cell positions) | Per-particle cell IDs (959 somatic cells), cell-type-specific elasticity/adhesion |
+| **[DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)** | Anatomical Mesh Deformation Pipeline | [DD001](DD001_Body_Physics_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md) | GPU skinning + cage-based MVC + PBD collision for ~1.6M Virtual Worm vertices |
 | **[DD012](DD012_Dynamic_Visualization_Architecture.md) (Phase 3)** | Public Experience Viewer | [DD012](DD012_Dynamic_Visualization_Architecture.md) Phase 2, [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) | Three.js + WebGPU, molecular scale, static site deployment, "Digital Organism In Your Browser" |
 
 **Key Deliverables:**
@@ -569,7 +569,7 @@ Phase 6 should build on DevoWorm's datasets and models rather than starting from
 
 - DevoWorm's [embryogenetic connectome](https://github.com/devoworm/embryogenetic-connectome) analysis provides the developmental graph connecting cell lineage to neural circuit formation
 - DevoWorm's [differentiation trees](https://www.biorxiv.org/content/early/2016/07/07/062539) complement [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s CeNGEN-based cell-type approach by adding temporal dynamics (when each neuron class differentiates)
-- DevoWorm's CompuCell3D models could inform the body size scaling mechanics in [DD003](DD003_Body_Physics_Architecture.md)/[DD004](DD004_Mechanical_Cell_Identity.md)
+- DevoWorm's CompuCell3D models could inform the body size scaling mechanics in [DD001](DD001_Body_Physics_Architecture.md)/[DD004](DD004_Mechanical_Cell_Identity.md)
 
 **Anticipated Scope:**
 
@@ -596,7 +596,7 @@ Phase 6 should build on DevoWorm's datasets and models rather than starting from
 
 - 385-neuron male connectome ([Cook2019](https://doi.org/10.1038/s41586-019-1352-7)MaleReader)
 - 83 male-specific neurons (ray neurons, HOB, spicule motor neurons)
-- Male tail anatomy (fan, rays, spicules) in [DD003](DD003_Body_Physics_Architecture.md)/DD004
+- Male tail anatomy (fan, rays, spicules) in [DD001](DD001_Body_Physics_Architecture.md)/DD004
 - Mating circuit and copulation behavior
 
 **Milestone (Projected):** **"Both Sexes Simulated"**
@@ -646,7 +646,7 @@ Phase A1 ([DD011](DD011_Simulation_Stack_Architecture.md), [DD008](DD008_Data_In
 
 | Phase | Duration | Calendar (if start March 2026) | Cumulative Cells | Cumulative DD Implementation |
 |-------|----------|-------------------------------|------------------|------------------------------|
-| Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD003](DD003_Body_Physics_Architecture.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) |
+| Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD001](DD001_Body_Physics_Architecture.md), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) |
 | Phase A1 | 2 weeks | Mar 2026 (Wks 1-2) | (no change) | +5 DDs ([DD011](DD011_Simulation_Stack_Architecture.md), [DD008](DD008_Data_Integration_Pipeline.md), [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md), [DD024](DD024_Project_Metrics_Dashboard.md)) |
 | Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +1 DD ([DD021](DD021_Protein_Foundation_Model_Pipeline.md)) + [Contributing](../contributing/index.md) section live |
 | Phase 1 | 3 months | Apr-Jun 2026 | 397 (specialized, not added) | +3 DDs ([DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD010](DD010_Validation_Framework.md) Tier 2, [DD012](DD012_Dynamic_Visualization_Architecture.md) Phase 1, [DD012.1](DD012.1_Visual_Rendering_Specification.md)) |

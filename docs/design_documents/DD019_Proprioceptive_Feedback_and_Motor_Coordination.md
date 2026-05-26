@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-19
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response — established bidirectional coupling pattern)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response — established bidirectional coupling pattern)
 
 ---
 
@@ -56,7 +56,7 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 | Artifact | Path | Format | Example |
 |----------|------|--------|---------|
 | Stretch receptor channel model | `c302/channel_models/stretch_receptor_chan.channel.nml` | NeuroML 2 XML | Curvature-gated cation channel |
-| B-class motor neuron templates | `cells/DB01Cell.cell.nml`, `VB01Cell.cell.nml`, etc. | NeuroML 2 XML | Add stretch receptor channel to [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 HH models |
+| B-class motor neuron templates | `cells/DB01Cell.cell.nml`, `VB01Cell.cell.nml`, etc. | NeuroML 2 XML | Add stretch receptor channel to [DD002](DD002_Neural_Circuit_Architecture.md)/DD005 HH models |
 | Body curvature readout module | `sibernetic/coupling/curvature_readout.py` | Python | Computes local curvature from SPH particle positions |
 | Extended bidirectional coupling | `sibernetic_c302_closedloop.py` (extend [DD015](DD015_Closed_Loop_Touch_Response.md)'s script) | Python | Add body→motor neuron proprioceptive path |
 | Curvature time series (viewer) | OME-Zarr: `sensory/curvature/`, shape (n_timesteps, n_segments) | OME-Zarr | Per-segment curvature angle over time |
@@ -70,7 +70,7 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 | **Primary repository** | `openworm/c302` (proprioceptive circuits, stretch receptor channel model) |
 | **Secondary repository** | `openworm/sibernetic` (body mechanics, curvature readout) |
 | **Issue label** | `dd019`, `proprioception` |
-| **Related DDs** | [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model) |
+| **Related DDs** | [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model) |
 
 ---
 
@@ -78,14 +78,14 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 ### Getting Started (Environment Setup)
 
-This DD builds on **two repositories**: the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) for stretch receptor channel models on B-class motor neurons, and **Sibernetic** ([DD003](DD003_Body_Physics_Architecture.md)) for body curvature readout that feeds proprioceptive signals back to motor neurons.
+This DD builds on **two repositories**: the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)) for stretch receptor channel models on B-class motor neurons, and **Sibernetic** ([DD001](DD001_Body_Physics_Architecture.md)) for body curvature readout that feeds proprioceptive signals back to motor neurons.
 
-If you have already completed both [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+If you have already completed both [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
 If starting fresh, follow both setup guides first, then return here:
 
-1. [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
-2. [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
+1. [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
+2. [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -98,7 +98,7 @@ This builds both the `neural` and `body` Docker stages needed for bidirectional 
 
 **Path B — Native (for development):**
 
-Complete both [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup). No additional pip installs are required beyond what DD001 and DD003 provide. Verify that the B-class motor neuron stretch receptor channel model is present:
+Complete both [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD001 native setup](DD001_Body_Physics_Architecture.md#getting-started-environment-setup). No additional pip installs are required beyond what DD002 and DD001 provide. Verify that the B-class motor neuron stretch receptor channel model is present:
 
 ```bash
 # Stretch receptor channel (curvature-gated cation conductance)
@@ -110,7 +110,7 @@ ls sibernetic/coupling/curvature_readout.py
 
 ### Step-by-step
 
-1. **Prerequisites:** Neural circuit ([DD001](DD001_Neural_Circuit_Architecture.md)) and body physics ([DD003](DD003_Body_Physics_Architecture.md)) running in simulation stack ([DD011](DD011_Simulation_Stack_Architecture.md))
+1. **Prerequisites:** Neural circuit ([DD002](DD002_Neural_Circuit_Architecture.md)) and body physics ([DD001](DD001_Body_Physics_Architecture.md)) running in simulation stack ([DD011](DD011_Simulation_Stack_Architecture.md))
 2. **Enable proprioceptive feedback:** Set `sensory.proprioception: true` in `openworm.yml` to activate the feedback channel between Sibernetic body curvature and B-class motor neurons
 3. **Run forward locomotion:** Execute simulation for 60 seconds with proprioception enabled
 4. **Measure wave propagation:** Body wave should show posterior-to-anterior coordination with wavelength stability ±10%
@@ -249,15 +249,15 @@ The [DD015](DD015_Closed_Loop_Touch_Response.md) bidirectional coupling framewor
 
 | Input | Source DD | Variable | Format |
 |-------|----------|----------|--------|
-| Body curvature per segment | [DD003](DD003_Body_Physics_Architecture.md) | Local curvature from SPH particle positions | Computed via curvature_readout.py |
-| B-class motor neuron models | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | HH cell templates | NeuroML |
+| Body curvature per segment | [DD001](DD001_Body_Physics_Architecture.md) | Local curvature from SPH particle positions | Computed via curvature_readout.py |
+| B-class motor neuron models | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | HH cell templates | NeuroML |
 
 ### Outputs
 
 | Output | Consumer DD | Variable | Format |
 |--------|------------|----------|--------|
-| Stretch receptor current | [DD001](DD001_Neural_Circuit_Architecture.md) | `I_stretch` on B-class motor neurons | NeuroML state variable |
-| Motor neuron excitability | [DD002](DD002_Muscle_Model_Architecture.md) | Modulates motor output → muscle activation | Indirect (via [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md) chain) |
+| Stretch receptor current | [DD002](DD002_Neural_Circuit_Architecture.md) | `I_stretch` on B-class motor neurons | NeuroML state variable |
+| Motor neuron excitability | [DD003](DD003_Muscle_Model_Architecture.md) | Modulates motor output → muscle activation | Indirect (via [DD002](DD002_Neural_Circuit_Architecture.md)→[DD003](DD003_Muscle_Model_Architecture.md) chain) |
 
 ---
 

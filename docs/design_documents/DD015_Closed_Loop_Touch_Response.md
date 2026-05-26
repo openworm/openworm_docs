@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid Mechanistic-ML Framework)
 
 ---
 
@@ -84,14 +84,14 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 
 ### Getting Started (Environment Setup)
 
-This DD builds on **two repositories**: the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)) for the MEC-4 channel model and tap withdrawal circuit, and **Sibernetic** ([DD003](DD003_Body_Physics_Architecture.md)) for mechanotransduction coupling (body physics to sensory neurons).
+This DD builds on **two repositories**: the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)) for the MEC-4 channel model and tap withdrawal circuit, and **Sibernetic** ([DD001](DD001_Body_Physics_Architecture.md)) for mechanotransduction coupling (body physics to sensory neurons).
 
-If you have already completed both [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+If you have already completed both [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
 If starting fresh, follow both setup guides first, then return here:
 
-1. [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
-2. [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
+1. [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) — clone c302, install neural circuit dependencies
+2. [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) — clone Sibernetic, install body physics dependencies
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -104,7 +104,7 @@ This builds both the `neural` and `body` Docker stages. Then skip to [Step 1](#s
 
 **Path B — Native (for development):**
 
-Complete both [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), then install additional dependencies:
+Complete both [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) and [DD001 native setup](DD001_Body_Physics_Architecture.md#getting-started-environment-setup), then install additional dependencies:
 
 ```bash
 # NEURON simulator (required for MEC-4 channel model and bidirectional coupling)
@@ -190,8 +190,8 @@ Environment → Cuticle deformation → Cuticle strain (SPH)
     → Touch receptor neuron depolarization (ALM, AVM, PLM, PVD)
     → Command interneuron decision (AVA backward / AVB forward)
     → Motor neuron pattern switch (DA/VA backward wave vs. DB/VB forward wave)
-    → Muscle activation ([DD002](DD002_Muscle_Model_Architecture.md) calcium-force)
-    → Body deformation ([DD003](DD003_Body_Physics_Architecture.md) SPH)
+    → Muscle activation ([DD003](DD003_Muscle_Model_Architecture.md) calcium-force)
+    → Body deformation ([DD001](DD001_Body_Physics_Architecture.md) SPH)
     → Movement in environment → (loop)
 ```
 
@@ -364,7 +364,7 @@ This produces the experimentally observed response: rapid onset current that ada
 
 ### Component 3: Touch Receptor Neuron Cell Templates
 
-Each touch receptor neuron has the standard [DD001](DD001_Neural_Circuit_Architecture.md) channels (leak, K_slow, K_fast, Ca_boyle) PLUS the MEC-4 mechanosensory channel:
+Each touch receptor neuron has the standard [DD002](DD002_Neural_Circuit_Architecture.md) channels (leak, K_slow, K_fast, Ca_boyle) PLUS the MEC-4 mechanosensory channel:
 
 ```python
 # c302/cells/ALMCell.cell.nml (pseudocode)
@@ -372,7 +372,7 @@ cell = GenericCell.copy()
 cell.id = "ALMCell"
 cell.add_channel("mec4_chan", g=20e-9)  # 20 nS mechanosensory
 cell.add_exposure("strain", source="sibernetic_strain_readout")
-# Standard channels remain at [DD001](DD001_Neural_Circuit_Architecture.md)/DD005 defaults
+# Standard channels remain at [DD002](DD002_Neural_Circuit_Architecture.md)/DD005 defaults
 ```
 
 If [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization) is enabled, the standard channel densities come from CeNGEN expression for ALM/AVM/PLM/PVD. The MEC-4 channel is additive on top.
@@ -611,7 +611,7 @@ class TapStimulus:
 - Adds significant computational cost (FEM mesh + SPH particles in parallel)
 - SPH particle displacement provides sufficient strain resolution for the ~6 touch neuron receptive fields
 - Maintaining FEM/SPH consistency during large deformations is non-trivial
-- FEM was already rejected for body physics in [DD003](DD003_Body_Physics_Architecture.md)
+- FEM was already rejected for body physics in [DD001](DD001_Body_Physics_Architecture.md)
 
 **When to reconsider:** If strain computation from SPH particles proves too noisy or spatially inaccurate for fine mechanosensory discrimination.
 
@@ -633,7 +633,7 @@ class TapStimulus:
 
 **Rejected because:**
 
-- [DD003](DD003_Body_Physics_Architecture.md) currently uses homogeneous elastic particles for the body wall
+- [DD001](DD001_Body_Physics_Architecture.md) currently uses homogeneous elastic particles for the body wall
 - Adding cuticle microstructure requires [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity) to tag particles with tissue layers
 - Overkill for the behavioral validation target (tap withdrawal doesn't require cuticle layer resolution)
 - Insufficient mechanical characterization of individual cuticle layers
@@ -717,7 +717,7 @@ docker compose run validate --config tap_withdrawal --duration 30
 
 6. **Male-specific touch neurons:** Males have additional touch-related neurons (e.g., ray neurons for mating). Hermaphrodite only in [DD015](DD015_Closed_Loop_Touch_Response.md).
 
-7. **Environmental mechanics beyond flat agar:** Soil, bacterial lawns, geometric obstacles, microfluidic channels. [DD003](DD003_Body_Physics_Architecture.md) currently supports simple boundary conditions only.
+7. **Environmental mechanics beyond flat agar:** Soil, bacterial lawns, geometric obstacles, microfluidic channels. [DD001](DD001_Body_Physics_Architecture.md) currently supports simple boundary conditions only.
 
 8. **Cuticle fine structure:** Three-layer cuticle mechanics, annuli, alae. Homogeneous elastic particles are sufficient for [DD015](DD015_Closed_Loop_Touch_Response.md).
 
@@ -757,7 +757,7 @@ python viz.py  # Visualize neural/muscle activity
 - [ ] Contact authors (still active as of 2026-02-18) — collaborate on proprioception DD?
 - [ ] Extract StretchReceptor model, compare to Wen et al. 2012 data
 - [ ] Write [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md): Proprioceptive Feedback (references CE_locomotion as source)
-- [ ] Integrate with [DD001](DD001_Neural_Circuit_Architecture.md) B-class motor neurons
+- [ ] Integrate with [DD002](DD002_Neural_Circuit_Architecture.md) B-class motor neurons
 
 **Estimated Time Savings:** 30-40 hours (proprioceptive model exists, just needs porting)
 
@@ -825,7 +825,7 @@ The tap withdrawal circuit is one of the best-characterized neural circuits in a
 ```
 openworm/c302/
 ├── c302/c302_TapWithdrawal.py         # Existing circuit definition (to be updated)
-├── c302/c302_GenericCell.py            # Generic neuron template ([DD001](DD001_Neural_Circuit_Architecture.md))
+├── c302/c302_GenericCell.py            # Generic neuron template ([DD002](DD002_Neural_Circuit_Architecture.md))
 ├── channel_models/                     # Existing channel models
 │   ├── leak_chan.channel.nml
 │   ├── k_slow_chan.channel.nml
@@ -902,7 +902,7 @@ Contains `StretchReceptor.cpp/h` implementing proprioceptive feedback on B-class
    *B-class motor neuron proprioception (stretch-sensitive, out of scope for [DD015](DD015_Closed_Loop_Touch_Response.md)).*
 
 6. **Boyle JH, Cohen N (2008).** "Caenorhabditis elegans body wall muscles are simple actuators." *Biosystems* 94:170-181.
-   *Muscle model parameters used in [DD002](DD002_Muscle_Model_Architecture.md) calcium-force coupling.*
+   *Muscle model parameters used in [DD003](DD003_Muscle_Model_Architecture.md) calcium-force coupling.*
 
 7. **Cook SJ et al. (2019).** "Whole-animal connectomes of both *Caenorhabditis elegans* sexes." *Nature* 571:63-71.
    *Connectome topology for circuit definition.*
@@ -920,19 +920,19 @@ Contains `StretchReceptor.cpp/h` implementing proprioceptive feedback on B-class
 
 | Input | Source DD | Variable | Format | Units | Timestep |
 |-------|----------|----------|--------|-------|----------|
-| Elastic particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for body wall particles | Sibernetic internal state / shared memory | µm | dt_body (20 µs) |
-| Rest particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) at t=0 | Snapshot at initialization | µm | One-time |
-| Boundary particle positions | [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for agar surface | Sibernetic internal state | µm | dt_body |
-| Connectome (touch circuit) | [DD001](DD001_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Touch neuron → interneuron → motor neuron adjacency | ConnectomeToolbox API | neuron pairs + weights | One-time |
+| Elastic particle positions | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for body wall particles | Sibernetic internal state / shared memory | µm | dt_body (20 µs) |
+| Rest particle positions | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) at t=0 | Snapshot at initialization | µm | One-time |
+| Boundary particle positions | [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic) | Per-particle (x, y, z) for agar surface | Sibernetic internal state | µm | dt_body |
+| Connectome (touch circuit) | [DD002](DD002_Neural_Circuit_Architecture.md) (ConnectomeToolbox) | Touch neuron → interneuron → motor neuron adjacency | ConnectomeToolbox API | neuron pairs + weights | One-time |
 | Cell-type channel densities (optional) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | CeNGEN-derived conductances for ALM, AVM, PLM, PVD | NeuroML `<channelDensity>` | S/cm² | One-time |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units | Timestep |
 |--------|------------|----------|--------|-------|----------|
-| Touch neuron membrane voltage | [DD001](DD001_Neural_Circuit_Architecture.md) (part of network simulation) | `V` per touch neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
-| Touch neuron [Ca²⁺]ᵢ | [DD001](DD001_Neural_Circuit_Architecture.md) (downstream synaptic output) | `ca_internal` per touch neuron | NeuroML state variable | mol/cm³ | dt_neuron |
-| Command interneuron activity (AVA, AVB) | [DD002](DD002_Muscle_Model_Architecture.md) (motor neuron drive) | Calcium/voltage of command interneurons | NeuroML state variable | mV, mol/cm³ | dt_neuron |
+| Touch neuron membrane voltage | [DD002](DD002_Neural_Circuit_Architecture.md) (part of network simulation) | `V` per touch neuron | NeuroML state variable | mV | dt_neuron (0.05 ms) |
+| Touch neuron [Ca²⁺]ᵢ | [DD002](DD002_Neural_Circuit_Architecture.md) (downstream synaptic output) | `ca_internal` per touch neuron | NeuroML state variable | mol/cm³ | dt_neuron |
+| Command interneuron activity (AVA, AVB) | [DD003](DD003_Muscle_Model_Architecture.md) (motor neuron drive) | Calcium/voltage of command interneurons | NeuroML state variable | mV, mol/cm³ | dt_neuron |
 | Reversal event log | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | Event onset/offset/type | JSON or CSV | s (timestamps) | Per-event |
 | Cuticle strain time series (viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-body-segment strain magnitude | OME-Zarr: `sensory/strain/`, shape (n_timesteps, n_segments) | dimensionless | output_interval |
 | Reversal event annotations (viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Event markers on timeline | OME-Zarr: `behavior/events/`, shape (n_events, 3) | s, enum | Per-event |
@@ -945,7 +945,7 @@ Contains `StretchReceptor.cpp/h` implementing proprioceptive feedback on B-class
 | **Repository (coupling + stimulus)** | `openworm/sibernetic` |
 | **Docker stage** | `neural` (c302 changes) + `body` (Sibernetic changes) |
 | **`versions.lock` keys** | `c302`, `sibernetic` (both must be pinned together for closed-loop) |
-| **Build dependencies** | Same as [DD001](DD001_Neural_Circuit_Architecture.md) + [DD003](DD003_Body_Physics_Architecture.md); no new dependencies |
+| **Build dependencies** | Same as [DD002](DD002_Neural_Circuit_Architecture.md) + [DD001](DD001_Body_Physics_Architecture.md); no new dependencies |
 
 ### Configuration
 
@@ -1023,9 +1023,9 @@ docker compose run validate --config tap_withdrawal
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Elastic particle positions | [DD003](DD003_Body_Physics_Architecture.md) | If particle count, indexing, or coordinate frame changes, strain readout breaks |
-| Muscle activation interface | [DD002](DD002_Muscle_Model_Architecture.md) | Forward coupling path (existing) — if activation format changes, coupling script breaks |
-| Touch circuit connectivity | [DD001](DD001_Neural_Circuit_Architecture.md) | If connectome data for touch neurons or command interneurons changes, circuit behavior changes |
+| Elastic particle positions | [DD001](DD001_Body_Physics_Architecture.md) | If particle count, indexing, or coordinate frame changes, strain readout breaks |
+| Muscle activation interface | [DD003](DD003_Muscle_Model_Architecture.md) | Forward coupling path (existing) — if activation format changes, coupling script breaks |
+| Touch circuit connectivity | [DD002](DD002_Neural_Circuit_Architecture.md) | If connectome data for touch neurons or command interneurons changes, circuit behavior changes |
 | Cell-type conductances (optional) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If CeNGEN-derived densities for touch neurons change, baseline excitability changes |
 | Neuropeptide modulation (optional) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Dopamine/serotonin modulation of touch sensitivity (habituation) — future work |
 

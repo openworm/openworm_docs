@@ -155,7 +155,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
     - [ ] Runs c302 network generation (`generate('C1', 'FW')`)
     - [ ] Mounts `./output` volume
     - [ ] No body physics dependencies required
-- **Sponsor Summary Hint:** This lets neural circuit developers test their changes without building the body physics engine (Sibernetic). It's like testing the worm's brain in isolation — faster iteration for anyone working on [DD001](DD001_Neural_Circuit_Architecture.md) neural architecture.
+- **Sponsor Summary Hint:** This lets neural circuit developers test their changes without building the body physics engine (Sibernetic). It's like testing the worm's brain in isolation — faster iteration for anyone working on [DD002](DD002_Neural_Circuit_Architecture.md) neural architecture.
 
 ---
 
@@ -236,7 +236,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD011`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD011 §5 — Enhanced master_openworm.py](DD011_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 2) and [DD001](DD001_Neural_Circuit_Architecture.md) (c302 network generation)
+- **DD Section to Read:** [DD011 §5 — Enhanced master_openworm.py](DD011_Simulation_Stack_Architecture.md#5-enhanced-master_openwormpy-implement-all-5-steps) (Step 2) and [DD002](DD002_Neural_Circuit_Architecture.md) (c302 network generation)
 - **Depends On:** Issue 9
 - **Files to Modify:**
     - `master_openworm.py`
@@ -376,7 +376,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 - **Labels:** `DD011`, `human-expert`, `L3`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
-- **DD Section to Read:** [DD011 Context — Known Issues](DD011_Simulation_Stack_Architecture.md#known-critical-issues), [DD011 Open Questions](DD011_Simulation_Stack_Architecture.md#open-questions-require-founder-input) (question 2), and [DD003 Backend Stabilization Roadmap](DD003_Body_Physics_Architecture.md#backend-stabilization-roadmap)
+- **DD Section to Read:** [DD011 Context — Known Issues](DD011_Simulation_Stack_Architecture.md#known-critical-issues), [DD011 Open Questions](DD011_Simulation_Stack_Architecture.md#open-questions-require-founder-input) (question 2), and [DD001 Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap)
 - **Depends On:** None
 - **Files to Modify:**
     - `Dockerfile` (OpenCL/GPU layers + conditional Taichi/PyTorch installation)
@@ -393,7 +393,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
     - [ ] Taichi/PyTorch deps installed conditionally based on selected backend
     - [ ] Performance improvement documented (expect ~10x speedup for GPU backends)
     - [ ] Issue [#320](https://github.com/openworm/OpenWorm/issues/320) resolved
-- **Sponsor Summary Hint:** Sibernetic simulates the worm's body as ~100,000 fluid particles — massively parallel computation that GPUs excel at. Currently the Docker image forces CPU-only OpenCL mode (10x slower) and doesn't support alternative backends. This broadens Docker to support GPU passthrough AND conditional installation of Taichi/PyTorch backends per the DD003 Backend Stabilization Roadmap.
+- **Sponsor Summary Hint:** Sibernetic simulates the worm's body as ~100,000 fluid particles — massively parallel computation that GPUs excel at. Currently the Docker image forces CPU-only OpenCL mode (10x slower) and doesn't support alternative backends. This broadens Docker to support GPU passthrough AND conditional installation of Taichi/PyTorch backends per the DD001 Backend Stabilization Roadmap.
 
 ---
 
@@ -573,7 +573,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 - **Labels:** `DD011`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD011 §9 — JupyterLab Interface](DD011_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347) and [DD001](DD001_Neural_Circuit_Architecture.md) (c302 framework)
+- **DD Section to Read:** [DD011 §9 — JupyterLab Interface](DD011_Simulation_Stack_Architecture.md#9-jupyterlab-interface-issue-347) and [DD002](DD002_Neural_Circuit_Architecture.md) (c302 framework)
 - **Depends On:** Issue 23
 - **Existing Code to Reuse:**
     - `c302/examples/test/Comparison.ipynb` — Existing Jupyter notebook comparing c302 configurations (starting point)
@@ -946,7 +946,7 @@ Target: A newcomer can experience the full simulation in a browser via MyBinder,
 
 ---
 
-## Backend Stabilization (Cross-Phase, DD003)
+## Backend Stabilization (Cross-Phase, DD001)
 
 Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before OpenCL becomes unusable.
 
@@ -954,12 +954,12 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ### Issue 39: Create cross-backend parity test suite
 
-- **Title:** `[DD003] Create cross-backend parity test suite against OpenCL baseline`
-- **Labels:** `DD003`, `ai-workable`, `L2`
+- **Title:** `[DD001] Create cross-backend parity test suite against OpenCL baseline`
+- **Labels:** `DD001`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD003_Body_Physics_Architecture.md#cross-backend-parity-requirements)
-- **Depends On:** DD003 Issues 1–2 (stability validation scripts)
+- **DD Section to Read:** [DD001 Backend Stabilization Roadmap — Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements)
+- **Depends On:** DD001 Issues 1–2 (stability validation scripts)
 - **Files to Modify:**
     - `scripts/backend_parity_test.py` (new)
     - `tests/baseline/` (new — OpenCL baseline metric files)
@@ -979,11 +979,11 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ### Issue 40: Fix Taichi elastic coordinate-space bug
 
-- **Title:** `[DD003] Fix Taichi elastic coordinate-space bug`
-- **Labels:** `DD003`, `human-expert`, `L2`
+- **Title:** `[DD001] Fix Taichi elastic coordinate-space bug`
+- **Labels:** `DD001`, `human-expert`, `L2`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Taichi Coordinate-Space Bug](DD003_Body_Physics_Architecture.md#the-taichi-coordinate-space-bug)
+- **DD Section to Read:** [DD001 Backend Stabilization Roadmap — The Taichi Coordinate-Space Bug](DD001_Body_Physics_Architecture.md#the-taichi-coordinate-space-bug)
 - **Depends On:** Issue 39
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (elastic force calculation)
@@ -1004,11 +1004,11 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ### Issue 41: Audit and fix PyTorch/Taichi result quality gap vs OpenCL
 
-- **Title:** `[DD003] Audit and fix PyTorch/Taichi result quality gap vs OpenCL`
-- **Labels:** `DD003`, `human-expert`, `L3`
+- **Title:** `[DD001] Audit and fix PyTorch/Taichi result quality gap vs OpenCL`
+- **Labels:** `DD001`, `human-expert`, `L3`
 - **Target Repo:** `openworm/Sibernetic`
 - **Required Capabilities:** python, physics, sph
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — The Result Quality Gap](DD003_Body_Physics_Architecture.md#the-result-quality-gap)
+- **DD Section to Read:** [DD001 Backend Stabilization Roadmap — The Result Quality Gap](DD001_Body_Physics_Architecture.md#the-result-quality-gap)
 - **Depends On:** Issue 39, Issue 40
 - **Files to Modify:**
     - `taichi_backend/sph_metal.py` (kernel implementations)
@@ -1029,26 +1029,26 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 
 ### Issue 42: Graduate backends to Stable/Production and add to Dockerfile
 
-- **Title:** `[DD003] Graduate backends to Stable/Production and add to Dockerfile`
-- **Labels:** `DD003`, `ai-workable`, `L2`
+- **Title:** `[DD001] Graduate backends to Stable/Production and add to Dockerfile`
+- **Labels:** `DD001`, `ai-workable`, `L2`
 - **Target Repo:** `openworm/Sibernetic` + `openworm/OpenWorm`
 - **Required Capabilities:** docker, ci-cd
-- **DD Section to Read:** [DD003 Backend Stabilization Roadmap — Backend Graduation Criteria](DD003_Body_Physics_Architecture.md#backend-graduation-criteria)
+- **DD Section to Read:** [DD001 Backend Stabilization Roadmap — Backend Graduation Criteria](DD001_Body_Physics_Architecture.md#backend-graduation-criteria)
 - **Depends On:** Issue 41
 - **Files to Modify:**
     - `Dockerfile` (body stage — add `pip install taichi torch` conditional)
     - `.github/workflows/integration.yml` (add backend-specific CI gates)
-    - DD003 Backend Status table (update status based on graduation results)
+    - DD001 Backend Status table (update status based on graduation results)
 - **Test Commands:**
     - `docker compose run simulation` with `body.backend: pytorch`
     - `docker compose run simulation` with `body.backend: taichi-metal` (on Apple Silicon)
     - CI passes with multi-backend smoke tests
 - **Acceptance Criteria:**
-    - [ ] Backends that pass parity tests upgraded to Stable in DD003 status table
+    - [ ] Backends that pass parity tests upgraded to Stable in DD001 status table
     - [ ] `pip install taichi torch` added to Dockerfile body stage (conditional on backend)
     - [ ] CI runs smoke test on at least OpenCL + one Python backend
     - [ ] Performance benchmark results documented for each graduated backend
-    - [ ] DD003 Compute Backends table updated with final status
+    - [ ] DD001 Compute Backends table updated with final status
     - [ ] Recommendation updated based on actual benchmark results
 - **Sponsor Summary Hint:** The final step in the stabilization sequence — once backends pass the parity tests, they graduate from Experimental to Stable/Production. This means adding them to the Docker image so any contributor can use them, and adding CI gates so regressions are caught automatically. The goal is that Apple Silicon users can run Taichi Metal, NVIDIA users can run CUDA, and everyone has a working backend.
 
@@ -1064,7 +1064,7 @@ Target: Achieve result parity with OpenCL on PyTorch/Taichi backends before Open
 | **L1** | 17 |
 | **L2** | 15 |
 | **L3** | 9 |
-| **DD003 label** | 4 |
+| **DD001 label** | 4 |
 
 | Phase | Issues | Target |
 |-------|--------|--------|
@@ -1105,7 +1105,7 @@ Issues 15, 16 (bug fixes) — independent
 Issues 34 (Docker Hub) — independent
 Issues 36, 37, 38 (surveys) — independent
 
-DD003 Issues 1-2 (stability scripts) → Issue 39 (parity test suite)
+DD001 Issues 1-2 (stability scripts) → Issue 39 (parity test suite)
   → Issue 40 (Taichi coordinate bug) → Issue 41 (quality gap audit)
     → Issue 42 (graduate backends + Dockerfile)
 ```

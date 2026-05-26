@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-24
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit Architecture), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD010](DD010_Validation_Framework.md) (Validation Framework), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML), [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition)
 
 ---
 
@@ -110,7 +110,7 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 
 ## Getting Started
 
-**Prerequisites:** Familiarity with [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture) — especially the c302 framework, Level C1 baseline, and the Hodgkin-Huxley formulation.
+**Prerequisites:** Familiarity with [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit Architecture) — especially the c302 framework, Level C1 baseline, and the Hodgkin-Huxley formulation.
 
 **Key resources:**
 
@@ -145,7 +145,7 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 
 | Input | Source | Variable | Format | Units |
 |-------|--------|----------|--------|-------|
-| Single-compartment neuron models | [DD001](DD001_Neural_Circuit_Architecture.md) | Level C1 network | NeuroML | — |
+| Single-compartment neuron models | [DD002](DD002_Neural_Circuit_Architecture.md) | Level C1 network | NeuroML | — |
 | Cell-type-specific conductances | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-class channel expression | CSV | TPM → g_max |
 | Neuron morphologies (EM) | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) / Witvliet 2021 | 3D segment coordinates | NeuroML `<morphology>` | µm |
 | Synapse centroid distances | [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) / Witvliet 2021 | Distance distributions | CSV | µm |
@@ -155,9 +155,9 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 
 | Output | Consumer | Variable | Format | Units |
 |--------|----------|----------|--------|-------|
-| Multicompartmental neuron models | [DD001](DD001_Neural_Circuit_Architecture.md) network | Level D cells | NeuroML `<cell>` | — |
+| Multicompartmental neuron models | [DD002](DD002_Neural_Circuit_Architecture.md) network | Level D cells | NeuroML `<cell>` | — |
 | Fitted channel densities | [DD010](DD010_Validation_Framework.md) Tier 1 | Per-segment g_max | NeuroML `<channelDensity>` | S/cm² |
-| Spatially placed synapses | [DD001](DD001_Neural_Circuit_Architecture.md) network | Synapse locations | NeuroML `<connection>` with segment refs | µm |
+| Spatially placed synapses | [DD002](DD002_Neural_Circuit_Architecture.md) network | Synapse locations | NeuroML `<connection>` with segment refs | µm |
 | Validation metrics | [DD010](DD010_Validation_Framework.md) | I-V curve fits | JSON | — |
 
 ---

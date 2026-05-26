@@ -14,7 +14,7 @@
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
-**This Map enforces:** The coupling contracts that ensure physical realism — muscle calcium drives body forces ([DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md)), body deformation feeds back to sensory neurons ([DD003](DD003_Body_Physics_Architecture.md)→[DD015](DD015_Closed_Loop_Touch_Response.md)), neuropeptide diffusion modulates neural excitability ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD001](DD001_Neural_Circuit_Architecture.md)), and protein foundation models predict channel kinetics from sequence ([DD021](DD021_Protein_Foundation_Model_Pipeline.md)→[DD005](DD005_Cell_Type_Differentiation_Strategy.md)→[DD001](DD001_Neural_Circuit_Architecture.md)). Every coupling is physically meaningful, not a black-box function call.
+**This Map enforces:** The coupling contracts that ensure physical realism — muscle calcium drives body forces ([DD003](DD003_Muscle_Model_Architecture.md)→[DD001](DD001_Body_Physics_Architecture.md)), body deformation feeds back to sensory neurons ([DD001](DD001_Body_Physics_Architecture.md)→[DD015](DD015_Closed_Loop_Touch_Response.md)), neuropeptide diffusion modulates neural excitability ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD002](DD002_Neural_Circuit_Architecture.md)), and protein foundation models predict channel kinetics from sequence ([DD021](DD021_Protein_Foundation_Model_Pipeline.md)→[DD005](DD005_Cell_Type_Differentiation_Strategy.md)→[DD002](DD002_Neural_Circuit_Architecture.md)). Every coupling is physically meaningful, not a black-box function call.
 
 ---
 
@@ -32,7 +32,7 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-- **Generated from:** Integration Contract sections of [DD001](DD001_Neural_Circuit_Architecture.md)-[DD024](DD024_Project_Metrics_Dashboard.md)
+- **Generated from:** Integration Contract sections of [DD002](DD002_Neural_Circuit_Architecture.md)-[DD024](DD024_Project_Metrics_Dashboard.md)
 - **Last updated:** 2026-02-22
 
 ---
@@ -92,9 +92,9 @@ package "Neural Extensions" as neurext #F3E5F5 {
 
 ' === CORE CHAIN (the spine) ===
 package "Core Simulation Chain" as core #E8F5E9 {
-  component "DD001\n302 Neurons\n(HH, graded syn)" as DD001 #90EE90
-  component "DD002\n95 Muscles\n(Ca -> force)" as DD002 #90EE90
-  component "DD003\nBody Physics\n(SPH ~100K)" as DD003 #90EE90
+  component "DD002\n302 Neurons\n(HH, graded syn)" as DD002 #90EE90
+  component "DD003\n95 Muscles\n(Ca -> force)" as DD003 #90EE90
+  component "DD001\nBody Physics\n(SPH ~100K)" as DD001 #90EE90
 }
 
 ' === SENSORY & MOTOR ===
@@ -156,58 +156,58 @@ ext_bio --> DD013 : model\nweights
 ext_wb --> DD021 : channel\nsequences
 
 ' Data Access -> Core / Neural Extensions
-DD016 --> DD001 : connectome\ntopology
+DD016 --> DD002 : connectome\ntopology
 DD016 --> DD005 : neuron classes
 
 ' ML -> Neural Extensions / Core (FORWARD in this layout)
 DD021 --> DD005 : kinetics\npriors
-DD021 --> DD001 : per-class\nHH params
-DD013 --> DD001 : fitted\nparams
+DD021 --> DD002 : per-class\nHH params
+DD013 --> DD002 : fitted\nparams
 DD013 --> DD006 : binding\naffinities
 
 ' Neural Extensions -> Core (FORWARD in this layout)
-DD005 --> DD001 : 128 cell\ntemplates
-DD006 --> DD001 : conductance\nmodulation
+DD005 --> DD002 : 128 cell\ntemplates
+DD006 --> DD002 : conductance\nmodulation
 
-' DD023 Multicompartmental (refines DD001 neurons)
+' DD023 Multicompartmental (refines DD002 neurons)
 DD005 --> DD023 : per-class\nconductances
-DD023 --> DD001 : Level D\ncells
+DD023 --> DD002 : Level D\ncells
 
 ' Core chain (THE SPINE)
-DD001 -[#008000,bold]-> DD002 : voltage/Ca\n(NMJ)
-DD002 -[#008000,bold]-> DD003 : muscle\nactivation
+DD002 -[#008000,bold]-> DD003 : voltage/Ca\n(NMJ)
+DD003 -[#008000,bold]-> DD001 : muscle\nactivation
 
 ' Core -> Sensory & Motor
-DD003 -[#CC0000,bold]-> DD015 : SPH strain
+DD001 -[#CC0000,bold]-> DD015 : SPH strain
 DD018 --> DD015 : stimuli
-DD003 --> DD019 : curvature
+DD001 --> DD019 : curvature
 
 ' Sensory feedback -> Core (BACKWARD — only 2 remaining)
-DD015 -[#CC0000,bold]-> DD001 : MEC-4\ncurrent
-DD019 --> DD001 : stretch\ncurrent
+DD015 -[#CC0000,bold]-> DD002 : MEC-4\ncurrent
+DD019 --> DD002 : stretch\ncurrent
 
 ' Core -> Organs
-DD001 --> DD007 : pharyngeal\ncircuit
-DD001 --> DD014 : HSN/VC
+DD002 --> DD007 : pharyngeal\ncircuit
+DD002 --> DD014 : HSN/VC
 DD006 --> DD014 : serotonin
 
 ' Whole organism
-DD003 --> DD004 : particle\nstruct
-DD004 --> DD003 : cell IDs
+DD001 --> DD004 : particle\nstruct
+DD004 --> DD001 : cell IDs
 
 ' Core -> Validation
-DD003 -[#0000CC]-> DD010 : kinematics
+DD001 -[#0000CC]-> DD010 : kinematics
 DD017 --> DD010 : feature\nextraction
 DD020 --> DD010 : "Versioned\nexperimental\ndata\n(all tiers)"
 
 ' Core -> Visualization
-DD003 -[#660099]-> DD012 : OME-Zarr\n(all subsystems)
+DD001 -[#660099]-> DD012 : OME-Zarr\n(all subsystems)
 ext_vw --> DD0122 : meshes
-DD003 --> DD0122 : SPH\npositions
+DD001 --> DD0122 : SPH\npositions
 
 ' RC Validation
-DD001 --> DD022 : neural\nstates
-DD002 --> DD022 : motor\nactivation
+DD002 --> DD022 : neural\nstates
+DD003 --> DD022 : motor\nactivation
 DD016 --> DD022 : neuron\nclassification
 DD022 -[#0000CC]-> DD010 : RC metrics\n(advisory)
 
@@ -217,7 +217,7 @@ DD010 --> DD024 : validation\nscores
 GOV --> DD024 : badge/contributor\ndata
 
 ' Hidden edge for layout: position Infrastructure near right side
-DD003 -[hidden]-> DD011
+DD001 -[hidden]-> DD011
 
 legend bottom left
   |= Color |= Meaning |
@@ -250,13 +250,13 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 | DD | Depended On By (count) | Consumers | Criticality | Owner |
 |----|----------------------|-----------|-------------|-------|
-| **[DD001](DD001_Neural_Circuit_Architecture.md)** (Neural Circuit) | **12 DDs** | [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | 🔴 **CRITICAL BOTTLENECK** | Neural Circuit L4 Maintainer |
-| **[DD003](DD003_Body_Physics_Architecture.md)** (Body Physics) | **7 DDs** | [DD004](DD004_Mechanical_Cell_Identity.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL** | Body Physics L4 Maintainer |
-| **[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome) | **9 DDs** | [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
-| [DD002](DD002_Muscle_Model_Architecture.md) (Muscle) | 5 DDs | [DD003](DD003_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md) | 🟡 Moderate | TBD (Muscle L4) |
+| **[DD002](DD002_Neural_Circuit_Architecture.md)** (Neural Circuit) | **12 DDs** | [DD003](DD003_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | 🔴 **CRITICAL BOTTLENECK** | Neural Circuit L4 Maintainer |
+| **[DD001](DD001_Body_Physics_Architecture.md)** (Body Physics) | **7 DDs** | [DD004](DD004_Mechanical_Cell_Identity.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL** | Body Physics L4 Maintainer |
+| **[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome) | **9 DDs** | [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD015](DD015_Closed_Loop_Touch_Response.md) | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
+| [DD003](DD003_Muscle_Model_Architecture.md) (Muscle) | 5 DDs | [DD001](DD001_Body_Physics_Architecture.md), [DD007](DD007_Pharyngeal_System_Architecture.md), [DD010](DD010_Validation_Framework.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md) | 🟡 Moderate | TBD (Muscle L4) |
 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) | 6 DDs | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD010](DD010_Validation_Framework.md), [DD012](DD012_Dynamic_Visualization_Architecture.md), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md), [DD014](DD014_Egg_Laying_System_Architecture.md), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | 🟡 Moderate (Phase 1+) | Neural Circuit L4 Maintainer |
-| [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Models) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (per-class HH params), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
-| [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML) | 2 DDs | [DD001](DD001_Neural_Circuit_Architecture.md) (fitted params), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
+| [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Models) | 2 DDs | [DD002](DD002_Neural_Circuit_Architecture.md) (per-class HH params), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
+| [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML) | 2 DDs | [DD002](DD002_Neural_Circuit_Architecture.md) (fitted params), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
 | [DD011](DD011_Simulation_Stack_Architecture.md) (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Integration L4) — **VACANT** |
 | [DD012](DD012_Dynamic_Visualization_Architecture.md) (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Visualization L4) |
 | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Toolbox) | 1 DD | [DD010](DD010_Validation_Framework.md) (Tier 3 only) | 🟡 **BLOCKING** (for validation) | TBD (Validation L4) — **VACANT** |
@@ -265,9 +265,9 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 | DD | Roadmap Phase | Status |
 |----|--------------|--------|
-| DD001 (Neural Circuit) | Phase 0 | Accepted |
-| DD002 (Muscle) | Phase 0 | Accepted |
-| DD003 (Body Physics) | Phase 0 | Accepted |
+| DD002 (Neural Circuit) | Phase 0 | Accepted |
+| DD003 (Muscle) | Phase 0 | Accepted |
+| DD001 (Body Physics) | Phase 0 | Accepted |
 | DD016 (Connectome) | Phase 0 | Accepted |
 | DD008 (Data Integration) | Phase A1 | Blocked |
 | DD011 (Simulation Stack) | Phase A1 | Proposed |
@@ -286,10 +286,10 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Key Insight:**
 
-- **[DD001](DD001_Neural_Circuit_Architecture.md) is the central hub** — 12 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, [OME-Zarr](https://ngff.openmicroscopy.org) schema) affects almost everything.
+- **[DD002](DD002_Neural_Circuit_Architecture.md) is the central hub** — 12 other DDs depend on it. Any change to neural output format (calcium variables, voltage traces, [OME-Zarr](https://ngff.openmicroscopy.org) schema) affects almost everything.
 - **[DD011](DD011_Simulation_Stack_Architecture.md) and [DD012](DD012_Dynamic_Visualization_Architecture.md) are pure consumers** — They orchestrate/visualize but don't produce data that other DDs depend on. This is correct (leaf nodes in the dependency graph).
 - **[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) is the foundational data layer** — 9 DDs pull connectome data from it. If `cect` API changes or default dataset switches, widespread updates needed.
-- **[DD021](DD021_Protein_Foundation_Model_Pipeline.md) and [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) are ML feeders** — They consume external foundation models (AlphaFold 3, BioEmu-1, Boltz-2, ESM Cambrian) and produce predicted parameters for the mechanistic core. DD021 feeds DD001/DD005 (channel kinetics); DD013 feeds DD001 (fitted params) and DD006 (binding affinities).
+- **[DD021](DD021_Protein_Foundation_Model_Pipeline.md) and [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) are ML feeders** — They consume external foundation models (AlphaFold 3, BioEmu-1, Boltz-2, ESM Cambrian) and produce predicted parameters for the mechanistic core. DD021 feeds DD002/DD005 (channel kinetics); DD013 feeds DD002 (fitted params) and DD006 (binding affinities).
 
 ---
 
@@ -303,31 +303,31 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 **Coupling scripts:**
 
-- NeuroML/LEMS handles [DD001](DD001_Neural_Circuit_Architecture.md)→[DD002](DD002_Muscle_Model_Architecture.md) (within same simulation)
-- `sibernetic_c302.py` handles [DD002](DD002_Muscle_Model_Architecture.md)→[DD003](DD003_Body_Physics_Architecture.md) (file-based coupling)
-- [WCON](https://github.com/openworm/tracker-commons) exporter in `master_openworm.py` handles [DD003](DD003_Body_Physics_Architecture.md)→[DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)
+- NeuroML/LEMS handles [DD002](DD002_Neural_Circuit_Architecture.md)→[DD003](DD003_Muscle_Model_Architecture.md) (within same simulation)
+- `sibernetic_c302.py` handles [DD003](DD003_Muscle_Model_Architecture.md)→[DD001](DD001_Body_Physics_Architecture.md) (file-based coupling)
+- [WCON](https://github.com/openworm/tracker-commons) exporter in `master_openworm.py` handles [DD001](DD001_Body_Physics_Architecture.md)→[DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 - Validation scripts handle [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)→[DD010](DD010_Validation_Framework.md)
 
-**Phase Status:** The core loop (DD001→DD002→DD003→DD017→DD010) is the only coupling chain that is **fully working today** (Phase 0). All other chains (Cell-Type, Closed-Loop, Visualization, Foundation Models) are Phase 1+.
+**Phase Status:** The core loop (DD002→DD003→DD001→DD017→DD010) is the only coupling chain that is **fully working today** (Phase 0). All other chains (Cell-Type, Closed-Loop, Visualization, Foundation Models) are Phase 1+.
 
 **Two trajectory generation paths (both produce WCON 1.0):**
 
 | Path | Tool | Physics | Speed | Use Case |
 |------|------|---------|-------|----------|
 | **2D fast path** | `boyle_berri_cohen_trajectory.py` (c302 repo) | 2D rod-spring, ~150 variables | Seconds (CPU) | CI quick-test, parameter sweeps, DD013 training data |
-| **Sibernetic full path** | `sibernetic_c302.py` → Sibernetic → `wcon/generate_wcon.py` (existing) or `extract_trajectory.py` (DD001 Issue 2) | 3D SPH, ~100K particles | Minutes-hours (GPU) | Publication validation, 3D analysis, DD015 strain |
+| **Sibernetic full path** | `sibernetic_c302.py` → Sibernetic → `wcon/generate_wcon.py` (existing) or `extract_trajectory.py` (DD002 Issue 2) | 3D SPH, ~100K particles | Minutes-hours (GPU) | Publication validation, 3D analysis, DD015 strain |
 
 Both paths feed identically into [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) → [DD010](DD010_Validation_Framework.md). The 2D fast path wraps the Boyle, Berri & Cohen (2012) published rod-spring model, already implemented in `openworm/CE_locomotion`, `openworm/Worm2D`, and `openworm/CelegansNeuromechanicalGaitModulation`.
 
-**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A1 deliverable (DD001 Issue 1).
+**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A1 deliverable (DD002 Issue 1).
 
 **2D model limitations:** 2D only. Cannot replace Sibernetic for [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD015](DD015_Closed_Loop_Touch_Response.md) (3D cuticle strain), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), or Phase 3+ organ systems.
 
 **What breaks if:**
 
-- [DD001](DD001_Neural_Circuit_Architecture.md) changes `ca_internal` variable name → [DD002](DD002_Muscle_Model_Architecture.md) can't read muscle calcium
-- [DD002](DD002_Muscle_Model_Architecture.md) changes activation file format → [DD003](DD003_Body_Physics_Architecture.md) reads wrong forces
-- [DD003](DD003_Body_Physics_Architecture.md) changes particle output or WCON schema → [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) parser fails
+- [DD002](DD002_Neural_Circuit_Architecture.md) changes `ca_internal` variable name → [DD003](DD003_Muscle_Model_Architecture.md) can't read muscle calcium
+- [DD003](DD003_Muscle_Model_Architecture.md) changes activation file format → [DD001](DD001_Body_Physics_Architecture.md) reads wrong forces
+- [DD001](DD001_Body_Physics_Architecture.md) changes particle output or WCON schema → [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) parser fails
 - [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) changes feature definitions → [DD010](DD010_Validation_Framework.md) acceptance thresholds may need recalibration
 
 ---
@@ -394,17 +394,17 @@ Closed-loop coupling can cause **oscillatory instability** if:
 ```
 WormBase sequences ──→ DD021 (Protein FM Pipeline) ──→ DD005 (kinetics priors)
                           │                                    │
-Foundation models ─────────┤                              DD001 (per-class HH params)
+Foundation models ─────────┤                              DD002 (per-class HH params)
 (AlphaFold 3, BioEmu-1,  │
  Boltz-2, ESM Cambrian)  └──→ DD013 (Hybrid ML Framework)
                                     │
-                                    ├──→ DD001 (auto-fitted params)
+                                    ├──→ DD002 (auto-fitted params)
                                     └──→ DD006 (binding affinities)
 ```
 
 **Data flow:**
 
-1. **Ion channel kinetics** ([DD021](DD021_Protein_Foundation_Model_Pipeline.md)): Gene sequence → AlphaFold 3/Boltz-2 (structure) → BioEmu-1 (dynamics) → ESM Cambrian (embeddings) → predicted HH parameters (V_half, slope, tau) → feed into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration and [DD001](DD001_Neural_Circuit_Architecture.md) per-class models
+1. **Ion channel kinetics** ([DD021](DD021_Protein_Foundation_Model_Pipeline.md)): Gene sequence → AlphaFold 3/Boltz-2 (structure) → BioEmu-1 (dynamics) → ESM Cambrian (embeddings) → predicted HH parameters (V_half, slope, tau) → feed into [DD005](DD005_Cell_Type_Differentiation_Strategy.md) calibration and [DD002](DD002_Neural_Circuit_Architecture.md) per-class models
 2. **Neuropeptide binding affinities** ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)→[DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): Peptide + receptor sequences → Boltz-2/AlphaFold 3 (complex structure) → predicted K_d values → differentiated k_on/k_off in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)
 
 **What breaks if:**
@@ -423,13 +423,13 @@ Foundation models ─────────┤                              DD
 
 | Interface | Producer | Consumer | Format | Criticality | Why |
 |-----------|----------|----------|--------|-------------|-----|
-| **Muscle calcium → Sibernetic activation** | [DD002](DD002_Muscle_Model_Architecture.md) | [DD003](DD003_Body_Physics_Architecture.md) | Tab-separated file | 🔴 **CRITICAL** | File format, muscle count, activation range [0,1] — if any change, body physics breaks |
-| **OME-Zarr schema** | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) (10+ producers) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | Zarr directory structure | 🔴 **CRITICAL** | 10+ DDs export, 1 DD consumes — coordination nightmare if schema changes |
-| **WCON format** | [DD001](DD001_Neural_Circuit_Architecture.md) (2D fast path) or [DD003](DD003_Body_Physics_Architecture.md) (Sibernetic full path) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | JSON (WCON 1.0 spec) | 🟡 **MODERATE** | WCON is external standard (tracker-commons), unlikely to change |
-| **`cect` API** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) (9 DDs) | Python classes (ConnectomeDataset, ConnectionInfo) | 🟡 **MODERATE** | ConnectomeToolbox maintainer maintains `cect`, API is stable, v0.2.7 →0.3.0 should be backward-compatible |
-| **Connectome topology (adjacency matrices)** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md) | NumPy arrays | 🟢 **LOW** | Topology is biological ground truth, rarely changes (only with new EM data) |
+| **Muscle calcium → Sibernetic activation** | [DD003](DD003_Muscle_Model_Architecture.md) | [DD001](DD001_Body_Physics_Architecture.md) | Tab-separated file | 🔴 **CRITICAL** | File format, muscle count, activation range [0,1] — if any change, body physics breaks |
+| **OME-Zarr schema** | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) (10+ producers) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | Zarr directory structure | 🔴 **CRITICAL** | 10+ DDs export, 1 DD consumes — coordination nightmare if schema changes |
+| **WCON format** | [DD002](DD002_Neural_Circuit_Architecture.md) (2D fast path) or [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic full path) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | JSON (WCON 1.0 spec) | 🟡 **MODERATE** | WCON is external standard (tracker-commons), unlikely to change |
+| **`cect` API** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) (9 DDs) | Python classes (ConnectomeDataset, ConnectionInfo) | 🟡 **MODERATE** | ConnectomeToolbox maintainer maintains `cect`, API is stable, v0.2.7 →0.3.0 should be backward-compatible |
+| **Connectome topology (adjacency matrices)** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD002](DD002_Neural_Circuit_Architecture.md) | NumPy arrays | 🟢 **LOW** | Topology is biological ground truth, rarely changes (only with new EM data) |
 | **CeNGEN expression** | [DD008](DD008_Data_Integration_Pipeline.md)/DD016 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | CSV or OWMeta query | 🟢 **LOW** | Expression data is fixed per CeNGEN version (L4 v1.0), won't change unless re-analysis |
-| **Foundation model predictions → DD005/DD001** | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | CSV (HH parameters) | 🟡 **MODERATE** | Predictions change when models are updated (AlphaFold 3→4, new ESM version); downstream parameters shift, requiring revalidation against [DD010](DD010_Validation_Framework.md) |
+| **Foundation model predictions → DD005/DD002** | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD002](DD002_Neural_Circuit_Architecture.md) | CSV (HH parameters) | 🟡 **MODERATE** | Predictions change when models are updated (AlphaFold 3→4, new ESM version); downstream parameters shift, requiring revalidation against [DD010](DD010_Validation_Framework.md) |
 | **Foundation model binding affinities → DD006** | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | CSV (K_d values) | 🟢 **LOW** | Predicted affinities are optional enhancement; DD006 falls back to uniform defaults if unavailable |
 
 **Recommendation:**
@@ -444,14 +444,14 @@ Foundation models ─────────┤                              DD
 
 | Coupling Boundary | Upstream DD | Downstream DD | Coupling Script / Location | Owner (L4 Maintainer) | Coordination Required |
 |-------------------|------------|--------------|---------------------------|----------------------|---------------------|
-| **Neural → Muscle** | [DD001](DD001_Neural_Circuit_Architecture.md) | [DD002](DD002_Muscle_Model_Architecture.md) | NeuroML/LEMS (same simulation) | Neural Circuit L4 Maintainer | Low (tightly coupled, same codebase) |
-| **Muscle → Body** | [DD002](DD002_Muscle_Model_Architecture.md) | [DD003](DD003_Body_Physics_Architecture.md) | `sibernetic_c302.py` (openworm/sibernetic) | **Integration L4** + Body Physics L4 | High (file format, different repos) |
-| **Body → Sensory (NEW)** | [DD003](DD003_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | `sibernetic_c302_closedloop.py` (openworm/sibernetic) | **Integration L4** + Body Physics L4 + Neural L4 | **VERY HIGH** (bidirectional, stability risk) |
-| **All → OME-Zarr Export** | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | `master_openworm.py` Step 4b | **Integration L4** | **VERY HIGH** (10+ producers, 1 schema) |
-| **Simulation → WCON** | [DD003](DD003_Body_Physics_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | WCON exporter in `master_openworm.py` | **Integration L4** + Validation L4 | Moderate (WCON spec is external standard) |
-| **Connectome → All** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md)+ (9 DDs) | `cect` Python API | Data L4 (TBD) + ConnectomeToolbox maintainer | Low (stable API, ConnectomeToolbox maintainer maintains both sides) |
+| **Neural → Muscle** | [DD002](DD002_Neural_Circuit_Architecture.md) | [DD003](DD003_Muscle_Model_Architecture.md) | NeuroML/LEMS (same simulation) | Neural Circuit L4 Maintainer | Low (tightly coupled, same codebase) |
+| **Muscle → Body** | [DD003](DD003_Muscle_Model_Architecture.md) | [DD001](DD001_Body_Physics_Architecture.md) | `sibernetic_c302.py` (openworm/sibernetic) | **Integration L4** + Body Physics L4 | High (file format, different repos) |
+| **Body → Sensory (NEW)** | [DD001](DD001_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | `sibernetic_c302_closedloop.py` (openworm/sibernetic) | **Integration L4** + Body Physics L4 + Neural L4 | **VERY HIGH** (bidirectional, stability risk) |
+| **All → OME-Zarr Export** | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | `master_openworm.py` Step 4b | **Integration L4** | **VERY HIGH** (10+ producers, 1 schema) |
+| **Simulation → WCON** | [DD001](DD001_Body_Physics_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | WCON exporter in `master_openworm.py` | **Integration L4** + Validation L4 | Moderate (WCON spec is external standard) |
+| **Connectome → All** | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD002](DD002_Neural_Circuit_Architecture.md)+ (9 DDs) | `cect` Python API | Data L4 (TBD) + ConnectomeToolbox maintainer | Low (stable API, ConnectomeToolbox maintainer maintains both sides) |
 | **CeNGEN → Calibration** | [DD008](DD008_Data_Integration_Pipeline.md)/DD016 | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | OWMeta query or direct download | Data L4 (TBD) + Neural L4 | Low (expression data is fixed per version) |
-| **Foundation Models → Channel Kinetics** | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | `generate_dd005_priors.py` (openworm/openworm-ml) | ML L4 (TBD) + Neural L4 | Moderate (predictions must pass cross-validation before adoption) |
+| **Foundation Models → Channel Kinetics** | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD002](DD002_Neural_Circuit_Architecture.md) | `generate_dd005_priors.py` (openworm/openworm-ml) | ML L4 (TBD) + Neural L4 | Moderate (predictions must pass cross-validation before adoption) |
 | **Foundation Models → Binding Affinities** | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Foundation model inference scripts (openworm/openworm-ml) | ML L4 (TBD) + Neural L4 | Low (optional enhancement, DD006 has uniform defaults as fallback) |
 
 **Key Finding:**
@@ -463,13 +463,13 @@ Foundation models ─────────┤                              DD
 
 ### Scenario 1: DD Changes an Output Interface
 
-**Example:** [DD001](DD001_Neural_Circuit_Architecture.md) PR proposes renaming `ca_internal` to `calcium_concentration`.
+**Example:** [DD002](DD002_Neural_Circuit_Architecture.md) PR proposes renaming `ca_internal` to `calcium_concentration`.
 
 **Integration L4 workflow:**
 
-1. **Mind-of-a-Worm flags PR:** "⚠️ **Integration alert:** This PR modifies calcium output variable name ([DD001](DD001_Neural_Circuit_Architecture.md) Integration Contract). [DD002](DD002_Muscle_Model_Architecture.md) (Muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal feedback), and [DD012](DD012_Dynamic_Visualization_Architecture.md) (Visualization) consume this output. Tagging maintainers."
-2. **Integration L4 reviews:** Checks [DD002](DD002_Muscle_Model_Architecture.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD012](DD012_Dynamic_Visualization_Architecture.md) code for `ca_internal` references
-3. **Coordination:** Opens issues on each consuming DD: "Update calcium variable name from ca_internal to calcium_concentration ([DD001](DD001_Neural_Circuit_Architecture.md) change)"
+1. **Mind-of-a-Worm flags PR:** "⚠️ **Integration alert:** This PR modifies calcium output variable name ([DD002](DD002_Neural_Circuit_Architecture.md) Integration Contract). [DD003](DD003_Muscle_Model_Architecture.md) (Muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal feedback), and [DD012](DD012_Dynamic_Visualization_Architecture.md) (Visualization) consume this output. Tagging maintainers."
+2. **Integration L4 reviews:** Checks [DD003](DD003_Muscle_Model_Architecture.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD009](DD009_Intestinal_Oscillator_Model.md), [DD012](DD012_Dynamic_Visualization_Architecture.md) code for `ca_internal` references
+3. **Coordination:** Opens issues on each consuming DD: "Update calcium variable name from ca_internal to calcium_concentration ([DD002](DD002_Neural_Circuit_Architecture.md) change)"
 4. **Synchronization:** All consuming DDs must update simultaneously (coordinated merge)
 5. **Validation:** Run full integration test (`docker compose run validate`) after all merges
 
@@ -486,14 +486,14 @@ Foundation models ─────────┤                              DD
 
 ### Scenario 3: Multiple DDs Change Simultaneously
 
-**Example:** Phase 2 implementation — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) and [DD015](DD015_Closed_Loop_Touch_Response.md) (touch) both modify [DD001](DD001_Neural_Circuit_Architecture.md).
+**Example:** Phase 2 implementation — [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides) and [DD015](DD015_Closed_Loop_Touch_Response.md) (touch) both modify [DD002](DD002_Neural_Circuit_Architecture.md).
 
 **Integration L4 workflow:**
 
 1. **Coordinate merge order:** [DD015](DD015_Closed_Loop_Touch_Response.md) first (adds MEC-4 channel to touch neurons), then [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (adds peptide components)
 2. **Integration test after each:** Run `docker compose run validate` after [DD015](DD015_Closed_Loop_Touch_Response.md) merge, again after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) merge
 3. **Regression detection:** If Tier 3 kinematics degrade after [DD015](DD015_Closed_Loop_Touch_Response.md), block [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) until fixed
-4. **Update Integration Map:** Add new edges ([DD015](DD015_Closed_Loop_Touch_Response.md)→[DD001](DD001_Neural_Circuit_Architecture.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD001](DD001_Neural_Circuit_Architecture.md)) to this document
+4. **Update Integration Map:** Add new edges ([DD015](DD015_Closed_Loop_Touch_Response.md)→[DD002](DD002_Neural_Circuit_Architecture.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)→[DD002](DD002_Neural_Circuit_Architecture.md)) to this document
 
 ---
 
@@ -503,16 +503,16 @@ Foundation models ─────────┤                              DD
 
 | Script | Location | What It Does | Producer DD | Consumer DD | Owner |
 |--------|----------|--------------|------------|-------------|-------|
-| **`sibernetic_c302.py`** | `openworm/sibernetic` | Reads muscle calcium from NEURON, converts to activation, writes to Sibernetic | [DD002](DD002_Muscle_Model_Architecture.md) | [DD003](DD003_Body_Physics_Architecture.md) | Integration L4 + Body Physics L4 |
-| **`sibernetic_c302_closedloop.py`** | `openworm/sibernetic` (to be created) | Extends above with strain readout (SPH → touch neurons) | [DD003](DD003_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | Integration L4 + Body Physics L4 + Neural L4 |
+| **`sibernetic_c302.py`** | `openworm/sibernetic` | Reads muscle calcium from NEURON, converts to activation, writes to Sibernetic | [DD003](DD003_Muscle_Model_Architecture.md) | [DD001](DD001_Body_Physics_Architecture.md) | Integration L4 + Body Physics L4 |
+| **`sibernetic_c302_closedloop.py`** | `openworm/sibernetic` (to be created) | Extends above with strain readout (SPH → touch neurons) | [DD001](DD001_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | Integration L4 + Body Physics L4 + Neural L4 |
 | **`master_openworm.py`** | `openworm/OpenWorm` | Orchestrates all subsystems, exports OME-Zarr | [DD011](DD011_Simulation_Stack_Architecture.md) | All | **Integration L4** |
-| **OME-Zarr export (Step 4b)** | Inside `master_openworm.py` | Collects all subsystem outputs, writes openworm.zarr/ | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | **Integration L4** |
-| **WCON exporter** | `openworm/sibernetic/wcon/generate_wcon.py` (existing; to be adapted per DD001 Issue 2) | Reads position_buffer.txt, computes curvature/angles, exports WCON 1.0 JSON with schema validation | [DD003](DD003_Body_Physics_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Integration L4 + Validation L4 |
-| **`boyle_berri_cohen_trajectory.py`** | `openworm/c302/scripts/` (to be created) | Reads c302 muscle calcium, runs Boyle-Cohen 2D rod-spring model, outputs WCON trajectory | [DD001](DD001_Neural_Circuit_Architecture.md)/[DD002](DD002_Muscle_Model_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD010](DD010_Validation_Framework.md) | Neural Circuit L4 Maintainer |
-| **c302 network generation** | `openworm/c302` (`CElegans.py`) | Reads connectome via `cect`, generates NeuroML | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD001](DD001_Neural_Circuit_Architecture.md) | Neural Circuit L4 Maintainer |
-| **Strain readout module** | `openworm/sibernetic/coupling/strain_readout.py` (to be created) | Computes local strain from particle displacements | [DD003](DD003_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | Body Physics L4 + Integration L4 |
+| **OME-Zarr export (Step 4b)** | Inside `master_openworm.py` | Collects all subsystem outputs, writes openworm.zarr/ | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | **Integration L4** |
+| **WCON exporter** | `openworm/sibernetic/wcon/generate_wcon.py` (existing; to be adapted per DD002 Issue 2) | Reads position_buffer.txt, computes curvature/angles, exports WCON 1.0 JSON with schema validation | [DD001](DD001_Body_Physics_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Integration L4 + Validation L4 |
+| **`boyle_berri_cohen_trajectory.py`** | `openworm/c302/scripts/` (to be created) | Reads c302 muscle calcium, runs Boyle-Cohen 2D rod-spring model, outputs WCON trajectory | [DD002](DD002_Neural_Circuit_Architecture.md)/[DD003](DD003_Muscle_Model_Architecture.md) | [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md), [DD010](DD010_Validation_Framework.md) | Neural Circuit L4 Maintainer |
+| **c302 network generation** | `openworm/c302` (`CElegans.py`) | Reads connectome via `cect`, generates NeuroML | [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) | [DD002](DD002_Neural_Circuit_Architecture.md) | Neural Circuit L4 Maintainer |
+| **Strain readout module** | `openworm/sibernetic/coupling/strain_readout.py` (to be created) | Computes local strain from particle displacements | [DD001](DD001_Body_Physics_Architecture.md) | [DD015](DD015_Closed_Loop_Touch_Response.md) | Body Physics L4 + Integration L4 |
 | **`predict_kinetics.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Predicts HH kinetic parameters from ion channel sequences via AlphaFold 3 + BioEmu-1 + ESM Cambrian | External (foundation models, WormBase) | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | ML L4 (TBD) |
-| **`generate_dd005_priors.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Combines DD021 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD001](DD001_Neural_Circuit_Architecture.md) | ML L4 (TBD) + Neural L4 |
+| **`generate_dd005_priors.py`** | `openworm/openworm-ml/foundation_params/scripts/` (to be created) | Combines DD021 kinetics predictions with CeNGEN expression to produce per-class HH parameter sets | [DD021](DD021_Protein_Foundation_Model_Pipeline.md) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD002](DD002_Neural_Circuit_Architecture.md) | ML L4 (TBD) + Neural L4 |
 
 **Critical observation:**
 `master_openworm.py` is the **integration bottleneck** — it orchestrates everything. This is why [DD011](DD011_Simulation_Stack_Architecture.md) (which specifies `master_openworm.py`'s architecture) and the Integration L4 role are so critical. The foundation model scripts (`openworm-ml`) run *offline* and produce static parameter files — they do not require runtime orchestration by `master_openworm.py`.
@@ -521,21 +521,21 @@ Foundation models ─────────┤                              DD
 
 ## Recommended Actions for Subsystem Maintainers
 
-### For Neural Circuit L4 Maintainer ([DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
+### For Neural Circuit L4 Maintainer ([DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
 
-**When modifying [DD001](DD001_Neural_Circuit_Architecture.md) outputs:**
+**When modifying [DD002](DD002_Neural_Circuit_Architecture.md) outputs:**
 
-1. Check Integration Contract "Depends On Me" table (lines 473-479 in [DD001](DD001_Neural_Circuit_Architecture.md))
-2. Identify consuming DDs: [DD002](DD002_Muscle_Model_Architecture.md) (muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal feedback), [DD010](DD010_Validation_Framework.md) (validation), [DD011](DD011_Simulation_Stack_Architecture.md) (integration), [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (ML), [DD014](DD014_Egg_Laying_System_Architecture.md) (egg-laying), [DD015](DD015_Closed_Loop_Touch_Response.md) (touch)
+1. Check Integration Contract "Depends On Me" table (lines 473-479 in [DD002](DD002_Neural_Circuit_Architecture.md))
+2. Identify consuming DDs: [DD003](DD003_Muscle_Model_Architecture.md) (muscle), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (peptides), [DD009](DD009_Intestinal_Oscillator_Model.md) (intestinal feedback), [DD010](DD010_Validation_Framework.md) (validation), [DD011](DD011_Simulation_Stack_Architecture.md) (integration), [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (ML), [DD014](DD014_Egg_Laying_System_Architecture.md) (egg-laying), [DD015](DD015_Closed_Loop_Touch_Response.md) (touch)
 3. **If changing calcium variable name, file format, or OME-Zarr schema:** Tag Integration L4 and all consuming DD maintainers
-4. **If adding a new neuron or channel:** Low coordination (internal to [DD001](DD001_Neural_Circuit_Architecture.md))
+4. **If adding a new neuron or channel:** Low coordination (internal to [DD002](DD002_Neural_Circuit_Architecture.md))
 5. **If changing connectome data source ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) → different dataset):** High coordination (affects all 302 neurons)
 
-### For Body Physics L4 Maintainer ([DD003](DD003_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
+### For Body Physics L4 Maintainer ([DD001](DD001_Body_Physics_Architecture.md), [DD004](DD004_Mechanical_Cell_Identity.md))
 
-**When modifying [DD003](DD003_Body_Physics_Architecture.md) outputs:**
+**When modifying [DD001](DD001_Body_Physics_Architecture.md) outputs:**
 
-1. Check "Depends On Me" table ([DD003](DD003_Body_Physics_Architecture.md) lines 489-493)
+1. Check "Depends On Me" table ([DD001](DD001_Body_Physics_Architecture.md) lines 489-493)
 2. Identify consumers: [DD004](DD004_Mechanical_Cell_Identity.md) (cell identity), [DD007](DD007_Pharyngeal_System_Architecture.md) (pharynx mechanics), [DD010](DD010_Validation_Framework.md) (kinematics), [DD011](DD011_Simulation_Stack_Architecture.md) (integration), [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization), [DD012.2](DD012.2_Anatomical_Mesh_Deformation_Pipeline.md) (mesh deformation), [DD015](DD015_Closed_Loop_Touch_Response.md) (strain readout)
 3. **If changing particle struct (adding fields):** [DD004](DD004_Mechanical_Cell_Identity.md) must update particle initialization
 4. **If changing WCON output:** [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) parser must be tested
@@ -546,7 +546,7 @@ Foundation models ─────────┤                              DD
 **Ongoing responsibilities:**
 
 1. **Review all PRs that modify coupling scripts** (sibernetic_c302.py, master_openworm.py, OME-Zarr export)
-2. **Run integration tests** after merging PRs to [DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md), [DD003](DD003_Body_Physics_Architecture.md) (the core chain)
+2. **Run integration tests** after merging PRs to [DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md), [DD001](DD001_Body_Physics_Architecture.md) (the core chain)
 3. **Update this Integration Map** when new DDs are added or coupling changes
 4. **Coordinate simultaneous merges** when multiple DDs change interfaces (Phase 2, Phase 3 multi-DD implementations)
 5. **Maintain `versions.lock`** — pin all subsystem commits together for each release
@@ -681,7 +681,7 @@ docker compose run test-dd015  # Only validates [DD015](DD015_Closed_Loop_Touch_
 
 ### Issue 3: Coupling Scripts Have No Owners in Integration Contracts
 
-**Problem:** [DD002](DD002_Muscle_Model_Architecture.md) Integration Contract doesn't name who owns `sibernetic_c302.py`. Is it Body Physics L4, Neural L4, or Integration L4?
+**Problem:** [DD003](DD003_Muscle_Model_Architecture.md) Integration Contract doesn't name who owns `sibernetic_c302.py`. Is it Body Physics L4, Neural L4, or Integration L4?
 
 **Future:** Add "Coupling Script Owner" row to Integration Contract tables:
 ```markdown

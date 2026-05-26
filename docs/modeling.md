@@ -5,7 +5,7 @@ OpenWorm Modeling Approach
 
 Our main goal is to build the world's first virtual organism — an *in silico* implementation of a living creature — for the purpose of achieving an understanding of the events and mechanisms of living cells.
 
-**This is now formalized in 29 Design Documents ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-[DD024](design_documents/DD024_Project_Metrics_Dashboard.md), plus [DD012.1](design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md))** that specify every subsystem from ion channels to organism behavior, validated against experimental data.
+**This is now formalized in 29 Design Documents ([DD002](design_documents/DD002_Neural_Circuit_Architecture.md)-[DD024](design_documents/DD024_Project_Metrics_Dashboard.md), plus [DD012.1](design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md))** that specify every subsystem from ion channels to organism behavior, validated against experimental data.
 
 ---
 
@@ -28,9 +28,9 @@ This prototype proved the concept worked. But it was:
 
 **Today, OpenWorm is built on formal Design Documents** that specify:
 
-- **[DD001: Neural Circuit](design_documents/DD001_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
-- **[DD002: Muscle Model](design_documents/DD002_Muscle_Model_Architecture.md)** — Calcium-force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters
-- **[DD003: Body Physics](design_documents/DD003_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
+- **[DD002: Neural Circuit](design_documents/DD002_Neural_Circuit_Architecture.md)** — 302-neuron HH model, graded synapses, validated kinematics
+- **[DD003: Muscle Model](design_documents/DD003_Muscle_Model_Architecture.md)** — Calcium-force coupling, [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025) parameters
+- **[DD001: Body Physics](design_documents/DD001_Body_Physics_Architecture.md)** — Sibernetic SPH, ~100K particles, PCISPH pressure solver
 
 **These three DDs (the "core chain") are WORKING and VALIDATED:**
 
@@ -49,9 +49,9 @@ OpenWorm doesn't model at one scale — it models at **five scales simultaneousl
 | Scale | Time | Space | Design Documents | Validation |
 |-------|------|-------|------------------|------------|
 | **Molecular** | Microseconds | Angstroms | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) (foundation models to params) | Protein structures (AlphaFold) |
-| **Channel** | Milliseconds | Nanometers | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (HH channels), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN to conductances) | Patch clamp electrophysiology |
-| **Cellular** | Milliseconds-seconds | Micrometers | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (neurons), [DD002](design_documents/DD002_Muscle_Model_Architecture.md) (muscles), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organs) | Calcium imaging, EMG |
-| **Tissue** | Seconds | Hundreds of um | [DD003](design_documents/DD003_Body_Physics_Architecture.md) (body physics), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) (cell identity) | Kinematics, organ function |
+| **Channel** | Milliseconds | Nanometers | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md) (HH channels), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (CeNGEN to conductances) | Patch clamp electrophysiology |
+| **Cellular** | Milliseconds-seconds | Micrometers | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md) (neurons), [DD003](design_documents/DD003_Muscle_Model_Architecture.md) (muscles), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organs) | Calcium imaging, EMG |
+| **Tissue** | Seconds | Hundreds of um | [DD001](design_documents/DD001_Body_Physics_Architecture.md) (body physics), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) (cell identity) | Kinematics, organ function |
 | **Organism** | Seconds-minutes | Millimeters | [DD010](design_documents/DD010_Validation_Framework.md) (behavioral validation), [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) (closed-loop) | Behavioral assays |
 
 **This is what makes OpenWorm unique** compared to other computational biology projects:
@@ -66,7 +66,7 @@ OpenWorm doesn't model at one scale — it models at **five scales simultaneousl
 
 ![image](../../images/sibernetic.jpg)
 
-Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
+Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-Itself-Comprehensive-Fabrication-Complexity/dp/0231075650) (referenced in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md)), OpenWorm focuses on the sensorimotor loop as the minimum core:
 
 <object data="../images/causal_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">OpenWorm Sensorimotor Causal Loop — click any DD to navigate</object>
 
@@ -82,7 +82,7 @@ Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-It
 
 **Current Specifications:**
 
-- **[DD003](design_documents/DD003_Body_Physics_Architecture.md) (Body Physics):** PCISPH algorithm, ~100K particles (liquid, elastic, boundary), validated
+- **[DD001](design_documents/DD001_Body_Physics_Architecture.md) (Body Physics):** PCISPH algorithm, ~100K particles (liquid, elastic, boundary), validated
 - **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity):** Per-particle cell IDs, 959 somatic cells, cell-type-specific elasticity
 - **[DD018](design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md) (Environment):** Substrates (agar, liquid, soil), chemical/thermal gradients, food particles
 
@@ -94,7 +94,7 @@ Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-It
 
 **Current Specifications:**
 
-- **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md) (Neural Circuit):** Multi-level HH framework (Levels A-D), graded synapses (Level C1 default)
+- **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md) (Neural Circuit):** Multi-level HH framework (Levels A-D), graded synapses (Level C1 default)
 - **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization):** 128 distinct neuron classes from CeNGEN single-cell transcriptomics
 - **[DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides):** 31,479 peptide-receptor interactions ([Ripoll-Sanchez 2023](https://doi.org/10.1016/j.neuron.2023.09.043)), slow modulation
 - **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 20 pharyngeal neurons (semi-autonomous pumping circuit)
@@ -110,7 +110,7 @@ Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-It
 
 **Current Specifications:**
 
-- **[DD002](design_documents/DD002_Muscle_Model_Architecture.md) (Body Wall):** 95 muscles, HH conductances 10-1000x smaller than neurons
+- **[DD003](design_documents/DD003_Muscle_Model_Architecture.md) (Body Wall):** 95 muscles, HH conductances 10-1000x smaller than neurons
 - **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharyngeal):** 20 pharyngeal muscles, plateau potentials, gap-junction-synchronized
 - **[DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) (Reproductive):** 16 sex muscles (8 vulval, 8 uterine), EGL-19/UNC-103 channels
 
@@ -159,7 +159,7 @@ More details available on the [Validation page](validation/).
 3. **Foundation model to ODE parameters** — ESM3/AlphaFold predict channel kinetics from gene sequences
 4. **Learned sensory transduction** — RNN learns stimulus-to-neuron response (chemotaxis, thermotaxis)
 
-**The mechanistic core ([DD001](design_documents/DD001_Neural_Circuit_Architecture.md)-003 HH+SPH equations) is preserved.** ML operates at boundaries (parameter fitting, acceleration, sensory front-end), never replacing causal interpretability.
+**The mechanistic core ([DD002](design_documents/DD002_Neural_Circuit_Architecture.md)-003 HH+SPH equations) is preserved.** ML operates at boundaries (parameter fitting, acceleration, sensory front-end), never replacing causal interpretability.
 
 ---
 

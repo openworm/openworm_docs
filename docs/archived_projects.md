@@ -17,11 +17,11 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it proved:**
 
-- SPH is the right approach for body physics (now formalized in [DD003](design_documents/DD003_Body_Physics_Architecture.md))
-- Graded synapses match _C. elegans_ biology better than spiking models (now formalized in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md))
-- Muscle calcium is the coupling variable between neural and mechanical domains (now formalized in [DD002](design_documents/DD002_Muscle_Model_Architecture.md))
+- SPH is the right approach for body physics (now formalized in [DD001](design_documents/DD001_Body_Physics_Architecture.md))
+- Graded synapses match _C. elegans_ biology better than spiking models (now formalized in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md))
+- Muscle calcium is the coupling variable between neural and mechanical domains (now formalized in [DD003](design_documents/DD003_Muscle_Model_Architecture.md))
 
-**Current status:** Superseded by [DD001](design_documents/DD001_Neural_Circuit_Architecture.md)–[DD003](design_documents/DD003_Body_Physics_Architecture.md) (the formal, validated core chain). Preserved as historical reference and [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) comparison point.
+**Current status:** Superseded by [DD002](design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](design_documents/DD001_Body_Physics_Architecture.md) (the formal, validated core chain). Preserved as historical reference and [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) comparison point.
 
 **See today's version:** [Sibernetic](Projects/sibernetic.md) (body physics) and [c302](Projects/c302.md) (neural modeling)
 
@@ -83,7 +83,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it was:** The original 3D anatomical model of the _C. elegans_ nervous system in NeuroML format, loaded and simulated via NeuroConstruct + NEURON.
 
-**What it evolved into:** [c302](https://github.com/openworm/c302) — the current multi-scale modeling framework specified by [DD001](design_documents/DD001_Neural_Circuit_Architecture.md). c302 generates NeuroML2 networks at multiple biophysical detail levels (A-D) and uses [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) for data access ([DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)).
+**What it evolved into:** [c302](https://github.com/openworm/c302) — the current multi-scale modeling framework specified by [DD002](design_documents/DD002_Neural_Circuit_Architecture.md). c302 generates NeuroML2 networks at multiple biophysical detail levels (A-D) and uses [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) for data access ([DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)).
 
 **See today's version:** [c302 project page](Projects/c302.md)
 
@@ -97,7 +97,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it proved:** Connectome-derived neural dynamics can produce meaningful sensorimotor behavior even in a simplified robot body.
 
-**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in [DD001](design_documents/DD001_Neural_Circuit_Architecture.md) + [DD015 (closed-loop touch response)](design_documents/DD015_Closed_Loop_Touch_Response.md).
+**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md) + [DD015 (closed-loop touch response)](design_documents/DD015_Closed_Loop_Touch_Response.md).
 
 **See today's version:** [C. elegans Robots](Projects/c-elegans-robot.md) project page
 

@@ -38,10 +38,10 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 **Automated compliance checking:**
 
-- Parse PR files to identify affected subsystems (e.g., `c302/` → [DD001](DD001_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
+- Parse PR files to identify affected subsystems (e.g., `c302/` → [DD002](DD002_Neural_Circuit_Architecture.md), [DD005](DD005_Cell_Type_Differentiation_Strategy.md), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
 - Retrieve relevant DDs and their Integration Contracts
 - Check:
-  - ✅ NeuroML validation ([DD001](DD001_Neural_Circuit_Architecture.md), [DD002](DD002_Muscle_Model_Architecture.md): `jnml -validate` must pass)
+  - ✅ NeuroML validation ([DD002](DD002_Neural_Circuit_Architecture.md), [DD003](DD003_Muscle_Model_Architecture.md): `jnml -validate` must pass)
   - ✅ Unit compliance ([DD010](DD010_Validation_Framework.md): biophysical units correct)
   - ✅ Parameter ranges (conductances, voltages, time constants within DD-specified ranges)
   - ⚠️ Coupling interface changes (flag if output variables, file formats, or OME-Zarr schema modified)
@@ -86,9 +86,9 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 - **[Decision Process](../contributing/decision-process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
 - **[DD005](DD005_Cell_Type_Differentiation_Strategy.md):** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use [DD005](DD005_Cell_Type_Differentiation_Strategy.md) as your model when writing a new DD.
-- **[DD001](DD001_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
+- **[DD002](DD002_Neural_Circuit_Architecture.md):** Example of Quick Action Reference table (7 key questions answered at the top)
 
-All science DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
+All science DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md), [DD014](DD014_Egg_Laying_System_Architecture.md)-[DD015](DD015_Closed_Loop_Touch_Response.md)) include a **Quick Action Reference** table answering:
 
 1. What does this produce?
 2. Success metric (which [DD010](DD010_Validation_Framework.md) tier, quantitative threshold)
@@ -198,7 +198,7 @@ Once DD is approved and merged:
 - ✅ **7 alternatives considered** — All rejected with rationale
 - ✅ **Integration Contract** — Complete with all 5 required sub-sections
 
-### [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit Architecture)
+### [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit Architecture)
 
 **Why it's excellent:**
 
@@ -296,4 +296,4 @@ A: [DD012](DD012_Dynamic_Visualization_Architecture.md) is the main visualizatio
 A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs ([DD001](DD001_Neural_Circuit_Architecture.md)-003, [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-003, [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

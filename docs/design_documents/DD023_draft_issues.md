@@ -8,7 +8,7 @@
 
 **Totals:** 3 issues (ai-workable: 1 / human-expert: 2 | L1: 1, L2: 0, L3: 2)
 
-**Roadmap Context:** DD023 is a **Phase 2** DD (proposed). These issues were originally part of DD001 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD023.
+**Roadmap Context:** DD023 is a **Phase 2** DD (proposed). These issues were originally part of DD002 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD023.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
@@ -137,7 +137,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 | Related DD | Relationship |
 |------------|-------------|
-| **[DD001](DD001_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD001 Draft Issues Groups 5 and Infrastructure Issue 20 |
+| **[DD002](DD002_draft_issues.md) (Neural Circuit)** | **Original source** — these issues were extracted from DD002 Draft Issues Groups 5 and Infrastructure Issue 20 |
 | **[DD005](DD005_draft_issues.md) (Cell-Type Specialization)** | Issues 6-9 (channel library) are prerequisites for Issue 2 |
 | DD010 (Validation Framework) | Level D validation criteria |
 | DD011 (Simulation Stack) | Issue 3 (config toggle depends on openworm.yml schema) |

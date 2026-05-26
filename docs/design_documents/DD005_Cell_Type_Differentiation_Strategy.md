@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD008](DD008_Data_Integration_Pipeline.md) (Data Integration Pipeline), [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition), [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Foundation Model Channel Kinetics)
 
 ---
 
@@ -76,9 +76,9 @@ Each `.cell.nml` file includes metadata:
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+This DD builds on the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)). If you have already completed [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
-If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+If starting fresh, follow [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -91,7 +91,7 @@ Then skip to [Step 2](#step-by-step) below.
 
 **Path B — Native (for development):**
 
-Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install additional dependencies:
+Complete [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), then install additional dependencies:
 
 ```bash
 # CeNGEN data access and Randi 2023 functional connectivity
@@ -183,7 +183,7 @@ docker compose run validate
 
 | Viewer Feature | Specification |
 |---------------|---------------|
-| **Layer** | `neural/` (same as [DD001](DD001_Neural_Circuit_Architecture.md), but now with class metadata) |
+| **Layer** | `neural/` (same as [DD002](DD002_Neural_Circuit_Architecture.md), but now with class metadata) |
 | **Color mode** | Color-by-neuron-class: 128 distinct colors, one per CeNGEN class |
 | **Data source** | OME-Zarr: `neural/neuron_class/`, shape (302,) — string enum mapping each of 302 neurons to its class |
 | **What you should SEE** | Neurons colored by class. Clicking a neuron shows its CeNGEN class, dominant channels, and calibration status. Calcium traces should show distinct dynamics per class (e.g., sensory neurons with faster kinetics than interneurons). |
@@ -473,7 +473,7 @@ python scripts/benchmark_improvement.py \
 
 7. **Channel post-translational modifications:** Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.
 
-8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models.
+8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models.
 
 ---
 
@@ -483,7 +483,7 @@ The current power-law expression-to-conductance pipeline is a necessary first st
 
 1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD021](DD021_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
 2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
-3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD001](DD001_Neural_Circuit_Architecture.md) Level D multicompartmental models
+3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models
 
 Each stage preserves backward compatibility with earlier stages via the `openworm.yml` configuration system.
 
@@ -617,7 +617,7 @@ ChannelWorm/
     - Handles activation/inactivation gate fitting separately
 3. **Use pre-generated NeuroML2 models:** `models/unc2_L-type_Ca.channel.nml`, `models/egl19_L-type_Ca.channel.nml`, etc.
     - These can be [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s initial channel definitions (before calibration)
-    - Cross-validate: Do ChannelWorm's models match [DD001](DD001_Neural_Circuit_Architecture.md)'s current channels?
+    - Cross-validate: Do ChannelWorm's models match [DD002](DD002_Neural_Circuit_Architecture.md)'s current channels?
 4. **Reuse SciUnit validation:** `tests/` directory → [DD010](DD010_Validation_Framework.md) Tier 1 single-cell validation framework
 
 **Estimated Time Savings:** 40-60 hours (no manual channel curation, HH fitter exists, NeuroML2 models already generated)
@@ -639,7 +639,7 @@ head -20 ion_channels.csv
 
 - [ ] Test ChannelWorm installation on Python 3.12 (may need dependency updates)
 - [ ] Extract ion channel database, count coverage (how many of 20 training neurons present?)
-- [ ] Compare ChannelWorm's NeuroML2 models to [DD001](DD001_Neural_Circuit_Architecture.md)'s current channel definitions
+- [ ] Compare ChannelWorm's NeuroML2 models to [DD002](DD002_Neural_Circuit_Architecture.md)'s current channel definitions
 - [ ] Port `channelworm/fitter.py` algorithm to [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s calibration pipeline
 - [ ] Add ChannelWorm to [DD011](DD011_Simulation_Stack_Architecture.md) `versions.lock` if used
 
@@ -747,14 +747,14 @@ Scripts for NeuroPAL dataset analysis and conversion. In-vivo neuron identificat
 |-------|--------|----------|--------|-------|
 | CeNGEN L4 expression matrix | cengen.org / OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) | 128 neuron classes × 20,500 genes | CSV (TPM or log-normalized counts) | TPM |
 | Electrophysiology calibration data | Published literature (Goodman, Lockery labs) | ~20 neuron classes with patch-clamp | CSV: neuron_class, channel, measured_g | S/cm² |
-| Ion channel gene→NeuroML model mapping | [DD001](DD001_Neural_Circuit_Architecture.md) channel definitions | Gene symbol → NeuroML channel ID | Python dict / CSV | identifiers |
+| Ion channel gene→NeuroML model mapping | [DD002](DD002_Neural_Circuit_Architecture.md) channel definitions | Gene symbol → NeuroML channel ID | Python dict / CSV | identifiers |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
-| 128 cell-type-specific NeuroML cell files | [DD001](DD001_Neural_Circuit_Architecture.md) (replaces GenericCell when `differentiated: true`) | `{NeuronClass}Cell.cell.nml` | NeuroML 2 XML | S/cm² (conductances), mV, ms |
-| Calibration parameters file | [DD001](DD001_Neural_Circuit_Architecture.md) (reproducibility) | `expression_to_conductance_calibration.csv` | CSV: channel, alpha, beta, baseline, R² | mixed |
+| 128 cell-type-specific NeuroML cell files | [DD002](DD002_Neural_Circuit_Architecture.md) (replaces GenericCell when `differentiated: true`) | `{NeuronClass}Cell.cell.nml` | NeuroML 2 XML | S/cm² (conductances), mV, ms |
+| Calibration parameters file | [DD002](DD002_Neural_Circuit_Architecture.md) (reproducibility) | `expression_to_conductance_calibration.csv` | CSV: channel, alpha, beta, baseline, R² | mixed |
 | Neuron class labels (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-neuron class identity (128 classes) for color-by-type mode | OME-Zarr: `neural/neuron_class/`, shape (302,) | string enum |
 
 ### CRITICAL: Integration Cascade
@@ -770,7 +770,7 @@ Validation sequence after calibration changes:
 ### Repository & Packaging
 
 - **Primary repository:** `openworm/c302`
-- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md))
+- **Docker stage:** `neural` (same as [DD002](DD002_Neural_Circuit_Architecture.md))
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), pandas (pip), scipy (pip)
 - **Additional data in image:** CeNGEN expression matrix (~50MB CSV), calibration file (~1KB)
@@ -780,7 +780,7 @@ Validation sequence after calibration changes:
 
 ```yaml
 neural:
-  differentiated: true               # false = generic model ([DD001](DD001_Neural_Circuit_Architecture.md) default)
+  differentiated: true               # false = generic model ([DD002](DD002_Neural_Circuit_Architecture.md) default)
                                      # true = CeNGEN-differentiated ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
   cengen_version: "L4_v1.0"         # Pin the CeNGEN data version
   calibration_version: "v1"          # Pin the calibration parameters
@@ -827,15 +827,15 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| NeuroML channel model definitions | [DD001](DD001_Neural_Circuit_Architecture.md) | If channel kinetics change, calibration must be redone |
+| NeuroML channel model definitions | [DD002](DD002_Neural_Circuit_Architecture.md) | If channel kinetics change, calibration must be redone |
 | CeNGEN data (external) | cengen.org | If CeNGEN updates expression values, all cell files must be regenerated |
 | Calibration training set (electrophysiology) | Published data | New electrophysiology data should improve calibration |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
-| Neural circuit dynamics | [DD001](DD001_Neural_Circuit_Architecture.md) | Every neuron's voltage/calcium behavior changes |
-| Muscle activation | [DD002](DD002_Muscle_Model_Architecture.md) | Motor neuron calcium output drives muscles — different conductances = different force |
-| Body locomotion | [DD003](DD003_Body_Physics_Architecture.md) | Changed muscle forces → changed movement |
+| Neural circuit dynamics | [DD002](DD002_Neural_Circuit_Architecture.md) | Every neuron's voltage/calcium behavior changes |
+| Muscle activation | [DD003](DD003_Muscle_Model_Architecture.md) | Motor neuron calcium output drives muscles — different conductances = different force |
+| Body locomotion | [DD001](DD001_Body_Physics_Architecture.md) | Changed muscle forces → changed movement |
 | Neuropeptide release | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Different calcium dynamics → different peptide release timing |
 | Functional connectivity validation | [DD010](DD010_Validation_Framework.md) | Tier 2 baseline changes — must re-establish reference values |
 

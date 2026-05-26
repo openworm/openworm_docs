@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD009](DD009_Intestinal_Oscillator_Model.md) (Intestinal Model)
 
 ---
 
@@ -88,9 +88,9 @@ Each pharyngeal NeuroML file includes metadata:
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+This DD builds on the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)). If you have already completed [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
-If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+If starting fresh, follow [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -103,7 +103,7 @@ Then skip to [Step 2](#step-by-step) below.
 
 **Path B — Native (for development):**
 
-Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup). The pharyngeal sub-network uses the same pyNeuroML/jnml toolchain as the body neural circuit. No additional pip installs are required beyond DD001 dependencies.
+Complete [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup). The pharyngeal sub-network uses the same pyNeuroML/jnml toolchain as the body neural circuit. No additional pip installs are required beyond DD002 dependencies.
 
 Verify the pharyngeal configuration files are present:
 
@@ -198,7 +198,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 
 **Modeling approach:**
 
-- Same HH framework as body muscles ([DD002](DD002_Muscle_Model_Architecture.md)) but with:
+- Same HH framework as body muscles ([DD003](DD003_Muscle_Model_Architecture.md)) but with:
   - Higher gap junction conductance (0.1-0.5 nS vs. 0.01 nS for neurons)
   - Adjusted Ca2+ channel kinetics for plateau potentials
   - Coupling to pharyngeal body mechanics (separate from main body SPH)
@@ -355,27 +355,27 @@ May contain HH parameter fits for pharyngeal neurons (I1, M3, MC, NSM) that coul
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Pharyngeal neuron connectome | ConnectomeToolbox / [DD001](DD001_Neural_Circuit_Architecture.md) | Pharyngeal neuron adjacency (20 neurons) | Same format as body connectome | synapse pairs + weights |
+| Pharyngeal neuron connectome | ConnectomeToolbox / [DD002](DD002_Neural_Circuit_Architecture.md) | Pharyngeal neuron adjacency (20 neurons) | Same format as body connectome | synapse pairs + weights |
 | CeNGEN expression (pharyngeal neurons) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-class conductance densities | NeuroML `<channelDensity>` | S/cm2 |
-| RIP->I2 synaptic input (rare body<->pharynx connection) | [DD001](DD001_Neural_Circuit_Architecture.md) | RIP neuron voltage | NeuroML coupling | mV |
+| RIP->I2 synaptic input (rare body<->pharynx connection) | [DD002](DD002_Neural_Circuit_Architecture.md) | RIP neuron voltage | NeuroML coupling | mV |
 
 **Outputs (What This Subsystem Produces)**
 
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
 | Pumping state (contracted/relaxed per section) | [DD010](DD010_Validation_Framework.md) (pumping frequency validation) | Per-section contraction time series | Tab-separated file | binary (0/1) or continuous [0,1] |
-| Pharyngeal particle forces (Option B only) | [DD003](DD003_Body_Physics_Architecture.md) | Per-particle force for pharyngeal muscles | Same format as body muscle activation | dimensionless [0,1] |
+| Pharyngeal particle forces (Option B only) | [DD001](DD001_Body_Physics_Architecture.md) | Per-particle force for pharyngeal muscles | Same format as body muscle activation | dimensionless [0,1] |
 | Food transport rate (future) | [DD009](DD009_Intestinal_Oscillator_Model.md) | Rate of material entering intestine | Scalar time series | um3/s |
 | Pumping state time series (for viewer) | **[DD012](DD012_Dynamic_Visualization_Architecture.md)** (visualization) | Per-section contraction state over all timesteps | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | continuous [0, 1] |
 
 ### Repository & Packaging
 
 - **Primary repository:** `openworm/c302` (same package, new module)
-- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md))
+- **Docker stage:** `neural` (same as [DD002](DD002_Neural_Circuit_Architecture.md))
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), numpy (pip)
 - **No additional Docker changes** for Option A (1D oscillator is pure Python/NeuroML)
-- **Option B would require:** Additional ~5K particles in Sibernetic initialization, changes to [DD003](DD003_Body_Physics_Architecture.md) Docker stage
+- **Option B would require:** Additional ~5K particles in Sibernetic initialization, changes to [DD001](DD001_Body_Physics_Architecture.md) Docker stage
 
 ### Configuration
 
@@ -441,7 +441,7 @@ docker compose run validate
 **Option B (future):** Requires:
 
 1. ~5,000 additional SPH particles tagged as pharyngeal cells ([DD004](DD004_Mechanical_Cell_Identity.md) cell_identity)
-2. Pharyngeal muscle activation -> pharyngeal particle forces (same coupling pattern as [DD002](DD002_Muscle_Model_Architecture.md)->[DD003](DD003_Body_Physics_Architecture.md))
+2. Pharyngeal muscle activation -> pharyngeal particle forces (same coupling pattern as [DD003](DD003_Muscle_Model_Architecture.md)->[DD001](DD001_Body_Physics_Architecture.md))
 3. Anterior attachment: pharyngeal particles mechanically connected to body wall particles at lips
 4. **This changes total particle count** (100K -> 105K), affecting simulation time and memory
 
@@ -451,7 +451,7 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| c302 HH framework | [DD001](DD001_Neural_Circuit_Architecture.md) | Pharyngeal neurons use same framework — channel model changes propagate |
+| c302 HH framework | [DD002](DD002_Neural_Circuit_Architecture.md) | Pharyngeal neurons use same framework — channel model changes propagate |
 | CeNGEN specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Pharyngeal neuron conductances come from CeNGEN |
 | Cell identity (Option B) | [DD004](DD004_Mechanical_Cell_Identity.md) | Pharyngeal particle tagging uses [DD004](DD004_Mechanical_Cell_Identity.md)'s cell_id system |
 
@@ -459,7 +459,7 @@ docker compose run validate
 |---------------|----|-----------------------------|
 | Intestinal input | [DD009](DD009_Intestinal_Oscillator_Model.md) | Eventually pharynx pumps food to intestine — if pumping dynamics change, food arrival rate changes |
 | Behavioral validation | [DD010](DD010_Validation_Framework.md) | Pumping frequency is a Tier 3 validation target |
-| Body physics (Option B) | [DD003](DD003_Body_Physics_Architecture.md) | Additional particles change total count and body initialization |
+| Body physics (Option B) | [DD001](DD001_Body_Physics_Architecture.md) | Additional particles change total count and body initialization |
 
 ---
 

@@ -1,7 +1,7 @@
 NeuroMechanical Modeling - Sibernetic
 =====================================
 
-Sibernetic implements **[DD003 (Body Physics Architecture)](../design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics.
+Sibernetic implements **[DD001 (Body Physics Architecture)](../design_documents/DD001_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics.
 
 ## What It Does
 
@@ -9,9 +9,9 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 
 | Particle Type | Count | Role | DD Reference |
 |---------------|-------|------|--------------|
-| Liquid | ~50K | Surrounding fluid medium | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
-| Elastic | ~30K | Body wall, muscles, cuticle | [DD003](../design_documents/DD003_Body_Physics_Architecture.md) |
-| Boundary | ~20K | Substrate surface | [DD003](../design_documents/DD003_Body_Physics_Architecture.md), [DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md) |
+| Liquid | ~50K | Surrounding fluid medium | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
+| Elastic | ~30K | Body wall, muscles, cuticle | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
+| Boundary | ~20K | Substrate surface | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md) |
 
 **Key algorithm:** PCISPH (Predictive-Corrective Incompressible SPH) pressure solver, implemented in C++ with GPU acceleration (OpenCL).
 
@@ -65,7 +65,7 @@ All issues related to the [Sibernetic code base](https://github.com/openworm/Ope
 
 ## Continue Reading
 
-- **[DD003: Body Physics Architecture](../design_documents/DD003_Body_Physics_Architecture.md)** — The governing specification for Sibernetic
+- **[DD001: Body Physics Architecture](../design_documents/DD001_Body_Physics_Architecture.md)** — The governing specification for Sibernetic
 - **[c302](c302.md)** — The neural network framework that drives Sibernetic
 - **[Docker simulation stack](docker.md)** — Running the complete simulation
 - **[Validation Framework](../validation.md)** — How body physics outputs are validated

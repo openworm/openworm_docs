@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-22
 - **Supersedes:** None (extracted from [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 3)
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML Framework), [DD010](DD010_Validation_Framework.md) (Validation Framework)
 
 ---
 
@@ -154,7 +154,7 @@ python scripts/generate_dd005_priors.py \
 
 ### The Problem: Limited Electrophysiology Data
 
-[DD001](DD001_Neural_Circuit_Architecture.md) uses the same generic HH parameters for all 302 neurons. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN single-cell transcriptomics, but the mapping from mRNA transcript counts to functional conductance densities is a hard, unsolved problem. The current plan ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) proposes a hand-crafted scaling:
+[DD002](DD002_Neural_Circuit_Architecture.md) uses the same generic HH parameters for all 302 neurons. [DD005](DD005_Cell_Type_Differentiation_Strategy.md) proposes specializing via CeNGEN single-cell transcriptomics, but the mapping from mRNA transcript counts to functional conductance densities is a hard, unsolved problem. The current plan ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) proposes a hand-crafted scaling:
 
 ```
 g_max(neuron_class, channel) = baseline_g * expression_level(neuron_class, channel) / max_expression(channel)
@@ -182,7 +182,7 @@ Step 3: Conformational dynamics → HH kinetics
         Input: Conformational landscape + known electrophysiology database
         Output: Predicted HH parameters (V_half, k, tau for each gate)
 
-Step 4: Feed into DD001/DD005 HH ODEs
+Step 4: Feed into DD002/DD005 HH ODEs
         Output parameters go directly into NeuroML (or differentiable backend)
 ```
 
@@ -244,7 +244,7 @@ class ChannelKineticsPredictor(torch.nn.Module):
 egl36_sequence = load_wormbase_sequence("egl-36")
 predicted_params = predictor(egl36_sequence)
 # → V_half_m=-22mV, k_m=5.3, tau_m=12ms, ...
-# Feed directly into DD001 HH model
+# Feed directly into DD002 HH model
 ```
 
 ### Training Data for Kinetics Prediction
@@ -297,7 +297,7 @@ Predicted parameters are validated in two ways:
 | Output | Consumer DD | Variable | Format | Units |
 |--------|------------|----------|--------|-------|
 | Predicted channel kinetics | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | Per-channel HH parameters (V_half, k, tau) | CSV | mV, ms, mS/cm² |
-| Per-neuron-class HH parameters | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-class conductances from sequence + expression | CSV / YAML | mS/cm², mV, ms |
+| Per-neuron-class HH parameters | [DD002](DD002_Neural_Circuit_Architecture.md) | Per-class conductances from sequence + expression | CSV / YAML | mS/cm², mV, ms |
 | Cross-validation report | Internal | Predicted vs. measured, error metrics | JSON | mixed |
 
 ### Configuration (`openworm.yml` Section)
@@ -315,12 +315,12 @@ ml:
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
 | CeNGEN data | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | If expression data versioning changes, per-class predictions change |
-| HH equations | [DD001](DD001_Neural_Circuit_Architecture.md) | If channel model equations change, predicted parameters must be remapped |
+| HH equations | [DD002](DD002_Neural_Circuit_Architecture.md) | If channel model equations change, predicted parameters must be remapped |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|-----------------------------|
 | Cell-type specialization (if using predicted kinetics) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If predicted conductances change, per-class models change |
-| Neural circuit (if using per-class params) | [DD001](DD001_Neural_Circuit_Architecture.md) | If per-class parameters change, simulation behavior changes |
+| Neural circuit (if using per-class params) | [DD002](DD002_Neural_Circuit_Architecture.md) | If per-class parameters change, simulation behavior changes |
 
 ---
 

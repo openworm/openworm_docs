@@ -24,7 +24,7 @@ We are building a simulation platform to prove it is possible to make good model
 Why _C. elegans_?
 -----------------
 
-In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD002_Muscle_Model_Architecture.md) on a body in a complex world.
+In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD003_Muscle_Model_Architecture.md) on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building a simple system to capture it, we are starting with making models of the individual cells and their interactions. If we do this correctly so that the cells act on each other as they do in the real organism, we will have a much more realistic model than we would get trying to go straight to the behavior.
 
@@ -80,7 +80,7 @@ In this case, we have to make do with what we have and make some good educated g
 
 [NeuroML](https://docs.neuroml.org) is an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
 
-OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in [DD001: Neural Circuit Architecture](design_documents/DD001_Neural_Circuit_Architecture.md).
+OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in [DD002: Neural Circuit Architecture](design_documents/DD002_Neural_Circuit_Architecture.md).
 
 ---
 
@@ -133,10 +133,10 @@ Each concept on this page has been formalized into an actionable Design Document
 
 | Concept | Design Document | What It Specifies |
 |---------|----------------|-------------------|
-| Bottom-up simulation | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD003](design_documents/DD003_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
+| Bottom-up simulation | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD001](design_documents/DD001_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
 | Multi-algorithm integration | [DD011](design_documents/DD011_Simulation_Stack_Architecture.md) | Docker-based simulation stack assembling all algorithms |
 | Model optimization | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Hybrid mechanistic-ML framework for parameter fitting |
-| NeuroML | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
+| NeuroML | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
 
 ---
 

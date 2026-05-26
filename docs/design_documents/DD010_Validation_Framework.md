@@ -99,8 +99,8 @@ cd OpenWorm
 
 **Per-tier additional repositories:**
 
-- **Tier 1 (single-cell electrophysiology):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
-- **Tier 2 (circuit-level functional connectivity):** Also needs c302 — see [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
+- **Tier 1 (single-cell electrophysiology):** Also needs c302 — see [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
+- **Tier 2 (circuit-level functional connectivity):** Also needs c302 — see [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) for setup
 - **Tier 3 (behavioral kinematics):** Also needs `open-worm-analysis-toolbox` — see [DD017 Getting Started](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md#getting-started-environment-setup) for setup
 
 **Path A — Docker (recommended):**
@@ -294,7 +294,7 @@ python scripts/check_validation_criteria.py func_conn_validation.json
 
 **Blocking:** If this test fails (r < 0.5), the PR cannot merge to `main`.
 
-**PCA structure validation (additional Tier 2 metric):** Beyond pairwise correlation matching, the low-dimensional dynamical structure of the neural network should be validated. [Kato et al. (2015)](https://doi.org/10.1016/j.cell.2015.09.034) showed that PCA of whole-brain calcium activity reveals a dominant mode (PC1) that separates forward-locomotion neurons (AVB, PVC, VB, DB classes) from backward-locomotion neurons (AVA, AVD, VA, DA classes). After synaptic weight optimization ([DD001](DD001_Neural_Circuit_Architecture.md)), simulated membrane potential time series should reproduce this PC1 separation. Zhao et al. (2024) demonstrated this validation approach on a 136-neuron circuit; OpenWorm will apply it to the full 302-neuron network.
+**PCA structure validation (additional Tier 2 metric):** Beyond pairwise correlation matching, the low-dimensional dynamical structure of the neural network should be validated. [Kato et al. (2015)](https://doi.org/10.1016/j.cell.2015.09.034) showed that PCA of whole-brain calcium activity reveals a dominant mode (PC1) that separates forward-locomotion neurons (AVB, PVC, VB, DB classes) from backward-locomotion neurons (AVA, AVD, VA, DA classes). After synaptic weight optimization ([DD002](DD002_Neural_Circuit_Architecture.md)), simulated membrane potential time series should reproduce this PC1 separation. Zhao et al. (2024) demonstrated this validation approach on a 136-neuron circuit; OpenWorm will apply it to the full 302-neuron network.
 
 #### Tier 2b: Neuropeptide Modulation Validation (unc-31 Natural Experiment)
 
@@ -481,9 +481,9 @@ As the validation toolbox ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Poli
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| Neuron calcium time series | [DD001](DD001_Neural_Circuit_Architecture.md) | Per-neuron [Ca²⁺] over time | Tab-separated `*_calcium.dat` | mol/cm³ |
-| Single-cell electrophysiology | [DD001](DD001_Neural_Circuit_Architecture.md) | V, I_Ca, I_K per cell | Tab-separated from NEURON | mV, nA |
-| Movement trajectory | [DD003](DD003_Body_Physics_Architecture.md) | Body centroid + posture over time | WCON file | µm, frames |
+| Neuron calcium time series | [DD002](DD002_Neural_Circuit_Architecture.md) | Per-neuron [Ca²⁺] over time | Tab-separated `*_calcium.dat` | mol/cm³ |
+| Single-cell electrophysiology | [DD002](DD002_Neural_Circuit_Architecture.md) | V, I_Ca, I_K per cell | Tab-separated from NEURON | mV, nA |
+| Movement trajectory | [DD001](DD001_Body_Physics_Architecture.md) | Body centroid + posture over time | WCON file | µm, frames |
 | Pharyngeal pumping state | [DD007](DD007_Pharyngeal_System_Architecture.md) | Per-section contraction time series | Tab-separated | binary or [0,1] |
 | Defecation motor program | [DD009](DD009_Intestinal_Oscillator_Model.md) | pBoc/aBoc/Exp timestamps | Event log | ms |
 | Experimental data (electrophysiology) | [DD008](DD008_Data_Integration_Pipeline.md) / published papers | Patch-clamp recordings | CSV | mV, nA |
@@ -696,9 +696,9 @@ docker compose run validate
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|-----------------------------|
-| Neural output format | [DD001](DD001_Neural_Circuit_Architecture.md) | If calcium time series format changes, Tier 1 and Tier 2 validators can't read data |
+| Neural output format | [DD002](DD002_Neural_Circuit_Architecture.md) | If calcium time series format changes, Tier 1 and Tier 2 validators can't read data |
 | Neuropeptide on/off toggle | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If DD006 enable/disable mechanism changes, Tier 2b (unc-31) validation can't run paired simulations |
-| Movement output format | [DD003](DD003_Body_Physics_Architecture.md) | If WCON format or particle output changes, Tier 3 movement validator breaks |
+| Movement output format | [DD001](DD001_Body_Physics_Architecture.md) | If WCON format or particle output changes, Tier 3 movement validator breaks |
 | Pharyngeal output format | [DD007](DD007_Pharyngeal_System_Architecture.md) | If pumping state format changes, pumping validation breaks |
 | Intestinal output format | [DD009](DD009_Intestinal_Oscillator_Model.md) | If defecation event format changes, defecation validation breaks |
 | Experimental data (OWMeta) | [DD008](DD008_Data_Integration_Pipeline.md) | If data provenance or versioning changes, validation baselines may shift |
@@ -709,7 +709,7 @@ docker compose run validate
 | CI pipeline (blocking gates) | [DD011](DD011_Simulation_Stack_Architecture.md) | If acceptance criteria change, CI may pass/fail differently |
 | PR review (Mind-of-a-Worm) | [Decision Process](../contributing/decision-process.md) | Mind-of-a-Worm references [DD010](DD010_Validation_Framework.md) criteria when checking PR compliance |
 | Founder digest (Mad-Worm-Scientist) | AI Agents | If validation report format changes, Mad-Worm-Scientist can't parse regression alerts |
-| All subsystem DDs | [DD001](DD001_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
+| All subsystem DDs | [DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md) | If a tier's acceptance criteria tighten, previously-passing subsystems may now fail |
 
 ---
 

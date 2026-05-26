@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
-- **Related:** [DD001](DD001_Neural_Circuit_Architecture.md) (Neural Circuit), [DD002](DD002_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome)
+- **Related:** [DD002](DD002_Neural_Circuit_Architecture.md) (Neural Circuit), [DD003](DD003_Muscle_Model_Architecture.md) (Muscle Model), [DD004](DD004_Mechanical_Cell_Identity.md) (Mechanical Cell Identity), [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization), [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome)
 
 ---
 
@@ -84,9 +84,9 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **c302** neural circuit framework ([DD001](DD001_Neural_Circuit_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+This DD builds on the **c302** neural circuit framework ([DD002](DD002_Neural_Circuit_Architecture.md)). If you have already completed [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
-If starting fresh, follow [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
+If starting fresh, follow [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) first to clone the c302 repository and install dependencies, then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -99,7 +99,7 @@ Then skip to [Step 1](#step-by-step) below.
 
 **Path B — Native (for development):**
 
-Complete [DD001 native setup](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup). The egg-laying circuit (2 HSN + 6 VC neurons + 16 sex muscles) uses the same pyNeuroML/jnml toolchain. No additional pip installs are required beyond DD001 dependencies (pyNeuroML, jnml, pandas, numpy, scipy).
+Complete [DD002 native setup](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup). The egg-laying circuit (2 HSN + 6 VC neurons + 16 sex muscles) uses the same pyNeuroML/jnml toolchain. No additional pip installs are required beyond DD002 dependencies (pyNeuroML, jnml, pandas, numpy, scipy).
 
 Verify the egg-laying circuit configuration:
 
@@ -278,7 +278,7 @@ ACh release -> nAChR on vm2 -> Na+ influx -> local depolarization -> EGL-19 acti
 
 ### Vulval Muscle Model (vm1 and vm2)
 
-Vulval muscles are non-striated, excitable cells distinct from body wall muscles ([DD002](DD002_Muscle_Model_Architecture.md)). They generate calcium-dependent potentials, not classical action potentials.
+Vulval muscles are non-striated, excitable cells distinct from body wall muscles ([DD003](DD003_Muscle_Model_Architecture.md)). They generate calcium-dependent potentials, not classical action potentials.
 
 **vm2 ion channels (the critical muscle):**
 
@@ -401,7 +401,7 @@ Egg-laying is mechanically coupled to locomotion via body bends:
 3. Each body bend delivers a rhythmic depolarizing pulse to vm1 → gap junctions → vm2
 4. During inactive state: subthreshold. During active state: each pulse triggers egg-laying Ca2+ transient
 
-**Coupling variable:** Body bend phase (from [DD001](DD001_Neural_Circuit_Architecture.md)/DD003 locomotion circuit) provides periodic current injection to vm1:
+**Coupling variable:** Body bend phase (from [DD002](DD002_Neural_Circuit_Architecture.md)/DD001 locomotion circuit) provides periodic current injection to vm1:
 
 ```
 I_body_bend = A_bend * sin(2*pi*t / T_bend)
@@ -443,7 +443,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 
 - Egg-laying is one of the most-studied *C. elegans* behaviors with rich quantitative data
 - The circuit is small (28 cells) and well-characterized — ideal for whole-organism modeling
-- HSN and VC neurons already exist in the [DD001](DD001_Neural_Circuit_Architecture.md) connectome; their primary function is egg-laying
+- HSN and VC neurons already exist in the [DD002](DD002_Neural_Circuit_Architecture.md) connectome; their primary function is egg-laying
 - Egg-laying provides a distinct behavioral validation target (two-state pattern) orthogonal to locomotion
 
 ### 2. Abstract State Machine (No Biophysical Circuit)
@@ -473,13 +473,13 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 
 ### 4. Treat Vulval Muscles as Identical to Body Wall Muscles
 
-**Description:** Use the same GenericMuscleCell ([DD002](DD002_Muscle_Model_Architecture.md)) with Boyle & Cohen parameters for vulval muscles.
+**Description:** Use the same GenericMuscleCell ([DD003](DD003_Muscle_Model_Architecture.md)) with Boyle & Cohen parameters for vulval muscles.
 
 **Rejected because:**
 
 - Vulval muscles are non-striated; body wall muscles are obliquely striated
 - Vulval muscles express distinct channel complement: EGL-19 (L-type Ca) dominates rather than ca_boyle, plus UNC-103 ERG K+ channel (absent in body wall)
-- The two-state pattern requires the EGL-19/UNC-103 balance, which does not exist in the [DD002](DD002_Muscle_Model_Architecture.md) GenericMuscleCell
+- The two-state pattern requires the EGL-19/UNC-103 balance, which does not exist in the [DD003](DD003_Muscle_Model_Architecture.md) GenericMuscleCell
 - Calcium-to-force coupling is qualitatively different (vulval opening vs. body bending)
 
 ### 5. Model Only HSN Without VC Feedback
@@ -522,7 +522,7 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 
 6. **Feedback Inhibition:** Removing uv1 tyramine release must produce prolonged active states with more eggs per bout.
 
-7. **Backward Compatibility:** Simulations with `egglaying.enabled: false` must produce identical output to the pre-egg-laying baseline. HSN and VC neurons still participate in the general neural circuit ([DD001](DD001_Neural_Circuit_Architecture.md)) but without sex muscle targets.
+7. **Backward Compatibility:** Simulations with `egglaying.enabled: false` must produce identical output to the pre-egg-laying baseline. HSN and VC neurons still participate in the general neural circuit ([DD002](DD002_Neural_Circuit_Architecture.md)) but without sex muscle targets.
 
 8. **Locomotion Non-Interference:** Adding the egg-laying circuit must not degrade Tier 3 kinematic metrics by more than 15%.
 
@@ -696,7 +696,7 @@ The first computational model of egg-laying temporal pattern generation (BMC Sys
 
 **Stage 2 (Circuit + Locomotion Coupling):**
 
-- Couple vm1 to body-bend-driven rhythmic excitation from [DD001](DD001_Neural_Circuit_Architecture.md)/DD003 locomotion
+- Couple vm1 to body-bend-driven rhythmic excitation from [DD002](DD002_Neural_Circuit_Architecture.md)/DD001 locomotion
 - Validate that egg-laying does not degrade locomotion
 - Validate that body bend coupling provides the ~10 s rhythmic drive
 
@@ -722,7 +722,7 @@ egglaying:
   model: "circuit"
 ```
 
-HSN and VC neurons exist in the [DD001](DD001_Neural_Circuit_Architecture.md) connectome regardless of `egglaying.enabled`. When disabled, they participate in general neural dynamics but have no sex muscle targets. When enabled, the sex muscles are instantiated and connected.
+HSN and VC neurons exist in the [DD002](DD002_Neural_Circuit_Architecture.md) connectome regardless of `egglaying.enabled`. When disabled, they participate in general neural dynamics but have no sex muscle targets. When enabled, the sex muscles are instantiated and connected.
 
 ---
 
@@ -815,9 +815,9 @@ Several known modulatory inputs are not included in Phase 3:
 
 | Input | Source DD | Variable | Format | Units |
 |-------|----------|----------|--------|-------|
-| HSN neuron voltage/calcium | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (c302 neural circuit) | `V_HSN`, `ca_HSN` | NeuroML state variables | mV, mol/cm³ |
-| VC neuron voltage/calcium | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (c302 neural circuit) | `V_VC4`, `V_VC5` | NeuroML state variables | mV, mol/cm³ |
-| Body bend phase (locomotion coupling) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD003](DD003_Body_Physics_Architecture.md) | Periodic motor neuron output on ventral cord | NeuroML coupling | nA (current injection to vm1) |
+| HSN neuron voltage/calcium | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (c302 neural circuit) | `V_HSN`, `ca_HSN` | NeuroML state variables | mV, mol/cm³ |
+| VC neuron voltage/calcium | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (c302 neural circuit) | `V_VC4`, `V_VC5` | NeuroML state variables | mV, mol/cm³ |
+| Body bend phase (locomotion coupling) | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD001](DD001_Body_Physics_Architecture.md) | Periodic motor neuron output on ventral cord | NeuroML coupling | nA (current injection to vm1) |
 | CeNGEN expression (HSN, VC classes) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-class conductance densities | NeuroML `<channelDensity>` | S/cm² |
 | Neuropeptide modulation (if [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) enabled) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | NLP-3 release from HSN; NLP-7/FLP-11 from uv1 | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) `<peptideRelease>` components | mol/cm³ |
 
@@ -829,12 +829,12 @@ Several known modulatory inputs are not included in Phase 3:
 | Circuit state (active/inactive) | [DD012](DD012_Dynamic_Visualization_Architecture.md) (visualization) | Binary state time series | OME-Zarr: `egglaying/circuit_state/`, shape (n_timesteps, 1) | binary |
 | Egg-laying event timestamps | [DD010](DD010_Validation_Framework.md) (validation) | Event log | OME-Zarr: `egglaying/egg_events/` | ms |
 | Egg-laying behavioral metrics | [DD010](DD010_Validation_Framework.md) (Tier 3 validation) | bout_interval, eggs_per_bout, active_duration | CSV output from measure_egglaying.py | min, count, min |
-| Sex muscle particle forces (Option B, future) | [DD003](DD003_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | Per-particle force for vulval/uterine muscles | Same format as [DD002](DD002_Muscle_Model_Architecture.md) muscle activation | dimensionless [0, 1] |
+| Sex muscle particle forces (Option B, future) | [DD001](DD001_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | Per-particle force for vulval/uterine muscles | Same format as [DD003](DD003_Muscle_Model_Architecture.md) muscle activation | dimensionless [0, 1] |
 
 ### Repository & Packaging
 
 - **Primary repository:** `openworm/c302` (same package, new module)
-- **Docker stage:** `neural` (same as [DD001](DD001_Neural_Circuit_Architecture.md) — sex muscles use NeuroML/LEMS)
+- **Docker stage:** `neural` (same as [DD002](DD002_Neural_Circuit_Architecture.md) — sex muscles use NeuroML/LEMS)
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), numpy (pip)
 - **No additional Docker changes** for Phase 3 (circuit-only model)
@@ -940,16 +940,16 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 
 | I Depend On | DD | What Breaks If They Change |
 |-------------|----|----------------------------|
-| Neural circuit (HSN, VC connectivity) | [DD001](DD001_Neural_Circuit_Architecture.md) | If HSN/VC synaptic weights change, egg-laying drive strength changes |
+| Neural circuit (HSN, VC connectivity) | [DD002](DD002_Neural_Circuit_Architecture.md) | If HSN/VC synaptic weights change, egg-laying drive strength changes |
 | CeNGEN specialization (HSN, VC channel densities) | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | If HSN/VC conductances change, circuit dynamics change |
-| Body bend locomotion (vm1 rhythmic drive) | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD003](DD003_Body_Physics_Architecture.md) | If body bend period changes, rhythmic vm1 excitation timing changes |
+| Body bend locomotion (vm1 rhythmic drive) | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD001](DD001_Body_Physics_Architecture.md) | If body bend period changes, rhythmic vm1 excitation timing changes |
 | Neuropeptide signaling (NLP-3, NLP-7, FLP-11) | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | If peptide dynamics change, HSN co-transmission and uv1 feedback change |
 | Cell identity (future vulval muscle particles) | [DD004](DD004_Mechanical_Cell_Identity.md) | If vulval muscle cell_ids change, wrong particles contract |
 
 | Depends On Me | DD | What Breaks If I Change |
 |---------------|----|----------------------------|
 | Validation (egg-laying behavioral metrics) | [DD010](DD010_Validation_Framework.md) | Egg-laying pattern is a Tier 3 validation target |
-| Body physics (future, if vulval muscles are SPH particles) | [DD003](DD003_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | If vm activation format changes, particle forces change |
+| Body physics (future, if vulval muscles are SPH particles) | [DD001](DD001_Body_Physics_Architecture.md) / [DD004](DD004_Mechanical_Cell_Identity.md) | If vm activation format changes, particle forces change |
 | Visualization (egg-laying layers) | [DD012](DD012_Dynamic_Visualization_Architecture.md) | If output format changes, viewer layers break |
 
 ---

@@ -4,7 +4,7 @@
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-19
 - **Supersedes:** None
-- **Related:** [DD003](DD003_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
+- **Related:** [DD001](DD001_Body_Physics_Architecture.md) (Body Physics — boundary particles), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response — tap stimulus), [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) (Hybrid ML — learned sensory)
 
 ---
 
@@ -79,7 +79,7 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 | **Primary repository** | `openworm/sibernetic` (environment is part of the physics engine) |
 | **Secondary repository** | `openworm/c302` (stimulus coupling to sensory neurons) |
 | **Issue label** | `dd018`, `environment` |
-| **Related DDs** | [DD003](DD003_Body_Physics_Architecture.md) (Body Physics), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response) |
+| **Related DDs** | [DD001](DD001_Body_Physics_Architecture.md) (Body Physics), [DD015](DD015_Closed_Loop_Touch_Response.md) (Touch Response) |
 
 ---
 
@@ -87,15 +87,15 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 ### Prerequisites
 
-- Sibernetic ([DD003](DD003_Body_Physics_Architecture.md)) running in Docker ([DD011](DD011_Simulation_Stack_Architecture.md))
-- c302 neural model ([DD001](DD001_Neural_Circuit_Architecture.md)) for sensory neuron stimulus coupling
+- Sibernetic ([DD001](DD001_Body_Physics_Architecture.md)) running in Docker ([DD011](DD011_Simulation_Stack_Architecture.md))
+- c302 neural model ([DD002](DD002_Neural_Circuit_Architecture.md)) for sensory neuron stimulus coupling
 - Stimulus configuration files (chemical gradient profiles, thermal profiles) — included in Docker image or generated at build time
 
 ### Getting Started (Environment Setup)
 
-This DD builds on the **Sibernetic** body physics framework ([DD003](DD003_Body_Physics_Architecture.md)). If you have already completed [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
+This DD builds on the **Sibernetic** body physics framework ([DD001](DD001_Body_Physics_Architecture.md)). If you have already completed [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup), you are ready for the steps below.
 
-If starting fresh, follow [DD003 Getting Started](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
+If starting fresh, follow [DD001 Getting Started](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) first to clone the Sibernetic repository and install dependencies (including OpenCL), then return here.
 
 **Path A — Docker (recommended for newcomers):**
 
@@ -108,7 +108,7 @@ Then skip to [Step-by-step](#step-by-step) below. The Docker image includes Sibe
 
 **Path B — Native (for development):**
 
-Complete [DD003 native setup](DD003_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
+Complete [DD001 native setup](DD001_Body_Physics_Architecture.md#getting-started-environment-setup) (includes OpenCL platform notes for Linux/macOS/Windows), then:
 
 ```bash
 # Install Python dependencies for gradient field solvers
@@ -120,7 +120,7 @@ python stimuli/chemical_gradient.py --output data/gradients/nacl_default.npy   #
 python stimuli/thermal_gradient.py --output data/gradients/thermal_default.npy # [TO BE CREATED]
 ```
 
-**Sensory neuron coupling (required for closed-loop behavior):** Environmental stimuli must reach sensory neurons via the c302 neural model. Complete [DD001 Getting Started](DD001_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up c302 and PyOpenWorm/OWMeta, which provide the sensory neuron wiring (AWC for chemotaxis, AFD for thermotaxis, ALM/PLM for mechanosensation).
+**Sensory neuron coupling (required for closed-loop behavior):** Environmental stimuli must reach sensory neurons via the c302 neural model. Complete [DD002 Getting Started](DD002_Neural_Circuit_Architecture.md#getting-started-environment-setup) to set up c302 and PyOpenWorm/OWMeta, which provide the sensory neuron wiring (AWC for chemotaxis, AFD for thermotaxis, ALM/PLM for mechanosensation).
 
 ### Step-by-step
 
@@ -147,11 +147,11 @@ python stimuli/thermal_gradient.py --output data/gradients/thermal_default.npy #
 - Viscoelastic solid (not purely elastic, not purely viscous)
 - Young's modulus: 3-10 kPa (depends on agarose concentration, typically 2%)
 - Poisson ratio: 0.45 (nearly incompressible)
-- [DD003](DD003_Body_Physics_Architecture.md) boundary particles model agar as fixed constraints; extend to deformable substrate
+- [DD001](DD001_Body_Physics_Architecture.md) boundary particles model agar as fixed constraints; extend to deformable substrate
 
 **Liquid (swimming experiments):**
 
-- Newtonian fluid (same Navier-Stokes as [DD003](DD003_Body_Physics_Architecture.md) pseudocoelom)
+- Newtonian fluid (same Navier-Stokes as [DD001](DD001_Body_Physics_Architecture.md) pseudocoelom)
 - Viscosity: 1e-3 Pa·s (water) to 1e-2 Pa·s (M9 buffer)
 - No solid substrate → worm swims, different gait (higher frequency, lower amplitude)
 
@@ -186,18 +186,18 @@ The defining feature of naturalistic chemotaxis is the closed-loop interaction b
 
 **Closed-loop cycle (each simulation timestep):**
 
-1. **Body position** ([DD003](DD003_Body_Physics_Architecture.md)) provides the worm's current location in the environment
+1. **Body position** ([DD001](DD001_Body_Physics_Architecture.md)) provides the worm's current location in the environment
 2. **Local concentration** (DD018 gradient field) sampled at the worm's head position
 3. **Temporal derivative** `dC/dt = (C(t) - C(t-dt)) / dt` computed — this implements the biased random walk strategy where the worm responds to concentration *changes*, not absolute levels
-4. **Sensory neuron activation** ([DD001](DD001_Neural_Circuit_Architecture.md)/[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)): `dC/dt` converted to current injection on chemosensory neurons (AWC for odors, ASEL/ASER for salt)
-5. **Neural circuit computation** ([DD001](DD001_Neural_Circuit_Architecture.md)): sensory input propagates through interneurons to motor neurons
-6. **Motor output** ([DD002](DD002_Muscle_Model_Architecture.md)): motor neuron calcium drives muscle contraction
-7. **Body movement** ([DD003](DD003_Body_Physics_Architecture.md)): muscles deform the body, propelling it through the environment
+4. **Sensory neuron activation** ([DD002](DD002_Neural_Circuit_Architecture.md)/[DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)): `dC/dt` converted to current injection on chemosensory neurons (AWC for odors, ASEL/ASER for salt)
+5. **Neural circuit computation** ([DD002](DD002_Neural_Circuit_Architecture.md)): sensory input propagates through interneurons to motor neurons
+6. **Motor output** ([DD003](DD003_Muscle_Model_Architecture.md)): motor neuron calcium drives muscle contraction
+7. **Body movement** ([DD001](DD001_Body_Physics_Architecture.md)): muscles deform the body, propelling it through the environment
 8. Return to step 1
 
 **Key biological insight:** Sensory activation uses the temporal derivative `dC/dt`, not the absolute concentration `C(t)`. This is because *C. elegans* employs a biased random walk strategy: it extends forward runs when moving up-gradient (positive dC/dt) and initiates turns/reversals when moving down-gradient (negative dC/dt) ([Pierce-Shimomura et al. 1999](https://doi.org/10.1523/JNEUROSCI.19-21-09557.1999)).
 
-**OpenWorm's approach differs from Zhao et al.** in a critical way: they used a linear readout layer from motor neuron membrane potentials to muscle activations (treating the neural circuit as a 'reservoir computer'). OpenWorm instead uses biophysical neuromuscular junction synapses ([DD002](DD002_Muscle_Model_Architecture.md)), producing a fully mechanistic chain from sensation to movement with no learned components in the motor pathway.
+**OpenWorm's approach differs from Zhao et al.** in a critical way: they used a linear readout layer from motor neuron membrane potentials to muscle activations (treating the neural circuit as a 'reservoir computer'). OpenWorm instead uses biophysical neuromuscular junction synapses ([DD003](DD003_Muscle_Model_Architecture.md)), producing a fully mechanistic chain from sensation to movement with no learned components in the motor pathway.
 
 **Validation target:** The simulated worm's trajectory in a chemical gradient should exhibit the characteristic zigzag pattern toward the food source, with a chemotaxis index (CI) > 0.5 on a standard NaCl gradient assay ([Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009)).
 
@@ -231,7 +231,7 @@ Similar to chemical gradient but for temperature:
 
 ### 2. Simplified: Boundary Conditions Only (No Substrate Mechanics)
 
-**Description:** Keep boundary particles fixed (current [DD003](DD003_Body_Physics_Architecture.md)), just add chemical/thermal fields.
+**Description:** Keep boundary particles fixed (current [DD001](DD001_Body_Physics_Architecture.md)), just add chemical/thermal fields.
 
 **Partially adopted:** For Phase 2-3, this is the pragmatic approach. Substrate mechanics (agar deformability) can be deferred to Phase 5+.
 
@@ -242,7 +242,7 @@ Similar to chemical gradient but for temperature:
 1. **Chemotaxis reproduction:** Simulated worm on NaCl gradient produces CI (chemotaxis index) >0.5 ([Iino & Yoshida 2009](https://doi.org/10.1523/JNEUROSCI.3633-08.2009) experimental data).
 2. **Thermotaxis reproduction:** Worm navigates to 20°C on 15-25°C gradient within ±2°C.
 3. **Substrate-dependent gait:** Crawling on agar vs. swimming in liquid produces ~2:1 speed ratio (matches experiments).
-4. **No destabilization:** Adding environment must not break [DD003](DD003_Body_Physics_Architecture.md) body physics (no particle escape, no NaN).
+4. **No destabilization:** Adding environment must not break [DD001](DD001_Body_Physics_Architecture.md) body physics (no particle escape, no NaN).
 
 ---
 
@@ -261,8 +261,8 @@ Similar to chemical gradient but for temperature:
 
 | Input | Source DD | Variable | Format |
 |-------|----------|----------|--------|
-| Worm body position | [DD003](DD003_Body_Physics_Architecture.md) | Centroid (x, y) from SPH particles | Computed from body/ OME-Zarr |
-| Sensory neuron positions | [DD001](DD001_Neural_Circuit_Architecture.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-neuron (x, y, z) | Static coordinates |
+| Worm body position | [DD001](DD001_Body_Physics_Architecture.md) | Centroid (x, y) from SPH particles | Computed from body/ OME-Zarr |
+| Sensory neuron positions | [DD002](DD002_Neural_Circuit_Architecture.md) / [DD008](DD008_Data_Integration_Pipeline.md) | Per-neuron (x, y, z) | Static coordinates |
 
 ### Outputs
 
@@ -270,7 +270,7 @@ Similar to chemical gradient but for temperature:
 |--------|------------|----------|--------|
 | Local chemical concentration | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (chemosensory) | Concentration at worm position | Scalar (mM) |
 | Local temperature | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) Component 4 (thermosensory) | Temperature at worm position | Scalar (°C) |
-| Substrate reaction force | [DD003](DD003_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
+| Substrate reaction force | [DD001](DD001_Body_Physics_Architecture.md) | Boundary particle forces | SPH force vectors |
 
 ---
 

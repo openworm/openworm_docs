@@ -18,12 +18,12 @@ nav:
       - Integration Map: design_documents/INTEGRATION_MAP.md
       - Contributing Guide: design_documents/contributing_guide.md
       - "Phase 0 — Core Architecture":
-          - DD001 Neural Circuit: design_documents/DD001_Neural_Circuit_Architecture.md
-          - DD001 Draft Issues: design_documents/DD001_draft_issues.md
-          - DD002 Muscle Model: design_documents/DD002_Muscle_Model_Architecture.md
+          - DD002 Neural Circuit: design_documents/DD002_Neural_Circuit_Architecture.md
           - DD002 Draft Issues: design_documents/DD002_draft_issues.md
-          - DD003 Body Physics: design_documents/DD003_Body_Physics_Architecture.md
+          - DD003 Muscle Model: design_documents/DD003_Muscle_Model_Architecture.md
           - DD003 Draft Issues: design_documents/DD003_draft_issues.md
+          - DD001 Body Physics: design_documents/DD001_Body_Physics_Architecture.md
+          - DD001 Draft Issues: design_documents/DD001_draft_issues.md
           - DD016 Connectome Data Access: design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md
           - DD016 Draft Issues: design_documents/DD016_draft_issues.md
       - "Phase A1 — Core Infrastructure":

@@ -6,8 +6,8 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 
 | Repository | Design Documents | Status | Role |
 |------------|------------------|--------|------|
-| [c302](Projects/c302/) | [DD001](design_documents/DD001_Neural_Circuit_Architecture.md), [DD002](design_documents/DD002_Muscle_Model_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md)-[DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Active | Neural circuit, muscle models, organ systems |
-| [Sibernetic](Projects/sibernetic/) | [DD003](design_documents/DD003_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | Active | Body physics, SPH engine |
+| [c302](Projects/c302/) | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md)-[DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Active | Neural circuit, muscle models, organ systems |
+| [Sibernetic](Projects/sibernetic/) | [DD001](design_documents/DD001_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | Active | Body physics, SPH engine |
 | [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Active | Connectome data access (cect API) |
 | [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) | Active | Visualization (Trame evolution) |
 | [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | [DD010](design_documents/DD010_Validation_Framework.md), [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Revival needed | Tier 3 behavioral validation |
@@ -21,8 +21,8 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 
 ### Currently active projects
 
--   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD003](design_documents/DD003_Body_Physics_Architecture.md)** (Body Physics) + **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (Mechanical Cell Identity)
--   [c302 multiscale modelling framework](Projects/c302/) — implements **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (Neural Circuit) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (Muscle Model) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)**
+-   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD001](design_documents/DD001_Body_Physics_Architecture.md)** (Body Physics) + **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (Mechanical Cell Identity)
+-   [c302 multiscale modelling framework](Projects/c302/) — implements **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** (Neural Circuit) + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)** (Muscle Model) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)**
 -   [OpenWorm Browser](Projects/browser/)
 -   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 6](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)**, connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)**
 -   [Docker simulation stack](Projects/docker/) — implements **[DD011](design_documents/DD011_Simulation_Stack_Architecture.md)** (Simulation Stack)
@@ -34,14 +34,14 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 -   [Movement analysis](Projects/worm-movement/) — implements **[DD010](design_documents/DD010_Validation_Framework.md)** (Validation) + **[DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** (Movement Toolbox)
 -   [Geppetto Simulation Engine](Projects/geppetto/) — historical; superseded by **[DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md)** (Dynamic Visualization)
 -   [Optimization engine](Projects/optimization/) — relates to **[DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md)** (Hybrid Mechanistic-ML)
--   [Muscle-Neuron integration](Projects/muscle-neuron-integration/) — formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)**
+-   [Muscle-Neuron integration](Projects/muscle-neuron-integration/) — formalized in **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)**
 -   [_C. elegans_ robots](Projects/c-elegans-robot/)
 
 ---
 
 **NeuroMechanical Modeling - Sibernetic**
 
-Sibernetic implements **[DD003 (Body Physics Architecture)](design_documents/DD003_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics including the PCISPH algorithm, ~100K particles, and fluid-structure interaction. See [DD003](design_documents/DD003_Body_Physics_Architecture.md) for the complete spec including particle types, validation criteria, and integration contract.
+Sibernetic implements **[DD001 (Body Physics Architecture)](design_documents/DD001_Body_Physics_Architecture.md)** — the formal specification for SPH-based body mechanics including the PCISPH algorithm, ~100K particles, and fluid-structure interaction. See [DD001](design_documents/DD001_Body_Physics_Architecture.md) for the complete spec including particle types, validation criteria, and integration contract.
 
 [Sibernetic](https://openworm.org/sibernetic/) is the home of the C++ code base that implements the core of the model. We have implemented an algorithm called Smoothed Particle Hydrodynamics (SPH) to simulate the body of the worm and its environment using GPUs.
 
@@ -51,7 +51,7 @@ More detailed information is available on the [Sibernetic project page](Projects
 
 **c302 Neural Modeling Framework**
 
-c302 implements **[DD001 (Neural Circuit Architecture)](design_documents/DD001_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) (egg-laying), and [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) (touch response).
+c302 implements **[DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) (egg-laying), and [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) (touch response).
 
 c302 generates NeuroML2 networks at multiple levels of biophysical detail (Levels A-D), with **Level C1 (HH + graded synapses)** as the recommended default for coupling with Sibernetic.
 
@@ -99,7 +99,7 @@ More detailed information is available on the [Community project page](Projects/
 
 **Muscle-Neuron Integration**
 
-Now formalized in **[DD001](design_documents/DD001_Neural_Circuit_Architecture.md)** (neural) + **[DD002](design_documents/DD002_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
+Now formalized in **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** (neural) + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
 
 More detailed information is available on the [Muscle-Neuron integration project page](Projects/muscle-neuron-integration/).
 
