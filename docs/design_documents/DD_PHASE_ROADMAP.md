@@ -197,7 +197,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 **Phase Rationale:** This phase derisks Phase 1 science. DD021 runs foundation model cross-validation in parallel with A1, providing priors that accelerate DD005 calibration.
 
-> **Note on governance scope:** Contributor progression, design-document RFC process, and AI-contributor model — previously listed here as DD011, DD012, and DD015 — are governance/process documents rather than technical Design Documents. They have been moved to the dedicated [Contributing section](../contributing/index.md) where they live as living governance pages independent of the DD phase structure.
+Governance documents (contributor progression, decision process, AI contributors) are maintained continuously in the [Contributing section](../contributing/index.md) rather than as DDs.
 
 **Scope:**
 
@@ -375,7 +375,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 | **DD007** | Pharyngeal System Architecture | DD002, DD003, DD005 | 63-cell semi-autonomous organ (20 neurons + 20 muscles), 3-4 Hz pumping |
 | **DD009** | Intestinal Oscillator Model | DD002, DD004 (optional) | 20-cell IP3/Ca oscillator, defecation motor program (50s period) |
 | **DD014** | Egg-Laying System Architecture | DD002, DD003, DD005, DD006 | 28-cell reproductive circuit (HSN serotonergic, VC cholinergic, 16 sex muscles), two-state pattern |
-| **DD013** | Hybrid Mechanistic-ML Framework | DD002-DD005, DD010 | Differentiable backend (auto parameter fit), SPH surrogate (1000× speedup), learned sensory (Component 3 extracted to DD021) |
+| **DD013** | Hybrid Mechanistic-ML Framework | DD001, DD002-DD005, DD010 | SPH surrogate trained against DD001's differentiable substrate (1000× speedup target), learned sensory transduction |
 
 **Key Deliverables:**
 

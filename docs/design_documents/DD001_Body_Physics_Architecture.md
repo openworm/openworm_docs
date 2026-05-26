@@ -733,13 +733,15 @@ The native Metal substrate is **architecturally differentiable**. This is not a 
 
 ### Why Differentiability Is a Substrate Property, Not a Framework Layer
 
-Earlier OpenWorm planning (DD013) treated "differentiable simulation" as a future framework component — a PyTorch reimplementation living in a separate `openworm-ml/differentiable/` repo, scheduled for Phase 3. The native-port work overtook that plan: as part of building hand-written Metal kernels, the implementers chose to derive analytic backwards alongside each forward kernel rather than rely on an autodiff layer. This produces three structural advantages over the framework-layer approach:
+The native substrate derives analytic backwards alongside each forward kernel rather than relying on an autodiff layer over a separate reimplementation. This produces three structural advantages:
 
-1. **No re-implementation drift.** A separate PyTorch reimplementation would have to track the OpenCL reference's behavior over time; an in-substrate backward is the same code path as the forward.
+1. **No re-implementation drift.** A separate autodiff reimplementation in PyTorch or JAX would have to track the reference's behavior over time as physics changes; an in-substrate backward is the same code path as the forward.
 2. **GPU-native gradients.** Backward kernels run on the same Metal command queue as the forwards — no host round-trip, no autodiff graph overhead.
 3. **Parameter gradients arrive for free.** Once each forward kernel has an analytic backward, every physical parameter (stiffness, viscosity, rest density, compliance) is differentiable end-to-end without explicit `requires_grad` plumbing.
 
 The CUDA scaffolding at `src/cuda/README.md` makes this explicit: the CUDA substrate must mirror `src/metal_diff/` file-for-file, including paired backward kernels per forward kernel. Differentiability is the *architectural contract* the substrate exposes — not an optional feature flag.
+
+The ML-augmentation framework that consumes this substrate (surrogate models, learned sensory transduction) is the scope of [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md).
 
 ### What's Differentiable Today
 

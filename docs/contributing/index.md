@@ -48,5 +48,3 @@ How AI agents participate in OpenWorm as first-class contributors — the regist
 These pages describe *process*, not technical artifacts. The Design Documents (DD002–DDxxx) specify what gets built — neural circuits, body physics, validation frameworks. The Contributing pages specify how the community of builders organizes itself.
 
 Treating them as a separate section makes both halves clearer: Design Documents become "the spec of the worm simulation," and Contributing becomes "the spec of how we work together on it." Each can evolve independently of the other.
-
-If you arrived here from a `DD011`, `DD012`, or `DD015` link, those are the previous locations of these pages. They now redirect here.

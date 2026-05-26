@@ -10,27 +10,14 @@
 
 > **Phase:** [Phase 3: Organ Integration & Behavior](DD_PHASE_ROADMAP.md#phase-3-organ-integration--behavior-months-13-18) | **Layer:** ML Framework
 
-!!! info "Scope reduced (2026-05)"
-    This DD was originally planned with four components. Three have moved out of its scope:
-
-    - **Differentiable SPH simulation backend** → now a property of the [Sibernetic native Metal substrate](DD001_Body_Physics_Architecture.md#differentiability) (DD001). 19 paired backward kernels, multi-step `xpbd_full_bwd`, 4 demos SGD-tuned to OpenCL reference. CUDA port inherits the same architecture.
-    - **Foundation model → ODE parameters** → extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md), promoted to Phase A2/Phase 1.
-    - **Differentiable neural/muscle ODE substrate** → deferred to Phase 3 design discussion (implementation strategy: hand-derived analytic backwards à la DD001, or PyTorch autodiff reimplementation, TBD).
-
-    The remaining DD013 scope is **two ML-augmentation components**: SPH neural surrogate (for speed) and learned sensory transduction (for data-gap filling).
-
 ## TL;DR
 
-When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. The remaining scope after recent architectural shifts is two ML-augmentation components:
+When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured synaptic weights), this framework provides a disciplined way to use machine learning as a gap-filler — constrained by known biology so ML components can be replaced as experimental data becomes available. Two ML-augmentation components are in scope:
 
-1. **Neural surrogate for SPH body physics** (1000× speedup target with <5% trajectory error)
+1. **Neural surrogate for SPH body physics** (1000× speedup target with <5% trajectory error against the native Sibernetic substrate — see [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability))
 2. **Learned sensory transduction** (close the stimulus-response loop where mechanistic models are unavailable)
 
-**Scope reductions:**
-
-- **Differentiable simulation backend (SPH portion)** has been delivered as a property of the native Sibernetic Metal substrate — see [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability). The Phase 3 plan was overtaken by the native-port work, which built end-to-end reverse-mode AD into the substrate itself (19 paired analytic backward kernels, multi-step `xpbd_full_bwd`, 4 demos SGD-tuned to OpenCL reference). The same architectural contract is mandated for the in-progress CUDA port.
-- **Differentiable neural/muscle ODE substrate** (originally part of component 1) — still future work. The c302 / NEURON / muscle ODE pipelines are not yet differentiable. Whether the path forward is a PyTorch reimplementation or following DD001's pattern of hand-derived analytic backwards is a Phase 3 design decision.
-- **Foundation model → ODE parameters** (component 3) extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and promoted to Phase A2/Phase 1.
+The differentiable SPH substrate this framework's surrogate trains against is delivered as a property of the native Sibernetic Metal substrate ([DD001](DD001_Body_Physics_Architecture.md#differentiability)) rather than as a component of this DD. Differentiability for the c302/NEURON/muscle ODE pipelines (neural-side substrate) is still future work; its implementation strategy is a Phase 3 design decision (hand-derived analytic backwards à la DD001, or PyTorch autodiff reimplementation). Foundation-model → ODE-parameters work is covered by [DD021](DD021_Protein_Foundation_Model_Pipeline.md).
 
 ## Goal & Success Criteria
 
@@ -42,7 +29,6 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 - SPH surrogate achieves at least 100x speedup (target 1000x) with < 5% trajectory error vs. the native Sibernetic substrate ([DD001](DD001_Body_Physics_Architecture.md))
 - Learned sensory transduction matches available experimental tuning-curve data within published noise ranges
 - Every ML component has a documented replacement pathway for when experimental data becomes available
-- *(Differentiable SPH substrate success criterion has moved to [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) item 7: every native-substrate forward kernel ships with a paired backward kernel within ±5% FD-validated)*
 
 ## Deliverables
 
@@ -51,9 +37,6 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 - Learned sensory transduction module (`openworm/openworm-ml/sensory/`)
 - ML component registry tracking which model parameters use ML vs. mechanistic values `[TO BE CREATED]`
 - Benchmark comparison scripts (ML-augmented vs. pure mechanistic) `[TO BE CREATED]`
-- *(Differentiable SPH simulation backend — **delivered** in [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability), not in this DD)*
-- *(Foundation model parameter pipeline — **extracted** to [DD021](DD021_Protein_Foundation_Model_Pipeline.md))*
-- *(Differentiable c302/NEURON/muscle ODE substrate — **future work**, scope and implementation strategy to be decided in Phase 3; could follow DD001's hand-derived-analytic-backwards pattern or use autodiff via PyTorch reimplementation)*
 
 ## Repository & Issues
 
@@ -68,7 +51,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 |----------|--------|
 | **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
 | **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **What does this produce?** | (1) Neural surrogate for Sibernetic SPH (trained against [DD001](DD001_Body_Physics_Architecture.md)'s differentiable substrate), (2) Learned sensory transduction module. *(Differentiable SPH substrate moved to DD001; foundation model parameter pipeline extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md); differentiable neural/muscle ODE substrate deferred to Phase 3 design discussion)* |
+| **What does this produce?** | (1) Neural surrogate for Sibernetic SPH (trained against [DD001](DD001_Body_Physics_Architecture.md)'s differentiable substrate), (2) Learned sensory transduction module |
 | **Success metric** | SPH surrogate achieves 100x–1000x speedup with <5% trajectory error vs. Sibernetic Metal reference; learned sensory transduction matches tuning-curve data within published noise ranges |
 | **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd013` |
 | **Config toggle** | `ml.sph_surrogate: true`, `ml.sensory_model: learned` in `openworm.yml` |
