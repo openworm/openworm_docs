@@ -56,7 +56,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 
 ## Phase 0: Core Architecture (Functional, Stabilizing)
 
-**Status:** ✅ **Functional** — core simulation runs; 83 stabilization issues tracked across DD002-DD001/DD016 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)
+**Status:** ✅ **Functional** — core simulation runs; 83 stabilization issues tracked across DD001/DD002/DD003/DD016 (containerization, validation scripts, config system, dependency pinning — most addressed by Phase A1)
 
 **Phase Rationale:** These DDs describe **already-implemented** subsystems — the code exists and works. c302 generates NeuroML networks, GenericMuscleCell has Ca²⁺→force coupling, Sibernetic runs ~100K SPH particles, and `cect` provides 30+ connectome datasets. They form the working foundation everything else builds on.
 
@@ -66,7 +66,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 |----|-------|---------------------|
 | DD002 | Neural Circuit Architecture | ✅ c302 Levels A-D exist, generate NeuroML networks |
 | DD003 | Muscle Model Architecture | ✅ GenericMuscleCell exists, Ca²⁺→force coupling works |
-| [DD001](DD001_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL only — PyTorch/Taichi do not yet match result quality; see DD001 Backend Stabilization Roadmap) |
+| [DD001](DD001_Body_Physics_Architecture.md) | Body Physics Architecture | ✅ Sibernetic v1.0+ works (OpenCL gold-standard reference; native Metal substrate experimental→stable, native CUDA in scaffolding; see DD001 Backend Stabilization Roadmap) |
 | DD016 | Connectome Data Access | ✅ `cect` v0.2.7 exists (needs version pinning per DD016) |
 
 **What Works Today:**
@@ -85,7 +85,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - No dependency pinning (branch names, not commits)
 - No automated validation (Tier 3 toolbox is broken)
 - Video pipeline has memory leak (OOMs >2s simulations)
-- PyTorch/Taichi backends don't yet match OpenCL result quality; OpenCL losing platform support (DD001 Backend Stabilization Roadmap)
+- Native Metal substrate consolidating to forward parity with OpenCL; native CUDA substrate in scaffolding; OpenCL losing platform support (DD001 Backend Stabilization Roadmap)
 - Fast trajectory screening for validation: Boyle-Cohen 2D model (`boyle_berri_cohen_trajectory.py`) enables quick-test kinematic validation without full Sibernetic GPU build (see DD002 Issue 1)
 
 **Phase 0 → Phase A1 Gap Map:**
@@ -157,7 +157,7 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 8. **Project metrics dashboard** (DD024) — Static-site dashboard (GitHub Pages) with 4 panels: validation scores (Tier 2/3 trend), contributor activity (BadgeList + GitHub), CI health (pass/fail across repos), phase progress (DD status parsing). Auto-updates on every CI run via GitHub Actions.
 9. **Validation data repository** (DD020) — `openworm/validation-data` repo with `manifest.json` mapping datasets to DDs and validation tiers, `verify_validation_data.py` script, digitized baseline datasets (Schafer kinematics WCON, Randi 2023 correlation matrix)
 
-**Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 2, mid March 2026)*
+**Milestone:** 🎉 **"Containerized Stack with Automated Validation"** *(Target: Week 2, mid June 2026)*
 
 - **What you run:** `docker compose run quick-test` (completes in <5 min) — builds the full simulation stack, runs a short simulation, checks for crashes
 - **What you see:** Terminal output showing build → simulate → validate pipeline. JSON report with pass/fail on each metric. Video of worm locomotion (no more OOM at >2s).
@@ -210,7 +210,7 @@ Governance documents (contributor progression, decision process, AI contributors
 1. **Channel kinetics predictions** (DD021) — Cross-validation of foundation model predictions against ~50-100 channels with known kinetics; `channel_kinetics_predictions.csv` ready for DD005 integration
 2. **Governance pages** — see [Contributing section](../contributing/index.md): contributor progression, decision process, AI contributors
 
-**Milestone:** 🎉 **"Foundation Model Cross-Validation"** *(Target: Week 4, late March 2026)*
+**Milestone:** 🎉 **"Foundation Model Cross-Validation"** *(Target: Week 4, late June 2026)*
 
 - **What you see:** Foundation model cross-validation complete — `channel_kinetics_predictions.csv` ready for Phase 1 integration. Governance pages are live in the Contributing section.
 - **Key result:** If DD005's naive expression→conductance mapping fails in Phase 1, structure-based predictions from DD021 are ready immediately as a fallback.
@@ -228,7 +228,7 @@ Governance documents (contributor progression, decision process, AI contributors
 
 - None — Phase A2 has no infrastructure dependencies and can proceed in parallel with Phase A1
 
-**Cumulative Metrics:** 397 cells (unchanged) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +4 DDs (13 total, including Phase A1)
+**Cumulative Metrics:** 397 cells (unchanged) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +1 DD (10 total, including Phase A1)
 
 ---
 
@@ -259,7 +259,7 @@ Governance documents (contributor progression, decision process, AI contributors
 7. **Visual rendering spec** (DD012.1) — 37-material color palette, activity-state overlays, 14 reference mockups as acceptance tests
 8. **WormBrowser enhancement** (DD012) — Click neuron/cell → links to WormAtlas + WormBase on browser.openworm.org (quick win for John White, ~8-16 hrs)
 
-**Milestone:** 🎉 **"Biologically Distinct Neurons"** *(Target: Month 3, June 2026)*
+**Milestone:** 🎉 **"Biologically Distinct Neurons"** *(Target: Month 3, September 2026)*
 
 - **What you run:** `docker compose run simulation` then `docker compose up viewer` — open `localhost:8501`
 - **What you see:** 3D viewer with smooth worm body crawling. Toggle "Neurons" layer — 302 neurons appear, colored by class (128 distinct colors). Click AVAL — inspector panel shows its class-specific voltage and calcium traces, visibly different from ASER or AWCL. Toggle "color by class" mode to see the diversity.
@@ -288,7 +288,7 @@ Governance documents (contributor progression, decision process, AI contributors
 - CeNGEN data downloaded and validated
 - Electrophysiology training set curated (20 neurons with measured conductances)
 
-**Cumulative Metrics:** 397 cells (specialized, not added) | **128** neuron classes | 1 coupling loop | 0 organ systems | Tier 2 validated (r > 0.5) + Tier 3 (±15%) | 2 viewer scales (organism, tissue) | +3 DDs (14 total)
+**Cumulative Metrics:** 397 cells (specialized, not added) | **128** neuron classes | 1 coupling loop | 0 organ systems | Tier 2 validated (r > 0.5) + Tier 3 (±15%) | 2 viewer scales (organism, tissue) | +4 DDs (14 total)
 
 ---
 
@@ -323,7 +323,7 @@ Governance documents (contributor progression, decision process, AI contributors
 9. **Viewer enhancements** (DD012) — Neuropeptide volumetric layer, strain heatmap, reversal event markers, gradient field visualization
 10. **RC validation report** (DD022) — `rc_validation_report.json` with 5 RC properties × 4 neuron partitions, falsifiable predictions tested
 
-**Milestone:** 🎉 **"The Worm Can Feel and Modulate"** *(Target: Month 6, September 2026)*
+**Milestone:** 🎉 **"The Worm Can Feel and Modulate"** *(Target: Month 6, December 2026)*
 
 - **What you run:** `docker compose run simulation --config closedloop_touch` then open the viewer
 - **Demo 1 — Tap withdrawal:** Worm crawls forward. At t=5s, anterior tap stimulus fires. Watch: touch receptor neurons (ALM, AVM) activate → command interneurons (AVA, AVD) depolarize → motor neurons reverse → worm reverses direction within <1 second, travels backward ≥1 body length, then resumes forward crawling. Compare: `--config openloop` (same tap, no reversal — the worm is deaf).
@@ -387,7 +387,7 @@ Governance documents (contributor progression, decision process, AI contributors
 6. **Auto-fitted parameters** — Gradient descent on DD010 validation loss, per-neuron-class conductances
 7. **Per-synapse weight optimization** (DD013 Component 1) — Replaces the uniform baseline `g_syn = 0.09 nS` with per-synapse conductances fitted via gradient descent against whole-brain functional connectivity data, following Zhao et al. (2024). Extended with neurotransmitter identity constraints from Wang et al. (2024) and full 302-neuron optimization. Config: `neural.synapse_optimization: true/false`. See DD013 Draft Issues.
 
-**Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"** *(Target: Month 12, March 2027)*
+**Milestone:** 🎉 **"From 302 Neurons to 433 Cells — Multi-Organ Simulation"** *(Target: Month 12, June 2027)*
 
 - **What you run:** `docker compose run simulation --config full_organism` (runs for ~20 simulated minutes to capture egg-laying cycle). Then open viewer.
 - **What you see — 3 organs running simultaneously:**
@@ -420,7 +420,7 @@ Governance documents (contributor progression, decision process, AI contributors
 - Organ-specific validation data curated (pharynx EPG, defecation period, egg-laying patterns)
 - GPU cluster access for SPH surrogate training (500+ long runs)
 
-**Cumulative Metrics:** 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | **3** organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (23 total)
+**Cumulative Metrics:** 514 cells (+63 pharynx +20 intestine +28 egg-laying) | 128 neuron classes | 2 coupling loops | **3** organ systems (pharynx, intestine, egg-laying) | 1 modulation layer | Tier 2 + Tier 3 validated | 2 viewer scales | +4 DDs (24 total)
 
 ---
 
@@ -447,7 +447,7 @@ Governance documents (contributor progression, decision process, AI contributors
 5. **Three.js viewer** (DD012 Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — wormsim.openworm.org (GitHub Pages or CDN)
 
-**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"** *(Target: Month 18, September 2027)*
+**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"** *(Target: Month 18, December 2027)*
 
 - **What you run:** Open `wormsim.openworm.org` in any browser. No Docker, no installation, no server.
 - **What you see — 3 scales of exploration:**
@@ -481,7 +481,7 @@ Governance documents (contributor progression, decision process, AI contributors
 - Virtual Worm meshes exported from Blender to individual OBJ files
 - GPU access for mesh deformation compute shaders (WebGPU or local testing)
 
-**Cumulative Metrics:** **959** cells (all somatic) | 128 neuron classes | 2 coupling loops | 3 organ systems | 1 modulation layer | Tier 2 + Tier 3 validated | **3** viewer scales (organism, tissue, molecular) | **Public access** (static site) | **23 DDs implemented**
+**Cumulative Metrics:** **959** cells (all somatic) | 128 neuron classes | 2 coupling loops | 3 organ systems | 1 modulation layer | Tier 2 + Tier 3 validated | **3** viewer scales (organism, tissue, molecular) | **Public access** (static site) | **26 DDs implemented**
 
 ---
 
@@ -644,16 +644,16 @@ Phase A1 (DD011, DD008, DD017, DD020, DD024) → Phase 1 (DD005, DD012/DD012.1) 
 
 ## Timeline Summary
 
-| Phase | Duration | Calendar (if start March 2026) | Cumulative Cells | Cumulative DD Implementation |
+| Phase | Duration | Calendar (if start June 2026) | Cumulative Cells | Cumulative DD Implementation |
 |-------|----------|-------------------------------|------------------|------------------------------|
-| Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs (DD002-[DD001](DD001_Body_Physics_Architecture.md), DD016) |
-| Phase A1 | 2 weeks | Mar 2026 (Wks 1-2) | (no change) | +5 DDs (DD011, DD008, DD017, DD020, DD024) |
-| Phase A2 | 2 weeks | Mar 2026 (Wks 3-4, parallel with A1) | (no change) | +1 DD (DD021) + [Contributing](../contributing/index.md) section live |
-| Phase 1 | 3 months | Apr-Jun 2026 | 397 (specialized, not added) | +3 DDs (DD005, DD010 Tier 2, DD012 Phase 1, DD012.1) |
-| Phase 2 | 3 months | Jul-Sep 2026 | 403 (add 6 touch neurons explicitly modeled) | +5 DDs (DD006, DD015, DD018, DD019, DD022, DD012 Phase 2) |
-| Phase 3 | 6 months | Oct 2026-Mar 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs (DD007, DD009, DD014, DD013) |
-| Phase 4 | 6 months | Apr-Sep 2027 | **959** (all somatic cells) | +2 DDs (DD004, DD012.2, DD012 Phase 3) |
-| **TOTAL** | **~18 months** | **Mar 2026 - Sep 2027** | **959 cells** | **23 DDs implemented** |
+| Phase 0 | Functional | Architecture defined, simulation runs | 397 (302 neurons + 95 muscles) | 4 DDs (DD001, DD002, DD003, DD016) |
+| Phase A1 | 2 weeks | Jun 2026 (Wks 1-2) | (no change) | +5 DDs (DD011, DD008, DD017, DD020, DD024) |
+| Phase A2 | 2 weeks | Jun 2026 (Wks 3-4, parallel with A1) | (no change) | +1 DD (DD021) + [Contributing](../contributing/index.md) section live |
+| Phase 1 | 3 months | Jul-Sep 2026 | 397 (specialized, not added) | +4 DDs (DD005, DD010, DD012 Phase 1, DD012.1) |
+| Phase 2 | 3 months | Oct-Dec 2026 | 403 (add 6 touch neurons explicitly modeled) | +6 DDs (DD006, DD015, DD018, DD019, DD022, DD023, DD012 Phase 2) |
+| Phase 3 | 6 months | Jan-Jun 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs (DD007, DD009, DD014, DD013) |
+| Phase 4 | 6 months | Jul-Dec 2027 | **959** (all somatic cells) | +2 DDs (DD004, DD012.2, DD012 Phase 3) |
+| **TOTAL** | **~18 months** | **Jun 2026 - Dec 2027** | **959 cells** | **26 DDs implemented** |
 
 **Phases 5-7:** Year 3+ (intracellular, developmental, male-specific)
 

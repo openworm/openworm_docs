@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Author:** Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team
-- **Date:** 2026-02-14
+- **Date:** 2026-05-27
 - **Supersedes:** None
 - **Related:** DD002 (Neural Circuit), DD003 (Muscle Model), DD004 (Mechanical Cell Identity)
 
@@ -278,7 +278,7 @@ However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrus
 
 **OpenWorm's position:** Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a **fast alternative** for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to DD013's learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.
 
-Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `taichi-metal`, `taichi-cuda`, `pytorch`.
+Configuration: `body.backend: "fem-projective"` alongside existing `opencl`, `metal-native`, `cuda-native`.
 
 Reference: [Bouaziz S et al. (2014)](https://doi.org/10.1145/2601097.2601116). "Projective Dynamics: Fusing constraint projections for fast simulation." *ACM Trans Graphics* 33:154.
 
@@ -344,7 +344,7 @@ A contribution to Sibernetic MUST:
     - Elastic deformation: A suspended elastic body under gravity should sag
     - Muscle contraction: Activating one muscle quadrant should bend the body
 
-5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++ reference), Native Metal (Apple Silicon), Native CUDA (NVIDIA), and [PyTorch](https://pytorch.org/) (CPU reference). Test on at least two backends.
+5. **GPU Backend Compatibility:** Changes to core SPH algorithms must work across OpenCL (original C++ reference), Native Metal (Apple Silicon), and Native CUDA (NVIDIA). Test on at least two backends.
 
 6. **Cross-Backend Parity:** Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see [Backend Stabilization Roadmap](#backend-stabilization-roadmap)) must pass before any backend is marked Production.
 
@@ -632,10 +632,9 @@ elasticity = 0.0006
 | OpenCL | C++ | CPU/GPU (Linux, Intel Mac) | Baseline | ❌ forward only | **Gold standard** — validated ±15% | **Production** (but losing driver support) |
 | Native Metal | C++/Metal shaders | Apple Silicon GPU | First-pass ~2.7 ms/step on M-series | ✅ **end-to-end** — 19 paired backward kernels, multi-step `xpbd_full_bwd`, FD-validated, 4 demos SGD-tuned | Forward parity in progress; 5+ demos working (cube drop, membrane, worm_alone, worm_swim) | **Experimental → Stable** — consolidated on `ow-native-gpu-0.1.0` branch; PR #230 in flight |
 | Native CUDA | C++/CUDA | NVIDIA GPU | Target ~5x OpenCL | 🟡 **structural mandate** — `src/cuda/README.md` requires mirroring Metal's paired-backward architecture | Scaffolding stage | **Scaffolding** — PR #229 (sib_cuda) in review |
-| PyTorch | Python | CPU | Slow | (autodiff possible but not on critical path) | Does not yet match OpenCL | **Stable** (doesn't crash; 76+ tests; useful as correctness reference) |
 | Taichi Metal / CUDA | Python/Taichi | Apple Silicon / NVIDIA | n/a | n/a | n/a | **Superseded** — earlier prototyping path; supplanted by the native ports above |
 
-**Recommendation:** OpenCL remains the only backend producing validated simulation results today. However, OpenCL driver support is shrinking across platforms (Apple removed OpenCL on Apple Silicon; AMD/NVIDIA deprioritizing). The path forward is **native** Metal and CUDA substrates — hand-written GPU kernels that target each platform's first-class API directly, rather than Python/Taichi abstractions that introduced their own divergence from the OpenCL reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
+**Recommendation:** OpenCL remains the only backend producing validated simulation results today. However, OpenCL driver support is shrinking across platforms (Apple removed OpenCL on Apple Silicon; AMD/NVIDIA deprioritizing). The path forward is **native** Metal and CUDA substrates — hand-written GPU kernels that target each platform's first-class API directly, rather than Taichi abstractions that introduced their own divergence from the OpenCL reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) below.
 
 ---
 
@@ -675,7 +674,6 @@ The native Metal substrate is the most mature of the modernization paths and rea
 | OpenCL | reference | reference | reference | reference | reference |
 | Native Metal | ✅ ±5% | 🟡 in tuning | ✅ ±5% | ✅ visual parity | 🟡 swim parity in progress |
 | Native CUDA | scaffolding | scaffolding | scaffolding | scaffolding | scaffolding |
-| PyTorch | results don't yet match | — | — | — | — |
 
 **Root cause analysis approach:** The OpenCL C++ kernels (`sphFluid.cl`, ~64KB) are the reference implementation. Each native substrate (Metal, CUDA) implements the kernels per-platform with direct OpenCL-line correspondence rather than via an intermediate abstraction. The historical Taichi divergence (elastic forces ~287× too weak from a coordinate-space mismatch — `sim_scale` division applied inconsistently between SPH and elastic force paths) is not present in the native ports because the OpenCL reference's coordinate handling is preserved verbatim.
 
@@ -707,7 +705,6 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 | OpenCL | **Production** | Losing platform support |
 | Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; demo2 sheet-scale tuning + worm_swim parity in progress. Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned to OpenCL reference. See [Differentiability](#differentiability) section. |
 | Native CUDA | **Scaffolding** | Awaiting kernel implementation (PR #229 introduces the substrate skeleton) |
-| PyTorch | **Experimental** | Stable but results don't match OpenCL; positioned as a CPU correctness reference |
 | Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction |
 
 ### Stabilization Sequence
@@ -735,13 +732,13 @@ The native Metal substrate is **architecturally differentiable**. This is not a 
 
 The native substrate derives analytic backwards alongside each forward kernel rather than relying on an autodiff layer over a separate reimplementation. This produces three structural advantages:
 
-1. **No re-implementation drift.** A separate autodiff reimplementation in PyTorch or JAX would have to track the reference's behavior over time as physics changes; an in-substrate backward is the same code path as the forward.
+1. **No re-implementation drift.** A separate autodiff reimplementation in a host-language framework would have to track the reference's behavior over time as physics changes; an in-substrate backward is the same code path as the forward.
 2. **GPU-native gradients.** Backward kernels run on the same Metal command queue as the forwards — no host round-trip, no autodiff graph overhead.
 3. **Parameter gradients arrive for free.** Once each forward kernel has an analytic backward, every physical parameter (stiffness, viscosity, rest density, compliance) is differentiable end-to-end without explicit `requires_grad` plumbing.
 
 The CUDA scaffolding at `src/cuda/README.md` makes this explicit: the CUDA substrate must mirror `src/metal_diff/` file-for-file, including paired backward kernels per forward kernel. Differentiability is the *architectural contract* the substrate exposes — not an optional feature flag.
 
-The ML-augmentation framework that consumes this substrate (surrogate models, learned sensory transduction) is the scope of [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md).
+The ML-augmentation framework that consumes this substrate (surrogate models, learned sensory transduction) is the scope of DD013.
 
 ### What's Differentiable Today
 
@@ -803,7 +800,6 @@ Because the substrate exposes a differentiable contract, downstream subsystems t
 
 - **OpenCL backend** — the reference implementation remains forward-only. Validated as the kinematic ground truth; not a differentiation target.
 - **CUDA substrate** — scaffolding stage; PR #229 introduces the substrate skeleton. The architectural contract (paired backward per forward) is mandated by the CUDA README but not yet implemented.
-- **PyTorch backend** — forward-only CPU reference; could in principle be made differentiable via autodiff, but is not on the critical path (the native substrates are the production target).
 
 ### How to Use the Differentiable Interface
 
@@ -881,7 +877,7 @@ For a worked example with SGD harness, see `src/metal_diff/sgd_true.py` (the can
 body:
   enabled: true
   engine: sibernetic
-  backend: opencl                    # opencl, metal-native, cuda-native, pytorch
+  backend: opencl                    # opencl, metal-native, cuda-native
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
   cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 (DD004): extend to all tissue types. "false" = bulk elastic only.
@@ -892,7 +888,7 @@ body:
 |-----|---------|-------------|-------------|
 | `body.enabled` | `true` | `true`/`false` | Enable body physics simulation |
 | `body.engine` | `sibernetic` | `sibernetic` | Physics engine selection |
-| `body.backend` | `opencl` | `opencl`, `metal-native`, `cuda-native`, `pytorch` | Compute backend. `metal-native` targets Apple Silicon via hand-written Metal shaders; `cuda-native` targets NVIDIA via hand-written CUDA kernels. The earlier `taichi-metal` / `taichi-cuda` options are superseded by the native ports. |
+| `body.backend` | `opencl` | `opencl`, `metal-native`, `cuda-native` | Compute backend. `metal-native` targets Apple Silicon via hand-written Metal shaders; `cuda-native` targets NVIDIA via hand-written CUDA kernels. The earlier `taichi-metal` / `taichi-cuda` options are superseded by the native ports. |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
 | `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types (DD004, Phase 4). `false` = bulk elastic only. |
@@ -961,7 +957,7 @@ def write_sibernetic_config(openworm_config):
 ---
 
 - **Approved by:** OpenWorm Steering
-- **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated; PyTorch experimental as CPU correctness reference. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
+- **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
 - **Next Actions:**
 
 1. Create stability validation scripts (`scripts/check_stability.py`, `scripts/validate_incompressibility.py`)

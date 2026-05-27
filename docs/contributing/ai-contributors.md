@@ -67,7 +67,7 @@ This DD defines:
 
 1. **Discovers** OpenWorm via public documentation
 2. **Registers** as an autonomous contributor (proves capability, declares sponsor)
-3. **Reads** Design Documents DD002-DD022 (plus DD012.1 and DD012.2) (ingests the project's architecture)
+3. **Reads** the published Design Documents (ingests the project's architecture)
 4. **Claims** an AI-workable issue (auto-generated from DD Integration Contracts)
 5. **Writes code** (implements the spec, runs tests locally)
 6. **Submits a PR** (AI-authored, with full traceability)
@@ -181,7 +181,7 @@ An AI agent's badge profile serves as a **competency signal**. Mind-of-a-Worm ch
 
 ### 2.1 The Problem
 
-Design Documents (DD002-DD021, plus DD012.1 and DD012.2) are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
+Design Documents are comprehensive architectural specs. But they're **too large for a single contributor** (human or AI) to implement in one PR.
 
 **Example:** DD006 (Neuropeptidergic Connectome Integration) specifies:
 
@@ -949,7 +949,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ### Phase 3: Issue Generation (Week 5-6)
 
-- [ ] Run `dd_issue_generator.py` on DD002-DD021 (plus DD012.1, DD012.2)
+- [ ] Run `dd_issue_generator.py` on all published Design Documents
 - [ ] Review generated issues for quality
 - [ ] Tag all issues with `ai-workable` or `human-expert`
 - [ ] Publish issue backlog to GitHub
@@ -1181,7 +1181,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 | Input | Source | Format |
 |-------|--------|--------|
-| Design Documents (DD002-DD024, plus DD012.1, DD012.2) | `docs/design_documents/` | Markdown |
+| Design Documents (DD001-DD024, plus DD012.1, DD012.2) | `docs/design_documents/` | Markdown |
 | Contributor progression rules | [Contributor Progression](contributor-progression.md) | Policy document |
 | Validation criteria | DD010 | Test suites |
 | PR diffs and issue data | GitHub API | JSON |

@@ -75,7 +75,7 @@ For detailed milestones, success criteria, datasets, and blocking dependencies, 
 
 !!! tip "Browse on GitHub"
     All Design Documents are maintained in this [openworm_docs repository](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents).
-    **Total:** 29 DDs (DD002-DD024 + DD012.1/DD012.2; DD016 was merged into DD005)
+    **Total:** 26 DDs (DD001-DD024 + DD012.1/DD012.2)
 
 ### By Topic
 

@@ -88,7 +88,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 - **DD005:** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use DD005 as your model when writing a new DD.
 - **DD002:** Example of Quick Action Reference table (7 key questions answered at the top)
 
-All science DDs (DD002-DD009, DD014-DD015) include a **Quick Action Reference** table answering:
+All science DDs include a **Quick Action Reference** table answering:
 
 1. What does this produce?
 2. Success metric (which DD010 tier, quantitative threshold)
@@ -124,7 +124,7 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 ### Step 3: Use the Template
 
-Follow [DD012 (RFC Process)](../contributing/decision-process.md) template structure. Use DD005 (Cell-Type Specialization) as your reference implementation.
+Follow the [Decision Process](../contributing/decision-process.md) template structure. Use DD005 (Cell-Type Specialization) as your reference implementation.
 
 **Required sections (from [Decision Process](../contributing/decision-process.md)):**
 

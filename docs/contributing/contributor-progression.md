@@ -112,7 +112,7 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 - Cannot: Change Design Documents, make cross-cutting architectural decisions
 - Responsibilities:
   - Mentor L1/L2 contributors in their subsystem
-  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections** (DD002-DD011)
+  - Ensure PRs comply with relevant Design Documents **including Integration Contract sections**
   - **When reviewing PRs that change a coupling interface, coordinate with Senior Contributors of consuming subsystems before merging**
   - Run `docker compose run validate` for PRs that modify core model parameters
   - Triage issues specific to their subsystem

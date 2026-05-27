@@ -10,7 +10,7 @@
 
 **OpenWorm Mission:** "Creating the world's first virtual organism in a computer, a *C. elegans* nematode." (openworm.org)
 
-**This Integration Map shows:** How 29 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
+**This Integration Map shows:** How 26 Design Documents compose into that virtual organism — each DD specifies one subsystem (neurons, muscles, body physics, pharynx, intestine, etc.), and this map shows how they couple together to produce emergent whole-organism behavior.
 
 **Core Principle:** "Worms are soft and squishy. So our model has to be too. We are building in the physics of muscles, soft tissues and fluids. Because it matters."
 
@@ -32,7 +32,7 @@ This document visualizes **how all Design Documents couple together** at the arc
 - Phase Roadmap: **When** to implement (timeline view)
 - Integration Map: **How** they connect (architecture view)
 
-- **Generated from:** Integration Contract sections of DD002-DD024
+- **Generated from:** Integration Contract sections of DD001-DD024
 - **Last updated:** 2026-02-22
 
 ---
@@ -253,7 +253,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | **DD002** (Neural Circuit) | **12 DDs** | DD003, DD005, DD006, DD007, DD009, DD010, DD011, DD012, DD013, DD014, DD015, DD021 | 🔴 **CRITICAL BOTTLENECK** | Neural Circuit L4 Maintainer |
 | **[DD001](DD001_Body_Physics_Architecture.md)** (Body Physics) | **7 DDs** | DD004, DD007, DD010, DD011, DD012, DD012.2, DD015 | 🔴 **CRITICAL** | Body Physics L4 Maintainer |
 | **DD016** (Connectome) | **9 DDs** | DD002, DD003, DD005, DD006, DD007, DD011, DD013, DD014, DD015 | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
-| DD003 (Muscle) | 5 DDs | [DD001](DD001_Body_Physics_Architecture.md), DD007, DD010, DD011, DD012, DD013, DD014 | 🟡 Moderate | TBD (Muscle L4) |
+| DD003 (Muscle) | 7 DDs | [DD001](DD001_Body_Physics_Architecture.md), DD007, DD010, DD011, DD012, DD013, DD014 | 🟡 Moderate | TBD (Muscle L4) |
 | DD005 (Cell-Type Specialization) | 6 DDs | DD006, DD010, DD012, DD013, DD014, DD021 | 🟡 Moderate (Phase 1+) | Neural Circuit L4 Maintainer |
 | DD021 (Foundation Models) | 2 DDs | DD002 (per-class HH params), DD005 (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
 | DD013 (Hybrid ML) | 2 DDs | DD002 (fitted params), DD006 (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |

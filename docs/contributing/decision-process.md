@@ -189,7 +189,7 @@ Variable name, Format, Units, Timestep (if applicable).
 
 - Anyone (L1+) can propose a Design Document
 - Open a PR to `openworm-admin/design_documents/` with a new DD file
-- Assign a DD number (next available, e.g., DD011)
+- Assign a DD number (next available, e.g., DDXXX)
 - Tag relevant subsystem maintainers (L4) for review
 
 **Step 2: Discussion**
@@ -371,7 +371,7 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Action:**
 
-1. Write DD011: "Simulator Backend Selection"
+1. Write DDXXX: "Simulator Backend Selection"
 2. Include: Context (why switch?), Decision (Brian2 vs. NEURON), Alternatives (NEST, custom solver), Quality Criteria (must reproduce all existing validation), Migration Path (parallel implementation during transition)
 3. Open RFC PR
 4. Community discusses performance benchmarks, NeuroML compatibility, learning curve
@@ -385,13 +385,13 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Action:**
 
-1. Write DD012: "Mechanosensory Transduction (MEC-4 Channel Model)"
+1. Write DDYYY: "Mechanosensory Transduction (MEC-4 Channel Model)"
 2. Include: MEC-4/MEC-10 DEG/ENaC channel kinetics, Goodman et al. 1998 data, coupling to Sibernetic mechanical strain
 3. Open RFC PR
 4. Discuss with L4 Neural Circuit maintainer
 5. Approve
 
-**Outcome:** DD012 becomes the specification. Contributor implements according to DD012. Mind-of-a-Worm checks compliance.
+**Outcome:** DDYYY becomes the specification. Contributor implements according to DDYYY. Mind-of-a-Worm checks compliance.
 
 ---
 
