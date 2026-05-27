@@ -16,7 +16,7 @@
 | 2. Per-Demo Parity & CUDA Bring-Up (Issues 4–8) | **Phase A1** | The substrate-correctness work consolidated on `ow-native-gpu-0.1.0`; each demo gets its own parity gate |
 | 3. Substrate Docs & PR Enforcement (Issues 9–11) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) binding on new PRs |
 | 4. Output Pipeline & Viewer Bridge (Issues 12–14) | **Phase A1/1** | OME-Zarr, surface mesh, configurable output for the visualization handoff |
-| 5. Documentation & Onboarding (Issues 15–18) | **Any** | Architecture overview, muscle mapping, contributor docs; includes replacements for closed issues #165 and #128 |
+| 5. Documentation & Onboarding (Issues 15–18) | **Any** | Architecture overview, muscle mapping, contributor docs; includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128) |
 | 6. Future Backend Direction (Issues 19–20) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
 
 ---
@@ -27,12 +27,12 @@ The 31 pre-existing `openworm/sibernetic` issues were triaged in a per-issue mig
 
 | Old issue | Disposition | Replaced by |
 |-----------|-------------|-------------|
-| **#226** (Wei Weng — Port `sphFluid.cl` to Metal for ARM64 Mac) | Kept live as canonical tracking issue for the Metal port; re-labeled `native-gpu` + `phase-0` | Issues 4–7 (per-demo Metal parity) consolidate the implementation work this issue tracks |
-| **#224** (Wei Weng — `QUEUE_EACH_KERNEL` OpenCL profiling flag) | Kept live; re-labeled `opencl` + `good-first-issue` | None — discrete enhancement to the OpenCL reference |
-| **#160** (lungd — Pressure buffer file issue) | Kept live pending current-master reproduction; re-labeled `bug` + `needs-reproduction-current` | None — bug retained until confirmed fixed |
-| #165 (custom geometries/muscles, 18 comments) | Closed as superseded by DD001 §Configuration Format | **Issue 16** — improve config-onboarding docs |
-| #128 (inline config parameter comments) | Closed as superseded by DD001 §Configuration Format + §Physical Parameters | **Issue 17** — inline parameter comments in config files |
-| #122 (`pySibernetic` external wrapper, 2017) | Closed as stale community offer | **Issue 20** — formal Python bindings via pybind11 |
+| **[#226](https://github.com/openworm/sibernetic/issues/226)** (Wei Weng — Port `sphFluid.cl` to Metal for ARM64 Mac) | Kept live as canonical tracking issue for the Metal port; re-labeled `native-gpu` + `phase-0` | Issues 4–7 (per-demo Metal parity) consolidate the implementation work this issue tracks |
+| **[#224](https://github.com/openworm/sibernetic/issues/224)** (Wei Weng — `QUEUE_EACH_KERNEL` OpenCL profiling flag) | Kept live; re-labeled `opencl` + `good-first-issue` | None — discrete enhancement to the OpenCL reference |
+| **[#160](https://github.com/openworm/sibernetic/issues/160)** (lungd — Pressure buffer file issue) | Kept live pending current-master reproduction; re-labeled `bug` + `needs-reproduction-current` | None — bug retained until confirmed fixed |
+| [#165](https://github.com/openworm/sibernetic/issues/165) (custom geometries/muscles, 18 comments) | Closed as superseded by DD001 §Configuration Format | **Issue 16** — improve config-onboarding docs |
+| [#128](https://github.com/openworm/sibernetic/issues/128) (inline config parameter comments) | Closed as superseded by DD001 §Configuration Format + §Physical Parameters | **Issue 17** — inline parameter comments in config files |
+| [#122](https://github.com/openworm/sibernetic/issues/122) (`pySibernetic` external wrapper, 2017) | Closed as stale community offer | **Issue 20** — formal Python bindings via pybind11 |
 
 The other 22 closed issues map cleanly to DD001 sections (Configuration Format, Integration Contract, Physical Parameters, Backend Stabilization Roadmap, Boundaries) or to held-back DDs (DD012 visualization, DD015 closed-loop touch, DD019 proprioception). The full per-issue migration plan with close-comment templates lives outside this DD.
 
@@ -255,19 +255,19 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, cuda, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 5), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
-- **Depends On:** Issue 3 (parity harness), Issue 4 (demo1 Metal parity as reference), PR #229 (sib_cuda — review and merge)
+- **Depends On:** Issue 3 (parity harness), Issue 4 (demo1 Metal parity as reference), [PR #229](https://github.com/openworm/sibernetic/pull/229) (sib_cuda — review and merge)
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/cuda/`](https://github.com/openworm/sibernetic) — CUDA substrate scaffolding (PR #229 by @feldmannn). Per `src/cuda/README.md`, the substrate **must** mirror `src/metal_diff/` file-for-file including paired backward kernels per forward kernel.
+    - [`openworm/sibernetic/src/cuda/`](https://github.com/openworm/sibernetic) — CUDA substrate scaffolding ([PR #229](https://github.com/openworm/sibernetic/pull/229) by @feldmannn). Per `src/cuda/README.md`, the substrate **must** mirror `src/metal_diff/` file-for-file including paired backward kernels per forward kernel.
     - [`openworm/sibernetic/src/metal_diff/`](https://github.com/openworm/sibernetic) — Reference architecture (19 forward + 19 backward kernels). CUDA implementation should follow Metal kernel-for-kernel.
-- **Approach:** Bring up — review and merge PR #229; then port Metal's 19 paired forward/backward kernels and demo1 trajectory dumper to CUDA. Each forward kernel must ship with an FD-validated paired backward per the [Quality Criteria #7](DD001_Body_Physics_Architecture.md#quality-criteria) contract.
+- **Approach:** Bring up — review and merge [PR #229](https://github.com/openworm/sibernetic/pull/229); then port Metal's 19 paired forward/backward kernels and demo1 trajectory dumper to CUDA. Each forward kernel must ship with an FD-validated paired backward per the [Quality Criteria #7](DD001_Body_Physics_Architecture.md#quality-criteria) contract.
 - **Acceptance Criteria:**
-    - [ ] PR #229 reviewed and merged
+    - [ ] [PR #229](https://github.com/openworm/sibernetic/pull/229) reviewed and merged
     - [ ] `src/cuda/dump_cuda_trajectory.py` operational (CUDA equivalent of `dump_metal_trajectory.py`)
     - [ ] First wave of forward kernels (density, distance constraints, predict_positions, update_velocities, floor) implemented with paired analytic backwards
     - [ ] FD validators pass at <5% rel-err for each backward kernel
     - [ ] Parity test green on `--scenario demo1 --substrate cuda-native`
     - [ ] Substrate listed as Experimental → Stable in DD001 §Backend Graduation Criteria
-- **Sponsor Summary Hint:** The CUDA substrate is the NVIDIA equivalent of the Metal port and the modernization story for the second-largest GPU platform. PR #229 puts the skeleton in place; this issue brings it through the same 8-phase methodology that got Metal to where it is. The paired-backward architectural mandate is non-negotiable — every forward kernel ships with its analytic backward, FD-validated, or it doesn't land.
+- **Sponsor Summary Hint:** The CUDA substrate is the NVIDIA equivalent of the Metal port and the modernization story for the second-largest GPU platform. [PR #229](https://github.com/openworm/sibernetic/pull/229) puts the skeleton in place; this issue brings it through the same 8-phase methodology that got Metal to where it is. The paired-backward architectural mandate is non-negotiable — every forward kernel ships with its analytic backward, FD-validated, or it doesn't land.
 
 ---
 
@@ -457,7 +457,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 
 ## Group 5: Documentation & Onboarding (Any Phase)
 
-Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic. Includes replacements for closed issues #165 and #128.
+Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic. Includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128).
 
 ---
 
@@ -488,7 +488,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 16: Improve config-onboarding docs for custom geometries and muscles (replaces #165)
+### Issue 16: Improve config-onboarding docs for custom geometries and muscles (replaces [#165](https://github.com/openworm/sibernetic/issues/165))
 
 - **Title:** `[DD001] Improve config-onboarding docs: bring-your-own-geometry workflow for custom Sibernetic runs`
 - **Labels:** `DD001`, `ai-workable`, `L2`
@@ -497,7 +497,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** docs, physics
 - **DD Section to Read:** [DD001 §Configuration Format](DD001_Body_Physics_Architecture.md#configuration-format), [DD001 §Muscle Actuation](DD001_Body_Physics_Architecture.md#muscle-actuation-force-injection)
 - **Depends On:** Issue 15 (architecture overview), Issue 17 (config parameter comments)
-- **Replaces:** Closed issue #165 (User-defined geometries and muscle models)
+- **Replaces:** Closed issue [#165](https://github.com/openworm/sibernetic/issues/165) (User-defined geometries and muscle models)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — 12+ existing binary configuration directories provide the working examples to walk through.
     - The configuration-format documentation in DD001 itself.
@@ -510,12 +510,12 @@ Target: Comprehensive documentation enabling new contributors to understand and 
     - [ ] Documents how to remap muscle units when the elastic-particle count changes
     - [ ] Provides a worked example: generate a `test_custom_geometry/` config, run it, visualize output
     - [ ] Cross-links to DD001 §Configuration Format and §Physical Parameters for the canonical parameter set
-    - [ ] Closes the loop on the 18-comment-long #165 discussion thread
-- **Sponsor Summary Hint:** Closed issue #165 had 18 comments over 5 years from contributors trying to use Sibernetic with their own body geometries or muscle configurations. The DD001 §Configuration Format now documents the format, but doesn't walk a new contributor through actually generating a config. This fills that gap.
+    - [ ] Closes the loop on the 18-comment-long [#165](https://github.com/openworm/sibernetic/issues/165) discussion thread
+- **Sponsor Summary Hint:** Closed issue [#165](https://github.com/openworm/sibernetic/issues/165) had 18 comments over 5 years from contributors trying to use Sibernetic with their own body geometries or muscle configurations. The DD001 §Configuration Format now documents the format, but doesn't walk a new contributor through actually generating a config. This fills that gap.
 
 ---
 
-### Issue 17: Inline parameter comments in config files (replaces #128)
+### Issue 17: Inline parameter comments in config files (replaces [#128](https://github.com/openworm/sibernetic/issues/128))
 
 - **Title:** `[DD001] Add inline parameter comments to binary configuration metadata files`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -524,7 +524,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD001 §Configuration Format](DD001_Body_Physics_Architecture.md#configuration-format), [DD001 §Physical Parameters](DD001_Body_Physics_Architecture.md#physical-parameters)
 - **Depends On:** None
-- **Replaces:** Closed issue #128 (Enhance configuration files with physical parameters)
+- **Replaces:** Closed issue [#128](https://github.com/openworm/sibernetic/issues/128) (Enhance configuration files with physical parameters)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing configuration directories.
     - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Source of truth for parameter definitions and units.
@@ -536,8 +536,8 @@ Target: Comprehensive documentation enabling new contributors to understand and 
     - [ ] Each of the 12+ configuration directories has a sidecar `README.md` documenting its purpose, particle counts, simulation duration, key parameter values, and expected behavior
     - [ ] Index `configuration/README.md` lists all configs with one-line descriptions and recommended use cases
     - [ ] Sidecar READMEs reference DD001 §Physical Parameters for parameter meaning + units
-    - [ ] Closes the loop on closed issue #128
-- **Sponsor Summary Hint:** Closed issue #128 asked for inline parameter comments in the config files. Sibernetic uses binary configuration directories (not text `.ini` files) so inline comments aren't possible — but a sidecar `README.md` per config directory captures the same information and is git-diffable.
+    - [ ] Closes the loop on closed issue [#128](https://github.com/openworm/sibernetic/issues/128)
+- **Sponsor Summary Hint:** Closed issue [#128](https://github.com/openworm/sibernetic/issues/128) asked for inline parameter comments in the config files. Sibernetic uses binary configuration directories (not text `.ini` files) so inline comments aren't possible — but a sidecar `README.md` per config directory captures the same information and is git-diffable.
 
 ---
 
@@ -603,7 +603,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue 20: Sibernetic Python bindings for direct API access (replaces #122)
+### Issue 20: Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
 
 - **Title:** `[DD001] Create Python bindings for Sibernetic C++ library (formalize the existing CPython integration)`
 - **Labels:** `DD001`, `human-expert`, `L3`
@@ -612,11 +612,11 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 - **Required Capabilities:** python, c++, pybind11
 - **DD Section to Read:** [DD001 §Integration Contract](DD001_Body_Physics_Architecture.md#integration-contract)
 - **Depends On:** None
-- **Replaces:** Closed issue #122 (pySibernetic, 2017 external wrapper)
+- **Replaces:** Closed issue [#122](https://github.com/openworm/sibernetic/issues/122) (pySibernetic, 2017 external wrapper)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/owSignalSimulator.cpp`](https://github.com/openworm/sibernetic) — Already contains a CPython API integration layer using direct `PyObject` calls to interface with NEURON/c302. C++↔Python interop already exists in the codebase; the question is formalization.
 - **Approach:** Extend — build on the existing CPython API calls in `owSignalSimulator.cpp`. Two viable paths: (a) formalize with pybind11 for a clean public API, (b) extend the existing CPython embedding for backward compatibility.
-- **Note:** Sibernetic uses a Makefile build system (the CMake migration of PR #214 is the current build path). Adding pybind11 will integrate with the current build path.
+- **Note:** Sibernetic uses a Makefile build system (the CMake migration of [PR #214](https://github.com/openworm/sibernetic/pull/214) is the current build path). Adding pybind11 will integrate with the current build path.
 - **Files to Modify:**
     - `python/sibernetic_bindings.cpp` (new — pybind11 wrapper)
     - `python/sibernetic/__init__.py` (new — Python package)
@@ -633,7 +633,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
     - [ ] Works with OpenCL backend (C++ core + Python wrapper)
     - [ ] Enables `sibernetic_c302.py` to call Sibernetic directly instead of via subprocess
     - [ ] Pybind11 wraps the existing C++ API; no algorithmic changes
-- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O. Python bindings would allow direct function calls, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. The existing `owSignalSimulator.cpp` already has CPython API calls — this formalizes that into a proper Python package, replacing the 2017 community-offered `pySibernetic` wrapper (#122) with a maintained in-tree binding.
+- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O. Python bindings would allow direct function calls, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. The existing `owSignalSimulator.cpp` already has CPython API calls — this formalizes that into a proper Python package, replacing the 2017 community-offered `pySibernetic` wrapper ([#122](https://github.com/openworm/sibernetic/issues/122)) with a maintained in-tree binding.
 
 ---
 
@@ -666,7 +666,7 @@ Issue 2 (incompressibility.py)┤
                               │                            ├→ Issue 5 (demo2 parity — close gap)
                               │                            ├→ Issue 6 (worm_alone parity)
                               │                            ├→ Issue 7 (worm_swim parity — close gap)
-                              │                            └→ Issue 8 (CUDA bring-up; also depends on PR #229)
+                              │                            └→ Issue 8 (CUDA bring-up; also depends on [PR #229](https://github.com/openworm/sibernetic/pull/229))
                               │
 Issue 9 (OpenCL kernel docs) ─┘  (feeds parity work, not blocking)
 
