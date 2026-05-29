@@ -6,7 +6,7 @@
 
 **Methodology:** [§2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation), [§2.3 — Reuse-First Issue Design](../contributing/ai-contributors.md#23-reuse-first-issue-design), [§2.4 — DD011 Simulation Stack Integration](../contributing/ai-contributors.md#24-dd011-simulation-stack-integration)
 
-**Totals:** 20 issues (ai-workable: 13 / human-expert: 7 | L1: 7, L2: 8, L3: 5)
+**Totals:** 18 fresh issues to file (ai-workable: 12 / human-expert: 6 | L1: 6, L2: 7, L3: 5) **plus** ~12 existing issues kept live (see [Migration Context](#migration-context-stabilize-the-gold-standard-while-building-forward) below).
 
 **Roadmap Context:** DD001 is a **Phase 0** DD (existing, working). Its draft issues span multiple roadmap phases:
 
@@ -14,60 +14,138 @@
 |-------|-------|-----------|
 | 1. Validation Infrastructure (Issues #233–#235) | **Phase A1** | `[TO BE CREATED]` scripts called out by [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) |
 | 2. Per-Demo Parity & CUDA Bring-Up (Issues #236–#240) | **Phase A1** | The substrate-correctness work consolidated on `ow-native-gpu-0.1.0`; each demo gets its own parity gate |
-| 3. Substrate Docs & PR Enforcement (Issues #241–#243) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) binding on new PRs |
+| 3. Substrate Docs & PR Enforcement (Issues #241–#243) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) discoverable to new PRs |
 | 4. Output Pipeline & Viewer Bridge (Issues #244–#246) | **Phase A1/1** | OME-Zarr, surface mesh, configurable output for the visualization handoff |
-| 5. Documentation & Onboarding (Issues #247–#250) | **Any** | Architecture overview, muscle mapping, contributor docs; includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128) |
-| 6. Future Backend Direction (Issues #251–#252) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
+| 5. Documentation & Onboarding (Issues #247–#248) | **Any** | Architecture overview, CONTRIBUTING.md (config-docs improvements folded into existing [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128)) |
+| 6. Future Backend Direction (Issues #249–#250) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
 
 ---
 
 ## Issue Numbering
 
-The 20 fresh issues below are labeled with **predicted** GitHub issue numbers (`#233` through `#252`) based on the current `openworm/sibernetic` numbering high-water mark (`#232`, a closed PR, as of 2026-05-28). Actual numbers assigned at filing time will shift forward if other issues or PRs are opened on the repo first. After filing, this document should be updated to reflect the assigned numbers.
+The 18 fresh issues below are labeled with **predicted** GitHub issue numbers (`#233` through `#250`) based on the current `openworm/sibernetic` numbering high-water mark (`#232`, a closed PR, as of 2026-05-28). Actual numbers assigned at filing time will shift forward if other issues or PRs are opened on the repo first. After filing, this document should be updated to reflect the assigned numbers.
 
 ---
 
-## Migration Context: Replacing the Pre-Reframe Issue Backlog
+## Migration Context: Stabilize the Gold Standard While Building Forward
 
-The 31 pre-existing `openworm/sibernetic` open issues were triaged in a per-issue migration plan. As of 2026-05-28, **27 remain open** — 3 stay live as ongoing work, and the other 24 are slated for closure with structured archive comments referencing DD001 sections as the migration plan executes. **4 issues were closed in the last week** (#102, #130, #176, #221), each of which fell into the "Replaced" or "Superseded" buckets of the plan. The fresh issues below derive from [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) and [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology). Three specific replacements:
+The 31 pre-existing `openworm/sibernetic` open issues have been re-evaluated with a more careful lens: **OpenCL is DD001's gold-standard reference implementation, and the native Metal / CUDA substrates must reach parity against it.** That means stabilizing OpenCL — fixing its bugs, documenting its behavior, exposing its parameters — is *supporting* work for the modernization, not a distraction from it. Issues that were earlier slated for blanket closure-as-superseded have been re-bucketed: real OpenCL defects, real docs gaps, and real build problems are kept live as **gold-standard stabilization** work. Issues that genuinely belong to held-back DDs (visualization, closed-loop touch, proprioception, foundation models) or duplicate other issues remain candidates for closure.
 
-| Old issue | Disposition | Replaced by |
-|-----------|-------------|-------------|
-| **[#226](https://github.com/openworm/sibernetic/issues/226)** (Wei Weng — Port `sphFluid.cl` to Metal for ARM64 Mac) | Kept live as canonical tracking issue for the Metal port; re-labeled `native-gpu` + `phase-0` | Issues #236–#239 (per-demo Metal parity) consolidate the implementation work this issue tracks |
-| **[#224](https://github.com/openworm/sibernetic/issues/224)** (Wei Weng — `QUEUE_EACH_KERNEL` OpenCL profiling flag) | Kept live; re-labeled `opencl` + `good-first-issue` | None — discrete enhancement to the OpenCL reference |
-| **[#160](https://github.com/openworm/sibernetic/issues/160)** (lungd — Pressure buffer file issue) | Kept live pending current-master reproduction; re-labeled `bug` + `needs-reproduction-current` | None — bug retained until confirmed fixed |
-| [#165](https://github.com/openworm/sibernetic/issues/165) (custom geometries/muscles, 18 comments) | Closed as superseded by DD001 §Configuration Format | **Issue #248** — improve config-onboarding docs |
-| [#128](https://github.com/openworm/sibernetic/issues/128) (inline config parameter comments) | Closed as superseded by DD001 §Configuration Format + §Physical Parameters | **Issue #249** — inline parameter comments in config files |
-| [#122](https://github.com/openworm/sibernetic/issues/122) (`pySibernetic` external wrapper, 2017) | Closed as stale community offer | **Issue #252** — formal Python bindings via pybind11 |
+As of 2026-05-28, **27 issues remain open**, and 4 were closed in the last week (#102, #130, #176, #221). Of the 27 open, ~12 are kept live, ~3 are folded into fresh DD001-derived issues, and ~12 will close with structured archive comments referencing DD001 or a held-back DD.
 
-The other 22 issues slated for closure map cleanly to DD001 sections (Configuration Format, Integration Contract, Physical Parameters, Backend Stabilization Roadmap, Boundaries) or to held-back DDs (DD012 visualization, DD015 closed-loop touch, DD019 proprioception). The full per-issue migration plan with close-comment templates lives outside this DD.
+### Live issues (kept open, re-labeled by category)
+
+#### A. OpenCL reference defects (real bugs, gold-standard stabilization)
+
+| Issue | Title | Why live |
+|-------|-------|----------|
+| [#125](https://github.com/openworm/sibernetic/issues/125) | Worm_motion_log contains only zeros in full scale resolution worm | Real OpenCL output bug, assigned to @a-palyanov. The output system is what every Metal/CUDA parity test compares against — fix it. **Label:** `opencl`, `bug`, `gold-standard` |
+| [#126](https://github.com/openworm/sibernetic/issues/126) | Liquid particles streaming out of standard cube | Real OpenCL physics bug on `demo1` (the cube drop scenario that the Metal port already passes). If the reference itself is leaking particles, parity claims are meaningless. **Label:** `opencl`, `bug`, `gold-standard` |
+| [#136](https://github.com/openworm/sibernetic/issues/136) | CL_OUT_OF_RESOURCES on Nvidia GTX 1060 copying position buffer | Real OpenCL HW-portability bug. Anyone reproducing on the listed NVIDIA generation hits it. **Label:** `opencl`, `bug`, `hardware-specific` |
+| [#160](https://github.com/openworm/sibernetic/issues/160) | Pressure buffer file issue | Concrete repro from 2019 — verify still reproduces on current master. **Label:** `opencl`, `bug`, `needs-reproduction-current` |
+| [#180](https://github.com/openworm/sibernetic/issues/180) | Resolve compiler warnings | Code-quality cleanup against current master (compiler warnings drift with toolchains). Good first issue. **Label:** `code-quality`, `good-first-issue` |
+| [#223](https://github.com/openworm/sibernetic/issues/223) | makefile.OSX doesn't work on M series Mac | Build path still partially broken on ARM Mac (setup.sh helps but doesn't cover all entry points). **Label:** `build`, `apple-silicon` |
+
+#### B. OpenCL reference enhancements + docs (low-risk, high-value)
+
+| Issue | Title | Why live |
+|-------|-------|----------|
+| [#127](https://github.com/openworm/sibernetic/issues/127) | Worm body modelling and mechanics — parameters, values etc. | 12-comment discussion thread on parameter values (Young's modulus, etc.). Capture the canonical values in the codebase / config docs. **Label:** `docs`, `physics` |
+| [#128](https://github.com/openworm/sibernetic/issues/128) | Enhance configuration files with physical parameters specific to full/half resolution | Expose physical params through config rather than hard-coded in source. Reduces the "magic numbers" problem and helps reproducibility. **Label:** `enhancement`, `config` |
+| [#147](https://github.com/openworm/sibernetic/issues/147) | How to expand the liquid particles? | Real docs gap. Pairs with #148. **Label:** `docs`, `good-first-issue` |
+| [#148](https://github.com/openworm/sibernetic/issues/148) | Document the way to access the body position on each step? | Real docs gap. Pairs with #147. **Label:** `docs`, `good-first-issue` |
+| [#165](https://github.com/openworm/sibernetic/issues/165) | User-defined geometries and muscle models | 18-comment community thread. Custom-geometry workflow is the right scope; the fresh "config-onboarding docs" issue I previously proposed folds back into this one. **Label:** `docs`, `community-interest` |
+| [#224](https://github.com/openworm/sibernetic/issues/224) | `QUEUE_EACH_KERNEL` OpenCL profiling flag | Clean profiling enhancement to the reference backend. **Label:** `opencl`, `enhancement`, `good-first-issue` |
+
+#### C. Modernization tracking
+
+| Issue | Title | Why live |
+|-------|-------|----------|
+| [#226](https://github.com/openworm/sibernetic/issues/226) | Port sphFluid.cl to Metal for ARM64 Mac | Canonical tracking issue for the Metal port. Wei Weng's filing is the statement of need that DD001 §Backend Stabilization Roadmap formalizes. The per-demo parity work ([Issues #236–#239](#group-2-per-demo-opencl-native-parity-phase-a1)) consolidates implementation under this umbrella. **Label:** `native-gpu`, `phase-0`, `epic` |
+
+### Issues slated for closure (mapping unchanged)
+
+Closures fall into these buckets. The full per-issue migration plan with close-comment templates lives outside this DD; the buckets are summarized here.
+
+| Bucket | Count | Examples | Rationale |
+|--------|-------|----------|-----------|
+| Out of DD001 scope (held-back DDs) | ~7 | #100 (steering — DD019), #101 (renders — DD012), #117, #119 (chart output — DD012), #141 (proprioception — DD019), #144 (touch — DD015), #182 (video recording — DD012) | Scope belongs to a design document held back from the current publish set. Fresh issues will be derived from those DDs when they publish. |
+| Out of DD001 scope (boundaries) | 1 | #163 (chemotaxis molecules) | Explicitly out of DD001 §Boundaries (item 3: environmental complexity beyond liquid/gel). |
+| Duplicate / answered | 2 | #106 (duplicate of #107), #168 (stale help request, no reproduction info) | Routine dedup. |
+| Replaced by fresh issue | 2 | #108 (calibration → covered by [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) workflow), #122 ([pySibernetic](https://github.com/openworm/sibernetic/issues/122) → replaced by [Issue #250](#issue-250-sibernetic-python-bindings-for-direct-api-access-replaces-122) formal Python bindings) | Clean DD001 replacement exists. |
+| Coupling docs (decide) | 1 | #107 (Write doc on Sibernetic-NEURON) | Could be kept live as a docs issue (Sibernetic↔c302/NEURON coupling docs are still useful) OR closed as covered by DD001 §Integration Contract. **Leadership call.** |
+| Multi-GPU performance scaling | 1 | #135 | Phase 2+ scope. Close as deferred. |
+
+### Recent closures (last week, 4 issues)
+
+For completeness: #102 (config docs) and #130 (build error) closed as Replaced / Superseded; #176 (c302 env issue on Windows) and #221 (Windows install question) closed as Answered / Superseded. The migration plan's dispositions matched the actual closures.
 
 ---
 
-## GitHub Milestone Context
+## Proposed GitHub Milestones
 
-`openworm/sibernetic` has four milestones in its history. Three are historical and closed (v0.0.3 in 2015, v0.0.4 in 2016, v0.0.5 in 2016); each was used to scope a release cycle and is no longer load-bearing. **One active milestone — `v0.0.8 release`, due 2026-06-12** — currently groups four open issues. The DD001 reframe creates a scheduling tension with that milestone that leadership should resolve explicitly before either the milestone closes or these fresh DD001 issues are filed.
+The current milestone landscape on `openworm/sibernetic`: three closed historical milestones (v0.0.3 in 2015, v0.0.4 in 2016, v0.0.5 in 2016) plus one active milestone (`v0.0.8 release`, due 2026-06-12). The proposal below repurposes the active milestone and adds three forward milestones aligned to the DD001 plan.
 
-### Active milestone: `v0.0.8 release` (due 2026-06-12)
+### v0.0.8 release — OpenCL Gold-Standard Stabilization (existing milestone, **re-scoped**, due slipped)
 
-| Issue | Title | Migration plan disposition | DD001 fresh issue (if any) |
-|-------|-------|----------------------------|----------------------------|
-| [#125](https://github.com/openworm/sibernetic/issues/125) | Worm_motion_log contains only zeros in full scale resolution worm | **Superseded** — 2017 output bug; output system being rebuilt under native-gpu work | Output-pipeline work picked up by [Issue #244](#issue-244-implement-ome-zarr-export-for-particle-data) (OME-Zarr export) and [Issue #246](#issue-246-configurable-output-frequency-via-openwormyml) (configurable output frequency). Recommend closing with archive comment + cross-link to #246. |
-| [#165](https://github.com/openworm/sibernetic/issues/165) | User-defined geometries and muscle models | **Superseded** — 18-comment thread, closed as superseded by DD001 §Configuration Format | **Directly replaced by [Issue #248](#issue-248-improve-config-onboarding-docs-for-custom-geometries-and-muscles-replaces-165)** (improve config-onboarding docs). Recommend closing #165 with cross-link to the new issue when #248 is filed. |
-| [#180](https://github.com/openworm/sibernetic/issues/180) | Resolve compiler warnings | **Superseded** — 2021 GCC warnings list; build system has materially changed (CMake [PR #214](https://github.com/openworm/sibernetic/pull/214), `setup.sh` [PR #211](https://github.com/openworm/sibernetic/pull/211), native-Metal port [PR #222](https://github.com/openworm/sibernetic/pull/222)) | None — out of DD001 scope at the kernel/correctness level. If new warnings surface on the native-gpu branch, file a fresh issue against the current warning set. |
-| [#182](https://github.com/openworm/sibernetic/issues/182) | Add simulation video recording utility | **Superseded** — out of DD001 scope; falls under DD012 (Dynamic Visualization Architecture, held back) | None — visualization concern, deferred to DD012 publication. |
+**Goal:** Stabilize the OpenCL reference as the gold standard against which all native substrates are validated. No new scope; tighten the existing.
 
-### The scheduling tension
+**Current contents** (4 issues, all from earlier triage): #125, #165, #180, #182 — keep #125 and #180; re-label #165 to category B (community-docs); remove #182 (scope belongs to DD012, held back).
 
-The `v0.0.8 release` milestone implies these four issues will be resolved by **2026-06-12**. The DD001 migration plan, by contrast, marks all four as Superseded and slates them for **closure-without-resolution** (archive comment referencing DD001 or a held-back DD). These are incompatible expectations: the milestone says "ship a fix for these," the migration plan says "close as obsolete."
+**Proposed final scope** — every Live issue in category A plus the two pairing docs issues:
 
-Three ways to resolve:
+- #125, #126, #136, #160, #180, #223 (OpenCL bugs + build)
+- #147, #148 (paired docs gaps)
 
-1. **Close the four issues now** (per migration plan), then either close the milestone with no contents or repurpose it to scope a different release cut. Cleanest. Recommended if leadership accepts that none of these four are blocking work for v0.0.8.
-2. **Re-scope `v0.0.8 release`** to a smaller, DD001-aligned set — e.g., the validation infrastructure issues ([#233](#issue-233-create-scriptscheck_stabilitypy), [#234](#issue-234-create-scriptsvalidate_incompressibilitypy), [#235](#issue-235-create-cross-backend-parity-test-suite-scriptsbackend_parity_testpy)) once filed. Treats v0.0.8 as the validation-infrastructure release.
-3. **Slip the milestone due date** to give time to actually resolve the four or to fold them into a larger v0.1.0 cut. Lowest-energy option but doesn't resolve the underlying obsolescence.
+**Due date:** Slip from 2026-06-12 → "when stabilization buckets land" (no fixed calendar date). With 8 issues from contributors of varying availability, a fixed two-week deadline is unrealistic.
 
-The recommendation is **Option 1 plus a fresh v0.1.0 milestone** scoped to the DD001 substrate-correctness work ([#236](#issue-236-opencl-metal-parity-on-demo1-cube-drop) through [#240](#issue-240-cuda-substrate-parity-bring-up) per-demo parity gates + CUDA bring-up). The native-gpu branch consolidation (PR [#230](https://github.com/openworm/sibernetic/pull/230)) is the natural reason for a v0.1.0 cut, and grouping the per-demo parity issues under that milestone gives the modernization work a visible release target.
+### v0.1.0 release — Native-GPU Substrate Consolidation (**new milestone**)
+
+**Goal:** Land the native-Metal port at OpenCL parity on the four working demos, bring native-CUDA to demo1 parity, and merge the consolidation PR.
+
+**Contents:**
+
+- [Issue #235](#issue-235-create-cross-backend-parity-test-suite-scriptsbackend_parity_testpy) — Cross-backend parity test suite
+- [Issue #236](#issue-236-opencl-metal-parity-on-demo1-cube-drop) — demo1 (cube drop) parity, lock in CI
+- [Issue #237](#issue-237-opencl-metal-parity-on-demo2-membrane-permeability) — demo2 (membrane permeability) parity, close gap
+- [Issue #238](#issue-238-opencl-metal-parity-on-worm_alone_half_resolution) — worm_alone parity, lock in
+- [Issue #239](#issue-239-opencl-metal-parity-on-worm_swim_half_resolution) — worm_swim parity, close gap
+- [Issue #240](#issue-240-cuda-substrate-parity-bring-up) — CUDA substrate parity bring-up
+- [#226](https://github.com/openworm/sibernetic/issues/226) — Metal port tracking issue (closes when v0.1.0 ships)
+- [PR #229](https://github.com/openworm/sibernetic/pull/229) — Add native CUDA substrate
+- [PR #230](https://github.com/openworm/sibernetic/pull/230) — Ow native gpu 0.1.0 → 0.9.9 (consolidation)
+
+**Due date:** Open-ended; ships when the four parity gates are green.
+
+### v0.2.0 release — Validation Infrastructure + Output Pipeline (**new milestone**)
+
+**Goal:** Make CI-level validation possible across substrates. Bridge simulation output to the visualization handoff.
+
+**Contents:**
+
+- [Issue #233](#issue-233-create-scriptscheck_stabilitypy) — `check_stability.py`
+- [Issue #234](#issue-234-create-scriptsvalidate_incompressibilitypy) — `validate_incompressibility.py`
+- [Issue #244](#issue-244-implement-ome-zarr-export-for-particle-data) — OME-Zarr export
+- [Issue #245](#issue-245-implement-surface-mesh-reconstruction-from-sph-particles) — Marching cubes surface reconstruction
+- [Issue #246](#issue-246-configurable-output-frequency-via-openwormyml) — Configurable output frequency
+
+### v0.3.0 release — Substrate Documentation + Contributor Onboarding (**new milestone**)
+
+**Goal:** Make the substrate understandable and contributor-ready.
+
+**Contents:**
+
+- [Issue #241](#issue-241-document-opencl-kernel-architecture-sphfluidcl) — OpenCL kernel architecture
+- [Issue #242](#issue-242-document-the-19-paired-forwardbackward-kernels-differentiable-substrate) — 19 paired backward kernels
+- [Issue #243](#issue-243-mind-of-a-worm-8-phase-validation-methodology-pr-assist) — Mind-of-a-Worm PR assist
+- [Issue #247](#issue-247-sibernetic-architecture-overview-for-new-contributors) — Architecture overview
+- [Issue #248](#issue-248-sibernetic-contributingmd-with-substrate-workflow) — CONTRIBUTING.md
+- [#127](https://github.com/openworm/sibernetic/issues/127), [#128](https://github.com/openworm/sibernetic/issues/128), [#165](https://github.com/openworm/sibernetic/issues/165) — Existing community docs/enhancement issues consolidated under the docs release
+
+### Unmilestoned (future / research)
+
+- [Issue #249](#issue-249-evaluate-fem-projective-dynamics-backend-feasibility) — FEM Projective Dynamics evaluation
+- [Issue #250](#issue-250-sibernetic-python-bindings-for-direct-api-access-replaces-122) — Python bindings
 
 ### Historical milestones (closed, reference only)
 
@@ -76,8 +154,6 @@ The recommendation is **Option 1 plus a fresh v0.1.0 milestone** scoped to the D
 | v0.0.3 | 2015-07 | 12 | LeapFrog integrator, `-help` option, worm config from file, snapshot ability |
 | v0.0.4 | 2016-04 | 15 | Bug-fixing pass: memory leaks, segfault on GPU-absent machines, NEURON interaction |
 | v0.0.5 | 2016-05 | 2 | Multi-device parallelization, settings file format |
-
-These document the project's release-cadence history. No active mapping to DD001 — included here so anyone scanning the milestones page understands the gap between 2016 and the 2026 v0.0.8 work-in-progress.
 
 ---
 
@@ -393,7 +469,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
     - [ ] Workflow triggers on PRs touching kernel sources or substrate code
     - [ ] Surfaces the status of each checklist item: written prediction, OpenCL reference trajectory, Metal/CUDA trajectory dump, side-by-side MP4 under `docs/`, SGD convergence history, FD test for any new kernel
     - [ ] Workflow posts a checklist-status comment on the PR (does **not** block merge; reviewers decide)
-    - [ ] Documented in `CONTRIBUTING.md` (Issue #250) and DD001 itself
+    - [ ] Documented in `CONTRIBUTING.md` (Issue #248) and DD001 itself
 - **Sponsor Summary Hint:** DD001's Validation Methodology gives reviewers a 10-item checklist to walk through. This issue makes that checklist easier to apply by posting an automated summary on each kernel-touching PR — "here's which items I can verify are present, here's what's missing." The bot is an assistant, not a gatekeeper: human reviewers decide whether a PR is ready to merge.
 
 ---
@@ -498,7 +574,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 
 ## Group 5: Documentation & Onboarding (Any Phase)
 
-Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic. Includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128).
+Target: Comprehensive documentation enabling new contributors to understand and modify Sibernetic. **Note:** Two previously-drafted issues in this group (config-onboarding docs and inline parameter comments) have been folded into the existing live issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128) — see [Migration Context](#migration-context-stabilize-the-gold-standard-while-building-forward). Those community-tracked threads carry the work; no separate fresh issues are filed.
 
 ---
 
@@ -529,60 +605,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue #248: Improve config-onboarding docs for custom geometries and muscles (replaces [#165](https://github.com/openworm/sibernetic/issues/165))
-
-- **Title:** `[DD001] Improve config-onboarding docs: bring-your-own-geometry workflow for custom Sibernetic runs`
-- **Labels:** `DD001`, `ai-workable`, `L2`
-- **Roadmap Phase:** Any
-- **Target Repo:** `openworm/sibernetic`
-- **Required Capabilities:** docs, physics
-- **DD Section to Read:** [DD001 §Configuration Format](DD001_Body_Physics_Architecture.md#configuration-format), [DD001 §Muscle Actuation](DD001_Body_Physics_Architecture.md#muscle-actuation-force-injection)
-- **Depends On:** Issue #247 (architecture overview), Issue #249 (config parameter comments)
-- **Replaces:** Closed issue [#165](https://github.com/openworm/sibernetic/issues/165) (User-defined geometries and muscle models)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — 12+ existing binary configuration directories provide the working examples to walk through.
-    - The configuration-format documentation in DD001 itself.
-- **Approach:** Create — walks a new contributor from "I want to run my own body shape" through to a working simulation, including muscle mapping and config-directory generation.
-- **Files to Modify:**
-    - `docs/custom_configurations.md` (new — in Sibernetic repo)
-- **Acceptance Criteria:**
-    - [ ] Explains the binary configuration directory format (position/velocity/type buffers per directory)
-    - [ ] Walks through generating a new config from a worm mesh OBJ or procedural geometry
-    - [ ] Documents how to remap muscle units when the elastic-particle count changes
-    - [ ] Provides a worked example: generate a `test_custom_geometry/` config, run it, visualize output
-    - [ ] Cross-links to DD001 §Configuration Format and §Physical Parameters for the canonical parameter set
-    - [ ] Closes the loop on the 18-comment-long [#165](https://github.com/openworm/sibernetic/issues/165) discussion thread
-- **Sponsor Summary Hint:** Closed issue [#165](https://github.com/openworm/sibernetic/issues/165) had 18 comments over 5 years from contributors trying to use Sibernetic with their own body geometries or muscle configurations. The DD001 §Configuration Format now documents the format, but doesn't walk a new contributor through actually generating a config. This fills that gap.
-
----
-
-### Issue #249: Inline parameter comments in config files (replaces [#128](https://github.com/openworm/sibernetic/issues/128))
-
-- **Title:** `[DD001] Add inline parameter comments to binary configuration metadata files`
-- **Labels:** `DD001`, `ai-workable`, `L1`
-- **Roadmap Phase:** Any
-- **Target Repo:** `openworm/sibernetic`
-- **Required Capabilities:** docs
-- **DD Section to Read:** [DD001 §Configuration Format](DD001_Body_Physics_Architecture.md#configuration-format), [DD001 §Physical Parameters](DD001_Body_Physics_Architecture.md#physical-parameters)
-- **Depends On:** None
-- **Replaces:** Closed issue [#128](https://github.com/openworm/sibernetic/issues/128) (Enhance configuration files with physical parameters)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — Existing configuration directories.
-    - [`openworm/sibernetic/inc/owPhysicsConstant.h`](https://github.com/openworm/sibernetic) — Source of truth for parameter definitions and units.
-- **Approach:** Adapt — adds a sidecar `README.md` to each configuration directory documenting which parameters it sets and why. (Binary configuration directories themselves can't carry inline comments, but a documented sidecar provides the same value to readers.)
-- **Files to Modify:**
-    - `configuration/<each>/README.md` (new sidecar per config directory)
-    - `configuration/README.md` (new — index of all configs)
-- **Acceptance Criteria:**
-    - [ ] Each of the 12+ configuration directories has a sidecar `README.md` documenting its purpose, particle counts, simulation duration, key parameter values, and expected behavior
-    - [ ] Index `configuration/README.md` lists all configs with one-line descriptions and recommended use cases
-    - [ ] Sidecar READMEs reference DD001 §Physical Parameters for parameter meaning + units
-    - [ ] Closes the loop on closed issue [#128](https://github.com/openworm/sibernetic/issues/128)
-- **Sponsor Summary Hint:** Closed issue [#128](https://github.com/openworm/sibernetic/issues/128) asked for inline parameter comments in the config files. Sibernetic uses binary configuration directories (not text `.ini` files) so inline comments aren't possible — but a sidecar `README.md` per config directory captures the same information and is git-diffable.
-
----
-
-### Issue #250: Sibernetic CONTRIBUTING.md with substrate workflow
+### Issue #248: Sibernetic CONTRIBUTING.md with substrate workflow
 
 - **Title:** `[DD001] Create CONTRIBUTING.md with native-substrate development workflow and standards`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -616,7 +639,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue #251: Evaluate FEM Projective Dynamics backend feasibility
+### Issue #249: Evaluate FEM Projective Dynamics backend feasibility
 
 - **Title:** `[DD001] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm / Metaworm)`
 - **Labels:** `DD001`, `human-expert`, `L3`
@@ -644,7 +667,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue #252: Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
+### Issue #250: Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
 
 - **Title:** `[DD001] Create Python bindings for Sibernetic C++ library (formalize the existing CPython integration)`
 - **Labels:** `DD001`, `human-expert`, `L3`
@@ -682,45 +705,45 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 | Category | Count |
 |----------|-------|
-| **Total Issues** | 20 |
-| **ai-workable** | 13 |
-| **human-expert** | 7 |
-| **L1** | 7 |
-| **L2** | 8 |
+| **Fresh issues to file** | 18 |
+| **ai-workable** | 12 |
+| **human-expert** | 6 |
+| **L1** | 6 |
+| **L2** | 7 |
 | **L3** | 5 |
+| **Existing issues kept live** | ~12 (see [Migration Context](#migration-context-stabilize-the-gold-standard-while-building-forward)) |
 
 | Group | Issues | Target |
 |-------|--------|--------|
-| **1: Validation Infrastructure** | 1–3 | Stability/incompressibility scripts + cross-backend parity harness |
-| **2: Per-Demo Parity & CUDA Bring-Up** | 4–8 | Close OpenCL↔Metal parity per demo; stand up CUDA |
-| **3: Substrate Docs & PR Enforcement** | 9–11 | Document substrate + make Validation Methodology a binding gate |
-| **4: Output Pipeline** | 12–14 | OME-Zarr, surface mesh, configurable output |
-| **5: Documentation & Onboarding** | 15–18 | Architecture, custom configs, CONTRIBUTING |
-| **6: Advanced / Future** | 19–20 | FEM evaluation, Python bindings |
+| **1: Validation Infrastructure** | #233–#235 | Stability/incompressibility scripts + cross-backend parity harness |
+| **2: Per-Demo Parity & CUDA Bring-Up** | #236–#240 | Close OpenCL↔Metal parity per demo; stand up CUDA |
+| **3: Substrate Docs & PR Assist** | #241–#243 | Document substrate + surface Validation Methodology checklist on PRs |
+| **4: Output Pipeline** | #244–#246 | OME-Zarr, surface mesh, configurable output |
+| **5: Documentation & Onboarding** | #247–#248 | Architecture overview, CONTRIBUTING.md (config-docs work folded into existing #128, #165) |
+| **6: Advanced / Future** | #249–#250 | FEM evaluation, Python bindings |
 
 ### Dependency Graph (Critical Path)
 
 ```
 Issue #233 (check_stability.py) ─┐
 Issue #234 (incompressibility.py)┤
-                              ├→ Issue #235 (parity harness) ─┬→ Issue #236 (demo1 parity, mostly done)
-                              │                            ├→ Issue #237 (demo2 parity — close gap)
-                              │                            ├→ Issue #238 (worm_alone parity)
-                              │                            ├→ Issue #239 (worm_swim parity — close gap)
-                              │                            └→ Issue #240 (CUDA bring-up; also depends on [PR #229](https://github.com/openworm/sibernetic/pull/229))
-                              │
+                                 ├→ Issue #235 (parity harness) ─┬→ Issue #236 (demo1 parity, mostly done)
+                                 │                               ├→ Issue #237 (demo2 parity — close gap)
+                                 │                               ├→ Issue #238 (worm_alone parity)
+                                 │                               ├→ Issue #239 (worm_swim parity — close gap)
+                                 │                               └→ Issue #240 (CUDA bring-up; also depends on [PR #229](https://github.com/openworm/sibernetic/pull/229))
+                                 │
 Issue #241 (OpenCL kernel docs) ─┘  (feeds parity work, not blocking)
 
 Issue #242 (paired backward docs) — independent; pairs with Issue #243
-Issue #243 (MoaW PR gate) — independent; depends on existing parity test for one of its acceptance items
+Issue #243 (MoaW PR assist) — independent; depends on existing parity test for one of its acceptance items
 
 Issue #244 (OME-Zarr export) → Issue #245 (surface mesh)
 Issue #246 (output frequency) — depends on DD011 config loading
 
-Issue #247 (architecture overview) → Issue #248 (custom config docs)
-Issue #249 (inline param comments) — independent
-Issue #250 (CONTRIBUTING.md) — depends on Issues #235, #241, #242, #243 being defined (but not done)
+Issue #247 (architecture overview) — independent
+Issue #248 (CONTRIBUTING.md) — depends on Issues #235, #241, #242, #243 being defined (but not done)
 
-Issue #251 (FEM evaluation) — independent research
-Issue #252 (Python bindings) — independent
+Issue #249 (FEM evaluation) — independent research
+Issue #250 (Python bindings) — independent
 ```
