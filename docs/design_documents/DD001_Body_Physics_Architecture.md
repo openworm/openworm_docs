@@ -25,7 +25,7 @@
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
 | **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
-| **Validation methodology** | Every physics change in Sibernetic must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. [Mind-of-a-Worm](../contributing/ai-contributors.md) enforces this on every PR via the [Validation Methodology](#validation-methodology) checklist. |
+| **Validation methodology** | Every physics change in Sibernetic should follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. [Mind-of-a-Worm](../contributing/ai-contributors.md) — when available — surfaces a checklist on PRs against the [Validation Methodology](#validation-methodology) section; human reviewers remain the canonical approvers. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
@@ -350,13 +350,13 @@ A contribution to Sibernetic MUST:
 
 7. **Paired Backward Per Forward (Native Substrates):** Every new forward kernel added to the native Metal or native CUDA substrate MUST ship with a paired analytic backward kernel, validated against finite-difference to within ±5% relative error. This is the architectural contract of the substrate; see [Differentiability](#differentiability). New kernels without a paired backward break the end-to-end differentiability guarantee and must not land.
 
-8. **Validation Methodology Followed:** Every physics change MUST follow the 8-phase predict → reference → inspect → refine → implement → SGD-tune → render → compare workflow documented in [Validation Methodology](#validation-methodology). PRs that ship a Metal/CUDA implementation without (a) a benchmark config, (b) an OpenCL reference trajectory, (c) a Metal/CUDA trajectory dump, (d) a side-by-side comparison movie, and (e) visual + quantitative parity evidence are not ready to land. Hand-swept parameters are not acceptable — parameter tuning must use the SGD harness with a saved convergence history. This applies to every kernel-level PR (new physics, parameter changes, optimization PRs that affect numerical output, etc.).
+8. **Validation Methodology Followed:** Every physics change should follow the 8-phase predict → reference → inspect → refine → implement → SGD-tune → render → compare workflow documented in [Validation Methodology](#validation-methodology). PRs that ship a Metal/CUDA implementation are strongly encouraged to include (a) a benchmark config, (b) an OpenCL reference trajectory, (c) a Metal/CUDA trajectory dump, (d) a side-by-side comparison movie, and (e) visual + quantitative parity evidence — these dramatically reduce review time. SGD-based parameter tuning with a saved convergence history is preferred over hand-swept parameters. Human reviewers exercise judgment on which items are necessary for a given PR.
 
 ---
 
 ## Validation Methodology
 
-**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — must follow the 8-phase workflow below.** [Mind-of-a-Worm](../contributing/ai-contributors.md) uses the checklist at the end of this section as a binding PR gate. Reviewers (human or AI) MUST verify each item before approving.
+**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — should follow the 8-phase workflow below.** The 10-item checklist at the end of this section is the recommended self-review for contributors and the reviewer's reference. [Mind-of-a-Worm](../contributing/ai-contributors.md) — when the bot is in service — surfaces the checklist on the PR as a courtesy; it does not block merges on its own. Human reviewers remain the canonical approvers and use the checklist to guide their review.
 
 The methodology emerged from the native-Metal port (consolidated on the `ow-native-gpu-0.1.0` branch) and is now baked into the repo's tooling. It is the substrate-correctness story: hand-derived backward kernels per [Differentiability](#differentiability) prove the *math* is right; this workflow proves the *physics* is right.
 
@@ -500,7 +500,7 @@ Cross-link the PR to the relevant `dd001` GitHub label and the demo's parity art
 
 ### Mind-of-a-Worm PR Review Checklist
 
-MoaW (and any human reviewer) must verify each item before approving any PR that touches Sibernetic physics:
+Human reviewers (with MoaW assistance when available) walk through this checklist when reviewing a PR that touches Sibernetic physics. Items 1, 4, 5, 6 are the most consequential; items 7–10 are reporting hygiene that can be added in-PR.
 
 | # | Check | Pass condition |
 |---|-------|---------------|
@@ -515,13 +515,11 @@ MoaW (and any human reviewer) must verify each item before approving any PR that
 | 9 | **Substrate work itemized** | The commit message lists what substrate-level changes landed (new kernels, harness extensions, validator tests, render-script updates). |
 | 10 | **Phase 1 prediction reconciled against Phase 3 measurement** | If the OpenCL measurement surprised the predictor, the PR documents the gap and the root cause (e.g., "predicted 2× faster because forgot the 0.25 factor"). This is a learning artifact for future contributors. |
 
-A PR missing items 1, 4, 5, or 6 is not ready — it's hand-fitted or unverified.
-A PR missing items 7-10 is incomplete reporting (can be fixed in-PR; not a block).
-A PR missing items 2 or 3 is unreviewable — the reference and the candidate must both be present for parity to be checked.
+As a rule of thumb: items 1, 4, 5, 6 carry the most weight (without them the PR is hand-fitted or unverified); items 7–10 are reporting hygiene that can usually be added in-PR; items 2 and 3 (the OpenCL reference + the candidate trajectory) are what make parity checkable at all, so they're worth pushing for early.
 
 ### Common Gotchas (Distilled from the Native-Metal Port)
 
-These are the recurring failure modes during the port that MoaW should flag if present in new PRs:
+These are the recurring failure modes seen during the native-Metal port. Reviewers (and MoaW, when available) keep an eye out for them in new PRs:
 
 1. **0.25 factor on non-worm-body elastic springs.** `sphFluid.cl` applies `elasticityCoefficient × 0.25` only to non-worm-body elastic pairs. Forgetting this in Metal makes the oscillation period 2× too short. The Phase 1 prediction must account for it.
 2. **`rho_rest = 0` causes NaN.** The density solver divides by `rho_rest`. Always use `1.0` for vacuum scenarios where SPH coupling is irrelevant; use the config's `rho0` explicitly for liquid scenarios.

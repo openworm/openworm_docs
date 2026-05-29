@@ -257,9 +257,9 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD005 (Cell-Type Specialization) | 6 DDs | DD006, DD010, DD012, DD013, DD014, DD021 | 🟡 Moderate (Phase 1+) | Neural Circuit L4 Maintainer |
 | DD021 (Foundation Models) | 2 DDs | DD002 (per-class HH params), DD005 (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
 | DD013 (Hybrid ML) | 2 DDs | DD002 (fitted params), DD006 (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
-| DD011 (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Integration L4) — **VACANT** |
-| DD012 (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | TBD (Visualization L4) |
-| DD017 (Toolbox) | 1 DD | DD010 (Tier 3 only) | 🟡 **BLOCKING** (for validation) | TBD (Validation L4) — **VACANT** |
+| DD011 (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | Integration L4 seat open to community |
+| DD012 (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | Visualization L4 seat open to community |
+| DD017 (Toolbox) | 1 DD | DD010 (Tier 3 only) | 🟡 **BLOCKING** (for validation) | Validation L4 seat open to community |
 
 ### Phase Legend
 

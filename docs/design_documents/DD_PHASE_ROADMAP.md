@@ -181,11 +181,13 @@ OpenWorm's path from 302 generic neurons to 959 specialized cells is organized i
 - **Randi 2023 functional connectivity** (302×302 correlation matrix) — Tier 2 validation
 - **Validation data for digitization** — Thomas 1990, Raizen 1994, O'Hagan 2005, Chalfie 1985
 
-**Blocking Dependencies:**
+**Helpful (not blocking):**
 
-- Recruit Integration L4 Maintainer (owns DD011 implementation)
-- Recruit Data L4 Maintainer (owns DD008 OWMeta revival)
-- Recruit Validation L4 Maintainer (owns DD017 revival)
+- An Integration L4 contributor to shepherd DD011 implementation
+- A Data L4 contributor to lead DD008 OWMeta revival
+- A Validation L4 contributor to lead DD017 revival
+
+These L4 contributor seats accelerate the phase but are not strictly required — phases can advance through community contributions coordinated by the Core Team.
 
 **Cumulative Metrics:** 397 cells (unchanged — infrastructure phase) | 1 neuron class (generic) | 1 coupling loop | 0 organ systems | Tier 2 + Tier 3 validation operational | No viewer | +5 DDs (9 total)
 
@@ -447,7 +449,9 @@ Governance documents (contributor progression, decision process, AI contributors
 5. **Three.js viewer** (DD012 Phase 3) — Client-side, no server, molecular scale with gene expression pipeline visible
 6. **Static site deployment** — wormsim.openworm.org (GitHub Pages or CDN)
 
-**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"** *(Target: Month 18, December 2027)*
+**Milestone:** 🎉 **"WormSim 2.0 — 959-Cell Digital Organism In Your Browser"**
+
+This is the capstone milestone — a second-generation public WormSim building on the original WormSim browser visualization. The "2.0" framing matters: the first WormSim exists, this phase rebuilds it with full 959-cell anatomy, dynamic simulation, and the three-scale viewer. No fixed delivery date — the milestone ships when the prior phases have landed and the content is stable enough to expose publicly.
 
 - **What you run:** Open `wormsim.openworm.org` in any browser. No Docker, no installation, no server.
 - **What you see — 3 scales of exploration:**
@@ -635,10 +639,11 @@ Phase A1 (DD011, DD008, DD017, DD020, DD024) → Phase 1 (DD005, DD012/DD012.1) 
 
 **What Blocks Everything:**
 
-- **Integration Maintainer recruitment** — Without this, DD011 doesn't get implemented
-- **Data Maintainer recruitment** — Without this, DD008 OWMeta doesn't get revived and Phase 1+ datasets lack unified access
-- **Validation Maintainer recruitment** — Without this, DD017 doesn't get revived
 - **Phase A1 completion** — Without config system, data layer, and automated validation, contributor workflow doesn't work
+
+**What Accelerates Everything (but doesn't block):**
+
+- L4 contributors stepping into the Integration, Data, and Validation seats. These roles are open invitations to the community to lead a subsystem; they speed phases up substantially but the Core Team can move work forward without them.
 
 ---
 
@@ -652,8 +657,8 @@ Phase A1 (DD011, DD008, DD017, DD020, DD024) → Phase 1 (DD005, DD012/DD012.1) 
 | Phase 1 | 3 months | Jul-Sep 2026 | 397 (specialized, not added) | +4 DDs (DD005, DD010, DD012 Phase 1, DD012.1) |
 | Phase 2 | 3 months | Oct-Dec 2026 | 403 (add 6 touch neurons explicitly modeled) | +6 DDs (DD006, DD015, DD018, DD019, DD022, DD023, DD012 Phase 2) |
 | Phase 3 | 6 months | Jan-Jun 2027 | 514 (add 63 pharynx + 20 intestine + 28 egg-laying) | +4 DDs (DD007, DD009, DD014, DD013) |
-| Phase 4 | 6 months | Jul-Dec 2027 | **959** (all somatic cells) | +2 DDs (DD004, DD012.2, DD012 Phase 3) |
-| **TOTAL** | **~18 months** | **Jun 2026 - Dec 2027** | **959 cells** | **26 DDs implemented** |
+| Phase 4 | ~6 months | (no fixed date — gated on prior phases) | **959** (all somatic cells) | +2 DDs (DD004, DD012.2, DD012 Phase 3) |
+| **TOTAL** | **~18 months active work** | **Phases 0–3 dated; WormSim 2.0 capstone ships when ready** | **959 cells** | **26 DDs implemented** |
 
 **Phases 5-7:** Year 3+ (intracellular, developmental, male-specific)
 
@@ -673,13 +678,13 @@ A: DD004 requires per-cell mechanical properties (elasticity, adhesion) that are
 **Q: What if Phase 1 DD005 fails validation (Tier 2 doesn't improve)?**
 A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to DD021 (foundation model→params) or manual curation. DD005's scientific risk is why it's Phase 1 — validate the approach early before building more on top of it.
 
-**Q: When do we write papers?**
-A: After each major milestone:
+**Q: Where do we want to publish?**
+A: We have ambitions across the venue spectrum, scaled to the scientific weight of each result. Specific timing is not committed — papers ship when the underlying work warrants them.
 
-- Phase 1: "CeNGEN-Parameterized Neural Circuit" (target: *eNeuro* or *Frontiers in Neuroinformatics*)
-- Phase 2: "Closed-Loop Sensorimotor Behavior in Whole-Organism Simulation" (target: *PLoS Computational Biology*)
-- Phase 3: "Multi-Organ, Multi-Timescale C. elegans Simulation" (target: *Nature Communications* or *Cell Systems*)
-- Phase 4: "Complete 959-Cell Digital Organism" (target: **Nature** or **Science**)
+- Cell-type specialization work: *eNeuro* or *Frontiers in Neuroinformatics* tier
+- Closed-loop sensorimotor work: *PLoS Computational Biology* tier
+- Multi-organ, multi-timescale integration: *Nature Communications* or *Cell Systems* tier
+- The complete 959-cell digital organism result is the kind of capstone that, if delivered, would aim at the **Nature** or **Science** tier — though no calendar promise attaches to that ambition
 
 **Q: Why is DD021 (foundation model kinetics) in Phase A2, not Phase 3 with the rest of DD013?**
 A: Component 3 derisks DD005's uncertain transcript→conductance mapping. BioEmu-1 (100,000x MD speed) invalidated the original "computationally expensive" rejection. The inputs (WormBase sequences, literature kinetics) are available now with no infrastructure dependencies. Cross-validation in Phase A2 provides a safety net: if DD005's naive mapping fails in Phase 1, structure-based predictions are ready immediately.

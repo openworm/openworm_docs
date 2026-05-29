@@ -154,10 +154,10 @@ The Apache Software Foundation's **meritocratic contributor ladder** (User → C
 | **Muscle Models** | DD003, DD007, DD009 | TBD (propose from community) | c302, Sibernetic |
 | **Data Integration** | DD008 | TBD | OWMeta, ConnectomeToolbox |
 | **Validation** | DD010 | TBD | open-worm-analysis-toolbox |
-| **Integration Stack** | DD011 | TBD — **Critical hire** | OpenWorm (meta-repo) |
+| **Integration Stack** | DD011 | Seat open to community L4 contributors | OpenWorm (meta-repo) |
 | **Visualization** | DD012 | TBD | Worm3DViewer, Worm Browser |
 
-**Critical:** At least one L4 Senior Contributor per subsystem. If a subsystem lacks an L4, the founder is the de-facto owner (unsustainable).
+**Aspiration:** Ideally each subsystem has an L4 Senior Contributor leading it. Until those seats fill, work proceeds through Core Team coordination and community contributions; L4 leadership accelerates a subsystem rather than gating it.
 
 ---
 

@@ -1,16 +1,19 @@
 # AI-Native Contributor Model
 
-- **Status:** Active (Governance)
+- **Status:** In development (Governance)
 - **Maintained by:** OpenWorm Core Team
-- **Last updated:** 2026-02-15
+- **Last updated:** 2026-05-28
 - **Inspired by:** Moltbook AI social network (launched Jan 28, 2026)
 - **Related:** [Contributor Progression](contributor-progression.md), [Decision Process](decision-process.md)
+
+!!! info "Status — in development"
+    This page describes the AI contributor model OpenWorm is building. The infrastructure (`dd_issue_generator.py`, the agent registry, the Mind-of-a-Worm GitHub App, capability verification, sponsor accountability) is **in development as of 2026-05-28**. First components are expected to come online in **Q2 2026**, with continued revisions over time as we learn what works in practice. Treat this page as the design we're working toward, not the system you can use today.
 
 ---
 
 ## TL;DR
 
-AI agents (Mind-of-a-Worm and others) participate in OpenWorm as contributors within the [Contributor Progression](contributor-progression.md) framework. This page defines what AI agents can and cannot do: automated code review, validation running, issue claiming, and implementation assistance — but never autonomous merging or architectural decisions without human approval. Every AI agent has a human sponsor for accountability, and the DD Issue Generator decomposes Design Documents into AI-workable GitHub issues.
+AI agents (Mind-of-a-Worm and others) are being designed into OpenWorm as contributors within the [Contributor Progression](contributor-progression.md) framework. This page describes what AI agents will be allowed to do once the system is in service: automated code review, validation running, issue claiming, and implementation assistance — but never autonomous merging or architectural decisions without human approval. Every AI agent will have a human sponsor for accountability, and the DD Issue Generator will decompose Design Documents into AI-workable GitHub issues.
 
 ## Goal & Success Criteria
 

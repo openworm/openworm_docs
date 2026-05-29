@@ -273,7 +273,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ## Group 3: Substrate Docs & PR Enforcement (Phase A1)
 
-Target: Document what the native substrate is, and make the 8-phase Validation Methodology a binding PR gate.
+Target: Document what the native substrate is, and stand up an optional Mind-of-a-Worm assist that surfaces the 8-phase Validation Methodology checklist on PRs.
 
 ---
 
@@ -330,9 +330,9 @@ Target: Document what the native substrate is, and make the 8-phase Validation M
 
 ---
 
-### Issue 11: Mind-of-a-Worm 8-phase Validation Methodology PR gate
+### Issue 11: Mind-of-a-Worm 8-phase Validation Methodology PR assist
 
-- **Title:** `[DD001] Mind-of-a-Worm PR gate enforcing the 8-phase Validation Methodology checklist`
+- **Title:** `[DD001] Mind-of-a-Worm PR assist surfacing the 8-phase Validation Methodology checklist`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
 - **Roadmap Phase:** Phase A1
 - **Target Repo:** `openworm/sibernetic`
@@ -340,20 +340,18 @@ Target: Document what the native substrate is, and make the 8-phase Validation M
 - **DD Section to Read:** [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), [§MoaW PR Review Checklist](DD001_Body_Physics_Architecture.md#mind-of-a-worm-pr-review-checklist), [DD001 Quality Criteria #8](DD001_Body_Physics_Architecture.md#quality-criteria) (Validation Methodology Followed)
 - **Depends On:** None
 - **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/metal_diff/tests/test_demo1_backend_parity.py`](https://github.com/openworm/sibernetic) — Existing parity gate; the PR check can shell out to it.
+    - [`openworm/sibernetic/src/metal_diff/tests/test_demo1_backend_parity.py`](https://github.com/openworm/sibernetic) — Existing parity gate; the assist can shell out to it.
     - Mind-of-a-Worm GitHub bot scaffolding (see [AI Contributors](../contributing/ai-contributors.md))
-- **Approach:** Create — there's no automated check today. Build a GitHub Actions workflow that runs on PRs touching `src/sphFluid*.cl`, `src/metal_diff/**`, or `src/cuda/**` and verifies the 10 checklist items.
+- **Approach:** Create — there's no automated assist today. Build a GitHub Actions workflow that runs on PRs touching `src/sphFluid*.cl`, `src/metal_diff/**`, or `src/cuda/**` and posts a checklist-status comment summarizing which of the 10 items appear present. Approval and merge decisions stay with human reviewers.
 - **Files to Modify:**
     - `.github/workflows/validation_methodology.yml` (new)
     - `scripts/moaw_checklist.py` (new — applies the 10-item checklist against the PR diff and committed artifacts)
 - **Acceptance Criteria:**
     - [ ] Workflow triggers on PRs touching kernel sources or substrate code
-    - [ ] Required artifacts checked: written prediction, OpenCL reference trajectory, Metal/CUDA trajectory dump, side-by-side MP4 under `docs/`, SGD convergence history, FD test for any new kernel
-    - [ ] PRs missing items 1, 4, 5, or 6 are blocked (cannot merge)
-    - [ ] PRs missing items 7–10 receive a warning but don't block (per the checklist's own gradation)
-    - [ ] Workflow posts a checklist-status comment on the PR
+    - [ ] Surfaces the status of each checklist item: written prediction, OpenCL reference trajectory, Metal/CUDA trajectory dump, side-by-side MP4 under `docs/`, SGD convergence history, FD test for any new kernel
+    - [ ] Workflow posts a checklist-status comment on the PR (does **not** block merge; reviewers decide)
     - [ ] Documented in `CONTRIBUTING.md` (Issue 18) and DD001 itself
-- **Sponsor Summary Hint:** DD001's Validation Methodology is binding text but binding text alone doesn't stop unverified physics from landing. This issue makes the 8-phase workflow's deliverables a hard PR gate enforced by CI: no prediction, no OpenCL reference, no side-by-side MP4 → no merge. The MoaW review checklist becomes a literal checklist that the bot ticks off.
+- **Sponsor Summary Hint:** DD001's Validation Methodology gives reviewers a 10-item checklist to walk through. This issue makes that checklist easier to apply by posting an automated summary on each kernel-touching PR — "here's which items I can verify are present, here's what's missing." The bot is an assistant, not a gatekeeper: human reviewers decide whether a PR is ready to merge.
 
 ---
 
