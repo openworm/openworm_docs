@@ -306,7 +306,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
     - [ ] Demo registry supports demo1 (cube drop), demo2 (membrane permeability), worm_alone_half_resolution, worm_swim_half_resolution
     - [ ] `--substrate` flag accepts `opencl`, `metal-native`, `cuda-native` (CUDA produces error message until implemented)
     - [ ] Emits JSON summary + human-readable table; exit code reflects pass/fail
-    - [ ] Wires into CI per [DD001 §Backend Graduation Criteria](DD001_Body_Physics_Architecture.md#backend-graduation-criteria) — a backend cannot graduate from Experimental → Stable without this passing
+    - [ ] Wires into CI per [DD001 §Backend Graduation Criteria (Exit Conditions)](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions) — a backend cannot graduate from Experimental → Stable without this passing
 - **Sponsor Summary Hint:** OpenCL is the validated reference; every native substrate must reproduce its kinematic output within ±5%. The native-Metal port already has a parity gate for demo1 (the cube drop) — this issue generalizes that gate into a uniform harness covering all four working demos, and prepares the entry point for the CUDA substrate once its kernels land.
 
 ---
