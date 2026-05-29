@@ -42,48 +42,48 @@ As of 2026-05-28, **27 issues remain open**, and 4 were closed in the last week 
 
 | Issue | Title | Milestone | Why live |
 |-------|-------|-----------|----------|
-| [#125](https://github.com/openworm/sibernetic/issues/125) | Worm_motion_log contains only zeros in full scale resolution worm | **v0.0.8** | Real OpenCL output bug, assigned to @a-palyanov. The output system is what every Metal/CUDA parity test compares against — fix it. **Label:** `opencl`, `bug`, `gold-standard` |
-| [#126](https://github.com/openworm/sibernetic/issues/126) | Liquid particles streaming out of standard cube | **v0.0.8** | Real OpenCL physics bug on `demo1` (the cube drop scenario that the Metal port already passes). If the reference itself is leaking particles, parity claims are meaningless. **Label:** `opencl`, `bug`, `gold-standard` |
-| [#136](https://github.com/openworm/sibernetic/issues/136) | CL_OUT_OF_RESOURCES on Nvidia GTX 1060 copying position buffer | **v0.0.8** | Real OpenCL HW-portability bug. Anyone reproducing on the listed NVIDIA generation hits it. **Label:** `opencl`, `bug`, `hardware-specific` |
-| [#160](https://github.com/openworm/sibernetic/issues/160) | Pressure buffer file issue | **v0.0.8** | Concrete repro from 2019 — verify still reproduces on current master. **Label:** `opencl`, `bug`, `needs-reproduction-current` |
-| [#180](https://github.com/openworm/sibernetic/issues/180) | Resolve compiler warnings | **v0.0.8** | Code-quality cleanup against current master (compiler warnings drift with toolchains). Good first issue. **Label:** `code-quality`, `good-first-issue` |
-| [#223](https://github.com/openworm/sibernetic/issues/223) | makefile.OSX doesn't work on M series Mac | **v0.0.8** | Build path still partially broken on ARM Mac (setup.sh helps but doesn't cover all entry points). **Label:** `build`, `apple-silicon` |
+| [#125](https://github.com/openworm/sibernetic/issues/125) | Worm_motion_log contains only zeros in full scale resolution worm | **Phase 0 — Stabilization** | Real OpenCL output bug, assigned to @a-palyanov. The output system is what every Metal/CUDA parity test compares against — fix it. **Label:** `opencl`, `bug`, `gold-standard` |
+| [#126](https://github.com/openworm/sibernetic/issues/126) | Liquid particles streaming out of standard cube | **Phase 0 — Stabilization** | Real OpenCL physics bug on `demo1` (the cube drop scenario that the Metal port already passes). If the reference itself is leaking particles, parity claims are meaningless. **Label:** `opencl`, `bug`, `gold-standard` |
+| [#136](https://github.com/openworm/sibernetic/issues/136) | CL_OUT_OF_RESOURCES on Nvidia GTX 1060 copying position buffer | **Phase 0 — Stabilization** | Real OpenCL HW-portability bug. Anyone reproducing on the listed NVIDIA generation hits it. **Label:** `opencl`, `bug`, `hardware-specific` |
+| [#160](https://github.com/openworm/sibernetic/issues/160) | Pressure buffer file issue | **Phase 0 — Stabilization** | Concrete repro from 2019 — verify still reproduces on current master. **Label:** `opencl`, `bug`, `needs-reproduction-current` |
+| [#180](https://github.com/openworm/sibernetic/issues/180) | Resolve compiler warnings | **Phase 0 — Stabilization** | Code-quality cleanup against current master (compiler warnings drift with toolchains). Good first issue. **Label:** `code-quality`, `good-first-issue` |
+| [#223](https://github.com/openworm/sibernetic/issues/223) | makefile.OSX doesn't work on M series Mac | **Phase 0 — Stabilization** | Build path still partially broken on ARM Mac (setup.sh helps but doesn't cover all entry points). **Label:** `build`, `apple-silicon` |
 
 #### B. OpenCL reference enhancements + docs (low-risk, high-value)
 
 | Issue | Title | Milestone | Why live |
 |-------|-------|-----------|----------|
-| [#127](https://github.com/openworm/sibernetic/issues/127) | Worm body modelling and mechanics — parameters, values etc. | **v0.3.0** | 12-comment discussion thread on parameter values (Young's modulus, etc.). Capture the canonical values in the codebase / config docs. **Label:** `docs`, `physics` |
-| [#128](https://github.com/openworm/sibernetic/issues/128) | Enhance configuration files with physical parameters specific to full/half resolution | **v0.3.0** | Expose physical params through config rather than hard-coded in source. Reduces the "magic numbers" problem and helps reproducibility. **Label:** `enhancement`, `config` |
-| [#147](https://github.com/openworm/sibernetic/issues/147) | How to expand the liquid particles? | **v0.0.8** | Real docs gap. Pairs with [#148](https://github.com/openworm/sibernetic/issues/148). Bundled with stabilization since the answer is part of the gold-standard usage docs. **Label:** `docs`, `good-first-issue` |
-| [#148](https://github.com/openworm/sibernetic/issues/148) | Document the way to access the body position on each step? | **v0.0.8** | Real docs gap. Pairs with [#147](https://github.com/openworm/sibernetic/issues/147). Bundled with stabilization for the same reason. **Label:** `docs`, `good-first-issue` |
-| [#165](https://github.com/openworm/sibernetic/issues/165) | User-defined geometries and muscle models | **v0.3.0** | 18-comment community thread. Custom-geometry workflow is the right scope; the fresh "config-onboarding docs" issue I previously proposed folds back into this one. **Label:** `docs`, `community-interest` |
-| [#224](https://github.com/openworm/sibernetic/issues/224) | `QUEUE_EACH_KERNEL` OpenCL profiling flag | **v0.0.8** | Clean profiling enhancement to the reference backend; fits the stabilization release. **Label:** `opencl`, `enhancement`, `good-first-issue` |
+| [#127](https://github.com/openworm/sibernetic/issues/127) | Worm body modelling and mechanics — parameters, values etc. | **Phase A1 — Substrate Documentation** | 12-comment discussion thread on parameter values (Young's modulus, etc.). Capture the canonical values in the codebase / config docs. **Label:** `docs`, `physics` |
+| [#128](https://github.com/openworm/sibernetic/issues/128) | Enhance configuration files with physical parameters specific to full/half resolution | **Phase A1 — Substrate Documentation** | Expose physical params through config rather than hard-coded in source. Reduces the "magic numbers" problem and helps reproducibility. **Label:** `enhancement`, `config` |
+| [#147](https://github.com/openworm/sibernetic/issues/147) | How to expand the liquid particles? | **Phase 0 — Stabilization** | Real docs gap. Pairs with [#148](https://github.com/openworm/sibernetic/issues/148). Bundled with stabilization since the answer is part of the gold-standard usage docs. **Label:** `docs`, `good-first-issue` |
+| [#148](https://github.com/openworm/sibernetic/issues/148) | Document the way to access the body position on each step? | **Phase 0 — Stabilization** | Real docs gap. Pairs with [#147](https://github.com/openworm/sibernetic/issues/147). Bundled with stabilization for the same reason. **Label:** `docs`, `good-first-issue` |
+| [#165](https://github.com/openworm/sibernetic/issues/165) | User-defined geometries and muscle models | **Phase A1 — Substrate Documentation** | 18-comment community thread. Custom-geometry workflow is the right scope; the fresh "config-onboarding docs" issue I previously proposed folds back into this one. **Label:** `docs`, `community-interest` |
+| [#224](https://github.com/openworm/sibernetic/issues/224) | `QUEUE_EACH_KERNEL` OpenCL profiling flag | **Phase 0 — Stabilization** | Clean profiling enhancement to the reference backend; fits the stabilization release. **Label:** `opencl`, `enhancement`, `good-first-issue` |
 
 #### C. Modernization tracking
 
 | Issue | Title | Milestone | Why live |
 |-------|-------|-----------|----------|
-| [#226](https://github.com/openworm/sibernetic/issues/226) | Port sphFluid.cl to Metal for ARM64 Mac | **v0.1.0** | Canonical tracking issue for the Metal port. Wei Weng's filing is the statement of need that DD001 §Backend Stabilization Roadmap formalizes. The per-demo parity work ([Issues [#236](https://github.com/openworm/sibernetic/issues/236)–#239](#group-2-per-demo-opencl-native-parity-phase-a1)) consolidates implementation under this umbrella. Closes when v0.1.0 ships. **Label:** `native-gpu`, `phase-0`, `epic` |
+| [#226](https://github.com/openworm/sibernetic/issues/226) | Port sphFluid.cl to Metal for ARM64 Mac | **Phase 0 — Modernization** | Canonical tracking issue for the Metal port. Wei Weng's filing is the statement of need that DD001 §Backend Stabilization Roadmap formalizes. The per-demo parity work ([Issues [#236](https://github.com/openworm/sibernetic/issues/236)–#239](#group-2-per-demo-opencl-native-parity-phase-a1)) consolidates implementation under this umbrella. Closes when Phase 0 — Modernization ships. **Label:** `native-gpu`, `phase-0`, `epic` |
 
 ### Issues to defer to later milestones (was: "close as superseded")
 
 Earlier framing treated most non-Live issues as candidates for closure. Re-evaluating: a deferred-with-milestone disposition preserves contributor intent (the issue is *acknowledged* as in-scope eventually), keeps the discussion thread discoverable, and gives community contributors a target release if they want to pick the work up. **Most issues that would have been "closed as superseded" should instead be re-labeled, milestoned, and left open with a comment explaining the deferral.**
 
-The milestones below extend the four-milestone plan with v0.4.0 and v0.5.0 (covered in the [Milestones](#milestones) table). Per-issue dispositions:
+The milestones below extend the four-milestone plan with Phase 2 — Sensory Coupling and Phase 1 — Sibernetic Visualization Enhancements (covered in the [Milestones](#milestones) table). Per-issue dispositions:
 
 | Issue | Defer to milestone | Add labels | Comment to post |
 |-------|--------------------|-----------|-----------------|
-| [#100](https://github.com/openworm/sibernetic/issues/100) | **v0.4.0 — Sensory Coupling** | `closed-loop`, `dd019`, `deferred` | Closed-loop neural control of worm steering needs the bidirectional Sibernetic↔neural coupling that lands under DD019 (Closed-Loop Touch Response — currently held back). Deferring to v0.4.0 (Sensory Coupling), which will pick this scope up once DD019 publishes. Original 2016 scope preserved here for reference. Current Sibernetic spec: [DD001](https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/). |
-| [#141](https://github.com/openworm/sibernetic/issues/141) | **v0.4.0 — Sensory Coupling** | `proprioception`, `dd019`, `deferred` | Stretch-receptor / proprioceptive feedback is the scope of DD019 (currently held back). Deferring to v0.4.0 (Sensory Coupling). The detailed checklist (zeroGinitTime, per-muscle length ratio extraction) is preserved in this thread as scope reference for when DD019 publishes. |
-| [#144](https://github.com/openworm/sibernetic/issues/144) | **v0.4.0 — Sensory Coupling** | `touch`, `dd015`, `deferred` | MEC-4 mechanosensation and tap-withdrawal touch sensation is the scope of DD015 (currently held back). Deferring to v0.4.0 (Sensory Coupling), which will derive fresh issues from DD015 when it publishes. |
-| [#101](https://github.com/openworm/sibernetic/issues/101) | **v0.5.0 — Visualization & Output Enhancements** | `visualization`, `dd012`, `deferred` | Render-performance concerns are downstream of the visualization architecture (DD012, currently held back). Deferring to v0.5.0 (Visualization & Output Enhancements). The OME-Zarr + surface-mesh pipeline shipping in v0.2.0 reshapes what "rendering" means; this issue revisits afterward. |
-| [#117](https://github.com/openworm/sibernetic/issues/117) | **v0.5.0 — Visualization & Output Enhancements** | `visualization`, `dd012`, `deferred`, `duplicate` | Same scope as [#119](https://github.com/openworm/sibernetic/issues/119). Time-series speed-chart output belongs to DD012's visualization roadmap. Deferring to v0.5.0; #119 will be the canonical issue going forward. |
-| [#119](https://github.com/openworm/sibernetic/issues/119) | **v0.5.0 — Visualization & Output Enhancements** | `visualization`, `dd012`, `deferred` | Time-series chart output for worm motion is a DD012 visualization concern (currently held back). Deferring to v0.5.0 (Visualization & Output Enhancements). |
-| [#182](https://github.com/openworm/sibernetic/issues/182) | **v0.5.0 — Visualization & Output Enhancements** | `visualization`, `dd012`, `deferred` | Simulation video recording belongs to DD012's visualization scope (currently held back). Deferring to v0.5.0 (Visualization & Output Enhancements). |
-| [#107](https://github.com/openworm/sibernetic/issues/107) | **v0.3.0 — Substrate Documentation + Contributor Onboarding** | `docs`, `coupling`, `deferred` | Sibernetic↔NEURON coupling documentation is part of DD001 §Integration Contract and lands as part of the v0.3.0 substrate-docs release. Deferring rather than closing because @skhayrulin's original scope is the right shape. |
-| [#108](https://github.com/openworm/sibernetic/issues/108) | **v0.3.0 — Substrate Documentation + Contributor Onboarding** | `docs`, `calibration`, `deferred` | Calibration of Sibernetic worm movements to neural signals is now structured by the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) in DD001. The original "how to calibrate" scope becomes part of the v0.3.0 substrate-documentation release. |
-| [#135](https://github.com/openworm/sibernetic/issues/135) | **Unmilestoned (Phase 2+ research)** | `performance`, `multi-gpu`, `deferred`, `future` | Multi-GPU scaling is a Phase 2+ concern building on the native-gpu substrate landing in v0.1.0. Filing as Unmilestoned so the scope stays discoverable; revisit after v0.1.0 ships and Metal+CUDA are at Stable. |
+| [#100](https://github.com/openworm/sibernetic/issues/100) | **Phase 2 — Sensory Coupling** | `closed-loop`, `dd019`, `deferred` | Closed-loop neural control of worm steering needs the bidirectional Sibernetic↔neural coupling that lands under DD019 (Closed-Loop Touch Response — currently held back). Deferring to Phase 2 — Sensory Coupling, which will pick this scope up once DD019 publishes. Original 2016 scope preserved here for reference. Current Sibernetic spec: [DD001](https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/). |
+| [#141](https://github.com/openworm/sibernetic/issues/141) | **Phase 2 — Sensory Coupling** | `proprioception`, `dd019`, `deferred` | Stretch-receptor / proprioceptive feedback is the scope of DD019 (currently held back). Deferring to Phase 2 — Sensory Coupling. The detailed checklist (zeroGinitTime, per-muscle length ratio extraction) is preserved in this thread as scope reference for when DD019 publishes. |
+| [#144](https://github.com/openworm/sibernetic/issues/144) | **Phase 2 — Sensory Coupling** | `touch`, `dd015`, `deferred` | MEC-4 mechanosensation and tap-withdrawal touch sensation is the scope of DD015 (currently held back). Deferring to Phase 2 — Sensory Coupling, which will derive fresh issues from DD015 when it publishes. |
+| [#101](https://github.com/openworm/sibernetic/issues/101) | **Phase 1 — Sibernetic Visualization Enhancements** | `visualization`, `dd012`, `deferred` | Render-performance concerns are downstream of the visualization architecture (DD012, currently held back). Deferring to Phase 1 — Sibernetic Visualization Enhancements. The OME-Zarr + surface-mesh pipeline shipping in Phase A1 — Validation Infrastructure reshapes what "rendering" means; this issue revisits afterward. |
+| [#117](https://github.com/openworm/sibernetic/issues/117) | **Phase 1 — Sibernetic Visualization Enhancements** | `visualization`, `dd012`, `deferred`, `duplicate` | Same scope as [#119](https://github.com/openworm/sibernetic/issues/119). Time-series speed-chart output belongs to DD012's visualization roadmap. Deferring to Phase 1 — Sibernetic Visualization Enhancements; #119 will be the canonical issue going forward. |
+| [#119](https://github.com/openworm/sibernetic/issues/119) | **Phase 1 — Sibernetic Visualization Enhancements** | `visualization`, `dd012`, `deferred` | Time-series chart output for worm motion is a DD012 visualization concern (currently held back). Deferring to Phase 1 — Sibernetic Visualization Enhancements. |
+| [#182](https://github.com/openworm/sibernetic/issues/182) | **Phase 1 — Sibernetic Visualization Enhancements** | `visualization`, `dd012`, `deferred` | Simulation video recording belongs to DD012's visualization scope (currently held back). Deferring to Phase 1 — Sibernetic Visualization Enhancements. |
+| [#107](https://github.com/openworm/sibernetic/issues/107) | **Phase A1 — Substrate Documentation** | `docs`, `coupling`, `deferred` | Sibernetic↔NEURON coupling documentation is part of DD001 §Integration Contract and lands as part of the Phase A1 — Substrate Documentation release. Deferring rather than closing because @skhayrulin's original scope is the right shape. |
+| [#108](https://github.com/openworm/sibernetic/issues/108) | **Phase A1 — Substrate Documentation** | `docs`, `calibration`, `deferred` | Calibration of Sibernetic worm movements to neural signals is now structured by the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) in DD001. The original "how to calibrate" scope becomes part of the Phase A1 — Substrate Documentation substrate-documentation release. |
+| [#135](https://github.com/openworm/sibernetic/issues/135) | **Unmilestoned (Phase 2+ research)** | `performance`, `multi-gpu`, `deferred`, `future` | Multi-GPU scaling is a Phase 2+ concern building on the native-gpu substrate landing in Phase 0 — Modernization. Filing as Unmilestoned so the scope stays discoverable; revisit after Phase 0 — Modernization ships and Metal+CUDA are at Stable. |
 
 ### Issues to actually close (no good milestone match)
 
@@ -91,7 +91,7 @@ Four issues warrant outright closure rather than deferral:
 
 | Issue | Disposition | Comment |
 |-------|-------------|---------|
-| [#106](https://github.com/openworm/sibernetic/issues/106) | Close as **duplicate of [#107](https://github.com/openworm/sibernetic/issues/107)** | Same scope as [#107](https://github.com/openworm/sibernetic/issues/107) (Sibernetic-NEURON sync docs). Consolidating discussion there; #107 is being deferred to v0.3.0. |
+| [#106](https://github.com/openworm/sibernetic/issues/106) | Close as **duplicate of [#107](https://github.com/openworm/sibernetic/issues/107)** | Same scope as [#107](https://github.com/openworm/sibernetic/issues/107) (Sibernetic-NEURON sync docs). Consolidating discussion there; #107 is being deferred to Phase A1 — Substrate Documentation. |
 | [#163](https://github.com/openworm/sibernetic/issues/163) | Close as **out of project scope** | Chemical species / molecular environment simulation is explicitly out of scope in DD001 §Boundaries (item 3: environmental complexity beyond liquid/gel). This would require a separate design document for chemotaxis/molecular environment that doesn't yet exist on the OpenWorm roadmap. |
 | [#168](https://github.com/openworm/sibernetic/issues/168) | Close as **stale, insufficient information** | 5-year-old generic help request with no reproduction details or specific ask. Original macOS build question is now addressed by `./setup.sh` and the in-progress native-Metal port. Please file a fresh issue with reproduction details if a current bug exists. |
 | [#122](https://github.com/openworm/sibernetic/issues/122) | Close as **stale community offer, replaced** | Thanks @ranr01 for offering the pySibernetic wrapper in 2017. Current Python-binding direction is in-tree via pybind11; tracked as [Issue #250](#issue-250-sibernetic-python-bindings-for-direct-api-access-replaces-122). Closing this issue as historical; the external wrapper remains available at github.com/ranr01/pySibernetic for anyone who finds it useful. |
@@ -123,32 +123,36 @@ This keeps the issue discoverable to community contributors who might pick it up
 
 ## Milestones
 
-Four release milestones proposed; each issue's milestone is shown in the issue tables above and on every individual issue section below. Historical milestones are listed at the bottom of this section for context.
+Six release milestones proposed, named to align directly with [the OpenWorm project Phase Roadmap](DD_PHASE_ROADMAP.md). Each milestone's name carries the roadmap phase it serves, so a contributor scanning the openworm/sibernetic milestones page can immediately tell which phase of the larger project the work supports. Each issue's milestone is shown in the issue tables above and on every individual issue section below. Historical milestones are listed at the bottom of this section for context.
 
-| Milestone | Status | Theme | What it ships |
-|-----------|--------|-------|---------------|
-| **v0.0.8 release** | Existing — **re-scope** (slip due date from 2026-06-12 to "when scope lands") | OpenCL Gold-Standard Stabilization | Lock in OpenCL as the validated reference: fix the real bugs, close the paired docs gaps, land the profiling enhancement. Without this the cross-substrate parity work has no trustworthy reference to compare against. |
-| **v0.1.0 release** | **New** | Native-GPU Substrate Consolidation | The native-Metal port at OpenCL parity on the four working demos, native-CUDA scaffold brought up to demo1 parity, the consolidation PR merged. Native modernization shipped as a release. |
-| **v0.2.0 release** | **New** | Validation Infrastructure + Output Pipeline | Cross-substrate validation scripts (stability, incompressibility) and the OME-Zarr + surface-mesh + configurable-output pipeline that bridges simulation output to the visualization handoff. |
-| **v0.3.0 release** | **New** | Substrate Documentation + Contributor Onboarding | The substrate becomes understandable and contributor-ready: OpenCL kernel architecture documented, the 19 paired forward/backward kernels explained, MoaW PR assist live, architecture overview + CONTRIBUTING.md in place, community-tracked docs issues ([#127](https://github.com/openworm/sibernetic/issues/127), [#128](https://github.com/openworm/sibernetic/issues/128), [#165](https://github.com/openworm/sibernetic/issues/165)) consolidated under this release. Also picks up Sibernetic↔NEURON coupling docs ([#107](https://github.com/openworm/sibernetic/issues/107)) and calibration scope ([#108](https://github.com/openworm/sibernetic/issues/108)). |
-| **v0.4.0 release** | **New** | Sensory Coupling (Phase 2 territory) | Sibernetic-side support for closed-loop sensorimotor work that DD015 (Touch Response) and DD019 (Proprioceptive Feedback) will spec when those held-back DDs publish. Holds the deferred issues ([#100](https://github.com/openworm/sibernetic/issues/100) steering, [#141](https://github.com/openworm/sibernetic/issues/141) proprioception, [#144](https://github.com/openworm/sibernetic/issues/144) touch) until DD015/DD019 publish and fresh issues derive from them. |
-| **v0.5.0 release** | **New** | Visualization & Output Enhancements (DD012 territory) | Sibernetic-side improvements that DD012 (Dynamic Visualization Architecture) will spec when it publishes. Holds deferred visualization issues ([#101](https://github.com/openworm/sibernetic/issues/101), [#117](https://github.com/openworm/sibernetic/issues/117), [#119](https://github.com/openworm/sibernetic/issues/119), [#182](https://github.com/openworm/sibernetic/issues/182)). Ships after the v0.2.0 OME-Zarr + surface-mesh pipeline lands, which reshapes what "visualization" means for Sibernetic. |
-| **Unmilestoned** | — | Research / future-direction | FEM Projective Dynamics feasibility evaluation, Python bindings (replaces stale [#122](https://github.com/openworm/sibernetic/issues/122)), multi-GPU performance scaling ([#135](https://github.com/openworm/sibernetic/issues/135) — Phase 2+ after native substrates Stable). Filed for tracking but no release commitment yet. |
+| Milestone | Maps to roadmap phase | Status | What it ships |
+|-----------|----------------------|--------|---------------|
+| **Phase 0 — Stabilization** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-core-architecture-functional-stabilizing) (Core Architecture stabilization) | Existing — **re-scope** (slip due date from 2026-06-12 to "when scope lands") | Lock in OpenCL as the validated reference: fix the real bugs, close the paired docs gaps, land the profiling enhancement. Without this the cross-substrate parity work has no trustworthy reference to compare against. |
+| **Phase 0 — Modernization** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-core-architecture-functional-stabilizing) (modernizes the existing foundation) | **New** | The native-Metal port at OpenCL parity on the four working demos, native-CUDA scaffold brought up to demo1 parity, the consolidation PR merged. Native modernization shipped as a release. |
+| **Phase A1 — Validation Infrastructure** | [Phase A1](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) (validation toolbox + output pipeline are A1 deliverables) | **New** | Cross-substrate validation scripts (stability, incompressibility) and the OME-Zarr + surface-mesh + configurable-output pipeline that bridges simulation output to the visualization handoff. |
+| **Phase A1 — Substrate Documentation** | [Phase A1](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) (contributor workflow is A1 territory) | **New** | The substrate becomes understandable and contributor-ready: OpenCL kernel architecture documented, the 19 paired forward/backward kernels explained, MoaW PR assist live, architecture overview + CONTRIBUTING.md in place, community-tracked docs issues ([#127](https://github.com/openworm/sibernetic/issues/127), [#128](https://github.com/openworm/sibernetic/issues/128), [#165](https://github.com/openworm/sibernetic/issues/165)) consolidated. Also picks up Sibernetic↔NEURON coupling docs ([#107](https://github.com/openworm/sibernetic/issues/107)) and calibration scope ([#108](https://github.com/openworm/sibernetic/issues/108)). |
+| **Phase 1 — Sibernetic Visualization Enhancements** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-specialization-months-1-3) (DD012 Phase 1 Post-Hoc Trame Viewer begins here) | **New** | Sibernetic-side improvements that DD012 (Dynamic Visualization Architecture) will spec when it publishes. Holds deferred visualization issues ([#101](https://github.com/openworm/sibernetic/issues/101), [#117](https://github.com/openworm/sibernetic/issues/117), [#119](https://github.com/openworm/sibernetic/issues/119), [#182](https://github.com/openworm/sibernetic/issues/182)). Ships after Phase A1 — Validation Infrastructure lands, which reshapes what "visualization" means for Sibernetic. |
+| **Phase 2 — Sensory Coupling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD015 Touch + DD019 Proprioception live here) | **New** | Sibernetic-side support for closed-loop sensorimotor work that DD015 (Touch Response) and DD019 (Proprioceptive Feedback) will spec when those held-back DDs publish. Holds the deferred issues ([#100](https://github.com/openworm/sibernetic/issues/100) steering, [#141](https://github.com/openworm/sibernetic/issues/141) proprioception, [#144](https://github.com/openworm/sibernetic/issues/144) touch) until DD015/DD019 publish and fresh issues derive from them. |
+| **Unmilestoned** | — | — | FEM Projective Dynamics feasibility evaluation, Python bindings (replaces stale [#122](https://github.com/openworm/sibernetic/issues/122)), multi-GPU performance scaling ([#135](https://github.com/openworm/sibernetic/issues/135) — Phase 2+ research after native substrates Stable). Filed for tracking but no release commitment yet. |
 
 ### Milestone descriptions to post on GitHub
 
 The text below is copy-paste-ready for the four GitHub milestone description fields. Each description references the published [DD001](https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/) so anyone landing on the milestone page can find the spec without searching.
 
-#### `v0.0.8 release` — OpenCL Gold-Standard Stabilization
+#### `Phase 0 — Stabilization` — OpenCL Gold-Standard Stabilization
 
 ```
 OpenCL gold-standard stabilization.
+
+Maps to roadmap Phase 0 (Core Architecture — Functional, Stabilizing).
+This is the "fix what's there" half of Phase 0; Phase 0 —
+Modernization handles the "rebuild for new platforms" half.
 
 Scope: Lock in the OpenCL reference implementation as the validated
 gold standard against which all native substrates (Metal, CUDA) are
 measured. Fix real bugs, close paired docs gaps, land the profiling
 enhancement. Without this milestone, cross-substrate parity claims
-in v0.1.0 are meaningless — the reference itself must be trustworthy.
+in Phase 0 — Modernization are meaningless — the reference itself must be trustworthy.
 
 Spec: DD001 Body Physics Engine Architecture (the gold-standard
 framing lives in DD001 §Backend Stabilization Roadmap).
@@ -162,10 +166,14 @@ that triggered that date has been re-evaluated (see DD001 issue
 migration plan).
 ```
 
-#### `v0.1.0 release` — Native-GPU Substrate Consolidation
+#### `Phase 0 — Modernization` — Native-GPU Substrate Consolidation
 
 ```
 Native-GPU substrate consolidation.
+
+Maps to roadmap Phase 0 (Core Architecture). This modernizes the
+existing foundation by moving from OpenCL (losing platform support)
+to native Metal + native CUDA. Pairs with Phase 0 — Stabilization.
 
 Scope: Ship the native-Metal substrate at OpenCL parity on the
 four working demos (demo1 cube drop, demo2 membrane permeability,
@@ -187,11 +195,16 @@ Filter for the work in this release: label:dd001 label:native-gpu
 Open-ended due date — ships when the four parity gates are green.
 ```
 
-#### `v0.2.0 release` — Validation Infrastructure + Output Pipeline
+#### `Phase A1 — Validation Infrastructure` — Validation Infrastructure + Output Pipeline
 
 ```
 Cross-substrate validation infrastructure and the simulation-output
 pipeline.
+
+Maps to roadmap Phase A1 (Core Infrastructure). The validation
+toolbox revival (DD017), the output pipeline that feeds DD012
+visualization, and Sibernetic's place in the `docker compose run
+validate` workflow (DD011) are all Phase A1 deliverables.
 
 Scope: Land scripts/check_stability.py and scripts/validate_
 incompressibility.py so every simulation run on every substrate gets
@@ -205,13 +218,18 @@ https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#acce
 
 Filter for the work in this release: label:dd001 + this milestone.
 
-Ships after v0.1.0 native substrates are at Stable.
+Ships after Phase 0 — Modernization native substrates are at Stable.
 ```
 
-#### `v0.3.0 release` — Substrate Documentation + Contributor Onboarding
+#### `Phase A1 — Substrate Documentation` — Substrate Documentation + Contributor Onboarding
 
 ```
 Substrate becomes understandable and contributor-ready.
+
+Maps to roadmap Phase A1 (Core Infrastructure). The contributor
+workflow ("Fork subsystem → build with custom branch → quick-test
+→ validate → PR") is a Phase A1 deliverable; this milestone
+documents the Sibernetic side of that workflow.
 
 Scope: Document the OpenCL reference kernel architecture (~64KB
 sphFluid.cl annotated walkthrough). Document the 19 paired forward/
@@ -229,20 +247,52 @@ https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#diff
 Filter for the work in this release: label:dd001 label:docs
 + this milestone.
 
-Ships after v0.2.0.
+Ships after Phase A1 — Validation Infrastructure.
 ```
 
-#### `v0.4.0 release` — Sensory Coupling
+#### `Phase 1 — Sibernetic Visualization Enhancements` — Visualization & Output Enhancements
+
+```
+Visualization-side improvements that DD012 will spec.
+
+Maps to roadmap Phase 1 (Cell-Type Specialization), where DD012
+Phase 1 (Post-Hoc Trame Viewer) begins. Sibernetic-side rendering
+and output enhancements line up with that visualization push.
+
+Scope: Holds the deferred visualization issues (#101 render speed,
+#117 + #119 chart output, #182 video recording) whose scope falls
+under the held-back DD012 (Dynamic Visualization Architecture).
+Fresh issues will derive from DD012 when it publishes.
+
+The Phase A1 — Validation Infrastructure OME-Zarr + surface-mesh
++ configurable-output pipeline ships first and reshapes what
+"visualization" means for Sibernetic; this milestone revisits these
+deferred issues against the new pipeline.
+
+Spec: DD001 Body Physics Engine Architecture, §How to Visualize
+and §Deliverables (OME-Zarr rows).
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#how-to-visualize
+
+Filter for the work in this release: label:dd001 label:visualization
++ this milestone.
+
+Ships after Phase A1 — Validation Infrastructure lands and DD012 publishes.
+```
+
+#### `Phase 2 — Sensory Coupling` — Sensory Coupling
 
 ```
 Sibernetic-side support for closed-loop sensorimotor work.
 
+Maps to roadmap Phase 2 (Slow Modulation + Closed-Loop Sensory),
+where DD015 (Touch Response) and DD019 (Proprioceptive Feedback)
+land. Sibernetic-side bidirectional coupling lives here.
+
 Scope: Holds the deferred issues whose Sibernetic-side scope falls
-under the held-back DDs DD015 (Touch Response) and DD019 (Closed-
-Loop / Proprioceptive Feedback). Includes #100 (steering), #141
-(proprioception), and #144 (touch sensation). Fresh issues will
-derive from DD015 and DD019 when they publish, and this milestone
-will be re-scoped accordingly.
+under the held-back DDs DD015 and DD019. Includes #100 (steering),
+#141 (proprioception), and #144 (touch sensation). Fresh issues
+will derive from DD015 and DD019 when they publish, and this
+milestone will be re-scoped accordingly.
 
 Until DD015 and DD019 publish, this milestone is a deferral target
 rather than an active sprint. The deferred issues stay open so
@@ -256,32 +306,8 @@ https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#inte
 Filter for the work in this release: label:dd001 label:closed-loop
 OR label:touch OR label:proprioception + this milestone.
 
-Ships after v0.3.0 and after DD015 / DD019 publish.
-```
-
-#### `v0.5.0 release` — Visualization & Output Enhancements
-
-```
-Visualization-side improvements that DD012 will spec.
-
-Scope: Holds the deferred visualization issues (#101 render speed,
-#117 + #119 chart output, #182 video recording) whose scope falls
-under the held-back DD012 (Dynamic Visualization Architecture).
-Fresh issues will derive from DD012 when it publishes.
-
-The v0.2.0 OME-Zarr + surface-mesh + configurable-output pipeline
-ships first and reshapes what "visualization" means for Sibernetic;
-this milestone revisits these deferred issues against the new
-pipeline.
-
-Spec: DD001 Body Physics Engine Architecture, §How to Visualize
-and §Deliverables (OME-Zarr rows).
-https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#how-to-visualize
-
-Filter for the work in this release: label:dd001 label:visualization
-+ this milestone.
-
-Ships after v0.2.0 lands and DD012 publishes.
+Ships after Phase 1 — Sibernetic Visualization Enhancements and
+after DD015 / DD019 publish.
 ```
 
 ### Historical milestones (closed, reference only)
@@ -305,7 +331,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create check_stability.py — simulation divergence detector`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.2.0](#milestones)
+- **Milestone:** [Phase A1 — Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) and [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) (criterion 1)
@@ -340,7 +366,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create validate_incompressibility.py — density deviation checker`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.2.0](#milestones)
+- **Milestone:** [Phase A1 — Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) (validate gate) and [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) (criterion 2)
@@ -374,7 +400,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create cross-backend parity test suite comparing native substrates against OpenCL reference`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) and [DD001 §Backend Graduation Criteria (Exit Conditions)](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions)
@@ -415,7 +441,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on demo1 (cube drop) — confirm and lock in`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) (8-phase workflow)
@@ -440,7 +466,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on demo2 (membrane permeability) — close remaining gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), §Differentiability (M10 membrane kernels)
@@ -466,7 +492,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_alone_half_resolution — lock in visual parity`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
@@ -491,7 +517,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_swim_half_resolution — close swim-gait gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
@@ -515,7 +541,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] CUDA substrate parity bring-up — demo1 first, then mirror Metal trajectory`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.1.0](#milestones)
+- **Milestone:** [Phase 0 — Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, cuda, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Backend Graduation Criteria (Exit Conditions)](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
@@ -546,7 +572,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Document OpenCL reference kernel architecture for substrate parity work`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.3.0](#milestones)
+- **Milestone:** [Phase A1 — Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** opencl, physics, sph
 - **DD Section to Read:** [DD001 §Why Native Ports, Not Taichi](DD001_Body_Physics_Architecture.md#why-native-ports-not-taichi), [DD001 §Implementation References](DD001_Body_Physics_Architecture.md#implementation-references)
@@ -574,7 +600,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Document the 19 paired forward/backward kernels and xpbd_full_bwd reverse-mode pipeline`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.3.0](#milestones)
+- **Milestone:** [Phase A1 — Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, sph, autograd
 - **DD Section to Read:** [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability), [§What's Differentiable Today](DD001_Body_Physics_Architecture.md#whats-differentiable-today), [§Multi-Step Reverse-Mode AD](DD001_Body_Physics_Architecture.md#multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd)
@@ -601,7 +627,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Mind-of-a-Worm PR assist surfacing the 8-phase Validation Methodology checklist`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** [v0.3.0](#milestones)
+- **Milestone:** [Phase A1 — Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** ci-cd, python, github-api
 - **DD Section to Read:** [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), [§MoaW PR Review Checklist](DD001_Body_Physics_Architecture.md#mind-of-a-worm-pr-review-checklist), [DD001 Quality Criteria #8](DD001_Body_Physics_Architecture.md#quality-criteria) (Validation Methodology Followed)
@@ -633,7 +659,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement OME-Zarr export for body/positions and body/types`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** [v0.2.0](#milestones)
+- **Milestone:** [Phase A1 — Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD001 §Deliverables](DD001_Body_Physics_Architecture.md#deliverables) (OME-Zarr rows) and [DD001 §How to Visualize](DD001_Body_Physics_Architecture.md#how-to-visualize)
@@ -664,7 +690,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement marching cubes surface reconstruction from SPH particles`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** [v0.2.0](#milestones)
+- **Milestone:** [Phase A1 — Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, 3d-geometry
 - **DD Section to Read:** [DD001 §Deliverables](DD001_Body_Physics_Architecture.md#deliverables) (surface mesh row), [DD001 §How to Visualize](DD001_Body_Physics_Architecture.md#how-to-visualize)
@@ -696,7 +722,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement configurable output frequency from openworm.yml simulation.output_interval`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** [v0.2.0](#milestones)
+- **Milestone:** [Phase A1 — Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, c++
 - **DD Section to Read:** [DD001 §Configuration](DD001_Body_Physics_Architecture.md#configuration), DD011 (Simulation Stack — `simulation.output_interval` key)
@@ -734,7 +760,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Title:** `[DD001] Create Sibernetic architecture overview for contributors`
 - **Labels:** `DD001`, `ai-workable`, `L1`
 - **Roadmap Phase:** Any
-- **Milestone:** [v0.3.0](#milestones)
+- **Milestone:** [Phase A1 — Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD001 §Technical Approach](DD001_Body_Physics_Architecture.md#technical-approach), [DD001 §Implementation References](DD001_Body_Physics_Architecture.md#implementation-references)
@@ -762,7 +788,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Title:** `[DD001] Create CONTRIBUTING.md with native-substrate development workflow and standards`
 - **Labels:** `DD001`, `ai-workable`, `L1`
 - **Roadmap Phase:** Any
-- **Milestone:** [v0.3.0](#milestones)
+- **Milestone:** [Phase A1 — Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD001 §Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria), [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
