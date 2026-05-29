@@ -39,7 +39,6 @@ DD001 is the architectural specification. Implementation work is tracked outside
 
 - **Active issues:** filter by [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the [`openworm/sibernetic`](https://github.com/openworm/sibernetic) repo
 - **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) for the version-scoped batches (`v0.0.8` OpenCL gold-standard stabilization, `v0.1.0` native-gpu consolidation, `v0.2.0` validation + output pipeline, `v0.3.0` substrate docs + onboarding)
-- **Proposed but not yet filed:** see [DD001 Draft GitHub Issues](DD001_draft_issues.md) for the fresh issues derived from §Backend Stabilization Roadmap and §Validation Methodology
 
 Build & test commands, parameter values, validation criteria, and the substrate architecture all live in this document. *What* gets built, *which version it ships in*, and *who's working on it* live in GitHub.
 
@@ -959,4 +958,4 @@ def write_sibernetic_config(openworm_config):
 
 - **Approved by:** OpenWorm Steering
 - **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
-- **Active implementation:** Tracked via [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the sibernetic repo and the [release milestones](https://github.com/openworm/sibernetic/milestones); proposed-but-not-yet-filed work in [DD001 Draft GitHub Issues](DD001_draft_issues.md). See [Implementation Status & Roadmap](#implementation-status-roadmap).
+- **Active implementation:** Tracked via [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the sibernetic repo and the [release milestones](https://github.com/openworm/sibernetic/milestones). See [Implementation Status & Roadmap](#implementation-status-roadmap).

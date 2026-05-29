@@ -25,7 +25,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 **New to Design Documents?**
 
 - 📋 [Decision Process](../contributing/decision-process.md) — How design decisions get made, DD template, RFC workflow (in the Contributing section)
-- 🌟 DD005: Cell-Type Specialization — Reference implementation with all sections filled
+- 🌟 [DD001: Body Physics Engine](DD001_Body_Physics_Architecture.md) — Reference DD for this docs cycle; shows the spec/implementation cleavage and the 8-phase Validation Methodology pattern
 - 🗺️ [Integration Map](INTEGRATION_MAP.md) — PlantUML diagram showing how all DDs couple together
 - 📅 [Phase Roadmap](DD_PHASE_ROADMAP.md) — 18-month implementation timeline with milestones
 

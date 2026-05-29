@@ -85,8 +85,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 ## Template & Reference
 
 - **[Decision Process](../contributing/decision-process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
-- **DD005:** **Reference implementation** — demonstrates the full expanded template with all sections filled. Use DD005 as your model when writing a new DD.
-- **DD002:** Example of Quick Action Reference table (7 key questions answered at the top)
+- **[DD001](DD001_Body_Physics_Architecture.md):** **Reference implementation** — the first DD published in this docs cycle. Demonstrates the full expanded template, the spec/implementation cleavage (see its **Implementation Status & Roadmap** section), and the 8-phase Validation Methodology pattern. Use DD001 as your model when writing a new DD.
 
 All science DDs include a **Quick Action Reference** table answering:
 
@@ -124,7 +123,7 @@ Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by 
 
 ### Step 3: Use the Template
 
-Follow the [Decision Process](../contributing/decision-process.md) template structure. Use DD005 (Cell-Type Specialization) as your reference implementation.
+Follow the [Decision Process](../contributing/decision-process.md) template structure. Use [DD001 (Body Physics Engine)](DD001_Body_Physics_Architecture.md) as your reference implementation.
 
 **Required sections (from [Decision Process](../contributing/decision-process.md)):**
 
@@ -132,6 +131,7 @@ Follow the [Decision Process](../contributing/decision-process.md) template stru
 - Goal & Success Criteria (which DD010 tier, quantitative threshold)
 - Deliverables (exact files, paths, formats)
 - Repository & Issues (GitHub repo, issue label, branch convention)
+- Implementation Status & Roadmap (pointer to `label:ddNNN` and the release-milestones page; spec stays here, implementation lives in GitHub)
 - How to Build & Test (copy-pasteable commands, green-light criteria)
 - How to Visualize (DD012 layer, color mapping, what you should see)
 - Technical Approach (equations, parameters, algorithms)
@@ -181,33 +181,28 @@ Once DD is approved and merged:
 
 ---
 
-## Examples of Excellent Design Documents
+## Reference Implementation
 
-### DD005 (Cell-Type Specialization) — REFERENCE IMPLEMENTATION
+### [DD001 (Body Physics Engine)](DD001_Body_Physics_Architecture.md) — REFERENCE DD
 
-**Why it's excellent:**
+DD001 is the first design document published in this docs cycle. Read it end-to-end before writing a new DD; it shows the patterns the spec describes.
 
-- ✅ **TL;DR at top** — Reader knows what/why/success metric in 3 sentences
-- ✅ **Mission-aligned** — Uses CeNGEN (world's largest single-cell atlas for any organism) to create biologically distinct neurons
-- ✅ **Goal & Success Criteria** — DD010 Tier 2, quantitative threshold (≥20% improvement in functional connectivity)
-- ✅ **Deliverables** — Exact files (128 `.cell.nml` files), paths, formats (NeuroML 2 XML)
-- ✅ **Repository & Issues** — `openworm/c302`, issue label `dd005`, branch convention
-- ✅ **How to Build & Test** — 8 copy-pasteable commands, green-light criteria, scripts marked `[TO BE CREATED]`
-- ✅ **How to Visualize** — DD012 neural/ layer, color-by-neuron-class mode
-- ✅ **Technical Approach** — 6-step pipeline with code examples
-- ✅ **7 alternatives considered** — All rejected with rationale
-- ✅ **Integration Contract** — Complete with all 5 required sub-sections
+**Why it's the reference:**
 
-### DD002 (Neural Circuit Architecture)
-
-**Why it's excellent:**
-
-- ✅ **Quick Action Reference** — 7-question table at top answers contributor questions immediately
-- ✅ **Clear decision** — Level C1 graded synapses (not IAF, not spiking), biologically justified
-- ✅ **Quantitative parameters** — Table of conductances with exact values and units
-- ✅ **Alternatives explained** — IAF rejected, AlphaFold+MD rejected, multicompartmental deferred
-- ✅ **Validation procedure** — 5-step command sequence from `jnml -validate` to kinematic comparison
-- ✅ **Migration path** — If decision changes, add Level D (don't modify C1, backward compatibility sacred)
+- ✅ **TL;DR at top** — reader knows what/why/success metric in a few sentences
+- ✅ **Quick Action Reference** — table answering the contributor's most-likely questions in one place
+- ✅ **Implementation Status & Roadmap** — clean spec/issue cleavage: pointers to `label:dd001` and the release milestones; no inlined "Next Actions" list
+- ✅ **Goal & Success Criteria** — quantitative DD010-tier thresholds (kinematic ±15%, density <1%, parity ±5%)
+- ✅ **Deliverables** — exact files (binary configs, kernel files, scripts), paths, formats
+- ✅ **Repository & Issues** — `openworm/sibernetic`, issue label `dd001`, branch convention
+- ✅ **How to Build & Test** — points at the live Sibernetic README rather than recapping it; specifies acceptance criteria as gates (quick-test, validate, parity, differentiability)
+- ✅ **How to Visualize** — DD012 layer spec, color mapping, what you should see
+- ✅ **Technical Approach** — equations, parameters, particle types, kernel functions
+- ✅ **Alternatives Considered** — 5 alternatives with rationale (FEM, mass-spring, LBM, PBD, 2D rod-spring)
+- ✅ **Quality Criteria** — testable acceptance criteria including paired-backward contract for native substrates
+- ✅ **Validation Methodology** — full 8-phase workflow with worked example, common gotchas, MoaW PR-review checklist
+- ✅ **Differentiability section** — documents the substrate-as-autograd-target architecture
+- ✅ **Integration Contract** — inputs/outputs, repository & packaging, configuration, coupling dependencies
 
 ---
 
@@ -244,6 +239,11 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 > Commands reference `validate_network.py` with no tracking, no `[TO BE CREATED]` marker.
 
 *Mark all non-existent scripts `[TO BE CREATED]` with GitHub issue link or #TBD.*
+
+**❌ Inlined Next Actions list:**
+> Footer enumerates 8–10 specific implementation tasks (build script X, merge PR #Y, port kernel Z, etc.).
+
+*These become stale the moment the issue tracker moves. Point at the issue tracker via `label:ddNNN` and the release-milestones page in the **Implementation Status & Roadmap** section instead. The spec describes what should be built; the issue tracker describes what is being built and by whom.*
 
 **❌ Disconnected from viewer:**
 > No "How to Visualize" section, no mention of DD012 layers.

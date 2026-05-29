@@ -76,6 +76,19 @@ and the single most important success metric.
 - Milestone link
 - Example PR title
 
+## Implementation Status & Roadmap                ← REQUIRED
+- One-line statement: this DD is the spec; implementation
+  is tracked outside it
+- Pointer to the active issue label: `label:ddNNN`
+  on the relevant repo
+- Pointer to the release-milestones page for that repo
+- Cleavage line: spec lives here, *what / when / who*
+  lives in GitHub
+
+This section keeps the DD stable as implementation churns
+and prevents inlined next-actions lists from rotting (see
+[contributing guide § Anti-Patterns](../design_documents/contributing_guide.md#anti-patterns-what-not-to-do)).
+
 ## How to Build & Test                            ← REQUIRED
 
 ### Prerequisites
