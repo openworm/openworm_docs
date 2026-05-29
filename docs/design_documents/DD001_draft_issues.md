@@ -75,6 +75,7 @@ The milestones below extend the four-milestone plan with Phase 2 — Sensory Cou
 | Issue | Defer to milestone | Add labels | Comment to post |
 |-------|--------------------|-----------|-----------------|
 | [#100](https://github.com/openworm/sibernetic/issues/100) | **Phase 2 — Sensory Coupling** | `closed-loop`, `dd019`, `deferred` | Closed-loop neural control of worm steering needs the bidirectional Sibernetic↔neural coupling that lands under DD019 (Closed-Loop Touch Response — currently held back). Deferring to Phase 2 — Sensory Coupling, which will pick this scope up once DD019 publishes. Original 2016 scope preserved here for reference. Current Sibernetic spec: [DD001](https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/). |
+| [#163](https://github.com/openworm/sibernetic/issues/163) | **Phase 2 — Environmental Modeling** | `environment`, `dd018`, `deferred` | Chemical species / molecular environment simulation is out of scope for DD001 (per its §Boundaries item 3, "beyond liquid/gel") but **in scope for DD018 — Environmental Modeling and Stimulus Delivery**, which is held back but on the [Phase 2 roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (chemotaxis on simulated NaCl gradient, thermotaxis). Deferring to Phase 2 — Environmental Modeling, which will pick this scope up once DD018 publishes. |
 | [#141](https://github.com/openworm/sibernetic/issues/141) | **Phase 2 — Sensory Coupling** | `proprioception`, `dd019`, `deferred` | Stretch-receptor / proprioceptive feedback is the scope of DD019 (currently held back). Deferring to Phase 2 — Sensory Coupling. The detailed checklist (zeroGinitTime, per-muscle length ratio extraction) is preserved in this thread as scope reference for when DD019 publishes. |
 | [#144](https://github.com/openworm/sibernetic/issues/144) | **Phase 2 — Sensory Coupling** | `touch`, `dd015`, `deferred` | MEC-4 mechanosensation and tap-withdrawal touch sensation is the scope of DD015 (currently held back). Deferring to Phase 2 — Sensory Coupling, which will derive fresh issues from DD015 when it publishes. |
 | [#101](https://github.com/openworm/sibernetic/issues/101) | **Phase 1 — Sibernetic Visualization Enhancements** | `visualization`, `dd012`, `deferred` | Render-performance concerns are downstream of the visualization architecture (DD012, currently held back). Deferring to Phase 1 — Sibernetic Visualization Enhancements. The OME-Zarr + surface-mesh pipeline shipping in Phase A1 — Validation Infrastructure reshapes what "rendering" means; this issue revisits afterward. |
@@ -87,12 +88,11 @@ The milestones below extend the four-milestone plan with Phase 2 — Sensory Cou
 
 ### Issues to actually close (no good milestone match)
 
-Four issues warrant outright closure rather than deferral:
+Three issues warrant outright closure rather than deferral:
 
 | Issue | Disposition | Comment |
 |-------|-------------|---------|
 | [#106](https://github.com/openworm/sibernetic/issues/106) | Close as **duplicate of [#107](https://github.com/openworm/sibernetic/issues/107)** | Same scope as [#107](https://github.com/openworm/sibernetic/issues/107) (Sibernetic-NEURON sync docs). Consolidating discussion there; #107 is being deferred to Phase A1 — Substrate Documentation. |
-| [#163](https://github.com/openworm/sibernetic/issues/163) | Close as **out of project scope** | Chemical species / molecular environment simulation is explicitly out of scope in DD001 §Boundaries (item 3: environmental complexity beyond liquid/gel). This would require a separate design document for chemotaxis/molecular environment that doesn't yet exist on the OpenWorm roadmap. |
 | [#168](https://github.com/openworm/sibernetic/issues/168) | Close as **stale, insufficient information** | 5-year-old generic help request with no reproduction details or specific ask. Original macOS build question is now addressed by `./setup.sh` and the in-progress native-Metal port. Please file a fresh issue with reproduction details if a current bug exists. |
 | [#122](https://github.com/openworm/sibernetic/issues/122) | Close as **stale community offer, replaced** | Thanks @ranr01 for offering the pySibernetic wrapper in 2017. Current Python-binding direction is in-tree via pybind11; tracked as [Issue #250](#issue-250-sibernetic-python-bindings-for-direct-api-access-replaces-122). Closing this issue as historical; the external wrapper remains available at github.com/ranr01/pySibernetic for anyone who finds it useful. |
 
@@ -123,7 +123,7 @@ This keeps the issue discoverable to community contributors who might pick it up
 
 ## Milestones
 
-Six release milestones proposed, named to align directly with [the OpenWorm project Phase Roadmap](DD_PHASE_ROADMAP.md). Each milestone's name carries the roadmap phase it serves, so a contributor scanning the openworm/sibernetic milestones page can immediately tell which phase of the larger project the work supports. Each issue's milestone is shown in the issue tables above and on every individual issue section below. Historical milestones are listed at the bottom of this section for context.
+Seven release milestones proposed, named to align directly with [the OpenWorm project Phase Roadmap](DD_PHASE_ROADMAP.md). Each milestone's name carries the roadmap phase it serves, so a contributor scanning the openworm/sibernetic milestones page can immediately tell which phase of the larger project the work supports. Each issue's milestone is shown in the issue tables above and on every individual issue section below. Historical milestones are listed at the bottom of this section for context.
 
 | Milestone | Maps to roadmap phase | Status | What it ships |
 |-----------|----------------------|--------|---------------|
@@ -133,6 +133,7 @@ Six release milestones proposed, named to align directly with [the OpenWorm proj
 | **Phase A1 — Substrate Documentation** | [Phase A1](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) (contributor workflow is A1 territory) | **New** | The substrate becomes understandable and contributor-ready: OpenCL kernel architecture documented, the 19 paired forward/backward kernels explained, MoaW PR assist live, architecture overview + CONTRIBUTING.md in place, community-tracked docs issues ([#127](https://github.com/openworm/sibernetic/issues/127), [#128](https://github.com/openworm/sibernetic/issues/128), [#165](https://github.com/openworm/sibernetic/issues/165)) consolidated. Also picks up Sibernetic↔NEURON coupling docs ([#107](https://github.com/openworm/sibernetic/issues/107)) and calibration scope ([#108](https://github.com/openworm/sibernetic/issues/108)). |
 | **Phase 1 — Sibernetic Visualization Enhancements** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-specialization-months-1-3) (DD012 Phase 1 Post-Hoc Trame Viewer begins here) | **New** | Sibernetic-side improvements that DD012 (Dynamic Visualization Architecture) will spec when it publishes. Holds deferred visualization issues ([#101](https://github.com/openworm/sibernetic/issues/101), [#117](https://github.com/openworm/sibernetic/issues/117), [#119](https://github.com/openworm/sibernetic/issues/119), [#182](https://github.com/openworm/sibernetic/issues/182)). Ships after Phase A1 — Validation Infrastructure lands, which reshapes what "visualization" means for Sibernetic. |
 | **Phase 2 — Sensory Coupling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD015 Touch + DD019 Proprioception live here) | **New** | Sibernetic-side support for closed-loop sensorimotor work that DD015 (Touch Response) and DD019 (Proprioceptive Feedback) will spec when those held-back DDs publish. Holds the deferred issues ([#100](https://github.com/openworm/sibernetic/issues/100) steering, [#141](https://github.com/openworm/sibernetic/issues/141) proprioception, [#144](https://github.com/openworm/sibernetic/issues/144) touch) until DD015/DD019 publish and fresh issues derive from them. |
+| **Phase 2 — Environmental Modeling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD018 Environmental Modeling lives here) | **New** | Sibernetic-side support for chemical/thermal environment simulation that DD018 (Environmental Modeling and Stimulus Delivery) will spec when it publishes — chemotaxis on simulated NaCl gradient, thermotaxis, agar substrate enhancements beyond what DD001 already covers. Holds [#163](https://github.com/openworm/sibernetic/issues/163) (molecular environment). Out of DD001's §Boundaries ("beyond liquid/gel") but in scope for DD018. |
 | **Unmilestoned** | — | — | FEM Projective Dynamics feasibility evaluation, Python bindings (replaces stale [#122](https://github.com/openworm/sibernetic/issues/122)), multi-GPU performance scaling ([#135](https://github.com/openworm/sibernetic/issues/135) — Phase 2+ research after native substrates Stable). Filed for tracking but no release commitment yet. |
 
 ### Milestone descriptions to post on GitHub
@@ -308,6 +309,32 @@ OR label:touch OR label:proprioception + this milestone.
 
 Ships after Phase 1 — Sibernetic Visualization Enhancements and
 after DD015 / DD019 publish.
+```
+
+#### `Phase 2 — Environmental Modeling` — Environmental Modeling
+
+```
+Sibernetic-side support for chemical/thermal environment simulation.
+
+Maps to roadmap Phase 2 (Slow Modulation + Closed-Loop Sensory),
+where DD018 (Environmental Modeling and Stimulus Delivery) lands.
+Chemotaxis on simulated NaCl gradient, thermotaxis, and agar-
+substrate enhancements beyond what DD001 already covers all live
+here on the Sibernetic side.
+
+Scope: Holds the deferred issue #163 (molecular environment).
+Out of DD001's §Boundaries (item 3, "beyond liquid/gel") but in
+scope for the held-back DD018. Fresh issues will derive from DD018
+when it publishes; this milestone is the deferral target until then.
+
+Spec: DD018 when it publishes; DD001 §Boundaries for the explicit
+hand-off line on what's in vs out of DD001's environment scope.
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#boundaries-explicitly-out-of-scope
+
+Filter for the work in this release: label:dd001 label:environment
++ this milestone.
+
+Ships after Phase 2 — Sensory Coupling and after DD018 publishes.
 ```
 
 ### Historical milestones (closed, reference only)
