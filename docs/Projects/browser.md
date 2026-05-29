@@ -12,12 +12,12 @@ The OpenWorm Browser can be accessed [here](https://browser.openworm.org/).
 The source code for this project can be found [here](https://github.com/openworm/wormbrowser).
 
 !!! note "Future Visualization"
-    The next-generation visualization is specified by [DD012: Dynamic Visualization Architecture](../design_documents/DD012_Dynamic_Visualization_Architecture.md), which plans a Trame-based viewer evolving toward **WormSim 2.0** — a public Three.js + WebGPU site at wormsim.openworm.org. The WormBrowser at browser.openworm.org will continue to be maintained until WormSim 2.0 achieves full feature parity (see DD012 deployment timeline).
+    The next-generation visualization is specified by DD012: Dynamic Visualization Architecture, which plans a Trame-based viewer evolving toward **WormSim 2.0** — a public Three.js + WebGPU site at wormsim.openworm.org. The WormBrowser at browser.openworm.org will continue to be maintained until WormSim 2.0 achieves full feature parity (see DD012 deployment timeline).
 
 ---
 
 ## Continue Reading
 
-- **[DD012: Dynamic Visualization](../design_documents/DD012_Dynamic_Visualization_Architecture.md)** — The next-generation viewer architecture
+- **DD012: Dynamic Visualization** — The next-generation viewer architecture
 - **[Archived Projects](../archived_projects.md)** — Historical context for Geppetto and other visualization efforts
 - **[Projects Overview](../projects.md)** — All active projects and their governing DDs

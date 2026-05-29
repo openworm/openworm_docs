@@ -11,7 +11,7 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 |---------------|-------|------|--------------|
 | Liquid | ~50K | Surrounding fluid medium | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
 | Elastic | ~30K | Body wall, muscles, cuticle | [DD001](../design_documents/DD001_Body_Physics_Architecture.md) |
-| Boundary | ~20K | Substrate surface | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), [DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md) |
+| Boundary | ~20K | Substrate surface | [DD001](../design_documents/DD001_Body_Physics_Architecture.md), DD018 |
 
 **Key algorithm:** PCISPH (Predictive-Corrective Incompressible SPH) pressure solver, implemented in C++ with GPU acceleration (OpenCL).
 
@@ -21,24 +21,24 @@ Simulates the _C. elegans_ body as ~100K particles using Smoothed Particle Hydro
 
 - 3D body model with fluid-structure interaction
 - Muscle activation produces emergent undulatory locomotion
-- Validated against Schafer lab kinematics ([DD010](../design_documents/DD010_Validation_Framework.md) Tier 3: speed, wavelength, frequency within +/-15%)
+- Validated against Schafer lab kinematics (DD010 Tier 3: speed, wavelength, frequency within +/-15%)
 
 To get a quick idea of what this looks like, check out the [latest movie](https://www.youtube.com/watch?v=SaovWiZJUWY). In this movie you can see a simulated 3D _C. elegans_ being activated in an environment. Its muscles are located around the outside of its body, and as they turn red, they are exerting forces on the body that cause the bending to happen.
 
 ## Roadmap
 
-**Phase 3-4 ([DD004](../design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
+**Phase 3-4 (DD004):** Mechanical cell identity
 
 - Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
 - Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
 
-**Phase 4 ([DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
+**Phase 4 (DD018):** Environmental modeling
 
 - Substrate types (agar, liquid, soil)
 - Chemical/thermal gradients
 - Food particles and obstacles
 
-**Phase 6 ([DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
+**Phase 6 (DD012.2):** Mesh deformation
 
 - GPU skinning from SPH particles to Virtual Worm anatomical meshes
 - Photorealistic rendering

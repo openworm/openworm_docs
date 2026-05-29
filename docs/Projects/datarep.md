@@ -2,7 +2,7 @@ Data Collection and Representation
 ==================================
 
 !!! info "Governed by DD008 + DD016"
-    Data integration is specified by [DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md) (OWMeta unified data layer) and [DD016: Connectome Data Access](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (cect API with [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) as default dataset).
+    Data integration is specified by DD008: Data Integration Pipeline (OWMeta unified data layer) and DD016: Connectome Data Access (cect API with [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) as default dataset).
 
 There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. On this page you can read about how different dataset are used in the model.
 
@@ -17,7 +17,7 @@ Here is a list of some of the data sets that we have used so far:
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](https://caltech.wormbase.org/virtualworm/)
 -   [The _C. elegans_ connectome (wiring diagram of neurons)](https://www.wormatlas.org/neuronalwiring.html)
 -   [Cell list of _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdGFnQldkWm9oUmQ3YjZ1LXJ4OHFnR0E&output=html)
--   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html) — ion channel models feed into [DD002 (Neural Circuit)](../design_documents/DD002_Neural_Circuit_Architecture.md) and [DD005 (Cell-Type Specialization)](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
+-   [Ion channels used by _C. elegans_](https://docs.google.com/spreadsheet/pub?key=0Avt3mQaA-HaMdEd6S0dfVnE4blhaY2ZIWDBvZFNjT0E&output=html) — ion channel models feed into DD002 (Neural Circuit) and DD005 (Cell-Type Specialization)
 -   [Database of Worm behavioral phenotypes](https://www.ncbi.nlm.nih.gov/pubmed/23852451)
 
 Currently our work on data collection and representation is divided among four subprojects:
@@ -34,7 +34,7 @@ A lot of data about _C. elegans_ is integrated into the model. In this project, 
 NeuroML Connectome
 ------------------
 
-Our computational strategy to accomplish this involves first reusing the _C. elegans_ [connectome](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the [NeuroML](https://docs.neuroml.org) standard [(Gleeson et al., 2010)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000815) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator [(Hines & Carnevale 1997)](https://ieeexplore.ieee.org/abstract/document/6795645) to perform in silico experiments.
+Our computational strategy to accomplish this involves first reusing the _C. elegans_ connectome and the 3D anatomical map of the _C. elegans_ nervous system and body plan. We have used the [NeuroML](https://docs.neuroml.org) standard [(Gleeson et al., 2010)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000815) to describe the 3D anatomical map of the _C. elegans_ nervous system. This has been done by discretizing each neuron into multiple compartments, while preserving its three-dimensional position and structure. We have then defined the connections between the NeuroML neurons using the _C. elegans_ connectome. Because NeuroML has a well-defined mapping into a system of Hodgkin-Huxley equations, it is currently possible to import the "spatial connectome" into the NEURON simulator [(Hines & Carnevale 1997)](https://ieeexplore.ieee.org/abstract/document/6795645) to perform in silico experiments.
 
 ### Previous accomplishments
 
@@ -96,8 +96,8 @@ Repository | Description | Language
 
 ## Continue Reading
 
-- **[DD008: Data Integration Pipeline](../design_documents/DD008_Data_Integration_Pipeline.md)** — The OWMeta data layer specification
-- **[DD016: Connectome Data Access](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** — cect API and dataset policy
+- **DD008: Data Integration Pipeline** — The OWMeta data layer specification
+- **DD016: Connectome Data Access** — cect API and dataset policy
 - **[c302](c302.md)** — The neural framework that consumes connectome data
 - **[How It Works: Modeling](../modeling.md)** — Multi-scale architecture overview
 - **[Projects Overview](../projects.md)** — All active projects and their governing DDs

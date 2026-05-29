@@ -3,7 +3,7 @@ How We Know It's Working: The Validation Framework
 
 Building a digital worm is one thing. Knowing it's *right* is another.
 
-A simulation might produce something that looks like a worm crawling — but if the neurons inside are firing for the wrong reasons, the first change you make will break everything. OpenWorm's validation framework, specified in **[DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)**, addresses this with a principle borrowed from software engineering: **test at every level, not just the final output**.
+A simulation might produce something that looks like a worm crawling — but if the neurons inside are firing for the wrong reasons, the first change you make will break everything. OpenWorm's validation framework, specified in **DD010: Validation Framework**, addresses this with a principle borrowed from software engineering: **test at every level, not just the final output**.
 
 ---
 
@@ -37,7 +37,7 @@ One of the most elegant validation tests comes from a mutant worm called *unc-31
 
 [Randi et al.](https://doi.org/10.1038/s41586-023-06683-4) measured the 302×302 correlation matrix for both wild-type and *unc-31* worms. The *difference* between those two matrices isolates exactly what neuropeptides contribute to brain dynamics.
 
-We can do the same thing in simulation: run the model with [neuropeptide signaling](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) on, then off, and compare the difference to the experimental difference. If our model of neuropeptide modulation is correct, the two difference matrices should match (r > 0.3 — a weaker threshold because the difference signal is smaller and noisier than the absolute signal).
+We can do the same thing in simulation: run the model with neuropeptide signaling on, then off, and compare the difference to the experimental difference. If our model of neuropeptide modulation is correct, the two difference matrices should match (r > 0.3 — a weaker threshold because the difference signal is smaller and noisier than the absolute signal).
 
 This is a genuinely predictive test: the model must get the *mechanism* right, not just the final outcome.
 
@@ -55,7 +55,7 @@ Ultimately, the worm has to crawl like a real worm. The [Schafer lab](https://do
 
 **Threshold: all 5 within ±15%.** Why 15%? Because that's roughly the coefficient of variation observed across real worms of the same genotype. A model matching the mean within one CV is performing within the biological noise floor. Going tighter would mean overfitting to a specific animal rather than capturing the population.
 
-**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — currently being revived per [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md).
+**Tool:** [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) — currently being revived per DD017.
 
 **Status:** Blocking, but currently not automated — the analysis toolbox needs revival first.
 
@@ -91,9 +91,9 @@ Beyond locomotion, organ systems have their own characteristic rhythms that serv
 
 | Organ | DD | What to Measure | Expected Value |
 |-------|----|-----------------|----------------|
-| **Pharynx** | [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) | Pumping frequency | 3–4 Hz |
-| **Intestine** | [DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Defecation cycle period | 50 ± 10 seconds |
-| **Egg-laying** | [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) | Active/inactive pattern | ~20 min inactive, ~2 min active |
+| **Pharynx** | DD007 | Pumping frequency | 3–4 Hz |
+| **Intestine** | DD009 | Defecation cycle period | 50 ± 10 seconds |
+| **Egg-laying** | DD014 | Active/inactive pattern | ~20 min inactive, ~2 min active |
 
 These are beautiful validation targets because the rhythms are robust and well-characterized — a pharynx that pumps at 1 Hz or 10 Hz is clearly wrong.
 
@@ -105,17 +105,17 @@ These are beautiful validation targets because the rhythms are robust and well-c
 |------|--------|---------------|
 | **Tier 1** (single cell) | Scripts exist, not in CI | Automate and integrate |
 | **Tier 2a** (circuit) | Data ready via `wormneuroatlas` API | Wire into CI pipeline |
-| **Tier 2b** (neuropeptides) | Data ready, awaiting [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Implement DD006 first |
-| **Tier 3** (behavior) | **Blocked** — toolbox needs revival | [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival (~33 hrs) |
+| **Tier 2b** (neuropeptides) | Data ready, awaiting DD006 | Implement DD006 first |
+| **Tier 3** (behavior) | **Blocked** — toolbox needs revival | DD017 revival (~33 hrs) |
 | **Tier 4** (causal) | Future work | Phase 5+ |
 
-The infrastructure priority is getting Tiers 2 and 3 automated in CI ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)) so every pull request is validated before merging.
+The infrastructure priority is getting Tiers 2 and 3 automated in CI (DD011) so every pull request is validated before merging.
 
 ---
 
 ## Continue Reading
 
-- **[DD010: Validation Framework](design_documents/DD010_Validation_Framework.md)** — Complete specification: all thresholds, test commands, data sources, and CI integration
-- **[DD017: Movement Analysis Toolbox](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** — Tier 3 toolbox revival plan
-- **[DD020: Validation Data Acquisition](design_documents/DD020_Validation_Data_Acquisition_Pipeline.md)** — How we source experimental data for all tiers
+- **DD010: Validation Framework** — Complete specification: all thresholds, test commands, data sources, and CI integration
+- **DD017: Movement Analysis Toolbox** — Tier 3 toolbox revival plan
+- **DD020: Validation Data Acquisition** — How we source experimental data for all tiers
 - **[How It Works: Modeling](modeling.md)** — How the simulation components fit together

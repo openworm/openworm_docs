@@ -10,7 +10,7 @@ Simulation engines
 ### Geppetto
 
 !!! note "Superseded by DD012"
-    Geppetto served OpenWorm well from 2014-2020 but has been superseded by [DD012: Dynamic Visualization Architecture](../design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a Python-native Trame viewer. See [Archived Projects](../archived_projects.md#geppetto-web-platform-2014-2020) for context on this transition.
+    Geppetto served OpenWorm well from 2014-2020 but has been superseded by DD012: Dynamic Visualization Architecture, which specifies a Python-native Trame viewer. See [Archived Projects](../archived_projects.md#geppetto-web-platform-2014-2020) for context on this transition.
 
 Geppetto is a generic multi-algorithm integration platform written in Java and HTML5 by Cantarelli, Idili, Martinez and Khayrulin whose goal is to enable the world to play with simulations via their web browser, dramatically reducing the barrier to entry.
 
@@ -41,7 +41,7 @@ More information is available at [http://www.connectomeengine.com/]
 ### CyberElegans (Historical)
 
 !!! note "Historical Prototype"
-    CyberElegans was superseded by the current core chain: [DD002](../design_documents/DD002_Neural_Circuit_Architecture.md) (neurons) → [DD003](../design_documents/DD003_Muscle_Model_Architecture.md) (muscles) → [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (body physics). See [Archived Projects](../archived_projects.md#cyberelegans-2010-2014) for context.
+    CyberElegans was superseded by the current core chain: DD002 (neurons) → DD003 (muscles) → [DD001](../design_documents/DD001_Body_Physics_Architecture.md) (body physics). See [Archived Projects](../archived_projects.md#cyberelegans-2010-2014) for context.
 
 When we first started, our team in Novosibirsk had produced an awesome prototype of a neuromechanical c. elegans model which they called 'CyberElegans'. We published [an article](https://iospress.metapress.com/content/p61284485326g608/?p=5e3b5e96ad274eb5af0001971360de3e&pi=4) about it. If you watch [the movie that goes along with the prototype](https://www.youtube.com/watch?v=3uV3yTmUlgo), you can see the basic components of the loop above in action:
 
@@ -74,7 +74,7 @@ Data sets
 A Python API for accessing information about *C. elegans* is available
 at [OWMeta](https://github.com/openworm/OWMeta). This API consolidates
 information from our [publicly accessible archive of data sets](https://drive.google.com/#folders/0B_t3mQaA-HaMejlrMmpnR2VjN0U)
-that we have come across and adapted on Google Drive. OWMeta is part of the data integration pipeline specified by [DD008](../design_documents/DD008_Data_Integration_Pipeline.md).
+that we have come across and adapted on Google Drive. OWMeta is part of the data integration pipeline specified by DD008.
 
 ### C. elegans NeuroML model in NeuroConstruct
 

@@ -5,7 +5,7 @@ OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/
 
 !!! info "Governing Design Documents"
     - **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — L0–L5 levels, meritocratic ladder
-    - **[DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md)** — Integration support from Mind-of-a-Worm
+    - **DD011: Simulation Stack Architecture** — Integration support from Mind-of-a-Worm
     - **[DD015: AI Contributor Model](../contributing/ai-contributors.md)** — Autonomous AI agents as registered contributors
 
 ---
@@ -116,7 +116,7 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Design Document Enforcement** | Flags deviations from established architectural decisions; links to the relevant DD |
 | **Graduated Task Assignment** | Maintains a 5-level difficulty scale; recommends tasks based on contributor history |
 | **Progress Tracking** | Tracks each contributor's level (L1–L5), completed tasks, review quality |
-| **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers ([DD011](../design_documents/DD011_Simulation_Stack_Architecture.md)) |
+| **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers (DD011) |
 | **Peer Mentoring** | Connects senior contributors with newcomers working in the same subsystem |
 
 **What it replaces:** The 15% of founder time spent on code review, explaining architectural decisions, and assigning work.
@@ -169,7 +169,7 @@ Each [Design Document](../design_documents/index.md) encodes:
 2. **Decision** — The chosen approach, with specificity about fidelity, parameters, and data sources
 3. **Alternatives Considered** — What was rejected and why (prevents re-proposals)
 4. **Quality Criteria** — How to validate correctness
-5. **Integration Contract** — How the subsystem connects to the rest of the organism ([DD011](../design_documents/DD011_Simulation_Stack_Architecture.md))
+5. **Integration Contract** — How the subsystem connects to the rest of the organism (DD011)
 6. **References** — Relevant papers, datasets, and prior work
 
 Mind-of-a-Worm enforces Design Documents automatically during PR review. Contributors who disagree with a decision can propose a new DD through the [RFC process](../contributing/decision-process.md).

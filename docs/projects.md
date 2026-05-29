@@ -6,14 +6,14 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 
 | Repository | Design Documents | Status | Role |
 |------------|------------------|--------|------|
-| [c302](Projects/c302/) | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md)-[DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Active | Neural circuit, muscle models, organ systems |
-| [Sibernetic](Projects/sibernetic/) | [DD001](design_documents/DD001_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | Active | Body physics, SPH engine |
-| [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | Active | Connectome data access (cect API) |
-| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) | Active | Visualization (Trame evolution) |
-| [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | [DD010](design_documents/DD010_Validation_Framework.md), [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Revival needed | Tier 3 behavioral validation |
-| [OpenWorm (meta-repo)](Projects/docker/) | [DD011](design_documents/DD011_Simulation_Stack_Architecture.md) | Proposed | Integration, Docker stack |
-| [DevoWorm](Projects/DevoWorm/) | [Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Active | Developmental dynamics, morphogenesis |
-| [Geppetto](Projects/geppetto/) | [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) (historical) | Dormant | Web platform (superseded by Trame) |
+| [c302](Projects/c302/) | DD002, DD003, DD005-DD009, DD014-DD015 | Active | Neural circuit, muscle models, organ systems |
+| [Sibernetic](Projects/sibernetic/) | [DD001](design_documents/DD001_Body_Physics_Architecture.md), DD004 | Active | Body physics, SPH engine |
+| [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) | DD016 | Active | Connectome data access (cect API) |
+| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | DD012 | Active | Visualization (Trame evolution) |
+| [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | DD010, DD017 | Revival needed | Tier 3 behavioral validation |
+| [OpenWorm (meta-repo)](Projects/docker/) | DD011 | Proposed | Integration, Docker stack |
+| [DevoWorm](Projects/DevoWorm/) | [Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling), DD004, DD005 | Active | Developmental dynamics, morphogenesis |
+| [Geppetto](Projects/geppetto/) | DD012 (historical) | Dormant | Web platform (superseded by Trame) |
 
 **See [Integration Map](design_documents/INTEGRATION_MAP.md)** for the complete dependency graph.
 
@@ -21,20 +21,20 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 
 ### Currently active projects
 
--   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD001](design_documents/DD001_Body_Physics_Architecture.md)** (Body Physics) + **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (Mechanical Cell Identity)
--   [c302 multiscale modelling framework](Projects/c302/) — implements **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** (Neural Circuit) + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)** (Muscle Model) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)**
+-   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD001](design_documents/DD001_Body_Physics_Architecture.md)** (Body Physics) + **DD004** (Mechanical Cell Identity)
+-   [c302 multiscale modelling framework](Projects/c302/) — implements **DD002** (Neural Circuit) + **DD003** (Muscle Model) + **DD005-DD009**
 -   [OpenWorm Browser](Projects/browser/)
--   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)**, connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)**
--   [Docker simulation stack](Projects/docker/) — implements **[DD011](design_documents/DD011_Simulation_Stack_Architecture.md)** (Simulation Stack)
+-   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)**, connects to **DD004** + **DD005**
+-   [Docker simulation stack](Projects/docker/) — implements **DD011** (Simulation Stack)
 -   [Community outreach](Projects/community-proj/)
 
 ### Projects still maintained, less active
 
--   [Data collection and representation](Projects/datarep/) — relates to **[DD008](design_documents/DD008_Data_Integration_Pipeline.md)** (Data Integration) + **[DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** (Connectome Access)
--   [Movement analysis](Projects/worm-movement/) — implements **[DD010](design_documents/DD010_Validation_Framework.md)** (Validation) + **[DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)** (Movement Toolbox)
--   [Geppetto Simulation Engine](Projects/geppetto/) — historical; superseded by **[DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md)** (Dynamic Visualization)
--   [Optimization engine](Projects/optimization/) — relates to **[DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md)** (Hybrid Mechanistic-ML)
--   [Muscle-Neuron integration](Projects/muscle-neuron-integration/) — formalized in **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)**
+-   [Data collection and representation](Projects/datarep/) — relates to **DD008** (Data Integration) + **DD016** (Connectome Access)
+-   [Movement analysis](Projects/worm-movement/) — implements **DD010** (Validation) + **DD017** (Movement Toolbox)
+-   [Geppetto Simulation Engine](Projects/geppetto/) — historical; superseded by **DD012** (Dynamic Visualization)
+-   [Optimization engine](Projects/optimization/) — relates to **DD013** (Hybrid Mechanistic-ML)
+-   [Muscle-Neuron integration](Projects/muscle-neuron-integration/) — formalized in **DD002** + **DD003**
 -   [_C. elegans_ robots](Projects/c-elegans-robot/)
 
 ---
@@ -51,7 +51,7 @@ More detailed information is available on the [Sibernetic project page](Projects
 
 **c302 Neural Modeling Framework**
 
-c302 implements **[DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (cell-type specialization), [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (neuropeptides), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (organ circuits), [DD014](design_documents/DD014_Egg_Laying_System_Architecture.md) (egg-laying), and [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) (touch response).
+c302 implements **DD002 (Neural Circuit Architecture)** — the multi-level Hodgkin-Huxley framework for all 302 neurons. It also serves as the foundation for DD005 (cell-type specialization), DD006 (neuropeptides), DD007-DD009 (organ circuits), DD014 (egg-laying), and DD015 (touch response).
 
 c302 generates NeuroML2 networks at multiple levels of biophysical detail (Levels A-D), with **Level C1 (HH + graded synapses)** as the recommended default for coupling with Sibernetic.
 
@@ -59,7 +59,7 @@ More detailed information is available on the [c302 project page](Projects/c302/
 
 **Visualization**
 
-The visualization platform is evolving per **[DD012 (Dynamic Visualization Architecture)](design_documents/DD012_Dynamic_Visualization_Architecture.md)**:
+The visualization platform is evolving per **DD012 (Dynamic Visualization Architecture)**:
 
 - **Phase 3:** Trame viewer (PyVista + live server)
 - **Phase 4:** Interactive layers with validation overlays
@@ -69,25 +69,25 @@ The visualization platform is evolving per **[DD012 (Dynamic Visualization Archi
 
 **Movement Analysis and Validation**
 
-The Movement Analysis project implements **[DD010 (Validation Framework)](design_documents/DD010_Validation_Framework.md)** — the 3-tier validation system that ensures our simulation matches real worm behavior. The analysis toolbox is being revived per **[DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)**.
+The Movement Analysis project implements **DD010 (Validation Framework)** — the 3-tier validation system that ensures our simulation matches real worm behavior. The analysis toolbox is being revived per **DD017**.
 
 More detailed information is available on the [Movement analysis project page](Projects/worm-movement/) and the [Validation page](validation/).
 
 **Optimization and Parameter Fitting**
 
-Now formalized in **[DD013 (Hybrid Mechanistic-ML Framework)](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md)** — differentiable simulation with gradient descent, neural surrogates for 1000x speedup, and foundation model predictions for channel kinetics.
+Now formalized in **DD013 (Hybrid Mechanistic-ML Framework)** — differentiable simulation with gradient descent, neural surrogates for 1000x speedup, and foundation model predictions for channel kinetics.
 
 More detailed information is available on the [Optimization project page](Projects/optimization/).
 
 **Data Collection and Representation**
 
-Formalized in **[DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md)** and **[DD016 (Connectome Data Access)](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)** — the ConnectomeToolbox (cect) is the canonical API for connectome data.
+Formalized in **DD008 (Data Integration Pipeline)** and **DD016 (Connectome Data Access)** — the ConnectomeToolbox (cect) is the canonical API for connectome data.
 
 More detailed information is available on the [Data representation project page](Projects/datarep/).
 
 **DevoWorm — Developmental Modeling**
 
-The [DevoWorm project](Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) focuses on developmental dynamics, digital morphogenesis, and developmental plasticity in *C. elegans*. DevoWorm's embryogenetic connectome analysis, differentiation trees, and CompuCell3D morphogenesis models form the foundation for **[Phase 8 (Developmental Modeling)](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)** of the simulation roadmap — the "Worm That Grows" milestone. DevoWorm's work also connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (cell identity during body growth) and **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (temporal dynamics of cell-type specification).
+The [DevoWorm project](Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) focuses on developmental dynamics, digital morphogenesis, and developmental plasticity in *C. elegans*. DevoWorm's embryogenetic connectome analysis, differentiation trees, and CompuCell3D morphogenesis models form the foundation for **[Phase 8 (Developmental Modeling)](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)** of the simulation roadmap — the "Worm That Grows" milestone. DevoWorm's work also connects to **DD004** (cell identity during body growth) and **DD005** (temporal dynamics of cell-type specification).
 
 More detailed information is available on the [DevoWorm project page](Projects/DevoWorm/).
 
@@ -99,7 +99,7 @@ More detailed information is available on the [Community project page](Projects/
 
 **Muscle-Neuron Integration**
 
-Now formalized in **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** (neural) + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)** (muscle) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
+Now formalized in **DD002** (neural) + **DD003** (muscle) + **DD005** (cell-type specialization). The goal of creating biologically-realistic ion channel models from experimental data is specified with quantitative criteria and CeNGEN single-cell transcriptomics as the primary data source.
 
 More detailed information is available on the [Muscle-Neuron integration project page](Projects/muscle-neuron-integration/).
 

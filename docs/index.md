@@ -51,11 +51,11 @@ Navigating OpenWorm
 
 We've created this documentation to help orient you to the different locations on the web where OpenWorm material is found and where contributions can be made.
 
-The **[Design Documents](design_documents/)** provide the complete technical roadmap — 29 architectural specifications ([DD002](design_documents/DD002_Neural_Circuit_Architecture.md)-[DD024](design_documents/DD024_Project_Metrics_Dashboard.md), plus [DD012.1](design_documents/DD012.1_Visual_Rendering_Specification.md) and [DD012.2](design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **[Start here](design_documents/)** if you want to understand the engineering blueprint.
+The **[Design Documents](design_documents/)** provide the complete technical roadmap — 29 architectural specifications (DD002-DD024, plus DD012.1 and DD012.2) defining how we build from 302 neurons to 959 cells, validated against experimental data at every level. **[Start here](design_documents/)** if you want to understand the engineering blueprint.
 
 The [modeling approach page](modeling/) explains how we model at five scales simultaneously (molecular, channel, cellular, tissue, organism) and how the current architecture evolved from the CyberElegans prototype.
 
-The [validation page](validation/) explains our 3-tier framework ([DD010](design_documents/DD010_Validation_Framework.md)) for ensuring the simulation matches real worm behavior at single-cell, circuit, and behavioral levels.
+The [validation page](validation/) explains our 3-tier framework (DD010) for ensuring the simulation matches real worm behavior at single-cell, circuit, and behavioral levels.
 
 The [resources page](Resources/resources/) has a gallery of content that has been produced by the project, including simulation engines, visualization environments, and data sets.
 

@@ -18,10 +18,10 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 **What it proved:**
 
 - SPH is the right approach for body physics (now formalized in [DD001](design_documents/DD001_Body_Physics_Architecture.md))
-- Graded synapses match _C. elegans_ biology better than spiking models (now formalized in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md))
-- Muscle calcium is the coupling variable between neural and mechanical domains (now formalized in [DD003](design_documents/DD003_Muscle_Model_Architecture.md))
+- Graded synapses match _C. elegans_ biology better than spiking models (now formalized in DD002)
+- Muscle calcium is the coupling variable between neural and mechanical domains (now formalized in DD003)
 
-**Current status:** Superseded by [DD002](design_documents/DD002_Neural_Circuit_Architecture.md)–[DD001](design_documents/DD001_Body_Physics_Architecture.md) (the formal, validated core chain). Preserved as historical reference and [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) comparison point.
+**Current status:** Superseded by DD002–[DD001](design_documents/DD001_Body_Physics_Architecture.md) (the formal, validated core chain). Preserved as historical reference and DD013 comparison point.
 
 **See today's version:** [Sibernetic](Projects/sibernetic.md) (body physics) and [c302](Projects/c302.md) (neural modeling)
 
@@ -41,9 +41,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 - Proved web-based simulation visualization was possible
 - Grew into a general-purpose platform used by other neuroscience projects
-- Demonstrated multi-algorithm integration concepts that inform [DD011](design_documents/DD011_Simulation_Stack_Architecture.md)
+- Demonstrated multi-algorithm integration concepts that inform DD011
 
-**Why the evolution:** [DD012 (Dynamic Visualization)](design_documents/DD012_Dynamic_Visualization_Architecture.md) chose Trame (Python + PyVista) over Geppetto because:
+**Why the evolution:** DD012 (Dynamic Visualization) chose Trame (Python + PyVista) over Geppetto because:
 
 - Geppetto is Java-based — most OpenWorm contributors write Python
 - Requires a server process per client — doesn't scale for public viewer
@@ -52,9 +52,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **Current status:** Dormant in OpenWorm (last commit ~2020). Still maintained upstream at [geppetto.org](https://geppetto.org). Could be re-evaluated if needs change.
 
-**See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) evolution roadmap)
+**See today's version:** [Geppetto project page](Projects/geppetto.md) (historical context and DD012 evolution roadmap)
 
-**What replaced it:** [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) specifies a 3-phase evolution:
+**What replaced it:** DD012 specifies a 3-phase evolution:
 
 1. **Phase 3:** Trame viewer (PyVista + live server)
 2. **Phase 4:** Interactive layers with validation overlays
@@ -73,7 +73,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 - Established the principle of quantitative behavioral validation
 - Ported key feature extraction algorithms from MATLAB to Python
 
-**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md). The toolbox revival is an infrastructure priority, as it enables [Tier 3 behavioral validation](validation.md).
+**Current status:** Superseded by [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox), which is being revived per DD017. The toolbox revival is an infrastructure priority, as it enables [Tier 3 behavioral validation](validation.md).
 
 **See today's version:** [Movement Analysis](Projects/worm-movement.md) project page
 
@@ -83,7 +83,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it was:** The original 3D anatomical model of the _C. elegans_ nervous system in NeuroML format, loaded and simulated via NeuroConstruct + NEURON.
 
-**What it evolved into:** [c302](https://github.com/openworm/c302) — the current multi-scale modeling framework specified by [DD002](design_documents/DD002_Neural_Circuit_Architecture.md). c302 generates NeuroML2 networks at multiple biophysical detail levels (A-D) and uses [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) for data access ([DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)).
+**What it evolved into:** [c302](https://github.com/openworm/c302) — the current multi-scale modeling framework specified by DD002. c302 generates NeuroML2 networks at multiple biophysical detail levels (A-D) and uses [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) for data access (DD016).
 
 **See today's version:** [c302 project page](Projects/c302.md)
 
@@ -97,7 +97,7 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What it proved:** Connectome-derived neural dynamics can produce meaningful sensorimotor behavior even in a simplified robot body.
 
-**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md) + [DD015 (closed-loop touch response)](design_documents/DD015_Closed_Loop_Touch_Response.md).
+**Current status:** Historical demonstration. The underlying principle (connectome-driven behavior) is now formalized in DD002 + DD015 (closed-loop touch response).
 
 **See today's version:** [C. elegans Robots](Projects/c-elegans-robot.md) project page
 

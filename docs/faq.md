@@ -6,7 +6,7 @@ OpenWorm general
 
 ### Why _C. elegans_?
 
-The tiny worm _C. elegans_ is by far the most understood and studied animal with a brain in all of biology -- first genome mapped, exactly 302 neurons with a complete [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md), and three Nobel prizes awarded for work on it. When making a complex computer model, it is important to start where the data are the most complete. For the full story, see the [Background](background/) page.
+The tiny worm _C. elegans_ is by far the most understood and studied animal with a brain in all of biology -- first genome mapped, exactly 302 neurons with a complete connectome, and three Nobel prizes awarded for work on it. When making a complex computer model, it is important to start where the data are the most complete. For the full story, see the [Background](background/) page.
 
 ### What does the real worm do?
 
@@ -19,23 +19,23 @@ It has all sorts of behaviors! Some include:
 
 ### Do you simulate all that?
 
-Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD003_Muscle_Model_Architecture.md) + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
+Yes! Today we simulate crawling (302 neurons + 95 muscles + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
-Egg-laying is specified in **[DD014 (Egg-Laying System Architecture)](design_documents/DD014_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 5 work.
+Egg-laying is specified in **DD014 (Egg-Laying System Architecture)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 5 work.
 
 Developmental modeling (embryo to L1 to L4 to adult) is Phase 8 work in our roadmap, using the Witvliet developmental connectome series (8 stages). _C. elegans_ has the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing), making it a fascinating future direction.
 
 ### Does it need to know how to be a worm to act like a worm?
 
-The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in [DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
+The "logic" part comes from the dynamics of the neurons interacting with each other. It is a little unintuitive but that's what makes up how it "thinks". So we are simulating those dynamics as well as we can rather than instructing it what to do when. This is formalized in DD002 (Neural Circuit Architecture), which uses Hodgkin-Huxley equations to model each neuron's electrical dynamics.
 
 ### Given all that we DON'T know about _C. elegans_ (all the various synaptic strengths, dynamics, gap junction rectification, long-range neuromodulation, etc.), how do you know the model you eventually make truly recapitulates reality?
 
 All models are wrong, some models are useful :) We must have the model make a prediction and then test it. Based on how well the model fits the available data, we can quantify how well the model recapitulates reality.
 
-We now have a formal **3-tier validation framework** ([DD010](design_documents/DD010_Validation_Framework.md)):
+We now have a formal **3-tier validation framework** (DD010):
 
 - **Tier 1:** Single-cell electrophysiology (patch clamp comparison)
 - **Tier 2:** Circuit-level functional connectivity (must correlate r > 0.5 with [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain imaging)
@@ -47,7 +47,7 @@ We now have a formal **3-tier validation framework** ([DD010](design_documents/D
 
 It is very likely to be multiple, [given what we know about the variability of neuronal networks in general](https://doi.org/10.1038/nn1312) (Prinz, Bucher & Marder 2004). One technique to deal with this is to [generate multiple models that work](https://doi.org/10.1038/nrn3056) (Marder & Taylor 2011) and analyze them under different conditions. What we are after is the [solution space that works](https://doi.org/10.1371/journal.pcbi.0020094) (Achard & De Schutter 2006, see Fig 6 for an example), rather than a single solution.
 
-[DD013 (Hybrid Mechanistic-ML Framework)](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
+DD013 (Hybrid Mechanistic-ML Framework) now specifies automated approaches: differentiable simulation with gradient descent for parameter fitting, plus foundation model predictions (ESM3/AlphaFold) for channel kinetics.
 
 ### Why not start with simulating something simpler? Are nematodes too complex for a first go at whole organism simulation?
 
@@ -55,7 +55,7 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 
 ### When do you think the simulation will be "complete", and which behaviors would that include?
 
-**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered across the phased implementation roadmap. We define completion at each phase as meeting all [DD010 validation criteria](design_documents/DD010_Validation_Framework.md). Beyond Phase 6, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/#phase-overview) for the full phase-by-phase plan.
+**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered across the phased implementation roadmap. We define completion at each phase as meeting all DD010 validation criteria. Beyond Phase 6, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/#phase-overview) for the full phase-by-phase plan.
 
 ### Currently, what are your biggest problems or needs?
 
@@ -63,8 +63,8 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 **Current priorities:**
 
-- **Core infrastructure (Phase 1):** Docker stack ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)), toolbox revival ([DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
-- **Phase 3 science:** CeNGEN cell-type specialization ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
+- **Core infrastructure (Phase 1):** Docker stack (DD011), toolbox revival (DD017), CI/CD pipeline
+- **Phase 3 science:** CeNGEN cell-type specialization (DD005), functional connectivity validation (DD010 Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 
 Read more about ways to help [on our website](https://www.openworm.org/get_involved.html) or check the [contributor guide](community/).
@@ -96,24 +96,24 @@ We model at **five scales simultaneously** (detailed on the [modeling approach p
 
 | Scale | Design Documents | Computational Cost |
 |-------|------------------|-------------------|
-| Molecular | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Low (parameter lookup) |
-| Channel | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Moderate (HH equations per cell) |
-| Cellular | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD007](design_documents/DD007_Pharyngeal_System_Architecture.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) | Moderate-High (302-959 cells) |
-| Tissue | [DD001](design_documents/DD001_Body_Physics_Architecture.md), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md) | High (~100K SPH particles) |
-| Organism | [DD010](design_documents/DD010_Validation_Framework.md), [DD015](design_documents/DD015_Closed_Loop_Touch_Response.md) | Validation overhead |
+| Molecular | DD013 | Low (parameter lookup) |
+| Channel | DD002, DD005 | Moderate (HH equations per cell) |
+| Cellular | DD002, DD003, DD007-DD009 | Moderate-High (302-959 cells) |
+| Tissue | [DD001](design_documents/DD001_Body_Physics_Architecture.md), DD004 | High (~100K SPH particles) |
+| Organism | DD010, DD015 | Validation overhead |
 
-In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) specifies neural surrogates that can provide 1000x speedup for body physics.
+In order to make this work we make use of abstraction, so something that is less complex today can be swapped in for something more complex tomorrow. DD013 specifies neural surrogates that can provide 1000x speedup for body physics.
 
 ### What's the data source for your computer simulation of the living worm?
 
-There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. [DD008 (Data Integration Pipeline)](design_documents/DD008_Data_Integration_Pipeline.md) specifies the formal approach. Key datasets include:
+There is not a single data source for our simulation; in fact one of our unique challenges is coming up with new ways to work out how to integrate multiple data sets together. DD008 (Data Integration Pipeline) specifies the formal approach. Key datasets include:
 
 -   [The Virtual Worm (3D atlas of _C. elegans_ anatomy)](https://caltech.wormbase.org/virtualworm/)
--   [The _C. elegans_ connectome](https://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md)
--   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives [cell-type differentiation](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)
--   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — [Tier 2 validation](design_documents/DD010_Validation_Framework.md) target for functional connectivity
--   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions feeding the [neuropeptide model](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md)
--   [Schafer lab WCON behavioral database](https://wormbehavior.mrc-lmb.cam.ac.uk/) — [Tier 3 validation](design_documents/DD010_Validation_Framework.md) target for behavioral kinematics
+-   [The _C. elegans_ connectome](https://www.wormatlas.org/neuronalwiring.html) — accessed via [ConnectomeToolbox (cect)](https://github.com/openworm/ConnectomeToolbox) per DD016
+-   [CeNGEN single-cell transcriptomics](https://cengen.shinyapps.io/CengenApp/) — drives cell-type differentiation
+-   [Randi 2023 whole-brain calcium imaging](https://pubmed.ncbi.nlm.nih.gov/36859544/) — Tier 2 validation target for functional connectivity
+-   [Ripoll-Sanchez 2023 neuropeptide connectome](https://pubmed.ncbi.nlm.nih.gov/37080210/) — 31,479 interactions feeding the neuropeptide model
+-   [Schafer lab WCON behavioral database](https://wormbehavior.mrc-lmb.cam.ac.uk/) — Tier 3 validation target for behavioral kinematics
 
 ### Has there been previous modeling work on various subsystems illustrating what level of simulation is necessary to produce observed behaviors?
 
@@ -121,7 +121,7 @@ There have been [other modeling efforts in _C. elegans_ and their subsystems](ht
 
 ### How are neurons simulated today?
 
-Our neural models are specified in [DD002 (Neural Circuit Architecture)](design_documents/DD002_Neural_Circuit_Architecture.md) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
+Our neural models are specified in DD002 (Neural Circuit Architecture) and implemented in the [c302 framework](https://github.com/openworm/c302). c302 generates NeuroML2 networks at multiple levels of biophysical detail:
 
 There are a wide variety of ways to simulate neurons, as shown in figure 2 of [Izhikevich 2004](http://www.ncbi.nlm.nih.gov/pubmed/15484883).
 
@@ -137,11 +137,11 @@ There are a wide variety of ways to simulate neurons, as shown in figure 2 of [I
 
 ### What is the connection between the basic properties of _C. elegans_ neurons and human neurons?
 
-_C. elegans_ neurons do not spike (i.e. have [action potentials](https://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model), used in [DD002](design_documents/DD002_Neural_Circuit_Architecture.md)) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](https://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](https://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](https://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](https://en.wikipedia.org/wiki/Membrane_potential).
+_C. elegans_ neurons do not spike (i.e. have [action potentials](https://en.wikipedia.org/wiki/Action_potential)), which makes them different from human neurons. However, the same mathematics that describe the action potential (known as the [Hodgkin-Huxley model](https://en.wikipedia.org/wiki/Hodgkin%E2%80%93Huxley_model), used in DD002) also describe the dynamics of neurons that do not exhibit action potentials. The biophysics of the neurons from either species are still similar in that they both have [chemical synapses](https://en.wikipedia.org/wiki/Chemical_synapse), both have [excitable cell membranes](https://en.wikipedia.org/wiki/Cell_membrane), and both use [voltage sensitive ion channels](https://en.wikipedia.org/wiki/Voltage-gated_ion_channel) to modify the [electrical potential across their cell membranes](https://en.wikipedia.org/wiki/Membrane_potential).
 
 ### What is the level of detail of the wiring diagram for the non-neuron elements?
 
-There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, [DD016 (Connectome Data Access)](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
+There is a map between motor neurons and muscle cells in the published wiring diagram. Beyond that, DD016 (Connectome Data Access) specifies the ConnectomeToolbox (cect) as the canonical API for all connectivity data. The Witvliet developmental series (8 stages) and Ripoll-Sanchez neuropeptide connectome provide additional non-synaptic interaction data.
 
 ### What is SPH?
 
@@ -160,7 +160,7 @@ OpenWorm code reuse
 
 ### What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
 
-These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD012 (Dynamic Visualization)](design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 3-4) and Three.js + WebGPU (Phase 5).
+These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by DD012 (Dynamic Visualization), which specifies a lighter Python-native approach using Trame (Phase 3-4) and Three.js + WebGPU (Phase 5).
 
 See [Archived Projects](archived_projects.md) for the full historical context.
 

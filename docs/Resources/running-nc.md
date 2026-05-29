@@ -1,5 +1,5 @@
 !!! warning "Historical Content"
-    This page describes an older approach to running OpenWorm simulations. For the current simulation architecture, see [DD011 (Simulation Stack)](../design_documents/DD011_Simulation_Stack_Architecture.md).
+    This page describes an older approach to running OpenWorm simulations. For the current simulation architecture, see DD011 (Simulation Stack).
 
 Running the NeuroML connectome in NeuroConstruct
 ================================================

@@ -24,7 +24,7 @@ We are building a simulation platform to prove it is possible to make good model
 Why _C. elegans_?
 -----------------
 
-In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole [connectome](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving [muscles](design_documents/DD003_Muscle_Model_Architecture.md) on a body in a complex world.
+In the field of neuroscience, one of the simplest organisms that are studied is _Caenorhabditis elegans_, or _C. elegans_ for short. It only has 302 neurons, has a very consistent lifecycle, and is well studied. Its whole connectome (wiring diagram) has been mapped. Its whole body has only 1000 cells total. With those 1000 cells it solves basic problems of feeding, mate-finding, predator and toxin avoidance using a nervous system driving muscles on a body in a complex world.
 
 The cells in its body work together to produce its behavior. Instead of starting with the behavior and building a simple system to capture it, we are starting with making models of the individual cells and their interactions. If we do this correctly so that the cells act on each other as they do in the real organism, we will have a much more realistic model than we would get trying to go straight to the behavior.
 
@@ -80,7 +80,7 @@ In this case, we have to make do with what we have and make some good educated g
 
 [NeuroML](https://docs.neuroml.org) is an XML (Extensible Markup Language) based model description language that aims to provide a common data format for defining and exchanging models in computational neuroscience. The focus of NeuroML is on models which are based on the biophysical and anatomical properties of real neurons. NeuroML is known as an open standard, because its means of describing a model is publicly available for others to improve upon.
 
-OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in [DD002: Neural Circuit Architecture](design_documents/DD002_Neural_Circuit_Architecture.md).
+OpenWorm's [c302 framework](Projects/c302.md) generates NeuroML2 networks of the _C. elegans_ nervous system at multiple biophysical detail levels, as specified in DD002: Neural Circuit Architecture.
 
 ---
 
@@ -97,7 +97,7 @@ This is an ambitious goal, and it requires discipline. We've crystallized our ap
 
 1. **Biophysically realistic** — grounded in experimental data, not heuristic shortcuts
 2. **Causally interpretable** — we can trace why behavior emerges from underlying mechanisms
-3. **Validated** — tested against real worm physiology and behavior ([DD010: Validation Framework](design_documents/DD010_Validation_Framework.md))
+3. **Validated** — tested against real worm physiology and behavior (DD010: Validation Framework)
 4. **Composable** — subsystems integrate via clean interfaces so the whole is greater than the sum of its parts
 
 And one core conviction about *how* to build it:
@@ -114,7 +114,7 @@ These design principles didn't emerge in a vacuum — they draw on several intel
 
 **Causal models, not just predictive ones.** [Pearl (2000)](https://doi.org/10.1017/CBO9780511803161) draws a crucial distinction between systems that can *predict* outcomes (statistical models) and systems that can answer *"what if?"* questions (causal models). OpenWorm is designed as a causal model — we can ablate a virtual neuron and predict the behavioral consequence, not because we trained on ablation data, but because the model captures the mechanistic structure that makes the prediction follow from first principles. This is our core differentiator from data-driven foundation models.
 
-**Emergence.** A simulated organism that exhibits behavior not explicitly programmed raises deep questions. Can higher-level properties (locomotion, foraging, arousal states) be fully explained by lower-level mechanisms (channel kinetics, calcium dynamics, synaptic transmission)? [Chalmers (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011) distinguishes "weak" emergence (deducible in principle from lower-level laws) from "strong" emergence (not so deducible). Our multi-tier [validation framework](design_documents/DD010_Validation_Framework.md) directly tests whether behavior emerges from mechanism, by validating at every level independently.
+**Emergence.** A simulated organism that exhibits behavior not explicitly programmed raises deep questions. Can higher-level properties (locomotion, foraging, arousal states) be fully explained by lower-level mechanisms (channel kinetics, calcium dynamics, synaptic transmission)? [Chalmers (2006)](https://doi.org/10.1093/acprof:oso/9780199544318.003.0011) distinguishes "weak" emergence (deducible in principle from lower-level laws) from "strong" emergence (not so deducible). Our multi-tier validation framework directly tests whether behavior emerges from mechanism, by validating at every level independently.
 
 **Completeness.** [Haspel et al. (2023)](https://arxiv.org/abs/2308.06578) argue that *C. elegans* offers a unique opportunity for observational and perturbational completeness — recording from and manipulating every neuron — which is a prerequisite for causal understanding ([Pearl & Mackenzie 2018](https://www.hachettebookgroup.com/titles/judea-pearl/the-book-of-why/9780465097616/)). OpenWorm complements this experimental agenda with *computational* completeness: modeling every cell, every connection, every signaling pathway. Together, experimental and computational completeness enable a depth of understanding that partial approaches cannot achieve.
 
@@ -133,10 +133,10 @@ Each concept on this page has been formalized into an actionable Design Document
 
 | Concept | Design Document | What It Specifies |
 |---------|----------------|-------------------|
-| Bottom-up simulation | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD003](design_documents/DD003_Muscle_Model_Architecture.md), [DD001](design_documents/DD001_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
-| Multi-algorithm integration | [DD011](design_documents/DD011_Simulation_Stack_Architecture.md) | Docker-based simulation stack assembling all algorithms |
-| Model optimization | [DD013](design_documents/DD013_Hybrid_Mechanistic_ML_Framework.md) | Hybrid mechanistic-ML framework for parameter fitting |
-| NeuroML | [DD002](design_documents/DD002_Neural_Circuit_Architecture.md), [DD016](design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md) | c302 generates NeuroML2 networks using cect connectome data |
+| Bottom-up simulation | DD002, DD003, [DD001](design_documents/DD001_Body_Physics_Architecture.md) | The core chain: neurons → muscles → body physics |
+| Multi-algorithm integration | DD011 | Docker-based simulation stack assembling all algorithms |
+| Model optimization | DD013 | Hybrid mechanistic-ML framework for parameter fitting |
+| NeuroML | DD002, DD016 | c302 generates NeuroML2 networks using cect connectome data |
 
 ---
 
