@@ -690,22 +690,24 @@ Replacement backends must produce kinematic outputs matching OpenCL within ±5% 
 
 Each test produces numeric metrics; the parity suite compares against OpenCL baseline values stored in a reference file.
 
-### Backend Graduation Criteria
+### Backend Graduation Criteria (Exit Conditions)
 
-| Level | Requirements |
-|-------|-------------|
-| **Experimental** | Compiles, runs, produces output without crashing |
-| **Stable** | Runs 10s without divergence, passes parity tests within ±5% of OpenCL |
-| **Production** | Stable + integrated in Docker + CI-gated + performance benchmarked |
+A backend transitions levels by satisfying the **exit conditions** below. These are *gating* — a substrate stays at its current level until every condition in the next row is met. This mirrors the Kubernetes alpha/beta/GA graduation-criteria pattern, where each maturity stage has a defined contract for what closes it out.
+
+| To exit... | ...into | Exit conditions (all must hold) |
+|------------|---------|--------------------------------|
+| (initial) | **Experimental** | Compiles on the target platform. Runs an end-to-end simulation. Produces an output artifact (trajectory dump, frame, or whatever the substrate's analog is) without segfault, NaN, or SIGKILL. |
+| **Experimental** | **Stable** | Runs 10s of simulated time without divergence. Passes the cross-backend parity test suite (Issue [#235](https://github.com/openworm/sibernetic/issues/235), milestone v0.1.0) within ±5% of the OpenCL reference on every working demo. For native substrates: every new forward kernel ships with a paired analytic backward, FD-validated within ±5% (see [Quality Criteria #7](#quality-criteria)). |
+| **Stable** | **Production** | All Stable conditions hold. Substrate integrated into the Sibernetic Docker image. CI gate active on the platform (macOS runner for Metal, Linux+NVIDIA runner for CUDA). Performance benchmarked on at least three platforms and the result documented. |
 
 **Current status:**
 
-| Backend | Level | Blocking Issue |
-|---------|-------|---------------|
-| OpenCL | **Production** | Losing platform support |
-| Native Metal | **Experimental → Stable** | Forward parity demonstrated on 5+ demos; demo2 sheet-scale tuning + worm_swim parity in progress. Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned to OpenCL reference. See [Differentiability](#differentiability) section. |
-| Native CUDA | **Scaffolding** | Awaiting kernel implementation (PR #229 introduces the substrate skeleton) |
-| Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction |
+| Backend | Level | What's holding the next transition |
+|---------|-------|------------------------------------|
+| OpenCL | **Production** | (Production today. Losing platform support is a separate, non-graduation concern — the goal is to maintain the gold standard until native substrates reach Production.) |
+| Native Metal | **Experimental → Stable** | Forward parity on 5+ demos; demo2 sheet-scale and worm_swim parity tuning in progress. Closes when those two parity gates go green (milestone v0.1.0). Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned. See [Differentiability](#differentiability). |
+| Native CUDA | **Scaffolding → Experimental** | Awaiting kernel implementation. PR #229 introduces the substrate skeleton; first wave of forward kernels + paired backwards needed to clear Experimental (milestone v0.1.0). |
+| Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction. Not on a graduation path. |
 
 ### Stabilization Sequence
 

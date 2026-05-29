@@ -245,6 +245,8 @@ From [Decision Process](../contributing/decision-process.md) Quality Criteria se
 
 *These become stale the moment the issue tracker moves. Point at the issue tracker via `label:ddNNN` and the release-milestones page in the **Implementation Status & Roadmap** section instead. The spec describes what should be built; the issue tracker describes what is being built and by whom.*
 
+*The Rust RFC process documents this directly: "we cannot expect every merged RFC to actually reflect what the end result will be at the time of the next major release." That's the whole point of keeping the design doc and the implementation tracker separate — the tracker absorbs the drift so the design doc doesn't have to be edited every time a task slips, splits, or pivots.*
+
 **❌ Disconnected from viewer:**
 > No "How to Visualize" section, no mention of DD012 layers.
 

@@ -97,6 +97,102 @@ The current milestone landscape on `openworm/sibernetic`: three closed historica
 | **v0.3.0 release** | **New** | Substrate Documentation + Contributor Onboarding | The substrate becomes understandable and contributor-ready: OpenCL kernel architecture documented, the 19 paired forward/backward kernels explained, MoaW PR assist live, architecture overview + CONTRIBUTING.md in place, community-tracked docs issues (#127, #128, #165) consolidated under this release. |
 | **Unmilestoned** | — | Research / future-direction | FEM Projective Dynamics feasibility evaluation, Python bindings (replaces stale #122). Filed for tracking but no release commitment yet. |
 
+### Milestone descriptions to post on GitHub
+
+The text below is copy-paste-ready for the four GitHub milestone description fields. Each description references the published [DD001](https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/) so anyone landing on the milestone page can find the spec without searching.
+
+#### `v0.0.8 release` — OpenCL Gold-Standard Stabilization
+
+```
+OpenCL gold-standard stabilization.
+
+Scope: Lock in the OpenCL reference implementation as the validated
+gold standard against which all native substrates (Metal, CUDA) are
+measured. Fix real bugs, close paired docs gaps, land the profiling
+enhancement. Without this milestone, cross-substrate parity claims
+in v0.1.0 are meaningless — the reference itself must be trustworthy.
+
+Spec: DD001 Body Physics Engine Architecture (the gold-standard
+framing lives in DD001 §Backend Stabilization Roadmap).
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#backend-stabilization-roadmap
+
+Filter for the work in this release: label:dd001 + this milestone.
+
+No fixed due date — this milestone ships when its scope lands.
+Previous "2026-06-12" due date is superseded; the four-issue scope
+that triggered that date has been re-evaluated (see DD001 issue
+migration plan).
+```
+
+#### `v0.1.0 release` — Native-GPU Substrate Consolidation
+
+```
+Native-GPU substrate consolidation.
+
+Scope: Ship the native-Metal substrate at OpenCL parity on the
+four working demos (demo1 cube drop, demo2 membrane permeability,
+worm_alone, worm_swim). Bring native-CUDA scaffolding up to demo1
+parity. Merge the native-gpu branch consolidation PR.
+
+This milestone transitions native Metal from Experimental → Stable
+per DD001 §Backend Graduation Criteria (Exit Conditions), and native
+CUDA from Scaffolding → Experimental.
+
+Spec: DD001 Body Physics Engine Architecture, especially §Cross-
+Backend Parity Requirements, §Validation Methodology, and §Differ-
+entiability.
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#cross-backend-parity-requirements
+
+Filter for the work in this release: label:dd001 label:native-gpu
++ this milestone. PR #229 and PR #230 are part of the release.
+
+Open-ended due date — ships when the four parity gates are green.
+```
+
+#### `v0.2.0 release` — Validation Infrastructure + Output Pipeline
+
+```
+Cross-substrate validation infrastructure and the simulation-output
+pipeline.
+
+Scope: Land scripts/check_stability.py and scripts/validate_
+incompressibility.py so every simulation run on every substrate gets
+the same gating. Ship OME-Zarr export, marching-cubes surface
+reconstruction, and configurable output frequency — the data pipeline
+that bridges raw simulation output to the visualization handoff.
+
+Spec: DD001 Body Physics Engine Architecture, especially §Acceptance
+Criteria and §Deliverables (the OME-Zarr rows).
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#acceptance-criteria-green-light-definitions
+
+Filter for the work in this release: label:dd001 + this milestone.
+
+Ships after v0.1.0 native substrates are at Stable.
+```
+
+#### `v0.3.0 release` — Substrate Documentation + Contributor Onboarding
+
+```
+Substrate becomes understandable and contributor-ready.
+
+Scope: Document the OpenCL reference kernel architecture (~64KB
+sphFluid.cl annotated walkthrough). Document the 19 paired forward/
+backward kernels and the xpbd_full_bwd reverse-mode pipeline. Stand
+up the Mind-of-a-Worm PR assist that surfaces the 8-phase Validation
+Methodology checklist on PRs. Land the Sibernetic architecture
+overview and CONTRIBUTING.md. Roll up the community-tracked docs
+issues (#127, #128, #165) into this docs release.
+
+Spec: DD001 Body Physics Engine Architecture, especially
+§Differentiability and §Validation Methodology.
+https://docs.openworm.org/design_documents/DD001_Body_Physics_Architecture/#differentiability
+
+Filter for the work in this release: label:dd001 label:docs
++ this milestone.
+
+Ships after v0.2.0.
+```
+
 ### Historical milestones (closed, reference only)
 
 | Milestone | Closed | Issues | Scope |

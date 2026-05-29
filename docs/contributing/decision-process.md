@@ -89,6 +89,19 @@ This section keeps the DD stable as implementation churns
 and prevents inlined next-actions lists from rotting (see
 [contributing guide § Anti-Patterns](../design_documents/contributing_guide.md#anti-patterns-what-not-to-do)).
 
+**Precedent:** This cleavage matches the convergent pattern across
+reference open-source projects. Python PEPs, Rust RFCs, Kubernetes
+KEPs, and Django DEPs all keep their design documents as frozen
+spec + rationale, and delegate the living next-actions checklist to
+either the general issue tracker or a dedicated tracking issue.
+Rust's RFC README states it bluntly: *"we cannot expect every
+merged RFC to actually reflect what the end result will be"* — i.e.,
+the design doc must NOT be edited to mirror implementation drift.
+Kubernetes uses a `latest-milestone` metadata field as the single
+canonical link to release scope, never an inline task list. OpenWorm
+adopts the lighter Python/Django pattern: label + release-milestones
+page, no separate tracking issue per DD.
+
 ## How to Build & Test                            ← REQUIRED
 
 ### Prerequisites
