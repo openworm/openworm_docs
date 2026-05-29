@@ -33,6 +33,18 @@
 | **CI gate** | Tier 3 kinematic validation + physical stability (no particle escape) blocks merge |
 ---
 
+## Implementation Status & Roadmap
+
+DD001 is the architectural specification. Implementation work is tracked outside the spec:
+
+- **Active issues:** filter by [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the [`openworm/sibernetic`](https://github.com/openworm/sibernetic) repo
+- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) for the version-scoped batches (`v0.0.8` OpenCL gold-standard stabilization, `v0.1.0` native-gpu consolidation, `v0.2.0` validation + output pipeline, `v0.3.0` substrate docs + onboarding)
+- **Proposed but not yet filed:** see [DD001 Draft GitHub Issues](DD001_draft_issues.md) for the fresh issues derived from §Backend Stabilization Roadmap and §Validation Methodology
+
+Build & test commands, parameter values, validation criteria, and the substrate architecture all live in this document. *What* gets built, *which version it ships in*, and *who's working on it* live in GitHub.
+
+---
+
 ## Goal & Success Criteria
 
 | Criterion | Target | DD010 Tier |
@@ -94,15 +106,6 @@ A working build must satisfy, on at least one of the [Compute Backends](#compute
 | **validate** | Density deviation < 1% for liquid particles; kinematic metrics within ±15% of baseline; no particle escape | `docker compose run validate` |
 | **parity** (native substrates) | Per-demo kinematic match against OpenCL reference within ±5% — see [Cross-Backend Parity Requirements](#cross-backend-parity-requirements) | `python3 tests/test_demo*_backend_parity.py` |
 | **differentiability** (native substrates) | Every paired backward kernel within ±5% relative error of finite-difference | `python3 src/metal_diff/test_*.py` (and equivalent for `src/cuda/`) |
-
-### Validation Tooling Status
-
-Two stability/incompressibility scripts referenced in older validation documents may not yet exist in the repo. If absent, they should be created against `openworm/sibernetic` with label `dd001`:
-
-| Script | Status | Tracking |
-|--------|--------|----------|
-| `scripts/check_stability.py` | Verify in repo | `openworm/sibernetic` — label `dd001` |
-| `scripts/validate_incompressibility.py` | Verify in repo | `openworm/sibernetic` — label `dd001` |
 
 ---
 
@@ -718,7 +721,7 @@ Each test produces numeric metrics; the parity suite compares against OpenCL bas
 
 ### Community Contributions to Modernization
 
-Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on `openworm/sibernetic` rather than in this design document — see the `contributor-acknowledgment` label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues such as #226 (Port sphFluid.cl to Metal for ARM64 Mac).
+Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on `openworm/sibernetic` rather than in this design document — see the `contributor-acknowledgment` label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues; see the `native-gpu` label for the current set.
 
 ---
 
@@ -956,15 +959,4 @@ def write_sibernetic_config(openworm_config):
 
 - **Approved by:** OpenWorm Steering
 - **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
-- **Next Actions:**
-
-1. Create stability validation scripts (`scripts/check_stability.py`, `scripts/validate_incompressibility.py`)
-2. Create cross-backend parity test suite against OpenCL baseline (`scripts/backend_parity_test.py`)
-3. **Land the native-gpu branch consolidation** — merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`)
-4. **Complete OpenCL ↔ Native Metal parity** on remaining demos (demo2 sheet-scale, worm_swim swim parity)
-5. **Bring native CUDA substrate up to demo1 parity** (review and merge PR #229, then iterate) — including paired backward kernels per the architectural contract
-6. **Expose differentiable interface in `openworm.yml`** (DD011) so downstream subsystems can opt into gradient-based parameter fitting
-7. **Joint neural ↔ body parameter fitting prototype** (DD002, DD003) — use SGD to tune muscle activation scaling end-to-end against kinematic targets
-8. Graduate backends that pass parity tests; add to Dockerfile and CI per-platform
-9. Extend per-particle cell IDs to all tissue types (DD004)
-10. Add cell-type-specific mechanical properties
+- **Active implementation:** Tracked via [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the sibernetic repo and the [release milestones](https://github.com/openworm/sibernetic/milestones); proposed-but-not-yet-filed work in [DD001 Draft GitHub Issues](DD001_draft_issues.md). See [Implementation Status & Roadmap](#implementation-status-roadmap).
