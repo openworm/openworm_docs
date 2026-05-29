@@ -44,6 +44,43 @@ The other 22 issues slated for closure map cleanly to DD001 sections (Configurat
 
 ---
 
+## GitHub Milestone Context
+
+`openworm/sibernetic` has four milestones in its history. Three are historical and closed (v0.0.3 in 2015, v0.0.4 in 2016, v0.0.5 in 2016); each was used to scope a release cycle and is no longer load-bearing. **One active milestone — `v0.0.8 release`, due 2026-06-12** — currently groups four open issues. The DD001 reframe creates a scheduling tension with that milestone that leadership should resolve explicitly before either the milestone closes or these fresh DD001 issues are filed.
+
+### Active milestone: `v0.0.8 release` (due 2026-06-12)
+
+| Issue | Title | Migration plan disposition | DD001 fresh issue (if any) |
+|-------|-------|----------------------------|----------------------------|
+| [#125](https://github.com/openworm/sibernetic/issues/125) | Worm_motion_log contains only zeros in full scale resolution worm | **Superseded** — 2017 output bug; output system being rebuilt under native-gpu work | Output-pipeline work picked up by [Issue #244](#issue-244-implement-ome-zarr-export-for-particle-data) (OME-Zarr export) and [Issue #246](#issue-246-configurable-output-frequency-via-openwormyml) (configurable output frequency). Recommend closing with archive comment + cross-link to #246. |
+| [#165](https://github.com/openworm/sibernetic/issues/165) | User-defined geometries and muscle models | **Superseded** — 18-comment thread, closed as superseded by DD001 §Configuration Format | **Directly replaced by [Issue #248](#issue-248-improve-config-onboarding-docs-for-custom-geometries-and-muscles-replaces-165)** (improve config-onboarding docs). Recommend closing #165 with cross-link to the new issue when #248 is filed. |
+| [#180](https://github.com/openworm/sibernetic/issues/180) | Resolve compiler warnings | **Superseded** — 2021 GCC warnings list; build system has materially changed (CMake [PR #214](https://github.com/openworm/sibernetic/pull/214), `setup.sh` [PR #211](https://github.com/openworm/sibernetic/pull/211), native-Metal port [PR #222](https://github.com/openworm/sibernetic/pull/222)) | None — out of DD001 scope at the kernel/correctness level. If new warnings surface on the native-gpu branch, file a fresh issue against the current warning set. |
+| [#182](https://github.com/openworm/sibernetic/issues/182) | Add simulation video recording utility | **Superseded** — out of DD001 scope; falls under DD012 (Dynamic Visualization Architecture, held back) | None — visualization concern, deferred to DD012 publication. |
+
+### The scheduling tension
+
+The `v0.0.8 release` milestone implies these four issues will be resolved by **2026-06-12**. The DD001 migration plan, by contrast, marks all four as Superseded and slates them for **closure-without-resolution** (archive comment referencing DD001 or a held-back DD). These are incompatible expectations: the milestone says "ship a fix for these," the migration plan says "close as obsolete."
+
+Three ways to resolve:
+
+1. **Close the four issues now** (per migration plan), then either close the milestone with no contents or repurpose it to scope a different release cut. Cleanest. Recommended if leadership accepts that none of these four are blocking work for v0.0.8.
+2. **Re-scope `v0.0.8 release`** to a smaller, DD001-aligned set — e.g., the validation infrastructure issues ([#233](#issue-233-create-scriptscheck_stabilitypy), [#234](#issue-234-create-scriptsvalidate_incompressibilitypy), [#235](#issue-235-create-cross-backend-parity-test-suite-scriptsbackend_parity_testpy)) once filed. Treats v0.0.8 as the validation-infrastructure release.
+3. **Slip the milestone due date** to give time to actually resolve the four or to fold them into a larger v0.1.0 cut. Lowest-energy option but doesn't resolve the underlying obsolescence.
+
+The recommendation is **Option 1 plus a fresh v0.1.0 milestone** scoped to the DD001 substrate-correctness work ([#236](#issue-236-opencl-metal-parity-on-demo1-cube-drop) through [#240](#issue-240-cuda-substrate-parity-bring-up) per-demo parity gates + CUDA bring-up). The native-gpu branch consolidation (PR [#230](https://github.com/openworm/sibernetic/pull/230)) is the natural reason for a v0.1.0 cut, and grouping the per-demo parity issues under that milestone gives the modernization work a visible release target.
+
+### Historical milestones (closed, reference only)
+
+| Milestone | Closed | Issues | Scope |
+|-----------|--------|--------|-------|
+| v0.0.3 | 2015-07 | 12 | LeapFrog integrator, `-help` option, worm config from file, snapshot ability |
+| v0.0.4 | 2016-04 | 15 | Bug-fixing pass: memory leaks, segfault on GPU-absent machines, NEURON interaction |
+| v0.0.5 | 2016-05 | 2 | Multi-device parallelization, settings file format |
+
+These document the project's release-cadence history. No active mapping to DD001 — included here so anyone scanning the milestones page understands the gap between 2016 and the 2026 v0.0.8 work-in-progress.
+
+---
+
 ## Group 1: Validation Infrastructure (Phase A1)
 
 Target: Scripts and infrastructure to measure simulation quality and gate cross-backend correctness.
