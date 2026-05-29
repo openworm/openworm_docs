@@ -44,7 +44,6 @@ nav:
       - Overview: contributing/index.md
       - Contributor Progression: contributing/contributor-progression.md
       - Decision Process: contributing/decision-process.md
-      - AI Contributors: contributing/ai-contributors.md
   - Community:
       - Community Overview: community.md
       - GitHub: Community/github.md

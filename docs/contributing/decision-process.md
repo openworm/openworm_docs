@@ -3,7 +3,7 @@
 - **Status:** Active (Governance)
 - **Maintained by:** OpenWorm Core Team
 - **Last updated:** 2026-02-14
-- **Related:** [Contributor Progression](contributor-progression.md), [AI Contributors](ai-contributors.md)
+- **Related:** [Contributor Progression](contributor-progression.md), AI Contributors
 
 ---
 
@@ -253,7 +253,7 @@ When a DD is created, approved, or changes phase assignment:
 3. **Integration L4** updates `INTEGRATION_MAP.md`:
    - Update the Phase Legend table
    - Update coupling chain phase annotations if data flow changes
-4. **DD Issue Generator** ([AI Contributors](ai-contributors.md) §2.2) regenerates issues with `- **Roadmap Phase:**` tags matching the new phase
+4. **DD Issue Generator** (AI Contributors §2.2) regenerates issues with `- **Roadmap Phase:**` tags matching the new phase
 5. **Mind-of-a-Worm** checks phase consistency on every PR that modifies a DD:
    - DD header `> **Phase:**` matches DD_PHASE_ROADMAP.md entry
    - Issue draft `Roadmap Phase` tags are consistent with DD phase

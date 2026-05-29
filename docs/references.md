@@ -52,7 +52,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | [Pereira et al. 2015](https://doi.org/10.7554/eLife.12432) | eLife 4:e12432 | 2015 | Cellular and regulatory map of the cholinergic nervous system of *C. elegans*. DD006, DD010 |
 | [Beets et al. 2022](https://doi.org/10.7554/eLife.81548) | eLife 12:e81548 | 2022 | System-wide mapping of neuropeptide-GPCR interactions in *C. elegans*. DD006 |
 | [Flavell et al. 2020](https://doi.org/10.1534/genetics.120.303539) | Genetics 216:315-332 | 2020 | Behavioral states in *C. elegans*. DD006, DD020 |
-| [Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958) | Annu Rev Neurosci 37:329-346 | 2014 | Neuromodulation of circuits with variable parameters. [DD015](contributing/ai-contributors.md) |
+| [Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958) | Annu Rev Neurosci 37:329-346 | 2014 | Neuromodulation of circuits with variable parameters. DD015 |
 
 ---
 
@@ -188,7 +188,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 | [Prinz et al. 2004](https://doi.org/10.1038/nn1312) | Nat Neurosci 7:1345-1352 | 2004 | Similar network activity from disparate circuit parameters. [FAQ](faq.md) |
 | [Achard & De Schutter 2006](https://doi.org/10.1371/journal.pcbi.0020094) | PLoS Comput Biol 2:e94 | 2006 | Complex parameter landscape for a complex neuron model — the solution space approach. [FAQ](faq.md) |
 | [Marder & Taylor 2011](https://doi.org/10.1038/nrn3056) | Nat Rev Neurosci 12:563-574 | 2011 | Multiple models to capture the variability in biological neurons and networks. [FAQ](faq.md) |
-| [Kawano et al. 2011](https://doi.org/10.1016/j.neuron.2011.09.005) | Neuron 72:572-586 | 2011 | An imbalancing act: gap junctions reduce backward motor circuit activity to bias *C. elegans* for forward locomotion. [DD015](contributing/ai-contributors.md) |
+| [Kawano et al. 2011](https://doi.org/10.1016/j.neuron.2011.09.005) | Neuron 72:572-586 | 2011 | An imbalancing act: gap junctions reduce backward motor circuit activity to bias *C. elegans* for forward locomotion. DD015 |
 
 ---
 

@@ -283,7 +283,7 @@ A: DDs with major scientific implications (e.g., choosing what biological detail
 A: DD012 is the main visualization architecture (data pipeline, viewer framework, phase roadmap). DD012.1 (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). DD012.2 (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
 
 **Q: Where are the GitHub issues for DD implementation?**
-A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
+A: Not yet created. After DDs are approved, `dd_issue_generator.py` (AI Contributors) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
 A: Phase 0 DDs (DD002-003, DD016) are Accepted because they're implemented and working. Phase 1-6 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

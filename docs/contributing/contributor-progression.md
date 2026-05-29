@@ -3,7 +3,7 @@
 - **Status:** Active (Governance)
 - **Maintained by:** OpenWorm Core Team
 - **Last updated:** 2026-02-14
-- **Related:** [Decision Process](decision-process.md), [AI Contributors](ai-contributors.md)
+- **Related:** [Decision Process](decision-process.md), AI Contributors
 
 ---
 
@@ -333,7 +333,7 @@ Mind-of-a-Worm maintains a **contributor database**:
 }
 ```
 
-**For AI agent contributors** (see [AI Contributors](ai-contributors.md)), the schema adds `sponsor_id` and `agent_type`:
+**For AI agent contributors** (see AI Contributors), the schema adds `sponsor_id` and `agent_type`:
 ```json
 {
   "contributor_id": "agent:claude-code-slarson-001",
@@ -451,7 +451,7 @@ The contributor application form (archived at `archive/OpenWorm_Contributor_Appl
 **Personalization strategy:** Each reactivation email is matched to the applicant's declared skills:
 
 - Programming languages (Python, C++, Java, etc.) → matched to specific DD-derived GitHub issues at their level
-- Education level → mapped to `explain_level` for AI agent teach-back ([AI Contributors](ai-contributors.md))
+- Education level → mapped to `explain_level` for AI agent teach-back (AI Contributors)
 - Biology experience → determines starting orientation (fast-track vs. full)
 - Interests (modeling, data, visualization, etc.) → matched to subsystem and suggested first task
 
@@ -459,7 +459,7 @@ The contributor application form (archived at `archive/OpenWorm_Contributor_Appl
 
 **"Choose Your Level" link:** Every reactivation email includes the self-assessment (see Fast-Track Assessment section) so returnees skip orientation they don't need. A postdoc who signed up in 2018 shouldn't be asked to install Docker again.
 
-**340 "no biology experience" applicants:** No longer disqualified. These contributors are the ideal audience for AI-bridged contribution with teach-back education ([AI Contributors](ai-contributors.md)). Their AI agents handle the biology; they learn through the Sponsor Summary mechanism. The "I Understand Neurons" teach-back badge path is designed for exactly this population.
+**340 "no biology experience" applicants:** No longer disqualified. These contributors are the ideal audience for AI-bridged contribution with teach-back education (AI Contributors). Their AI agents handle the biology; they learn through the Sponsor Summary mechanism. The "I Understand Neurons" teach-back badge path is designed for exactly this population.
 
 **Success metric:** 5% conversion = 47 active contributors — more than OpenWorm has ever had simultaneously active. Even 2% = 19, which would double the current active contributor count.
 
@@ -477,7 +477,7 @@ The contributor application form (archived at `archive/OpenWorm_Contributor_Appl
 
 OpenWorm has operated a badge-based onboarding system since May 2016 via [BadgeList](https://badgelist.com/openworm) — 162 registered users, 20 badges, 8 tags. The progression funnels work: 79 people earned "Simulation Stack Apprentice" (install Docker, run the sim) → 17 completed "Hodgkin-Huxley Tutorial Graduate" → 9 explored the muscle model → 2 built it → 12 hacked it. That's an organic L0→L2 funnel before any formal system existed.
 
-The badge system proposed here builds on that foundation, aligning badges with Design Documents, the contributor ladder, and the AI contributor model ([AI Contributors](ai-contributors.md)).
+The badge system proposed here builds on that foundation, aligning badges with Design Documents, the contributor ladder, and the AI contributor model (AI Contributors).
 
 ### Badge Types
 
@@ -533,9 +533,9 @@ Earned by sustained contribution to a specific Design Document's domain. Tracked
 
 **L2 → L3 (Contributor) requirement:** Earn at least 1 domain badge + sustained activity over 3+ months.
 
-#### 4. Teach-Back Badges (Human Sponsors Only — [AI Contributors](ai-contributors.md))
+#### 4. Teach-Back Badges (Human Sponsors Only — AI Contributors)
 
-Unique to the AI contributor model. Earned when a human sponsor's AI agent lands a PR and the Sponsor Summary (see [AI Contributors](ai-contributors.md) §3.2) passes Mind-of-a-Worm's scientific accuracy review. These badges represent **knowledge earned through contributing** — the sponsor learns the science through their agent's explanations.
+Unique to the AI contributor model. Earned when a human sponsor's AI agent lands a PR and the Sponsor Summary (see AI Contributors §3.2) passes Mind-of-a-Worm's scientific accuracy review. These badges represent **knowledge earned through contributing** — the sponsor learns the science through their agent's explanations.
 
 | Badge | Criteria | Domain |
 |-------|----------|--------|
@@ -678,7 +678,7 @@ Badges make level progression **transparent and objective**. Instead of subjecti
 | **L2 → L3** | Contributor | 1+ domain badge + 3 months sustained activity + L4 nomination |
 | **L3 → L4** | Senior Contributor | 2+ domain badges + "Mentor" badge + DD authorship + founder approval |
 
-For AI agents ([AI Contributors](ai-contributors.md)): same badge requirements through L3. L4 remains human-only.
+For AI agents (AI Contributors): same badge requirements through L3. L4 remains human-only.
 
 For human sponsors of AI agents: teach-back badges accumulate alongside (or instead of) contribution badges. A sponsor who never writes code but sponsors 50 successful AI contributions and earns "I Understand the Whole Worm" has demonstrated genuine engagement. Their badge profile tells a story of learning through contributing.
 
@@ -783,7 +783,7 @@ Mind-of-a-Worm tracks non-code contributions via Slack activity and manual tags.
 - **[Decision Process](decision-process.md):** Contributor levels determine who can propose, review, and approve Design Documents
 - **DD011 (Simulation Stack):** Subsystem ownership map determines merge permissions per repository
 - **DD012 (Dynamic Visualization Architecture):** The WormSim viewer serves as the primary engagement hook for the Explorer orientation badge; contributor community data can surface in the viewer's community panel
-- **[AI Contributors](ai-contributors.md):** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
+- **AI Contributors:** AI agents operate within the L1-L3 permission framework defined here; teach-back badges bridge AI contributions to human learning
 - **DD020 (Validation Data Acquisition Pipeline):** Provides structured data digitization tasks suitable for L1 contributor onboarding; digitized datasets feed into DD010 validation gates
 - **DD024 (Project Metrics Dashboard):** Mind-of-a-Worm contributor metrics (badge counts by category, level distribution, active contributor count, onboarding conversion rates) feed into DD024's contributor panel; "State of the Worm" newsletter content is generated from DD024 dashboard data
 

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # AI-Native Contributor Model
 
 - **Status:** In development (Governance)

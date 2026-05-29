@@ -30,7 +30,7 @@ How architectural decisions get made in OpenWorm — the Rust-style RFC process 
 - Mind-of-a-Worm DD compliance enforcement
 - Quality criteria and anti-patterns
 
-### [AI-Native Contributor Model](ai-contributors.md)
+### AI-Native Contributor Model
 
 How AI agents participate in OpenWorm as first-class contributors — the registration system, sponsor accountability model, DD-to-issue decomposition, AI-human coexistence rules, and the teach-back badge mechanism that turns AI contributions into human learning. Covers:
 

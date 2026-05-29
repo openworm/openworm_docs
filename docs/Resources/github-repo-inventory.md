@@ -96,10 +96,10 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Purpose |
 |------------|-----------|-------|--------|---------|
-| [openworm.ai](https://github.com/openworm/openworm.ai) | 2026-02-19 | 3 | **VERY ACTIVE** | LLM/AI scripts — may inform [DD015](../contributing/ai-contributors.md) (AI Contributors) |
+| [openworm.ai](https://github.com/openworm/openworm.ai) | 2026-02-19 | 3 | **VERY ACTIVE** | LLM/AI scripts — may inform DD015 (AI Contributors) |
 
 !!! note
-    This repo is brand new or recently revived. Should be reviewed for [DD015](../contributing/ai-contributors.md) AI contributor infrastructure.
+    This repo is brand new or recently revived. Should be reviewed for DD015 AI contributor infrastructure.
 
 ---
 

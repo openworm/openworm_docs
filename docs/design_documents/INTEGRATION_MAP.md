@@ -276,7 +276,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD024 (Project Metrics Dashboard) | Phase 1 | Proposed |
 | [Contributor Progression](../contributing/contributor-progression.md) | Governance (Contributing section) | Active |
 | [Decision Process](../contributing/decision-process.md) | Governance (Contributing section) | Active |
-| [AI Contributors](../contributing/ai-contributors.md) | Governance (Contributing section) | Active |
+| AI Contributors | Governance (Contributing section) | Active |
 | DD021 (Foundation Models) | Phase 2 | Proposed |
 | DD005 (Cell-Type Specialization) | Phase 3 | Proposed |
 | DD010 (Validation Framework) | Phase 3 | Proposed |

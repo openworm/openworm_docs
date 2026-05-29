@@ -25,7 +25,7 @@
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
 | **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
-| **Validation methodology** | Every physics change in Sibernetic should follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. [Mind-of-a-Worm](../contributing/ai-contributors.md) — when available — surfaces a checklist on PRs against the [Validation Methodology](#validation-methodology) section; human reviewers remain the canonical approvers. |
+| **Validation methodology** | Every physics change in Sibernetic should follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow. [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) — when available — surfaces a checklist on PRs against the [Validation Methodology](#validation-methodology) section; human reviewers remain the canonical approvers. |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd001` |
 | **Config toggle** | `body.enabled: true` / `body.backend: opencl` in `openworm.yml` |
 | **Build & test** | `docker compose run quick-test` (no NaN/segfault, *.wcon exists), `docker compose run validate` (Tier 3) |
@@ -358,7 +358,7 @@ A contribution to Sibernetic MUST:
 
 ## Validation Methodology
 
-**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — should follow the 8-phase workflow below.** The 10-item checklist at the end of this section is the recommended self-review for contributors and the reviewer's reference. [Mind-of-a-Worm](../contributing/ai-contributors.md) — when the bot is in service — surfaces the checklist on the PR as a courtesy; it does not block merges on its own. Human reviewers remain the canonical approvers and use the checklist to guide their review.
+**Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — should follow the 8-phase workflow below.** The 10-item checklist at the end of this section is the recommended self-review for contributors and the reviewer's reference. [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) — when the bot is in service — surfaces the checklist on the PR as a courtesy; it does not block merges on its own. Human reviewers remain the canonical approvers and use the checklist to guide their review.
 
 The methodology emerged from the native-Metal port (consolidated on the `ow-native-gpu-0.1.0` branch) and is now baked into the repo's tooling. It is the substrate-correctness story: hand-derived backward kernels per [Differentiability](#differentiability) prove the *math* is right; this workflow proves the *physics* is right.
 

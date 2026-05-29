@@ -33,7 +33,7 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 - 🛠️ [Contributing Guide](contributing_guide.md) — How to use, write, and review DDs (lifecycle, templates, examples, anti-patterns, FAQ)
 - 📈 [Contributor Progression](../contributing/contributor-progression.md) — L0→L5 path, badge system (in the Contributing section)
-- 🤖 [AI Contributors](../contributing/ai-contributors.md) — Autonomous agent registration (in the Contributing section)
+- 🤖 AI Contributors — Autonomous agent registration (in the Contributing section)
 
 **Resources:**
 
@@ -51,7 +51,7 @@ The key insight behind this phasing: **validate the hardest science early**. Pha
 |-------|------|--------|-----------------|---------|-------|
 | 0 | Core Architecture | Functional | Neural circuit + muscle + body + connectome data — simulation runs, 83 stabilization issues tracked | 4 | 302 neurons + 95 muscles |
 | 1 | Core Infrastructure | Proposed | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
-| 2 | Governance & Derisking | Proposed (parallel with Phase 1) | L0-L5 contributor levels + badge taxonomy ([Contributor Progression](../contributing/contributor-progression.md)), DD proposal/review process ([Decision Process](../contributing/decision-process.md)), AI agent registration + task pipeline ([AI Contributors](../contributing/ai-contributors.md)), ion channel kinetics predictions derisking Phase 3 (DD021) | 4 | — |
+| 2 | Governance & Derisking | Proposed (parallel with Phase 1) | L0-L5 contributor levels + badge taxonomy ([Contributor Progression](../contributing/contributor-progression.md)), DD proposal/review process ([Decision Process](../contributing/decision-process.md)), AI agent registration + task pipeline (AI Contributors), ion channel kinetics predictions derisking Phase 3 (DD021) | 4 | — |
 | 3 | Cell-Type Specialization | Proposed | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
 | 4 | Modulation + Closed-Loop | Proposed | Neuropeptides, touch response, proprioception | 6 | +sensory loop |
 | 5 | Organ Systems | Proposed | Pharynx, intestine, egg-laying, ML hybrid | 4 | +3 organs |
@@ -101,7 +101,7 @@ DD008 (OWMeta), DD010 (4-tier validation), DD016 (connectome/cect), DD017 (movem
 DD011 (simulation stack), DD012 (visualization), DD012.1 (visual rendering), DD012.2 (mesh deformation), DD024 (project metrics dashboard)
 
 **Governance:**
-[Contributor Progression](../contributing/contributor-progression.md) (contributor progression), [Decision Process](../contributing/decision-process.md) (RFC process), [AI Contributors](../contributing/ai-contributors.md) (AI contributors)
+[Contributor Progression](../contributing/contributor-progression.md) (contributor progression), [Decision Process](../contributing/decision-process.md) (RFC process), AI Contributors (AI contributors)
 
 **Hybrid/Advanced:**
 DD013 (mechanistic-ML hybrid), DD021 (foundation model channel kinetics), DD022 (reservoir computing validation)
@@ -165,7 +165,7 @@ DD013 (mechanistic-ML hybrid), DD021 (foundation model channel kinetics), DD022 
 
 - **Contributors:** [Contributor Progression](../contributing/contributor-progression.md) (L0-L5 progression, badge system)
 - **RFC Process:** [Decision Process](../contributing/decision-process.md) (DD template, approval workflow, [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) enforcement)
-- **AI Contributors:** [AI Contributors](../contributing/ai-contributors.md) (autonomous agents as L1-L3 contributors)
+- **AI Contributors:** AI Contributors (autonomous agents as L1-L3 contributors)
 
 ### Hybrid & Advanced
 
