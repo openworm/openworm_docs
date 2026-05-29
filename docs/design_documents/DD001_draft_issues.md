@@ -377,7 +377,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
-- **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) and [DD001 §Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 2)
+- **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) and [DD001 §Backend Graduation Criteria (Exit Conditions)](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions)
 - **Depends On:** Issue [#233](https://github.com/openworm/sibernetic/issues/233) (`check_stability.py`)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/metal_diff/tests/test_demo1_backend_parity.py`](https://github.com/openworm/sibernetic) — Existing automated parity gate for the cube-drop demo; runs both backends, compares trajectories, reports per-metric pass/fail. **THIS is the template** — generalize to all four demos.
@@ -518,7 +518,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, cuda, sph
-- **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 5), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
+- **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Backend Graduation Criteria (Exit Conditions)](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
 - **Depends On:** Issue [#235](https://github.com/openworm/sibernetic/issues/235) (parity harness), Issue [#236](https://github.com/openworm/sibernetic/issues/236) (demo1 Metal parity as reference), [PR #229](https://github.com/openworm/sibernetic/pull/229) (sib_cuda — review and merge)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/cuda/`](https://github.com/openworm/sibernetic) — CUDA substrate scaffolding ([PR #229](https://github.com/openworm/sibernetic/pull/229) by @feldmannn). Per `src/cuda/README.md`, the substrate **must** mirror `src/metal_diff/` file-for-file including paired backward kernels per forward kernel.
