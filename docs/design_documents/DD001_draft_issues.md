@@ -12,29 +12,35 @@
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Validation Infrastructure (Issues 1–3) | **Phase A1** | `[TO BE CREATED]` scripts called out by [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) |
-| 2. Per-Demo Parity & CUDA Bring-Up (Issues 4–8) | **Phase A1** | The substrate-correctness work consolidated on `ow-native-gpu-0.1.0`; each demo gets its own parity gate |
-| 3. Substrate Docs & PR Enforcement (Issues 9–11) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) binding on new PRs |
-| 4. Output Pipeline & Viewer Bridge (Issues 12–14) | **Phase A1/1** | OME-Zarr, surface mesh, configurable output for the visualization handoff |
-| 5. Documentation & Onboarding (Issues 15–18) | **Any** | Architecture overview, muscle mapping, contributor docs; includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128) |
-| 6. Future Backend Direction (Issues 19–20) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
+| 1. Validation Infrastructure (Issues #233–#235) | **Phase A1** | `[TO BE CREATED]` scripts called out by [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) |
+| 2. Per-Demo Parity & CUDA Bring-Up (Issues #236–#240) | **Phase A1** | The substrate-correctness work consolidated on `ow-native-gpu-0.1.0`; each demo gets its own parity gate |
+| 3. Substrate Docs & PR Enforcement (Issues #241–#243) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) binding on new PRs |
+| 4. Output Pipeline & Viewer Bridge (Issues #244–#246) | **Phase A1/1** | OME-Zarr, surface mesh, configurable output for the visualization handoff |
+| 5. Documentation & Onboarding (Issues #247–#250) | **Any** | Architecture overview, muscle mapping, contributor docs; includes replacements for closed issues [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128) |
+| 6. Future Backend Direction (Issues #251–#252) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
+
+---
+
+## Issue Numbering
+
+The 20 fresh issues below are labeled with **predicted** GitHub issue numbers (`#233` through `#252`) based on the current `openworm/sibernetic` numbering high-water mark (`#232`, a closed PR, as of 2026-05-28). Actual numbers assigned at filing time will shift forward if other issues or PRs are opened on the repo first. After filing, this document should be updated to reflect the assigned numbers.
 
 ---
 
 ## Migration Context: Replacing the Pre-Reframe Issue Backlog
 
-The 31 pre-existing `openworm/sibernetic` issues were triaged in a per-issue migration plan; only 3 stayed live, the rest were closed with structured archive comments referencing DD001 sections. The fresh issues below derive from [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) and [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology). Three specific replacements:
+The 31 pre-existing `openworm/sibernetic` open issues were triaged in a per-issue migration plan. As of 2026-05-28, **27 remain open** — 3 stay live as ongoing work, and the other 24 are slated for closure with structured archive comments referencing DD001 sections as the migration plan executes. **4 issues were closed in the last week** (#102, #130, #176, #221), each of which fell into the "Replaced" or "Superseded" buckets of the plan. The fresh issues below derive from [DD001 §Backend Stabilization Roadmap](DD001_Body_Physics_Architecture.md#backend-stabilization-roadmap) and [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology). Three specific replacements:
 
 | Old issue | Disposition | Replaced by |
 |-----------|-------------|-------------|
-| **[#226](https://github.com/openworm/sibernetic/issues/226)** (Wei Weng — Port `sphFluid.cl` to Metal for ARM64 Mac) | Kept live as canonical tracking issue for the Metal port; re-labeled `native-gpu` + `phase-0` | Issues 4–7 (per-demo Metal parity) consolidate the implementation work this issue tracks |
+| **[#226](https://github.com/openworm/sibernetic/issues/226)** (Wei Weng — Port `sphFluid.cl` to Metal for ARM64 Mac) | Kept live as canonical tracking issue for the Metal port; re-labeled `native-gpu` + `phase-0` | Issues #236–#239 (per-demo Metal parity) consolidate the implementation work this issue tracks |
 | **[#224](https://github.com/openworm/sibernetic/issues/224)** (Wei Weng — `QUEUE_EACH_KERNEL` OpenCL profiling flag) | Kept live; re-labeled `opencl` + `good-first-issue` | None — discrete enhancement to the OpenCL reference |
 | **[#160](https://github.com/openworm/sibernetic/issues/160)** (lungd — Pressure buffer file issue) | Kept live pending current-master reproduction; re-labeled `bug` + `needs-reproduction-current` | None — bug retained until confirmed fixed |
-| [#165](https://github.com/openworm/sibernetic/issues/165) (custom geometries/muscles, 18 comments) | Closed as superseded by DD001 §Configuration Format | **Issue 16** — improve config-onboarding docs |
-| [#128](https://github.com/openworm/sibernetic/issues/128) (inline config parameter comments) | Closed as superseded by DD001 §Configuration Format + §Physical Parameters | **Issue 17** — inline parameter comments in config files |
-| [#122](https://github.com/openworm/sibernetic/issues/122) (`pySibernetic` external wrapper, 2017) | Closed as stale community offer | **Issue 20** — formal Python bindings via pybind11 |
+| [#165](https://github.com/openworm/sibernetic/issues/165) (custom geometries/muscles, 18 comments) | Closed as superseded by DD001 §Configuration Format | **Issue #248** — improve config-onboarding docs |
+| [#128](https://github.com/openworm/sibernetic/issues/128) (inline config parameter comments) | Closed as superseded by DD001 §Configuration Format + §Physical Parameters | **Issue #249** — inline parameter comments in config files |
+| [#122](https://github.com/openworm/sibernetic/issues/122) (`pySibernetic` external wrapper, 2017) | Closed as stale community offer | **Issue #252** — formal Python bindings via pybind11 |
 
-The other 22 closed issues map cleanly to DD001 sections (Configuration Format, Integration Contract, Physical Parameters, Backend Stabilization Roadmap, Boundaries) or to held-back DDs (DD012 visualization, DD015 closed-loop touch, DD019 proprioception). The full per-issue migration plan with close-comment templates lives outside this DD.
+The other 22 issues slated for closure map cleanly to DD001 sections (Configuration Format, Integration Contract, Physical Parameters, Backend Stabilization Roadmap, Boundaries) or to held-back DDs (DD012 visualization, DD015 closed-loop touch, DD019 proprioception). The full per-issue migration plan with close-comment templates lives outside this DD.
 
 ---
 
@@ -44,7 +50,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 
 ---
 
-### Issue 1: Create `scripts/check_stability.py`
+### Issue #233: Create `scripts/check_stability.py`
 
 - **Title:** `[DD001] Create check_stability.py — simulation divergence detector`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
@@ -78,7 +84,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 
 ---
 
-### Issue 2: Create `scripts/validate_incompressibility.py`
+### Issue #234: Create `scripts/validate_incompressibility.py`
 
 - **Title:** `[DD001] Create validate_incompressibility.py — density deviation checker`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
@@ -111,7 +117,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 
 ---
 
-### Issue 3: Create cross-backend parity test suite (`scripts/backend_parity_test.py`)
+### Issue #235: Create cross-backend parity test suite (`scripts/backend_parity_test.py`)
 
 - **Title:** `[DD001] Create cross-backend parity test suite comparing native substrates against OpenCL reference`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`, `native-gpu`
@@ -119,7 +125,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) and [DD001 §Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 2)
-- **Depends On:** Issue 1 (`check_stability.py`)
+- **Depends On:** Issue #233 (`check_stability.py`)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/metal_diff/tests/test_demo1_backend_parity.py`](https://github.com/openworm/sibernetic) — Existing automated parity gate for the cube-drop demo; runs both backends, compares trajectories, reports per-metric pass/fail. **THIS is the template** — generalize to all four demos.
     - [`openworm/sibernetic/src/metal_diff/dump_metal_trajectory.py`](https://github.com/openworm/sibernetic) — Metal trajectory dumper used by the existing parity test.
@@ -128,7 +134,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Files to Modify:**
     - `scripts/backend_parity_test.py` (new — generalized harness)
     - `scripts/parity_scenarios/{demo1,demo2,worm_alone,worm_swim}.py` (new — per-demo configs)
-    - `tests/baseline/*_opencl.json` (new — see Issue 8)
+    - `tests/baseline/*_opencl.json` (new — see Issue #240)
 - **Test Commands:**
     - `python3 scripts/backend_parity_test.py --backend metal-native --scenario demo1`
     - `python3 scripts/backend_parity_test.py --backend metal-native --all`
@@ -145,13 +151,13 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 
 ## Group 2: Per-Demo OpenCL ↔ Native Parity (Phase A1)
 
-Target: Close OpenCL↔Metal parity per demo, then stand up the CUDA scaffold to the same bar. Each demo is its own deliverable so the parity gate (Issue 3) can light up incrementally.
+Target: Close OpenCL↔Metal parity per demo, then stand up the CUDA scaffold to the same bar. Each demo is its own deliverable so the parity gate (Issue #235) can light up incrementally.
 
 Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), every PR landing under these issues must follow the 8-phase **predict → reference → inspect → refine → implement → SGD-tune → render → compare** workflow and satisfy the [MoaW PR review checklist](DD001_Body_Physics_Architecture.md#mind-of-a-worm-pr-review-checklist).
 
 ---
 
-### Issue 4: OpenCL ↔ Metal parity on demo1 (cube drop)
+### Issue #236: OpenCL ↔ Metal parity on demo1 (cube drop)
 
 - **Title:** `[DD001] OpenCL↔Metal parity on demo1 (cube drop) — confirm and lock in`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
@@ -159,14 +165,14 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) (8-phase workflow)
-- **Depends On:** Issue 3 (parity harness)
+- **Depends On:** Issue #235 (parity harness)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/metal_diff/`](https://github.com/openworm/sibernetic) — Demo1 already at ±5% parity per DD001 §The Result Quality Gap.
     - `docs/<demo1>_opencl_vs_metal.mp4` — Side-by-side comparison MP4 (per §Validation Methodology Phase 6).
 - **Approach:** Confirm — demo1 is the most-mature parity case; this issue locks the parity in CI and produces the canonical artifact bundle for the documentation set.
 - **Status today:** ✅ ±5% on all 5 metrics per the existing parity test.
 - **Acceptance Criteria:**
-    - [ ] Parity test (Issue 3) green on `--scenario demo1 --substrate metal-native`
+    - [ ] Parity test (Issue #235) green on `--scenario demo1 --substrate metal-native`
     - [ ] Side-by-side MP4 committed under `docs/`
     - [ ] SGD convergence history committed (`tools/sgd_history/demo1_sgd_history.json`)
     - [ ] 3–4 spot-check frames with labeled y-values
@@ -175,7 +181,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue 5: OpenCL ↔ Metal parity on demo2 (membrane permeability)
+### Issue #237: OpenCL ↔ Metal parity on demo2 (membrane permeability)
 
 - **Title:** `[DD001] OpenCL↔Metal parity on demo2 (membrane permeability) — close remaining gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
@@ -183,7 +189,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), §Differentiability (M10 membrane kernels)
-- **Depends On:** Issue 3 (parity harness)
+- **Depends On:** Issue #235 (parity harness)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/metal_diff/`](https://github.com/openworm/sibernetic) — M10 membrane mechanism ported with FD-validated backward (<7e-4 rel-err per DD001 §What's Differentiable Today); sheet-scale parameter tuning in progress.
     - `sgd_demo2_membrane.py`, `sgd_demo2_permeability.py` — Tuning harnesses already exist.
@@ -200,7 +206,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue 6: OpenCL ↔ Metal parity on `worm_alone_half_resolution`
+### Issue #238: OpenCL ↔ Metal parity on `worm_alone_half_resolution`
 
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_alone_half_resolution — lock in visual parity`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
@@ -208,7 +214,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
-- **Depends On:** Issue 3 (parity harness)
+- **Depends On:** Issue #235 (parity harness)
 - **Existing Code to Reuse:**
     - `sgd_worm.py` — Worm-scale parameter tuning harness already exists.
     - `render_worm.py` — Worm-scale comparison rendering already exists.
@@ -224,7 +230,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue 7: OpenCL ↔ Metal parity on `worm_swim_half_resolution`
+### Issue #239: OpenCL ↔ Metal parity on `worm_swim_half_resolution`
 
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_swim_half_resolution — close swim-gait gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
@@ -232,7 +238,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
-- **Depends On:** Issue 3 (parity harness), Issue 6 (worm_alone parity)
+- **Depends On:** Issue #235 (parity harness), Issue #238 (worm_alone parity)
 - **Existing Code to Reuse:**
     - SPH pressure-force kernel (`pair_forces_pressure_grid`) already implemented (replaces XPBD-only density for water-on-worm dynamics) per DD001 §Extended Position-Based Dynamics.
 - **Approach:** Finish — basic swim locomotion validated; remaining work is closing the kinematic-metric gap (swimming velocity, frequency, wavelength) against OpenCL.
@@ -247,7 +253,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue 8: CUDA substrate parity bring-up
+### Issue #240: CUDA substrate parity bring-up
 
 - **Title:** `[DD001] CUDA substrate parity bring-up — demo1 first, then mirror Metal trajectory`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
@@ -255,7 +261,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, cuda, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 5), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
-- **Depends On:** Issue 3 (parity harness), Issue 4 (demo1 Metal parity as reference), [PR #229](https://github.com/openworm/sibernetic/pull/229) (sib_cuda — review and merge)
+- **Depends On:** Issue #235 (parity harness), Issue #236 (demo1 Metal parity as reference), [PR #229](https://github.com/openworm/sibernetic/pull/229) (sib_cuda — review and merge)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/src/cuda/`](https://github.com/openworm/sibernetic) — CUDA substrate scaffolding ([PR #229](https://github.com/openworm/sibernetic/pull/229) by @feldmannn). Per `src/cuda/README.md`, the substrate **must** mirror `src/metal_diff/` file-for-file including paired backward kernels per forward kernel.
     - [`openworm/sibernetic/src/metal_diff/`](https://github.com/openworm/sibernetic) — Reference architecture (19 forward + 19 backward kernels). CUDA implementation should follow Metal kernel-for-kernel.
@@ -277,7 +283,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 
 ---
 
-### Issue 9: Document OpenCL kernel architecture (`sphFluid.cl`)
+### Issue #241: Document OpenCL kernel architecture (`sphFluid.cl`)
 
 - **Title:** `[DD001] Document OpenCL reference kernel architecture for substrate parity work`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`
@@ -304,7 +310,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 
 ---
 
-### Issue 10: Document the 19 paired forward/backward kernels (differentiable substrate)
+### Issue #242: Document the 19 paired forward/backward kernels (differentiable substrate)
 
 - **Title:** `[DD001] Document the 19 paired forward/backward kernels and xpbd_full_bwd reverse-mode pipeline`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
@@ -330,7 +336,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 
 ---
 
-### Issue 11: Mind-of-a-Worm 8-phase Validation Methodology PR assist
+### Issue #243: Mind-of-a-Worm 8-phase Validation Methodology PR assist
 
 - **Title:** `[DD001] Mind-of-a-Worm PR assist surfacing the 8-phase Validation Methodology checklist`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
@@ -350,7 +356,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
     - [ ] Workflow triggers on PRs touching kernel sources or substrate code
     - [ ] Surfaces the status of each checklist item: written prediction, OpenCL reference trajectory, Metal/CUDA trajectory dump, side-by-side MP4 under `docs/`, SGD convergence history, FD test for any new kernel
     - [ ] Workflow posts a checklist-status comment on the PR (does **not** block merge; reviewers decide)
-    - [ ] Documented in `CONTRIBUTING.md` (Issue 18) and DD001 itself
+    - [ ] Documented in `CONTRIBUTING.md` (Issue #250) and DD001 itself
 - **Sponsor Summary Hint:** DD001's Validation Methodology gives reviewers a 10-item checklist to walk through. This issue makes that checklist easier to apply by posting an automated summary on each kernel-touching PR — "here's which items I can verify are present, here's what's missing." The bot is an assistant, not a gatekeeper: human reviewers decide whether a PR is ready to merge.
 
 ---
@@ -361,7 +367,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 
 ---
 
-### Issue 12: Implement OME-Zarr export for particle data
+### Issue #244: Implement OME-Zarr export for particle data
 
 - **Title:** `[DD001] Implement OME-Zarr export for body/positions and body/types`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
@@ -391,7 +397,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 
 ---
 
-### Issue 13: Implement surface mesh reconstruction from SPH particles
+### Issue #245: Implement surface mesh reconstruction from SPH particles
 
 - **Title:** `[DD001] Implement marching cubes surface reconstruction from SPH particles`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
@@ -399,7 +405,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, 3d-geometry
 - **DD Section to Read:** [DD001 §Deliverables](DD001_Body_Physics_Architecture.md#deliverables) (surface mesh row), [DD001 §How to Visualize](DD001_Body_Physics_Architecture.md#how-to-visualize)
-- **Depends On:** Issue 12 (OME-Zarr export)
+- **Depends On:** Issue #244 (OME-Zarr export)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/inc/owVtkExport.h`](https://github.com/openworm/sibernetic) — VTK export for particle visualization. Can serve as the input reader for surface reconstruction.
     - [`openworm/skeletonExtraction`](https://github.com/openworm/skeletonExtraction) — C++ skeleton extraction from Sibernetic mesh output (3D graphics skeleton for animation). Different purpose (animation skeleton vs. surface mesh) but related geometry processing on the same particle data.
@@ -422,7 +428,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 
 ---
 
-### Issue 14: Configurable output frequency via `openworm.yml`
+### Issue #246: Configurable output frequency via `openworm.yml`
 
 - **Title:** `[DD001] Implement configurable output frequency from openworm.yml simulation.output_interval`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
@@ -459,7 +465,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 15: Sibernetic architecture overview for new contributors
+### Issue #247: Sibernetic architecture overview for new contributors
 
 - **Title:** `[DD001] Create Sibernetic architecture overview for contributors`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -486,7 +492,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 16: Improve config-onboarding docs for custom geometries and muscles (replaces [#165](https://github.com/openworm/sibernetic/issues/165))
+### Issue #248: Improve config-onboarding docs for custom geometries and muscles (replaces [#165](https://github.com/openworm/sibernetic/issues/165))
 
 - **Title:** `[DD001] Improve config-onboarding docs: bring-your-own-geometry workflow for custom Sibernetic runs`
 - **Labels:** `DD001`, `ai-workable`, `L2`
@@ -494,7 +500,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs, physics
 - **DD Section to Read:** [DD001 §Configuration Format](DD001_Body_Physics_Architecture.md#configuration-format), [DD001 §Muscle Actuation](DD001_Body_Physics_Architecture.md#muscle-actuation-force-injection)
-- **Depends On:** Issue 15 (architecture overview), Issue 17 (config parameter comments)
+- **Depends On:** Issue #247 (architecture overview), Issue #249 (config parameter comments)
 - **Replaces:** Closed issue [#165](https://github.com/openworm/sibernetic/issues/165) (User-defined geometries and muscle models)
 - **Existing Code to Reuse:**
     - [`openworm/sibernetic/configuration/`](https://github.com/openworm/sibernetic) — 12+ existing binary configuration directories provide the working examples to walk through.
@@ -513,7 +519,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 17: Inline parameter comments in config files (replaces [#128](https://github.com/openworm/sibernetic/issues/128))
+### Issue #249: Inline parameter comments in config files (replaces [#128](https://github.com/openworm/sibernetic/issues/128))
 
 - **Title:** `[DD001] Add inline parameter comments to binary configuration metadata files`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -539,7 +545,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 
 ---
 
-### Issue 18: Sibernetic CONTRIBUTING.md with substrate workflow
+### Issue #250: Sibernetic CONTRIBUTING.md with substrate workflow
 
 - **Title:** `[DD001] Create CONTRIBUTING.md with native-substrate development workflow and standards`
 - **Labels:** `DD001`, `ai-workable`, `L1`
@@ -561,7 +567,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
     - [ ] Explicit pointer to the 8-phase Validation Methodology with examples
     - [ ] Branch naming convention: `dd001/description`
     - [ ] How to add a new kernel to the native substrate (paired-backward contract from §Differentiability)
-    - [ ] How to run the cross-backend parity test suite (Issue 3)
+    - [ ] How to run the cross-backend parity test suite (Issue #235)
     - [ ] Links to DD001 for specifications
 - **Sponsor Summary Hint:** A CONTRIBUTING.md is the entry point for any developer. This one specifically guides physics-engine contributors through the multi-substrate testing workflow — build, test, compare against OpenCL baseline, satisfy the 8-phase Validation Methodology, submit PR. Without it, contributors won't know which tests to run or what quality bar to meet.
 
@@ -573,7 +579,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue 19: Evaluate FEM Projective Dynamics backend feasibility
+### Issue #251: Evaluate FEM Projective Dynamics backend feasibility
 
 - **Title:** `[DD001] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm / Metaworm)`
 - **Labels:** `DD001`, `human-expert`, `L3`
@@ -601,7 +607,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue 20: Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
+### Issue #252: Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
 
 - **Title:** `[DD001] Create Python bindings for Sibernetic C++ library (formalize the existing CPython integration)`
 - **Labels:** `DD001`, `human-expert`, `L3`
@@ -658,26 +664,26 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 ### Dependency Graph (Critical Path)
 
 ```
-Issue 1 (check_stability.py) ─┐
-Issue 2 (incompressibility.py)┤
-                              ├→ Issue 3 (parity harness) ─┬→ Issue 4 (demo1 parity, mostly done)
-                              │                            ├→ Issue 5 (demo2 parity — close gap)
-                              │                            ├→ Issue 6 (worm_alone parity)
-                              │                            ├→ Issue 7 (worm_swim parity — close gap)
-                              │                            └→ Issue 8 (CUDA bring-up; also depends on [PR #229](https://github.com/openworm/sibernetic/pull/229))
+Issue #233 (check_stability.py) ─┐
+Issue #234 (incompressibility.py)┤
+                              ├→ Issue #235 (parity harness) ─┬→ Issue #236 (demo1 parity, mostly done)
+                              │                            ├→ Issue #237 (demo2 parity — close gap)
+                              │                            ├→ Issue #238 (worm_alone parity)
+                              │                            ├→ Issue #239 (worm_swim parity — close gap)
+                              │                            └→ Issue #240 (CUDA bring-up; also depends on [PR #229](https://github.com/openworm/sibernetic/pull/229))
                               │
-Issue 9 (OpenCL kernel docs) ─┘  (feeds parity work, not blocking)
+Issue #241 (OpenCL kernel docs) ─┘  (feeds parity work, not blocking)
 
-Issue 10 (paired backward docs) — independent; pairs with Issue 11
-Issue 11 (MoaW PR gate) — independent; depends on existing parity test for one of its acceptance items
+Issue #242 (paired backward docs) — independent; pairs with Issue #243
+Issue #243 (MoaW PR gate) — independent; depends on existing parity test for one of its acceptance items
 
-Issue 12 (OME-Zarr export) → Issue 13 (surface mesh)
-Issue 14 (output frequency) — depends on DD011 config loading
+Issue #244 (OME-Zarr export) → Issue #245 (surface mesh)
+Issue #246 (output frequency) — depends on DD011 config loading
 
-Issue 15 (architecture overview) → Issue 16 (custom config docs)
-Issue 17 (inline param comments) — independent
-Issue 18 (CONTRIBUTING.md) — depends on Issues 3, 9, 10, 11 being defined (but not done)
+Issue #247 (architecture overview) → Issue #248 (custom config docs)
+Issue #249 (inline param comments) — independent
+Issue #250 (CONTRIBUTING.md) — depends on Issues #235, #241, #242, #243 being defined (but not done)
 
-Issue 19 (FEM evaluation) — independent research
-Issue 20 (Python bindings) — independent
+Issue #251 (FEM evaluation) — independent research
+Issue #252 (Python bindings) — independent
 ```
