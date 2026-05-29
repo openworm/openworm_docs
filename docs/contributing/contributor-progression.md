@@ -16,14 +16,14 @@ OpenWorm uses a five-level contributor progression (L0 Observer through L5 Found
 ### Goals
 
 1. **Transparent contributor advancement path** — newcomers can see exactly how to progress from observer to leader
-2. **Reduced founder bottleneck** — delegate mentoring, review, and merge authority to L3/L4 contributors
+2. **Decentralized review** — L3/L4 contributors hold mentoring, review, and merge authority in their subsystems, so work doesn't bottleneck through one person
 3. **Clear subsystem ownership** — every Design Document domain has an accountable Senior Contributor (L4)
 
 ### Success Criteria
 
 - At least 3 contributors at L3+ within 12 months of adoption
 - All subsystems in the ownership map have assigned L4 maintainers (no "TBD" entries)
-- Decision-making latency reduced: L3 contributors can merge PRs in their subsystem without founder review
+- Decision-making latency reduced: L3 contributors can merge PRs in their subsystem without escalating to L5
 - [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) contributor database operational and tracking progression automatically
 
 ## Deliverables
@@ -61,7 +61,7 @@ OpenWorm has operated with **informal, organic leadership emergence**: "experien
 
 - Newcomers don't know how to progress from observer to contributor to leader
 - No clear criteria for when someone is "ready" for more responsibility
-- Founder ends up mentoring everyone, which doesn't scale
+- Mentoring concentrates on a few senior contributors, which doesn't scale past the current contributor population
 - Quality control is ad-hoc (no systematic review process)
 
 The Apache Software Foundation's **meritocratic contributor ladder** (User → Contributor → Committer → PMC Member) is the gold standard. Linux kernel's **maintainer tree** provides the delegation model. Medical residency's **graduated autonomy** framework provides the competency-based progression logic.

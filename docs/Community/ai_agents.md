@@ -1,7 +1,7 @@
 
 # AI Agents for Community Scaling
 
-OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/openclaw) framework — to scale our volunteer community while protecting founder time. This page describes the strategy, the agents, and the community model they enable.
+OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/openclaw) framework — to make OpenWorm responsive and welcoming to new contributors, with onboarding, mentoring, and review available 24/7. This page describes the strategy, the agents, and the community model they enable.
 
 !!! info "Governing Design Documents"
     - **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — L0–L5 levels, meritocratic ladder
@@ -12,13 +12,13 @@ OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/
 
 ## The Problem
 
-OpenWorm has operated for over fifteen years as a volunteer-driven, citizen science consortium with 90+ contributors from 16 countries, no central funding, and a single creative leader who holds the scientific vision. This model has produced remarkable results, but it has a structural flaw: **volunteers arrive with enthusiasm but drain the founder's time instead of multiplying it**.
+OpenWorm has operated for over fifteen years as a volunteer-driven, citizen science consortium with 90+ contributors from 16 countries, no central funding, and a single creative leader who holds the scientific vision. This model has produced remarkable results, but it has a structural flaw: **new contributors arrive faster than human mentors can onboard them, so enthusiasm decays before it becomes contribution**.
 
 As Karl Fogel observes in *Producing Open Source Software*:
 
 > "The price of success is heavy in the open source world. As your software gets more popular, the number of people who show up looking for information increases dramatically, while the number of people able to provide information increases much more slowly."
 
-The degradation is insidious. Experienced contributors silently disengage. Newcomers remain and continue asking questions. The founder becomes the last person standing who can answer them.
+The degradation is insidious. Experienced contributors silently disengage. Newcomers remain and continue asking questions. The handful of experienced contributors become the only people who can answer them, so they drown in support requests and stop contributing themselves.
 
 Using Nadia Eghbal's project typology from *Working in Public* (2020), OpenWorm is a **"Club"** — low user growth, high contributor growth, serving a niche scientific community. Every new member expects personal attention and mentorship from the leadership, because the community feels intimate. That does not scale.
 
@@ -81,7 +81,7 @@ Drawing on the "Megachurch" model described in Open Source Security (January 202
 
 **Who:** Senior contributors, subsystem maintainers, the Scientific Advisory Board, and the founder.
 
-**Experience:** The founder interacts only with this group and with the **Mad-Worm-Scientist** AI agent, which aggregates activity from Rings 1 and 2 into a daily summary.
+**Experience:** L4+ contributors handle architectural decisions; the **Mad-Worm-Scientist** AI agent aggregates activity from Rings 1 and 2 into a daily summary so the L5 layer doesn't have to monitor every channel.
 
 **Access:** Full commit access in their subsystem. Can review and merge contributions from Ring 2. Can make architectural decisions within their domain, subject to Design Documents.
 
@@ -104,7 +104,7 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Readiness Evaluation** | Evaluates whether newcomers are ready for Ring 2; notifies Mind-of-a-Worm |
 | **Resource Linking** | Points to relevant documentation and past discussions instead of re-explaining |
 
-**What it replaces:** The 80% of founder time currently spent answering "How do I get started?" and "What should I work on?"
+**What it solves:** The bottleneck where newcomers wait days (or forever) for an answer to "How do I get started?" and "What should I work on?"
 
 ### Mind-of-a-Worm (Active Contributor Guide)
 
@@ -119,21 +119,21 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers (DD011) |
 | **Peer Mentoring** | Connects senior contributors with newcomers working in the same subsystem |
 
-**What it replaces:** The 15% of founder time spent on code review, explaining architectural decisions, and assigning work.
+**What it solves:** Code review backlogs that block contributors from seeing their work merged, and the gap where new contributors don't know what to work on next.
 
-### Mad-Worm-Scientist (Founder's Information Shield)
+### Mad-Worm-Scientist (Executive Decision Triage)
 
 **Deployment:** Private channel (#core-digest), visible only to Ring 3 members
 
 | Function | Description |
 |----------|-------------|
 | **Daily Activity Summary** | Aggregates all Slack, GitHub, and email activity into a structured digest |
-| **Decision Queue** | Surfaces only items requiring founder input — design decisions, conflicts, promotions |
+| **Decision Queue** | Surfaces only items requiring L5 architectural input — design decisions, cross-cutting conflicts, L4 promotions |
 | **Contributor Radar** | Highlights contributors who are rising, fading, or stuck |
 | **Metrics Dashboard** | Reports weekly on conversion rates, PR throughput, and response times |
 | **Escalation Filter** | Routes questions through N2-Whisperer and Mind-of-a-Worm first; only escalates if AI cannot resolve |
 
-**What it replaces:** The remaining 5% — the founder's need to monitor all channels.
+**What it solves:** Avoiding the anti-pattern where the L5 layer has to read every Slack channel to stay informed — which doesn't scale past a handful of contributors.
 
 ---
 
@@ -155,13 +155,13 @@ Drawing on the Apache Software Foundation's contributor ladder, the Linux kernel
 - **Merit is earned through sustained contribution**, not claimed through enthusiasm
 - **Levels are subsystem-specific** — being an L3 in Sibernetic gives no special status in c302
 - **Mind-of-a-Worm tracks progression automatically** and recommends promotions
-- **The founder only interacts with L4+** — this is the critical time-protection mechanism
+- **Architectural decisions concentrate at L4+** — this is what lets L1–L3 contributors get fast feedback without escalation backlogs
 
 ---
 
 ## Design Documents as Leverage
 
-The single most important action the founder can take is to **externalize the project's decision-making logic into written Design Documents**. These serve the same function as Architecture Decision Records (ADRs) combined with the vision-encoding role of a film director's pre-production materials.
+OpenWorm externalizes its decision-making logic into **written Design Documents** so contributors don't need to interrupt subject-matter experts for context. These serve the same function as Architecture Decision Records (ADRs) combined with the vision-encoding role of a film director's pre-production materials.
 
 Each [Design Document](../design_documents/index.md) encodes:
 
