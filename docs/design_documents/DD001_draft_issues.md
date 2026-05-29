@@ -20,7 +20,7 @@
 | 3. Substrate Docs & PR Enforcement (Issues [#241](https://github.com/openworm/sibernetic/issues/241)–[#243](https://github.com/openworm/sibernetic/issues/243)) | **Phase A1** | Documents what landed (kernels + paired backwards) and makes the 8-phase [Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) discoverable to new PRs |
 | 4. Output Pipeline & Viewer Bridge (Issues [#244](https://github.com/openworm/sibernetic/issues/244)–[#246](https://github.com/openworm/sibernetic/issues/246)) | **Phase A1/1** | OME-Zarr, surface mesh, configurable output for the visualization handoff |
 | 5. Documentation & Onboarding (Issues [#247](https://github.com/openworm/sibernetic/issues/247)–[#248](https://github.com/openworm/sibernetic/issues/248)) | **Any** | Architecture overview, CONTRIBUTING.md (config-docs improvements folded into existing [#165](https://github.com/openworm/sibernetic/issues/165) and [#128](https://github.com/openworm/sibernetic/issues/128)) |
-| 6. Future Backend Direction (Issues [#249](https://github.com/openworm/sibernetic/issues/249)–[#250](https://github.com/openworm/sibernetic/issues/250)) | **Phase 2+** | FEM Projective Dynamics evaluation; Python bindings |
+| 6. Future Backend Direction ([#249](https://github.com/openworm/sibernetic/issues/249), [#250](https://github.com/openworm/sibernetic/issues/250)) | **Phase 2+ / Phase 2** | FEM Projective Dynamics evaluation (unmilestoned); in-process `Simulation` handle for closed-loop tight loop (Phase 2 — Sensory Coupling) |
 
 ---
 
@@ -94,7 +94,7 @@ Three issues warrant outright closure rather than deferral:
 |-------|-------------|---------|
 | [#106](https://github.com/openworm/sibernetic/issues/106) | Close as **duplicate of [#107](https://github.com/openworm/sibernetic/issues/107)** | Same scope as [#107](https://github.com/openworm/sibernetic/issues/107) (Sibernetic-NEURON sync docs). Consolidating discussion there; #107 is being deferred to Phase A1 — Substrate Documentation. |
 | [#168](https://github.com/openworm/sibernetic/issues/168) | Close as **stale, insufficient information** | 5-year-old generic help request with no reproduction details or specific ask. Original macOS build question is now addressed by `./setup.sh` and the in-progress native-Metal port. Please file a fresh issue with reproduction details if a current bug exists. |
-| [#122](https://github.com/openworm/sibernetic/issues/122) | Close as **stale community offer, replaced** | Thanks @ranr01 for offering the pySibernetic wrapper in 2017. Current Python-binding direction is in-tree via pybind11; tracked as [Issue #250](#issue-250-sibernetic-python-bindings-for-direct-api-access-replaces-122). Closing this issue as historical; the external wrapper remains available at github.com/ranr01/pySibernetic for anyone who finds it useful. |
+| [#122](https://github.com/openworm/sibernetic/issues/122) | Close as **stale community offer**; see warmer comment below | A more generous close-comment text for @ranr01 is drafted alongside this DD; see the comment template at the end of this section. The current Python-binding direction is narrowed and re-scoped under [Issue #250](#issue-250-in-process-simulation-handle-for-tight-loop-closed-loop-control) (Phase 2 — Sensory Coupling). |
 
 ### Recent closures (last week, 4 issues)
 
@@ -132,9 +132,9 @@ Seven release milestones proposed, named to align directly with [the OpenWorm pr
 | **Phase A1 — Validation Infrastructure** | [Phase A1](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) (validation toolbox + output pipeline are A1 deliverables) | **New** | Cross-substrate validation scripts (stability, incompressibility) and the OME-Zarr + surface-mesh + configurable-output pipeline that bridges simulation output to the visualization handoff. |
 | **Phase A1 — Substrate Documentation** | [Phase A1](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) (contributor workflow is A1 territory) | **New** | The substrate becomes understandable and contributor-ready: OpenCL kernel architecture documented, the 19 paired forward/backward kernels explained, MoaW PR assist live, architecture overview + CONTRIBUTING.md in place, community-tracked docs issues ([#127](https://github.com/openworm/sibernetic/issues/127), [#128](https://github.com/openworm/sibernetic/issues/128), [#165](https://github.com/openworm/sibernetic/issues/165)) consolidated. Also picks up Sibernetic↔NEURON coupling docs ([#107](https://github.com/openworm/sibernetic/issues/107)) and calibration scope ([#108](https://github.com/openworm/sibernetic/issues/108)). |
 | **Phase 1 — Sibernetic Visualization Enhancements** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-specialization-months-1-3) (DD012 Phase 1 Post-Hoc Trame Viewer begins here) | **New** | Sibernetic-side improvements that DD012 (Dynamic Visualization Architecture) will spec when it publishes. Holds deferred visualization issues ([#101](https://github.com/openworm/sibernetic/issues/101), [#117](https://github.com/openworm/sibernetic/issues/117), [#119](https://github.com/openworm/sibernetic/issues/119), [#182](https://github.com/openworm/sibernetic/issues/182)). Ships after Phase A1 — Validation Infrastructure lands, which reshapes what "visualization" means for Sibernetic. |
-| **Phase 2 — Sensory Coupling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD015 Touch + DD019 Proprioception live here) | **New** | Sibernetic-side support for closed-loop sensorimotor work that DD015 (Touch Response) and DD019 (Proprioceptive Feedback) will spec when those held-back DDs publish. Holds the deferred issues ([#100](https://github.com/openworm/sibernetic/issues/100) steering, [#141](https://github.com/openworm/sibernetic/issues/141) proprioception, [#144](https://github.com/openworm/sibernetic/issues/144) touch) until DD015/DD019 publish and fresh issues derive from them. |
+| **Phase 2 — Sensory Coupling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD015 Touch + DD019 Proprioception live here) | **New** | Sibernetic-side support for closed-loop sensorimotor work that DD015 (Touch Response) and DD019 (Proprioceptive Feedback) will spec when those held-back DDs publish. Holds the deferred issues ([#100](https://github.com/openworm/sibernetic/issues/100) steering, [#141](https://github.com/openworm/sibernetic/issues/141) proprioception, [#144](https://github.com/openworm/sibernetic/issues/144) touch) plus the in-process `Simulation` handle ([Issue #250](#issue-250-in-process-simulation-handle-for-tight-loop-closed-loop-control)) that the closed-loop tight loop needs. |
 | **Phase 2 — Environmental Modeling** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (DD018 Environmental Modeling lives here) | **New** | Sibernetic-side support for chemical/thermal environment simulation that DD018 (Environmental Modeling and Stimulus Delivery) will spec when it publishes — chemotaxis on simulated NaCl gradient, thermotaxis, agar substrate enhancements beyond what DD001 already covers. Holds [#163](https://github.com/openworm/sibernetic/issues/163) (molecular environment). Out of DD001's §Boundaries ("beyond liquid/gel") but in scope for DD018. |
-| **Unmilestoned** | — | — | FEM Projective Dynamics feasibility evaluation, Python bindings (replaces stale [#122](https://github.com/openworm/sibernetic/issues/122)), multi-GPU performance scaling ([#135](https://github.com/openworm/sibernetic/issues/135) — Phase 2+ research after native substrates Stable). Filed for tracking but no release commitment yet. |
+| **Unmilestoned** | — | — | FEM Projective Dynamics feasibility evaluation, multi-GPU performance scaling ([#135](https://github.com/openworm/sibernetic/issues/135) — Phase 2+ research after native substrates Stable). Filed for tracking but no release commitment yet. |
 
 ### Milestone descriptions to post on GitHub
 
@@ -874,38 +874,33 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 
 ---
 
-### Issue [#250](https://github.com/openworm/sibernetic/issues/250): Sibernetic Python bindings for direct API access (replaces [#122](https://github.com/openworm/sibernetic/issues/122))
+### Issue [#250](https://github.com/openworm/sibernetic/issues/250): In-process Simulation handle for tight-loop closed-loop control
 
-- **Title:** `[DD001] Create Python bindings for Sibernetic C++ library (formalize the existing CPython integration)`
-- **Labels:** `DD001`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 2+
-- **Milestone:** [Unmilestoned](#milestones)
+- **Title:** `[DD001] In-process Simulation handle for closed-loop tight-loop control`
+- **Labels:** `DD001`, `human-expert`, `L3`, `closed-loop`
+- **Roadmap Phase:** Phase 2
+- **Milestone:** [Phase 2 — Sensory Coupling](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, c++, pybind11
 - **DD Section to Read:** [DD001 §Integration Contract](DD001_Body_Physics_Architecture.md#integration-contract)
-- **Depends On:** None
-- **Replaces:** Closed issue [#122](https://github.com/openworm/sibernetic/issues/122) (pySibernetic, 2017 external wrapper)
-- **Existing Code to Reuse:**
-    - [`openworm/sibernetic/src/owSignalSimulator.cpp`](https://github.com/openworm/sibernetic) — Already contains a CPython API integration layer using direct `PyObject` calls to interface with NEURON/c302. C++↔Python interop already exists in the codebase; the question is formalization.
-- **Approach:** Extend — build on the existing CPython API calls in `owSignalSimulator.cpp`. Two viable paths: (a) formalize with pybind11 for a clean public API, (b) extend the existing CPython embedding for backward compatibility.
-- **Note:** Sibernetic uses a Makefile build system (the CMake migration of [PR #214](https://github.com/openworm/sibernetic/pull/214) is the current build path). Adding pybind11 will integrate with the current build path.
+- **Depends On:** DD015 (Touch Response) and/or DD019 (Proprioceptive Feedback) publishing — these establish the closed-loop coupling requirement that motivates this issue.
+- **Audit note (Python already present in Sibernetic):** Sibernetic already has substantial Python infrastructure today: `src/owSignalSimulator.cpp` embeds CPython for the C++→Python neural-callback path (NEURON/c302 integration); `sibernetic_c302.py`, `src/metal_diff/dump_metal_trajectory.py`, and the SGD harnesses (`src/metal_diff/sgd_*.py`) all drive the simulation via subprocess; `tests/`, `scripts/`, and `wcon/` carry the post-processing and parity-test Python. The subprocess pattern handles every existing workflow today. **This issue is not about replacing that — it's narrowly about the per-timestep tight-loop case that subprocess overhead would block.**
+- **Approach:** Add a single `Simulation` Python class with the minimum surface area for tight-loop closed-loop control. Builds on `owSignalSimulator.cpp`'s existing CPython embedding (the inverse direction). No `pip install`-able package, no replacement of the existing subprocess pattern — the binding is an additive option for workflows that need it.
 - **Files to Modify:**
-    - `python/sibernetic_bindings.cpp` (new — pybind11 wrapper)
-    - `python/sibernetic/__init__.py` (new — Python package)
+    - `python/sibernetic_loop.cpp` (new — pybind11 wrapper, minimum surface)
+    - `python/sibernetic/__init__.py` (new — in-repo Python module, NOT a pip package)
     - `CMakeLists.txt` (add pybind11 target)
-    - `pyproject.toml` (new — pip installable)
 - **Test Commands:**
-    - `pip install -e .`
-    - `python3 -c "import sibernetic; sim = sibernetic.Simulation('configuration/worm_crawl_demo'); sim.step()"`
+    - `python3 -c "from python.sibernetic import Simulation; sim = Simulation('configuration/worm_crawl_demo'); sim.step(); print(sim.get_positions()[:5])"`
+    - Closed-loop control demo: read SPH strain → compute Python-side sensory response → inject muscle activation → step. Measure tight-loop overhead vs subprocess.
 - **Acceptance Criteria:**
-    - [ ] `pip install` produces a `sibernetic` Python package
-    - [ ] Python API exposes: `Simulation(config_path)`, `.step()`, `.get_positions()`, `.get_velocities()`, `.get_densities()`
-    - [ ] Can inject muscle forces from Python: `sim.set_muscle_activation(quadrant, value)`
-    - [ ] Can read particle state without file I/O (direct memory access)
-    - [ ] Works with OpenCL backend (C++ core + Python wrapper)
-    - [ ] Enables `sibernetic_c302.py` to call Sibernetic directly instead of via subprocess
-    - [ ] Pybind11 wraps the existing C++ API; no algorithmic changes
-- **Sponsor Summary Hint:** Currently the neural circuit (Python) and body physics (C++) communicate via file I/O. Python bindings would allow direct function calls, dramatically simplifying the coupling code and eliminating file I/O bottlenecks. The existing `owSignalSimulator.cpp` already has CPython API calls — this formalizes that into a proper Python package, replacing the 2017 community-offered `pySibernetic` wrapper ([#122](https://github.com/openworm/sibernetic/issues/122)) with a maintained in-tree binding.
+    - [ ] `Simulation(config_path)` constructs an in-process simulation instance
+    - [ ] `.step()` advances one timestep without subprocess overhead
+    - [ ] `.get_positions()`, `.get_velocities()` return particle state via direct memory access (zero-copy via numpy buffer protocol where possible)
+    - [ ] `.set_muscle_activation(quadrant, value)` injects activation for the next step
+    - [ ] Closed-loop demo shows the per-timestep loop is meaningfully faster than the equivalent subprocess pattern (target: <10% of subprocess time)
+    - [ ] **Does not** require `pip install` or break the existing subprocess workflows in `sibernetic_c302.py`, `dump_metal_trajectory.py`, or the SGD harnesses
+- **Sponsor Summary Hint:** Sibernetic already has substantial Python — embedded CPython for the neural callback, subprocess-driven Python for everything else. That works fine for current workflows. What it doesn't work for is the per-timestep tight loop a closed-loop sensorimotor controller needs: read strain, compute a sensory response, inject muscle activation, step. This issue adds a minimal `Simulation` class with just those four operations for the closed-loop case. It's scoped to support DD015/DD019 when they publish; until then, subprocess is the right answer.
 
 ---
 
