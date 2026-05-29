@@ -15,16 +15,16 @@
 
 | Group | Milestone | Issues |
 |-------|-----------|--------|
-| 1. Parity Harness + Per-Demo Parity + CUDA Phase 3 | **v0.0.9 — Phase 0 Modernization** | [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1) generalize parity harness, [#237](#issue-237-run-the-demo1-cube-drop-parity-test-in-ci-on-every-pr) demo1 lock-in, [#238](#issue-238-add-a-parity-check-for-demo2-membrane-permeability) demo2 harness entry, [#239](#issue-239-add-a-parity-check-for-worm_alone-passive-worm-body-no-muscle-drive) worm_alone lock-in, [#240](#issue-240-replace-the-temporary-soft-floor-hack-with-proper-boundary-physics-metal) Ihmsen 2010 boundary pressure, [#241](#issue-241-fix-the-worm-sinking-bug-in-the-metal-swim-test-iterative-pressure-each-step) PCISPH iterative pressure, [#242](#issue-242-turn-on-muscle-drive-in-worm_swim-and-add-a-parity-check-depends-on-236-241) worm_swim driven scenario, [#243](#issue-243-cuda-bring-up-port-one-sph-kernel-and-prove-the-build-works) CUDA Phase 3 |
-| 2. Validation Tooling + Output Pipeline | **v0.1.0 — Phase 1 Validation Infrastructure** | [#233](#issue-233-detect-blown-up-simulations-nan-particle-escape-runaway-velocity) extend stability checker, [#234](#issue-234-save-per-particle-density-to-disk-both-substrates) emit per-particle density, [#235](#issue-235-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-234) incompressibility checker, [#247](#issue-247-export-simulation-output-to-ome-zarr-only-if-the-viewer-team-needs-it) OME-Zarr converter, [#248](#issue-248-wire-openwormyml-output_interval-into-sibernetic) output-interval plumbing |
-| 3. Substrate Docs + Contributor Onboarding | **v0.1.1 — Phase 1 Substrate Documentation** | [#244](#issue-244-opencl-backend-walkthrough-doc-call-graph-equation-table-gotchas) OpenCL kernel call graph, [#245](#issue-245-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass) paired-kernel runbook, [#246](#issue-246-auto-post-the-validation-checklist-on-every-pr-that-changes-kernel-code) static-action PR checklist, [#249](#issue-249-add-a-contributingmd-mostly-links-pr-checklist-branch-naming) link-heavy CONTRIBUTING.md |
+| 1. Parity Harness + Per-Demo Parity + CUDA Phase 3 | **v0.0.9 — Phase 0 Modernization** | [#233](https://github.com/openworm/sibernetic/issues/233) generalize parity harness, [#234](https://github.com/openworm/sibernetic/issues/234) demo1 lock-in, [#235](https://github.com/openworm/sibernetic/issues/235) demo2 harness entry, [#236](https://github.com/openworm/sibernetic/issues/236) worm_alone lock-in, [#237](https://github.com/openworm/sibernetic/issues/237) Ihmsen 2010 boundary pressure, [#238](https://github.com/openworm/sibernetic/issues/238) PCISPH iterative pressure, [#239](https://github.com/openworm/sibernetic/issues/239) worm_swim driven scenario, [#240](https://github.com/openworm/sibernetic/issues/240) CUDA Phase 3 |
+| 2. Validation Tooling + Output Pipeline | **v0.1.0 — Phase 1 Validation Infrastructure** | [#241](#issue-241-detect-blown-up-simulations-nan-particle-escape-runaway-velocity) extend stability checker, [#242](#issue-242-save-per-particle-density-to-disk-both-substrates) emit per-particle density, [#243](#issue-243-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-242) incompressibility checker, [#244](#issue-244-export-simulation-output-to-ome-zarr-only-if-the-viewer-team-needs-it) OME-Zarr converter, [#245](#issue-245-wire-openwormyml-output_interval-into-sibernetic) output-interval plumbing |
+| 3. Substrate Docs + Contributor Onboarding | **v0.1.1 — Phase 1 Substrate Documentation** | [#246](#issue-246-opencl-backend-walkthrough-doc-call-graph-equation-table-gotchas) OpenCL kernel call graph, [#247](#issue-247-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass) paired-kernel runbook, [#248](#issue-248-auto-post-the-validation-checklist-on-every-pr-that-changes-kernel-code) static-action PR checklist, [#249](#issue-249-add-a-contributingmd-mostly-links-pr-checklist-branch-naming) link-heavy CONTRIBUTING.md |
 | 4. Closed-Loop | **v0.4.0 — Phase 4 Sensory Coupling** | [#250](#issue-250-python-class-to-drive-the-simulator-step-by-step-for-closed-loop-control) in-process Simulation handle |
 
 ---
 
 ## Issue Numbering
 
-The 18 fresh issues below are labeled with **predicted** GitHub issue numbers (`#233` through `#250`) based on the current `openworm/sibernetic` numbering high-water mark (#232, a closed PR, as of 2026-05-28). Actual numbers assigned at filing time will shift forward if other issues or PRs are opened on the repo first. After filing, this document should be updated to reflect the assigned numbers.
+The 18 fresh issues below are labeled with **predicted** GitHub issue numbers (`#241` through `#250`) based on the current `openworm/sibernetic` numbering high-water mark (#232, a closed PR, as of 2026-05-28). Actual numbers assigned at filing time will shift forward if other issues or PRs are opened on the repo first. After filing, this document should be updated to reflect the assigned numbers.
 
 ---
 
@@ -62,7 +62,7 @@ As of 2026-05-28, **27 issues remain open**, and 4 were closed in the last week 
 
 | Issue | Title | Milestone | Why live |
 |-------|-------|-----------|----------|
-| [#226](https://github.com/openworm/sibernetic/issues/226) | Port sphFluid.cl to Metal for ARM64 Mac | **v0.0.9 — Phase 0 Modernization** | Canonical tracking issue for the Metal port. Wei Weng's filing is the statement of need that DD001 §Backend Stabilization Roadmap formalizes. The per-demo parity work (Issues [#237](#issue-237-run-the-demo1-cube-drop-parity-test-in-ci-on-every-pr) – [#242](#issue-242-turn-on-muscle-drive-in-worm_swim-and-add-a-parity-check-depends-on-236-241)) consolidates implementation under this umbrella. Closes when v0.0.9 (Phase 0 Modernization) ships. **Label:** `native-gpu`, `phase-0`, `epic` |
+| [#226](https://github.com/openworm/sibernetic/issues/226) | Port sphFluid.cl to Metal for ARM64 Mac | **v0.0.9 — Phase 0 Modernization** | Canonical tracking issue for the Metal port. Wei Weng's filing is the statement of need that DD001 §Backend Stabilization Roadmap formalizes. The per-demo parity work (Issues [#234](https://github.com/openworm/sibernetic/issues/234) – [#239](https://github.com/openworm/sibernetic/issues/239)) consolidates implementation under this umbrella. Closes when v0.0.9 (Phase 0 Modernization) ships. **Label:** `native-gpu`, `phase-0`, `epic` |
 
 ### Issues to defer to later milestones (was: "close as superseded")
 
@@ -378,7 +378,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue #236: Generalize the parity test to support all four demos, not just demo1
+### Issue #233: Generalize the parity test to support all four demos, not just demo1
 
 - **Title:** `[DD001] Generalize the parity test so it works for all four demos, not just demo1`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `validation`, `parity`
@@ -386,9 +386,9 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Milestone:** [v0.0.9 — Phase 0 Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
-- **Audit note:** `tests/test_demo1_backend_parity.py` (256 lines) is already a fully-functional parity harness — parses position buffers with `.times.txt` sidecar handling, computes per-particle L2 + cube-center/extent drifts + init/mean/final L2, has explicit `THRESHOLDS` dict and 5 pass/fail gates, JSON + human-readable output. The proposed new file `scripts/backend_parity_test.py` would duplicate ~80% of this. **Milestone:** Logically validation infrastructure, but co-ships with v0.0.9 (Phase 0 Modernization) because the per-demo parity issues #237/#238/#239/#242 all depend on the generalized harness — splitting these across milestones would force v0.0.9 to ship without working CI gates.
+- **Audit note:** `tests/test_demo1_backend_parity.py` (256 lines) is already a fully-functional parity harness — parses position buffers with `.times.txt` sidecar handling, computes per-particle L2 + cube-center/extent drifts + init/mean/final L2, has explicit `THRESHOLDS` dict and 5 pass/fail gates, JSON + human-readable output. The proposed new file `scripts/backend_parity_test.py` would duplicate ~80% of this. **Milestone:** Logically validation infrastructure, but co-ships with v0.0.9 (Phase 0 Modernization) because the per-demo parity issues #234/#235/#236/#239 all depend on the generalized harness — splitting these across milestones would force v0.0.9 to ship without working CI gates.
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Backend Graduation Criteria](DD001_Body_Physics_Architecture.md#backend-graduation-criteria-exit-conditions)
-- **Depends On:** None (the per-demo parity issues #237-#239, #242 depend on this)
+- **Depends On:** None (the per-demo parity issues #234-#236, #239 depend on this)
 - **Existing Code to Reuse / Refactor:**
     - `tests/test_demo1_backend_parity.py` — rename to `tests/test_backend_parity.py`, parameterize on scenario
     - `scripts/cross_backend_regression.py` — driver that runs N backends; already pluggable via `--binary NAME=PATH`
@@ -400,7 +400,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
     - `tests/baseline/*_opencl.json` (new — committed reference metrics)
 - **Acceptance Criteria:**
     - [ ] Runs `--scenario demo1 --substrate metal-native` and reproduces the existing demo1 parity check
-    - [ ] Adds entry points for demo2, worm_alone, worm_swim (used by #238, #239, #242)
+    - [ ] Adds entry points for demo2, worm_alone, worm_swim (used by #235, #236, #239)
     - [ ] `--substrate cuda-native` returns "not implemented yet" error message
     - [ ] Emits JSON + human-readable table; exit code reflects pass/fail
     - [ ] `cross_backend_regression.py` continues to work
@@ -412,7 +412,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue #237: Run the demo1 (cube drop) parity test in CI on every PR
+### Issue #234: Run the demo1 (cube drop) parity test in CI on every PR
 
 - **Title:** `[DD001] Run the demo1 (cube drop) parity test automatically in CI on every PR`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`, `native-gpu`, `ci`
@@ -421,7 +421,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** ci-cd, python
 - **Audit note:** demo1 parity is **substantively done**. `tests/test_demo1_backend_parity.py` exists (256 lines), `docs/cube_drop_demo1_25ms.mp4` + `.gif` committed, `scripts/render_demo1_parity.py` exists, `docs/demos.md` has the regenerate recipe + tuned params. The Metal smoke test in `.github/workflows/ci-build.yml` runs `xpbd_step` for 50 steps but doesn't call the full parity test (requires a pre-committed OpenCL reference, can't generate on macOS CI). This is a 1-2 day CI-wiring task.
-- **Depends On:** [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1) (generalized harness)
+- **Depends On:** [#233](https://github.com/openworm/sibernetic/issues/233) (generalized harness)
 - **Acceptance Criteria:**
     - [ ] Commit canonical OpenCL `position_buffer.txt` reference under `tests/data/demo1_opencl/` (or generate via Linux runner)
     - [ ] CI smoke test flipped to call `tests/test_backend_parity.py --scenario demo1 --substrate metal-native`
@@ -433,16 +433,16 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue #238: Add a parity check for demo2 (membrane permeability)
+### Issue #235: Add a parity check for demo2 (membrane permeability)
 
-- **Title:** `[DD001] Add a parity check for demo2 (membrane permeability) — depends on #236`
+- **Title:** `[DD001] Add a parity check for demo2 (membrane permeability) — depends on #233`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase 0
 - **Milestone:** [v0.0.9 — Phase 0 Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **Audit note:** SGD parameters for demo2 are **already converged and shipped** (commit bf6b333). `docs/demo2_v9_sgd_perm.mp4` + `.gif` exist; `docs/demos.md` documents tuned params (`spring_k=2697`, `anchor_k=12177`, `rho_rest=8e-13`, `alpha_dist=3.3e-9`). What's missing is a demo2-shaped parity check — cube-center/extent metrics don't apply to a sheet; need membrane-retention vs permeability ratio over time.
-- **Depends On:** [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1) (generalized harness)
+- **Depends On:** [#233](https://github.com/openworm/sibernetic/issues/233) (generalized harness)
 - **Acceptance Criteria:**
     - [ ] `tests/parity_scenarios/demo2.py` with membrane-specific THRESHOLDS (liquid fraction above sheet on membraned half vs porous half over 42ms, ±5% vs OpenCL)
     - [ ] Parity test green on `--scenario demo2 --substrate metal-native`
@@ -454,28 +454,28 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue #239: Add a parity check for worm_alone (passive worm body, no muscle drive)
+### Issue #236: Add a parity check for worm_alone (passive worm body, no muscle drive)
 
-- **Title:** `[DD001] Add a parity check for worm_alone (passive worm body) — depends on #236`
+- **Title:** `[DD001] Add a parity check for worm_alone (passive worm body) — depends on #233`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase 0
 - **Milestone:** [v0.0.9 — Phase 0 Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
-- **Audit note:** Visual + quantitative parity **already shipped** (commit 929ec8a). `docs/worm_alone_opencl_vs_metal.mp4` + `.gif` exist; `docs/demos.md` parity table shows worm-top y matching within 0.06 sim units across 25ms, MSE 0.112, cross-section diameter within ~1%, tuned params committed. What's missing: a worm-shaped parity test (cube metrics don't apply; need worm-COM, cross-section diameter, max-span change). Known caveat: `floor_y=2.25` is a soft proxy for missing Ihmsen 2010 boundary pressure — tracked separately as [Issue #240](#issue-240-replace-the-temporary-soft-floor-hack-with-proper-boundary-physics-metal).
-- **Depends On:** [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1) (generalized harness)
+- **Audit note:** Visual + quantitative parity **already shipped** (commit 929ec8a). `docs/worm_alone_opencl_vs_metal.mp4` + `.gif` exist; `docs/demos.md` parity table shows worm-top y matching within 0.06 sim units across 25ms, MSE 0.112, cross-section diameter within ~1%, tuned params committed. What's missing: a worm-shaped parity test (cube metrics don't apply; need worm-COM, cross-section diameter, max-span change). Known caveat: `floor_y=2.25` is a soft proxy for missing Ihmsen 2010 boundary pressure — tracked separately as [Issue #237](https://github.com/openworm/sibernetic/issues/237).
+- **Depends On:** [#233](https://github.com/openworm/sibernetic/issues/233) (generalized harness)
 - **Acceptance Criteria:**
     - [ ] `tests/parity_scenarios/worm_alone.py` with worm-COM + cross-section + max-span THRESHOLDS
     - [ ] Parity test green on `--scenario worm_alone --substrate metal-native`
     - [ ] SGD convergence history committed
-    - [ ] Cross-references [#240](#issue-240-replace-the-temporary-soft-floor-hack-with-proper-boundary-physics-metal) as the real physics fix for the `floor_y` proxy
-- **Sponsor Summary Hint:** Worm-alone parity is shipped; this just adds the parity-test entry. Real residual physics gap tracked separately in #240.
+    - [ ] Cross-references [#237](https://github.com/openworm/sibernetic/issues/237) as the real physics fix for the `floor_y` proxy
+- **Sponsor Summary Hint:** Worm-alone parity is shipped; this just adds the parity-test entry. Real residual physics gap tracked separately in #237.
 
 ---
 
 ---
 
-### Issue #240: Replace the temporary soft-floor hack with proper boundary physics (Metal)
+### Issue #237: Replace the temporary soft-floor hack with proper boundary physics (Metal)
 
 - **Title:** `[DD001] Replace the temporary "soft floor" with proper boundary physics on Metal (Ihmsen 2010)`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`, `physics`
@@ -500,7 +500,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 
 ---
 
-### Issue #241: Fix the worm-sinking bug in the Metal swim test (iterative pressure each step)
+### Issue #238: Fix the worm-sinking bug in the Metal swim test (iterative pressure each step)
 
 - **Title:** `[DD001] Fix the worm-sinking bug in the Metal swim test by iterating pressure each step (PCISPH-style)`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`, `physics`
@@ -508,43 +508,43 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Milestone:** [v0.0.9 — Phase 0 Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, sph, metal, xpbd
-- **Audit note (NEW issue surfaced by audit):** Per `docs/demos.md` worm_swim parity table: OpenCL's PCISPH iterates pressure until density exactly matches `rho_0` per step; Metal's XPBD density solver only fires when density *exceeds* `rho_rest`, so steady-state pressure is zero and the worm sinks ~3 sim units below OpenCL by 25ms. Closing this gap requires a PCISPH-iterative-pressure rewrite of the inner XPBD loop. Substantial physics work — split out from worm_swim parity (was tangled together in original [#239](#issue-239-add-a-parity-check-for-worm_alone-passive-worm-body-no-muscle-drive)).
+- **Audit note (NEW issue surfaced by audit):** Per `docs/demos.md` worm_swim parity table: OpenCL's PCISPH iterates pressure until density exactly matches `rho_0` per step; Metal's XPBD density solver only fires when density *exceeds* `rho_rest`, so steady-state pressure is zero and the worm sinks ~3 sim units below OpenCL by 25ms. Closing this gap requires a PCISPH-iterative-pressure rewrite of the inner XPBD loop. Substantial physics work — split out from worm_swim parity (was tangled together in original [#236](https://github.com/openworm/sibernetic/issues/236)).
 - **DD Section to Read:** [DD001 §Extended Position-Based Dynamics](DD001_Body_Physics_Architecture.md#extended-position-based-dynamics-xpbd-native-metal-cuda-substrates)
 - **Depends On:** None (#242 worm_swim parity depends on this)
 - **Acceptance Criteria:**
     - [ ] PCISPH-style iterative pressure correction implemented in the XPBD density solver
     - [ ] Paired analytic backward + FD validator
     - [ ] Existing demo1, demo2, worm_alone parity tests still pass (no regression)
-    - [ ] worm_swim sink rate measurably closer to OpenCL (validates the fix before #242 wraps it up with kinematic-gait checks)
+    - [ ] worm_swim sink rate measurably closer to OpenCL (validates the fix before #239 wraps it up with kinematic-gait checks)
 - **Sponsor Summary Hint:** The worm currently sinks in the Metal swim test because the pressure solver only kicks in when the fluid is *too dense* — never when it's at the right density. So at steady state the pressure is zero and the worm sinks. The fix iterates pressure each step until density matches the target exactly (the same approach the OpenCL reference uses). Real physics work, days to weeks.
 
 ---
 
 ---
 
-### Issue #242: Turn on muscle drive in worm_swim and add a parity check (depends on #236, #241)
+### Issue #239: Turn on muscle drive in worm_swim and add a parity check (depends on #233, #238)
 
-- **Title:** `[DD001] Turn on muscle drive in the worm_swim test and add a parity check (depends on #236, #241)`
+- **Title:** `[DD001] Turn on muscle drive in the worm_swim test and add a parity check (depends on #233, #238)`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase 0
 - **Milestone:** [v0.0.9 — Phase 0 Modernization](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph, muscle-actuation
-- **Audit note:** Original issue conflated two things: (a) PCISPH-iterative density rewrite (now split to [#241](#issue-241-fix-the-worm-sinking-bug-in-the-metal-swim-test-iterative-pressure-each-step)) and (b) setting up a muscle-driven swim scenario plus parity. The current `worm_swim_half_resolution` config is a passive sink test (no muscle drive), so the kinematic-gait acceptance criteria (swimming velocity / frequency / wavelength within ±5%) can't be checked against it as-is.
+- **Audit note:** Original issue conflated two things: (a) PCISPH-iterative density rewrite (now split to [#238](https://github.com/openworm/sibernetic/issues/238)) and (b) setting up a muscle-driven swim scenario plus parity. The current `worm_swim_half_resolution` config is a passive sink test (no muscle drive), so the kinematic-gait acceptance criteria (swimming velocity / frequency / wavelength within ±5%) can't be checked against it as-is.
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validated Kinematic Outputs](DD001_Body_Physics_Architecture.md#validated-kinematic-outputs-palyanov-et-al-2018)
-- **Depends On:** [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1) (harness), [#241](#issue-241-fix-the-worm-sinking-bug-in-the-metal-swim-test-iterative-pressure-each-step) (PCISPH iterative pressure — needed for steady-state behavior)
+- **Depends On:** [#233](https://github.com/openworm/sibernetic/issues/233) (harness), [#238](https://github.com/openworm/sibernetic/issues/238) (PCISPH iterative pressure — needed for steady-state behavior)
 - **Acceptance Criteria:**
     - [ ] Muscle-driven worm_swim config in `configuration/worm_swim_half_resolution_driven/`
     - [ ] `tests/parity_scenarios/worm_swim.py` with kinematic THRESHOLDS (velocity / frequency / wavelength)
     - [ ] Parity test green on `--scenario worm_swim --substrate metal-native` within ±5% of OpenCL AND within DD001 §Validated Kinematic Outputs experimental ranges
     - [ ] SGD convergence history committed
-- **Sponsor Summary Hint:** The current worm_swim Metal port is a passive sink; you can't check swim-gait kinematics on something that isn't swimming. This issue sets up the driven scenario and wires the kinematic-gait parity gate, gated on #241 fixing the density-equilibrium problem.
+- **Sponsor Summary Hint:** The current worm_swim Metal port is a passive sink; you can't check swim-gait kinematics on something that isn't swimming. This issue sets up the driven scenario and wires the kinematic-gait parity gate, gated on #238 fixing the density-equilibrium problem.
 
 ---
 
 ---
 
-### Issue #243: CUDA bring-up — port one SPH kernel and prove the build works
+### Issue #240: CUDA bring-up — port one SPH kernel and prove the build works
 
 - **Title:** `[DD001] CUDA bring-up: port one SPH kernel (wpoly6), prove the nvcc build, validate vs Metal`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`, `cuda`
@@ -573,7 +573,7 @@ Cross-substrate validation infrastructure and the simulation-output pipeline. Th
 
 ---
 
-### Issue #233: Detect blown-up simulations (NaN, particle escape, runaway velocity)
+### Issue #241: Detect blown-up simulations (NaN, particle escape, runaway velocity)
 
 - **Title:** `[DD001] Detect blown-up simulations: NaN values, particles escaping the box, runaway velocities`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `validation`
@@ -605,7 +605,7 @@ Cross-substrate validation infrastructure and the simulation-output pipeline. Th
 
 ---
 
-### Issue #234: Save per-particle density to disk (both substrates)
+### Issue #242: Save per-particle density to disk (both substrates)
 
 - **Title:** `[DD001] Save per-particle density to disk on both OpenCL and Metal substrates`
 - **Labels:** `DD001`, `human-expert`, `L2`, `validation`, `output-format`
@@ -613,9 +613,9 @@ Cross-substrate validation infrastructure and the simulation-output pipeline. Th
 - **Milestone:** [v0.1.0 — Phase 1 Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, c++, physics
-- **Audit note (NEW issue surfaced by audit):** Sibernetic computes per-particle density on both substrates (`src/metal_diff/test_dens_grad.py`, `test_solve_dens_bwd.py` cover the Metal side; `sphFluid.cl` PCISPH on OpenCL) but **does not dump it to disk** in the normal run path. `position_buffer.txt` only has `x y z type`. Without this, [Issue #235](#issue-235-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-234) (`validate_incompressibility.py`) has nothing to read against. This issue is the missing prerequisite.
+- **Audit note (NEW issue surfaced by audit):** Sibernetic computes per-particle density on both substrates (`src/metal_diff/test_dens_grad.py`, `test_solve_dens_bwd.py` cover the Metal side; `sphFluid.cl` PCISPH on OpenCL) but **does not dump it to disk** in the normal run path. `position_buffer.txt` only has `x y z type`. Without this, [Issue #243](#issue-243-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-242) (`validate_incompressibility.py`) has nothing to read against. This issue is the missing prerequisite.
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) (validate gate)
-- **Depends On:** None (this is a prereq for #235)
+- **Depends On:** None (this is a prereq for #243)
 - **Existing Code to Reuse:**
     - `src/owPhysicsFluidSimulator.cpp` — owns the OpenCL output writing path
     - `src/metal_diff/dump_metal_trajectory.py` — owns the Metal trajectory dump path
@@ -637,33 +637,33 @@ Cross-substrate validation infrastructure and the simulation-output pipeline. Th
 
 ---
 
-### Issue #235: Validate that fluid density stays near 1000 kg/m³ (depends on #234)
+### Issue #243: Validate that fluid density stays near 1000 kg/m³ (depends on #242)
 
-- **Title:** `[DD001] Add validator: fluid density stays near 1000 kg/m³ (depends on #234)`
+- **Title:** `[DD001] Add validator: fluid density stays near 1000 kg/m³ (depends on #242)`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `validation`
 - **Roadmap Phase:** Phase 1
 - **Milestone:** [v0.1.0 — Phase 1 Validation Infrastructure](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
-- **Audit note:** Original framing made this a from-scratch effort. With [Issue #234](#issue-234-save-per-particle-density-to-disk-both-substrates) emitting density data, the actual script is ~50 lines of NumPy.
+- **Audit note:** Original framing made this a from-scratch effort. With [Issue #242](#issue-242-save-per-particle-density-to-disk-both-substrates) emitting density data, the actual script is ~50 lines of NumPy.
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) (validate gate)
-- **Depends On:** [#234](#issue-234-save-per-particle-density-to-disk-both-substrates) (density dump must exist first)
+- **Depends On:** [#242](#issue-242-save-per-particle-density-to-disk-both-substrates) (density dump must exist first)
 - **Files to Modify:**
     - `scripts/validate_incompressibility.py` (new — thin reader)
     - `tests/test_validate_incompressibility.py` (new)
 - **Acceptance Criteria:**
-    - [ ] Reads density output produced by #234
+    - [ ] Reads density output produced by #242
     - [ ] Filters to liquid-type particles
     - [ ] Reports max / mean / percentile deviation from ρ₀ = 1000 kg/m³
     - [ ] `--max_deviation` flag (default 0.01)
     - [ ] PASS/FAIL with statistics, exit code 0/1
-- **Sponsor Summary Hint:** Thin checker, ~50 lines. Gated on #234 producing the data to check.
+- **Sponsor Summary Hint:** Thin checker, ~50 lines. Gated on #242 producing the data to check.
 
 ---
 
 ---
 
-### Issue #247: Export simulation output to OME-Zarr (only if the viewer team needs it)
+### Issue #244: Export simulation output to OME-Zarr (only if the viewer team needs it)
 
 - **Title:** `[DD001] Convert simulation output to OME-Zarr — only if the visualization team needs it`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `output`, `visualization`
@@ -686,7 +686,7 @@ Cross-substrate validation infrastructure and the simulation-output pipeline. Th
 
 ---
 
-### Issue #248: Wire openworm.yml output_interval into Sibernetic
+### Issue #245: Wire openworm.yml output_interval into Sibernetic
 
 - **Title:** `[DD001] Wire openworm.yml's output_interval setting into Sibernetic's existing output-frequency knobs`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `config`, `integration`
@@ -714,7 +714,7 @@ Substrate becomes understandable and contributor-ready. Fill the genuine doc gap
 
 ---
 
-### Issue #244: OpenCL backend walkthrough doc (call graph, equation table, gotchas)
+### Issue #246: OpenCL backend walkthrough doc (call graph, equation table, gotchas)
 
 - **Title:** `[DD001] Add an OpenCL backend walkthrough doc: kernel call graph, equation table, gotchas-with-line-numbers`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `docs`, `opencl`
@@ -738,7 +738,7 @@ Substrate becomes understandable and contributor-ready. Fill the genuine doc gap
 
 ---
 
-### Issue #245: Doc — how to add a new differentiable kernel (forward + backward pass)
+### Issue #247: Doc — how to add a new differentiable kernel (forward + backward pass)
 
 - **Title:** `[DD001] Document how to add a new differentiable kernel (forward op + backward pass + FD test)`
 - **Labels:** `DD001`, `human-expert`, `L2`, `docs`, `native-gpu`
@@ -762,7 +762,7 @@ Substrate becomes understandable and contributor-ready. Fill the genuine doc gap
 
 ---
 
-### Issue #246: Auto-post the validation checklist on every PR that changes kernel code
+### Issue #248: Auto-post the validation checklist on every PR that changes kernel code
 
 - **Title:** `[DD001] GitHub Action: auto-post the validation checklist on every PR that touches kernel code`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `ci`, `docs`
@@ -795,7 +795,7 @@ Substrate becomes understandable and contributor-ready. Fill the genuine doc gap
 - **Milestone:** [v0.1.1 — Phase 1 Substrate Documentation](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs
-- **Audit note:** No `CONTRIBUTING.md` exists today. `AGENTS.md` carries minimal contributor guidance. The README has Building sections per-substrate, Quickstart, and per-substrate build scripts. `src/metal_diff/README.md` documents the FD-test pattern. DD001 has Validation Methodology + Quality Criteria. **The CONTRIBUTING.md should link to those, not duplicate them** — its unique content is the PR checklist, branch convention, and the add-a-kernel runbook (which is also delivered in [#245](#issue-245-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass); cross-reference).
+- **Audit note:** No `CONTRIBUTING.md` exists today. `AGENTS.md` carries minimal contributor guidance. The README has Building sections per-substrate, Quickstart, and per-substrate build scripts. `src/metal_diff/README.md` documents the FD-test pattern. DD001 has Validation Methodology + Quality Criteria. **The CONTRIBUTING.md should link to those, not duplicate them** — its unique content is the PR checklist, branch convention, and the add-a-kernel runbook (which is also delivered in [#247](#issue-247-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass); cross-reference).
 - **DD Section to Read:** [DD001 §Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
 - **Depends On:** None
 - **Acceptance Criteria:**
@@ -804,7 +804,7 @@ Substrate becomes understandable and contributor-ready. Fill the genuine doc gap
     - [ ] Testing workflow: **link** to existing scripts (`measure_cube_stability.py`, `test_backend_parity.py`)
     - [ ] PR checklist: own this content (DD001 §Quality Criteria + MoaW checklist, condensed)
     - [ ] Branch naming convention (`dd001/description`): own this content
-    - [ ] Add-a-kernel runbook: **link** to #245's `differentiable_substrate.md`, don't fork
+    - [ ] Add-a-kernel runbook: **link** to #247's `differentiable_substrate.md`, don't fork
     - [ ] Total length ~1.5 pages
 - **Sponsor Summary Hint:** GitHub renders CONTRIBUTING.md in the PR creation UI — that's real value the README can't replace. But the file should mostly link to README/metal_diff/DD001 rather than duplicating their content. Own only what has no other home: PR checklist + branch convention.
 
@@ -867,9 +867,9 @@ Sibernetic-side support for closed-loop sensorimotor work. Deferral target for D
 
 | Group | Milestone | Issues | Target |
 |-------|-----------|--------|--------|
-| **1: Parity Harness + Per-Demo Parity + CUDA Phase 3** | v0.0.9 — Phase 0 Modernization | [#236](#issue-236-generalize-the-parity-test-to-support-all-four-demos-not-just-demo1), [#237](#issue-237-run-the-demo1-cube-drop-parity-test-in-ci-on-every-pr), [#238](#issue-238-add-a-parity-check-for-demo2-membrane-permeability), [#239](#issue-239-add-a-parity-check-for-worm_alone-passive-worm-body-no-muscle-drive), [#240](#issue-240-replace-the-temporary-soft-floor-hack-with-proper-boundary-physics-metal), [#241](#issue-241-fix-the-worm-sinking-bug-in-the-metal-swim-test-iterative-pressure-each-step), [#242](#issue-242-turn-on-muscle-drive-in-worm_swim-and-add-a-parity-check-depends-on-236-241), [#243](#issue-243-cuda-bring-up-port-one-sph-kernel-and-prove-the-build-works) | Generalize parity harness, lock in demo1/demo2/worm_alone, Ihmsen 2010 boundary pressure, PCISPH iterative rewrite, worm_swim driven scenario, CUDA Phase 3 |
-| **2: Validation Tooling + Output Pipeline** | v0.1.0 — Phase 1 Validation Infrastructure | [#233](#issue-233-detect-blown-up-simulations-nan-particle-escape-runaway-velocity), [#234](#issue-234-save-per-particle-density-to-disk-both-substrates), [#235](#issue-235-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-234), [#247](#issue-247-export-simulation-output-to-ome-zarr-only-if-the-viewer-team-needs-it), [#248](#issue-248-wire-openwormyml-output_interval-into-sibernetic) | Extend stability checker, emit per-particle density, incompressibility validator, OME-Zarr converter (contingent on DD012 contract), output-interval YAML plumbing |
-| **3: Substrate Docs + Contributor Onboarding** | v0.1.1 — Phase 1 Substrate Documentation | [#244](#issue-244-opencl-backend-walkthrough-doc-call-graph-equation-table-gotchas), [#245](#issue-245-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass), [#246](#issue-246-auto-post-the-validation-checklist-on-every-pr-that-changes-kernel-code), [#249](#issue-249-add-a-contributingmd-mostly-links-pr-checklist-branch-naming) | OpenCL kernel call graph + table, paired-kernel runbook + saved-state contract, static PR-checklist GitHub Action, link-heavy CONTRIBUTING.md |
+| **1: Parity Harness + Per-Demo Parity + CUDA Phase 3** | v0.0.9 — Phase 0 Modernization | [#233](https://github.com/openworm/sibernetic/issues/233), [#234](https://github.com/openworm/sibernetic/issues/234), [#235](https://github.com/openworm/sibernetic/issues/235), [#236](https://github.com/openworm/sibernetic/issues/236), [#237](https://github.com/openworm/sibernetic/issues/237), [#238](https://github.com/openworm/sibernetic/issues/238), [#239](https://github.com/openworm/sibernetic/issues/239), [#240](https://github.com/openworm/sibernetic/issues/240) | Generalize parity harness, lock in demo1/demo2/worm_alone, Ihmsen 2010 boundary pressure, PCISPH iterative rewrite, worm_swim driven scenario, CUDA Phase 3 |
+| **2: Validation Tooling + Output Pipeline** | v0.1.0 — Phase 1 Validation Infrastructure | [#241](#issue-241-detect-blown-up-simulations-nan-particle-escape-runaway-velocity), [#242](#issue-242-save-per-particle-density-to-disk-both-substrates), [#243](#issue-243-validate-that-fluid-density-stays-near-1000-kgm3-depends-on-242), [#244](#issue-244-export-simulation-output-to-ome-zarr-only-if-the-viewer-team-needs-it), [#245](#issue-245-wire-openwormyml-output_interval-into-sibernetic) | Extend stability checker, emit per-particle density, incompressibility validator, OME-Zarr converter (contingent on DD012 contract), output-interval YAML plumbing |
+| **3: Substrate Docs + Contributor Onboarding** | v0.1.1 — Phase 1 Substrate Documentation | [#246](#issue-246-opencl-backend-walkthrough-doc-call-graph-equation-table-gotchas), [#247](#issue-247-doc-how-to-add-a-new-differentiable-kernel-forward-backward-pass), [#248](#issue-248-auto-post-the-validation-checklist-on-every-pr-that-changes-kernel-code), [#249](#issue-249-add-a-contributingmd-mostly-links-pr-checklist-branch-naming) | OpenCL kernel call graph + table, paired-kernel runbook + saved-state contract, static PR-checklist GitHub Action, link-heavy CONTRIBUTING.md |
 | **4: Closed-Loop** | v0.4.0 — Phase 4 Sensory Coupling | [#250](#issue-250-python-class-to-drive-the-simulator-step-by-step-for-closed-loop-control) | In-process Simulation handle |
 
 ### Dependency Graph (Critical Path)
@@ -880,29 +880,29 @@ backwards cross-milestone deps).
 ```
 v0.0.9 — Phase 0 Modernization
 ──────────────────────────────
-  Issue #236 (generalize parity harness) ─┬→ Issue #237 (demo1 CI lock-in)
-                                          ├→ Issue #238 (demo2 harness entry)
-                                          ├→ Issue #239 (worm_alone harness entry)
-                                          └→ Issue #242 (worm_swim parity)
-  Issue #240 (Ihmsen 2010 boundary)  — follow-up from #239's known caveat;
+  Issue #233 (generalize parity harness) ─┬→ Issue #234 (demo1 CI lock-in)
+                                          ├→ Issue #235 (demo2 harness entry)
+                                          ├→ Issue #236 (worm_alone harness entry)
+                                          └→ Issue #239 (worm_swim parity)
+  Issue #237 (Ihmsen 2010 boundary)  — follow-up from #236's known caveat;
                                        standalone physics work
-  Issue #241 (PCISPH iterative)      ─→ Issue #242 (worm_swim parity)
-  Issue #243 (CUDA Phase 3)          — independent; on success, derive
+  Issue #238 (PCISPH iterative)      ─→ Issue #239 (worm_swim parity)
+  Issue #240 (CUDA Phase 3)          — independent; on success, derive
                                        Phases 2-5 separately
 
 v0.1.0 — Phase 1 Validation Infrastructure
 ──────────────────────────────────────────
-  Issue #233 (extend stability checker) — independent
-  Issue #234 (density dump prereq)      ─→ Issue #235 (incompressibility validator)
-  Issue #247 (OME-Zarr converter)       — gated on DD012 viewer contract
-  Issue #248 (output-interval plumbing) — depends on DD011 config loading
+  Issue #241 (extend stability checker) — independent
+  Issue #242 (density dump prereq)      ─→ Issue #243 (incompressibility validator)
+  Issue #244 (OME-Zarr converter)       — gated on DD012 viewer contract
+  Issue #245 (output-interval plumbing) — depends on DD011 config loading
 
 v0.1.1 — Phase 1 Substrate Documentation
 ────────────────────────────────────────
-  Issue #244 (OpenCL kernel call graph) — independent
-  Issue #245 (paired-kernel runbook)    — independent; cross-refs with #249
-  Issue #246 (static PR-checklist)      — independent
-  Issue #249 (CONTRIBUTING.md)          — cross-refs #245 for add-a-kernel runbook
+  Issue #246 (OpenCL kernel call graph) — independent
+  Issue #247 (paired-kernel runbook)    — independent; cross-refs with #249
+  Issue #248 (static PR-checklist)      — independent
+  Issue #249 (CONTRIBUTING.md)          — cross-refs #247 for add-a-kernel runbook
 
 v0.4.0 — Phase 4 Sensory Coupling
 ─────────────────────────────────
