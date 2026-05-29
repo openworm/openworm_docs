@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 !!! warning "Historical Content"
     This page describes an older protocol for setting up live video streams for OpenWorm community meetings. It is retained for archival purposes. For current information about participating in OpenWorm meetings, see the [Community page](community.md#meetings).
 

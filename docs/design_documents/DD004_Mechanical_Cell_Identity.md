@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD004: Mechanical Cell Identity in Sibernetic (Per-Cell Physics)
 
 - **Status:** Proposed (Phase 6)

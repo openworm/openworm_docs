@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD018: Environmental Modeling and Stimulus Delivery
 
 - **Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory))

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD017: Movement Analysis Toolbox and WCON Policy
 
 - **Status:** Proposed

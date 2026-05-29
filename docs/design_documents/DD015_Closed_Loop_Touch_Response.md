@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD015: Closed-Loop Touch Response and Tap Withdrawal Behavior
 
 - **Status:** Proposed (Phase 4-5)

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD005 Draft GitHub Issues
 
 **Epic:** DD005 — Cell-Type Differentiation Strategy

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD019: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
 - **Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory), after [DD015](DD015_Closed_Loop_Touch_Response.md))

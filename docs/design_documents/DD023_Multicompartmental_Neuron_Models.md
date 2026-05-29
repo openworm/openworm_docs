@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD023: Multicompartmental Neuron Models
 
 - **Status:** Proposed

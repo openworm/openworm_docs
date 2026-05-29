@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD020: Validation Data Acquisition Pipeline
 
 - **Status:** Proposed (Phase 1 — Core Infrastructure)

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD010: Validation Framework and Quantitative Benchmarks
 
 - **Status:** Accepted

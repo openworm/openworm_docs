@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD005: Cell-Type Specialization Strategy Using Single-Cell Transcriptomics
 
 - **Status:** Proposed (Phase 3)

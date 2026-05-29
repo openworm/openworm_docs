@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD008: Data Integration Pipeline and OWMeta Knowledge Graph
 
 - **Status:** Accepted (with proposed extensions)

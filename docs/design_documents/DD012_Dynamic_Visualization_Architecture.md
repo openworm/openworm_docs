@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD012: Dynamic Visualization and Multi-Scale Exploration Architecture
 
 - **Status:** Proposed

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD011 Draft GitHub Issues
 
 **Epic:** DD011 — Simulation Stack Architecture

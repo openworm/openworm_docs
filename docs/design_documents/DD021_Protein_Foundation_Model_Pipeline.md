@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD021: Protein Foundation Model Pipeline for Ion Channel Kinetics
 
 - **Status:** Proposed (Phase 2 / Phase 3)

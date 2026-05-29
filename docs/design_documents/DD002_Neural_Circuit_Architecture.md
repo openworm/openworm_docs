@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD002: Neural Circuit Architecture and Multi-Level Framework
 
 - **Status:** Accepted

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD014: Egg-Laying System Architecture (Reproductive Behavioral Circuit)
 
 - **Status:** Proposed (Phase 5)

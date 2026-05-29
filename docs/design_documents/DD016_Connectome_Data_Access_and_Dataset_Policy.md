@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD016: Connectome Data Access and Dataset Policy
 
 - **Status:** Accepted

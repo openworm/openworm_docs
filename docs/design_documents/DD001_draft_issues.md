@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD001 Draft GitHub Issues
 
 !!! warning "Internal planning document — to be deleted before master merge"

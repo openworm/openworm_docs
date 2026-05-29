@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD011: Simulation Stack Architecture (The Integration Backbone)
 
 - **Status:** Proposed

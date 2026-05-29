@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD006: Neuropeptidergic Connectome Integration (Extrasynaptic Signaling Layer)
 
 - **Status:** Proposed (Phase 4)

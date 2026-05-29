@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD002 Draft GitHub Issues
 
 **Epic:** DD002 — Neural Circuit Architecture and Multi-Level Framework

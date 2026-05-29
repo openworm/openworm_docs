@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD023 Draft GitHub Issues
 
 **Epic:** DD023 — Multicompartmental Neuron Models

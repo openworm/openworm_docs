@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD003: Muscle Model Architecture and Calcium-Force Coupling
 
 - **Status:** Accepted

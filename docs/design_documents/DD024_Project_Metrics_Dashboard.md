@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD024: Project Metrics Dashboard
 
 - **Status:** Proposed

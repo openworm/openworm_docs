@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD013 Draft GitHub Issues
 
 **Epic:** DD013 — Hybrid Mechanistic-ML Framework

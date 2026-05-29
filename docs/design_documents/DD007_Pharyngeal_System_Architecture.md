@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD007: Pharyngeal System Architecture (Semi-Autonomous Organ)
 
 - **Status:** Proposed (Phase 5)

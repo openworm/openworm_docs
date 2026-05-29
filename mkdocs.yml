@@ -19,7 +19,6 @@ nav:
       - Contributing Guide: design_documents/contributing_guide.md
       - "Phase 0 — Core Architecture":
           - DD001 Body Physics: design_documents/DD001_Body_Physics_Architecture.md
-          - DD001 Draft Issues: design_documents/DD001_draft_issues.md
   - How It Works:
       - Modeling Approach: modeling.md
       - Validation Framework: validation.md

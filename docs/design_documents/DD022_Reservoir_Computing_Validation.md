@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD022: Reservoir Computing Validation of the C. elegans Nervous System
 
 - **Status:** Proposed (Phase 4)

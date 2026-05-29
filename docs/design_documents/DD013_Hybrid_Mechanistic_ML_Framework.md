@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD013: Hybrid Mechanistic-ML Framework
 
 - **Status:** Proposed (Phase 5-6)

@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD009: Intestinal Calcium Oscillator and Defecation Motor Program
 
 - **Status:** Proposed (Phase 5)

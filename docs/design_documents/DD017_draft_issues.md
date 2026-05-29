@@ -1,3 +1,8 @@
+---
+search:
+  exclude: true
+---
+
 # DD017 Draft GitHub Issues
 
 **Epic:** DD017 — Movement Analysis Toolbox Revival and WCON Policy
