@@ -467,7 +467,7 @@ Foundation models ─────────┤                              DD
 
 **Integration L4 workflow:**
 
-1. **Mind-of-a-Worm flags PR:** "⚠️ **Integration alert:** This PR modifies calcium output variable name (DD002 Integration Contract). DD003 (Muscle), DD006 (Neuropeptides), DD009 (Intestinal feedback), and DD012 (Visualization) consume this output. Tagging maintainers."
+1. **[Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) flags PR:** "⚠️ **Integration alert:** This PR modifies calcium output variable name (DD002 Integration Contract). DD003 (Muscle), DD006 (Neuropeptides), DD009 (Intestinal feedback), and DD012 (Visualization) consume this output. Tagging maintainers."
 2. **Integration L4 reviews:** Checks DD003, DD006, DD009, DD012 code for `ca_internal` references
 3. **Coordination:** Opens issues on each consuming DD: "Update calcium variable name from ca_internal to calcium_concentration (DD002 change)"
 4. **Synchronization:** All consuming DDs must update simultaneously (coordinated merge)

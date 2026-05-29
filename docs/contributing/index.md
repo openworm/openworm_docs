@@ -21,7 +21,7 @@ The five-level contributor ladder (L0 Observer → L5 Founder), the criteria for
 
 ### [Decision Process](decision-process.md)
 
-How architectural decisions get made in OpenWorm — the Rust-style RFC process adapted for a scientific simulation project, the Design Document template, the workflow from proposal → discussion → approval → implementation, and what Mind-of-a-Worm checks automatically on every PR. Covers:
+How architectural decisions get made in OpenWorm — the Rust-style RFC process adapted for a scientific simulation project, the Design Document template, the workflow from proposal → discussion → approval → implementation, and what [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) checks automatically on every PR. Covers:
 
 - When a change requires a Design Document vs. just a PR
 - The Design Document template and required sections

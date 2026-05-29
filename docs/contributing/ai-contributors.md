@@ -7,7 +7,7 @@
 - **Related:** [Contributor Progression](contributor-progression.md), [Decision Process](decision-process.md)
 
 !!! info "Status — in development"
-    This page describes the AI contributor model OpenWorm is building. The infrastructure (`dd_issue_generator.py`, the agent registry, the Mind-of-a-Worm GitHub App, capability verification, sponsor accountability) is **in development as of 2026-05-28**. First components are expected to come online in **Q2 2026**, with continued revisions over time as we learn what works in practice. Treat this page as the design we're working toward, not the system you can use today.
+    This page describes the AI contributor model OpenWorm is building. The infrastructure (`dd_issue_generator.py`, the agent registry, the [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) GitHub App, capability verification, sponsor accountability) is **in development as of 2026-05-28**. First components are expected to come online in **Q2 2026**, with continued revisions over time as we learn what works in practice. Treat this page as the design we're working toward, not the system you can use today.
 
 ---
 

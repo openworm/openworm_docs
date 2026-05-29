@@ -46,6 +46,6 @@ The robot project embodies the same neuromechanical coupling that the full simul
 
 ## Continue Reading
 
-- **[Archived Projects](../archived_projects.md#connectome-engine--lego-robot)** — Historical context for the Lego robot demonstration
+- **[Archived Projects](../archived_projects.md#connectome-engine-lego-robot)** — Historical context for the Lego robot demonstration
 - **[How It Works: Modeling](../modeling.md)** — The full multi-scale simulation architecture
 - **[Projects Overview](../projects.md)** — All active projects and their governing DDs

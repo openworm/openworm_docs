@@ -47,11 +47,11 @@ Opening a New Issue
 
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 
-![image](../../images/gh_issue1.png)
+![image](../images/gh_issue1.png)
 
 Next, click on the New Image button in the upper right corner of the screen.
 
-![image](../../images/gh_issue2.png)
+![image](../images/gh_issue2.png)
 
 This will open the interface to create a new issue. You will need to add the following information:
 
@@ -61,7 +61,7 @@ This will open the interface to create a new issue. You will need to add the fol
 -   Add a milestone if appropriate
 -   Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
-![image](../../images/gh_issue3.png)
+![image](../images/gh_issue3.png)
 
 Finally, click on Submit New Issue.
 
@@ -108,7 +108,7 @@ Contributing to Design Document Implementation
 6. **Implement according to DD spec** — Quality Criteria define acceptance
 7. **Run tests:** `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge)
 8. **Open PR** referencing the DD and issue
-9. **Mind-of-a-Worm pre-review** — AI checks DD compliance automatically
+9. **[Mind-of-a-Worm](ai_agents.md#mind-of-a-worm-active-contributor-guide) pre-review** — AI checks DD compliance automatically
 10. **Human L3+ review** — Final approval gate
 
 ### Contributor Levels

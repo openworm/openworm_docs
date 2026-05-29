@@ -164,7 +164,7 @@ DD013 (mechanistic-ML hybrid), DD021 (foundation model channel kinetics), DD022 
 ### Governance
 
 - **Contributors:** [Contributor Progression](../contributing/contributor-progression.md) (L0-L5 progression, badge system)
-- **RFC Process:** [Decision Process](../contributing/decision-process.md) (DD template, approval workflow, Mind-of-a-Worm enforcement)
+- **RFC Process:** [Decision Process](../contributing/decision-process.md) (DD template, approval workflow, [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) enforcement)
 - **AI Contributors:** [AI Contributors](../contributing/ai-contributors.md) (autonomous agents as L1-L3 contributors)
 
 ### Hybrid & Advanced

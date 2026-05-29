@@ -560,9 +560,9 @@ The key architectural lesson from Karr et al. is the **hybrid multi-formalism** 
 
 **Status:** 📝 **Not Yet Specified** — Placeholder for multi-stage simulation
 
-**Existing Work: [DevoWorm](../../Projects/DevoWorm/)**
+**Existing Work: [DevoWorm](../Projects/DevoWorm/)**
 
-The [DevoWorm project](../../Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) has been building toward developmental modeling since 2014 as an OpenWorm sub-project. DevoWorm's three research areas map directly onto Phase 8 needs:
+The [DevoWorm project](../Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) has been building toward developmental modeling since 2014 as an OpenWorm sub-project. DevoWorm's three research areas map directly onto Phase 8 needs:
 
 - **Developmental Dynamics:** Quantitative embryogenesis datasets, differentiation trees, and embryogenetic connectome analysis — directly applicable to modeling neuron birth order, cell lineage, and stage-specific neural topology
 - **Cybernetics and Digital Morphogenesis:** Cellular automata (Morphozoic) and Cellular Potts (CompuCell3D) models of embryogenesis — candidate frameworks for body morphogenesis simulation (L1 ~240 µm → adult ~1000 µm)

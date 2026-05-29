@@ -54,7 +54,7 @@ Every Design Document follows this structure. **Lead with impact, end with backg
 - **Supersedes:** DD### (if applicable)
 - **Related:** DD### (cross-references)
 
-> **Phase:** [Phase X](DD_PHASE_ROADMAP.md#phase-x-...) | **Layer:** [layer name]
+> **Phase:** Phase X | **Layer:** [layer name]
 
 ## TL;DR                                         ← REQUIRED
 2-3 sentences. What this DD does, why it matters,
@@ -240,7 +240,7 @@ Variable name, Format, Units, Timestep (if applicable).
 
 - Code changes to implement the DD are tracked separately (GitHub issues, milestones)
 - Implementation PRs reference the DD number
-- Mind-of-a-Worm checks that implementation PRs comply with the DD
+- [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) checks that implementation PRs comply with the DD
 
 **Step 6: Phase Synchronization**
 

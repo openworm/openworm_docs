@@ -26,7 +26,7 @@ This guide covers how to use, write, review, and contribute to OpenWorm Design D
 
 **When reviewing a PR:**
 
-1. Check which DDs are relevant (Mind-of-a-Worm will flag these automatically)
+1. Check which DDs are relevant ([Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) will flag these automatically)
 2. Verify the PR aligns with DD specifications (check Quality Criteria section)
 3. **If PR modifies a coupling interface** (changes output format, variable names, OME-Zarr schema):
     - Check the DD's "Depends On Me" table in Integration Contract

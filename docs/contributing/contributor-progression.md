@@ -24,7 +24,7 @@ OpenWorm uses a five-level contributor progression (L0 Observer through L5 Found
 - At least 3 contributors at L3+ within 12 months of adoption
 - All subsystems in the ownership map have assigned L4 maintainers (no "TBD" entries)
 - Decision-making latency reduced: L3 contributors can merge PRs in their subsystem without founder review
-- Mind-of-a-Worm contributor database operational and tracking progression automatically
+- [Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) contributor database operational and tracking progression automatically
 
 ## Deliverables
 
