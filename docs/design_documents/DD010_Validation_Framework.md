@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Validation
+> **Phase:** [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation) | **Layer:** Validation
 
 ## TL;DR
 
@@ -18,8 +18,8 @@ Every pull request must pass quantitative validation at four levels — single c
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
-| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) |
+| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation) |
+| **Layer** | Validation — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation) |
 | **What does this produce?** | Three-tier validation reports: Tier 1 (single-cell electrophysiology), Tier 2 (functional connectivity correlation), Tier 3 (behavioral kinematics via `open-worm-analysis-toolbox` — see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
 | **Success metric** | Tier 2a: correlation-of-correlations r > 0.5 vs. [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4); Tier 2b: neuropeptide contribution r > 0.3 (wt-vs-unc-31); Tier 3: 5 kinematic metrics within ±15% of [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) Schafer lab data |
 | **Repository** | Validation scripts in `openworm/OpenWorm` meta-repo; Tier 3 tool: [`openworm/open-worm-analysis-toolbox`](https://github.com/openworm/open-worm-analysis-toolbox) ([DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)) |
@@ -80,7 +80,7 @@ A simulation that produces movement but fails electrophysiology validation has *
 - **Tier 3 toolbox:** `openworm/open-worm-analysis-toolbox` (see [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md))
 - **Tier 2 data API:** `openworm/wormneuroatlas` (Randi 2023 functional connectivity)
 - **Issue label:** `dd010`, `validation`
-- **Milestone:** Phase 1 — Validation CI Pipeline
+- **Milestone:** Phase 3 — Validation CI Pipeline
 - **ClickUp task:** 868hjdzqy (Validation L4 Maintainer)
 
 ---
@@ -161,7 +161,7 @@ Validation results are displayed through the [DD012](DD012_Dynamic_Visualization
 | **Tier 2a: Integration (Circuit)** | Functional connectivity, network dynamics | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) whole-brain pairwise correlations (wild-type) | Correlation coefficient > 0.5 vs. experimental | Yes (blocks merge) |
 | **Tier 2b: Integration (Neuropeptides)** | Neuropeptide modulation effect on functional connectivity | [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) wild-type vs. *unc-31* mutant | Neuropeptide contribution correlation r > 0.3 | Yes (after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | **Tier 3: System (Behavior)** | Movement kinematics, pumping, defecation | [Yemini et al. 2013](https://doi.org/10.1038/nmeth.2560) (Schafer lab kinematics), [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) (pharyngeal EPG), [Thomas 1990](https://doi.org/10.1093/genetics/124.4.855) (defecation) | Statistical match via open-worm-analysis-toolbox | Yes (blocks merge) |
-| **Tier 4: Causal (Intervention)** | Perturbation response: ablation, silencing, mutation | Published laser ablation, optogenetics, mutant phenotype data | Direction of effect matches ≥70%; magnitude within ±30% | No (advisory → blocking Phase 3+) |
+| **Tier 4: Causal (Intervention)** | Perturbation response: ablation, silencing, mutation | Published laser ablation, optogenetics, mutant phenotype data | Direction of effect matches ≥70%; magnitude within ±30% | No (advisory → blocking Phase 5+) |
 
 **Blocking:** A PR that degrades Tier 2 or Tier 3 validation scores cannot be merged without explicit founder approval + justification.
 
@@ -203,22 +203,22 @@ For any PR that touches model code at a given tier, the following artifacts must
 
 | Artifact | Tier 1 | Tier 2 | Tier 3 |
 |----------|--------|--------|--------|
-| Written prediction (Phase 1) | Expected V_rest, R_in, I-V shape | Expected correlation pattern for affected pairs | Expected kinematic metric values |
-| Reference data (Phase 2) | Patch-clamp / Ca imaging dataset path | `data/randi2023_v*` | `data/yemini2013_v*` |
-| Model output (Phase 5) | NeuroML cell file + trace dump | c302 simulation calcium output | WCON trajectory |
-| Tuning history (Phase 6) | Parameter optimization log if any tuning was done | Synaptic-weight grid search results | SGD convergence history (Sibernetic; see [DD001](DD001_Body_Physics_Architecture.md#validation-methodology)) |
-| Side-by-side render (Phase 7) | Trace overlay PNG | Correlation heatmap diff | Side-by-side MP4 |
+| Written prediction (Phase 3) | Expected V_rest, R_in, I-V shape | Expected correlation pattern for affected pairs | Expected kinematic metric values |
+| Reference data (Phase 4) | Patch-clamp / Ca imaging dataset path | `data/randi2023_v*` | `data/yemini2013_v*` |
+| Model output (Phase 7) | NeuroML cell file + trace dump | c302 simulation calcium output | WCON trajectory |
+| Tuning history (Phase 8) | Parameter optimization log if any tuning was done | Synaptic-weight grid search results | SGD convergence history (Sibernetic; see [DD001](DD001_Body_Physics_Architecture.md#validation-methodology)) |
+| Side-by-side render (Phase 9) | Trace overlay PNG | Correlation heatmap diff | Side-by-side MP4 |
 | Pass/fail report (Phase 8) | Per-metric table with thresholds | Correlation-of-correlations score | Per-metric pass/fail with values |
 
 #### Anti-Patterns (What Mind-of-a-Worm Flags)
 
 These are the recurring failure modes the workflow prevents. MoaW should flag any PR exhibiting them:
 
-1. **Skipping Phase 1 (no written prediction).** "I'll know it when I see it" is not validation. Without a prediction, the post-hoc rationalization of any output as "close enough" is unfalsifiable.
-2. **Skipping Phase 3 (no inspection of reference).** Assuming the reference matches your prediction. Almost always it doesn't — see the canonical 0.25-factor surprise in [DD001 §Worked Example](DD001_Body_Physics_Architecture.md#worked-example-one_sprig_test).
+1. **Skipping Phase 3 (no written prediction).** "I'll know it when I see it" is not validation. Without a prediction, the post-hoc rationalization of any output as "close enough" is unfalsifiable.
+2. **Skipping Phase 5 (no inspection of reference).** Assuming the reference matches your prediction. Almost always it doesn't — see the canonical 0.25-factor surprise in [DD001 §Worked Example](DD001_Body_Physics_Architecture.md#worked-example-one_sprig_test).
 3. **Hand-sweeping parameters in Phase 6.** Running 3-5 variants and picking the closest. Not reproducible, not defensible, and slower than SGD which converges in 5-10 iterations.
 4. **Visual comparison without quantitative metrics in Phase 7.** "Looks right" is necessary but not sufficient. Always pair with a numeric difference at sampled times / per-metric values.
-5. **Pass/fail thresholds defined post-hoc.** Thresholds in Phase 4 must be set from the reference, *before* the model output is known. Adjusting thresholds to accommodate a struggling model is data-fitting, not validation.
+5. **Pass/fail thresholds defined post-hoc.** Thresholds in Phase 6 must be set from the reference, *before* the model output is known. Adjusting thresholds to accommodate a struggling model is data-fitting, not validation.
 6. **Treating a Tier failure as "noisy data" without root-cause investigation.** If Tier 2 correlation drops below threshold, the answer is not "the data is noisy" — it's "find which model changes drove the drop." Use bisection if needed.
 7. **Skipping Phase 8 commit of artifacts.** The reference trajectory, model output, render, and tuning history must all live alongside the code change. Future contributors need to re-run the comparison.
 
@@ -257,7 +257,7 @@ Run the cell model in isolation (no synaptic inputs, no network effects) with st
 | ASH (nociceptor) | [Hilliard et al. 2005](https://doi.org/10.1038/sj.emboj.7600493), **WormsenseLab_ASH** repo | Calcium imaging, OSM-9/TRPV channel characterization | Validate polymodal nociceptor response profile |
 | AVA (command interneuron) | Lockery lab ([Lindsay et al. 2011](https://doi.org/10.1038/ncomms1304)) | Whole-cell recordings, graded potential dynamics | Validate command interneuron I-V curve, graded (non-spiking) response |
 | RIM (motor/modulatory) | [Liu et al. 2018](https://doi.org/10.1016/j.cell.2018.08.018) | Calcium imaging + electrophysiology, EGL-19/UNC-2 channels | Validate motor neuron calcium dynamics, channel conductance ratios |
-| Pharyngeal neurons (MC, M3) | [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | Electropharyngeogram (EPG): extracellular field potentials from pharyngeal muscles and neurons | Validate pharyngeal neuron firing patterns (Phase 3, [DD007](DD007_Pharyngeal_System_Architecture.md)) |
+| Pharyngeal neurons (MC, M3) | [Raizen & Avery 1994](https://doi.org/10.1016/0896-6273(94)90207-0) | Electropharyngeogram (EPG): extracellular field potentials from pharyngeal muscles and neurons | Validate pharyngeal neuron firing patterns (Phase 5, [DD007](DD007_Pharyngeal_System_Architecture.md)) |
 
 **Coverage:** ~7 neuron classes have direct patch-clamp or detailed calcium imaging data suitable for Tier 1 spot-checks. An additional ~13 classes have partial recordings (single-channel data, calcium responses to specific stimuli) curated in the `openworm/ChannelWorm` ion channel database. See [DD005](DD005_Cell_Type_Differentiation_Strategy.md) Calibration Dataset for the full training set.
 
@@ -407,7 +407,7 @@ fc_unc31 = atlas.get_signal_propagation_atlas(strain="unc31")
 fc_diff_exp = fc_wt - fc_unc31  # Neuropeptide contribution (experimental)
 ```
 
-**Blocking:** This sub-test becomes blocking after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) is implemented (Phase 2). Before DD006, it is informational only.
+**Blocking:** This sub-test becomes blocking after [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) is implemented (Phase 4). Before DD006, it is informational only.
 
 **Cross-reference:** See [DD006 §Validation](DD006_Neuropeptidergic_Connectome_Integration.md#validation-procedure) for the full neuropeptide validation methodology, which uses this same unc-31 comparison as its Tier 1 functional connectivity validation.
 
@@ -471,7 +471,7 @@ python check_acceptance.py validation_report.json --tolerance 0.15
 - Magnitude within ±30% for well-characterized perturbations (e.g., touch neuron ablation latency, unc-2 speed reduction)
 - Model does not predict catastrophic failure (NaN, divergence) for perturbations that produce viable animals in vivo
 
-**Status:** Non-blocking (advisory) in Phase 1-2. Becomes blocking in Phase 3+ as more subsystems come online and the model makes increasingly specific causal predictions.
+**Status:** Non-blocking (advisory) in Phase 3-2. Becomes blocking in Phase 5+ as more subsystems come online and the model makes increasingly specific causal predictions.
 
 **Note:** A growing body of whole-brain perturbation data is being collected by multiple labs using optogenetic stimulation paired with whole-brain imaging across thousands of animals ([Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4); [Haspel et al. 2023](https://arxiv.org/abs/2308.06578)). As these datasets become publicly available, they will provide increasingly powerful Tier 4 validation targets. See [DD020](DD020_Validation_Data_Acquisition_Pipeline.md) (Validation Data Acquisition) for the data sourcing roadmap.
 
@@ -734,7 +734,7 @@ This repo is **dormant** (last commit Jan 2020). **[DD017](DD017_Movement_Analys
 - API contract for `NormalizedWorm` and `WormFeatures` classes
 - Relationship to Tierpsy Tracker (modern successor)
 
-**See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase A1 ([DD011](DD011_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
+**See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) for the complete revival plan.** This is a Phase 1 ([DD011](DD011_Simulation_Stack_Architecture.md) roadmap) task. Without a working analysis toolbox, Tier 3 validation is impossible.
 
 Note: The archived predecessor repo `openworm/movement_validation` should not be used — it was superseded by the analysis toolbox.
 
@@ -855,7 +855,7 @@ openworm/validation_data/
 
 **Current state:** Validation is run manually before major releases.
 
-**Target state (Phase 1):** GitHub Actions CI runs validation suite on every PR to `main`.
+**Target state (Phase 3):** GitHub Actions CI runs validation suite on every PR to `main`.
 
 **Implementation:**
 ```yaml
@@ -889,8 +889,8 @@ jobs:
 
 ## Boundaries (Explicitly Out of Scope)
 
-1. **Developmental validation:** Validating stage-specific models (L1, dauer, male) is Phase 6 work.
-2. **Genetic variation:** Validating against natural isolates (Ben-David eQTLs) is Phase 6+ work.
+1. **Developmental validation:** Validating stage-specific models (L1, dauer, male) is Phase 8 work.
+2. **Genetic variation:** Validating against natural isolates (Ben-David eQTLs) is Phase 8+ work.
 3. **Pharmacological validation:** Drug effects (aldicarb, levamisole) are future work.
 
 ---
@@ -941,14 +941,14 @@ Published HH parameter fits for motor neurons, interneurons, AWCon, and RMD. Exp
 
 - **Tier 1** (single-cell electrophysiology): Scripts exist but not automated (non-blocking currently)
 - **Tier 2a** (functional connectivity): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data accessible via `wormneuroatlas` API — no manual ingestion needed (blocking)
-- **Tier 2b** (neuropeptide unc-31 comparison): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) *unc-31* data also in `wormneuroatlas` — blocked on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) implementation (Phase 2)
+- **Tier 2b** (neuropeptide unc-31 comparison): [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) *unc-31* data also in `wormneuroatlas` — blocked on [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) implementation (Phase 4)
 - **Tier 3** (behavioral kinematics): **BLOCKED** — `open-worm-analysis-toolbox` is dormant (last commit Jan 2020, broken on Python 3.12)
 
 **See [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (Movement Analysis Toolbox and WCON Policy)** for the complete toolbox revival plan (8 tasks, ~33 hours). Tier 3 validation cannot run until the toolbox is revived and installable on Python 3.12.
 
 **Next Actions:**
 
-1. **URGENT:** Prioritize [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase A1 work (parallel with [DD011](DD011_Simulation_Stack_Architecture.md))
+1. **URGENT:** Prioritize [DD017](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) toolbox revival as Phase 1 work (parallel with [DD011](DD011_Simulation_Stack_Architecture.md))
 2. Appoint Validation L4 Maintainer to own revival (see ClickUp task 868hjdzqy)
 3. Add `wormneuroatlas` + `cect` to Docker validation stage — [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) data is already accessible via API (no manual ingestion needed)
 4. After [DD006](DD006_Neuropeptidergic_Connectome_Integration.md): Implement Tier 2b (unc-31 comparison) validation script

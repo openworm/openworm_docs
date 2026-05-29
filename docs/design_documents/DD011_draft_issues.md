@@ -10,7 +10,7 @@
 
 ---
 
-## Phase A1: Foundation (Weeks 1–4)
+## Phase 1: Foundation
 
 Target: Contributors can `docker compose run quick-test` with their branch.
 
@@ -419,7 +419,7 @@ Target: Contributors can `docker compose run quick-test` with their branch.
 
 ---
 
-## Phase B: Validation Integration (Weeks 5–8)
+## Phase B: Validation Integration
 
 Target: PRs to main are automatically validated. JupyterLab available for exploration.
 
@@ -641,7 +641,7 @@ Target: PRs to main are automatically validated. JupyterLab available for explor
 
 ---
 
-## Phase C: Subsystem Expansion (Weeks 9–16)
+## Phase C: Subsystem Expansion
 
 Target: New subsystems plug into the stack via config toggles.
 
@@ -773,7 +773,7 @@ Target: New subsystems plug into the stack via config toggles.
 
 ---
 
-## Phase D: Polish & Onboarding (Weeks 17–20)
+## Phase D: Polish & Onboarding
 
 Target: A newcomer can experience the full simulation in a browser via MyBinder, then progress to local Docker for development.
 

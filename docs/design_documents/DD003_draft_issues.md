@@ -14,15 +14,15 @@
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Validation Scripts (Issues 1-4) | **Phase A1** | 2 `[TO BE CREATED]` scripts + test suite + parameter audit |
-| 2. Output Pipeline (Issues 5-8) | **Phase A1** | OME-Zarr export, config validation, integration tests |
-| 3. Bug Fixes (Issues 9-12) | **Phase A1** | MVL24 fix, config propagation, edge cases |
-| 4. Research (Issues 13-15) | **Phase 1+** | CeNGEN muscle survey, multi-compartment, Hill-type |
+| 1. Validation Scripts (Issues 1-4) | **Phase 1** | 2 `[TO BE CREATED]` scripts + test suite + parameter audit |
+| 2. Output Pipeline (Issues 5-8) | **Phase 1** | OME-Zarr export, config validation, integration tests |
+| 3. Bug Fixes (Issues 9-12) | **Phase 1** | MVL24 fix, config propagation, edge cases |
+| 4. Research (Issues 13-15) | **Phase 3+** | CeNGEN muscle survey, multi-compartment, Hill-type |
 | 5. Documentation (Issues 16-18) | **Any** | Can be addressed independently |
 
 ---
 
-## Group 1: Validation Scripts (Phase A1)
+## Group 1: Validation Scripts (Phase 1)
 
 Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit tests and parameter auditing.
 
@@ -32,7 +32,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit t
 
 - **Title:** `[DD003] Refactor c302_MuscleTest.py plotting into standalone plot_muscle_activation.py`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, matplotlib
 - **DD Section to Read:** [DD003 — How to Build & Test](DD003_Muscle_Model_Architecture.md#how-to-build-test) (Step 4) and [DD003 — How to Visualize](DD003_Muscle_Model_Architecture.md#how-to-visualize)
@@ -66,7 +66,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit t
 
 - **Title:** `[DD003] Adapt muscle_model validation code into validate_muscle_calcium.py — calcium dynamics and activation range checker`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, numpy
 - **DD Section to Read:** [DD003 — How to Build & Test](DD003_Muscle_Model_Architecture.md#how-to-build-test) (Step 5) and [DD003 — Green Light Criteria](DD003_Muscle_Model_Architecture.md#green-light-criteria)
@@ -101,7 +101,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit t
 
 - **Title:** `[DD003] Convert c302_IClampMuscle.py and c302_MuscleTest.py into pytest suite for GenericMuscleCell validation`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD003 — Quality Criteria](DD003_Muscle_Model_Architecture.md#quality-criteria) (criteria 3-5) and [DD003 — Implementation References — Muscle Cell Template](DD003_Muscle_Model_Architecture.md#muscle-cell-template)
@@ -134,7 +134,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit t
 
 - **Title:** `[DD003] Extend muscle_model/compareToNeuroML2.py into full conductance density audit against Boyle & Cohen 2008 and DD003 spec`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD003 — Technical Approach — Muscle Cells](DD003_Muscle_Model_Architecture.md#muscle-cells-use-the-same-hodgkin-huxley-framework-as-neurons) and [Boyle & Cohen 2008](https://doi.org/10.1016/j.biosystems.2008.05.025)
@@ -164,7 +164,7 @@ Target: Create the two scripts listed as `[TO BE CREATED]` in DD003, plus unit t
 
 ---
 
-## Group 2: Output Pipeline & Integration (Phase A1)
+## Group 2: Output Pipeline & Integration (Phase 1)
 
 Target: OME-Zarr export, config validation, and integration testing for DD003's interfaces with DD002 and DD001.
 
@@ -174,7 +174,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD003's 
 
 - **Title:** `[DD003] Implement OME-Zarr export for muscle/activation/ and muscle/calcium/`
 - **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, zarr
 - **DD Section to Read:** [DD003 — Deliverables](DD003_Muscle_Model_Architecture.md#deliverables) (OME-Zarr rows) and [DD012 — OME-Zarr Schema](DD012_Dynamic_Visualization_Architecture.md)
@@ -208,7 +208,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD003's 
 
 - **Title:** `[DD003] Add muscle config section validation and cross-constraint checking`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
 - **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
@@ -241,7 +241,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD003's 
 
 - **Title:** `[DD003] Create integration test verifying muscle calcium → Sibernetic activation pipeline`
 - **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, docker
 - **DD Section to Read:** [DD003 — Integration Contract — Outputs](DD003_Muscle_Model_Architecture.md#inputs--outputs) and [DD003 — Coupling Bridge Ownership](DD003_Muscle_Model_Architecture.md#coupling-bridge-ownership)
@@ -274,7 +274,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD003's 
 
 - **Title:** `[DD003] Extend c302_TargetMuscle.py into systematic NMJ connectivity validator against Cook et al. 2019`
 - **Labels:** `DD003`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience, connectomics
 - **DD Section to Read:** [DD003 — Neural-to-Muscle Coupling](DD003_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (cect API)
@@ -301,7 +301,7 @@ Target: OME-Zarr export, config validation, and integration testing for DD003's 
 
 ---
 
-## Group 3: Bug Fixes & Improvements (Phase A1)
+## Group 3: Bug Fixes & Improvements (Phase 1)
 
 Target: Fix known issues and improve muscle model configurability.
 
@@ -311,7 +311,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 - **Title:** `[DD003] Patch get_muscle_names() in c302/__init__.py to return 95 muscles — fix MVL24 phantom`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD003 — Known Issues — Issue 3: MVL24](DD003_Muscle_Model_Architecture.md#issue-3-mvl24-muscle-does-not-exist)
@@ -347,7 +347,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 - **Title:** `[DD003] Propagate muscle.max_muscle_force and muscle.max_ca from openworm.yml to coupling script`
 - **Labels:** `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD003 — Integration Contract — Configuration](DD003_Muscle_Model_Architecture.md#configuration) and [DD011 §1](DD011_Simulation_Stack_Architecture.md#1-simulation-configuration-system-openwormyml)
@@ -380,7 +380,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 - **Title:** `[DD003] Verify calcium-to-activation formula handles edge cases correctly`
 - **Labels:** `DD003`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD003 — Calcium-to-Force Coupling](DD003_Muscle_Model_Architecture.md#calcium-to-force-coupling-the-bridge-to-sibernetic)
@@ -410,7 +410,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 - **Title:** `[DD003] Audit NMJ conductance values (0.5-1.0 nS) across all motor neuron–muscle pairs`
 - **Labels:** `DD003`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience
 - **DD Section to Read:** [DD003 — Neural-to-Muscle Coupling](DD003_Muscle_Model_Architecture.md#neural-to-muscle-coupling) and [DD002 — Integration Contract](DD002_Neural_Circuit_Architecture.md)
@@ -436,7 +436,7 @@ Target: Fix known issues and improve muscle model configurability.
 
 ---
 
-## Group 4: Research & Advanced Features (Phase 1+)
+## Group 4: Research & Advanced Features (Phase 3+)
 
 Target: Investigate muscle-type differentiation, multi-compartment modeling, and alternative mechanical models for future phases.
 
@@ -446,10 +446,10 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 
 - **Title:** `[DD003] Survey CeNGEN data for muscle-type-specific ion channel expression profiles`
 - **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, bioinformatics, neuroscience
-- **DD Section to Read:** [DD003 — Migration Path — Muscle-Type Diversity](DD003_Muscle_Model_Architecture.md#if-muscle-type-diversity-is-required-phase-3) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization)
+- **DD Section to Read:** [DD003 — Migration Path — Muscle-Type Diversity](DD003_Muscle_Model_Architecture.md#if-muscle-type-diversity-is-required-phase-5) and [DD005](DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization)
 - **Existing Code to Reuse:**
     - `openworm/wormneuroatlas` repo — Python package for accessing CeNGEN single-cell RNA-seq data; use as the primary data access interface (reuse strategy: **import directly**)
     - `openworm/c302` → `c302/parameters_D.py` — current channel→gene mapping (which genes map to which model channels); use as the mapping to validate against (reuse strategy: **reference**)
@@ -468,7 +468,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
     - [ ] Assess: do body wall muscles in different quadrants (MDR/MVR/MVL/MDL) show differential channel expression?
     - [ ] Summarize: which muscle types might need distinct conductance profiles?
     - [ ] Post report as issue comment with data tables and citations
-    - [ ] If differentiation is warranted, draft a follow-up issue for Phase 3 implementation
+    - [ ] If differentiation is warranted, draft a follow-up issue for Phase 5 implementation
 - **Sponsor Summary Hint:** The current model uses one generic muscle cell type for all 95 body wall muscles. But real worms might have subtle differences — do muscles near the head express different ion channels than muscles near the tail? CeNGEN is a massive dataset of gene expression in individual C. elegans cells. This research mines that data to determine whether we need different "recipes" for different muscles, or whether the single generic model is biologically justified.
 
 ---
@@ -477,7 +477,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 
 - **Title:** `[DD003] Prototype multi-compartment muscle cell to evaluate voltage non-uniformity`
 - **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroscience, computational-modeling
 - **DD Section to Read:** [DD003 — Known Issues — Issue 1: Single Muscle Compartment](DD003_Muscle_Model_Architecture.md#issue-1-single-muscle-compartment)
@@ -509,7 +509,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
 
 - **Title:** `[DD003] Evaluate Hill-type crossbridge mechanics for specialized muscles (egg-laying, defecation)`
 - **Labels:** `DD003`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** physics, biomechanics, neuroscience
 - **DD Section to Read:** [DD003 — Alternatives Considered — Hill-Type Muscle Model](DD003_Muscle_Model_Architecture.md#1-hill-type-muscle-model-with-crossbridge-dynamics) and [DD003 — Migration Path](DD003_Muscle_Model_Architecture.md#migration-path)
@@ -531,7 +531,7 @@ Target: Investigate muscle-type differentiation, multi-compartment modeling, and
     - [ ] Compare Boyle-Cohen, JohnsonMailler, and CE_locomotion muscle dynamics approaches
     - [ ] Propose LEMS ComponentType extension approach (per DD003 Migration Path)
     - [ ] Post feasibility report with go/no-go recommendation per muscle type
-    - [ ] If Hill-type is warranted for any muscle type, draft DD amendment for Phase 3
+    - [ ] If Hill-type is warranted for any muscle type, draft DD amendment for Phase 5
 - **Sponsor Summary Hint:** DD003's muscle model uses a simple linear formula: more calcium = more force. This works for locomotion (Boyle & Cohen 2008 showed body wall muscles are "simple actuators"). But what about specialized muscles — the vulval muscles that lay eggs, the anal depressor muscle that contracts during defecation, the pharyngeal muscles that pump food? These might need a richer mechanical model (Hill-type) with actin-myosin crossbridge dynamics. Three different muscle model implementations exist across OpenWorm repos (`muscle_model`, `JohnsonMailler_MuscleModel`, `CE_locomotion`) — this research compares them to determine which muscles, if any, need upgrading.
 
 ---

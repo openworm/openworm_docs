@@ -254,9 +254,9 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | **[DD001](DD001_Body_Physics_Architecture.md)** (Body Physics) | **7 DDs** | DD004, DD007, DD010, DD011, DD012, DD012.2, DD015 | 🔴 **CRITICAL** | Body Physics L4 Maintainer |
 | **DD016** (Connectome) | **9 DDs** | DD002, DD003, DD005, DD006, DD007, DD011, DD013, DD014, DD015 | 🔴 **CRITICAL FOUNDATION** | TBD (Data L4) |
 | DD003 (Muscle) | 7 DDs | [DD001](DD001_Body_Physics_Architecture.md), DD007, DD010, DD011, DD012, DD013, DD014 | 🟡 Moderate | TBD (Muscle L4) |
-| DD005 (Cell-Type Specialization) | 6 DDs | DD006, DD010, DD012, DD013, DD014, DD021 | 🟡 Moderate (Phase 1+) | Neural Circuit L4 Maintainer |
-| DD021 (Foundation Models) | 2 DDs | DD002 (per-class HH params), DD005 (kinetics priors) | 🟡 Moderate (Phase A2+) | TBD (ML L4) |
-| DD013 (Hybrid ML) | 2 DDs | DD002 (fitted params), DD006 (binding affinities) | 🟡 Moderate (Phase 3+) | TBD (ML L4) |
+| DD005 (Cell-Type Specialization) | 6 DDs | DD006, DD010, DD012, DD013, DD014, DD021 | 🟡 Moderate (Phase 3+) | Neural Circuit L4 Maintainer |
+| DD021 (Foundation Models) | 2 DDs | DD002 (per-class HH params), DD005 (kinetics priors) | 🟡 Moderate (Phase 2+) | TBD (ML L4) |
+| DD013 (Hybrid ML) | 2 DDs | DD002 (fitted params), DD006 (binding affinities) | 🟡 Moderate (Phase 5+) | TBD (ML L4) |
 | DD011 (Integration) | **0 DDs** | (Orchestrator — no one depends on it) | ℹ️ **LEAF NODE** | Integration L4 seat open to community |
 | DD012 (Visualization) | **0 DDs** | (Consumer only — no one depends on it) | ℹ️ **LEAF NODE** | Visualization L4 seat open to community |
 | DD017 (Toolbox) | 1 DD | DD010 (Tier 3 only) | 🟡 **BLOCKING** (for validation) | Validation L4 seat open to community |
@@ -269,20 +269,20 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 | DD003 (Muscle) | Phase 0 | Accepted |
 | DD001 (Body Physics) | Phase 0 | Accepted |
 | DD016 (Connectome) | Phase 0 | Accepted |
-| DD008 (Data Integration) | Phase A1 | Blocked |
-| DD011 (Simulation Stack) | Phase A1 | Proposed |
-| DD017 (Movement Toolbox) | Phase A1 | Blocked |
-| DD020 (Validation Data) | Phase A1 | Proposed |
-| DD024 (Project Metrics Dashboard) | Phase A1 | Proposed |
+| DD008 (Data Integration) | Phase 1 | Blocked |
+| DD011 (Simulation Stack) | Phase 1 | Proposed |
+| DD017 (Movement Toolbox) | Phase 1 | Blocked |
+| DD020 (Validation Data) | Phase 1 | Proposed |
+| DD024 (Project Metrics Dashboard) | Phase 1 | Proposed |
 | [Contributor Progression](../contributing/contributor-progression.md) | Governance (Contributing section) | Active |
 | [Decision Process](../contributing/decision-process.md) | Governance (Contributing section) | Active |
 | [AI Contributors](../contributing/ai-contributors.md) | Governance (Contributing section) | Active |
-| DD021 (Foundation Models) | Phase A2 | Proposed |
-| DD005 (Cell-Type Specialization) | Phase 1 | Proposed |
-| DD010 (Validation Framework) | Phase 1 | Proposed |
-| DD012 (Visualization) | Phase 1-4 | Proposed |
-| DD013 (Hybrid ML) | Phase 3 | Proposed |
-| DD023 (Multicompartmental) | Phase 2 | Proposed |
+| DD021 (Foundation Models) | Phase 2 | Proposed |
+| DD005 (Cell-Type Specialization) | Phase 3 | Proposed |
+| DD010 (Validation Framework) | Phase 3 | Proposed |
+| DD012 (Visualization) | Phase 3-6 | Proposed |
+| DD013 (Hybrid ML) | Phase 5 | Proposed |
+| DD023 (Multicompartmental) | Phase 4 | Proposed |
 
 **Key Insight:**
 
@@ -308,7 +308,7 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 - [WCON](https://github.com/openworm/tracker-commons) exporter in `master_openworm.py` handles [DD001](DD001_Body_Physics_Architecture.md)→DD017
 - Validation scripts handle DD017→DD010
 
-**Phase Status:** The core loop (DD002→DD003→DD001→DD017→DD010) is the only coupling chain that is **fully working today** (Phase 0). All other chains (Cell-Type, Closed-Loop, Visualization, Foundation Models) are Phase 1+.
+**Phase Status:** The core loop (DD002→DD003→DD001→DD017→DD010) is the only coupling chain that is **fully working today** (Phase 0). All other chains (Cell-Type, Closed-Loop, Visualization, Foundation Models) are Phase 3+.
 
 **Two trajectory generation paths (both produce WCON 1.0):**
 
@@ -319,9 +319,9 @@ java -jar plantuml.jar INTEGRATION_MAP.md
 
 Both paths feed identically into DD017 → DD010. The 2D fast path wraps the Boyle, Berri & Cohen (2012) published rod-spring model, already implemented in `openworm/CE_locomotion`, `openworm/Worm2D`, and `openworm/CelegansNeuromechanicalGaitModulation`.
 
-**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase A1 deliverable (DD002 Issue 1).
+**Phase Status:** The Sibernetic full path works today (Phase 0). The 2D fast path (`boyle_berri_cohen_trajectory.py`) is a Phase 1 deliverable (DD002 Issue 1).
 
-**2D model limitations:** 2D only. Cannot replace Sibernetic for DD004 (cell identity), DD015 (3D cuticle strain), DD012.2 (mesh deformation), or Phase 3+ organ systems.
+**2D model limitations:** 2D only. Cannot replace Sibernetic for DD004 (cell identity), DD015 (3D cuticle strain), DD012.2 (mesh deformation), or Phase 5+ organ systems.
 
 **What breaks if:**
 
@@ -334,7 +334,7 @@ Both paths feed identically into DD017 → DD010. The 2D fast path wraps the Boy
 
 ### Chain 2: Cell-Type Specialization (CeNGEN → Conductances → Functional Connectivity)
 
-**Phase 1 validation chain:**
+**Phase 3 validation chain:**
 
 <object data="../../images/chain2_cell_differentiation.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 2: Cell-Type Specialization</object>
 
@@ -348,7 +348,7 @@ Both paths feed identically into DD017 → DD010. The 2D fast path wraps the Boy
 
 ### Chain 3: Bidirectional Closed-Loop Touch (DD015 Closes the Loop)
 
-**New in Phase 2** — adds reverse path (body → sensory):
+**New in Phase 4** — adds reverse path (body → sensory):
 
 <object data="../../images/chain3_closed_loop.svg" type="image/svg+xml" style="width:100%; max-width:900px;">Chain 3: Closed-Loop Touch</object>
 
@@ -426,7 +426,7 @@ Foundation models ─────────┤                              DD
 | **Muscle calcium → Sibernetic activation** | DD003 | [DD001](DD001_Body_Physics_Architecture.md) | Tab-separated file | 🔴 **CRITICAL** | File format, muscle count, activation range [0,1] — if any change, body physics breaks |
 | **OME-Zarr schema** | DD002-DD015 (10+ producers) | DD012 | Zarr directory structure | 🔴 **CRITICAL** | 10+ DDs export, 1 DD consumes — coordination nightmare if schema changes |
 | **WCON format** | DD002 (2D fast path) or [DD001](DD001_Body_Physics_Architecture.md) (Sibernetic full path) | DD017 | JSON (WCON 1.0 spec) | 🟡 **MODERATE** | WCON is external standard (tracker-commons), unlikely to change |
-| **`cect` API** | DD016 | DD002-DD015 (9 DDs) | Python classes (ConnectomeDataset, ConnectionInfo) | 🟡 **MODERATE** | ConnectomeToolbox maintainer maintains `cect`, API is stable, v0.2.7 →0.3.0 should be backward-compatible |
+| **`cect` API** | DD016 | DD002-DD015 (9 DDs) | Python classes (ConnectomeDataset, ConnectionInfo) | 🟡 **MODERATE** | ConnectomeToolbox maintainer maintains `cect`, API is stable, v0.4.7 →0.3.0 should be backward-compatible |
 | **Connectome topology (adjacency matrices)** | DD016 | DD002 | NumPy arrays | 🟢 **LOW** | Topology is biological ground truth, rarely changes (only with new EM data) |
 | **CeNGEN expression** | DD008/DD016 | DD005 | CSV or OWMeta query | 🟢 **LOW** | Expression data is fixed per CeNGEN version (L4 v1.0), won't change unless re-analysis |
 | **Foundation model predictions → DD005/DD002** | DD021 | DD005, DD002 | CSV (HH parameters) | 🟡 **MODERATE** | Predictions change when models are updated (AlphaFold 3→4, new ESM version); downstream parameters shift, requiring revalidation against DD010 |
@@ -486,7 +486,7 @@ Foundation models ─────────┤                              DD
 
 ### Scenario 3: Multiple DDs Change Simultaneously
 
-**Example:** Phase 2 implementation — DD006 (neuropeptides) and DD015 (touch) both modify DD002.
+**Example:** Phase 4 implementation — DD006 (neuropeptides) and DD015 (touch) both modify DD002.
 
 **Integration L4 workflow:**
 
@@ -548,7 +548,7 @@ Foundation models ─────────┤                              DD
 1. **Review all PRs that modify coupling scripts** (sibernetic_c302.py, master_openworm.py, OME-Zarr export)
 2. **Run integration tests** after merging PRs to DD002, DD003, [DD001](DD001_Body_Physics_Architecture.md) (the core chain)
 3. **Update this Integration Map** when new DDs are added or coupling changes
-4. **Coordinate simultaneous merges** when multiple DDs change interfaces (Phase 2, Phase 3 multi-DD implementations)
+4. **Coordinate simultaneous merges** when multiple DDs change interfaces (Phase 4, Phase 5 multi-DD implementations)
 5. **Maintain `versions.lock`** — pin all subsystem commits together for each release
 
 ### For Validation L4 (TBD — DD010, DD017)
@@ -564,7 +564,7 @@ Foundation models ─────────┤                              DD
 
 **Ongoing responsibilities:**
 
-1. **Implement viewer features** per DD012 Phase 1-3 roadmap
+1. **Implement viewer features** per DD012 Phase 3-5 roadmap
 2. **Update color mappings** in DD012.1 if new cell types added (e.g., pharynx, intestine)
 3. **Maintain OME-Zarr import** — when science DDs add new groups, update viewer to display them
 4. **Performance optimization** — keep rendering at 60fps as dataset size grows
@@ -694,4 +694,4 @@ docker compose run test-dd015  # Only validates DD015 coupling (body → sensory
 
 - **Approved by:** Pending (awaiting founder review)
 - **Maintained by:** Integration L4 Maintainer (when appointed)
-- **Next Update:** After Phase A1 (reassess coupling graph based on actual DD011 implementation and DD021 cross-validation results)
+- **Next Update:** After Phase 1 (reassess coupling graph based on actual DD011 implementation and DD021 cross-validation results)

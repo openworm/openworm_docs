@@ -56,9 +56,9 @@ OpenWorm has evolved significantly since 2011. These projects were important mil
 
 **What replaced it:** [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) specifies a 3-phase evolution:
 
-1. **Phase 1:** Trame viewer (PyVista + live server)
-2. **Phase 2:** Interactive layers with validation overlays
-3. **Phase 3:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
+1. **Phase 3:** Trame viewer (PyVista + live server)
+2. **Phase 4:** Interactive layers with validation overlays
+3. **Phase 5:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
 
 ---
 

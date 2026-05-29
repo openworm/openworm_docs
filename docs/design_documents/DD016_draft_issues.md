@@ -12,16 +12,16 @@
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Build Integration (Issues 1-5) | **Phase A1** | Pin cect in DD011 Docker stack |
-| 2. CI & Quality Gates (Issues 6-9) | **Phase A1** | Automated regression detection |
-| 3. Connectome Loaders (Issues 10-14) | **Phase 1+** | Built as consuming DDs are implemented |
-| 4. API & Utilities (Issues 15-18) | **Phase 1+** | Bilateral symmetry, cell type classifier |
+| 1. Build Integration (Issues 1-5) | **Phase 1** | Pin cect in DD011 Docker stack |
+| 2. CI & Quality Gates (Issues 6-9) | **Phase 1** | Automated regression detection |
+| 3. Connectome Loaders (Issues 10-14) | **Phase 3+** | Built as consuming DDs are implemented |
+| 4. API & Utilities (Issues 15-18) | **Phase 3+** | Bilateral symmetry, cell type classifier |
 | 5. Documentation (Issues 19-21) | **Any** | Can be addressed independently |
-| 6. Research (Issues 22-23) | **Phase 3+** | Developmental connectome, E/L classification |
+| 6. Research (Issues 22-23) | **Phase 5+** | Developmental connectome, E/L classification |
 
 ---
 
-## Group 1: Build Integration (Phase A1)
+## Group 1: Build Integration (Phase 1)
 
 Target: `cect` is pinned, configured, cached, and installable inside the DD011 Docker stack.
 
@@ -31,7 +31,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 - **Title:** `[DD016] Pin cect==0.2.7 in versions.lock`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
 - **DD Section to Read:** [DD016 — Version Pinning & Update Procedure](DD016_Connectome_Data_Access_and_Dataset_Policy.md#version-pinning-update-procedure) and [DD011 §4 — Dependency Pinning](DD011_Simulation_Stack_Architecture.md#4-dependency-pinning-versionslock)
@@ -54,7 +54,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 - **Title:** `[DD016] Add data.connectome configuration section to openworm.yml`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** yaml
 - **DD Section to Read:** [DD016 — Configuration](DD016_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (openworm.yml section)
@@ -81,7 +81,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 - **Title:** `[DD016] Add connectome config validation to validate_config.py`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Configuration](DD016_Connectome_Data_Access_and_Dataset_Policy.md#configuration) (config keys table) and [DD016 — Quality Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
@@ -109,7 +109,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 - **Title:** `[DD016] Install cect at pinned version in Docker neural stage`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** docker
 - **DD Section to Read:** [DD016 — Repository & Packaging](DD016_Connectome_Data_Access_and_Dataset_Policy.md#repository-packaging) (Docker stage, build dependencies)
@@ -135,7 +135,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 - **Title:** `[DD016] Pre-generate and cache cect dataset JSON files in Docker image`
 - **Labels:** `DD016`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, docker
 - **DD Section to Read:** [DD016 — Dataset Selection Rules](DD016_Connectome_Data_Access_and_Dataset_Policy.md#dataset-selection-rules) (rule 4: `from_cache=True` in CI) and [DD016 — Quality Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 6)
@@ -157,7 +157,7 @@ Target: `cect` is pinned, configured, cached, and installable inside the DD011 D
 
 ---
 
-## Group 2: CI & Quality Gates (Phase A1)
+## Group 2: CI & Quality Gates (Phase 1)
 
 Target: Every PR is automatically checked for correct connectome data access.
 
@@ -167,7 +167,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD016] Create CI gate: verify cect version and default dataset load`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** ci-cd, python
 - **DD Section to Read:** [DD016 — How to Test](DD016_Connectome_Data_Access_and_Dataset_Policy.md#how-to-test-contributor-workflow) (quick test and full validation scripts)
@@ -196,7 +196,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD016] Audit all 9 consuming DDs for raw connectome file parsing`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
 - **DD Section to Read:** [DD016 — Quality Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (criterion 1: API-only access) and [DD016 — Goal & Success Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#goal-success-criteria)
@@ -222,7 +222,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD016] Create connectome API compliance checker for CI`
 - **Labels:** `DD016`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Quality Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria) (all 6 criteria) and [DD016 — API Contract for Consumers](DD016_Connectome_Data_Access_and_Dataset_Policy.md#api-contract-for-consumers)
@@ -251,7 +251,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 - **Title:** `[DD016] Create cect version update and regression test script`
 - **Labels:** `DD016`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Update Procedure](DD016_Connectome_Data_Access_and_Dataset_Policy.md#update-procedure) (6-step process)
@@ -273,7 +273,7 @@ Target: Every PR is automatically checked for correct connectome data access.
 
 ---
 
-## Group 3: Consumer DD Integration (Phase 1+)
+## Group 3: Consumer DD Integration (Phase 3+)
 
 Target: Canonical data loaders exist for each consuming DD's connectome access pattern.
 
@@ -283,7 +283,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 - **Title:** `[DD016] Create canonical connectome loader for c302 using DD016 API patterns`
 - **Labels:** `DD016`, `DD002`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
 - **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 1, 2, 5, 6) and [DD002 Integration Contract](DD002_Neural_Circuit_Architecture.md)
@@ -311,7 +311,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 - **Title:** `[DD016] Create neuron-to-muscle connection loader for DD003 muscle model`
 - **Labels:** `DD016`, `DD003`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 3: neuron-to-muscle) and [DD003 Integration Contract](DD003_Muscle_Model_Architecture.md)
@@ -337,7 +337,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 - **Title:** `[DD016] Create pharyngeal connectome view loader for DD007`
 - **Labels:** `DD016`, `DD007`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Pattern 4: pharyngeal view) and [DD007 Integration Contract](DD007_Pharyngeal_System_Architecture.md)
@@ -362,7 +362,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 - **Title:** `[DD016] Create neuropeptide network and neurotransmitter identity loaders for DD006`
 - **Labels:** `DD016`, `DD006`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Canonical Query Patterns](DD016_Connectome_Data_Access_and_Dataset_Policy.md#canonical-query-patterns) (Patterns 8 and 9) and [DD006 Integration Contract](DD006_Neuropeptidergic_Connectome_Integration.md)
@@ -385,7 +385,7 @@ Target: Canonical data loaders exist for each consuming DD's connectome access p
 
 ---
 
-## Group 4: Multi-Dataset Validation (Phase 1+)
+## Group 4: Multi-Dataset Validation (Phase 3+)
 
 Target: Infrastructure for comparing simulations across multiple connectome datasets.
 
@@ -395,7 +395,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 
 - **Title:** `[DD016] Implement cross-dataset validation: Cook2019 vs Witvliet8 comparison`
 - **Labels:** `DD016`, `DD010`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Multi-Dataset Validation](DD016_Connectome_Data_Access_and_Dataset_Policy.md#multi-dataset-validation) (validation protocol table)
@@ -423,7 +423,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 
 - **Title:** `[DD016] Implement bilateral symmetry as a connectome quality and simulation validation metric`
 - **Labels:** `DD016`, `DD010`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD016 — Bilateral Symmetry as a Validation Metric](DD016_Connectome_Data_Access_and_Dataset_Policy.md#bilateral-symmetry-as-a-validation-metric)
@@ -451,7 +451,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 
 - **Title:** `[DD016] Create dataset sensitivity analysis: which connections matter most for behavior?`
 - **Labels:** `DD016`, `DD010`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroml, physics
 - **DD Section to Read:** [DD016 — Multi-Dataset Validation](DD016_Connectome_Data_Access_and_Dataset_Policy.md#multi-dataset-validation) (sensitivity analysis row)
@@ -477,7 +477,7 @@ Target: Infrastructure for comparing simulations across multiple connectome data
 
 - **Title:** `[DD016] Create multi-dataset regression test suite for cect version updates`
 - **Labels:** `DD016`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1+
+- **Roadmap Phase:** Phase 3+
 - **Target Repo:** `openworm/ConnectomeToolbox`
 - **Required Capabilities:** python, testing
 - **DD Section to Read:** [DD016 — Update Procedure](DD016_Connectome_Data_Access_and_Dataset_Policy.md#update-procedure) (breaking change policy) and [DD016 — Quality Criteria](DD016_Connectome_Data_Access_and_Dataset_Policy.md#quality-criteria)
@@ -586,7 +586,7 @@ Target: New contributors can explore connectome data interactively and understan
 
 ---
 
-## Group 6: Future Work & Evaluation (Phase 3+)
+## Group 6: Future Work & Evaluation (Phase 5+)
 
 Target: Research tasks to evaluate upcoming data sources and prepare for future cect evolution.
 
@@ -596,7 +596,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 
 - **Title:** `[DD016] Evaluate wormneuroatlas package for versions.lock and Docker integration`
 - **Labels:** `DD016`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 3+
+- **Roadmap Phase:** Phase 5+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, git
 - **DD Section to Read:** [DD016 — Existing Code Resources](DD016_Connectome_Data_Access_and_Dataset_Policy.md#existing-code-resources) (wormneuroatlas section)
@@ -621,7 +621,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 
 - **Title:** `[DD016] Evaluate NemaNode for per-synapse spatial data needed by DD002 Level D`
 - **Labels:** `DD016`, `DD002`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 3+
+- **Roadmap Phase:** Phase 5+
 - **Target Repo:** `openworm/OpenWorm`
 - **Required Capabilities:** python, neuroscience
 - **DD Section to Read:** [DD016 — Per-Synapse Spatial Position Data](DD016_Connectome_Data_Access_and_Dataset_Policy.md#per-synapse-spatial-position-data) and [DD016 — Existing Code Resources](DD016_Connectome_Data_Access_and_Dataset_Policy.md#existing-code-resources) (NemaNode section)
@@ -647,7 +647,7 @@ Target: Research tasks to evaluate upcoming data sources and prepare for future 
 
 - **Title:** `[DD016] Create stability monitoring test for OpenWormUnifiedReader`
 - **Labels:** `DD016`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 3+
+- **Roadmap Phase:** Phase 5+
 - **Target Repo:** `openworm/ConnectomeToolbox`
 - **Required Capabilities:** python, testing
 - **DD Section to Read:** [DD016 — Known Issues](DD016_Connectome_Data_Access_and_Dataset_Policy.md#known-issues-and-future-work) (Issue 1: OpenWormUnifiedReader is WIP) and [DD016 — Alternatives Considered](DD016_Connectome_Data_Access_and_Dataset_Policy.md#5-default-to-openwormunifiedreader-instead-of-cook2019herm) (alternative 5)

@@ -18,7 +18,7 @@ Some *C. elegans* neurons require multicompartmental cable equation models — s
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md) (Stage 1: 5 neurons), Phase 4-5 (Stage 2: all 302) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md) (Stage 1: 5 neurons), Phase 6-7 (Stage 2: all 302) |
 | **Layer** | Neural Architecture Extension |
 | **What does this produce?** | Multicompartmental NeuroML neuron models with per-segment channel densities and spatially resolved synapses |
 | **Success metric** | Level D neurons reproduce published I-V curves and compartmentalized calcium dynamics (Hendricks 2012, Nicoletti 2019) |
@@ -57,7 +57,7 @@ The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/J
 
 ## Implementation Pathway
 
-### Stage 1 (Phase 2 — Proof of Concept)
+### Stage 1 (Phase 4 — Proof of Concept)
 
 1. Select 5 representative neurons with published morphological reconstructions AND published electrophysiology: AWC (sensory), AIY (interneuron), AVA (command interneuron), RIM (interneuron), VD5 (motor neuron) — the same set validated by Zhao et al. (2024)
 2. Obtain morphologies from EM reconstructions (Witvliet et al. 2021; Cook et al. 2019) or from BAAIWorm SWC files; convert to NeuroML `<morphology>` elements with segments < 2 μm
@@ -65,7 +65,7 @@ The BAAIWorm repository ([github.com/Jessie940611/BAAIWorm](https://github.com/J
 4. Optimize passive parameters (axial resistance, membrane capacitance) and channel densities using automated fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend or NEURON's built-in optimizer) to match published I-V curves and current-clamp responses
 5. Propagate fitted parameters to all neurons in the same CeNGEN functional class, scaling channel densities by expression level ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
 
-### Stage 2 (Phase 4-5 — Scale to Full Circuit)
+### Stage 2 (Phase 6-7 — Scale to Full Circuit)
 
 1. Extend to all 302 neurons using the representative-neuron approach
 2. Incorporate subcellular molecular data from expansion microscopy (Alon et al. 2021; [Shaib et al. 2023](https://doi.org/10.1038/s41587-024-02431-9)) as it becomes available
@@ -178,4 +178,4 @@ Level D neurons must pass all [DD010](DD010_Validation_Framework.md) tiers. Indi
 
 - **Approved by:** Pending (awaiting founder review)
 - **Implementation Status:** Not started
-- **Next Review:** After Phase 2 kickoff
+- **Next Review:** After Phase 4 kickoff

@@ -1,6 +1,6 @@
 # DD022: Reservoir Computing Validation of the C. elegans Nervous System
 
-- **Status:** Proposed (Phase 2)
+- **Status:** Proposed (Phase 4)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-23
 - **Supersedes:** None
@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Months 4-6) | **Layer:** Analysis / Validation
+> **Phase:** [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) | **Layer:** Analysis / Validation
 
 ## TL;DR
 
@@ -22,9 +22,9 @@ Tests whether the 302-neuron *C. elegans* connectome functions as a **reservoir 
 
 | Criterion | Target | Phase | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|-------|------------|
-| **Primary:** Linear readout R² | R² ≥ 0.5 predicting motor output from reservoir state under at least one partition | Phase 2 | Tier 2a (advisory, non-blocking) |
-| **Secondary:** All 5 RC properties tested | Quantitative results for all 5 predictions × 4 partitions (20 tests total) | Phase 2 | Non-blocking |
-| **Tertiary:** Cross-partition robustness | RC framing holds (or fails) consistently across ≥3 of 4 partitions | Phase 2 | Non-blocking |
+| **Primary:** Linear readout R² | R² ≥ 0.5 predicting motor output from reservoir state under at least one partition | Phase 4 | Tier 2a (advisory, non-blocking) |
+| **Secondary:** All 5 RC properties tested | Quantitative results for all 5 predictions × 4 partitions (20 tests total) | Phase 4 | Non-blocking |
+| **Tertiary:** Cross-partition robustness | RC framing holds (or fails) consistently across ≥3 of 4 partitions | Phase 4 | Non-blocking |
 
 **Success = all 5 predictions tested across all 4 partitions with quantitative results documented.** The DD succeeds whether it confirms or falsifies the RC framing. A clear falsification is as valuable as confirmation — it constrains what computational framework *does* apply.
 
@@ -310,7 +310,7 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 | **Repository** | `openworm/OpenWorm` (validation scripts) `[TO BE CREATED]` |
 | **Subdirectory** | `validation/reservoir_computing/` |
 | **Issue label** | `dd022` |
-| **Milestone** | Phase 2 — Reservoir Computing Validation |
+| **Milestone** | Phase 4 — Reservoir Computing Validation |
 | **Example PR title** | `DD022: echo state property test across 4 partitions` |
 
 ---
@@ -319,7 +319,7 @@ Each prediction defines a **quantitative threshold**. If the threshold is violat
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Months 4-6) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
 | **Layer** | Analysis / Validation — pure analysis of simulation output, no simulation changes |
 | **What does this produce?** | Quantitative assessment of whether the connectome functions as a reservoir computer |
 | **Success metric** | All 5 predictions × 4 partitions tested; linear readout R² ≥ 0.5 under ≥1 partition |
@@ -411,11 +411,11 @@ print(f'Robustness: {summary[\"robustness\"]}')
 
 | Script | Status | Phase |
 |--------|--------|-------|
-| `validation/reservoir_computing/rc_analysis.py` | `[TO BE CREATED]` | Phase 2 |
-| `validation/reservoir_computing/rc_metrics.py` | `[TO BE CREATED]` | Phase 2 |
-| `validation/reservoir_computing/rc_readout.py` | `[TO BE CREATED]` | Phase 2 |
-| `validation/reservoir_computing/rc_partitions.py` | `[TO BE CREATED]` | Phase 2 |
-| `validation/reservoir_computing/RC_Validation.ipynb` | `[TO BE CREATED]` | Phase 2 |
+| `validation/reservoir_computing/rc_analysis.py` | `[TO BE CREATED]` | Phase 4 |
+| `validation/reservoir_computing/rc_metrics.py` | `[TO BE CREATED]` | Phase 4 |
+| `validation/reservoir_computing/rc_readout.py` | `[TO BE CREATED]` | Phase 4 |
+| `validation/reservoir_computing/rc_partitions.py` | `[TO BE CREATED]` | Phase 4 |
+| `validation/reservoir_computing/RC_Validation.ipynb` | `[TO BE CREATED]` | Phase 4 |
 
 ---
 
@@ -581,7 +581,7 @@ DD022 is itself a validation document — it validates a *computational framewor
 
 ## Implementation Roadmap
 
-### Phase 2 Implementation (~20 hours)
+### Phase 4 Implementation (~20 hours)
 
 | Step | Task | Hours | Dependencies |
 |------|------|-------|-------------|
@@ -590,9 +590,9 @@ DD022 is itself a validation document — it validates a *computational framewor
 | 3 | Implement `rc_readout.py` (ridge regression + MLP training) | 4 | scikit-learn, PyTorch |
 | 4 | Implement `rc_analysis.py` (orchestrator: load data → run tests → produce report) | 4 | [DD002](DD002_Neural_Circuit_Architecture.md) HDF5 output |
 | 5 | Create `RC_Validation.ipynb` with visualization and interpretation | 4 | Steps 1-4 |
-| 6 | Integration test with Phase 2 simulation output | 2 | Phase 2 simulation running |
+| 6 | Integration test with Phase 4 simulation output | 2 | Phase 4 simulation running |
 
-**Parallelization:** DD022 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 1 specialized neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
+**Parallelization:** DD022 can be implemented in parallel with [DD006](DD006_Neuropeptidergic_Connectome_Integration.md), [DD015](DD015_Closed_Loop_Touch_Response.md), [DD018](DD018_Environmental_Modeling_and_Stimulus_Delivery.md), and [DD019](DD019_Proprioceptive_Feedback_and_Motor_Coordination.md). It only requires Phase 3 specialized neurons ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)) and simulation output — no changes to the simulation itself.
 
 ---
 
@@ -674,5 +674,5 @@ DD022 is itself a validation document — it validates a *computational framewor
 1. Implement `rc_partitions.py` using `cect` neuron classification
 2. Implement `rc_metrics.py` (ESP, memory capacity, separation tests)
 3. Implement `rc_readout.py` (ridge + MLP readout training)
-4. Run on Phase 2 simulation output
+4. Run on Phase 4 simulation output
 5. Produce `rc_validation_report.json` and Jupyter notebook with figures

@@ -286,4 +286,4 @@ A: DD012 is the main visualization architecture (data pipeline, viewer framework
 A: Not yet created. After DDs are approved, `dd_issue_generator.py` ([AI Contributors](../contributing/ai-contributors.md)) will auto-generate GitHub issues from Integration Contract sections.
 
 **Q: Why are so many DDs "Proposed" instead of "Accepted"?**
-A: Phase 0 DDs (DD002-003, DD016) are Accepted because they're implemented and working. Phase A1/A2-4 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.
+A: Phase 0 DDs (DD002-003, DD016) are Accepted because they're implemented and working. Phase 1-6 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

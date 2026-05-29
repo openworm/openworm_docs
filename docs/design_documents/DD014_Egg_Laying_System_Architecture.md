@@ -1,6 +1,6 @@
 # DD014: Egg-Laying System Architecture (Reproductive Behavioral Circuit)
 
-- **Status:** Proposed (Phase 3)
+- **Status:** Proposed (Phase 5)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Phase** | [Phase 5](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
 | **What does this produce?** | Egg-laying circuit: 2 HSN neurons + 6 VC neurons + 16 sex muscles (NeuroML), serotonergic/cholinergic signaling, two-state behavioral output |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: egg-laying bout interval 20 +/- 10 min, 3-5 eggs per bout; inactive/active two-state pattern reproduced |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_egglaying.py`, `egglaying/` module) — issues labeled `dd014` |
@@ -69,7 +69,7 @@ Model the *C. elegans* egg-laying system as a 24-cell circuit comprising 2 serot
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd014` |
-| **Milestone** | Phase 3: Organ Systems |
+| **Milestone** | Phase 5: Organ Systems |
 | **Branch convention** | `dd014/description` (e.g., `dd014/hsn-serotonin-synapse`) |
 | **Example PR title** | `DD014: Add vulval muscle cell templates with EGL-19/UNC-103 channels` |
 
@@ -379,7 +379,7 @@ EGL-30 (Gaq) activation
         [primarily in neurons]       [in muscles: secondary]
 ```
 
-**Modeling approach:** The full Gaq -> Trio -> DAG cascade is complex (10+ state variables). For Phase 3, use a **phenomenological modulation model**:
+**Modeling approach:** The full Gaq -> Trio -> DAG cascade is complex (10+ state variables). For Phase 5, use a **phenomenological modulation model**:
 
 ```
 g_EGL19_effective = g_EGL19_baseline * (1 + serotonin_modulation)
@@ -463,13 +463,13 @@ Eggs accumulate in the uterus at ~1 per 10 min per gonad arm. The uterus holds 1
 
 **Description:** Explicitly model the Gaq → PLCbeta / Trio RhoGEF → DAG → PKC → channel phosphorylation cascade with 15+ state variables per cell.
 
-**Rejected (for Phase 3) because:**
+**Rejected (for Phase 5) because:**
 
 - Biochemical rate constants are largely unknown for *C. elegans* Gaq signaling in vulval muscles
 - Phenomenological conductance modulation captures the net functional effect
-- Phase 5 (intracellular signaling) is the appropriate place for detailed biochemical cascades
+- Phase 7 (intracellular signaling) is the appropriate place for detailed biochemical cascades
 
-**When to reconsider:** Phase 5, when IP3/DAG/PKC cascades are added for non-neural cells.
+**When to reconsider:** Phase 7, when IP3/DAG/PKC cascades are added for non-neural cells.
 
 ### 4. Treat Vulval Muscles as Identical to Body Wall Muscles
 
@@ -746,7 +746,7 @@ The Gaq -> DAG cascade is modeled as phenomenological conductance modulation, no
 - Cross-talk between SER-1 and SER-7 pathways
 - PKC-mediated phosphorylation of specific channels
 
-**Future work:** Phase 5 intracellular signaling (DD to be written).
+**Future work:** Phase 7 intracellular signaling (DD to be written).
 
 ### Issue 3: Egg Counter Is Abstract
 
@@ -756,7 +756,7 @@ Eggs are not physically modeled as objects. The "egg in uterus" is a counter, no
 
 ### Issue 4: Missing Modulatory Inputs
 
-Several known modulatory inputs are not included in Phase 3:
+Several known modulatory inputs are not included in Phase 5:
 
 - PLM mechanosensory inhibition of HSN (posterior touch suppresses egg-laying)
 - Food-dependent modulation (AWC, ASI chemosensory pathways)
@@ -837,7 +837,7 @@ Several known modulatory inputs are not included in Phase 3:
 - **Docker stage:** `neural` (same as [DD002](DD002_Neural_Circuit_Architecture.md) — sex muscles use NeuroML/LEMS)
 - **`versions.lock` key:** `c302`
 - **Build dependencies:** pyNeuroML (pip), numpy (pip)
-- **No additional Docker changes** for Phase 3 (circuit-only model)
+- **No additional Docker changes** for Phase 5 (circuit-only model)
 
 **Repository structure:**
 
@@ -861,7 +861,7 @@ c302/
 ```yaml
 egglaying:
   enabled: false                    # Off by default until validated
-  model: "circuit"                  # Only option for Phase 3
+  model: "circuit"                  # Only option for Phase 5
   serotonin_modulation: true       # Enable serotonergic conductance modulation on vm2
   uv1_feedback: true               # Enable tyraminergic feedback from uv1
   egg_production_rate: 0.1         # eggs per minute per gonad arm
@@ -871,7 +871,7 @@ egglaying:
 | Key | Default | Valid Range | Description |
 |-----|---------|-------------|-------------|
 | `egglaying.enabled` | `false` | `true`/`false` | Enable egg-laying subsystem |
-| `egglaying.model` | `"circuit"` | `"circuit"` | Egg-laying model type (only one for Phase 3) |
+| `egglaying.model` | `"circuit"` | `"circuit"` | Egg-laying model type (only one for Phase 5) |
 | `egglaying.serotonin_modulation` | `true` | `true`/`false` | Enable serotonin -> Gaq -> conductance modulation on vm2 |
 | `egglaying.uv1_feedback` | `true` | `true`/`false` | Enable uv1 tyraminergic feedback inhibition |
 | `egglaying.egg_production_rate` | `0.1` | `0.05`-`0.2` eggs/min/arm | Egg production rate per gonad arm |
@@ -954,7 +954,7 @@ The egg-laying circuit adds minimal computational cost to short simulations. How
 
 ---
 
-- **Approved by:** Pending (Phase 3)
+- **Approved by:** Pending (Phase 5)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

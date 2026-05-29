@@ -1,6 +1,6 @@
 # DD004: Mechanical Cell Identity in Sibernetic (Per-Cell Physics)
 
-- **Status:** Proposed (Phase 4)
+- **Status:** Proposed (Phase 6)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) |
-| **Layer** | Complete Organism — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) |
+| **Phase** | [Phase 6](DD_PHASE_ROADMAP.md#phase-6-mechanical-cell-identity-high-fidelity-visualization) |
+| **Layer** | Complete Organism — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-6-mechanical-cell-identity-high-fidelity-visualization) |
 | **What does this produce?** | Tagged particle file: each of ~100K SPH particles gets a WBbt cell ID + cell-type-specific elasticity/adhesion |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: kinematic metrics within ±15% with `cell_identity: true`; all 959 somatic cells mapped |
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) — issues labeled `dd004` |
@@ -61,7 +61,7 @@ Tag every SPH particle with a WBbt cell ID from EM reconstructions, enabling cel
 |------|-------|
 | **Repository** | [`openworm/sibernetic`](https://github.com/openworm/sibernetic) |
 | **Issue label** | `dd004` |
-| **Milestone** | Phase 4: Mechanical Cell Identity |
+| **Milestone** | Phase 6: Mechanical Cell Identity |
 | **Branch convention** | `dd004/description` (e.g., `dd004/particle-tagging`) |
 | **Example PR title** | `DD004: Implement per-particle cell ID tagging from Witvliet EM data` |
 
@@ -174,7 +174,7 @@ typedef struct {
 | Cell Type | WBbt Count | Elasticity Multiplier | Adhesion Strength | Contractile? | Notes |
 |-----------|------------|----------------------|------------------|--------------|-------|
 | **Body wall muscle** | 95 | 1.5x baseline | High | Yes (HH-driven) | Current default |
-| **Intestinal** | 20 | 0.8x (compliant) | Medium | No (peristaltic waves) | Phase 3 target |
+| **Intestinal** | 20 | 0.8x (compliant) | Medium | No (peristaltic waves) | Phase 5 target |
 | **Hyp7 syncytium** | 1 (covers body) | 0.5x (soft) | Very high | No | Largest cell |
 | **Cuticle (basal)** | -- | 5x (stiff) | N/A (acellular) | No | Protective shell |
 | **Cuticle (medial)** | -- | 3x | N/A | No | Layered structure |
@@ -250,7 +250,7 @@ particle_id,x,y,z,type,cell_id,elasticity,adhesion
 
 3. **Mechanical Realism:** Cell-type-specific elasticity must be justified by literature (e.g., cuticle is stiffer than intestine) or default to baseline.
 
-4. **Validation:** Intestinal peristalsis (Phase 3), hypodermal compliance during body bending, cuticle rigidity should be qualitatively correct.
+4. **Validation:** Intestinal peristalsis (Phase 5), hypodermal compliance during body bending, cuticle rigidity should be qualitatively correct.
 
 ---
 
@@ -280,7 +280,7 @@ Current Sibernetic represents the worm body as **bulk elastic and liquid particl
 - Gonad sheath contraction for oocyte transport
 - Cell-cell adhesion specificity (cadherin-mediated)
 
-The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides the EM foundation for this DD. For developmental modeling beyond static cell identity (e.g., morphogenesis, cell division, body growth), the [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built Cellular Potts (CompuCell3D) and Cellular Automata (Morphozoic) models of embryogenesis that could inform future body-scaling mechanics (see [Phase 6](DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)).
+The Witvliet et al. 2021 developmental series (8 stages, L1 → adult) provides the EM foundation for this DD. For developmental modeling beyond static cell identity (e.g., morphogenesis, cell division, body growth), the [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built Cellular Potts (CompuCell3D) and Cellular Automata (Morphozoic) models of embryogenesis that could inform future body-scaling mechanics (see [Phase 8](DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)).
 
 ---
 
@@ -432,7 +432,7 @@ When `body.cell_identity: true`:
 
 ---
 
-- **Approved by:** Pending (Phase 4)
+- **Approved by:** Pending (Phase 6)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

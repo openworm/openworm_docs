@@ -12,7 +12,7 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 | [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) | Active | Visualization (Trame evolution) |
 | [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | [DD010](design_documents/DD010_Validation_Framework.md), [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) | Revival needed | Tier 3 behavioral validation |
 | [OpenWorm (meta-repo)](Projects/docker/) | [DD011](design_documents/DD011_Simulation_Stack_Architecture.md) | Proposed | Integration, Docker stack |
-| [DevoWorm](Projects/DevoWorm/) | [Phase 6](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Active | Developmental dynamics, morphogenesis |
+| [DevoWorm](Projects/DevoWorm/) | [Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling), [DD004](design_documents/DD004_Mechanical_Cell_Identity.md), [DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md) | Active | Developmental dynamics, morphogenesis |
 | [Geppetto](Projects/geppetto/) | [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) (historical) | Dormant | Web platform (superseded by Trame) |
 
 **See [Integration Map](design_documents/INTEGRATION_MAP.md)** for the complete dependency graph.
@@ -24,7 +24,7 @@ OpenWorm's projects are now **formally specified in [Design Documents](design_do
 -   [Neuromechanical modeling with Sibernetic](Projects/sibernetic/) — implements **[DD001](design_documents/DD001_Body_Physics_Architecture.md)** (Body Physics) + **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (Mechanical Cell Identity)
 -   [c302 multiscale modelling framework](Projects/c302/) — implements **[DD002](design_documents/DD002_Neural_Circuit_Architecture.md)** (Neural Circuit) + **[DD003](design_documents/DD003_Muscle_Model_Architecture.md)** (Muscle Model) + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)-[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md)**
 -   [OpenWorm Browser](Projects/browser/)
--   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 6](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)**, connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)**
+-   [DevoWorm project](Projects/DevoWorm/) — developmental modeling for **[Phase 8](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)**, connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** + **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)**
 -   [Docker simulation stack](Projects/docker/) — implements **[DD011](design_documents/DD011_Simulation_Stack_Architecture.md)** (Simulation Stack)
 -   [Community outreach](Projects/community-proj/)
 
@@ -61,9 +61,9 @@ More detailed information is available on the [c302 project page](Projects/c302/
 
 The visualization platform is evolving per **[DD012 (Dynamic Visualization Architecture)](design_documents/DD012_Dynamic_Visualization_Architecture.md)**:
 
-- **Phase 1:** Trame viewer (PyVista + live server)
-- **Phase 2:** Interactive layers with validation overlays
-- **Phase 3:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
+- **Phase 3:** Trame viewer (PyVista + live server)
+- **Phase 4:** Interactive layers with validation overlays
+- **Phase 5:** Three.js + WebGPU static site at wormsim.openworm.org (WormSim 2.0)
 
 [Geppetto](Projects/geppetto/) served this role historically (2014-2020) and is preserved as [archival reference](archived_projects/).
 
@@ -87,7 +87,7 @@ More detailed information is available on the [Data representation project page]
 
 **DevoWorm — Developmental Modeling**
 
-The [DevoWorm project](Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) focuses on developmental dynamics, digital morphogenesis, and developmental plasticity in *C. elegans*. DevoWorm's embryogenetic connectome analysis, differentiation trees, and CompuCell3D morphogenesis models form the foundation for **[Phase 6 (Developmental Modeling)](design_documents/DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)** of the simulation roadmap — the "Worm That Grows" milestone. DevoWorm's work also connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (cell identity during body growth) and **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (temporal dynamics of cell-type specification).
+The [DevoWorm project](Projects/DevoWorm/) ([devoworm.weebly.com](https://devoworm.weebly.com/), [github.com/devoworm](https://github.com/devoworm)) focuses on developmental dynamics, digital morphogenesis, and developmental plasticity in *C. elegans*. DevoWorm's embryogenetic connectome analysis, differentiation trees, and CompuCell3D morphogenesis models form the foundation for **[Phase 8 (Developmental Modeling)](design_documents/DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)** of the simulation roadmap — the "Worm That Grows" milestone. DevoWorm's work also connects to **[DD004](design_documents/DD004_Mechanical_Cell_Identity.md)** (cell identity during body growth) and **[DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)** (temporal dynamics of cell-type specification).
 
 More detailed information is available on the [DevoWorm project page](Projects/DevoWorm/).
 

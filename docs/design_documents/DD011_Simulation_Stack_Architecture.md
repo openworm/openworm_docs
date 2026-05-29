@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Integration
+> **Phase:** [Phase 1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-1-core-infrastructure) | **Layer:** Integration
 
 ## TL;DR
 
@@ -143,8 +143,8 @@ neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1: CeNGEN cell-type specialization ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
-  neuropeptides: false               # Phase 2: peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
+  differentiated: false              # Phase 3: CeNGEN cell-type specialization ([DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+  neuropeptides: false               # Phase 4: peptidergic modulation ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md))
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
   reference: "FW"                    # FW (forward crawl), BA (backward), TU (turning)
@@ -156,7 +156,7 @@ body:
   backend: opencl                    # opencl (production), pytorch (testing), taichi-metal (experimental), taichi-cuda (experimental)
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000             # ~100K for standard, ~25K for quick
-  cell_identity: false               # Phase 4: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))
+  cell_identity: false               # Phase 6: tagged particles ([DD004](DD004_Mechanical_Cell_Identity.md))
   timestep: 0.00002                  # seconds
 
 # === Muscle Model ([DD003](DD003_Muscle_Model_Architecture.md)) ===
@@ -164,12 +164,12 @@ muscle:
   enabled: true                      # Requires neural.enabled
   calcium_coupling: true             # Ca²⁺ → force pipeline
 
-# === Pharynx ([DD007](DD007_Pharyngeal_System_Architecture.md)) — Phase 3 ===
+# === Pharynx ([DD007](DD007_Pharyngeal_System_Architecture.md)) — Phase 5 ===
 pharynx:
   enabled: false
   pumping_frequency_target: 3.5      # Hz
 
-# === Intestine ([DD009](DD009_Intestinal_Oscillator_Model.md)) — Phase 3 ===
+# === Intestine ([DD009](DD009_Intestinal_Oscillator_Model.md)) — Phase 5 ===
 intestine:
   enabled: false
   oscillator_period_target: 50.0     # seconds
@@ -206,7 +206,7 @@ visualization:
 viewer:
   enabled: false                     # Launch Trame viewer after simulation
   port: 8501                         # Viewer port
-  backend: "trame"                   # "trame" (Phase 1) or "threejs" (Phase 2+)
+  backend: "trame"                   # "trame" (Phase 3) or "threejs" (Phase 4+)
   default_layers:                    # Layers visible on startup
     - body_surface
     - muscles
@@ -1071,7 +1071,7 @@ Mind-of-a-Worm (AI agent) can automate routine integration tasks:
 
 ## Implementation Roadmap
 
-For the granular task breakdown of DD011 implementation, see the [DD011 Draft Issues](DD011_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD011 is assigned to **Phase A1: Core Infrastructure (Weeks 1–2)**.
+For the granular task breakdown of DD011 implementation, see the [DD011 Draft Issues](DD011_draft_issues.md) (42 issues organized into Phases A–D, Infrastructure, and Backend Stabilization). For project-wide phasing and timeline, see the [DD Phase Roadmap](DD_PHASE_ROADMAP.md) — DD011 is assigned to **Phase 1: Core Infrastructure**.
 
 ---
 
@@ -1130,7 +1130,7 @@ Next newcomer who runs the Docker image sees the improvement
 
 1. **Who is the L4 Integration Maintainer?** The Neural Circuit L4 Maintainer is the de facto integration maintainer but this should be formalized and ideally shared with someone else to reduce bus factor.
 
-2. **GPU support priority:** Should we invest in fixing Docker GPU passthrough (issue #320) now, or wait for Phase 1 to be further along? GPU would make longer simulations practical.
+2. **GPU support priority:** Should we invest in fixing Docker GPU passthrough (issue #320) now, or wait for Phase 3 to be further along? GPU would make longer simulations practical.
 
 3. **MyBinder vs. Google Colab:** For zero-install demos, MyBinder is fully open but resource-limited. Google Colab has GPU but requires Google account. Which aligns better with open science values?
 
@@ -1220,6 +1220,6 @@ The simulation stack is the **integration layer** — it consumes and routes out
 - **Next Actions:**
 
 1. Appoint or recruit L4 Integration Maintainer
-2. Begin Phase A1 (config system + multi-stage Docker)
+2. Begin Phase 1 (config system + multi-stage Docker)
 3. Fix the video pipeline memory leak (critical for any serious use)
 4. Set up CI with docker-compose-based test suite

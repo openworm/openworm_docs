@@ -1,6 +1,6 @@
 # DD015: Closed-Loop Touch Response and Tap Withdrawal Behavior
 
-- **Status:** Proposed (Phase 2-3)
+- **Status:** Proposed (Phase 4-5)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Close the sensorimotor loop by reading cuticle mechanical strain from Sibernetic
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
-| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
+| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
 | **What does this produce?** | Closed-loop mechanosensory transduction model: Sibernetic cuticle strain → MEC-4 channel currents on touch neurons (ALM, AVM, PLM, PVD) → tap withdrawal circuit → motor reversal → backward locomotion |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: tap stimulus → reversal onset <1 s, backward locomotion ≥1 body length, return to forward crawling within 10 s |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (mechanosensory model, circuit) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (strain readout, tap stimulus, bidirectional coupling) |
@@ -625,7 +625,7 @@ class TapStimulus:
 - Adding it simultaneously would confound validation of the touch circuit
 - Motor neuron proprioception is likely needed for stable undulatory locomotion but is not required for tap withdrawal specifically
 
-**When to add:** Phase 3, after [DD015](DD015_Closed_Loop_Touch_Response.md)'s touch-response closed loop is validated. Proprioceptive feedback could be [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md).
+**When to add:** Phase 5, after [DD015](DD015_Closed_Loop_Touch_Response.md)'s touch-response closed loop is validated. Proprioceptive feedback could be [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md).
 
 ### 6. Detailed Cuticle Layer Mechanics
 

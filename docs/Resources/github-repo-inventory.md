@@ -37,16 +37,16 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
-| [owmeta](https://github.com/openworm/owmeta) | 2024-07-29 | 153 | **Deferred** (Phase 3+) | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-3) |
-| [owmeta-core](https://github.com/openworm/owmeta-core) | 2025-03-18 | 3 | **Deferred** (Phase 3+) | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-3) |
+| [owmeta](https://github.com/openworm/owmeta) | 2024-07-29 | 153 | **Deferred** (Phase 5+) | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-5) |
+| [owmeta-core](https://github.com/openworm/owmeta-core) | 2025-03-18 | 3 | **Deferred** (Phase 5+) | [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-5) |
 | [tracker-commons](https://github.com/openworm/tracker-commons) | 2025-04-23 | 14 | **Maintained** | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON 1.0 spec) |
 | [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | 2020-01-16 | 48 | **Archived** — **Revival needed** | [DD010](../design_documents/DD010_Validation_Framework.md) (Tier 3), [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (revival plan) |
 | [movement_validation](https://github.com/openworm/movement_validation) | 2017-06-21 | 16 | **ARCHIVED** — Do not use | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (historical — superseded by analysis toolbox) |
 
 **Status:**
 
-- `cect` (ConnectomeToolbox) is the **working data layer** for Phase 1-2 ([DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md))
-- `owmeta` is **deferred to Phase 3+** ([DD008](../design_documents/DD008_Data_Integration_Pipeline.md) acknowledges this)
+- `cect` (ConnectomeToolbox) is the **working data layer** for Phase 3-4 ([DD016](../design_documents/DD016_Connectome_Data_Access_and_Dataset_Policy.md))
+- `owmeta` is **deferred to Phase 5+** ([DD008](../design_documents/DD008_Data_Integration_Pipeline.md) acknowledges this)
 - Analysis toolbox **blocks Tier 3 validation** ([DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) 8-task revival plan, 33 hours)
 
 ---
@@ -69,7 +69,7 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
-| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (Neural Circuit L4 Maintainer) | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Phase 1 (Trame viewer evolution) |
+| [Worm3DViewer](https://github.com/openworm/Worm3DViewer) | 2025-12-01 | 0 | **Active** (Neural Circuit L4 Maintainer) | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Phase 3 (Trame viewer evolution) |
 | [wormbrowser](https://github.com/openworm/wormbrowser) | 2026-02-13 | 49 | **Active** | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) (historical 3D browser, still maintained) |
 | [openwormbrowser-ios](https://github.com/openworm/openwormbrowser-ios) | 2026-01-20 | 20 | **Active** | Mobile version of worm browser |
 | [WCONViewer](https://github.com/openworm/WCONViewer) | 2025-12-17 | 0 | **Maintained** | [DD017](../design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) (WCON visualization tool) |
@@ -82,13 +82,13 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Notes |
 |------------|-----------|-------|--------|-------|
-| [org.geppetto.frontend](https://github.com/openworm/org.geppetto.frontend) | 2025-04-03 | 29 | **Deferred** | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) mentions Geppetto (not using for Phase 1-2) |
+| [org.geppetto.frontend](https://github.com/openworm/org.geppetto.frontend) | 2025-04-03 | 29 | **Deferred** | [DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) mentions Geppetto (not using for Phase 3-4) |
 | [geppetto-client](https://github.com/openworm/geppetto-client) | 2025-04-18 | 6 | **Deferred** | |
 | [org.geppetto.core](https://github.com/openworm/org.geppetto.core) | 2025-03-28 | 22 | **Deferred** | |
 | [org.geppetto.datasources](https://github.com/openworm/org.geppetto.datasources) | 2025-03-28 | 2 | **Deferred** | |
 | [org.geppetto.docs](https://github.com/openworm/org.geppetto.docs) | 2020-08-04 | 3 | **Archived** | |
 
-**[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Decision:** Not using Geppetto for Phase 1-2 (too heavy, Java-based). Using Trame (PyVista) instead. Geppetto could be revisited in Phase 3 if needed.
+**[DD012](../design_documents/DD012_Dynamic_Visualization_Architecture.md) Decision:** Not using Geppetto for Phase 3-4 (too heavy, Java-based). Using Trame (PyVista) instead. Geppetto could be revisited in Phase 5 if needed.
 
 ---
 
@@ -156,7 +156,7 @@ External research code and datasets forked into the OpenWorm org. Not under acti
 | [DD005](../design_documents/DD005_Cell_Type_Differentiation_Strategy.md) (Cell-Type Specialization) | c302, wormneuroatlas | NeuroPAL (cell ID), NicolettiEtAl models (calibration), WormsenseLab_ASH (electrophysiology) |
 | [DD006](../design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptides) | c302 | — |
 | [DD007](../design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx) | c302 | PlateauNoiseModel (plateau potentials), JohnsonMailler_MuscleModel (Ca²⁺ coupling), NicolettiEtAl models (pharyngeal neurons) |
-| [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) (Data Integration) | owmeta, owmeta-core | ConnectomeToolbox (Phase 1-2 bridge), owmeta ecosystem (9 repos — see below) |
+| [DD008](../design_documents/DD008_Data_Integration_Pipeline.md) (Data Integration) | owmeta, owmeta-core | ConnectomeToolbox (Phase 3-4 bridge), owmeta ecosystem (9 repos — see below) |
 | [DD009](../design_documents/DD009_Intestinal_Oscillator_Model.md) (Intestine) | c302 | — |
 | [DD010](../design_documents/DD010_Validation_Framework.md) (Validation) | open-worm-analysis-toolbox, tracker-commons | wormneuroatlas (Tier 2), tierpsy-tracker (Tier 3), owmeta-sciunit (Tier 1), worm-functional-connectivity (Tier 2 alt.), NicolettiEtAl models (Tier 1 calibration) |
 | [DD011](../design_documents/DD011_Simulation_Stack_Architecture.md) (Integration) | OpenWorm (meta-repo) | owmeta-sciunit (CI validation) |
@@ -192,9 +192,9 @@ External research code and datasets forked into the OpenWorm org. Not under acti
 
 ---
 
-## OWMeta Ecosystem (9 repos) — Deferred to Phase 3+
+## OWMeta Ecosystem (9 repos) — Deferred to Phase 5+
 
-[DD008](../design_documents/DD008_Data_Integration_Pipeline.md) defers OWMeta integration to Phase 3+. These repos are working code but not needed until the semantic data layer is activated. `cect` (ConnectomeToolbox) serves as the Phase 1-2 data bridge.
+[DD008](../design_documents/DD008_Data_Integration_Pipeline.md) defers OWMeta integration to Phase 5+. These repos are working code but not needed until the semantic data layer is activated. `cect` (ConnectomeToolbox) serves as the Phase 3-4 data bridge.
 
 | Repository | Last Push | Stars | Role |
 |------------|-----------|-------|------|
@@ -270,7 +270,7 @@ Last pushed before Jan 2020. Historical or experimental. May contain useful code
 | **Active** | Commits within last 3 months, actively developed |
 | **Maintained** | Commits within last year, stable and working |
 | **Research** | External research code forked into OpenWorm; recent but not under active OpenWorm development; directly reusable for DDs |
-| **Deferred** | Working code, intentionally deferred to a later phase (e.g., OWMeta to Phase 3+) |
+| **Deferred** | Working code, intentionally deferred to a later phase (e.g., OWMeta to Phase 5+) |
 | **Inactive** | Post-2020 activity but no current DD priority; not broken, just not in the critical path |
 | **Archived** | Pre-2020, historical or experimental; may need modernization |
 | **ARCHIVED** | Explicitly superseded or deprecated, do not use |

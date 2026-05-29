@@ -20,8 +20,8 @@
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
-| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-existing-foundation-accepted-working) |
+| **Phase** | [Phase 0](DD_PHASE_ROADMAP.md#phase-0-core-architecture-functional-stabilizing) |
+| **Layer** | Core Architecture — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-0-core-architecture-functional-stabilizing) |
 | **What does this produce?** | Particle position time series (~100K SPH particles), [WCON](https://github.com/openworm/tracker-commons) trajectory files, rendered body frames, **gradients on physical parameters via reverse-mode AD** |
 | **Success metric** | DD010 Tier 3: kinematic metrics within ±15%; density deviation <1% for liquid particles; **every gradient kernel within ±5% rel-err of finite-difference** |
 | **Differentiability** | Native Metal substrate (`src/metal_diff/`) is end-to-end differentiable. Multi-step `xpbd_full_bwd` produces gradients on `(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)`. See [Differentiability](#differentiability) below. |
@@ -38,7 +38,7 @@
 DD001 is the architectural specification. Implementation work is tracked outside the spec:
 
 - **Active issues:** filter by [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the [`openworm/sibernetic`](https://github.com/openworm/sibernetic) repo
-- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) — milestone names carry the [project Phase](DD_PHASE_ROADMAP.md) they serve (e.g., `v0.0.8 — Phase 0 Stabilization`, `v0.A1.0 — Phase A1 Validation Infrastructure`), so the sibernetic release schedule lines up directly with the larger OpenWorm phase plan
+- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) — milestone names carry the [project Phase](DD_PHASE_ROADMAP.md) they serve (e.g., `v0.0.8 — Phase 0 Stabilization`, `v0.1.0 — Phase 1 Validation Infrastructure`), so the sibernetic release schedule lines up directly with the larger OpenWorm phase plan
 
 Build & test commands, parameter values, validation criteria, and the substrate architecture all live in this document. *What* gets built, *which phase it serves*, and *who's working on it* live in GitHub.
 
@@ -324,7 +324,7 @@ This was tried in early OpenWorm prototypes and abandoned because crawling requi
 
 - 2D only — no dorsal-ventral body mechanics, omega turns, or body roll
 - No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes
-- No internal body volume — cannot support DD004 (cell identity), DD012.2 (mesh deformation), or Phase 3+ organs
+- No internal body volume — cannot support DD004 (cell identity), DD012.2 (mesh deformation), or Phase 5+ organs
 - No fluid-structure interaction — DD015 touch mechanotransduction requires 3D particle strain
 
 **Role in OpenWorm:** Fast validation screening tool (`scripts/boyle_berri_cohen_trajectory.py` in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating DD013 surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.
@@ -558,13 +558,13 @@ The matching cuda substrate (when it lands per `src/cuda/README.md`) must includ
 
 1. **Per-cell mechanical identity beyond muscles:** Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376), Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.
 
-2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 4 work.
+2. **Cuticle fine structure:** The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 6 work.
 
 3. **Environmental complexity beyond liquid/gel:** Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid ([Palyanov et al. 2018](https://doi.org/10.1098/rstb.2017.0376), Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.
 
 4. **Thermodynamics:** No temperature, no heat diffusion, no thermal expansion. *C. elegans* is studied at 20°C but temperature effects are not modeled.
 
-5. **Growth and molting:** Body size changes during development. Current model assumes fixed adult size. Phase 6 work.
+5. **Growth and molting:** Body size changes during development. Current model assumes fixed adult size. Phase 8 work.
 
 ---
 
@@ -871,7 +871,7 @@ body:
   backend: opencl                    # opencl, metal-native, cuda-native
   configuration: "worm_crawl_half_resolution"
   particle_count: 100000
-  cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 4 (DD004): extend to all tissue types. "false" = bulk elastic only.
+  cell_identity: muscle              # "muscle" = 96 muscle units mapped (default). "all" = Phase 6 (DD004): extend to all tissue types. "false" = bulk elastic only.
   timestep: 0.00002                  # seconds
 ```
 
@@ -882,7 +882,7 @@ body:
 | `body.backend` | `opencl` | `opencl`, `metal-native`, `cuda-native` | Compute backend. `metal-native` targets Apple Silicon via hand-written Metal shaders; `cuda-native` targets NVIDIA via hand-written CUDA kernels. The earlier `taichi-metal` / `taichi-cuda` options are superseded by the native ports. |
 | `body.configuration` | `"worm_crawl_half_resolution"` | String | Simulation configuration name |
 | `body.particle_count` | `100000` | Integer | Total particle count |
-| `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types (DD004, Phase 4). `false` = bulk elastic only. |
+| `body.cell_identity` | `muscle` | `false`/`muscle`/`all` | `muscle` = 96 muscle units mapped (existing). `all` = extend to all tissue types (DD004, Phase 6). `false` = bulk elastic only. |
 | `body.timestep` | `0.00002` | Float (seconds) | Simulation timestep |
 
 ### How to Test (Contributor Workflow)

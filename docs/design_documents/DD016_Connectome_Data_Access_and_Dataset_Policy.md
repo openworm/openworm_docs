@@ -12,7 +12,7 @@
 
 ## TL;DR
 
-The [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) (`cect`, PyPI v0.2.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
+The [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) (`cect`, PyPI v0.4.7) is OpenWorm's canonical package for accessing *C. elegans* connectome data. It provides 30+ dataset readers spanning 1976-2024 (White, Varshney, Cook, Witvliet developmental series, Randi functional, Ripoll-Sanchez neuropeptidergic, [Wang 2024](https://doi.org/10.7554/eLife.95402) neurotransmitter atlas), cell classification, neurotransmitter identity, and bilateral symmetry analysis. This DD specifies: (1) the default dataset for each modeling use case, (2) version pinning policy, (3) canonical API patterns all consuming DDs must follow, and (4) multi-dataset validation strategy. **Never parse raw CSV/Excel connectome files directly — always use `cect`.**
 
 ---
 
@@ -37,7 +37,7 @@ The [ConnectomeToolbox](https://github.com/openworm/ConnectomeToolbox) (`cect`, 
 |-----------|--------|------------|
 | **Primary:** Unified data access | All 9 consuming DDs obtain connectome data via `cect` API, not raw file parsing | Tier 1 (blocking) |
 | **Secondary:** Reproducibility | Dataset selection and `cect` version pinned in `openworm.yml` + `versions.lock`; any two runs with same config produce identical adjacency matrices | Tier 1 (blocking) |
-| **Tertiary:** Multi-dataset validation | Simulation results compared against ≥2 independent connectome datasets (e.g., [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm primary, Witvliet8 cross-validation) | Tier 2 (non-blocking initially, blocking Phase 3+) |
+| **Tertiary:** Multi-dataset validation | Simulation results compared against ≥2 independent connectome datasets (e.g., [Cook2019](https://doi.org/10.1038/s41586-019-1352-7)Herm primary, Witvliet8 cross-validation) | Tier 2 (non-blocking initially, blocking Phase 5+) |
 
 **Before:** Each consuming DD independently decides which connectome dataset to use, how to parse it, and how to handle cell name variants. [DD002](DD002_Neural_Circuit_Architecture.md) uses `UpdatedSpreadsheetDataReader2`, [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) uses Ripoll-Sanchez data, [DD007](DD007_Pharyngeal_System_Architecture.md) may use [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) pharyngeal subset — no coordination, no version pinning, no comparison.
 
@@ -423,7 +423,7 @@ Biological connectome data are noisy — different labs, different animals, diff
 
 ### Bilateral Symmetry as a Validation Metric
 
-The worm's nervous system is largely bilaterally symmetric — left and right neuron pairs (e.g., AVAL/AVAR) receive similar inputs and produce similar outputs. `cect` v0.2.7 includes bilateral symmetry analysis (added Feb 2026):
+The worm's nervous system is largely bilaterally symmetric — left and right neuron pairs (e.g., AVAL/AVAR) receive similar inputs and produce similar outputs. `cect` v0.4.7 includes bilateral symmetry analysis (added Feb 2026):
 
 ```python
 from cect.Analysis import convert_to_symmetry_array
@@ -486,7 +486,7 @@ The Witvliet et al. 2021 EM reconstructions include synapse centroid coordinates
 - `cect` provides direct Python API access to 30+ datasets; OWMeta has ingestion scripts for fewer datasets
 - `cect` already has caching, cell classification, neurotransmitter identity, and visualization built in
 
-**When to reconsider:** In Phase 3+, when OWMeta integrates CeNGEN, WormAtlas, and other non-connectome data sources, `cect` data should flow *through* OWMeta to provide a unified semantic layer. At that point, [DD008](DD008_Data_Integration_Pipeline.md)'s OWMeta would call `cect` internally, and consuming DDs could use either API. See "Relationship to [DD008](DD008_Data_Integration_Pipeline.md)" below.
+**When to reconsider:** In Phase 5+, when OWMeta integrates CeNGEN, WormAtlas, and other non-connectome data sources, `cect` data should flow *through* OWMeta to provide a unified semantic layer. At that point, [DD008](DD008_Data_Integration_Pipeline.md)'s OWMeta would call `cect` internally, and consuming DDs could use either API. See "Relationship to [DD008](DD008_Data_Integration_Pipeline.md)" below.
 
 ### 2. Parse Raw Published Data Files Directly
 
@@ -594,7 +594,7 @@ The *C. elegans* connectome — the complete wiring diagram of the nervous syste
 | 2024 | Wang et al. | Neurotransmitter atlas (16 systems, CRISPR/Cas9 reporters) | `Wang2024HermReader`, `Wang2024MaleReader` |
 | 2024 | Yim et al. | Updated connectivity analysis | `Yim2024DataReader` |
 
-The ConnectomeToolbox (`cect`) was created to provide unified access to all these datasets through a consistent Python API. As of v0.2.7 (Feb 2026), it includes 30+ dataset readers, cell classification, neurotransmitter identity, bilateral symmetry analysis, and multiple visualization modes.
+The ConnectomeToolbox (`cect`) was created to provide unified access to all these datasets through a consistent Python API. As of v0.4.7 (Feb 2026), it includes 30+ dataset readers, cell classification, neurotransmitter identity, bilateral symmetry analysis, and multiple visualization modes.
 
 ### Recent Activity (Feb 2026)
 
@@ -625,15 +625,15 @@ ConnectomeToolbox is already referenced as a dependency in 9 existing DDs ([DD00
 | **Query style** | `get_instance()` → `ConnectomeDataset` | `connect("openworm_data")` → SPARQL-like |
 | **Data scope** | Connectome topology only | Connectome + CeNGEN + WormAtlas + lineage + ... |
 | **Maintainer** | ConnectomeToolbox maintainer (active) | OWMeta team (dormant since Jul 2024) |
-| **Current status** | v0.2.7, 30+ datasets, preprint pending | Working but under-maintained |
+| **Current status** | v0.4.7, 30+ datasets, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 
-**Phase 1-2 (now):** Use `cect` directly. It's actively maintained, has the datasets we need, and provides the API patterns consuming DDs require.
+**Phase 3-4 (now):** Use `cect` directly. It's actively maintained, has the datasets we need, and provides the API patterns consuming DDs require.
 
-**Phase 3+ (future):** When OWMeta becomes active again, it should call `cect` internally as its connectome data provider. Consuming DDs could then use either `cect` (direct) or OWMeta (semantic) depending on their needs. [DD008](DD008_Data_Integration_Pipeline.md) should add a `cect` ingestion adapter:
+**Phase 5+ (future):** When OWMeta becomes active again, it should call `cect` internally as its connectome data provider. Consuming DDs could then use either `cect` (direct) or OWMeta (semantic) depending on their needs. [DD008](DD008_Data_Integration_Pipeline.md) should add a `cect` ingestion adapter:
 
 ```python
-# Future [DD008](DD008_Data_Integration_Pipeline.md) integration (Phase 3+)
+# Future [DD008](DD008_Data_Integration_Pipeline.md) integration (Phase 5+)
 # OWMeta calls cect internally
 from owmeta_core import connect
 conn = connect("openworm_data")
@@ -790,7 +790,7 @@ print('[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) full validati
 | Cell-type specialization | [DD005](DD005_Cell_Type_Differentiation_Strategy.md) | [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) neuron list defines which cells to specialize |
 | Neuropeptidergic network | [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) | Ripoll-Sanchez data defines peptide-receptor interactions |
 | Pharyngeal circuit | [DD007](DD007_Pharyngeal_System_Architecture.md) | Pharyngeal view filter defines pharynx neuron connectivity |
-| Data integration | [DD008](DD008_Data_Integration_Pipeline.md) | OWMeta ingests connectome data from `cect` (Phase 3+) |
+| Data integration | [DD008](DD008_Data_Integration_Pipeline.md) | OWMeta ingests connectome data from `cect` (Phase 5+) |
 | Simulation stack | [DD011](DD011_Simulation_Stack_Architecture.md) | `cect` version pinned in `versions.lock` |
 | Hybrid ML framework | [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) | Graph structure (via NetworkX) used for graph neural networks |
 | Closed-loop touch response | [DD015](DD015_Closed_Loop_Touch_Response.md) | Touch neuron connectivity (MEC-4 neurons) from `cect` |
@@ -867,7 +867,7 @@ Interactive connectome map. Evaluate as cross-validation data source and potenti
 ---
 
 - **Approved by:** OpenWorm Steering
-- **Implementation Status:** Complete (cect v0.2.7 on PyPI; dataset policy ratified)
+- **Implementation Status:** Complete (cect v0.4.7 on PyPI; dataset policy ratified)
 - **Next Actions:**
 
 1. Pin `cect==0.2.7` in `versions.lock`

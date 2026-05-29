@@ -1,6 +1,6 @@
 # DD009: Intestinal Calcium Oscillator and Defecation Motor Program
 
-- **Status:** Proposed (Phase 3)
+- **Status:** Proposed (Phase 5)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Phase** | [Phase 5](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
 | **What does this produce?** | 20 intestinal cell models (IP3/Ca2+ oscillator in NeuroML/LEMS), defecation trigger signal, per-cell calcium time series |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: defecation cycle period 50 +/- 10 seconds; posterior-to-anterior wave; >=3 consecutive cycles |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_intestine.py`, `intestine/` module) — issues labeled `dd009` |
@@ -64,7 +64,7 @@ Model 20 intestinal cells with IP3/Ca2+ oscillator dynamics to reproduce the def
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd009` |
-| **Milestone** | Phase 3: Intestinal Oscillator |
+| **Milestone** | Phase 5: Intestinal Oscillator |
 | **Branch convention** | `dd009/description` (e.g., `dd009/ip3r-lems-model`) |
 | **Example PR title** | `DD009: Implement Li-Rinzel IP3R model in LEMS for intestinal cells` |
 
@@ -262,7 +262,7 @@ The intestinal calcium wave triggers the **defecation motor program** via innerv
 
 **Description:** Explicitly model ER tubules and cisternae with 3D geometry, solve Ca2+ diffusion within ER lumen.
 
-**Rejected (Phase 3):** Simplified lumped-pool ER model (single [Ca]_ER variable) is sufficient to produce oscillations. Detailed ER geometry is future work if spatial Ca2+ gradients within cells prove essential.
+**Rejected (Phase 5):** Simplified lumped-pool ER model (single [Ca]_ER variable) is sufficient to produce oscillations. Detailed ER geometry is future work if spatial Ca2+ gradients within cells prove essential.
 
 ### 3. Mitochondrial Calcium Buffering
 
@@ -448,7 +448,7 @@ When `body.cell_identity: true`, intestinal cells are represented by tagged SPH 
 3. Intestinal particle elasticity is modulated: `k_particle = k_baseline * (1 + activation * peristalsis_strength)`
 4. This produces peristaltic waves in the SPH simulation
 
-**This coupling is Phase 4 work** (requires [DD004](DD004_Mechanical_Cell_Identity.md) to be implemented first).
+**This coupling is Phase 6 work** (requires [DD004](DD004_Mechanical_Cell_Identity.md) to be implemented first).
 
 ### Coupling Dependencies
 
@@ -468,7 +468,7 @@ When `body.cell_identity: true`, intestinal cells are represented by tagged SPH 
 
 ---
 
-- **Approved by:** Pending (Phase 3)
+- **Approved by:** Pending (Phase 5)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

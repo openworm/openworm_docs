@@ -18,8 +18,8 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
-| **Layer** | Data Integration — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) |
+| **Phase** | [Phase 1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-1-core-infrastructure) |
+| **Layer** | Data Integration — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-1-core-infrastructure) |
 | **What does this produce?** | Unified data access layer (OWMeta) for connectome, CeNGEN expression, cell positions, neuropeptide interactions — all via Python API |
 | **Success metric** | All downstream DDs ([DD002](DD002_Neural_Circuit_Architecture.md)-[DD009](DD009_Intestinal_Oscillator_Model.md)) can query data via OWMeta; ID consistency (all neuron/cell IDs map to WBbt ontology) |
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) — issues labeled `dd008` |
@@ -34,7 +34,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 | Criterion | Target | [DD010](DD010_Validation_Framework.md) Tier |
 |-----------|--------|------------|
 | **Primary:** ID consistency | All neuron/cell IDs map to WBbt ontology; no orphaned IDs | Tier 1 (blocking) |
-| **Secondary:** Dataset ingestion | All Phase 1-3 datasets ingested and queryable via OWMeta | Tier 1 (blocking) |
+| **Secondary:** Dataset ingestion | All Phase 3-5 datasets ingested and queryable via OWMeta | Tier 1 (blocking) |
 | **Tertiary:** Downstream migration | c302, Sibernetic init, and validation scripts successfully migrated to OWMeta queries | Tier 2 (blocking) |
 
 **Before:** Each contributor writes custom parsers for CSV/JSON files from different sources; IDs are inconsistent across datasets (Cook uses "AVAL," WormBase uses "WBGene00006748"); data versions drift.
@@ -62,7 +62,7 @@ OWMeta is a semantic knowledge graph providing unified programmatic access to 15
 |------|-------|
 | **Repository** | [`openworm/owmeta`](https://github.com/openworm/owmeta) + [`openworm/owmeta-core`](https://github.com/openworm/owmeta-core) |
 | **Issue label** | `dd008` |
-| **Milestone** | Phase 1-3: Data Integration |
+| **Milestone** | Phase 3-5: Data Integration |
 | **Branch convention** | `dd008/description` (e.g., `dd008/ingest-ripoll-sanchez`) |
 | **Example PR title** | `DD008: Ingest Ripoll-Sanchez neuropeptide-receptor pairs into OWMeta` |
 
@@ -176,8 +176,8 @@ All modeling code (c302, Sibernetic initialization, validation scripts) MUST acc
 
 OWMeta and `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) serve complementary purposes:
 
-- **Phase 1-2 (current):** Use `cect` directly for connectome data ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)). OWMeta is optional for semantic queries.
-- **Phase 3+ (future):** OWMeta wraps `cect` internally. Consuming DDs can use either API.
+- **Phase 3-4 (current):** Use `cect` directly for connectome data ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)). OWMeta is optional for semantic queries.
+- **Phase 5+ (future):** OWMeta wraps `cect` internally. Consuming DDs can use either API.
 
 Contributors should follow [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) for connectome-specific data access and use OWMeta when broader semantic queries across multiple data types are needed.
 
@@ -228,12 +228,12 @@ for cell in intestine_cells:
 | WormBase WS298 | Integrated | -- | Maintain (archival) |
 | WormAtlas anatomy | Partial | High | Complete integration |
 | CeNGEN L4 expression | Integrated | -- | Maintain |
-| CeNGEN L1 expression | Not yet | Medium | Add in Phase 1 |
-| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Not yet | High | Add for Phase 6 (development) |
-| Ripoll-Sanchez neuropeptides | Not yet | High | Add for Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
+| CeNGEN L1 expression | Not yet | Medium | Add in Phase 3 |
+| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Not yet | High | Add for Phase 8 (development) |
+| Ripoll-Sanchez neuropeptides | Not yet | High | Add for Phase 4 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)) |
 | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity | Not yet | High | Add for validation |
-| [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Not yet | Medium | Add for Phase 6 |
-| Ben-David 2021 eQTLs | Not yet | Low | Phase 6+ |
+| [Packer 2019](https://doi.org/10.1126/science.aax1971) embryonic scRNA-seq | Not yet | Medium | Add for Phase 8 |
+| Ben-David 2021 eQTLs | Not yet | Low | Phase 8+ |
 
 ### OWMeta Update Process (For Contributors)
 
@@ -338,7 +338,7 @@ OpenWorm integrates data from 15+ sources: WormBase, WormAtlas, CeNGEN, Cook con
 | WormAtlas anatomy | wormatlas.org | Cell positions, morphology, EM images | HTML/images → RDF ingestion | Partial |
 | Ripoll-Sanchez neuropeptides | Neuron 111:3570 supplement | Peptide-receptor pairs + expression | CSV → RDF ingestion | **Not yet ingested into OWMeta** (needed for [DD006](DD006_Neuropeptidergic_Connectome_Integration.md)). Note: this data *is* already available in ConnectomeToolbox (`cect`) per [DD006](DD006_Neuropeptidergic_Connectome_Integration.md); the "not yet ingested" status refers specifically to OWMeta's RDF graph. |
 | [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4) functional connectivity | Nature 623:406 supplement | 302×302 correlation matrix | NumPy .npy → RDF metadata only | **Not yet ingested** (needed for [DD010](DD010_Validation_Framework.md)) |
-| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 6) |
+| [Witvliet 2021](https://doi.org/10.1038/s41586-021-03778-8) dev. connectomes | Nature 596:257 | Multi-stage connectomes (L1, L4, adult) | CSV → RDF ingestion | **Not yet ingested** (needed for Phase 8) |
 
 **Outputs (What This Subsystem Produces)**
 
@@ -427,15 +427,15 @@ docker compose run quick-test  # with data.backend: "direct"
 
 OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar 2025). The mandate "all code MUST use OWMeta" cannot be enforced immediately. Phased approach:
 
-- **Phase 1:** OWMeta is **optional**. Direct file access is acceptable with documented data provenance (source DOI, version, access date).
-- **Phase 2:** OWMeta is **recommended**. New code should use OWMeta where possible. Migration scripts provided for existing direct-access code.
-- **Phase 3+:** OWMeta is **required**. All modeling code accesses data through OWMeta. Direct file parsing is prohibited.
+- **Phase 3:** OWMeta is **optional**. Direct file access is acceptable with documented data provenance (source DOI, version, access date).
+- **Phase 4:** OWMeta is **recommended**. New code should use OWMeta where possible. Migration scripts provided for existing direct-access code.
+- **Phase 5+:** OWMeta is **required**. All modeling code accesses data through OWMeta. Direct file parsing is prohibited.
 
-**Trigger for Phase 2→3 transition:** OWMeta is installable on Python 3.12, all Phase 1-2 datasets are ingested, and at least 3 downstream consumers (c302, Sibernetic init, validation) have been successfully migrated.
+**Trigger for Phase 4→3 transition:** OWMeta is installable on Python 3.12, all Phase 3-4 datasets are ingested, and at least 3 downstream consumers (c302, Sibernetic init, validation) have been successfully migrated.
 
 ### Reconciliation with [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) (Connectome Data Access Policy)
 
-**[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)** specifies ConnectomeToolbox (`cect`, PyPI v0.2.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
+**[DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)** specifies ConnectomeToolbox (`cect`, PyPI v0.4.7) as the canonical API for connectome data access. OWMeta and `cect` serve complementary purposes and should coexist:
 
 | Aspect | `cect` ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) | OWMeta ([DD008](DD008_Data_Integration_Pipeline.md)) |
 |--------|---------------|----------------|
@@ -444,12 +444,12 @@ OWMeta is **dormant** (last real commit Jul 2024, `owmeta-core` last updated Mar
 | **Query style** | `get_instance()` → `ConnectomeDataset` | `connect("openworm_data")` → SPARQL-like |
 | **Data scope** | Connectome topology only (30+ datasets) | Connectome + CeNGEN + WormAtlas + lineage + anatomy |
 | **Maintainer** | Active maintainer (commits within days) | OWMeta team (dormant since Jul 2024) |
-| **Current status** | v0.2.7, preprint pending | Working but under-maintained |
+| **Current status** | v0.4.7, preprint pending | Working but under-maintained |
 | **Best for** | Direct adjacency matrix access, visualization, cross-dataset comparison | Unified multi-modal biological queries, provenance tracking |
 
-**Current recommendation (Phase 1-2):** Use `cect` directly for all connectome queries (see [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
+**Current recommendation (Phase 3-4):** Use `cect` directly for all connectome queries (see [DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md) API contract). This is the actively maintained, stable tool with 30+ dataset readers.
 
-**Future integration (Phase 3+):** When OWMeta becomes active again and ingests all Phase 1-2 datasets (CeNGEN, [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4), Ripoll-Sanchez, [Wang 2024](https://doi.org/10.7554/eLife.95402)), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
+**Future integration (Phase 5+):** When OWMeta becomes active again and ingests all Phase 3-4 datasets (CeNGEN, [Randi 2023](https://doi.org/10.1038/s41586-023-06683-4), Ripoll-Sanchez, [Wang 2024](https://doi.org/10.7554/eLife.95402)), it should call `cect` internally as its connectome data provider. Consuming DDs can then use either `cect` (direct, fast) or OWMeta (semantic, provenance-tracked) depending on their needs.
 
 **Action for OWMeta revival:** Add a `cect` ingestion adapter so OWMeta wraps `cect` readers rather than duplicating connectome parsing logic.
 

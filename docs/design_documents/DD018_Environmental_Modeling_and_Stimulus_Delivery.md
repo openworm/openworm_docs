@@ -1,6 +1,6 @@
 # DD018: Environmental Modeling and Stimulus Delivery
 
-- **Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
+- **Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory))
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-19
 - **Supersedes:** None
@@ -18,8 +18,8 @@ The worm doesn't live in a void — it crawls on agar, swims in liquid, navigate
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
-| **Layer** | Environment — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
+| **Layer** | Environment — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
 | **What does this produce?** | Substrate models (agar stiffness, liquid viscosity, soil), chemical/thermal gradient fields, geometric obstacles, bacterial lawn particle system |
 | **Success metric** | Chemotaxis on NaCl gradient (CI chemotaxis index >0.5), thermotaxis to cultivation temp (±2°C), tap withdrawal on agar vs. liquid (latency difference reproduced) |
 | **Repository** | `openworm/sibernetic` (substrate mechanics) + `openworm/c302` (stimulus coupling to sensory neurons) — issues labeled `dd018` |
@@ -159,7 +159,7 @@ python stimuli/thermal_gradient.py --output data/gradients/thermal_default.npy #
 
 - Granular medium (sand, decomposed organic matter)
 - Modeled as additional SPH particles or DEM (discrete element method)
-- Phase 5+ work (complex, low priority)
+- Phase 7+ work (complex, low priority)
 
 ### Component 2: Chemical Gradient Delivery
 
@@ -219,7 +219,7 @@ Similar to chemical gradient but for temperature:
 - Delivered to pharyngeal lumen via pumping ([DD007](DD007_Pharyngeal_System_Architecture.md))
 - Grinder crushes bacteria (future: mechanical food processing)
 
-**Phase 3 work** (not required for basic pumping frequency validation).
+**Phase 5 work** (not required for basic pumping frequency validation).
 
 ---
 
@@ -233,7 +233,7 @@ Similar to chemical gradient but for temperature:
 
 **Description:** Keep boundary particles fixed (current [DD001](DD001_Body_Physics_Architecture.md)), just add chemical/thermal fields.
 
-**Partially adopted:** For Phase 2-3, this is the pragmatic approach. Substrate mechanics (agar deformability) can be deferred to Phase 5+.
+**Partially adopted:** For Phase 4-5, this is the pragmatic approach. Substrate mechanics (agar deformability) can be deferred to Phase 7+.
 
 ---
 
@@ -249,9 +249,9 @@ Similar to chemical gradient but for temperature:
 ## Boundaries (Explicitly Out of Scope)
 
 1. **Multi-worm environments:** Social aggregation, pheromone communication. Single-worm only.
-2. **Complex geometries:** Microfluidic mazes, 3D terrains. Flat gradients for Phase 2-3.
-3. **Food consumption dynamics:** Bacterial digestion, nutrient absorption. Food particles are visual only (Phase 3).
-4. **Soil microbial ecology:** Bacteria, fungi, nematode predators. Simple soil mechanics only (Phase 5+).
+2. **Complex geometries:** Microfluidic mazes, 3D terrains. Flat gradients for Phase 4-3.
+3. **Food consumption dynamics:** Bacterial digestion, nutrient absorption. Food particles are visual only (Phase 5).
+4. **Soil microbial ecology:** Bacteria, fungi, nematode predators. Simple soil mechanics only (Phase 7+).
 
 ---
 
@@ -293,7 +293,7 @@ Without an environment model, the virtual worm exists in a featureless void and 
 ---
 
 - **Approved by:** Pending
-- **Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6))
+- **Implementation Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory))
 - **Next Actions:**
 
 1. Write detailed substrate mechanics spec (agar viscoelasticity parameters)

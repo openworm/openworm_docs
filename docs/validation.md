@@ -107,7 +107,7 @@ These are beautiful validation targets because the rhythms are robust and well-c
 | **Tier 2a** (circuit) | Data ready via `wormneuroatlas` API | Wire into CI pipeline |
 | **Tier 2b** (neuropeptides) | Data ready, awaiting [DD006](design_documents/DD006_Neuropeptidergic_Connectome_Integration.md) | Implement DD006 first |
 | **Tier 3** (behavior) | **Blocked** — toolbox needs revival | [DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md) revival (~33 hrs) |
-| **Tier 4** (causal) | Future work | Phase 3+ |
+| **Tier 4** (causal) | Future work | Phase 5+ |
 
 The infrastructure priority is getting Tiers 2 and 3 automated in CI ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)) so every pull request is validated before merging.
 

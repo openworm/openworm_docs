@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3), [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) | **Layer:** Visualization
+> **Phase:** [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation), [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory), [Phase 6](DD_PHASE_ROADMAP.md#phase-6-mechanical-cell-identity-high-fidelity-visualization) | **Layer:** Visualization
 
 ## TL;DR
 
@@ -116,27 +116,27 @@ The visualization layer is not a single tool. It is a **data export pipeline** (
 
 DD012 is developed incrementally across three Roadmap phases. To avoid confusion, the table below maps DD012's internal viewer stages to the [Phase Roadmap](DD_PHASE_ROADMAP.md):
 
-| DD012 Viewer Stage | Roadmap Phase | Timeline | What Ships |
-|--------------------|---------------|----------|------------|
-| **Viewer Stage 1** — Post-hoc Trame viewer | [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) (Cell-Type Specialization, months 1-3) | Weeks 1-8 | Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing. |
-| **Viewer Stage 2** — Interactive dynamic viewer | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) (Modulation + Closed-Loop, months 4-6) | Weeks 9-20 | All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins. |
-| **Viewer Stage 3** — WormSim 2.0 | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18) (Complete Organism, months 13-18) | Weeks 21-32+ | **Molecular scale** (ion channels, gene expression per [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. **browser.openworm.org redirects here after feature parity achieved.** |
+| DD012 Viewer Stage | Roadmap Phase | What Ships |
+|--------------------|---------------|------------|
+| **Viewer Stage 1** — Post-hoc Trame viewer | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation) (Cell-Type Specialization) | Organism + Tissue/Cell scales. Smooth body surface, neurons/muscles visible and selectable, activity coloring, time scrubbing. |
+| **Viewer Stage 2** — Interactive dynamic viewer | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) (Modulation + Closed-Loop) | All tissue-scale features enhanced: pharynx/intestine layers, neuropeptide volumetric clouds, validation overlay, full layer system. Three.js prototype begins. |
+| **Viewer Stage 3** — WormSim 2.0 | [Phase 6](DD_PHASE_ROADMAP.md#phase-6-mechanical-cell-identity-high-fidelity-visualization) (Complete Organism) | **Molecular scale** (ion channels, gene expression per [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 13-14), Three.js + WebGPU static site, narrative-guided exploration, deployed to wormsim.openworm.org. **browser.openworm.org redirects here after feature parity achieved.** |
 
-Note: There is no DD012 work in Roadmap Phase 3 (Organ Systems). During Phase 3, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
+Note: There is no DD012 work in Roadmap Phase 5 (Organ Systems). During Phase 5, the viewer built in Stage 2 is *used* to visualize pharynx/intestine/egg-laying, but no new viewer architecture is needed — the layer system from Stage 2 already supports it.
 
-See **[DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Viewer Stage 3 only** (Roadmap Phase 4) — not part of Stage 1-2 deliverables.
+See **[DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Specification)** for complete appearance specifications at all three scales. Note: [DD012.1](DD012.1_Visual_Rendering_Specification.md) Mockups 10-14 (membrane cross-section, calcium influx, nucleus, gene transcription, vesicle trafficking) are **Viewer Stage 3 only** (Roadmap Phase 6) — not part of Stage 1-2 deliverables.
 
-**Viewer Stage 1 (Roadmap Phase 1): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
+**Viewer Stage 1 (Roadmap Phase 3): Post-hoc static viewer.** Simulation runs in Docker, exports OME-Zarr data. Trame viewer loads and renders organism + tissue scales. No live server during simulation. **Build on Worm3DViewer.**
 
-**Viewer Stage 2 (Roadmap Phase 2): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
+**Viewer Stage 2 (Roadmap Phase 4): Interactive dynamic viewer.** Full interactivity with time scrubbing, layer toggling, cell selection, inspector panel. Served via Trame or static OME-Zarr + Three.js. Data stays pre-computed but viewer is fully interactive. Pharynx, intestine, neuropeptides visible if enabled.
 
-**Viewer Stage 3 (Roadmap Phase 4): WormSim 2.0.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD012.1](DD012.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
+**Viewer Stage 3 (Roadmap Phase 6): WormSim 2.0.** The "Digital Organism In Your Browser" — **adds molecular scale** (gene expression, channel dynamics, intracellular compartments per [DD012.1](DD012.1_Visual_Rendering_Specification.md)), narrative-guided exploration, educational overlays. Hosted as static site on GitHub Pages or CDN. No Docker, no server, no installation.
 
-### Phase 1: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
+### Phase 3: Evolve Worm3DViewer into the Canonical Post-Hoc Viewer
 
 **What changes from current Worm3DViewer:**
 
-| Current (v0.0.8) | Phase 1 Target (v1.0) |
+| Current (v0.0.8) | Phase 3 Target (v1.0) |
 |------------------|----------------------|
 | Streamlit + stpyvista (static iframe) | **Trame** (PyVista + live server, real animation) |
 | Reads `position_buffer.txt` (custom text) | Reads **OME-Zarr** (standardized, chunked, streamable) |
@@ -149,7 +149,7 @@ See **[DD012.1](DD012.1_Visual_Rendering_Specification.md) (Visual Rendering Spe
 
 **Key architectural decision:** Use **Trame** (not raw Streamlit) as the web framework. Trame is Kitware's production web framework for VTK/PyVista, supports both server-side rendering (for large datasets) and client-side vtk.js rendering (for small datasets), and is actively maintained. This preserves the existing PyVista investment in Worm3DViewer while solving the animation problem.
 
-**Alternative considered — rewrite in Three.js now:** Rejected for Phase 1. A Three.js rewrite would require JavaScript expertise that may not exist in the community. Trame lets Python-fluent contributors (who already work with c302 and Sibernetic) build the viewer without learning a new language. Phase 2 or 3 may migrate to Three.js + WebGPU for the public experience.
+**Alternative considered — rewrite in Three.js now:** Rejected for Phase 1. A Three.js rewrite would require JavaScript expertise that may not exist in the community. Trame lets Python-fluent contributors (who already work with c302 and Sibernetic) build the viewer without learning a new language. Phase 4 or 3 may migrate to Three.js + WebGPU for the public experience.
 
 ### Simulation Output Format: OME-Zarr
 
@@ -209,7 +209,7 @@ output/
 
 The SPH particle cloud must be converted to a smooth surface for the Organism-scale view. Two approaches:
 
-**Option 1: Marching Cubes on density field (recommended for Phase 1)**
+**Option 1: Marching Cubes on density field (recommended for Phase 3)**
 
 - Compute a density field from particle positions (Gaussian kernel smoothing)
 - Extract an isosurface via marching cubes (VTK's `vtkMarchingCubes`)
@@ -222,7 +222,7 @@ The SPH particle cloud must be converted to a smooth surface for the Organism-sc
 - Start with the VirtualWorm OBJ mesh (smooth anatomical surface)
 - Deform it to match particle positions at each timestep (skinning)
 - Higher visual quality but requires mapping between particles and mesh vertices
-- Phase 2 work
+- Phase 4 work
 
 ### Color Mapping for Activity
 
@@ -301,12 +301,12 @@ The viewer has toggleable layers, inspired by WormSim's skin/muscles/neurons tog
 
 - Docker with `docker compose` ([DD011](DD011_Simulation_Stack_Architecture.md) simulation stack)
 - OR: Python 3.10+, [PyVista](https://docs.pyvista.org/), [Trame](https://kitware.github.io/trame/), VTK
-- For Phase 3 (Three.js viewer): Node.js 18+, npm
+- For Phase 5 (Three.js viewer): Node.js 18+, npm
 - A simulation output in OME-Zarr format (produced by [DD011](DD011_Simulation_Stack_Architecture.md) pipeline)
 
 ### Getting Started (Environment Setup)
 
-There are two paths: **Docker** (recommended for newcomers) and **native Python** (for viewer development). The primary viewer target is the Phase 1 Trame viewer.
+There are two paths: **Docker** (recommended for newcomers) and **native Python** (for viewer development). The primary viewer target is the Phase 3 Trame viewer.
 
 **Clone the meta-repo:**
 
@@ -345,7 +345,7 @@ pip install numpy scipy trimesh
 
 You also need a simulation output directory containing `openworm.zarr`. Either run the Docker simulation (`docker compose run simulation`) or use sample data from the meta-repo.
 
-**Path C — Phase 3 Three.js Preview (future):**
+**Path C — Phase 5 Three.js Preview (future):**
 
 ```bash
 # Once the Three.js viewer directory exists in the meta-repo:
@@ -420,7 +420,7 @@ for key in z.keys():
 
 ### 3. Build Directly in Three.js + WebGPU (Skip Trame)
 
-**Deferred to Phase 2/3:** A pure Three.js viewer would be optimal for the public experience (no server, static hosting, best performance). But it requires JavaScript expertise and a longer development timeline. Phase 1 builds on the existing PyVista/Python ecosystem to get a working viewer faster, then Phase 2 ports the interactive experience to the browser.
+**Deferred to Phase 4/3:** A pure Three.js viewer would be optimal for the public experience (no server, static hosting, best performance). But it requires JavaScript expertise and a longer development timeline. Phase 3 builds on the existing PyVista/Python ecosystem to get a working viewer faster, then Phase 4 ports the interactive experience to the browser.
 
 ### 4. Use Neuroglancer
 
@@ -497,7 +497,7 @@ visualization:
 viewer:
   enabled: false                     # Launch viewer service in docker-compose
   port: 8501                         # Web UI port
-  backend: "trame"                   # "trame" (Phase 1) or "threejs" (Phase 2/3, future)
+  backend: "trame"                   # "trame" (Phase 3) or "threejs" (Phase 4/3, future)
   default_layers:                    # Which layers are ON by default
     - body_surface
     - muscles
@@ -622,13 +622,13 @@ docker compose run quick-test  # with visualization.export_format: "legacy"
 
 ## Implementation Roadmap
 
-### Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3), Weeks 1-8)
+### Viewer Stage 1: Post-Hoc Trame Viewer (Roadmap [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation))
 
 Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 
 | Task | Owner | Effort | Dependency |
 |------|-------|--------|------------|
-| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase A1 |
+| Add OME-Zarr export to `master_openworm.py` | Integration Maintainer | 16 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase 1 |
 | Port Worm3DViewer from Streamlit to Trame | Visualization L4 | 24 hrs | None |
 | Implement time scrubbing (slider + play/pause) | Visualization L4 | 8 hrs | Trame port |
 | Implement layer toggle system | Visualization L4 | 8 hrs | Trame port |
@@ -636,12 +636,12 @@ Build on Worm3DViewer, evolve from Streamlit+stpyvista to Trame.
 | Add neuron voltage → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add muscle activation → color mapping | Visualization L4 | 4 hrs | OME-Zarr export |
 | Add cell click → inspector panel | Visualization L4 | 8 hrs | Trame port |
-| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase A1 |
+| Add Docker stage + compose service | Integration Maintainer | 4 hrs | [DD011](DD011_Simulation_Stack_Architecture.md) Phase 1 |
 | Add to CI (build + smoke test) | Integration Maintainer | 4 hrs | Docker stage |
 
 **Deliverable:** `docker compose up viewer` serves a web app with time-animated, multi-layer, interactive 3D worm at `localhost:8501`.
 
-### Viewer Stage 2: Interactive Dynamic Viewer (Roadmap [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), Weeks 9-20)
+### Viewer Stage 2: Interactive Dynamic Viewer (Roadmap [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory))
 
 Enhance the viewer with deeper interactivity and begin Three.js migration for public deployment.
 
@@ -658,7 +658,7 @@ Enhance the viewer with deeper interactivity and begin Three.js migration for pu
 
 **Deliverable:** Full tissue/cell-scale exploration. Early Three.js prototype for server-free deployment.
 
-### Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap [Phase 4](DD_PHASE_ROADMAP.md#phase-4-mechanical-cell-identity-high-fidelity-visualization-months-13-18), Weeks 21-32+)
+### Viewer Stage 3: WormSim 2.0 — "A Digital Organism In Your Browser" (Roadmap [Phase 6](DD_PHASE_ROADMAP.md#phase-6-mechanical-cell-identity-high-fidelity-visualization))
 
 The full WormSim vision, rebuilt on modern technology. Deploys to `wormsim.openworm.org` as a static site. browser.openworm.org redirects here once WormBrowser feature parity is achieved (see Deployment Plan below).
 
@@ -718,15 +718,15 @@ Green checkmarks appear on subsystems passing validation (locomotion speed withi
 
 | Phase | browser.openworm.org | wormsim.openworm.org | Docker viewer |
 |-------|---------------------|---------------------|---------------|
-| Phase A1 | WormBrowser (legacy, live) | Does not exist | — |
-| Phase 1 | **WormBrowser enhanced** — click neuron/cell → links to WormAtlas + WormBase | Does not exist | `docker compose up viewer` → Trame at localhost:8501 |
-| Phase 2 | WormBrowser enhanced (continues) | Three.js prototype (may lack some WormBrowser features) | Trame viewer continues |
-| Phase 3 | WormBrowser enhanced (continues) | Three.js with organ systems (approaching parity) | Trame viewer continues |
-| Phase 4 | **Redirects → wormsim.openworm.org** | **WormSim 2.0** — full public experience | Trame viewer continues (local dev) |
+| Phase 1 | WormBrowser (legacy, live) | Does not exist | — |
+| Phase 3 | **WormBrowser enhanced** — click neuron/cell → links to WormAtlas + WormBase | Does not exist | `docker compose up viewer` → Trame at localhost:8501 |
+| Phase 4 | WormBrowser enhanced (continues) | Three.js prototype (may lack some WormBrowser features) | Trame viewer continues |
+| Phase 5 | WormBrowser enhanced (continues) | Three.js with organ systems (approaching parity) | Trame viewer continues |
+| Phase 6 | **Redirects → wormsim.openworm.org** | **WormSim 2.0** — full public experience | Trame viewer continues (local dev) |
 
-### Phase 1 Quick Win: WormBrowser Enhancement
+### Phase 3 Quick Win: WormBrowser Enhancement
 
-The existing WormBrowser at browser.openworm.org gets a targeted enhancement in Phase 1 — not a full rewrite, just adding click-to-identify with database links:
+The existing WormBrowser at browser.openworm.org gets a targeted enhancement in Phase 3 — not a full rewrite, just adding click-to-identify with database links:
 
 - **Click any neuron** → tooltip/panel shows: neuron name, class (sensory/inter/motor), [WormAtlas](https://wormatlas.org) link, [WormBase](https://wormbase.org) link
 - **Click any muscle** → similar links
@@ -760,12 +760,12 @@ WormSim 2.0 must have ALL of the following before browser.openworm.org redirects
 
 **John White requirements (phased):**
 
-- [ ] Click neuron → links to WormAtlas and WormBase — **Phase 1 quick win on existing WormBrowser**
-- [ ] Multiple developmental stages (L1, L4, adult) — from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions (Phase 4+)
-- [ ] Dauer larva anatomy — from [Yim et al. 2024](https://doi.org/10.1038/s41467-024-45943-3) (Phase 4+)
-- [ ] Male anatomy — from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) male connectome (Phase 4+)
-- [ ] Comparative species view — *Pristionchus pacificus* and other nematodes (Phase 5+)
-- [ ] Stage/sex comparison mode (Phase 4+)
+- [ ] Click neuron → links to WormAtlas and WormBase — **Phase 3 quick win on existing WormBrowser**
+- [ ] Multiple developmental stages (L1, L4, adult) — from [Witvliet et al. 2021](https://doi.org/10.1038/s41586-021-03778-8) EM reconstructions (Phase 6+)
+- [ ] Dauer larva anatomy — from [Yim et al. 2024](https://doi.org/10.1038/s41467-024-45943-3) (Phase 6+)
+- [ ] Male anatomy — from [Cook et al. 2019](https://doi.org/10.1038/s41586-019-1352-7) male connectome (Phase 6+)
+- [ ] Comparative species view — *Pristionchus pacificus* and other nematodes (Phase 7+)
+- [ ] Stage/sex comparison mode (Phase 6+)
 
 ---
 
@@ -777,7 +777,7 @@ WormSim 2.0 must have ALL of the following before browser.openworm.org redirects
 
 3. **Live multi-user collaboration.** The viewer is single-user. Real-time collaborative annotation is future work.
 
-4. **VR hardware requirements.** WebXR support (Phase 3) works with standard browsers. No dedicated VR headset required.
+4. **VR hardware requirements.** WebXR support (Phase 5) works with standard browsers. No dedicated VR headset required.
 
 5. **Editing simulation parameters.** The viewer is read-only. Changing parameters and re-running requires Docker. A future "interactive mode" could allow parameter tweaking but is not in this DD.
 
@@ -809,7 +809,7 @@ Interactive web-based map of neural connections (formerly nemanode.org). May con
 - **Implementation Status:** Proposed
 - **Next Actions:**
 
-1. Evolve Worm3DViewer from Streamlit to Trame (Phase 1, critical path)
+1. Evolve Worm3DViewer from Streamlit to Trame (Phase 3, critical path)
 2. Implement OME-Zarr export in `master_openworm.py`
 3. Implement surface reconstruction pipeline
 4. Identify / recruit Visualization L4 Maintainer

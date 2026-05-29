@@ -1,6 +1,6 @@
 # DD013: Hybrid Mechanistic-ML Framework
 
-- **Status:** Proposed (Phase 3-4)
+- **Status:** Proposed (Phase 5-6)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-16
 - **Supersedes:** None
@@ -8,7 +8,7 @@
 
 ---
 
-> **Phase:** [Phase 3: Organ Integration & Behavior](DD_PHASE_ROADMAP.md#phase-3-organ-integration--behavior-months-13-18) | **Layer:** ML Framework
+> **Phase:** [Phase 5: Organ Integration & Behavior](DD_PHASE_ROADMAP.md#phase-5-organ-integration--behavior) | **Layer:** ML Framework
 
 ## TL;DR
 
@@ -17,7 +17,7 @@ When mechanistic models hit data gaps (unknown ion channel kinetics, unmeasured 
 1. **Neural surrogate for SPH body physics** (1000× speedup target with <5% trajectory error against the native Sibernetic substrate — see [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability))
 2. **Learned sensory transduction** (close the stimulus-response loop where mechanistic models are unavailable)
 
-The differentiable SPH substrate this framework's surrogate trains against is delivered as a property of the native Sibernetic Metal substrate ([DD001](DD001_Body_Physics_Architecture.md#differentiability)) rather than as a component of this DD. Differentiability for the c302/NEURON/muscle ODE pipelines (neural-side substrate) is still future work; its implementation strategy is a Phase 3 design decision (hand-derived analytic backwards à la DD001, or PyTorch autodiff reimplementation). Foundation-model → ODE-parameters work is covered by [DD021](DD021_Protein_Foundation_Model_Pipeline.md).
+The differentiable SPH substrate this framework's surrogate trains against is delivered as a property of the native Sibernetic Metal substrate ([DD001](DD001_Body_Physics_Architecture.md#differentiability)) rather than as a component of this DD. Differentiability for the c302/NEURON/muscle ODE pipelines (neural-side substrate) is still future work; its implementation strategy is a Phase 5 design decision (hand-derived analytic backwards à la DD001, or PyTorch autodiff reimplementation). Foundation-model → ODE-parameters work is covered by [DD021](DD021_Protein_Foundation_Model_Pipeline.md).
 
 ## Goal & Success Criteria
 
@@ -42,15 +42,15 @@ The differentiable SPH substrate this framework's surrogate trains against is de
 
 - **Repository:** `openworm/openworm-ml` (new repo) `[TO BE CREATED]`
 - **Issue label:** `dd013`
-- **Milestone:** Phase 3 — Hybrid ML Framework
+- **Milestone:** Phase 5 — Hybrid ML Framework
 - **Example PR title:** `dd013: SPH surrogate matches Sibernetic Metal trajectories within ±5%`
 
 ## Quick Action Reference
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Phase** | [Phase 5](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
+| **Layer** | Hybrid ML — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
 | **What does this produce?** | (1) Neural surrogate for Sibernetic SPH (trained against [DD001](DD001_Body_Physics_Architecture.md)'s differentiable substrate), (2) Learned sensory transduction module |
 | **Success metric** | SPH surrogate achieves 100x–1000x speedup with <5% trajectory error vs. Sibernetic Metal reference; learned sensory transduction matches tuning-curve data within published noise ranges |
 | **Repository** | `openworm/openworm-ml` (new repo) — issues labeled `dd013` |
@@ -492,7 +492,7 @@ for activations, trajectories in training_data:
 
 **Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline for Ion Channel Kinetics).**
 
-Component 3 was promoted from DD013 Phase 3 to a standalone DD in Phase A2/Phase 1 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
+Component 3 was promoted from DD013 Phase 5 to a standalone DD in Phase 2/Phase 3 because: (1) it derisks [DD005](DD005_Cell_Type_Differentiation_Strategy.md)'s uncertain expression→conductance mapping, (2) BioEmu-1 invalidated the original "computationally expensive" objection, and (3) its inputs (WormBase sequences, literature kinetics) have no infrastructure dependencies.
 
 See [DD021](DD021_Protein_Foundation_Model_Pipeline.md) for the full specification including the foundation model table, training data, validation criteria, and implementation roadmap.
 
@@ -795,7 +795,7 @@ ml:
 
 ## Implementation Roadmap
 
-### Phase A: Differentiable Backend (Weeks 1-8)
+### Phase A: Differentiable Backend
 
 1. **Week 1-2:** Port [DD002](DD002_Neural_Circuit_Architecture.md) HH equations to PyTorch (single neuron)
 2. **Week 3-4:** Port [DD003](DD003_Muscle_Model_Architecture.md) muscle model, couple to neural circuit
@@ -804,13 +804,13 @@ ml:
 
 **Milestone:** `DifferentiableWorm` module passes all [DD010](DD010_Validation_Framework.md) validation tests.
 
-### Phase B: Auto-Fitting (Weeks 9-12)
+### Phase B: Auto-Fitting
 
 1. **Week 9-10:** Implement [DD010](DD010_Validation_Framework.md) validation loss function in PyTorch
 2. **Week 11-12:** Run gradient descent to find per-neuron-class parameters
 3. **Deliverable:** New parameter set that equals or improves on hand-tuned [DD010](DD010_Validation_Framework.md) scores
 
-### Phase C: SPH Surrogate (Weeks 9-16, parallel with Phase B)
+### Phase C: SPH Surrogate (parallel with Phase B)
 
 1. **Week 9-12:** Generate training dataset (500+ SPH simulation runs)
 2. **Week 13-14:** Train FNO surrogate
@@ -820,9 +820,9 @@ ml:
 
 ### Phase D: Foundation Model Pipeline
 
-**Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and moved to Phase A2/Phase 1.** See DD021 Implementation Roadmap for the detailed timeline (~20 hours Phase A2, ~12 hours Phase 1).
+**Extracted to [DD021](DD021_Protein_Foundation_Model_Pipeline.md) and moved to Phase 2/Phase 1.** See DD021 Implementation Roadmap for the detailed timeline (~20 hours Phase 2, ~12 hours Phase 3).
 
-### Phase E: Sensory Transduction (Weeks 25-32)
+### Phase E: Sensory Transduction
 
 1. **Week 25-28:** Curate training data from published calcium imaging
 2. **Week 29-30:** Train sensory transduction models (one per modality)

@@ -8,15 +8,15 @@
 
 **Totals:** 6 issues (ai-workable: 3 / human-expert: 3 | L1: 2, L2: 3, L3: 1)
 
-**Roadmap Context:** DD005 is a **Phase 1** DD (proposed). These ion channel library issues were originally part of DD002 Draft Issues (Group 3) and have been relocated here because the extended channel library is a prerequisite for DD005's expression→conductance mapping. DD005 drives cell-type specialization; these channels provide the molecular basis.
+**Roadmap Context:** DD005 is a **Phase 3** DD (proposed). These ion channel library issues were originally part of DD002 Draft Issues (Group 3) and have been relocated here because the extended channel library is a prerequisite for DD005's expression→conductance mapping. DD005 drives cell-type specialization; these channels provide the molecular basis.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Ion Channel Library (Issues 1-6) | **Phase 1** | Extended channels feed DD005 cell-type specialization |
+| 1. Ion Channel Library (Issues 1-6) | **Phase 3** | Extended channels feed DD005 cell-type specialization |
 
 ---
 
-## Group 1: Extended Ion Channel Library (Phase 1)
+## Group 1: Extended Ion Channel Library (Phase 3)
 
 Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, leveraging existing NeuroML2 models from Nicoletti et al. and NMODL files from BAAIWorm.
 
@@ -26,10 +26,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Survey existing NeuroML2 and NMODL ion channel implementations across all OpenWorm and related repos`
 - **Labels:** `DD005`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (code reuse plan) and [DD005 — Ion Channel Sources](DD005_Cell_Type_Differentiation_Strategy.md)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) (code reuse plan) and [DD005 — Ion Channel Sources](DD005_Cell_Type_Differentiation_Strategy.md)
 - **Depends On:** None
 - **Existing Code to Reuse (THIS IS THE CODE TO SURVEY):**
     - [`openworm/NicolettiEtAl2019_NeuronModels/NeuroML2/`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **31 ion channels already in NeuroML2**: AWCon (16 channels: shal, kvs1, shak, kqt3, egl2, kir, unc2, egl19, cca, bk, slo1, bk2, slo2, sk, nca, leak) and RMD (15 channels: bk, bk2, cca, egl19, egl36, kir, leak, nca, shak, shal, sk, slo1, slo2, unc2). Includes `GenerateNeuroML.py` and Ca dynamics model. **Validated against original XPP models.**
@@ -59,10 +59,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Validate and adopt existing EGL-19 (Cav1 L-type Ca²⁺) NeuroML2 channel into c302 channel library`
 - **Labels:** `DD005`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (EGL-19 row, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) (EGL-19 row, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
 - **Depends On:** Issue 1 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_egl19.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **EGL-19 already exists in validated NeuroML2.** Part of the AWCon 16-channel model. Validated against XPP original.
@@ -94,10 +94,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Validate and adopt existing SLO-1 (BK Ca²⁺-activated K⁺) NeuroML2 channel into c302 channel library`
 - **Labels:** `DD005`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (SLO-1 row, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) (SLO-1 row, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
 - **Depends On:** Issue 1 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_slo1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **SLO-1 already exists in validated NeuroML2.** Calcium-dependent gating modeled. Part of AWCon model.
@@ -125,10 +125,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Validate and adopt existing KVS-1 (Kv Shaker) and EGL-36 (ERG) NeuroML2 channels into c302 library`
 - **Labels:** `DD005`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (KVS-1 and EGL-36 rows, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) (KVS-1 and EGL-36 rows, HIGH priority) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
 - **Depends On:** Issue 1 (survey)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2019_NeuronModels/NeuroML2/AWCon_kvs1.channel.nml`](https://github.com/openworm/NicolettiEtAl2019_NeuronModels) — **KVS-1 already exists in validated NeuroML2** (AWCon model)
@@ -160,10 +160,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Adopt existing NeuroML2 or convert NMODL for MEDIUM-priority channels (CCA-1, EGL-2, KQT-3, SLO-2, KCNL, IRK, NCA)`
 - **Labels:** `DD005`, `ai-workable`, `L3`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) (MEDIUM priority rows) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) (MEDIUM priority rows) and [DD005 — Conductance Calibration](DD005_Cell_Type_Differentiation_Strategy.md)
 - **Depends On:** Issues 3-4 (HIGH priority channels establish the adoption/validation workflow)
 - **Existing Code to Reuse:**
     - **Already in NeuroML2 (NicolettiEtAl2019):** CCA-1 (`AWCon_cca.channel.nml`), EGL-2 (`AWCon_egl2.channel.nml`), KQT-3 (`AWCon_kqt3.channel.nml`), SLO-2 (`AWCon_slo2.channel.nml`), SK/KCNL (`AWCon_sk.channel.nml`), IRK/KIR (`AWCon_kir.channel.nml`), NCA (`AWCon_nca.channel.nml`) — **ALL 7 channels already exist in validated NeuroML2**
@@ -198,10 +198,10 @@ Target: Expand from 4 generic channels to 14+ neuron-class-specific channels, le
 
 - **Title:** `[DD005] Create comprehensive channel library test suite with standard voltage-clamp protocols`
 - **Labels:** `DD005`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 1
+- **Roadmap Phase:** Phase 3
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml
-- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-1-2) and [DD002 — Quality Criteria](DD002_Neural_Circuit_Architecture.md#quality-criteria) (criterion 3: biophysical units)
+- **DD Section to Read:** [DD002 — Extended Ion Channel Library](DD002_Neural_Circuit_Architecture.md#extended-ion-channel-library-phase-3-2) and [DD002 — Quality Criteria](DD002_Neural_Circuit_Architecture.md#quality-criteria) (criterion 3: biophysical units)
 - **Depends On:** Issues 2-5 (channel adoptions)
 - **Existing Code to Reuse:**
     - [`NicolettiEtAl2024_MN_IN/*_vclamp.py`](https://github.com/openworm/NicolettiEtAl2024_MN_IN) — Voltage-clamp simulation scripts already exist for VA5, VB6, VD5 neurons. Includes conductance unit conversion utilities (`g_to_Scm2.py`, `g_to_nS.py`).

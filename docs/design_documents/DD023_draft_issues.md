@@ -8,16 +8,16 @@
 
 **Totals:** 3 issues (ai-workable: 1 / human-expert: 2 | L1: 1, L2: 0, L3: 2)
 
-**Roadmap Context:** DD023 is a **Phase 2** DD (proposed). These issues were originally part of DD002 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD023.
+**Roadmap Context:** DD023 is a **Phase 4** DD (proposed). These issues were originally part of DD002 Draft Issues (Groups 5 and Infrastructure) and have been relocated here because multicompartmental modeling is now specified by DD023.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Level D Multicompartmental (Issues 1-2) | **Phase 2** | Proof-of-concept requires EM morphologies + Nicoletti channels |
-| 2. Infrastructure (Issue 3) | **Phase A1** | Config toggle depends on DD011 openworm.yml |
+| 1. Level D Multicompartmental (Issues 1-2) | **Phase 4** | Proof-of-concept requires EM morphologies + Nicoletti channels |
+| 2. Infrastructure (Issue 3) | **Phase 1** | Config toggle depends on DD011 openworm.yml |
 
 ---
 
-## Group 1: Level D Multicompartmental Development (Phase 2)
+## Group 1: Level D Multicompartmental Development (Phase 4)
 
 Target: Multicompartmental neuron models for neurons where single-compartment approximation is insufficient.
 
@@ -27,7 +27,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 - **Title:** `[DD023] Evaluate existing CElegansNeuroML morphologies for AWC, AIY, AVA, RIM, VD5 and refine for Level D`
 - **Labels:** `DD023`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 2
+- **Roadmap Phase:** Phase 4
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroanatomy
 - **DD Section to Read:** [DD023 — Implementation Pathway](DD023_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, step 2)
@@ -61,7 +61,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 - **Title:** `[DD023] Integrate existing Nicoletti AWCon channels + CElegansNeuroML morphology into c302 Level D AWC proof-of-concept`
 - **Labels:** `DD023`, `human-expert`, `L3`
-- **Roadmap Phase:** Phase 2
+- **Roadmap Phase:** Phase 4
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, electrophysiology
 - **DD Section to Read:** [DD023 — Implementation Pathway](DD023_Multicompartmental_Neuron_Models.md#implementation-pathway) (Stage 1, steps 3-4) and Reference 3 (Nicoletti et al. 2019 AWCon model)
@@ -91,7 +91,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 ---
 
-## Group 2: Infrastructure (Phase A1)
+## Group 2: Infrastructure (Phase 1)
 
 ---
 
@@ -99,7 +99,7 @@ Target: Multicompartmental neuron models for neurons where single-compartment ap
 
 - **Title:** `[DD023] Add neural.spatial_synapses config toggle for spatially resolved synapse placement`
 - **Labels:** `DD023`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase A1
+- **Roadmap Phase:** Phase 1
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
 - **DD Section to Read:** [DD023 — Spatially Resolved Synapse Placement](DD023_Multicompartmental_Neuron_Models.md#spatially-resolved-synapse-placement)

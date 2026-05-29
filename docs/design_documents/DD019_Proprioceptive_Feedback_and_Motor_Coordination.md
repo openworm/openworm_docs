@@ -1,6 +1,6 @@
 # DD019: Proprioceptive Feedback and Motor Coordination (Stretch Receptors)
 
-- **Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD015](DD015_Closed_Loop_Touch_Response.md))
+- **Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory), after [DD015](DD015_Closed_Loop_Touch_Response.md))
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-19
 - **Supersedes:** None
@@ -18,8 +18,8 @@ B-class motor neurons (DB1-7, VB1-11) have stretch-sensitive ion channels that d
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
-| **Layer** | Motor Coordination — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
+| **Layer** | Motor Coordination — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
 | **What does this produce?** | Stretch-sensitive channels on B-class motor neurons (DB, VB), proprioceptive feedback from body curvature to motor pattern, stable undulatory wave propagation |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: locomotion wavelength stability improved (±10% vs. ±15% baseline), proprioceptive ablation (disable stretch receptors) degrades coordination by >30% |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (stretch receptor channel model) + [`openworm/sibernetic`](https://github.com/openworm/sibernetic) (body curvature readout) — issues labeled `dd019` |
@@ -262,7 +262,7 @@ The [DD015](DD015_Closed_Loop_Touch_Response.md) bidirectional coupling framewor
 ---
 
 - **Approved by:** Pending
-- **Implementation Status:** Proposed ([Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6), after [DD015](DD015_Closed_Loop_Touch_Response.md) bidirectional coupling established)
+- **Implementation Status:** Proposed ([Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory), after [DD015](DD015_Closed_Loop_Touch_Response.md) bidirectional coupling established)
 - **Next Actions:**
 
 1. Contact CE_locomotion authors (collaboration opportunity)

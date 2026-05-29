@@ -425,7 +425,7 @@ Neural-circuit changes touch a three-level hierarchy: a single cell's electrophy
 
 This level uses the body-physics validation tooling described in [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) — the same `dump_metal_trajectory.py` / SGD / render / compare workflow, but with the neural circuit as the upstream driver rather than a fixed muscle-activation file. The neural-circuit change is the parameter being varied; Sibernetic is the simulator; Schafer-lab WCON metrics are the reference.
 
-**Key cross-DD dependency:** as the body substrate is differentiable end-to-end ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)), kinematic-target loss can in principle backpropagate through the body into the muscle activation timing. Once the neural ODE side is also differentiable (deferred to Phase 3 per [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), this enables joint neural↔body parameter fitting via SGD. Until then, this layer uses gradient-free tuning (grid search, NSGA-II).
+**Key cross-DD dependency:** as the body substrate is differentiable end-to-end ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)), kinematic-target loss can in principle backpropagate through the body into the muscle activation timing. Once the neural ODE side is also differentiable (deferred to Phase 5 per [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), this enables joint neural↔body parameter fitting via SGD. Until then, this layer uses gradient-free tuning (grid search, NSGA-II).
 
 ### Mind-of-a-Worm PR Review Checklist (Neural-Circuit-Specific)
 
@@ -633,8 +633,8 @@ neural:
   enabled: true
   framework: c302
   level: C1                          # A, B, C, C1, C2, D
-  differentiated: false              # Phase 1 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)): CeNGEN cell-type specialization
-  neuropeptides: false               # Phase 2 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): peptidergic modulation
+  differentiated: false              # Phase 3 ([DD005](DD005_Cell_Type_Differentiation_Strategy.md)): CeNGEN cell-type specialization
+  neuropeptides: false               # Phase 4 ([DD006](DD006_Neuropeptidergic_Connectome_Integration.md)): peptidergic modulation
   connectome_dataset: "Cook2019"     # Cook2019, Witvliet2021, Varshney2011
   data_reader: "UpdatedSpreadsheetDataReader2"
   reference: "FW"                    # FW (forward crawl), BA (backward), TU (turning)
@@ -702,10 +702,10 @@ The `sibernetic_c302.py` script (in the Sibernetic repo) implements the [DD002](
 
 ### Joint Neural ↔ Body Parameter Fitting (Forward Reference)
 
-The native Sibernetic substrate is end-to-end differentiable ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)) — gradients on `(spring_K, viscosity, density compliance, …)` are available via `xpbd_full_bwd`. As the c302/NEURON pipeline gains a differentiable substrate of its own (currently future work tracked under [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), joint optimization becomes possible: muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be tuned end-to-end against kinematic targets ([DD010](DD010_Validation_Framework.md) Tier 3 metrics) rather than via manual sweeps. This is a Phase 3 capability gated on the neural-side substrate, not a current deliverable of this DD.
+The native Sibernetic substrate is end-to-end differentiable ([DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability)) — gradients on `(spring_K, viscosity, density compliance, …)` are available via `xpbd_full_bwd`. As the c302/NEURON pipeline gains a differentiable substrate of its own (currently future work tracked under [DD013](DD013_Hybrid_Mechanistic_ML_Framework.md)), joint optimization becomes possible: muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be tuned end-to-end against kinematic targets ([DD010](DD010_Validation_Framework.md) Tier 3 metrics) rather than via manual sweeps. This is a Phase 5 capability gated on the neural-side substrate, not a current deliverable of this DD.
 
 ---
 
 - **Approved by:** OpenWorm Steering
 - **Implementation Status:** Complete (c302 Levels A-D exist)
-- **Next Review:** After Phase 1 cell-type specialization (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))
+- **Next Review:** After Phase 3 cell-type specialization (see [DD005](DD005_Cell_Type_Differentiation_Strategy.md))

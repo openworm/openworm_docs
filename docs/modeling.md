@@ -118,7 +118,7 @@ Inspired by [Robert Rosen's work on causal loops](https://www.amazon.com/Life-It
 
 ### Organs (New!)
 
-**Added in Phase 3:**
+**Added in Phase 5:**
 
 - **[DD007](design_documents/DD007_Pharyngeal_System_Architecture.md) (Pharynx):** 63-cell semi-autonomous organ, 3-4 Hz pumping
 - **[DD009](design_documents/DD009_Intestinal_Oscillator_Model.md) (Intestine):** 20-cell IP3/Ca oscillator, 50s defecation motor program
@@ -169,9 +169,9 @@ More details available on the [Validation page](validation/).
 
 **Current Specification: [DD012: Dynamic Visualization](design_documents/DD012_Dynamic_Visualization_Architecture.md)**
 
-- **Phase 1:** Trame viewer (PyVista + live server, organism + tissue scales)
-- **Phase 2:** Interactive layers (neuropeptides, organs, validation overlay)
-- **Phase 3:** Three.js + WebGPU static site, molecular scale, wormsim.openworm.org (WormSim 2.0)
+- **Phase 3:** Trame viewer (PyVista + live server, organism + tissue scales)
+- **Phase 4:** Interactive layers (neuropeptides, organs, validation overlay)
+- **Phase 5:** Three.js + WebGPU static site, molecular scale, wormsim.openworm.org (WormSim 2.0)
 
 **Why the evolution from Geppetto?** [DD012](design_documents/DD012_Dynamic_Visualization_Architecture.md) Alternatives Considered: Geppetto is Java-based, requires per-client server processes, not updated for WebGPU. Trame is lighter, Python-native (matches contributor skillset), actively maintained.
 
@@ -197,6 +197,6 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 ## What's Next
 
-The path from today's 302-neuron simulation to the complete 959-cell organism is organized into 4 implementation phases over ~18 months, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase timeline with milestones and Design Document assignments.
+The path from today's 302-neuron simulation to the complete 959-cell organism is organized into a phased implementation roadmap, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#implementation-roadmap-by-phase) for the complete phase-by-phase plan with milestones and Design Document assignments.
 
 **Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation).

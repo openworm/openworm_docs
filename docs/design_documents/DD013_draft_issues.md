@@ -8,15 +8,15 @@
 
 **Totals:** 3 issues (ai-workable: 2 / human-expert: 1 | L1: 1, L2: 2, L3: 0)
 
-**Roadmap Context:** DD013 is a **Phase 3** DD (proposed). These synaptic optimization issues were originally part of DD002 Draft Issues (Group 4) and have been relocated here because synaptic weight optimization requires DD013's differentiable simulation backend. DD013 Component 1 provides the gradient descent infrastructure; these issues prepare the biological constraints and validation targets.
+**Roadmap Context:** DD013 is a **Phase 5** DD (proposed). These synaptic optimization issues were originally part of DD002 Draft Issues (Group 4) and have been relocated here because synaptic weight optimization requires DD013's differentiable simulation backend. DD013 Component 1 provides the gradient descent infrastructure; these issues prepare the biological constraints and validation targets.
 
 | Group | Phase | Rationale |
 |-------|-------|-----------|
-| 1. Synaptic Optimization (Issues 1-3) | **Phase 2** | Weight optimization requires DD013 differentiable backend |
+| 1. Synaptic Optimization (Issues 1-3) | **Phase 4** | Weight optimization requires DD013 differentiable backend |
 
 ---
 
-## Group 1: Synaptic Optimization (Phase 2)
+## Group 1: Synaptic Optimization (Phase 4)
 
 Target: Per-synapse conductance optimization using differentiable simulation and neurotransmitter identity constraints.
 
@@ -26,7 +26,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 - **Title:** `[DD013] Consolidate existing neurotransmitter identity data from c302, wormneuroatlas, and Wang et al. 2024 into validated synapse polarity constraints`
 - **Labels:** `DD013`, `human-expert`, `L2`
-- **Roadmap Phase:** Phase 2
+- **Roadmap Phase:** Phase 4
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroml, neuroscience
 - **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (neurotransmitter identity constraints) and [DD013 — Component 1: Differentiable Backend](DD013_Hybrid_Mechanistic_ML_Framework.md)
@@ -60,7 +60,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 - **Title:** `[DD013] Add neural.synapse_optimization config toggle to openworm.yml`
 - **Labels:** `DD013`, `ai-workable`, `L1`
-- **Roadmap Phase:** Phase 2
+- **Roadmap Phase:** Phase 4
 - **Target Repo:** `openworm/c302` + `openworm/OpenWorm`
 - **Required Capabilities:** python, yaml
 - **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (Configuration section) and [DD013 — Configuration](DD013_Hybrid_Mechanistic_ML_Framework.md)
@@ -85,7 +85,7 @@ Target: Per-synapse conductance optimization using differentiable simulation and
 
 - **Title:** `[DD013] Create adapter for Randi 2023 functional connectivity matrix using wormneuroatlas API`
 - **Labels:** `DD013`, `ai-workable`, `L2`
-- **Roadmap Phase:** Phase 2
+- **Roadmap Phase:** Phase 4
 - **Target Repo:** `openworm/c302`
 - **Required Capabilities:** python, neuroscience
 - **DD Section to Read:** [DD002 — Synaptic Weight and Polarity Optimization](DD002_Neural_Circuit_Architecture.md#synaptic-weight-and-polarity-optimization) (full 302-neuron optimization) and [DD013 — Validation Targets](DD013_Hybrid_Mechanistic_ML_Framework.md)

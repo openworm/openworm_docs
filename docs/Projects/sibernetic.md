@@ -27,18 +27,18 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 
 ## Roadmap
 
-**Phase 1-2 ([DD004](../design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
+**Phase 3-4 ([DD004](../design_documents/DD004_Mechanical_Cell_Identity.md)):** Mechanical cell identity
 
 - Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
 - Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
 
-**Phase 2 ([DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
+**Phase 4 ([DD018](../design_documents/DD018_Environmental_Modeling_and_Stimulus_Delivery.md)):** Environmental modeling
 
 - Substrate types (agar, liquid, soil)
 - Chemical/thermal gradients
 - Food particles and obstacles
 
-**Phase 4 ([DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
+**Phase 6 ([DD012.2](../design_documents/DD012.2_Anatomical_Mesh_Deformation_Pipeline.md)):** Mesh deformation
 
 - GPU skinning from SPH particles to Virtual Worm anatomical meshes
 - Photorealistic rendering

@@ -229,20 +229,20 @@ Parse the DD's **Integration Contract** section:
 ```markdown
 **Epic:** DD006 — Neuropeptidergic Connectome Integration [Label: DD006] [Label: Epic]
 
-**Phase 1: Data Loading**
+**Phase 3: Data Loading**
 - [ ] Issue #101: Load peptide-receptor interactions from OWMeta [Label: DD006] [Label: ai-workable] [Label: L1]
 - [ ] Issue #102: Load GPCR modulation parameters from literature [Label: DD006] [Label: ai-workable] [Label: L2]
 
-**Phase 2: Core Implementation**
+**Phase 4: Core Implementation**
 - [ ] Issue #103: Implement GPCR modulation equations ([Marder et al. 2014](https://doi.org/10.1146/annurev-neuro-071013-013958)) [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #104: Implement peptide concentration diffusion model [Label: DD006] [Label: human-expert] [Label: L3]
 - [ ] Issue #105: Integrate peptide release with DD002 spike times [Label: DD006] [Label: ai-workable] [Label: L2]
 
-**Phase 3: Config & Docker**
+**Phase 5: Config & Docker**
 - [ ] Issue #106: Add `neural.neuropeptides` config section to openworm.yml [Label: DD006] [Label: ai-workable] [Label: L1]
 - [ ] Issue #107: Create `neuropeptide-deps` Docker stage [Label: DD006] [Label: ai-workable] [Label: L1]
 
-**Phase 4: Visualization & Validation**
+**Phase 6: Visualization & Validation**
 - [ ] Issue #108: Export peptide concentrations to OME-Zarr [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #109: Write integration test: verify GPCR → muscle coupling [Label: DD006] [Label: ai-workable] [Label: L2]
 - [ ] Issue #110: Validate against experimental peptide knockout data [Label: DD006] [Label: human-expert] [Label: L3]
@@ -257,7 +257,7 @@ Parse the DD's **Integration Contract** section:
 
 **Required per-issue field:**
 
-- **Roadmap Phase:** Phase X — derived from DD's phase assignment in `DD_PHASE_ROADMAP.md`; issues from Phase 0 DDs may target Phase A1/A2 or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: `## Group N: Name (Phase X)`.
+- **Roadmap Phase:** Phase X — derived from DD's phase assignment in `DD_PHASE_ROADMAP.md`; issues from Phase 0 DDs may target Phase 1, Phase 2, or later if they address infrastructure gaps. Group headers in draft issue files must include the phase in parentheses: `## Group N: Name (Phase X)`.
 
 **Automation:** `dd_issue_generator.py` runs:
 
@@ -930,7 +930,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 
 ## 10. Implementation Checklist
 
-### Phase 1: Infrastructure (Week 1-2)
+### Phase 3: Infrastructure
 
 - [ ] Create `openworm/ai-contributor-registry` repo
 - [ ] Write `AI_AGENT_ONBOARDING.md` (how AI agents join) ✅
@@ -942,7 +942,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 - [ ] Deploy OpenClaw backend (Flask/FastAPI server)
 - [ ] Configure GitHub App webhooks
 
-### Phase 2: Mind-of-a-Worm Integration (Week 3-4)
+### Phase 4: Mind-of-a-Worm Integration
 
 - [ ] Extend Mind-of-a-Worm SKILL.md with AI agent handling
 - [ ] Add AI claim verification logic (level vs. difficulty check)
@@ -950,14 +950,14 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 - [ ] Add sponsor notification system
 - [ ] Test with one simulated AI agent (manual)
 
-### Phase 3: Issue Generation (Week 5-6)
+### Phase 5: Issue Generation
 
 - [ ] Run `dd_issue_generator.py` on all published Design Documents
 - [ ] Review generated issues for quality
 - [ ] Tag all issues with `ai-workable` or `human-expert`
 - [ ] Publish issue backlog to GitHub
 
-### Phase 4: Pilot Program (Week 7-12)
+### Phase 6: Pilot Program
 
 - [ ] Invite 3-5 AI agent owners to register their agents
 - [ ] Monitor #ai-contributors Slack channel
@@ -965,7 +965,7 @@ Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files
 - [ ] Iterate on workflow based on feedback
 - [ ] Measure: AI PR merge rate, human override rate, issue completion velocity
 
-### Phase 5: Public Launch (Month 4)
+### Phase 7: Public Launch (Month 4)
 
 - [ ] Publish blog post: "OpenWorm now accepts AI agents as contributors"
 - [ ] Cross-post to Moltbook (invite AI agents to discover OpenWorm)
@@ -1146,7 +1146,7 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 
 1. **Approve this DD** (or request revisions via [Decision Process](decision-process.md) RFC process)
 2. **Decide on open questions** (public registry? AI co-authorship policy?)
-3. **Allocate 20 hours** for Phase 1 infrastructure setup
+3. **Allocate 20 hours** for Phase 3 infrastructure setup
 
 ### For L4 Senior Contributors
 
@@ -1157,9 +1157,9 @@ by AI agent gpt4-researcher-789 (GPT-4 Turbo), sponsored by Dr. Smith.
 ### For Implementation Team
 
 1. **Set up `openworm/ai-contributor-registry` repo** (Week 1)
-2. **Write `scripts/dd_issue_generator.py`** (Week 1-2)
+2. **Write `scripts/dd_issue_generator.py`**
 3. **Deploy Slack #ai-contributors channel** (Week 1)
-4. **Run pilot program** with 3 AI agents (Week 7-12)
+4. **Run pilot program** with 3 AI agents
 
 ---
 

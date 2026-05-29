@@ -1,6 +1,6 @@
 # DD005: Cell-Type Specialization Strategy Using Single-Cell Transcriptomics
 
-- **Status:** Proposed (Phase 1)
+- **Status:** Proposed (Phase 3)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
@@ -8,11 +8,11 @@
 
 ---
 
-> **Phase:** [Phase 1](DD_PHASE_ROADMAP.md#phase-1-cell-type-differentiation-months-1-3) | **Layer:** Cell-Type Specialization
+> **Phase:** [Phase 3](DD_PHASE_ROADMAP.md#phase-3-cell-type-differentiation) | **Layer:** Cell-Type Specialization
 
 ## TL;DR
 
-Replace the single generic neuron template used for all 302 neurons with **128 cell-type-specific templates** parameterized from CeNGEN single-cell RNA-seq data. This is Phase 1 work — the first DD to produce biologically distinct neurons. Success metric: **20%+ improvement in functional connectivity correlation** vs. [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) experimental data.
+Replace the single generic neuron template used for all 302 neurons with **128 cell-type-specific templates** parameterized from CeNGEN single-cell RNA-seq data. This is Phase 3 work — the first DD to produce biologically distinct neurons. Success metric: **20%+ improvement in functional connectivity correlation** vs. [Randi et al. 2023](https://doi.org/10.1038/s41586-023-06683-4) experimental data.
 
 ---
 
@@ -60,7 +60,7 @@ Each `.cell.nml` file includes metadata:
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd005` |
-| **Milestone** | Phase 1: Cell-Type Specialization |
+| **Milestone** | Phase 3: Cell-Type Specialization |
 | **Branch convention** | `dd005/description` (e.g., `dd005/cengen-calibration`) |
 | **Example PR title** | `DD005: Generate 128 cell-type NeuroML files from CeNGEN L4` |
 
@@ -323,7 +323,7 @@ This produces `LEMS_c302_C1_Differentiated.xml` with 128 distinct cell types (on
 
 **Promoted to parallel track — see [DD021](DD021_Protein_Foundation_Model_Pipeline.md).**
 
-Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD021 runs cross-validation during Phase A2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
+Originally rejected (Feb 2026) because molecular dynamics was "computationally expensive (days-weeks per channel)." BioEmu-1 (Microsoft, 2025) changed this calculus: conformational ensembles at 100,000x MD speed make gating parameter prediction feasible for all *C. elegans* channels. DD021 runs cross-validation during Phase 2 and feeds predictions into DD005's calibration as structure-informed priors during Phase 1.
 
 **Relationship to DD005:** DD021 does not replace the CeNGEN expression-based approach — it runs in parallel. If DD005's power-law scaling works, DD021 predictions serve as independent validation. If DD005 fails for certain neuron classes, DD021 predictions substitute immediately.
 
@@ -459,7 +459,7 @@ python scripts/benchmark_improvement.py \
 
 ### What This Design Document Does NOT Cover:
 
-1. **Non-neural cells:** Muscle, intestine, hypodermis, gonad. This DD applies only to the 302 neurons. Muscle differentiation is a separate effort (Phase 3).
+1. **Non-neural cells:** Muscle, intestine, hypodermis, gonad. This DD applies only to the 302 neurons. Muscle differentiation is a separate effort (Phase 5).
 
 2. **Developmental stage differences:** CeNGEN L4 is the reference stage. L1, adult, dauer require separate expression datasets (CeNGEN L1 is available; others are future work).
 
@@ -467,13 +467,13 @@ python scripts/benchmark_improvement.py \
 
 4. **Neuropeptide receptors:** Expression is in CeNGEN, but receptor dynamics are covered in [DD006](DD006_Neuropeptidergic_Connectome_Integration.md) (Neuropeptidergic Connectome).
 
-5. **Individual genetic variation:** Natural isolates show expression variation (Ben-David et al. 2021 eQTLs). This DD uses population-averaged expression. Individual variation is Phase 6+ work.
+5. **Individual genetic variation:** Natural isolates show expression variation (Ben-David et al. 2021 eQTLs). This DD uses population-averaged expression. Individual variation is Phase 8+ work.
 
 6. **Synaptic weight differences:** Expression-based specialization affects postsynaptic channels but not synaptic weights (connection strengths). Synapse-specific weights from functional data are future work.
 
 7. **Channel post-translational modifications:** Phosphorylation, palmitoylation, etc. are not captured by transcriptomics.
 
-8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 5+) that will complement the class-average approach used here and feed into [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models.
+8. **Subcellular / synapse-level molecular localization:** CeNGEN provides cell-class-average transcript counts, not spatial information about where proteins are distributed within a neuron. Emerging techniques — expansion microscopy optimized for *C. elegans* (Shaib et al. 2023) and expansion sequencing (ExSeq) for spatially precise in-situ transcriptomics (Alon et al. 2021) — will eventually provide molecular maps at synaptic resolution, enabling per-synapse channel density assignments. This is future work (Phase 7+) that will complement the class-average approach used here and feed into [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models.
 
 ---
 
@@ -481,9 +481,9 @@ python scripts/benchmark_improvement.py \
 
 The current power-law expression-to-conductance pipeline is a necessary first step. It uses the best available systematic data (CeNGEN) to move beyond the generic neuron template. Future phases will refine this in stages:
 
-1. **Phase 1 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD021](DD021_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
-2. **Phase 2-3:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
-3. **Phase 5+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models
+1. **Phase 3 (this DD):** Class-average expression → class-specific conductance densities (128 uniform templates), with [DD021](DD021_Protein_Foundation_Model_Pipeline.md) structure-based predictions as calibration priors where available
+2. **Phase 4-5:** Incorporate functional data (Randi et al. 2023 signal propagation) to constrain relative channel weights via data-driven parameter fitting ([DD013](DD013_Hybrid_Mechanistic_ML_Framework.md) differentiable backend)
+3. **Phase 7+:** Subcellular resolution from expansion microscopy (Shaib et al. 2023) and in-situ sequencing (Alon et al. 2021) → per-compartment channel densities for [DD002](DD002_Neural_Circuit_Architecture.md) Level D multicompartmental models
 
 Each stage preserves backward compatibility with earlier stages via the `openworm.yml` configuration system.
 
@@ -659,7 +659,7 @@ Only ~20 neuron types have electrophysiology. Extrapolating to 128 classes assum
 
 CeNGEN L1 data exist but are less mature. Adult and dauer expression are unavailable. Developmental changes in channel expression are not captured.
 
-**Future work:** Integrate CeNGEN L1 when validated. Use [Packer et al. 2019](https://doi.org/10.1126/science.aax1971) embryonic atlas for earlier stages. The [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built differentiation trees and embryogenetic connectome analyses that map temporal dynamics of cell-type specification — these complement CeNGEN's static snapshot by adding the developmental dimension (see [Phase 6](DD_PHASE_ROADMAP.md#phase-6-developmental-modeling-year-2)).
+**Future work:** Integrate CeNGEN L1 when validated. Use [Packer et al. 2019](https://doi.org/10.1126/science.aax1971) embryonic atlas for earlier stages. The [DevoWorm project](../../Projects/DevoWorm/) ([github.com/devoworm](https://github.com/devoworm)) has built differentiation trees and embryogenetic connectome analyses that map temporal dynamics of cell-type specification — these complement CeNGEN's static snapshot by adding the developmental dimension (see [Phase 8](DD_PHASE_ROADMAP.md#phase-8-developmental-modeling)).
 
 ### Issue 3: Post-Transcriptional Regulation
 
@@ -686,7 +686,7 @@ The calibration training set (Issue 1 above) is limited to ~20 neuron types with
 - **[AlphaFold 3](https://github.com/google-deepmind/alphafold3)** / **[Boltz-2](https://github.com/jwohlwend/boltz)**: Predict 3D structures of all *C. elegans* ion channels from sequence, including ion coordination sites that determine selectivity and gating
 - **[BioEmu-1](https://github.com/microsoft/BioEmu)** (Microsoft): Simulate channel conformational dynamics at 100,000x MD speed, predicting gating parameters (V_half, slope, tau) from structure alone
 
-This pipeline is now specified as a standalone Design Document: [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase A2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
+This pipeline is now specified as a standalone Design Document: [DD021](DD021_Protein_Foundation_Model_Pipeline.md) (Protein Foundation Model Pipeline). Cross-validation begins in Phase 2; predictions feed into DD005 calibration as structure-informed priors in Phase 1.
 
 **Validation step:** For the ~20 neurons with known electrophysiology, compare foundation-model-predicted kinetics against measured values. Prediction error must be smaller than the current "generic channel" error to justify adoption.
 
@@ -841,7 +841,7 @@ docker compose run validate
 
 ---
 
-- **Approved by:** Pending (Phase 1 work)
+- **Approved by:** Pending (Phase 3 work)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

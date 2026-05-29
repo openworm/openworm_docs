@@ -410,7 +410,7 @@ When reviewing a DD003 PR, MoaW must verify:
 
 3. **Muscle cell geometry:** Currently single-compartment. Multicompartmental muscle with spindle morphology is future work.
 
-4. **Developmental changes:** Muscle properties change during development (L1 vs. adult). Phase 6 work.
+4. **Developmental changes:** Muscle properties change during development (L1 vs. adult). Phase 8 work.
 
 5. **Myosin isoform diversity:** *C. elegans* expresses multiple myosin heavy chain genes. Current model uses generic contractility.
 
@@ -469,7 +469,7 @@ The `c302_Sibernetic` integration script:
 3. **Provide [Ca²⁺]ᵢ → force mapping** that preserves the Sibernetic interface.
 4. **Validate against isometric force recordings** if such data become available for *C. elegans*.
 
-### If Muscle-Type Diversity Is Required (Phase 3):
+### If Muscle-Type Diversity Is Required (Phase 5):
 
 See [DD007](DD007_Pharyngeal_System_Architecture.md) (Pharyngeal System) for an example of creating a distinct muscle cell type. The general pattern:
 
@@ -628,6 +628,6 @@ docker compose run validate
 - **Implementation Status:** Complete (GenericMuscleCell in c302)
 - **Next Actions:**
 
-1. Differentiate into muscle-type-specific models using transcriptomics (Phase 3)
+1. Differentiate into muscle-type-specific models using transcriptomics (Phase 5)
 2. Add pharyngeal muscles ([DD007](DD007_Pharyngeal_System_Architecture.md))
 3. Model specialized muscles (vulval, uterine, enteric) as needed

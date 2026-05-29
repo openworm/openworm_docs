@@ -43,29 +43,29 @@ For the philosophical commitments behind these principles — mechanistic explan
 
 ## Phase Overview
 
-OpenWorm's roadmap takes the project from today's 302 generic neurons to a complete 959-cell digital organism over ~18 months. The journey is organized into phases that manage scientific risk, build infrastructure first, and validate early. Phase 0 established the core architecture — coupled neural-muscle-body simulation runs and produces movement, though stabilization work remains (see Phase A1). Phases A1 and A2 lay the infrastructure and governance foundation. Phases 1-4 progressively add biological complexity — from cell-type specialization through organ systems to the complete organism.
+OpenWorm's roadmap takes the project from today's 302 generic neurons to a complete 959-cell digital organism. The journey is organized into phases that manage scientific risk, build infrastructure first, and validate early. Phase 0 established the core architecture — coupled neural-muscle-body simulation runs and produces movement, though stabilization work remains (see Phase 1). Phases 1 and 2 lay the infrastructure and governance foundation. Phases 3-6 progressively add biological complexity — from cell-type specialization through organ systems to the complete organism.
 
-The key insight behind this phasing: **validate the hardest science early**. Phase 1's expression→conductance mapping is the highest-risk step. If it fails, we discover it in month 3 (not month 12). Each subsequent phase builds on validated foundations, not assumptions.
+The key insight behind this phasing: **validate the hardest science early**. Phase 3's expression→conductance mapping is the highest-risk step. If it fails, we discover it before the rest of the science is built on top of it. Each subsequent phase builds on validated foundations, not assumptions.
 
-| Phase | Name | Duration | What It Delivers | Key DDs | Cells |
-|-------|------|----------|-----------------|---------|-------|
+| Phase | Name | Status | What It Delivers | Key DDs | Cells |
+|-------|------|--------|-----------------|---------|-------|
 | 0 | Core Architecture | Functional | Neural circuit + muscle + body + connectome data — simulation runs, 83 stabilization issues tracked | 4 | 302 neurons + 95 muscles |
-| A1 | Core Infrastructure | Wks 1-2 | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
-| A2 | Governance & Derisking | Wks 3-4 | L0-L5 contributor levels + badge taxonomy ([Contributor Progression](../contributing/contributor-progression.md)), DD proposal/review process ([Decision Process](../contributing/decision-process.md)), AI agent registration + task pipeline ([AI Contributors](../contributing/ai-contributors.md)), ion channel kinetics predictions derisking Phase 1 (DD021) | 4 | — |
-| 1 | Cell-Type Specialization | Mo 1-3 | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
-| 2 | Modulation + Closed-Loop | Mo 4-6 | Neuropeptides, touch response, proprioception | 6 | +sensory loop |
-| 3 | Organ Systems | Mo 7-12 | Pharynx, intestine, egg-laying, ML hybrid | 4 | +3 organs |
-| 4 | Complete Organism | Mo 13-18 | 959 mechanically distinct cells, web viewer | 3 | 959 cells |
+| 1 | Core Infrastructure | Proposed | `docker compose run quick-test`, unified data API, validation toolbox, baseline datasets, project dashboard | 5 | — |
+| 2 | Governance & Derisking | Proposed (parallel with Phase 1) | L0-L5 contributor levels + badge taxonomy ([Contributor Progression](../contributing/contributor-progression.md)), DD proposal/review process ([Decision Process](../contributing/decision-process.md)), AI agent registration + task pipeline ([AI Contributors](../contributing/ai-contributors.md)), ion channel kinetics predictions derisking Phase 3 (DD021) | 4 | — |
+| 3 | Cell-Type Specialization | Proposed | 128 neuron classes from generic → specialized | 4 | 302 specialized neurons |
+| 4 | Modulation + Closed-Loop | Proposed | Neuropeptides, touch response, proprioception | 6 | +sensory loop |
+| 5 | Organ Systems | Proposed | Pharynx, intestine, egg-laying, ML hybrid | 4 | +3 organs |
+| 6 | Complete Organism | Proposed | 959 mechanically distinct cells, web viewer | 3 | 959 cells |
 
 ### Why This Order?
 
-- **Phase 0:** The foundation is functional — coupled simulation runs and produces movement with 302 neurons, 95 muscles, and SPH body physics. 83 stabilization issues remain (containerization, validation scripts, dependency pinning), most addressed by Phase A1.
-- **Phase A1:** Can't build/test/validate without containerization (DD011), data access (DD008), and validation toolbox (DD017). These block everything.
-- **Phase A2:** Doesn't block modeling but enables governance at scale and derisks Phase 1 calibration via foundation model cross-validation (DD021). Runs in parallel with A1.
-- **Phase 1:** Highest scientific risk (expression→conductance mapping) — test early, fail fast. If it works, we have 128 distinct neuron classes. If it fails, DD021 predictions are the fallback.
-- **Phase 2:** Closes the sensory loop — the worm can now respond to stimuli (touch, chemicals, temperature) and modulate behavior via neuropeptides.
-- **Phase 3:** Adds organ systems (pharynx, intestine, egg-laying) that need the closed-loop substrate from Phase 2.
-- **Phase 4:** Completes the organism — 959 mechanically distinct cells + public web viewer at wormsim.openworm.org.
+- **Phase 0:** The foundation is functional — coupled simulation runs and produces movement with 302 neurons, 95 muscles, and SPH body physics. 83 stabilization issues remain (containerization, validation scripts, dependency pinning), most addressed by Phase 1.
+- **Phase 1:** Can't build/test/validate without containerization (DD011), data access (DD008), and validation toolbox (DD017). These block everything.
+- **Phase 2:** Doesn't block modeling but enables governance at scale and derisks Phase 3 calibration via foundation model cross-validation (DD021). Runs in parallel with Phase 1.
+- **Phase 3:** Highest scientific risk (expression→conductance mapping) — test early, fail fast. If it works, we have 128 distinct neuron classes. If it fails, DD021 predictions are the fallback.
+- **Phase 4:** Closes the sensory loop — the worm can now respond to stimuli (touch, chemicals, temperature) and modulate behavior via neuropeptides.
+- **Phase 5:** Adds organ systems (pharynx, intestine, egg-laying) that need the closed-loop substrate from Phase 4.
+- **Phase 6:** Completes the organism — 959 mechanically distinct cells + public web viewer at wormsim.openworm.org.
 
 For detailed milestones, success criteria, datasets, and blocking dependencies, see the **[Phase Roadmap](DD_PHASE_ROADMAP.md)**.
 
@@ -147,8 +147,8 @@ DD013 (mechanistic-ML hybrid), DD021 (foundation model channel kinetics), DD022 
 
 ### Data & Validation
 
-- **Connectome:** DD016 (`cect` API v0.2.7, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) default, 30+ datasets)
-- **Data Integration:** DD008 (OWMeta semantic RDF graph; Phase 3+ wraps `cect`)
+- **Connectome:** DD016 (`cect` API v0.4.7, [Cook2019](https://doi.org/10.1038/s41586-019-1352-7) default, 30+ datasets)
+- **Data Integration:** DD008 (OWMeta semantic RDF graph; Phase 5+ wraps `cect`)
 - **Movement Validation:** DD017 (analysis toolbox revival, WCON 1.0, 5 kinematic metrics)
 - **Validation Framework:** DD010 (4 tiers: electrophysiology, functional connectivity r > 0.5, behavioral ±15%, causal/interventional)
 - **Validation Data:** DD020 (acquire, format, version-control all experimental datasets)

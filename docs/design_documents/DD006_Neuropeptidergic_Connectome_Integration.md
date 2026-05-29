@@ -1,6 +1,6 @@
 # DD006: Neuropeptidergic Connectome Integration (Extrasynaptic Signaling Layer)
 
-- **Status:** Proposed (Phase 2)
+- **Status:** Proposed (Phase 4)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Model the 31,479 neuropeptide-receptor interactions (already in the ConnectomeTo
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 2](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
-| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-2-slow-modulation-closed-loop-sensory-months-4-6) |
+| **Phase** | [Phase 4](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
+| **Layer** | Modulation + Closed-Loop — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-4-slow-modulation-closed-loop-sensory) |
 | **What does this produce?** | NeuroML `<peptideRelease>` + `<peptideReceptor>` components for 31,479 peptide-receptor interactions; conductance modulation layer |
 | **Success metric** | Functional connectivity: neuropeptide contribution correlates with Randi 2023 wt-vs-unc-31 difference (r > 0.3, [DD010](DD010_Validation_Framework.md) Tier 2); Behavioral: ≥3 peptide knockout phenotypes within 30% error (Tier 3) |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) — issues labeled `dd006` |
@@ -77,7 +77,7 @@ Each LEMS extension includes metadata:
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd006` |
-| **Milestone** | Phase 2: Neuropeptidergic Signaling |
+| **Milestone** | Phase 4: Neuropeptidergic Signaling |
 | **Branch convention** | `dd006/description` (e.g., `dd006/flp-proof-of-concept`) |
 | **Example PR title** | `DD006: Add FLP peptide release/receptor LEMS components (Stage 1)` |
 
@@ -366,14 +366,14 @@ Each neuropeptidergic connection in the toolbox stores:
 
 **Description:** Explicitly model G-protein activation, PLC/adenylyl cyclase, IP3/cAMP production, PKA/PKC, and downstream channel phosphorylation.
 
-**Rejected (for Phase 2) because:**
+**Rejected (for Phase 4) because:**
 
 - Adds 10-20 state variables per receptor per cell (x36 receptors x 302 neurons = ~200,000 additional variables)
 - Biochemical rate constants are largely unknown for *C. elegans* GPCRs
 - Phenomenological modulation (direct conductance scaling) captures the functional effect without mechanistic detail
-- Phase 5 (intracellular signaling cascades) is the appropriate place for detailed GPCR modeling
+- Phase 7 (intracellular signaling cascades) is the appropriate place for detailed GPCR modeling
 
-**When to reconsider:** Phase 5, when IP3/cAMP/MAPK cascades are added for intestinal and other non-neural cells.
+**When to reconsider:** Phase 7, when IP3/cAMP/MAPK cascades are added for intestinal and other non-neural cells.
 
 ### 6. Ignore Neuropeptides Entirely
 
@@ -482,7 +482,7 @@ assert r_diff > 0.3, f"DD006 Tier 1 FAILED: r_diff = {r_diff}"
 |---------|-------------------|---------------------|-------------|
 | **FLP peptides** | Altered locomotion speed and reversal frequency | Modulation of motor circuit excitability | [Li et al. 1999](https://doi.org/10.1111/j.1749-6632.1999.tb07895.x), [Rogers et al. 2003](https://doi.org/10.1038/nn1140) |
 | **NLP-12** (RIM neurons) | Reduced reversal initiation | Reduced excitability of backward command circuit | Ripoll-Sánchez supp data |
-| **INS-1** (ASI neurons) | Dauer decision, lifespan | Modulation of DAF-2 pathway (out of scope for Phase 2) | Future |
+| **INS-1** (ASI neurons) | Dauer decision, lifespan | Modulation of DAF-2 pathway (out of scope for Phase 4) | Future |
 | **PDF-1** (DVA neuron) | Arousal state | Modulation of global excitability | [Choi et al. 2013](https://doi.org/10.1016/j.neuron.2013.04.002) |
 
 **Testing workflow:**
@@ -554,7 +554,7 @@ python scripts/validate_knockout.py \
 
 2. **Peptide degradation enzymes:** Extracellular peptidases (e.g., neprilysins) degrade peptides. Captured phenomenologically in tau_release, not mechanistically.
 
-3. **Non-neuronal peptide signaling:** Intestinal cells, hypodermis, and other tissues release peptides (e.g., insulin-like peptides from intestine). Phase 5 work.
+3. **Non-neuronal peptide signaling:** Intestinal cells, hypodermis, and other tissues release peptides (e.g., insulin-like peptides from intestine). Phase 7 work.
 
 4. **GPCR signaling cascades:** The full Gq/Gs/Gi cascade (PLC, adenylyl cyclase, IP3, cAMP, PKA, PKC) is not modeled. Captured as direct conductance modulation.
 
@@ -562,9 +562,9 @@ python scripts/validate_knockout.py \
 
 6. **Monoaminergic signaling:** Serotonin, dopamine, octopamine, tyramine are small-molecule transmitters, not peptides. Already in ConnectomeToolbox via Bentley et al. 2016 and Wang et al. 2024 neurotransmitter atlas. Separate from peptide signaling.
 
-7. **Endocrine signaling:** Insulin, TGF-beta, steroids released from non-neural tissues (intestine, hypodermis) into the pseudocoelom. Phase 5 (inter-tissue signaling).
+7. **Endocrine signaling:** Insulin, TGF-beta, steroids released from non-neural tissues (intestine, hypodermis) into the pseudocoelom. Phase 7 (inter-tissue signaling).
 
-8. **Synaptic co-transmission:** Some neurons co-release peptides and classical transmitters (e.g., GLU + NLP). Modeling the interaction is Phase 5 work.
+8. **Synaptic co-transmission:** Some neurons co-release peptides and classical transmitters (e.g., GLU + NLP). Modeling the interaction is Phase 7 work.
 
 9. **Receptor desensitization:** GPCRs undergo desensitization (beta-arrestin binding, receptor internalization) on prolonged activation. Not modeled in Phase 2. If needed, add desensitization term to receptor dynamics.
 
@@ -595,7 +595,7 @@ This extrasynaptic layer likely governs slow behavioral states (arousal, stress,
 ```
 Ripoll-Sanchez et al. (2023) Supplementary Data Table S1
 ```
-**Already integrated into ConnectomeToolbox** (`cect` package v0.2.7+) as "extrasynaptic" connection type. Access via the `cect` Python API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) — no manual download needed. The toolbox provides standardized access to the full Ripoll-Sánchez 2023 dataset including short-, medium-, and long-range diffusion categories, as well as the earlier Bentley et al. 2016 monoaminergic/peptidergic data for cross-validation.
+**Already integrated into ConnectomeToolbox** (`cect` package v0.4.7+) as "extrasynaptic" connection type. Access via the `cect` Python API ([DD016](DD016_Connectome_Data_Access_and_Dataset_Policy.md)) — no manual download needed. The toolbox provides standardized access to the full Ripoll-Sánchez 2023 dataset including short-, medium-, and long-range diffusion categories, as well as the earlier Bentley et al. 2016 monoaminergic/peptidergic data for cross-validation.
 
 ### NeuroML Extension Proposal
 
@@ -1009,7 +1009,7 @@ for t in range(0, duration, dt_fast):
 
 ---
 
-- **Approved by:** Pending (Phase 2 proposal)
+- **Approved by:** Pending (Phase 4 proposal)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

@@ -19,13 +19,13 @@ It has all sorts of behaviors! Some include:
 
 ### Do you simulate all that?
 
-Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD003_Muscle_Model_Architecture.md) + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells over 18 months. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
+Yes! Today we simulate crawling (302 neurons + 95 [muscles](design_documents/DD003_Muscle_Model_Architecture.md) + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
-Egg-laying is specified in **[DD014 (Egg-Laying System Architecture)](design_documents/DD014_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 3 work.
+Egg-laying is specified in **[DD014 (Egg-Laying System Architecture)](design_documents/DD014_Egg_Laying_System_Architecture.md)** — a 28-cell circuit (2 HSN serotonergic, 6 VC cholinergic, 16 sex muscles) that produces the characteristic two-state pattern (~20 min inactive, ~2 min active bursts). Implementation is Phase 5 work.
 
-Developmental modeling (embryo to L1 to L4 to adult) is Phase 6 work in our roadmap, using the Witvliet developmental connectome series (8 stages). _C. elegans_ has the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing), making it a fascinating future direction.
+Developmental modeling (embryo to L1 to L4 to adult) is Phase 8 work in our roadmap, using the Witvliet developmental connectome series (8 stages). _C. elegans_ has the [best known developmental history of any organism](https://docs.google.com/file/d/0B_t3mQaA-HaMbEtfZHhqUmRIX1E/edit?usp=sharing), making it a fascinating future direction.
 
 ### Does it need to know how to be a worm to act like a worm?
 
@@ -55,7 +55,7 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 
 ### When do you think the simulation will be "complete", and which behaviors would that include?
 
-**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered over ~18 months in 4 phases. We define completion at each phase as meeting all [DD010 validation criteria](design_documents/DD010_Validation_Framework.md). Beyond Phase 4, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/#phase-overview) for the full phase-by-phase timeline.
+**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered across the phased implementation roadmap. We define completion at each phase as meeting all [DD010 validation criteria](design_documents/DD010_Validation_Framework.md). Beyond Phase 6, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/#phase-overview) for the full phase-by-phase plan.
 
 ### Currently, what are your biggest problems or needs?
 
@@ -63,8 +63,8 @@ To make this project move faster, we'd love more help from motivated folks. Both
 
 **Current priorities:**
 
-- **Core infrastructure (Phase A1):** Docker stack ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)), toolbox revival ([DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
-- **Phase 1 science:** CeNGEN cell-type specialization ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
+- **Core infrastructure (Phase 1):** Docker stack ([DD011](design_documents/DD011_Simulation_Stack_Architecture.md)), toolbox revival ([DD017](design_documents/DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)), CI/CD pipeline
+- **Phase 3 science:** CeNGEN cell-type specialization ([DD005](design_documents/DD005_Cell_Type_Differentiation_Strategy.md)), functional connectivity validation ([DD010](design_documents/DD010_Validation_Framework.md) Tier 2)
 - **Integration + Validation maintainers:** Two critical L4 roles are currently vacant
 
 Read more about ways to help [on our website](https://www.openworm.org/get_involved.html) or check the [contributor guide](community/).
@@ -160,7 +160,7 @@ OpenWorm code reuse
 
 ### What about Geppetto, OSGi, Spring, Tomcat, Virgo, and Maven?
 
-These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD012 (Dynamic Visualization)](design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 1-2) and Three.js + WebGPU (Phase 3).
+These were core technologies for the [Geppetto simulation platform](archived_projects.md#geppetto-web-platform-2014-2020), which served as our primary visualization and simulation environment from 2014-2020. Geppetto has been superseded by [DD012 (Dynamic Visualization)](design_documents/DD012_Dynamic_Visualization_Architecture.md), which specifies a lighter Python-native approach using Trame (Phase 3-4) and Three.js + WebGPU (Phase 5).
 
 See [Archived Projects](archived_projects.md) for the full historical context.
 

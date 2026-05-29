@@ -5,7 +5,7 @@
 - **Date:** 2026-02-27
 - **Related:** [DD010](DD010_Validation_Framework.md), [Contributor Progression](../contributing/contributor-progression.md), [DD011](DD011_Simulation_Stack_Architecture.md), [DD012](DD012_Dynamic_Visualization_Architecture.md)
 
-> **Phase:** [Phase A1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-a1-core-infrastructure-weeks-1-2) | **Layer:** Infrastructure
+> **Phase:** [Phase 1: Core Infrastructure](DD_PHASE_ROADMAP.md#phase-1-core-infrastructure) | **Layer:** Infrastructure
 
 ---
 
@@ -47,7 +47,7 @@ DD024 defines a real-time project metrics dashboard aggregating validation score
 
 - **Repository:** `openworm/openworm` (or a dedicated `openworm/dashboard` repo if preferred)
 - **Issue label:** `dd024-dashboard`
-- **Milestone:** Phase 1 — Project Metrics Dashboard
+- **Milestone:** Phase 3 — Project Metrics Dashboard
 
 ---
 

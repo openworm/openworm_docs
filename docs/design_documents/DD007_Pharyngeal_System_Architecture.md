@@ -1,6 +1,6 @@
 # DD007: Pharyngeal System Architecture (Semi-Autonomous Organ)
 
-- **Status:** Proposed (Phase 3)
+- **Status:** Proposed (Phase 5)
 - **Author:** OpenWorm Core Team
 - **Date:** 2026-02-14
 - **Supersedes:** None
@@ -18,8 +18,8 @@ Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level 
 
 | Question | Answer |
 |----------|--------|
-| **Phase** | [Phase 3](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
-| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-3-organ-systems-hybrid-ml-months-7-12) |
+| **Phase** | [Phase 5](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
+| **Layer** | Organ Systems — see [Phase Roadmap](DD_PHASE_ROADMAP.md#phase-5-organ-systems-hybrid-ml) |
 | **What does this produce?** | Pharyngeal network: 20 neurons + 20 muscles (NeuroML), 1D pumping oscillator module, pumping state time series |
 | **Success metric** | [DD010](DD010_Validation_Framework.md) Tier 3: pumping frequency 3-4 Hz; body locomotion not degraded when pharynx enabled |
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) (`c302_pharynx.py`, `pharynx/` module) — issues labeled `dd007` |
@@ -50,7 +50,7 @@ Model the 63-cell pharynx as a semi-autonomous subsystem with 20 neurons (Level 
 | Pharyngeal muscle cell template | `pharynx/PharyngealMuscleCell.cell.nml` | NeuroML 2 XML | Nonstriated HH model with plateau potential kinetics |
 | Pharyngeal network generator | `c302_pharynx.py` | Python | Generates 20 neurons + 20 muscles + connectivity |
 | 1D pumping oscillator | `pharynx/pumping_oscillator.py` | Python | 3-section contraction/relaxation model |
-| Pharynx coupling module (future) | `pharynx/pharynx_coupling.py` | Python | Option B SPH coupling `[TO BE CREATED — Phase 4+]` |
+| Pharynx coupling module (future) | `pharynx/pharynx_coupling.py` | Python | Option B SPH coupling `[TO BE CREATED — Phase 6+]` |
 | Pumping state time series | Output: `pharynx_pumping_state.dat` | Tab-separated | Per-section contraction [0,1] over time |
 | Pumping state for viewer | OME-Zarr: `pharynx/pumping_state/`, shape (n_timesteps, 3) | OME-Zarr | Continuous [0,1] per section |
 
@@ -73,7 +73,7 @@ Each pharyngeal NeuroML file includes metadata:
 |------|-------|
 | **Repository** | [`openworm/c302`](https://github.com/openworm/c302) |
 | **Issue label** | `dd007` |
-| **Milestone** | Phase 3: Pharyngeal System |
+| **Milestone** | Phase 5: Pharyngeal System |
 | **Branch convention** | `dd007/description` (e.g., `dd007/pharyngeal-muscle-model`) |
 | **Example PR title** | `DD007: Add PharyngealMuscleCell with plateau potential kinetics` |
 
@@ -184,7 +184,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 - Connectome topology (pharyngeal neuron -> pharyngeal neuron connections only)
 - Cell-type-specific specialization using CeNGEN expression (128 neuron classes include pharyngeal neurons)
 
-**Already partially implemented:** c302 Level B includes pharyngeal neurons with integrate-and-fire dynamics. Phase 3 upgrades to Level C1 HH.
+**Already partially implemented:** c302 Level B includes pharyngeal neurons with integrate-and-fire dynamics. Phase 5 upgrades to Level C1 HH.
 
 ### Pharyngeal Muscle Models
 
@@ -229,7 +229,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 
 **Description:** Model individual bacteria as SPH particles flowing through the pharyngeal lumen, grinder crushing bacteria, pharyngeal glands secreting enzymes.
 
-**Deferred (too complex for Phase 3):** Start with muscle contraction dynamics and pumping frequency. Add lumen fluid flow and food transport if needed for validation.
+**Deferred (too complex for Phase 5):** Start with muscle contraction dynamics and pumping frequency. Add lumen fluid flow and food transport if needed for validation.
 
 ---
 
@@ -249,7 +249,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 
 ### What This Design Document Does NOT Cover:
 
-1. **Food particle transport:** Individual bacteria moving through the pharyngeal lumen are not modeled. Phase 4+ work if mechanical food processing is needed.
+1. **Food particle transport:** Individual bacteria moving through the pharyngeal lumen are not modeled. Phase 6+ work if mechanical food processing is needed.
 
 2. **Pharyngeal gland secretion:** The 4 gland cells (g1, g2L, g2R, gl) secrete digestive enzymes. Not modeled in Phase 3.
 
@@ -257,7 +257,7 @@ Use the **same Level C1 framework** (Hodgkin-Huxley conductance-based) as body n
 
 4. **Pharynx-intestine coupling:** Food transfer from pharynx to intestine is the interface with [DD009](DD009_Intestinal_Oscillator_Model.md). Only the pumping state output is provided; actual material flow is future work.
 
-5. **Egg-laying coordination:** Vulva-uterus-pharynx coordination requires Option B (SPH pharynx) and is Phase 4+ work.
+5. **Egg-laying coordination:** Vulva-uterus-pharynx coordination requires Option B (SPH pharynx) and is Phase 6+ work.
 
 6. **Pharyngeal epithelial and marginal cells:** The 9 epithelial and 9 marginal cells provide structural support. They are included in cell count but not actively modeled in Phase 3.
 
@@ -463,7 +463,7 @@ docker compose run validate
 
 ---
 
-- **Approved by:** Pending (Phase 3)
+- **Approved by:** Pending (Phase 5)
 - **Implementation Status:** Proposed
 - **Next Actions:**
 

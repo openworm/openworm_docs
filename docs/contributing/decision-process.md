@@ -259,7 +259,7 @@ When a DD is created, approved, or changes phase assignment:
    - Issue draft `Roadmap Phase` tags are consistent with DD phase
    - Integration Map Phase Legend is current
 
-**Anti-pattern:** A DD changes phase (e.g., from Phase 1 to Phase A1) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD016 bug discovered in Feb 2026: DD016 was Phase 0 in the roadmap but said Phase 1 in its own header.
+**Anti-pattern:** A DD changes phase (e.g., from Phase 3 to Phase 1) but only the DD file is updated — the roadmap, integration map, and issue drafts still show the old phase. This is exactly the DD016 bug discovered in Feb 2026: DD016 was Phase 0 in the roadmap but said Phase 3 in its own header.
 
 ### When to Write a Design Document vs. Just Opening a PR
 
@@ -326,7 +326,7 @@ When a DD is created, approved, or changes phase assignment:
 
 11. **Visualizable:** Must describe what the work looks like in the DD012 viewer. If not applicable (governance DDs), state "N/A."
 
-12. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD012 spans Phase 1-4), the header should reference the earliest phase and note the span.
+12. **Phase Consistency:** The DD's `> **Phase:**` header must match its entry in `DD_PHASE_ROADMAP.md`. If a DD appears in multiple phases (e.g., DD012 spans Phase 3-6), the header should reference the earliest phase and note the span.
 
 ### Bad Design Document Anti-Patterns
 
@@ -377,15 +377,15 @@ Mind-of-a-Worm uses Design Documents as **automated review criteria**:
 
 **Current state:** Zero Design Documents exist (except those created in this proposal).
 
-**Phase 1 (Week 1-4):** Founder writes initial DDs for existing subsystems:
+**Phase 3:** Founder writes initial DDs for existing subsystems:
 
 - DD002–[DD001](../design_documents/DD001_Body_Physics_Architecture.md): Neural, Muscle, Physics (document current architecture)
 - DD005–DD010: Future work (document proposed phases)
 - [Contributor Progression](contributor-progression.md) and [Decision Process](decision-process.md): Governance (this page and its companion)
 
-**Phase 2 (Month 2-3):** Community reviews. Open each DD as a PR, invite discussion, revise.
+**Phase 4:** Community reviews. Open each DD as a PR, invite discussion, revise.
 
-**Phase 3 (Month 4+):** DDs are accepted, become binding. New proposals follow RFC process.
+**Phase 5 (Month 4+):** DDs are accepted, become binding. New proposals follow RFC process.
 
 ---
 
