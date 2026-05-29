@@ -38,7 +38,7 @@
 DD001 is the architectural specification. Implementation work is tracked outside the spec:
 
 - **Active issues:** filter by [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the [`openworm/sibernetic`](https://github.com/openworm/sibernetic) repo
-- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) for the version-scoped batches (`v0.0.8` OpenCL gold-standard stabilization, `v0.1.0` native-gpu consolidation, `v0.2.0` validation + output pipeline, `v0.3.0` substrate docs + onboarding)
+- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) for the version-scoped release batches
 
 Build & test commands, parameter values, validation criteria, and the substrate architecture all live in this document. *What* gets built, *which version it ships in*, and *who's working on it* live in GitHub.
 
@@ -709,17 +709,6 @@ A backend transitions levels by satisfying the **exit conditions** below. These 
 | Native CUDA | **Scaffolding → Experimental** | Awaiting kernel implementation. PR #229 introduces the substrate skeleton; first wave of forward kernels + paired backwards needed to clear Experimental (milestone v0.1.0). |
 | Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction. Not on a graduation path. |
 
-### Stabilization Sequence
-
-1. **Create validation scripts:** `scripts/check_stability.py` and `scripts/validate_incompressibility.py`
-2. **Create cross-backend parity test suite:** `scripts/backend_parity_test.py` — compare against OpenCL baseline
-3. **Land the native Metal substrate consolidation:** merge PR #230 (`ow-native-gpu-0.1.0 → 0.9.9`) — this represents the strategic shift from Taichi prototyping to hand-written platform-native kernels
-4. **Complete OpenCL ↔ Native Metal parity per demo:** demo1 ✅, demo2 (in tuning), worm_alone ✅, worm_swim (in progress), one_sprig ✅. Each demo gets a parity gate in CI.
-5. **Land the native CUDA substrate:** review and merge PR #229; bring CUDA up to demo1 parity
-6. **Run parity tests:** Graduate backends that pass to Stable
-7. **Add to Dockerfile and CI:** Add graduated backends to Docker image, add backend-specific CI gates per platform (macOS for Metal, Linux+NVIDIA for CUDA)
-8. **Performance benchmark:** Update recommendation for which backend to use on which platform
-
 ### Community Contributions to Modernization
 
 Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on `openworm/sibernetic` rather than in this design document — see the `contributor-acknowledgment` label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues; see the `native-gpu` label for the current set.
@@ -960,4 +949,3 @@ def write_sibernetic_config(openworm_config):
 
 - **Approved by:** OpenWorm Steering
 - **Implementation Status:** Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and **end-to-end differentiable** — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated. See [Backend Stabilization Roadmap](#backend-stabilization-roadmap) and [Differentiability](#differentiability))
-- **Active implementation:** Tracked via [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the sibernetic repo and the [release milestones](https://github.com/openworm/sibernetic/milestones). See [Implementation Status & Roadmap](#implementation-status-roadmap).

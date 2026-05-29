@@ -87,7 +87,7 @@ For completeness: [#102](https://github.com/openworm/sibernetic/issues/102) (con
 
 ## Milestones
 
-The current milestone landscape on `openworm/sibernetic`: three closed historical milestones (v0.0.3 in 2015, v0.0.4 in 2016, v0.0.5 in 2016) plus one active milestone (`v0.0.8 release`, currently due 2026-06-12 — proposed to slip). The proposal below repurposes the active milestone and adds three forward milestones aligned to the DD001 plan. **Each issue's milestone is shown in the issue tables above and on every individual issue section below.**
+Four release milestones proposed; each issue's milestone is shown in the issue tables above and on every individual issue section below. Historical milestones are listed at the bottom of this section for context.
 
 | Milestone | Status | Theme | What it ships |
 |-----------|--------|-------|---------------|
@@ -214,7 +214,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create check_stability.py — simulation divergence detector`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.2.0** (Validation Infrastructure + Output Pipeline)
+- **Milestone:** [v0.2.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) and [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) (criterion 1)
@@ -249,7 +249,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create validate_incompressibility.py — density deviation checker`
 - **Labels:** `DD001`, `ai-workable`, `L1`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.2.0** (Validation Infrastructure + Output Pipeline)
+- **Milestone:** [v0.2.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 — Acceptance Criteria](DD001_Body_Physics_Architecture.md#acceptance-criteria-green-light-definitions) (validate gate) and [DD001 Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria) (criterion 2)
@@ -283,7 +283,7 @@ Target: Scripts and infrastructure to measure simulation quality and gate cross-
 - **Title:** `[DD001] Create cross-backend parity test suite comparing native substrates against OpenCL reference`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, physics
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements) and [DD001 §Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 2)
@@ -324,7 +324,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on demo1 (cube drop) — confirm and lock in`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology) (8-phase workflow)
@@ -349,7 +349,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on demo2 (membrane permeability) — close remaining gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), §Differentiability (M10 membrane kernels)
@@ -375,7 +375,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_alone_half_resolution — lock in visual parity`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
@@ -400,7 +400,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] OpenCL↔Metal parity on worm_swim_half_resolution — close swim-gait gap`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, opencl, metal, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
@@ -424,7 +424,7 @@ Per [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validati
 - **Title:** `[DD001] CUDA substrate parity bring-up — demo1 first, then mirror Metal trajectory`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.1.0** (Native-GPU Substrate Consolidation)
+- **Milestone:** [v0.1.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, cuda, sph
 - **DD Section to Read:** [DD001 §Cross-Backend Parity Requirements](DD001_Body_Physics_Architecture.md#cross-backend-parity-requirements), [§Stabilization Sequence](DD001_Body_Physics_Architecture.md#stabilization-sequence) (step 5), [§Differentiability](DD001_Body_Physics_Architecture.md#differentiability) (paired-backward architectural mandate)
@@ -455,7 +455,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Document OpenCL reference kernel architecture for substrate parity work`
 - **Labels:** `DD001`, `human-expert`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.3.0** (Substrate Documentation + Contributor Onboarding)
+- **Milestone:** [v0.3.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** opencl, physics, sph
 - **DD Section to Read:** [DD001 §Why Native Ports, Not Taichi](DD001_Body_Physics_Architecture.md#why-native-ports-not-taichi), [DD001 §Implementation References](DD001_Body_Physics_Architecture.md#implementation-references)
@@ -483,7 +483,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Document the 19 paired forward/backward kernels and xpbd_full_bwd reverse-mode pipeline`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`, `native-gpu`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.3.0** (Substrate Documentation + Contributor Onboarding)
+- **Milestone:** [v0.3.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, sph, autograd
 - **DD Section to Read:** [DD001 §Differentiability](DD001_Body_Physics_Architecture.md#differentiability), [§What's Differentiable Today](DD001_Body_Physics_Architecture.md#whats-differentiable-today), [§Multi-Step Reverse-Mode AD](DD001_Body_Physics_Architecture.md#multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd)
@@ -510,7 +510,7 @@ Target: Document what the native substrate is, and stand up an optional Mind-of-
 - **Title:** `[DD001] Mind-of-a-Worm PR assist surfacing the 8-phase Validation Methodology checklist`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
 - **Roadmap Phase:** Phase A1
-- **Milestone:** **v0.3.0** (Substrate Documentation + Contributor Onboarding)
+- **Milestone:** [v0.3.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** ci-cd, python, github-api
 - **DD Section to Read:** [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology), [§MoaW PR Review Checklist](DD001_Body_Physics_Architecture.md#mind-of-a-worm-pr-review-checklist), [DD001 Quality Criteria #8](DD001_Body_Physics_Architecture.md#quality-criteria) (Validation Methodology Followed)
@@ -542,7 +542,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement OME-Zarr export for body/positions and body/types`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** **v0.2.0** (Validation Infrastructure + Output Pipeline)
+- **Milestone:** [v0.2.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python
 - **DD Section to Read:** [DD001 §Deliverables](DD001_Body_Physics_Architecture.md#deliverables) (OME-Zarr rows) and [DD001 §How to Visualize](DD001_Body_Physics_Architecture.md#how-to-visualize)
@@ -573,7 +573,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement marching cubes surface reconstruction from SPH particles`
 - **Labels:** `DD001`, `human-expert`, `L3`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** **v0.2.0** (Validation Infrastructure + Output Pipeline)
+- **Milestone:** [v0.2.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, 3d-geometry
 - **DD Section to Read:** [DD001 §Deliverables](DD001_Body_Physics_Architecture.md#deliverables) (surface mesh row), [DD001 §How to Visualize](DD001_Body_Physics_Architecture.md#how-to-visualize)
@@ -605,7 +605,7 @@ Target: Sibernetic produces output in formats that DD010 (validation), DD011 (si
 - **Title:** `[DD001] Implement configurable output frequency from openworm.yml simulation.output_interval`
 - **Labels:** `DD001`, `ai-workable`, `L2`, `phase-0`
 - **Roadmap Phase:** Phase A1/1
-- **Milestone:** **v0.2.0** (Validation Infrastructure + Output Pipeline)
+- **Milestone:** [v0.2.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, c++
 - **DD Section to Read:** [DD001 §Configuration](DD001_Body_Physics_Architecture.md#configuration), DD011 (Simulation Stack — `simulation.output_interval` key)
@@ -643,7 +643,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Title:** `[DD001] Create Sibernetic architecture overview for contributors`
 - **Labels:** `DD001`, `ai-workable`, `L1`
 - **Roadmap Phase:** Any
-- **Milestone:** **v0.3.0** (Substrate Documentation + Contributor Onboarding)
+- **Milestone:** [v0.3.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD001 §Technical Approach](DD001_Body_Physics_Architecture.md#technical-approach), [DD001 §Implementation References](DD001_Body_Physics_Architecture.md#implementation-references)
@@ -671,7 +671,7 @@ Target: Comprehensive documentation enabling new contributors to understand and 
 - **Title:** `[DD001] Create CONTRIBUTING.md with native-substrate development workflow and standards`
 - **Labels:** `DD001`, `ai-workable`, `L1`
 - **Roadmap Phase:** Any
-- **Milestone:** **v0.3.0** (Substrate Documentation + Contributor Onboarding)
+- **Milestone:** [v0.3.0](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** docs
 - **DD Section to Read:** [DD001 §Quality Criteria](DD001_Body_Physics_Architecture.md#quality-criteria), [DD001 §Validation Methodology](DD001_Body_Physics_Architecture.md#validation-methodology)
@@ -706,7 +706,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 - **Title:** `[DD001] Evaluate Projective Dynamics FEM backend feasibility (Zhao et al. / BAAIWorm / Metaworm)`
 - **Labels:** `DD001`, `human-expert`, `L3`
 - **Roadmap Phase:** Phase 2+
-- **Milestone:** Unmilestoned (future / research)
+- **Milestone:** [Unmilestoned](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** physics, c++, cuda
 - **DD Section to Read:** [DD001 §Alternatives Considered — FEM](DD001_Body_Physics_Architecture.md#1-finite-element-method-fem) (the "Update 2026-02" section laying out the BAAIWorm direction)
@@ -735,7 +735,7 @@ Target: Evaluate complementary backend approaches and expose programmatic access
 - **Title:** `[DD001] Create Python bindings for Sibernetic C++ library (formalize the existing CPython integration)`
 - **Labels:** `DD001`, `human-expert`, `L3`
 - **Roadmap Phase:** Phase 2+
-- **Milestone:** Unmilestoned (future / research)
+- **Milestone:** [Unmilestoned](#milestones)
 - **Target Repo:** `openworm/sibernetic`
 - **Required Capabilities:** python, c++, pybind11
 - **DD Section to Read:** [DD001 §Integration Contract](DD001_Body_Physics_Architecture.md#integration-contract)

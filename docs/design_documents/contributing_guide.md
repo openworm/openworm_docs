@@ -185,24 +185,12 @@ Once DD is approved and merged:
 
 ### [DD001 (Body Physics Engine)](DD001_Body_Physics_Architecture.md) — REFERENCE DD
 
-DD001 is the first design document published in this docs cycle. Read it end-to-end before writing a new DD; it shows the patterns the spec describes.
+DD001 is the first design document published in this docs cycle. Read it end-to-end before writing a new DD. Beyond the required-sections template, four things are distinctive about how DD001 is structured:
 
-**Why it's the reference:**
-
-- ✅ **TL;DR at top** — reader knows what/why/success metric in a few sentences
-- ✅ **Quick Action Reference** — table answering the contributor's most-likely questions in one place
-- ✅ **Implementation Status & Roadmap** — clean spec/issue cleavage: pointers to `label:dd001` and the release milestones; no inlined "Next Actions" list
-- ✅ **Goal & Success Criteria** — quantitative DD010-tier thresholds (kinematic ±15%, density <1%, parity ±5%)
-- ✅ **Deliverables** — exact files (binary configs, kernel files, scripts), paths, formats
-- ✅ **Repository & Issues** — `openworm/sibernetic`, issue label `dd001`, branch convention
-- ✅ **How to Build & Test** — points at the live Sibernetic README rather than recapping it; specifies acceptance criteria as gates (quick-test, validate, parity, differentiability)
-- ✅ **How to Visualize** — DD012 layer spec, color mapping, what you should see
-- ✅ **Technical Approach** — equations, parameters, particle types, kernel functions
-- ✅ **Alternatives Considered** — 5 alternatives with rationale (FEM, mass-spring, LBM, PBD, 2D rod-spring)
-- ✅ **Quality Criteria** — testable acceptance criteria including paired-backward contract for native substrates
-- ✅ **Validation Methodology** — full 8-phase workflow with worked example, common gotchas, MoaW PR-review checklist
-- ✅ **Differentiability section** — documents the substrate-as-autograd-target architecture
-- ✅ **Integration Contract** — inputs/outputs, repository & packaging, configuration, coupling dependencies
+- ✅ **Implementation Status & Roadmap + Backend Graduation Criteria (Exit Conditions)** — the spec/issue cleavage in practice. Pointers to `label:dd001` and milestones; substrate maturity transitions defined as gating exit conditions, not described prose.
+- ✅ **8-phase Validation Methodology** — predict → reference → inspect → refine → implement → SGD-tune → render → compare. Includes a worked example, common gotchas, and the MoaW PR-review checklist.
+- ✅ **Paired-backward contract + Differentiability section** — Quality Criterion #7 mandates an FD-validated analytic backward per forward kernel; the Differentiability section documents the substrate-as-autograd-target architecture this contract produces.
+- ✅ **Alternatives Considered with named rejection rationale** — 5 alternatives (FEM, mass-spring, LBM, PBD, 2D rod-spring), each with the specific reason it was rejected, so future contributors don't re-propose them.
 
 ---
 
