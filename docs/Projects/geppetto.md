@@ -2,7 +2,7 @@ Geppetto Simulation Engine
 ==========================
 
 !!! note "Platform Evolution"
-    Geppetto served as OpenWorm's primary simulation and visualization platform from 2014-2020. For Phase 3-4 work, it has been superseded by **DD012 (Dynamic Visualization Architecture)**, which specifies a Trame-based (Python) approach. See [Archived Projects](../archived_projects/#geppetto-web-platform-2014-2020) for full historical context.
+    Geppetto served as OpenWorm's primary simulation and visualization platform from 2014-2020. For Phase 3-6 visualization work, it has been superseded by **DD012 (Dynamic Visualization Architecture)**, which specifies a Trame-based (Python) approach. See [Archived Projects](../archived_projects/#geppetto-web-platform-2014-2020) for full historical context.
 
 [Geppetto](https://geppetto.org) is an open-source modular platform to enable multi-scale and multi-algorithm interactive simulation of biological systems. Geppetto features a built-in WebGL visualizer that offers out-of-the-box visualization of simulated models right in the browser.
 
@@ -27,7 +27,7 @@ DD012 evaluated Geppetto against alternatives and chose Trame because:
 |-------|-----------|------------|
 | Phase 3 | Trame (PyVista) | Organism + tissue scales, live server |
 | Phase 4 | Trame + layers | Neuropeptides, organs, validation overlay |
-| Phase 5 | Three.js + WebGPU | Molecular scale, static site at wormsim.openworm.org (WormSim 2.0) |
+| Phase 6 | Three.js + WebGPU | Molecular scale, static site at wormsim.openworm.org (WormSim 2.0) |
 
 ---
 

@@ -27,7 +27,7 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 
 ## Roadmap
 
-**Phase 3-4 (DD004):** Mechanical cell identity
+**Phase 6 (DD004):** Mechanical cell identity
 
 - Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
 - Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
