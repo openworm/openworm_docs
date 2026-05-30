@@ -113,16 +113,7 @@ Contributing to Design Document Implementation
 
 ### Contributor Levels
 
-See **[DD011 (Contributor Progression)](../contributing/contributor-progression.md)** for the L0 to L5 path:
-
-| Level | Role | Can Do |
-|-------|------|--------|
-| L0 | Observer | Read DDs, watch meetings, join Slack |
-| L1 | Apprentice | Doc fixes, test improvements (3 orientation tasks) |
-| L2 | Junior Contributor | Open PRs to designated subsystems |
-| L3 | Contributor | Review/merge L1-L2 PRs, GitHub commit access |
-| L4 | Senior Contributor | Architectural decisions, write Design Documents |
-| L5 | Founder / Steering | Set direction, approve DDs, resolve conflicts |
+OpenWorm is evolving toward a structured L0–L5 contributor ladder. See **[Contributor Progression Model](../contributing/contributor-progression.md)** for the full table and progression criteria.
 
 Licenses on repositories
 ------------------------

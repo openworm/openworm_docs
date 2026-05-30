@@ -1,7 +1,10 @@
 
 # AI Agents for Community Scaling
 
-OpenWorm deploys three AI agents — built on the [OpenClaw](https://github.com/openclaw) framework — to make OpenWorm responsive and welcoming to new contributors, with onboarding, mentoring, and review available 24/7. This page describes the strategy, the agents, and the community model they enable.
+!!! info "Status: In development"
+    The AI agents described here (N2-Whisperer, Mind-of-a-Worm, Mad-Worm-Scientist) are the model OpenWorm is building toward. First components are expected in **Q2 2026**. **Today**, contributor onboarding still goes through the volunteer application form — see the [Community page](../community.md) for the current path. This page describes the target state.
+
+OpenWorm is building three AI agents — on the [OpenClaw](https://github.com/openclaw) framework — to make OpenWorm responsive and welcoming to new contributors, with onboarding, mentoring, and review available 24/7. This page describes the strategy, the agents, and the community model they will enable.
 
 !!! info "Governing Design Documents"
     - **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — L0–L5 levels, meritocratic ladder
@@ -139,22 +142,13 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 
 ## The Graduated Access System
 
-Drawing on the Apache Software Foundation's contributor ladder, the Linux kernel's maintainer tree, and the medical residency model of graduated autonomy, contributors progress through explicit levels defined in [DD011](../contributing/contributor-progression.md):
-
-| Level | Title | Access | Earned By | Mentored By |
-|-------|-------|--------|-----------|-------------|
-| **L0** | Observer | Read-only; public Slack | Signing up | N2-Whisperer |
-| **L1** | Apprentice | Documentation fixes, test improvements | Completing 3 orientation tasks | Mind-of-a-Worm |
-| **L2** | Contributor | PRs to designated subsystems | 5+ merged contributions | Mind-of-a-Worm + L3 peers |
-| **L3** | Committer | Review and merge L1–L2 contributions | Sustained quality over 3+ months | Subsystem maintainer (L4) |
-| **L4** | Subsystem Maintainer | Architectural decisions within DD scope | Deep subsystem understanding + founder approval | Founder |
-| **L5** | Founder / Steering | Sets direction; writes Design Documents | N/A | Scientific Advisory Board |
+Drawing on the Apache Software Foundation's contributor ladder, the Linux kernel's maintainer tree, and the medical residency model of graduated autonomy, contributors will progress through explicit L0–L5 levels. The canonical table and progression criteria live on the **[Contributor Progression Model](../contributing/contributor-progression.md)** page.
 
 **Key principles:**
 
 - **Merit is earned through sustained contribution**, not claimed through enthusiasm
 - **Levels are subsystem-specific** — being an L3 in Sibernetic gives no special status in c302
-- **Mind-of-a-Worm tracks progression automatically** and recommends promotions
+- **Mind-of-a-Worm will track progression automatically** and recommend promotions
 - **Architectural decisions concentrate at L4+** — this is what lets L1–L3 contributors get fast feedback without escalation backlogs
 
 ---

@@ -1,5 +1,8 @@
 # Contributing to OpenWorm
 
+!!! info "What this section is for"
+    This section describes the **structured contributor framework OpenWorm is evolving toward** — explicit L0–L5 levels, the RFC-style decision process, and the role AI agents will play. For how to contribute **today** (Slack signup → find a GitHub issue → open a PR), see the [Community page](../community.md).
+
 OpenWorm is built by a community of researchers, engineers, students, and (increasingly) AI agents. This section documents **how that community works** — the contributor levels, the decision-making process, and the role AI agents play alongside human contributors.
 
 These are **governance and process pages**, separate from the [Design Documents](../design_documents/index.md) (which specify the simulation's technical architecture). If you're looking for "how the simulation is built," start with the Design Documents. If you're looking for "how to participate in building it," you're in the right place.

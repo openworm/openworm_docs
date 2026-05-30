@@ -7,9 +7,12 @@
 
 ---
 
+!!! info "Status: Proposed framework"
+    The L0–L5 ladder described on this page is the structured contributor framework OpenWorm is moving toward. **Today**, contribution still works as described on the [Community page](../community.md) (volunteer form → Slack → find a GitHub issue → open a PR), and the historical Contributor / Core Member statuses on the [Membership page](../Community/membership.md) remain in effect. This page describes the target state and the criteria that will govern advancement once the framework is in place.
+
 ## TL;DR
 
-OpenWorm uses a five-level contributor progression (L0 Observer through L5 Founder) with explicit criteria for advancement. Each level unlocks specific permissions (code review, merge authority, architectural decisions). This replaces informal trust-based access with transparent, documented governance. Badges earned through contributions make progression objective and visible.
+OpenWorm is moving to a five-level contributor progression (L0 Observer through L5 Founder) with explicit criteria for advancement. Each level unlocks specific permissions (code review, merge authority, architectural decisions). This will replace informal trust-based access with transparent, documented governance. Badges earned through contributions make progression objective and visible.
 
 ## Goal & Success Criteria
 

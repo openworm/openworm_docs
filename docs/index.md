@@ -64,16 +64,6 @@ There are a lot of additional questions you may have about the project. We have 
 Contributing to OpenWorm
 ------------------------
 
-We primarily use Slack to communicate and coordinate our daily activities, you are welcome to join us! For an invitation, fill out our [volunteer application form](https://goo.gl/3ncZWn).
-
-**New contributors:** Check the [Design Documents](design_documents/) for areas matching your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation). The [contributor progression model ([DD011](contributing/contributor-progression.md))](contributing/contributor-progression.md) describes the path from Observer to Senior Contributor.
-
-Then, please browse our [project list](projects/) to understand the different areas where work is happening. To put the projects in context, you will find it useful to read more about the big picture idea of the [modeling approach](modeling/) we are taking.
-
-If you are interested in a specific programming language, check out links to issues specifically for [Python](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=python&page=1&sort=comments&state=open) or [C++](https://github.com/openworm/OpenWorm/issues?direction=desc&labels=c%2B%2B&page=1&sort=comments&state=open).
-
-If you have questions about specific things you find, please reach out on [Slack](https://openworm.org/contacts.html).
-
-More information about the process of making a contribution is available on our [community page](community/).
+Get started on the **[Community page](community/)** — it walks you through joining Slack, finding work, and submitting your first contribution. The [project list](projects/) is a useful companion for understanding the different areas where work is happening, in the context of the broader [modeling approach](modeling/).
 
 While the heart of OpenWorm is computational modeling, we are always looking for people with talents beyond programming to contribute. Are you a graphic designer, writer, PR specialist or simply someone with a love of science and expertise to share? Please reach out to us at <info@openworm.org> to discuss opportunities with OpenWorm.

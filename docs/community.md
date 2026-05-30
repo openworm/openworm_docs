@@ -3,6 +3,18 @@ OpenWorm Community
 
 This page contains information intended to help individuals understand what steps to take to make contributions to OpenWorm, how to join OpenWorm meetings, how to interact with the community online, and how to become an OpenWorm core member.
 
+The path from newcomer to contributor
+-------------------------------------
+
+The current way to start contributing:
+
+1. **Apply for Slack access** — [fill out the volunteer application form](https://goo.gl/3ncZWn) to request a Slack invite.
+2. **Find work** — browse the [project list](projects/) or [GitHub issues across the OpenWorm org](https://github.com/orgs/openworm/projects) to find an area that matches your interests.
+3. **Announce your interest** — comment on the GitHub issue you'd like to work on so others know it's claimed.
+4. **Submit your contribution** — see the [GitHub Workflow page](Community/github.md) for the mechanics of forking, opening PRs, and the Design Document implementation flow.
+
+OpenWorm is also evolving toward a more structured contributor framework with explicit L0–L5 levels and AI-mentored onboarding. See the [Contributing section](contributing/index.md) for the framework being built; today, the four steps above are how contribution works in practice.
+
 An Opening Note
 ---------------
 
