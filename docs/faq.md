@@ -19,7 +19,7 @@ It has all sorts of behaviors! Some include:
 
 ### Do you simulate all that?
 
-Yes! Today we simulate crawling (302 neurons + 95 muscles + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/#phase-overview) for the complete phase-by-phase plan.
+Yes! Today we simulate crawling (302 neurons + 95 muscles + [body physics](design_documents/DD001_Body_Physics_Architecture.md), validated against Schafer lab kinematics). Our roadmap adds cell-type specialization, sensory responses, organ systems (pharynx, intestine, egg-laying), and ultimately all 959 somatic cells. The main point is that we want the worm's overall behavior to **emerge from the behavior of each of its cells put together**. Each behavior is formally specified in a [Design Document](design_documents/) with quantitative validation targets. See the [Phase Overview](design_documents/index.md#phase-overview) for the complete phase-by-phase plan.
 
 ### So say the virtual organism lays eggs. Are the eggs intended to be new, viable OpenWorms, or is fertilization not a goal?
 
@@ -55,7 +55,7 @@ Nematodes have been studied far more than simpler multi-cellular organisms, and 
 
 ### When do you think the simulation will be "complete", and which behaviors would that include?
 
-**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered across the phased implementation roadmap. We define completion at each phase as meeting all DD010 validation criteria. Beyond Phase 6, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/#phase-overview) for the full phase-by-phase plan.
+**"Complete" is relative** -- biology is infinitely complex. Our target is a 959-cell organism with all major organ systems (pharynx, intestine, reproductive), validated against experimental kinematics and organ-specific metrics, delivered across the phased implementation roadmap. We define completion at each phase as meeting all DD010 validation criteria. Beyond Phase 6, future work includes intracellular signaling, developmental modeling, and male-specific systems. See the [Phase Overview](design_documents/index.md#phase-overview) for the full phase-by-phase plan.
 
 ### Currently, what are your biggest problems or needs?
 
@@ -81,7 +81,7 @@ We primarily use [Slack](https://openworm.org/contacts.html) for coordination. I
 
 In general, you won't step on any toes though -- multiple people doing the same thing can still be helpful as different individuals bring different perspectives to the table.
 
-For a structured approach, see the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation) and the [contributor progression model](contributing/contributor-progression.md) (Observer to Senior Contributor, L0-L5).
+For a structured approach, see the [DD contribution workflow](Community/github.md#contributing-to-design-document-implementation) and the [contributor progression model](contributing/contributor-progression.md) (Observer to Senior Contributor, L0-L5).
 
 ### Do you all ever meet up somewhere physically?
 

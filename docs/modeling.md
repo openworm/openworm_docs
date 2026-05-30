@@ -197,6 +197,6 @@ Geppetto is preserved as [historical documentation](archived_projects/) and in t
 
 ## What's Next
 
-The path from today's 302-neuron simulation to the complete 959-cell organism is organized into a phased implementation roadmap, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/#phase-overview) for the complete phase-by-phase plan with milestones and Design Document assignments.
+The path from today's 302-neuron simulation to the complete 959-cell organism is organized into a phased implementation roadmap, progressing through cell-type specialization, sensory integration, organ systems, and finally the full organism with photorealistic visualization. See the [Implementation Roadmap](design_documents/index.md#phase-overview) for the complete phase-by-phase plan with milestones and Design Document assignments.
 
-**Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github/#contributing-to-design-document-implementation).
+**Contribute:** Check the [Design Documents](design_documents/) for areas that match your skills, then follow the [DD contribution workflow](Community/github.md#contributing-to-design-document-implementation).

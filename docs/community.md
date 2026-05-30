@@ -9,7 +9,7 @@ The path from newcomer to contributor
 The current way to start contributing:
 
 1. **Apply for Slack access** — [fill out the volunteer application form](https://goo.gl/3ncZWn) to request a Slack invite.
-2. **Find work** — browse the [project list](projects/) or [GitHub issues across the OpenWorm org](https://github.com/orgs/openworm/projects) to find an area that matches your interests.
+2. **Find work** — browse the [project list](projects.md) or [GitHub issues across the OpenWorm org](https://github.com/orgs/openworm/projects) to find an area that matches your interests.
 3. **Announce your interest** — comment on the GitHub issue you'd like to work on so others know it's claimed.
 4. **Submit your contribution** — see the [GitHub Workflow page](Community/github.md) for the mechanics of forking, opening PRs, and the Design Document implementation flow.
 
@@ -23,7 +23,7 @@ Feeling lost? Not uncommon in open source projects. In fact, there are [whole pa
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](projects.md) you want to contribute to.
 
 ### Find tasks to work on
 
@@ -45,15 +45,15 @@ You can initiate a conversation with us on [Slack](https://slack.com) channels t
 - [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
-Once you have identified an issue you want to work on from a [particular project](projects/), please announce your intention to help out by commenting on the specific [GitHub issue](Community/github/#contributing-and-resolving-issues).
+Once you have identified an issue you want to work on from a [particular project](projects.md), please announce your intention to help out by commenting on the specific [GitHub issue](Community/github.md#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve [forking one of our repositories](Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](Community/github.md#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-More details on best practices using OpenWorm repos on GitHub are available on [a separate page](Community/github/).
+More details on best practices using OpenWorm repos on GitHub are available on [a separate page](Community/github.md).
 
 ### Creating organizing documents
 
@@ -93,9 +93,9 @@ An example of an effective proposal is [available online](https://docs.google.co
 
 The [OpenWorm documentation](https://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](https://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](Resources/resources/).
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](Resources/resources.md).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](projects/).
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](projects.md).
 
 The docs use ["GitHub-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for GitHub (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
 
