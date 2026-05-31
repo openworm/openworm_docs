@@ -121,8 +121,18 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Progress Tracking** | Tracks each contributor's level (L1–L5), completed tasks, review quality |
 | **Integration Review** | Verifies PRs don't break coupling interfaces; tags affected subsystem maintainers (DD011) |
 | **Peer Mentoring** | Connects senior contributors with newcomers working in the same subsystem |
+| **Badge Issuance & Approval** | Awards [BadgeList](https://badgelist.com/OpenWorm) badges — automatically on qualifying GitHub events, and by surfacing manual submissions for prompt review — so contributors who finish the work are never left waiting on a stalled approval queue |
+| **Badge Health & Upkeep** | Monitors each badge's completion funnel (earned vs. in-progress); flags badges with high drop-off or stale/broken instructions and proposes corrected, clearly-scoped, chunked criteria |
 
-**What it solves:** Code review backlogs that block contributors from seeing their work merged, and the gap where new contributors don't know what to work on next.
+**What it solves:** Code review backlogs that block contributors from seeing their work merged, the gap where new contributors don't know what to work on next, and an unattended recognition layer where finished work goes un-awarded and badge instructions silently rot.
+
+#### Badge stewardship mandate
+
+[BadgeList](https://badgelist.com/OpenWorm) is OpenWorm's recognition layer (live since 2016, 18 public badges, 160+ members), and **Mind-of-a-Worm owns its health.** Recognition only motivates if it is timely, accurate, and earnable — an unattended badge system actively *demotivates*. MoaW therefore holds three standing badge duties:
+
+1. **Surface approvals.** Pending badge submissions are reviewed and awarded promptly so a contributor who finishes the work is never stranded waiting. This is a real, observed failure mode: the *Simulation Stack Apprentice* badge accumulated ~18 completion submissions but only 8 awards during the project's dormant period — roughly half of the people who finished were never credited because no one was there to award them. MoaW closes that gap, and clears any standing backlog of un-awarded finishers.
+2. **Keep instructions current.** Badge instructions drift out of date (e.g. Docker setup steps that no longer match the current `openworm/openworm` image or Apple-Silicon realities). When a badge's funnel shows high drop-off, or its steps reference broken/stale tooling, MoaW flags it and proposes corrected, clearly-scoped, chunked criteria with an unambiguous finish line.
+3. **Watch the funnel.** MoaW tracks earned-vs-in-progress per badge (via the BadgeList API — see the [Contributor Progression Model](../contributing/contributor-progression.md#badge-recognition-system)), distinguishes genuine attempts from one-click joins, identifies stalled cohorts, and routes them into re-engagement rather than letting "in-progress" counts accumulate as a graveyard.
 
 ### Mad-Worm-Scientist (Executive Decision Triage)
 
