@@ -6,10 +6,10 @@
 
 OpenWorm is building three AI agents — on the [OpenClaw](https://github.com/openclaw) framework — to make OpenWorm responsive and welcoming to new contributors, with onboarding, mentoring, and review available 24/7. This page describes the strategy, the agents, and the community model they will enable.
 
-!!! info "Governing Design Documents"
-    - **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — L0–L5 levels, meritocratic ladder
-    - **DD011: Simulation Stack Architecture** — Integration support from Mind-of-a-Worm
-    - **DD015: AI Contributor Model** — Autonomous AI agents as registered contributors
+!!! info "Governing documents"
+    - **[Contributor Progression Model](../contributing/contributor-progression.md)** (Contributing section) — L0–L5 levels, meritocratic ladder, badge system
+    - **[DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md)** — integration support from Mind-of-a-Worm
+    - **[AI Contributor Model](../contributing/ai-contributors.md)** (Contributing section) — autonomous AI agents as registered contributors
 
 ---
 
@@ -230,7 +230,7 @@ This approach is informed by several production deployments:
 
 ## AI-Assisted vs. AI-Native
 
-This page describes the **AI-assisted model** where AI agents help human contributors. OpenWorm also explores an **AI-native model** where autonomous AI agents register as independent contributors — see DD015: AI Contributor Model for that complementary approach.
+This page describes the **AI-assisted model** where AI agents help human contributors. OpenWorm also explores an **AI-native model** where autonomous AI agents register as independent contributors — see the [AI Contributor Model](../contributing/ai-contributors.md) for that complementary approach.
 
 ---
 
