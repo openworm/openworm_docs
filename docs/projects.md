@@ -93,7 +93,7 @@ More detailed information is available on the [DevoWorm project page](Projects/D
 
 **Community Outreach**
 
-The effort to build the OpenWorm open science community is always ongoing. See the [contributor progression model ([DD011](contributing/contributor-progression.md))](contributing/contributor-progression.md) for the L0-L5 path.
+The effort to build the OpenWorm open science community is always ongoing. See the [Contributor Progression Model](contributing/contributor-progression.md) for the L0-L5 path.
 
 More detailed information is available on the [Community project page](Projects/community-proj/).
 

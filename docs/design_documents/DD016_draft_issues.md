@@ -9,7 +9,7 @@ search:
 
 **Generated from:** [DD016: Connectome Data Access and Dataset Policy](DD016_Connectome_Data_Access_and_Dataset_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [AI Contributors §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 23 issues (ai-workable: 18 / human-expert: 5 | L1: 10, L2: 10, L3: 3)
 

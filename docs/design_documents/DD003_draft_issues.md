@@ -9,7 +9,7 @@ search:
 
 **Generated from:** [DD003: Muscle Model Architecture](DD003_Muscle_Model_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [AI Contributors §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 18 issues (ai-workable: 13 / human-expert: 5 | L1: 9, L2: 6, L3: 3)
 

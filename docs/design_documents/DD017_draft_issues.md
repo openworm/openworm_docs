@@ -9,7 +9,7 @@ search:
 
 **Generated from:** [DD017: Movement Analysis Toolbox and WCON Policy](DD017_Movement_Analysis_Toolbox_and_WCON_Policy.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [AI Contributors §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 2 issues (ai-workable: 2 / human-expert: 0 | L1: 1, L2: 1)
 

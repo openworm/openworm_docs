@@ -53,9 +53,9 @@ Associated Repositories
 
 ## Related Design Documents
 
-- **[DD011: Contributor Progression Model](../contributing/contributor-progression.md)** — The L0-L5 contributor progression framework (Observer → Senior Contributor)
+- **[Contributor Progression Model](../contributing/contributor-progression.md)** — The L0-L5 contributor progression framework (Observer → Senior Contributor)
 - **[DD012: RFC Process](../contributing/decision-process.md)** — How Design Documents are proposed, reviewed, and accepted
-- **DD015: AI Contributor Model** — How AI contributors participate in the project
+- **[AI Contributor Model](../contributing/ai-contributors.md)** — How AI contributors participate in the project
 
 ---
 

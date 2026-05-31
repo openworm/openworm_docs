@@ -58,7 +58,7 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 | [CElegansNeuroML](https://github.com/openworm/CElegansNeuroML) | 2023-03-30 | 140 | **Archived** (authoritative NeuroML files) | DD002 (NeuroML cell definitions) |
 | [Blender2NeuroML](https://github.com/openworm/Blender2NeuroML) | 2026-02-17 | 17 | **Active** | DD012.2 (Virtual Worm meshes source) |
 | [muscle_model](https://github.com/openworm/muscle_model) | 2025-05-15 | 48 | **Maintained** | DD003 (Boyle & Cohen implementation) |
-| [hodgkin_huxley_tutorial](https://github.com/openworm/hodgkin_huxley_tutorial) | 2025-10-30 | 49 | **Active** | [DD011](../contributing/contributor-progression.md) (orientation badge "HH Tutorial Graduate") |
+| [hodgkin_huxley_tutorial](https://github.com/openworm/hodgkin_huxley_tutorial) | 2025-10-30 | 49 | **Active** | [Contributor Progression](../contributing/contributor-progression.md) (orientation badge "HH Tutorial Graduate") |
 
 !!! note
     `CElegansNeuroML` is dormant but its NeuroML files are still authoritative. DD002 references this repo for cell template locations.
@@ -96,10 +96,10 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Purpose |
 |------------|-----------|-------|--------|---------|
-| [openworm.ai](https://github.com/openworm/openworm.ai) | 2026-02-19 | 3 | **VERY ACTIVE** | LLM/AI scripts — may inform DD015 (AI Contributors) |
+| [openworm.ai](https://github.com/openworm/openworm.ai) | 2026-02-19 | 3 | **VERY ACTIVE** | LLM/AI scripts — may inform the [AI Contributor Model](../contributing/ai-contributors.md) |
 
 !!! note
-    This repo is brand new or recently revived. Should be reviewed for DD015 AI contributor infrastructure.
+    This repo is brand new or recently revived. Should be reviewed for [AI Contributor Model](../contributing/ai-contributors.md) infrastructure.
 
 ---
 
@@ -107,7 +107,7 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 | Repository | Last Push | Stars | Status | Purpose |
 |------------|-----------|-------|--------|---------|
-| [hodgkin_huxley_tutorial](https://github.com/openworm/hodgkin_huxley_tutorial) | 2025-10-30 | 49 | **Active** | [DD011](../contributing/contributor-progression.md) badge "Neuron Modeling Foundations" |
+| [hodgkin_huxley_tutorial](https://github.com/openworm/hodgkin_huxley_tutorial) | 2025-10-30 | 49 | **Active** | [Contributor Progression](../contributing/contributor-progression.md) badge "Neuron Modeling Foundations" |
 | [openworm.github.io](https://github.com/openworm/openworm.github.io) | 2026-02-01 | 29 | **Active** | Website (static HTML) |
 | [openworm_docs](https://github.com/openworm/openworm_docs) | 2024-07-02 | 44 | **Inactive** (being replaced by this site) | ReadTheDocs documentation |
 
@@ -229,7 +229,7 @@ Post-2020 activity but no current DD priority. Not broken, just not in the criti
 | [worm-math-book](https://github.com/openworm/worm-math-book) | 2021-06-12 | 2 | Online book: mathematical concepts and models |
 | [openworm-scholar](https://github.com/openworm/openworm-scholar) | 2021-05-09 | 2 | Enhanced notifications of published research |
 | [jenkins](https://github.com/openworm/jenkins) | 2021-01-05 | 1 | Old CI infrastructure |
-| [simple-C-elegans](https://github.com/openworm/simple-C-elegans) | 2020-06-08 | 6 | Minimalist Python *C. elegans* model — [DD011](../contributing/contributor-progression.md) onboarding resource |
+| [simple-C-elegans](https://github.com/openworm/simple-C-elegans) | 2020-06-08 | 6 | Minimalist Python *C. elegans* model — [Contributor Progression](../contributing/contributor-progression.md) onboarding resource |
 
 ---
 

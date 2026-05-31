@@ -9,7 +9,7 @@ All publications, datasets, and resources referenced across the OpenWorm documen
 
 | Citation | Journal | Year | Description |
 |----------|---------|------|-------------|
-| [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382) | Phil Trans R Soc B 373:20170382 | 2018 | OpenWorm: overview and recent advances in integrative biological simulation of *C. elegans*. [DD011](contributing/contributor-progression.md) |
+| [Sarma et al. 2018](https://doi.org/10.1098/rstb.2017.0382) | Phil Trans R Soc B 373:20170382 | 2018 | OpenWorm: overview and recent advances in integrative biological simulation of *C. elegans*. [Contributor Progression](contributing/contributor-progression.md) |
 | [Gleeson et al. 2018](https://doi.org/10.1098/rstb.2017.0379) | Phil Trans R Soc B 373:20170379 | 2018 | c302: a multiscale framework for modelling the nervous system of *C. elegans*. DD002 |
 | [Sarma et al. 2016](https://doi.org/10.12688/f1000research.9095.1) | F1000Research 5:1946 | 2016 | Unit testing, model validation, and biological simulation. DD010, DD011, DD017 |
 

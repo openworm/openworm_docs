@@ -202,7 +202,7 @@ DD024 closes this gap with the simplest possible implementation: a static page f
 ## References
 
 1. DD010 — Validation Framework (defines Tier 2/3 metrics this dashboard tracks)
-2. DD011 — Contributor Progression Model (defines badge categories and level thresholds)
+2. Contributor Progression Model (defines badge categories and level thresholds)
 3. DD011 — Simulation Stack Architecture (defines CI pipeline whose results this dashboard aggregates)
 4. Chart.js — https://www.chartjs.org/ (visualization library)
 5. GitHub REST API — https://docs.github.com/en/rest (data source for CI and contributor activity)

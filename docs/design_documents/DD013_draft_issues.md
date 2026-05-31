@@ -9,7 +9,7 @@ search:
 
 **Generated from:** [DD013: Hybrid Mechanistic-ML Framework](DD013_Hybrid_Mechanistic_ML_Framework.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [AI Contributors §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 3 issues (ai-workable: 2 / human-expert: 1 | L1: 1, L2: 2, L3: 0)
 

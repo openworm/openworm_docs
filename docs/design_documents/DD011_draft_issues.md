@@ -9,7 +9,7 @@ search:
 
 **Generated from:** [DD011: Simulation Stack Architecture](DD011_Simulation_Stack_Architecture.md)
 
-**Methodology:** [DD015 §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
+**Methodology:** [AI Contributors §2.2 — DD Issue Generator](../contributing/ai-contributors.md#22-the-dd-issue-generator-automated-issue-creation)
 
 **Totals:** 42 issues (ai-workable: 31 / human-expert: 11 | L1: 17, L2: 15, L3: 9)
 
