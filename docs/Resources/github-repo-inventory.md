@@ -1,7 +1,7 @@
 # OpenWorm GitHub Organization — Repository Inventory
 
-- **Last Updated:** 2026-02-19
-- **Total Repositories:** 109
+- **Last Updated:** 2026-02-19 (corrected 2026-06-05: `open-worm-analysis-toolbox` status; `movement_validation` rename)
+- **Total Repositories:** 109 (the count includes `movement_validation`, which is a redirect to `open-worm-analysis-toolbox`, not a distinct repo)
 - **Source:** [github.com/orgs/openworm](https://github.com/orgs/openworm/repositories)
 
 ---
@@ -33,21 +33,23 @@ This inventory identifies which of OpenWorm's 109 GitHub repositories are:
 
 ---
 
-## Data Access Layer (5 repos)
+## Data Access Layer (4 repos)
 
 | Repository | Last Push | Stars | Status | Design Documents |
 |------------|-----------|-------|--------|------------------|
 | [owmeta](https://github.com/openworm/owmeta) | 2024-07-29 | 153 | **Deferred** (Phase 5+) | DD008 — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-5) |
 | [owmeta-core](https://github.com/openworm/owmeta-core) | 2025-03-18 | 3 | **Deferred** (Phase 5+) | DD008 — see [OWMeta Ecosystem](#owmeta-ecosystem-9-repos-deferred-to-phase-5) |
 | [tracker-commons](https://github.com/openworm/tracker-commons) | 2025-04-23 | 14 | **Maintained** | DD017 (WCON 1.0 spec) |
-| [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | 2020-01-16 | 48 | **Archived** — **Revival needed** | DD010 (Tier 3), DD017 (revival plan) |
-| [movement_validation](https://github.com/openworm/movement_validation) | 2017-06-21 | 16 | **ARCHIVED** — Do not use | DD017 (historical — superseded by analysis toolbox) |
+| [open-worm-analysis-toolbox](https://github.com/openworm/open-worm-analysis-toolbox) | 2026-04-28 | 48 | **Active** — revival underway | DD010 (Tier 3), DD017 (revival plan) |
+
+!!! note "`movement_validation` is the former name of `open-worm-analysis-toolbox`"
+    The repo was renamed; `github.com/openworm/movement_validation` now **301-redirects** to `open-worm-analysis-toolbox`. It is **not** a separate archived repo. (An earlier version of this inventory listed them separately — that was incorrect.)
 
 **Status:**
 
 - `cect` (ConnectomeToolbox) is the **working data layer** for Phase 3-4 (DD016)
 - `owmeta` is **deferred to Phase 5+** (DD008 acknowledges this)
-- Analysis toolbox **blocks Tier 3 validation** (DD017 8-task revival plan, 33 hours)
+- Analysis toolbox is **active again** (revival underway) — it gates Tier 3 validation (DD017 8-task revival plan, ~33 hours)
 
 ---
 
