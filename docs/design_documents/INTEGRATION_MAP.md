@@ -4,6 +4,9 @@
 - **Updated:** 2026-02-22
 - **Purpose:** Master coupling dependency graph showing how all Design Documents fit together
 
+!!! info "Where the Design Documents live"
+    This map references Design Documents by number (DD002–DD024) to show how the subsystems couple into a whole organism. Only [DD001](DD001_Body_Physics_Architecture.md) is published on this site so far — the full set is drafted on [GitHub](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents) and graduates into these docs as each subsystem is built and validated. DD references below are intentionally plain text, not links, until then.
+
 ---
 
 ## Mission Alignment
@@ -41,7 +44,7 @@ This document visualizes **how all Design Documents couple together** at the arc
 
 **Reading guide:** DDs are grouped into functional clusters. Arrows show major data flows between clusters (not every internal edge). Color-coded: green = core chain, red = closed-loop, blue = validation, purple = visualization. The 4 chain diagrams below show detailed data flow for each pathway.
 
-<object data="../../images/integration_map.svg" type="image/svg+xml" style="width:100%; max-width:1200px;">OpenWorm Integration Map — click any DD to navigate to its design document</object>
+<object data="../../images/integration_map.svg" type="image/svg+xml" style="width:100%; max-width:1200px;">OpenWorm Integration Map — coupling dependency graph across all Design Documents</object>
 
 <details>
 <summary>PlantUML Source (click to expand)</summary>

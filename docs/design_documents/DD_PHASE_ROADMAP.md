@@ -3,6 +3,9 @@
 - **Created:** 2026-02-19
 - **Purpose:** Master timeline for Design Document implementation with visible milestones
 
+!!! info "Where the Design Documents live"
+    This roadmap names many forthcoming Design Documents (DD002–DD024) to lay out the full path from today's 302-neuron simulation to a complete 959-cell organism — that future picture is the point of this page. Only [DD001](DD001_Body_Physics_Architecture.md) is published on this site so far; the rest are drafted on [GitHub](https://github.com/openworm/openworm_docs/tree/main/docs/design_documents) and graduate into these docs as their subsystems are built and validated. DD references here are intentionally plain text, not links, until then.
+
 ---
 
 ## Mission, Vision, and Principles
@@ -674,7 +677,7 @@ A: Without the config system (DD011) and automated validation (DD017), contribut
 A: Yes — they're semi-independent subsystems. Different contributors can work on pharynx, intestine, and egg-laying simultaneously. DD013 (hybrid ML) can also proceed in parallel.
 
 **Q: Why is DD004 (Cell Identity) in Phase 6, not earlier?**
-A: DD004 requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 5), observe their mechanics, then add cell-specific properties in Phase 4. DD004 is also needed for DD012.2 mesh deformation.
+A: DD004 requires per-cell mechanical properties (elasticity, adhesion) that are informed by organ system behavior. Better to implement organs first (Phase 5), observe their mechanics, then add cell-specific properties in Phase 6. DD004 is also needed for DD012.2 mesh deformation.
 
 **Q: What if Phase 3 DD005 fails validation (Tier 2 doesn't improve)?**
 A: The calibration approach (expression→conductance scaling) is uncertain. If it fails, fall back to DD021 (foundation model→params) or manual curation. DD005's scientific risk is why it's Phase 3 — validate the approach early before building more on top of it.
