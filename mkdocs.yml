@@ -3,6 +3,14 @@ theme:
   name: material
   favicon: images/favicon.ico
   logo: images/favicon.ico
+# Hidden DDs are excluded from the build entirely (not just absent from nav):
+# unreachable by direct URL and absent from the search index. Only DD001 is
+# published; DD002+ and all *_draft_issues.md live canonically on GitHub.
+# To publish a DD, add it to nav and remove it from the patterns below.
+exclude_docs: |
+  design_documents/DD0*.md
+  design_documents/*_draft_issues.md
+  !design_documents/DD001_Body_Physics_Architecture.md
 markdown_extensions:
   - toc:
       permalink: true
@@ -42,6 +50,7 @@ nav:
       - C. elegans Robots: Projects/c-elegans-robot.md
   - Contributing:
       - Overview: contributing/index.md
+      - How Contributing Works: contributing/how-contributing-works.md
       - Contributor Progression: contributing/contributor-progression.md
       - Decision Process: contributing/decision-process.md
   - Community:

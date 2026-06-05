@@ -8,7 +8,7 @@ OpenWorm is building three AI agents — on the [OpenClaw](https://github.com/op
 
 !!! info "Governing documents"
     - **[Contributor Progression Model](../contributing/contributor-progression.md)** (Contributing section) — L0–L5 levels, meritocratic ladder, badge system
-    - **[DD011: Simulation Stack Architecture](../design_documents/DD011_Simulation_Stack_Architecture.md)** — integration support from Mind-of-a-Worm
+    - **DD011: Simulation Stack Architecture** — integration support from Mind-of-a-Worm (Design Document, drafted on GitHub)
     - **[AI Contributor Model](../contributing/ai-contributors.md)** (Contributing section) — autonomous AI agents as registered contributors
 
 ---
