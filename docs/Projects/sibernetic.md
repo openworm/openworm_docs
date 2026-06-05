@@ -27,16 +27,16 @@ To get a quick idea of what this looks like, check out the [latest movie](https:
 
 ## Roadmap
 
-**Phase 6 (DD004):** Mechanical cell identity
-
-- Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
-- Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
-
 **Phase 4 (DD018):** Environmental modeling
 
 - Substrate types (agar, liquid, soil)
 - Chemical/thermal gradients
 - Food particles and obstacles
+
+**Phase 6 (DD004):** Mechanical cell identity
+
+- Per-particle cell IDs (map each SPH particle to one of 959 somatic cells)
+- Cell-type-specific elasticity (neurons vs. muscles vs. hypodermal)
 
 **Phase 6 (DD012.2):** Mesh deformation
 

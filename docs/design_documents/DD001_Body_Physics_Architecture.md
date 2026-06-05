@@ -38,7 +38,7 @@
 DD001 is the architectural specification. Implementation work is tracked outside the spec:
 
 - **Active issues:** filter by [`label:dd001`](https://github.com/openworm/sibernetic/labels/dd001) on the [`openworm/sibernetic`](https://github.com/openworm/sibernetic) repo
-- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) — milestone names carry the [project Phase](DD_PHASE_ROADMAP.md) they serve (e.g., `v0.0.8 — Phase 0 Stabilization`, `v0.1.0 — Phase 1 Validation Infrastructure`), so the sibernetic release schedule lines up directly with the larger OpenWorm phase plan
+- **Release milestones:** see [openworm/sibernetic milestones](https://github.com/openworm/sibernetic/milestones) — milestone names carry the [project Phase](DD_PHASE_ROADMAP.md) they serve (e.g., `v0.1.0 — Phase 0 Stabilization`, `v0.1.2 — Phase 1 Validation Infrastructure`), so the sibernetic release schedule lines up directly with the larger OpenWorm phase plan
 
 Build & test commands, parameter values, validation criteria, and the substrate architecture all live in this document. *What* gets built, *which phase it serves*, and *who's working on it* live in GitHub.
 
@@ -697,7 +697,7 @@ A backend transitions levels by satisfying the **exit conditions** below. These 
 | To exit... | ...into | Exit conditions (all must hold) |
 |------------|---------|--------------------------------|
 | (initial) | **Experimental** | Compiles on the target platform. Runs an end-to-end simulation. Produces an output artifact (trajectory dump, frame, or whatever the substrate's analog is) without segfault, NaN, or SIGKILL. |
-| **Experimental** | **Stable** | Runs 10s of simulated time without divergence. Passes the cross-backend parity test suite (Issue [#235](https://github.com/openworm/sibernetic/issues/235), milestone v0.0.9 (Phase 0 Modernization)) within ±5% of the OpenCL reference on every working demo. For native substrates: every new forward kernel ships with a paired analytic backward, FD-validated within ±5% (see [Quality Criteria #7](#quality-criteria)). |
+| **Experimental** | **Stable** | Runs 10s of simulated time without divergence. Passes the cross-backend parity test suite (Issue [#235](https://github.com/openworm/sibernetic/issues/235), milestone v0.1.1 (Phase 0 Modernization)) within ±5% of the OpenCL reference on every working demo. For native substrates: every new forward kernel ships with a paired analytic backward, FD-validated within ±5% (see [Quality Criteria #7](#quality-criteria)). |
 | **Stable** | **Production** | All Stable conditions hold. Substrate integrated into the Sibernetic Docker image. CI gate active on the platform (macOS runner for Metal, Linux+NVIDIA runner for CUDA). Performance benchmarked on at least three platforms and the result documented. |
 
 **Current status:**
@@ -705,8 +705,8 @@ A backend transitions levels by satisfying the **exit conditions** below. These 
 | Backend | Level | What's holding the next transition |
 |---------|-------|------------------------------------|
 | OpenCL | **Production** | (Production today. Losing platform support is a separate, non-graduation concern — the goal is to maintain the gold standard until native substrates reach Production.) |
-| Native Metal | **Experimental → Stable** | Forward parity on 5+ demos; demo2 sheet-scale and worm_swim parity tuning in progress. Closes when those two parity gates go green (milestone v0.0.9 (Phase 0 Modernization)). Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned. See [Differentiability](#differentiability). |
-| Native CUDA | **Scaffolding → Experimental** | Awaiting kernel implementation. PR #229 introduces the substrate skeleton; first wave of forward kernels + paired backwards needed to clear Experimental (milestone v0.0.9 (Phase 0 Modernization)). |
+| Native Metal | **Experimental → Stable** | Forward parity on 5+ demos; demo2 sheet-scale and worm_swim parity tuning in progress. Closes when those two parity gates go green (milestone v0.1.1 (Phase 0 Modernization)). Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step `xpbd_full_bwd`, 4 demos already SGD-tuned. See [Differentiability](#differentiability). |
+| Native CUDA | **Scaffolding → Experimental** | Awaiting kernel implementation. PR #229 introduces the substrate skeleton; first wave of forward kernels + paired backwards needed to clear Experimental (milestone v0.1.1 (Phase 0 Modernization)). |
 | Taichi Metal / CUDA | **Superseded** | Earlier prototyping path; the native ports above are the replacement direction. Not on a graduation path. |
 
 ### Community Contributions to Modernization
