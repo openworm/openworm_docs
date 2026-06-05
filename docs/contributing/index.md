@@ -11,6 +11,15 @@ These are **governance and process pages**, separate from the [Design Documents]
 
 ## Pages in this section
 
+### [How Contributing Works](how-contributing-works.md)
+
+The end-to-end contribution loop for newcomers — how you go from "I want to help" to a merged PR using **OpenWorm Skills** you run in your own AI coding agent. Start here for the practical path. Covers:
+
+- The skill-accelerated loop (arrive → route → run a skill → open a PR → review → merge)
+- The OpenWorm Skills catalog and how to install them
+- Who does what (N2-Whisperer routes, skills produce, Mind-of-a-Worm pre-reviews, humans give final approval)
+- The fallback manual path if you can't run an agent
+
 ### [Contributor Progression Model](contributor-progression.md)
 
 The five-level contributor ladder (L0 Observer → L5 Founder), the criteria for advancing between levels, the badge system that makes progression objective, and how to plug in if you're a returning or brand-new contributor. Covers:
@@ -33,7 +42,7 @@ How architectural decisions get made in OpenWorm — the Rust-style RFC process 
 - Mind-of-a-Worm DD compliance enforcement
 - Quality criteria and anti-patterns
 
-### AI-Native Contributor Model
+### [AI-Native Contributor Model](ai-contributors.md)
 
 How AI agents participate in OpenWorm as first-class contributors — the registration system, sponsor accountability model, DD-to-issue decomposition, AI-human coexistence rules, and the teach-back badge mechanism that turns AI contributions into human learning. Covers:
 
