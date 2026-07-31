@@ -1,0 +1,5283 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.openworm.org/preview/integrate-design-documents/design_documents/DD001_Body_Physics_Architecture/">
+      
+      
+        <link rel="prev" href="../contributing_guide/">
+      
+      
+        <link rel="next" href="../../modeling/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>DD001 Body Physics - OpenWorm Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dd001-body-physics-engine-sibernetic-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenWorm Documentation" class="md-header__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenWorm Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DD001 Body Physics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenWorm Documentation" class="md-nav__button md-logo" aria-label="OpenWorm Documentation" data-md-component="logo">
+      
+  <img src="../../images/favicon.ico" alt="logo">
+
+    </a>
+    OpenWorm Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design Documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DD_PHASE_ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATION_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 — Core Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 — Core Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DD001 Body Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-status-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Status &amp; Roadmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceptance-criteria-green-light-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceptance Criteria (Green-Light Definitions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-particle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Particle Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validated-kinematic-outputs-palyanov-et-al-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validated Kinematic Outputs (Palyanov et al. 2018)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sph-kernel-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPH Kernel Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-bonds-body-wall-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Bonds (Body Wall Structure)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-actuation-force-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Actuation (Force Injection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictive-corrective-pressure-solver-pcisph-opencl-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predictive-Corrective Pressure Solver (PCISPH — OpenCL Reference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extended-position-based-dynamics-xpbd-native-metal-cuda-substrates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-xpbd-for-the-native-substrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why XPBD for the Native Substrate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-approach-parity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Approach Parity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-finite-element-method-fem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Finite Element Method (FEM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mass-spring-system-simple-elastic-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Mass-Spring System (Simple Elastic Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lattice-boltzmann-method-lbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lattice Boltzmann Method (LBM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-position-based-dynamics-pbd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Position-Based Dynamics (PBD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-boyle-berri-cohen-2d-rod-spring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boyle-Berri-Cohen 2D Rod-Spring Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Methodology
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Horizontal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-8-phase-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 8-Phase Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Phase Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-predict-correct-behavior-before-running-anything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Predict Correct Behavior (Before Running Anything)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-run-opencl-gold-standard-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Run OpenCL Gold-Standard Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-inspect-refine-prediction-against-opencl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 — Inspect &amp; Refine Prediction Against OpenCL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-implement-on-metal-or-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4 — Implement on Metal (or CUDA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-sgd-tune-parameters-mandatory-hand-sweeps-forbidden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5 — SGD-Tune Parameters (Mandatory; Hand-Sweeps Forbidden)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-render-comparison-movies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6 — Render Comparison Movies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-7-examine-frame-by-frame-for-visual-parity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7 — Examine Frame-by-Frame for Visual Parity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-8-commit-document-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 8 — Commit, Document, Publish
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-one_sprig_test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example: one_sprig_test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mind-of-a-worm-pr-review-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mind-of-a-Worm PR Review Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-gotchas-distilled-from-the-native-metal-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Gotchas (Distilled from the Native-Metal Port)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-tooling-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Tooling Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-backends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Backends
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-stabilization-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Stabilization Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Stabilization Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-opencl-must-be-replaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why OpenCL Must Be Replaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-native-ports-not-taichi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Native Ports, Not Taichi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-result-quality-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Result Quality Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-backend-parity-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Backend Parity Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-graduation-criteria-exit-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Graduation Criteria (Exit Conditions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-contributions-to-modernization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community Contributions to Modernization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differentiability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differentiability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differentiability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-differentiability-is-a-substrate-property-not-a-framework-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Differentiability Is a Substrate Property, Not a Framework Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-differentiable-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Differentiable Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Step Reverse-Mode AD: xpbd_full_fwd / xpbd_full_bwd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-tuned-demos-sgd-already-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient-Tuned Demos (SGD Already Applied)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications-for-downstream-subsystems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implications for Downstream Subsystems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-not-yet-differentiable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Not (Yet) Differentiable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-the-differentiable-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Use the Differentiable Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd012-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD012 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-config-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend-Config Translation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How It Works
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How It Works
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modeling Approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    History
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fullhistory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archived_projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archived Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/sibernetic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sibernetic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c302/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    c302
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worm Browser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/DevoWorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevoWorm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker simulation stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/worm-movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Movement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/geppetto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geppetto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/datarep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/community-proj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Outreach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/muscle-neuron-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Muscle / Neuron /  Channel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projects/c-elegans-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. elegans Robots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/how-contributing-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Contributing Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/contributor-progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributor Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/decision-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ai-contributors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Community
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/ai_agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Community/membership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Membership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/github-repo-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Repo Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Resources/running-nc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running NeuroML connectome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-action-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Action Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-status-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Status &amp; Roadmap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal &amp; Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-build-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Build &amp; Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Build &amp; Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceptance-criteria-green-light-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceptance Criteria (Green-Light Definitions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-visualize" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-particle-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Particle Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validated-kinematic-outputs-palyanov-et-al-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validated Kinematic Outputs (Palyanov et al. 2018)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sph-kernel-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SPH Kernel Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-bonds-body-wall-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elastic Bonds (Body Wall Structure)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#muscle-actuation-force-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muscle Actuation (Force Injection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictive-corrective-pressure-solver-pcisph-opencl-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predictive-Corrective Pressure Solver (PCISPH — OpenCL Reference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extended-position-based-dynamics-xpbd-native-metal-cuda-substrates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-xpbd-for-the-native-substrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why XPBD for the Native Substrate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-approach-parity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Approach Parity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternatives Considered
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considered">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-finite-element-method-fem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Finite Element Method (FEM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mass-spring-system-simple-elastic-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Mass-Spring System (Simple Elastic Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lattice-boltzmann-method-lbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Lattice Boltzmann Method (LBM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-position-based-dynamics-pbd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Position-Based Dynamics (PBD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-boyle-berri-cohen-2d-rod-spring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boyle-Berri-Cohen 2D Rod-Spring Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Methodology
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Methodology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-horizontal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Horizontal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-8-phase-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 8-Phase Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The 8-Phase Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-predict-correct-behavior-before-running-anything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Predict Correct Behavior (Before Running Anything)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-run-opencl-gold-standard-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Run OpenCL Gold-Standard Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-inspect-refine-prediction-against-opencl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 — Inspect &amp; Refine Prediction Against OpenCL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-implement-on-metal-or-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4 — Implement on Metal (or CUDA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-sgd-tune-parameters-mandatory-hand-sweeps-forbidden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5 — SGD-Tune Parameters (Mandatory; Hand-Sweeps Forbidden)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-render-comparison-movies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6 — Render Comparison Movies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-7-examine-frame-by-frame-for-visual-parity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7 — Examine Frame-by-Frame for Visual Parity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-8-commit-document-publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 8 — Commit, Document, Publish
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-one_sprig_test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example: one_sprig_test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mind-of-a-worm-pr-review-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mind-of-a-Worm PR Review Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-gotchas-distilled-from-the-native-metal-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Gotchas (Distilled from the Native-Metal Port)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-tooling-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Tooling Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boundaries-explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundaries (Explicitly Out of Scope)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundaries (Explicitly Out of Scope)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-design-document-does-not-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This Design Document Does NOT Cover:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#context-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context &amp; Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation References
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation References">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute-backends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Backends
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-stabilization-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Stabilization Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Stabilization Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-opencl-must-be-replaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why OpenCL Must Be Replaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-native-ports-not-taichi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Native Ports, Not Taichi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-result-quality-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Result Quality Gap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-backend-parity-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Backend Parity Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-graduation-criteria-exit-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Graduation Criteria (Exit Conditions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-contributions-to-modernization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community Contributions to Modernization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differentiability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Differentiability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differentiability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-differentiability-is-a-substrate-property-not-a-framework-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Differentiability Is a Substrate Property, Not a Framework Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-differentiable-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Differentiable Today
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Step Reverse-Mode AD: xpbd_full_fwd / xpbd_full_bwd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-tuned-demos-sgd-already-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradient-Tuned Demos (SGD Already Applied)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications-for-downstream-subsystems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implications for Downstream Subsystems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-not-yet-differentiable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Not (Yet) Differentiable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-the-differentiable-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Use the Differentiable Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Contract
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Contract">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs / Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository &amp; Packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-test-contributor-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Test (Contributor Workflow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-visualize-dd012-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Visualize (DD012 Connection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-config-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend-Config Translation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coupling-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coupling Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dd001-body-physics-engine-sibernetic-architecture">DD001: Body Physics Engine (Sibernetic) Architecture<a class="headerlink" href="#dd001-body-physics-engine-sibernetic-architecture" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Status:</strong> Accepted</li>
+<li><strong>Author:</strong> Andrey Palyanov, Sergey Khayrulin, OpenWorm Core Team</li>
+<li><strong>Date:</strong> 2026-05-27</li>
+<li><strong>Supersedes:</strong> None</li>
+<li><strong>Related:</strong> DD002 (Neural Circuit), DD003 (Muscle Model), DD004 (Mechanical Cell Identity)</li>
+</ul>
+<hr />
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p><a href="https://doi.org/10.1145/1531326.1531346">PCISPH</a> <a href="https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics">SPH</a> framework (Sibernetic) simulating the worm as ~100K particles — liquid (pseudocoelom), elastic (body wall), boundary (environment). Muscle forces from DD003 calcium drive body deformation and locomotion. Success: kinematic validation within ±15%, density deviation &lt;1%.</p>
+<p><strong>Architecturally differentiable.</strong> The native Metal substrate (<code>src/metal_diff/</code>) implements every forward kernel with a paired analytic backward kernel, validated against finite-difference. End-to-end reverse-mode differentiation through multi-step XPBD integration produces gradients on initial conditions and all physical parameters (rest density, spring stiffness, viscosity, density-constraint compliance, floor restitution, membrane mechanics). This is a structural property of the substrate — not an optional layer — and is the design requirement that the in-progress CUDA port inherits.</p>
+<hr />
+<h2 id="quick-action-reference">Quick Action Reference<a class="headerlink" href="#quick-action-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase</strong></td>
+<td><a href="../DD_PHASE_ROADMAP/#phase-0-core-architecture-functional-stabilizing">Phase 0</a></td>
+</tr>
+<tr>
+<td><strong>Layer</strong></td>
+<td>Core Architecture — see <a href="../DD_PHASE_ROADMAP/#phase-0-core-architecture-functional-stabilizing">Phase Roadmap</a></td>
+</tr>
+<tr>
+<td><strong>What does this produce?</strong></td>
+<td>Particle position time series (~100K SPH particles), <a href="https://github.com/openworm/tracker-commons">WCON</a> trajectory files, rendered body frames, <strong>gradients on physical parameters via reverse-mode AD</strong></td>
+</tr>
+<tr>
+<td><strong>Success metric</strong></td>
+<td>DD010 Tier 3: kinematic metrics within ±15%; density deviation &lt;1% for liquid particles; <strong>every gradient kernel within ±5% rel-err of finite-difference</strong></td>
+</tr>
+<tr>
+<td><strong>Differentiability</strong></td>
+<td>Native Metal substrate (<code>src/metal_diff/</code>) is end-to-end differentiable. Multi-step <code>xpbd_full_bwd</code> produces gradients on <code>(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)</code>. See <a href="#differentiability">Differentiability</a> below.</td>
+</tr>
+<tr>
+<td><strong>Validation methodology</strong></td>
+<td>Every physics change in Sibernetic should follow the 8-phase <strong>predict → reference → inspect → refine → implement → SGD-tune → render → compare</strong> workflow. <a href="../../Community/ai_agents/#mind-of-a-worm-active-contributor-guide">Mind-of-a-Worm</a> — when available — surfaces a checklist on PRs against the <a href="#validation-methodology">Validation Methodology</a> section; human reviewers remain the canonical approvers.</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> — issues labeled <code>dd001</code></td>
+</tr>
+<tr>
+<td><strong>Config toggle</strong></td>
+<td><code>body.enabled: true</code> / <code>body.backend: opencl</code> in <code>openworm.yml</code></td>
+</tr>
+<tr>
+<td><strong>Build &amp; test</strong></td>
+<td><code>docker compose run quick-test</code> (no NaN/segfault, *.wcon exists), <code>docker compose run validate</code> (Tier 3)</td>
+</tr>
+<tr>
+<td><strong>Visualize</strong></td>
+<td>DD012 <code>body/positions/</code> layer — SPH particles colored by type (liquid=blue, elastic=green, boundary=gray)</td>
+</tr>
+<tr>
+<td><strong>CI gate</strong></td>
+<td>Tier 3 kinematic validation + physical stability (no particle escape) blocks merge</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="implementation-status-roadmap">Implementation Status &amp; Roadmap<a class="headerlink" href="#implementation-status-roadmap" title="Permanent link">&para;</a></h2>
+<p>DD001 is the architectural specification. Implementation work is tracked outside the spec:</p>
+<ul>
+<li><strong>Active issues:</strong> filter by <a href="https://github.com/openworm/sibernetic/labels/dd001"><code>label:dd001</code></a> on the <a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a> repo</li>
+<li><strong>Release milestones:</strong> see <a href="https://github.com/openworm/sibernetic/milestones">openworm/sibernetic milestones</a> — milestone names carry the <a href="../DD_PHASE_ROADMAP/">project Phase</a> they serve (e.g., <code>v0.1.0 — Phase 0 Stabilization</code>, <code>v0.1.2 — Phase 1 Validation Infrastructure</code>), so the sibernetic release schedule lines up directly with the larger OpenWorm phase plan</li>
+</ul>
+<p>Build &amp; test commands, parameter values, validation criteria, and the substrate architecture all live in this document. <em>What</em> gets built, <em>which phase it serves</em>, and <em>who's working on it</em> live in GitHub.</p>
+<hr />
+<h2 id="goal-success-criteria">Goal &amp; Success Criteria<a class="headerlink" href="#goal-success-criteria" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th>DD010 Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary:</strong> Kinematic metrics</td>
+<td>Within ±15% of Schafer lab baseline</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Secondary:</strong> Physical stability</td>
+<td>No particle escape, no NaN, no divergence over 10 s simulation</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+<tr>
+<td><strong>Tertiary:</strong> Density deviation</td>
+<td>&lt;1% for liquid particles after PCISPH convergence</td>
+<td>Tier 3 (blocking)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before:</strong> No fluid-structure interaction — rigid body or mass-spring models that cannot capture pseudocoelomic pressure or hydrostatic skeleton mechanics.</p>
+<p><strong>After:</strong> ~100K SPH particles (liquid + elastic + boundary) with PCISPH pressure solver, enabling coupled fluid-solid locomotion driven by muscle forces from DD003.</p>
+<hr />
+<h2 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path (relative to <code>openworm/sibernetic</code>)</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particle position time series</td>
+<td><code>output/</code> (per-run)</td>
+<td>Binary state dump or WCON trajectory</td>
+<td><code>output.dat</code>, <code>output.wcon</code></td>
+</tr>
+<tr>
+<td>WCON trajectory files</td>
+<td><code>output/*.wcon</code></td>
+<td>WCON JSON</td>
+<td>Worm centroid + posture over time</td>
+</tr>
+<tr>
+<td>Rendered frames / video</td>
+<td><code>output/frames/</code></td>
+<td>PNG (per-frame)</td>
+<td><code>frame_00001.png</code></td>
+</tr>
+<tr>
+<td>Sibernetic binary (C++/OpenCL)</td>
+<td><code>build/Sibernetic</code></td>
+<td>Compiled executable</td>
+<td><code>./Sibernetic -config ...</code></td>
+</tr>
+<tr>
+<td>Native Metal substrate</td>
+<td><code>src/metal_diff/</code></td>
+<td>C++/Objective-C++/Metal shaders</td>
+<td><code>src/metal_diff/sib_metal</code>, <code>src/metal_diff/shaders.metal</code></td>
+</tr>
+<tr>
+<td>Native CUDA substrate</td>
+<td><code>src/cuda/</code></td>
+<td>C++/CUDA</td>
+<td><code>src/cuda/sib_cuda</code> (PR #229, in review)</td>
+</tr>
+<tr>
+<td>Particle positions (viewer)</td>
+<td><a href="https://ngff.openmicroscopy.org">OME-Zarr</a>: <code>body/positions/</code>, shape (n_timesteps, n_particles, 3)</td>
+<td>OME-Zarr</td>
+<td>Per-particle (x, y, z) over all output timesteps</td>
+</tr>
+<tr>
+<td>Particle types (viewer)</td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,)</td>
+<td>OME-Zarr</td>
+<td>Enum: liquid/elastic/boundary</td>
+</tr>
+<tr>
+<td>Surface mesh (viewer)</td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> (per-frame OBJ or vertices+faces arrays)</td>
+<td>OME-Zarr</td>
+<td>Reconstructed smooth body surface per timestep</td>
+</tr>
+<tr>
+<td>Stability checker</td>
+<td><code>scripts/check_stability.py</code></td>
+<td>Python script</td>
+<td>Verify no NaN, no particle escape, no divergence <code>[TO BE CREATED]</code></td>
+</tr>
+<tr>
+<td>Incompressibility validator</td>
+<td><code>scripts/validate_incompressibility.py</code></td>
+<td>Python script</td>
+<td>Verify density deviation &lt;1% <code>[TO BE CREATED]</code></td>
+</tr>
+<tr>
+<td>Backend parity test suite</td>
+<td><code>scripts/backend_parity_test.py</code></td>
+<td>Python script</td>
+<td>Cross-backend kinematic comparison <code>[TO BE CREATED]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="repository-issues">Repository &amp; Issues<a class="headerlink" href="#repository-issues" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><a href="https://github.com/openworm/sibernetic"><code>openworm/sibernetic</code></a></td>
+</tr>
+<tr>
+<td><strong>Issue label</strong></td>
+<td><code>dd001</code></td>
+</tr>
+<tr>
+<td><strong>Milestone</strong></td>
+<td>Body Physics Engine</td>
+</tr>
+<tr>
+<td><strong>Branch convention</strong></td>
+<td><code>dd001/description</code> (e.g., <code>dd001/pcisph-stability-fix</code>)</td>
+</tr>
+<tr>
+<td><strong>Example PR title</strong></td>
+<td><code>DD001: Fix density deviation in PCISPH pressure solver</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-build-test">How to Build &amp; Test<a class="headerlink" href="#how-to-build-test" title="Permanent link">&para;</a></h2>
+<p>Build and run instructions live with the code, in the <a href="https://github.com/openworm/sibernetic/blob/master/README.md"><strong>Sibernetic README</strong></a>. That's the canonical source — it tracks the actual build system as it evolves (Docker stages, CMake flags, supported platforms, GPU SDK setup, demo configurations) and is updated more frequently than this design document.</p>
+<p>What this design document <em>does</em> specify is the <strong>acceptance criteria</strong> for whether a build is correct (below), and the <strong>validation workflow</strong> any contributor must follow when changing the physics (see <a href="#validation-methodology">Validation Methodology</a>).</p>
+<h3 id="acceptance-criteria-green-light-definitions">Acceptance Criteria (Green-Light Definitions)<a class="headerlink" href="#acceptance-criteria-green-light-definitions" title="Permanent link">&para;</a></h3>
+<p>A working build must satisfy, on at least one of the <a href="#compute-backends">Compute Backends</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>What it proves</th>
+<th>How it's run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>quick-test</strong></td>
+<td>Simulation completes without NaN, segfault, SIGKILL; <code>output/*.wcon</code> exists</td>
+<td><code>docker compose run quick-test</code> (or the equivalent native path documented in the Sibernetic README)</td>
+</tr>
+<tr>
+<td><strong>validate</strong></td>
+<td>Density deviation &lt; 1% for liquid particles; kinematic metrics within ±15% of baseline; no particle escape</td>
+<td><code>docker compose run validate</code></td>
+</tr>
+<tr>
+<td><strong>parity</strong> (native substrates)</td>
+<td>Per-demo kinematic match against OpenCL reference within ±5% — see <a href="#cross-backend-parity-requirements">Cross-Backend Parity Requirements</a></td>
+<td><code>python3 tests/test_demo*_backend_parity.py</code></td>
+</tr>
+<tr>
+<td><strong>differentiability</strong> (native substrates)</td>
+<td>Every paired backward kernel within ±5% relative error of finite-difference</td>
+<td><code>python3 src/metal_diff/test_*.py</code> (and equivalent for <code>src/cuda/</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-visualize">How to Visualize<a class="headerlink" href="#how-to-visualize" title="Permanent link">&para;</a></h2>
+<p><strong>DD012 viewer layer:</strong> <code>body/positions/</code> — SPH particles colored by type.</p>
+<table>
+<thead>
+<tr>
+<th>Viewer Feature</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Layer</strong></td>
+<td><code>body/positions/</code></td>
+</tr>
+<tr>
+<td><strong>Color mode</strong></td>
+<td>Particles colored by type: liquid=blue, elastic=green, boundary=gray</td>
+</tr>
+<tr>
+<td><strong>Type data</strong></td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,) — enum mapping each particle to its type</td>
+</tr>
+<tr>
+<td><strong>Surface mesh</strong></td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> — reconstructed smooth body surface per timestep</td>
+</tr>
+<tr>
+<td><strong>What you should SEE</strong></td>
+<td>A worm-shaped particle cloud deforming over time. Blue liquid particles filling the interior (pseudocoelom), green elastic particles forming the body wall, gray boundary particles defining the environment. Muscle activation should produce visible bending. Surface mesh should show smooth locomotion.</td>
+</tr>
+<tr>
+<td><strong>Comparison view</strong></td>
+<td>Side-by-side: particle view (raw SPH) vs. surface mesh (reconstructed body shape)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework">Smoothed Particle Hydrodynamics (SPH) as the Body Physics Framework<a class="headerlink" href="#smoothed-particle-hydrodynamics-sph-as-the-body-physics-framework" title="Permanent link">&para;</a></h3>
+<p>OpenWorm uses <strong>Predictive-Corrective Incompressible SPH (PCISPH)</strong> to simulate the worm as a deformable body embedded in a viscous fluid. SPH represents continuous fields (density, velocity, pressure) as weighted sums over discrete particles, making it naturally suited for coupled fluid-solid systems.</p>
+<h3 id="three-particle-types">Three Particle Types<a class="headerlink" href="#three-particle-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Represents</th>
+<th>Count</th>
+<th>Dynamics</th>
+<th>Color (Viz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Liquid</strong></td>
+<td>Pseudocoelom fluid</td>
+<td>~50,000</td>
+<td>Navier-Stokes via SPH</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td><strong>Elastic</strong></td>
+<td>Body wall structure</td>
+<td>~40,000</td>
+<td>Spring-bonded network</td>
+<td>Green</td>
+</tr>
+<tr>
+<td><strong>Boundary</strong></td>
+<td>Environmental surfaces</td>
+<td>~10,000</td>
+<td>Fixed or moving constraints</td>
+<td>Gray</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total particle count:</strong> ~100,000 for an adult hermaphrodite.</p>
+<h3 id="physical-parameters">Physical Parameters<a class="headerlink" href="#physical-parameters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Units</th>
+<th>Biological Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rest density (ρ₀)</td>
+<td>1000</td>
+<td>kg/m³</td>
+<td>Aqueous tissue</td>
+</tr>
+<tr>
+<td>Viscosity (µ)</td>
+<td>4e-6</td>
+<td>Pa·s</td>
+<td>Low Reynolds number (Re ≤ 0.05)</td>
+</tr>
+<tr>
+<td>Smoothing radius (h)</td>
+<td>3.34</td>
+<td>Particle units</td>
+<td>Determines neighbor interaction range</td>
+</tr>
+<tr>
+<td>Timestep (dt)</td>
+<td>2.0e-5</td>
+<td>s</td>
+<td>Stability for explicit integration</td>
+</tr>
+<tr>
+<td>Simulation length</td>
+<td>~311</td>
+<td>Particles</td>
+<td>Adult body length (~1 mm)</td>
+</tr>
+<tr>
+<td>Adult worm mass</td>
+<td>3.25e-9</td>
+<td>kg</td>
+<td>Mapped to total particle mass</td>
+</tr>
+<tr>
+<td>Elasticity coefficient</td>
+<td>4 × 1.5e-4 / mass</td>
+<td>--</td>
+<td>Spring stiffness for elastic bonds</td>
+</tr>
+<tr>
+<td>Max muscle contraction force</td>
+<td>2.7 × 10⁻⁹</td>
+<td>N</td>
+<td>Experimental range: (1.4–9.6) × 10⁻⁹ N</td>
+</tr>
+<tr>
+<td>Number of muscle units</td>
+<td>96</td>
+<td>--</td>
+<td>95 body-wall muscles, 24 per quadrant × 4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="validated-kinematic-outputs-palyanov-et-al-2018">Validated Kinematic Outputs (<a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov et al. 2018</a>)<a class="headerlink" href="#validated-kinematic-outputs-palyanov-et-al-2018" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Simulated</th>
+<th>Experimental</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crawling velocity</td>
+<td>0.13–0.15 mm/s</td>
+<td>0.1–0.3 mm/s</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Crawling frequency</td>
+<td>0.36–0.37 Hz</td>
+<td>0.3–0.8 Hz</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Crawling wavelength</td>
+<td>0.62–0.72 mm</td>
+<td>0.65 mm</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming velocity</td>
+<td>0.26–0.41 mm/s</td>
+<td>0.29 ± 0.03 mm/s</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming frequency</td>
+<td>1.76–1.83 Hz</td>
+<td>1.74 ± 0.16 Hz</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Swimming wavelength</td>
+<td>0.43–0.47 mm</td>
+<td>0.46 mm</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>Freq–wavelength slope</td>
+<td>0.59</td>
+<td>0.64 (Boyle et al.)</td>
+<td>Figure 5</td>
+</tr>
+<tr>
+<td>Freq–wavelength intercept</td>
+<td>0.48</td>
+<td>0.42 (Boyle et al.)</td>
+<td>Figure 5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Validated behaviors:</strong> Forward crawling, swimming, omega turns, body shortening, two-frequency undulation (head vs. body).</p>
+<h3 id="sph-kernel-functions">SPH Kernel Functions<a class="headerlink" href="#sph-kernel-functions" title="Permanent link">&para;</a></h3>
+<p>Following <a href="https://doi.org/10.2312/SCA03/154-159">Müller, Charypar &amp; Gross (2003)</a>:</p>
+<p><strong>Density estimation (Wpoly6):</strong>
+<div class="highlight"><pre><span></span><code>ρᵢ = Σⱼ mⱼ * Wpoly6(rᵢⱼ, h)
+Wpoly6(r, h) = (315 / (64πh⁹)) * (h² - r²)³  if r &lt; h, else 0
+</code></pre></div></p>
+<p><strong>Pressure gradient (∇Wspiky):</strong>
+<div class="highlight"><pre><span></span><code>∇pᵢ = Σⱼ mⱼ * ((pᵢ + pⱼ) / (2ρⱼ)) * ∇Wspiky(rᵢⱼ, h)
+∇Wspiky(r, h) = -(45 / (πh⁶)) * (h - r)² * (r / |r|)  if r &lt; h, else 0
+</code></pre></div></p>
+<p><strong>Viscous diffusion (∇²Wviscosity):</strong>
+<div class="highlight"><pre><span></span><code>Fᵢ^viscosity = µ * Σⱼ mⱼ * ((vⱼ - vᵢ) / ρⱼ) * ∇²Wviscosity(rᵢⱼ, h)
+∇²Wviscosity(r, h) = (45 / (πh⁶)) * (h - r)  if r &lt; h, else 0
+</code></pre></div></p>
+<h3 id="elastic-bonds-body-wall-structure">Elastic Bonds (Body Wall Structure)<a class="headerlink" href="#elastic-bonds-body-wall-structure" title="Permanent link">&para;</a></h3>
+<p>Elastic particles are connected by spring-like bonds with rest lengths:</p>
+<div class="highlight"><pre><span></span><code>F_elastic = k * (|rᵢⱼ| - L₀) * (rᵢⱼ / |rᵢⱼ|)
+</code></pre></div>
+<ul>
+<li>k = elasticity coefficient (see table above)</li>
+<li>L₀ = rest length (initial inter-particle distance)</li>
+</ul>
+<p>Bonds are created during initialization based on spatial proximity. Particles within the smoothing radius are bonded if they are both elastic-type.</p>
+<h3 id="muscle-actuation-force-injection">Muscle Actuation (Force Injection)<a class="headerlink" href="#muscle-actuation-force-injection" title="Permanent link">&para;</a></h3>
+<p><strong>Muscle cell mapping (<a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov et al. 2018</a>):</strong> The elastic shell is mapped into 4 longitudinal muscle bundles (VR, VL, DR, DL), and each bundle is subdivided into 24 areas representing <strong>individual muscle cells</strong> with geometries based on WormAtlas microphotographs. This gives 95 body-wall muscles (96 independently activable units). Muscle naming follows the DL side convention and is mirrored for DR, VR, and VL quadrants.</p>
+<p>Muscle forces from the calcium-force coupling (DD003) are injected by modulating elastic bond stiffness:</p>
+<div class="highlight"><pre><span></span><code>k_muscle(t) = k_baseline * (1 + activation(t) * muscle_strength_multiplier)
+</code></pre></div>
+<p>Where <code>activation(t)</code> comes from the [Ca²⁺]ᵢ time series of each muscle cell. Bonds tagged as muscle bonds (MDR, MVR, MVL, MDL in 4 quadrants) receive this time-varying stiffness. Each of the 96 muscle units can be activated independently, enabling the full range of body postures observed in <em>C. elegans</em>.</p>
+<h3 id="predictive-corrective-pressure-solver-pcisph-opencl-reference">Predictive-Corrective Pressure Solver (PCISPH — OpenCL Reference)<a class="headerlink" href="#predictive-corrective-pressure-solver-pcisph-opencl-reference" title="Permanent link">&para;</a></h3>
+<p>Standard SPH suffers from density fluctuations causing artificial pressure waves. PCISPH (<a href="https://doi.org/10.1145/1531326.1531346">Solenthaler &amp; Pajarola 2009</a>) adds a predictive-corrective iteration:</p>
+<ol>
+<li><strong>Predict:</strong> Estimate particle positions at t + dt using current forces</li>
+<li><strong>Correct:</strong> Iteratively adjust pressure forces to maintain incompressibility (ρ ≈ ρ₀)</li>
+<li><strong>Update:</strong> Advance to the next timestep once density error &lt; threshold</li>
+</ol>
+<p>This stabilizes the simulation at the cost of ~3-7 iterations per timestep. PCISPH is the approach used by the OpenCL reference implementation (<code>sphFluid.cl</code>) and is the validated kinematic baseline against which all newer substrates are measured.</p>
+<h3 id="extended-position-based-dynamics-xpbd-native-metal-cuda-substrates">Extended Position-Based Dynamics (XPBD — Native Metal / CUDA Substrates)<a class="headerlink" href="#extended-position-based-dynamics-xpbd-native-metal-cuda-substrates" title="Permanent link">&para;</a></h3>
+<p>The native Metal substrate (and the in-progress CUDA substrate) uses <a href="https://matthias-research.github.io/pages/publications/XPBD.pdf">eXtended Position-Based Dynamics (XPBD)</a> (<a href="https://matthias-research.github.io/pages/publications/XPBD.pdf">Macklin, Müller &amp; Chentanez 2016</a>) as the constraint-projection framework. XPBD generalizes Position-Based Dynamics by introducing a per-constraint compliance parameter <code>α</code>, which is the <em>inverse stiffness</em>: small α ⇒ stiff (hard) constraint, large α ⇒ compliant (soft) constraint. Each constraint contributes a Lagrange-multiplier update that, when iterated K times per timestep, drives the simulation toward the constrained manifold.</p>
+<p>The Sibernetic native substrate expresses each physical phenomenon as an XPBD constraint and projects them sequentially per timestep:</p>
+<ol>
+<li><strong>Predict:</strong> <code>predict_positions</code> advances positions using gravity, external forces, prior velocity (one shader pass)</li>
+<li><strong>Constrain:</strong> K projection passes, each solving one constraint kind in turn:<ul>
+<li><strong>Density constraint</strong> (<code>solve_density_constraint</code>) — particles within smoothing radius <code>h</code> project toward target density <code>ρ_rest</code> with compliance <code>α_density</code>. This is the XPBD equivalent of PCISPH's iterative pressure correction.</li>
+<li><strong>Distance constraints</strong> (<code>solve_distance_constraints_seq</code>) — elastic bonds (springs + anchors) project toward rest length.</li>
+<li><strong>Floor / box-clamp constraints</strong> (<code>solve_floor_constraint</code>, <code>clamp_to_box</code>) — boundary collision with restitution.</li>
+<li><strong>Membrane constraints</strong> (<code>membrane_apply</code>) — plane-projection through Ihmsen 2014 membrane mechanism (M10 kernels).</li>
+</ul>
+</li>
+<li><strong>Update velocities:</strong> <code>update_velocities</code> derives new velocities from position deltas (one shader pass)</li>
+</ol>
+<p>For phenomena that don't fit cleanly as constraints — viscous pair forces, surface tension, SPH pressure-gradient buoyancy needed for water-on-worm dynamics — additional force kernels (<code>pair_forces_grid</code>, <code>pair_forces_pressure_grid</code>) are interleaved within the same XPBD loop, contributing impulses that the constraint projection then resolves against.</p>
+<h4 id="why-xpbd-for-the-native-substrate">Why XPBD for the Native Substrate<a class="headerlink" href="#why-xpbd-for-the-native-substrate" title="Permanent link">&para;</a></h4>
+<p>The XPBD choice is what makes the substrate differentiable end-to-end:</p>
+<ol>
+<li>
+<p><strong>Each constraint has a closed-form Jacobian.</strong> Every projection step's gradient <code>∂x_new / ∂x_old</code> can be derived analytically. The substrate exploits this: every forward constraint kernel (<code>solve_density_constraint</code>, <code>solve_distance_constraints_seq</code>, etc.) has a paired backward kernel that walks the Jacobian, FD-validated to ±5% relative error. PCISPH's iterative pressure-force loop produces gradients in principle too, but autodiff through the iteration is memory-expensive and analytic backwards through iterative implicit methods are harder to derive. XPBD's per-constraint structure is the cleanest match for analytic backward-mode AD. See <a href="#differentiability">Differentiability</a>.</p>
+</li>
+<li>
+<p><strong>Per-step state is bounded and saveable.</strong> Each XPBD constraint kernel reads a fixed set of inputs and writes a fixed set of outputs. The substrate persists per-step state (positions, velocities, density, ∇C, denominator helpers, per-kernel auxiliaries) so <code>xpbd_full_bwd</code> can walk K constraint iterations in reverse. The state's bounded shape per kernel makes this practical at the worm-scale particle counts (~100K particles × multiple kernels × tens of timesteps).</p>
+</li>
+<li>
+<p><strong>Unconditional stability (PBD heritage).</strong> XPBD doesn't have the CFL-like stiffness constraint that PCISPH inherits from explicit pressure-force integration. Stiffer constraints don't require smaller timesteps — they require lower compliance α. This means kinematic parameter tuning via SGD can vary stiffness across orders of magnitude without restabilizing the integration loop.</p>
+</li>
+</ol>
+<h4 id="cross-approach-parity">Cross-Approach Parity<a class="headerlink" href="#cross-approach-parity" title="Permanent link">&para;</a></h4>
+<p>PCISPH and XPBD are mathematically distinct, but the validation methodology requires the native (XPBD) substrate to reproduce the OpenCL (PCISPH) reference's <em>kinematic outputs</em> — the per-demo trajectory parity gates ensure equivalent behavior at the observable level even though the inner numerical scheme differs. Where pure XPBD with constraint projection alone produced wrong kinematics (e.g., a worm sinking because there was no upward SPH pressure-gradient force from surrounding liquid), the substrate added the missing force kernel (<code>pair_forces_pressure_grid</code>, ported from <code>sphFluid.cl</code>) rather than abandoning the XPBD framework. The substrate is thus a <em>hybrid</em>: XPBD as the constraint-projection backbone with SPH force kernels interleaved where projection alone is insufficient. This hybrid is what reaches forward parity on the five validated demos; see <a href="#cross-backend-parity-requirements">Cross-Backend Parity Requirements</a>.</p>
+<p>The choice is also a Position-Based Dynamics revisitation. PBD itself was rejected for Sibernetic's original architecture as too inaccurate (see <a href="#4-position-based-dynamics-pbd">Alternatives Considered §4</a>). XPBD's per-constraint compliance restores the physical accuracy that vanilla PBD lacked while keeping PBD's stability and differentiability properties — making it a fit for biophysical validation that vanilla PBD never was.</p>
+<hr />
+<h2 id="alternatives-considered">Alternatives Considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<h3 id="1-finite-element-method-fem">1. <a href="https://en.wikipedia.org/wiki/Finite_element_method">Finite Element Method</a> (FEM)<a class="headerlink" href="#1-finite-element-method-fem" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Higher accuracy for solid mechanics, well-established in biomechanics.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Mesh generation for complex morphology is labor-intensive</li>
+<li>Large deformations (bending during crawling) cause mesh distortion</li>
+<li>Fluid-structure coupling in FEM+CFD is computationally expensive</li>
+<li>SPH is meshless, naturally handles topology changes, and couples fluid-solid seamlessly</li>
+</ul>
+<p><strong>When to reconsider:</strong> If future work requires extremely accurate stress/strain fields (e.g., modeling cuticle fracture, cell rupture). Not needed for behavior simulation.</p>
+<p><strong>Update (2026-02):</strong> Zhao et al. (2024) demonstrated that modern Projective Dynamics FEM solvers (<a href="https://doi.org/10.1145/2601097.2601116">Bouaziz et al. 2014</a>) address the mesh distortion and speed concerns listed above. Their implementation used a tetrahedral mesh of 984 vertices and 3,341 tetrahedrons with 96 muscle actuators and achieved real-time simulation at 30 frames per second — orders of magnitude faster than the current Sibernetic SPH approach (~100K particles). The key insight is that a Projective Dynamics solver uses a local-global optimization that is unconditionally stable under large deformations, eliminating the traditional FEM mesh distortion problem.</p>
+<p>However, Zhao et al.'s FEM approach uses simplified surface hydrodynamics (thrust and drag forces on the body surface) rather than solving full fluid dynamics. This is a valid approximation at the low Reynolds number of <em>C. elegans</em> locomotion (Re ~ 0.01) but sacrifices the internal pseudocoelomic fluid pressure dynamics that Sibernetic's SPH naturally captures.</p>
+<p><strong>OpenWorm's position:</strong> Sibernetic SPH remains the biophysically richer model and the default backend. A Projective Dynamics FEM backend should be added as a <strong>fast alternative</strong> for rapid iteration, CI testing, and parameter sweeps — similar in philosophy to DD013's learned surrogate but using first-principles physics rather than machine learning. The BAAIWorm repository (github.com/Jessie940611/BAAIWorm, Apache 2.0) contains a C++/CUDA FEM implementation that could serve as a starting point, though its CUDA/OptiX dependencies would need evaluation for compatibility.</p>
+<p>Configuration: <code>body.backend: "fem-projective"</code> alongside existing <code>opencl</code>, <code>metal-native</code>, <code>cuda-native</code>.</p>
+<p>Reference: <a href="https://doi.org/10.1145/2601097.2601116">Bouaziz S et al. (2014)</a>. "Projective Dynamics: Fusing constraint projections for fast simulation." <em>ACM Trans Graphics</em> 33:154.</p>
+<h3 id="2-mass-spring-system-simple-elastic-network">2. Mass-Spring System (Simple Elastic Network)<a class="headerlink" href="#2-mass-spring-system-simple-elastic-network" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Extremely fast, simple to implement.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>No fluid mechanics (pseudocoelom is critical for worm locomotion)</li>
+<li>Difficult to enforce incompressibility</li>
+<li>No pressure dynamics</li>
+</ul>
+<p>This was tried in early OpenWorm prototypes and abandoned because crawling requires fluid pressure to antagonize muscle contraction.</p>
+<h3 id="3-lattice-boltzmann-method-lbm">3. Lattice Boltzmann Method (LBM)<a class="headerlink" href="#3-lattice-boltzmann-method-lbm" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Good for fluid flow, naturally parallelizes.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Fixed Cartesian grid poorly represents complex worm morphology</li>
+<li>Deformable solid modeling in LBM is cumbersome</li>
+<li>SPH is more natural for moving, deforming boundaries</li>
+</ul>
+<h3 id="4-position-based-dynamics-pbd">4. Position-Based Dynamics (PBD)<a class="headerlink" href="#4-position-based-dynamics-pbd" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Unconditionally stable, used in real-time graphics/games.</p>
+<p><strong>Rejected because:</strong></p>
+<ul>
+<li>Sacrifices physical accuracy for stability (violates momentum conservation in general)</li>
+<li>Not suited for quantitative biophysical validation</li>
+<li>OpenWorm prioritizes biological accuracy over simulation speed</li>
+</ul>
+<h3 id="5-boyle-berri-cohen-2d-rod-spring-model">5. Boyle-Berri-Cohen 2D Rod-Spring Model<a class="headerlink" href="#5-boyle-berri-cohen-2d-rod-spring-model" title="Permanent link">&para;</a></h3>
+<p><strong>Advantages:</strong> Extremely fast (~seconds on single CPU), published and validated (<a href="https://doi.org/10.3389/fncom.2012.00010">Boyle, Berri &amp; Cohen 2012</a>), already implemented in three OpenWorm repos (<a href="https://github.com/openworm/CE_locomotion">CE_locomotion</a>, <a href="https://github.com/openworm/Worm2D">Worm2D</a>, <a href="https://github.com/openworm/CelegansNeuromechanicalGaitModulation">CelegansNeuromechanicalGaitModulation</a>), ~150 state variables, produces WCON output directly, has c302 integration and proprioception support.</p>
+<p><strong>Not a replacement for Sibernetic because:</strong></p>
+<ul>
+<li>2D only — no dorsal-ventral body mechanics, omega turns, or body roll</li>
+<li>No fluid dynamics — uses drag coefficients (Resistive Force Theory), not solved Navier-Stokes</li>
+<li>No internal body volume — cannot support DD004 (cell identity), DD012.2 (mesh deformation), or Phase 5+ organs</li>
+<li>No fluid-structure interaction — DD015 touch mechanotransduction requires 3D particle strain</li>
+</ul>
+<p><strong>Role in OpenWorm:</strong> Fast validation screening tool (<code>scripts/boyle_berri_cohen_trajectory.py</code> in c302 repo). Takes c302 muscle calcium output, runs the 2D body model, produces WCON in seconds. Enables rapid iteration on neural circuit parameters and CI quick-test gates. Also useful for generating DD013 surrogate training data. Sibernetic SPH remains the mission-critical body physics engine.</p>
+<hr />
+<h2 id="quality-criteria">Quality Criteria<a class="headerlink" href="#quality-criteria" title="Permanent link">&para;</a></h2>
+<p>A contribution to Sibernetic MUST:</p>
+<ol>
+<li>
+<p><strong>Preserve Physical Stability:</strong> Simulations must not explode (density &lt; 0, particles escaping to infinity, NaN values). Run at least 10 seconds of simulation time without divergence.</p>
+</li>
+<li>
+<p><strong>Maintain Incompressibility:</strong> Density deviation from ρ₀ should be &lt; 1% for liquid particles after PCISPH convergence.</p>
+</li>
+<li>
+<p><strong>Pass Unit Tests:</strong> Sibernetic repository contains unit tests for kernel functions, neighbor search, and pressure solver. All must pass.</p>
+</li>
+<li>
+<p><strong>Validate Against Known Cases:</strong></p>
+<ul>
+<li>Drop test: Sphere of liquid particles under gravity should settle and spread</li>
+<li>Elastic deformation: A suspended elastic body under gravity should sag</li>
+<li>Muscle contraction: Activating one muscle quadrant should bend the body</li>
+</ul>
+</li>
+<li>
+<p><strong>GPU Backend Compatibility:</strong> Changes to core SPH algorithms must work across OpenCL (original C++ reference), Native Metal (Apple Silicon), and Native CUDA (NVIDIA). Test on at least two backends.</p>
+</li>
+<li>
+<p><strong>Cross-Backend Parity:</strong> Core SPH algorithms must produce kinematic outputs within ±5% across all stable backends on the same configuration. The parity test suite (see <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a>) must pass before any backend is marked Production.</p>
+</li>
+<li>
+<p><strong>Paired Backward Per Forward (Native Substrates):</strong> Every new forward kernel added to the native Metal or native CUDA substrate MUST ship with a paired analytic backward kernel, validated against finite-difference to within ±5% relative error. This is the architectural contract of the substrate; see <a href="#differentiability">Differentiability</a>. New kernels without a paired backward break the end-to-end differentiability guarantee and must not land.</p>
+</li>
+<li>
+<p><strong>Validation Methodology Followed:</strong> Every physics change should follow the 8-phase predict → reference → inspect → refine → implement → SGD-tune → render → compare workflow documented in <a href="#validation-methodology">Validation Methodology</a>. PRs that ship a Metal/CUDA implementation are strongly encouraged to include (a) a benchmark config, (b) an OpenCL reference trajectory, (c) a Metal/CUDA trajectory dump, (d) a side-by-side comparison movie, and (e) visual + quantitative parity evidence — these dramatically reduce review time. SGD-based parameter tuning with a saved convergence history is preferred over hand-swept parameters. Human reviewers exercise judgment on which items are necessary for a given PR.</p>
+</li>
+</ol>
+<hr />
+<h2 id="validation-methodology">Validation Methodology<a class="headerlink" href="#validation-methodology" title="Permanent link">&para;</a></h2>
+<p><strong>Every physics change in Sibernetic — new kernel, parameter retuning, optimization PR that perturbs numerical output, backend port — should follow the 8-phase workflow below.</strong> The 10-item checklist at the end of this section is the recommended self-review for contributors and the reviewer's reference. <a href="../../Community/ai_agents/#mind-of-a-worm-active-contributor-guide">Mind-of-a-Worm</a> — when the bot is in service — surfaces the checklist on the PR as a courtesy; it does not block merges on its own. Human reviewers remain the canonical approvers and use the checklist to guide their review.</p>
+<p>The methodology emerged from the native-Metal port (consolidated on the <code>ow-native-gpu-0.1.0</code> branch) and is now baked into the repo's tooling. It is the substrate-correctness story: hand-derived backward kernels per <a href="#differentiability">Differentiability</a> prove the <em>math</em> is right; this workflow proves the <em>physics</em> is right.</p>
+<h3 id="why-this-is-horizontal">Why This Is Horizontal<a class="headerlink" href="#why-this-is-horizontal" title="Permanent link">&para;</a></h3>
+<p>Earlier OpenCL-only Sibernetic relied on "build the kernel, eyeball the demo, ship it." That worked when there was one reference implementation. With three substrates now (OpenCL gold-standard reference, native Metal, native CUDA in scaffolding) and a differentiable pipeline that can be SGD-tuned, the cost of an incorrect kernel landing is now multi-platform divergence that's expensive to retroactively diagnose. The 8-phase workflow front-loads the cost of being right: predict before measuring, measure before implementing, tune via gradient descent not manual sweeps, prove parity visually frame-by-frame.</p>
+<p>This applies horizontally to every PR. There is no "small physics change" exemption — even a parameter default tweak goes through the workflow because the trajectory is what matters, not the change-set size.</p>
+<h3 id="the-8-phase-workflow">The 8-Phase Workflow<a class="headerlink" href="#the-8-phase-workflow" title="Permanent link">&para;</a></h3>
+<h4 id="phase-1-predict-correct-behavior-before-running-anything">Phase 1 — Predict Correct Behavior (Before Running Anything)<a class="headerlink" href="#phase-1-predict-correct-behavior-before-running-anything" title="Permanent link">&para;</a></h4>
+<p>Read the benchmark configuration file (typically under <code>configuration/&lt;demo&gt;</code> or <code>configuration/test/&lt;demo&gt;</code>). Extract the physics setup: simulation box bounds, particle positions and types, velocities, spring bond topology (rest length, connection type), membranes if present, boundary anchor locations.</p>
+<p>For analytically tractable scenarios (single elastic + anchor, simple oscillators, cube under gravity), calculate expected equilibrium positions, oscillation periods, settling times, displacements <em>by hand</em> using the documented formulas (e.g., for elastic-on-anchor: <code>T = 2π / √(K_eff / m_eff)</code> where <code>K_eff = elasticityCoefficient × 0.25 × sim_scale</code> for non-worm-body elastic pairs — the 0.25 factor is a frequent gotcha).</p>
+<p>Write down the prediction with units BEFORE touching OpenCL or Metal. This written prediction becomes the SGD target in Phase 5 and the parity benchmark in Phase 7. The act of writing the prediction first surfaces assumptions and identifies where intuition is wrong.</p>
+<h4 id="phase-2-run-opencl-gold-standard-reference">Phase 2 — Run OpenCL Gold-Standard Reference<a class="headerlink" href="#phase-2-run-opencl-gold-standard-reference" title="Permanent link">&para;</a></h4>
+<p>Run the benchmark config on the OpenCL backend (the validated ±15%-against-Schafer-lab reference). This produces a reference trajectory: per-particle position time series, typically saved as <code>&lt;demo&gt;_opencl_position.txt</code> or equivalent.</p>
+<p>The OpenCL trajectory is the ground truth for what the Metal (and future CUDA) implementations must match. Commit it to the repo alongside the new physics change so reviewers can re-run parity checks.</p>
+<h4 id="phase-3-inspect-refine-prediction-against-opencl">Phase 3 — Inspect &amp; Refine Prediction Against OpenCL<a class="headerlink" href="#phase-3-inspect-refine-prediction-against-opencl" title="Permanent link">&para;</a></h4>
+<p>Parse the OpenCL trajectory and measure observed behavior: actual oscillation period (zero-crossing analysis), amplitude, equilibrium, drift, damping, settling time. Compare against the Phase 1 prediction.</p>
+<div class="highlight"><pre><span></span><code><span class="n">zero_crossings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_centered</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">observed_period_ms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">zero_crossings</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">frame_dt_ms</span>
+</code></pre></div>
+<p>Surprises are common and informative:
+- Period off by 2× → forgot the 0.25 factor on non-worm-body elastic pairs
+- Particle drift when stationary → ε guards differ between paths
+- Faster fall than expected → buoyancy from SPH pressure gradients
+- Unexpected damping → viscous coupling through neighbor particles</p>
+<p>Update the written prediction with the measured values. These updated targets are what Phase 5 SGD will optimize against. A correct Metal port must reproduce <em>what OpenCL actually does</em>, not what we thought it would do.</p>
+<h4 id="phase-4-implement-on-metal-or-cuda">Phase 4 — Implement on Metal (or CUDA)<a class="headerlink" href="#phase-4-implement-on-metal-or-cuda" title="Permanent link">&para;</a></h4>
+<p>Build the native substrate (<code>./build.sh</code> in <code>src/metal_diff/</code>; analogous for <code>src/cuda/</code> once it lands). Implement the new kernel or change. Run the benchmark via <code>dump_metal_trajectory.py</code> (or the equivalent CUDA dumper) with the same duration as the OpenCL reference:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>src/metal_diff/dump_metal_trajectory.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--scenario<span class="w"> </span>&lt;demo_name&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--steps<span class="w"> </span><span class="m">2500</span><span class="w"> </span>--chunk<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rho-rest<span class="w"> </span><span class="m">1</span>.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--spring-k<span class="w"> </span>&lt;initial-guess&gt;<span class="w"> </span>--anchor-k<span class="w"> </span>&lt;initial-guess&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w"> </span>/tmp/&lt;demo&gt;_metal.txt
+</code></pre></div>
+<p>Sanity-check immediately: trajectory range should match the OpenCL prediction within a few percent. Massive divergence (&gt;50%) means there's a kernel-level physics error to fix before parameter tuning is meaningful. Per <a href="#quality-criteria">Quality Criteria #7</a>, the new kernel must ship with a paired analytic backward and FD test.</p>
+<h4 id="phase-5-sgd-tune-parameters-mandatory-hand-sweeps-forbidden">Phase 5 — SGD-Tune Parameters (Mandatory; Hand-Sweeps Forbidden)<a class="headerlink" href="#phase-5-sgd-tune-parameters-mandatory-hand-sweeps-forbidden" title="Permanent link">&para;</a></h4>
+<p>Use the SGD harness (<code>src/metal_diff/sgd_*.py</code>; <code>sgd_one_sprig.py</code> for single-spring scenarios, <code>sgd_true.py</code> for multi-parameter tuning, <code>sgd_worm.py</code> for worm-scale, plus demo-specific scripts). Each iteration:</p>
+<ol>
+<li>Run the simulation with current parameters via <code>dump_metal_trajectory.py</code></li>
+<li>Measure trajectory features (period, amplitude, final position, kinematic metrics)</li>
+<li>Compute scalar loss against the Phase 3 measured targets</li>
+<li>Compute gradients — finite-difference over the CLI for measurement-based losses; analytic backward kernels via <code>xpbd_full_bwd</code> for learned parameters</li>
+<li>Update in log-space for stiffness-like params, linear-space (<code>--linear-trainable</code>) for bounded params like <code>floor_y</code></li>
+</ol>
+<p>Save the convergence history to <code>/tmp/sgd_&lt;demo&gt;_history.json</code> and commit it alongside the parity artifacts. This is the evidence that parameters were not hand-fitted.</p>
+<p>If SGD plateaus on a loss that's worse than OpenCL by a wide margin, the problem is missing physics (a kernel), not bad parameter tuning. Port the missing OpenCL kernel — do not ship with caveats. (Example: worm sinking because no buoyancy → port the SPH pressure-force kernel. Example: water exploding → port the PCISPH iterative density correction.)</p>
+<h4 id="phase-6-render-comparison-movies">Phase 6 — Render Comparison Movies<a class="headerlink" href="#phase-6-render-comparison-movies" title="Permanent link">&para;</a></h4>
+<p>Render OpenCL and Metal trajectories as separate panels using the per-scenario renderer (<code>render_one_sprig.py</code>, <code>render_worm.py</code>, etc. under <code>src/metal_diff/</code>), then stack horizontally with ffmpeg:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>src/metal_diff/render_one_sprig.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/tmp/&lt;demo&gt;_opencl_position.txt<span class="w"> </span>/tmp/&lt;demo&gt;_opencl_panel.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--title<span class="w"> </span><span class="s2">&quot;OpenCL &lt;demo&gt;&quot;</span>
+python3<span class="w"> </span>src/metal_diff/render_one_sprig.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/tmp/&lt;demo&gt;_metal.txt<span class="w"> </span>/tmp/&lt;demo&gt;_metal_panel.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--title<span class="w"> </span><span class="s2">&quot;Native Metal &lt;demo&gt;&quot;</span><span class="w"> </span>--max-frames<span class="w"> </span><span class="m">250</span>
+
+ffmpeg<span class="w"> </span>-y<span class="w"> </span>-i<span class="w"> </span>/tmp/&lt;demo&gt;_opencl_panel.mp4<span class="w"> </span>-i<span class="w"> </span>/tmp/&lt;demo&gt;_metal_panel.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-filter_complex<span class="w"> </span><span class="s2">&quot;[0:v]pad=920:900:0:0:color=white[left];[left][1:v]hstack[v]&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-map<span class="w"> </span><span class="s2">&quot;[v]&quot;</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-crf<span class="w"> </span><span class="m">18</span><span class="w"> </span>-pix_fmt<span class="w"> </span>yuv420p<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docs/&lt;demo&gt;_opencl_vs_metal.mp4
+</code></pre></div>
+<p>The renderer auto-detects trajectory format (OpenCL and Metal frame structures differ — OpenCL includes boundary particles only in frame 0; Metal includes them in every frame). Hard-code identical camera bounds and distance in both panels so visual differences reflect physics, not viewport.</p>
+<h4 id="phase-7-examine-frame-by-frame-for-visual-parity">Phase 7 — Examine Frame-by-Frame for Visual Parity<a class="headerlink" href="#phase-7-examine-frame-by-frame-for-visual-parity" title="Permanent link">&para;</a></h4>
+<p>Extract sample frames at multiple time points from the side-by-side MP4:</p>
+<div class="highlight"><pre><span></span><code>ffmpeg<span class="w"> </span>-y<span class="w"> </span>-i<span class="w"> </span>docs/&lt;demo&gt;_opencl_vs_metal.mp4<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-vf<span class="w"> </span><span class="s2">&quot;select=between(n\,0\,0)+between(n\,15\,15)+between(n\,100\,100)+between(n\,200\,200)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-vsync<span class="w"> </span>vfr<span class="w"> </span>/tmp/check_frames/sxs_%d.png
+</code></pre></div>
+<p>Verify at each sample:
+- Frame 0 — correct initial positions on both sides
+- Mid-trajectory — particle positions, deformation patterns, flow lines match
+- Late frames — equilibrium / settling matches
+- No render bugs (particle missing, mis-labeled, anchor-spring topology wrong)</p>
+<p>Quantitative spot-check: at each sample frame, log the y-coordinate (or equivalent scalar metric — wave amplitude, sheet curvature, worm midline) for both sides. Δ &lt; 5% of the OpenCL scale is the parity threshold.</p>
+<p>If visually rendered values don't match the trajectory file's numbers, it's a parser bug (re-check the auto-detect logic in the render script). If trajectory numbers diverge between OpenCL and Metal despite SGD convergence, it's a kernel-physics mismatch — return to Phase 4.</p>
+<h4 id="phase-8-commit-document-publish">Phase 8 — Commit, Document, Publish<a class="headerlink" href="#phase-8-commit-document-publish" title="Permanent link">&para;</a></h4>
+<p>One commit per benchmark / per substrate port, containing:</p>
+<ul>
+<li>New / modified kernel code + paired backward + FD test</li>
+<li>The benchmark config file (if new)</li>
+<li>The OpenCL reference trajectory</li>
+<li>The Metal trajectory</li>
+<li>The side-by-side MP4 under <code>docs/</code></li>
+<li>The SGD convergence history (<code>/tmp/sgd_&lt;demo&gt;_history.json</code> copied to a tracked location)</li>
+<li>Spot-check frame images (at minimum 3-4 sampled timepoints) showing labeled y-values</li>
+<li>A commit message summarizing: parity at sample frames, tuned parameters, substrate work landed</li>
+</ul>
+<p>Cross-link the PR to the relevant <code>dd001</code> GitHub label and the demo's parity artifact in <code>docs/</code>.</p>
+<h3 id="worked-example-one_sprig_test">Worked Example: <code>one_sprig_test</code><a class="headerlink" href="#worked-example-one_sprig_test" title="Permanent link">&para;</a></h3>
+<p><strong>Scenario:</strong> Single elastic particle suspended by a vertical anchor spring; no other forces. Tests anchor-spring kernel correctness in isolation.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Activity</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Predict</td>
+<td>Config: anchor at (x, 32.565, z), elastic at (x, 16.91, z), rest_length = 15.655. Equilibrium y = 16.91. K = elasticityCoefficient × 0.25 × sim_scale = 307,500 (Metal units). Predicted T ≈ 0.36 ms.</td>
+<td>Written prediction filed</td>
+</tr>
+<tr>
+<td>2. Reference</td>
+<td>Ran OpenCL gold standard, saved <code>/tmp/one_sprig_opencl_position.txt</code></td>
+<td>Reference trajectory captured</td>
+</tr>
+<tr>
+<td>3. Inspect &amp; refine</td>
+<td>Zero-crossing analysis: actual period = 0.725 ms (1379 Hz); half-amplitude = 1.694 units. <strong>Surprise: period is 2× expected — likely the 0.25 factor.</strong></td>
+<td>Targets updated: T=0.725 ms, A=1.694 units</td>
+</tr>
+<tr>
+<td>4. Implement Metal</td>
+<td>Built Metal substrate, ran <code>dump_metal_trajectory.py --anchor-k 555</code>. Initial: y oscillates at 0.36 ms (2× too fast).</td>
+<td>Kernel works; needs parameter tuning</td>
+</tr>
+<tr>
+<td>5. SGD-tune</td>
+<td><code>sgd_one_sprig.py</code> with loss <code>L = (period_err/0.725)² + 0.25·(amplitude_err/1.694)²</code>. Init K=300, lr=0.5 log-space. Converged in 7 iterations to K=555.</td>
+<td>History saved; T, A match within &lt;1%</td>
+</tr>
+<tr>
+<td>6. Render</td>
+<td><code>render_one_sprig.py</code> for both panels; ffmpeg hstack to <code>docs/one_sprig_opencl_vs_metal.mp4</code></td>
+<td>Side-by-side MP4 produced</td>
+</tr>
+<tr>
+<td>7. Frame check</td>
+<td>Samples at t=0, 10, 50, 100 ms: y = 18.606 ± 0.001 across both panels; x, z constant; spring topology correct</td>
+<td>Visual parity confirmed</td>
+</tr>
+<tr>
+<td>8. Commit</td>
+<td>Squashed commit containing: kernel cleanup (M11), SGD history, MP4, frame samples, commit-message parity table</td>
+<td>PR ready for review</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mind-of-a-worm-pr-review-checklist">Mind-of-a-Worm PR Review Checklist<a class="headerlink" href="#mind-of-a-worm-pr-review-checklist" title="Permanent link">&para;</a></h3>
+<p>Human reviewers (with MoaW assistance when available) walk through this checklist when reviewing a PR that touches Sibernetic physics. Items 1, 4, 5, 6 are the most consequential; items 7–10 are reporting hygiene that can be added in-PR.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Written prediction filed</strong></td>
+<td>PR includes a comment, commit-message section, or doc file showing the expected behavior (period, amplitude, equilibrium, settling time, etc.) derived from the config <em>before</em> the implementation was written.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>OpenCL reference trajectory committed</strong></td>
+<td>An <code>&lt;demo&gt;_opencl_position.txt</code> (or equivalent) artifact exists in the repo or PR diff, with metadata identifying which OpenCL build produced it.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Metal/CUDA trajectory committed</strong></td>
+<td>An equivalent Metal/CUDA trajectory dump exists, same scenario, same duration.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Side-by-side comparison MP4 in <code>docs/</code></strong></td>
+<td><code>docs/&lt;demo&gt;_opencl_vs_metal.mp4</code> (or <code>_vs_cuda</code>) exists, OpenCL on left, native on right, identical camera.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Visual parity verified at sample frames</strong></td>
+<td>PR includes at least 3-4 extracted frame images at distinct time points, with labeled y-values (or scalar metric) showing Δ &lt; 5% of OpenCL scale.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>SGD convergence history</strong></td>
+<td>If any parameter was tuned, the PR includes the SGD harness output (loss-per-iteration JSON or similar) demonstrating systematic optimization, not hand-sweeping.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Paired backward kernel + FD test</strong></td>
+<td>Per <a href="#quality-criteria">Quality Criteria #7</a>, any new forward kernel has a paired analytic backward and a <code>test_*.py</code> FD validator passing at &lt;5% rel-err.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Tuned parameter values documented</strong></td>
+<td>Final values for <code>rho_rest</code>, <code>spring_k</code>, <code>visc_pair_coef</code>, <code>alpha_dens</code>, etc., recorded in the commit message and/or the demo's README.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Substrate work itemized</strong></td>
+<td>The commit message lists what substrate-level changes landed (new kernels, harness extensions, validator tests, render-script updates).</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Phase 1 prediction reconciled against Phase 3 measurement</strong></td>
+<td>If the OpenCL measurement surprised the predictor, the PR documents the gap and the root cause (e.g., "predicted 2× faster because forgot the 0.25 factor"). This is a learning artifact for future contributors.</td>
+</tr>
+</tbody>
+</table>
+<p>As a rule of thumb: items 1, 4, 5, 6 carry the most weight (without them the PR is hand-fitted or unverified); items 7–10 are reporting hygiene that can usually be added in-PR; items 2 and 3 (the OpenCL reference + the candidate trajectory) are what make parity checkable at all, so they're worth pushing for early.</p>
+<h3 id="common-gotchas-distilled-from-the-native-metal-port">Common Gotchas (Distilled from the Native-Metal Port)<a class="headerlink" href="#common-gotchas-distilled-from-the-native-metal-port" title="Permanent link">&para;</a></h3>
+<p>These are the recurring failure modes seen during the native-Metal port. Reviewers (and MoaW, when available) keep an eye out for them in new PRs:</p>
+<ol>
+<li><strong>0.25 factor on non-worm-body elastic springs.</strong> <code>sphFluid.cl</code> applies <code>elasticityCoefficient × 0.25</code> only to non-worm-body elastic pairs. Forgetting this in Metal makes the oscillation period 2× too short. The Phase 1 prediction must account for it.</li>
+<li><strong><code>rho_rest = 0</code> causes NaN.</strong> The density solver divides by <code>rho_rest</code>. Always use <code>1.0</code> for vacuum scenarios where SPH coupling is irrelevant; use the config's <code>rho0</code> explicitly for liquid scenarios.</li>
+<li><strong>CLI argv off-by-one cascades.</strong> <code>dump_metal_trajectory.py</code> uses positional arguments. Skipping a slot doesn't skip the C++ side's argv index — you must emit placeholder <code>'0'</code> strings. When adding a new flag, verify subsequent indices are still aligned.</li>
+<li><strong>Hand-sweeping parameters instead of SGD.</strong> If a PR runs 3-5 variants of <code>dump_metal_trajectory.py</code> with guessed values, stop and use the harness. SGD converges in 5-10 iterations; hand-sweeping takes 20+ and produces less defensible results.</li>
+<li><strong>Physics gap vs parameter gap.</strong> If SGD plateaus on a loss that's clearly worse than OpenCL (worm sinking with no buoyancy, water exploding with no PCISPH), the issue is a missing kernel, not bad tuning. Port the missing OpenCL kernel — do not ship with caveats.</li>
+<li><strong>Bounded parameters in log-space blow up.</strong> Linear parameters like <code>floor_y</code> can't use log-space updates (<code>floor_y = 2 × exp(0.5 × 10) = 296</code>). Use <code>--linear-trainable</code> with <code>--linear-lr 0.05-0.15</code> and bounded step sizes.</li>
+<li><strong>Oscillation around optimum on linear params.</strong> A limit cycle (parameter bouncing between two values every iteration) means the step size is too coarse. The harness auto-halves on sign-flip + L-increase; if you still see it, drop <code>--linear-lr</code> further.</li>
+<li><strong>Frame-format mismatch between backends.</strong> OpenCL and Metal trajectories differ in frame structure (boundary particles in frame 0 vs every frame). The render script auto-detects by divisibility check. Symptoms of a broken parser: elastic particle visually missing, or labeled with a boundary-particle y-value.</li>
+<li><strong>Frame count mismatch desyncs the side-by-side.</strong> Use <code>--max-frames</code> on the longer trajectory to cap it to the shorter one, or both panels will end at different simulation times.</li>
+<li><strong>Convergence threshold too tight.</strong> Chasing <code>L &lt; 1e-6</code> wastes finite-difference evaluations. <code>L &lt; 1e-4</code> is tight enough for frame-by-frame visual parity; stop there.</li>
+</ol>
+<h3 id="validation-tooling-reference">Validation Tooling Reference<a class="headerlink" href="#validation-tooling-reference" title="Permanent link">&para;</a></h3>
+<p>Operational scripts that implement this workflow (all in <code>src/metal_diff/</code>):</p>
+<ul>
+<li><strong><code>dump_metal_trajectory.py</code></strong> — runs a scenario on the Metal substrate; emits trajectory text file matching the OpenCL output format</li>
+<li><strong><code>render_one_sprig.py</code></strong> — renders a single trajectory as an MP4 panel; auto-detects OpenCL vs Metal frame structure</li>
+<li><strong><code>render_worm.py</code></strong> — same for worm-scale demos with iso/closeup/cross views, zoom controls, edge rendering, liquid opacity</li>
+<li><strong><code>sgd_one_sprig.py</code></strong> — single-parameter SGD harness for anchor-spring scenarios</li>
+<li><strong><code>sgd_true.py</code></strong> — multi-parameter SGD harness using analytic gradients via <code>xpbd_full_bwd</code> (the canonical reference; TBPTT + gradient clipping)</li>
+<li><strong><code>sgd_worm.py</code></strong> — worm-scale parameter tuning</li>
+<li><strong><code>sgd_demo2_membrane.py</code></strong> / <strong><code>sgd_demo2_permeability.py</code></strong> — membrane-specific tuning harnesses</li>
+<li><strong><code>tests/test_demo1_backend_parity.py</code></strong> — automated parity gate for the cube-drop demo (runs both backends, compares trajectories, reports per-metric pass/fail)</li>
+<li><strong><code>test_*.py</code></strong> in <code>src/metal_diff/</code> — 19 finite-difference validators for individual kernel backwards</li>
+</ul>
+<p>The matching cuda substrate (when it lands per <code>src/cuda/README.md</code>) must include the same workflow tools — <code>dump_cuda_trajectory.py</code>, <code>sgd_*</code> scripts, and FD validators.</p>
+<hr />
+<h2 id="boundaries-explicitly-out-of-scope">Boundaries (Explicitly Out of Scope)<a class="headerlink" href="#boundaries-explicitly-out-of-scope" title="Permanent link">&para;</a></h2>
+<h3 id="this-design-document-does-not-cover">This Design Document Does NOT Cover:<a class="headerlink" href="#this-design-document-does-not-cover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Per-cell mechanical identity beyond muscles:</strong> Sibernetic already maps 95 body-wall muscles into 96 independently activable units (24 per quadrant × 4 quadrants: VR, VL, DR, DL), with geometries based on WormAtlas microphotographs (<a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov et al. 2018</a>, Section 2b). However, non-muscle cells (hypodermis, seam cells, neurons) are still represented as bulk elastic/liquid without cell boundaries. See DD004 (Mechanical Cell Identity) for the proposal to extend per-particle cell IDs to all tissue types.</p>
+</li>
+<li>
+<p><strong>Cuticle fine structure:</strong> The cuticle has three layers (basal, medial, cortical) with distinct mechanical properties. Current model uses homogeneous elastic particles. Phase 6 work.</p>
+</li>
+<li>
+<p><strong>Environmental complexity beyond liquid/gel:</strong> Sibernetic already supports both liquid and agar gel environments — gel is modeled as elastic matter cubes in a 3D grid (<a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov et al. 2018</a>, Section 2c). Realistic soil mechanics, bacterial food, and geometric obstacles remain out of scope.</p>
+</li>
+<li>
+<p><strong>Thermodynamics:</strong> No temperature, no heat diffusion, no thermal expansion. <em>C. elegans</em> is studied at 20°C but temperature effects are not modeled.</p>
+</li>
+<li>
+<p><strong>Growth and molting:</strong> Body size changes during development. Current model assumes fixed adult size. Phase 8 work.</p>
+</li>
+</ol>
+<hr />
+<h2 id="context-background">Context &amp; Background<a class="headerlink" href="#context-background" title="Permanent link">&para;</a></h2>
+<p><em>C. elegans</em> is a soft-bodied organism. Locomotion emerges from the interaction between:</p>
+<ul>
+<li>Muscle contractile forces (internal)</li>
+<li>Body wall elasticity (structural)</li>
+<li>Pseudocoelomic fluid pressure (hydrostatic skeleton)</li>
+<li>Environmental resistance (viscous drag, surface contact)</li>
+</ul>
+<p>Classical rigid-body physics engines (used in robotics) cannot capture this fluid-structure interaction. Finite element methods (FEM) are accurate but computationally expensive and poorly suited for large deformations and topological changes.</p>
+<hr />
+<h2 id="implementation-references">Implementation References<a class="headerlink" href="#implementation-references" title="Permanent link">&para;</a></h2>
+<h3 id="repository">Repository<a class="headerlink" href="#repository" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>https://github.com/openworm/Sibernetic
+</code></pre></div>
+<p><strong>Key files:</strong></p>
+<ul>
+<li><code>src/owPhysicsFluidSimulator.cpp</code> — Main SPH loop (OpenCL reference)</li>
+<li><code>src/owWorldSimulation.cpp</code> — Particle initialization, boundary conditions</li>
+<li><code>src/sphFluid.cl</code> — OpenCL kernel for GPU acceleration (the canonical reference; ~64KB)</li>
+<li><code>src/metal_diff/</code> — Native Metal substrate (Apple Silicon): <code>sib_metal</code> binary, <code>shaders.metal</code>, per-op test suite</li>
+<li><code>src/cuda/</code> — Native CUDA substrate (NVIDIA): scaffolding awaiting PR #229</li>
+<li><code>taichi_backend/</code> — Historical Taichi prototyping path (superseded by the native substrates above)</li>
+</ul>
+<h3 id="configuration-format">Configuration Format<a class="headerlink" href="#configuration-format" title="Permanent link">&para;</a></h3>
+<p>Sibernetic reads <code>.ini</code> files specifying:</p>
+<ul>
+<li>Particle counts (liquid, elastic, boundary)</li>
+<li>Initial positions (from pre-generated <code>.obj</code> 3D mesh or procedural)</li>
+<li>Muscle activation input file</li>
+<li>Simulation duration, timestep, output frequency</li>
+</ul>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="k">[simulation]</span>
+<span class="na">timestep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.00002</span>
+<span class="na">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10.0</span>
+<span class="na">output_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.01</span>
+
+<span class="k">[particles]</span>
+<span class="na">liquid_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">50000</span>
+<span class="na">elastic_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">40000</span>
+<span class="na">boundary_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10000</span>
+
+<span class="k">[physics]</span>
+<span class="na">rest_density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1000.0</span>
+<span class="na">viscosity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4e-6</span>
+<span class="na">elasticity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0.0006</span>
+</code></pre></div></p>
+<h3 id="compute-backends">Compute Backends<a class="headerlink" href="#compute-backends" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Language</th>
+<th>Hardware</th>
+<th>Speed</th>
+<th>Differentiable</th>
+<th>Result Quality</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCL</td>
+<td>C++</td>
+<td>CPU/GPU (Linux, Intel Mac)</td>
+<td>Baseline</td>
+<td>❌ forward only</td>
+<td><strong>Gold standard</strong> — validated ±15%</td>
+<td><strong>Production</strong> (but losing driver support)</td>
+</tr>
+<tr>
+<td>Native Metal</td>
+<td>C++/Metal shaders</td>
+<td>Apple Silicon GPU</td>
+<td>First-pass ~2.7 ms/step on M-series</td>
+<td>✅ <strong>end-to-end</strong> — 19 paired backward kernels, multi-step <code>xpbd_full_bwd</code>, FD-validated, 4 demos SGD-tuned</td>
+<td>Forward parity in progress; 5+ demos working (cube drop, membrane, worm_alone, worm_swim)</td>
+<td><strong>Experimental → Stable</strong> — consolidated on <code>ow-native-gpu-0.1.0</code> branch; PR #230 in flight</td>
+</tr>
+<tr>
+<td>Native CUDA</td>
+<td>C++/CUDA</td>
+<td>NVIDIA GPU</td>
+<td>Target ~5x OpenCL</td>
+<td>🟡 <strong>structural mandate</strong> — <code>src/cuda/README.md</code> requires mirroring Metal's paired-backward architecture</td>
+<td>Scaffolding stage</td>
+<td><strong>Scaffolding</strong> — PR #229 (sib_cuda) in review</td>
+</tr>
+<tr>
+<td>Taichi Metal / CUDA</td>
+<td>Python/Taichi</td>
+<td>Apple Silicon / NVIDIA</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td><strong>Superseded</strong> — earlier prototyping path; supplanted by the native ports above</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation:</strong> OpenCL remains the only backend producing validated simulation results today. However, OpenCL driver support is shrinking across platforms (Apple removed OpenCL on Apple Silicon; AMD/NVIDIA deprioritizing). The path forward is <strong>native</strong> Metal and CUDA substrates — hand-written GPU kernels that target each platform's first-class API directly, rather than Taichi abstractions that introduced their own divergence from the OpenCL reference. See <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a> below.</p>
+<hr />
+<h2 id="backend-stabilization-roadmap">Backend Stabilization Roadmap<a class="headerlink" href="#backend-stabilization-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="why-opencl-must-be-replaced">Why OpenCL Must Be Replaced<a class="headerlink" href="#why-opencl-must-be-replaced" title="Permanent link">&para;</a></h3>
+<p>The OpenCL backend is the <strong>only</strong> backend producing validated simulation results (kinematic metrics within ±15% of Schafer lab baseline). However, OpenCL driver support is shrinking across all major platforms:</p>
+<ul>
+<li><strong>Apple</strong> dropped OpenCL entirely (deprecated since macOS 10.14, removed from Apple Silicon native support)</li>
+<li><strong>AMD</strong> is deprioritizing OpenCL in favor of ROCm/HIP</li>
+<li><strong>NVIDIA</strong> is deprioritizing OpenCL in favor of CUDA</li>
+<li><strong>Docker</strong> — OpenCL runs CPU-only in Docker (GPU passthrough broken, issue #320)</li>
+</ul>
+<p>The core challenge: the only backend producing good simulation results is losing the platforms it runs on. The goal is to achieve OpenCL-equivalent result quality on <strong>native</strong> Metal (Apple Silicon) and <strong>native</strong> CUDA (NVIDIA) substrates <strong>before</strong> OpenCL becomes unusable.</p>
+<h3 id="why-native-ports-not-taichi">Why Native Ports, Not Taichi<a class="headerlink" href="#why-native-ports-not-taichi" title="Permanent link">&para;</a></h3>
+<p>An earlier prototyping path used <a href="https://www.taichi-lang.org/">Taichi</a> as an intermediate language to target Metal and CUDA from a single Python codebase. Taichi simplified bring-up but introduced a coordinate-space divergence from the OpenCL reference (elastic forces ~287× too weak — see historical note in <a href="#cross-backend-parity-requirements">Cross-Backend Parity Requirements</a> below) that proved harder to debug than implementing the GPU kernels natively.</p>
+<p>The current strategy is <strong>hand-written kernels per platform</strong>: a Metal shader implementation for Apple Silicon (<code>src/metal_diff/</code>), a CUDA kernel implementation for NVIDIA (<code>src/cuda/</code>). Each substrate mirrors the OpenCL <code>sphFluid.cl</code> reference line-by-line, giving direct algorithmic correspondence without an intermediate abstraction layer. This is the strategy consolidated on the <code>ow-native-gpu-0.1.0</code> branch (see PR #230) and is the active direction for the project.</p>
+<h3 id="the-result-quality-gap">The Result Quality Gap<a class="headerlink" href="#the-result-quality-gap" title="Permanent link">&para;</a></h3>
+<p>The native Metal substrate is the most mature of the modernization paths and reaches forward parity on five demos so far:</p>
+<ul>
+<li><strong>demo1</strong> (cube drop) — forward parity within ±5%; cross-backend parity test passes 5/5 metrics</li>
+<li><strong>demo2</strong> (membrane permeability) — membrane mechanism ported (M10 kernels) with FD-validated backward; sheet-scale parameter tuning in progress</li>
+<li><strong>one_sprig_test</strong> — active muscle contraction extension to anchor-spring kernel; OpenCL reference + Metal port both validated</li>
+<li><strong>worm_alone_half_resolution</strong> — gravity drop + cylindrical-diameter retention matched to OpenCL</li>
+<li><strong>worm_swim_half_resolution</strong> — basic swim locomotion validated; SPH pressure force kernel implemented (replaces XPBD-only density solver) for accurate water-on-worm dynamics</li>
+</ul>
+<p><strong>Cross-backend parity status:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Demo1</th>
+<th>Demo2</th>
+<th>one_sprig</th>
+<th>worm_alone</th>
+<th>worm_swim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCL</td>
+<td>reference</td>
+<td>reference</td>
+<td>reference</td>
+<td>reference</td>
+<td>reference</td>
+</tr>
+<tr>
+<td>Native Metal</td>
+<td>✅ ±5%</td>
+<td>🟡 in tuning</td>
+<td>✅ ±5%</td>
+<td>✅ visual parity</td>
+<td>🟡 swim parity in progress</td>
+</tr>
+<tr>
+<td>Native CUDA</td>
+<td>scaffolding</td>
+<td>scaffolding</td>
+<td>scaffolding</td>
+<td>scaffolding</td>
+<td>scaffolding</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Root cause analysis approach:</strong> The OpenCL C++ kernels (<code>sphFluid.cl</code>, ~64KB) are the reference implementation. Each native substrate (Metal, CUDA) implements the kernels per-platform with direct OpenCL-line correspondence rather than via an intermediate abstraction. The historical Taichi divergence (elastic forces ~287× too weak from a coordinate-space mismatch — <code>sim_scale</code> division applied inconsistently between SPH and elastic force paths) is not present in the native ports because the OpenCL reference's coordinate handling is preserved verbatim.</p>
+<h3 id="cross-backend-parity-requirements">Cross-Backend Parity Requirements<a class="headerlink" href="#cross-backend-parity-requirements" title="Permanent link">&para;</a></h3>
+<p>Replacement backends must produce kinematic outputs matching OpenCL within ±5% on the same configuration. The parity test suite consists of:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>What It Measures</th>
+<th>Pass Criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Drop test</td>
+<td>Liquid sphere under gravity settles and spreads</td>
+<td>Position/velocity metrics within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Elastic deformation</td>
+<td>Suspended elastic body sags under gravity</td>
+<td>Mean displacement within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Muscle contraction</td>
+<td>Single quadrant activation bends body</td>
+<td>Curvature within ±5% of OpenCL</td>
+</tr>
+<tr>
+<td>Full worm crawling</td>
+<td>15ms coupled simulation</td>
+<td>WCON trajectory metrics within ±5% of OpenCL</td>
+</tr>
+</tbody>
+</table>
+<p>Each test produces numeric metrics; the parity suite compares against OpenCL baseline values stored in a reference file.</p>
+<h3 id="backend-graduation-criteria-exit-conditions">Backend Graduation Criteria (Exit Conditions)<a class="headerlink" href="#backend-graduation-criteria-exit-conditions" title="Permanent link">&para;</a></h3>
+<p>A backend transitions levels by satisfying the <strong>exit conditions</strong> below. These are <em>gating</em> — a substrate stays at its current level until every condition in the next row is met. This mirrors the Kubernetes alpha/beta/GA graduation-criteria pattern, where each maturity stage has a defined contract for what closes it out.</p>
+<table>
+<thead>
+<tr>
+<th>To exit...</th>
+<th>...into</th>
+<th>Exit conditions (all must hold)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(initial)</td>
+<td><strong>Experimental</strong></td>
+<td>Compiles on the target platform. Runs an end-to-end simulation. Produces an output artifact (trajectory dump, frame, or whatever the substrate's analog is) without segfault, NaN, or SIGKILL.</td>
+</tr>
+<tr>
+<td><strong>Experimental</strong></td>
+<td><strong>Stable</strong></td>
+<td>Runs 10s of simulated time without divergence. Passes the cross-backend parity test suite (Issue <a href="https://github.com/openworm/sibernetic/issues/235">#235</a>, milestone v0.1.1 (Phase 0 Modernization)) within ±5% of the OpenCL reference on every working demo. For native substrates: every new forward kernel ships with a paired analytic backward, FD-validated within ±5% (see <a href="#quality-criteria">Quality Criteria #7</a>).</td>
+</tr>
+<tr>
+<td><strong>Stable</strong></td>
+<td><strong>Production</strong></td>
+<td>All Stable conditions hold. Substrate integrated into the Sibernetic Docker image. CI gate active on the platform (macOS runner for Metal, Linux+NVIDIA runner for CUDA). Performance benchmarked on at least three platforms and the result documented.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current status:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Level</th>
+<th>What's holding the next transition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenCL</td>
+<td><strong>Production</strong></td>
+<td>(Production today. Losing platform support is a separate, non-graduation concern — the goal is to maintain the gold standard until native substrates reach Production.)</td>
+</tr>
+<tr>
+<td>Native Metal</td>
+<td><strong>Experimental → Stable</strong></td>
+<td>Forward parity on 5+ demos; demo2 sheet-scale and worm_swim parity tuning in progress. Closes when those two parity gates go green (milestone v0.1.1 (Phase 0 Modernization)). Differentiable end-to-end: 19 paired backward kernels (FD-validated), multi-step <code>xpbd_full_bwd</code>, 4 demos already SGD-tuned. See <a href="#differentiability">Differentiability</a>.</td>
+</tr>
+<tr>
+<td>Native CUDA</td>
+<td><strong>Scaffolding → Experimental</strong></td>
+<td>Awaiting kernel implementation. PR #229 introduces the substrate skeleton; first wave of forward kernels + paired backwards needed to clear Experimental (milestone v0.1.1 (Phase 0 Modernization)).</td>
+</tr>
+<tr>
+<td>Taichi Metal / CUDA</td>
+<td><strong>Superseded</strong></td>
+<td>Earlier prototyping path; the native ports above are the replacement direction. Not on a graduation path.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="community-contributions-to-modernization">Community Contributions to Modernization<a class="headerlink" href="#community-contributions-to-modernization" title="Permanent link">&para;</a></h3>
+<p>Substantial portions of the native-port modernization have been driven by community contributions. Specific contributor acknowledgments are tracked in GitHub issues on <code>openworm/sibernetic</code> rather than in this design document — see the <code>contributor-acknowledgment</code> label for the current list. The framing of "OpenCL is losing platform support, native Metal + CUDA is the modernization path" emerged directly from community-filed issues; see the <code>native-gpu</code> label for the current set.</p>
+<hr />
+<h2 id="differentiability">Differentiability<a class="headerlink" href="#differentiability" title="Permanent link">&para;</a></h2>
+<p>The native Metal substrate is <strong>architecturally differentiable</strong>. This is not a bolt-on or a future framework: every physical kernel was implemented from day one with a paired analytic backward kernel, and the multi-step integration loop walks K iterations in reverse to produce gradients on initial conditions and physical parameters. The same architecture is the design requirement for the in-progress CUDA port.</p>
+<h3 id="why-differentiability-is-a-substrate-property-not-a-framework-layer">Why Differentiability Is a Substrate Property, Not a Framework Layer<a class="headerlink" href="#why-differentiability-is-a-substrate-property-not-a-framework-layer" title="Permanent link">&para;</a></h3>
+<p>The native substrate derives analytic backwards alongside each forward kernel rather than relying on an autodiff layer over a separate reimplementation. This produces three structural advantages:</p>
+<ol>
+<li><strong>No re-implementation drift.</strong> A separate autodiff reimplementation in a host-language framework would have to track the reference's behavior over time as physics changes; an in-substrate backward is the same code path as the forward.</li>
+<li><strong>GPU-native gradients.</strong> Backward kernels run on the same Metal command queue as the forwards — no host round-trip, no autodiff graph overhead.</li>
+<li><strong>Parameter gradients arrive for free.</strong> Once each forward kernel has an analytic backward, every physical parameter (stiffness, viscosity, rest density, compliance) is differentiable end-to-end without explicit <code>requires_grad</code> plumbing.</li>
+</ol>
+<p>The CUDA scaffolding at <code>src/cuda/README.md</code> makes this explicit: the CUDA substrate must mirror <code>src/metal_diff/</code> file-for-file, including paired backward kernels per forward kernel. Differentiability is the <em>architectural contract</em> the substrate exposes — not an optional feature flag.</p>
+<p>The ML-augmentation framework that consumes this substrate (surrogate models, learned sensory transduction) is the scope of DD013.</p>
+<h3 id="whats-differentiable-today">What's Differentiable Today<a class="headerlink" href="#whats-differentiable-today" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Forward kernel</th>
+<th>Backward kernel</th>
+<th>Status</th>
+<th>FD validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dist_active_static</code> / <code>_active_active</code> (pairwise distance)</td>
+<td><code>*_backward</code></td>
+<td>Implemented</td>
+<td>&lt;1% rel-err</td>
+</tr>
+<tr>
+<td><code>wpoly6_inplace</code> (Müller poly6 SPH kernel)</td>
+<td><code>wpoly6_inplace_backward</code></td>
+<td>Implemented</td>
+<td>&lt;1% rel-err</td>
+</tr>
+<tr>
+<td><code>rowsum_density</code> (SPH density via threadgroup reduction)</td>
+<td><code>rowsum_density_backward</code></td>
+<td>Implemented</td>
+<td>&lt;1% rel-err</td>
+</tr>
+<tr>
+<td><code>density_grad_combined</code> (fused density + ∇W + denom)</td>
+<td><code>density_constraint_grad_backward</code></td>
+<td>Implemented</td>
+<td>&lt;5% rel-err</td>
+</tr>
+<tr>
+<td><code>solve_density_constraint</code> (XPBD density correction)</td>
+<td><code>solve_density_constraint_backward</code></td>
+<td>Implemented</td>
+<td>&lt;5% rel-err</td>
+</tr>
+<tr>
+<td><code>predict_positions</code> (XPBD predictive step)</td>
+<td><code>predict_positions_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>solve_distance_constraints_seq</code> (iterative constraint projection)</td>
+<td><code>*_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>pair_forces_grid</code> (viscosity + surface tension)</td>
+<td><code>pair_forces_grid_backward</code></td>
+<td>Implemented</td>
+<td>&lt;1% rel-err</td>
+</tr>
+<tr>
+<td><code>apply_ext_accel</code> (external acceleration)</td>
+<td><code>apply_ext_accel_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>spring_bonds_force</code> (Hooke spring bonds)</td>
+<td><code>spring_bonds_force_backward</code></td>
+<td>Implemented</td>
+<td>&lt;1% rel-err</td>
+</tr>
+<tr>
+<td><code>spring_anchor_force</code> (boundary anchor springs)</td>
+<td><code>spring_anchor_force_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>solve_floor_constraint</code> (floor collision + restitution)</td>
+<td><code>solve_floor_constraint_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>update_velocities</code> (verlet velocity update)</td>
+<td><code>update_velocities_backward</code></td>
+<td>Implemented</td>
+<td>end-to-end via <code>xpbd_full_bwd</code></td>
+</tr>
+<tr>
+<td><code>membrane_clear</code> / <code>_accumulate</code> / <code>_apply</code> (Ihmsen 2014 M10)</td>
+<td>analytic backward through plane projection</td>
+<td>Implemented</td>
+<td>&lt;7e-4 rel-err (test_xpbd_full_membrane.py, K ∈ {1,2,3,5})</td>
+</tr>
+</tbody>
+</table>
+<p><strong>19 forward kernels, 19 paired backward kernels.</strong> All analytic, hand-derived from the physics. All validated against finite-difference at ε = 1e-3 to within 1–5% relative error (membrane: &lt;7e-4).</p>
+<h3 id="multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd">Multi-Step Reverse-Mode AD: <code>xpbd_full_fwd</code> / <code>xpbd_full_bwd</code><a class="headerlink" href="#multi-step-reverse-mode-ad-xpbd_full_fwd-xpbd_full_bwd" title="Permanent link">&para;</a></h3>
+<p>The substrate exposes an end-to-end forward + backward pair (<code>ops_xpbd_full.mm</code>):</p>
+<ul>
+<li><strong><code>run_xpbd_full_fwd(argc, argv)</code></strong> — runs K XPBD constraint-projection steps, persisting per-step state (positions, velocities, density, ∇C, denominator helpers, per-kernel auxiliaries) to disk for the backward walk.</li>
+<li><strong><code>run_xpbd_full_bwd(argc, argv)</code></strong> — consumes the saved state + a ∂L/∂x_final seed gradient, walks K steps in reverse, and outputs:</li>
+<li><code>∂L/∂x_init</code>, <code>∂L/∂v_init</code> (initial-condition gradients)</li>
+<li><code>∂L/∂ρ_rest</code>, <code>∂L/∂spring_K</code>, <code>∂L/∂visc_coef</code>, <code>∂L/∂α_density</code>, <code>∂L/∂floor_y</code>, <code>∂L/∂restitution</code> (scalar parameter gradients)</li>
+<li>Per-particle parameter gradients where applicable</li>
+</ul>
+<p>Per-step gradient clipping (env: <code>BWD_CLIP_NORM</code>) keeps long sequences numerically stable; TBPTT support lets training scripts trade memory for trajectory length.</p>
+<h3 id="gradient-tuned-demos-sgd-already-applied">Gradient-Tuned Demos (SGD Already Applied)<a class="headerlink" href="#gradient-tuned-demos-sgd-already-applied" title="Permanent link">&para;</a></h3>
+<p>Four of the five working demos have been tuned via gradient descent against OpenCL reference trajectories:</p>
+<table>
+<thead>
+<tr>
+<th>Demo</th>
+<th>Parameters tuned</th>
+<th>SGD script</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>demo1</strong> (cube drop)</td>
+<td><code>ρ_rest</code>, <code>spring_K</code>, <code>visc_coef</code></td>
+<td><code>sgd_true.py</code> (TBPTT + grad clipping)</td>
+<td>tuned to OpenCL parity (commit <code>bf6b333</code> series)</td>
+</tr>
+<tr>
+<td><strong>demo2</strong> (membrane permeability)</td>
+<td>membrane elasticity, permeability</td>
+<td><code>sgd_demo2_membrane.py</code>, <code>sgd_demo2_permeability.py</code></td>
+<td>tuned to OpenCL parity</td>
+</tr>
+<tr>
+<td><strong>one_sprig_test</strong></td>
+<td><code>spring_K</code> (single anchor spring)</td>
+<td><code>sgd_one_sprig.py</code></td>
+<td>reference oscillator validated</td>
+</tr>
+<tr>
+<td><strong>worm_alone_half_resolution</strong></td>
+<td><code>spring_K</code>, <code>visc</code> on worm elastic particles</td>
+<td><code>sgd_worm.py</code></td>
+<td>tuned to OpenCL trajectory</td>
+</tr>
+<tr>
+<td><strong>worm_swim_half_resolution</strong></td>
+<td>(in progress)</td>
+<td>—</td>
+<td>forward parity demonstrated; SGD pending</td>
+</tr>
+</tbody>
+</table>
+<p>SGD harness lives at <code>src/metal_diff/sgd_*.py</code> (8 scripts total, see repo). The pattern is reusable for any new demo or parameter sweep.</p>
+<h3 id="implications-for-downstream-subsystems">Implications for Downstream Subsystems<a class="headerlink" href="#implications-for-downstream-subsystems" title="Permanent link">&para;</a></h3>
+<p>Because the substrate exposes a differentiable contract, downstream subsystems that couple to body physics can now ask gradient-based questions of it:</p>
+<ul>
+<li><strong>Neural ↔ body coupling (DD002, DD003)</strong> — muscle activation timing, calcium-to-force scaling, and per-muscle-unit strength can be jointly optimized against kinematic targets. The muscle force injection path (Sibernetic's modulation of elastic bond stiffness via <code>k_muscle(t) = k_baseline × (1 + activation(t) × strength_multiplier)</code>) is differentiable through <code>xpbd_full_bwd</code>; activation traces can be backpropagated to neural circuit parameters when those are also expressed in a differentiable form.</li>
+<li><strong>Validation framework (DD010)</strong> — kinematic-metric mismatches against Schafer-lab baselines (speed, wavelength, frequency, gait) can directly drive parameter updates rather than requiring manual sweeps. Tier 3 validation becomes a loss function the substrate can be optimized against.</li>
+<li><strong>Simulation stack (DD011)</strong> — the <code>body.backend: metal-native</code> configuration should expose a differentiable interface alongside the forward-only interface, so other subsystems can opt into gradient-based parameter fitting via <code>openworm.yml</code>.</li>
+<li><strong>Hybrid ML framework (DD013)</strong> — now narrows to its remaining scope: neural surrogates for SPH (1000× speedup target) and learned sensory transduction. The "differentiable simulation backend" component of DD013 is delivered here, in DD001.</li>
+</ul>
+<h3 id="whats-not-yet-differentiable">What's Not (Yet) Differentiable<a class="headerlink" href="#whats-not-yet-differentiable" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>OpenCL backend</strong> — the reference implementation remains forward-only. Validated as the kinematic ground truth; not a differentiation target.</li>
+<li><strong>CUDA substrate</strong> — scaffolding stage; PR #229 introduces the substrate skeleton. The architectural contract (paired backward per forward) is mandated by the CUDA README but not yet implemented.</li>
+</ul>
+<h3 id="how-to-use-the-differentiable-interface">How to Use the Differentiable Interface<a class="headerlink" href="#how-to-use-the-differentiable-interface" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Forward pass: run K steps, save state</span>
+./sib_metal<span class="w"> </span>xpbd_full_fwd<span class="w"> </span>&lt;args&gt;<span class="w"> </span>--save-state<span class="w"> </span>/tmp/sim_state.bin
+
+<span class="c1"># Backward pass: seed gradient + retrieve parameter gradients</span>
+./sib_metal<span class="w"> </span>xpbd_full_bwd<span class="w"> </span>/tmp/sim_state.bin<span class="w"> </span>/tmp/grad_seed.bin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out-grads<span class="w"> </span>/tmp/param_grads.bin
+</code></pre></div>
+<p>For a worked example with SGD harness, see <code>src/metal_diff/sgd_true.py</code> (the canonical reference implementation that tunes <code>(ρ_rest, spring_K, visc_coef, α_density, floor_y)</code> against an OpenCL target trajectory using TBPTT + gradient clipping).</p>
+<hr />
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong><a href="https://doi.org/10.2312/SCA03/154-159">Müller M, Charypar D, Gross M (2003)</a>.</strong> "Particle-based fluid simulation for interactive applications." <em>Proc. ACM SIGGRAPH/Eurographics Symp. Computer Animation</em>, pp. 154-159.
+   <em>SPH kernel functions.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1145/1531326.1531346">Solenthaler B, Pajarola R (2009)</a>.</strong> "Predictive-Corrective Incompressible SPH." <em>ACM Trans. Graphics</em> 28(3):40.
+   <em>PCISPH pressure solver.</em></p>
+</li>
+<li>
+<p><strong>Boyle JH, Cohen N (2008).</strong> "Caenorhabditis elegans body wall muscles are simple actuators." <em>Biosystems</em> 94:170-181.
+   <em>Muscle-to-physics coupling validation.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1098/rstb.2017.0376">Palyanov A, Khayrulin S, Larson SD (2018)</a>.</strong> "Three-dimensional simulation of the <em>Caenorhabditis elegans</em> body and muscle cells in liquid and gel environments for behavioural analysis." <em>Phil. Trans. R. Soc. B</em> 373:20170376.
+   <em>Primary Sibernetic publication. Describes muscle cell mapping (96 units), validated kinematics (Table 1), force–velocity/force–length relationships, omega turns, and agar gel simulation.</em></p>
+</li>
+<li>
+<p><strong>Zhao M et al. (2024).</strong> <em>Nat Comp Sci</em> 4:978-990.
+   <em>Demonstrated real-time FEM body simulation of C. elegans at 30 FPS.</em></p>
+</li>
+<li>
+<p><strong><a href="https://doi.org/10.1145/2601097.2601116">Bouaziz S et al. (2014)</a>.</strong> <em>ACM Trans Graphics</em> 33:154.
+   <em>Projective Dynamics FEM solver.</em></p>
+</li>
+</ol>
+<hr />
+<h2 id="integration-contract">Integration Contract<a class="headerlink" href="#integration-contract" title="Permanent link">&para;</a></h2>
+<h3 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">&para;</a></h3>
+<p><strong>Inputs (What This Subsystem Consumes)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Source DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+<th>Timestep</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muscle activation coefficients</td>
+<td>DD003 (via <code>sibernetic_c302.py</code>)</td>
+<td>Per-muscle activation [0, 1]</td>
+<td>Written to muscle activation file by coupling script</td>
+<td>dimensionless</td>
+<td>dt_coupling (0.005 ms from neural side)</td>
+</tr>
+<tr>
+<td>Particle initialization geometry</td>
+<td>DD004 (when cell_identity enabled)</td>
+<td>Per-particle position, type, cell_id</td>
+<td>Binary or CSV particle file</td>
+<td>µm (positions), enum (type)</td>
+<td>One-time at sim start</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outputs (What This Subsystem Produces)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Consumer DD</th>
+<th>Variable</th>
+<th>Format</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Particle position time series</td>
+<td>DD010 (Tier 3 validation)</td>
+<td>All particle positions per output frame</td>
+<td>Binary state dump or WCON trajectory</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Rendered frames / video</td>
+<td>DD011 (output pipeline)</td>
+<td>Visual frames of worm body</td>
+<td>PNG or direct framebuffer</td>
+<td>pixels</td>
+</tr>
+<tr>
+<td>Body deformation state</td>
+<td>DD007 (pharynx, if Option B)</td>
+<td>Anterior attachment point displacement</td>
+<td>Shared memory or file</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Particle positions (for viewer)</td>
+<td><strong>DD012</strong> (visualization)</td>
+<td>Per-particle (x, y, z) over all output timesteps</td>
+<td>OME-Zarr: <code>body/positions/</code>, shape (n_timesteps, n_particles, 3)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td>Particle types (for viewer)</td>
+<td><strong>DD012</strong> (visualization)</td>
+<td>Per-particle type (liquid/elastic/boundary)</td>
+<td>OME-Zarr: <code>body/types/</code>, shape (n_particles,)</td>
+<td>enum</td>
+</tr>
+<tr>
+<td>Surface mesh (for viewer)</td>
+<td><strong>DD012</strong> (visualization)</td>
+<td>Reconstructed smooth body surface per timestep</td>
+<td>OME-Zarr: <code>geometry/body_surface/</code> (per-frame OBJ or vertices+faces arrays)</td>
+<td>µm</td>
+</tr>
+<tr>
+<td><strong>Parameter gradients</strong> (native substrates only)</td>
+<td>DD002 (joint neural↔body fitting), DD003 (muscle parameter fitting), DD010 (gradient-based validation loop)</td>
+<td><code>∂L/∂(x_init, v_init, ρ_rest, spring_K, viscosity, α_density, floor_y, restitution)</code> via <code>xpbd_full_bwd</code></td>
+<td>Binary float32 buffers per parameter</td>
+<td>mixed (per-particle position grads, scalar parameter grads)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repository-packaging">Repository &amp; Packaging<a class="headerlink" href="#repository-packaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository</strong></td>
+<td><code>openworm/sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Docker stage</strong></td>
+<td><code>body</code> in multi-stage Dockerfile</td>
+</tr>
+<tr>
+<td><strong><code>versions.lock</code> key</strong></td>
+<td><code>sibernetic</code></td>
+</tr>
+<tr>
+<td><strong>Build dependencies</strong></td>
+<td>OpenCL SDK (AMD or Intel), CMake, C++ compiler</td>
+</tr>
+<tr>
+<td><strong>Backend note</strong></td>
+<td>Taichi backends require <code>pip install taichi</code> (not currently in Dockerfile)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">body</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sibernetic</span>
+<span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencl</span><span class="w">                    </span><span class="c1"># opencl, metal-native, cuda-native</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;worm_crawl_half_resolution&quot;</span>
+<span class="w">  </span><span class="nt">particle_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span>
+<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscle</span><span class="w">              </span><span class="c1"># &quot;muscle&quot; = 96 muscle units mapped (default). &quot;all&quot; = Phase 6 (DD004): extend to all tissue types. &quot;false&quot; = bulk elastic only.</span>
+<span class="w">  </span><span class="nt">timestep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00002</span><span class="w">                  </span><span class="c1"># seconds</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Valid Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body.enabled</code></td>
+<td><code>true</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td>Enable body physics simulation</td>
+</tr>
+<tr>
+<td><code>body.engine</code></td>
+<td><code>sibernetic</code></td>
+<td><code>sibernetic</code></td>
+<td>Physics engine selection</td>
+</tr>
+<tr>
+<td><code>body.backend</code></td>
+<td><code>opencl</code></td>
+<td><code>opencl</code>, <code>metal-native</code>, <code>cuda-native</code></td>
+<td>Compute backend. <code>metal-native</code> targets Apple Silicon via hand-written Metal shaders; <code>cuda-native</code> targets NVIDIA via hand-written CUDA kernels. The earlier <code>taichi-metal</code> / <code>taichi-cuda</code> options are superseded by the native ports.</td>
+</tr>
+<tr>
+<td><code>body.configuration</code></td>
+<td><code>"worm_crawl_half_resolution"</code></td>
+<td>String</td>
+<td>Simulation configuration name</td>
+</tr>
+<tr>
+<td><code>body.particle_count</code></td>
+<td><code>100000</code></td>
+<td>Integer</td>
+<td>Total particle count</td>
+</tr>
+<tr>
+<td><code>body.cell_identity</code></td>
+<td><code>muscle</code></td>
+<td><code>false</code>/<code>muscle</code>/<code>all</code></td>
+<td><code>muscle</code> = 96 muscle units mapped (existing). <code>all</code> = extend to all tissue types (DD004, Phase 6). <code>false</code> = bulk elastic only.</td>
+</tr>
+<tr>
+<td><code>body.timestep</code></td>
+<td><code>0.00002</code></td>
+<td>Float (seconds)</td>
+<td>Simulation timestep</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-to-test-contributor-workflow">How to Test (Contributor Workflow)<a class="headerlink" href="#how-to-test-contributor-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Per-PR quick test (must pass before submission)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>quick-test
+<span class="c1"># Checks: simulation completes without NaN, segfault, or SIGKILL</span>
+<span class="c1"># Checks: output/*.wcon exists</span>
+
+<span class="c1"># Full validation (must pass before merge to main)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>validate
+<span class="c1"># Checks:</span>
+<span class="c1">#   - Density deviation &lt; 1% for liquid particles</span>
+<span class="c1">#   - Tier 3 kinematic metrics within ±15% of baseline</span>
+<span class="c1">#   - No particle escape (all positions within bounding box)</span>
+</code></pre></div>
+<p><strong>Per-PR checklist:</strong></p>
+<ul>
+<li>[ ] Build succeeds (<code>cmake .. &amp;&amp; make -j8</code>)</li>
+<li>[ ] <code>quick-test</code> passes (no NaN, no segfault, *.wcon exists)</li>
+<li>[ ] <code>validate</code> passes (Tier 3 kinematics + density constraint)</li>
+<li>[ ] Tested on at least two backends if core SPH algorithms changed</li>
+<li>[ ] No particle escape (all positions within bounding box)</li>
+</ul>
+<h3 id="how-to-visualize-dd012-connection">How to Visualize (DD012 Connection)<a class="headerlink" href="#how-to-visualize-dd012-connection" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>OME-Zarr Group</th>
+<th>Viewer Layer</th>
+<th>Color Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>body/positions/</code> (n_timesteps, n_particles, 3)</td>
+<td>Body particles</td>
+<td>Liquid=blue, elastic=green, boundary=gray</td>
+</tr>
+<tr>
+<td><code>body/types/</code> (n_particles,)</td>
+<td>Particle type overlay</td>
+<td>Type enum → color mapping</td>
+</tr>
+<tr>
+<td><code>geometry/body_surface/</code> (per-frame)</td>
+<td>Reconstructed mesh</td>
+<td>Smooth surface rendering</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backend-config-translation">Backend-Config Translation<a class="headerlink" href="#backend-config-translation" title="Permanent link">&para;</a></h3>
+<p>Sibernetic internally reads <code>.ini</code> configuration files. The <code>master_openworm.py</code> orchestrator (DD011) is responsible for translating <code>openworm.yml</code> body section to Sibernetic <code>.ini</code> format at runtime:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># master_openworm.py (pseudocode)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_sibernetic_config</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">):</span>
+    <span class="n">ini</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;simulation&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">])</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;particles&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;particle_count&#39;</span><span class="p">])</span>
+    <span class="c1"># ... etc</span>
+    <span class="n">ini</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sibernetic_config.ini&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>I Depend On</th>
+<th>DD</th>
+<th>What Breaks If They Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muscle activation format</td>
+<td>DD003</td>
+<td>If activation value range, file format, or muscle count changes, Sibernetic reads wrong data</td>
+</tr>
+<tr>
+<td><code>sibernetic_c302.py</code> script</td>
+<td>DD002/DD003</td>
+<td>This script bridges neural→body; changes to it affect coupling timing</td>
+</tr>
+<tr>
+<td>Cell boundary data</td>
+<td>DD004</td>
+<td>If particle initialization changes (cell-tagged particles), body geometry changes</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Depends On Me</th>
+<th>DD</th>
+<th>What Breaks If I Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Movement validation</td>
+<td>DD010</td>
+<td>If particle output format changes, validation toolbox can't read trajectory data</td>
+</tr>
+<tr>
+<td>Mechanical cell identity</td>
+<td>DD004</td>
+<td>If particle struct changes (adding/removing fields), DD004 initialization must match</td>
+</tr>
+<tr>
+<td>Pharynx attachment</td>
+<td>DD007</td>
+<td>If body geometry changes at anterior, pharynx coupling point shifts</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><strong>Approved by:</strong> OpenWorm Steering</li>
+<li><strong>Implementation Status:</strong> Complete (OpenCL production but losing platform support; native Metal substrate experimental→stable with 5+ demos working and <strong>end-to-end differentiable</strong> — 19 paired backward kernels, 4 demos already SGD-tuned; native CUDA substrate in scaffolding with paired-backward architecture mandated. See <a href="#backend-stabilization-roadmap">Backend Stabilization Roadmap</a> and <a href="#differentiability">Differentiability</a>)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
