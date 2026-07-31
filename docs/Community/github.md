@@ -10,7 +10,7 @@ This page contains a list of repositories maintained by the OpenWorm project on 
 Repositories
 ------------
 
-View the full current list [repositories](../Community/repositories/) of repositories on GitHub.
+View the full current list of [OpenWorm repositories on GitHub](https://github.com/openworm).
 
 Accessing GitHub
 ----------------
@@ -47,11 +47,11 @@ Opening a New Issue
 
 After logging into GitHub, select the OpenWorm organization and then click on the repository in which the issue is located/relevant to. Click on the Issues tab on the menu to the right.
 
-![image](../../images/gh_issue1.png)
+![image](../images/gh_issue1.png)
 
 Next, click on the New Image button in the upper right corner of the screen.
 
-![image](../../images/gh_issue2.png)
+![image](../images/gh_issue2.png)
 
 This will open the interface to create a new issue. You will need to add the following information:
 
@@ -61,7 +61,7 @@ This will open the interface to create a new issue. You will need to add the fol
 -   Add a milestone if appropriate
 -   Add labels to categorize the issue such as what language is being used, issue status (not started, working, etc.) and what function the issue is related to.
 
-![image](../../images/gh_issue3.png)
+![image](../images/gh_issue3.png)
 
 Finally, click on Submit New Issue.
 
@@ -93,10 +93,32 @@ Creating or Adding New Repositories
 
 Already existing repositories can be transferred into the OpenWorm GitHub organization via the ["transfer" mechanism provided by GitHub](https://help.github.com/articles/how-to-transfer-a-repository). New repositories [can be created](https://help.github.com/articles/create-a-repo) under the OpenWorm GitHub organization by request.
 
+Contributing to Design Document Implementation
+-----------------------------------------------
+
+**[Design Documents](../design_documents/) specify what to build.** GitHub issues (generated from DD Integration Contracts) specify the work breakdown.
+
+### DD Contribution Workflow
+
+1. **Browse [Design Documents](../design_documents/)** — find a DD matching your interest (neural modeling -> DD002, visualization -> DD012, etc.)
+2. **Read the DD** — understand the goal, deliverables, and quality criteria
+3. **Read "How to Build & Test" section** — copy-pasteable commands to get started
+4. **Check for GitHub issues** labeled `dd###` (e.g., `dd005` for DD005)
+5. **Claim an issue** — comment: "I'll work on this, ETA: X days"
+6. **Implement according to DD spec** — Quality Criteria define acceptance
+7. **Run tests:** `docker compose run quick-test` (per-PR), `docker compose run validate` (pre-merge)
+8. **Open PR** referencing the DD and issue
+9. **[Mind-of-a-Worm](ai_agents.md#mind-of-a-worm-active-contributor-guide) pre-review** — AI checks DD compliance automatically
+10. **Human L3+ review** — Final approval gate
+
+### Contributor Levels
+
+OpenWorm is evolving toward a structured L0–L5 contributor ladder. See **[Contributor Progression Model](../contributing/contributor-progression.md)** for the full table and progression criteria.
+
 Licenses on repositories
 ------------------------
 
-In historical practice, OpenWorm members have chosen to use the [MIT open source license](http://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](http://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
+In historical practice, OpenWorm members have chosen to use the [MIT open source license](https://opensource.org/licenses/MIT) for their repositories. The ultimate choice of license is up to the the authors of a given repository, but we would ask that all OpenWorm repository authors [choose some open source license for your repository](https://choosealicense.com/) and display a LICENSE file in the root of the repository to make it clear how to use it.
 
 An example of using the MIT license for OpenWorm code follows:
 

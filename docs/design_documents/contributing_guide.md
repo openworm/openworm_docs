@@ -1,0 +1,289 @@
+# Contributing to Design Documents
+
+This guide covers how to use, write, review, and contribute to OpenWorm Design Documents. For the overview of all DDs and the implementation roadmap, see the [Design Documents Overview](index.md).
+
+---
+
+## How to Use Design Documents
+
+### For Contributors
+
+**Before implementing a feature:**
+
+1. Check if a relevant DD exists (search this directory or ask in #development Slack)
+2. Read the DD's "Technical Approach" and "Quality Criteria" sections
+3. Check the DD's Integration Contract (what it consumes from other DDs, what it produces)
+4. Implement according to the DD's specifications
+5. Run the DD's validation procedure (`docker compose run quick-test`, `docker compose run validate`)
+6. Reference the DD number in your PR description (e.g., "Implements DD005 CeNGEN calibration")
+
+**If you disagree with a DD:**
+
+1. Propose a new DD that supersedes it (follow [Decision Process](../contributing/decision-process.md) RFC process)
+2. Do NOT silently deviate from an accepted DD without approval
+
+### For Reviewers (L3+)
+
+**When reviewing a PR:**
+
+1. Check which DDs are relevant ([Mind-of-a-Worm](../Community/ai_agents.md#mind-of-a-worm-active-contributor-guide) will flag these automatically)
+2. Verify the PR aligns with DD specifications (check Quality Criteria section)
+3. **If PR modifies a coupling interface** (changes output format, variable names, OME-Zarr schema):
+    - Check the DD's "Depends On Me" table in Integration Contract
+    - Tag maintainers of consuming DDs for coordination
+    - Require integration test evidence (`docker compose run validate` output)
+4. If the PR deviates from a DD, request justification or DD amendment via [Decision Process](../contributing/decision-process.md) RFC
+
+### For Mind-of-a-Worm AI
+
+**Automated compliance checking:**
+
+- Parse PR files to identify affected subsystems (e.g., `c302/` → DD002, DD005, DD006)
+- Retrieve relevant DDs and their Integration Contracts
+- Check:
+  - ✅ NeuroML validation (DD002, DD003: `jnml -validate` must pass)
+  - ✅ Unit compliance (DD010: biophysical units correct)
+  - ✅ Parameter ranges (conductances, voltages, time constants within DD-specified ranges)
+  - ⚠️ Coupling interface changes (flag if output variables, file formats, or OME-Zarr schema modified)
+  - ❌ Alternatives-considered violations (re-proposing explicitly rejected approaches)
+- Post automated review comment with pass/warn/fail status per DD
+- Tag relevant L4 maintainers for cross-subsystem coordination
+
+---
+
+## Design Document Lifecycle
+
+```
+┌─────────────┐
+│  Proposed   │ ← New DD opened as PR to openworm-admin
+└──────┬──────┘
+       │ Community discussion in PR comments, DD revised based on feedback
+       v
+┌─────────────┐
+│  Accepted   │ ← L4 maintainer (subsystem-specific) or L5 founder approves, PR merged
+└──────┬──────┘
+       │ Implementation proceeds (GitHub issues created, PRs reference DD)
+       │
+       ├─── Implementation complete, validation passes → Stable (no further changes unless bugs found)
+       │
+       ├─── New DD proposed that supersedes this one → Superseded (reference new DD number in header)
+       │
+       └─── Community testing reveals approach is wrong → Rejected (rare, but document why for future)
+```
+
+**Status definitions:**
+
+- ✅ **Accepted:** Binding specification. All implementations must comply. Can be amended via [Decision Process](../contributing/decision-process.md) RFC.
+- ⚠️ **Proposed:** Under review or approved but not yet implemented. Not binding until marked Accepted.
+- 🔴 **Blocked:** Cannot proceed due to missing prerequisite (e.g., DD017 blocked on toolbox dormancy).
+- 📦 **Archived / Backburner:** Deferred or superseded. Do not implement without reopening discussion.
+- **Superseded:** Replaced by a newer DD. Reference the superseding DD number.
+- **Rejected:** Explicitly not adopted. Alternatives Considered section documents why.
+
+---
+
+## Template & Reference
+
+- **[Decision Process](../contributing/decision-process.md):** Defines the Design Document template and all required sections (TL;DR, Goal, Deliverables, Build & Test, How to Visualize, Technical Approach, Alternatives, Quality Criteria, Boundaries, Integration Contract)
+- **[DD001](DD001_Body_Physics_Architecture.md):** **Reference implementation** — the first DD published in this docs cycle. Demonstrates the full expanded template, the spec/implementation cleavage (see its **Implementation Status & Roadmap** section), and the 8-phase Validation Methodology pattern. Use DD001 as your model when writing a new DD.
+
+All science DDs include a **Quick Action Reference** table answering:
+
+1. What does this produce?
+2. Success metric (which DD010 tier, quantitative threshold)
+3. Repository (GitHub link, issue label convention)
+4. Config toggle (openworm.yml keys)
+5. Build & test (docker commands, green-light criteria)
+6. Visualize (DD012 layer, color mapping, what you should see)
+7. CI gate (what blocks merge)
+
+---
+
+## Writing Your First Design Document
+
+### Step 1: Check Mission Alignment
+
+**Before writing a DD, ask:**
+
+- Does this advance the mission ("world's first virtual organism")?
+- Does it maintain physical realism ("soft and squishy")?
+- Is it experimentally validated (DD010 tiers)?
+- Is it open source and causally interpretable?
+
+**If yes to all:** Proceed. **If no:** Reconsider or clarify how it serves the mission.
+
+### Step 2: Check if a DD Already Exists
+
+Search this directory:
+```bash
+grep -r "keyword" design_documents/*.md
+```
+
+Check [INTEGRATION_MAP.md](INTEGRATION_MAP.md) — your topic may be covered by an existing DD's Integration Contract.
+
+### Step 3: Use the Template
+
+Follow the [Decision Process](../contributing/decision-process.md) template structure. Use [DD001 (Body Physics Engine)](DD001_Body_Physics_Architecture.md) as your reference implementation.
+
+**Required sections (from [Decision Process](../contributing/decision-process.md)):**
+
+- TL;DR (2-3 sentences)
+- Goal & Success Criteria (which DD010 tier, quantitative threshold)
+- Deliverables (exact files, paths, formats)
+- Repository & Issues (GitHub repo, issue label, branch convention)
+- Implementation Status & Roadmap (pointer to `label:ddNNN` and the release-milestones page; spec stays here, implementation lives in GitHub)
+- How to Build & Test (copy-pasteable commands, green-light criteria)
+- How to Visualize (DD012 layer, color mapping, what you should see)
+- Technical Approach (equations, parameters, algorithms)
+- Alternatives Considered (why other approaches were rejected)
+- Quality Criteria (testable acceptance criteria)
+- Boundaries (explicitly out of scope)
+- Context & Background (biological motivation, project history)
+- References (papers, datasets, DOIs)
+- Integration Contract (inputs/outputs, repository & packaging, configuration, how to test, how to visualize, coupling dependencies)
+
+### Step 4: Check Integration Map
+
+Before finalizing your DD, check [INTEGRATION_MAP.md](INTEGRATION_MAP.md):
+
+- Which DDs does yours depend on? (Add to "I Depend On" table)
+- Which DDs will depend on yours? (Add to "Depends On Me" table)
+- What data format do you consume/produce? (Document in Integration Contract)
+- Who's the upstream/downstream maintainer? (Coordinate before merging)
+
+### Step 5: Open RFC PR
+
+```bash
+cd openworm-admin/
+git checkout -b rfc/dd0XX-your-topic
+# (write DD0XX_Your_Topic.md)
+git add design_documents/DD0XX_Your_Topic.md
+git commit -m "RFC: DD0XX Your Topic"
+git push origin rfc/dd0XX-your-topic
+# Open PR on GitHub, tag relevant L4 maintainers
+```
+
+### Step 6: Respond to Feedback & Iterate
+
+- Community discusses in PR comments
+- You revise based on feedback
+- Subsystem L4 maintainer facilitates discussion
+- If fundamental disagreement: L5 founder arbitrates
+
+### Step 7: Implementation (After Approval)
+
+Once DD is approved and merged:
+
+- DD status changes to "Accepted"
+- Open implementation issues (or run `dd_issue_generator.py` to auto-generate from Integration Contract)
+- Implementation PRs reference the DD number
+- Mind-of-a-Worm checks implementation PRs for DD compliance
+
+---
+
+## Reference Implementation
+
+### [DD001 (Body Physics Engine)](DD001_Body_Physics_Architecture.md) — REFERENCE DD
+
+DD001 is the first design document published in this docs cycle. Read it end-to-end before writing a new DD. Beyond the required-sections template, four things are distinctive about how DD001 is structured:
+
+- ✅ **Implementation Status & Roadmap + Backend Graduation Criteria (Exit Conditions)** — the spec/issue cleavage in practice. Pointers to `label:dd001` and milestones; substrate maturity transitions defined as gating exit conditions, not described prose.
+- ✅ **8-phase Validation Methodology** — predict → reference → inspect → refine → implement → SGD-tune → render → compare. Includes a worked example, common gotchas, and the MoaW PR-review checklist.
+- ✅ **Paired-backward contract + Differentiability section** — Quality Criterion #7 mandates an FD-validated analytic backward per forward kernel; the Differentiability section documents the substrate-as-autograd-target architecture this contract produces.
+- ✅ **Alternatives Considered with named rejection rationale** — 5 alternatives (FEM, mass-spring, LBM, PBD, 2D rod-spring), each with the specific reason it was rejected, so future contributors don't re-propose them.
+
+---
+
+## Anti-Patterns (What NOT to Do)
+
+From [Decision Process](../contributing/decision-process.md) Quality Criteria section:
+
+**❌ Too vague:**
+> "We should use realistic channel models."
+
+*What's realistic? Which channels? What parameters? Which papers?*
+
+**❌ No alternatives:**
+> "We decided to use SPH for body physics."
+
+*Why not FEM? Why not mass-spring? Future contributors will re-propose without knowing they were already rejected.*
+
+**❌ No validation:**
+> "Implement IP3 receptor model."
+
+*How do you know if it works? What's the acceptance test? Which DD010 tier?*
+
+**❌ Scope creep:**
+> "This DD covers neurons, muscles, intestine, hypodermis, and gonad."
+
+*Too broad. Split into focused DDs (one per organ system).*
+
+**❌ Buried punchline:**
+> Validation goal appears at line 300 instead of the Goal section (line 30).
+
+*Lead with WHY and WHAT (impact), end with HOW (background). [Decision Process](../contributing/decision-process.md) template enforces this.*
+
+**❌ Phantom scripts:**
+> Commands reference `validate_network.py` with no tracking, no `[TO BE CREATED]` marker.
+
+*Mark all non-existent scripts `[TO BE CREATED]` with GitHub issue link or #TBD.*
+
+**❌ Inlined Next Actions list:**
+> Footer enumerates 8–10 specific implementation tasks (build script X, merge PR #Y, port kernel Z, etc.).
+
+*These become stale the moment the issue tracker moves. Point at the issue tracker via `label:ddNNN` and the release-milestones page in the **Implementation Status & Roadmap** section instead. The spec describes what should be built; the issue tracker describes what is being built and by whom.*
+
+*The Rust RFC process documents this directly: "we cannot expect every merged RFC to actually reflect what the end result will be at the time of the next major release." That's the whole point of keeping the design doc and the implementation tracker separate — the tracker absorbs the drift so the design doc doesn't have to be edited every time a task slips, splits, or pivots.*
+
+**❌ Disconnected from viewer:**
+> No "How to Visualize" section, no mention of DD012 layers.
+
+*Contributors can't see what they're building. Every science DD must specify its DD012 visualization.*
+
+**❌ No repo guidance:**
+> Doesn't specify which GitHub repo, where to file issues, branch naming convention.
+
+*Contributor doesn't know where to start. Repository & Issues section is required.*
+
+**❌ Consecutive bold-key lines without list markers:**
+> ```
+> **Status:** Accepted
+> **Author:** OpenWorm Core Team
+> **Date:** 2026-02-14
+> ```
+
+*Standard Markdown treats consecutive lines as a single paragraph — these will render as one run-together line. Always use list markers (`- `) for metadata blocks:*
+
+> ```
+> - **Status:** Accepted
+> - **Author:** OpenWorm Core Team
+> - **Date:** 2026-02-14
+> ```
+
+---
+
+## Frequently Asked Questions
+
+**Q: Do I need a DD to fix a typo?**
+A: No. Trivial fixes (typos, dead link updates, comment improvements) do not require DDs.
+
+**Q: Do I need a DD to add a new neuron to the connectome?**
+A: No, if the neuron is from published connectome data (Cook, Witvliet). The connectome topology is biological ground truth (DD016), not an architectural decision. Yes, if you are proposing a novel *modeling approach* for that neuron (e.g., multicompartmental morphology, new channel type).
+
+**Q: Can I modify an accepted DD?**
+A: Yes, via amendment. Open a PR modifying the DD, add "Amended YYYY-MM-DD" to the header, go through [Decision Process](../contributing/decision-process.md) RFC process. L4 maintainer or founder approves amendments.
+
+**Q: What if my DD is rejected?**
+A: The rejection itself is documented (DD status → Rejected, Alternatives Considered explains why). You (and future contributors) now know that approach was considered and why it doesn't serve the mission. This preserves institutional memory.
+
+**Q: How do DDs relate to the Scientific Advisory Board?**
+A: DDs with major scientific implications (e.g., choosing what biological detail to model, which validation targets to prioritize) should be reviewed by SAB before final approval. L4 maintainers coordinate SAB review for their subsystem.
+
+**Q: What's the difference between DD012, DD012.1, and DD012.2?**
+A: DD012 is the main visualization architecture (data pipeline, viewer framework, phase roadmap). DD012.1 (Visual Rendering Specification) is a companion defining appearance (colors, materials, lighting, mockups). DD012.2 (Mesh Deformation) is a companion defining how to deform Virtual Worm meshes to follow SPH particles.
+
+**Q: Where are the GitHub issues for DD implementation?**
+A: Not yet created. After DDs are approved, `dd_issue_generator.py` (AI Contributors) will auto-generate GitHub issues from Integration Contract sections.
+
+**Q: Why are so many DDs "Proposed" instead of "Accepted"?**
+A: Phase 0 DDs (DD002-003, DD016) are Accepted because they're implemented and working. Phase 1-6 DDs are Proposed because they're the roadmap for future work. They'll become Accepted as each phase is implemented and validated.

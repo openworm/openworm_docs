@@ -3,15 +3,30 @@ OpenWorm Community
 
 This page contains information intended to help individuals understand what steps to take to make contributions to OpenWorm, how to join OpenWorm meetings, how to interact with the community online, and how to become an OpenWorm core member.
 
+The path from newcomer to contributor
+-------------------------------------
+
+The current way to start contributing:
+
+1. **Apply for Slack access** — [fill out the volunteer application form](https://goo.gl/3ncZWn) to request a Slack invite.
+2. **Find work** — browse the [project list](projects.md) or [GitHub issues across the OpenWorm org](https://github.com/orgs/openworm/projects) to find an area that matches your interests.
+3. **Announce your interest** — comment on the GitHub issue you'd like to work on so others know it's claimed.
+4. **Submit your contribution** — see the [GitHub Workflow page](Community/github.md) for the mechanics of forking, opening PRs, and the Design Document implementation flow.
+
+!!! tip "Working with an AI coding agent?"
+    If you use Claude Code, OpenClaw, or a similar AI agent, the **[OpenWorm Skills](contributing/how-contributing-works.md)** give you (and your agent) a guided, step-by-step path through the whole loop — set up, find an issue, read the design document, implement, validate, and submit. See **[How Contributing Works](contributing/how-contributing-works.md)** for the skill-accelerated path.
+
+OpenWorm is also evolving toward a more structured contributor framework with explicit L0–L5 levels and AI-mentored onboarding. See the [Contributing section](contributing/index.md) for the framework being built; today, the four steps above are how contribution works in practice.
+
 An Opening Note
 ---------------
 
-Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](http://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](http://openworm.org/contacts.html).
+Feeling lost? Not uncommon in open source projects. In fact, there are [whole papers](https://www.igor.pro.br/publica/papers/OSS2014.pdf) describing the kinds of problems you may be having and some proposed solutions. Help us make helping you easier by [reaching out to us to ask for help](https://openworm.org/contacts.html).
 
 Contribution Best Practices
 ---------------------------
 
-What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](../projects/) you want to contribute to.
+What do I work on? We outline the work we are doing in the project using [GitHub issues](https://guides.github.com/features/issues/). Therefore, in order to figure out what to help out on, you need to be able to check them out for yourself. One way is to use this documentation to find [a project](projects.md) you want to contribute to.
 
 ### Find tasks to work on
 
@@ -33,20 +48,20 @@ You can initiate a conversation with us on [Slack](https://slack.com) channels t
 - [Muscle model](https://app.slack.com/client/T02EPNETZ/C40BEV91S)
 - [ChannelWorm](https://app.slack.com/client/T02EPNETZ/C40MMRWDQ)
 
-Once you have identified an issue you want to work on from a [particular project](../projects/), please announce your intention to help out by commenting on the specific [GitHub issue](../Community/github/#contributing-and-resolving-issues).
+Once you have identified an issue you want to work on from a [particular project](projects.md), please announce your intention to help out by commenting on the specific [GitHub issue](Community/github.md#contributing-and-resolving-issues).
 
 ### Using OpenWorm repos on GitHub
 
-Making a contribution of code to the project will first involve [forking one of our repositories](../Community/github/#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
+Making a contribution of code to the project will first involve [forking one of our repositories](Community/github.md#forking-github-repositories), making changes, committing them, creating a pull request back to the original repo, and then updating the appropriate part of documentation.
 
 An alternate way to contribute is to create a new GitHub repo yourself and begin tackling some issue directly there. We can then fork your repo back into the OpenWorm organization at a later point in order to bring other contributors along to help you.
 
-More details on best practices using OpenWorm repos on GitHub are available on [a separate page](../Community/github/).
+More details on best practices using OpenWorm repos on GitHub are available on [a separate page](Community/github.md).
 
 ### Creating organizing documents
 
 Another great way to contribute is by organizing ideas or documentation or proposals via a Google
-doc, and then sharing the link on our [Slack](http://openworm.org/contacts.html).
+doc, and then sharing the link on our [Slack](https://openworm.org/contacts.html).
 
 To contribute documentation and materials to the OpenWorm Google Drive, log into your Gmail account and click on [this link](https://drive.google.com/folderview?id=0B_t3mQaA-HaMaXpxVW5BY2JLa1E&usp=sharing).
 
@@ -69,21 +84,21 @@ An effective progress report should contain the following information:
 
 An example of an effective progress report is [available online](https://docs.google.com/document/d/1sBgMAD-7RUjHwBgrC204LMqSC81byIaZNRm32lEGWMM/edit).
 
-Once the document is shared, it should be announced on [Slack](http://openworm.org/contacts.html).
+Once the document is shared, it should be announced on [Slack](https://openworm.org/contacts.html).
 
 ### Creating proposals as Google docs
 
-To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [Slack](http://openworm.org/contacts.html).
+To gather public comment on a direction for the project, it is often effective to create a proposal as a world-editable Google Doc. Once your document is created and shared, it should be announced on [Slack](https://openworm.org/contacts.html).
 
 An example of an effective proposal is [available online](https://docs.google.com/a/openworm.org/document/d/1R5yeossrj_Ks1GvTtoE__8HtsrPCNVN46crwiJdSieU/edit#heading=h.8sny9ql7x375).
 
 ### Contributing to the OpenWorm documentation
 
-The [OpenWorm documentation](http://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](http://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
+The [OpenWorm documentation](https://docs.openworm.org) is a searchable repository of knowledge we have assembled to help new users get oriented to the different areas of the project. When new contributions are made, it is important that they are incorporated into the appropriate part of the documentation.  The GitHub repo for the OpenWorm documentation [is here](https://github.com/openworm/openworm_docs).  An issues list for changes that we are working on to improve the documentation [is here](https://github.com/openworm/openworm_docs/issues).
 
-When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](../Resources/resources/).
+When they are ready to consume by the general public, simulation engines, visualization environments, and data sets should be added to [the resources page](Resources/resources.md).
 
-Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](../projects/).
+Information about the goals, progress, and roadmap of current or proposed projects should be added to [the projects page](projects.md).
 
 The docs use ["GitHub-flavored" markdown format](https://help.github.com/articles/github-flavored-markdown/). This makes writing for GitHub (where most of our code is stored) and writing the documentation seamless. Markdown is also more forgiving in its syntax than, say, ReSTructured text, which was used previously.
 
@@ -91,7 +106,7 @@ The documentation is published using [GitHub Pages](https://pages.github.com/), 
 
 The markdown documentation is rendered using the Python module [MkDocs](https://www.mkdocs.org), making theming and structuring much easier. The outline of the Table of Contents tree is structured in `mkdocs.yml`.
 
-After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at http://docs.openworm.org) to become rebuilt and pushed onto the site (using a [GitHub Action](https://github.com/openworm/openworm_docs/actions)).
+After issuing a pull request and merging to master, changes that appear in GitHub will automatically trigger a hook that will cause the documentation on GitHub Pages (and available at https://docs.openworm.org) to become rebuilt and pushed onto the site (using a [GitHub Action](https://github.com/openworm/openworm_docs/actions)).
 
 ### Guest Blog Post
 
@@ -108,7 +123,7 @@ If you have an idea for a good journal club, please contact us at <info@openworm
 Coding Standards
 ----------------
 
-It is recommended to follow the [PEP8 Guidelines](http://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](http://pypi.python.org/pypi/autopep8).
+It is recommended to follow the [PEP8 Guidelines](https://legacy.python.org/dev/peps/pep-0008/). For contributions of Python code to OpenWorm repositories. Compliance can be checked with the [pep8 tool](https://pypi.python.org/pypi/pep8) and [autopep8](https://pypi.python.org/pypi/autopep8).
 
 Meetings
 --------
@@ -119,7 +134,7 @@ Contributors are encouraged to meet with each other on Slack on a regular basis 
 
 ### Scheduling meetings
 
-We like using the [Doodle service](http://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.
+We like using the [Doodle service](https://doodle.com) for scheduling meetings. This makes it easy to find times to meet across various time zones. Once a meeting is scheduled, we will often create a Google Calendar event to track it and remind everyone it is occurring.
 
 Interactions
 ------------
@@ -133,11 +148,11 @@ There are two Google Groups in connection with OpenWorm.
 [This list](https://groups.google.com/forum/?hl=en#!forum/openworm-discuss) was for high-volume type technical discussions, day-to-day communications, and questions related to the OpenWorm project.
 
 >> **⚠ NOTE: Discussions have moved to Slack.**  
->> The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to [Slack](http://openworm.org/contacts.html).
+>> The mailing lists above have become quiet of late... Most of the in depth discussions in the project have moved to [Slack](https://openworm.org/contacts.html).
 
 ### Twitter
 
-[Follow our Twitter feed](http://twitter.com/openworm)
+[Follow our Twitter feed](https://twitter.com/openworm)
 
 Want to tag OpenWorm on a tweet? Use @openworm and share the love.
 
@@ -149,15 +164,15 @@ Interesting in being a guest on our blog? We love hearing about what members of 
 
 ### YouTube
 
-Our YouTube channel is currently quite out of date, but for historical purposes, you can [view our YouTube channel here.](http://www.youtube.com/user/OpenWorm)
+Our [YouTube channel](https://www.youtube.com/user/OpenWorm) hosts a collection of historical talks, project demos, journal club recordings, and status update presentations from across the project's history. While new content is added infrequently, the archive is a valuable resource for understanding the evolution of the project and its science.
 
-Want to get notified when new content goes live? [Subscribe to the channel](http://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
+Want to get notified when new content goes live? [Subscribe to the channel](https://www.youtube.com/user/OpenWorm) by clicking on the "subscribe" button while logged in to your Google account.
 
 #### Playlists
 
 -   Status Updates - Frequent updates from the OpenWorm team.
 -   Journal Clubs - Like journal clubs that meet in person, the OpenWorm journal clubs use discuss new discoveries, tools and resources related to neuroscience, _C. elegans_, computational biology and open source science. Journal clubs are posted to social media in advance for any to watch and recordings then become available on YouTube. Learn more about our [journal clubs](#journal-clubs).
--   Data Team meetings - Learn more about our [team meetings](#team-meetings).
+-   Data Team meetings - Learn more about our team meetings via the Mailing Lists section below.
 -   Real _C. elegans_
 -   Building Blocks
 
@@ -187,3 +202,13 @@ It may be adapted for subteams.  Please follow these style rules when doing so:
 - Logo needs to be readable when rendered in grayscale
 
 Such logos are subject to review by the core team to retain consistency across the project.
+
+---
+
+## Continue Reading
+
+- **[GitHub Workflow](Community/github.md)** — Detailed guide to contributing via GitHub, including Design Document implementation
+- **[Design Documents](design_documents/index.md)** — The technical roadmap with contributor-facing specifications
+- **[Contributor Progression](contributing/contributor-progression.md)** — The L0-L5 contributor progression framework
+- **[Projects](projects.md)** — Find a project matching your interests
+- **[Resources](Resources/resources.md)** — Simulation engines, visualizations, and data sets
