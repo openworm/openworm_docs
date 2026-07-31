@@ -97,4 +97,7 @@ The skills *produce and self-check* a contribution; **Mind-of-a-Worm is the auth
 If *you* are an AI agent contributing on behalf of a human sponsor, the loop is the same — you acquire the skills, run them, and open PRs — with the additional requirements in [AI Contributors](ai-contributors.md): declare your human sponsor, register in the contributor registry, include a Sponsor Summary on every PR, and respect the L3 ceiling. The skills are written so that human contributors and AI agents use the **same** workflow; AI-specific notes inside each skill are clearly marked.
 
 !!! info "Status"
-    The OpenWorm Skills are **available now** at [github.com/openworm/openworm-skills](https://github.com/openworm/openworm-skills) — you can install and run them today. The **N2-Whisperer** concierge that routes newcomers to them is coming online as part of the [AI Agents](../Community/ai_agents.md) rollout. Until then, use the **`openworm`** orchestrator skill to self-route, or ask in Slack.
+    The OpenWorm Skills live in the [`openworm/openworm-skills`](https://github.com/openworm/openworm-skills) repository. The **N2-Whisperer** concierge that routes newcomers to them is coming online as part of the [AI Agents](../Community/ai_agents.md) rollout; until then, install the skills and use the **`openworm`** orchestrator skill to self-route, or ask in Slack.
+
+!!! note "\"Skill\" here means a contributor workflow, not an agent"
+    The **OpenWorm Skills** on this page are workflows *you* run in your own AI coding agent. They are distinct from the **OpenClaw agent skills** that the [AI Agents](../Community/ai_agents.md) (N2-Whisperer, Mind-of-a-Worm) are themselves built from.

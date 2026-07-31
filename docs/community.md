@@ -13,6 +13,9 @@ The current way to start contributing:
 3. **Announce your interest** — comment on the GitHub issue you'd like to work on so others know it's claimed.
 4. **Submit your contribution** — see the [GitHub Workflow page](Community/github.md) for the mechanics of forking, opening PRs, and the Design Document implementation flow.
 
+!!! tip "Working with an AI coding agent?"
+    If you use Claude Code, OpenClaw, or a similar AI agent, the **[OpenWorm Skills](contributing/how-contributing-works.md)** give you (and your agent) a guided, step-by-step path through the whole loop — set up, find an issue, read the design document, implement, validate, and submit. See **[How Contributing Works](contributing/how-contributing-works.md)** for the skill-accelerated path.
+
 OpenWorm is also evolving toward a more structured contributor framework with explicit L0–L5 levels and AI-mentored onboarding. See the [Contributing section](contributing/index.md) for the framework being built; today, the four steps above are how contribution works in practice.
 
 An Opening Note

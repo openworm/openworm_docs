@@ -106,8 +106,12 @@ Each agent is implemented as an OpenClaw skill deployed in the OpenWorm Slack wo
 | **Task Assignment** | Assigns orientation tasks from a curated list; verifies completion |
 | **Readiness Evaluation** | Evaluates whether newcomers are ready for Ring 2; notifies Mind-of-a-Worm |
 | **Resource Linking** | Points to relevant documentation and past discussions instead of re-explaining |
+| **Skill Routing** | Points you to the right **[OpenWorm Skill](../contributing/how-contributing-works.md)** to run on your own machine — N2-Whisperer *prescribes* the skill; it never writes your code or solves the issue for you |
 
 **What it solves:** The bottleneck where newcomers wait days (or forever) for an answer to "How do I get started?" and "What should I work on?"
+
+!!! info "Two meanings of \"skill\" on this page"
+    The three agents above are each built from an **OpenClaw agent skill** (a `SKILL.md` that defines the agent's behavior — `worm_guide`, `worm_mentor`, `worm_digest`). Those are different from the **[OpenWorm Skills](../contributing/how-contributing-works.md)** that N2-Whisperer routes *you* to — structured workflows you install into your own AI coding agent and run locally to produce a contribution. See [How Contributing Works](../contributing/how-contributing-works.md) for the contributor-facing skills.
 
 ### Mind-of-a-Worm (Active Contributor Guide)
 
@@ -245,7 +249,7 @@ This page describes the **AI-assisted model** where AI agents help human contrib
 | Slack integration | Not yet configured |
 | GitHub webhook integration | Not yet configured |
 
-The full agent specifications, SKILL.md templates, and deployment configurations are maintained in the [openworm-admin](https://github.com/openworm) repository.
+The contributor-facing **[OpenWorm Skills](https://github.com/openworm/openworm-skills)** — the workflows N2-Whisperer routes you to — are open source in the `openworm/openworm-skills` repository. The agents' own behavioral specifications and deployment configurations are maintained privately by the OpenWorm Foundation.
 
 ---
 
