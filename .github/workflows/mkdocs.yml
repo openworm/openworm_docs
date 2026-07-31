@@ -145,9 +145,23 @@ jobs:
         if [[ "$LAST_BUILT_SHA" = "$SHA"  ]] && git diff origin/gh-pages --exit-code $REPO_METADATA_SHAS ; then
             echo "No changes in repo metadata. Skipping deploy"
         else
+            # Save any existing preview deployments before ghp-import wipes gh-pages
+            if [ -d "preview" ]; then
+              cp -r preview /tmp/preview-backup
+              echo "Saved preview/ directory for restoration after deploy"
+            fi
+
             git checkout -
             ghp-import -o -n site
             git checkout gh-pages
+
+            # Restore preview deployments
+            if [ -d "/tmp/preview-backup" ]; then
+              cp -r /tmp/preview-backup preview
+              git add preview/
+              echo "Restored preview/ directory"
+            fi
+
             echo -n $SHA > last_build_sha
             git add last_build_sha
             mv $REPO_METADATA_SHAS.temp $REPO_METADATA_SHAS
