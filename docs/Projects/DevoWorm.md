@@ -20,7 +20,7 @@ Developmental Dynamics (DD)                      | [Comparative Quantitative Emb
 DD                                               | [Differentiation Trees and Maps](http://www.biorxiv.org/content/early/2016/07/07/062539)
 DD                                               | [Embryo Networks and Developmental Connectomes](https://doi.org/10.1101/146035)
 DD                                               | Time-series of Terminal Differentiation
-Cybernetics and Digital Morphogenesis (C-DM)     | [Morphozoic (Cellular Automata)](https://drive.google.com/open?id=0B4qKWcILZ0ddbzJoeUZsQ0lEZ1k)
+Cybernetics and Digital Morphogenesis (C-DM)     | [Morphozoic (Cellular Automata)](https://www.researchgate.net/publication/311738597_Morphozoic_Cellular_Automata_with_Nested_Neighborhoods_as_a_Metamorphic_Representation_of_Morphogenesis)
 C-DM                                             | [Cybernetic Embryo](https://www.academia.edu/33002276/Origins_of_the_Embryo_self-organization_through_cybernetic_regulation)
 C-DM                                             | CompuCell 3D
 Reproduction and Developmental Plasticity (R-DP) | [Experimental Evolution](http://rsos.royalsocietypublishing.org/content/3/11/160496)
