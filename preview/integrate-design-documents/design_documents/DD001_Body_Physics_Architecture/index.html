@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
       
 
@@ -4239,21 +4239,21 @@ Wpoly6(r, h) = (315 / (64πh⁹)) * (h² - r²)³  if r &lt; h, else 0
 <p>Render OpenCL and Metal trajectories as separate panels using the per-scenario renderer (<code>render_one_sprig.py</code>, <code>render_worm.py</code>, etc. under <code>src/metal_diff/</code>), then stack horizontally with ffmpeg:</p>
 <div class="highlight"><pre><span></span><code>python3<span class="w"> </span>src/metal_diff/render_one_sprig.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>/tmp/&lt;demo&gt;_opencl_position.txt<span class="w"> </span>/tmp/&lt;demo&gt;_opencl_panel.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--title<span class="w"> </span><span class="s2">&quot;OpenCL &lt;demo&gt;&quot;</span>
+<span class="w">    </span>--title<span class="w"> </span><span class="s2">"OpenCL &lt;demo&gt;"</span>
 python3<span class="w"> </span>src/metal_diff/render_one_sprig.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>/tmp/&lt;demo&gt;_metal.txt<span class="w"> </span>/tmp/&lt;demo&gt;_metal_panel.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--title<span class="w"> </span><span class="s2">&quot;Native Metal &lt;demo&gt;&quot;</span><span class="w"> </span>--max-frames<span class="w"> </span><span class="m">250</span>
+<span class="w">    </span>--title<span class="w"> </span><span class="s2">"Native Metal &lt;demo&gt;"</span><span class="w"> </span>--max-frames<span class="w"> </span><span class="m">250</span>
 
 ffmpeg<span class="w"> </span>-y<span class="w"> </span>-i<span class="w"> </span>/tmp/&lt;demo&gt;_opencl_panel.mp4<span class="w"> </span>-i<span class="w"> </span>/tmp/&lt;demo&gt;_metal_panel.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-filter_complex<span class="w"> </span><span class="s2">&quot;[0:v]pad=920:900:0:0:color=white[left];[left][1:v]hstack[v]&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-map<span class="w"> </span><span class="s2">&quot;[v]&quot;</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-crf<span class="w"> </span><span class="m">18</span><span class="w"> </span>-pix_fmt<span class="w"> </span>yuv420p<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-filter_complex<span class="w"> </span><span class="s2">"[0:v]pad=920:900:0:0:color=white[left];[left][1:v]hstack[v]"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-map<span class="w"> </span><span class="s2">"[v]"</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-crf<span class="w"> </span><span class="m">18</span><span class="w"> </span>-pix_fmt<span class="w"> </span>yuv420p<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docs/&lt;demo&gt;_opencl_vs_metal.mp4
 </code></pre></div>
 <p>The renderer auto-detects trajectory format (OpenCL and Metal frame structures differ — OpenCL includes boundary particles only in frame 0; Metal includes them in every frame). Hard-code identical camera bounds and distance in both panels so visual differences reflect physics, not viewport.</p>
 <h4 id="phase-7-examine-frame-by-frame-for-visual-parity">Phase 7 — Examine Frame-by-Frame for Visual Parity<a class="headerlink" href="#phase-7-examine-frame-by-frame-for-visual-parity" title="Permanent link">&para;</a></h4>
 <p>Extract sample frames at multiple time points from the side-by-side MP4:</p>
 <div class="highlight"><pre><span></span><code>ffmpeg<span class="w"> </span>-y<span class="w"> </span>-i<span class="w"> </span>docs/&lt;demo&gt;_opencl_vs_metal.mp4<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-vf<span class="w"> </span><span class="s2">&quot;select=between(n\,0\,0)+between(n\,15\,15)+between(n\,100\,100)+between(n\,200\,200)&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-vf<span class="w"> </span><span class="s2">"select=between(n\,0\,0)+between(n\,15\,15)+between(n\,100\,100)+between(n\,200\,200)"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-vsync<span class="w"> </span>vfr<span class="w"> </span>/tmp/check_frames/sxs_%d.png
 </code></pre></div>
 <p>Verify at each sample:
@@ -5049,9 +5049,9 @@ ffmpeg<span class="w"> </span>-y<span class="w"> </span>-i<span class="w"> </spa
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">engine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sibernetic</span>
 <span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">opencl</span><span class="w">                    </span><span class="c1"># opencl, metal-native, cuda-native</span>
-<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;worm_crawl_half_resolution&quot;</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="s">"worm_crawl_half_resolution"</span>
 <span class="w">  </span><span class="nt">particle_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span>
-<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscle</span><span class="w">              </span><span class="c1"># &quot;muscle&quot; = 96 muscle units mapped (default). &quot;all&quot; = Phase 6 (DD004): extend to all tissue types. &quot;false&quot; = bulk elastic only.</span>
+<span class="w">  </span><span class="nt">cell_identity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">muscle</span><span class="w">              </span><span class="c1"># "muscle" = 96 muscle units mapped (default). "all" = Phase 6 (DD004): extend to all tissue types. "false" = bulk elastic only.</span>
 <span class="w">  </span><span class="nt">timestep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00002</span><span class="w">                  </span><span class="c1"># seconds</span>
 </code></pre></div>
 <table>
@@ -5161,10 +5161,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w">
 <div class="highlight"><pre><span></span><code><span class="c1"># master_openworm.py (pseudocode)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">write_sibernetic_config</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">):</span>
     <span class="n">ini</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
-    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;simulation&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;timestep&#39;</span><span class="p">])</span>
-    <span class="n">ini</span><span class="p">[</span><span class="s1">&#39;particles&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">][</span><span class="s1">&#39;particle_count&#39;</span><span class="p">])</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">'simulation'</span><span class="p">][</span><span class="s1">'timestep'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">'body'</span><span class="p">][</span><span class="s1">'timestep'</span><span class="p">])</span>
+    <span class="n">ini</span><span class="p">[</span><span class="s1">'particles'</span><span class="p">][</span><span class="s1">'total'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">openworm_config</span><span class="p">[</span><span class="s1">'body'</span><span class="p">][</span><span class="s1">'particle_count'</span><span class="p">])</span>
     <span class="c1"># ... etc</span>
-    <span class="n">ini</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;sibernetic_config.ini&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
+    <span class="n">ini</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">'sibernetic_config.ini'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">))</span>
 </code></pre></div>
 <h3 id="coupling-dependencies">Coupling Dependencies<a class="headerlink" href="#coupling-dependencies" title="Permanent link">&para;</a></h3>
 <table>
@@ -5273,10 +5273,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w">
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

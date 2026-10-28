@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
       
 
@@ -4028,7 +4028,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**Documentation Tier:**</span> [Repo-internal | Docs site | BadgeList-aligned] — [brief justification]
 </code></pre></div>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**Documentation Tier:**</span> Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion; augments existing BadgeList &quot;Muscle Model Explorer/Builder/Hacker&quot; badge progression
+<div class="highlight"><pre><span></span><code><span class="k">-</span><span class="w"> </span><span class="gs">**Documentation Tier:**</span> Docs site — cross-repo guide spanning c302, muscle_model, and CE_locomotion; augments existing BadgeList "Muscle Model Explorer/Builder/Hacker" badge progression
 </code></pre></div>
 <hr />
 <h2 id="3-ai-human-coexistence-model">3. AI-Human Coexistence Model<a class="headerlink" href="#3-ai-human-coexistence-model" title="Permanent link">&para;</a></h2>
@@ -4363,7 +4363,7 @@ by watching the backward locomotion sequence.
  <div class="highlight"><pre><span></span><code><span class="nt">neural</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">neuropeptides</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># default off until DD006 fully implemented</span>
-<span class="w">    </span><span class="nt">peptide_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;nlp-1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;flp-1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;ins-1&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># placeholder</span>
+<span class="w">    </span><span class="nt">peptide_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"nlp-1"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"flp-1"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"ins-1"</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># placeholder</span>
 <span class="w">    </span><span class="nt">diffusion_constant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1e-6</span><span class="w">  </span><span class="c1"># cm^2/s</span>
 </code></pre></div></p>
 </li>
@@ -4547,8 +4547,8 @@ Implements DD006 Integration Contract section 4.1: <span class="sb">`neural.neur
 ┌─────────────────────────────────────────────────────────┐
 │  GitHub PR #1234                                        │
 │  Comment from Mind-of-a-Worm[bot]:                          │
-│  &quot;✅ DD006 compliant, ✅ Tests pass,                    │
-│   ⚠️ Missing integration test. Add per DD006 §5.2.&quot;    │
+│  "✅ DD006 compliant, ✅ Tests pass,                    │
+│   ⚠️ Missing integration test. Add per DD006 §5.2."    │
 └─────────────────────────────────────────────────────────┘
 </code></pre></div>
 <h3 id="83-implementation-steps">8.3 Implementation Steps<a class="headerlink" href="#83-implementation-steps" title="Permanent link">&para;</a></h3>
@@ -4573,17 +4573,17 @@ Implements DD006 Integration Contract section 4.1: <span class="sb">`neural.neur
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/wormentor-webhook&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/api/wormentor-webhook'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'POST'</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">wormentor_webhook</span><span class="p">():</span>
-    <span class="n">event</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X-GitHub-Event&#39;</span><span class="p">)</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'X-GitHub-Event'</span><span class="p">)</span>
     <span class="n">payload</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span>
 
-    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">&#39;pull_request&#39;</span> <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;opened&#39;</span><span class="p">:</span>
-        <span class="n">pr_number</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s1">&#39;pull_request&#39;</span><span class="p">][</span><span class="s1">&#39;number&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">'pull_request'</span> <span class="ow">and</span> <span class="n">payload</span><span class="p">[</span><span class="s1">'action'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'opened'</span><span class="p">:</span>
+        <span class="n">pr_number</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s1">'pull_request'</span><span class="p">][</span><span class="s1">'number'</span><span class="p">]</span>
         <span class="n">pr_diff</span> <span class="o">=</span> <span class="n">get_pr_diff</span><span class="p">(</span><span class="n">pr_number</span><span class="p">)</span>  <span class="c1"># GitHub API call</span>
 
         <span class="c1"># Load Mind-of-a-Worm SKILL.md + relevant DD</span>
-        <span class="n">skill</span> <span class="o">=</span> <span class="n">load_skill</span><span class="p">(</span><span class="s1">&#39;worm_mentor&#39;</span><span class="p">)</span>
+        <span class="n">skill</span> <span class="o">=</span> <span class="n">load_skill</span><span class="p">(</span><span class="s1">'worm_mentor'</span><span class="p">)</span>
         <span class="n">affected_dds</span> <span class="o">=</span> <span class="n">detect_affected_dds</span><span class="p">(</span><span class="n">pr_diff</span><span class="p">)</span>  <span class="c1"># Parse file paths → DDs</span>
 
         <span class="c1"># Generate review</span>
@@ -4592,7 +4592,7 @@ Implements DD006 Integration Contract section 4.1: <span class="sb">`neural.neur
         <span class="c1"># Post comment</span>
         <span class="n">post_pr_comment</span><span class="p">(</span><span class="n">pr_number</span><span class="p">,</span> <span class="n">review</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">'status'</span><span class="p">:</span> <span class="s1">'ok'</span><span class="p">}</span>
 </code></pre></div></p>
 <p><strong>3. Install GitHub App on Repos</strong></p>
 <ul>
@@ -4645,7 +4645,7 @@ Last updated: 2026-02-18T14:30:00Z
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>DD006 config follows DD011 schema pattern (line 45)
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>Always check DD011 before adding new config sections
 <span class="k">-</span><span class="w"> </span><span class="gs">**Human feedback:**</span>
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Subsystem maintainer: &quot;Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)&quot;
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Subsystem maintainer: "Use 1e-7 instead of 1e-6 for diffusion_constant (Skinner 2024)"
 <span class="k">-</span><span class="w"> </span><span class="gs">**Next time:**</span> Read related papers before choosing parameter values
 
 <span class="gu">### 2026-02-18: Issue #107 - Expand peptide types to all 40</span>
@@ -4656,9 +4656,9 @@ Last updated: 2026-02-18T14:30:00Z
 <span class="k">-</span><span class="w"> </span><span class="gs">**What I learned:**</span>
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>All 40 peptide types from NeuroPAL dataset (Cook lab 2021)
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>Cross-reference with DD008 OWMeta for canonical names
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Use WormBase IDs (e.g., &quot;nlp-1&quot; → WBGene00003681)
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Use WormBase IDs (e.g., "nlp-1" → WBGene00003681)
 <span class="k">-</span><span class="w"> </span><span class="gs">**Human feedback:**</span>
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Mind-of-a-Worm: &quot;Good work. Add source citations in config comments.&quot;
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>Mind-of-a-Worm: "Good work. Add source citations in config comments."
 <span class="k">-</span><span class="w"> </span><span class="gs">**Challenges:**</span>
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>Finding canonical peptide names took 1 hour (WormBase search)
 <span class="w">  </span><span class="k">-</span><span class="w"> </span>Solution: Created a mapping table in comments
@@ -4667,9 +4667,9 @@ Last updated: 2026-02-18T14:30:00Z
 
 <span class="gu">## Common Mistakes (What NOT to Do)</span>
 
-<span class="k">1.</span> <span class="gs">**Don&#39;t guess parameter values**</span> - Always cite a paper or DD
-<span class="k">2.</span> <span class="gs">**Don&#39;t skip `docker compose config`**</span> - Catches YAML syntax errors
-<span class="k">3.</span> <span class="gs">**Don&#39;t claim L3 issues when you&#39;re L1**</span> - Mind-of-a-Worm will reject
+<span class="k">1.</span> <span class="gs">**Don't guess parameter values**</span> - Always cite a paper or DD
+<span class="k">2.</span> <span class="gs">**Don't skip `docker compose config`**</span> - Catches YAML syntax errors
+<span class="k">3.</span> <span class="gs">**Don't claim L3 issues when you're L1**</span> - Mind-of-a-Worm will reject
 
 ---
 
@@ -4682,7 +4682,7 @@ Last updated: 2026-02-18T14:30:00Z
 
 <span class="gu">### DD011 Config Schema</span>
 <span class="k">-</span><span class="w"> </span>All config sections follow pattern: <span class="sb">`subsystem.feature.parameter`</span>
-<span class="k">-</span><span class="w"> </span>Default values should be &quot;safe&quot; (disabled or conservative)
+<span class="k">-</span><span class="w"> </span>Default values should be "safe" (disabled or conservative)
 <span class="k">-</span><span class="w"> </span>Include comments with source citations
 
 <span class="gu">### Mind-of-a-Worm Review Process</span>
@@ -4693,8 +4693,8 @@ Last updated: 2026-02-18T14:30:00Z
 <span class="gu">### Phase Drift Detection</span>
 Mind-of-a-Worm should check for phase drift when reviewing PRs that modify files in <span class="sb">`docs/design_documents/`</span>:
 
-<span class="k">-</span><span class="w"> </span>If a DD&#39;s <span class="sb">`&gt; **Phase:**`</span> line is modified: verify <span class="sb">`DD_PHASE_ROADMAP.md`</span> and <span class="sb">`INTEGRATION_MAP.md`</span> are also updated in the same PR (or a linked PR)
-<span class="k">-</span><span class="w"> </span>If <span class="sb">`DD_PHASE_ROADMAP.md`</span> adds/moves a DD: verify the DD file&#39;s header matches
+<span class="k">-</span><span class="w"> </span>If a DD's <span class="sb">`&gt; **Phase:**`</span> line is modified: verify <span class="sb">`DD_PHASE_ROADMAP.md`</span> and <span class="sb">`INTEGRATION_MAP.md`</span> are also updated in the same PR (or a linked PR)
+<span class="k">-</span><span class="w"> </span>If <span class="sb">`DD_PHASE_ROADMAP.md`</span> adds/moves a DD: verify the DD file's header matches
 <span class="k">-</span><span class="w"> </span>If a draft issues file is regenerated: verify <span class="sb">`- **Roadmap Phase:**`</span> tags match current <span class="sb">`DD_PHASE_ROADMAP.md`</span>
 </code></pre></div></p>
 <h3 id="93-auto-update-mechanism">9.3 Auto-Update Mechanism<a class="headerlink" href="#93-auto-update-mechanism" title="Permanent link">&para;</a></h3>
@@ -5164,10 +5164,10 @@ Contains LLM/AI scripts, text corpus, and processed data. May include prompt tem
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

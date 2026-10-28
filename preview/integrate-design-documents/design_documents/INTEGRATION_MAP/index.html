@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
       
 
@@ -2603,162 +2603,162 @@ skinparam nodesep 20
 skinparam ranksep 40
 left to right direction
 
-&#39; === EXTERNAL DATA (leftmost) ===
-package &quot;External Data&quot; as extdata #E6F3FF {
-  component &quot;Connectomes\n(Cook, Witvliet,\nWang, Ripoll-Sanchez)&quot; as ext_conn #87CEEB
-  component &quot;CeNGEN\nExpression Atlas&quot; as ext_cen #87CEEB
-  component &quot;Behavioral Data\n(Schafer, Raizen)&quot; as ext_beh #87CEEB
-  component &quot;Virtual Worm\nMeshes (688)&quot; as ext_vw #87CEEB
-  component &quot;Foundation Models\n(AlphaFold 3, BioEmu-1,\nBoltz-2, ESM Cambrian)&quot; as ext_bio #87CEEB
-  component &quot;WormBase\nChannel Sequences&quot; as ext_wb #87CEEB
+' === EXTERNAL DATA (leftmost) ===
+package "External Data" as extdata #E6F3FF {
+  component "Connectomes\n(Cook, Witvliet,\nWang, Ripoll-Sanchez)" as ext_conn #87CEEB
+  component "CeNGEN\nExpression Atlas" as ext_cen #87CEEB
+  component "Behavioral Data\n(Schafer, Raizen)" as ext_beh #87CEEB
+  component "Virtual Worm\nMeshes (688)" as ext_vw #87CEEB
+  component "Foundation Models\n(AlphaFold 3, BioEmu-1,\nBoltz-2, ESM Cambrian)" as ext_bio #87CEEB
+  component "WormBase\nChannel Sequences" as ext_wb #87CEEB
 }
 
-&#39; === DATA ACCESS ===
-package &quot;Data Access&quot; as databox #F0F8FF {
-  component &quot;DD016\ncect API&quot; as DD016 #90EE90
-  component &quot;DD008\nOWMeta&quot; as DD008 #FFB6C1
+' === DATA ACCESS ===
+package "Data Access" as databox #F0F8FF {
+  component "DD016\ncect API" as DD016 #90EE90
+  component "DD008\nOWMeta" as DD008 #FFB6C1
 }
 
-&#39; === ML &amp; FOUNDATION (feeds into Neural Extensions and Core) ===
-package &quot;ML &amp; Foundation&quot; as mlbox #E8D5E8 {
-  component &quot;DD021\nProtein FM\nPipeline&quot; as DD021 #FFE4B5
-  component &quot;DD013\nHybrid ML\n(1000x speedup)&quot; as DD013 #FFE4B5
+' === ML &amp; FOUNDATION (feeds into Neural Extensions and Core) ===
+package "ML &amp; Foundation" as mlbox #E8D5E8 {
+  component "DD021\nProtein FM\nPipeline" as DD021 #FFE4B5
+  component "DD013\nHybrid ML\n(1000x speedup)" as DD013 #FFE4B5
 }
 
-&#39; === NEURAL EXTENSIONS (feeds into Core) ===
-package &quot;Neural Extensions&quot; as neurext #F3E5F5 {
-  component &quot;DD005\n128 Neuron\nClasses&quot; as DD005 #FFE4B5
-  component &quot;DD006\nNeuropeptides\n(31K interactions)&quot; as DD006 #FFE4B5
-  component &quot;DD023\nMulticompartmental\nNeurons&quot; as DD023 #FFE4B5
+' === NEURAL EXTENSIONS (feeds into Core) ===
+package "Neural Extensions" as neurext #F3E5F5 {
+  component "DD005\n128 Neuron\nClasses" as DD005 #FFE4B5
+  component "DD006\nNeuropeptides\n(31K interactions)" as DD006 #FFE4B5
+  component "DD023\nMulticompartmental\nNeurons" as DD023 #FFE4B5
 }
 
-&#39; === CORE CHAIN (the spine) ===
-package &quot;Core Simulation Chain&quot; as core #E8F5E9 {
-  component &quot;DD002\n302 Neurons\n(HH, graded syn)&quot; as DD002 #90EE90
-  component &quot;DD003\n95 Muscles\n(Ca -&gt; force)&quot; as DD003 #90EE90
-  component &quot;DD001\nBody Physics\n(SPH ~100K)&quot; as DD001 #90EE90
+' === CORE CHAIN (the spine) ===
+package "Core Simulation Chain" as core #E8F5E9 {
+  component "DD002\n302 Neurons\n(HH, graded syn)" as DD002 #90EE90
+  component "DD003\n95 Muscles\n(Ca -&gt; force)" as DD003 #90EE90
+  component "DD001\nBody Physics\n(SPH ~100K)" as DD001 #90EE90
 }
 
-&#39; === SENSORY &amp; MOTOR ===
-package &quot;Sensory &amp; Motor&quot; as sensory #FFF3E0 {
-  component &quot;DD015\nTouch Response\n(closed-loop)&quot; as DD015 #FFE4B5
-  component &quot;DD018\nEnvironment\n(gradients)&quot; as DD018 #FFE4B5
-  component &quot;DD019\nProprioception\n(stretch)&quot; as DD019 #FFE4B5
+' === SENSORY &amp; MOTOR ===
+package "Sensory &amp; Motor" as sensory #FFF3E0 {
+  component "DD015\nTouch Response\n(closed-loop)" as DD015 #FFE4B5
+  component "DD018\nEnvironment\n(gradients)" as DD018 #FFE4B5
+  component "DD019\nProprioception\n(stretch)" as DD019 #FFE4B5
 }
 
-&#39; === ORGANS ===
-package &quot;Organ Systems&quot; as organs #FCE4EC {
-  component &quot;DD007\nPharynx\n(63 cells)&quot; as DD007 #FFE4B5
-  component &quot;DD009\nIntestine\n(20 cells)&quot; as DD009 #FFE4B5
-  component &quot;DD014\nEgg-Laying\n(28 cells)&quot; as DD014 #FFE4B5
+' === ORGANS ===
+package "Organ Systems" as organs #FCE4EC {
+  component "DD007\nPharynx\n(63 cells)" as DD007 #FFE4B5
+  component "DD009\nIntestine\n(20 cells)" as DD009 #FFE4B5
+  component "DD014\nEgg-Laying\n(28 cells)" as DD014 #FFE4B5
 }
 
-&#39; === WHOLE-ORGANISM CELL IDENTITY ===
-package &quot;Whole Organism&quot; as whole #FFEBEE {
-  component &quot;DD004\n959 Cell IDs\n(mechanical)&quot; as DD004 #FFE4B5
+' === WHOLE-ORGANISM CELL IDENTITY ===
+package "Whole Organism" as whole #FFEBEE {
+  component "DD004\n959 Cell IDs\n(mechanical)" as DD004 #FFE4B5
 }
 
-&#39; === VALIDATION ===
-package &quot;Validation&quot; as valbox #FFF5E6 {
-  component &quot;DD010\n4-Tier\nValidation&quot; as DD010 #FFE4B5
-  component &quot;DD017\nMovement\nToolbox&quot; as DD017 #FFB6C1
-  component &quot;DD020\nValidation\nData\nAcquisition&quot; as DD020 #FFB6C1
-  component &quot;DD022\nReservoir\nComputing&quot; as DD022 #FFE4B5
+' === VALIDATION ===
+package "Validation" as valbox #FFF5E6 {
+  component "DD010\n4-Tier\nValidation" as DD010 #FFE4B5
+  component "DD017\nMovement\nToolbox" as DD017 #FFB6C1
+  component "DD020\nValidation\nData\nAcquisition" as DD020 #FFB6C1
+  component "DD022\nReservoir\nComputing" as DD022 #FFE4B5
 }
 
-&#39; === VISUALIZATION ===
-package &quot;Visualization (WormSim 2.0)&quot; as visbox #E8EAF6 {
-  component &quot;DD012\nDynamic Viewer\n(Trame-&gt;Three.js)&quot; as DD012 #FFE4B5
-  component &quot;DD012.1\nRendering Spec&quot; as DD0121 #FFE4B5
-  component &quot;DD012.2\nMesh Deform&quot; as DD0122 #FFE4B5
+' === VISUALIZATION ===
+package "Visualization (WormSim 2.0)" as visbox #E8EAF6 {
+  component "DD012\nDynamic Viewer\n(Trame-&gt;Three.js)" as DD012 #FFE4B5
+  component "DD012.1\nRendering Spec" as DD0121 #FFE4B5
+  component "DD012.2\nMesh Deform" as DD0122 #FFE4B5
 }
 
-&#39; === INFRASTRUCTURE ===
-package &quot;Infrastructure&quot; as infra #FFF9C4 {
-  component &quot;DD011\nDocker Stack\n(orchestrator)&quot; as DD011 #FFE4B5
-  component &quot;DD024\nMetrics\nDashboard&quot; as DD024 #FFE4B5
+' === INFRASTRUCTURE ===
+package "Infrastructure" as infra #FFF9C4 {
+  component "DD011\nDocker Stack\n(orchestrator)" as DD011 #FFE4B5
+  component "DD024\nMetrics\nDashboard" as DD024 #FFE4B5
 }
 
-&#39; === GOVERNANCE (Contributing section) ===
-package &quot;Governance (Contributing)&quot; as gov #F5F5F5 {
-  component &quot;Contributor Progression\nDecision Process\nAI Contributors&quot; as GOV #E0E0E0
+' === GOVERNANCE (Contributing section) ===
+package "Governance (Contributing)" as gov #F5F5F5 {
+  component "Contributor Progression\nDecision Process\nAI Contributors" as GOV #E0E0E0
 }
 
-&#39; === EDGES ===
+' === EDGES ===
 
-&#39; External -&gt; Data Access
+' External -&gt; Data Access
 ext_conn --&gt; DD016
 ext_cen --&gt; DD016
 ext_beh --&gt; DD020 : raw\nexperimental\ndata
 ext_beh --&gt; DD017
 
-&#39; External -&gt; ML &amp; Foundation
+' External -&gt; ML &amp; Foundation
 ext_bio --&gt; DD021 : model\nweights
 ext_bio --&gt; DD013 : model\nweights
 ext_wb --&gt; DD021 : channel\nsequences
 
-&#39; Data Access -&gt; Core / Neural Extensions
+' Data Access -&gt; Core / Neural Extensions
 DD016 --&gt; DD002 : connectome\ntopology
 DD016 --&gt; DD005 : neuron classes
 
-&#39; ML -&gt; Neural Extensions / Core (FORWARD in this layout)
+' ML -&gt; Neural Extensions / Core (FORWARD in this layout)
 DD021 --&gt; DD005 : kinetics\npriors
 DD021 --&gt; DD002 : per-class\nHH params
 DD013 --&gt; DD002 : fitted\nparams
 DD013 --&gt; DD006 : binding\naffinities
 
-&#39; Neural Extensions -&gt; Core (FORWARD in this layout)
+' Neural Extensions -&gt; Core (FORWARD in this layout)
 DD005 --&gt; DD002 : 128 cell\ntemplates
 DD006 --&gt; DD002 : conductance\nmodulation
 
-&#39; DD023 Multicompartmental (refines DD002 neurons)
+' DD023 Multicompartmental (refines DD002 neurons)
 DD005 --&gt; DD023 : per-class\nconductances
 DD023 --&gt; DD002 : Level D\ncells
 
-&#39; Core chain (THE SPINE)
+' Core chain (THE SPINE)
 DD002 -[#008000,bold]-&gt; DD003 : voltage/Ca\n(NMJ)
 DD003 -[#008000,bold]-&gt; DD001 : muscle\nactivation
 
-&#39; Core -&gt; Sensory &amp; Motor
+' Core -&gt; Sensory &amp; Motor
 DD001 -[#CC0000,bold]-&gt; DD015 : SPH strain
 DD018 --&gt; DD015 : stimuli
 DD001 --&gt; DD019 : curvature
 
-&#39; Sensory feedback -&gt; Core (BACKWARD — only 2 remaining)
+' Sensory feedback -&gt; Core (BACKWARD — only 2 remaining)
 DD015 -[#CC0000,bold]-&gt; DD002 : MEC-4\ncurrent
 DD019 --&gt; DD002 : stretch\ncurrent
 
-&#39; Core -&gt; Organs
+' Core -&gt; Organs
 DD002 --&gt; DD007 : pharyngeal\ncircuit
 DD002 --&gt; DD014 : HSN/VC
 DD006 --&gt; DD014 : serotonin
 
-&#39; Whole organism
+' Whole organism
 DD001 --&gt; DD004 : particle\nstruct
 DD004 --&gt; DD001 : cell IDs
 
-&#39; Core -&gt; Validation
+' Core -&gt; Validation
 DD001 -[#0000CC]-&gt; DD010 : kinematics
 DD017 --&gt; DD010 : feature\nextraction
-DD020 --&gt; DD010 : &quot;Versioned\nexperimental\ndata\n(all tiers)&quot;
+DD020 --&gt; DD010 : "Versioned\nexperimental\ndata\n(all tiers)"
 
-&#39; Core -&gt; Visualization
+' Core -&gt; Visualization
 DD001 -[#660099]-&gt; DD012 : OME-Zarr\n(all subsystems)
 ext_vw --&gt; DD0122 : meshes
 DD001 --&gt; DD0122 : SPH\npositions
 
-&#39; RC Validation
+' RC Validation
 DD002 --&gt; DD022 : neural\nstates
 DD003 --&gt; DD022 : motor\nactivation
 DD016 --&gt; DD022 : neuron\nclassification
 DD022 -[#0000CC]-&gt; DD010 : RC metrics\n(advisory)
 
-&#39; Dashboard (read-only consumer)
+' Dashboard (read-only consumer)
 DD011 --&gt; DD024 : CI status
 DD010 --&gt; DD024 : validation\nscores
 GOV --&gt; DD024 : badge/contributor\ndata
 
-&#39; Hidden edge for layout: position Infrastructure near right side
+' Hidden edge for layout: position Infrastructure near right side
 DD001 -[hidden]-&gt; DD011
 
 legend bottom left
@@ -3466,23 +3466,23 @@ Foundation models ─────────┤                              DD
 <li>
 <p><strong>Pin all subsystem commits in <code>versions.lock</code>:</strong>
    <div class="highlight"><pre><span></span><code><span class="nt">c302</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123...&quot;</span>
-<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ow-0.10.0&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">"abc123..."</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"ow-0.10.0"</span>
 <span class="nt">sibernetic</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;def456...&quot;</span>
-<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ow-0.10.0&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">"def456..."</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"ow-0.10.0"</span>
 <span class="nt">cect</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.2.7&quot;</span>
+<span class="w">  </span><span class="nt">pypi_version</span><span class="p">:</span><span class="w"> </span><span class="s">"0.2.7"</span>
 <span class="nt">open_worm_analysis_toolbox</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ghi789...&quot;</span>
-<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;revival-0.1.0&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">"ghi789..."</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"revival-0.1.0"</span>
 <span class="nt">openworm_ml</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jkl012...&quot;</span>
-<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ow-0.10.0&quot;</span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="s">"jkl012..."</span>
+<span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"ow-0.10.0"</span>
 <span class="w">  </span><span class="nt">foundation_model_versions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">alphafold3</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v3.0.0&quot;</span>
-<span class="w">    </span><span class="nt">bioemu1</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;v1.0.0&quot;</span>
-<span class="w">    </span><span class="nt">esm_cambrian</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;esm-c-300m-2024-12&quot;</span>
+<span class="w">    </span><span class="nt">alphafold3</span><span class="p">:</span><span class="w"> </span><span class="s">"v3.0.0"</span>
+<span class="w">    </span><span class="nt">bioemu1</span><span class="p">:</span><span class="w"> </span><span class="s">"v1.0.0"</span>
+<span class="w">    </span><span class="nt">esm_cambrian</span><span class="p">:</span><span class="w"> </span><span class="s">"esm-c-300m-2024-12"</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -3602,10 +3602,10 @@ docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w">
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
