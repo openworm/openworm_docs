@@ -1,34 +1,67 @@
 site_name: OpenWorm Documentation
 theme:
-  name: material    
+  name: material
   favicon: images/favicon.ico
   logo: images/favicon.ico
+# Hidden DDs are excluded from the build entirely (not just absent from nav):
+# unreachable by direct URL and absent from the search index. Only DD001 is
+# published; DD002+ and all *_draft_issues.md live canonically on GitHub.
+# To publish a DD, add it to nav and remove it from the patterns below.
+exclude_docs: |
+  design_documents/DD0*.md
+  design_documents/*_draft_issues.md
+  !design_documents/DD001_Body_Physics_Architecture.md
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 nav:
-  - Introduction : index.md
-  - Background : background.md
-  - History : fullhistory.md
-  - Releases : releases.md
-  - Modelling : modeling.md
+  - Home: index.md
+  - Background: background.md
+  - Design Documents:
+      - Overview: design_documents/index.md
+      - Phase Roadmap: design_documents/DD_PHASE_ROADMAP.md
+      - Integration Map: design_documents/INTEGRATION_MAP.md
+      - Contributing Guide: design_documents/contributing_guide.md
+      - "Phase 0 — Core Architecture":
+          - DD001 Body Physics: design_documents/DD001_Body_Physics_Architecture.md
+  - How It Works:
+      - Modeling Approach: modeling.md
+      - Validation Framework: validation.md
+  - History:
+      - Full History: fullhistory.md
+      - Releases: releases.md
+      - Archived Projects: archived_projects.md
   - Projects:
-      - Projects Overview : projects.md
-      - Sibernetic : Projects/sibernetic.md
-      - c302 : Projects/c302.md
-      - Worm Browser : Projects/browser.md
-      - DevoWorm : Projects/DevoWorm.md
-      - Docker simulation stack : Projects/docker.md
-      - Movement : Projects/worm-movement.md
-      - Geppetto : Projects/geppetto.md
-      - Optimization : Projects/optimization.md
-      - Representation : Projects/datarep.md
-      - Community Outreach : Projects/community-proj.md
-      - Muscle / Neuron /  Channel : Projects/muscle-neuron-integration.md
-      - C. elegans Robots : Projects/c-elegans-robot.md
+      - Projects Overview: projects.md
+      - Sibernetic: Projects/sibernetic.md
+      - c302: Projects/c302.md
+      - Worm Browser: Projects/browser.md
+      - DevoWorm: Projects/DevoWorm.md
+      - Docker simulation stack: Projects/docker.md
+      - Movement: Projects/worm-movement.md
+      - Geppetto: Projects/geppetto.md
+      - Optimization: Projects/optimization.md
+      - Representation: Projects/datarep.md
+      - Community Outreach: Projects/community-proj.md
+      - Muscle / Neuron /  Channel: Projects/muscle-neuron-integration.md
+      - C. elegans Robots: Projects/c-elegans-robot.md
+  - Contributing:
+      - Overview: contributing/index.md
+      - How Contributing Works: contributing/how-contributing-works.md
+      - Contributor Progression: contributing/contributor-progression.md
+      - Decision Process: contributing/decision-process.md
+      - AI Contributors: contributing/ai-contributors.md
   - Community:
-      - Community Overview : community.md
-      - GitHub : Community/github.md
-      - Repos : Community/repositories.md
-      - Membership : Community/membership.md
+      - Community Overview: community.md
+      - GitHub: Community/github.md
+      - AI Agents: Community/ai_agents.md
+      - Membership: Community/membership.md
   - Resources:
       - Resources Overview: Resources/resources.md
+      - GitHub Repo Inventory: Resources/github-repo-inventory.md
       - Running NeuroML connectome: Resources/running-nc.md
-  - FAQ : faq.md
+  - References: references.md
+  - FAQ: faq.md
